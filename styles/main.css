@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #ffd722;
+}
+
+/* @apply tetap bekerja di sini! */
+body {
+  @apply bg-slate-50 text-slate-900;
+}

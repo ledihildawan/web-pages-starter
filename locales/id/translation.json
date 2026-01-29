@@ -1,0 +1,8 @@
+{
+  "home": {
+    "welcome": "Selamat Datang",
+    "description": "Selamat datang di ekosistem modern Bun + Vite + Rolldown.",
+    "btn_action": "Mulai Eksplorasi",
+    "btn_login": "Masuk ke Akun"
+  }
+}

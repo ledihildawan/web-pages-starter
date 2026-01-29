@@ -1,0 +1,35 @@
+{
+  "name": "web-pages-starter",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.18",
+    "@types/alpinejs": "^3.13.11",
+    "@types/i18next": "^12.1.0",
+    "@types/node": "^25.1.0",
+    "@types/nunjucks": "^3.2.6",
+    "@types/rollup": "^0.51.4",
+    "glob": "^13.0.0",
+    "lucide": "^0.563.0",
+    "nunjucks": "^3.2.4",
+    "tailwindcss": "^4.1.18",
+    "typescript": "~5.9.3",
+    "vite": "npm:rolldown-vite@7.2.5"
+  },
+  "overrides": {
+    "vite": "npm:rolldown-vite@7.2.5"
+  },
+  "dependencies": {
+    "alpinejs": "^3.15.5",
+    "axios": "^1.13.4",
+    "dayjs": "^1.11.19",
+    "i18next": "^25.8.0",
+    "zod": "^4.3.6"
+  }
+}
