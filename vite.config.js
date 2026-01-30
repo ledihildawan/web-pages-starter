@@ -25,6 +25,8 @@ export default defineConfig({
       input: {
         main: path.resolve(__dirname, 'scripts/main.ts'),
         'main-style': path.resolve(__dirname, 'styles/main.css'),
+        'home': path.resolve(__dirname, 'features/home/home.ts'),
+        'about': path.resolve(__dirname, 'features/about/about.ts'),
       },
       output: {
         entryFileNames: '[name]-[hash].js',

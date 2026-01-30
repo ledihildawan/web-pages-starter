@@ -1,5 +1,6 @@
 import Alpine from 'alpinejs';
 import { initI18n } from '../config/i18n';
+import { parseUrl } from '../config/router';
 import i18next from 'i18next';
 
 declare global {
@@ -9,42 +10,31 @@ declare global {
   }
 }
 
-const getLanguageFromURL = (): string | null => {
-  const params = new URLSearchParams(window.location.search);
-  return params.get('lang');
-};
 
-const changeLanguage = async (lang: string): Promise<void> => {
-  await i18next.changeLanguage(lang);
-  
-  const url = new URL(window.location.href);
-  url.searchParams.set('lang', lang);
-  window.history.replaceState({}, '', url.toString());
-  
-  const translations = document.querySelectorAll('[data-i18n]');
-  translations.forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (key) el.textContent = i18next.t(key);
-  });
+
+const changeLanguage = async (newLang: string): Promise<void> => {
+  const { path } = parseUrl(window.location.pathname);
+  const newPath = newLang === 'id' ? path : `/${newLang}${path}`;
+  window.location.href = newPath.replace(/\/$/, '') || '/';
 };
 
 const initApp = async (): Promise<void> => {
   window.Alpine = Alpine;
   
-  const langFromURL = getLanguageFromURL();
+  const { lang } = parseUrl(window.location.pathname);
   const savedLang = localStorage.getItem('language') || 'id';
   
-  if (langFromURL && (langFromURL === 'id' || langFromURL === 'en')) {
-    localStorage.setItem('language', langFromURL);
+  if (lang && (lang === 'id' || lang === 'en')) {
+    localStorage.setItem('language', lang);
   }
   
   window.changeLanguage = changeLanguage;
   
-  await initI18n(langFromURL || savedLang);
+  await initI18n(lang || savedLang);
   
   Alpine.data('app', () => {
     return {
-      language: localStorage.getItem('language') || 'id',
+      language: lang || savedLang,
       theme: localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'),
       
       init() {
@@ -71,12 +61,6 @@ const initApp = async (): Promise<void> => {
   });
   
   Alpine.start();
-  
-  const translations = document.querySelectorAll('[data-i18n]');
-  translations.forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (key) el.textContent = i18next.t(key);
-  });
   
   console.log('✅ App initialized');
 };

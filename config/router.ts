@@ -18,6 +18,29 @@ export const routes: RouteConfig<HomeContext>[] = [
   },
 ] as const;
 
+export interface ParsedUrl {
+  lang: string;
+  path: string;
+  route: RouteConfig<HomeContext> | undefined;
+}
+
+export const parseUrl = (url: string): ParsedUrl => {
+  const parts = url.split('/').filter(Boolean);
+  const possibleLang = parts[0];
+  const lang = (possibleLang === 'id' || possibleLang === 'en') ? possibleLang : 'id';
+  
+  const pathParts = (possibleLang === 'id' || possibleLang === 'en') 
+    ? parts.slice(1) 
+    : parts;
+  const path = pathParts.length === 0 ? '' : `/${pathParts.join('/')}`;
+  
+  const normalizedPath = path === '' ? '/' : path;
+  
+  const route = routes.find(r => r.path === normalizedPath);
+  
+  return { lang, path: normalizedPath, route };
+};
+
 export const getRoute = (path: string): RouteConfig<HomeContext> | undefined =>
   routes.find(route => route.path === path);
 

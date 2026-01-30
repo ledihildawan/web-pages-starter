@@ -48,7 +48,7 @@
             </button>
 
             <a
-                href="/"
+                href="{{ url('/') }}"
                 class="inline-flex items-center justify-center px-6 py-3 text-sm font-medium rounded-lg border border-border hover:bg-muted transition-colors"
             >
                 {{ t('about.btn_back') }}
@@ -57,3 +57,9 @@
     </div>
 </div>
 {%- endblock %}
+
+{% block scripts %}
+    {{ super() }}
+
+    <script src="./about.ts" type="module"></script>
+{% endblock %}
