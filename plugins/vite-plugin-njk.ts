@@ -99,13 +99,20 @@ export default function njkPlugin(): Plugin {
         const route = routes.find(r => r.path === url);
 
         if (route) {
+          await initI18n();
           const rendered = renderTemplate({
             rootPath: server.config.root,
             route,
-            currentPath: url
+            currentPath: url,
+            i18nData: translationData as unknown
           });
-          const html = await server.transformIndexHtml(url, rendered);
-          res.setHeader('Content-Type', 'text/html').end(html);
+          
+          let html = rendered;
+          html = html.replace(/<link rel="stylesheet" href="\/styles\/main\.css" \/>/, '<link rel="stylesheet" href="/styles/main.css">');
+          html = html.replace(/<script[^>]*src="\/scripts\/main\.(ts|js)"[^>]*><\/script>/, '<script type="module" src="/scripts/main.ts"></script>');
+          
+          const transformed = await server.transformIndexHtml(url, html);
+          res.setHeader('Content-Type', 'text/html').end(transformed);
           return;
         }
         next();
@@ -134,6 +141,8 @@ export default function njkPlugin(): Plugin {
       }
 
       const assets = Object.entries(_bundle);
+      const jsAssets = assets.filter(([name]) => name.endsWith('.js') && name.startsWith('main-'));
+      const cssAssets = assets.filter(([name]) => name.endsWith('.css') && name.startsWith('main-'));
 
       for (const route of routes) {
         const fileName = route.path === '/' ? 'index.html' : `${route.path.replace(/^\//, '')}.html`;
@@ -147,15 +156,12 @@ export default function njkPlugin(): Plugin {
         });
         let html = rendered;
 
-        for (const [name, asset] of assets) {
-          const assetType = (asset as { type: string }).type;
-          if (assetType === 'asset' && name.endsWith('.css')) {
-            html = html.replace('<link rel="stylesheet" href="/styles/main.css">', `<link rel="stylesheet" href="/${name}">`);
-          }
-          if (assetType === 'chunk' && name.endsWith('.js')) {
-            html = html.replace('<script type="module" src="/scripts/main.ts"></script>', '');
-            html = html.replace('</body>', `<script type="module" src="/${name}"></script></body>`);
-          }
+        for (const [name] of cssAssets) {
+          html = html.replace(/<link rel="stylesheet" href="\/styles\/main\.css" \/>/, `<link rel="stylesheet" href="/${name}">`);
+        }
+
+        for (const [name] of jsAssets) {
+          html = html.replace(/<script[^>]*src="\/scripts\/main\.(ts|js)"[^>]*><\/script>/, `<script type="module" src="/${name}"></script>`);
         }
 
         const dir = path.dirname(filePath);

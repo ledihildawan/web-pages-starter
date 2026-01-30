@@ -1,16 +1,24 @@
 import i18next from 'i18next';
 import type { I18nResources, TranslationSchema } from '../types/i18n';
 
-export async function initI18n(): Promise<void> {
-  const id = await import('../locales/id/translation.json') as { default: TranslationSchema };
-  const en = await import('../locales/en/translation.json') as { default: TranslationSchema };
+const loadTranslations = async (): Promise<{ id: TranslationSchema; en: TranslationSchema }> => {
+  const [id, en] = await Promise.all([
+    import('../locales/id/translation.json') as Promise<{ default: TranslationSchema }>,
+    import('../locales/en/translation.json') as Promise<{ default: TranslationSchema }>,
+  ]);
+
+  return { id: id.default, en: en.default };
+};
+
+export const initI18n = async (lng: string = 'id'): Promise<void> => {
+  const translations = await loadTranslations();
 
   await i18next.init<I18nResources>({
-    lng: 'id',
+    lng,
     fallbackLng: 'en',
     resources: {
-      id: { translation: id.default },
-      en: { translation: en.default }
-    }
+      id: { translation: translations.id },
+      en: { translation: translations.en },
+    },
   });
-}
+};

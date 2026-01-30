@@ -1,6 +1,11 @@
 export type I18nLanguage = 'id' | 'en';
 
 export interface TranslationSchema {
+  common: {
+    language: string;
+    dark_mode: string;
+    light_mode: string;
+  };
   home: {
     welcome: string;
     description: string;

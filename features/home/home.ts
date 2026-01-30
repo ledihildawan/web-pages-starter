@@ -1,17 +1,10 @@
-import type { AlpineComponent, AlpineData } from '@/types/alpine';
+import i18next from 'i18next';
 
-interface HomeController extends AlpineComponent {
-  init(): void;
-  sayHello(): void;
-}
-
-export default function homeController(): AlpineData<HomeController> {
-  return () => ({
-    init(): void {
-      console.log('Home logic ready!');
-    },
+export default function homeController() {
+  return {
     sayHello(): void {
-      alert('Hello from AlpineJS with Feature-Driven Design!');
+      const message = i18next.t('home.btn_action') ?? 'Hello!';
+      alert(message);
     }
-  });
+  };
 }
