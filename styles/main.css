@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+[x-cloak] {
+  display: none !important;
+}
+
+#page-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #ffd722 0%, #f5c900 50%, #d4a800 100%);
+  z-index: 9999;
+  transition: width 0.2s ease, opacity 0.3s ease;
+  width: 0%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
 @theme {
   --color-brand-50: #fffbe6;
   --color-brand-100: #fff5b8;

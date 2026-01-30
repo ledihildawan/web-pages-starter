@@ -82,12 +82,37 @@ function renderTemplate(options: RenderOptions): string {
 
   const templateSource = fs.readFileSync(templatePath, 'utf-8');
 
+  const lang = (i18nData as I18nData).currentLang || 'id';
+  const translatedTitle = translateTitle(route.title, lang, translationData);
+
   const context = {
     ...(typeof route.context === 'object' && route.context !== null ? route.context : {}),
-    title: route.title
+    title: translatedTitle
   };
 
   return env.renderString(templateSource, context);
+}
+
+function translateTitle(title: string, lang: string, translationData: I18nData | null): string {
+  if (!translationData) return title;
+
+  const translations: Record<string, Record<string, string>> = {
+    'Beranda': {
+      id: 'Beranda',
+      en: 'Home'
+    },
+    'Tentang': {
+      id: 'Tentang',
+      en: 'About'
+    }
+  };
+
+  const titleTranslations = translations[title];
+  if (titleTranslations && lang in titleTranslations) {
+    return titleTranslations[lang as keyof typeof titleTranslations];
+  }
+
+  return title;
 }
 
 export default function njkPlugin(): Plugin {
@@ -142,6 +167,14 @@ export default function njkPlugin(): Plugin {
           type: 'full-reload',
           path: '*'
         });
+      } else if (file.endsWith('.css') || file.endsWith('.ts')) {
+        const page = file.match(/features[\/\\](\w+)[\/\\]/)?.[1];
+        if (page) {
+          server.ws.send({
+            type: 'full-reload',
+            path: '*'
+          });
+        }
       }
     },
 
@@ -161,45 +194,50 @@ export default function njkPlugin(): Plugin {
       const jsAssets = assets.filter(([name]) => name.endsWith('.js'));
       const cssAssets = assets.filter(([name]) => name.endsWith('.css'));
 
-      for (const route of routes) {
-        const fileName = route.path === '/' ? 'index.html' : `${route.path.replace(/^\//, '')}.html`;
-        const filePath = path.resolve(distPath, fileName);
+      const languages = ['id', 'en'] as const;
 
-        const rendered = renderTemplate({
-          rootPath,
-          route,
-          currentPath: route.path,
-          i18nData: (translationData as unknown) || undefined
-        });
-        let html = rendered;
+      languages.forEach(lang => {
+        for (const route of routes) {
+          const basePath = route.path === '/' ? 'index.html' : `${route.path.replace(/^\//, '')}.html`;
+          const relativePath = lang === 'id' ? basePath : path.join(lang, basePath);
+          const filePath = path.resolve(distPath, relativePath);
 
-        for (const [name] of cssAssets) {
-          if (name.startsWith('main-')) {
-            html = html.replace(/<link rel="stylesheet" href="\/styles\/main\.css" \/>/, `<link rel="stylesheet" href="/${name}">`);
-          } else if (name.startsWith('home-')) {
-            html = html.replace(/<link[^>]*href="\.\/home\.css"[^>]*>/, `<link rel="stylesheet" href="/${name}">`);
-          } else if (name.startsWith('about-')) {
-            html = html.replace(/<link[^>]*href="\.\/about\.css"[^>]*>/, `<link rel="stylesheet" href="/${name}">`);
+          const rendered = renderTemplate({
+            rootPath,
+            route,
+            currentPath: route.path,
+            i18nData: { ...translationData, currentLang: lang }
+          });
+          let html = rendered;
+
+          for (const [name] of cssAssets) {
+            if (name.startsWith('main-')) {
+              html = html.replace(/<link rel="stylesheet" href="\/styles\/main\.css" \/>/, `<link rel="stylesheet" href="/${name}">`);
+            } else if (name.startsWith('home-')) {
+              html = html.replace(/<link[^>]*href="\.\/home\.css"[^>]*>/, `<link rel="stylesheet" href="/${name}">`);
+            } else if (name.startsWith('about-')) {
+              html = html.replace(/<link[^>]*href="\.\/about\.css"[^>]*>/, `<link rel="stylesheet" href="/${name}">`);
+            }
           }
-        }
 
-        for (const [name] of jsAssets) {
-          if (name.startsWith('main-')) {
-            html = html.replace(/<script[^>]*src="\/scripts\/main\.(ts|js)"[^>]*><\/script>/, `<script type="module" src="/${name}"></script>`);
-          } else if (name.startsWith('home-')) {
-            html = html.replace(/<script[^>]*src="\.\/home\.ts"[^>]*><\/script>/, `<script type="module" src="/${name}"></script>`);
-          } else if (name.startsWith('about-')) {
-            html = html.replace(/<script[^>]*src="\.\/about\.ts"[^>]*><\/script>/, `<script type="module" src="/${name}"></script>`);
+          for (const [name] of jsAssets) {
+            if (name.startsWith('main-')) {
+              html = html.replace(/<script[^>]*src="\/scripts\/main\.(ts|js)"[^>]*><\/script>/, `<script type="module" src="/${name}"></script>`);
+            } else if (name.startsWith('home-')) {
+              html = html.replace(/<script[^>]*src="\.\/home\.ts"[^>]*><\/script>/, `<script type="module" src="/${name}"></script>`);
+            } else if (name.startsWith('about-')) {
+              html = html.replace(/<script[^>]*src="\.\/about\.ts"[^>]*><\/script>/, `<script type="module" src="/${name}"></script>`);
+            }
           }
-        }
 
-        const dir = path.dirname(filePath);
-        if (!fs.existsSync(dir)) {
-          fs.mkdirSync(dir, { recursive: true });
-        }
+          const dir = path.dirname(filePath);
+          if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir, { recursive: true });
+          }
 
-        fs.writeFileSync(filePath, html);
-      }
+          fs.writeFileSync(filePath, html);
+        }
+      });
     }
   };
 }

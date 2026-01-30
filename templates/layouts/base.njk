@@ -20,14 +20,14 @@
                     {{ title or 'App' }}
                 </a>
                 <div class="flex items-center gap-2" x-data="app">
-                    <button 
+                    <button x-cloak
                         @click="toggleLanguage()"
                         class="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-muted transition-colors"
                         aria-label="Toggle language"
                     >
                         <span x-text="language === 'id' ? '🇮🇩' : '🇬🇧'" class="text-sm"></span>
                     </button>
-                    <button 
+                    <button x-cloak
                         @click="toggleTheme()"
                         class="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-muted transition-colors"
                         :aria-label="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"

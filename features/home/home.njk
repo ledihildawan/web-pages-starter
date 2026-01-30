@@ -2,7 +2,7 @@
 
 {% block styles %}
     {{ super() }}
-    
+
     <link rel="stylesheet" href="./home.css" />
 {% endblock %}
 
@@ -26,6 +26,13 @@
                 >
                     {{ t('home.btn_action') }}
                 </button>
+                
+                <a
+                    href="{{ url('/about') }}"
+                    class="inline-flex items-center justify-center px-6 py-3 text-sm font-medium rounded-lg border border-border hover:bg-muted transition-colors"
+                >
+                    About
+                </a>
 
                 <a
                     href="{{ url('/about') }}"
