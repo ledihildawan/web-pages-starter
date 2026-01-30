@@ -1,7 +1,6 @@
 import Alpine from 'alpinejs';
 import { initI18n } from '../config/i18n';
 import { parseUrl } from '../config/router';
-import i18next from 'i18next';
 
 declare global {
   interface Window {
@@ -9,8 +8,6 @@ declare global {
     changeLanguage?: (lang: string) => Promise<void>;
   }
 }
-
-
 
 const changeLanguage = async (newLang: string): Promise<void> => {
   const { path } = parseUrl(window.location.pathname);

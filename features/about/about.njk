@@ -1,8 +1,14 @@
 {% extends "layouts/base.njk" %}
 
+{% block styles %}
+    {{ super() }}
+    
+    <link rel="stylesheet" href="./about.css" />
+{% endblock %}
+
 {% block content -%}
 <div class="container mx-auto px-4 py-12">
-    <div class="max-w-2xl mx-auto">
+    <div class="max-w-2xl mx-auto about-container">
         <h1 class="text-4xl font-bold tracking-tight mb-4">
             {{ t('about.title') }}
         </h1>
@@ -11,27 +17,27 @@
             {{ t('about.description') }}
         </p>
 
-        <div class="mb-8 p-6 rounded-lg border border-border bg-muted/50">
+        <div class="mb-8 p-6 rounded-lg border border-border bg-muted/50 tech-stack-card">
             <h2 class="mb-4 text-lg font-semibold text-foreground">{{ t('about.tech_stack') }}</h2>
             <div class="grid gap-2 sm:grid-cols-2">
-                <div class="flex items-center gap-2 text-sm text-muted-foreground">
-                    <span class="w-1.5 h-1.5 rounded-full bg-brand-400"></span>
+                <div class="flex items-center gap-2 text-sm text-muted-foreground tech-item">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-400 tech-dot"></span>
                     Bun
                 </div>
-                <div class="flex items-center gap-2 text-sm text-muted-foreground">
-                    <span class="w-1.5 h-1.5 rounded-full bg-brand-400"></span>
+                <div class="flex items-center gap-2 text-sm text-muted-foreground tech-item">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-400 tech-dot"></span>
                     Vite
                 </div>
-                <div class="flex items-center gap-2 text-sm text-muted-foreground">
-                    <span class="w-1.5 h-1.5 rounded-full bg-brand-400"></span>
+                <div class="flex items-center gap-2 text-sm text-muted-foreground tech-item">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-400 tech-dot"></span>
                     Rolldown
                 </div>
-                <div class="flex items-center gap-2 text-sm text-muted-foreground">
-                    <span class="w-1.5 h-1.5 rounded-full bg-brand-400"></span>
+                <div class="flex items-center gap-2 text-sm text-muted-foreground tech-item">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-400 tech-dot"></span>
                     Tailwind CSS
                 </div>
-                <div class="flex items-center gap-2 text-sm text-muted-foreground">
-                    <span class="w-1.5 h-1.5 rounded-full bg-brand-400"></span>
+                <div class="flex items-center gap-2 text-sm text-muted-foreground tech-item">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-400 tech-dot"></span>
                     Alpine.js
                 </div>
             </div>

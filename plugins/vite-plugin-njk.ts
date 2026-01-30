@@ -124,6 +124,7 @@ export default function njkPlugin(): Plugin {
 
           let html = rendered;
           html = html.replace(/<link rel="stylesheet" href="\/styles\/main\.css" \/>/, '<link rel="stylesheet" href="/styles/main.css">');
+          html = html.replace(/<link[^>]*href="\.\/(\w+)\.css"[^>]*>/g, '<link rel="stylesheet" href="/features/$1/$1.css">');
           html = html.replace(/<script[^>]*src="\/scripts\/main\.(ts|js)"[^>]*><\/script>/, '<script type="module" src="/scripts/main.ts"></script>');
           html = html.replace(/<script[^>]*src="\.\/(\w+)\.ts"[^>]*><\/script>/g, '<script type="module" src="/features/$1/$1.ts"></script>');
 
@@ -158,7 +159,7 @@ export default function njkPlugin(): Plugin {
 
       const assets = Object.entries(_bundle);
       const jsAssets = assets.filter(([name]) => name.endsWith('.js'));
-      const cssAssets = assets.filter(([name]) => name.endsWith('.css') && name.startsWith('main-'));
+      const cssAssets = assets.filter(([name]) => name.endsWith('.css'));
 
       for (const route of routes) {
         const fileName = route.path === '/' ? 'index.html' : `${route.path.replace(/^\//, '')}.html`;
@@ -173,7 +174,13 @@ export default function njkPlugin(): Plugin {
         let html = rendered;
 
         for (const [name] of cssAssets) {
-          html = html.replace(/<link rel="stylesheet" href="\/styles\/main\.css" \/>/, `<link rel="stylesheet" href="/${name}">`);
+          if (name.startsWith('main-')) {
+            html = html.replace(/<link rel="stylesheet" href="\/styles\/main\.css" \/>/, `<link rel="stylesheet" href="/${name}">`);
+          } else if (name.startsWith('home-')) {
+            html = html.replace(/<link[^>]*href="\.\/home\.css"[^>]*>/, `<link rel="stylesheet" href="/${name}">`);
+          } else if (name.startsWith('about-')) {
+            html = html.replace(/<link[^>]*href="\.\/about\.css"[^>]*>/, `<link rel="stylesheet" href="/${name}">`);
+          }
         }
 
         for (const [name] of jsAssets) {
