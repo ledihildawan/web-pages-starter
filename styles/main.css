@@ -1,10 +1,40 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand: #ffd722;
+  --color-brand-50: #fffbe6;
+  --color-brand-100: #fff5b8;
+  --color-brand-200: #ffea85;
+  --color-brand-300: #ffde51;
+  --color-brand-400: #ffd722;
+  --color-brand-500: #f5c900;
+  --color-brand-600: #d4a800;
+  --color-brand-700: #a98300;
+  --color-brand-800: #856400;
+  --color-brand-900: #6a5000;
+
+  --color-background: #ffffff;
+  --color-foreground: #18181b;
+
+  --color-card: #ffffff;
+  --color-card-foreground: #18181b;
+
+  --color-muted: #f4f4f5;
+  --color-muted-foreground: #71717a;
+
+  --color-border: #e4e4e7;
+  --color-input: #e4e4e7;
 }
 
-/* @apply tetap bekerja di sini! */
-body {
-  @apply bg-slate-50 text-slate-900;
+.dark {
+  --color-background: #18181b;
+  --color-foreground: #fafafa;
+
+  --color-card: #27272a;
+  --color-card-foreground: #fafafa;
+
+  --color-muted: #27272a;
+  --color-muted-foreground: #a1a1aa;
+
+  --color-border: #3f3f46;
+  --color-input: #3f3f46;
 }

@@ -3,6 +3,7 @@ import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
 import { routes } from './config/router';
 import njkPlugin from './plugins/vite-plugin-njk';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig({
   plugins: [
@@ -19,13 +20,17 @@ export default defineConfig({
     }
   },
   build: {
+    emptyOutDir: true,
     rollupOptions: {
-      input: Object.fromEntries(
-        routes.map(route => {
-          const name = route.path === '/' ? 'index' : route.path.replace(/^\//, '').replace(/\//g, '-');
-          return [name, path.resolve(__dirname, route.view)];
-        })
-      )
+      input: {
+        main: path.resolve(__dirname, 'scripts/main.ts'),
+        'main-style': path.resolve(__dirname, 'styles/main.css'),
+      },
+      output: {
+        entryFileNames: '[name]-[hash].js',
+        chunkFileNames: '[name]-[hash].js',
+        assetFileNames: '[name]-[hash][extname]'
+      }
     }
   }
 });
