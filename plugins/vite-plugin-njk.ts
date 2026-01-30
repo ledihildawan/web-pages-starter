@@ -1,0 +1,170 @@
+import nunjucks from 'nunjucks';
+import fs from 'fs';
+import path from 'path';
+import { routes } from '../config/router';
+import i18next from 'i18next';
+import type { Plugin, ViteDevServer } from 'vite';
+import type { RenderOptions, TranslationFunction } from '../types/nunjucks';
+import type { TranslationSchema } from '../types/i18n';
+
+interface I18nData {
+  id: TranslationSchema;
+  en: TranslationSchema;
+}
+
+let i18nInitialized = false;
+let translationData: I18nData | null = null;
+
+async function initI18n(): Promise<void> {
+  if (!i18nInitialized) {
+    const id = await import('../locales/id/translation.json') as { default: TranslationSchema };
+    const en = await import('../locales/en/translation.json') as { default: TranslationSchema };
+
+    translationData = {
+      id: id.default,
+      en: en.default
+    };
+
+    await i18next.init({
+      lng: 'id',
+      fallbackLng: 'en',
+      resources: {
+        id: { translation: id.default },
+        en: { translation: en.default }
+      }
+    });
+    i18nInitialized = true;
+  }
+}
+
+function getEnv(i18nData?: unknown): nunjucks.Environment {
+  const env = nunjucks.configure(['features', 'templates'], {
+    noCache: true,
+    watch: false
+  });
+
+  const tFunc: TranslationFunction = i18nData
+    ? (key: string) => {
+        const keys = key.split('.');
+        let value: unknown = (i18nData as I18nData).id;
+        for (const k of keys) {
+          value = (value as Record<string, unknown>)?.[k];
+        }
+        return (value as string) || key;
+      }
+    : (key: string, opts?: Record<string, unknown>) => i18next.t(key, opts);
+
+  env.addGlobal('t', tFunc);
+  return env;
+}
+
+function renderTemplate(options: RenderOptions): string {
+  const { rootPath, route, currentPath, i18nData } = options;
+  const env = getEnv(i18nData);
+  env.addGlobal('currentPath', currentPath);
+
+  const templatePath = path.resolve(rootPath, route.view);
+  if (!fs.existsSync(templatePath)) {
+    throw new Error(`Template not found: ${templatePath}`);
+  }
+
+  const templateSource = fs.readFileSync(templatePath, 'utf-8');
+
+  const context = {
+    ...(typeof route.context === 'object' && route.context !== null ? route.context : {}),
+    title: route.title
+  };
+
+  return env.renderString(templateSource, context);
+}
+
+export default function njkPlugin(): Plugin {
+  return {
+    name: 'vite-plugin-nunjucks-engine',
+
+    load(id: string) {
+      if (id.endsWith('.njk')) {
+        return '';
+      }
+    },
+
+    configureServer(server: ViteDevServer) {
+      server.watcher.add([
+        path.resolve(process.cwd(), 'features/**/*.njk'),
+        path.resolve(process.cwd(), 'templates/**/*.njk')
+      ]);
+
+      server.middlewares.use(async (req: any, res: any, next: any) => {
+        const url = req.url?.split('?')[0] || '/';
+        const route = routes.find(r => r.path === url);
+
+        if (route) {
+          const rendered = renderTemplate({
+            rootPath: server.config.root,
+            route,
+            currentPath: url
+          });
+          const html = await server.transformIndexHtml(url, rendered);
+          res.setHeader('Content-Type', 'text/html').end(html);
+          return;
+        }
+        next();
+      });
+    },
+
+    async handleHotUpdate({ file, server }: { file: string; server: ViteDevServer }) {
+      if (file.endsWith('.njk')) {
+        server.ws.send({
+          type: 'full-reload',
+          path: '*'
+        });
+      }
+    },
+
+    async generateBundle(_options: any, _bundle: any): Promise<void> {
+      await initI18n();
+    },
+
+    writeBundle(_options: any, _bundle: any): void {
+      const rootPath = process.cwd();
+      const distPath = path.resolve(rootPath, 'dist');
+
+      if (!fs.existsSync(distPath)) {
+        fs.mkdirSync(distPath, { recursive: true });
+      }
+
+      const assets = Object.entries(_bundle);
+
+      for (const route of routes) {
+        const fileName = route.path === '/' ? 'index.html' : `${route.path.replace(/^\//, '')}.html`;
+        const filePath = path.resolve(distPath, fileName);
+
+        const rendered = renderTemplate({
+          rootPath,
+          route,
+          currentPath: route.path,
+          i18nData: (translationData as unknown) || undefined
+        });
+        let html = rendered;
+
+        for (const [name, asset] of assets) {
+          const assetType = (asset as { type: string }).type;
+          if (assetType === 'asset' && name.endsWith('.css')) {
+            html = html.replace('<link rel="stylesheet" href="/styles/main.css">', `<link rel="stylesheet" href="/${name}">`);
+          }
+          if (assetType === 'chunk' && name.endsWith('.js')) {
+            html = html.replace('<script type="module" src="/scripts/main.ts"></script>', '');
+            html = html.replace('</body>', `<script type="module" src="/${name}"></script></body>`);
+          }
+        }
+
+        const dir = path.dirname(filePath);
+        if (!fs.existsSync(dir)) {
+          fs.mkdirSync(dir, { recursive: true });
+        }
+
+        fs.writeFileSync(filePath, html);
+      }
+    }
+  };
+}

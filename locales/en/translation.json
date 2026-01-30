@@ -1,0 +1,8 @@
+{
+  "home": {
+    "welcome": "Welcome",
+    "description": "Welcome to the modern Bun + Vite + Rolldown ecosystem.",
+    "btn_action": "Start Exploring",
+    "btn_login": "Sign In"
+  }
+}
