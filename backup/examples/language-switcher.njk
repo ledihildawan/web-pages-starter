@@ -1,0 +1,70 @@
+<!-- Language Switcher Component Example -->
+<div x-data="i18n" class="flex items-center gap-2">
+  <template x-for="locale in availableLocales" :key="locale">
+    <a
+      :href="languageSwitcher[locale]"
+      class="inline-flex items-center justify-center w-8 h-8 rounded-md hover:bg-muted transition-colors"
+      :class="{ 'bg-muted ring-2 ring-primary': locale === currentLocale }"
+      :aria-label="`Switch to ${locale}`"
+    >
+      <template x-if="locale === 'en'">
+        <span class="text-sm">🇬🇧</span>
+      </template>
+      <template x-if="locale === 'id'">
+        <span class="text-sm">🇮🇩</span>
+      </template>
+      <template x-if="locale === 'fr'">
+        <span class="text-sm">🇫🇷</span>
+      </template>
+    </a>
+  </template>
+</div>
+
+<!-- Compact Language Switcher -->
+<div x-data="i18n" class="relative">
+  <button
+    @click="$refs.dropdown.toggle()"
+    class="inline-flex items-center gap-2 px-3 py-2 rounded-md hover:bg-muted transition-colors"
+  >
+    <span x-text="flagEmoji" class="text-sm"></span>
+    <span x-text="currentLocale.toUpperCase()" class="text-sm font-medium"></span>
+  </button>
+
+  <div
+    x-ref="dropdown"
+    @click.outside="$refs.dropdown.hide()"
+    x-show="false"
+    class="absolute right-0 mt-2 py-2 w-32 bg-background border border-border rounded-lg shadow-lg"
+    style="display: none;"
+  >
+    <template x-for="locale in availableLocales" :key="locale">
+      <a
+        :href="languageSwitcher[locale]"
+        class="block px-4 py-2 text-sm hover:bg-muted transition-colors"
+        :class="{ 'bg-muted text-foreground': locale === currentLocale }"
+      >
+        <template x-if="locale === 'en'">
+          <span>🇬🇧 English</span>
+        </template>
+        <template x-if="locale === 'id'">
+          <span>🇮🇩 Indonesia</span>
+        </template>
+        <template x-if="locale === 'fr'">
+          <span>🇫🇷 Français</span>
+        </template>
+      </a>
+    </template>
+  </div>
+</div>
+
+<!-- Using x-localized Directive -->
+<nav class="flex items-center gap-4">
+  <a x-localized="/about" class="hover:underline">{{ t('about.title') }}</a>
+  <a x-localized="/contact" class="hover:underline">{{ t('common.contact') }}</a>
+</nav>
+
+<!-- Manual Path Generation with Alpine -->
+<nav x-data="i18n" class="flex items-center gap-4">
+  <a :href="getLocalizedLink('/about')" class="hover:underline">About</a>
+  <a :href="getLocalizedLink('/contact')" class="hover:underline">Contact</a>
+</nav>

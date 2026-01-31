@@ -1,0 +1,12 @@
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
+force = true
+
+# Language routing fallbacks
+[[redirects]]
+from = "/en/*"
+to = "/en/index.html"
+status = 200
+force = true

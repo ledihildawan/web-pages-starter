@@ -1,0 +1,52 @@
+{% extends "layouts/base.njk" %}
+
+{% block styles %}
+    {{ super() }}
+
+    <link rel="stylesheet" href="./home.css" />
+{% endblock %}
+
+{% block content %}
+    <div class="container mx-auto px-4 py-12">
+        <div class="max-w-2xl mx-auto home-container">
+            <h1 class="text-4xl font-bold tracking-tight mb-4 home-title">
+                {{ t('home.welcome') }}
+            </h1>
+
+            <p class="text-lg text-muted-foreground mb-8 leading-relaxed home-description">
+                {{ t('home.description') }}
+            </p>
+
+            <div class="grid gap-3 sm:grid-cols-2 action-grid">
+                <button
+                    x-data="{ sayHello() { alert('{{ t('home.btn_action') }}'); } }"
+                    @click="sayHello()"
+                    class="inline-flex items-center justify-center px-6 py-3 text-sm font-medium rounded-lg bg-foreground text-background hover:bg-foreground/90 transition-colors"
+                    type="button"
+                >
+                    {{ t('home.btn_action') }}
+                </button>
+                
+                <a
+                    href="{{ url('/about') }}"
+                    class="inline-flex items-center justify-center px-6 py-3 text-sm font-medium rounded-lg border border-border hover:bg-muted transition-colors"
+                >
+                    About
+                </a>
+
+                <a
+                    href="{{ url('/about') }}"
+                    class="inline-flex items-center justify-center px-6 py-3 text-sm font-medium rounded-lg border border-border hover:bg-muted transition-colors"
+                >
+                    {{ t('home.btn_login') }}
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+
+    <script src="./home.ts" type="module"></script>
+{% endblock %}

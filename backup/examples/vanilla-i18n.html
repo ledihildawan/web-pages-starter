@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vanilla JS i18n Demo</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <!-- Language Switcher - Vanilla JS -->
+            <div id="language-switcher">
+                <button data-locale="en">🇬🇧 EN</button>
+                <button data-locale="id">🇮🇩 ID</button>
+                <button data-locale="fr">🇫🇷 FR</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <h1 data-i18n="home.welcome">Welcome</h1>
+        <p data-i18n="home.description">Description</p>
+
+        <div>
+            <a href="/en/about" data-localized-link>About (EN)</a>
+            <a href="/id/tentang" data-localized-link>Tentang (ID)</a>
+            <a href="/fr/a-propos" data-localized-link>À propos (FR)</a>
+        </div>
+
+        <button data-i18n="home.btn_action">Action</button>
+    </main>
+
+    <script type="module">
+        import { initI18n, t, switchLocale, getCurrentLocale, getLocalizedPath } from './utils/i18n.js';
+
+        // Initialize i18n
+        await initI18n();
+
+        // Update all i18n elements
+        function updateContent() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (key) {
+                    el.textContent = t(key);
+                }
+            });
+
+            // Update localized links
+            document.querySelectorAll('[data-localized-link]').forEach(el => {
+                const href = el.getAttribute('href');
+                if (href) {
+                    const path = href.replace(/^\/[a-z]{2}/, '');
+                    el.setAttribute('href', getLocalizedPath(getCurrentLocale(), path));
+                }
+            });
+
+            // Update language switcher buttons
+            const currentLocale = getCurrentLocale();
+            document.querySelectorAll('#language-switcher button').forEach(btn => {
+                const locale = btn.getAttribute('data-locale');
+                const path = window.location.pathname.replace(/^\/[a-z]{2}/, '') || '/';
+                btn.setAttribute('href', getLocalizedPath(locale as any, path));
+                btn.style.fontWeight = locale === currentLocale ? 'bold' : 'normal';
+            });
+        }
+
+        // Initial content update
+        updateContent();
+
+        // Language switcher event delegation
+        document.getElementById('language-switcher').addEventListener('click', (e) => {
+            const button = e.target.closest('button[data-locale]');
+            if (button) {
+                const locale = button.getAttribute('data-locale');
+                switchLocale(locale as any);
+            }
+        });
+
+        console.log('✅ Vanilla JS i18n initialized');
+        console.log('🌐 Current locale:', getCurrentLocale());
+    </script>
+</body>
+</html>
