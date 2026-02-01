@@ -1,42 +1,27 @@
 {
-  "name": "web-pages-starter",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "name": "template-factory",
+  "version": "1.0.50",
   "scripts": {
-    "dev": "bunx --bun vite",
-    "dev:spa": "BUILD_MODE=spa bunx --bun vite",
-    "dev:mpa": "BUILD_MODE=mpa bunx --bun vite",
-    "build": "rm -rf dist && tsc && bunx --bun vite build",
-    "build:spa": "BUILD_MODE=spa rm -rf dist && tsc && bunx --bun vite build",
-    "build:mpa": "BUILD_MODE=mpa rm -rf dist && tsc && bunx --bun vite build",
-    "preview": "bunx --bun vite preview",
-    "preview:spa": "BUILD_MODE=spa bunx --bun vite preview",
-    "preview:mpa": "BUILD_MODE=mpa bunx --bun vite preview"
-  },
-  "devDependencies": {
-    "@tailwindcss/vite": "^4.1.18",
-    "@types/alpinejs": "^3.13.11",
-    "@types/i18next": "^12.1.0",
-    "@types/node": "^25.1.0",
-    "@types/nunjucks": "^3.2.6",
-    "@types/rollup": "^0.51.4",
-    "glob": "^13.0.0",
-    "lucide": "^0.563.0",
-    "nunjucks": "^3.2.4",
-    "tailwindcss": "^4.1.18",
-    "typescript": "~5.9.3",
-    "vite": "npm:rolldown-vite@7.2.5",
-    "vite-plugin-static-copy": "^3.2.0"
-  },
-  "overrides": {
-    "vite": "npm:rolldown-vite@7.2.5"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cross-env NODE_ENV=development bun run --watch ./server.ts",
+    "vite": "vite",
+    "build": "vite build && node scripts/postbuild.js"
   },
   "dependencies": {
-    "alpinejs": "^3.15.5",
-    "axios": "^1.13.4",
-    "dayjs": "^1.11.19",
-    "i18next": "^25.8.0",
-    "zod": "^4.3.6"
-  }
+    "@elysiajs/html": "^1.4.0",
+    "@types/nunjucks": "^3.2.6",
+    "elysia": "latest",
+    "nunjucks": "^3.2.4"
+  },
+  "devDependencies": {
+    "@elysiajs/static": "^1.4.7",
+    "bun-types": "latest",
+    "clean-css": "^5.3.3",
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.1.0",
+    "html-minifier": "^4.0.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1"
+  },
+  "module": "src/index.js"
 }

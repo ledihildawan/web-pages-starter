@@ -1,0 +1,13 @@
+{% extends "./../../layouts/base.njk" %}
+{% block styles %}
+  <link rel="stylesheet" href="{{ cssPath }}">
+{% endblock styles %}
+{% block content %}
+  {% include "./sections/hero.njk" %}
+  {% include "./sections/features.njk" %}
+  {% include "./sections/stats.njk" %}
+  {% include "./sections/cta.njk" %}
+{% endblock content %}
+{% block scripts %}
+  <script type="module" src="{{ jsPath }}"></script>
+{% endblock scripts %}
