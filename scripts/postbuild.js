@@ -31,9 +31,7 @@ for (const name of fs.readdirSync(assetsDir)) {
     if (match) {
       const pageName = match[1];
       const hash = match[2];
-      const oldPath = `/assets/${pageName}/index-style.css-${hash}.css`;
-      const newPath = `/assets/${pageName}-${hash}.css`;
-      cssFiles[oldPath] = newPath;
+      cssFiles[`/assets/${pageName}/index-style.css-${hash}.css`] = `/assets/${pageName}-${hash}.css`;
     }
   }
 }
@@ -47,7 +45,13 @@ for (const name of fs.readdirSync(assetsDir)) {
       const subP = path.join(p, subName);
       const stat = fs.statSync(subP);
       if (stat.isFile()) {
-        const match = subName.match(/-([A-Za-z0-9-]+)\.(js|css)$/);
+        let match = subName.match(/index-([A-Za-z0-9-]+)\.(js|css)$/);
+        if (!match) {
+          match = subName.match(/index-style\.css-([A-Za-z0-9-]+)\.css$/);
+          if (match) {
+            match[2] = 'css';
+          }
+        }
         if (match) {
           const hash = match[1];
           const ext = match[2];
@@ -56,7 +60,7 @@ for (const name of fs.readdirSync(assetsDir)) {
           const newPath = `/assets/${newName}`;
           moveFile(subP, path.join(assetsDir, newName));
           if (ext === 'js') {
-            jsFiles[`${name}.ts`] = newPath;
+            jsFiles[`/assets/${name}/${name}.ts`] = newPath;
           } else {
             cssFiles[oldPath] = newPath;
           }

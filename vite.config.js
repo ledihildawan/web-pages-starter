@@ -138,13 +138,13 @@ export default defineConfig({
           const jsFileName = Object.keys(bundle).find(name => 
             name.startsWith('assets/') && 
             name.endsWith('.js') && 
-            name.includes(path.basename(hf.key))
+            name.startsWith(`assets/${hf.key}/`)
           );
           
           const cssFileName = Object.keys(bundle).find(name => 
             name.startsWith('assets/') && 
             name.endsWith('.css') && 
-            name.includes(`${hf.key}-style`)
+            name.startsWith(`assets/${hf.key}-style`)
           );
           
           if (jsFileName) {
