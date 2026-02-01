@@ -4,6 +4,7 @@ import * as htmlMinifier from 'html-minifier';
 import path from 'node:path';
 import nunjucks from 'nunjucks';
 import { defineConfig } from 'vite';
+import tailwindcss from '@tailwindcss/vite'
 
 const root = process.cwd();
 const pagesDir = path.join(root, 'pages');
@@ -81,7 +82,7 @@ for (const njk of njkFiles) {
 }
 
 const jsInputs = {};
-const cssMap = {};
+const cssInputs = {};
 
 for (const hf of htmlFiles) {
   const pageName = hf.key.split('/')[0];
@@ -95,7 +96,7 @@ for (const hf of htmlFiles) {
   }
   
   if (fs.existsSync(cssFile)) {
-    cssMap[hf.key] = cssFile;
+    cssInputs[`${hf.key}-style`] = cssFile;
   }
 }
 
@@ -108,7 +109,7 @@ export default defineConfig({
     minify: 'terser',
     cssMinify: true,
     rollupOptions: {
-      input: jsInputs,
+      input: { ...jsInputs, ...cssInputs },
       output: {
         entryFileNames: 'assets/[name]-[hash].js',
         chunkFileNames: 'assets/[name]-[hash].js',
@@ -124,6 +125,7 @@ export default defineConfig({
     },
   },
   plugins: [
+    tailwindcss(),
     {
       name: 'copy-html-and-css',
       generateBundle(options, bundle) {
@@ -142,7 +144,7 @@ export default defineConfig({
           const cssFileName = Object.keys(bundle).find(name => 
             name.startsWith('assets/') && 
             name.endsWith('.css') && 
-            name.includes(path.basename(hf.key))
+            name.includes(`${hf.key}-style`)
           );
           
           if (jsFileName) {

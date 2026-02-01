@@ -9,9 +9,11 @@
   },
   "dependencies": {
     "@elysiajs/html": "^1.4.0",
+    "@tailwindcss/vite": "^4.1.18",
     "@types/nunjucks": "^3.2.6",
     "elysia": "latest",
-    "nunjucks": "^3.2.4"
+    "nunjucks": "^3.2.4",
+    "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
     "@elysiajs/static": "^1.4.7",
