@@ -1,21 +1,44 @@
 import { defineConfig, type PostCSSOptions } from '@rsbuild/core';
 import { pluginImageCompress } from '@rsbuild/plugin-image-compress';
 import { CopyRspackPlugin } from '@rspack/core';
-import { minify } from 'html-minifier-terser'; // Import ini dikembalikan
+import { minify } from 'html-minifier-terser';
 import path from 'path';
+import fs from 'node:fs'; // Tambahan: Import module file system
 import tailwindcss from '@tailwindcss/postcss';
 
+// --- HELPER FUNCTION UNTUK OTOMATISASI ENTRY ---
+const getEntries = () => {
+  const pagesDir = path.resolve(__dirname, 'src/pages');
+  const entries: Record<string, string> = {};
+
+  // Cek apakah folder pages ada
+  if (fs.existsSync(pagesDir)) {
+    // Baca semua folder di dalam src/pages
+    const folders = fs.readdirSync(pagesDir);
+
+    folders.forEach((folder) => {
+      // Pola: src/pages/[nama]/[nama].ts
+      const entryFile = path.join(pagesDir, folder, `${folder}.ts`);
+      
+      // Jika file .ts nya ada, masukkan ke entry list
+      if (fs.existsSync(entryFile)) {
+        entries[folder] = entryFile;
+      }
+    });
+  }
+  return entries;
+};
+// ----------------------------------------------
+
 export default defineConfig({
-  // 1. Plugins
   plugins: [
     pluginImageCompress(
       { use: 'jpeg', quality: 50 },
-      { use: 'png' }, // Default optimal
+      { use: 'png' },
       { use: 'webp', quality: 50 }
     ),
   ],
 
-  // 2. Server & Dev Experience
   server: {
     port: 3000,
     open: true,
@@ -35,12 +58,10 @@ export default defineConfig({
 
   source: {
     preEntry: ['./src/assets/scripts/global.ts'],
-    entry: {
-      index: './src/pages/index/index.ts',
-      about: './src/pages/about/about.ts',
-      pricing: './src/pages/pricing/pricing.ts',
-      features: './src/pages/features/features.ts',
-    },
+    
+    // UBAH BAGIAN INI: Panggil fungsi helper tadi
+    // Hasilnya sama persis dengan manual, tapi otomatis nambah
+    entry: getEntries(), 
   },
 
   output: {
@@ -54,6 +75,7 @@ export default defineConfig({
   },
 
   html: {
+    // Bagian ini sudah dinamis, jadi aman!
     template: ({ entryName }) => `./src/pages/${entryName}/${entryName}.njk`,
     templateParameters: {
       asset: (f: string) => `assets/${f.startsWith('/') ? f.substring(1) : f}`,
@@ -66,25 +88,20 @@ export default defineConfig({
   },
 
   tools: {
-    // 3. RESTORED: HTML Minifier Terser Configuration
-    // Menggunakan function agar lebih aman secara tipe data dan logika
     htmlPlugin: (config) => {
       if (process.env.NODE_ENV === 'production') {
-        // Kita override fungsi minify bawaan dengan html-minifier-terser
         config.minify = (html) => {
           return minify(html, {
             collapseWhitespace: true,
             removeComments: true,
-            minifyCSS: true, // Minify CSS inline di dalam <style>
-            minifyJS: true,  // Minify JS inline di dalam <script>
+            minifyCSS: true,
+            minifyJS: true,
           });
         };
       }
-      // Jika mode development, biarkan config apa adanya (tanpa minify)
       return config;
     },
 
-    // 4. PostCSS (Tailwind v4)
     postcss: (config) => {
       config.postcssOptions ??= {};
       const opts = config.postcssOptions as PostCSSOptions;
@@ -92,7 +109,6 @@ export default defineConfig({
       opts.plugins.push(tailwindcss());
     },
 
-    // 5. Rspack Native Plugins & Loaders
     rspack: {
       plugins: [
         new CopyRspackPlugin({

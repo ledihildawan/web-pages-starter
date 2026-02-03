@@ -10,7 +10,8 @@
     "format": "biome format --write",
     "preview": "rsbuild preview",
     "test": "rstest",
-    "test:watch": "rstest --watch"
+    "test:watch": "rstest --watch",
+    "gen": "bun scripts/generate.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.8",
