@@ -4,14 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "rsbuild build",
-    "check": "biome check --write",
-    "dev": "rsbuild dev --open",
-    "format": "biome format --write",
+    "dev": "rsbuild dev",
+    "build": "rsbuild build && bun run ./scripts/generate-sitemap.ts",
     "preview": "rsbuild preview",
-    "test": "rstest",
-    "test:watch": "rstest --watch",
-    "gen": "bun scripts/generate.ts"
+    "gen": "bun run ./scripts/generate.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.8",

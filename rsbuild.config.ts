@@ -1,6 +1,6 @@
 import { defineConfig, type PostCSSOptions } from '@rsbuild/core';
 import { pluginImageCompress } from '@rsbuild/plugin-image-compress';
-import { CopyRspackPlugin } from '@rspack/core';
+import { CopyRspackPlugin, type Compiler, type Compilation } from '@rspack/core';
 import { minify } from 'html-minifier-terser';
 import path from 'path';
 import fs from 'node:fs';
@@ -24,9 +24,7 @@ const loadGlobalData = () => {
           } else {
             globalData[fileName] = content;
           }
-        } catch (e) {
-          console.error(`❌ Error parsing data file: ${file}`, e);
-        }
+        } catch (e) { console.error(e); }
       }
     });
   }
@@ -51,10 +49,18 @@ const getEntries = () => {
 };
 
 export default defineConfig({
+  // UPGRADE 1: PERFORMANCE & CODE SPLITTING
+  // Memisahkan vendor (node_modules) agar caching browser lebih efisien
+  performance: {
+    chunkSplit: {
+      strategy: 'split-by-experience',
+    },
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+
   plugins: [
-    // Compress gambar SETELAH diberi hash
     pluginImageCompress(
-      { use: 'jpeg', quality: 60 }, // Quality 60 sudah cukup bagus & kecil
+      { use: 'jpeg', quality: 60 },
       { use: 'png' },
       { use: 'webp', quality: 60 }
     ),
@@ -76,6 +82,7 @@ export default defineConfig({
         'src/**/*.njk',
         'src/data/**/*.json',
         'src/pages/**/*.json',
+        'src/**/*.css', // Manual Watch Fix (Dipertahankan)
       ],
       options: {
         usePolling: true,
@@ -85,8 +92,17 @@ export default defineConfig({
     },
   },
 
+  // UPGRADE 2: ALIAS PATH LENGKAP
+  // Sinkron dengan tsconfig.json
   resolve: {
-    alias: { '@': path.resolve(__dirname, 'src') },
+    alias: { 
+      '@': path.resolve(__dirname, 'src'),
+      '@data': path.resolve(__dirname, 'src/data'),
+      '@pages': path.resolve(__dirname, 'src/pages'),
+      '@assets': path.resolve(__dirname, 'src/assets'),
+      '@partials': path.resolve(__dirname, 'src/partials'),
+      '@layouts': path.resolve(__dirname, 'src/layouts'),
+    },
   },
 
   source: {
@@ -103,12 +119,11 @@ export default defineConfig({
       ? { js: 'cheap-module-source-map', css: true } 
       : { js: false, css: false },
     
-    // 🔥 AKTIFKAN HASHING DISINI
     filenameHash: true, 
     filename: {
       js: '[name].[contenthash:8].js',
       css: '[name].[contenthash:8].css',
-      image: '[name].[hash:8][ext]',
+      image: '[name].[hash:8][ext]', 
     }
   },
 
@@ -143,6 +158,7 @@ export default defineConfig({
             removeComments: true,
             minifyCSS: true,
             minifyJS: true,
+            minifyURLs: true,
           });
         };
       }
@@ -163,8 +179,6 @@ export default defineConfig({
             from: path.resolve(__dirname, 'src/assets'),
             to: 'assets',
             globOptions: { 
-              // 🔥 IGNORE GAMBAR agar tidak dicopy mentah-mentah
-              // Biarkan Nunjucks Loader yang memprosesnya
               ignore: [
                 '**/*.ts', '**/*.css', '**/*.njk', 
                 '**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.webp', '**/*.svg', '**/*.gif'
@@ -174,13 +188,11 @@ export default defineConfig({
           }],
         }),
         
-        // Plugin Watcher JSON
         {
-          apply(compiler) {
-            compiler.hooks.afterCompile.tap('WatchDataPlugin', (compilation) => {
+          apply(compiler: Compiler) {
+            compiler.hooks.afterCompile.tap('WatchDataPlugin', (compilation: Compilation) => {
               const addDirToWatch = (dir: string) => {
                 if (fs.existsSync(dir)) {
-                   // Recursive watch sederhana
                    const files = fs.readdirSync(dir, { recursive: true }) as string[];
                    files.forEach(f => {
                      if (f.endsWith('.json')) compilation.fileDependencies.add(path.join(dir, f));
@@ -205,7 +217,6 @@ export default defineConfig({
                   path.join(__dirname, 'src/layouts'),
                   path.join(__dirname, 'src/partials')
                 ],
-                // 🔥 KUNCI: Loader mencari gambar di src/assets
                 assetsPaths: [path.join(__dirname, 'src/assets')],
               },
             }],

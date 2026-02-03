@@ -11,7 +11,10 @@
     "moduleDetection": "force",
     "moduleResolution": "bundler",
     "verbatimModuleSyntax": true,
+    
+    /* 1. JSON Type Checking Support */
     "resolveJsonModule": true,
+    "esModuleInterop": true,
     "allowImportingTsExtensions": true,
     "noUncheckedSideEffectImports": true,
 
@@ -20,20 +23,19 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
 
-    /* === TAMBAHAN PENTING DI BAWAH INI === */
-    
-    /* 1. Agar import '@/...' dikenali VS Code */
+    /* 2. ALIAS PATH LENGKAP */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@data/*": ["./src/data/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@partials/*": ["./src/partials/*"],
+      "@layouts/*": ["./src/layouts/*"]
     },
 
-    /* 2. Agar Bun globals (seperti Bun.env) atau Node globals (process, __dirname) dikenali */
-    /* Pastikan Anda sudah install: bun add -d bun-types */
     "types": ["bun-types"] 
   },
-  
-  /* 3. Masukkan config file agar ikut dicek error-nya */
-  "include": ["src", "rsbuild.config.ts"],
+  "include": ["src", "scripts", "rsbuild.config.ts"],
   "exclude": ["dist", "node_modules"]
 }
