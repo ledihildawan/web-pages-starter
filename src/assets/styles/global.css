@@ -1,0 +1,16 @@
+/* Import Tailwind base, components, dan utilities */
+@import 'tailwindcss';
+
+/* Custom Global Styles */
+:root {
+  --primary-color: #2563eb;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Contoh Global Component yang bisa dipakai semua tim */
+.btn-primary {
+  @apply bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-sm;
+}

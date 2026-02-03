@@ -1,0 +1,118 @@
+{% extends "base.njk" %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-6">
+      <div class="max-w-6xl mx-auto text-center">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-violet-500/10 border border-violet-500/20 rounded-full text-violet-300 text-sm mb-8">
+          <span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
+          <span>New: Version 2.0 is here</span>
+        </div>
+        
+        <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-[1.1]">
+          Build something
+          <span class="block bg-gradient-to-r from-violet-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent">
+            beautiful today
+          </span>
+        </h1>
+        
+        <p class="text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+          The modern way to build web applications. Fast, flexible, and designed for developers who care about their craft.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+          <a href="#" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-xl font-semibold text-lg hover:opacity-90 transition-opacity shadow-lg shadow-violet-500/25">
+            Start Building →
+          </a>
+          <a href="#" class="w-full sm:w-auto px-8 py-4 bg-slate-800 border border-slate-700 rounded-xl font-semibold text-lg hover:bg-slate-700 transition-colors">
+            View Demo
+          </a>
+        </div>
+        
+        <p class="text-sm text-slate-500">No credit card required</p>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Everything you need</h2>
+          <p class="text-slate-400 max-w-xl mx-auto">Powerful features to help you build faster and ship with confidence.</p>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-6">
+          <!-- Feature 1 -->
+          <div class="group p-8 rounded-2xl bg-slate-900/50 border border-slate-800/50 hover:border-violet-500/30 transition-all">
+            <div class="w-14 h-14 rounded-2xl bg-violet-500/10 flex items-center justify-center text-violet-400 mb-6 group-hover:bg-violet-500/20 transition-colors">
+              <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">Lightning Fast</h3>
+            <p class="text-slate-400 leading-relaxed">Optimized for performance. Your apps load instantly and run smoothly.</p>
+          </div>
+          
+          <!-- Feature 2 -->
+          <div class="group p-8 rounded-2xl bg-slate-900/50 border border-slate-800/50 hover:border-violet-500/30 transition-all">
+            <div class="w-14 h-14 rounded-2xl bg-fuchsia-500/10 flex items-center justify-center text-fuchsia-400 mb-6 group-hover:bg-fuchsia-500/20 transition-colors">
+              <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.39m3.421 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">Beautiful Design</h3>
+            <p class="text-slate-400 leading-relaxed">Crafted with care. Every pixel is intentional and purposeful.</p>
+          </div>
+          
+          <!-- Feature 3 -->
+          <div class="group p-8 rounded-2xl bg-slate-900/50 border border-slate-800/50 hover:border-violet-500/30 transition-all">
+            <div class="w-14 h-14 rounded-2xl bg-pink-500/10 flex items-center justify-center text-pink-400 mb-6 group-hover:bg-pink-500/20 transition-colors">
+              <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">Secure by Default</h3>
+            <p class="text-slate-400 leading-relaxed">Enterprise-grade security. Your data is protected at every layer.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 px-6 border-y border-slate-800/50">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div>
+            <p class="text-4xl font-bold text-violet-400 mb-2">10K+</p>
+            <p class="text-slate-500">Developers</p>
+          </div>
+          <div>
+            <p class="text-4xl font-bold text-fuchsia-400 mb-2">50K+</p>
+            <p class="text-slate-500">Projects</p>
+          </div>
+          <div>
+            <p class="text-4xl font-bold text-pink-400 mb-2">99.9%</p>
+            <p class="text-slate-500">Uptime</p>
+          </div>
+          <div>
+            <p class="text-4xl font-bold text-amber-400 mb-2">4.9/5</p>
+            <p class="text-slate-500">Rating</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 px-6">
+      <div class="max-w-4xl mx-auto">
+        <div class="p-12 rounded-3xl bg-gradient-to-r from-violet-500/10 via-fuchsia-500/10 to-pink-500/10 border border-violet-500/20 text-center">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to get started?</h2>
+          <p class="text-slate-400 mb-8 max-w-lg mx-auto">Join thousands of developers building the future of the web.</p>
+          <a href="#" class="inline-block px-8 py-4 bg-white text-slate-900 rounded-xl font-semibold text-lg hover:bg-slate-100 transition-colors">
+            Start Building Free →
+          </a>
+        </div>
+      </div>
+    </section>
+{% endblock %}

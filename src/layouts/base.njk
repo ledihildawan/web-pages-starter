@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+      * { font-family: 'Inter', system-ui, sans-serif; }
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+      .animate-float { animation: float 6s ease-in-out infinite; }
+    </style>
+    
+    {# 
+       Saran: Pindahkan extra_head keluar dari tag <style> 
+       agar bisa inject meta tag atau link CSS eksternal juga. 
+    #}
+    {% block extra_head %}{% endblock %}
+  </head>
+  <body class="min-h-screen bg-slate-950 text-white antialiased">
+    
+    <div class="fixed inset-0 -z-10">
+      <div class="absolute top-0 left-1/4 w-96 h-96 bg-violet-500/20 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-fuchsia-500/20 rounded-full blur-3xl"></div>
+      <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px]"></div>
+    </div>
+
+    {% include "navbar.njk" %}
+    
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    
+    {% include "footer.njk" %}
+
+    {# === BAGIAN BARU: Block Scripts === #}
+    {# Ini memungkinkan halaman anak menyisipkan script khusus #}
+    {% block scripts %}{% endblock %}
+    
+  </body>
+</html>
