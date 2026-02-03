@@ -3,24 +3,45 @@ import { pluginImageCompress } from '@rsbuild/plugin-image-compress';
 import { CopyRspackPlugin } from '@rspack/core';
 import { minify } from 'html-minifier-terser';
 import path from 'path';
-import fs from 'node:fs'; // Tambahan: Import module file system
+import fs from 'node:fs';
 import tailwindcss from '@tailwindcss/postcss';
 
-// --- HELPER FUNCTION UNTUK OTOMATISASI ENTRY ---
+// --- HELPER 1: AUTO-DISCOVERY GLOBAL DATA ---
+const loadGlobalData = () => {
+  const dataDir = path.resolve(__dirname, 'src/data');
+  const globalData: Record<string, any> = {};
+
+  if (fs.existsSync(dataDir)) {
+    const files = fs.readdirSync(dataDir);
+    files.forEach((file) => {
+      if (path.extname(file) === '.json') {
+        const fileName = path.basename(file, '.json');
+        const filePath = path.join(dataDir, file);
+        try {
+          const content = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+          if (fileName === 'global') {
+            Object.assign(globalData, content);
+          } else {
+            globalData[fileName] = content;
+          }
+        } catch (e) {
+          console.error(`❌ Error parsing data file: ${file}`, e);
+        }
+      }
+    });
+  }
+  return globalData;
+};
+
+// --- HELPER 2: AUTO-DISCOVERY PAGE ENTRIES ---
 const getEntries = () => {
   const pagesDir = path.resolve(__dirname, 'src/pages');
   const entries: Record<string, string> = {};
 
-  // Cek apakah folder pages ada
   if (fs.existsSync(pagesDir)) {
-    // Baca semua folder di dalam src/pages
     const folders = fs.readdirSync(pagesDir);
-
     folders.forEach((folder) => {
-      // Pola: src/pages/[nama]/[nama].ts
       const entryFile = path.join(pagesDir, folder, `${folder}.ts`);
-      
-      // Jika file .ts nya ada, masukkan ke entry list
       if (fs.existsSync(entryFile)) {
         entries[folder] = entryFile;
       }
@@ -28,14 +49,14 @@ const getEntries = () => {
   }
   return entries;
 };
-// ----------------------------------------------
 
 export default defineConfig({
   plugins: [
+    // Compress gambar SETELAH diberi hash
     pluginImageCompress(
-      { use: 'jpeg', quality: 50 },
+      { use: 'jpeg', quality: 60 }, // Quality 60 sudah cukup bagus & kecil
       { use: 'png' },
-      { use: 'webp', quality: 50 }
+      { use: 'webp', quality: 60 }
     ),
   ],
 
@@ -43,12 +64,24 @@ export default defineConfig({
     port: 3000,
     open: true,
     strictPort: true,
+    historyApiFallback: {
+      index: '/404.html', 
+      disableDotRule: true
+    }
   },
 
   dev: {
     watchFiles: {
-      paths: ['src/**/*.njk'],
-      options: { usePolling: true },
+      paths: [
+        'src/**/*.njk',
+        'src/data/**/*.json',
+        'src/pages/**/*.json',
+      ],
+      options: {
+        usePolling: true,
+        interval: 100,
+      },
+      type: 'reload-page',
     },
   },
 
@@ -58,10 +91,7 @@ export default defineConfig({
 
   source: {
     preEntry: ['./src/assets/scripts/global.ts'],
-    
-    // UBAH BAGIAN INI: Panggil fungsi helper tadi
-    // Hasilnya sama persis dengan manual, tapi otomatis nambah
-    entry: getEntries(), 
+    entry: getEntries(),
   },
 
   output: {
@@ -72,19 +102,36 @@ export default defineConfig({
     sourceMap: process.env.NODE_ENV !== 'production' 
       ? { js: 'cheap-module-source-map', css: true } 
       : { js: false, css: false },
+    
+    // 🔥 AKTIFKAN HASHING DISINI
+    filenameHash: true, 
+    filename: {
+      js: '[name].[contenthash:8].js',
+      css: '[name].[contenthash:8].css',
+      image: '[name].[hash:8][ext]',
+    }
   },
 
   html: {
-    // Bagian ini sudah dinamis, jadi aman!
     template: ({ entryName }) => `./src/pages/${entryName}/${entryName}.njk`,
-    templateParameters: {
-      asset: (f: string) => `assets/${f.startsWith('/') ? f.substring(1) : f}`,
+    templateParameters: (params) => {
+      const entryName = params.entryName;
+      const globalData = loadGlobalData();
+      const pageDataPath = path.resolve(__dirname, `src/pages/${entryName}/${entryName}.json`);
+      let pageData = {};
+      
+      if (fs.existsSync(pageDataPath)) {
+        try {
+          pageData = JSON.parse(fs.readFileSync(pageDataPath, 'utf-8'));
+        } catch (e) { console.error(e); }
+      }
+      return { ...params, ...globalData, ...pageData };
     },
     meta: {
       viewport: 'width=device-width, initial-scale=1.0',
       charset: { charset: 'UTF-8' },
     },
-    title: 'My Rsbuild App',
+    title: 'My App',
   },
 
   tools: {
@@ -115,10 +162,36 @@ export default defineConfig({
           patterns: [{
             from: path.resolve(__dirname, 'src/assets'),
             to: 'assets',
-            globOptions: { ignore: ['**/*.ts', '**/*.css', '**/*.njk'] },
+            globOptions: { 
+              // 🔥 IGNORE GAMBAR agar tidak dicopy mentah-mentah
+              // Biarkan Nunjucks Loader yang memprosesnya
+              ignore: [
+                '**/*.ts', '**/*.css', '**/*.njk', 
+                '**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.webp', '**/*.svg', '**/*.gif'
+              ] 
+            },
             noErrorOnMissing: true, 
           }],
         }),
+        
+        // Plugin Watcher JSON
+        {
+          apply(compiler) {
+            compiler.hooks.afterCompile.tap('WatchDataPlugin', (compilation) => {
+              const addDirToWatch = (dir: string) => {
+                if (fs.existsSync(dir)) {
+                   // Recursive watch sederhana
+                   const files = fs.readdirSync(dir, { recursive: true }) as string[];
+                   files.forEach(f => {
+                     if (f.endsWith('.json')) compilation.fileDependencies.add(path.join(dir, f));
+                   });
+                }
+              };
+              addDirToWatch(path.resolve(__dirname, 'src/data'));
+              addDirToWatch(path.resolve(__dirname, 'src/pages'));
+            });
+          }
+        }
       ],
       module: {
         rules: [
@@ -132,6 +205,7 @@ export default defineConfig({
                   path.join(__dirname, 'src/layouts'),
                   path.join(__dirname, 'src/partials')
                 ],
+                // 🔥 KUNCI: Loader mencari gambar di src/assets
                 assetsPaths: [path.join(__dirname, 'src/assets')],
               },
             }],

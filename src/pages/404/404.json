@@ -1,0 +1,12 @@
+{
+  "meta": {
+    "title": "Page Not Found | Lost in Space",
+    "description": "Halaman yang Anda cari tidak ditemukan."
+  },
+  "content": {
+    "heading": "404",
+    "subheading": "Houston, we have a problem.",
+    "description": "Halaman yang Anda cari mungkin telah dipindahkan, dihapus, atau tersedot ke dalam Black Hole.",
+    "button_text": "Kembali ke Bumi (Home)"
+  }
+}

@@ -1,14 +1,17 @@
-<!-- Footer -->
-<footer class="py-12 px-6 border-t border-slate-800/50">
-  <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-    <span class="text-xl font-bold bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent">
-      Starter
-    </span>
-    <div class="flex items-center gap-8 text-sm text-slate-500">
-      <a href="#" class="hover:text-white transition-colors">Privacy</a>
-      <a href="#" class="hover:text-white transition-colors">Terms</a>
-      <a href="#" class="hover:text-white transition-colors">Contact</a>
+<footer class="border-t border-white/5 bg-slate-950 pt-16 pb-8 mt-20">
+  <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+    
+    <div class="text-slate-400 text-sm">
+      &copy; {{ site.year }} {{ site.author }}. All rights reserved.
     </div>
-    <p class="text-sm text-slate-600">© 2024 All rights reserved.</p>
+
+    <div class="flex gap-6">
+      {% for item in menu.footer %}
+        <a href="{{ item.url }}" class="text-sm text-slate-500 hover:text-violet-400 transition-colors">
+          {{ item.label }}
+        </a>
+      {% endfor %}
+    </div>
+
   </div>
 </footer>

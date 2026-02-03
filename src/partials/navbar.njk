@@ -1,18 +1,21 @@
-<!-- Navigation -->
-<nav class="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800/50">
-  <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-    <a href="/" class="text-xl font-bold bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent">
-      Starter
+<header class="fixed top-0 w-full z-50 border-b border-white/5 bg-slate-950/80 backdrop-blur-md">
+  <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+    
+    <a href="/" class="text-2xl font-bold bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent">
+      {{ site.name | default("Starter") }}
     </a>
-    <div class="hidden md:flex items-center gap-8">
-      <a href="/features" class="text-sm text-slate-400 hover:text-white transition-colors">Features</a>
-      <a href="/pricing" class="text-sm text-slate-400 hover:text-white transition-colors">Pricing</a>
-      <a href="/about" class="text-sm text-slate-400 hover:text-white transition-colors">About</a>
-      <a
-        href="#"
-        class="px-4 py-2 bg-white text-slate-900 rounded-lg text-sm font-medium hover:bg-slate-100 transition-colors">
-        Get Started
-      </a>
-    </div>
+
+    <nav class="hidden md:flex gap-8">
+      {# Loop menu dari global JSON #}
+      {% for item in menu.header %}
+        <a href="{{ item.url }}" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">
+          {{ item.label }}
+        </a>
+      {% endfor %}
+    </nav>
+
+    <button class="md:hidden text-white">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    </button>
   </div>
-</nav>
+</header>

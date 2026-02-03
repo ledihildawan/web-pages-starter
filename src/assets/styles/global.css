@@ -1,16 +1,20 @@
-/* Import Tailwind base, components, dan utilities */
-@import 'tailwindcss';
+@import "tailwindcss";
 
-/* Custom Global Styles */
-:root {
-  --primary-color: #2563eb;
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  
+  /* Definisi Animasi Custom di sini */
+  --animate-float: float 6s ease-in-out infinite;
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
 }
 
-body {
-  font-family: 'Inter', sans-serif;
-}
-
-/* Contoh Global Component yang bisa dipakai semua tim */
-.btn-primary {
-  @apply bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-sm;
+/* Layer Base untuk setting default element */
+@layer base {
+  body {
+    @apply font-sans;
+  }
 }
