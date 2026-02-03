@@ -32,6 +32,7 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
+    "@splidejs/splide": "^4.1.4",
     "@types/html-minifier-terser": "^7.0.2",
     "glob": "^13.0.0",
     "postcss": "^8.5.6",

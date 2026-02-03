@@ -1,0 +1,46 @@
+/* Custom Pagination Dots */
+.splide__pagination {
+    bottom: 2.5rem !important; /* Sesuaikan posisi */
+    justify-content: flex-start !important;
+    padding-left: 2.5rem !important;
+}
+
+.splide__pagination__page {
+    background: rgba(255, 255, 255, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    width: 10px !important;
+    height: 10px !important;
+    margin: 0 6px !important;
+    transition: all 0.3s ease;
+}
+
+.splide__pagination__page.is-active {
+    background: #fff !important;
+    transform: scale(1.4);
+}
+
+/* Sembunyikan panah bawaan Splide jika kita pakai custom arrow di HTML */
+/* Tapi karena di HTML kita pakai class 'splide__arrow', Splide otomatis bind funsinya */
+.splide__arrow svg {
+    /* Reset style SVG bawaan splide biar ikon kita yang muncul */
+    fill: none !important; 
+    height: auto !important;
+    width: auto !important;
+}
+
+/* Custom warna spinner */
+.splide__spinner {
+    border: 2px solid rgba(255, 255, 255, 0.2) !important;
+    border-left-color: #fff !important; /* Warna putaran */
+    width: 40px !important;
+    height: 40px !important;
+}
+
+/* Pastikan gambar 100% width/height saat sudah ter-load 
+  agar tidak ada layout shift.
+*/
+.splide__slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
