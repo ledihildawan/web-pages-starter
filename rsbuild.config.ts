@@ -15,6 +15,7 @@ import { minify } from 'html-minifier-terser';
  */
 const isProd = process.env.NODE_ENV === 'production';
 const shouldMinify = isProd && process.env.MINIFY !== 'false';
+const shouldMinifyHTML = shouldMinify && process.env.MINIFY_HTML !== 'false';
 const ROOT = process.cwd();
 const resolveRoot = (...args: string[]) => path.resolve(ROOT, ...args);
 
@@ -112,6 +113,14 @@ const WatchJsonPlugin = {
  * RSBUILD CONFIGURATION
  */
 export default defineConfig({
+  server: {
+    open: true,
+    strictPort: true,
+    historyApiFallback: {
+      index: '/404.html',
+      disableDotRule: true,
+    },
+  },
   performance: {
     chunkSplit: { strategy: 'split-by-experience' },
     removeConsole: shouldMinify,
@@ -191,7 +200,7 @@ export default defineConfig({
   tools: {
     htmlPlugin: (config) => {
       config.minify = (html) =>
-        !shouldMinify
+        !shouldMinifyHTML
           ? html
           : minify(html, {
               collapseWhitespace: true,
