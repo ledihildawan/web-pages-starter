@@ -6,6 +6,12 @@ import path from 'path';
 import fs from 'node:fs';
 import tailwindcss from '@tailwindcss/postcss';
 
+// --- LOGIC SWITCH MINIFY ---
+// 1. Mode Production
+// 2. Variable MINIFY tidak di-set ke 'false'
+const isProd = process.env.NODE_ENV === 'production';
+const shouldMinify = isProd && process.env.MINIFY !== 'false';
+
 // --- HELPER 1: AUTO-DISCOVERY GLOBAL DATA ---
 const loadGlobalData = () => {
   const dataDir = path.resolve(__dirname, 'src/data');
@@ -49,13 +55,13 @@ const getEntries = () => {
 };
 
 export default defineConfig({
-  // UPGRADE 1: PERFORMANCE & CODE SPLITTING
-  // Memisahkan vendor (node_modules) agar caching browser lebih efisien
+  // 1. PERFORMANCE: Code Splitting & Console Removal
   performance: {
     chunkSplit: {
       strategy: 'split-by-experience',
     },
-    removeConsole: process.env.NODE_ENV === 'production',
+    // Hapus console.log hanya jika minify aktif
+    removeConsole: shouldMinify,
   },
 
   plugins: [
@@ -82,7 +88,7 @@ export default defineConfig({
         'src/**/*.njk',
         'src/data/**/*.json',
         'src/pages/**/*.json',
-        'src/**/*.css', // Manual Watch Fix (Dipertahankan)
+        'src/**/*.css', // Safety net untuk CSS reload di Windows
       ],
       options: {
         usePolling: true,
@@ -92,8 +98,7 @@ export default defineConfig({
     },
   },
 
-  // UPGRADE 2: ALIAS PATH LENGKAP
-  // Sinkron dengan tsconfig.json
+  // 2. ALIAS PATH
   resolve: {
     alias: { 
       '@': path.resolve(__dirname, 'src'),
@@ -114,16 +119,21 @@ export default defineConfig({
     distPath: { js: 'scripts', css: 'styles', image: 'assets/images' },
     assetPrefix: './',
     cleanDistPath: true,
-    target: 'web', 
-    sourceMap: process.env.NODE_ENV !== 'production' 
+    target: 'web',
+    
+    // Aktifkan Source Map JIKA TIDAK di-minify (untuk debugging)
+    sourceMap: !shouldMinify 
       ? { js: 'cheap-module-source-map', css: true } 
       : { js: false, css: false },
     
+    // 🔥 KONTROL MINIFY JS/CSS
+    minify: shouldMinify,
+
     filenameHash: true, 
     filename: {
       js: '[name].[contenthash:8].js',
       css: '[name].[contenthash:8].css',
-      image: '[name].[hash:8][ext]', 
+      image: '[name].[hash:8][ext]', // Fix hash conflict dengan image compress
     }
   },
 
@@ -151,17 +161,19 @@ export default defineConfig({
 
   tools: {
     htmlPlugin: (config) => {
-      if (process.env.NODE_ENV === 'production') {
-        config.minify = (html) => {
-          return minify(html, {
-            collapseWhitespace: true,
-            removeComments: true,
-            minifyCSS: true,
-            minifyJS: true,
-            minifyURLs: true,
-          });
-        };
-      }
+      config.minify = (html: string) => {
+        if (!shouldMinify) {
+          return html; // Kembalikan apa adanya jika MINIFY=false
+        }
+
+        return minify(html, {
+          collapseWhitespace: true,
+          removeComments: true,
+          minifyCSS: true,
+          minifyJS: true,
+          minifyURLs: true,
+        });
+      };
       return config;
     },
 
@@ -179,6 +191,7 @@ export default defineConfig({
             from: path.resolve(__dirname, 'src/assets'),
             to: 'assets',
             globOptions: { 
+              // Ignore gambar agar diproses oleh Nunjucks Loader (Hash+Compress)
               ignore: [
                 '**/*.ts', '**/*.css', '**/*.njk', 
                 '**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.webp', '**/*.svg', '**/*.gif'
@@ -188,6 +201,7 @@ export default defineConfig({
           }],
         }),
         
+        // Plugin Watcher JSON Custom
         {
           apply(compiler: Compiler) {
             compiler.hooks.afterCompile.tap('WatchDataPlugin', (compilation: Compilation) => {
@@ -213,9 +227,12 @@ export default defineConfig({
               loader: 'simple-nunjucks-loader',
               options: {
                 searchPaths: [
-                  path.join(__dirname, 'src/pages'),
-                  path.join(__dirname, 'src/layouts'),
-                  path.join(__dirname, 'src/partials')
+                  // Path absolut ke folder utama
+        path.join(__dirname, 'src/pages'),
+        path.join(__dirname, 'src/layouts'),
+        path.join(__dirname, 'src/partials'),
+        // Tambahkan root 'src' agar bisa panggil path dari root jika perlu
+        path.join(__dirname, 'src'),
                 ],
                 assetsPaths: [path.join(__dirname, 'src/assets')],
               },

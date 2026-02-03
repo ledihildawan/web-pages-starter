@@ -34,7 +34,7 @@
       "@layouts/*": ["./src/layouts/*"]
     },
 
-    "types": ["bun-types"] 
+    "types": ["bun-types", "node"],
   },
   "include": ["src", "scripts", "rsbuild.config.ts"],
   "exclude": ["dist", "node_modules"]
