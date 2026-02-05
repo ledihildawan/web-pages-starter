@@ -1,10 +1,10 @@
 <footer class="border-t border-white/5 bg-slate-950 pt-16 pb-8 mt-20">
-  <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-    
+  <div class="mx-auto max-w-7xl px-6 flex flex-col md:flex-row justify-between items-center gap-6">
     <div class="text-slate-400 text-sm">
-      &copy; {{ site.year }} {{ site.author }}. All rights reserved.
+      &copy;
+      {{ site.year }}
+      {{ site.author }}. All rights reserved.
     </div>
-
     <div class="flex gap-6">
       {% for item in menu.footer %}
         <a href="{{ item.url }}" class="text-sm text-slate-500 hover:text-violet-400 transition-colors">
@@ -12,6 +12,5 @@
         </a>
       {% endfor %}
     </div>
-
   </div>
 </footer>

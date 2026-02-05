@@ -3,16 +3,12 @@
 @theme {
   --font-sans: 'Inter', system-ui, sans-serif;
   
-  /* Definisi Animasi Custom di sini */
-  --animate-float: float 6s ease-in-out infinite;
-  
   @keyframes float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
   }
 }
 
-/* Layer Base untuk setting default element */
 @layer base {
   body {
     @apply font-sans;

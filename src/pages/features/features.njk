@@ -1,174 +1,177 @@
 {% extends "base.njk" %}
 
 {% block page_styles %}
-<style>
-    .about-header { color: red; }
-</style>
+  <style>
+    .about-header {
+      color: red;
+    }
+  </style>
 {% endblock %}
 
 {% block content %}
-<section class="pt-40 pb-20 px-6 text-center">
-      <div class="max-w-4xl mx-auto">
-        <div class="inline-flex items-center gap-2 px-3 py-1 bg-violet-500/10 border border-violet-500/20 rounded-full text-violet-300 text-xs font-medium mb-6 uppercase tracking-wider">
-          Power under the hood
-        </div>
-        <h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-6">
-          Everything you need to <br>
-          <span class="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
-            scale faster
-          </span>
-        </h1>
-        <p class="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
-          From powerful analytics to seamless integrations, we provide the toolkit you need to build world-class applications without the headache.
-        </p>
+  <section class="pt-40 pb-20 px-6 text-center">
+    <div class="max-w-4xl mx-auto">
+      <div class="inline-flex items-center gap-2 px-3 py-1 bg-violet-500/10 border border-violet-500/20 rounded-full text-violet-300 text-xs font-medium mb-6 uppercase tracking-wider">
+        Power under the hood
       </div>
-    </section>
-
-    <section class="py-10 px-6 space-y-24">
-        
-        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-            <div class="order-2 md:order-1">
-                <div class="w-12 h-12 rounded-xl bg-violet-500/10 flex items-center justify-center text-violet-400 mb-6 border border-violet-500/20">
-                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                </div>
-                <h2 class="text-3xl font-bold mb-4">Real-time Synchronization</h2>
-                <p class="text-slate-400 text-lg leading-relaxed mb-6">
-                    Changes propagate instantly across all devices. Whether your users are on mobile, desktop, or tablet, they see the same data at the exact same time.
-                </p>
-                <ul class="space-y-3">
-                    <li class="flex items-center gap-3 text-slate-300">
-                        <div class="w-1.5 h-1.5 rounded-full bg-violet-400"></div>
-                        <span>Sub-millisecond latency</span>
-                    </li>
-                    <li class="flex items-center gap-3 text-slate-300">
-                        <div class="w-1.5 h-1.5 rounded-full bg-violet-400"></div>
-                        <span>Offline support out of the box</span>
-                    </li>
-                    <li class="flex items-center gap-3 text-slate-300">
-                        <div class="w-1.5 h-1.5 rounded-full bg-violet-400"></div>
-                        <span>Conflict resolution handling</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="order-1 md:order-2 relative rounded-2xl bg-slate-900 border border-slate-800 p-2 aspect-[4/3] shadow-2xl overflow-hidden group">
-                <div class="absolute inset-0 bg-gradient-to-tr from-violet-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div class="w-full h-full bg-slate-950/50 rounded-xl flex items-center justify-center relative overflow-hidden">
-                    <div class="absolute top-6 left-6 right-6 bottom-6 border border-slate-800 rounded-lg bg-slate-900/50">
-                        <div class="h-8 border-b border-slate-800 flex items-center px-3 gap-2">
-                            <div class="w-2 h-2 rounded-full bg-red-500/50"></div>
-                            <div class="w-2 h-2 rounded-full bg-yellow-500/50"></div>
-                            <div class="w-2 h-2 rounded-full bg-green-500/50"></div>
-                        </div>
-                        <div class="p-4 space-y-3">
-                            <div class="h-2 w-3/4 bg-slate-800 rounded"></div>
-                            <div class="h-2 w-1/2 bg-slate-800 rounded"></div>
-                            <div class="h-2 w-full bg-slate-800 rounded"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-6">
+        Everything you need to
+        <br>
+        <span class="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
+          scale faster
+        </span>
+      </h1>
+      <p class="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
+        From powerful analytics to seamless integrations, we provide the toolkit you need to build world-class applications without the headache.
+      </p>
+    </div>
+  </section>
+  <section class="py-10 px-6 space-y-24">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+      <div class="order-2 md:order-1">
+        <div class="w-12 h-12 rounded-xl bg-violet-500/10 flex items-center justify-center text-violet-400 mb-6 border border-violet-500/20">
+          <svg class="w-6 h-6" fill="none" viewbox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
         </div>
-
-        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-            <div class="relative rounded-2xl bg-slate-900 border border-slate-800 p-2 aspect-[4/3] shadow-2xl overflow-hidden group">
-                <div class="absolute inset-0 bg-gradient-to-bl from-fuchsia-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div class="w-full h-full bg-slate-950/50 rounded-xl flex items-center justify-center">
-                     <div class="w-3/4 h-1/2 flex items-end justify-between gap-2 px-4">
-                        <div class="w-full bg-slate-800 rounded-t-sm h-[40%] group-hover:h-[60%] transition-all duration-700 delay-100 bg-gradient-to-t from-fuchsia-500/20 to-fuchsia-500/50"></div>
-                        <div class="w-full bg-slate-800 rounded-t-sm h-[70%] group-hover:h-[80%] transition-all duration-700 delay-200 bg-gradient-to-t from-fuchsia-500/20 to-fuchsia-500/50"></div>
-                        <div class="w-full bg-slate-800 rounded-t-sm h-[50%] group-hover:h-[40%] transition-all duration-700 delay-300 bg-gradient-to-t from-fuchsia-500/20 to-fuchsia-500/50"></div>
-                        <div class="w-full bg-slate-800 rounded-t-sm h-[80%] group-hover:h-[90%] transition-all duration-700 delay-400 bg-gradient-to-t from-fuchsia-500/20 to-fuchsia-500/50"></div>
-                     </div>
-                </div>
+        <h2 class="text-3xl font-bold mb-4">Real-time Synchronization</h2>
+        <p class="text-slate-400 text-lg leading-relaxed mb-6">
+          Changes propagate instantly across all devices. Whether your users are on mobile, desktop, or tablet, they see the same data at the exact same time.
+        </p>
+        <ul class="space-y-3">
+          <li class="flex items-center gap-3 text-slate-300">
+            <div class="w-1.5 h-1.5 rounded-full bg-violet-400"></div>
+            <span>Sub-millisecond latency</span>
+          </li>
+          <li class="flex items-center gap-3 text-slate-300">
+            <div class="w-1.5 h-1.5 rounded-full bg-violet-400"></div>
+            <span>Offline support out of the box</span>
+          </li>
+          <li class="flex items-center gap-3 text-slate-300">
+            <div class="w-1.5 h-1.5 rounded-full bg-violet-400"></div>
+            <span>Conflict resolution handling</span>
+          </li>
+        </ul>
+      </div>
+      <div class="order-1 md:order-2 relative rounded-2xl bg-slate-900 border border-slate-800 p-2 aspect-[4/3] shadow-2xl overflow-hidden group">
+        <div class="absolute inset-0 bg-gradient-to-tr from-violet-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="w-full h-full bg-slate-950/50 rounded-xl flex items-center justify-center relative overflow-hidden">
+          <div class="absolute top-6 left-6 right-6 bottom-6 border border-slate-800 rounded-lg bg-slate-900/50">
+            <div class="h-8 border-b border-slate-800 flex items-center px-3 gap-2">
+              <div class="w-2 h-2 rounded-full bg-red-500/50"></div>
+              <div class="w-2 h-2 rounded-full bg-yellow-500/50"></div>
+              <div class="w-2 h-2 rounded-full bg-green-500/50"></div>
             </div>
-            <div>
-                <div class="w-12 h-12 rounded-xl bg-fuchsia-500/10 flex items-center justify-center text-fuchsia-400 mb-6 border border-fuchsia-500/20">
-                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
-                </div>
-                <h2 class="text-3xl font-bold mb-4">Actionable Analytics</h2>
-                <p class="text-slate-400 text-lg leading-relaxed mb-6">
-                    Don't fly blind. Get deep insights into user behavior, system performance, and revenue metrics. Visualize your data with beautiful, interactive charts.
-                </p>
-                <ul class="space-y-3">
-                    <li class="flex items-center gap-3 text-slate-300">
-                        <div class="w-1.5 h-1.5 rounded-full bg-fuchsia-400"></div>
-                        <span>Customizable dashboards</span>
-                    </li>
-                    <li class="flex items-center gap-3 text-slate-300">
-                        <div class="w-1.5 h-1.5 rounded-full bg-fuchsia-400"></div>
-                        <span>Export to PDF, CSV, or Excel</span>
-                    </li>
-                    <li class="flex items-center gap-3 text-slate-300">
-                        <div class="w-1.5 h-1.5 rounded-full bg-fuchsia-400"></div>
-                        <span>Automated weekly reports</span>
-                    </li>
-                </ul>
+            <div class="p-4 space-y-3">
+              <div class="h-2 w-3/4 bg-slate-800 rounded"></div>
+              <div class="h-2 w-1/2 bg-slate-800 rounded"></div>
+              <div class="h-2 w-full bg-slate-800 rounded"></div>
             </div>
+          </div>
         </div>
-    </section>
-
-    <section class="py-20 px-6">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-2xl font-bold text-center mb-12">And so much more...</h2>
-            
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="p-6 bg-slate-900/50 border border-slate-800 rounded-xl hover:border-violet-500/30 transition-colors">
-                    <h3 class="font-semibold text-white mb-2">Dark Mode</h3>
-                    <p class="text-sm text-slate-400">Built-in support for light and dark themes with automatic system detection.</p>
-                </div>
-                <div class="p-6 bg-slate-900/50 border border-slate-800 rounded-xl hover:border-violet-500/30 transition-colors">
-                    <h3 class="font-semibold text-white mb-2">API First</h3>
-                    <p class="text-sm text-slate-400">REST and GraphQL APIs available for full programmatic control.</p>
-                </div>
-                <div class="p-6 bg-slate-900/50 border border-slate-800 rounded-xl hover:border-violet-500/30 transition-colors">
-                    <h3 class="font-semibold text-white mb-2">SSO Login</h3>
-                    <p class="text-sm text-slate-400">Enterprise-grade Single Sign-On support for Google, GitHub, and Okta.</p>
-                </div>
-                <div class="p-6 bg-slate-900/50 border border-slate-800 rounded-xl hover:border-violet-500/30 transition-colors">
-                    <h3 class="font-semibold text-white mb-2">Audit Logs</h3>
-                    <p class="text-sm text-slate-400">Track every change made to your project with detailed timestamps.</p>
-                </div>
-                <div class="p-6 bg-slate-900/50 border border-slate-800 rounded-xl hover:border-violet-500/30 transition-colors">
-                    <h3 class="font-semibold text-white mb-2">Role Based Access</h3>
-                    <p class="text-sm text-slate-400">Granular permission controls for admins, editors, and viewers.</p>
-                </div>
-                <div class="p-6 bg-slate-900/50 border border-slate-800 rounded-xl hover:border-violet-500/30 transition-colors">
-                    <h3 class="font-semibold text-white mb-2">99.99% Uptime</h3>
-                    <p class="text-sm text-slate-400">Guaranteed availability with our globally distributed CDN.</p>
-                </div>
-            </div>
+      </div>
+    </div>
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+      <div class="relative rounded-2xl bg-slate-900 border border-slate-800 p-2 aspect-[4/3] shadow-2xl overflow-hidden group">
+        <div class="absolute inset-0 bg-gradient-to-bl from-fuchsia-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="w-full h-full bg-slate-950/50 rounded-xl flex items-center justify-center">
+          <div class="w-3/4 h-1/2 flex items-end justify-between gap-2 px-4">
+            <div class="w-full bg-slate-800 rounded-t-sm h-[40%] group-hover:h-[60%] transition-all duration-700 delay-100 bg-gradient-to-t from-fuchsia-500/20 to-fuchsia-500/50"></div>
+            <div class="w-full bg-slate-800 rounded-t-sm h-[70%] group-hover:h-[80%] transition-all duration-700 delay-200 bg-gradient-to-t from-fuchsia-500/20 to-fuchsia-500/50"></div>
+            <div class="w-full bg-slate-800 rounded-t-sm h-[50%] group-hover:h-[40%] transition-all duration-700 delay-300 bg-gradient-to-t from-fuchsia-500/20 to-fuchsia-500/50"></div>
+            <div class="w-full bg-slate-800 rounded-t-sm h-[80%] group-hover:h-[90%] transition-all duration-700 delay-400 bg-gradient-to-t from-fuchsia-500/20 to-fuchsia-500/50"></div>
+          </div>
         </div>
-    </section>
-
-    <section class="py-24 px-6 border-t border-slate-800/50">
-        <div class="max-w-3xl mx-auto text-center">
-            <h2 class="text-3xl font-bold mb-6">Ready to get started?</h2>
-            <div class="flex items-center justify-center gap-4">
-                <a href="#" class="px-8 py-3 bg-white text-slate-900 rounded-lg font-medium hover:bg-slate-100 transition-colors">
-                    Create Account
-                </a>
-                <a href="#" class="px-8 py-3 bg-slate-800 text-white rounded-lg font-medium hover:bg-slate-700 transition-colors">
-                    Read Documentation
-                </a>
-            </div>
+      </div>
+      <div>
+        <div class="w-12 h-12 rounded-xl bg-fuchsia-500/10 flex items-center justify-center text-fuchsia-400 mb-6 border border-fuchsia-500/20">
+          <svg class="w-6 h-6" fill="none" viewbox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
         </div>
-    </section>
+        <h2 class="text-3xl font-bold mb-4">Actionable Analytics</h2>
+        <p class="text-slate-400 text-lg leading-relaxed mb-6">
+          Don't fly blind. Get deep insights into user behavior, system performance, and revenue metrics. Visualize your data with beautiful, interactive charts.
+        </p>
+        <ul class="space-y-3">
+          <li class="flex items-center gap-3 text-slate-300">
+            <div class="w-1.5 h-1.5 rounded-full bg-fuchsia-400"></div>
+            <span>Customizable dashboards</span>
+          </li>
+          <li class="flex items-center gap-3 text-slate-300">
+            <div class="w-1.5 h-1.5 rounded-full bg-fuchsia-400"></div>
+            <span>Export to PDF, CSV, or Excel</span>
+          </li>
+          <li class="flex items-center gap-3 text-slate-300">
+            <div class="w-1.5 h-1.5 rounded-full bg-fuchsia-400"></div>
+            <span>Automated weekly reports</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class="py-20 px-6">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-2xl font-bold text-center mb-12">And so much more...</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="p-6 bg-slate-900/50 border border-slate-800 rounded-xl hover:border-violet-500/30 transition-colors">
+          <h3 class="font-semibold text-white mb-2">Dark Mode</h3>
+          <p class="text-sm text-slate-400">Built-in support for light and dark themes with automatic system detection.</p>
+        </div>
+        <div class="p-6 bg-slate-900/50 border border-slate-800 rounded-xl hover:border-violet-500/30 transition-colors">
+          <h3 class="font-semibold text-white mb-2">API First</h3>
+          <p class="text-sm text-slate-400">REST and GraphQL APIs available for full programmatic control.</p>
+        </div>
+        <div class="p-6 bg-slate-900/50 border border-slate-800 rounded-xl hover:border-violet-500/30 transition-colors">
+          <h3 class="font-semibold text-white mb-2">SSO Login</h3>
+          <p class="text-sm text-slate-400">Enterprise-grade Single Sign-On support for Google, GitHub, and Okta.</p>
+        </div>
+        <div class="p-6 bg-slate-900/50 border border-slate-800 rounded-xl hover:border-violet-500/30 transition-colors">
+          <h3 class="font-semibold text-white mb-2">Audit Logs</h3>
+          <p class="text-sm text-slate-400">Track every change made to your project with detailed timestamps.</p>
+        </div>
+        <div class="p-6 bg-slate-900/50 border border-slate-800 rounded-xl hover:border-violet-500/30 transition-colors">
+          <h3 class="font-semibold text-white mb-2">Role Based Access</h3>
+          <p class="text-sm text-slate-400">Granular permission controls for admins, editors, and viewers.</p>
+        </div>
+        <div class="p-6 bg-slate-900/50 border border-slate-800 rounded-xl hover:border-violet-500/30 transition-colors">
+          <h3 class="font-semibold text-white mb-2">99.99% Uptime</h3>
+          <p class="text-sm text-slate-400">Guaranteed availability with our globally distributed CDN.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="py-24 px-6 border-t border-slate-800/50">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-6">Ready to get started?</h2>
+      <div class="flex items-center justify-center gap-4">
+        <a href="#" class="px-8 py-3 bg-white text-slate-900 rounded-lg font-medium hover:bg-slate-100 transition-colors">
+          Create Account
+        </a>
+        <a href="#" class="px-8 py-3 bg-slate-800 text-white rounded-lg font-medium hover:bg-slate-700 transition-colors">
+          Read Documentation
+        </a>
+      </div>
+    </div>
+  </section>
 {% endblock %}
 
 {% block scripts %}
- <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
-<script>
-    console.log("Hanya jalan di halaman features sadf");
-</script>
-<script>
-// Lodash is available globally as the '_' object after the script loads
-const data = [1, 2, 3, 4, 5, 6, 7, 8];
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+  <script>
+    console.log("Hanya jalan di halaman features");
+  </script>
+  <script>
+    const data = [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ];
 
-// Use the _.chunk function to split the array into chunks of 3
-const chunkedData = _.chunk(data, 3);
+    const chunkedData = _.chunk(data, 3);
 
-// Log the result to the console
-console.log("Original data:", data);
-console.log("Chunked data (chunks of 3):", chunkedData);
-</script>
+    console.log("Original data:", data);
+    console.log("Chunked data (chunks of 3):", chunkedData);
+  </script>
 {% endblock %}

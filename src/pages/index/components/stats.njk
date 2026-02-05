@@ -1,0 +1,12 @@
+<section class="py-16 px-6 border-y border-slate-800/50">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      {% for stat in stats %}
+        <div>
+          <p class="text-4xl font-bold text-{{ stat.color }}-400 mb-2">{{ stat.value }}</p>
+          <p class="text-slate-500">{{ stat.label }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

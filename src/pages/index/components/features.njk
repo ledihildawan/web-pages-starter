@@ -1,32 +1,32 @@
 <section id="features" class="py-20 px-6">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold mb-4">{{ features.heading }}</h2>
-          <p class="text-slate-400 max-w-xl mx-auto">{{ features.subheading }}</p>
-        </div>
-        
-        <div class="grid md:grid-cols-3 gap-6">
-          {# --- LOOPING FEATURES DARI JSON --- #}
-          {% for item in features.list %}
-          <div class="group p-8 rounded-2xl bg-slate-900/50 border border-slate-800/50 hover:border-{{ item.color }}-500/30 transition-all">
-            
-            {# Dynamic Color Class: bg-violet-500/10, text-violet-400, dll #}
-            <div class="w-14 h-14 rounded-2xl bg-{{ item.color }}-500/10 flex items-center justify-center text-{{ item.color }}-400 mb-6 group-hover:bg-{{ item.color }}-500/20 transition-colors">
-              
-              {# Logic Sederhana untuk memilih Icon berdasarkan nama di JSON #}
-              {% if item.icon == 'lightning' %}
-                <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
-              {% elif item.icon == 'design' %}
-                <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.39m3.421 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" /></svg>
-              {% elif item.icon == 'shield' %}
-                <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg>
-              {% endif %}
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">{{ features.heading }}</h2>
+      <p class="text-slate-400 max-w-xl mx-auto">{{ features.subheading }}</p>
+    </div>
 
-            </div>
-            <h3 class="text-xl font-semibold mb-3">{{ item.title }}</h3>
-            <p class="text-slate-400 leading-relaxed">{{ item.description }}</p>
+    <div class="grid md:grid-cols-3 gap-6">
+      {# --- LOOPING FEATURES DARI JSON --- #}
+      {% for item in features.list %}
+        <div class="group p-8 rounded-2xl bg-slate-900/50 border border-slate-800/50 hover:border-{{ item.color }}-500/30 transition-all">
+
+          {# Dynamic Color Class: bg-violet-500/10, text-violet-400, dll #}
+          <div class="w-14 h-14 rounded-2xl bg-{{ item.color }}-500/10 flex items-center justify-center text-{{ item.color }}-400 mb-6 group-hover:bg-{{ item.color }}-500/20 transition-colors">
+
+            {# Logic Sederhana untuk memilih Icon berdasarkan nama di JSON #}
+            {% if item.icon == 'lightning' %}
+              <svg class="w-7 h-7" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+            {% elif item.icon == 'design' %}
+              <svg class="w-7 h-7" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.39m3.421 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42"/></svg>
+            {% elif item.icon == 'shield' %}
+              <svg class="w-7 h-7" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/></svg>
+            {% endif %}
+
           </div>
-          {% endfor %}
+          <h3 class="text-xl font-semibold mb-3">{{ item.title }}</h3>
+          <p class="text-slate-400 leading-relaxed">{{ item.description }}</p>
         </div>
-      </div>
-    </section>
+      {% endfor %}
+    </div>
+  </div>
+</section>
