@@ -1,44 +1,36 @@
-/* Custom Pagination Dots */
 .splide__pagination {
-    bottom: 2.5rem !important; /* Sesuaikan posisi */
-    justify-content: flex-start !important;
-    padding-left: 2.5rem !important;
+    bottom: 2.5rem;
+    justify-content: flex-start;
+    padding-left: 2.5rem;
 }
 
 .splide__pagination__page {
-    background: rgba(255, 255, 255, 0.3) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    width: 10px !important;
-    height: 10px !important;
-    margin: 0 6px !important;
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 10px;
+    height: 10px;
+    margin: 0 6px;
     transition: all 0.3s ease;
 }
 
 .splide__pagination__page.is-active {
-    background: #fff !important;
+    background: #fff;
     transform: scale(1.4);
 }
 
-/* Sembunyikan panah bawaan Splide jika kita pakai custom arrow di HTML */
-/* Tapi karena di HTML kita pakai class 'splide__arrow', Splide otomatis bind funsinya */
 .splide__arrow svg {
-    /* Reset style SVG bawaan splide biar ikon kita yang muncul */
-    fill: none !important; 
-    height: auto !important;
-    width: auto !important;
+    fill: none; 
+    height: auto;
+    width: auto;
 }
 
-/* Custom warna spinner */
 .splide__spinner {
-    border: 2px solid rgba(255, 255, 255, 0.2) !important;
-    border-left-color: #fff !important; /* Warna putaran */
-    width: 40px !important;
-    height: 40px !important;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-left-color: #fff; /* Warna putaran */
+    width: 40px;
+    height: 40px;
 }
 
-/* Pastikan gambar 100% width/height saat sudah ter-load 
-  agar tidak ada layout shift.
-*/
 .splide__slide img {
     width: 100%;
     height: 100%;
