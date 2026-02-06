@@ -168,7 +168,11 @@ export default defineConfig({
   },
 
   output: {
-    distPath: { js: 'scripts', css: 'styles', image: 'assets/images' },
+    distPath: {
+      js: 'assets/scripts',
+      css: 'assets/styles',
+      image: 'assets/images',
+    },
     assetPrefix: './',
     cleanDistPath: true,
     minify: shouldMinify,
