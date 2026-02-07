@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8">
+        <title>A4 Wide Layout - Max Surface</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+        <style>
+            /* 1. RESET TOTAL */
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            body {
+                background-color: #525659;
+                /* Warna abu-abu ala PDF viewer */
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            /* 2. SETTING HALAMAN WIDE */
+            .page {
+                width: 210mm;
+                height: 297mm;
+                /* PADDING WIDE: Hanya 5mm agar konten hampir mentok ke pinggir */
+                padding: 5mm;
+                background: white;
+                position: relative;
+                overflow: hidden;
+                display: block;
+
+                /* UI di Layar */
+                margin: 20px 0;
+                box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            }
+
+            /* 3. KONTEN INTERNAL */
+            .content-border {
+                /* Opsional: Garis bantu tipis untuk melihat batas konten */
+                border: 1px dashed #eee;
+                height: 100%;
+                width: 100%;
+            }
+
+            /* 4. MEDIA PRINT (PENTING!) */
+            @media print {
+                @page {
+                    size: A4;
+                    margin: 0;
+                    /* Wajib 0 agar padding .page kita yang pegang kendali */
+                }
+
+                body {
+                    background: none;
+                }
+                #download-btn {
+                    display: none;
+                }
+
+                .page {
+                    margin: 0 !important;
+                    border: none !important;
+                    box-shadow: none !important;
+                    page-break-after: always !important;
+                    width: 210mm !important;
+                    height: 297mm !important;
+                }
+            }
+
+            /* 5. EXPORT HELPER */
+            .is-exporting .page {
+                margin: 0 !important;
+                border: none !important;
+                box-shadow: none !important;
+            }
+
+            #download-btn {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 1000;
+                padding: 12px 25px;
+                background: #e67e22;
+                color: white;
+                border: none;
+                border-radius: 50px;
+                cursor: pointer;
+                font-weight: bold;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            }
+        </style>
+    </head>
+    <body>
+
+        <button id="download-btn" onclick="exportPDF()">Download Full PDF</button>
+
+        <div id="render-area">
+            <div class="page">
+                <div class="content-border">
+                    <h2>Halaman 1 (Wide Mode)</h2>
+                    <p>Padding dikurangi menjadi 5mm untuk memaksimalkan area kerja.</p>
+                    <div style="width: 100%; height: 50mm; background: #3498db; margin-top: 10px; color: white; padding: 10px;">
+                        Blok ini hampir menyentuh pinggir kertas.
+                    </div>
+                </div>
+            </div>
+
+            <div class="page">
+                <div class="content-border">
+                    <h2>Halaman 2</h2>
+                    <p>Memastikan transisi antar halaman tetap bersih tanpa slip halaman kosong.</p>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            async function exportPDF() {
+                const {jsPDF} = window.jspdf;
+                const btn = document.getElementById('download-btn');
+                const pages = document.querySelectorAll('.page');
+
+                btn.disabled = true;
+                btn.innerText = "Processing...";
+                document
+                    .body
+                    .classList
+                    .add('is-exporting');
+
+                const pdf = new jsPDF('p', 'mm', 'a4');
+
+                for (let i = 0; i < pages.length; i++) {
+                    const canvas = await html2canvas(pages[i], {
+                        scale: 2, // Kualitas tinggi
+                        useCORS: true,
+                        logging: false,
+                        // Dimensi pixel presisi A4 di 96 DPI
+                        width: 793.7,
+                        height: 1122.5
+                    });
+
+                    const imgData = canvas.toDataURL('image/jpeg', 0.98);
+
+                    if (i > 0) 
+                        pdf.addPage();
+                    
+                    // Tempel gambar tepat di 0,0
+                    pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297);
+                }
+
+                pdf.save('Wide_Layout_Document.pdf');
+                document
+                    .body
+                    .classList
+                    .remove('is-exporting');
+                btn.disabled = false;
+                btn.innerText = "Download Full PDF";
+            }
+        </script>
+    </body>
+</html>
