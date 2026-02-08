@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>CORE-65 | Anti-Leak Solid Edition</title>
+        <title>CORE-65 | Studio Environment Edition</title>
         <style>
             /* --- 1. CSS RESET & GLOBAL --- */
             *,
@@ -21,22 +21,23 @@
                 --radius-key: 6px;
                 --radius-case: 32px;
 
-                /* Theme Light */
-                --bg-canvas: #d1cfcd;
-                --bg-wood-opacity: 1;
-                --bg-carbon-opacity: 0;
-                --mat-case-base: oklch(0.82 0.01 240);
-                --mat-case-slope: oklch(0.88 0.01 240);
-                --mat-case-bezel: oklch(0.94 0.01 240);
+                /* Environmental Lighting Light Mode */
+                --bg-canvas: #f0f2f5;
+                --mesh-1: #e2e8f0;
+                --mesh-2: #cbd5e1;
+                --mesh-3: #94a3b8;
+
+                --mat-case-base: oklch(0.85 0.01 240);
+                --mat-case-slope: oklch(0.9 0.01 240);
+                --mat-case-bezel: oklch(0.96 0.01 240);
                 --mat-plate-inner: oklch(0.7 0.02 240);
 
-                /* Key Colors - SOLID ONLY */
-                --key-alpha-base: oklch(0.85 0.01 240);
+                --key-alpha-base: oklch(0.88 0.01 240);
                 --key-alpha-top: oklch(0.98 0.01 240);
                 --key-alpha-fg: oklch(0.25 0.05 240);
 
-                --key-mod-base: oklch(0.75 0.08 240);
-                --key-mod-top: oklch(0.85 0.1 240);
+                --key-mod-base: oklch(0.8 0.08 240);
+                --key-mod-top: oklch(0.88 0.1 240);
                 --key-mod-fg: oklch(0.25 0.05 240);
 
                 --key-accent-base: oklch(0.2 0.12 255);
@@ -48,101 +49,96 @@
             }
 
             [data-theme="dark"] {
-                --bg-canvas: #080c14;
-                --bg-wood-opacity: 0;
-                --bg-carbon-opacity: 1;
+                /* Environmental Lighting Dark Mode */
+                --bg-canvas: #0a0c10;
+                --mesh-1: #1a1c24;
+                --mesh-2: #0f172a;
+                --mesh-3: #1e293b;
+
                 --mat-case-base: oklch(0.12 0.02 240);
                 --mat-case-slope: oklch(0.18 0.02 240);
                 --mat-case-bezel: oklch(0.28 0.02 240);
                 --mat-plate-inner: oklch(0.08 0.02 240);
 
                 --key-alpha-base: oklch(0.35 0.03 240);
-                --key-alpha-top: oklch(0.45 0.03 240);
+                --key-alpha-top: oklch(0.42 0.03 240);
                 --key-alpha-fg: oklch(0.95 0.01 240);
 
                 --key-mod-base: oklch(0.25 0.08 240);
-                --key-mod-top: oklch(0.35 0.1 240);
+                --key-mod-top: oklch(0.32 0.1 240);
                 --key-mod-fg: oklch(0.95 0.01 240);
 
                 --key-accent-base: oklch(0.1 0.1 255);
-                --key-accent-top: oklch(0.2 0.1 255);
+                --key-accent-top: oklch(0.18 0.1 255);
                 --key-accent-fg: oklch(0.9 0.05 240);
 
                 --led-active: oklch(0.9 0.1 190);
                 --label-stealth: oklch(0.4 0.01 240);
             }
 
+            /* --- 2. DYNAMIC BACKGROUND --- */
             body {
                 background-color: var(--bg-canvas);
+                position: relative;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 min-height: 100vh;
                 font-family: 'Inter', sans-serif;
                 overflow: hidden;
-                transition: background-color 0.8s ease;
+                transition: background-color 1.2s ease;
             }
 
-            .bg-layer {
+            /* Studio Light Mesh Gradient */
+            .bg-studio {
                 position: fixed;
                 inset: 0;
-                pointer-events: none;
                 z-index: -1;
-                transition: opacity 0.8s ease;
-            }
-            .bg-wood {
-                background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
-                opacity: var(--bg-wood-opacity);
-            }
-            .bg-carbon {
-                background-image: url("https://www.transparenttextures.com/patterns/carbon-fibre.png");
-                background-blend-mode: overlay;
-                opacity: var(--bg-carbon-opacity);
+                background: radial-gradient(at 0% 0%, var(--mesh-1) 0px, transparent 50%), radial-gradient(at 100% 0%, var(--mesh-2) 0px, transparent 50%), radial-gradient(at 100% 100%, var(--mesh-3) 0px, transparent 50%), radial-gradient(at 0% 100%, var(--mesh-2) 0px, transparent 50%);
+                filter: blur(40px);
+                opacity: 0.6;
             }
 
-            /* --- 2. CHASSIS --- */
+            /* Noise Texture Overlay */
+            .bg-noise {
+                position: fixed;
+                inset: 0;
+                z-index: -1;
+                background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
+                opacity: 0.15;
+                pointer-events: none;
+            }
+
+            /* --- 3. CHASSIS --- */
             .chassis-housing {
                 background-color: var(--mat-case-base);
-                padding: 4px;
+                padding: 10px;
                 border-radius: var(--radius-case);
                 position: relative;
-                box-shadow: 0 40px 100px -20px oklch(0 0 0 / 0.7);
-            }
-
-            .chassis-housing::after {
-                content: "";
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: -16px;
-                background-color: oklch(from var(--mat-case-base) calc(l - 0.15) c h);
-                border-radius: var(--radius-case);
-                z-index: -1;
-                box-shadow: inset 0 -4px 10px rgba(0,0,0,0.1);
+                box-shadow: 0 0 80px rgba(0,0,0,0.2);
             }
 
             .angled-slope {
                 background-color: var(--mat-case-slope);
                 padding: 8px;
-                border-radius: 28px;
-                box-shadow: inset 0 8px 12px rgba(0,0,0,0.1), inset 0 -4px 8px rgba(0,0,0,0.05);
+                border-radius: 26px;
+                box-shadow: inset 0 0 12px rgba(0,0,0,0.1);
             }
 
             .bezel-frame {
                 background-color: var(--mat-case-bezel);
-                padding: 10px 15px;
+                padding: 12px 16px;
                 border-radius: 20px;
-                box-shadow: 0 10px 20px rgba(0,0,0,0.2);
                 position: relative;
+                box-shadow: 0 6px 15px rgba(0,0,0,0.1);
             }
 
-            /* --- 3. ZERO-LEAK 3D KEYCAPS --- */
+            /* --- 4. INNER PLATE & KEYS --- */
             .inner-plate {
                 background-color: var(--mat-plate-inner);
                 padding: 8px;
-                border-radius: 12px;
-                box-shadow: inset 0 10px 20px oklch(0 0 0 / 0.5);
+                border-radius: 10px;
+                box-shadow: inset 0 0 20px rgba(0,0,0,0.45);
                 overflow: hidden;
             }
 
@@ -163,33 +159,40 @@
                 outline: none;
                 border-radius: var(--radius-key);
                 background-color: var(--key-base);
-                /* Solid Side Shadow */
-                box-shadow: 0 3px 0 rgba(0,0,0,0.25);
-                transition: transform 0.05s linear;
                 overflow: hidden;
-                /* Penting: memotong apapun yang keluar dari radius */
+                transition: transform 0.05s ease;
             }
 
-            /* Permukaan Atas (Piramida Terpotong) */
             .key-top {
                 position: absolute;
-                /* Inset pixel tetap untuk mencegah gap geometris */
-                top: 3px;
-                left: 4px;
-                right: 4px;
-                bottom: 7px;
+                top: 5px;
+                left: 5px;
+                right: 5px;
+                bottom: 5px;
                 border-radius: calc(var(--radius-key) - 2px);
                 background-color: var(--key-top);
                 color: var(--key-fg);
                 display: flex;
+                flex-direction: column;
                 align-items: center;
                 justify-content: center;
                 font-family: 'JetBrains Mono', monospace;
-                font-weight: 800;
-                font-size: 11px;
-                /* Hanya bayangan solid tipis untuk kedalaman, tanpa pantulan cahaya */
-                box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+                font-weight: 700;
+                box-shadow: inset 0 0 4px rgba(0,0,0,0.06);
                 z-index: 2;
+                transition: all 0.05s ease;
+            }
+
+            .key-label {
+                font-size: 11px;
+            }
+            .key-icon {
+                font-size: 14px;
+                margin-bottom: 2px;
+            }
+            .type-mod .key-label {
+                font-size: 8.5px;
+                font-weight: 800;
             }
 
             .type-alpha {
@@ -201,8 +204,6 @@
                 --key-base: var(--key-mod-base);
                 --key-top: var(--key-mod-top);
                 --key-fg: var(--key-mod-fg);
-                font-size: 8px;
-                text-transform: uppercase;
             }
             .type-accent {
                 --key-base: var(--key-accent-base);
@@ -211,17 +212,17 @@
             }
 
             .key.active {
-                transform: translateY(2px);
+                transform: scale(0.97);
             }
             .key.active .key-top {
-                filter: brightness(0.92);
+                filter: brightness(0.9);
             }
 
-            /* --- 4. INDICATOR --- */
+            /* --- 5. INDICATOR --- */
             .indicator-plate {
                 position: absolute;
-                left: 5px;
-                top: 36px;
+                left: 6px;
+                top: 38px;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -235,13 +236,14 @@
             }
             .caps-on .led-line {
                 background-color: var(--led-active);
-                box-shadow: 0 0 6px var(--led-active);
+                box-shadow: 0 0 10px var(--led-active);
             }
             .led-label {
                 font-size: 7px;
                 font-weight: 900;
                 color: var(--label-stealth);
                 font-family: 'JetBrains Mono', monospace;
+                opacity: 0.6;
             }
 
             /* Utilities */
@@ -269,17 +271,17 @@
             .sub {
                 position: absolute;
                 top: 3px;
-                left: 5px;
+                left: 6px;
                 font-size: 8px;
-                opacity: 0.5;
+                opacity: 0.4;
                 pointer-events: none;
             }
 
             #theme-toggle {
                 position: fixed;
-                top: 30px;
+                bottom: 30px;
                 right: 30px;
-                padding: 10px 22px;
+                padding: 12px 24px;
                 border-radius: 40px;
                 background: var(--mat-case-bezel);
                 color: var(--key-alpha-fg);
@@ -288,15 +290,21 @@
                 font-size: 11px;
                 cursor: pointer;
                 z-index: 100;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                transition: all 0.3s ease;
+            }
+            #theme-toggle:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 15px 40px rgba(0,0,0,0.3);
             }
         </style>
     </head>
     <body data-theme="light">
 
-        <div class="bg-layer bg-wood"></div>
-        <div class="bg-layer bg-carbon"></div>
+        <div class="bg-studio"></div>
+        <div class="bg-noise"></div>
 
-        <button id="theme-toggle">TOGGLE THEME</button>
+        <button id="theme-toggle">TOGGLE ATMOSPHERE</button>
 
         <div class="chassis-housing" id="main-shell">
             <div class="angled-slope">
@@ -365,7 +373,7 @@
             const layoutData = [
                 [
                     {
-                        l: 'Esc',
+                        l: 'ESC',
                         c: 'Escape',
                         t: 'type-accent',
                         w: 'w-1u'
@@ -442,12 +450,13 @@
                         t: 'type-alpha',
                         w: 'w-1u'
                     }, {
-                        l: 'Bksp',
+                        i: '⌫',
+                        l: 'BACK',
                         c: 'Backspace',
                         t: 'type-mod',
                         w: 'w-2u'
                     }, {
-                        l: 'Hm',
+                        l: 'HOME',
                         c: 'Home',
                         t: 'type-mod',
                         w: 'w-1u'
@@ -455,7 +464,8 @@
                 ],
                 [
                     {
-                        l: 'Tab',
+                        i: '⇥',
+                        l: 'TAB',
                         c: 'Tab',
                         t: 'type-mod',
                         w: 'w-1-5u'
@@ -528,7 +538,7 @@
                         t: 'type-alpha',
                         w: 'w-1-5u'
                     }, {
-                        l: 'Del',
+                        l: 'DEL',
                         c: 'Delete',
                         t: 'type-mod',
                         w: 'w-1u'
@@ -536,7 +546,8 @@
                 ],
                 [
                     {
-                        l: 'Caps',
+                        i: '⇪',
+                        l: 'CAPS',
                         c: 'CapsLock',
                         t: 'type-mod',
                         w: 'w-1-75u'
@@ -598,12 +609,13 @@
                         t: 'type-alpha',
                         w: 'w-1u'
                     }, {
-                        l: 'Enter',
+                        i: '⏎',
+                        l: 'ENTER',
                         c: 'Enter',
                         t: 'type-accent',
                         w: 'w-2-25u'
                     }, {
-                        l: 'PgU',
+                        l: 'PGUP',
                         c: 'PageUp',
                         t: 'type-mod',
                         w: 'w-1u'
@@ -611,7 +623,8 @@
                 ],
                 [
                     {
-                        l: 'Shift',
+                        i: '⇧',
+                        l: 'SHIFT',
                         c: 'ShiftLeft',
                         t: 'type-mod',
                         w: 'w-2-25u'
@@ -669,17 +682,18 @@
                         t: 'type-alpha',
                         w: 'w-1u'
                     }, {
-                        l: 'Shift',
+                        i: '⇧',
+                        l: 'SHIFT',
                         c: 'ShiftRight',
                         t: 'type-mod',
                         w: 'w-flex'
                     }, {
-                        l: '▲',
+                        i: '▲',
                         c: 'ArrowUp',
                         t: 'type-alpha',
                         w: 'w-1u'
                     }, {
-                        l: 'PgD',
+                        l: 'PGDN',
                         c: 'PageDown',
                         t: 'type-mod',
                         w: 'w-1u'
@@ -687,17 +701,18 @@
                 ],
                 [
                     {
-                        l: 'Ctrl',
+                        l: 'CTRL',
                         c: 'ControlLeft',
                         t: 'type-mod',
                         w: 'w-1-25u'
                     }, {
-                        l: 'Win',
+                        i: '⊞',
+                        l: 'WIN',
                         c: 'MetaLeft',
                         t: 'type-mod',
                         w: 'w-1u'
                     }, {
-                        l: 'Alt',
+                        l: 'ALT',
                         c: 'AltLeft',
                         t: 'type-mod',
                         w: 'w-1-25u'
@@ -707,32 +722,32 @@
                         t: 'type-accent',
                         w: 'w-flex'
                     }, {
-                        l: 'Alt',
+                        l: 'ALT',
                         c: 'AltRight',
                         t: 'type-mod',
                         w: 'w-1-25u'
                     }, {
-                        l: 'Fn',
+                        l: 'FN',
                         c: 'Fn',
                         t: 'type-mod',
                         w: 'w-1u'
                     }, {
-                        l: 'Ctrl',
+                        l: 'CTRL',
                         c: 'ControlRight',
                         t: 'type-mod',
                         w: 'w-1u'
                     }, {
-                        l: '◀',
+                        i: '◀',
                         c: 'ArrowLeft',
                         t: 'type-alpha',
                         w: 'w-1u'
                     }, {
-                        l: '▼',
+                        i: '▼',
                         c: 'ArrowDown',
                         t: 'type-alpha',
                         w: 'w-1u'
                     }, {
-                        l: '▶',
+                        i: '▶',
                         c: 'ArrowRight',
                         t: 'type-alpha',
                         w: 'w-1u'
@@ -756,9 +771,18 @@
                         s.innerText = key.s;
                         top.appendChild(s);
                     }
-                    const l = document.createElement('span');
-                    l.innerText = key.l;
-                    top.appendChild(l);
+                    if (key.i) {
+                        const i = document.createElement('span');
+                        i.className = 'key-icon';
+                        i.innerText = key.i;
+                        top.appendChild(i);
+                    }
+                    if (key.l) {
+                        const l = document.createElement('span');
+                        l.className = 'key-label';
+                        l.innerText = key.l;
+                        top.appendChild(l);
+                    }
                     btn.appendChild(top);
                     rowDiv.appendChild(btn);
                 });
