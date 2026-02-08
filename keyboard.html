@@ -3,27 +3,49 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>CORE-65 | Premium Mechanical Simulator</title>
+        <title>CORE-65 | Top-Left Indicator Edition</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;800&family=Inter:wght@400;700;800&display=swap');
             :root {
-                --case-bg: #e2e8f0;
-                --navy: #1e293b;
-                --blue: #dbeafe;
-                --white: #ffffff;
-                --shadow-navy: #020617;
-                --shadow-blue: #93c5fd;
-                --shadow-white: #cbd5e1;
-                --u: 50px;
-                --gap: 4px;
+                --u: 52px;
+                --gap: 5px;
+                /* Light Mode - CNC Silver */
+                --bg-base: #d1cfcd;
+                --case-outer: oklch(0.82 0.01 240);
+                --case-slope: oklch(0.88 0.01 240);
+                --case-bezel: oklch(0.94 0.01 240);
+                --case-inner: oklch(0.97 0.01 240);
+                --key-white: oklch(0.99 0.01 240);
+                --key-blue: oklch(0.92 0.04 230);
+                --key-navy: oklch(0.28 0.05 240);
+                --text-main: oklch(0.25 0.05 240);
+                --inner-scoop: inset 0 6px 12px oklch(0 0 0 / 0.08), inset 0 -2px 4px oklch(1 0 0 / 0.8);
+                --led-on: oklch(0.98 0.02 240);
+                --fixed-c: oklch(0.65 0.01 240);
+                --shadow-intensity: 0.4;
+            }
+
+            [data-theme="dark"] {
+                /* Dark Mode - Obsidian Slate */
+                --bg-base: #080c14;
+                --case-outer: oklch(0.12 0.02 240);
+                --case-slope: oklch(0.18 0.02 240);
+                --case-bezel: oklch(0.26 0.02 240);
+                --case-inner: oklch(0.22 0.02 240);
+                --key-white: oklch(0.42 0.03 240);
+                --key-blue: oklch(0.32 0.07 240);
+                --key-navy: oklch(0.14 0.05 240);
+                --text-main: oklch(0.92 0.01 240);
+                --led-on: oklch(0.95 0.02 240);
+                --fixed-c: oklch(0.45 0.01 240);
+                --shadow-intensity: 0.9;
             }
 
             body {
                 margin: 0;
                 padding: 0;
-                background-color: #050505;
-                background-image: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
+                background-color: var(--bg-base);
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -31,27 +53,105 @@
                 font-family: 'Inter', sans-serif;
                 user-select: none;
                 overflow: hidden;
+                transition: background-color 0.8s ease;
             }
 
-            .keyboard-case {
-                background-color: var(--case-bg);
-                background-image: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.2) 100%);
-                padding: 22px;
-                border-radius: 16px;
-                border: 1px solid #94a3b8;
-                box-shadow: 0 60px 120px -30px rgba(0,0,0,1), inset 0 -6px 12px rgba(0,0,0,0.1), inset 0 3px 6px rgba(255,255,255,1);
+            .bg-layer {
+                position: fixed;
+                inset: 0;
+                pointer-events: none;
+                z-index: -1;
+                transition: opacity 0.8s ease;
+            }
+            .bg-wood {
+                background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
+                background-color: oklch(0.95 0.02 70 / 0.3);
+                opacity: 1;
+            }
+            .bg-carbon {
+                background-image: url("https://www.transparenttextures.com/patterns/carbon-fibre.png");
+                background-blend-mode: overlay;
+                opacity: 0;
+            }
+            [data-theme="dark"] .bg-wood {
+                opacity: 0;
+            }
+            [data-theme="dark"] .bg-carbon {
+                opacity: 1;
+            }
+
+            /* LAYER 1: BASE */
+            .chassis-housing {
+                background-color: var(--case-outer);
+                padding: 4px;
+                border-radius: 32px;
+                box-shadow: 0 50px 100px -20px oklch(0 0 0 / var(--shadow-intensity)), 0 16px 0 oklch(from var(--case-outer) calc(l - 0.15) c h);
+            }
+
+            /* LAYER 2: SLOPE */
+            .angled-slope {
+                background-color: var(--case-slope);
+                padding: 8px;
+                border-radius: 28px;
+                box-shadow: inset 0 4px 8px oklch(0 0 0 / 0.12);
+            }
+
+            /* LAYER 3: BEZEL FRAME */
+            .bezel-frame {
+                background-color: var(--case-bezel);
+                padding: 10px 15px;
+                border-radius: 20px;
+                box-shadow: 0 8px 20px oklch(0 0 0 / 0.3), inset 0 1px 1px oklch(1 0 0 / 0.5);
+                position: relative;
+            }
+
+            /* LAYER 4: INDICATOR (POSISI KIRI ATAS - Sejajar Esc) */
+            .indicator-plate {
+                position: absolute;
+                left: 4px;
+                top: 36px;
+                /* Posisi naik sejajar dengan baris pertama (Esc) */
                 display: flex;
                 flex-direction: column;
-                gap: var(--gap);
-                width: fit-content;
+                align-items: center;
+                gap: 3px;
+            }
+            .led-line {
+                width: 8px;
+                height: 2px;
+                border-radius: 1px;
+                background-color: oklch(from var(--case-bezel) calc(l - 0.25) c h);
+                transition: all 0.3s ease;
+            }
+            .caps-on .led-line {
+                background-color: var(--led-on);
+                box-shadow: 0 0 6px var(--led-on);
+            }
+            .led-label {
+                font-size: 7px;
+                font-weight: 900;
+                color: var(--fixed-c);
+                font-family: 'JetBrains Mono', monospace;
+            }
+
+            /* LAYER 5: INNER PLATE */
+            .inner-plate {
+                background-color: var(--case-inner);
+                padding: 8px;
+                border-radius: 12px;
+                box-shadow: inset 0 2px 5px oklch(0 0 0 / 0.2);
             }
 
             .row {
                 display: flex;
                 gap: var(--gap);
-                width: 100%;
+                margin-bottom: var(--gap);
+            }
+            .row:last-child {
+                margin-bottom: 0;
             }
 
+            /* KEYCAPS */
             .key {
                 height: 52px;
                 border-radius: 6px;
@@ -61,40 +161,37 @@
                 font-weight: 800;
                 font-size: 11px;
                 position: relative;
-                transition: all 0.07s cubic-bezier(0.2, 1, 0.3, 1);
+                transition: background-color 0.5s ease, color 0.5s ease, transform 0.07s cubic-bezier(0.2, 1, 0.3, 1);
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                border-top: 1px solid rgba(255,255,255,0.5);
-                box-sizing: border-box;
                 outline: none;
+                box-shadow: var(--inner-scoop);
+                background-image: radial-gradient(circle at center, oklch(1 0 0 / 0.01) 0%, transparent 100%);
             }
 
             .navy {
-                background-color: var(--navy);
+                background-color: var(--key-navy);
                 color: #f8fafc;
-                box-shadow: 0 5px 0 var(--shadow-navy);
             }
             .blue {
-                background-color: var(--blue);
-                color: #2563eb;
-                box-shadow: 0 5px 0 var(--shadow-blue);
+                background-color: var(--key-blue);
+                color: oklch(from var(--key-blue) calc(l - 0.5) calc(c + 0.1) h);
                 text-transform: uppercase;
                 font-size: 8px;
             }
             .white {
-                background-color: var(--white);
-                color: #334155;
-                box-shadow: 0 5px 0 var(--shadow-white);
+                background-color: var(--key-white);
+                color: var(--text-main);
             }
 
             .key.active {
-                transform: translateY(5px) !important;
-                box-shadow: 0 0 0 transparent !important;
-                filter: brightness(0.9) saturate(1.3);
-                border-top: 0;
+                transform: scale(0.96) translateY(4px) !important;
+                filter: brightness(0.9);
+                box-shadow: inset 0 4px 8px oklch(0 0 0 / 0.4) !important;
             }
 
+            /* Widths */
             .w-1u {
                 width: var(--u);
             }
@@ -121,106 +218,101 @@
                 position: absolute;
                 top: 4px;
                 left: 6px;
-                font-size: 9px;
-                opacity: 0.45;
-                font-weight: 500;
+                font-size: 8px;
+                opacity: 0.5;
+                pointer-events: none;
             }
 
-            .particle {
-                position: absolute;
-                pointer-events: none;
-                background: #3b82f6;
-                border-radius: 50%;
-                animation: explode 0.6s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+            #theme-toggle {
+                position: fixed;
+                top: 30px;
+                right: 30px;
+                padding: 10px 22px;
+                border-radius: 40px;
+                background: var(--case-bezel);
+                color: var(--text-main);
+                border: 2px solid var(--case-outer);
+                font-weight: 800;
+                font-size: 11px;
+                cursor: pointer;
                 z-index: 100;
-            }
-            @keyframes explode {
-                0% {
-                    transform: scale(1);
-                    opacity: 1;
-                }
-                100% {
-                    transform: scale(0);
-                    opacity: 0;
-                    translate: var(--x) var(--y);
-                }
+                box-shadow: 0 10px 20px -5px rgba(0,0,0,0.4);
             }
         </style>
     </head>
-    <body>
+    <body data-theme="light">
 
-        <div class="keyboard-case" id="kb-case"></div>
+        <div class="bg-layer bg-wood"></div>
+        <div class="bg-layer bg-carbon"></div>
+
+        <button id="theme-toggle">SWITCH TO DARK</button>
+
+        <div class="chassis-housing" id="main-shell">
+            <div class="angled-slope">
+                <div class="bezel-frame">
+                    <div class="indicator-plate" id="caps-group">
+                        <div class="led-line"></div>
+                        <div class="led-label">C</div>
+                    </div>
+
+                    <div class="inner-plate">
+                        <div id="kb-case"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <script>
-            // --- ADVANCED PREMIUM SOUND ENGINE ---
-            const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+            const themeBtn = document.getElementById('theme-toggle');
+            themeBtn.onclick = () => {
+                const current = document
+                    .body
+                    .getAttribute('data-theme');
+                const target = current === 'light'
+                    ? 'dark'
+                    : 'light';
+                document
+                    .body
+                    .setAttribute('data-theme', target);
+                themeBtn.innerText = target === 'light'
+                    ? 'SWITCH TO DARK'
+                    : 'SWITCH TO LIGHT';
+            };
 
-            function playPremiumThock(isSpace = false) {
+            const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+            function playThock(isSpace = false) {
                 if (audioCtx.state === 'suspended') 
                     audioCtx.resume();
                 const now = audioCtx.currentTime;
-
-                // 1. The Low "Thock" Body (Nada rendah padat)
-                const bodyOsc = audioCtx.createOscillator();
-                const bodyGain = audioCtx.createGain();
-                const lowPass = audioCtx.createBiquadFilter();
-
-                bodyOsc.type = 'triangle';
-                bodyOsc
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                const filter = audioCtx.createBiquadFilter();
+                osc.type = 'triangle';
+                osc
                     .frequency
                     .setValueAtTime(
                         isSpace
-                        ? 75
-                        : 110 + Math.random() * 10,
+                        ? 72
+                        : 108,
                     now);
-                bodyOsc
+                osc
                     .frequency
-                    .exponentialRampToValueAtTime(40, now + 0.1);
-
-                lowPass.type = 'lowpass';
-                lowPass.frequency.value = isSpace
-                    ? 350
-                    : 600;
-
-                bodyGain
+                    .exponentialRampToValueAtTime(30, now + 0.12);
+                filter.type = 'lowpass';
+                filter.frequency.value = isSpace
+                    ? 320
+                    : 580;
+                gain
                     .gain
-                    .setValueAtTime(0.4, now);
-                bodyGain
+                    .setValueAtTime(0.25, now);
+                gain
                     .gain
-                    .exponentialRampToValueAtTime(0.01, now + 0.12);
-
-                bodyOsc.connect(lowPass);
-                lowPass.connect(bodyGain);
-                bodyGain.connect(audioCtx.destination);
-
-                // 2. The Transient "Click" (Suara kontak fisik halus)
-                const clickOsc = audioCtx.createOscillator();
-                const clickGain = audioCtx.createGain();
-                const highPass = audioCtx.createBiquadFilter();
-
-                clickOsc.type = 'sine';
-                clickOsc
-                    .frequency
-                    .setValueAtTime(1200, now);
-
-                highPass.type = 'highpass';
-                highPass.frequency.value = 1000;
-
-                clickGain
-                    .gain
-                    .setValueAtTime(0.05, now);
-                clickGain
-                    .gain
-                    .exponentialRampToValueAtTime(0.001, now + 0.02);
-
-                clickOsc.connect(highPass);
-                highPass.connect(clickGain);
-                clickGain.connect(audioCtx.destination);
-
-                bodyOsc.start(now);
-                bodyOsc.stop(now + 0.12);
-                clickOsc.start(now);
-                clickOsc.stop(now + 0.02);
+                    .exponentialRampToValueAtTime(0.01, now + 0.15);
+                osc.connect(filter);
+                filter.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(now + 0.15);
             }
 
             const layoutData = [
@@ -287,7 +379,7 @@
                     }, {
                         l: '0',
                         s: ')',
-                        c: 'Digit0',
+                        c: 'Digit10',
                         t: 'white',
                         w: 'w-1u'
                     }, {
@@ -610,23 +702,33 @@
                     btn.className = `key ${key.t} ${key.w}`;
                     btn.id = key.c;
                     if (key.s) {
-                        const sub = document.createElement('span');
-                        sub.className = 'sub';
-                        sub.innerText = key.s;
-                        btn.appendChild(sub);
+                        const s = document.createElement('span');
+                        s.className = 'sub';
+                        s.innerText = key.s;
+                        btn.appendChild(s);
                     }
-                    const label = document.createElement('span');
-                    label.innerText = key.l;
-                    btn.appendChild(label);
-
-                    btn.onmousedown = (e) => {
-                        handlePress(key.c);
-                        createParticles(e.clientX, e.clientY);
-                    };
-                    btn.onmouseup = btn.onmouseleave = () => handleRelease(key.c);
+                    const l = document.createElement('span');
+                    l.innerText = key.l;
+                    btn.appendChild(l);
                     rowDiv.appendChild(btn);
                 });
                 container.appendChild(rowDiv);
+            });
+
+            const mainShell = document.getElementById('main-shell');
+            mainShell.addEventListener('mousedown', (e) => {
+                const keyBtn = e
+                    .target
+                    .closest('.key');
+                if (keyBtn) 
+                    handlePress(keyBtn.id);
+                }
+            );
+
+            window.addEventListener('mouseup', () => {
+                document
+                    .querySelectorAll('.key.active')
+                    .forEach(btn => handleRelease(btn.id));
             });
 
             function handlePress(code) {
@@ -635,10 +737,14 @@
                     el
                         .classList
                         .add('active');
-                    playPremiumThock(code === 'Space');
+                    playThock(code === 'Space');
+                    if (code === 'CapsLock') 
+                        document
+                            .getElementById('caps-group')
+                            .classList
+                            .toggle('caps-on');
+                    }
                 }
-            }
-
             function handleRelease(code) {
                 const el = document.getElementById(code);
                 if (el) 
@@ -647,29 +753,8 @@
                         .remove('active');
                 }
             
-            function createParticles(x, y) {
-                for (let i = 0; i < 8; i++) {
-                    const p = document.createElement('div');
-                    p.className = 'particle';
-                    const size = Math.random() * 4 + 3;
-                    p.style.width = p.style.height = size + 'px';
-                    p.style.left = x + 'px';
-                    p.style.top = y + 'px';
-                    p
-                        .style
-                        .setProperty('--x', (Math.random() - 0.5) * 120 + 'px');
-                    p
-                        .style
-                        .setProperty('--y', (Math.random() - 0.5) * 120 + 'px');
-                    document
-                        .body
-                        .appendChild(p);
-                    setTimeout(() => p.remove(), 600);
-                }
-            }
-
             window.addEventListener('keydown', e => {
-                const blocked = [
+                if ([
                     'Tab',
                     'Alt',
                     'Meta',
@@ -682,8 +767,7 @@
                     'PageDown',
                     'Home',
                     ' '
-                ];
-                if (blocked.includes(e.key)) 
+                ].includes(e.key)) 
                     e.preventDefault();
                 handlePress(e.code);
             });
