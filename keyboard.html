@@ -3,14 +3,14 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>CORE-65 | Top-Left Indicator Edition</title>
+        <title>CORE-65 | Ray-Traced CNC Edition</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;800&family=Inter:wght@400;700;800&display=swap');
             :root {
                 --u: 52px;
                 --gap: 5px;
-                /* Light Mode - CNC Silver */
+                /* Light Mode - Luxury Silver Anodized */
                 --bg-base: #d1cfcd;
                 --case-outer: oklch(0.82 0.01 240);
                 --case-slope: oklch(0.88 0.01 240);
@@ -20,26 +20,25 @@
                 --key-blue: oklch(0.92 0.04 230);
                 --key-navy: oklch(0.28 0.05 240);
                 --text-main: oklch(0.25 0.05 240);
-                --inner-scoop: inset 0 6px 12px oklch(0 0 0 / 0.08), inset 0 -2px 4px oklch(1 0 0 / 0.8);
+                --inner-scoop: inset 0 6px 12px oklch(0 0 0 / 0.1), inset 0 -2px 4px oklch(1 0 0 / 0.8);
                 --led-on: oklch(0.98 0.02 240);
                 --fixed-c: oklch(0.65 0.01 240);
-                --shadow-intensity: 0.4;
             }
 
             [data-theme="dark"] {
-                /* Dark Mode - Obsidian Slate */
+                /* Dark Mode - Deep Graphite Machined */
                 --bg-base: #080c14;
                 --case-outer: oklch(0.12 0.02 240);
                 --case-slope: oklch(0.18 0.02 240);
-                --case-bezel: oklch(0.26 0.02 240);
+                --case-bezel: oklch(0.28 0.02 240);
                 --case-inner: oklch(0.22 0.02 240);
                 --key-white: oklch(0.42 0.03 240);
                 --key-blue: oklch(0.32 0.07 240);
                 --key-navy: oklch(0.14 0.05 240);
                 --text-main: oklch(0.92 0.01 240);
-                --led-on: oklch(0.95 0.02 240);
+                --led-on: oklch(0.95 0.05 190);
+                /* Subtle Ice Blue */
                 --fixed-c: oklch(0.45 0.01 240);
-                --shadow-intensity: 0.9;
             }
 
             body {
@@ -80,66 +79,76 @@
                 opacity: 1;
             }
 
-            /* LAYER 1: BASE */
+            /* LAYER 1: BASE HOUSING - Heavy 3D Cast */
             .chassis-housing {
                 background-color: var(--case-outer);
                 padding: 4px;
                 border-radius: 32px;
-                box-shadow: 0 50px 100px -20px oklch(0 0 0 / var(--shadow-intensity)), 0 16px 0 oklch(from var(--case-outer) calc(l - 0.15) c h);
+                position: relative;
+                box-shadow: 0 18px 0 oklch(from var(--case-outer) calc(l - 0.2) c h), 0 35px 70px -15px oklch(0 0 0 / 0.8), inset 0 1px 1px oklch(1 0 0 / 0.2);
+                transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             }
 
-            /* LAYER 2: SLOPE */
+            /* LAYER 2: CNC SLOPE - Precision Machined */
             .angled-slope {
                 background-color: var(--case-slope);
                 padding: 8px;
                 border-radius: 28px;
-                box-shadow: inset 0 4px 8px oklch(0 0 0 / 0.12);
+                box-shadow: inset 0 8px 12px oklch(0 0 0 / 0.15), inset 0 -4px 8px oklch(1 0 0 / 0.15), 0 1px 0 oklch(1 0 0 / 0.4);
+                transition: all 0.5s ease;
             }
 
-            /* LAYER 3: BEZEL FRAME */
+            /* LAYER 3: RAISED BEZEL - Diamond Cut Edge */
             .bezel-frame {
                 background-color: var(--case-bezel);
                 padding: 10px 15px;
                 border-radius: 20px;
-                box-shadow: 0 8px 20px oklch(0 0 0 / 0.3), inset 0 1px 1px oklch(1 0 0 / 0.5);
+                box-shadow:0 12px 25px oklch(0 0 0 / 0.35), inset 0 1.5px 0.5px oklch(1 0 0 / 0.9),
+                /* Diamond Cut Highlight */
+                inset 0 -1px 2px oklch(0 0 0 / 0.1);
                 position: relative;
+                transition: all 0.5s ease;
             }
 
-            /* LAYER 4: INDICATOR (POSISI KIRI ATAS - Sejajar Esc) */
+            /* LAYER 4: TOP-LEFT STEALTH INDICATOR - Glass Inset */
             .indicator-plate {
                 position: absolute;
-                left: 4px;
+                left: 5.5px;
                 top: 36px;
-                /* Posisi naik sejajar dengan baris pertama (Esc) */
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                gap: 3px;
+                gap: 4px;
             }
             .led-line {
-                width: 8px;
+                width: 7px;
                 height: 2px;
                 border-radius: 1px;
-                background-color: oklch(from var(--case-bezel) calc(l - 0.25) c h);
+                background-color: oklch(from var(--case-bezel) calc(l - 0.3) c h);
+                box-shadow: inset 0 1px 1px oklch(0 0 0 / 0.5);
                 transition: all 0.3s ease;
             }
             .caps-on .led-line {
                 background-color: var(--led-on);
-                box-shadow: 0 0 6px var(--led-on);
+                box-shadow: 0 0 10px var(--led-on), 0 0 2px oklch(1 0 0);
             }
             .led-label {
-                font-size: 7px;
+                font-size: 7.5px;
                 font-weight: 900;
                 color: var(--fixed-c);
                 font-family: 'JetBrains Mono', monospace;
+                opacity: 0.7;
             }
 
-            /* LAYER 5: INNER PLATE */
+            /* LAYER 5: INNER PLATE - Deep Occlusion */
             .inner-plate {
                 background-color: var(--case-inner);
                 padding: 8px;
                 border-radius: 12px;
-                box-shadow: inset 0 2px 5px oklch(0 0 0 / 0.2);
+                box-shadow:inset 0 4px 10px oklch(0 0 0 / 0.3),
+                /* Deep shadow inside plate */
+                inset 0 -1px 1px oklch(1 0 0 / 0.5);
+                transition: all 0.5s ease;
             }
 
             .row {
@@ -151,7 +160,7 @@
                 margin-bottom: 0;
             }
 
-            /* KEYCAPS */
+            /* KEYCAPS - Solid PBT Sculpted */
             .key {
                 height: 52px;
                 border-radius: 6px;
@@ -167,7 +176,9 @@
                 justify-content: center;
                 outline: none;
                 box-shadow: var(--inner-scoop);
-                background-image: radial-gradient(circle at center, oklch(1 0 0 / 0.01) 0%, transparent 100%);
+                background-color: var(--key-white);
+                /* Subtle top reflection for concave shape */
+                background-image: linear-gradient(to bottom, oklch(1 0 0 / 0.03) 0%, transparent 40%);
             }
 
             .navy {
@@ -187,11 +198,10 @@
 
             .key.active {
                 transform: scale(0.96) translateY(4px) !important;
-                filter: brightness(0.9);
-                box-shadow: inset 0 4px 8px oklch(0 0 0 / 0.4) !important;
+                filter: brightness(0.88);
+                box-shadow: inset 0 5px 12px oklch(0 0 0 / 0.6) !important;
             }
 
-            /* Widths */
             .w-1u {
                 width: var(--u);
             }
@@ -227,7 +237,7 @@
                 position: fixed;
                 top: 30px;
                 right: 30px;
-                padding: 10px 22px;
+                padding: 12px 24px;
                 border-radius: 40px;
                 background: var(--case-bezel);
                 color: var(--text-main);
@@ -237,6 +247,7 @@
                 cursor: pointer;
                 z-index: 100;
                 box-shadow: 0 10px 20px -5px rgba(0,0,0,0.4);
+                transition: all 0.3s ease;
             }
         </style>
     </head>
@@ -292,16 +303,16 @@
                     .frequency
                     .setValueAtTime(
                         isSpace
-                        ? 72
-                        : 108,
+                        ? 70
+                        : 105,
                     now);
                 osc
                     .frequency
                     .exponentialRampToValueAtTime(30, now + 0.12);
                 filter.type = 'lowpass';
                 filter.frequency.value = isSpace
-                    ? 320
-                    : 580;
+                    ? 300
+                    : 550;
                 gain
                     .gain
                     .setValueAtTime(0.25, now);
