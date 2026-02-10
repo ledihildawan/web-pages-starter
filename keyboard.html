@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>CORE-65 | Studio Environment Edition</title>
+        <title>CORE-65 | RGB Chroma Edition</title>
         <style>
             /* --- 1. CSS RESET & GLOBAL --- */
             *,
@@ -46,10 +46,12 @@
 
                 --led-active: oklch(0.6 0.2 250);
                 --label-stealth: oklch(0.6 0.01 240);
+
+                /* RGB Animation Variables */
+                --rgb-speed: 6s;
             }
 
             [data-theme="dark"] {
-                /* Environmental Lighting Dark Mode */
                 --bg-canvas: #0a0c10;
                 --mesh-1: #1a1c24;
                 --mesh-2: #0f172a;
@@ -89,7 +91,6 @@
                 transition: background-color 1.2s ease;
             }
 
-            /* Studio Light Mesh Gradient */
             .bg-studio {
                 position: fixed;
                 inset: 0;
@@ -99,7 +100,6 @@
                 opacity: 0.6;
             }
 
-            /* Noise Texture Overlay */
             .bg-noise {
                 position: fixed;
                 inset: 0;
@@ -133,7 +133,6 @@
                 box-shadow: 0 6px 15px rgba(0,0,0,0.1);
             }
 
-            /* --- 4. INNER PLATE & KEYS --- */
             .inner-plate {
                 background-color: var(--mat-plate-inner);
                 padding: 8px;
@@ -142,13 +141,11 @@
                 overflow: hidden;
             }
 
+            /* --- 4. RGB & KEYCAP ELEMENTS --- */
             .row {
                 display: flex;
                 gap: var(--gap);
                 margin-bottom: var(--gap);
-            }
-            .row:last-child {
-                margin-bottom: 0;
             }
 
             .key {
@@ -159,17 +156,44 @@
                 outline: none;
                 border-radius: var(--radius-key);
                 background-color: var(--key-base);
-                overflow: hidden;
+                overflow: visible;
+                /* Biarkan glow merembes keluar gap */
                 transition: transform 0.05s ease;
+            }
+
+            /* Efek Sinar di Sela-sela Tombol */
+            .key-glow {
+                position: absolute;
+                inset: -2px;
+                /* Merembes sedikit ke sela gap */
+                background: conic-gradient(from 0deg, #ff0000, #ff8000, #ffff00, #00ff00, #00ffff, #0000ff, #8000ff, #ff00ff, #ff0000);
+                filter: blur(10px);
+                border-radius: var(--radius-key);
+                opacity: 0.4;
+                z-index: 1;
+                animation: rotateRGB var(--rgb-speed) linear infinite;
+            }
+
+            [data-theme="dark"] .key-glow {
+                opacity: 0.7;
+                /* Lebih terang di mode gelap */
+                filter: blur(12px);
+            }
+
+            @keyframes rotateRGB {
+                from {
+                    filter: blur(10px) hue-rotate(0deg);
+                }
+                to {
+                    filter: blur(10px) hue-rotate(360deg);
+                }
             }
 
             .key-top {
                 position: absolute;
-                top: 5px;
-                left: 5px;
-                right: 5px;
-                bottom: 5px;
-                border-radius: calc(var(--radius-key) - 2px);
+                inset: 3px;
+                /* Jarak agar glow terlihat di pinggiran */
+                border-radius: calc(var(--radius-key) - 1px);
                 background-color: var(--key-top);
                 color: var(--key-fg);
                 display: flex;
@@ -178,8 +202,8 @@
                 justify-content: center;
                 font-family: 'JetBrains Mono', monospace;
                 font-weight: 700;
-                box-shadow: inset 0 0 4px rgba(0,0,0,0.06);
-                z-index: 2;
+                box-shadow: inset 0 1px 2px rgba(255,255,255,0.1), 0 2px 4px rgba(0,0,0,0.2);
+                z-index: 3;
                 transition: all 0.05s ease;
             }
 
@@ -211,11 +235,13 @@
                 --key-fg: var(--key-accent-fg);
             }
 
+            /* Tekanan Tombol menutupi glow sedikit lebih banyak */
             .key.active {
-                transform: scale(0.97);
+                transform: scale(0.96);
             }
             .key.active .key-top {
-                filter: brightness(0.9);
+                filter: brightness(0.85);
+                transform: translateY(1px);
             }
 
             /* --- 5. INDICATOR --- */
@@ -268,12 +294,13 @@
             .w-flex {
                 flex: 1;
             }
+
             .sub {
                 position: absolute;
                 top: 3px;
                 left: 6px;
                 font-size: 8px;
-                opacity: 0.4;
+                opacity: 0.5;
                 pointer-events: none;
             }
 
@@ -292,10 +319,6 @@
                 z-index: 100;
                 box-shadow: 0 10px 30px rgba(0,0,0,0.2);
                 transition: all 0.3s ease;
-            }
-            #theme-toggle:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 15px 40px rgba(0,0,0,0.3);
             }
         </style>
     </head>
@@ -763,8 +786,14 @@
                     const btn = document.createElement('button');
                     btn.className = `key ${key.t} ${key.w}`;
                     btn.id = key.c;
+
+                    // Tambahkan element Glow untuk RGB
+                    const glow = document.createElement('div');
+                    glow.className = 'key-glow';
+
                     const top = document.createElement('div');
                     top.className = 'key-top';
+
                     if (key.s) {
                         const s = document.createElement('span');
                         s.className = 'sub';
@@ -783,6 +812,8 @@
                         l.innerText = key.l;
                         top.appendChild(l);
                     }
+
+                    btn.appendChild(glow); // Masukkan glow
                     btn.appendChild(top);
                     rowDiv.appendChild(btn);
                 });
@@ -819,6 +850,7 @@
                             .toggle('caps-on');
                     }
                 }
+
             function handleRelease(code) {
                 const el = document.getElementById(code);
                 if (el) 
