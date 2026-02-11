@@ -1,6 +1,5 @@
 import Splide from '@splidejs/splide';
 import '@splidejs/splide/dist/css/splide.min.css';
-import './carousel-demo.css';
 
 document.addEventListener('DOMContentLoaded', () => {
   const el = document.getElementById('main-carousel');

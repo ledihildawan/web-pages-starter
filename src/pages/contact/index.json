@@ -1,0 +1,10 @@
+{
+  "meta": {
+    "title": "Contact | Starter App",
+    "description": "Information about Contact"
+  },
+  "hero": {
+    "title": "Welcome to Contact",
+    "description": "This content is managed locally in src/pages/contact/index.json"
+  }
+}

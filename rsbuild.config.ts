@@ -10,9 +10,6 @@ import {
 import tailwindcss from '@tailwindcss/postcss';
 import { minify } from 'html-minifier-terser';
 
-/**
- * CONFIG & UTILS
- */
 const isProd = process.env.NODE_ENV === 'production';
 const shouldMinify = isProd && process.env.MINIFY !== 'false';
 const shouldMinifyHTML = shouldMinify && process.env.MINIFY_HTML !== 'false';
@@ -44,13 +41,9 @@ const readJSON = (filePath: string): Record<string, unknown> => {
   }
 };
 
-/**
- * CORE LOGIC
- */
 const loadGlobalData = () => {
   const dir = resolveRoot('src/data');
   const globalData: Record<string, unknown> = {};
-
   if (!fs.existsSync(dir)) return globalData;
 
   const files = fs.readdirSync(dir);
@@ -70,23 +63,30 @@ const loadGlobalData = () => {
 
 const getEntries = () => {
   const dir = resolveRoot('src/pages');
-  const entries: Record<string, string> = {};
-
+  const entries: Record<string, any> = {};
   if (!fs.existsSync(dir)) return entries;
 
   const folders = fs.readdirSync(dir);
   for (const folder of folders) {
-    const file = path.join(dir, folder, `${folder}.ts`);
-    if (fs.existsSync(file)) {
-      entries[folder] = file;
+    const tsFile = path.join(dir, folder, 'index.ts');
+    const cssFile = path.join(dir, folder, 'index.css');
+    if (fs.existsSync(tsFile)) {
+      entries[folder] = fs.existsSync(cssFile) ? [tsFile, cssFile] : tsFile;
     }
   }
   return entries;
 };
 
-/**
- * CUSTOM PLUGINS
- */
+const getGlobalEntries = () => {
+  const globalEntries: string[] = [];
+  const scriptPath = resolveRoot('src/scripts/main.ts');
+  const stylePath = resolveRoot('src/styles/main.css');
+
+  if (fs.existsSync(scriptPath)) globalEntries.push(scriptPath);
+  if (fs.existsSync(stylePath)) globalEntries.push(stylePath);
+  return globalEntries;
+};
+
 const WatchJsonPlugin = {
   apply(compiler: Compiler) {
     compiler.hooks.afterCompile.tap(
@@ -109,18 +109,19 @@ const WatchJsonPlugin = {
   },
 };
 
-/**
- * RSBUILD CONFIGURATION
- */
 export default defineConfig({
   server: {
-    open: true,
+    open: '/',
     strictPort: true,
     historyApiFallback: {
-      index: '/404.html',
+      rewrites: [
+        { from: /^\/$/, to: '/home.html' },
+        { from: /./, to: '/404.html' },
+      ],
       disableDotRule: true,
     },
   },
+
   performance: {
     chunkSplit: { strategy: 'split-by-experience' },
     removeConsole: shouldMinify,
@@ -135,10 +136,7 @@ export default defineConfig({
   ],
 
   dev: {
-    client: {
-      overlay: true,
-      reconnect: 5,
-    },
+    client: { overlay: true, reconnect: 5 },
     watchFiles: {
       paths: [
         'src/**/*.njk',
@@ -154,7 +152,7 @@ export default defineConfig({
   resolve: {
     alias: (() => {
       const aliases: Record<string, string> = { '@': resolveRoot('src') };
-      const dirs = ['data', 'pages', 'assets', 'partials', 'layouts'];
+      const dirs = ['data', 'pages', 'assets', 'layouts'];
       for (const dir of dirs) {
         aliases[`@${dir}`] = resolveRoot('src', dir);
       }
@@ -163,7 +161,7 @@ export default defineConfig({
   },
 
   source: {
-    preEntry: [resolveRoot('src/assets/scripts/global.ts')],
+    preEntry: getGlobalEntries(),
     entry: getEntries(),
   },
 
@@ -187,18 +185,15 @@ export default defineConfig({
   },
 
   html: {
-    template: ({ entryName }) =>
-      path.join('src/pages', entryName, `${entryName}.njk`),
+    template: ({ entryName }) => path.join('src/pages', entryName, 'index.njk'),
     templateParameters: (params) => {
       const name = String(params.entryName || '');
-      const data = {
+      return {
         ...params,
         ...loadGlobalData(),
-        ...readJSON(resolveRoot('src/pages', name, `${name}.json`)),
+        ...readJSON(resolveRoot('src/pages', name, 'index.json')),
       };
-      return data;
     },
-    meta: { viewport: 'width=device-width, initial-scale=1.0' },
   },
 
   tools: {
@@ -243,7 +238,7 @@ export default defineConfig({
               {
                 loader: 'simple-nunjucks-loader',
                 options: {
-                  searchPaths: ['pages', 'layouts', 'partials', ''].map((d) =>
+                  searchPaths: ['pages', 'layouts', ''].map((d) =>
                     resolveRoot('src', d),
                   ),
                   assetsPaths: [resolveRoot('src/assets')],

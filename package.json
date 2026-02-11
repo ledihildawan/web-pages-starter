@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "rsbuild dev",
-    "build": "rsbuild build && bun run ./scripts/generate-sitemap.ts",
-    "build:debug": "cross-env MINIFY=false rsbuild build && bun run ./scripts/generate-sitemap.ts",
-    "build:no-html-minify": "cross-env MINIFY_HTML=false rsbuild build && bun run ./scripts/generate-sitemap.ts",
+    "build": "rsbuild build",
+    "build:debug": "cross-env MINIFY=false rsbuild build",
+    "build:no-html-minify": "cross-env MINIFY_HTML=false rsbuild build",
     "preview": "rsbuild preview",
     "gen": "bun run ./scripts/generate.ts",
     "clean": "rm -rf dist bun.lockb node_modules && bun install"

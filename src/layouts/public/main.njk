@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>{{ meta.title | default(site.name) }}</title>
+
     <meta name="description" content="{{ meta.description | default(site.description) }}">
     <meta name="author" content="{{ site.author }}">
 
@@ -22,11 +23,15 @@
         bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)]
         bg-size-[64px_64px]"></div>
     </div>
-    {% include "navbar.njk" %}
+
+    {% include "shared/navbar.njk" %}
+
     <main class="relative z-10">
       {% block content %}{% endblock %}
     </main>
-    {% include "footer.njk" %}
+
+    {% include "shared/footer.njk" %}
+
     {% block scripts %}{% endblock %}
   </body>
 </html>
