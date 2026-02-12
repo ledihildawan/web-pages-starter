@@ -1,0 +1,7 @@
+{% macro t(key) %}
+    data-i18n="{{ key }}"
+{% endmacro %}
+
+{% macro t_attr(attr, key) %}
+    data-i18n-attr="{{ attr }}:{{ key }}"
+{% endmacro %}

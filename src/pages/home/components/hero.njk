@@ -2,26 +2,28 @@
   <div class="max-w-6xl mx-auto text-center">
     <div class="inline-flex items-center gap-2 px-4 py-2 bg-violet-500/10 border border-violet-500/20 rounded-full text-violet-300 text-sm mb-8">
       <span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
-      <span>{{ hero.badge }}</span>
+      <span {{ i18n.t('home:hero.badge') }}>{{ hero.badge }}</span>
     </div>
     <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-[1.1]">
-      {{ hero.title_start }}
-      <span class="block bg-linear-to-r from-violet-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent">
+      <span {{ i18n.t('home:hero.title_start') }}>
+        {{ hero.title_start }}
+      </span>
+      <span class="block bg-linear-to-r from-violet-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent" {{ i18n.t('home:hero.title_highlight') }}>
         {{ hero.title_highlight }}
       </span>
       <img src="{% static 'images/hero-test.jpg' %}" alt="Testing Hash & Compress" class="w-64 h-auto rounded-lg shadow-xl mx-auto my-8">
     </h1>
-    <p class="text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+    <p class="text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed" {{ i18n.t('home:hero.description') }}>
       {{ hero.description }}
     </p>
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-      <a href="{{ hero.primary_btn.url }}" class="w-full sm:w-auto px-8 py-4 bg-linear-to-r from-violet-500 to-fuchsia-500 rounded-xl font-semibold text-lg hover:opacity-90 transition-opacity shadow-lg shadow-violet-500/25">
+      <a href="{{ hero.primary_btn.url }}" class="w-full sm:w-auto px-8 py-4 bg-linear-to-r from-violet-500 to-fuchsia-500 rounded-xl font-semibold text-lg hover:opacity-90 transition-opacity shadow-lg shadow-violet-500/25" {{ i18n.t('home:hero.primary_btn.label') }}>
         {{ hero.primary_btn.label }}
       </a>
-      <a href="{{ hero.secondary_btn.url }}" class="w-full sm:w-auto px-8 py-4 bg-slate-800 border border-slate-700 rounded-xl font-semibold text-lg hover:bg-slate-700 transition-colors">
+      <a href="{{ hero.secondary_btn.url }}" class="w-full sm:w-auto px-8 py-4 bg-slate-800 border border-slate-700 rounded-xl font-semibold text-lg hover:bg-slate-700 transition-colors" {{ i18n.t('home:hero.secondary_btn.label') }}>
         {{ hero.secondary_btn.label }}
       </a>
     </div>
-    <p class="text-sm text-slate-500">{{ hero.note }}</p>
+    <p class="text-sm text-slate-500" {{ i18n.t('home:hero.note') }}>{{ hero.note }}</p>
   </div>
 </section>

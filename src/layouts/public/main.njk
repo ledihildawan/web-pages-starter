@@ -1,5 +1,7 @@
+{% import "macros/translate.njk" as i18n %}
+
 <!DOCTYPE html>
-<html lang="{{ lang | default('id') }}" class="scroll-smooth">
+<html lang="id" class="scroll-smooth">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +17,7 @@
 
     {% block extra_head %}{% endblock %}
   </head>
-  <body class="min-h-screen bg-slate-950 text-white antialiased font-sans selection:bg-violet-500 selection:text-white">
+  <body class="min-h-screen bg-slate-950 text-white antialiased font-sans selection:bg-violet-500 selection:text-white" data-page="{{ page_id | default('common') }}">
     <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
       <div class="absolute top-0 left-1/4 w-96 h-96 bg-violet-500/10 rounded-full blur-3xl opacity-50 animate-pulse"></div>
       <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-fuchsia-500/10 rounded-full blur-3xl opacity-50 animate-pulse" style="animation-delay: 2s;"></div>

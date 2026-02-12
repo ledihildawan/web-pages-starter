@@ -1,0 +1,52 @@
+{
+   "hero": {
+  "badge": "Baru: Versi 2.0 sudah hadir",
+  "title_start": "Bangun sesuatu",
+  "title_highlight": "yang indah hari ini",
+  "description": "Cara modern membangun aplikasi web. Cepat, fleksibel, dan dirancang untuk developer yang peduli dengan karya mereka.",
+  "primary_btn": { 
+    "label": "Mulai Membangun →", 
+    "url": "/start" 
+  },
+  "secondary_btn": { 
+    "label": "Lihat Demo", 
+    "url": "/demo" 
+  },
+  "note": "Tidak perlu kartu kredit"
+},
+  "features": {
+    "heading": "Everything you need",
+    "subheading": "Powerful features to help you build faster and ship with confidence.",
+    "list": [
+      {
+        "icon": "lightning",
+        "color": "violet",
+        "title": "Lightning Fast",
+        "description": "Optimized for performance. Your apps load instantly and run smoothly."
+      },
+      {
+        "icon": "design",
+        "color": "fuchsia",
+        "title": "Beautiful Design",
+        "description": "Crafted with care. Every pixel is intentional and purposeful."
+      },
+      {
+        "icon": "shield",
+        "color": "pink",
+        "title": "Secure by Default",
+        "description": "Enterprise-grade security. Your data is protected at every layer."
+      }
+    ]
+  },
+  "stats": [
+    { "value": "10K+", "label": "Developers", "color": "violet" },
+    { "value": "50K+", "label": "Projects", "color": "fuchsia" },
+    { "value": "99.9%", "label": "Uptime", "color": "pink" },
+    { "value": "4.9/5", "label": "Rating", "color": "amber" }
+  ],
+  "cta": {
+    "heading": "Ready to get started?",
+    "description": "Join thousands of developers building the future of the web.",
+    "button_text": "Start Building Free →"
+  }
+}
