@@ -1,28 +1,17 @@
-<header class="fixed top-0 w-full z-50 border-b border-white/5 bg-slate-950/80 backdrop-blur-md">
-  <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-    <a href="/" class="text-2xl font-bold bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent">
-      {{ site.name | default("Starter") }}
+<nav class="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800/50" data-pc-src="/index.html:30">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center" data-pc-src="/index.html:31">
+    <a href="#" class="text-xl font-bold bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent" data-pc-src="/index.html:32">
+      Starter
     </a>
+    <div class="hidden md:flex items-center gap-8" data-pc-src="/index.html:35">
+      {% for item in global.menu.header %}
 
-    <nav class="hidden md:flex gap-8">
-      {% for item in menu.header %}
-        <a href="{{ item.url }}" class="text-sm font-medium text-slate-300 hover:text-white transition-colors" {{ i18n.t(item.t_key) }}>
-          {{ item.label }}
-        </a>
+        <a href="{{ item.url }}" class="text-sm text-slate-400 hover:text-white transition-colors">
+          {{ i18n.t(item.t_key) }}</a>
       {% endfor %}
-    </nav>
-
-    <div class="lang-switcher">
-      <button onclick="changeLanguage('id')">ID</button>
-      <button onclick="changeLanguage('en')">EN</button>
+      <a href="#" class="px-4 py-2 bg-white text-slate-900 rounded-lg text-sm font-medium hover:bg-slate-100 transition-colors">
+        Get Started
+      </a>
     </div>
-
-    <button class="md:hidden text-white">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="3" y1="12" x2="21" y2="12"></line>
-        <line x1="3" y1="6" x2="21" y2="6"></line>
-        <line x1="3" y1="18" x2="21" y2="18"></line>
-      </svg>
-    </button>
   </div>
-</header>
+</nav>

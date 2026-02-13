@@ -1,4 +1,4 @@
-{% import "macros/translate.njk" as i18n %}
+{% import "macros/i18n.njk" as i18n with context %}
 
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
@@ -15,9 +15,53 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+    <style>
+      /* Sembunyikan semua elemen i18n hanya jika class i18n-loading aktif */
+      html.i18n-loading [data-i18n-attr],
+      html.i18n-loading [data-i18n] {
+        opacity: 0 !important;
+        visibility: hidden !important;
+      }
+
+      /* Efek Fade-in hanya saat transisi changeLanguage manual (opsional) */
+      html.i18n-ready [data-i18n] {
+        transition: opacity 0.2s ease-in-out;
+      }
+    </style>
+
+    <script>
+      (function () {
+        const savedLng = localStorage.getItem('i18nextLng');
+        const browserLng = navigator
+          .language
+          .split('-')[0];
+        const htmlLng = document.documentElement.lang; // "id"
+
+        // Tentukan bahasa yang kemungkinan besar akan dipakai
+        const targetLng = savedLng || browserLng;
+
+        // Jika target bahasa bukan "id", kunci layar (opacity 0) segera!
+        if (targetLng && targetLng !== htmlLng) {
+          document
+            .documentElement
+            .classList
+            .add('i18n-loading');
+        }
+
+        // Failsafe 2 detik
+        setTimeout(function () {
+          document
+            .documentElement
+            .classList
+            .remove('i18n-loading');
+        }, 2000);
+      })();
+    </script>
+
     {% block extra_head %}{% endblock %}
   </head>
-  <body class="min-h-screen bg-slate-950 text-white antialiased font-sans selection:bg-violet-500 selection:text-white" data-page="{{ page_id | default('common') }}">
+  <body class="min-h-screen bg-slate-950 text-white antialiased font-sans selection:bg-violet-500 selection:text-white" data-page="{{ page_id }}">
+
     <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
       <div class="absolute top-0 left-1/4 w-96 h-96 bg-violet-500/10 rounded-full blur-3xl opacity-50 animate-pulse"></div>
       <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-fuchsia-500/10 rounded-full blur-3xl opacity-50 animate-pulse" style="animation-delay: 2s;"></div>

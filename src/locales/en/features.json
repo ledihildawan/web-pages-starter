@@ -1,0 +1,55 @@
+{
+  "hero": {
+    "badge": "Power under the hood",
+    "title": "Everything you need to <br> <span class='bg-linear-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent'>scale faster</span>",
+    "description": "From powerful analytics to seamless integrations, we provide the toolkit you need to build world-class applications without the headache."
+  },
+  "sections": {
+    "sync": {
+      "title": "Real-time Synchronization",
+      "description": "Changes propagate instantly across all devices. Whether your users are on mobile, desktop, or tablet, they see the same data at the exact same time.",
+      "check_0": "Sub-millisecond latency",
+      "check_1": "Offline support out of the box",
+      "check_2": "Conflict resolution handling"
+    },
+    "analytics": {
+      "title": "Actionable Analytics",
+      "description": "Don't fly blind. Get deep insights into user behavior, system performance, and revenue metrics. Visualize your data with beautiful, interactive charts.",
+      "check_0": "Customizable dashboards",
+      "check_1": "Export to PDF, CSV, or Excel",
+      "check_2": "Automated weekly reports"
+    }
+  },
+  "more_title": "And so much more...",
+  "more": {
+    "dark_mode": {
+      "title": "Dark Mode",
+      "desc": "Built-in support for light and dark themes with automatic system detection."
+    },
+    "api_first": {
+      "title": "API First",
+      "desc": "REST and GraphQL APIs available for full programmatic control."
+    },
+    "sso": {
+      "title": "SSO Login",
+      "desc": "Enterprise-grade Single Sign-On support for Google, GitHub, and Okta."
+    },
+    "audit": {
+      "title": "Audit Logs",
+      "desc": "Track every change made to your project with detailed timestamps."
+    },
+    "rbac": {
+      "title": "Role Based Access",
+      "desc": "Granular permission controls for admins, editors, and viewers."
+    },
+    "uptime": {
+      "title": "99.99% Uptime",
+      "desc": "Guaranteed availability with our globally distributed CDN."
+    }
+  },
+  "cta": {
+    "heading": "Ready to get started?",
+    "btn_create": "Create Account",
+    "btn_docs": "Read Documentation"
+  }
+}

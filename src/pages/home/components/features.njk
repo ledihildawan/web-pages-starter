@@ -1,11 +1,11 @@
 <section id="features" class="py-20 px-6">
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold mb-4" {{ i18n.t('home:features.heading') }}></h2>
-      <p class="text-slate-400 max-w-xl mx-auto" {{ i18n.t('home:features.subheading') }}></p>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">{{ i18n.t('page.features.heading') }}</h2>
+      <p class="text-slate-400 max-w-xl mx-auto">{{ i18n.t('page.features.subheading') }}</p>
     </div>
     <div class="grid md:grid-cols-3 gap-6">
-      {% for item in features.list %}
+      {% for item in page.features.list %}
         <div class="group p-8 rounded-2xl bg-slate-900/50 border border-slate-800/50 hover:border-{{ item.color }}-500/30 transition-all">
           <div class="w-14 h-14 rounded-2xl bg-{{ item.color }}-500/10 flex items-center justify-center text-{{ item.color }}-400 mb-6 group-hover:bg-{{ item.color }}-500/20 transition-colors">
             {% if item.icon == 'lightning' %}
@@ -16,8 +16,8 @@
               <svg class="w-7 h-7" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/></svg>
             {% endif %}
           </div>
-          <h3 class="text-xl font-semibold mb-3" {{ i18n.t('home:features.list.' + item.t_key + '.' + item.title) }}></h3>
-          <p class="text-slate-400 leading-relaxed" {{ i18n.t('home:features.list.' + item.t_key + '.' + item.description) }}></p>
+          <h3 class="text-xl font-semibold mb-3">{{ i18n.t('page.features.list.' + item.t_key + '.' + item.title) }}</h3>
+          <p class="text-slate-400 leading-relaxed">{{ i18n.t('page.features.list.' + item.t_key + '.' + item.description) }}</p>
         </div>
       {% endfor %}
     </div>

@@ -1,0 +1,55 @@
+{
+  "hero": {
+    "badge": "Tenaga di balik layar",
+    "title": "Semua yang Anda butuhkan untuk <br> <span class='bg-linear-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent'>skala lebih cepat</span>",
+    "description": "Dari analitik yang kuat hingga integrasi yang mulus, kami menyediakan toolkit yang Anda butuhkan untuk membangun aplikasi kelas dunia tanpa pusing."
+  },
+  "sections": {
+    "sync": {
+      "title": "Sinkronisasi Real-time",
+      "description": "Perubahan tersebar secara instan di semua perangkat. Baik pengguna Anda menggunakan ponsel, desktop, atau tablet, mereka melihat data yang sama di waktu yang sama.",
+      "check_0": "Latensi di bawah milidetik",
+      "check_1": "Dukungan offline bawaan",
+      "check_2": "Penanganan resolusi konflik"
+    },
+    "analytics": {
+      "title": "Analitik yang Dapat Ditindaklanjuti",
+      "description": "Jangan menebak-nebak. Dapatkan wawasan mendalam tentang perilaku pengguna, kinerja sistem, dan metrik pendapatan. Visualisasikan data Anda dengan grafik interaktif.",
+      "check_0": "Dashboard yang dapat disesuaikan",
+      "check_1": "Ekspor ke PDF, CSV, atau Excel",
+      "check_2": "Laporan mingguan otomatis"
+    }
+  },
+  "more_title": "Dan masih banyak lagi...",
+  "more": {
+    "dark_mode": {
+      "title": "Mode Gelap",
+      "desc": "Dukungan bawaan untuk tema terang dan gelap dengan deteksi otomatis."
+    },
+    "api_first": {
+      "title": "API First",
+      "desc": "API REST dan GraphQL tersedia untuk kontrol terprogram penuh."
+    },
+    "sso": {
+      "title": "Login SSO",
+      "desc": "Single Sign-On kelas enterprise untuk Google, GitHub, dan Okta."
+    },
+    "audit": {
+      "title": "Log Audit",
+      "desc": "Lacak setiap perubahan pada proyek Anda dengan stempel waktu terperinci."
+    },
+    "rbac": {
+      "title": "Akses Berbasis Peran",
+      "desc": "Kontrol izin granular untuk admin, editor, dan viewer."
+    },
+    "uptime": {
+      "title": "Uptime 99.99%",
+      "desc": "Ketersediaan terjamin dengan CDN kami yang terdistribusi secara global."
+    }
+  },
+  "cta": {
+    "heading": "Siap untuk memulai?",
+    "btn_create": "Buat Akun",
+    "btn_docs": "Baca Dokumentasi"
+  }
+}

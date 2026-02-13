@@ -1,0 +1,25 @@
+{% macro t(key, vars = {}, class = '') %}
+  {% set item = i18n(key, vars) %}
+
+  <span class="{{ class }}" data-i18n="{{ item.k }}" {% if item.vars %} data-i18n-vars='{{ item.vars | safe }}' {% endif %}>
+    {{ item.v | safe }}
+  </span>
+{% endmacro %}
+
+{% macro wrap(key, vars = {}, tag = 'div', class = '', ext = {}) %}
+  {% set item = i18n(key, vars) %}
+
+  <{{ tag }} class="{{ class }}" data-i18n="{{ item.k }}" {% for name, value in ext %} {{ name }}="{{ value }}" {% endfor %} {% if item.vars %} data-i18n-vars='{{ item.vars | safe }}' {% endif %}>
+    {{ caller(item) | safe }}
+  </{{ tag }}>
+{% endmacro %}
+
+{% macro attr(key, attrName, vars = {}) %}
+  {% set item = i18n(key, vars) %}
+
+  {{ attrName }}="{{ item.v }}" data-i18n-attr="{{ attrName }}:{{ item.k }}"
+
+  {% if item.vars %}
+    data-i18n-vars='{{ item.vars | safe }}'
+  {% endif %}
+{% endmacro %}

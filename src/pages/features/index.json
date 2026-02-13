@@ -1,0 +1,60 @@
+{
+  "meta": {
+    "t_key": "hero",
+    "theme_color": "violet"
+  },
+  "hero": {
+    "t_key": "hero"
+  },
+  "main_features": [
+    {
+      "id": "sync",
+      "t_key": "sections.sync",
+      "icon": "lightning",
+      "accent": "violet",
+      "reverse": false,
+      "checklist_count": 3
+    },
+    {
+      "id": "analytics",
+      "t_key": "sections.analytics",
+      "icon": "chart",
+      "accent": "fuchsia",
+      "reverse": true,
+      "checklist_count": 3
+    }
+  ],
+  "additional_features": [
+    {
+      "t_key": "more.dark_mode",
+      "icon": "moon"
+    },
+    {
+      "t_key": "more.api_first",
+      "icon": "code"
+    },
+    {
+      "t_key": "more.sso",
+      "icon": "key"
+    },
+    {
+      "t_key": "more.audit",
+      "icon": "clipboard"
+    },
+    {
+      "t_key": "more.rbac",
+      "icon": "users"
+    },
+    {
+      "t_key": "more.uptime",
+      "icon": "globe"
+    }
+  ],
+  "cta": {
+    "t_key": "cta",
+    "links": {
+      "create": "#",
+      "docs": "#"
+    }
+  }
+}
