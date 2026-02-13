@@ -2,5 +2,54 @@
   "meta": {
     "title": "Home | Starter App",
     "description": "Modern web application builder."
-  }
+  },
+  "features": {
+    "heading": "heading",
+    "subheading": "subheading",
+    "list": [
+      {
+        "t_key": "speed",
+        "icon": "lightning",
+        "color": "violet",
+        "title": "title",
+        "description": "description"
+      },
+      {
+        "t_key": "design",
+        "icon": "design",
+        "color": "fuchsia",
+        "title": "title",
+        "description": "description"
+      },
+      {
+        "t_key": "security",
+        "icon": "shield",
+        "color": "pink",
+        "title": "title",
+        "description": "description"
+      }
+    ]
+  },
+  "stats": [
+    {
+      "value": "10K+",
+      "label": "community",
+      "color": "violet"
+    },
+    {
+      "value": "50K+",
+      "label": "projects",
+      "color": "fuchsia"
+    },
+    {
+      "value": "99.9%",
+      "label": "uptime",
+      "color": "pink"
+    },
+    {
+      "value": "4.9/5",
+      "label": "rating",
+      "color": "amber"
+    }
+  ]
 }

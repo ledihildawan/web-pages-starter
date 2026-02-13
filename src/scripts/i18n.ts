@@ -41,6 +41,7 @@ export const translatePage = () => {
   document.documentElement.lang = i18next.language;
 };
 
+// TODO: Change to better dx
 (window as any).changeLanguage = async (lng: string) => {
   await i18next.changeLanguage(lng);
   

@@ -4,7 +4,7 @@
       {% for stat in stats %}
         <div>
           <p class="text-4xl font-bold text-{{ stat.color }}-400 mb-2">{{ stat.value }}</p>
-          <p class="text-slate-500">{{ stat.label }}</p>
+          <p class="text-slate-500" {{ i18n.t('home:stats.' + stat.label) }}>{{ stat.label }}</p>
         </div>
       {% endfor %}
     </div>

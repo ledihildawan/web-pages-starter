@@ -1,43 +1,43 @@
 {
-   "hero": {
+  "hero": {
     "badge": "New: Version 2.0 is here",
     "title_start": "Build something",
     "title_highlight": "beautiful today",
     "description": "The modern way to build web applications. Fast, flexible, and designed for developers who care about their craft.",
-    "primary_btn": { "label": "Start Building →", "url": "/start" },
-    "secondary_btn": { "label": "View Demo", "url": "/demo" },
+    "primary_btn": {
+      "label": "Start Building →",
+      "url": "/start"
+    },
+    "secondary_btn": {
+      "label": "View Demo",
+      "url": "/demo"
+    },
     "note": "No credit card required"
   },
   "features": {
-    "heading": "Everything you need",
-    "subheading": "Powerful features to help you build faster and ship with confidence.",
-    "list": [
-      {
-        "icon": "lightning",
-        "color": "violet",
+    "heading": "Everything You Need",
+    "subheading": "Powerful features to help you build faster.",
+    "list": {
+      "speed": {
         "title": "Lightning Fast",
-        "description": "Optimized for performance. Your apps load instantly and run smoothly."
+        "description": "Optimized for performance. Your apps load instantly."
       },
-      {
-        "icon": "design",
-        "color": "fuchsia",
+      "design": {
         "title": "Beautiful Design",
-        "description": "Crafted with care. Every pixel is intentional and purposeful."
+        "description": "Crafted with care. Every pixel has meaning and purpose."
       },
-      {
-        "icon": "shield",
-        "color": "pink",
+      "security": {
         "title": "Secure by Default",
         "description": "Enterprise-grade security. Your data is protected at every layer."
       }
-    ]
+    }
   },
-  "stats": [
-    { "value": "10K+", "label": "Developers", "color": "violet" },
-    { "value": "50K+", "label": "Projects", "color": "fuchsia" },
-    { "value": "99.9%", "label": "Uptime", "color": "pink" },
-    { "value": "4.9/5", "label": "Rating", "color": "amber" }
-  ],
+  "stats": {
+    "community": "Developer Community",
+    "projects": "Projects Built",
+    "uptime": "Service Uptime",
+    "rating": "User Rating"
+  },
   "cta": {
     "heading": "Ready to get started?",
     "description": "Join thousands of developers building the future of the web.",

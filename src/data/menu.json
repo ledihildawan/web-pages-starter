@@ -1,7 +1,19 @@
 {
   "header": [
-    { "label": "Features", "url": "/features" },
-    { "label": "Pricing", "url": "/pricing" },
-    { "label": "About", "url": "/about" }
+    {
+      "label": "Features",
+      "url": "/features",
+      "t_key": "features"
+    },
+    {
+      "label": "Pricing",
+      "url": "/pricing",
+      "t_key": "pricing"
+    },
+    {
+      "label": "About",
+      "url": "/about",
+      "t_key": "about"
+    }
   ]
 }

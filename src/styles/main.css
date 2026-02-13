@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+[data-i18n] {
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.i18n-ready [data-i18n] {
+  opacity: 1;
+  transform: translateY(0);
+}
