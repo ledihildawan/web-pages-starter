@@ -1,0 +1,30 @@
+{
+  "hero": {
+    "title_part1": "Kami merancang ",
+    "title_highlight": "masa depan digital",
+    "description": "Didirikan pada tahun 2024, Starter hadir untuk membantu pengembang membangun aplikasi lebih baik dengan lebih cepat. Kami percaya pada kekuatan kode yang bersih dan desain yang indah."
+  },
+  "stats": {
+    "years": "Tahun Pengalaman",
+    "clients": "Klien Global",
+    "countries": "Negara",
+    "support": "Dukungan Teknis"
+  },
+  "story": {
+    "visual_label": "Ilustrasi Studio Kreatif",
+    "title": "Digerakkan oleh gairah, <br>didefinisikan oleh keunggulan.",
+    "para1": "Perjalanan kami dimulai dengan ide sederhana: membuat pengembangan web dapat diakses dan menyenangkan bagi semua orang. Kami lelah dengan framework yang berat dan konfigurasi yang rumit.",
+    "para2": "Hari ini, kami adalah tim beragam yang terdiri dari engineer, desainer, dan pemikir yang bekerja sama memecahkan masalah kompleks dengan solusi elegan.",
+    "val1": "Filosofi desain yang berpusat pada pengguna",
+    "val2": "Arsitektur yang mengutamakan performa",
+    "val3": "Transparansi dan komunikasi terbuka"
+  },
+  "team": {
+    "title": "Kenali Tim Kami",
+    "subtitle": "Pikiran cerdas di balik setiap baris kode yang kami buat.",
+    "alex_desc": "Pemimpin visioner dengan 10+ tahun pengalaman dalam pengembangan ekosistem SaaS.",
+    "sarah_desc": "Wizard full-stack yang ahli dalam membangun arsitektur sistem berskala besar.",
+    "mike_desc": "Sangat terobsesi dengan detail pixel, alur UX yang mulus, dan standar aksesibilitas.",
+    "jessica_desc": "Storyteller kreatif yang membantu brand menemukan suara unik mereka di dunia digital."
+  }
+}

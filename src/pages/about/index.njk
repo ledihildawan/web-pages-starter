@@ -1,144 +1,114 @@
 {% extends "public/main.njk" %}
-{% block extra_head %}
-  <style>
-    .about-header {
-      color: red;
-    }
-  </style>
-{% endblock %}
+
 {% block content %}
-  <section class="pt-40 pb-20 px-6">
+  {# --- HERO SECTION --- #}
+  <section class="relative pt-40 pb-20 px-6 overflow-hidden">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-violet-500/10 via-transparent to-transparent -z-10"></div>
+
     <div class="max-w-4xl mx-auto text-center">
-      <h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-8">
-        We are crafting the
+      <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-8">
+        {{ i18n.t('page.' + page.hero.t_key + '.title_part1') }}
         <span class="bg-linear-to-r from-violet-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent">
-          future of digital
+          {{ i18n.t('page.' + page.hero.t_key + '.title_highlight') }}
         </span>
       </h1>
-      <p class="text-lg md:text-xl text-slate-400 leading-relaxed mb-12">
-        Founded in 2024, Starter exists to help developers build better applications faster. We believe in the power of clean code, beautiful design, and open source collaboration.
+
+      <p class="text-xl text-slate-400 leading-relaxed max-w-2xl mx-auto mb-16">
+        {{ i18n.t('page.' + page.hero.t_key + '.description') }}
       </p>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 py-8 border-y border-slate-800/50">
-        <div>
-          <div class="text-3xl font-bold text-white mb-1">3+</div>
-          <div class="text-sm text-slate-500 font-medium uppercase tracking-wider">Years</div>
-        </div>
-        <div>
-          <div class="text-3xl font-bold text-white mb-1">120+</div>
-          <div class="text-sm text-slate-500 font-medium uppercase tracking-wider">Clients</div>
-        </div>
-        <div>
-          <div class="text-3xl font-bold text-white mb-1">15</div>
-          <div class="text-sm text-slate-500 font-medium uppercase tracking-wider">Countries</div>
-        </div>
-        <div>
-          <div class="text-3xl font-bold text-white mb-1">24/7</div>
-          <div class="text-sm text-slate-500 font-medium uppercase tracking-wider">Support</div>
-        </div>
+
+      {# Stats Grid - Dinamis dari page.stats #}
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 py-10 border-y border-white/5 bg-white/[0.02] backdrop-blur-xs rounded-2xl">
+        {% for stat in page.stats %}
+          <div class="relative group">
+            <div class="text-4xl font-bold text-white mb-2 group-hover:text-{{ stat.color }}-400 transition-colors">
+              {{ stat.val }}
+            </div>
+            <div class="text-xs text-slate-500 font-bold uppercase tracking-widest">
+              {{ i18n.t(stat.label) }}
+            </div>
+          </div>
+        {% endfor %}
       </div>
     </div>
   </section>
-  <section class="py-10 px-6">
-    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+
+  {# --- STORY SECTION --- #}
+  <section class="py-24 px-6">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-20 items-center">
       <div class="relative group">
-        <div class="absolute -inset-1 bg-linear-to-rrom-violet-600 to-pink-600 rounded-2xl blur opacity-25 group-hover:opacity-50
-                    transition duration-1000 group-hover:duration-200"></div>
-        <div class="relative h-96 bg-slate-900 rounded-2xl border border-slate-800 flex items-center justify-center overflow-hidden">
-          <div class="absolute inset-0
-                        bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)]
-                        bg-size-[32px_32px]"></div>
-          <span class="text-slate-600 font-medium">Office Image / Illustration</span>
+        <div class="absolute -inset-4 bg-linear-to-r from-violet-600/20 to-pink-600/20 rounded-3xl blur-2xl opacity-50 group-hover:opacity-100 transition duration-1000"></div>
+        <div class="relative h-[450px] bg-slate-900 rounded-3xl border border-white/10 flex items-center justify-center overflow-hidden shadow-2xl">
+          <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-slate-800 to-slate-950"></div>
+          <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#6366f1 0.5px, transparent 0.5px); background-size: 24px 24px;"></div>
+
+          <div class="relative text-center p-8">
+            <div class="w-20 h-20 bg-violet-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-violet-500/30">
+              <svg class="w-10 h-10 text-violet-400" fill="none" viewbox="0 0 24 24" stroke="currentColor"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.168.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" stroke-width="1.5"/></svg>
+            </div>
+            <p class="text-slate-500 text-sm font-medium uppercase tracking-widest">
+              {{ i18n.t('page.' + page.story.t_key + '.visual_label') }}
+            </p>
+          </div>
         </div>
       </div>
-      <div>
-        <h2 class="text-3xl font-bold mb-6">Driven by passion,
-          <br>defined by excellence.</h2>
-        <div class="space-y-6 text-slate-400">
-          <p>
-            Our journey began with a simple idea: make web development accessible and enjoyable. We were tired of bloated frameworks and complex configurations.
-          </p>
-          <p>
-            Today, we are a diverse team of engineers, designers, and thinkers working together to solve complex problems with elegant solutions.
-          </p>
-          <ul class="space-y-4 mt-8">
-            <li class="flex items-center gap-3 text-slate-300">
-              <span class="flex items-center justify-center w-6 h-6 rounded-full bg-violet-500/20 text-violet-400 text-xs">✓</span>
-              User-centric design philosophy
-            </li>
-            <li class="flex items-center gap-3 text-slate-300">
-              <span class="flex items-center justify-center w-6 h-6 rounded-full bg-fuchsia-500/20 text-fuchsia-400 text-xs">✓</span>
-              Performance-first architecture
-            </li>
-            <li class="flex items-center gap-3 text-slate-300">
-              <span class="flex items-center justify-center w-6 h-6 rounded-full bg-pink-500/20 text-pink-400 text-xs">✓</span>
-              Transparency and open communication
-            </li>
+
+      <div class="space-y-8">
+        <h2 class="text-4xl md:text-5xl font-bold leading-tight">
+          {{ i18n.t('page.' + page.story.t_key + '.title') | safe }}
+        </h2>
+
+        <div class="space-y-6 text-slate-400 text-lg leading-relaxed">
+          <p>{{ i18n.t('page.' + page.story.t_key + '.para1') }}</p>
+          <p>{{ i18n.t('page.' + page.story.t_key + '.para2') }}</p>
+
+          <ul class="space-y-5 pt-6">
+            {# Nilai-nilai perusahaan diambil dinamis (Asumsi 3 nilai tetap) #}
+            {% set value_colors = ['violet', 'fuchsia', 'pink'] %}
+            {% for i in range(1, 4) %}
+              <li class="flex items-center gap-4 text-slate-200 group">
+                <span class="flex-none flex items-center justify-center w-6 h-6 rounded-full bg-{{ value_colors[i-1] }}-500/20 text-{{ value_colors[i-1] }}-400 text-[10px] font-bold border border-{{ value_colors[i-1] }}-500/30 group-hover:scale-110 transition-transform">✓</span>
+                {{ i18n.t('page.' + page.story.t_key + '.val' + i) }}
+              </li>
+            {% endfor %}
           </ul>
         </div>
       </div>
     </div>
   </section>
-  <section class="py-24 px-6">
+
+  {# --- TEAM SECTION --- #}
+  <section class="py-24 px-6 relative bg-white/[0.01] border-y border-white/5">
     <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">Meet the Team</h2>
-        <p class="text-slate-400 max-w-xl mx-auto">The brilliant minds behind the code.</p>
+      <div class="text-center mb-20 space-y-4">
+        <h2 class="text-4xl font-bold tracking-tight">
+          {{ i18n.t('page.' + page.team.t_key + '.title') }}
+        </h2>
+        <p class="text-slate-400 text-lg">
+          {{ i18n.t('page.' + page.team.t_key + '.subtitle') }}
+        </p>
       </div>
-      <div class="grid md:grid-cols-4 gap-6">
-        <div class="group p-6 rounded-2xl bg-slate-900/50 border border-slate-800/50 hover:border-violet-500/30 hover:bg-slate-900/80
-                            transition-all text-center">
-          <div class="w-24 h-24 mx-auto rounded-full bg-linear-to-br from-slate-700 to-slate-800 mb-4 border-2 border-slate-700
-                                group-hover:border-violet-500/50 transition-colors overflow-hidden">
-            <svg class="w-full h-full text-slate-600 p-4" fill="currentColor" viewbox="0 0 24 24"><path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0
-                                018 0z"/>
-            </svg>
+
+      <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
+        {% for member in page.team.members %}
+          <div class="group p-8 rounded-3xl bg-slate-900/40 border border-white/5 hover:border-{{ member.color }}-500/30 hover:bg-slate-900/80 transition-all duration-500 text-center relative overflow-hidden">
+            <div class="absolute -bottom-12 -right-12 w-24 h-24 bg-{{ member.color }}-500/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+
+            <div class="relative w-28 h-28 mx-auto mb-6">
+              <div class="absolute inset-0 bg-linear-to-br from-{{ member.color }}-500 to-transparent rounded-full blur-sm opacity-20 group-hover:opacity-40 transition-opacity"></div>
+              <div class="relative w-full h-full rounded-full bg-slate-800 border-2 border-white/10 group-hover:border-{{ member.color }}-500/50 transition-colors flex items-center justify-center overflow-hidden">
+                <svg class="w-12 h-12 text-slate-600" fill="currentColor" viewbox="0 0 24 24"><path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+              </div>
+            </div>
+
+            <h3 class="text-xl font-bold text-white mb-1">{{ member.name }}</h3>
+            <p class="text-sm font-semibold text-{{ member.color }}-400 mb-4">{{ member.role }}</p>
+            <p class="text-xs text-slate-500 leading-relaxed">
+              {{ i18n.t(member.desc_key) }}
+            </p>
           </div>
-          <h3 class="text-lg font-semibold text-white">Alex Morgan</h3>
-          <p class="text-sm text-violet-400 mb-3">Founder & CEO</p>
-          <p class="text-xs text-slate-500 leading-relaxed">Visionary leader with 10+ years in SaaS development.</p>
-        </div>
-        <div class="group p-6 rounded-2xl bg-slate-900/50 border border-slate-800/50 hover:border-fuchsia-500/30 hover:bg-slate-900/80
-                            transition-all text-center">
-          <div class="w-24 h-24 mx-auto rounded-full bg-linear-to-br from-slate-700 to-slate-800 mb-4 border-2 border-slate-700
-                                group-hover:border-fuchsia-500/50 transition-colors overflow-hidden">
-            <svg class="w-full h-full text-slate-600 p-4" fill="currentColor" viewbox="0 0 24 24"><path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0
-                                018 0z"/>
-            </svg>
-          </div>
-          <h3 class="text-lg font-semibold text-white">Sarah Chen</h3>
-          <p class="text-sm text-fuchsia-400 mb-3">Lead Engineer</p>
-          <p class="text-xs text-slate-500 leading-relaxed">Full-stack wizard specializing in scalable architecture.</p>
-        </div>
-        <div class="group p-6 rounded-2xl bg-slate-900/50 border border-slate-800/50 hover:border-pink-500/30 hover:bg-slate-900/80
-                            transition-all text-center">
-          <div class="w-24 h-24 mx-auto rounded-full bg-linear-to-br from-slate-700 to-slate-800 mb-4 border-2 border-slate-700
-                                group-hover:border-pink-500/50 transition-colors overflow-hidden">
-            <svg class="w-full h-full text-slate-600 p-4" fill="currentColor" viewbox="0 0 24 24"><path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0
-                                018 0z"/>
-            </svg>
-          </div>
-          <h3 class="text-lg font-semibold text-white">Mike Ross</h3>
-          <p class="text-sm text-pink-400 mb-3">Product Design</p>
-          <p class="text-xs text-slate-500 leading-relaxed">Obsessed with pixels, UX flow, and accessibility.</p>
-        </div>
-        <div class="group p-6 rounded-2xl bg-slate-900/50 border border-slate-800/50 hover:border-amber-500/30 hover:bg-slate-900/80
-                            transition-all text-center">
-          <div class="w-24 h-24 mx-auto rounded-full bg-linear-to-br from-slate-700 to-slate-800 mb-4 border-2 border-slate-700
-                                group-hover:border-amber-500/50 transition-colors overflow-hidden">
-            <svg class="w-full h-full text-slate-600 p-4" fill="currentColor" viewbox="0 0 24 24"><path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0
-                                018 0z"/>
-            </svg>
-          </div>
-          <h3 class="text-lg font-semibold text-white">Jessica Lee</h3>
-          <p class="text-sm text-amber-400 mb-3">Marketing</p>
-          <p class="text-xs text-slate-500 leading-relaxed">Storyteller helping brands find their unique voice.</p>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </section>
-{% endblock %}
-{% block scripts %}
-  <script>
-    console.log("Hanya jalan di halaman About");
-  </script>
 {% endblock %}

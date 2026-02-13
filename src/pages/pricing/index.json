@@ -1,0 +1,30 @@
+{
+  "page_id": "pricing",
+  "hero": {
+    "t_key": "hero"
+  },
+  "plans": [
+    {
+      "id": "hobby",
+      "price": "0",
+      "color": "slate",
+      "featured": false,
+      "feature_count": 3
+    },
+    {
+      "id": "pro",
+      "price": "29",
+      "color": "violet",
+      "featured": true,
+      "feature_count": 4
+    },
+    {
+      "id": "enterprise",
+      "price": "99",
+      "color": "slate",
+      "featured": false,
+      "feature_count": 4
+    }
+  ],
+  "faq_count": 3
+}

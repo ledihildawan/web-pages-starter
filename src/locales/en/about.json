@@ -1,0 +1,30 @@
+{
+  "hero": {
+    "title_part1": "We are crafting the ",
+    "title_highlight": "digital future",
+    "description": "Founded in 2024, Starter exists to help developers build better applications faster. We believe in the power of clean code, beautiful design, and open source collaboration."
+  },
+  "stats": {
+    "years": "Years of Experience",
+    "clients": "Global Clients",
+    "countries": "Countries Reached",
+    "support": "Expert Support"
+  },
+  "story": {
+    "visual_label": "Creative Studio Illustration",
+    "title": "Driven by passion, <br>defined by excellence.",
+    "para1": "Our journey began with a simple idea: make web development accessible and enjoyable for everyone. We were tired of bloated frameworks and complex configurations.",
+    "para2": "Today, we are a diverse team of engineers, designers, and thinkers working together to solve complex problems with elegant solutions.",
+    "val1": "User-centric design philosophy",
+    "val2": "Performance-first architecture",
+    "val3": "Transparency and open communication"
+  },
+  "team": {
+    "title": "Meet the Team",
+    "subtitle": "The brilliant minds behind every line of code we write.",
+    "alex_desc": "Visionary leader with 10+ years of experience in SaaS ecosystem development.",
+    "sarah_desc": "Full-stack wizard specializing in building large-scale system architectures.",
+    "mike_desc": "Deeply obsessed with pixel details, smooth UX flows, and accessibility standards.",
+    "jessica_desc": "Creative storyteller helping brands find their unique voice in the digital world."
+  }
+}

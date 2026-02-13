@@ -1,0 +1,61 @@
+{
+  "page_id": "about",
+  "hero": {
+    "t_key": "hero"
+  },
+  "stats": [
+    {
+      "val": "3+",
+      "label": "page.stats.years",
+      "color": "violet"
+    },
+    {
+      "val": "120+",
+      "label": "page.stats.clients",
+      "color": "fuchsia"
+    },
+    {
+      "val": "15",
+      "label": "page.stats.countries",
+      "color": "pink"
+    },
+    {
+      "val": "24/7",
+      "label": "page.stats.support",
+      "color": "amber"
+    }
+  ],
+  "story": {
+    "t_key": "story",
+    "visual_type": "illustration"
+  },
+  "team": {
+    "t_key": "team",
+    "members": [
+      {
+        "name": "Alex Morgan",
+        "role": "Founder & CEO",
+        "color": "violet",
+        "desc_key": "page.team.alex_desc"
+      },
+      {
+        "name": "Sarah Chen",
+        "role": "Lead Engineer",
+        "color": "fuchsia",
+        "desc_key": "page.team.sarah_desc"
+      },
+      {
+        "name": "Mike Ross",
+        "role": "Product Design",
+        "color": "pink",
+        "desc_key": "page.team.mike_desc"
+      },
+      {
+        "name": "Jessica Lee",
+        "role": "Marketing",
+        "color": "amber",
+        "desc_key": "page.team.jessica_desc"
+      }
+    ]
+  }
+}

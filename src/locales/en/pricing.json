@@ -1,0 +1,49 @@
+{
+  "hero": {
+    "title_part1": "Simple, transparent ",
+    "title_highlight": "pricing",
+    "description": "No hidden fees. No surprise charges. Choose the plan that fits your needs perfectly."
+  },
+  "toggle": {
+    "monthly": "Monthly",
+    "yearly": "Yearly"
+  },
+  "plans": {
+    "hobby": {
+      "name": "Hobby",
+      "desc": "Perfect for side projects and learning.",
+      "btn": "Get Started",
+      "feature_0": "1 Project",
+      "feature_1": "Community Support",
+      "feature_2": "5GB Storage"
+    },
+    "pro": {
+      "name": "Pro",
+      "badge": "Most Popular",
+      "desc": "For professional developers and small teams.",
+      "btn": "Get Pro Now",
+      "feature_0": "Unlimited Projects",
+      "feature_1": "Priority Email Support",
+      "feature_2": "100GB Storage",
+      "feature_3": "Advanced Analytics"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "desc": "For large scale applications and orgs.",
+      "btn": "Contact Sales",
+      "feature_0": "Everything in Pro",
+      "feature_1": "Dedicated Manager",
+      "feature_2": "SSO & Audit Logs",
+      "feature_3": "Unlimited Storage"
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "q_0": "Can I cancel anytime?",
+    "a_0": "Yes, you can cancel your subscription at any time. Your access will continue until the end of your billing period.",
+    "q_1": "Do you offer a free trial?",
+    "a_1": "We offer a 14-day free trial for the Pro plan. No credit card required to start.",
+    "q_2": "What payment methods do you accept?",
+    "a_2": "We accept all major credit cards (Visa, Mastercard, Amex) and PayPal. For Enterprise plans, we support wire transfers."
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "hero": {
+    "title_part1": "Harga yang simpel & ",
+    "title_highlight": "transparan",
+    "description": "Tanpa biaya tersembunyi. Tanpa biaya kejutan. Pilih paket yang paling sesuai dengan kebutuhan Anda."
+  },
+  "toggle": {
+    "monthly": "Bulanan",
+    "yearly": "Tahunan"
+  },
+  "plans": {
+    "hobby": {
+      "name": "Hobby",
+      "desc": "Sangat cocok untuk proyek sampingan dan pembelajaran.",
+      "btn": "Mulai Gratis",
+      "feature_0": "1 Proyek",
+      "feature_1": "Dukungan Komunitas",
+      "feature_2": "Penyimpanan 5GB"
+    },
+    "pro": {
+      "name": "Pro",
+      "badge": "Paling Populer",
+      "desc": "Untuk pengembang profesional dan tim kecil.",
+      "btn": "Ambil Paket Pro",
+      "feature_0": "Proyek Tak Terbatas",
+      "feature_1": "Dukungan Email Prioritas",
+      "feature_2": "Penyimpanan 100GB",
+      "feature_3": "Analitik Lanjutan"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "desc": "Untuk aplikasi skala besar dan organisasi.",
+      "btn": "Hubungi Sales",
+      "feature_0": "Semua fitur di paket Pro",
+      "feature_1": "Manajer Akun Khusus",
+      "feature_2": "SSO & Audit Logs",
+      "feature_3": "Penyimpanan Tak Terbatas"
+    }
+  },
+  "faq": {
+    "title": "Pertanyaan Umum",
+    "q_0": "Apakah saya bisa membatalkan kapan saja?",
+    "a_0": "Ya, Anda dapat membatalkan langganan kapan saja. Akses Anda akan tetap aktif hingga akhir periode penagihan.",
+    "q_1": "Apakah ada uji coba gratis?",
+    "a_1": "Kami menawarkan uji coba gratis selama 14 hari untuk paket Pro. Tidak perlu kartu kredit untuk memulai.",
+    "q_2": "Metode pembayaran apa yang diterima?",
+    "a_2": "Kami menerima kartu kredit utama dan PayPal. Untuk Enterprise, kami mendukung transfer bank."
+  }
+}
