@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Home | Starter App",
-    "description": "Modern web application builder."
+    "title": "Beranda | Starter App",
+    "description": "Pembangun aplikasi web modern."
   },
   "hero": {
     "badge": "Baru: Versi 2.0 sudah hadir",
@@ -38,13 +38,12 @@
   },
   "stats": {
     "community": "Komunitas Dev",
+    "community_val": "10Rb+",
     "projects": "Proyek Terbangun",
+    "projects_val": "50Rb+",
     "uptime": "Ketersediaan 24/7",
-    "rating": "Rating dari Pengguna"
-  },
-  "cta": {
-    "heading": "Yuk, mulai sekarang!",
-    "description": "Ikut ribuan developer membentuk masa depan web.",
-    "button_text": "Bangun Gratis →"
+    "uptime_val": "99.9%",
+    "rating": "Rating Pengguna",
+    "rating_val": "4.9/5"
   }
 }

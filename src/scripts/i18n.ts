@@ -1,73 +1,76 @@
+import Alpine from 'alpinejs'; // Pastikan install: npm install alpinejs
 import i18next from 'i18next';
-import HttpApi from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
+import HttpApi from 'i18next-http-backend';
+import resourcesToBackend from 'i18next-resources-to-backend';
 
-declare global {
-  interface Window {
-    changeLanguage: (lng: string) => Promise<void>;
-  }
-}
-
-/**
- * Fungsi untuk mengambil variabel dari atribut data-i18n-vars
- */
+// Helper untuk mengambil variabel data-i18n-vars
 const getVars = (el: Element): Record<string, unknown> => {
-  const vars = el.getAttribute('data-i18n-vars');
   try {
-    return vars ? (JSON.parse(vars) as Record<string, unknown>) : {};
-  } catch (e) {
-    console.error('Error parsing i18n vars:', e);
+    const vars = el.getAttribute('data-i18n-vars');
+    return vars ? JSON.parse(vars) : {};
+  } catch {
     return {};
   }
 };
 
-/**
- * Fungsi utama untuk mengubah teks di DOM
- */
+// Fungsi untuk menerjemahkan elemen statis (non-Alpine)
 export const translatePage = async (): Promise<void> => {
-  // 1. Update Konten Teks & HTML Internal
-  const textElements = document.querySelectorAll('[data-i18n]');
-  textElements.forEach((el) => {
-    const key = el.getAttribute('data-i18n');
-    if (key) {
-      el.innerHTML = i18next.t(key, getVars(el));
-    }
-  });
+  const currentLng = i18next.language ? i18next.language.split('-')[0] : 'id';
 
-  // 2. Update Atribut (Alt, Placeholder, Title)
-  const attrElements = document.querySelectorAll('[data-i18n-attr]');
-  attrElements.forEach((el) => {
-    const raw = el.getAttribute('data-i18n-attr');
-    if (raw && raw.includes(':')) {
-      const colonIndex = raw.indexOf(':');
-      const attrName = raw.substring(0, colonIndex);
-      const key = raw.substring(colonIndex + 1);
-      el.setAttribute(attrName, i18next.t(key, getVars(el)));
-    }
-  });
+  return new Promise((resolve) => {
+    requestAnimationFrame(() => {
+      // 1. Terjemahkan elemen teks utama
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const key = el.getAttribute('data-i18n');
+        if (key) el.innerHTML = i18next.t(key, getVars(el));
+      });
 
-  // 3. Update Status Dokumen
-  document.documentElement.lang = i18next.language;
-  document.documentElement.classList.remove('i18n-loading');
-  document.documentElement.classList.add('i18n-ready');
+      // 2. Terjemahkan atribut (placeholder, alt, title, dll)
+      document.querySelectorAll('[data-i18n-attr]').forEach((el) => {
+        const raw = el.getAttribute('data-i18n-attr');
+        if (raw?.includes(':')) {
+          const [attr, key] = raw.split(':');
+          el.setAttribute(attr, i18next.t(key, getVars(el)));
+        }
+      });
+
+      // 3. Logika RTL/LTR & Lang Attribute
+      document.documentElement.lang = currentLng;
+      document.documentElement.dir = currentLng === 'ar' ? 'rtl' : 'ltr';
+
+      resolve();
+    });
+  });
 };
 
-/**
- * Inisialisasi i18next
- */
+// Inisialisasi Utama
 export const initI18n = async (): Promise<void> => {
-  const pageNamespace = document.body.getAttribute('data-page') || 'home';
+  const pageNS =
+    window.__PAGE_ID__ || document.body.getAttribute('data-page') || 'home';
+  const usedComps = window.__USED_COMPONENTS__ || [];
+  const compNS = usedComps.map((n) => `components/${n}`);
+  const defaultLang = 'id';
 
   try {
     await i18next
-      .use(HttpApi)
       .use(LanguageDetector)
+      .use(
+        resourcesToBackend((lng: string, _ns: string) => {
+          if (lng === defaultLang) return {};
+          return null; // Gunakan backend lain jika null
+        }),
+      )
+      .use(HttpApi)
       .init({
-        fallbackLng: 'id',
-        supportedLngs: ['id', 'en'],
-        ns: ['common', pageNamespace],
-        defaultNS: pageNamespace,
-        backend: { loadPath: '/locales/{{lng}}/{{ns}}.json' },
+        fallbackLng: defaultLang,
+        supportedLngs: ['id', 'en', 'jp', 'cn', 'ar'],
+        ns: ['common', pageNS, ...compNS],
+        defaultNS: pageNS,
+        backend: {
+          loadPath: (lngs: string[], namespaces: string[]) =>
+            `/assets/locales/${lngs[0]}-${namespaces[0].replace(/\//g, '-')}.json`,
+        },
         detection: {
           order: ['localStorage', 'navigator'],
           caches: ['localStorage'],
@@ -75,41 +78,20 @@ export const initI18n = async (): Promise<void> => {
         interpolation: { escapeValue: false },
       });
 
-    // AMBIL BAHASA AKTIF (Bisa dari localStorage atau deteksi browser)
-    const activeLang = i18next.language.split('-')[0]; // Ambil 'en' dari 'en-US'
-    const serverLang = document.documentElement.lang;
+    // Update state awal Alpine setelah i18next siap
+    const activeLang = i18next.language.split('-')[0];
 
-    // WAJIB jalankan translatePage jika bahasa tidak sama dengan HTML mentah
-    if (activeLang !== serverLang) {
+    // Kita akses store secara langsung (jika Alpine sudah init)
+    // atau biarkan Alpine mengambil state awal dari localStorage
+    if (activeLang !== defaultLang) {
       await translatePage();
     }
 
-    // SETELAH TRANSLASI SELESAI, baru buka tirai
+    // Hapus loading screen
     document.documentElement.classList.remove('i18n-loading');
     document.documentElement.classList.add('i18n-ready');
-
   } catch (error) {
-    console.error('i18n Initialization Failed:', error);
-    document.documentElement.classList.remove('i18n-loading');
-  }
-};
-
-/**
- * Global Language Switcher
- */
-window.changeLanguage = async (lng: string): Promise<void> => {
-  if (i18next.language === lng) return;
-
-  // Pasang kembali blocker saat transisi bahasa
-  document.documentElement.classList.add('i18n-loading');
-  document.documentElement.classList.remove('i18n-ready');
-
-  try {
-    await i18next.changeLanguage(lng);
-    await translatePage();
-    localStorage.setItem('i18nextLng', lng);
-  } catch (error) {
-    console.error('Change Language Failed:', error);
+    console.error('[i18n] Init Failed:', error);
     document.documentElement.classList.remove('i18n-loading');
   }
 };

@@ -27,7 +27,7 @@ if (fs.existsSync(targetDir)) {
 fs.mkdirSync(targetDir, { recursive: true });
 
 // 2. Konten Nunjucks (Scoped page.*)
-const njkContent = `{% extends "public/main.njk" %}
+const njkContent = `{% extends "main.njk" %}
 
 {% block content %}
 <section class="py-24 relative overflow-hidden">

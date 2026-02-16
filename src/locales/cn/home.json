@@ -1,0 +1,45 @@
+{
+  "hero": {
+    "badge": "新发布：版本 2.0 已上线",
+    "title_start": "立即打造 ",
+    "title_highlight": "精美之作",
+    "description": "构建 Web 应用程序的现代方式。快速、灵活，专为追求卓越的开发者而设计。",
+    "primary_btn": {
+      "label": "开始构建 →",
+      "url": "/start"
+    },
+    "secondary_btn": {
+      "label": "查看演示",
+      "url": "/demo"
+    },
+    "note": "无需信用卡"
+  },
+  "features": {
+    "heading": "所需功能，一应俱全",
+    "subheading": "强大的功能助您提升构建速度。",
+    "list": {
+      "speed": {
+        "title": "极速响应",
+        "description": "性能优化。您的应用可实现秒开。"
+      },
+      "design": {
+        "title": "精美设计",
+        "description": "精心打造。每一个像素都蕴含意义与目的。"
+      },
+      "security": {
+        "title": "默认安全",
+        "description": "企业级安全保障。在每一层级保护您的数据。"
+      }
+    }
+  },
+  "stats": {
+    "community": "开发者社区",
+    "community_val": "1万+",
+    "projects": "已构建项目",
+    "projects_val": "5万+",
+    "uptime": "服务在线率",
+    "uptime_val": "99.9%",
+    "rating": "用户评分",
+    "rating_val": "4.9/5"
+  }
+}

@@ -1,41 +1,54 @@
 {
   "compilerOptions": {
-    "lib": ["DOM", "ES2020"],
-    "target": "ES2020",
+    /* Basic Options */
+    "target": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "noEmit": true,
     "skipLibCheck": true,
     "useDefineForClassFields": true,
+    "isolatedModules": true,
 
-    /* modules */
+    /* Modules */
     "module": "ESNext",
     "moduleDetection": "force",
     "moduleResolution": "bundler",
     "verbatimModuleSyntax": true,
-    
-    /* 1. JSON Type Checking Support */
+
+    /* JSON & Assets Support */
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "allowImportingTsExtensions": true,
     "noUncheckedSideEffectImports": true,
+    "allowJs": true,
 
-    /* type checking */
+    /* Strict Type Checking (Gold Standard) */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
 
-    /* 2. ALIAS PATH LENGKAP */
+    /* ALIAS PATHS - Harus Sinkron dengan rsbuild.config.ts */
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
       "@data/*": ["./src/data/*"],
       "@pages/*": ["./src/pages/*"],
       "@assets/*": ["./src/assets/*"],
-      "@partials/*": ["./src/partials/*"],
-      "@layouts/*": ["./src/layouts/*"]
+      "@layouts/*": ["./src/layouts/*"],
+      "@components/*": ["./src/components/*"]
     },
 
-    "types": ["bun-types", "node"],
+    "types": ["bun-types", "node"]
   },
-  "include": ["src", "scripts", "rsbuild.config.ts"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.json",
+    "rsbuild.config.ts",
+    "src/scripts/i18n.js"
+  ],
   "exclude": ["dist", "node_modules"]
 }

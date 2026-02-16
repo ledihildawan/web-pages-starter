@@ -1,10 +1,12 @@
-<section class="py-16 px-6 border-y border-slate-800/50">
+<section class="py-20 px-6 relative bg-white/[0.01] border-y border-white/5">
   <div class="max-w-6xl mx-auto">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
       {% for stat in page.stats %}
-        <div>
-          <p class="text-4xl font-bold text-{{ stat.color }}-400 mb-2">{{ stat.value }}</p>
-          <p class="text-slate-500">{{ i18n.t('page.stats.' + stat.label) }}</p>
+        <div class="space-y-2">
+          <p class="text-5xl font-bold text-{{ stat.color }}-400 tracking-tight">{{ stat.value }}</p>
+          <p class="text-slate-500 font-bold uppercase tracking-widest text-xs">
+            {{ i18n.t('page.stats.' + stat.label) }}
+          </p>
         </div>
       {% endfor %}
     </div>

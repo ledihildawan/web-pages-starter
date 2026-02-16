@@ -1,0 +1,24 @@
+{% macro render_tags(page, global) %}
+  {# 1. Logic Penentuan Title #}
+  {% set title = page.title or global.site_name or "Starter App" %}
+
+  {# 2. Logic Penentuan Description #}
+  {% set description = page.description or global.site_description or "Default description for the site." %}
+
+  {# --- Render SEO Tags --- #}
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ description }}">
+
+  {# Open Graph / Social Media #}
+  <meta property="og:title" content="{{ title }}">
+  <meta property="og:description" content="{{ description }}">
+  <meta property="og:type" content="website">
+  {% if page.image or global.site_image %}
+    <meta property="og:image" content="{{ page.image or global.site_image }}">
+  {% endif %}
+
+  {# Twitter Card #}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ title }}">
+  <meta name="twitter:description" content="{{ description }}">
+{% endmacro %}

@@ -1,0 +1,370 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { defineConfig } from '@rsbuild/core';
+import { pluginImageCompress } from '@rsbuild/plugin-image-compress';
+import {
+  type Compilation,
+  type Compiler,
+  CopyRspackPlugin,
+} from '@rspack/core';
+import tailwindcss from '@tailwindcss/postcss';
+import { minify } from 'html-minifier-terser';
+
+// --- Definisi Tipe Data Eksplisit ---
+interface I18nResult {
+  v: string;
+  k: string;
+  vars: string | null;
+}
+
+type JsonValue =
+  | string
+  | number
+  | boolean
+  | null
+  | { [key: string]: JsonValue }
+  | JsonValue[];
+
+type JsonData = Record<string, JsonValue>;
+
+// --- Helper Functions ---
+const isProd = process.env.NODE_ENV === 'production';
+const shouldMinify = isProd && process.env.MINIFY !== 'false';
+const shouldMinifyHTML = shouldMinify && process.env.MINIFY_HTML !== 'false';
+const ROOT = process.cwd();
+const resolveRoot = (...args: string[]): string => path.resolve(ROOT, ...args);
+
+const MANAGED_EXTS = ['ts', 'css', 'njk', 'png', 'jpg', 'jpeg', 'webp', 'svg', 'gif'];
+
+/**
+ * Membaca JSON dengan validasi tipe dasar
+ */
+const readJSON = (filePath: string): JsonData => {
+  try {
+    if (!fs.existsSync(filePath)) return {};
+    const content = fs.readFileSync(filePath, 'utf-8');
+    return JSON.parse(content) as JsonData;
+  } catch (err) {
+    console.warn(`[JSON Read Error]: ${filePath}`, err);
+    return {};
+  }
+};
+
+const loadGlobalData = (): JsonData => {
+  const dir = resolveRoot('src/data');
+  const globalData: JsonData = {};
+  if (!fs.existsSync(dir)) return globalData;
+
+  const files = fs.readdirSync(dir);
+  for (const file of files) {
+    if (file.endsWith('.json')) {
+      const name = path.basename(file, '.json');
+      const data = readJSON(path.join(dir, file));
+      if (name === 'global') {
+        Object.assign(globalData, data);
+      } else {
+        globalData[name] = data;
+      }
+    }
+  }
+  return globalData;
+};
+
+const getEntries = (): Record<string, string | string[]> => {
+  const dir = resolveRoot('src/pages');
+  const entries: Record<string, string | string[]> = {};
+  if (!fs.existsSync(dir)) return entries;
+
+  const folders = fs.readdirSync(dir);
+  for (const folder of folders) {
+    const tsFile = path.join(dir, folder, 'index.ts');
+    const cssFile = path.join(dir, folder, 'index.css');
+    if (fs.existsSync(tsFile)) {
+      entries[folder] = fs.existsSync(cssFile) ? [tsFile, cssFile] : tsFile;
+    }
+  }
+  return entries;
+};
+
+const getGlobalEntries = (): string[] => {
+  const scripts = [resolveRoot('src/scripts/main.ts'), resolveRoot('src/styles/main.css')];
+  return scripts.filter((p) => fs.existsSync(p));
+};
+
+const WatchJsonPlugin = {
+  apply(compiler: Compiler) {
+    compiler.hooks.afterCompile.tap('WatchJsonPlugin', (compilation: Compilation) => {
+      ['data', 'pages', 'locales'].forEach((d) => {
+        const full = resolveRoot('src', d);
+        if (fs.existsSync(full)) {
+          const files = fs.readdirSync(full, { recursive: true }) as string[];
+          files
+            .filter((f) => f.endsWith('.json'))
+            .forEach((f) => {
+              compilation.fileDependencies.add(path.join(full, f));
+            });
+        }
+      });
+    });
+  },
+};
+
+/**
+ * Type-safe value retrieval dari nested object
+ */
+const getValueByPath = (obj: JsonData, jsonPath: string): JsonValue | undefined => {
+  return jsonPath.split('.').reduce((prev: JsonValue | undefined, curr: string) => {
+    if (prev && typeof prev === 'object' && !Array.isArray(prev)) {
+      return (prev as Record<string, JsonValue>)[curr];
+    }
+    return undefined;
+  }, obj);
+};
+
+export default defineConfig({
+  server: {
+    open: '/',
+    strictPort: true,
+    historyApiFallback: {
+      rewrites: [
+        { from: /^\/$/, to: '/home.html' },
+        { from: /./, to: '/404.html' },
+      ],
+      disableDotRule: true,
+    },
+  },
+
+  performance: {
+    chunkSplit: { strategy: 'split-by-experience' },
+    removeConsole: shouldMinify,
+  },
+
+  plugins: [
+    pluginImageCompress(
+      { use: 'jpeg', quality: 70 },
+      { use: 'png' },
+      { use: 'webp', quality: 70 },
+    ),
+  ],
+
+  dev: {
+    client: { overlay: true, reconnect: 5 },
+    watchFiles: {
+      paths: ['src/**/*.njk', 'src/**/*.json', 'src/**/*.css'],
+      options: { usePolling: true, interval: 100 },
+      type: 'reload-page',
+    },
+  },
+
+  resolve: {
+    alias: (() => {
+      const aliases: Record<string, string> = { '@': resolveRoot('src') };
+      ['data', 'pages', 'assets', 'layouts', 'components'].forEach((dir) => {
+        aliases[`@${dir}`] = resolveRoot('src', dir);
+      });
+      return aliases;
+    })(),
+  },
+
+  source: {
+    preEntry: getGlobalEntries(),
+    entry: getEntries(),
+  },
+
+  output: {
+    distPath: {
+      js: 'assets/scripts',
+      css: 'assets/styles',
+      image: 'assets/images',
+      font: 'assets/fonts',
+    },
+    // Pastikan root absolut jika mendeploy ke hosting (Vercel/Netlify)
+    // Gunakan './' hanya jika ingin bisa dibuka secara offline (file://)
+    assetPrefix: '/',
+    cleanDistPath: true,
+    minify: shouldMinify,
+    inlineStyles: ({ size }) => size < 12 * 1024,
+    inlineScripts: ({ size }) => size < 4 * 1024,
+    sourceMap: !shouldMinify ? { js: 'cheap-module-source-map', css: true } : false,
+    filename: {
+      js: '[name].[contenthash:8].js',
+      css: '[name].[contenthash:8].css',
+      image: '[name].[hash:8][ext]',
+    },
+  },
+
+  html: {
+    title: '', // Dihandle manual di template untuk SEO 100
+    inject: 'head',
+    scriptLoading: 'defer',
+    template: ({ entryName }) => path.join('src/pages', entryName, 'index.njk'),
+
+    // --- OPTIMASI PERFORMANCE (Preload & Anti-Glitch) ---
+    tags: [
+      // 1. Preconnect ke Google Fonts (Jika masih pakai CDN)
+      // { tag: 'link', attrs: { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }, head: true },
+
+      // 2. Preload Font Utama (Fontsource) - Sesuaikan path dengan hasil build
+      {
+        tag: 'link',
+        attrs: {
+          rel: 'preload',
+          href: '/assets/fonts/inter-latin-400-normal.woff2',
+          as: 'font',
+          type: 'font/woff2',
+          crossorigin: 'anonymous',
+        },
+        head: true,
+      },
+
+      // 3. Injeksi Anti-Glitch & Preload JSON Locales
+      {
+        tag: 'script',
+        head: true,
+        append: false, // Wajib di paling atas head
+        children: `
+          (function() {
+            const savedLng = localStorage.getItem('i18nextLng') || navigator.language.split('-')[0] || 'id';
+            if (savedLng !== 'id') document.documentElement.classList.add('i18n-loading');
+            
+            const pageId = window.location.pathname.split('/').pop().replace('.html', '') || 'home';
+            ['common', pageId].forEach(ns => {
+              const link = document.createElement('link');
+              link.rel = 'preload'; link.as = 'fetch';
+              link.href = '/locales/' + savedLng + '/' + ns + '.json';
+              link.crossOrigin = 'anonymous';
+              document.head.appendChild(link);
+            });
+          })();
+        `,
+      },
+    ],
+
+    templateParameters: (params) => {
+      const name = String(params.entryName || 'home');
+      const lang = 'id';
+
+      const rawPageLocales = readJSON(resolveRoot(`src/locales/${lang}/${name}.json`));
+      const commonLocales = readJSON(resolveRoot(`src/locales/${lang}/common.json`));
+
+      const mergedLocales: JsonData = {
+        ...commonLocales,
+        page: rawPageLocales,
+      };
+
+      const globalData = loadGlobalData();
+      const pageData = readJSON(resolveRoot('src/pages', name, 'index.json'));
+
+      const _resolve = (jsonPath: string, variables: Record<string, unknown> = {}): string => {
+        const val = getValueByPath(mergedLocales, jsonPath);
+        const result = val !== undefined ? String(val) : jsonPath;
+
+        if (typeof result === 'string') {
+          let replaced = result;
+          Object.keys(variables).forEach((key) => {
+            replaced = replaced.replace(
+              new RegExp(`{{ *${key} *}}`, 'g'),
+              String(variables[key]),
+            );
+          });
+          return replaced;
+        }
+        return result;
+      };
+
+      return {
+        ...params,
+        // Type-safe Meta Tags untuk SEO 100
+        meta: {
+          title: (pageData.title as string) || (globalData.site_name as string) || "Default Title",
+          description: (pageData.description as string) || (globalData.site_description as string) || "",
+        },
+        page_id: name,
+        global: globalData,
+        page: pageData,
+        i18n: (key: string, vars: Record<string, unknown> = {}): I18nResult => {
+          const isScoped = key.startsWith('page.');
+          const namespace = isScoped ? name : 'common';
+          const clientKey = isScoped ? key.replace('page.', '') : key;
+          const value = _resolve(key, vars);
+
+          return {
+            v: value,
+            k: `${namespace}:${clientKey}`,
+            vars: Object.keys(vars).length ? JSON.stringify(vars) : null,
+          };
+        },
+      };
+    },
+  },
+
+  tools: {
+    htmlPlugin: (config) => {
+      // Kita menimpa fungsi minify bawaan Rsbuild dengan html-minifier-terser
+      config.minify = (html) => {
+        if (!shouldMinifyHTML) return html;
+
+        // Proses "Double Pass" dimulai di sini
+        return minify(html, {
+          collapseWhitespace: true,
+          removeComments: true,
+          decodeEntities: true,
+          // Mengoptimalkan ulang JS/CSS yang mungkin di-inline oleh Rsbuild
+          minifyCSS: true,
+          minifyJS: true,
+          minifyURLs: true,
+          // Membersihkan atribut yang tidak diperlukan untuk skor SEO/Aksesibilitas
+          removeRedundantAttributes: true,
+          removeScriptTypeAttributes: true,
+          removeStyleLinkTypeAttributes: true,
+          useShortDoctype: true,
+          // Memastikan tag seperti <br> atau <img> tetap valid secara mandiri
+          removeEmptyAttributes: true,
+        });
+      };
+      return config;
+    },
+    postcss: (config) => {
+      config.postcssOptions ??= {};
+      const opts = config.postcssOptions as { plugins?: unknown[] };
+      opts.plugins ??= [];
+      opts.plugins.push(tailwindcss());
+    },
+    rspack: {
+      plugins: [
+        new CopyRspackPlugin({
+          patterns: [
+            {
+              from: resolveRoot('src/assets'),
+              to: 'assets',
+              globOptions: { ignore: MANAGED_EXTS.map((ext) => `**/*.${ext}`) },
+              noErrorOnMissing: true,
+            },
+            {
+              from: resolveRoot('src/locales'),
+              to: 'locales',
+              noErrorOnMissing: true,
+            },
+          ],
+        }),
+        WatchJsonPlugin,
+      ],
+      module: {
+        rules: [
+          {
+            test: /\.njk$/,
+            use: [
+              {
+                loader: 'simple-nunjucks-loader',
+                options: {
+                  searchPaths: ['pages', 'layouts', 'components', ''].map((d) => resolveRoot('src', d)),
+                  assetsPaths: [resolveRoot('src/assets')],
+                },
+              },
+            ],
+          },
+        ],
+      },
+    },
+  },
+});

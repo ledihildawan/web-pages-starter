@@ -1,0 +1,30 @@
+<footer class="py-12 px-6 border-t border-white/10 bg-slate-950 relative overflow-hidden">
+  <div class="absolute bottom-0 right-0 w-64 h-64 bg-violet-500/5 blur-3xl -z-10 rounded-full"></div>
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
+    <div class="flex flex-col items-center md:items-start gap-2">
+      <span class="text-2xl font-black bg-linear-to-r from-violet-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent tracking-tight">
+        Starter
+      </span>
+      <p class="text-[10px] text-slate-300 font-bold tracking-[0.2em] uppercase opacity-90">
+        {{ i18n.t('common:site_tagline') }}
+      </p>
+    </div>
+
+    <nav class="flex flex-wrap justify-center items-center gap-x-10 gap-y-2 text-sm">
+      {% for item in global.menu.header %}
+        <a href="{{ item.url }}" class="text-slate-200 hover:text-white transition-all duration-300 py-2 min-h-[44px] flex items-center font-bold">
+          {{ i18n.t(item.t_key) }}
+        </a>
+      {% endfor %}
+    </nav>
+
+    <div class="text-center md:text-right">
+      <p class="text-sm text-slate-300 font-bold">
+        &copy; 2026 Technomira Tanzania.
+      </p>
+      <p class="text-[11px] text-slate-400 font-black uppercase tracking-widest mt-1">
+        {{ i18n.t('common:rights_reserved') }}
+      </p>
+    </div>
+  </div>
+</footer>

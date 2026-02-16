@@ -1,5 +1,9 @@
 {
   "about": "About",
   "pricing": "Pricing",
-  "features": "Features"
+  "features": "Features",
+  "get_started": "Get Started",
+  "engine_name": "Web Engine",
+  "site_tagline": "Build for Performance",
+  "rights_reserved": "All rights reserved."
 }

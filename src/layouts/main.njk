@@ -1,0 +1,91 @@
+{% import "macros/i18n.njk" as i18n with context %}
+{% import "macros/seo.njk" as seo %}
+
+<!DOCTYPE html>
+<html lang="{{ lang }}" dir="ltr" class="scroll-smooth i18n-loading">
+  <head>
+    {{ seo.render_tags(page, global) }}
+
+    {% block resource_hints %}
+      <link rel="preload" href="/assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+      {{ clientI18nScript | safe }}
+    {% endblock %}
+
+    <style>
+      /* State 1: Saat Loading - Mencegah Fluktuasi Skor LCP */
+      html.i18n-loading [data-i18n] {
+        color: transparent !important;
+        background-color: rgba(255,255,255,0.05);
+        border-radius: 4px;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transition: none !important;
+      }
+
+      /* State 2: Saat Atribut Berubah */
+      html.i18n-loading [data-i18n-attr] {
+        color: inherit !important;
+        background-color: transparent !important;
+      }
+
+      /* State 3: Saat Ready */
+      html.i18n-ready [data-i18n] {
+        color: inherit;
+        background-color: transparent;
+        transition: color 0.2s ease, background-color 0.2s ease;
+      }
+
+      /* UPDATE: Tambahkan font-family khusus untuk karakter Asia (JP/CN) jika diperlukan */
+      @font-face {
+        font-family: 'Inter';
+        font-display: swap;
+      }
+
+      /* UPDATE: Tambahkan CSS agar transisi RTL smooth */
+      [dir="rtl"] {
+        text-align: right;
+      }
+
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #020617;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #1e293b;
+        border-radius: 5px;
+        border: 2px solid #020617;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #334155;
+      }
+
+      [x-cloak] {
+        display: none !important;
+      }
+    </style>
+
+    {% block extra_head %}{% endblock %}
+  </head>
+
+  <body class="min-h-screen bg-slate-950 text-slate-200 antialiased font-sans selection:bg-violet-500/30 selection:text-violet-200" data-page="{{ page_id }}">
+
+    <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(15,23,42,0)_0%,rgba(2,6,23,1)_100%)]"></div>
+      <div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-violet-600/10 rounded-full blur-[120px] animate-pulse"></div>
+      <div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-fuchsia-600/10 rounded-full blur-[120px] animate-pulse" style="animation-delay: 3s;"></div>
+      <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_80%)]"></div>
+    </div>
+
+    {% include "navbar.njk" %}
+
+    <main id="main-content" class="relative z-10 flex flex-col">
+      {% block content %}{% endblock %}
+    </main>
+
+    {% include "footer.njk" %}
+
+    {% block scripts %}{% endblock %}
+  </body>
+</html>

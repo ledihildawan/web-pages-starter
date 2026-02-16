@@ -17,3 +17,5 @@ dist/
 
 .rsbuild
 coverage
+
+.unlighthouse
