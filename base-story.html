@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>Telkomsel Story System - Final Production</title>
+        <style>
+            /* --- 1. BASE DESIGN TOKENS --- */
+            :root {
+                --brand-red: #EE2D24;
+                --brand-dark: #000000;
+                --surface: #ffffff;
+                --text-main: #1a1a1a;
+                --text-sub: #666666;
+
+                /* Motion & Interaction */
+                --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+                --ease-spring: cubic-bezier(0.4, 1.2, 0.5, 1);
+                --transition-smooth: 0.4s var(--ease-out);
+            }
+
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            body {
+                background: var(--brand-dark);
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+                overflow: hidden;
+            }
+
+            /* --- 2. COMPONENT: STORY-CONTAINER --- */
+            .story-container {
+                position: relative;
+                width: 100%;
+                max-width: 430px;
+                height: 100%;
+                background: var(--brand-dark);
+                overflow: hidden;
+                box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            }
+
+            /* Viewport Logic */
+            .story-viewport {
+                position: absolute;
+                inset: 0;
+                z-index: 1;
+                transition: transform 0.6s var(--ease-out), filter 0.6s var(--ease-out), border-radius 0.6s var(--ease-out);
+                will-change: transform, filter;
+            }
+
+            .story-viewport video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            /* Progress Bar */
+            .story-progress-bar {
+                position: absolute;
+                top: 15px;
+                left: 12px;
+                right: 12px;
+                height: 2px;
+                background: rgba(255, 255, 255, 0.2);
+                z-index: 10;
+                border-radius: 10px;
+                overflow: hidden;
+            }
+
+            .story-progress-bar__fill {
+                height: 100%;
+                background: #fff;
+                width: 0;
+                will-change: width;
+            }
+
+            /* --- 3. COMPONENT: BOTTOM-SHEET --- */
+            .bottom-sheet {
+                position: absolute;
+                inset: 0;
+                z-index: 100;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                visibility: hidden;
+                pointer-events: none;
+            }
+
+            .bottom-sheet.is-active {
+                visibility: visible;
+            }
+
+            .bottom-sheet__backdrop {
+                position: absolute;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.6);
+                backdrop-filter: blur(8px);
+                opacity: 0;
+                transition: opacity 0.4s var(--ease-out);
+                pointer-events: auto;
+                cursor: s-resize;
+                /* Memberi petunjuk klik untuk tutup */
+            }
+
+            .bottom-sheet.is-active .bottom-sheet__backdrop {
+                opacity: 1;
+            }
+
+            .bottom-sheet__content {
+                position: relative;
+                background: var(--surface);
+                border-radius: 24px 24px 0 0;
+                width: 100%;
+                padding: 12px 24px 40px;
+                z-index: 101;
+                transform: translateY(100%);
+                transition: transform 0.5s var(--ease-spring);
+                pointer-events: auto;
+                will-change: transform;
+                max-height: 85vh;
+                overflow-y: auto;
+            }
+
+            .bottom-sheet.is-active .bottom-sheet__content {
+                transform: translateY(0);
+            }
+
+            .bottom-sheet__handle {
+                width: 40px;
+                height: 4px;
+                background: #E0E0E0;
+                border-radius: 10px;
+                margin: 0 auto 20px;
+                cursor: grab;
+                transition: width 0.3s var(--ease-spring);
+            }
+
+            .bottom-sheet__handle:active {
+                cursor: grabbing;
+                width: 60px;
+            }
+
+            /* --- 4. CONTENT VIEW: V-DETAIL --- */
+            .view-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+            .view-header__title {
+                font-size: 22px;
+                font-weight: 800;
+                color: var(--text-main);
+            }
+            .view-header__meta {
+                font-size: 12px;
+                font-weight: 600;
+                color: var(--text-sub);
+                background: #F2F2F2;
+                padding: 4px 12px;
+                border-radius: 20px;
+            }
+
+            .content-body {
+                position: relative;
+                margin-bottom: 25px;
+            }
+
+            .content-body__text {
+                font-size: 15px;
+                color: var(--text-sub);
+                line-height: 1.6;
+                max-height: 95px;
+                /* Collapsed state */
+                overflow: hidden;
+                transition: max-height 0.6s var(--ease-spring);
+                position: relative;
+            }
+
+            /* Gradient Mask for collapsed text */
+            .content-body__text::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 40px;
+                background: linear-gradient(to top, var(--surface), transparent);
+                transition: opacity 0.3s;
+            }
+
+            /* Expanded State */
+            .content-body.is-expanded .content-body__text {
+                max-height: 1000px;
+            }
+            .content-body.is-expanded .content-body__text::after {
+                opacity: 0;
+            }
+
+            .content-body p {
+                margin-bottom: 12px;
+            }
+
+            .content-body__toggle {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                margin-top: 10px;
+                color: var(--brand-red);
+                font-weight: 700;
+                font-size: 14px;
+                cursor: pointer;
+            }
+
+            .content-body__toggle::after {
+                content: '▼';
+                font-size: 10px;
+                transition: transform 0.3s;
+            }
+
+            .is-expanded .content-body__toggle::after {
+                transform: rotate(180deg);
+            }
+
+            /* --- 5. BUTTONS & TRIGGERS --- */
+            .btn-primary {
+                width: 100%;
+                padding: 18px;
+                background: var(--brand-red);
+                color: #fff;
+                border: none;
+                border-radius: 16px;
+                font-weight: 700;
+                font-size: 16px;
+                cursor: pointer;
+                transition: 0.2s var(--ease-out);
+                box-shadow: 0 4px 15px rgba(238, 45, 36, 0.2);
+            }
+
+            .btn-primary:active {
+                transform: scale(0.96);
+                opacity: 0.9;
+            }
+
+            .story-ui-trigger {
+                position: absolute;
+                bottom: 40px;
+                left: 20px;
+                right: 20px;
+                z-index: 5;
+                color: #fff;
+                cursor: pointer;
+                pointer-events: auto;
+            }
+
+            /* Story App Focus state */
+            .story-container.is-focused .story-viewport {
+                transform: scale(0.94);
+                border-radius: 24px;
+                filter: blur(5px) brightness(0.7);
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="story-container" id="storyApp">
+            <div class="story-viewport">
+                <div class="story-progress-bar">
+                    <div class="story-progress-bar__fill" id="pFill"></div>
+                </div>
+                <video id="vSource" autoplay="autoplay" muted="muted" loop="loop" playsinline="playsinline" src="https://assets.mixkit.co/videos/preview/mixkit-glitter-bokeh-in-soft-focus-4034-large.mp4"></video>
+            </div>
+
+            <div class="story-ui-trigger" onclick="StoryManager.open()">
+                <h2 style="margin-bottom: 5px; font-size: 20px;">Paket Dynamic Keluarga ✨</h2>
+                <p style="font-size: 14px; opacity: 0.8;">Ketuk untuk detail paket</p>
+            </div>
+
+            <div class="bottom-sheet" id="bottomSheet">
+                <div class="bottom-sheet__backdrop" onclick="StoryManager.close()"></div>
+                <div class="bottom-sheet__content" id="sheetContent">
+                    <div class="bottom-sheet__handle" id="sheetHandle"></div>
+
+                    <div class="view is-active" id="v-detail">
+                        <div class="view-header">
+                            <h3 class="view-header__title">Paket Dynamic</h3>
+                            <span class="view-header__meta">👁️ 1.2K Views</span>
+                        </div>
+
+                        <div class="content-body" id="expandableContent">
+                            <div class="content-body__text">
+                                <p>
+                                    <span>Satu paketnya, melimpah kuotanya bisa dipakai internetan di mana saja sekeluarga 🛜</span></p>
+                                <p>
+                                    <span>Mau terus terhubung dengan lancar ketika di rumah dan beraktivitas di luar? Cukup pilih pakai Paket Dynamic, harganya mulai dari Rp350.000 sudah termasuk:</span></p>
+                                <p>✅ Internet rumah dengan kecepatan 100 Mbps</p>
+                                <p>✅ Kuota HP anggota keluarga 30 GB</p>
+                                <p>✅ Bebas biaya langganan Prime, Catchplay+, IndiHome TV, dan Perplexity Pro selama setahun</p>
+                                <p>
+                                    <span>Yuk, saatnya nikmati koneksi internet yang lebih hemat untuk keluarga dengan langganan paket Dynamic sekarang di telkomsel.com/one , @MyTelkomsel, dan juga GraPARI terdekat!</span></p>
+                                <p>
+                                    <small>*Harga belum termasuk PPN</small><br>
+                                    <small>*Syarat dan ketentuan berlaku</small>
+                                </p>
+                            </div>
+                            <div class="content-body__toggle" onclick="StoryManager.toggleMore()">Selengkapnya</div>
+                        </div>
+
+                        <button class="btn-primary" onclick="window.open('https://telkomsel.com/one', '_blank')">LANGGANAN SEKARANG</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            /**
+     * STORY MANAGER - Logical UI Engine
+     */
+            const StoryManager = (() => {
+                const state = {
+                    isOpen: false,
+                    progress: 0,
+                    isDragging: false,
+                    isExpanded: false,
+                    startY: 0
+                };
+
+                const refs = {
+                    app: document.getElementById('storyApp'),
+                    video: document.getElementById('vSource'),
+                    pFill: document.getElementById('pFill'),
+                    sheet: document.getElementById('bottomSheet'),
+                    card: document.getElementById('sheetContent'),
+                    handle: document.getElementById('sheetHandle'),
+                    expandZone: document.getElementById('expandableContent'),
+                    toggleBtn: document.querySelector('.content-body__toggle')
+                };
+
+                const init = () => {
+                    _animateProgressBar();
+                    _bindDraggable();
+                };
+
+                // 1. Progress Bar Logic
+                const _animateProgressBar = () => {
+                    if (!state.isOpen && state.progress < 100) {
+                        state.progress += 0.20;
+                        refs.pFill.style.width = `${state.progress}%`;
+                    }
+                    requestAnimationFrame(_animateProgressBar);
+                };
+
+                // 2. Open / Close Sheet
+                const open = () => {
+                    state.isOpen = true;
+                    refs
+                        .app
+                        .classList
+                        .add('is-focused');
+                    refs
+                        .sheet
+                        .classList
+                        .add('is-active');
+                    refs
+                        .video
+                        .pause();
+                };
+
+                const close = () => {
+                    state.isOpen = false;
+                    state.isExpanded = false;
+                    refs
+                        .expandZone
+                        .classList
+                        .remove('is-expanded');
+                    refs
+                        .toggleBtn
+                        .childNodes[0]
+                        .textContent = "Selengkapnya";
+
+                    refs
+                        .app
+                        .classList
+                        .remove('is-focused');
+                    refs
+                        .sheet
+                        .classList
+                        .remove('is-active');
+                    refs.card.style.transform = ''; // Reset drag position
+                    setTimeout(() => refs.video.play(), 400);
+                };
+
+                // 3. Content Expansion Logic
+                const toggleMore = () => {
+                    state.isExpanded = !state.isExpanded;
+                    if (state.isExpanded) {
+                        refs
+                            .expandZone
+                            .classList
+                            .add('is-expanded');
+                        refs
+                            .toggleBtn
+                            .childNodes[0]
+                            .textContent = "Sembunyikan";
+                    } else {
+                        refs
+                            .expandZone
+                            .classList
+                            .remove('is-expanded');
+                        refs
+                            .toggleBtn
+                            .childNodes[0]
+                            .textContent = "Selengkapnya";
+                    }
+                };
+
+                // 4. Draggable Component Logic
+                const _bindDraggable = () => {
+                    const getPointerY = (e) => e.pageY || (
+                        e.touches
+                        ? e.touches[0].pageY
+                        : 0);
+
+                    const onStart = (e) => {
+                        state.isDragging = true;
+                        state.startY = getPointerY(e);
+                        refs.card.style.transition = 'none';
+                    };
+
+                    const onMove = (e) => {
+                        if (!state.isDragging) 
+                            return;
+                        const currentY = getPointerY(e);
+                        const deltaY = currentY - state.startY;
+
+                        if (deltaY > 0) {
+                            refs.card.style.transform = `translateY(${deltaY}px)`;
+                        } else {
+                            refs.card.style.transform = `translateY(${deltaY * 0.1}px)`; // Rubber band effect
+                        }
+                    };
+
+                    const onEnd = (e) => {
+                        if (!state.isDragging) 
+                            return;
+                        state.isDragging = false;
+                        refs.card.style.transition = 'transform 0.5s var(--ease-spring)';
+
+                        const finalY = e.pageY || (
+                            e.changedTouches
+                            ? e.changedTouches[0].pageY
+                            : 0);
+                        const deltaY = finalY - state.startY;
+
+                        if (deltaY > 120) 
+                            close();
+                        else 
+                            refs.card.style.transform = 'translateY(0)';
+                        }
+                    ;
+
+                    // Event Binding
+                    refs
+                        .handle
+                        .addEventListener('mousedown', onStart);
+                    refs
+                        .handle
+                        .addEventListener('touchstart', onStart, {passive: true});
+                    window.addEventListener('mousemove', onMove);
+                    window.addEventListener('touchmove', onMove, {passive: false});
+                    window.addEventListener('mouseup', onEnd);
+                    window.addEventListener('touchend', onEnd);
+                };
+
+                return {init, open, close, toggleMore};
+            })();
+
+            // Launch Application
+            StoryManager.init();
+        </script>
+
+    </body>
+</html>
