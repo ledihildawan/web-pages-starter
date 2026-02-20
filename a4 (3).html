@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8">
+        <title>Laporan SLIK - Fixed Borders</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+        <style>
+            .page {
+                width: 210mm;
+                min-height: 297mm;
+                padding: 10mm;
+                background: white;
+                box-shadow: 0 0 10px rgba(0,0,0,0.3);
+                margin: 20px auto;
+            }
+
+            body.is-exporting .page {
+                margin: 0 !important;
+                box-shadow: none !important;
+                border: none !important;
+                height: 296.8mm !important;
+                min-height: unset !important;
+            }
+            body.is-exporting {
+                overflow: hidden;
+            }
+
+            /* TWEAK TAMBAHAN: Memastikan border tajam */
+            table,
+            td,
+            th {
+                border-spacing: 0;
+            }
+        </style>
+    </head>
+    <body class="bg-gray-600 flex flex-col items-center font-sans">
+
+        <button id="download-btn" onclick="exportPDF()" class="fixed top-5 right-5 z-50 bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-6 rounded-full shadow-lg transition duration-300">
+            Download PDF
+        </button>
+
+        <div id="render-area">
+            <div class="page text-[10px] leading-tight text-gray-800">
+
+                <div class="border-b-2 border-[#A40D38] pb-2 mb-4">
+                    <h1 class="text-[#A40D38] text-xl font-bold uppercase">Informasi Debitur</h1>
+                    <h2 class="text-black text-sm font-bold">Sistem Layanan Informasi Keuangan</h2>
+                </div>
+
+                <div class="mb-4">
+                    <div class="grid grid-cols-[100px_1fr] gap-x-2 text-[10px]">
+                        <div class="font-bold text-gray-600">Tanggal Permintaan</div>
+                        <div>: 12-01-2026</div>
+                        <div class="font-bold text-gray-600">Posisi Data</div>
+                        <div>: 31-12-2025</div>
+                    </div>
+                </div>
+
+                <div class="bg-[#A40D38] text-white font-bold px-2 py-1 mb-1 text-xs uppercase">
+                    Data Pokok Debitur
+                </div>
+                <table class="w-full border-t border-l border-gray-300 mb-4">
+                    <tbody>
+                        <tr>
+                            <th class="bg-gray-100 text-left p-1 border-b border-r border-gray-300 w-1/5">Nama Identitas</th>
+                            <td class="p-1 font-bold w-1/3 border-b border-r border-gray-300">SITI ASFIYAH</td>
+                            <th class="bg-gray-100 text-left p-1 border-b border-r border-gray-300 w-1/5">Identitas</th>
+                            <td class="p-1 border-b border-r border-gray-300">NIK / 3516164604680002</td>
+                        </tr>
+                        <tr>
+                            <th class="bg-gray-100 text-left p-1 border-b border-r border-gray-300">Jenis Kelamin</th>
+                            <td class="p-1 border-b border-r border-gray-300">Perempuan</td>
+                            <th class="bg-gray-100 text-left p-1 border-b border-r border-gray-300">Tempat / Tgl Lahir</th>
+                            <td class="p-1 border-b border-r border-gray-300">MOJOKERTO / 06-04-1968</td>
+                        </tr>
+                        <tr>
+                            <th class="bg-gray-100 text-left p-1 border-b border-r border-gray-300">Alamat</th>
+                            <td colspan="3" class="p-1 border-b border-r border-gray-300">DSN WONOREJO 01 07RT.001/007, JETIS, KAB. MOJOKERTO, 61352, ID</td>
+                        </tr>
+                        <tr>
+                            <th class="bg-gray-100 text-left p-1 border-b border-r border-gray-300">Pekerjaan</th>
+                            <td class="p-1 border-b border-r border-gray-300">NotSpecified</td>
+                            <th class="bg-gray-100 text-left p-1 border-b border-r border-gray-300">Bidang Usaha</th>
+                            <td class="p-1 border-b border-r border-gray-300">NotSpecified</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="bg-[#A40D38] text-white font-bold px-2 py-1 mb-1 text-xs uppercase">
+                    Ringkasan Fasilitas
+                </div>
+                <table class="w-full border-t border-l border-gray-300 mb-4 text-center">
+                    <thead>
+                        <tr class="bg-gray-100 text-gray-700">
+                            <th class="border-b border-r border-gray-300 p-1">Fasilitas</th>
+                            <th class="border-b border-r border-gray-300 p-1">Kredit (IDR)</th>
+                            <th class="border-b border-r border-gray-300 p-1">L/C (IDR)</th>
+                            <th class="border-b border-r border-gray-300 p-1">Garansi (IDR)</th>
+                            <th class="border-b border-r border-gray-300 p-1">Total (IDR)</th>
+                            <th class="border-b border-r border-gray-300 p-1 w-24">Kol. Terburuk</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border-b border-r border-gray-300 p-1 text-left font-bold">Plafon Efektif</td>
+                            <td class="border-b border-r border-gray-300 p-1">Rp 0</td>
+                            <td class="border-b border-r border-gray-300 p-1">Rp 0</td>
+                            <td class="border-b border-r border-gray-300 p-1">Rp 0</td>
+                            <td class="border-b border-r border-gray-300 p-1">Rp 0</td>
+                            <td rowspan="2" class="border-b border-r border-gray-300 p-1 font-bold text-red-600 align-middle">/</td>
+                        </tr>
+                        <tr>
+                            <td class="border-b border-r border-gray-300 p-1 text-left font-bold">Baki Debet</td>
+                            <td class="border-b border-r border-gray-300 p-1">Rp 0</td>
+                            <td class="border-b border-r border-gray-300 p-1">Rp 0</td>
+                            <td class="border-b border-r border-gray-300 p-1">Rp 0</td>
+                            <td class="border-b border-r border-gray-300 p-1">Rp 0</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="w-1/2 border-t border-l border-gray-300 mb-6">
+                    <tr>
+                        <th rowspan="2" class="border-b border-r border-gray-300 bg-white text-[#A40D38] p-1 text-center align-middle w-1/3">Jumlah Kreditur</th>
+                        <th class="border-b border-r border-gray-300 bg-gray-100 p-1 text-center">Bank Umum</th>
+                        <th class="border-b border-r border-gray-300 bg-gray-100 p-1 text-center">BPR/S</th>
+                        <th class="border-b border-r border-gray-300 bg-gray-100 p-1 text-center">Lembaga Lain</th>
+                    </tr>
+                    <tr>
+                        <td class="border-b border-r border-gray-300 p-1 text-center font-bold">1</td>
+                        <td class="border-b border-r border-gray-300 p-1 text-center">0</td>
+                        <td class="border-b border-r border-gray-300 p-1 text-center">0</td>
+                    </tr>
+                </table>
+
+                <div class="bg-[#A40D38] text-white font-bold px-2 py-1 mb-1 text-xs uppercase">
+                    Kredit / Pembiayaan
+                </div>
+
+                <div class="bg-gray-100 border border-gray-300 p-2 mb-2 text-[9px] flex gap-4">
+                    <span>
+                        <strong class="text-gray-700">Pelapor:</strong>
+                        494 - PT Bank Raya Indonesia Tbk</span>
+                    <span>
+                        <strong class="text-gray-700">Cabang:</strong>
+                        073</span>
+                    <span>
+                        <strong class="text-gray-700">Update:</strong>
+                        12-01-2026</span>
+                </div>
+
+                <table class="w-full border-t border-l border-gray-300 mb-4 table-fixed text-[8px]">
+                    <thead>
+                        <tr class="bg-gray-100 text-center">
+                            <th colspan="2" rowspan="2" class="border-b border-r border-gray-300 p-1 bg-gray-200">Kualitas /<br>Tunggakan</th>
+                            <th colspan="2" class="border-b border-r border-gray-300 p-0.5">Feb 24</th>
+                            <th colspan="2" class="border-b border-r border-gray-300 p-0.5">Mar 24</th>
+                            <th colspan="2" class="border-b border-r border-gray-300 p-0.5">Apr 24</th>
+                            <th colspan="2" class="border-b border-r border-gray-300 p-0.5">Mei 24</th>
+                            <th colspan="2" class="border-b border-r border-gray-300 p-0.5">Jun 24</th>
+                            <th colspan="2" class="border-b border-r border-gray-300 p-0.5">Jul 24</th>
+                            <th colspan="2" class="border-b border-r border-gray-300 p-0.5">Aug 24</th>
+                            <th colspan="2" class="border-b border-r border-gray-300 p-0.5">Sep 24</th>
+                            <th colspan="2" class="border-b border-r border-gray-300 p-0.5">Okt 24</th>
+                            <th colspan="2" class="border-b border-r border-gray-300 p-0.5">Nov 24</th>
+                            <th colspan="2" class="border-b border-r border-gray-300 p-0.5">Des 24</th>
+                            <th colspan="2" class="border-b border-r border-gray-300 p-0.5">Jan 25</th>
+                        </tr>
+                        <tr>
+                            <td colspan="24" class="border-b border-r border-gray-300 bg-gray-50 text-[6px] tracking-widest text-center text-gray-400 p-0.5">HISTORY TRACK RECORD</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-center">
+                            <td colspan="2" class="border-b border-r border-gray-300 p-1 font-bold text-left pl-2 bg-gray-50">Kualitas</td>
+                            <td colspan="2" class="border-b border-r border-gray-300">1</td>
+                            <td colspan="2" class="border-b border-r border-gray-300">1</td>
+                            <td colspan="2" class="border-b border-r border-gray-300">1</td>
+                            <td colspan="2" class="border-b border-r border-gray-300">1</td>
+                            <td colspan="2" class="border-b border-r border-gray-300">1</td>
+                            <td colspan="2" class="border-b border-r border-gray-300">1</td>
+                            <td colspan="2" class="border-b border-r border-gray-300">1</td>
+                            <td colspan="2" class="border-b border-r border-gray-300">1</td>
+                            <td colspan="2" class="border-b border-r border-gray-300">1</td>
+                            <td colspan="2" class="border-b border-r border-gray-300">1</td>
+                            <td colspan="2" class="border-b border-r border-gray-300">1</td>
+                            <td colspan="2" class="border-b border-r border-gray-300">1</td>
+                        </tr>
+                        <tr class="text-center">
+                            <td colspan="2" class="border-b border-r border-gray-300 p-1 font-bold text-left pl-2 bg-gray-50">Hari Tunggakan</td>
+                            <td colspan="2" class="border-b border-r border-gray-300">0</td>
+                            <td colspan="2" class="border-b border-r border-gray-300">0</td>
+                            <td colspan="2" class="border-b border-r border-gray-300">0</td>
+                            <td colspan="2" class="border-b border-r border-gray-300">0</td>
+                            <td colspan="2" class="border-b border-r border-gray-300">0</td>
+                            <td colspan="2" class="border-b border-r border-gray-300">0</td>
+                            <td colspan="2" class="border-b border-r border-gray-300">0</td>
+                            <td colspan="2" class="border-b border-r border-gray-300">0</td>
+                            <td colspan="2" class="border-b border-r border-gray-300">0</td>
+                            <td colspan="2" class="border-b border-r border-gray-300">0</td>
+                            <td colspan="2" class="border-b border-r border-gray-300">0</td>
+                            <td colspan="2" class="border-b border-r border-gray-300">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="w-full border-t border-l border-gray-300 text-[9px]">
+                    <tbody>
+                        <tr>
+                            <th class="bg-gray-100 text-left p-1 border-b border-r border-gray-300 w-1/4">No Rekening</th>
+                            <td class="p-1 border-b border-r border-gray-300 w-1/4">BRI0002</td>
+                            <th class="bg-gray-100 text-left p-1 border-b border-r border-gray-300 w-1/4">Sifat Kredit</th>
+                            <td class="p-1 border-b border-r border-gray-300 w-1/4">-</td>
+                        </tr>
+                        <tr>
+                            <th class="bg-gray-100 text-left p-1 border-b border-r border-gray-300">Jenis Kredit</th>
+                            <td class="p-1 border-b border-r border-gray-300">Lainnya (Dengan Perjanjian)</td>
+                            <th class="bg-gray-100 text-left p-1 border-b border-r border-gray-300">Akad Kredit</th>
+                            <td class="p-1 border-b border-r border-gray-300">Konvensional</td>
+                        </tr>
+                        <tr>
+                            <th class="bg-gray-100 text-left p-1 border-b border-r border-gray-300">Tgl Awal Kredit</th>
+                            <td class="p-1 border-b border-r border-gray-300">11-05-2023</td>
+                            <th class="bg-gray-100 text-left p-1 border-b border-r border-gray-300">Tgl Jatuh Tempo</th>
+                            <td class="p-1 border-b border-r border-gray-300">11-05-2025</td>
+                        </tr>
+                        <tr>
+                            <th class="bg-gray-100 text-left p-1 border-b border-r border-gray-300">Tgl Macet</th>
+                            <td class="p-1 border-b border-r border-gray-300">11-07-2024</td>
+                            <th class="bg-gray-100 text-left p-1 border-b border-r border-gray-300">Sebab Macet</th>
+                            <td class="p-1 border-b border-r border-gray-300">Lainnya</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+        <script>
+            function exportPDF() {
+                const element = document.getElementById('render-area');
+                const btn = document.getElementById('download-btn');
+
+                btn.disabled = true;
+                btn.innerText = "Generating...";
+                document
+                    .body
+                    .classList
+                    .add('is-exporting');
+
+                const opt = {
+                    margin: 0,
+                    filename: 'Laporan_SLIK_Tailwind_Sharp.pdf',
+                    image: {
+                        type: 'jpeg',
+                        quality: 0.98
+                    },
+                    html2canvas: {
+                        scale: 2,
+                        useCORS: true,
+                        scrollY: 0,
+                        windowWidth: document.documentElement.offsetWidth
+                    },
+                    jsPDF: {
+                        unit: 'mm',
+                        format: 'a4',
+                        orientation: 'portrait'
+                    }
+                };
+
+                html2pdf()
+                    .set(opt)
+                    .from(element)
+                    .save()
+                    .then(() => {
+                        document
+                            .body
+                            .classList
+                            .remove('is-exporting');
+                        btn.disabled = false;
+                        btn.innerText = "Download PDF";
+                    });
+            }
+        </script>
+    </body>
+</html>

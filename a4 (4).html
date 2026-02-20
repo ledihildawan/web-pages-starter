@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8">
+        <title>Laporan SLIK - Alpine.js Fix Rowspan</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+        <script defer="defer" src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+        <style>
+            .page-container {
+                width: 210mm;
+                min-height: 297mm;
+                padding: 10mm;
+                background: white;
+                margin: 20px auto;
+                box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            }
+
+            body.is-exporting .page-container {
+                margin: 0 !important;
+                box-shadow: none !important;
+                border: none !important;
+                padding: 0 !important;
+                width: 100% !important;
+            }
+
+            body.is-exporting {
+                overflow: hidden;
+            }
+
+            table,
+            td,
+            th {
+                border-spacing: 0;
+            }
+
+            .avoid-break {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+
+            tr {
+                page-break-inside: avoid !important;
+            }
+        </style>
+    </head>
+    <body class="bg-gray-600 font-sans" x-data="reportApp()">
+
+        <button id="download-btn" @click="exportPDF()" class="fixed top-5 right-5 z-50 bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-6 rounded-full shadow-lg transition duration-300 disabled:opacity-50" :disabled="isGenerating" x-text="isGenerating ? 'Generating...' : 'Download PDF (Fix Rowspan)'"></button>
+
+        <div id="render-area">
+            <div class="page-container text-[10px] leading-tight text-gray-800">
+
+                <div class="border-b-2 border-[#A40D38] pb-2 mb-4">
+                    <h1 class="text-[#A40D38] text-xl font-bold uppercase" x-text="title"></h1>
+                    <h2 class="text-black text-sm font-bold">Sistem Layanan Informasi Keuangan</h2>
+                </div>
+
+                <div class="mb-4 avoid-break">
+                    <div class="grid grid-cols-[100px_1fr] gap-x-2">
+                        <div class="font-bold text-gray-600">Tanggal Permintaan</div>
+                        <div x-text="': ' + metadata.requestDate"></div>
+                        <div class="font-bold text-gray-600">Posisi Data</div>
+                        <div x-text="': ' + metadata.dataPosition"></div>
+                    </div>
+                </div>
+
+                <div class="avoid-break mb-6">
+                    <div class="bg-[#A40D38] text-white font-bold px-2 py-1 mb-1 text-xs uppercase">Data Pokok Debitur</div>
+                    <table class="w-full border-t border-l border-gray-300">
+                        <tbody>
+                            <tr>
+                                <th class="bg-gray-100 text-left p-1 border-b border-r border-gray-300 w-1/5">Nama Identitas</th>
+                                <td class="p-1 font-bold w-1/3 border-b border-r border-gray-300" x-text="debitur.nama"></td>
+                                <th class="bg-gray-100 text-left p-1 border-b border-r border-gray-300 w-1/5">Identitas</th>
+                                <td class="p-1 border-b border-r border-gray-300" x-text="debitur.nik"></td>
+                            </tr>
+                            <tr>
+                                <th class="bg-gray-100 text-left p-1 border-b border-r border-gray-300">Alamat</th>
+                                <td colspan="3" class="p-1 border-b border-r border-gray-300" x-text="debitur.alamat"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="avoid-break mb-6">
+                    <div class="bg-[#A40D38] text-white font-bold px-2 py-1 mb-1 text-xs uppercase">Ringkasan Fasilitas</div>
+                    <table class="w-full border-t border-l border-gray-300 text-center">
+                        <thead>
+                            <tr class="bg-gray-100 text-gray-700">
+                                <th class="border-b border-r border-gray-300 p-1">Fasilitas</th>
+                                <th class="border-b border-r border-gray-300 p-1">Plafon</th>
+                                <th class="border-b border-r border-gray-300 p-1">Baki Debet</th>
+                                <th class="border-b border-r border-gray-300 p-1">Kol. Terburuk</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border-b border-r border-gray-300 p-1 text-left font-bold">Total Kredit</td>
+                                <td class="border-b border-r border-gray-300 p-1" x-text="summary.plafon"></td>
+                                <td class="border-b border-r border-gray-300 p-1" x-text="summary.bakiDebet"></td>
+                                <td class="border-b border-r border-gray-300 p-1 font-bold text-red-600" x-text="summary.kolektibilitas"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <template x-for="(credit, index) in facilities" :key="index">
+                    <div class="avoid-break mb-8">
+                        <div class="bg-[#A40D38] text-white font-bold px-2 py-1 mb-1 text-xs uppercase flex justify-between">
+                            <span x-text="'Fasilitas Kredit #' + (index + 1)"></span>
+                            <span class="text-[9px] font-normal opacity-80" x-text="'Ref: ' + credit.ref"></span>
+                        </div>
+
+                        <div class="bg-gray-100 border border-gray-300 p-2 mb-2 text-[9px] flex gap-4">
+                            <span>
+                                <strong class="text-gray-700">Pelapor:</strong>
+                                <span x-text="credit.bank"></span></span>
+                            <span>
+                                <strong class="text-gray-700">Update:</strong>
+                                <span x-text="credit.updatedAt"></span></span>
+                            <span>
+                                <strong class="text-gray-700">Status:</strong>
+                                <span x-text="credit.status"></span></span>
+                        </div>
+
+                        <table class="w-full border-t border-l border-gray-300 mb-2 table-fixed text-[8px]">
+                            <thead>
+                                <tr class="bg-gray-100 text-center">
+                                    <th colspan="2" class="border-r border-gray-300 p-1 bg-gray-200 border-b-0 align-bottom">
+                                        Kualitas
+                                    </th>
+                                    <th colspan="12" class="border-b border-r border-gray-300 p-0.5">Riwayat 12 Bulan Terakhir</th>
+                                </tr>
+
+                                <tr class="bg-gray-50 text-center">
+                                    <th colspan="2" class="border-r border-gray-300 p-1 bg-gray-200 border-t-0"></th>
+
+                                    <template x-for="month in months">
+                                        <td class="border-b border-r border-gray-300 p-0.5" x-text="month"></td>
+                                    </template>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center">
+                                    <td colspan="2" class="border-b border-r border-gray-300 p-1 font-bold text-left pl-2 bg-gray-50">Kol</td>
+                                    <template x-for="val in credit.history">
+                                        <td class="border-b border-r border-gray-300" x-text="val"></td>
+                                    </template>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </template>
+
+            </div>
+        </div>
+
+        <script>
+            function reportApp() {
+                return {
+                    title: 'Informasi Debitur',
+                    isGenerating: false,
+                    metadata: {
+                        requestDate: '12-01-2026',
+                        dataPosition: '31-12-2025'
+                    },
+                    debitur: {
+                        nama: 'SITI ASFIYAH',
+                        nik: 'NIK / 3516164604680002',
+                        alamat: 'DSN WONOREJO 01 07RT.001/007, JETIS, KAB. MOJOKERTO'
+                    },
+                    summary: {
+                        plafon: 'Rp 500.000.000',
+                        bakiDebet: 'Rp 250.000.000',
+                        kolektibilitas: '2 (Dalam Perhatian)'
+                    },
+                    months: [
+                        'Jan',
+                        'Feb',
+                        'Mar',
+                        'Apr',
+                        'Mei',
+                        'Jun',
+                        'Jul',
+                        'Ags',
+                        'Sep',
+                        'Okt',
+                        'Nov',
+                        'Des'
+                    ],
+                    // Simulasi Data Dinamis
+                    facilities: Array.from({
+                        length: 8
+                    }, (_, i) => ({
+                        ref: `BRI-2026-00${i + 1}`,
+                        bank: 'PT Bank Rakyat Indonesia',
+                        updatedAt: '12-01-2026',
+                        status: i % 2 === 0
+                            ? 'Lancar'
+                            : 'Dalam Perhatian',
+                        history: Array(12).fill(
+                            i % 2 === 0
+                            ? '1'
+                            : '2')
+                    })),
+
+                    async exportPDF() {
+                        this.isGenerating = true;
+                        const element = document.getElementById('render-area');
+
+                        // Tambahkan class khusus saat export
+                        document
+                            .body
+                            .classList
+                            .add('is-exporting');
+
+                        const opt = {
+                            margin: [
+                                10, 10, 10, 10
+                            ], // Margin fisik agar tidak terpotong di tepi
+                            filename: 'Laporan_SLIK_Rowspan_Fix.pdf',
+                            image: {
+                                type: 'jpeg',
+                                quality: 0.98
+                            },
+                            html2canvas: {
+                                scale: 2,
+                                useCORS: true,
+                                windowWidth: document.documentElement.offsetWidth
+                            },
+                            jsPDF: {
+                                unit: 'mm',
+                                format: 'a4',
+                                orientation: 'portrait'
+                            },
+                            // Mode legacy penting untuk layout panjang
+                            pagebreak: {
+                                mode: ['css', 'legacy']
+                            }
+                        };
+
+                        try {
+                            await html2pdf()
+                                .set(opt)
+                                .from(element)
+                                .save();
+                        } catch (error) {
+                            console.error(error);
+                        } finally {
+                            document
+                                .body
+                                .classList
+                                .remove('is-exporting');
+                            this.isGenerating = false;
+                        }
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>
