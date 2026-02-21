@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <title>Telkomsel Story - Global Loading & Sync Reveal</title>
+        <title>Telkomsel Story - Adaptive Frame & Perfect Sync</title>
         <style>
             /* --- 1. DESIGN TOKENS --- */
             :root {
@@ -61,7 +61,7 @@
                 transition: gap 0.7s var(--ease-spring), padding 0.7s var(--ease-spring);
             }
 
-            /* --- 3. VIDEO CONTAINER --- */
+            /* --- 3. VIDEO CONTAINER & ADAPTIVE FRAME --- */
             .story-container {
                 position: relative;
                 height: 100dvh;
@@ -75,6 +75,7 @@
                 transition: border-radius 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out);
             }
 
+            /* Ambient Layer */
             .ambient-layer {
                 display: none;
                 position: absolute;
@@ -109,7 +110,7 @@
                 z-index: 10;
                 background: transparent;
                 overflow: hidden;
-                border-radius: var(--frame-radius);
+                border-radius: inherit;
                 transition: filter 0.6s var(--ease-out);
             }
 
@@ -131,7 +132,6 @@
                 transition: opacity 0.4s var(--ease-out);
             }
 
-            /* YOUTUBE IFRAME */
             #youtubePlayer {
                 position: absolute;
                 top: 0;
@@ -173,12 +173,12 @@
                 }
             }
 
-            /* Hilangkan Loader saat wrapper .is-ready */
+            /* Hide loader globally when ready */
             .layout-wrapper.is-ready .story-loader {
                 opacity: 0;
             }
 
-            /* --- 5. INITIAL UI STATE (HIDDEN BEFORE READY) --- */
+            /* --- 5. PROGRESS BAR (SYNC FOCUS) --- */
             .story-progress-bar {
                 position: absolute;
                 top: max(16px, env(safe-area-inset-top));
@@ -200,8 +200,10 @@
                 border-radius: 4px;
                 box-shadow: 0 0 8px rgba(255,255,255,0.5);
                 transition: none;
+                /* Controlled by JS strictly */
             }
 
+            /* --- 6. UI ELEMENTS (REVEAL SYNC) --- */
             .story-excerpt {
                 position: absolute;
                 bottom: max(32px, env(safe-area-inset-bottom));
@@ -232,7 +234,6 @@
                 transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-spring);
             }
 
-            /* --- 6. DESKTOP CARD (HIDDEN BEFORE READY) --- */
             .story-card {
                 display: none;
                 width: var(--card-width);
@@ -247,19 +248,17 @@
                 overflow: hidden;
                 box-shadow: 0 32px 72px rgba(0,0,0,0.3);
                 border: 1px solid rgba(255, 255, 255, 0.05);
-
-                /* Sembunyi Awal */
+                /* Hidden Start */
                 opacity: 0;
                 pointer-events: none;
                 transform: translateY(20px);
                 transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-spring);
             }
 
-            /* --- 7. READY UI STATE (REVEAL ALL) --- */
+            /* --- Global Reveal Transition --- */
             .layout-wrapper.is-ready .story-progress-bar {
                 opacity: 1;
             }
-
             .layout-wrapper.is-ready .story-card,
             .layout-wrapper.is-ready .story-excerpt,
             .layout-wrapper.is-ready .story-player-actions {
@@ -268,7 +267,7 @@
                 transform: translateY(0);
             }
 
-            /* --- 8. EXCERPT & FAB STYLING --- */
+            /* Interaction Details */
             .layout-wrapper.is-ready .story-excerpt:hover {
                 opacity: 0.9;
                 transform: translateY(-4px);
@@ -336,7 +335,6 @@
                 box-shadow: 0 2px 8px rgba(0,0,0,0.2);
             }
 
-            /* Reaction Wrapper & Options */
             .reaction-wrapper {
                 position: relative;
                 display: flex;
@@ -398,7 +396,7 @@
                 transform: scale(1.05);
             }
 
-            /* Stagger Timing */
+            /* Stagger Delays */
             .reaction-option-btn:nth-child(1) {
                 transition-delay: 0s;
             }
@@ -442,7 +440,7 @@
                 display: block !important;
             }
 
-            /* --- 9. OVERLAYS (SHEET & POPUP) --- */
+            /* --- 9. OVERLAYS --- */
             .overlay-backdrop {
                 position: absolute;
                 inset: 0;
@@ -713,7 +711,6 @@
                 background: #E9ECEF;
             }
 
-            /* Toast */
             .toast-notification {
                 position: fixed;
                 left: 0;
@@ -741,8 +738,13 @@
                 bottom: 48px;
             }
 
-            /* --- 11. RESPONSIVE BREAKPOINTS --- */
+            /* --- 11. ADAPTIVE BREAKPOINTS --- */
             @media (max-width: 767px) {
+                /* FRAME RADIUS TIDAK BERLAKU DI MOBILE */
+                .story-container,
+                .story-viewport {
+                    border-radius: 0 !important;
+                }
                 .story-popup {
                     display: none !important;
                 }
@@ -750,7 +752,6 @@
                     filter: blur(12px) brightness(0.5);
                     transform: translateY(-20px) scale(0.95);
                 }
-                /* Hide UI during Mobile Sheet open */
                 .layout-wrapper.is-ui-open .story-excerpt,
                 .layout-wrapper.is-ui-open .story-player-actions {
                     opacity: 0;
@@ -799,7 +800,6 @@
                     display: block;
                     opacity: 0.6;
                 }
-                /* Desktop Card dikontrol display flex namun tetap mengikuti opacity awal dari parent base */
                 .story-card {
                     display: flex;
                 }
@@ -861,9 +861,10 @@
                             <div class="reaction-wrapper" id="reactionWrapper">
                                 <div class="reaction-options">
                                     <button class="reaction-option-btn" onclick="StoryManager.react('❤️', event)">❤️</button>
-                                    <button class="reaction-option-btn" onclick="StoryManager.react('🤣', event)">🤣</button>
-                                    <button class="reaction-option-btn" onclick="StoryManager.react('😭', event)">😭</button>
                                     <button class="reaction-option-btn" onclick="StoryManager.react('🔥', event)">🔥</button>
+                                    <button class="reaction-option-btn" onclick="StoryManager.react('🤣', event)">🤣</button>
+                                    <button class="reaction-option-btn" onclick="StoryManager.react('👏🏻', event)">👏🏻</button>
+                                    <button class="reaction-option-btn" onclick="StoryManager.react('😭', event)">😭</button>
                                 </div>
                                 <button class="player-fab" onclick="StoryManager.toggleReactionMenu(event)">🤍</button>
                             </div>
