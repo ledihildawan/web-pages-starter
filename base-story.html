@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <title>Telkomsel Story - Adaptive Frame & Perfect Sync</title>
+        <title>Telkomsel Story - True Immersive Clean Mode</title>
         <style>
             /* --- 1. DESIGN TOKENS --- */
             :root {
@@ -173,7 +173,7 @@
                 }
             }
 
-            /* Hide loader globally when ready */
+            /* Hilangkan Loader saat wrapper .is-ready */
             .layout-wrapper.is-ready .story-loader {
                 opacity: 0;
             }
@@ -234,6 +234,7 @@
                 transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-spring);
             }
 
+            /* --- 6. DESKTOP CARD (HIDDEN BEFORE READY) --- */
             .story-card {
                 display: none;
                 width: var(--card-width);
@@ -248,17 +249,19 @@
                 overflow: hidden;
                 box-shadow: 0 32px 72px rgba(0,0,0,0.3);
                 border: 1px solid rgba(255, 255, 255, 0.05);
-                /* Hidden Start */
+
+                /* Sembunyi Awal */
                 opacity: 0;
                 pointer-events: none;
                 transform: translateY(20px);
                 transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-spring);
             }
 
-            /* --- Global Reveal Transition --- */
+            /* --- 7. READY UI STATE (REVEAL ALL) --- */
             .layout-wrapper.is-ready .story-progress-bar {
                 opacity: 1;
             }
+
             .layout-wrapper.is-ready .story-card,
             .layout-wrapper.is-ready .story-excerpt,
             .layout-wrapper.is-ready .story-player-actions {
@@ -267,7 +270,7 @@
                 transform: translateY(0);
             }
 
-            /* Interaction Details */
+            /* --- 8. EXCERPT & FAB STYLING --- */
             .layout-wrapper.is-ready .story-excerpt:hover {
                 opacity: 0.9;
                 transform: translateY(-4px);
@@ -335,6 +338,7 @@
                 box-shadow: 0 2px 8px rgba(0,0,0,0.2);
             }
 
+            /* Reaction Wrapper & Options */
             .reaction-wrapper {
                 position: relative;
                 display: flex;
@@ -422,7 +426,7 @@
                 transition-delay: 0.15s;
             }
 
-            /* Clean Mode */
+            /* --- Clean Mode (Video Murni) --- */
             .story-container.is-clean-mode .reaction-wrapper,
             .story-container.is-clean-mode .share-fab,
             .story-container.is-clean-mode .story-excerpt {
@@ -430,9 +434,12 @@
                 pointer-events: none !important;
                 transform: translateY(20px) !important;
             }
+
+            /* Sembunyikan Gradient Filter saat Clean Mode */
             .story-container.is-clean-mode .story-video-wrapper::after {
-                opacity: 0.2;
+                opacity: 0 !important;
             }
+
             .story-container.is-clean-mode #icon-enter-fs {
                 display: none;
             }
@@ -790,12 +797,19 @@
             }
 
             @media (min-width: 1490px) {
+                /* TAMPILAN LARGE DESKTOP: MURNI CLEAN MODE DI PLAYER */
                 .story-excerpt,
                 .story-player-actions,
                 .story-popup,
                 .story-sheet {
                     display: none !important;
                 }
+
+                /* HILANGKAN GRADIENT FILTER PADA DESKTOP */
+                .story-video-wrapper::after {
+                    display: none !important;
+                }
+
                 .ambient-layer {
                     display: block;
                     opacity: 0.6;
@@ -947,12 +961,12 @@
 
             function onYouTubeIframeAPIReady() {
                 const ytOptions = {
-                    videoId: 'IHolHlnDP9s',
+                    videoId: 'kyPF1-VvOsQ',
                     playerVars: {
                         'autoplay': 1,
                         'controls': 0,
                         'loop': 1,
-                        'playlist': 'IHolHlnDP9s',
+                        'playlist': 'kyPF1-VvOsQ',
                         'mute': 1,
                         'modestbranding': 1,
                         'iv_load_policy': 3,
@@ -1212,7 +1226,7 @@
                 const nativeShare = async () => {
                     const data = {
                         title: 'Gaming Performa Cerdas 🔥',
-                        url: 'https://www.youtube.com/watch?v=IHolHlnDP9s'
+                        url: 'https://www.youtube.com/watch?v=kyPF1-VvOsQ'
                     };
                     try {
                         if (navigator.share) 
