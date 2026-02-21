@@ -3,13 +3,14 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <title>Telkomsel Story - Smart Interaction Edition</title>
+        <title>Telkomsel Story - Adaptive Frameless Mobile & Framed Desktop</title>
         <style>
             /* --- 1. DESIGN TOKENS --- */
             :root {
                 --brand-red: #EE2D24;
                 --brand-dark: #000000;
                 --surface: #ffffff;
+                --bg-gray: #F4F4F4;
                 --text-main: #1a1a1a;
                 --text-sub: #666666;
                 --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
@@ -23,73 +24,136 @@
                 -webkit-tap-highlight-color: transparent;
             }
             body {
-                background: var(--brand-dark);
-                height: 100vh;
-                display: flex;
-                justify-content: center;
-                align-items: center;
+                background: #0a0a0a;
+                margin: 0;
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
                 overflow: hidden;
                 touch-action: none;
-                /* Prevent browser pull-to-refresh */
             }
 
-            /* --- 2. STORY CONTAINER --- */
+            /* --- WRAPPER UTAMA --- */
+            .layout-wrapper {
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100dvh;
+                width: 100vw;
+            }
+
+            /* Slider Wrapper khusus untuk Desktop Card & Video */
+            .desktop-slider {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100dvh;
+                width: 100%;
+            }
+
+            /* --- 2. STORY CONTAINER (BASE: MOBILE FULL SCREEN) --- */
             .story-container {
                 position: relative;
                 width: 100%;
-                max-width: 430px;
-                height: 100%;
-                background: #000;
+                height: 100dvh;
+                /* Default Mobile: Layar penuh penuh */
+                background: var(--brand-dark);
                 overflow: hidden;
-                cursor: default;
+                border-radius: 0;
+                /* Tanpa frame di mobile */
+                transition: transform 0.5s var(--ease-spring), border-radius 0.5s, height 0.5s var(--ease-out);
+            }
+
+            .ambient-layer {
+                display: none;
+                /* Ambilight mati di mobile */
+                position: absolute;
+                inset: 0;
+                z-index: 1;
+                filter: blur(40px) saturate(200%);
+                opacity: 0.65;
+                transform: scale(1.15);
+                pointer-events: none;
+                transition: opacity 0.5s;
+            }
+            .ambient-layer iframe {
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+            .story-container.is-focused .ambient-layer {
+                opacity: 0.3;
             }
 
             .story-viewport {
                 position: absolute;
                 inset: 0;
-                z-index: 1;
-                transition: transform 0.6s var(--ease-out), filter 0.6s var(--ease-out), border-radius 0.6s var(--ease-out);
+                z-index: 10;
+                background: transparent;
+                overflow: hidden;
+                transition: transform 0.6s var(--ease-spring), filter 0.6s var(--ease-out), border-radius 0.6s var(--ease-out), box-shadow 0.6s;
                 will-change: transform, filter;
             }
 
-            .video-wrapper {
+            .story-video-wrapper {
                 position: relative;
                 width: 100%;
                 height: 100%;
                 overflow: hidden;
-                background: #000;
+                background: var(--brand-dark);
             }
-            #ytPlayer {
+
+            .story-video-wrapper::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                pointer-events: none;
+                z-index: 5;
+                background: radial-gradient(ellipse at center, rgba(0,0,0,0) 50%, rgba(0,0,0,0.5) 100%);
+            }
+
+            #youtubePlayer {
                 width: 100%;
                 height: 100%;
                 border: none;
-                transform: scale(1.3);
-                /* Optimized scale */
                 pointer-events: none;
-                /* User interacts with UI, not iframe */
+                transform: scale(1.05);
+                /* Skala slightly diperbesar menghilangkan black bar iframe */
+                object-fit: cover;
             }
 
             .story-progress-bar {
                 position: absolute;
-                top: 15px;
+                top: max(15px, env(safe-area-inset-top));
                 left: 12px;
                 right: 12px;
                 height: 2px;
                 background: rgba(255,255,255,0.2);
-                z-index: 10;
+                z-index: 15;
                 border-radius: 10px;
             }
             .story-progress-bar__fill {
                 height: 100%;
                 background: #fff;
                 width: 0;
-                transition: width 0.1s linear;
             }
 
-            /* --- 3. BOTTOM SHEET (DRAGGABLE) --- */
-            .bottom-sheet {
+            .story-ui-trigger {
                 position: absolute;
+                bottom: calc(40px + env(safe-area-inset-bottom));
+                left: 24px;
+                right: 24px;
+                z-index: 20;
+                color: #fff;
+                cursor: pointer;
+                transition: opacity 0.4s, transform 0.3s;
+            }
+            .story-ui-trigger:active {
+                transform: scale(0.98);
+            }
+
+            /* --- 3. LAYOUT 1: MOBILE BOTTOM SHEET --- */
+            .story-sheet {
+                position: fixed;
                 inset: 0;
                 z-index: 100;
                 display: flex;
@@ -98,90 +162,169 @@
                 visibility: hidden;
                 pointer-events: none;
             }
-            .bottom-sheet.is-active {
+            .story-sheet.is-active {
                 visibility: visible;
             }
-
-            .bottom-sheet__backdrop {
+            .story-sheet__backdrop {
                 position: absolute;
                 inset: 0;
                 background: rgba(0,0,0,0.6);
-                backdrop-filter: blur(8px);
-                -webkit-backdrop-filter: blur(8px);
                 opacity: 0;
                 transition: opacity 0.4s;
                 pointer-events: auto;
             }
-            .bottom-sheet.is-active .bottom-sheet__backdrop {
+            .story-sheet.is-active .story-sheet__backdrop {
                 opacity: 1;
             }
 
-            .bottom-sheet__content {
+            .story-sheet__content {
                 position: relative;
                 background: var(--surface);
                 border-radius: 28px 28px 0 0;
                 width: 100%;
-                padding: 12px 24px 40px;
+                padding: 12px 0 0;
                 z-index: 101;
                 transform: translateY(100%);
                 pointer-events: auto;
                 max-height: 85vh;
-                overflow-y: auto;
-                /* Will be controlled by JS for dragging, but has default transition */
+                height: auto;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
                 transition: transform 0.5s var(--ease-spring);
-                box-shadow: 0 -10px 40px rgba(0,0,0,0.2);
             }
-
-            /* Dragging State */
-            .bottom-sheet__content.is-dragging {
+            .story-sheet__content.is-dragging {
                 transition: none;
-                /* Disable transition while dragging for 1:1 feel */
-                cursor: grabbing !important;
             }
-
-            .bottom-sheet.is-active .bottom-sheet__content {
+            .story-sheet.is-active .story-sheet__content {
                 transform: translateY(0);
             }
-
-            .bottom-sheet__handle-wrapper {
+            .story-sheet__handle-wrapper {
                 width: 100%;
                 padding: 8px 0 20px;
                 cursor: grab;
                 display: flex;
                 justify-content: center;
+                flex-shrink: 0;
             }
-            .bottom-sheet__handle {
+            .story-sheet__handle {
                 width: 40px;
                 height: 5px;
                 background: #E0E0E0;
                 border-radius: 10px;
-                transition: background 0.3s;
-            }
-            .bottom-sheet__handle-wrapper:hover .bottom-sheet__handle {
-                background: #CCCCCC;
             }
 
-            /* --- 4. VIEWS & CONTENT --- */
-            .view {
-                display: none;
+            /* --- 4. LAYOUT 2: TABLET POPUP MODAL --- */
+            .story-popup {
+                position: fixed;
+                inset: 0;
+                z-index: 100;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                visibility: hidden;
+                pointer-events: none;
             }
-            .view.is-active {
-                display: block;
-                animation: viewSlideUp 0.4s var(--ease-out);
+            .story-popup.is-active {
+                visibility: visible;
             }
-            @keyframes viewSlideUp {
-                from {
-                    opacity: 0;
-                    transform: translateY(20px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
+            .story-popup__backdrop {
+                position: absolute;
+                inset: 0;
+                background: rgba(0,0,0,0.6);
+                opacity: 0;
+                transition: opacity 0.4s;
+                pointer-events: auto;
+            }
+            .story-popup.is-active .story-popup__backdrop {
+                opacity: 1;
             }
 
-            .category-badge {
+            .story-popup__content {
+                position: relative;
+                background: var(--surface);
+                width: 400px;
+                padding: 40px 0 0;
+                z-index: 101;
+                opacity: 0;
+                max-height: calc(100dvh - 64px);
+                height: auto;
+                /* Menyisakan gap 32px atas-bawah di tablet */
+                border-radius: 28px;
+                transform: scale(0.95);
+                transition: all 0.5s var(--ease-spring);
+                pointer-events: auto;
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+                box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            }
+            .story-popup.is-active .story-popup__content {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            .story-card__close-btn,
+            .story-popup__close-btn {
+                position: absolute;
+                top: 20px;
+                right: 24px;
+                width: 36px;
+                height: 36px;
+                border: none;
                 background: #f2f2f2;
+                border-radius: 50%;
+                font-size: 16px;
+                font-weight: bold;
+                color: var(--text-main);
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: background 0.2s;
+                z-index: 30;
+            }
+            .story-card__close-btn:hover,
+            .story-popup__close-btn:hover {
+                background: #e0e0e0;
+            }
+
+            /* --- 5. LAYOUT 3: LARGE DESKTOP CARD --- */
+            .story-card {
+                display: none;
+                width: 400px;
+                height: auto;
+                /* Max height mengikuti tinggi frame video agar sejajar */
+                max-height: min(calc(100dvh - 80px), 950px);
+                background: var(--surface);
+                border-radius: 24px;
+                padding: 40px 0 0;
+                box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+                position: relative;
+                flex-direction: column;
+                overflow: hidden;
+            }
+
+            /* --- 6. STRUKTUR KONTEN DALAM (INNER SCROLL) --- */
+            .story-dynamic-area {
+                display: flex;
+                flex-direction: column;
+                min-height: 0;
+                flex-shrink: 1;
+            }
+            .story-view {
+                display: flex;
+                flex-direction: column;
+                min-height: 0;
+                flex-shrink: 1;
+            }
+
+            .story-header {
+                flex-shrink: 0;
+                padding: 0 24px;
+            }
+            .story-badge {
+                background: var(--bg-gray);
                 color: var(--text-sub);
                 font-size: 10px;
                 font-weight: 800;
@@ -190,130 +333,151 @@
                 border-radius: 6px;
                 display: inline-block;
                 margin-bottom: 12px;
-                letter-spacing: 0.5px;
             }
-            .view-title {
+            .story-view__title {
                 font-size: 20px;
                 font-weight: 800;
                 color: var(--text-main);
                 margin-bottom: 4px;
                 line-height: 1.3;
             }
-            .view-meta {
+            .story-view__meta {
                 font-size: 12px;
                 color: var(--text-sub);
                 margin-bottom: 20px;
                 display: block;
             }
 
-            .content-body__text {
+            .story-body {
+                flex-shrink: 1;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+                padding: 0 24px;
+                min-height: 0;
+            }
+            .story-body::-webkit-scrollbar {
+                width: 4px;
+            }
+            .story-body::-webkit-scrollbar-thumb {
+                background: #d0d0d0;
+                border-radius: 10px;
+            }
+            .story-body::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            .story-body__mask {
+                position: relative;
+                max-height: 80px;
+                overflow: hidden;
+                transition: max-height 0.6s var(--ease-spring);
+            }
+            .story-body__mask::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 40px;
+                background: linear-gradient(to bottom, rgba(255,255,255,0), var(--surface));
+                pointer-events: none;
+                transition: opacity 0.3s;
+            }
+
+            .story-body__cms-content {
                 font-size: 15px;
                 color: var(--text-sub);
                 line-height: 1.6;
-                max-height: 80px;
-                overflow: hidden;
-                position: relative;
-                transition: max-height 0.5s var(--ease-spring);
             }
-            .content-body.is-expanded .content-body__text {
-                max-height: 1000px;
+            .story-body__cms-content p {
+                margin-bottom: 12px;
+            }
+            .story-body__cms-content p:last-child {
+                margin-bottom: 0;
             }
 
-            .content-body__toggle {
+            .story-body__toggle {
+                background: none;
+                border: none;
                 color: var(--brand-red);
                 font-weight: 700;
                 font-size: 14px;
                 cursor: pointer;
+                padding: 12px 0 16px;
                 display: inline-block;
-                padding: 10px 0;
-                transition: opacity 0.2s;
             }
-            .content-body__toggle:hover {
-                opacity: 0.7;
+            .story-body.is-expanded .story-body__mask {
+                max-height: 2500px;
             }
-
-            .tags-container {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 8px;
-                margin: 16px 0 24px;
-            }
-            .tag-item {
-                color: var(--brand-red);
-                font-size: 13px;
-                font-weight: 600;
-                text-decoration: none;
+            .story-body.is-expanded .story-body__mask::after {
+                opacity: 0;
             }
 
-            /* --- 5. SMART BUTTONS --- */
-            .btn-group {
+            .story-footer {
+                flex-shrink: 0;
                 display: flex;
                 gap: 12px;
+                background: var(--bg-gray);
+                padding: 16px 24px 32px;
+                box-shadow: 0 -10px 15px -10px rgba(0,0,0,0.05);
+                position: sticky;
+                bottom: 0;
+                z-index: 20;
             }
-            .btn-base {
+
+            .emote {
+                flex: 1;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                background: #FFFFFF;
+                border-radius: 16px;
+                padding: 0 12px;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+                height: 56px;
+            }
+            .emote > div {
+                font-size: 24px;
+                cursor: pointer;
+                padding: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: transform 0.4s var(--ease-spring);
+                -webkit-tap-highlight-color: transparent;
+                user-select: none;
+            }
+            .emote > div:hover {
+                transform: scale(1.25);
+            }
+            .emote > div:active {
+                transform: scale(0.85);
+            }
+
+            .story-share-btn {
+                background: #FFFFFF;
                 border: none;
                 border-radius: 16px;
-                font-weight: 700;
-                font-size: 15px;
+                font-size: 24px;
                 cursor: pointer;
-                transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 18px;
-            }
-            .btn-base--primary {
-                flex: 3;
-                background: var(--brand-red);
-                color: #fff;
-            }
-            .btn-base--secondary {
-                flex: 1.2;
-                background: #F2F2F2;
-                color: var(--text-main);
-            }
-            .btn-base:hover {
-                transform: translateY(-2px);
-                filter: brightness(1.05);
-                box-shadow: 0 5px 15px rgba(238, 45, 36, 0.2);
-            }
-            .btn-base:active {
-                transform: scale(0.95);
-            }
-
-            /* --- 6. SHARE GRID --- */
-            .share-grid {
-                display: grid;
-                grid-template-columns: repeat(4, 1fr);
-                gap: 16px;
-                margin: 10px 0 24px;
-            }
-            .share-item {
-                text-align: center;
-                font-size: 11px;
-                color: var(--text-sub);
-                font-weight: 600;
-                cursor: pointer;
-            }
-            .share-icon {
                 width: 56px;
                 height: 56px;
-                background: #F8F8F8;
-                border-radius: 18px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 22px;
-                margin: 0 auto 8px;
-                transition: 0.3s var(--ease-spring);
+                box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+                transition: transform 0.4s var(--ease-spring);
+                -webkit-tap-highlight-color: transparent;
+                user-select: none;
             }
-            .share-item:hover .share-icon {
-                background: #eee;
-                transform: translateY(-4px);
+            .story-share-btn:hover {
+                transform: scale(1.15);
+            }
+            .story-share-btn:active {
+                transform: scale(0.9);
             }
 
-            /* --- 7. TOAST --- */
-            .toast {
+            .toast-notification {
                 position: fixed;
                 bottom: 40px;
                 left: 50%;
@@ -329,130 +493,262 @@
                 transition: all 0.4s var(--ease-spring);
                 pointer-events: none;
             }
-            .toast.show {
+            .toast-notification.is-visible {
                 opacity: 1;
                 transform: translateX(-50%) translateY(0);
             }
 
-            /* --- 8. UI TRIGGERS --- */
-            .story-ui-trigger {
-                position: absolute;
-                bottom: 40px;
-                left: 24px;
-                right: 24px;
-                z-index: 5;
-                color: #fff;
-                cursor: pointer;
-                transition: transform 0.3s;
-            }
-            .story-ui-trigger:active {
-                transform: scale(0.98);
+            /* --- 7. SCOPE ISOLATION (MEDIA QUERIES) --- */
+
+            /* MOBILE (< 768px) */
+            @media (max-width: 767px) {
+                .story-popup {
+                    display: none !important;
+                }
+                .ambient-layer {
+                    display: none !important;
+                }
+
+                /* Animasi mengecil & melengkung saat bottom sheet terbuka di mobile */
+                .layout-wrapper.is-ui-open .story-viewport {
+                    transform: scale(0.92);
+                    border-radius: 32px;
+                    filter: blur(10px) brightness(0.6);
+                }
             }
 
-            .story-container.is-focused .story-viewport {
-                transform: scale(0.92);
-                border-radius: 32px;
-                filter: blur(10px) brightness(0.6);
+            /* TABLET & KECIL DESKTOP (768px - 1489px) */
+            @media (min-width: 768px) and (max-width: 1489px) {
+                .story-sheet {
+                    display: none !important;
+                }
+                .ambient-layer {
+                    display: block;
+                }
+
+                /* MENAMBAHKAN FRAME: Video tidak menyentuh ujung layar */
+                .story-container {
+                    width: auto;
+                    height: calc(100dvh - 64px);
+                    /* Sisa 32px di atas & bawah */
+                    max-height: 900px;
+                    aspect-ratio: 9 / 16;
+                    border-radius: 24px;
+                    border: 1px solid rgba(255, 255, 255, 0.08);
+                    overflow: visible;
+                }
+                .story-viewport {
+                    border-radius: 24px;
+                    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+                }
+
+                .layout-wrapper.is-ui-open .story-viewport {
+                    transform: scale(0.96);
+                    filter: blur(8px) brightness(0.7);
+                }
+                .story-body,
+                .story-header {
+                    padding: 0 32px;
+                }
+                .story-footer {
+                    padding: 16px 32px 32px;
+                }
+            }
+
+            /* LARGE DESKTOP (1490px+) -> CARD GESER VIDEO */
+            @media (min-width: 1490px) {
+                .story-popup,
+                .story-sheet {
+                    display: none !important;
+                }
+                .ambient-layer {
+                    display: block;
+                }
+
+                /* MENAMBAHKAN FRAME BESAR: Video tidak menyentuh ujung layar */
+                .story-container {
+                    width: auto;
+                    height: calc(100dvh - 80px);
+                    /* Sisa 40px di atas & bawah */
+                    max-height: 950px;
+                    aspect-ratio: 9 / 16;
+                    border-radius: 24px;
+                    border: 1px solid rgba(255, 255, 255, 0.08);
+                    overflow: visible;
+                }
+                .story-viewport {
+                    border-radius: 24px;
+                    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+                }
+
+                .desktop-slider {
+                    gap: 32px;
+                    transform: translateX(216px);
+                    transition: transform 0.6s var(--ease-spring);
+                }
+
+                .story-card {
+                    display: flex;
+                    opacity: 0;
+                    pointer-events: none;
+                    transform: translateX(-40px) scale(0.95);
+                    transition: all 0.6s var(--ease-spring);
+                }
+
+                /* Saat Card Terbuka (Slide) */
+                .layout-wrapper.is-ui-open .desktop-slider {
+                    transform: translateX(0);
+                }
+                .layout-wrapper.is-ui-open .story-card {
+                    opacity: 1;
+                    pointer-events: auto;
+                    transform: translateX(0) scale(1);
+                }
+                .layout-wrapper.is-ui-open .story-ui-trigger {
+                    opacity: 0;
+                    pointer-events: none;
+                }
+                .layout-wrapper.is-ui-open .story-viewport {
+                    transform: none !important;
+                    filter: none !important;
+                }
+
+                .story-body,
+                .story-header {
+                    padding: 0 32px;
+                }
+                .story-footer {
+                    padding: 16px 32px 32px;
+                }
             }
         </style>
     </head>
     <body>
 
-        <div class="story-container" id="storyApp">
-            <div class="story-viewport">
-                <div class="story-progress-bar">
-                    <div class="story-progress-bar__fill" id="pFill"></div>
-                </div>
-                <div class="video-wrapper">
-                    <div id="ytPlayer"></div>
-                </div>
-            </div>
+        <div class="layout-wrapper" id="layoutWrapper">
 
-            <div class="story-ui-trigger" onclick="StoryManager.open()">
-                <span class="category-badge" style="background: rgba(255,255,255,0.2); color: #fff; backdrop-filter: blur(4px); margin-bottom: 8px;">Product Insight</span>
-                <h2 style="font-size: 24px; margin-bottom: 6px; text-shadow: 0 2px 15px rgba(0,0,0,0.6);">Gaming Performa Cerdas 🔥</h2>
-                <p style="font-size: 14px; opacity: 0.8; display: flex; align-items: center; gap: 6px;">
-                    Swipe up untuk detail
-                    <span style="font-size: 18px;">↑</span>
-                </p>
-            </div>
+            <div class="desktop-slider">
 
-            <div class="bottom-sheet" id="bottomSheet">
-                <div class="bottom-sheet__backdrop" onclick="StoryManager.close()"></div>
-                <div class="bottom-sheet__content" id="sheetContent">
-                    <div class="bottom-sheet__handle-wrapper" id="sheetHandle">
-                        <div class="bottom-sheet__handle"></div>
+                <div class="story-container" id="storyContainer">
+                    <div class="ambient-layer">
+                        <div id="ambientPlayer"></div>
                     </div>
-
-                    <div class="view is-active" id="v-detail">
-                        <span class="category-badge">Education & Technology</span>
-                        <h3 class="view-title">GApai Mimpi dan rankING = GAMING</h3>
-                        <span class="view-meta">Oleh okemudin • 1.4M Penonton</span>
-
-                        <div class="content-body" id="expandableContent">
-                            <div class="content-body__text">
-                                <p>Laptop Asus G Gaming K16 adalah laptop tangguh yang punya performa cerdas untuk memaksimalkan potensi kerja kreatif yang bisa main game.</p><br>
-                                <p>Dilengkapi CPU Intel Core i5 generasi ke-13, GPU RTX 3050, dan fitur AI Noise Cancelling untuk kejernihan suara saat meeting. Menggunakan teknologi Asus IceCool agar tetap dingin!</p><br>
-                                <p>Bobot hanya 1.8 Kg, slim namun bertenaga. Dapatkan produk original bergaransi resmi hanya di Sentral Komputer. Harga spesial Rp11.495.000!</p>
-                            </div>
-                            <span class="content-body__toggle" onclick="StoryManager.toggleMore()">Selengkapnya</span>
-
-                            <div class="tags-container">
-                                <a href="#" class="tag-item">#AsusGaming</a>
-                                <a href="#" class="tag-item">#LaptopReview</a>
-                                <a href="#" class="tag-item">#GamingK16</a>
-                            </div>
+                    <div class="story-viewport">
+                        <div class="story-progress-bar">
+                            <div class="story-progress-bar__fill" id="storyProgressFill"></div>
                         </div>
-
-                        <div class="btn-group">
-                            <button class="btn-base btn-base--primary" onclick="window.open('https://www.youtube.com/shorts/504Fi_Y4qMo')">BELI SEKARANG</button>
-                            <button class="btn-base btn-base--secondary" onclick="StoryManager.switchView('v-share')">BAGIKAN</button>
+                        <div class="story-video-wrapper">
+                            <div id="youtubePlayer"></div>
+                        </div>
+                        <div class="story-ui-trigger" onclick="StoryManager.openContext()">
+                            <span class="story-badge" style="background: rgba(255,255,255,0.2); color: #fff; backdrop-filter: blur(4px);">Product Insight</span>
+                            <h2 style="font-size: 24px; margin-top: 8px; margin-bottom: 6px; text-shadow: 0 2px 15px rgba(0,0,0,0.8);">Gaming Performa Cerdas 🔥</h2>
+                            <p style="font-size: 14px; opacity: 0.9; display: flex; align-items: center; gap: 6px; text-shadow: 0 1px 4px rgba(0,0,0,0.5);">
+                                Cek Detail Produk
+                                <span style="font-size: 18px;">↗</span>
+                            </p>
                         </div>
                     </div>
+                </div>
 
-                    <div class="view" id="v-share">
-                        <h3 class="view-title" style="text-align: center; margin-bottom: 24px;">Bagikan Ke Teman</h3>
-                        <div class="share-grid">
-                            <div class="share-item">
-                                <div class="share-icon">💬</div>WA</div>
-                            <div class="share-item">
-                                <div class="share-icon">✈️</div>Telegram</div>
-                            <div class="share-item">
-                                <div class="share-icon">📸</div>Stories</div>
-                            <div class="share-item" onclick="StoryManager.copyLink()">
-                                <div class="share-icon">🔗</div>Salin</div>
-                        </div>
-                        <button class="btn-base btn-base--secondary" style="width: 100%" onclick="StoryManager.switchView('v-detail')">KEMBALI</button>
+                <div class="story-card" id="storyCard">
+                    <button class="story-card__close-btn" onclick="StoryManager.closeContext()">✕</button>
+                    <div class="story-dynamic-area"></div>
+                </div>
+
+            </div>
+            <div class="story-sheet" id="storySheet">
+                <div class="story-sheet__backdrop" onclick="StoryManager.closeContext()"></div>
+                <div class="story-sheet__content" id="storySheetContent">
+                    <div class="story-sheet__handle-wrapper" id="storySheetHandle">
+                        <div class="story-sheet__handle"></div>
                     </div>
+                    <div class="story-dynamic-area"></div>
                 </div>
             </div>
+
+            <div class="story-popup" id="storyPopup">
+                <div class="story-popup__backdrop" onclick="StoryManager.closeContext()"></div>
+                <div class="story-popup__content">
+                    <button class="story-popup__close-btn" onclick="StoryManager.closeContext()">✕</button>
+                    <div class="story-dynamic-area"></div>
+                </div>
+            </div>
+
         </div>
 
-        <div id="toast" class="toast">Link berhasil disalin!</div>
+        <div id="copyToastNotification" class="toast-notification">Link berhasil disalin!</div>
+
+        <template id="storyContentTemplate">
+            <div class="story-view is-active">
+                <div class="story-header">
+                    <h3 class="story-view__title">Gaming Performa Cerdas 🔥</h3>
+                    <span class="story-view__meta">View Icon - 213213</span>
+                </div>
+
+                <div class="story-body">
+                    <div class="story-body__mask">
+                        <div class="story-body__cms-content">
+                            <p>Laptop Asus G Gaming K16 adalah laptop tangguh yang punya performa cerdas untuk memaksimalkan potensi kerja kreatif yang bisa main game.</p>
+                            <p>Dilengkapi CPU Intel Core i5 generasi ke-13, GPU RTX 3050, dan fitur AI Noise Cancelling untuk kejernihan suara saat meeting. Menggunakan teknologi Asus IceCool agar tetap dingin!</p>
+                            <p>Bobot hanya 1.8 Kg, slim namun bertenaga. Harga spesial Rp11.495.000!</p>
+                            <p>Dilengkapi juga dengan baterai 90Whrs untuk daya tahan seharian penuh. Layar OLED 120Hz memberikan warna super akurat bagi kreator.</p>
+                        </div>
+                    </div>
+                    <button class="story-body__toggle" onclick="StoryManager.toggleTextExpansion(this)">Selengkapnya</button>
+                </div>
+
+                <div class="story-footer">
+                    <div class="emote">
+                        <div onclick="StoryManager.react('😭')">😭</div>
+                        <div onclick="StoryManager.react('👏🏻')">👏🏻</div>
+                        <div onclick="StoryManager.react('🤣')">🤣</div>
+                        <div onclick="StoryManager.react('🎉')">🎉</div>
+                        <div onclick="StoryManager.react('❤️')">❤️</div>
+                    </div>
+                    <button class="story-share-btn" onclick="StoryManager.nativeShare()">✈️</button>
+                </div>
+            </div>
+        </template>
 
         <script src="https://www.youtube.com/iframe_api"></script>
-
         <script>
-            let player;
+            let player,
+                ambientPlayer;
             function onYouTubeIframeAPIReady() {
-                player = new YT.Player('ytPlayer', {
-                    videoId: '504Fi_Y4qMo',
+                const ytOptions = {
+                    videoId: 'IHolHlnDP9s',
                     playerVars: {
                         'autoplay': 1,
                         'controls': 0,
                         'loop': 1,
-                        'playlist': '504Fi_Y4qMo',
+                        'playlist': 'IHolHlnDP9s',
                         'mute': 1,
                         'modestbranding': 1,
                         'iv_load_policy': 3,
                         'rel': 0
-                    },
+                    }
+                };
+
+                player = new YT.Player('youtubePlayer', {
+                    ...ytOptions,
                     events: {
-                        'onReady': (e) => {
-                            e
+                        'onReady': (event) => {
+                            event
                                 .target
                                 .playVideo();
-                            StoryManager.startProgress();
+                            StoryManager.startProgressBar();
+                        }
+                    }
+                });
+
+                ambientPlayer = new YT.Player('ambientPlayer', {
+                    ...ytOptions,
+                    events: {
+                        'onReady': (event) => {
+                            event
+                                .target
+                                .playVideo();
                         }
                     }
                 });
@@ -461,67 +757,176 @@
             const StoryManager = (() => {
                 const state = {
                     isOpen: false,
-                    progress: 0,
-                    isExpanded: false,
+                    progressInterval: null,
                     startY: 0,
                     currentY: 0,
                     isDragging: false
                 };
 
-                const refs = {
-                    app: document.getElementById('storyApp'),
-                    pFill: document.getElementById('pFill'),
-                    sheet: document.getElementById('bottomSheet'),
-                    content: document.getElementById('sheetContent'),
-                    handle: document.getElementById('sheetHandle'),
-                    toast: document.getElementById('toast')
+                const domRefs = {
+                    layoutWrapper: document.getElementById('layoutWrapper'),
+                    mainContainer: document.getElementById('storyContainer'),
+                    progressFill: document.getElementById('storyProgressFill'),
+                    mobileSheet: document.getElementById('storySheet'),
+                    mobileContent: document.getElementById('storySheetContent'),
+                    mobileHandle: document.getElementById('storySheetHandle'),
+                    tabletPopup: document.getElementById('storyPopup'),
+                    desktopCard: document.getElementById('storyCard'),
+                    contentTemplate: document.getElementById('storyContentTemplate'),
+                    toastNotification: document.getElementById('copyToastNotification')
                 };
 
-                // --- PROGRESS LOGIC ---
-                const startProgress = () => {
-                    setInterval(() => {
-                        if (!state.isOpen && state.progress < 100) {
-                            state.progress += 0.15;
-                            refs.pFill.style.width = `${state.progress}%`;
+                const getActiveContext = () => {
+                    const w = window.innerWidth;
+                    if (w >= 1490) 
+                        return domRefs.desktopCard;
+                    if (w >= 768) 
+                        return domRefs.tabletPopup;
+                    return domRefs.mobileSheet;
+                };
+
+                const injectTemplateToContext = (contextElement) => {
+                    const targetArea = contextElement.querySelector('.story-dynamic-area');
+                    if (targetArea && targetArea.innerHTML.trim() === '') {
+                        const templateClone = domRefs
+                            .contentTemplate
+                            .content
+                            .cloneNode(true);
+                        targetArea.appendChild(templateClone);
+                    }
+                };
+
+                injectTemplateToContext(domRefs.mobileSheet);
+                injectTemplateToContext(domRefs.tabletPopup);
+                injectTemplateToContext(domRefs.desktopCard);
+
+                const startProgressBar = () => {
+                    if (state.progressInterval) 
+                        clearInterval(state.progressInterval);
+                    state.progressInterval = setInterval(() => {
+                        if (!state.isOpen && player && typeof player.getDuration === 'function') {
+                            const duration = player.getDuration();
+                            const currentTime = player.getCurrentTime();
+                            if (duration > 0) {
+                                const progressPercent = (currentTime / duration) * 100;
+                                domRefs.progressFill.style.width = `${progressPercent}%`;
+                            }
                         }
-                    }, 30);
+                    }, 50);
                 };
 
-                // --- OPEN / CLOSE ---
-                const open = () => {
+                const openContext = () => {
+                    const ctx = getActiveContext();
+                    if (!ctx) 
+                        return;
+                    
                     state.isOpen = true;
-                    refs
-                        .app
+                    domRefs
+                        .layoutWrapper
                         .classList
-                        .add('is-focused');
-                    refs
-                        .sheet
+                        .add('is-ui-open');
+                    ctx
                         .classList
                         .add('is-active');
-                    refs.content.style.transform = `translateY(0)`; // Reset position
+
+                    if (window.innerWidth < 768) {
+                        domRefs.mobileContent.style.transform = '';
+                    }
+
                     if (player) 
                         player.pauseVideo();
+                    if (ambientPlayer) 
+                        ambientPlayer.pauseVideo();
                     };
                 
-                const close = () => {
+                const closeContext = () => {
                     state.isOpen = false;
-                    refs
-                        .app
+
+                    domRefs
+                        .layoutWrapper
                         .classList
-                        .remove('is-focused');
-                    refs
-                        .sheet
+                        .remove('is-ui-open');
+                    domRefs
+                        .mobileSheet
                         .classList
                         .remove('is-active');
-                    refs.content.style.transform = ''; // Back to CSS default
-                    switchView('v-detail');
+                    domRefs
+                        .tabletPopup
+                        .classList
+                        .remove('is-active');
+                    domRefs
+                        .desktopCard
+                        .classList
+                        .remove('is-active');
+
+                    const activeBodies = document.querySelectorAll('.story-body.is-expanded');
+                    activeBodies.forEach(body => {
+                        body
+                            .classList
+                            .remove('is-expanded');
+                        const toggleBtn = body.querySelector('.story-body__toggle');
+                        if (toggleBtn) 
+                            toggleBtn.innerText = "Selengkapnya";
+                        body.scrollTop = 0;
+                    });
+
                     if (player) 
                         player.playVideo();
+                    if (ambientPlayer) 
+                        ambientPlayer.playVideo();
                     };
                 
-                // --- DRAG ENGINE (SMART INTERACTION) ---
-                const initDrag = () => {
+                const toggleTextExpansion = (buttonElement) => {
+                    const bodyContainer = buttonElement.closest('.story-body');
+                    const isExpanded = bodyContainer
+                        .classList
+                        .toggle('is-expanded');
+                    buttonElement.innerText = isExpanded
+                        ? "Sembunyikan"
+                        : "Selengkapnya";
+                };
+
+                const nativeShare = async () => {
+                    const shareData = {
+                        title: 'Gaming Performa Cerdas 🔥',
+                        text: 'Cek Detail Produk ini sekarang juga!',
+                        url: 'https://www.youtube.com/watch?v=IHolHlnDP9s'
+                    };
+
+                    try {
+                        if (navigator.share) {
+                            await navigator.share(shareData);
+                        } else {
+                            navigator
+                                .clipboard
+                                .writeText(shareData.url)
+                                .then(() => {
+                                    domRefs.toastNotification.innerText = "Link berhasil disalin!";
+                                    domRefs
+                                        .toastNotification
+                                        .classList
+                                        .add('is-visible');
+                                    setTimeout(() => domRefs.toastNotification.classList.remove('is-visible'), 2000);
+                                });
+                        }
+                    } catch (err) {
+                        console.log('Share canceled / failed', err);
+                    }
+                };
+
+                const react = (emoji) => {
+                    domRefs.toastNotification.innerText = `Kamu bereaksi ${emoji}`;
+                    domRefs
+                        .toastNotification
+                        .classList
+                        .add('is-visible');
+                    setTimeout(() => domRefs.toastNotification.classList.remove('is-visible'), 1500);
+                };
+
+                const initializeMobileDrag = () => {
                     const handleDragStart = (e) => {
+                        if (window.innerWidth >= 768) 
+                            return;
                         state.startY = e
                             .type
                             .includes('touch')
@@ -530,54 +935,55 @@
                                     .clientY
                                 : e.clientY;
                         state.isDragging = true;
-                        refs
-                            .content
+                        domRefs
+                            .mobileContent
                             .classList
                             .add('is-dragging');
                     };
 
                     const handleDragMove = (e) => {
-                        if (!state.isDragging) 
+                        if (!state.isDragging || window.innerWidth >= 768) 
                             return;
-                        
-                        const y = e
+                        const currentYPosition = e
                             .type
                             .includes('touch')
                                 ? e
                                     .touches[0]
                                     .clientY
                                 : e.clientY;
-                        const deltaY = y - state.startY;
+                        const deltaY = currentYPosition - state.startY;
 
-                        if (deltaY > 0) { // Only allow dragging downwards
+                        if (deltaY > 0) {
                             state.currentY = deltaY;
-                            refs.content.style.transform = `translateY(${deltaY}px)`;
+                            domRefs.mobileContent.style.transform = `translateY(${deltaY}px)`;
                         }
                     };
 
                     const handleDragEnd = () => {
-                        if (!state.isDragging) 
+                        if (!state.isDragging || window.innerWidth >= 768) 
                             return;
                         state.isDragging = false;
-                        refs
-                            .content
+                        domRefs
+                            .mobileContent
                             .classList
                             .remove('is-dragging');
 
-                        if (state.currentY > 150) { // Threshold to close
-                            close();
+                        if (state.currentY > 150) {
+                            closeContext();
                         } else {
-                            // Snap back with spring effect
-                            refs.content.style.transform = `translateY(0)`;
+                            domRefs.mobileContent.style.transform = `translateY(0)`;
                         }
                         state.currentY = 0;
                     };
 
-                    // Attach listeners to handle and content
-                    [refs.handle, refs.content].forEach(el => {
-                        el.addEventListener('mousedown', handleDragStart);
-                        el.addEventListener('touchstart', handleDragStart, {passive: true});
-                    });
+                    if (domRefs.mobileHandle) {
+                        domRefs
+                            .mobileHandle
+                            .addEventListener('mousedown', handleDragStart);
+                        domRefs
+                            .mobileHandle
+                            .addEventListener('touchstart', handleDragStart, {passive: true});
+                    }
 
                     window.addEventListener('mousemove', handleDragMove);
                     window.addEventListener('touchmove', handleDragMove, {passive: false});
@@ -585,52 +991,15 @@
                     window.addEventListener('touchend', handleDragEnd);
                 };
 
-                const toggleMore = () => {
-                    state.isExpanded = !state.isExpanded;
-                    document
-                        .getElementById('expandableContent')
-                        .classList
-                        .toggle('is-expanded');
-                    document
-                        .querySelector('.content-body__toggle')
-                        .innerText = state.isExpanded
-                            ? "Sembunyikan"
-                            : "Selengkapnya";
-                };
-
-                const switchView = (id) => {
-                    document
-                        .querySelectorAll('.view')
-                        .forEach(v => v.classList.remove('is-active'));
-                    document
-                        .getElementById(id)
-                        .classList
-                        .add('is-active');
-                };
-
-                const copyLink = () => {
-                    navigator
-                        .clipboard
-                        .writeText("https://www.youtube.com/shorts/504Fi_Y4qMo")
-                        .then(() => {
-                            refs
-                                .toast
-                                .classList
-                                .add('show');
-                            setTimeout(() => refs.toast.classList.remove('show'), 2000);
-                        });
-                };
-
-                // Initialize Engine
-                initDrag();
+                initializeMobileDrag();
 
                 return {
-                    startProgress,
-                    open,
-                    close,
-                    toggleMore,
-                    switchView,
-                    copyLink
+                    startProgressBar,
+                    openContext,
+                    closeContext,
+                    toggleTextExpansion,
+                    nativeShare,
+                    react
                 };
             })();
         </script>
