@@ -3,18 +3,27 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <title>Telkomsel Story - Adaptive Frameless Mobile & Framed Desktop</title>
+        <title>Telkomsel Story - Global Loading & Sync Reveal</title>
         <style>
             /* --- 1. DESIGN TOKENS --- */
             :root {
                 --brand-red: #EE2D24;
-                --brand-dark: #000000;
+                --brand-dark: #050505;
                 --surface: #ffffff;
-                --bg-gray: #F4F4F4;
-                --text-main: #1a1a1a;
-                --text-sub: #666666;
-                --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
-                --ease-spring: cubic-bezier(0.4, 1.2, 0.5, 1);
+                --bg-gray: #F8F9FA;
+                --text-main: #111111;
+                --text-sub: #555555;
+
+                --glass-bg: rgba(20, 20, 20, 0.6);
+                --glass-border: rgba(255, 255, 255, 0.15);
+
+                --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+                --ease-spring: cubic-bezier(0.34, 1.5, 0.64, 1);
+
+                --card-width: 420px;
+                --desktop-gap: 40px;
+                --fab-size: 44px;
+                --frame-radius: 12px;
             }
 
             * {
@@ -23,15 +32,16 @@
                 padding: 0;
                 -webkit-tap-highlight-color: transparent;
             }
+
             body {
-                background: #0a0a0a;
-                margin: 0;
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+                background: #0f0f11;
+                font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
                 overflow: hidden;
                 touch-action: none;
+                color: var(--text-main);
             }
 
-            /* --- WRAPPER UTAMA --- */
+            /* --- 2. LAYOUT --- */
             .layout-wrapper {
                 position: relative;
                 display: flex;
@@ -41,47 +51,56 @@
                 width: 100vw;
             }
 
-            /* Slider Wrapper khusus untuk Desktop Card & Video */
             .desktop-slider {
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 height: 100dvh;
                 width: 100%;
+                gap: var(--desktop-gap);
+                transition: gap 0.7s var(--ease-spring), padding 0.7s var(--ease-spring);
             }
 
-            /* --- 2. STORY CONTAINER (BASE: MOBILE FULL SCREEN) --- */
+            /* --- 3. VIDEO CONTAINER --- */
             .story-container {
                 position: relative;
-                width: 100%;
                 height: 100dvh;
-                /* Default Mobile: Layar penuh penuh */
+                width: 100%;
+                max-width: calc(100dvh * (9 / 16));
+                min-width: 320px;
                 background: var(--brand-dark);
                 overflow: hidden;
-                border-radius: 0;
-                /* Tanpa frame di mobile */
-                transition: transform 0.5s var(--ease-spring), border-radius 0.5s, height 0.5s var(--ease-out);
+                z-index: 10;
+                border-radius: var(--frame-radius);
+                transition: border-radius 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out);
             }
 
             .ambient-layer {
                 display: none;
-                /* Ambilight mati di mobile */
                 position: absolute;
-                inset: 0;
+                top: 5%;
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+                width: 110%;
+                height: 90%;
                 z-index: 1;
-                filter: blur(40px) saturate(200%);
-                opacity: 0.65;
-                transform: scale(1.15);
+                filter: blur(60px) saturate(150%);
+                opacity: 0.4;
                 pointer-events: none;
-                transition: opacity 0.5s;
+                transition: opacity 0.6s;
             }
-            .ambient-layer iframe {
+
+            #ambientPlayer {
                 width: 100%;
                 height: 100%;
                 border: none;
+                opacity: 0;
+                transition: opacity 0.8s var(--ease-out);
             }
+
             .story-container.is-focused .ambient-layer {
-                opacity: 0.3;
+                opacity: 0.25;
             }
 
             .story-viewport {
@@ -90,8 +109,8 @@
                 z-index: 10;
                 background: transparent;
                 overflow: hidden;
-                transition: transform 0.6s var(--ease-spring), filter 0.6s var(--ease-out), border-radius 0.6s var(--ease-out), box-shadow 0.6s;
-                will-change: transform, filter;
+                border-radius: var(--frame-radius);
+                transition: filter 0.6s var(--ease-out);
             }
 
             .story-video-wrapper {
@@ -108,50 +127,335 @@
                 inset: 0;
                 pointer-events: none;
                 z-index: 5;
-                background: radial-gradient(ellipse at center, rgba(0,0,0,0) 50%, rgba(0,0,0,0.5) 100%);
+                background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 25%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.85) 100%);
+                transition: opacity 0.4s var(--ease-out);
             }
 
+            /* YOUTUBE IFRAME */
             #youtubePlayer {
+                position: absolute;
+                top: 0;
+                left: 0;
                 width: 100%;
                 height: 100%;
                 border: none;
                 pointer-events: none;
-                transform: scale(1.05);
-                /* Skala slightly diperbesar menghilangkan black bar iframe */
                 object-fit: cover;
+                opacity: 0;
+                transition: opacity 0.8s var(--ease-out);
             }
 
+            /* --- 4. LOADER --- */
+            .story-loader {
+                position: absolute;
+                inset: 0;
+                z-index: 50;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: var(--brand-dark);
+                transition: opacity 0.6s var(--ease-out);
+                pointer-events: none;
+            }
+
+            .story-loader__spinner {
+                width: 42px;
+                height: 42px;
+                border: 3.5px solid rgba(255, 255, 255, 0.1);
+                border-top-color: var(--brand-red);
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+            }
+
+            @keyframes spin {
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+
+            /* Hilangkan Loader saat wrapper .is-ready */
+            .layout-wrapper.is-ready .story-loader {
+                opacity: 0;
+            }
+
+            /* --- 5. INITIAL UI STATE (HIDDEN BEFORE READY) --- */
             .story-progress-bar {
                 position: absolute;
-                top: max(15px, env(safe-area-inset-top));
-                left: 12px;
-                right: 12px;
-                height: 2px;
-                background: rgba(255,255,255,0.2);
+                top: max(16px, env(safe-area-inset-top));
+                left: 16px;
+                right: 16px;
+                height: 3px;
+                background: rgba(255,255,255,0.25);
                 z-index: 15;
-                border-radius: 10px;
-            }
-            .story-progress-bar__fill {
-                height: 100%;
-                background: #fff;
-                width: 0;
+                border-radius: 4px;
+                overflow: hidden;
+                opacity: 0;
+                transition: opacity 0.8s var(--ease-out);
             }
 
-            .story-ui-trigger {
+            .story-progress-bar__fill {
+                height: 100%;
+                background: rgba(255,255,255,0.95);
+                width: 0;
+                border-radius: 4px;
+                box-shadow: 0 0 8px rgba(255,255,255,0.5);
+                transition: none;
+            }
+
+            .story-excerpt {
                 position: absolute;
-                bottom: calc(40px + env(safe-area-inset-bottom));
-                left: 24px;
-                right: 24px;
+                bottom: max(32px, env(safe-area-inset-bottom));
+                left: 20px;
+                right: 20px;
+                padding-right: 70px;
                 z-index: 20;
                 color: #fff;
                 cursor: pointer;
-                transition: opacity 0.4s, transform 0.3s;
-            }
-            .story-ui-trigger:active {
-                transform: scale(0.98);
+                opacity: 0;
+                pointer-events: none;
+                transform: translateY(20px);
+                transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-spring);
             }
 
-            /* --- 3. LAYOUT 1: MOBILE BOTTOM SHEET --- */
+            .story-player-actions {
+                position: absolute;
+                bottom: max(32px, env(safe-area-inset-bottom));
+                right: 16px;
+                z-index: 20;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+                opacity: 0;
+                pointer-events: none;
+                transform: translateY(20px);
+                transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-spring);
+            }
+
+            /* --- 6. DESKTOP CARD (HIDDEN BEFORE READY) --- */
+            .story-card {
+                display: none;
+                width: var(--card-width);
+                height: auto;
+                max-height: calc(100dvh - 80px);
+                background: var(--surface);
+                border-radius: var(--frame-radius);
+                padding: 40px 0 0;
+                z-index: 20;
+                position: relative;
+                flex-direction: column;
+                overflow: hidden;
+                box-shadow: 0 32px 72px rgba(0,0,0,0.3);
+                border: 1px solid rgba(255, 255, 255, 0.05);
+
+                /* Sembunyi Awal */
+                opacity: 0;
+                pointer-events: none;
+                transform: translateY(20px);
+                transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-spring);
+            }
+
+            /* --- 7. READY UI STATE (REVEAL ALL) --- */
+            .layout-wrapper.is-ready .story-progress-bar {
+                opacity: 1;
+            }
+
+            .layout-wrapper.is-ready .story-card,
+            .layout-wrapper.is-ready .story-excerpt,
+            .layout-wrapper.is-ready .story-player-actions {
+                opacity: 1;
+                pointer-events: auto;
+                transform: translateY(0);
+            }
+
+            /* --- 8. EXCERPT & FAB STYLING --- */
+            .layout-wrapper.is-ready .story-excerpt:hover {
+                opacity: 0.9;
+                transform: translateY(-4px);
+            }
+
+            .story-excerpt__badge {
+                background: rgba(255,255,255,0.15);
+                color: #fff;
+                backdrop-filter: blur(12px);
+                border: 0.5px solid var(--glass-border);
+                font-size: 11px;
+                font-weight: 700;
+                text-transform: uppercase;
+                padding: 6px 12px;
+                border-radius: 8px;
+                display: inline-block;
+                margin-bottom: 12px;
+            }
+
+            .story-excerpt__title {
+                font-size: 20px;
+                font-weight: 800;
+                margin-bottom: 8px;
+                text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+                line-height: 1.2;
+            }
+
+            .story-excerpt__text {
+                font-size: 14px;
+                line-height: 1.5;
+                opacity: 0.9;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-shadow: 0 1px 8px rgba(0,0,0,0.6);
+            }
+
+            .player-fab {
+                width: var(--fab-size);
+                height: var(--fab-size);
+                border-radius: 50%;
+                background: var(--glass-bg);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                border: 1px solid var(--glass-border);
+                color: #fff;
+                font-size: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+                transition: all 0.3s;
+            }
+
+            .player-fab:hover {
+                background: rgba(255, 255, 255, 0.25);
+                transform: translateY(-4px);
+                box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            }
+            .player-fab:active {
+                background: rgba(255, 255, 255, 0.1);
+                transform: translateY(2px);
+                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            }
+
+            /* Reaction Wrapper & Options */
+            .reaction-wrapper {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .reaction-options {
+                position: absolute;
+                bottom: 100%;
+                right: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+                pointer-events: none;
+                padding-bottom: 12px;
+            }
+            .reaction-wrapper.is-active .reaction-options {
+                pointer-events: auto;
+            }
+
+            .reaction-option-btn {
+                width: var(--fab-size);
+                height: var(--fab-size);
+                border-radius: 50%;
+                background: var(--glass-bg);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                border: 1px solid var(--glass-border);
+                color: #fff;
+                font-size: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+                opacity: 0;
+                transform: translateY(20px) scale(0.6);
+                transition: all 0.4s var(--ease-spring);
+            }
+
+            .reaction-option-btn:hover {
+                background: rgba(255, 255, 255, 0.25);
+                transform: translateY(-4px) scale(1.1);
+            }
+            .reaction-option-btn:active {
+                background: rgba(255, 255, 255, 0.1);
+                transform: translateY(2px) scale(0.9);
+            }
+
+            .reaction-wrapper.is-active .reaction-option-btn {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                margin-bottom: 10px;
+            }
+            .reaction-wrapper.is-active .player-fab {
+                background: rgba(255, 255, 255, 0.9);
+                color: var(--brand-dark);
+                transform: scale(1.05);
+            }
+
+            /* Stagger Timing */
+            .reaction-option-btn:nth-child(1) {
+                transition-delay: 0s;
+            }
+            .reaction-option-btn:nth-child(2) {
+                transition-delay: 0.04s;
+            }
+            .reaction-option-btn:nth-child(3) {
+                transition-delay: 0.08s;
+            }
+            .reaction-option-btn:nth-child(4) {
+                transition-delay: 0.12s;
+            }
+            .reaction-wrapper.is-active .reaction-option-btn:nth-child(4) {
+                transition-delay: 0s;
+            }
+            .reaction-wrapper.is-active .reaction-option-btn:nth-child(3) {
+                transition-delay: 0.05s;
+            }
+            .reaction-wrapper.is-active .reaction-option-btn:nth-child(2) {
+                transition-delay: 0.1s;
+            }
+            .reaction-wrapper.is-active .reaction-option-btn:nth-child(1) {
+                transition-delay: 0.15s;
+            }
+
+            /* Clean Mode */
+            .story-container.is-clean-mode .reaction-wrapper,
+            .story-container.is-clean-mode .share-fab,
+            .story-container.is-clean-mode .story-excerpt {
+                opacity: 0 !important;
+                pointer-events: none !important;
+                transform: translateY(20px) !important;
+            }
+            .story-container.is-clean-mode .story-video-wrapper::after {
+                opacity: 0.2;
+            }
+            .story-container.is-clean-mode #icon-enter-fs {
+                display: none;
+            }
+            .story-container.is-clean-mode #icon-exit-fs {
+                display: block !important;
+            }
+
+            /* --- 9. OVERLAYS (SHEET & POPUP) --- */
+            .overlay-backdrop {
+                position: absolute;
+                inset: 0;
+                background: rgba(0,0,0,0.6);
+                backdrop-filter: blur(4px);
+                opacity: 0;
+                transition: opacity 0.5s;
+                pointer-events: auto;
+            }
+            .is-active .overlay-backdrop {
+                opacity: 1;
+            }
+
             .story-sheet {
                 position: fixed;
                 inset: 0;
@@ -165,18 +469,6 @@
             .story-sheet.is-active {
                 visibility: visible;
             }
-            .story-sheet__backdrop {
-                position: absolute;
-                inset: 0;
-                background: rgba(0,0,0,0.6);
-                opacity: 0;
-                transition: opacity 0.4s;
-                pointer-events: auto;
-            }
-            .story-sheet.is-active .story-sheet__backdrop {
-                opacity: 1;
-            }
-
             .story-sheet__content {
                 position: relative;
                 background: var(--surface);
@@ -186,35 +478,35 @@
                 z-index: 101;
                 transform: translateY(100%);
                 pointer-events: auto;
-                max-height: 85vh;
+                max-height: 88vh;
                 height: auto;
                 overflow: hidden;
                 display: flex;
                 flex-direction: column;
-                transition: transform 0.5s var(--ease-spring);
-            }
-            .story-sheet__content.is-dragging {
-                transition: none;
+                transition: transform 0.6s var(--ease-spring);
+                box-shadow: 0 -10px 40px rgba(0,0,0,0.2);
             }
             .story-sheet.is-active .story-sheet__content {
                 transform: translateY(0);
             }
+            .story-sheet__content.is-dragging {
+                transition: none;
+            }
             .story-sheet__handle-wrapper {
                 width: 100%;
-                padding: 8px 0 20px;
+                padding: 10px 0 24px;
                 cursor: grab;
                 display: flex;
                 justify-content: center;
                 flex-shrink: 0;
             }
             .story-sheet__handle {
-                width: 40px;
+                width: 44px;
                 height: 5px;
-                background: #E0E0E0;
+                background: #D1D1D6;
                 border-radius: 10px;
             }
 
-            /* --- 4. LAYOUT 2: TABLET POPUP MODAL --- */
             .story-popup {
                 position: fixed;
                 inset: 0;
@@ -228,149 +520,109 @@
             .story-popup.is-active {
                 visibility: visible;
             }
-            .story-popup__backdrop {
-                position: absolute;
-                inset: 0;
-                background: rgba(0,0,0,0.6);
-                opacity: 0;
-                transition: opacity 0.4s;
-                pointer-events: auto;
-            }
-            .story-popup.is-active .story-popup__backdrop {
-                opacity: 1;
-            }
-
             .story-popup__content {
                 position: relative;
                 background: var(--surface);
-                width: 400px;
-                padding: 40px 0 0;
+                width: var(--card-width);
+                padding: 40px 0;
                 z-index: 101;
                 opacity: 0;
+                transform: translateY(40px);
                 max-height: calc(100dvh - 64px);
                 height: auto;
-                /* Menyisakan gap 32px atas-bawah di tablet */
-                border-radius: 28px;
-                transform: scale(0.95);
-                transition: all 0.5s var(--ease-spring);
+                border-radius: var(--frame-radius);
+                transition: transform 0.6s var(--ease-spring), opacity 0.6s var(--ease-spring);
                 pointer-events: auto;
                 display: flex;
                 flex-direction: column;
                 overflow: hidden;
-                box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+                box-shadow: 0 24px 64px rgba(0,0,0,0.25);
             }
             .story-popup.is-active .story-popup__content {
                 opacity: 1;
-                transform: scale(1);
+                transform: translateY(0);
             }
 
-            .story-card__close-btn,
-            .story-popup__close-btn {
+            .story-close-btn {
                 position: absolute;
                 top: 20px;
                 right: 24px;
                 width: 36px;
                 height: 36px;
                 border: none;
-                background: #f2f2f2;
+                background: var(--bg-gray);
                 border-radius: 50%;
-                font-size: 16px;
+                font-size: 14px;
                 font-weight: bold;
-                color: var(--text-main);
+                color: var(--text-sub);
                 cursor: pointer;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                transition: background 0.2s;
+                transition: all 0.3s;
                 z-index: 30;
             }
-            .story-card__close-btn:hover,
-            .story-popup__close-btn:hover {
-                background: #e0e0e0;
+            .story-close-btn:hover {
+                background: #E9ECEF;
+                color: var(--text-main);
             }
 
-            /* --- 5. LAYOUT 3: LARGE DESKTOP CARD --- */
-            .story-card {
-                display: none;
-                width: 400px;
-                height: auto;
-                /* Max height mengikuti tinggi frame video agar sejajar */
-                max-height: min(calc(100dvh - 80px), 950px);
-                background: var(--surface);
-                border-radius: 24px;
-                padding: 40px 0 0;
-                box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-                position: relative;
-                flex-direction: column;
-                overflow: hidden;
-            }
-
-            /* --- 6. STRUKTUR KONTEN DALAM (INNER SCROLL) --- */
+            /* --- 10. CONTENT STRUCTURE --- */
             .story-dynamic-area {
                 display: flex;
                 flex-direction: column;
                 min-height: 0;
-                flex-shrink: 1;
+                flex: 1 1 auto;
             }
             .story-view {
                 display: flex;
                 flex-direction: column;
+                flex: 1 1 auto;
                 min-height: 0;
-                flex-shrink: 1;
             }
-
             .story-header {
                 flex-shrink: 0;
-                padding: 0 24px;
-            }
-            .story-badge {
-                background: var(--bg-gray);
-                color: var(--text-sub);
-                font-size: 10px;
-                font-weight: 800;
-                text-transform: uppercase;
-                padding: 4px 10px;
-                border-radius: 6px;
-                display: inline-block;
-                margin-bottom: 12px;
+                padding: 0 28px;
             }
             .story-view__title {
-                font-size: 20px;
+                font-size: 24px;
                 font-weight: 800;
                 color: var(--text-main);
-                margin-bottom: 4px;
-                line-height: 1.3;
+                margin-bottom: 6px;
+                line-height: 1.25;
             }
             .story-view__meta {
-                font-size: 12px;
-                color: var(--text-sub);
-                margin-bottom: 20px;
+                font-size: 13px;
+                font-weight: 500;
+                color: #888;
+                margin-bottom: 24px;
                 display: block;
             }
 
             .story-body {
-                flex-shrink: 1;
+                flex: 1 1 auto;
                 overflow-y: auto;
                 -webkit-overflow-scrolling: touch;
-                padding: 0 24px;
+                padding: 0 28px 32px;
                 min-height: 0;
             }
             .story-body::-webkit-scrollbar {
-                width: 4px;
+                width: 5px;
             }
             .story-body::-webkit-scrollbar-thumb {
-                background: #d0d0d0;
+                background: #D1D1D6;
                 border-radius: 10px;
             }
             .story-body::-webkit-scrollbar-track {
                 background: transparent;
+                margin: 8px 0;
             }
 
             .story-body__mask {
                 position: relative;
-                max-height: 80px;
+                max-height: 85px;
                 overflow: hidden;
-                transition: max-height 0.6s var(--ease-spring);
+                transition: max-height 0.8s var(--ease-spring);
             }
             .story-body__mask::after {
                 content: '';
@@ -378,86 +630,75 @@
                 bottom: 0;
                 left: 0;
                 width: 100%;
-                height: 40px;
-                background: linear-gradient(to bottom, rgba(255,255,255,0), var(--surface));
+                height: 48px;
+                background: linear-gradient(to bottom, rgba(255,255,255,0), var(--surface) 90%);
                 pointer-events: none;
-                transition: opacity 0.3s;
+                transition: opacity 0.4s;
             }
-
             .story-body__cms-content {
                 font-size: 15px;
                 color: var(--text-sub);
                 line-height: 1.6;
             }
             .story-body__cms-content p {
-                margin-bottom: 12px;
-            }
-            .story-body__cms-content p:last-child {
-                margin-bottom: 0;
+                margin-bottom: 16px;
             }
 
             .story-body__toggle {
+                display: none;
                 background: none;
                 border: none;
                 color: var(--brand-red);
                 font-weight: 700;
                 font-size: 14px;
                 cursor: pointer;
-                padding: 12px 0 16px;
-                display: inline-block;
+                padding: 12px 0 24px;
             }
             .story-body.is-expanded .story-body__mask {
-                max-height: 2500px;
+                max-height: 5000px;
             }
             .story-body.is-expanded .story-body__mask::after {
                 opacity: 0;
             }
 
             .story-footer {
+                display: none;
                 flex-shrink: 0;
-                display: flex;
-                gap: 12px;
-                background: var(--bg-gray);
-                padding: 16px 24px 32px;
-                box-shadow: 0 -10px 15px -10px rgba(0,0,0,0.05);
+                gap: 14px;
+                background: var(--surface);
+                padding: 20px 28px 28px;
                 position: sticky;
                 bottom: 0;
                 z-index: 20;
+                border-top: 1px solid rgba(0,0,0,0.03);
             }
-
             .emote {
                 flex: 1;
                 display: flex;
                 align-items: center;
                 justify-content: space-around;
-                background: #FFFFFF;
-                border-radius: 16px;
-                padding: 0 12px;
-                box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+                background: var(--bg-gray);
+                border-radius: 20px;
+                padding: 0 8px;
                 height: 56px;
             }
             .emote > div {
-                font-size: 24px;
+                font-size: 26px;
                 cursor: pointer;
-                padding: 8px;
+                padding: 10px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                transition: transform 0.4s var(--ease-spring);
-                -webkit-tap-highlight-color: transparent;
+                transition: opacity 0.3s;
                 user-select: none;
             }
             .emote > div:hover {
-                transform: scale(1.25);
+                opacity: 0.7;
             }
-            .emote > div:active {
-                transform: scale(0.85);
-            }
-
-            .story-share-btn {
-                background: #FFFFFF;
+            .story-footer-share {
+                background: var(--bg-gray);
                 border: none;
-                border-radius: 16px;
+                border-radius: 20px;
                 font-size: 24px;
                 cursor: pointer;
                 width: 56px;
@@ -465,59 +706,59 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-                transition: transform 0.4s var(--ease-spring);
-                -webkit-tap-highlight-color: transparent;
-                user-select: none;
+                transition: background 0.3s;
+                color: var(--text-main);
             }
-            .story-share-btn:hover {
-                transform: scale(1.15);
-            }
-            .story-share-btn:active {
-                transform: scale(0.9);
+            .story-footer-share:hover {
+                background: #E9ECEF;
             }
 
+            /* Toast */
             .toast-notification {
                 position: fixed;
-                bottom: 40px;
-                left: 50%;
-                transform: translateX(-50%) translateY(40px);
-                background: rgba(0,0,0,0.9);
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+                width: max-content;
+                bottom: 20px;
+                background: rgba(20, 20, 22, 0.95);
+                backdrop-filter: blur(10px);
                 color: white;
-                padding: 14px 28px;
+                padding: 14px 32px;
                 border-radius: 50px;
                 font-size: 14px;
                 font-weight: 600;
-                z-index: 2000;
+                z-index: 3000;
                 opacity: 0;
-                transition: all 0.4s var(--ease-spring);
+                transform: translateY(20px);
+                transition: all 0.5s var(--ease-spring);
                 pointer-events: none;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.2);
             }
             .toast-notification.is-visible {
                 opacity: 1;
-                transform: translateX(-50%) translateY(0);
+                transform: translateY(0);
+                bottom: 48px;
             }
 
-            /* --- 7. SCOPE ISOLATION (MEDIA QUERIES) --- */
-
-            /* MOBILE (< 768px) */
+            /* --- 11. RESPONSIVE BREAKPOINTS --- */
             @media (max-width: 767px) {
                 .story-popup {
                     display: none !important;
                 }
-                .ambient-layer {
-                    display: none !important;
-                }
-
-                /* Animasi mengecil & melengkung saat bottom sheet terbuka di mobile */
                 .layout-wrapper.is-ui-open .story-viewport {
-                    transform: scale(0.92);
-                    border-radius: 32px;
-                    filter: blur(10px) brightness(0.6);
+                    filter: blur(12px) brightness(0.5);
+                    transform: translateY(-20px) scale(0.95);
+                }
+                /* Hide UI during Mobile Sheet open */
+                .layout-wrapper.is-ui-open .story-excerpt,
+                .layout-wrapper.is-ui-open .story-player-actions {
+                    opacity: 0;
+                    transform: translateY(10px);
+                    pointer-events: none;
                 }
             }
 
-            /* TABLET & KECIL DESKTOP (768px - 1489px) */
             @media (min-width: 768px) and (max-width: 1489px) {
                 .story-sheet {
                     display: none !important;
@@ -525,100 +766,60 @@
                 .ambient-layer {
                     display: block;
                 }
-
-                /* MENAMBAHKAN FRAME: Video tidak menyentuh ujung layar */
                 .story-container {
                     width: auto;
                     height: calc(100dvh - 64px);
-                    /* Sisa 32px di atas & bawah */
-                    max-height: 900px;
                     aspect-ratio: 9 / 16;
-                    border-radius: 24px;
-                    border: 1px solid rgba(255, 255, 255, 0.08);
                     overflow: visible;
+                    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
                 }
-                .story-viewport {
-                    border-radius: 24px;
-                    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-                }
-
                 .layout-wrapper.is-ui-open .story-viewport {
-                    transform: scale(0.96);
-                    filter: blur(8px) brightness(0.7);
+                    filter: blur(12px) brightness(0.6);
+                    transform: scale(0.97);
+                }
+                .layout-wrapper.is-ui-open .story-excerpt,
+                .layout-wrapper.is-ui-open .story-player-actions {
+                    opacity: 0;
+                    pointer-events: none;
                 }
                 .story-body,
                 .story-header {
-                    padding: 0 32px;
-                }
-                .story-footer {
-                    padding: 16px 32px 32px;
+                    padding: 0 36px;
                 }
             }
 
-            /* LARGE DESKTOP (1490px+) -> CARD GESER VIDEO */
             @media (min-width: 1490px) {
+                .story-excerpt,
+                .story-player-actions,
                 .story-popup,
                 .story-sheet {
                     display: none !important;
                 }
                 .ambient-layer {
                     display: block;
+                    opacity: 0.6;
                 }
-
-                /* MENAMBAHKAN FRAME BESAR: Video tidak menyentuh ujung layar */
+                /* Desktop Card dikontrol display flex namun tetap mengikuti opacity awal dari parent base */
+                .story-card {
+                    display: flex;
+                }
                 .story-container {
                     width: auto;
                     height: calc(100dvh - 80px);
-                    /* Sisa 40px di atas & bawah */
-                    max-height: 950px;
                     aspect-ratio: 9 / 16;
-                    border-radius: 24px;
-                    border: 1px solid rgba(255, 255, 255, 0.08);
                     overflow: visible;
+                    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
                 }
-                .story-viewport {
-                    border-radius: 24px;
-                    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-                }
-
-                .desktop-slider {
-                    gap: 32px;
-                    transform: translateX(216px);
-                    transition: transform 0.6s var(--ease-spring);
-                }
-
-                .story-card {
-                    display: flex;
-                    opacity: 0;
-                    pointer-events: none;
-                    transform: translateX(-40px) scale(0.95);
-                    transition: all 0.6s var(--ease-spring);
-                }
-
-                /* Saat Card Terbuka (Slide) */
-                .layout-wrapper.is-ui-open .desktop-slider {
-                    transform: translateX(0);
-                }
-                .layout-wrapper.is-ui-open .story-card {
-                    opacity: 1;
-                    pointer-events: auto;
-                    transform: translateX(0) scale(1);
-                }
-                .layout-wrapper.is-ui-open .story-ui-trigger {
-                    opacity: 0;
-                    pointer-events: none;
-                }
-                .layout-wrapper.is-ui-open .story-viewport {
-                    transform: none !important;
-                    filter: none !important;
-                }
-
                 .story-body,
                 .story-header {
-                    padding: 0 32px;
+                    padding: 0 36px;
                 }
                 .story-footer {
-                    padding: 16px 32px 32px;
+                    display: flex;
+                    padding: 20px 36px 36px;
+                }
+                .story-body__toggle {
+                    display: inline-block;
                 }
             }
         </style>
@@ -626,40 +827,65 @@
     <body>
 
         <div class="layout-wrapper" id="layoutWrapper">
-
             <div class="desktop-slider">
 
                 <div class="story-container" id="storyContainer">
+
                     <div class="ambient-layer">
                         <div id="ambientPlayer"></div>
                     </div>
+
                     <div class="story-viewport">
+
+                        <div class="story-loader">
+                            <div class="story-loader__spinner"></div>
+                        </div>
+
                         <div class="story-progress-bar">
                             <div class="story-progress-bar__fill" id="storyProgressFill"></div>
                         </div>
+
                         <div class="story-video-wrapper">
                             <div id="youtubePlayer"></div>
                         </div>
-                        <div class="story-ui-trigger" onclick="StoryManager.openContext()">
-                            <span class="story-badge" style="background: rgba(255,255,255,0.2); color: #fff; backdrop-filter: blur(4px);">Product Insight</span>
-                            <h2 style="font-size: 24px; margin-top: 8px; margin-bottom: 6px; text-shadow: 0 2px 15px rgba(0,0,0,0.8);">Gaming Performa Cerdas 🔥</h2>
-                            <p style="font-size: 14px; opacity: 0.9; display: flex; align-items: center; gap: 6px; text-shadow: 0 1px 4px rgba(0,0,0,0.5);">
-                                Cek Detail Produk
-                                <span style="font-size: 18px;">↗</span>
-                            </p>
+
+                        <div class="story-excerpt" onclick="StoryManager.openContext()">
+                            <span class="story-excerpt__badge">Product Insight</span>
+                            <h2 class="story-excerpt__title">Gaming Performa Cerdas 🔥</h2>
+                            <div class="story-excerpt__text">
+                                Laptop Asus G Gaming K16 adalah laptop tangguh yang punya performa cerdas untuk memaksimalkan potensi kerja kreatif yang bisa main game...
+                            </div>
+                        </div>
+
+                        <div class="story-player-actions">
+                            <div class="reaction-wrapper" id="reactionWrapper">
+                                <div class="reaction-options">
+                                    <button class="reaction-option-btn" onclick="StoryManager.react('❤️', event)">❤️</button>
+                                    <button class="reaction-option-btn" onclick="StoryManager.react('🤣', event)">🤣</button>
+                                    <button class="reaction-option-btn" onclick="StoryManager.react('😭', event)">😭</button>
+                                    <button class="reaction-option-btn" onclick="StoryManager.react('🔥', event)">🔥</button>
+                                </div>
+                                <button class="player-fab" onclick="StoryManager.toggleReactionMenu(event)">🤍</button>
+                            </div>
+
+                            <button class="player-fab share-fab" onclick="StoryManager.nativeShare()">🔗</button>
+
+                            <button class="player-fab fullscreen-fab" onclick="StoryManager.toggleCleanMode(event)">
+                                <span id="icon-enter-fs">🔲</span>
+                                <span id="icon-exit-fs" style="display: none;">✖️</span>
+                            </button>
                         </div>
                     </div>
                 </div>
 
-                <div class="story-card" id="storyCard">
-                    <button class="story-card__close-btn" onclick="StoryManager.closeContext()">✕</button>
+                <div class="story-card" id="storyCardDashboard">
                     <div class="story-dynamic-area"></div>
                 </div>
-
             </div>
+
             <div class="story-sheet" id="storySheet">
-                <div class="story-sheet__backdrop" onclick="StoryManager.closeContext()"></div>
-                <div class="story-sheet__content" id="storySheetContent">
+                <div class="story-sheet__backdrop overlay-backdrop" onclick="StoryManager.closeContext()"></div>
+                <div class="story-sheet__content">
                     <div class="story-sheet__handle-wrapper" id="storySheetHandle">
                         <div class="story-sheet__handle"></div>
                     </div>
@@ -668,45 +894,46 @@
             </div>
 
             <div class="story-popup" id="storyPopup">
-                <div class="story-popup__backdrop" onclick="StoryManager.closeContext()"></div>
+                <div class="story-popup__backdrop overlay-backdrop" onclick="StoryManager.closeContext()"></div>
                 <div class="story-popup__content">
-                    <button class="story-popup__close-btn" onclick="StoryManager.closeContext()">✕</button>
+                    <button class="story-close-btn" onclick="StoryManager.closeContext()">✖️</button>
                     <div class="story-dynamic-area"></div>
                 </div>
             </div>
-
         </div>
 
-        <div id="copyToastNotification" class="toast-notification">Link berhasil disalin!</div>
+        <div id="copyToastNotification" class="toast-notification">Notifikasi...</div>
 
         <template id="storyContentTemplate">
             <div class="story-view is-active">
                 <div class="story-header">
                     <h3 class="story-view__title">Gaming Performa Cerdas 🔥</h3>
-                    <span class="story-view__meta">View Icon - 213213</span>
+                    <span class="story-view__meta">Asus ROG Series • 2 Jam yang lalu</span>
                 </div>
-
                 <div class="story-body">
                     <div class="story-body__mask">
                         <div class="story-body__cms-content">
                             <p>Laptop Asus G Gaming K16 adalah laptop tangguh yang punya performa cerdas untuk memaksimalkan potensi kerja kreatif yang bisa main game.</p>
-                            <p>Dilengkapi CPU Intel Core i5 generasi ke-13, GPU RTX 3050, dan fitur AI Noise Cancelling untuk kejernihan suara saat meeting. Menggunakan teknologi Asus IceCool agar tetap dingin!</p>
-                            <p>Bobot hanya 1.8 Kg, slim namun bertenaga. Harga spesial Rp11.495.000!</p>
-                            <p>Dilengkapi juga dengan baterai 90Whrs untuk daya tahan seharian penuh. Layar OLED 120Hz memberikan warna super akurat bagi kreator.</p>
+                            <p>Dilengkapi CPU Intel Core i5 generasi ke-13, GPU RTX 3050, dan fitur AI Noise Cancelling. Menggunakan teknologi Asus IceCool agar tetap dingin!</p>
+                            <p>Bobot hanya 1.8 Kg, sangat
+                                <i>slim</i>
+                                namun bertenaga. Harga spesial promo hari ini
+                                <strong>Rp11.495.000!</strong>
+                            </p>
+                            <p>Layar Asus G Gaming K16 ini mengadopsi panel OLED 120Hz yang memberikan reproduksi warna presisi dengan DCI-P3 100% gamut. Sempurna bagi gamer dan kreator.</p>
                         </div>
                     </div>
-                    <button class="story-body__toggle" onclick="StoryManager.toggleTextExpansion(this)">Selengkapnya</button>
+                    <button class="story-body__toggle" onclick="StoryManager.toggleTextExpansion(this)">Baca Selengkapnya</button>
                 </div>
-
                 <div class="story-footer">
                     <div class="emote">
                         <div onclick="StoryManager.react('😭')">😭</div>
                         <div onclick="StoryManager.react('👏🏻')">👏🏻</div>
                         <div onclick="StoryManager.react('🤣')">🤣</div>
-                        <div onclick="StoryManager.react('🎉')">🎉</div>
+                        <div onclick="StoryManager.react('🔥')">🔥</div>
                         <div onclick="StoryManager.react('❤️')">❤️</div>
                     </div>
-                    <button class="story-share-btn" onclick="StoryManager.nativeShare()">✈️</button>
+                    <button class="story-footer-share" onclick="StoryManager.nativeShare()">🔗</button>
                 </div>
             </div>
         </template>
@@ -715,6 +942,8 @@
         <script>
             let player,
                 ambientPlayer;
+            let isYouTubeInitialPhase = true;
+
             function onYouTubeIframeAPIReady() {
                 const ytOptions = {
                     videoId: 'IHolHlnDP9s',
@@ -726,18 +955,56 @@
                         'mute': 1,
                         'modestbranding': 1,
                         'iv_load_policy': 3,
-                        'rel': 0
+                        'rel': 0,
+                        'playsinline': 1
                     }
                 };
 
                 player = new YT.Player('youtubePlayer', {
                     ...ytOptions,
                     events: {
-                        'onReady': (event) => {
-                            event
+                        'onReady': (e) => {
+                            e
+                                .target
+                                .mute();
+                            e
                                 .target
                                 .playVideo();
-                            StoryManager.startProgressBar();
+                        },
+                        'onStateChange': (e) => {
+                            if (e.data === YT.PlayerState.PLAYING && isYouTubeInitialPhase) {
+
+                                setTimeout(() => {
+                                    // 1. Putar balik ke awal
+                                    e
+                                        .target
+                                        .seekTo(0);
+
+                                    // 2. Munculkan Video Murni
+                                    document
+                                        .getElementById('youtubePlayer')
+                                        .style
+                                        .opacity = '1';
+
+                                    if (ambientPlayer && typeof ambientPlayer.seekTo === 'function') {
+                                        ambientPlayer.seekTo(0);
+                                        document
+                                            .getElementById('ambientPlayer')
+                                            .style
+                                            .opacity = '1';
+                                    }
+
+                                    // 3. Akhiri Fase Initial & Beri tahu Layout bahwa UI sudah siap
+                                    isYouTubeInitialPhase = false;
+                                    document
+                                        .getElementById('layoutWrapper')
+                                        .classList
+                                        .add('is-ready');
+
+                                    // 4. Jalankan Progress Bar
+                                    StoryManager.startProgressBar();
+                                }, 3500);
+                            }
                         }
                     }
                 });
@@ -745,8 +1012,11 @@
                 ambientPlayer = new YT.Player('ambientPlayer', {
                     ...ytOptions,
                     events: {
-                        'onReady': (event) => {
-                            event
+                        'onReady': (e) => {
+                            e
+                                .target
+                                .mute();
+                            e
                                 .target
                                 .playVideo();
                         }
@@ -760,7 +1030,8 @@
                     progressInterval: null,
                     startY: 0,
                     currentY: 0,
-                    isDragging: false
+                    isDragging: false,
+                    lastVideoTime: 0
                 };
 
                 const domRefs = {
@@ -768,51 +1039,64 @@
                     mainContainer: document.getElementById('storyContainer'),
                     progressFill: document.getElementById('storyProgressFill'),
                     mobileSheet: document.getElementById('storySheet'),
-                    mobileContent: document.getElementById('storySheetContent'),
                     mobileHandle: document.getElementById('storySheetHandle'),
                     tabletPopup: document.getElementById('storyPopup'),
-                    desktopCard: document.getElementById('storyCard'),
+                    dashboardCard: document.getElementById('storyCardDashboard'),
                     contentTemplate: document.getElementById('storyContentTemplate'),
-                    toastNotification: document.getElementById('copyToastNotification')
+                    toastNotification: document.getElementById('copyToastNotification'),
+                    reactionWrapper: document.getElementById('reactionWrapper')
                 };
 
                 const getActiveContext = () => {
                     const w = window.innerWidth;
                     if (w >= 1490) 
-                        return domRefs.desktopCard;
-                    if (w >= 768) 
-                        return domRefs.tabletPopup;
-                    return domRefs.mobileSheet;
+                        return null;
+                    return w >= 768
+                        ? domRefs.tabletPopup
+                        : domRefs.mobileSheet;
                 };
 
-                const injectTemplateToContext = (contextElement) => {
-                    const targetArea = contextElement.querySelector('.story-dynamic-area');
-                    if (targetArea && targetArea.innerHTML.trim() === '') {
-                        const templateClone = domRefs
-                            .contentTemplate
-                            .content
-                            .cloneNode(true);
-                        targetArea.appendChild(templateClone);
+                const injectTemplate = (el) => {
+                    const target = el.querySelector('.story-dynamic-area');
+                    if (target && target.innerHTML.trim() === '') {
+                        target.appendChild(domRefs.contentTemplate.content.cloneNode(true));
                     }
                 };
 
-                injectTemplateToContext(domRefs.mobileSheet);
-                injectTemplateToContext(domRefs.tabletPopup);
-                injectTemplateToContext(domRefs.desktopCard);
+                [domRefs.mobileSheet, domRefs.tabletPopup, domRefs.dashboardCard].forEach(injectTemplate);
 
                 const startProgressBar = () => {
                     if (state.progressInterval) 
                         clearInterval(state.progressInterval);
-                    state.progressInterval = setInterval(() => {
-                        if (!state.isOpen && player && typeof player.getDuration === 'function') {
-                            const duration = player.getDuration();
-                            const currentTime = player.getCurrentTime();
-                            if (duration > 0) {
-                                const progressPercent = (currentTime / duration) * 100;
-                                domRefs.progressFill.style.width = `${progressPercent}%`;
-                            }
-                        }
-                    }, 50);
+                    
+                    domRefs.progressFill.style.transition = 'none';
+                    domRefs.progressFill.style.width = '0%';
+                    state.lastVideoTime = 0;
+
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => {
+                            state.progressInterval = setInterval(() => {
+                                if (
+                                    !state.isOpen && !isYouTubeInitialPhase && player
+                                    ?.getDuration
+                                        ?.() > 0) {
+                                    const duration = player.getDuration();
+                                    const currentTime = player.getCurrentTime();
+                                    const percent = (currentTime / duration) * 100;
+
+                                    if (currentTime < state.lastVideoTime || currentTime < 0.2) {
+                                        domRefs.progressFill.style.transition = 'none';
+                                        domRefs.progressFill.style.width = '0%';
+                                    } else {
+                                        domRefs.progressFill.style.transition = 'width 0.1s linear';
+                                        domRefs.progressFill.style.width = `${percent}%`;
+                                    }
+
+                                    state.lastVideoTime = currentTime;
+                                }
+                            }, 50);
+                        });
+                    });
                 };
 
                 const openContext = () => {
@@ -820,6 +1104,11 @@
                     if (!ctx) 
                         return;
                     
+                    domRefs
+                        .mainContainer
+                        .classList
+                        .remove('is-clean-mode');
+
                     state.isOpen = true;
                     domRefs
                         .layoutWrapper
@@ -829,19 +1118,22 @@
                         .classList
                         .add('is-active');
 
-                    if (window.innerWidth < 768) {
-                        domRefs.mobileContent.style.transform = '';
-                    }
-
+                    const body = ctx.querySelector('.story-body');
+                    if (body) 
+                        body
+                            .classList
+                            .add('is-expanded');
+                    
                     if (player) 
                         player.pauseVideo();
                     if (ambientPlayer) 
                         ambientPlayer.pauseVideo();
-                    };
-                
+                    
+                    closeReactionMenu();
+                };
+
                 const closeContext = () => {
                     state.isOpen = false;
-
                     domRefs
                         .layoutWrapper
                         .classList
@@ -854,21 +1146,16 @@
                         .tabletPopup
                         .classList
                         .remove('is-active');
-                    domRefs
-                        .desktopCard
-                        .classList
-                        .remove('is-active');
 
-                    const activeBodies = document.querySelectorAll('.story-body.is-expanded');
-                    activeBodies.forEach(body => {
-                        body
-                            .classList
-                            .remove('is-expanded');
-                        const toggleBtn = body.querySelector('.story-body__toggle');
-                        if (toggleBtn) 
-                            toggleBtn.innerText = "Selengkapnya";
-                        body.scrollTop = 0;
-                    });
+                    document
+                        .querySelectorAll('.story-body.is-expanded')
+                        .forEach(body => {
+                            if (window.innerWidth < 1490) 
+                                body
+                                    .classList
+                                    .remove('is-expanded');
+                            body.scrollTop = 0;
+                        });
 
                     if (player) 
                         player.playVideo();
@@ -876,55 +1163,95 @@
                         ambientPlayer.playVideo();
                     };
                 
-                const toggleTextExpansion = (buttonElement) => {
-                    const bodyContainer = buttonElement.closest('.story-body');
-                    const isExpanded = bodyContainer
+                const toggleTextExpansion = (btn) => {
+                    const body = btn.closest('.story-body');
+                    const isExpanded = body
                         .classList
                         .toggle('is-expanded');
-                    buttonElement.innerText = isExpanded
+                    btn.innerText = isExpanded
                         ? "Sembunyikan"
-                        : "Selengkapnya";
+                        : "Baca Selengkapnya";
                 };
 
-                const nativeShare = async () => {
-                    const shareData = {
-                        title: 'Gaming Performa Cerdas 🔥',
-                        text: 'Cek Detail Produk ini sekarang juga!',
-                        url: 'https://www.youtube.com/watch?v=IHolHlnDP9s'
-                    };
-
-                    try {
-                        if (navigator.share) {
-                            await navigator.share(shareData);
-                        } else {
-                            navigator
-                                .clipboard
-                                .writeText(shareData.url)
-                                .then(() => {
-                                    domRefs.toastNotification.innerText = "Link berhasil disalin!";
-                                    domRefs
-                                        .toastNotification
-                                        .classList
-                                        .add('is-visible');
-                                    setTimeout(() => domRefs.toastNotification.classList.remove('is-visible'), 2000);
-                                });
-                        }
-                    } catch (err) {
-                        console.log('Share canceled / failed', err);
+                const toggleReactionMenu = (e) => {
+                    if (e) 
+                        e.stopPropagation();
+                    if (domRefs.reactionWrapper) {
+                        domRefs
+                            .reactionWrapper
+                            .classList
+                            .toggle('is-active');
                     }
                 };
 
-                const react = (emoji) => {
-                    domRefs.toastNotification.innerText = `Kamu bereaksi ${emoji}`;
+                const closeReactionMenu = () => {
+                    if (domRefs.reactionWrapper) 
+                        domRefs
+                            .reactionWrapper
+                            .classList
+                            .remove('is-active');
+                    };
+                
+                const toggleCleanMode = (e) => {
+                    if (e) 
+                        e.stopPropagation();
+                    closeReactionMenu();
+                    domRefs
+                        .mainContainer
+                        .classList
+                        .toggle('is-clean-mode');
+                };
+
+                document.addEventListener('click', (e) => {
+                    if (domRefs.reactionWrapper && !domRefs.reactionWrapper.contains(e.target)) {
+                        closeReactionMenu();
+                    }
+                });
+
+                const nativeShare = async () => {
+                    const data = {
+                        title: 'Gaming Performa Cerdas 🔥',
+                        url: 'https://www.youtube.com/watch?v=IHolHlnDP9s'
+                    };
+                    try {
+                        if (navigator.share) 
+                            await navigator.share(data);
+                        else {
+                            navigator
+                                .clipboard
+                                .writeText(data.url);
+                            showToast("Tautan 🔗 berhasil disalin!");
+                        }
+                    } catch (e) {}
+                };
+
+                const react = (emoji, e) => {
+                    if (e) 
+                        e.stopPropagation();
+                    showToast(`Kamu bereaksi ${emoji}`);
+
+                    const mainBtn = domRefs
+                        .reactionWrapper
+                        .querySelector('.player-fab');
+                    if (mainBtn) {
+                        mainBtn.innerText = emoji;
+                        setTimeout(() => mainBtn.innerText = '🤍', 1500);
+                    }
+
+                    closeReactionMenu();
+                };
+
+                const showToast = (message) => {
+                    domRefs.toastNotification.innerText = message;
                     domRefs
                         .toastNotification
                         .classList
                         .add('is-visible');
-                    setTimeout(() => domRefs.toastNotification.classList.remove('is-visible'), 1500);
+                    setTimeout(() => domRefs.toastNotification.classList.remove('is-visible'), 2500);
                 };
 
-                const initializeMobileDrag = () => {
-                    const handleDragStart = (e) => {
+                const initDrag = () => {
+                    const start = (e) => {
                         if (window.innerWidth >= 768) 
                             return;
                         state.startY = e
@@ -935,63 +1262,55 @@
                                     .clientY
                                 : e.clientY;
                         state.isDragging = true;
-                        domRefs
-                            .mobileContent
-                            .classList
-                            .add('is-dragging');
                     };
-
-                    const handleDragMove = (e) => {
+                    const move = (e) => {
                         if (!state.isDragging || window.innerWidth >= 768) 
                             return;
-                        const currentYPosition = e
+                        const y = e
                             .type
                             .includes('touch')
                                 ? e
                                     .touches[0]
                                     .clientY
                                 : e.clientY;
-                        const deltaY = currentYPosition - state.startY;
+                        state.currentY = Math.max(0, y - state.startY);
 
-                        if (deltaY > 0) {
-                            state.currentY = deltaY;
-                            domRefs.mobileContent.style.transform = `translateY(${deltaY}px)`;
-                        }
+                        domRefs
+                            .mobileSheet
+                            .querySelector('.story-sheet__content')
+                            .style
+                            .transform = `translateY(${state.currentY}px)`;
                     };
-
-                    const handleDragEnd = () => {
+                    const end = () => {
                         if (!state.isDragging || window.innerWidth >= 768) 
                             return;
                         state.isDragging = false;
-                        domRefs
-                            .mobileContent
-                            .classList
-                            .remove('is-dragging');
-
-                        if (state.currentY > 150) {
+                        if (state.currentY > 120) 
                             closeContext();
-                        } else {
-                            domRefs.mobileContent.style.transform = `translateY(0)`;
-                        }
+                        else 
+                            domRefs
+                                .mobileSheet
+                                .querySelector('.story-sheet__content')
+                                .style
+                                .transform = '';
                         state.currentY = 0;
                     };
 
                     if (domRefs.mobileHandle) {
                         domRefs
                             .mobileHandle
-                            .addEventListener('mousedown', handleDragStart);
+                            .addEventListener('mousedown', start);
                         domRefs
                             .mobileHandle
-                            .addEventListener('touchstart', handleDragStart, {passive: true});
+                            .addEventListener('touchstart', start, {passive: true});
                     }
-
-                    window.addEventListener('mousemove', handleDragMove);
-                    window.addEventListener('touchmove', handleDragMove, {passive: false});
-                    window.addEventListener('mouseup', handleDragEnd);
-                    window.addEventListener('touchend', handleDragEnd);
+                    window.addEventListener('mousemove', move);
+                    window.addEventListener('touchmove', move, {passive: false});
+                    window.addEventListener('mouseup', end);
+                    window.addEventListener('touchend', end);
                 };
 
-                initializeMobileDrag();
+                initDrag();
 
                 return {
                     startProgressBar,
@@ -999,7 +1318,9 @@
                     closeContext,
                     toggleTextExpansion,
                     nativeShare,
-                    react
+                    react,
+                    toggleReactionMenu,
+                    toggleCleanMode
                 };
             })();
         </script>
