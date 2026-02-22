@@ -31,7 +31,7 @@
                 background: #0f0f11;
                 font-family: -apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,sans-serif;
                 overflow: hidden;
-                touch-action: none;
+                /* FIX: Hapus touch-action: none; agar scroll tidak mati */
                 color: var(--text-main);
             }
             .layout-wrapper {
@@ -41,6 +41,8 @@
                 align-items: center;
                 height: 100dvh;
                 width: 100vw;
+                touch-action: pan-y;
+                /* Membatasi aksi default ke vertikal saja di tingkat wrapper */
             }
             .desktop-slider {
                 display: flex;
@@ -73,7 +75,7 @@
                 width: 110%;
                 height: 90%;
                 z-index: 1;
-                filter:blur(60px) saturate(150%);
+                filter: blur(60px) saturate(150%);
                 opacity: 0.4;
                 pointer-events: none;
                 transition: opacity 0.6s;
@@ -131,26 +133,26 @@
                 z-index: 12;
                 cursor: pointer;
             }
+
+            /* --- FLASH ANIMATION CSS --- */
             .story-center-play {
                 position: absolute;
                 top: 50%;
                 left: 50%;
-                transform: translate(-50%,-50%) scale(0.5);
+                transform: translate(-50%, -50%) scale(1.5);
                 font-size: 80px;
                 z-index: 25;
                 opacity: 0;
                 pointer-events: none;
-                transition: all 0.3s var(--ease-spring);
-                filter:drop-shadow(0 4px 12px rgba(0,0,0,0.5));
-                display: none;
+                transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+                filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
             }
-            .story-container.is-clean-mode .story-center-play {
-                display: block;
+            .story-center-play.is-flashing {
+                opacity: 0.9;
+                transform: translate(-50%, -50%) scale(1);
+                transition: opacity 0.1s ease-in, transform 0.2s var(--ease-spring);
             }
-            .story-container.is-clean-mode.is-paused .story-center-play {
-                opacity: 1;
-                transform: translate(-50%,-50%) scale(1);
-            }
+
             .story-loader {
                 position: absolute;
                 inset: 0;
@@ -273,7 +275,7 @@
             .story-excerpt__badge {
                 background: rgba(255,255,255,0.15);
                 color: #fff;
-                backdrop-filter:blur(12px);
+                backdrop-filter: blur(12px);
                 border: 0.5px solid var(--glass-border);
                 font-size: 11px;
                 font-weight: 700;
@@ -305,8 +307,8 @@
                 height: var(--fab-size);
                 border-radius: 50%;
                 background: var(--glass-bg);
-                backdrop-filter:blur(16px);
-                -webkit-backdrop-filter:blur(16px);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
                 border: 1px solid var(--glass-border);
                 color: #fff;
                 font-size: 20px;
@@ -346,8 +348,8 @@
                 height: var(--fab-size);
                 border-radius: 50%;
                 background: var(--glass-bg);
-                backdrop-filter:blur(16px);
-                -webkit-backdrop-filter:blur(16px);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
                 border: 1px solid var(--glass-border);
                 color: #fff;
                 font-size: 20px;
@@ -396,6 +398,7 @@
             .reaction-wrapper.is-active .reaction-option-btn:nth-child(1) {
                 transition-delay: 0.15s;
             }
+
             .story-container.is-clean-mode .reaction-wrapper,
             .story-container.is-clean-mode .share-fab,
             .story-container.is-clean-mode .story-excerpt {
@@ -421,10 +424,12 @@
                 position: absolute;
                 inset: 0;
                 background: rgba(0,0,0,0.6);
-                backdrop-filter:blur(4px);
+                backdrop-filter: blur(4px);
                 opacity: 0;
                 transition: opacity 0.5s;
                 pointer-events: auto;
+                touch-action: none;
+                /* Cegah scroll body ketika backdrop aktif */
             }
             .is-active .overlay-backdrop {
                 opacity: 1;
@@ -472,6 +477,8 @@
                 display: flex;
                 justify-content: center;
                 flex-shrink: 0;
+                touch-action: none;
+                /* Khusus handle drag */
             }
             .story-sheet__handle {
                 width: 44px;
@@ -564,6 +571,8 @@
                 -webkit-overflow-scrolling: touch;
                 padding: 0 28px 32px;
                 min-height: 0;
+                overscroll-behavior-y: contain;
+                /* FIX SCROLL BOCOR */
             }
             .story-body::-webkit-scrollbar {
                 width: 5px;
@@ -661,7 +670,9 @@
                 justify-content: center;
                 transition: background 0.3s;
                 color: var(--text-main);
+                flex-shrink: 0;
             }
+
             #reaction-container {
                 position: absolute;
                 inset: 0;
@@ -681,7 +692,7 @@
                 will-change: transform,opacity;
                 animation: drop-physics var(--duration) ease-in forwards;
                 animation-delay: var(--delay);
-                filter:blur(var(--blur)) drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+                filter: blur(var(--blur)) drop-shadow(0 2px 6px rgba(0,0,0,0.4));
                 z-index: var(--z);
             }
             @keyframes drop-physics {
@@ -729,15 +740,12 @@
                     display: none!important;
                 }
                 .layout-wrapper.is-ui-open .story-viewport {
-                    filter:blur(12px) brightness(0.5);
+                    filter: blur(12px) brightness(0.5);
                     transform: scale(0.97);
                     border-radius: var(--frame-radius)!important;
                 }
                 .layout-wrapper.is-ui-open .story-excerpt,
-                .layout-wrapper.is-ui-open .story-player-actions {
-                    opacity: 0;
-                    pointer-events: none;
-                }
+                .layout-wrapper.is-ui-open .story-player-actions,
                 .layout-wrapper.is-ui-open .story-top-actions {
                     opacity: 0;
                     pointer-events: none;
@@ -758,7 +766,7 @@
                     box-shadow: 0 24px 64px rgba(0,0,0,0.4);
                 }
                 .layout-wrapper.is-ui-open .story-viewport {
-                    filter:blur(12px) brightness(0.6);
+                    filter: blur(12px) brightness(0.6);
                     transform: scale(0.97);
                 }
                 .layout-wrapper.is-ui-open .story-excerpt,
@@ -779,9 +787,7 @@
                     display: none!important;
                 }
                 .story-player-actions .reaction-wrapper,
-                .story-player-actions .share-fab {
-                    display: none!important;
-                }
+                .story-player-actions .share-fab,
                 .story-video-wrapper::after {
                     display: none!important;
                 }
@@ -855,7 +861,8 @@
                             </div>
                             <button class="player-fab share-fab" onclick="StoryManager.nativeShare()">🔗</button>
                             <button class="player-fab fullscreen-fab" onclick="StoryManager.toggleCleanMode(event)">
-                                <span id="icon-enter-fs">🔲</span><span id="icon-exit-fs" style="display:none">✖️</span></button>
+                                <span id="icon-enter-fs">🔲</span><span id="icon-exit-fs" style="display:none">✖️</span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -880,11 +887,13 @@
                 </div>
             </div>
         </div>
+
         <template id="storyContentTemplate">
             <div class="story-view is-active">
                 <div class="story-header">
                     <h3 class="story-view__title">Gaming Performa Cerdas 🔥</h3>
-                    <span class="story-view__meta">Asus ROG Series • 2 Jam yang lalu</span></div>
+                    <span class="story-view__meta">Asus ROG Series • 2 Jam yang lalu</span>
+                </div>
                 <div class="story-body">
                     <div class="story-body__mask">
                         <div class="story-body__cms-content">
@@ -902,20 +911,416 @@
                 </div>
                 <div class="story-footer">
                     <div class="emote">
-                        <div onclick="StoryManager.react('😭')">😭</div>
-                        <div onclick="StoryManager.react('👏🏻')">👏🏻</div>
-                        <div onclick="StoryManager.react('🤣')">🤣</div>
-                        <div onclick="StoryManager.react('🔥')">🔥</div>
-                        <div onclick="StoryManager.react('❤️')">❤️</div>
+                        <div onclick="StoryManager.react('😭', event)">😭</div>
+                        <div onclick="StoryManager.react('👏🏻', event)">👏🏻</div>
+                        <div onclick="StoryManager.react('🤣', event)">🤣</div>
+                        <div onclick="StoryManager.react('🔥', event)">🔥</div>
+                        <div onclick="StoryManager.react('❤️', event)">❤️</div>
                     </div>
                     <button class="story-footer-share" onclick="StoryManager.nativeShare()">🔗</button>
                 </div>
             </div>
         </template>
+
         <script src="https://www.youtube.com/iframe_api"></script>
         <script>
             let player,
                 ambientPlayer;
+
+            // FIX: Ekspos StoryManager ke global object (window) agar aman dari isu 'undefined' di inline handler
+            window.StoryManager = (() => {
+                const state = {
+                    isOpen: false,
+                    progressInterval: null,
+                    startY: 0,
+                    currentY: 0,
+                    isDragging: false,
+                    lastVideoTime: 0
+                };
+                const domRefs = {
+                    layoutWrapper: document.getElementById('layoutWrapper'),
+                    mainContainer: document.getElementById('storyContainer'),
+                    progressFill: document.getElementById('storyProgressFill'),
+                    mobileSheet: document.getElementById('storySheet'),
+                    mobileHandle: document.getElementById('storySheetHandle'),
+                    tabletPopup: document.getElementById('storyPopup'),
+                    dashboardCard: document.getElementById('storyCardDashboard'),
+                    contentTemplate: document.getElementById('storyContentTemplate'),
+                    reactionWrapper: document.getElementById('reactionWrapper'),
+                    btnPlayPause: document.getElementById('btnPlayPause'),
+                    btnMute: document.getElementById('btnMute'),
+                    iconEnter: document.getElementById('icon-enter-fs'),
+                    iconExit: document.getElementById('icon-exit-fs'),
+                    reactionContainer: document.getElementById('reaction-container'),
+                    centerPlayIndicator: document.getElementById('centerPlayIndicator')
+                };
+
+                const getActiveContext = () => {
+                    const w = window.innerWidth;
+                    if (w >= 1490) 
+                        return null;
+                    return w >= 768
+                        ? domRefs.tabletPopup
+                        : domRefs.mobileSheet;
+                };
+
+                const injectTemplate = (el) => {
+                    const target = el.querySelector('.story-dynamic-area');
+                    if (target && target.innerHTML.trim() === '') {
+                        target.appendChild(domRefs.contentTemplate.content.cloneNode(true));
+                    }
+                };
+                [domRefs.mobileSheet, domRefs.tabletPopup, domRefs.dashboardCard].forEach(injectTemplate);
+
+                const startProgressBar = () => {
+                    if (state.progressInterval) 
+                        clearInterval(state.progressInterval);
+                    domRefs.progressFill.style.transition = 'none';
+                    domRefs.progressFill.style.width = '0%';
+                    state.lastVideoTime = 0;
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => {
+                            state.progressInterval = setInterval(() => {
+                                if (
+                                    !state.isOpen && player
+                                    ?.getPlayerState() === YT.PlayerState.PLAYING) {
+                                    const duration = player.getDuration();
+                                    const currentTime = player.getCurrentTime();
+                                    if (duration > 0) {
+                                        const percent = (currentTime / duration) * 100;
+                                        if (currentTime < state.lastVideoTime - 0.5 || currentTime < 0.2) {
+                                            domRefs.progressFill.style.transition = 'none';
+                                            domRefs.progressFill.style.width = '0%';
+                                        } else {
+                                            domRefs.progressFill.style.transition = 'width 0.1s linear';
+                                            domRefs.progressFill.style.width = `${percent}%`;
+                                        }
+                                        state.lastVideoTime = currentTime;
+                                    }
+                                }
+                            }, 50);
+                        });
+                    });
+                };
+
+                let flashTimeout;
+                const flashIcon = (iconStr) => {
+                    const iconEl = domRefs.centerPlayIndicator;
+                    if (!iconEl) 
+                        return;
+                    
+                    iconEl.innerText = iconStr;
+                    iconEl
+                        .classList
+                        .remove('is-flashing');
+                    void iconEl.offsetWidth;
+                    iconEl
+                        .classList
+                        .add('is-flashing');
+
+                    clearTimeout(flashTimeout);
+                    flashTimeout = setTimeout(() => {
+                        iconEl
+                            .classList
+                            .remove('is-flashing');
+                    }, 500);
+                };
+
+                const togglePlayPause = (e) => {
+                    if (e) 
+                        e.stopPropagation();
+                    if (!player) 
+                        return;
+                    
+                    // FIX: Picu Flash langsung lewat ketukan user, BUKAN dari API onStateChange
+                    if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+                        player.pauseVideo();
+                        if (ambientPlayer && typeof ambientPlayer.pauseVideo === 'function') 
+                            ambientPlayer.pauseVideo();
+                        flashIcon('⏸️'); // Menampilkan sekilas icon Pause
+                    } else {
+                        player.playVideo();
+                        if (ambientPlayer && typeof ambientPlayer.playVideo === 'function') 
+                            ambientPlayer.playVideo();
+                        flashIcon('▶️'); // Menampilkan sekilas icon Play
+                    }
+                };
+
+                const toggleMute = (e) => {
+                    if (e) 
+                        e.stopPropagation();
+                    if (!player) 
+                        return;
+                    if (player.isMuted()) {
+                        player.unMute();
+                        domRefs.btnMute.innerText = '🔊';
+                    } else {
+                        player.mute();
+                        domRefs.btnMute.innerText = '🔇';
+                    }
+                };
+
+                const openContext = () => {
+                    const ctx = getActiveContext();
+                    if (!ctx) 
+                        return;
+                    domRefs
+                        .mainContainer
+                        .classList
+                        .remove('is-clean-mode');
+                    domRefs.iconEnter.style.display = 'block';
+                    domRefs.iconExit.style.display = 'none';
+                    state.isOpen = true;
+                    domRefs
+                        .layoutWrapper
+                        .classList
+                        .add('is-ui-open');
+                    ctx
+                        .classList
+                        .add('is-active');
+                    const body = ctx.querySelector('.story-body');
+                    if (body) 
+                        body
+                            .classList
+                            .add('is-expanded');
+                    
+                    if (player) 
+                        player.pauseVideo();
+                    if (ambientPlayer && typeof ambientPlayer.pauseVideo === 'function') 
+                        ambientPlayer.pauseVideo();
+                    closeReactionMenu();
+                };
+
+                const closeContext = () => {
+                    state.isOpen = false;
+                    domRefs
+                        .layoutWrapper
+                        .classList
+                        .remove('is-ui-open');
+                    domRefs
+                        .mobileSheet
+                        .classList
+                        .remove('is-active');
+                    domRefs
+                        .tabletPopup
+                        .classList
+                        .remove('is-active');
+                    domRefs
+                        .mobileSheet
+                        .querySelector('.story-sheet__content')
+                        .style
+                        .transform = '';
+                    document
+                        .querySelectorAll('.story-body.is-expanded')
+                        .forEach(body => {
+                            if (window.innerWidth < 1490) 
+                                body
+                                    .classList
+                                    .remove('is-expanded');
+                            body.scrollTop = 0;
+                        });
+
+                    if (player) 
+                        player.playVideo();
+                    if (ambientPlayer && typeof ambientPlayer.playVideo === 'function') 
+                        ambientPlayer.playVideo();
+                    };
+                
+                const toggleTextExpansion = (btn) => {
+                    const body = btn.closest('.story-body');
+                    const isExpanded = body
+                        .classList
+                        .toggle('is-expanded');
+                    btn.innerText = isExpanded
+                        ? "Sembunyikan"
+                        : "Baca Selengkapnya";
+                };
+
+                const toggleReactionMenu = (e) => {
+                    if (e) 
+                        e.stopPropagation();
+                    if (domRefs.reactionWrapper) 
+                        domRefs
+                            .reactionWrapper
+                            .classList
+                            .toggle('is-active');
+                    };
+                
+                const closeReactionMenu = () => {
+                    if (domRefs.reactionWrapper) 
+                        domRefs
+                            .reactionWrapper
+                            .classList
+                            .remove('is-active');
+                    };
+                
+                const toggleCleanMode = (e) => {
+                    if (e) 
+                        e.stopPropagation();
+                    closeReactionMenu();
+                    const isClean = domRefs
+                        .mainContainer
+                        .classList
+                        .toggle('is-clean-mode');
+                    domRefs.iconEnter.style.display = isClean
+                        ? 'none'
+                        : 'block';
+                    domRefs.iconExit.style.display = isClean
+                        ? 'block'
+                        : 'none';
+                };
+
+                document.addEventListener('click', (e) => {
+                    if (domRefs.reactionWrapper && !domRefs.reactionWrapper.contains(e.target)) 
+                        closeReactionMenu();
+                    }
+                );
+
+                const nativeShare = async () => {
+                    const data = {
+                        title: 'Gaming Performa Cerdas 🔥',
+                        url: 'https://www.youtube.com/watch?v=kyPF1-VvOsQ'
+                    };
+                    try {
+                        if (navigator.share) 
+                            await navigator.share(data);
+                        else {
+                            navigator
+                                .clipboard
+                                .writeText(data.url);
+                            alert("Tautan berhasil disalin!");
+                        }
+                    } catch (e) {}
+                };
+
+                const triggerReaction = (char) => {
+                    const fragment = document.createDocumentFragment();
+                    for (let i = 0; i < 35; i++) {
+                        const el = document.createElement('div');
+                        el.className = 'particle';
+                        el.innerText = char;
+                        const depth = Math.random();
+                        el.style.cssText = `--x:${Math.random() * 100}%;--size:${ (depth * 1.2) + 1.2}rem;--blur:${depth < 0.2
+                            ? '2px'
+                            : '0px'};--z:${depth > 0.5
+                                ? 20
+                                : 1};--duration:${ 3500 - (depth * 1500)}ms;--delay:${Math.random() * 600}ms;--rotation:${ (Math.random() - 0.5) * 720}deg;--drift:${ (Math.random() - 0.5) * 120}px;`;
+
+                        const removeEl = () => el.remove();
+                        el.onanimationend = removeEl;
+                        setTimeout(removeEl, 4000);
+
+                        fragment.appendChild(el);
+                    }
+                    domRefs
+                        .reactionContainer
+                        .appendChild(fragment);
+                    if (navigator.vibrate) 
+                        navigator.vibrate(40);
+                    };
+                
+                const react = (emoji, e) => {
+                    if (e && typeof e.stopPropagation === 'function') 
+                        e.stopPropagation();
+                    triggerReaction(emoji);
+                    const mainBtn = domRefs
+                        .reactionWrapper
+                        .querySelector('.player-fab');
+                    if (mainBtn) {
+                        mainBtn.innerText = emoji;
+                        setTimeout(() => mainBtn.innerText = '🤍', 1500);
+                    }
+                    closeReactionMenu();
+                };
+
+                const initDrag = () => {
+                    const move = (e) => {
+                        if (!state.isDragging || window.innerWidth >= 768) 
+                            return;
+                        if (e.cancelable) 
+                            e.preventDefault();
+                        const y = e
+                            .type
+                            .includes('touch')
+                                ? e
+                                    .touches[0]
+                                    .clientY
+                                : e.clientY;
+                        state.currentY = Math.max(0, y - state.startY);
+                        domRefs
+                            .mobileSheet
+                            .querySelector('.story-sheet__content')
+                            .style
+                            .transform = `translateY(${state.currentY}px)`;
+                    };
+
+                    const end = () => {
+                        if (!state.isDragging || window.innerWidth >= 768) 
+                            return;
+                        state.isDragging = false;
+
+                        // Lepas listener move/end agar lebih ringan di memory
+                        window.removeEventListener('mousemove', move);
+                        window.removeEventListener('touchmove', move);
+                        window.removeEventListener('mouseup', end);
+                        window.removeEventListener('touchend', end);
+
+                        if (state.currentY > 120) 
+                            closeContext();
+                        else 
+                            domRefs
+                                .mobileSheet
+                                .querySelector('.story-sheet__content')
+                                .style
+                                .transform = '';
+                        state.currentY = 0;
+                    };
+
+                    const start = (e) => {
+                        if (window.innerWidth >= 768) 
+                            return;
+                        state.startY = e
+                            .type
+                            .includes('touch')
+                                ? e
+                                    .touches[0]
+                                    .clientY
+                                : e.clientY;
+                        state.isDragging = true;
+
+                        // Cuma bind saat user mulai nge-drag
+                        window.addEventListener('mousemove', move);
+                        window.addEventListener('touchmove', move, {passive: false});
+                        window.addEventListener('mouseup', end);
+                        window.addEventListener('touchend', end);
+                    };
+
+                    if (domRefs.mobileHandle) {
+                        domRefs
+                            .mobileHandle
+                            .addEventListener('mousedown', start);
+                        domRefs
+                            .mobileHandle
+                            .addEventListener('touchstart', start, {passive: true});
+                    }
+                };
+
+                initDrag();
+
+                return {
+                    startProgressBar,
+                    openContext,
+                    closeContext,
+                    toggleTextExpansion,
+                    nativeShare,
+                    react,
+                    toggleReactionMenu,
+                    toggleCleanMode,
+                    togglePlayPause,
+                    toggleMute
+                };
+            })();
+
             function onYouTubeIframeAPIReady() {
                 const ytOptions = {
                     videoId: 'kyPF1-VvOsQ',
@@ -949,23 +1354,25 @@
                                 .getElementById('layoutWrapper')
                                 .classList
                                 .add('is-ready');
-                            StoryManager.startProgressBar()
+                            StoryManager.startProgressBar();
                         },
                         'onStateChange': (e) => {
                             const btn = document.getElementById('btnPlayPause');
                             const container = document.getElementById('storyContainer');
+
+                            // FIX: Menangani status tombol UI berdasarkan state murni dari API
                             if (e.data === YT.PlayerState.PLAYING) {
                                 if (btn) 
                                     btn.innerText = '⏸️';
                                 container
                                     .classList
-                                    .remove('is-paused')
+                                    .remove('is-paused');
                             } else if (e.data === YT.PlayerState.PAUSED) {
                                 if (btn) 
                                     btn.innerText = '▶️';
                                 container
                                     .classList
-                                    .add('is-paused')
+                                    .add('is-paused');
                             } else if (e.data === YT.PlayerState.ENDED) {
                                 if (btn) 
                                     btn.innerText = '▶️';
@@ -980,7 +1387,7 @@
                                     .playVideo();
                                 container
                                     .classList
-                                    .remove('is-paused')
+                                    .remove('is-paused');
                             }
                         }
                     }
@@ -998,336 +1405,11 @@
                             document
                                 .getElementById('ambientPlayer')
                                 .style
-                                .opacity = '1'
+                                .opacity = '1';
                         }
                     }
-                })
-            }
-            const StoryManager = (() => {
-                const state = {
-                    isOpen: false,
-                    progressInterval: null,
-                    startY: 0,
-                    currentY: 0,
-                    isDragging: false,
-                    lastVideoTime: 0
-                };
-                const domRefs = {
-                    layoutWrapper: document.getElementById('layoutWrapper'),
-                    mainContainer: document.getElementById('storyContainer'),
-                    progressFill: document.getElementById('storyProgressFill'),
-                    mobileSheet: document.getElementById('storySheet'),
-                    mobileHandle: document.getElementById('storySheetHandle'),
-                    tabletPopup: document.getElementById('storyPopup'),
-                    dashboardCard: document.getElementById('storyCardDashboard'),
-                    contentTemplate: document.getElementById('storyContentTemplate'),
-                    reactionWrapper: document.getElementById('reactionWrapper'),
-                    btnPlayPause: document.getElementById('btnPlayPause'),
-                    btnMute: document.getElementById('btnMute'),
-                    iconEnter: document.getElementById('icon-enter-fs'),
-                    iconExit: document.getElementById('icon-exit-fs'),
-                    reactionContainer: document.getElementById('reaction-container')
-                };
-                const getActiveContext = () => {
-                    const w = window.innerWidth;
-                    if (w >= 1490) 
-                        return null;
-                    return w >= 768
-                        ? domRefs.tabletPopup
-                        : domRefs.mobileSheet
-                };
-                const injectTemplate = (el) => {
-                    const target = el.querySelector('.story-dynamic-area');
-                    if (target && target.innerHTML.trim() === '') {
-                        target.appendChild(domRefs.contentTemplate.content.cloneNode(true))
-                    }
-                };
-                [domRefs.mobileSheet, domRefs.tabletPopup, domRefs.dashboardCard].forEach(injectTemplate);
-                const startProgressBar = () => {
-                    if (state.progressInterval) 
-                        clearInterval(state.progressInterval);
-                    domRefs.progressFill.style.transition = 'none';
-                    domRefs.progressFill.style.width = '0%';
-                    state.lastVideoTime = 0;
-                    requestAnimationFrame(() => {
-                        requestAnimationFrame(() => {
-                            state.progressInterval = setInterval(() => {
-                                if (
-                                    !state.isOpen && player
-                                    ?.getPlayerState() === YT.PlayerState.PLAYING) {
-                                    const duration = player.getDuration();
-                                    const currentTime = player.getCurrentTime();
-                                    if (duration > 0) {
-                                        const percent = (currentTime / duration) * 100;
-                                        if (currentTime < state.lastVideoTime - 0.5 || currentTime < 0.2) {
-                                            domRefs.progressFill.style.transition = 'none';
-                                            domRefs.progressFill.style.width = '0%'
-                                        } else {
-                                            domRefs.progressFill.style.transition = 'width 0.1s linear';
-                                            domRefs.progressFill.style.width = `${percent}%`
-                                        }
-                                        state.lastVideoTime = currentTime
-                                    }
-                                }
-                            }, 50)
-                        })
-                    })
-                };
-                const togglePlayPause = (e) => {
-                    if (e) 
-                        e.stopPropagation();
-                    if (!player) 
-                        return;
-                    if (player.getPlayerState() === YT.PlayerState.PLAYING) {
-                        player.pauseVideo();
-                        if (ambientPlayer) 
-                            ambientPlayer.pauseVideo()
-                    } else {
-                        player.playVideo();
-                        if (ambientPlayer) 
-                            ambientPlayer.playVideo()
-                    }
-                };
-                const toggleMute = (e) => {
-                    if (e) 
-                        e.stopPropagation();
-                    if (!player) 
-                        return;
-                    if (player.isMuted()) {
-                        player.unMute();
-                        domRefs.btnMute.innerText = '🔊'
-                    } else {
-                        player.mute();
-                        domRefs.btnMute.innerText = '🔇'
-                    }
-                };
-                const openContext = () => {
-                    const ctx = getActiveContext();
-                    if (!ctx) 
-                        return;
-                    domRefs
-                        .mainContainer
-                        .classList
-                        .remove('is-clean-mode');
-                    domRefs.iconEnter.style.display = 'block';
-                    domRefs.iconExit.style.display = 'none';
-                    state.isOpen = true;
-                    domRefs
-                        .layoutWrapper
-                        .classList
-                        .add('is-ui-open');
-                    ctx
-                        .classList
-                        .add('is-active');
-                    const body = ctx.querySelector('.story-body');
-                    if (body) 
-                        body
-                            .classList
-                            .add('is-expanded');
-                    if (player) 
-                        player.pauseVideo();
-                    if (ambientPlayer) 
-                        ambientPlayer.pauseVideo();
-                    closeReactionMenu()
-                };
-                const closeContext = () => {
-                    state.isOpen = false;
-                    domRefs
-                        .layoutWrapper
-                        .classList
-                        .remove('is-ui-open');
-                    domRefs
-                        .mobileSheet
-                        .classList
-                        .remove('is-active');
-                    domRefs
-                        .tabletPopup
-                        .classList
-                        .remove('is-active');
-                    domRefs
-                        .mobileSheet
-                        .querySelector('.story-sheet__content')
-                        .style
-                        .transform = '';
-                    document
-                        .querySelectorAll('.story-body.is-expanded')
-                        .forEach(body => {
-                            if (window.innerWidth < 1490) 
-                                body
-                                    .classList
-                                    .remove('is-expanded');
-                            body.scrollTop = 0
-                        });
-                    if (player) 
-                        player.playVideo();
-                    if (ambientPlayer) 
-                        ambientPlayer.playVideo()
-                };
-                const toggleTextExpansion = (btn) => {
-                    const body = btn.closest('.story-body');
-                    const isExpanded = body
-                        .classList
-                        .toggle('is-expanded');
-                    btn.innerText = isExpanded
-                        ? "Sembunyikan"
-                        : "Baca Selengkapnya"
-                };
-                const toggleReactionMenu = (e) => {
-                    if (e) 
-                        e.stopPropagation();
-                    if (domRefs.reactionWrapper) 
-                        domRefs
-                            .reactionWrapper
-                            .classList
-                            .toggle('is-active')
-                    };
-                const closeReactionMenu = () => {
-                    if (domRefs.reactionWrapper) 
-                        domRefs
-                            .reactionWrapper
-                            .classList
-                            .remove('is-active')
-                    };
-                const toggleCleanMode = (e) => {
-                    if (e) 
-                        e.stopPropagation();
-                    closeReactionMenu();
-                    const isClean = domRefs
-                        .mainContainer
-                        .classList
-                        .toggle('is-clean-mode');
-                    domRefs.iconEnter.style.display = isClean
-                        ? 'none'
-                        : 'block';
-                    domRefs.iconExit.style.display = isClean
-                        ? 'block'
-                        : 'none'
-                };
-                document.addEventListener('click', (e) => {
-                    if (domRefs.reactionWrapper && !domRefs.reactionWrapper.contains(e.target)) 
-                        closeReactionMenu()
                 });
-                const nativeShare = async () => {
-                    const data = {
-                        title: 'Gaming Performa Cerdas 🔥',
-                        url: 'https://www.youtube.com/watch?v=kyPF1-VvOsQ'
-                    };
-                    try {
-                        if (navigator.share) 
-                            await navigator.share(data);
-                        else {
-                            navigator
-                                .clipboard
-                                .writeText(data.url);
-                            alert("Tautan berhasil disalin!")
-                        }
-                    } catch (e) {}
-                };
-                const triggerReaction = (char) => {
-                    const fragment = document.createDocumentFragment();
-                    for (let i = 0; i < 35; i++) {
-                        const el = document.createElement('div');
-                        el.className = 'particle';
-                        el.innerText = char;
-                        const depth = Math.random();
-                        el.style.cssText = `--x:${Math.random() * 100}%;--size:${ (depth * 1.2) + 1.2}rem;--blur:${depth < 0.2
-                            ? '2px'
-                            : '0px'};--z:${depth > 0.5
-                                ? 20
-                                : 1};--duration:${ 3500 - (depth * 1500)}ms;--delay:${Math.random() * 600}ms;--rotation:${ (Math.random() - 0.5) * 720}deg;--drift:${ (Math.random() - 0.5) * 120}px;`;
-                        el.onanimationend = () => el.remove();
-                        fragment.appendChild(el)
-                    }
-                    domRefs
-                        .reactionContainer
-                        .appendChild(fragment);
-                    if (navigator.vibrate) 
-                        navigator.vibrate(40)
-                };
-                const react = (emoji, e) => {
-                    if (e) 
-                        e.stopPropagation();
-                    triggerReaction(emoji);
-                    const mainBtn = domRefs
-                        .reactionWrapper
-                        .querySelector('.player-fab');
-                    if (mainBtn) {
-                        mainBtn.innerText = emoji;
-                        setTimeout(() => mainBtn.innerText = '🤍', 1500)
-                    }
-                    closeReactionMenu()
-                };
-                const initDrag = () => {
-                    const start = (e) => {
-                        if (window.innerWidth >= 768) 
-                            return;
-                        state.startY = e
-                            .type
-                            .includes('touch')
-                                ? e
-                                    .touches[0]
-                                    .clientY
-                                : e.clientY;
-                        state.isDragging = true
-                    };
-                    const move = (e) => {
-                        if (!state.isDragging || window.innerWidth >= 768) 
-                            return;
-                        const y = e
-                            .type
-                            .includes('touch')
-                                ? e
-                                    .touches[0]
-                                    .clientY
-                                : e.clientY;
-                        state.currentY = Math.max(0, y - state.startY);
-                        domRefs
-                            .mobileSheet
-                            .querySelector('.story-sheet__content')
-                            .style
-                            .transform = `translateY(${state.currentY}px)`
-                    };
-                    const end = () => {
-                        if (!state.isDragging || window.innerWidth >= 768) 
-                            return;
-                        state.isDragging = false;
-                        if (state.currentY > 120) 
-                            closeContext();
-                        else 
-                            domRefs
-                                .mobileSheet
-                                .querySelector('.story-sheet__content')
-                                .style
-                                .transform = '';
-                        state.currentY = 0
-                    };
-                    if (domRefs.mobileHandle) {
-                        domRefs
-                            .mobileHandle
-                            .addEventListener('mousedown', start);
-                        domRefs
-                            .mobileHandle
-                            .addEventListener('touchstart', start, {passive: true})
-                    }
-                    window.addEventListener('mousemove', move);
-                    window.addEventListener('touchmove', move, {passive: false});
-                    window.addEventListener('mouseup', end);
-                    window.addEventListener('touchend', end)
-                };
-                initDrag();
-                return {
-                    startProgressBar,
-                    openContext,
-                    closeContext,
-                    toggleTextExpansion,
-                    nativeShare,
-                    react,
-                    toggleReactionMenu,
-                    toggleCleanMode,
-                    togglePlayPause,
-                    toggleMute
-                }
-            })();
+            }
         </script>
     </body>
 </html>
