@@ -17,6 +17,7 @@
                 --ease-out: cubic-bezier(0.25,1,0.5,1);
                 --ease-spring: cubic-bezier(0.34,1.5,0.64,1);
                 --card-width: 420px;
+                --desktop-gap: 40px;
                 --fab-size: 44px;
                 --frame-radius: 12px;
             }
@@ -31,6 +32,13 @@
                 font-family: -apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,sans-serif;
                 overflow: hidden;
                 color: var(--text-main);
+            }
+
+            /* Point 5: Aksesibilitas (Focus Outline) */
+            .story-excerpt:focus-visible,
+            button:focus-visible {
+                outline: 2px solid var(--brand-red);
+                outline-offset: 2px;
             }
 
             /* =========================================================
@@ -59,8 +67,6 @@
                 width: 100%;
                 transition: padding 0.7s var(--ease-spring);
             }
-
-            /* Wrapper Penggerak Animasi Shift */
             .story-group-wrapper {
                 position: relative;
                 display: flex;
@@ -160,7 +166,6 @@
                 touch-action: manipulation;
             }
 
-            /* Play/Pause Center Indicator */
             .story-center-play {
                 position: absolute;
                 top: 50%;
@@ -307,7 +312,6 @@
                 text-shadow: 0 1px 8px rgba(0,0,0,0.6);
             }
 
-            /* Universal Button Style */
             .player-fab {
                 width: var(--fab-size);
                 height: var(--fab-size);
@@ -331,7 +335,6 @@
                 transform: scale(0.95);
             }
 
-            /* Reactions */
             .reaction-wrapper {
                 position: relative;
                 display: flex;
@@ -408,7 +411,6 @@
                 transition-delay: 0.15s;
             }
 
-            /* Trigger Animasi Muncul UI Dalam Video */
             .layout-wrapper.is-ready .story-excerpt,
             .layout-wrapper.is-ready .story-player-actions,
             .layout-wrapper.is-ready .story-progress-bar,
@@ -419,26 +421,39 @@
             }
 
             /* =========================================================
-               EXTERNAL UI (CLOSE & NAV) - DIJAMIN TAMPIL
-               Diposisikan absolut terhadap layar (viewport)
+               EXTERNAL UI WRAPPER (Point 2: Keselarasan Posisi)
                ========================================================= */
-            .story-close-player {
+            .desktop-controls-wrapper {
                 position: fixed;
+                right: 16px;
+                top: 0;
+                bottom: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                pointer-events: none;
                 z-index: 50;
                 opacity: 0;
-                pointer-events: none;
                 transition: opacity 0.8s var(--ease-out);
             }
-            .external-nav-group {
+            .layout-wrapper.is-ready .desktop-controls-wrapper {
+                opacity: 1;
+            }
+            .desktop-controls-wrapper > * {
+                pointer-events: auto;
+            }
+
+            /* Di mobile, tombol close tetap absolute di pojok karena tidak tergabung dalam flex tengah */
+            .story-close-player {
                 position: fixed;
+                top: max(32px, env(safe-area-inset-top));
+                right: 16px;
+            }
+            .external-nav-group {
                 display: none;
                 flex-direction: column;
                 gap: 12px;
-                z-index: 50;
-                opacity: 0;
-                transition: opacity 0.6s var(--ease-out);
             }
-
             .external-nav-btn {
                 width: var(--fab-size);
                 height: var(--fab-size);
@@ -466,21 +481,9 @@
                 pointer-events: none;
             }
 
-            /* Pastikan Nav dan Close muncul saat video load */
-            .layout-wrapper.is-ready .story-close-player {
-                opacity: 1;
-                pointer-events: auto;
-            }
-            .layout-wrapper.is-ready .external-nav-group {
-                opacity: 1;
-                pointer-events: auto;
-            }
-
             /* =========================================================
-               LOGIKA CLEAN MODE (RAPI DAN TEPAT SASARAN)
+               LOGIKA CLEAN MODE
                ========================================================= */
-
-            /* 1. Aturan Global Clean Mode (Tablet & Desktop) */
             .layout-wrapper.is-clean-mode .reaction-wrapper,
             .layout-wrapper.is-clean-mode .share-fab,
             .layout-wrapper.is-clean-mode .story-excerpt,
@@ -497,8 +500,6 @@
                 opacity: 0 !important;
                 visibility: hidden !important;
             }
-
-            /* Ganti ikon toggle murni CSS */
             .layout-wrapper.is-clean-mode #icon-enter-fs {
                 display: none !important;
             }
@@ -506,7 +507,6 @@
                 display: block !important;
             }
 
-            /* 2. Pengecualian Clean Mode untuk MOBILE (< 768px) */
             @media(max-width: 767px) {
                 .layout-wrapper.is-clean-mode .story-close-player {
                     opacity: 0 !important;
@@ -516,7 +516,7 @@
             }
 
             /* =========================================================
-               MODALS, POPUPS, AND CARDS (KONTEKS BACAAN)
+               MODALS, POPUPS, AND CARDS
                ========================================================= */
             .story-card {
                 display: none;
@@ -634,7 +634,6 @@
                 transform: translateY(0);
             }
 
-            /* Tombol Close Modal (Di dalam Card/Popup) */
             .story-close-btn {
                 position: absolute;
                 top: 16px;
@@ -680,6 +679,7 @@
                 color: #888;
                 display: block;
             }
+
             .story-body {
                 flex: 1 1 auto;
                 overflow-y: auto;
@@ -782,14 +782,10 @@
                 .story-group-wrapper {
                     width: 100%;
                 }
-
-                /* Close Button dalam area video Mobile */
-                .story-close-player {
-                    top: max(32px, env(safe-area-inset-top));
-                    right: 16px;
+                .story-header {
+                    padding: 0 28px;
                 }
 
-                /* Efek saat Modal Terbuka */
                 .layout-wrapper.is-ui-open .story-viewport {
                     filter: blur(12px) brightness(0.5);
                     transform: scale(0.97);
@@ -824,26 +820,25 @@
                     box-shadow: 0 24px 64px rgba(0,0,0,0.4);
                 }
 
-                /* Navigasi & Close di Kanan Luar Video */
+                /* Layout Wrapper untuk Navigasi Sejajar */
+                .desktop-controls-wrapper {
+                    right: 32px;
+                }
                 .external-nav-group {
                     display: flex;
-                    right: 32px;
-                    top: 50%;
-                    transform: translateY(-50%);
+                    margin-top: auto;
+                    margin-bottom: auto;
                 }
                 .story-close-player {
-                    right: 32px;
+                    position: relative;
                     top: max(32px, env(safe-area-inset-top));
+                    right: auto;
                 }
 
-                /* Sembunyikan Nav/Close saat Popup Tablet Terbuka */
-                .layout-wrapper.is-ui-open .external-nav-group,
-                .layout-wrapper.is-ui-open .story-close-player {
+                .layout-wrapper.is-ui-open .desktop-controls-wrapper {
                     opacity: 0;
                     pointer-events: none;
                 }
-
-                /* Efek saat Modal Terbuka */
                 .layout-wrapper.is-ui-open .story-viewport {
                     filter: blur(12px) brightness(0.6);
                     transform: scale(0.97);
@@ -866,8 +861,6 @@
                     display: block;
                     opacity: 0.6;
                 }
-
-                /* Wrapper memeluk ukuran Video */
                 .story-group-wrapper {
                     width: max-content;
                     height: calc(100dvh - 80px);
@@ -884,12 +877,9 @@
                     z-index: 10;
                 }
 
-                /* ANIMASI SHIFT (Geser Video ke Kiri) */
                 .layout-wrapper.is-ui-open .story-group-wrapper {
                     transform: translateX(calc((var(--card-width) + 16px) / -2));
                 }
-
-                /* Card Desktop (Tertanam posisi Fixed, merapat sempurna ke sebelah kiri tombol Navigasi) */
                 .story-card {
                     display: flex;
                     position: fixed;
@@ -902,34 +892,33 @@
                     transition: all 0.6s var(--ease-spring);
                     z-index: 15;
                 }
-
-                /* 100px = (40px margin kanan viewport) + (44px lebar tombol nav) + (16px jarak aman/gap) */
                 .layout-wrapper.is-ui-open .story-card {
                     opacity: 1;
                     pointer-events: auto;
                     right: 100px;
                 }
 
-                /* Navigasi & Close di Pojok Kanan Layar (Menempel Viewport, Tidak Bergeser) */
+                /* Layout Wrapper untuk Navigasi Sejajar */
+                .desktop-controls-wrapper {
+                    right: 40px;
+                }
                 .external-nav-group {
                     display: flex;
-                    right: 40px;
-                    top: 50%;
-                    transform: translateY(-50%);
+                    margin-top: auto;
+                    margin-bottom: auto;
                 }
                 .story-close-player {
-                    right: 40px;
+                    position: relative;
                     top: max(40px, env(safe-area-inset-top));
+                    right: auto;
                 }
 
-                /* DI DESKTOP, Nav & Close TETAP TAMPIL meski Card terbuka */
-                .layout-wrapper.is-ui-open .external-nav-group,
-                .layout-wrapper.is-ui-open .story-close-player {
+                /* Tetap tampil meski popup terbuka */
+                .layout-wrapper.is-ui-open .desktop-controls-wrapper {
                     opacity: 1;
                     pointer-events: auto;
                 }
 
-                /* Hilangkan teks ganda dan halangan, sisakan UI interaksi Video */
                 .layout-wrapper.is-ui-open .story-excerpt {
                     opacity: 0;
                     pointer-events: none;
@@ -943,11 +932,10 @@
         </style>
     </head>
     <body>
-        <div class="layout-wrapper" id="layoutWrapper">
+        <div class="layout-wrapper" id="layoutWrapper" tabindex="-1">
             <div class="desktop-slider">
 
                 <div class="story-group-wrapper" id="storyGroupWrapper">
-
                     <div class="story-container" id="storyContainer">
                         <div class="ambient-layer">
                             <div id="ambientPlayer"></div>
@@ -971,10 +959,9 @@
 
                             <div class="story-click-layer" onclick="StoryManager.handleStoryClick(event)"></div>
                             <div id="reaction-container"></div>
-
                             <div class="story-center-play" id="centerPlayIndicator" aria-hidden="true">▶️</div>
 
-                            <div class="story-excerpt" onclick="StoryManager.openContext()">
+                            <div class="story-excerpt" role="button" tabindex="0" onclick="StoryManager.openContext()" onkeydown="if(event.key==='Enter' || event.key===' ') StoryManager.openContext()">
                                 <span class="story-excerpt__badge">Kategori</span>
                                 <h2 class="story-excerpt__title">Judul Video</h2>
                                 <div class="story-excerpt__text">Deskripsi singkat video...</div>
@@ -983,16 +970,16 @@
                             <div class="story-player-actions">
                                 <div class="reaction-wrapper" id="reactionWrapper">
                                     <div class="reaction-options">
-                                        <button class="reaction-option-btn" onclick="StoryManager.react('❤️',event)">❤️</button>
-                                        <button class="reaction-option-btn" onclick="StoryManager.react('🔥',event)">🔥</button>
-                                        <button class="reaction-option-btn" onclick="StoryManager.react('🤣',event)">🤣</button>
-                                        <button class="reaction-option-btn" onclick="StoryManager.react('👏🏻',event)">👏🏻</button>
-                                        <button class="reaction-option-btn" onclick="StoryManager.react('😭',event)">😭</button>
+                                        <button class="reaction-option-btn" aria-label="Beri reaksi Hati" onclick="StoryManager.react('❤️',event)">❤️</button>
+                                        <button class="reaction-option-btn" aria-label="Beri reaksi Api" onclick="StoryManager.react('🔥',event)">🔥</button>
+                                        <button class="reaction-option-btn" aria-label="Beri reaksi Tertawa" onclick="StoryManager.react('🤣',event)">🤣</button>
+                                        <button class="reaction-option-btn" aria-label="Beri reaksi Tepuk Tangan" onclick="StoryManager.react('👏🏻',event)">👏🏻</button>
+                                        <button class="reaction-option-btn" aria-label="Beri reaksi Menangis" onclick="StoryManager.react('😭',event)">😭</button>
                                     </div>
-                                    <button class="player-fab" onclick="StoryManager.toggleReactionMenu(event)">🤍</button>
+                                    <button class="player-fab" aria-label="Pilih Reaksi" aria-expanded="false" onclick="StoryManager.toggleReactionMenu(event)">🤍</button>
                                 </div>
-                                <button class="player-fab share-fab" onclick="StoryManager.nativeShare()">🔗</button>
-                                <button class="player-fab fullscreen-fab" onclick="StoryManager.toggleCleanMode(event)">
+                                <button class="player-fab share-fab" aria-label="Bagikan Tautan" onclick="StoryManager.nativeShare()">🔗</button>
+                                <button class="player-fab fullscreen-fab" aria-label="Mode Bersih" onclick="StoryManager.toggleCleanMode(event)">
                                     <span id="icon-enter-fs">🔲</span><span id="icon-exit-fs" style="display:none">✖️</span>
                                 </button>
                             </div>
@@ -1005,12 +992,13 @@
                     <div class="story-dynamic-area"></div>
                 </div>
 
-                <div class="external-nav-group">
-                    <button id="btnPrevStory" class="external-nav-btn" aria-label="Video Sebelumnya" onclick="StoryManager.prevVideo(event)">🔼</button>
-                    <button id="btnNextStory" class="external-nav-btn" aria-label="Video Selanjutnya" onclick="StoryManager.nextVideo(event)">🔽</button>
+                <div class="desktop-controls-wrapper">
+                    <button class="player-fab story-close-player" aria-label="Tutup Story" onclick="StoryManager.closeStory(event)">✖️</button>
+                    <div class="external-nav-group">
+                        <button id="btnPrevStory" class="external-nav-btn" aria-label="Video Sebelumnya" onclick="StoryManager.prevVideo(event)">🔼</button>
+                        <button id="btnNextStory" class="external-nav-btn" aria-label="Video Selanjutnya" onclick="StoryManager.nextVideo(event)">🔽</button>
+                    </div>
                 </div>
-
-                <button class="player-fab story-close-player" aria-label="Tutup Story" onclick="StoryManager.closeStory(event)">✖️</button>
 
             </div>
 
@@ -1026,7 +1014,7 @@
             <div class="story-popup" id="storyPopup" aria-modal="true" role="dialog">
                 <div class="story-popup__backdrop overlay-backdrop" onclick="StoryManager.closeContext()"></div>
                 <div class="story-popup__content">
-                    <button class="story-close-btn" onclick="StoryManager.closeContext()">✖️</button>
+                    <button class="story-close-btn" aria-label="Tutup Detail" onclick="StoryManager.closeContext()">✖️</button>
                     <div class="story-dynamic-area"></div>
                 </div>
             </div>
@@ -1035,10 +1023,10 @@
         <template id="storyContentTemplate">
             <div class="story-view is-active">
                 <div class="story-header">
-                    <h3 class="story-view__title">Judul</h3>
+                    <h3 class="story-view__title" tabindex="0">Judul</h3>
                     <span class="story-view__meta" id="storyMeta">Informasi • Meta</span>
                 </div>
-                <div class="story-body">
+                <div class="story-body" tabindex="0">
                     <div class="story-body__cms-content"></div>
                 </div>
             </div>
@@ -1205,27 +1193,25 @@
                 };
 
                 const checkNavState = () => {
-                    if (domRefs.btnPrevStory) {
+                    if (domRefs.btnPrevStory) 
                         domRefs
                             .btnPrevStory
                             .classList
                             .toggle('is-disabled', currentVideoIndex === 0);
-                    }
-                    if (domRefs.btnNextStory) {
+                    if (domRefs.btnNextStory) 
                         domRefs
                             .btnNextStory
                             .classList
                             .toggle('is-disabled', currentVideoIndex === videoPlaylist.length - 1);
-                    }
-                };
-
+                    };
+                
                 const nextVideo = (e) => {
                     if (e) 
                         e.stopPropagation();
                     if (currentVideoIndex < videoPlaylist.length - 1) {
                         currentVideoIndex++;
                         if (state.isOpen) 
-                            closeContext(); // FIX: Menutup panel info sebelum berpindah video
+                            closeContext();
                         updateVideoUI();
                     }
                 };
@@ -1236,7 +1222,7 @@
                     if (currentVideoIndex > 0) {
                         currentVideoIndex--;
                         if (state.isOpen) 
-                            closeContext(); // FIX: Menutup panel info sebelum berpindah video
+                            closeContext();
                         updateVideoUI();
                     }
                 };
@@ -1320,6 +1306,35 @@
                     }
                 };
 
+                // Point 5: Focus Trap
+                const trapFocus = (e) => {
+                    if (!state.isOpen) 
+                        return;
+                    const activeCtx = getActiveContext();
+                    const focusableElements = activeCtx.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+                    if (focusableElements.length === 0) 
+                        return;
+                    
+                    const firstElement = focusableElements[0];
+                    const lastElement = focusableElements[focusableElements.length - 1];
+
+                    if (e.key === 'Tab') {
+                        if (e.shiftKey) {
+                            if (document.activeElement === firstElement) {
+                                lastElement.focus();
+                                e.preventDefault();
+                            }
+                        } else {
+                            if (document.activeElement === lastElement) {
+                                firstElement.focus();
+                                e.preventDefault();
+                            }
+                        }
+                    } else if (e.key === 'Escape') {
+                        closeContext();
+                    }
+                };
+
                 const openContext = () => {
                     const ctx = getActiveContext();
                     if (!ctx) 
@@ -1348,8 +1363,14 @@
                             ambientPlayer.pauseVideo();
                         }
                     closeReactionMenu();
-                };
 
+                    // Init Focus Trap
+                    document.addEventListener('keydown', trapFocus);
+                    const closeBtn = ctx.querySelector('.story-close-btn');
+                    if (closeBtn) 
+                        setTimeout(() => closeBtn.focus(), 100);
+                    };
+                
                 const closeContext = () => {
                     if (!state.isOpen) 
                         return;
@@ -1384,7 +1405,12 @@
                         if (ambientPlayer && typeof ambientPlayer.playVideo === 'function') 
                             ambientPlayer.playVideo();
                         }
-                    };
+                    
+                    document.removeEventListener('keydown', trapFocus);
+                    domRefs
+                        .layoutWrapper
+                        .focus(); // Kembalikan fokus ke area utama
+                };
 
                 window.addEventListener('resize', () => {
                     if (state.isOpen) 
@@ -1398,9 +1424,8 @@
                     }
                 });
 
-                // Dukungan Aksesibilitas Keyboard
                 document.addEventListener('keydown', (e) => {
-                    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') 
+                    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || state.isOpen) 
                         return;
                     if (e.code === 'Space') {
                         e.preventDefault();
@@ -1415,21 +1440,31 @@
                 const toggleReactionMenu = (e) => {
                     if (e) 
                         e.stopPropagation();
-                    if (domRefs.reactionWrapper) 
-                        domRefs
+                    if (domRefs.reactionWrapper) {
+                        const isActive = domRefs
                             .reactionWrapper
                             .classList
                             .toggle('is-active');
-                    };
-                
+                        e
+                            .currentTarget
+                            .setAttribute('aria-expanded', isActive);
+                    }
+                };
+
                 const closeReactionMenu = () => {
-                    if (domRefs.reactionWrapper) 
+                    if (domRefs.reactionWrapper) {
                         domRefs
                             .reactionWrapper
                             .classList
                             .remove('is-active');
+                        const btn = domRefs
+                            .reactionWrapper
+                            .querySelector('.player-fab');
+                        if (btn) 
+                            btn.setAttribute('aria-expanded', 'false');
+                        }
                     };
-                
+
                 const toggleCleanMode = (e) => {
                     if (e) {
                         e.preventDefault();
@@ -1465,6 +1500,7 @@
                     } catch (e) {}
                 };
 
+                // Point 3: Clean up JavaScript (Redundansi partikel dihapus)
                 const triggerReaction = (char) => {
                     const fragment = document.createDocumentFragment();
                     for (let i = 0; i < 35; i++) {
@@ -1478,10 +1514,7 @@
                                 ? 20
                                 : 1};--duration:${ 3500 - (depth * 1500)}ms;--delay:${Math.random() * 600}ms;--rotation:${ (Math.random() - 0.5) * 720}deg;--drift:${ (Math.random() - 0.5) * 120}px;`;
 
-                        const removeEl = () => el.remove();
-                        el.onanimationend = removeEl;
-                        setTimeout(removeEl, 4000);
-
+                        el.onanimationend = () => el.remove(); // Otomatis hapus setelah animasi selesai
                         fragment.appendChild(el);
                     }
                     domRefs
@@ -1506,24 +1539,31 @@
                 };
 
                 const initDrag = () => {
+                    let rAFDrag = null; // Throttle untuk performa drag (Point 3)
+
                     const move = (e) => {
                         if (!state.isDragging || window.innerWidth >= 768) 
                             return;
                         if (e.cancelable) 
                             e.preventDefault();
-                        const y = e
-                            .type
-                            .includes('touch')
-                                ? e
-                                    .touches[0]
-                                    .clientY
-                                : e.clientY;
-                        state.currentY = Math.max(0, y - state.startY);
-                        domRefs
-                            .mobileSheet
-                            .querySelector('.story-sheet__content')
-                            .style
-                            .transform = `translateY(${state.currentY}px)`;
+                        
+                        if (rAFDrag) 
+                            cancelAnimationFrame(rAFDrag);
+                        rAFDrag = requestAnimationFrame(() => {
+                            const y = e
+                                .type
+                                .includes('touch')
+                                    ? e
+                                        .touches[0]
+                                        .clientY
+                                    : e.clientY;
+                            state.currentY = Math.max(0, y - state.startY);
+                            domRefs
+                                .mobileSheet
+                                .querySelector('.story-sheet__content')
+                                .style
+                                .transform = `translateY(${state.currentY}px)`;
+                        });
                     };
 
                     const end = () => {
@@ -1670,38 +1710,37 @@
                                 StoryManager.stopProgressBar();
                             } else if (e.data === YT.PlayerState.ENDED) {
                                 StoryManager.stopProgressBar();
-                                if (currentVideoIndex < videoPlaylist.length - 1) {
-                                    StoryManager.nextVideo();
-                                } else {
-                                    e
-                                        .target
-                                        .seekTo(0);
-                                    e
-                                        .target
-                                        .playVideo();
-                                }
+                                e
+                                    .target
+                                    .seekTo(0);
+                                e
+                                    .target
+                                    .playVideo();
                             }
                         }
                     }
                 });
 
-                ambientPlayer = new YT.Player('ambientPlayer', {
-                    ...ytOptions,
-                    events: {
-                        'onReady': (e) => {
-                            e
-                                .target
-                                .mute();
-                            e
-                                .target
-                                .playVideo();
-                            document
-                                .getElementById('ambientPlayer')
-                                .style
-                                .opacity = '1';
+                // Point 1: Performa (Hanya load ambient player jika lebar >= 768px Tablet/Desktop)
+                if (window.innerWidth >= 768) {
+                    ambientPlayer = new YT.Player('ambientPlayer', {
+                        ...ytOptions,
+                        events: {
+                            'onReady': (e) => {
+                                e
+                                    .target
+                                    .mute();
+                                e
+                                    .target
+                                    .playVideo();
+                                document
+                                    .getElementById('ambientPlayer')
+                                    .style
+                                    .opacity = '1';
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
 
             loadYouTubeAPI();
