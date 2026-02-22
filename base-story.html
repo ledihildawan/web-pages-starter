@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-        <title>Telkomsel Story - No Auto Next</title>
+        <title>Telkomsel Story - The Perfect Masterpiece</title>
         <style>
             :root {
                 --brand-red: #EE2D24;
@@ -17,7 +17,6 @@
                 --ease-out: cubic-bezier(0.25,1,0.5,1);
                 --ease-spring: cubic-bezier(0.34,1.5,0.64,1);
                 --card-width: 420px;
-                --desktop-gap: 40px;
                 --fab-size: 44px;
                 --frame-radius: 12px;
             }
@@ -34,6 +33,9 @@
                 color: var(--text-main);
             }
 
+            /* =========================================================
+               LAYOUT UTAMA
+               ========================================================= */
             .layout-wrapper {
                 position: relative;
                 display: flex;
@@ -42,24 +44,33 @@
                 height: 100dvh;
                 width: 100vw;
                 touch-action: pan-y;
+                opacity: 0;
                 transition: opacity 0.5s var(--ease-out);
             }
+            .layout-wrapper.is-ready {
+                opacity: 1;
+            }
+
             .desktop-slider {
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 height: 100dvh;
                 width: 100%;
-                gap: var(--desktop-gap);
-                transition: gap 0.7s var(--ease-spring),padding 0.7s var(--ease-spring);
+                transition: padding 0.7s var(--ease-spring);
             }
 
+            /* Wrapper Penggerak Animasi Shift */
             .story-group-wrapper {
                 position: relative;
                 display: flex;
                 align-items: center;
+                justify-content: center;
                 height: 100dvh;
+                width: 100%;
+                transition: transform 0.6s var(--ease-spring);
             }
+
             .story-container {
                 position: relative;
                 height: 100dvh;
@@ -109,8 +120,8 @@
                 background: transparent;
                 overflow: hidden;
                 border-radius: inherit;
-                transition: filter 0.6s var(--ease-out);
-                will-change: filter;
+                transition: filter 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+                will-change: filter, transform;
             }
             .story-video-wrapper {
                 position: relative;
@@ -149,6 +160,7 @@
                 touch-action: manipulation;
             }
 
+            /* Play/Pause Center Indicator */
             .story-center-play {
                 position: absolute;
                 top: 50%;
@@ -196,6 +208,9 @@
                 opacity: 0;
             }
 
+            /* =========================================================
+               UI ELEMENTS DALAM VIDEO
+               ========================================================= */
             .story-progress-bar {
                 position: absolute;
                 top: max(16px,env(safe-area-inset-top));
@@ -231,16 +246,6 @@
                 transform: translateY(-20px);
                 transition: opacity 0.8s var(--ease-out),transform 0.8s var(--ease-spring);
             }
-            .story-close-player {
-                position: absolute;
-                top: max(32px,env(safe-area-inset-top));
-                right: 16px;
-                z-index: 30;
-                opacity: 0;
-                pointer-events: none;
-                transform: translateY(-20px);
-                transition: opacity 0.8s var(--ease-out),transform 0.8s var(--ease-spring);
-            }
 
             .story-excerpt {
                 position: absolute;
@@ -269,37 +274,6 @@
                 pointer-events: none;
                 transform: translateY(20px);
                 transition: opacity 0.8s var(--ease-out),transform 0.8s var(--ease-spring);
-            }
-
-            .story-card {
-                display: none;
-                width: var(--card-width);
-                height: auto;
-                max-height: calc(100dvh - 80px);
-                background: var(--surface);
-                border-radius: var(--frame-radius);
-                padding: 32px 0 0;
-                z-index: 20;
-                position: relative;
-                flex-direction: column;
-                overflow: hidden;
-                box-shadow: 0 32px 72px rgba(0,0,0,0.3);
-                border: 1px solid rgba(255,255,255,0.05);
-                opacity: 0;
-                pointer-events: none;
-                transform: translateY(20px);
-                transition: opacity 0.8s var(--ease-out),transform 0.8s var(--ease-spring);
-            }
-
-            .layout-wrapper.is-ready .story-card,
-            .layout-wrapper.is-ready .story-close-player,
-            .layout-wrapper.is-ready .story-excerpt,
-            .layout-wrapper.is-ready .story-player-actions,
-            .layout-wrapper.is-ready .story-progress-bar,
-            .layout-wrapper.is-ready .story-top-actions {
-                opacity: 1;
-                pointer-events: auto;
-                transform: translateY(0);
             }
 
             .story-excerpt__badge {
@@ -333,6 +307,7 @@
                 text-shadow: 0 1px 8px rgba(0,0,0,0.6);
             }
 
+            /* Universal Button Style */
             .player-fab {
                 width: var(--fab-size);
                 height: var(--fab-size);
@@ -348,56 +323,15 @@
                 justify-content: center;
                 cursor: pointer;
                 box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-                transition: background 0.3s,box-shadow 0.3s, opacity 0.3s;
+                transition: background 0.3s,box-shadow 0.3s, opacity 0.3s, transform 0.3s;
             }
             .player-fab:active {
                 background: rgba(255,255,255,0.1);
                 box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            }
-
-            .external-nav-group {
-                position: absolute;
-                left: -70px;
-                top: 50%;
-                transform: translateY(-50%);
-                display: flex;
-                flex-direction: column;
-                gap: 12px;
-                z-index: 20;
-                opacity: 0;
-                transition: opacity 0.8s var(--ease-out);
-            }
-            .layout-wrapper.is-ready .external-nav-group {
-                opacity: 1;
-            }
-            .external-nav-btn {
-                width: var(--fab-size);
-                height: var(--fab-size);
-                border-radius: 50%;
-                background: var(--glass-bg);
-                backdrop-filter: blur(16px);
-                -webkit-backdrop-filter: blur(16px);
-                border: 1px solid var(--glass-border);
-                color: #fff;
-                font-size: 20px;
-                cursor: pointer;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-                transition: background 0.3s ease, transform 0.2s ease, opacity 0.3s ease;
-            }
-            .external-nav-btn:active:not(.is-disabled) {
-                background: rgba(255,255,255,0.1);
                 transform: scale(0.95);
             }
 
-            .external-nav-btn.is-disabled {
-                opacity: 0.3;
-                cursor: not-allowed;
-                pointer-events: none;
-            }
-
+            /* Reactions */
             .reaction-wrapper {
                 position: relative;
                 display: flex;
@@ -424,7 +358,6 @@
                 border-radius: 50%;
                 background: var(--glass-bg);
                 backdrop-filter: blur(16px);
-                -webkit-backdrop-filter: blur(16px);
                 border: 1px solid var(--glass-border);
                 color: #fff;
                 font-size: 20px;
@@ -439,6 +372,7 @@
             }
             .reaction-option-btn:active {
                 background: rgba(255,255,255,0.1);
+                transform: scale(0.9);
             }
             .reaction-wrapper.is-active .reaction-option-btn {
                 opacity: 1;
@@ -474,32 +408,131 @@
                 transition-delay: 0.15s;
             }
 
-            .story-container.is-clean-mode .reaction-wrapper,
-            .story-container.is-clean-mode .share-fab,
-            .story-container.is-clean-mode .story-close-player,
-            .story-container.is-clean-mode .story-excerpt {
-                opacity: 0!important;
-                pointer-events: none!important;
-                transform: translateY(20px)!important;
-            }
-            .story-container.is-clean-mode .story-close-player {
-                transform: translateY(-20px)!important;
-            }
-            .story-container.is-clean-mode .story-top-actions {
-                opacity: 0!important;
-                pointer-events: none!important;
-                transform: translateY(-20px)!important;
-            }
-            .story-container.is-clean-mode .story-video-wrapper::after {
-                display: none!important;
-            }
-            .story-container.is-clean-mode #icon-enter-fs {
-                display: none;
-            }
-            .story-container.is-clean-mode #icon-exit-fs {
-                display: block!important;
+            /* Trigger Animasi Muncul UI Dalam Video */
+            .layout-wrapper.is-ready .story-excerpt,
+            .layout-wrapper.is-ready .story-player-actions,
+            .layout-wrapper.is-ready .story-progress-bar,
+            .layout-wrapper.is-ready .story-top-actions {
+                opacity: 1;
+                pointer-events: auto;
+                transform: translateY(0);
             }
 
+            /* =========================================================
+               EXTERNAL UI (CLOSE & NAV) - DIJAMIN TAMPIL
+               Diposisikan absolut terhadap layar (viewport)
+               ========================================================= */
+            .story-close-player {
+                position: fixed;
+                z-index: 50;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.8s var(--ease-out);
+            }
+            .external-nav-group {
+                position: fixed;
+                display: none;
+                flex-direction: column;
+                gap: 12px;
+                z-index: 50;
+                opacity: 0;
+                transition: opacity 0.6s var(--ease-out);
+            }
+
+            .external-nav-btn {
+                width: var(--fab-size);
+                height: var(--fab-size);
+                border-radius: 50%;
+                background: var(--glass-bg);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                border: 1px solid var(--glass-border);
+                color: #fff;
+                font-size: 20px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+                transition: background 0.3s ease, transform 0.2s ease, opacity 0.3s ease;
+            }
+            .external-nav-btn:active:not(.is-disabled) {
+                background: rgba(255,255,255,0.1);
+                transform: scale(0.95);
+            }
+            .external-nav-btn.is-disabled {
+                opacity: 0.3;
+                cursor: not-allowed;
+                pointer-events: none;
+            }
+
+            /* Pastikan Nav dan Close muncul saat video load */
+            .layout-wrapper.is-ready .story-close-player {
+                opacity: 1;
+                pointer-events: auto;
+            }
+            .layout-wrapper.is-ready .external-nav-group {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            /* =========================================================
+               LOGIKA CLEAN MODE (RAPI DAN TEPAT SASARAN)
+               ========================================================= */
+
+            /* 1. Aturan Global Clean Mode (Tablet & Desktop) */
+            .layout-wrapper.is-clean-mode .reaction-wrapper,
+            .layout-wrapper.is-clean-mode .share-fab,
+            .layout-wrapper.is-clean-mode .story-excerpt,
+            .layout-wrapper.is-clean-mode .story-progress-bar,
+            .layout-wrapper.is-clean-mode .story-top-actions {
+                opacity: 0 !important;
+                pointer-events: none !important;
+                visibility: hidden !important;
+            }
+            .layout-wrapper.is-clean-mode .story-top-actions {
+                transform: translateY(-20px) !important;
+            }
+            .layout-wrapper.is-clean-mode .story-video-wrapper::after {
+                opacity: 0 !important;
+                visibility: hidden !important;
+            }
+
+            /* Ganti ikon toggle murni CSS */
+            .layout-wrapper.is-clean-mode #icon-enter-fs {
+                display: none !important;
+            }
+            .layout-wrapper.is-clean-mode #icon-exit-fs {
+                display: block !important;
+            }
+
+            /* 2. Pengecualian Clean Mode untuk MOBILE (< 768px) */
+            @media(max-width: 767px) {
+                .layout-wrapper.is-clean-mode .story-close-player {
+                    opacity: 0 !important;
+                    pointer-events: none !important;
+                    visibility: hidden !important;
+                }
+            }
+
+            /* =========================================================
+               MODALS, POPUPS, AND CARDS (KONTEKS BACAAN)
+               ========================================================= */
+            .story-card {
+                display: none;
+                width: var(--card-width);
+                height: auto;
+                max-height: calc(100dvh - 80px);
+                background: var(--surface);
+                border-radius: var(--frame-radius);
+                padding: 24px 0 0;
+                z-index: 30;
+                position: relative;
+                flex-direction: column;
+                overflow: hidden;
+                box-shadow: 0 32px 72px rgba(0,0,0,0.3);
+                border: 1px solid rgba(255,255,255,0.05);
+            }
             .overlay-backdrop {
                 position: absolute;
                 inset: 0;
@@ -538,7 +571,6 @@
                 pointer-events: auto;
                 max-height: 88vh;
                 height: auto;
-                overflow: hidden;
                 display: flex;
                 flex-direction: column;
                 transition: transform 0.6s var(--ease-spring);
@@ -584,7 +616,7 @@
                 position: relative;
                 background: var(--surface);
                 width: var(--card-width);
-                padding: 32px 0;
+                padding: 24px 0;
                 z-index: 101;
                 opacity: 0;
                 transform: translateY(40px);
@@ -595,17 +627,18 @@
                 pointer-events: auto;
                 display: flex;
                 flex-direction: column;
-                overflow: hidden;
                 box-shadow: 0 24px 64px rgba(0,0,0,0.25);
             }
             .story-popup.is-active .story-popup__content {
                 opacity: 1;
                 transform: translateY(0);
             }
+
+            /* Tombol Close Modal (Di dalam Card/Popup) */
             .story-close-btn {
                 position: absolute;
-                top: 20px;
-                right: 24px;
+                top: 16px;
+                right: 16px;
                 width: 36px;
                 height: 36px;
                 border: none;
@@ -631,7 +664,8 @@
             }
             .story-header {
                 flex-shrink: 0;
-                padding: 0 28px;
+                padding: 0 64px 0 28px;
+                margin-bottom: 16px;
             }
             .story-view__title {
                 font-size: 24px;
@@ -644,10 +678,8 @@
                 font-size: 13px;
                 font-weight: 500;
                 color: #888;
-                margin-bottom: 24px;
                 display: block;
             }
-
             .story-body {
                 flex: 1 1 auto;
                 overflow-y: auto;
@@ -667,24 +699,6 @@
                 background: transparent;
                 margin: 8px 0;
             }
-            .story-body__mask {
-                position: relative;
-                max-height: 85px;
-                overflow: hidden;
-                transition: max-height 0.8s var(--ease-spring);
-            }
-            .story-body__mask::after {
-                content: '';
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                width: 100%;
-                height: 48px;
-                background: linear-gradient(to bottom,rgba(255,255,255,0),var(--surface) 90%);
-                pointer-events: none;
-                transition: opacity 0.4s;
-            }
-
             .story-body__cms-content {
                 font-size: 15px;
                 color: var(--text-sub);
@@ -692,69 +706,6 @@
             }
             .story-body__cms-content p {
                 margin-bottom: 16px;
-            }
-            .story-body__toggle {
-                display: none;
-                background: none;
-                border: none;
-                color: var(--brand-red);
-                font-weight: 700;
-                font-size: 14px;
-                cursor: pointer;
-                padding: 12px 0 24px;
-            }
-            .story-body.is-expanded .story-body__mask {
-                max-height: 5000px;
-            }
-            .story-body.is-expanded .story-body__mask::after {
-                opacity: 0;
-            }
-
-            .story-footer {
-                display: none;
-                flex-shrink: 0;
-                gap: 14px;
-                background: var(--surface);
-                padding: 20px 28px 28px;
-                position: sticky;
-                bottom: 0;
-                z-index: 20;
-                border-top: 1px solid rgba(0,0,0,0.03);
-            }
-            .emote {
-                flex: 1;
-                display: flex;
-                align-items: center;
-                justify-content: space-around;
-                background: var(--bg-gray);
-                border-radius: 20px;
-                padding: 0 8px;
-                height: 56px;
-            }
-            .emote > div {
-                font-size: 26px;
-                cursor: pointer;
-                padding: 10px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: opacity 0.3s;
-                user-select: none;
-            }
-            .story-footer-share {
-                background: var(--bg-gray);
-                border: none;
-                border-radius: 20px;
-                font-size: 24px;
-                cursor: pointer;
-                width: 56px;
-                height: 56px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: background 0.3s;
-                color: var(--text-main);
-                flex-shrink: 0;
             }
 
             #reaction-container {
@@ -809,17 +760,17 @@
                     background: #E9ECEF;
                     color: var(--text-main);
                 }
-                .emote > div:hover {
-                    opacity: 0.7;
-                }
-                .story-footer-share:hover {
-                    background: #E9ECEF;
-                }
                 .external-nav-btn:hover:not(.is-disabled) {
                     background: rgba(255,255,255,0.25);
                     box-shadow: 0 8px 20px rgba(0,0,0,0.4);
                 }
             }
+
+            /* =========================================================
+               RESPONSIVE BREAKPOINTS
+               ========================================================= */
+
+            /* --- MOBILE (< 768px) --- */
             @media(max-width:767px) {
                 .story-container,
                 .story-viewport {
@@ -828,6 +779,17 @@
                 .story-popup {
                     display: none!important;
                 }
+                .story-group-wrapper {
+                    width: 100%;
+                }
+
+                /* Close Button dalam area video Mobile */
+                .story-close-player {
+                    top: max(32px, env(safe-area-inset-top));
+                    right: 16px;
+                }
+
+                /* Efek saat Modal Terbuka */
                 .layout-wrapper.is-ui-open .story-viewport {
                     filter: blur(12px) brightness(0.5);
                     transform: scale(0.97);
@@ -840,14 +802,10 @@
                     opacity: 0;
                     pointer-events: none;
                 }
-                .external-nav-group {
-                    display: none !important;
-                }
-                .story-group-wrapper {
-                    width: 100%;
-                }
             }
-            @media(min-width:768px) and (max-width:1489px) {
+
+            /* --- TABLET (768px - 1365px) --- */
+            @media(min-width:768px) and (max-width:1365px) {
                 .story-sheet {
                     display: none!important;
                 }
@@ -856,6 +814,7 @@
                 }
                 .story-group-wrapper {
                     height: calc(100dvh - 64px);
+                    width: auto;
                 }
                 .story-container {
                     width: auto;
@@ -864,42 +823,57 @@
                     overflow: visible;
                     box-shadow: 0 24px 64px rgba(0,0,0,0.4);
                 }
+
+                /* Navigasi & Close di Kanan Luar Video */
+                .external-nav-group {
+                    display: flex;
+                    right: 32px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+                .story-close-player {
+                    right: 32px;
+                    top: max(32px, env(safe-area-inset-top));
+                }
+
+                /* Sembunyikan Nav/Close saat Popup Tablet Terbuka */
+                .layout-wrapper.is-ui-open .external-nav-group,
+                .layout-wrapper.is-ui-open .story-close-player {
+                    opacity: 0;
+                    pointer-events: none;
+                }
+
+                /* Efek saat Modal Terbuka */
                 .layout-wrapper.is-ui-open .story-viewport {
                     filter: blur(12px) brightness(0.6);
                     transform: scale(0.97);
                 }
-                .layout-wrapper.is-ui-open .story-close-player,
                 .layout-wrapper.is-ui-open .story-excerpt,
                 .layout-wrapper.is-ui-open .story-player-actions,
                 .layout-wrapper.is-ui-open .story-top-actions {
                     opacity: 0;
                     pointer-events: none;
                 }
-                .story-body,
-                .story-header {
-                    padding: 0 36px;
-                }
             }
-            @media(min-width:1490px) {
-                .story-excerpt,
+
+            /* --- LARGE DESKTOP (>= 1366px) --- */
+            @media(min-width:1366px) {
                 .story-popup,
                 .story-sheet {
-                    display: none!important;
-                }
-                .story-player-actions .reaction-wrapper,
-                .story-player-actions .share-fab,
-                .story-video-wrapper::after {
                     display: none!important;
                 }
                 .ambient-layer {
                     display: block;
                     opacity: 0.6;
                 }
-                .story-card {
-                    display: flex;
-                }
+
+                /* Wrapper memeluk ukuran Video */
                 .story-group-wrapper {
+                    width: max-content;
                     height: calc(100dvh - 80px);
+                    position: relative;
+                    transition: transform 0.6s var(--ease-spring);
+                    margin: 0 auto;
                 }
                 .story-container {
                     width: auto;
@@ -907,17 +881,63 @@
                     aspect-ratio: 9/16;
                     overflow: visible;
                     box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+                    z-index: 10;
                 }
-                .story-body,
-                .story-header {
-                    padding: 0 36px;
+
+                /* ANIMASI SHIFT (Geser Video ke Kiri) */
+                .layout-wrapper.is-ui-open .story-group-wrapper {
+                    transform: translateX(calc((var(--card-width) + 16px) / -2));
                 }
-                .story-footer {
+
+                /* Card Desktop (Tertanam posisi Fixed, merapat sempurna ke sebelah kiri tombol Navigasi) */
+                .story-card {
                     display: flex;
-                    padding: 20px 36px 36px;
+                    position: fixed;
+                    right: -500px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    margin: 0;
+                    opacity: 0;
+                    pointer-events: none;
+                    transition: all 0.6s var(--ease-spring);
+                    z-index: 15;
                 }
-                .story-body__toggle {
-                    display: inline-block;
+
+                /* 100px = (40px margin kanan viewport) + (44px lebar tombol nav) + (16px jarak aman/gap) */
+                .layout-wrapper.is-ui-open .story-card {
+                    opacity: 1;
+                    pointer-events: auto;
+                    right: 100px;
+                }
+
+                /* Navigasi & Close di Pojok Kanan Layar (Menempel Viewport, Tidak Bergeser) */
+                .external-nav-group {
+                    display: flex;
+                    right: 40px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+                .story-close-player {
+                    right: 40px;
+                    top: max(40px, env(safe-area-inset-top));
+                }
+
+                /* DI DESKTOP, Nav & Close TETAP TAMPIL meski Card terbuka */
+                .layout-wrapper.is-ui-open .external-nav-group,
+                .layout-wrapper.is-ui-open .story-close-player {
+                    opacity: 1;
+                    pointer-events: auto;
+                }
+
+                /* Hilangkan teks ganda dan halangan, sisakan UI interaksi Video */
+                .layout-wrapper.is-ui-open .story-excerpt {
+                    opacity: 0;
+                    pointer-events: none;
+                }
+                .layout-wrapper.is-ui-open .story-player-actions,
+                .layout-wrapper.is-ui-open .story-top-actions {
+                    opacity: 1;
+                    pointer-events: auto;
                 }
             }
         </style>
@@ -925,7 +945,9 @@
     <body>
         <div class="layout-wrapper" id="layoutWrapper">
             <div class="desktop-slider">
-                <div class="story-group-wrapper">
+
+                <div class="story-group-wrapper" id="storyGroupWrapper">
+
                     <div class="story-container" id="storyContainer">
                         <div class="ambient-layer">
                             <div id="ambientPlayer"></div>
@@ -942,7 +964,6 @@
                                 <button class="player-fab" id="btnPlayPause" aria-label="Pause Video" onclick="StoryManager.togglePlayPause(event)">⏸️</button>
                                 <button class="player-fab" id="btnMute" aria-label="Mute Audio" onclick="StoryManager.toggleMute(event)">🔇</button>
                             </div>
-                            <button class="player-fab story-close-player" aria-label="Tutup Story" onclick="StoryManager.closeStory(event)">✖️</button>
 
                             <div class="story-video-wrapper">
                                 <div id="youtubePlayer"></div>
@@ -950,7 +971,9 @@
 
                             <div class="story-click-layer" onclick="StoryManager.handleStoryClick(event)"></div>
                             <div id="reaction-container"></div>
+
                             <div class="story-center-play" id="centerPlayIndicator" aria-hidden="true">▶️</div>
+
                             <div class="story-excerpt" onclick="StoryManager.openContext()">
                                 <span class="story-excerpt__badge">Kategori</span>
                                 <h2 class="story-excerpt__title">Judul Video</h2>
@@ -975,15 +998,20 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="external-nav-group">
-                        <button id="btnPrevStory" class="external-nav-btn" aria-label="Video Sebelumnya" onclick="StoryManager.prevVideo(event)">🔼</button>
-                        <button id="btnNextStory" class="external-nav-btn" aria-label="Video Selanjutnya" onclick="StoryManager.nextVideo(event)">🔽</button>
-                    </div>
                 </div>
+
                 <div class="story-card" id="storyCardDashboard">
+                    <button class="story-close-btn" aria-label="Tutup Detail" onclick="StoryManager.closeContext()">✖️</button>
                     <div class="story-dynamic-area"></div>
                 </div>
+
+                <div class="external-nav-group">
+                    <button id="btnPrevStory" class="external-nav-btn" aria-label="Video Sebelumnya" onclick="StoryManager.prevVideo(event)">🔼</button>
+                    <button id="btnNextStory" class="external-nav-btn" aria-label="Video Selanjutnya" onclick="StoryManager.nextVideo(event)">🔽</button>
+                </div>
+
+                <button class="player-fab story-close-player" aria-label="Tutup Story" onclick="StoryManager.closeStory(event)">✖️</button>
+
             </div>
 
             <div class="story-sheet" id="storySheet" aria-modal="true" role="dialog">
@@ -1011,20 +1039,7 @@
                     <span class="story-view__meta" id="storyMeta">Informasi • Meta</span>
                 </div>
                 <div class="story-body">
-                    <div class="story-body__mask">
-                        <div class="story-body__cms-content"></div>
-                    </div>
-                    <button class="story-body__toggle" onclick="StoryManager.toggleTextExpansion(this)">Baca Selengkapnya</button>
-                </div>
-                <div class="story-footer">
-                    <div class="emote">
-                        <div role="button" tabindex="0" onclick="StoryManager.react('😭', event)">😭</div>
-                        <div role="button" tabindex="0" onclick="StoryManager.react('👏🏻', event)">👏🏻</div>
-                        <div role="button" tabindex="0" onclick="StoryManager.react('🤣', event)">🤣</div>
-                        <div role="button" tabindex="0" onclick="StoryManager.react('🔥', event)">🔥</div>
-                        <div role="button" tabindex="0" onclick="StoryManager.react('❤️', event)">❤️</div>
-                    </div>
-                    <button class="story-footer-share" onclick="StoryManager.nativeShare()">🔗</button>
+                    <div class="story-body__cms-content"></div>
                 </div>
             </div>
         </template>
@@ -1108,6 +1123,7 @@
                 };
                 const domRefs = {
                     layoutWrapper: document.getElementById('layoutWrapper'),
+                    groupWrapper: document.getElementById('storyGroupWrapper'),
                     mainContainer: document.getElementById('storyContainer'),
                     progressFill: document.getElementById('storyProgressFill'),
                     mobileSheet: document.getElementById('storySheet'),
@@ -1128,8 +1144,8 @@
 
                 const getActiveContext = () => {
                     const w = window.innerWidth;
-                    if (w >= 1490) 
-                        return null;
+                    if (w >= 1366) 
+                        return domRefs.dashboardCard;
                     return w >= 768
                         ? domRefs.tabletPopup
                         : domRefs.mobileSheet;
@@ -1208,8 +1224,9 @@
                         e.stopPropagation();
                     if (currentVideoIndex < videoPlaylist.length - 1) {
                         currentVideoIndex++;
+                        if (state.isOpen) 
+                            closeContext(); // FIX: Menutup panel info sebelum berpindah video
                         updateVideoUI();
-                        flashIcon('🔽');
                     }
                 };
 
@@ -1218,15 +1235,15 @@
                         e.stopPropagation();
                     if (currentVideoIndex > 0) {
                         currentVideoIndex--;
+                        if (state.isOpen) 
+                            closeContext(); // FIX: Menutup panel info sebelum berpindah video
                         updateVideoUI();
-                        flashIcon('🔼');
                     }
                 };
 
                 const handleStoryClick = (e) => {
                     if (e) 
                         e.stopPropagation();
-                    
                     const screenWidth = window.innerWidth;
                     const clickX = e
                         .type
@@ -1307,12 +1324,14 @@
                     const ctx = getActiveContext();
                     if (!ctx) 
                         return;
+                    
                     domRefs
-                        .mainContainer
+                        .layoutWrapper
                         .classList
                         .remove('is-clean-mode');
                     domRefs.iconEnter.style.display = 'block';
                     domRefs.iconExit.style.display = 'none';
+
                     state.isOpen = true;
                     domRefs
                         .layoutWrapper
@@ -1321,16 +1340,13 @@
                     ctx
                         .classList
                         .add('is-active');
-                    const body = ctx.querySelector('.story-body');
-                    if (body) 
-                        body
-                            .classList
-                            .add('is-expanded');
-                    
-                    if (player) 
-                        player.pauseVideo();
-                    if (ambientPlayer && typeof ambientPlayer.pauseVideo === 'function') 
-                        ambientPlayer.pauseVideo();
+
+                    if (window.innerWidth < 1366) {
+                        if (player) 
+                            player.pauseVideo();
+                        if (ambientPlayer && typeof ambientPlayer.pauseVideo === 'function') 
+                            ambientPlayer.pauseVideo();
+                        }
                     closeReactionMenu();
                 };
 
@@ -1342,6 +1358,7 @@
                         .layoutWrapper
                         .classList
                         .remove('is-ui-open');
+
                     domRefs
                         .mobileSheet
                         .classList
@@ -1351,26 +1368,24 @@
                         .classList
                         .remove('is-active');
                     domRefs
+                        .dashboardCard
+                        .classList
+                        .remove('is-active');
+
+                    domRefs
                         .mobileSheet
                         .querySelector('.story-sheet__content')
                         .style
                         .transform = '';
-                    document
-                        .querySelectorAll('.story-body.is-expanded')
-                        .forEach(body => {
-                            if (window.innerWidth < 1490) 
-                                body
-                                    .classList
-                                    .remove('is-expanded');
-                            body.scrollTop = 0;
-                        });
 
-                    if (player) 
-                        player.playVideo();
-                    if (ambientPlayer && typeof ambientPlayer.playVideo === 'function') 
-                        ambientPlayer.playVideo();
+                    if (window.innerWidth < 1366) {
+                        if (player) 
+                            player.playVideo();
+                        if (ambientPlayer && typeof ambientPlayer.playVideo === 'function') 
+                            ambientPlayer.playVideo();
+                        }
                     };
-                
+
                 window.addEventListener('resize', () => {
                     if (state.isOpen) 
                         closeContext();
@@ -1383,15 +1398,19 @@
                     }
                 });
 
-                const toggleTextExpansion = (btn) => {
-                    const body = btn.closest('.story-body');
-                    const isExpanded = body
-                        .classList
-                        .toggle('is-expanded');
-                    btn.innerText = isExpanded
-                        ? "Sembunyikan"
-                        : "Baca Selengkapnya";
-                };
+                // Dukungan Aksesibilitas Keyboard
+                document.addEventListener('keydown', (e) => {
+                    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') 
+                        return;
+                    if (e.code === 'Space') {
+                        e.preventDefault();
+                        togglePlayPause();
+                    } else if (e.code === 'ArrowRight') {
+                        nextVideo();
+                    } else if (e.code === 'ArrowLeft') {
+                        prevVideo();
+                    }
+                });
 
                 const toggleReactionMenu = (e) => {
                     if (e) 
@@ -1412,19 +1431,15 @@
                     };
                 
                 const toggleCleanMode = (e) => {
-                    if (e) 
+                    if (e) {
+                        e.preventDefault();
                         e.stopPropagation();
+                    }
                     closeReactionMenu();
-                    const isClean = domRefs
-                        .mainContainer
+                    domRefs
+                        .layoutWrapper
                         .classList
                         .toggle('is-clean-mode');
-                    domRefs.iconEnter.style.display = isClean
-                        ? 'none'
-                        : 'block';
-                    domRefs.iconExit.style.display = isClean
-                        ? 'block'
-                        : 'none';
                 };
 
                 document.addEventListener('click', (e) => {
@@ -1565,7 +1580,6 @@
                     openContext,
                     closeContext,
                     handleStoryClick,
-                    toggleTextExpansion,
                     nativeShare,
                     react,
                     toggleReactionMenu,
@@ -1655,14 +1669,17 @@
                                     .add('is-paused');
                                 StoryManager.stopProgressBar();
                             } else if (e.data === YT.PlayerState.ENDED) {
-                                // LOGIC FIX: Kembalikan fungsi loop current video saat ENDED
                                 StoryManager.stopProgressBar();
-                                e
-                                    .target
-                                    .seekTo(0);
-                                e
-                                    .target
-                                    .playVideo();
+                                if (currentVideoIndex < videoPlaylist.length - 1) {
+                                    StoryManager.nextVideo();
+                                } else {
+                                    e
+                                        .target
+                                        .seekTo(0);
+                                    e
+                                        .target
+                                        .playVideo();
+                                }
                             }
                         }
                     }
