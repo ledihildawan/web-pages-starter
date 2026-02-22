@@ -2,8 +2,8 @@
 <html lang="id">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-        <title>Telkomsel Story - Reaction Shower Fixed</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+        <title>Telkomsel Story - No Auto Next</title>
         <style>
             :root {
                 --brand-red: #EE2D24;
@@ -31,9 +31,9 @@
                 background: #0f0f11;
                 font-family: -apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,sans-serif;
                 overflow: hidden;
-                /* FIX: Hapus touch-action: none; agar scroll tidak mati */
                 color: var(--text-main);
             }
+
             .layout-wrapper {
                 position: relative;
                 display: flex;
@@ -42,7 +42,7 @@
                 height: 100dvh;
                 width: 100vw;
                 touch-action: pan-y;
-                /* Membatasi aksi default ke vertikal saja di tingkat wrapper */
+                transition: opacity 0.5s var(--ease-out);
             }
             .desktop-slider {
                 display: flex;
@@ -52,6 +52,13 @@
                 width: 100%;
                 gap: var(--desktop-gap);
                 transition: gap 0.7s var(--ease-spring),padding 0.7s var(--ease-spring);
+            }
+
+            .story-group-wrapper {
+                position: relative;
+                display: flex;
+                align-items: center;
+                height: 100dvh;
             }
             .story-container {
                 position: relative;
@@ -64,7 +71,9 @@
                 z-index: 10;
                 border-radius: var(--frame-radius);
                 transition: border-radius 0.6s var(--ease-out),box-shadow 0.6s var(--ease-out);
+                transform: translateZ(0);
             }
+
             .ambient-layer {
                 display: none;
                 position: absolute;
@@ -79,6 +88,8 @@
                 opacity: 0.4;
                 pointer-events: none;
                 transition: opacity 0.6s;
+                will-change: opacity, transform;
+                transform: translateZ(0);
             }
             #ambientPlayer {
                 width: 100%;
@@ -90,6 +101,7 @@
             .story-container.is-focused .ambient-layer {
                 opacity: 0.25;
             }
+
             .story-viewport {
                 position: absolute;
                 inset: 0;
@@ -98,6 +110,7 @@
                 overflow: hidden;
                 border-radius: inherit;
                 transition: filter 0.6s var(--ease-out);
+                will-change: filter;
             }
             .story-video-wrapper {
                 position: relative;
@@ -115,6 +128,7 @@
                 background: linear-gradient(to bottom,rgba(0,0,0,0.05) 0,rgba(0,0,0,0) 25%,rgba(0,0,0,0) 50%,rgba(0,0,0,0.85) 100%);
                 transition: opacity 0.4s var(--ease-out);
             }
+
             #youtubePlayer {
                 position: absolute;
                 top: 0;
@@ -132,9 +146,9 @@
                 inset: 0;
                 z-index: 12;
                 cursor: pointer;
+                touch-action: manipulation;
             }
 
-            /* --- FLASH ANIMATION CSS --- */
             .story-center-play {
                 position: absolute;
                 top: 50%;
@@ -146,6 +160,7 @@
                 pointer-events: none;
                 transition: opacity 0.4s ease-out, transform 0.4s ease-out;
                 filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+                will-change: transform, opacity;
             }
             .story-center-play.is-flashing {
                 opacity: 0.9;
@@ -180,6 +195,7 @@
             .layout-wrapper.is-ready .story-loader {
                 opacity: 0;
             }
+
             .story-progress-bar {
                 position: absolute;
                 top: max(16px,env(safe-area-inset-top));
@@ -199,8 +215,9 @@
                 width: 0;
                 border-radius: 4px;
                 box-shadow: 0 0 8px rgba(255,255,255,0.5);
-                transition: none;
+                will-change: width;
             }
+
             .story-top-actions {
                 position: absolute;
                 top: max(32px,env(safe-area-inset-top));
@@ -214,6 +231,17 @@
                 transform: translateY(-20px);
                 transition: opacity 0.8s var(--ease-out),transform 0.8s var(--ease-spring);
             }
+            .story-close-player {
+                position: absolute;
+                top: max(32px,env(safe-area-inset-top));
+                right: 16px;
+                z-index: 30;
+                opacity: 0;
+                pointer-events: none;
+                transform: translateY(-20px);
+                transition: opacity 0.8s var(--ease-out),transform 0.8s var(--ease-spring);
+            }
+
             .story-excerpt {
                 position: absolute;
                 bottom: max(32px,env(safe-area-inset-bottom));
@@ -242,6 +270,7 @@
                 transform: translateY(20px);
                 transition: opacity 0.8s var(--ease-out),transform 0.8s var(--ease-spring);
             }
+
             .story-card {
                 display: none;
                 width: var(--card-width);
@@ -261,17 +290,18 @@
                 transform: translateY(20px);
                 transition: opacity 0.8s var(--ease-out),transform 0.8s var(--ease-spring);
             }
-            .layout-wrapper.is-ready .story-progress-bar {
-                opacity: 1;
-            }
+
             .layout-wrapper.is-ready .story-card,
+            .layout-wrapper.is-ready .story-close-player,
             .layout-wrapper.is-ready .story-excerpt,
             .layout-wrapper.is-ready .story-player-actions,
+            .layout-wrapper.is-ready .story-progress-bar,
             .layout-wrapper.is-ready .story-top-actions {
                 opacity: 1;
                 pointer-events: auto;
                 transform: translateY(0);
             }
+
             .story-excerpt__badge {
                 background: rgba(255,255,255,0.15);
                 color: #fff;
@@ -302,6 +332,7 @@
                 overflow: hidden;
                 text-shadow: 0 1px 8px rgba(0,0,0,0.6);
             }
+
             .player-fab {
                 width: var(--fab-size);
                 height: var(--fab-size);
@@ -317,12 +348,56 @@
                 justify-content: center;
                 cursor: pointer;
                 box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-                transition: background 0.3s,box-shadow 0.3s;
+                transition: background 0.3s,box-shadow 0.3s, opacity 0.3s;
             }
             .player-fab:active {
                 background: rgba(255,255,255,0.1);
                 box-shadow: 0 2px 8px rgba(0,0,0,0.2);
             }
+
+            .external-nav-group {
+                position: absolute;
+                left: -70px;
+                top: 50%;
+                transform: translateY(-50%);
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                z-index: 20;
+                opacity: 0;
+                transition: opacity 0.8s var(--ease-out);
+            }
+            .layout-wrapper.is-ready .external-nav-group {
+                opacity: 1;
+            }
+            .external-nav-btn {
+                width: var(--fab-size);
+                height: var(--fab-size);
+                border-radius: 50%;
+                background: var(--glass-bg);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                border: 1px solid var(--glass-border);
+                color: #fff;
+                font-size: 20px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+                transition: background 0.3s ease, transform 0.2s ease, opacity 0.3s ease;
+            }
+            .external-nav-btn:active:not(.is-disabled) {
+                background: rgba(255,255,255,0.1);
+                transform: scale(0.95);
+            }
+
+            .external-nav-btn.is-disabled {
+                opacity: 0.3;
+                cursor: not-allowed;
+                pointer-events: none;
+            }
+
             .reaction-wrapper {
                 position: relative;
                 display: flex;
@@ -401,10 +476,14 @@
 
             .story-container.is-clean-mode .reaction-wrapper,
             .story-container.is-clean-mode .share-fab,
+            .story-container.is-clean-mode .story-close-player,
             .story-container.is-clean-mode .story-excerpt {
                 opacity: 0!important;
                 pointer-events: none!important;
                 transform: translateY(20px)!important;
+            }
+            .story-container.is-clean-mode .story-close-player {
+                transform: translateY(-20px)!important;
             }
             .story-container.is-clean-mode .story-top-actions {
                 opacity: 0!important;
@@ -420,6 +499,7 @@
             .story-container.is-clean-mode #icon-exit-fs {
                 display: block!important;
             }
+
             .overlay-backdrop {
                 position: absolute;
                 inset: 0;
@@ -429,11 +509,11 @@
                 transition: opacity 0.5s;
                 pointer-events: auto;
                 touch-action: none;
-                /* Cegah scroll body ketika backdrop aktif */
             }
             .is-active .overlay-backdrop {
                 opacity: 1;
             }
+
             .story-sheet {
                 position: fixed;
                 inset: 0;
@@ -463,6 +543,7 @@
                 flex-direction: column;
                 transition: transform 0.6s var(--ease-spring);
                 box-shadow: 0 -10px 40px rgba(0,0,0,0.2);
+                will-change: transform;
             }
             .story-sheet.is-active .story-sheet__content {
                 transform: translateY(0);
@@ -478,7 +559,6 @@
                 justify-content: center;
                 flex-shrink: 0;
                 touch-action: none;
-                /* Khusus handle drag */
             }
             .story-sheet__handle {
                 width: 44px;
@@ -486,6 +566,7 @@
                 background: #D1D1D6;
                 border-radius: 10px;
             }
+
             .story-popup {
                 position: fixed;
                 inset: 0;
@@ -540,6 +621,7 @@
                 transition: background 0.3s;
                 z-index: 30;
             }
+
             .story-dynamic-area,
             .story-view {
                 display: flex;
@@ -565,6 +647,7 @@
                 margin-bottom: 24px;
                 display: block;
             }
+
             .story-body {
                 flex: 1 1 auto;
                 overflow-y: auto;
@@ -572,7 +655,6 @@
                 padding: 0 28px 32px;
                 min-height: 0;
                 overscroll-behavior-y: contain;
-                /* FIX SCROLL BOCOR */
             }
             .story-body::-webkit-scrollbar {
                 width: 5px;
@@ -602,6 +684,7 @@
                 pointer-events: none;
                 transition: opacity 0.4s;
             }
+
             .story-body__cms-content {
                 font-size: 15px;
                 color: var(--text-sub);
@@ -626,6 +709,7 @@
             .story-body.is-expanded .story-body__mask::after {
                 opacity: 0;
             }
+
             .story-footer {
                 display: none;
                 flex-shrink: 0;
@@ -709,6 +793,7 @@
                     opacity: 0;
                 }
             }
+
             @media(hover:hover) and (pointer:fine) {
                 .layout-wrapper.is-ready .story-excerpt:hover {
                     opacity: 0.9;
@@ -730,6 +815,10 @@
                 .story-footer-share:hover {
                     background: #E9ECEF;
                 }
+                .external-nav-btn:hover:not(.is-disabled) {
+                    background: rgba(255,255,255,0.25);
+                    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+                }
             }
             @media(max-width:767px) {
                 .story-container,
@@ -744,11 +833,18 @@
                     transform: scale(0.97);
                     border-radius: var(--frame-radius)!important;
                 }
+                .layout-wrapper.is-ui-open .story-close-player,
                 .layout-wrapper.is-ui-open .story-excerpt,
                 .layout-wrapper.is-ui-open .story-player-actions,
                 .layout-wrapper.is-ui-open .story-top-actions {
                     opacity: 0;
                     pointer-events: none;
+                }
+                .external-nav-group {
+                    display: none !important;
+                }
+                .story-group-wrapper {
+                    width: 100%;
                 }
             }
             @media(min-width:768px) and (max-width:1489px) {
@@ -758,9 +854,12 @@
                 .ambient-layer {
                     display: block;
                 }
+                .story-group-wrapper {
+                    height: calc(100dvh - 64px);
+                }
                 .story-container {
                     width: auto;
-                    height: calc(100dvh - 64px);
+                    height: 100%;
                     aspect-ratio: 9/16;
                     overflow: visible;
                     box-shadow: 0 24px 64px rgba(0,0,0,0.4);
@@ -769,6 +868,7 @@
                     filter: blur(12px) brightness(0.6);
                     transform: scale(0.97);
                 }
+                .layout-wrapper.is-ui-open .story-close-player,
                 .layout-wrapper.is-ui-open .story-excerpt,
                 .layout-wrapper.is-ui-open .story-player-actions,
                 .layout-wrapper.is-ui-open .story-top-actions {
@@ -798,9 +898,12 @@
                 .story-card {
                     display: flex;
                 }
+                .story-group-wrapper {
+                    height: calc(100dvh - 80px);
+                }
                 .story-container {
                     width: auto;
-                    height: calc(100dvh - 80px);
+                    height: 100%;
                     aspect-ratio: 9/16;
                     overflow: visible;
                     box-shadow: 0 24px 64px rgba(0,0,0,0.4);
@@ -822,55 +925,68 @@
     <body>
         <div class="layout-wrapper" id="layoutWrapper">
             <div class="desktop-slider">
-                <div class="story-container" id="storyContainer">
-                    <div class="ambient-layer">
-                        <div id="ambientPlayer"></div>
-                    </div>
-                    <div class="story-viewport">
-                        <div class="story-loader">
-                            <div class="story-loader__spinner"></div>
+                <div class="story-group-wrapper">
+                    <div class="story-container" id="storyContainer">
+                        <div class="ambient-layer">
+                            <div id="ambientPlayer"></div>
                         </div>
-                        <div class="story-progress-bar">
-                            <div class="story-progress-bar__fill" id="storyProgressFill"></div>
-                        </div>
-                        <div class="story-top-actions">
-                            <button class="player-fab" id="btnPlayPause" onclick="StoryManager.togglePlayPause(event)">⏸️</button>
-                            <button class="player-fab" id="btnMute" onclick="StoryManager.toggleMute(event)">🔇</button>
-                        </div>
-                        <div class="story-video-wrapper">
-                            <div id="youtubePlayer"></div>
-                        </div>
-                        <div class="story-click-layer" onclick="StoryManager.togglePlayPause(event)"></div>
-                        <div id="reaction-container"></div>
-                        <div class="story-center-play" id="centerPlayIndicator">▶️</div>
-                        <div class="story-excerpt" onclick="StoryManager.openContext()">
-                            <span class="story-excerpt__badge">Product Insight</span>
-                            <h2 class="story-excerpt__title">Gaming Performa Cerdas 🔥</h2>
-                            <div class="story-excerpt__text">Laptop Asus G Gaming K16 adalah laptop tangguh yang punya performa cerdas untuk memaksimalkan potensi kerja kreatif yang bisa main game...</div>
-                        </div>
-                        <div class="story-player-actions">
-                            <div class="reaction-wrapper" id="reactionWrapper">
-                                <div class="reaction-options">
-                                    <button class="reaction-option-btn" onclick="StoryManager.react('❤️',event)">❤️</button>
-                                    <button class="reaction-option-btn" onclick="StoryManager.react('🔥',event)">🔥</button>
-                                    <button class="reaction-option-btn" onclick="StoryManager.react('🤣',event)">🤣</button>
-                                    <button class="reaction-option-btn" onclick="StoryManager.react('👏🏻',event)">👏🏻</button>
-                                    <button class="reaction-option-btn" onclick="StoryManager.react('😭',event)">😭</button>
-                                </div>
-                                <button class="player-fab" onclick="StoryManager.toggleReactionMenu(event)">🤍</button>
+                        <div class="story-viewport">
+                            <div class="story-loader">
+                                <div class="story-loader__spinner"></div>
                             </div>
-                            <button class="player-fab share-fab" onclick="StoryManager.nativeShare()">🔗</button>
-                            <button class="player-fab fullscreen-fab" onclick="StoryManager.toggleCleanMode(event)">
-                                <span id="icon-enter-fs">🔲</span><span id="icon-exit-fs" style="display:none">✖️</span>
-                            </button>
+                            <div class="story-progress-bar">
+                                <div class="story-progress-bar__fill" id="storyProgressFill"></div>
+                            </div>
+
+                            <div class="story-top-actions">
+                                <button class="player-fab" id="btnPlayPause" aria-label="Pause Video" onclick="StoryManager.togglePlayPause(event)">⏸️</button>
+                                <button class="player-fab" id="btnMute" aria-label="Mute Audio" onclick="StoryManager.toggleMute(event)">🔇</button>
+                            </div>
+                            <button class="player-fab story-close-player" aria-label="Tutup Story" onclick="StoryManager.closeStory(event)">✖️</button>
+
+                            <div class="story-video-wrapper">
+                                <div id="youtubePlayer"></div>
+                            </div>
+
+                            <div class="story-click-layer" onclick="StoryManager.handleStoryClick(event)"></div>
+                            <div id="reaction-container"></div>
+                            <div class="story-center-play" id="centerPlayIndicator" aria-hidden="true">▶️</div>
+                            <div class="story-excerpt" onclick="StoryManager.openContext()">
+                                <span class="story-excerpt__badge">Kategori</span>
+                                <h2 class="story-excerpt__title">Judul Video</h2>
+                                <div class="story-excerpt__text">Deskripsi singkat video...</div>
+                            </div>
+
+                            <div class="story-player-actions">
+                                <div class="reaction-wrapper" id="reactionWrapper">
+                                    <div class="reaction-options">
+                                        <button class="reaction-option-btn" onclick="StoryManager.react('❤️',event)">❤️</button>
+                                        <button class="reaction-option-btn" onclick="StoryManager.react('🔥',event)">🔥</button>
+                                        <button class="reaction-option-btn" onclick="StoryManager.react('🤣',event)">🤣</button>
+                                        <button class="reaction-option-btn" onclick="StoryManager.react('👏🏻',event)">👏🏻</button>
+                                        <button class="reaction-option-btn" onclick="StoryManager.react('😭',event)">😭</button>
+                                    </div>
+                                    <button class="player-fab" onclick="StoryManager.toggleReactionMenu(event)">🤍</button>
+                                </div>
+                                <button class="player-fab share-fab" onclick="StoryManager.nativeShare()">🔗</button>
+                                <button class="player-fab fullscreen-fab" onclick="StoryManager.toggleCleanMode(event)">
+                                    <span id="icon-enter-fs">🔲</span><span id="icon-exit-fs" style="display:none">✖️</span>
+                                </button>
+                            </div>
                         </div>
+                    </div>
+
+                    <div class="external-nav-group">
+                        <button id="btnPrevStory" class="external-nav-btn" aria-label="Video Sebelumnya" onclick="StoryManager.prevVideo(event)">🔼</button>
+                        <button id="btnNextStory" class="external-nav-btn" aria-label="Video Selanjutnya" onclick="StoryManager.nextVideo(event)">🔽</button>
                     </div>
                 </div>
                 <div class="story-card" id="storyCardDashboard">
                     <div class="story-dynamic-area"></div>
                 </div>
             </div>
-            <div class="story-sheet" id="storySheet">
+
+            <div class="story-sheet" id="storySheet" aria-modal="true" role="dialog">
                 <div class="story-sheet__backdrop overlay-backdrop" onclick="StoryManager.closeContext()"></div>
                 <div class="story-sheet__content">
                     <div class="story-sheet__handle-wrapper" id="storySheetHandle">
@@ -879,7 +995,7 @@
                     <div class="story-dynamic-area"></div>
                 </div>
             </div>
-            <div class="story-popup" id="storyPopup">
+            <div class="story-popup" id="storyPopup" aria-modal="true" role="dialog">
                 <div class="story-popup__backdrop overlay-backdrop" onclick="StoryManager.closeContext()"></div>
                 <div class="story-popup__content">
                     <button class="story-close-btn" onclick="StoryManager.closeContext()">✖️</button>
@@ -891,51 +1007,104 @@
         <template id="storyContentTemplate">
             <div class="story-view is-active">
                 <div class="story-header">
-                    <h3 class="story-view__title">Gaming Performa Cerdas 🔥</h3>
-                    <span class="story-view__meta">Asus ROG Series • 2 Jam yang lalu</span>
+                    <h3 class="story-view__title">Judul</h3>
+                    <span class="story-view__meta" id="storyMeta">Informasi • Meta</span>
                 </div>
                 <div class="story-body">
                     <div class="story-body__mask">
-                        <div class="story-body__cms-content">
-                            <p>Laptop Asus G Gaming K16 adalah laptop tangguh yang punya performa cerdas untuk memaksimalkan potensi kerja kreatif yang bisa main game.</p>
-                            <p>Dilengkapi CPU Intel Core i5 generasi ke-13, GPU RTX 3050, dan fitur AI Noise Cancelling. Menggunakan teknologi Asus IceCool agar tetap dingin!</p>
-                            <p>Bobot hanya 1.8 Kg, sangat
-                                <i>slim</i>
-                                namun bertenaga. Harga spesial promo hari ini
-                                <strong>Rp11.495.000!</strong>
-                            </p>
-                            <p>Layar Asus G Gaming K16 ini mengadopsi panel OLED 120Hz yang memberikan reproduksi warna presisi dengan DCI-P3 100% gamut. Sempurna bagi gamer dan kreator.</p>
-                        </div>
+                        <div class="story-body__cms-content"></div>
                     </div>
                     <button class="story-body__toggle" onclick="StoryManager.toggleTextExpansion(this)">Baca Selengkapnya</button>
                 </div>
                 <div class="story-footer">
                     <div class="emote">
-                        <div onclick="StoryManager.react('😭', event)">😭</div>
-                        <div onclick="StoryManager.react('👏🏻', event)">👏🏻</div>
-                        <div onclick="StoryManager.react('🤣', event)">🤣</div>
-                        <div onclick="StoryManager.react('🔥', event)">🔥</div>
-                        <div onclick="StoryManager.react('❤️', event)">❤️</div>
+                        <div role="button" tabindex="0" onclick="StoryManager.react('😭', event)">😭</div>
+                        <div role="button" tabindex="0" onclick="StoryManager.react('👏🏻', event)">👏🏻</div>
+                        <div role="button" tabindex="0" onclick="StoryManager.react('🤣', event)">🤣</div>
+                        <div role="button" tabindex="0" onclick="StoryManager.react('🔥', event)">🔥</div>
+                        <div role="button" tabindex="0" onclick="StoryManager.react('❤️', event)">❤️</div>
                     </div>
                     <button class="story-footer-share" onclick="StoryManager.nativeShare()">🔗</button>
                 </div>
             </div>
         </template>
 
-        <script src="https://www.youtube.com/iframe_api"></script>
         <script>
             let player,
                 ambientPlayer;
+            let currentVideoIndex = 0;
 
-            // FIX: Ekspos StoryManager ke global object (window) agar aman dari isu 'undefined' di inline handler
+            const videoPlaylist = [
+                {
+                    id: 'kyPF1-VvOsQ',
+                    badge: 'Product Insight',
+                    title: 'Gaming Performa Cerdas 🔥',
+                    meta: 'Asus ROG Series • 2 Jam yang lalu',
+                    excerpt: 'Laptop Asus G Gaming K16 adalah laptop tangguh yang punya performa cerdas untuk memaksimalkan potensi kerja kreatif...',
+                    content: '<p>Laptop Asus G Gaming K16 adalah laptop tangguh yang punya performa cerdas untuk memaksimalkan potensi kerja kreatif yang bisa main game.</p><p>Dilengkapi CPU Intel Core i5 generasi ke-13, GPU RTX 3050, dan fitur AI Noise Cancelling. Menggunakan teknologi Asus IceCool agar tetap dingin!</p><p>Bobot hanya 1.8 Kg, sangat <i>slim</i> namun bertenaga. Harga spesial promo hari ini <strong>Rp11.495.000!</strong></p><p>Layar Asus G Gaming K16 ini mengadopsi panel OLED 120Hz yang memberikan reproduksi warna presisi dengan DCI-P3 100% gamut. Sempurna bagi gamer dan kreator.</p>'
+                }, {
+                    id: 'dQw4w9WgXcQ',
+                    badge: 'Tips & Trik',
+                    title: 'Setup Meja Kerja Minimalis 💻',
+                    meta: 'Workspace Hacks • 5 Jam yang lalu',
+                    excerpt: 'Rahasia membuat meja kerja terlihat bersih tanpa kabel yang berantakan, bikin produktivitas meningkat tajam!',
+                    content: '<p>Ruang kerja yang berantakan adalah musuh produktivitas. Mulailah dengan manajemen kabel menggunakan <i>cable tray</i> di bawah meja.</p><p>Gunakan lengan monitor (monitor arm) untuk membebaskan area meja, memberi ilusi ruang yang lebih luas dan lega.</p>'
+                }, {
+                    id: 'jNQXAC9IVRw',
+                    badge: 'Tech Update',
+                    title: 'Evolusi Teknologi AI 🤖',
+                    meta: 'AI Review • 1 Hari yang lalu',
+                    excerpt: 'Melihat bagaimana kecerdasan buatan berkembang sangat pesat dalam kurun waktu 5 tahun terakhir.',
+                    content: '<p>Dari asisten virtual suara biasa menjadi model generatif kompleks yang mampu merancang kode aplikasi dan lukisan hiper-realistis.</p><p>Apa dampaknya bagi industri kreatif? Mari kita telusuri evolusinya dari tahun ke tahun.</p>'
+                }
+            ];
+
+            const updateVideoUI = () => {
+                const data = videoPlaylist[currentVideoIndex];
+
+                const progressFill = document.getElementById('storyProgressFill');
+                if (progressFill) 
+                    progressFill.style.width = '0%';
+                
+                document
+                    .querySelector('.story-excerpt__badge')
+                    .innerText = data.badge;
+                document
+                    .querySelector('.story-excerpt__title')
+                    .innerText = data.title;
+                document
+                    .querySelector('.story-excerpt__text')
+                    .innerText = data.excerpt;
+
+                document
+                    .querySelectorAll('.story-view__title')
+                    .forEach(el => el.innerText = data.title);
+                document
+                    .querySelectorAll('.story-view__meta')
+                    .forEach(el => el.innerText = data.meta);
+                document
+                    .querySelectorAll('.story-body__cms-content')
+                    .forEach(el => el.innerHTML = data.content);
+
+                if (player && typeof player.loadVideoById === 'function') {
+                    player.loadVideoById(data.id);
+                }
+                if (ambientPlayer && typeof ambientPlayer.loadVideoById === 'function') {
+                    ambientPlayer.loadVideoById(data.id);
+                }
+
+                StoryManager.startProgressBar();
+                StoryManager.checkNavState();
+            };
+
             window.StoryManager = (() => {
                 const state = {
                     isOpen: false,
-                    progressInterval: null,
                     startY: 0,
                     currentY: 0,
                     isDragging: false,
-                    lastVideoTime: 0
+                    animFrameId: null,
+                    lastClickTime: 0
                 };
                 const domRefs = {
                     layoutWrapper: document.getElementById('layoutWrapper'),
@@ -952,7 +1121,9 @@
                     iconEnter: document.getElementById('icon-enter-fs'),
                     iconExit: document.getElementById('icon-exit-fs'),
                     reactionContainer: document.getElementById('reaction-container'),
-                    centerPlayIndicator: document.getElementById('centerPlayIndicator')
+                    centerPlayIndicator: document.getElementById('centerPlayIndicator'),
+                    btnPrevStory: document.getElementById('btnPrevStory'),
+                    btnNextStory: document.getElementById('btnNextStory')
                 };
 
                 const getActiveContext = () => {
@@ -972,43 +1143,35 @@
                 };
                 [domRefs.mobileSheet, domRefs.tabletPopup, domRefs.dashboardCard].forEach(injectTemplate);
 
-                const startProgressBar = () => {
-                    if (state.progressInterval) 
-                        clearInterval(state.progressInterval);
-                    domRefs.progressFill.style.transition = 'none';
-                    domRefs.progressFill.style.width = '0%';
-                    state.lastVideoTime = 0;
-                    requestAnimationFrame(() => {
-                        requestAnimationFrame(() => {
-                            state.progressInterval = setInterval(() => {
-                                if (
-                                    !state.isOpen && player
-                                    ?.getPlayerState() === YT.PlayerState.PLAYING) {
-                                    const duration = player.getDuration();
-                                    const currentTime = player.getCurrentTime();
-                                    if (duration > 0) {
-                                        const percent = (currentTime / duration) * 100;
-                                        if (currentTime < state.lastVideoTime - 0.5 || currentTime < 0.2) {
-                                            domRefs.progressFill.style.transition = 'none';
-                                            domRefs.progressFill.style.width = '0%';
-                                        } else {
-                                            domRefs.progressFill.style.transition = 'width 0.1s linear';
-                                            domRefs.progressFill.style.width = `${percent}%`;
-                                        }
-                                        state.lastVideoTime = currentTime;
-                                    }
-                                }
-                            }, 50);
-                        });
-                    });
+                const loopProgress = () => {
+                    if (!state.isOpen && player && player.getPlayerState() === YT.PlayerState.PLAYING) {
+                        const duration = player.getDuration();
+                        const currentTime = player.getCurrentTime();
+                        if (duration > 0) {
+                            const percent = (currentTime / duration) * 100;
+                            domRefs.progressFill.style.width = `${percent}%`;
+                        }
+                    }
+                    state.animFrameId = requestAnimationFrame(loopProgress);
                 };
 
+                const startProgressBar = () => {
+                    if (state.animFrameId) 
+                        cancelAnimationFrame(state.animFrameId);
+                    domRefs.progressFill.style.width = '0%';
+                    state.animFrameId = requestAnimationFrame(loopProgress);
+                };
+
+                const stopProgressBar = () => {
+                    if (state.animFrameId) 
+                        cancelAnimationFrame(state.animFrameId);
+                    };
+                
                 let flashTimeout;
                 const flashIcon = (iconStr) => {
                     const iconEl = domRefs.centerPlayIndicator;
                     if (!iconEl) 
                         return;
-                    
                     iconEl.innerText = iconStr;
                     iconEl
                         .classList
@@ -1017,12 +1180,86 @@
                     iconEl
                         .classList
                         .add('is-flashing');
-
                     clearTimeout(flashTimeout);
                     flashTimeout = setTimeout(() => {
                         iconEl
                             .classList
                             .remove('is-flashing');
+                    }, 500);
+                };
+
+                const checkNavState = () => {
+                    if (domRefs.btnPrevStory) {
+                        domRefs
+                            .btnPrevStory
+                            .classList
+                            .toggle('is-disabled', currentVideoIndex === 0);
+                    }
+                    if (domRefs.btnNextStory) {
+                        domRefs
+                            .btnNextStory
+                            .classList
+                            .toggle('is-disabled', currentVideoIndex === videoPlaylist.length - 1);
+                    }
+                };
+
+                const nextVideo = (e) => {
+                    if (e) 
+                        e.stopPropagation();
+                    if (currentVideoIndex < videoPlaylist.length - 1) {
+                        currentVideoIndex++;
+                        updateVideoUI();
+                        flashIcon('🔽');
+                    }
+                };
+
+                const prevVideo = (e) => {
+                    if (e) 
+                        e.stopPropagation();
+                    if (currentVideoIndex > 0) {
+                        currentVideoIndex--;
+                        updateVideoUI();
+                        flashIcon('🔼');
+                    }
+                };
+
+                const handleStoryClick = (e) => {
+                    if (e) 
+                        e.stopPropagation();
+                    
+                    const screenWidth = window.innerWidth;
+                    const clickX = e
+                        .type
+                        .includes('touch')
+                            ? e
+                                .touches[0]
+                                .clientX
+                            : e.clientX;
+
+                    if (clickX < screenWidth * 0.25) {
+                        if (currentVideoIndex > 0) 
+                            prevVideo();
+                        }
+                    else if (clickX > screenWidth * 0.75) {
+                        if (currentVideoIndex < videoPlaylist.length - 1) 
+                            nextVideo();
+                        }
+                    else {
+                        togglePlayPause();
+                    }
+                };
+
+                const closeStory = (e) => {
+                    if (e) 
+                        e.stopPropagation();
+                    if (player) 
+                        player.pauseVideo();
+                    if (ambientPlayer && typeof ambientPlayer.pauseVideo === 'function') 
+                        ambientPlayer.pauseVideo();
+                    
+                    domRefs.layoutWrapper.style.opacity = '0';
+                    setTimeout(() => {
+                        domRefs.layoutWrapper.style.display = 'none';
                     }, 500);
                 };
 
@@ -1032,17 +1269,23 @@
                     if (!player) 
                         return;
                     
-                    // FIX: Picu Flash langsung lewat ketukan user, BUKAN dari API onStateChange
+                    const now = Date.now();
+                    if (now - state.lastClickTime < 300) 
+                        return;
+                    state.lastClickTime = now;
+
                     if (player.getPlayerState() === YT.PlayerState.PLAYING) {
                         player.pauseVideo();
                         if (ambientPlayer && typeof ambientPlayer.pauseVideo === 'function') 
                             ambientPlayer.pauseVideo();
-                        flashIcon('⏸️'); // Menampilkan sekilas icon Pause
+                        flashIcon('⏸️');
                     } else {
                         player.playVideo();
-                        if (ambientPlayer && typeof ambientPlayer.playVideo === 'function') 
+                        if (ambientPlayer && typeof ambientPlayer.seekTo === 'function') {
+                            ambientPlayer.seekTo(player.getCurrentTime(), true);
                             ambientPlayer.playVideo();
-                        flashIcon('▶️'); // Menampilkan sekilas icon Play
+                        }
+                        flashIcon('▶️');
                     }
                 };
 
@@ -1092,6 +1335,8 @@
                 };
 
                 const closeContext = () => {
+                    if (!state.isOpen) 
+                        return;
                     state.isOpen = false;
                     domRefs
                         .layoutWrapper
@@ -1126,6 +1371,18 @@
                         ambientPlayer.playVideo();
                     };
                 
+                window.addEventListener('resize', () => {
+                    if (state.isOpen) 
+                        closeContext();
+                    }
+                );
+
+                document.addEventListener('visibilitychange', () => {
+                    if (document.hidden && player && player.getPlayerState() === YT.PlayerState.PLAYING) {
+                        togglePlayPause();
+                    }
+                });
+
                 const toggleTextExpansion = (btn) => {
                     const body = btn.closest('.story-body');
                     const isExpanded = body
@@ -1178,8 +1435,8 @@
 
                 const nativeShare = async () => {
                     const data = {
-                        title: 'Gaming Performa Cerdas 🔥',
-                        url: 'https://www.youtube.com/watch?v=kyPF1-VvOsQ'
+                        title: videoPlaylist[currentVideoIndex].title,
+                        url: `https://www.youtube.com/watch?v=${videoPlaylist[currentVideoIndex].id}`
                     };
                     try {
                         if (navigator.share) 
@@ -1258,13 +1515,10 @@
                         if (!state.isDragging || window.innerWidth >= 768) 
                             return;
                         state.isDragging = false;
-
-                        // Lepas listener move/end agar lebih ringan di memory
                         window.removeEventListener('mousemove', move);
                         window.removeEventListener('touchmove', move);
                         window.removeEventListener('mouseup', end);
                         window.removeEventListener('touchend', end);
-
                         if (state.currentY > 120) 
                             closeContext();
                         else 
@@ -1287,8 +1541,6 @@
                                     .clientY
                                 : e.clientY;
                         state.isDragging = true;
-
-                        // Cuma bind saat user mulai nge-drag
                         window.addEventListener('mousemove', move);
                         window.addEventListener('touchmove', move, {passive: false});
                         window.addEventListener('mouseup', end);
@@ -1309,26 +1561,44 @@
 
                 return {
                     startProgressBar,
+                    stopProgressBar,
                     openContext,
                     closeContext,
+                    handleStoryClick,
                     toggleTextExpansion,
                     nativeShare,
                     react,
                     toggleReactionMenu,
                     toggleCleanMode,
                     togglePlayPause,
-                    toggleMute
+                    toggleMute,
+                    nextVideo,
+                    prevVideo,
+                    closeStory,
+                    checkNavState
                 };
             })();
 
+            function loadYouTubeAPI() {
+                var tag = document.createElement('script');
+                tag.src = "https://www.youtube.com/iframe_api";
+                var firstScriptTag = document.getElementsByTagName('script')[0];
+                firstScriptTag
+                    .parentNode
+                    .insertBefore(tag, firstScriptTag);
+            }
+
             function onYouTubeIframeAPIReady() {
+                updateVideoUI();
+
+                const initialVideoId = videoPlaylist[currentVideoIndex].id;
+
                 const ytOptions = {
-                    videoId: 'kyPF1-VvOsQ',
+                    videoId: initialVideoId,
                     playerVars: {
                         'autoplay': 1,
                         'controls': 0,
-                        'loop': 1,
-                        'playlist': 'kyPF1-VvOsQ',
+                        'loop': 0,
                         'mute': 1,
                         'modestbranding': 1,
                         'iv_load_policy': 3,
@@ -1336,6 +1606,7 @@
                         'playsinline': 1
                     }
                 };
+
                 player = new YT.Player('youtubePlayer', {
                     ...ytOptions,
                     events: {
@@ -1354,44 +1625,49 @@
                                 .getElementById('layoutWrapper')
                                 .classList
                                 .add('is-ready');
-                            StoryManager.startProgressBar();
+                        },
+                        'onError': (e) => {
+                            console.error("YouTube Player Error:", e.data);
+                            document
+                                .getElementById('layoutWrapper')
+                                .classList
+                                .add('is-ready');
                         },
                         'onStateChange': (e) => {
                             const btn = document.getElementById('btnPlayPause');
                             const container = document.getElementById('storyContainer');
 
-                            // FIX: Menangani status tombol UI berdasarkan state murni dari API
                             if (e.data === YT.PlayerState.PLAYING) {
                                 if (btn) 
                                     btn.innerText = '⏸️';
                                 container
                                     .classList
                                     .remove('is-paused');
+                                if (ambientPlayer && typeof ambientPlayer.seekTo === 'function') {
+                                    ambientPlayer.seekTo(player.getCurrentTime(), true);
+                                }
+                                StoryManager.startProgressBar();
                             } else if (e.data === YT.PlayerState.PAUSED) {
                                 if (btn) 
                                     btn.innerText = '▶️';
                                 container
                                     .classList
                                     .add('is-paused');
+                                StoryManager.stopProgressBar();
                             } else if (e.data === YT.PlayerState.ENDED) {
-                                if (btn) 
-                                    btn.innerText = '▶️';
-                                container
-                                    .classList
-                                    .add('is-paused');
+                                // LOGIC FIX: Kembalikan fungsi loop current video saat ENDED
+                                StoryManager.stopProgressBar();
                                 e
                                     .target
                                     .seekTo(0);
                                 e
                                     .target
                                     .playVideo();
-                                container
-                                    .classList
-                                    .remove('is-paused');
                             }
                         }
                     }
                 });
+
                 ambientPlayer = new YT.Player('ambientPlayer', {
                     ...ytOptions,
                     events: {
@@ -1410,6 +1686,8 @@
                     }
                 });
             }
+
+            loadYouTubeAPI();
         </script>
     </body>
 </html>
