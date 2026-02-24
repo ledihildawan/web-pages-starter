@@ -4,11 +4,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Video Story Component</title>
-
         <link rel="stylesheet" href="./styles.css">
-
         <style>
-            /* CSS Reset & Styling Basic Halaman Depan */
             *,
             *::after,
             *::before {
@@ -68,7 +65,6 @@
             <div class="video-thumbnail" data-story-group="data-story-group" data-story-format="default">
                 <h3>🎬 Story 1</h3>
                 <p>Default (YouTube)</p>
-
                 <div style="display: none;">
                     <div data-story-item="data-story-item" data-story-id="vid-001" data-story-type="youtube" data-story-url="https://www.youtube.com/embed/IHolHlnDP9s" data-story-title="Pantes aja betah dan ketinggalan di rumah!" data-story-views="380" data-story-desc-content="<p>Ini adalah deskripsi lucu dari video pertama. Tonton sampe habis yaa! 😁 #komedi</p>"></div>
                 </div>
@@ -77,7 +73,6 @@
             <div class="video-thumbnail" data-story-group="data-story-group" data-story-format="default">
                 <h3>🎬 Story 2</h3>
                 <p>Default (MP4)</p>
-
                 <div style="display: none;">
                     <div data-story-item="data-story-item" data-story-id="vid-002" data-story-type="mp4" data-story-url="https://assets.telkomsel.com/public/2025-08/simpati-terbaikuntukmu-video-content.mp4" data-story-title="Seru banget jalan-jalan hari ini! ✈️" data-story-views="5.4K" data-story-desc-content="<p>Vlog perjalanan seru ke tempat-tempat indah. Ikuti perjalanannya dari awal sampai akhir.</p>"></div>
                 </div>
@@ -86,24 +81,19 @@
             <div class="video-thumbnail" data-story-group="data-story-group" data-story-format="webstory">
                 <h3>📱 IG Story Style</h3>
                 <p>3 Segmen (Video & Gambar)</p>
-
                 <div style="display: none;">
-                    <div data-story-item="data-story-item" data-story-id="ws-001" data-story-type="mp4" data-story-url="https://assets.telkomsel.com/public/2025-08/simpati-terbaikuntukmu-video-content.mp4" data-story-title="🎉 Promo Spesial 1" data-story-desc-content="<p>Tonton video ini sampai habis!</p>"></div>
-
-                    <div data-story-item="data-story-item" data-story-id="ws-002" data-story-type="image" data-story-url="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1000&auto=format&fit=crop" data-story-title="🎮 Mode Gaming" data-story-desc-content="<p>Mabar makin lancar pakai layanan terbaik kami!</p>"></div>
-
-                    <div data-story-item="data-story-item" data-story-id="ws-003" data-story-type="mp4" data-story-url="https://assets.telkomsel.com/public/2025-08/simpati-terbaikuntukmu-video-content.mp4" data-story-title="🚀 Extra Kuota" data-story-desc-content="<p>Dapatkan sekarang juga di aplikasi.</p>"></div>
+                    <div data-story-item="data-story-item" data-story-id="ws-001" data-story-type="mp4" data-story-url="https://assets.telkomsel.com/public/2025-08/simpati-terbaikuntukmu-video-content.mp4" data-story-title="🎉 Promo Spesial 1" data-story-views="12K" data-story-desc-content="<p>Tonton video ini sampai habis!</p>"></div>
+                    <div data-story-item="data-story-item" data-story-id="ws-002" data-story-type="image" data-story-url="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1000&auto=format&fit=crop" data-story-title="🎮 Mode Gaming" data-story-views="8.3K" data-story-desc-content="<p>Mabar makin lancar pakai layanan terbaik kami!</p>"></div>
+                    <div data-story-item="data-story-item" data-story-id="ws-003" data-story-type="mp4" data-story-url="https://assets.telkomsel.com/public/2025-08/simpati-terbaikuntukmu-video-content.mp4" data-story-title="🚀 Extra Kuota" data-story-views="22K" data-story-desc-content="<p>Dapatkan sekarang juga di aplikasi.</p>"></div>
                 </div>
             </div>
 
         </div>
 
         <script src="./script.js"></script>
-
         <script>
             document.addEventListener("DOMContentLoaded", () => {
                 const groups = document.querySelectorAll('[data-story-group]');
-
                 groups.forEach(group => {
                     group.addEventListener('click', function () {
                         new VideoStoryPlayer({
@@ -120,8 +110,6 @@
                             .add('no-scroll');
                     });
                 });
-
-                // Auto-play via parameter URL (misal: ?video=ws-002)
                 VideoStoryPlayer.initFromURL();
             });
         </script>

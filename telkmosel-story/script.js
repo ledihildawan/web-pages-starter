@@ -1,6 +1,5 @@
 class VideoStoryPlayer {
     constructor(options = {}) {
-        // --- 1. SETUP DATA & GROUPING ---
         this.targetElement = options.target || document.body;
         this.triggerGroup = options.triggerGroup;
         
@@ -26,7 +25,6 @@ class VideoStoryPlayer {
             onClose: options.onClose
         };
 
-        // --- 2. STATE ANIMASI & EVENT BINDING ---
         this.isPaused = false;
         this.currentAnimationFrame = null;
         this.startTime = null;
@@ -39,15 +37,11 @@ class VideoStoryPlayer {
 
     init() {
         document.querySelectorAll('.video-player-container').forEach(el => el.remove());
-
-        this.addOverlayStyles();
         this.render();
         this.cacheDOM();
         this.bindEvents();
         this.updateButtonState();
         this.updateURLWithVideoId();
-        
-        if (this.shareMenuDesktop) this.shareMenuDesktop.style.display = 'none';
 
         if (this.data.format === 'webstory') {
             this.startMediaProgress();
@@ -59,10 +53,6 @@ class VideoStoryPlayer {
         }
     }
 
-    // ==========================================
-    // RENDER & TEMPLATE
-    // ==========================================
-
     getYouTubeId(url) {
         const match = url.match(/^.*(youtu.be\/|youtube.com\/(watch\?v=|embed\/|shorts\/))([^#\&\?]*).*/);
         return (match && match[3].length > 0) ? match[3] : url;
@@ -72,15 +62,15 @@ class VideoStoryPlayer {
         const { type, videoUrl } = this.data;
         if (type === "youtube") {
             const youtubeId = videoUrl.includes("youtube") || videoUrl.includes("youtu.be") ? this.getYouTubeId(videoUrl) : videoUrl;
-            return `<iframe loading="lazy" class="video-element" src="https://www.youtube.com/embed/${youtubeId}?autoplay=1&controls=1&rel=0&showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+            return `<iframe loading="lazy" class="unified-media-element" src="https://www.youtube.com/embed/${youtubeId}?autoplay=1&controls=1&rel=0&showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
         } else if (type === "mp4") {
-            return `<video class="web-story-element video-element" id="mediaPlayer" autoplay playsinline>
+            return `<video class="unified-media-element" id="mediaPlayer" autoplay playsinline preload="auto">
                         <source src="${videoUrl}" type="video/mp4">
                     </video>`;
         } else if (type === "image") {
-            return `<img class="web-story-element web-story-img" id="mediaPlayer" src="${videoUrl}" alt="Story Image">`;
+            return `<img class="unified-media-element img-element" id="mediaPlayer" src="${videoUrl}" alt="Story Image">`;
         } else {
-            return `<iframe loading="lazy" class="video-element" src="${videoUrl}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+            return `<iframe loading="lazy" class="unified-media-element" src="${videoUrl}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
         }
     }
 
@@ -98,100 +88,157 @@ class VideoStoryPlayer {
         const currentUrl = window.location.origin + window.location.pathname + "?video=" + this.data.id;
         const encodedUrl = encodeURIComponent(currentUrl);
         const encodedTitle = encodeURIComponent(this.data.title);
-
-        if (this.data.format === 'webstory') {
-            let dynamicStyle = "";
-            if (window.innerWidth >= 768) {
-                const widthVal = this.data.type === "image" ? "308px" : "350px";
-                dynamicStyle = `width: ${widthVal}; margin-inline: auto; left: 0; right: 0;`;
-            }
-
-            return `
-                <div class="video-player-container web-story-container">
-                    <div class="close-btn-story close-button" aria-label="Tutup">×</div>
-                    
-                    <div class="progress-bar-container" style="${dynamicStyle}">${this.renderProgressBars()}</div>
-                    
-                    <div class="web-story" style="${dynamicStyle}">
-                        <div class="video-container-story">
-                            ${this.getVideoElement()}
-                            <div class="controls">
-                                <button id="playPauseButton" class="control-button" aria-label="Play/Pause"><img id="playPauseIcon" src="https://telkomsel.com/themes/custom/telkomsel/assets/img/revamp/pause.svg" alt="pause"></button>
-                                <button id="muteButton" class="control-button" aria-label="Mute/Unmute"><img id="muteIcon" src="https://telkomsel.com/themes/custom/telkomsel/assets/img/revamp/sound.svg" alt="sound"></button>
-                            </div>
-                        </div>
-                        <div class="touch-overlay left-overlay"></div>
-                        <div class="touch-overlay center-overlay"></div>
-                        <div class="touch-overlay right-overlay"></div>
-                    </div>
-
-                    <div class="story-video-info" style="${dynamicStyle}">
-                        <h3>${this.data.title}</h3>
-                        <div class="content-story-desc">${this.data.content}</div>
-                    </div>
-
-                    <div class="video-controls-scroll">
-                        <div class="scroll-btn" id="scrollUp"><img src="https://telkomsel.com/themes/custom/telkomsel/assets/img/revamp/icons/ico_chevron_up.svg" loading="lazy" alt="up"></div>
-                        <div class="scroll-btn" id="scrollDown"><img src="https://telkomsel.com/themes/custom/telkomsel/assets/img/revamp/icons/ico_chevron_down.svg" loading="lazy" alt="down"></div>
-                    </div>
-                </div>
-            `;
-        }
-
-        let touchOverlaysDefault = '';
-        if (window.innerWidth <= 768) {
-            touchOverlaysDefault = `
-                <div class="touch-overlay top-overlay"></div>
-                <div class="touch-overlay left-overlay"></div>
-                <div class="touch-overlay right-overlay"></div>
-            `;
-        }
+        
+        const isWebStory = this.data.format === 'webstory';
+        const isNotYoutube = this.data.type !== 'youtube';
 
         return `
             <div class="video-player-container">
-                <div class="close-button" aria-label="Tutup">×</div>
-                <div class="video-player">
+                <div class="unified-video-wrapper">
                     ${this.getVideoElement()}
-                    ${touchOverlaysDefault}
-                </div>
-                
-                <div class="fullscreen-video-info" id="mobile-video-info">
-                    <h3>${this.data.title}</h3>
-                    <div class="content-desc" id="section-content-description">${this.data.content}</div>
+
+                    ${isWebStory ? `<div class="progress-bar-container">${this.renderProgressBars()}</div>` : ''}
+                    
+                    <div class="unified-top-controls">
+                        ${isNotYoutube ? `
+                            <button id="playPauseButton" class="control-button" aria-label="Play/Pause"><img id="playPauseIcon" src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/pause.svg" alt="pause"></button>
+                            <button id="muteButton" class="control-button" aria-label="Mute/Unmute"><img id="muteIcon" src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/sound.svg" alt="sound"></button>
+                        ` : ''}
+                        <button class="close-button" aria-label="Tutup">×</button>
+                    </div>
+
+                    ${isWebStory ? `
+                        <div class="story-video-info">
+                            <h3>${this.data.title}</h3>
+                            <div class="view-content view-content-light">
+                                <img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/ico_eye_open.svg" alt="views">
+                                <div class="view-content-number">${this.data.views}</div>
+                            </div>
+                            <div class="content-story-desc">${this.data.content}</div>
+                        </div>
+                    ` : ''}
+
+                    <div class="touch-overlay top-overlay"></div>
+                    <div class="touch-overlay left-overlay"></div>
+                    ${isNotYoutube ? '<div class="touch-overlay center-overlay"></div>' : ''}
+                    <div class="touch-overlay right-overlay"></div>
                 </div>
 
-                <div class="section-media">
-                    <div class="section-media-wrapper">
-                        <div class="content">
-                            <p>${this.data.title}</p>
-                            <div class="view-content"><img src="https://telkomsel.com/themes/custom/telkomsel/assets/img/revamp/icons/ico_eye_open.svg" alt="views"><div class="view-content-number">${this.data.views}</div></div>
-                            <div class="desc-content desktop-desc">${this.data.content}</div>
-                            <a href="#" class="read-more-section">${this.data.readMoreText}</a>
+                ${!isWebStory ? `
+                    <div class="fullscreen-video-info" id="mobile-video-info">
+                        <h3>${this.data.title}</h3>
+                        <div class="view-content view-content-light">
+                            <img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/ico_eye_open.svg" alt="views">
+                            <div class="view-content-number">${this.data.views}</div>
                         </div>
-                        <div class="content-footer">
-                            <div class="content-outer-card">
-                                <div class="emote"><div class="emote-icon-sad">😭</div><div class="emote-icon-clap">👏🏻</div><div class="emote-icon-laugh">🤣</div><div class="emote-icon-celebrate">🎉</div><div class="emote-icon-heart">❤️</div></div>
-                                <div class="btn-share"><button class="button-primary-global" id="btn-share-social-desktop">Bagikan</button></div>
+                        <div class="content-desc" id="section-content-description">${this.data.content}</div>
+                    </div>
+
+                    <div class="section-media">
+                        <div class="section-media-wrapper">
+                            <div class="content">
+                                <p>${this.data.title}</p>
+                                <div class="view-content">
+                                    <img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/ico_eye_open.svg" alt="views">
+                                    <div class="view-content-number">${this.data.views}</div>
+                                </div>
+                                <div class="desc-content desktop-desc">${this.data.content}</div>
+                                <a href="#" class="read-more-section">${this.data.readMoreText}</a>
                             </div>
-                            <div class="share-link" id="share-link-media-desktop">
-                                <div class="title-link">Bagikan Dengan yang lain</div>
-                                <div class="share-icon-social-media">
-                                    <div class="icon-social"><a href="https://api.whatsapp.com/send?text=${encodedUrl}" target="_blank"><img src="https://telkomsel.com/themes/custom/telkomsel/assets/img/revamp/icons/social/whatsapp.svg" alt="wa"></a><span>Whatsapp</span></div>
-                                    <div class="icon-social"><a href="https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}" target="_blank"><img src="https://telkomsel.com/themes/custom/telkomsel/assets/img/revamp/icons/social/telegram.svg" alt="tg"></a><span>Telegram</span></div>
-                                    <div class="icon-social copy-link"><div data-url="${currentUrl}"><img src="https://telkomsel.com/themes/custom/telkomsel/assets/img/revamp/icons/social/link.svg" alt="link"></div><span>Copy Link</span></div>
+                            <div class="content-footer">
+                                <div class="content-outer-card">
+                                    <div class="emote">
+                                        <div class="emote-icon-sad">😭</div>
+                                        <div class="emote-icon-clap">👏🏻</div>
+                                        <div class="emote-icon-laugh">🤣</div>
+                                        <div class="emote-icon-celebrate">🎉</div>
+                                        <div class="emote-icon-heart">❤️</div>
+                                    </div>
+                                    <div class="btn-share">
+                                        <button class="button-primary-global" id="btn-share-social-desktop">Bagikan</button>
+                                    </div>
+                                </div>
+                                <div class="share-link" id="share-link-media-desktop">
+                                    <div class="share-icon-social-media">
+                                        <div class="icon-social"><a href="https://api.whatsapp.com/send?text=${encodedUrl}" target="_blank"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/whatsapp.svg" alt="wa"></a><span>Whatsapp</span></div>
+                                        <div class="icon-social"><a href="https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}" target="_blank"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/telegram.svg" alt="tg"></a><span>Telegram</span></div>
+                                        <div class="icon-social"><a href="https://x.com/intent/tweet?url=${encodedUrl}" target="_blank"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/x.svg" alt="x"></a><span>X</span></div>
+                                        <div class="icon-social"><a href="https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}" target="_blank"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/facebook.svg" alt="fb"></a><span>Facebook</span></div>
+                                        <div class="icon-social"><a href="mailto:?subject=${encodedTitle}&body=${encodedUrl}" target="_blank"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/mail.svg" alt="mail"></a><span>Email</span></div>
+                                        <div class="icon-social copy-link"><div data-url="${currentUrl}"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/link.svg" alt="link"></div><span>Copy Link</span></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+
+                    <div class="modal-wrapper-hidden">
+                        
+                        <div class="dialog-video-description">
+                            <div class="popup-shorts-overlay"></div>
+                            <div class="popup-shorts popup-shorts-content">
+                                <div class="popup-shorts-inner">
+                                    <div class="stick-close" id="closedescription"></div>
+                                    <div class="section-media-wrapper">
+                                        <div class="content">
+                                            <p>${this.data.title}</p>
+                                            <div class="view-content">
+                                                <img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/ico_eye_open.svg" alt="views">
+                                                <div class="view-content-number">${this.data.views}</div>
+                                            </div>
+                                            <div class="desc-content mobile-desc-content">${this.data.content}</div>
+                                            <a href="#" class="read-more-section">${this.data.readMoreText}</a>
+                                        </div>
+                                        <div class="content-footer">
+                                            <div class="content-outer-card">
+                                                <div class="emote">
+                                                    <div class="emote-icon-sad">😭</div>
+                                                    <div class="emote-icon-clap">👏🏻</div>
+                                                    <div class="emote-icon-laugh">🤣</div>
+                                                    <div class="emote-icon-celebrate">🎉</div>
+                                                    <div class="emote-icon-heart">❤️</div>
+                                                </div>
+                                                <div class="btn-share">
+                                                    <button class="button-primary-global" id="btn-share-mobile">Bagikan</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dialog-video-share">
+                            <div class="popup-share-overlay"></div>
+                            <div class="popup-share popup-share-content">
+                                <div class="popup-share-inner">
+                                    <div class="stick-close" id="closedescriptionShare"></div>
+                                    <div class="section-media-wrapper share">
+                                        <div class="content-footer content-footer-share">
+                                            <div class="share-link" id="share-link-media">
+                                                <div class="title-link title-link-share">Bagikan Dengan yang lain</div>
+                                                <div class="share-icon-social-media">
+                                                    <div class="icon-social"><a href="https://api.whatsapp.com/send?text=${encodedUrl}" target="_blank"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/whatsapp.svg" alt="wa"></a><span>Whatsapp</span></div>
+                                                    <div class="icon-social"><a href="https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}" target="_blank"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/telegram.svg" alt="tg"></a><span>Telegram</span></div>
+                                                    <div class="icon-social"><a href="https://x.com/intent/tweet?url=${encodedUrl}" target="_blank"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/x.svg" alt="x"></a><span>X</span></div>
+                                                    <div class="icon-social"><a href="https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}" target="_blank"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/facebook.svg" alt="fb"></a><span>Facebook</span></div>
+                                                    <div class="icon-social"><a href="mailto:?subject=${encodedTitle}&body=${encodedUrl}" target="_blank"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/mail.svg" alt="mail"></a><span>Email</span></div>
+                                                    <div class="icon-social copy-link"><div data-url="${currentUrl}"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/link.svg" alt="link"></div><span>Copy Link</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                ` : ''}
 
                 <div class="video-controls-scroll">
-                    <div class="scroll-btn" id="scrollUp"><img src="https://telkomsel.com/themes/custom/telkomsel/assets/img/revamp/icons/ico_chevron_up.svg" alt="up"></div>
-                    <div class="scroll-btn" id="scrollDown"><img src="https://telkomsel.com/themes/custom/telkomsel/assets/img/revamp/icons/ico_chevron_down.svg" alt="down"></div>
+                    <div class="scroll-btn" id="scrollUp"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/ico_chevron_up.svg" loading="lazy" alt="up"></div>
+                    <div class="scroll-btn" id="scrollDown"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/ico_chevron_down.svg" loading="lazy" alt="down"></div>
                 </div>
-
-                <div class="dialog-video-description"><div class="popup-video-shorts popup-shorts-overlay"></div><div class="popup-shorts popup-shorts-content"><div class="popup-shorts-inner"><div class="popup-shorts-inner-content"><div class="body-content"><div class="card-info"><div class="stick-close" id="closedescription"></div><div class="section-media-wrapper"><div class="content"><p>${this.data.title}</p><div class="view-content"><img src="https://telkomsel.com/themes/custom/telkomsel/assets/img/revamp/icons/ico_eye_open.svg" alt="views"><div class="view-content-number">${this.data.views}</div></div><div class="desc-content mobile-desc-content">${this.data.content}</div><a href="#" class="read-more-section">Selengkapnya</a></div><div class="content-footer"><div class="content-outer-card"><div class="emote"><div class="emote-icon-sad">😭</div><div class="emote-icon-clap">👏🏻</div><div class="emote-icon-laugh">🤣</div><div class="emote-icon-celebrate">🎉</div><div class="emote-icon-heart">❤️</div></div><div class="btn-share"><button class="button-primary-global" id="btn-share-mobile">Bagikan</button></div></div></div></div></div></div></div></div></div></div>
-                <div class="dialog-video-share"><div class="popup-video-share popup-share-overlay"></div><div class="popup-share popup-share-content"><div class="popup-share-inner"><div class="popup-share-inner-content"><div class="body-content"><div class="card-info"><div class="stick-close" id="closedescriptionShare">×</div><div class="section-media-wrapper share"><div class="content-footer content-footer-share"><div class="share-link" id="share-link-media"><div class="title-link title-link-share">Bagikan Dengan yang lain</div><div class="share-icon-social-media"><div class="icon-social"><a href="https://api.whatsapp.com/send?text=${encodedUrl}" target="_blank"><img src="https://telkomsel.com/themes/custom/telkomsel/assets/img/revamp/icons/social/whatsapp.svg" alt="wa"></a><span>Whatsapp</span></div><div class="icon-social"><a href="https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}" target="_blank"><img src="https://telkomsel.com/themes/custom/telkomsel/assets/img/revamp/icons/social/telegram.svg" alt="tg"></a><span>Telegram</span></div><div class="icon-social copy-link"><div data-url="${currentUrl}"><img src="https://telkomsel.com/themes/custom/telkomsel/assets/img/revamp/icons/social/link.svg" alt="link"></div><span>Copy Link</span></div></div></div></div></div></div></div></div></div></div></div>
             </div>
         `;
     }
@@ -201,9 +248,6 @@ class VideoStoryPlayer {
         wrapper.innerHTML = this.getTemplate().trim();
         this.element = wrapper.firstChild;
         
-        this.element.style.display = 'flex';
-        this.element.style.flexDirection = 'column';
-
         const siteHeader = document.getElementById('site-header');
         if (siteHeader) siteHeader.style.display = 'none';
 
@@ -211,32 +255,34 @@ class VideoStoryPlayer {
     }
 
     cacheDOM() {
+        this.videoPlayerArea = this.element.querySelector('.unified-video-wrapper');
         this.closeBtn = this.element.querySelector('.close-button');
         this.scrollUp = this.element.querySelector('#scrollUp');
         this.scrollDown = this.element.querySelector('#scrollDown');
 
+        this.leftOverlay = this.element.querySelector('.left-overlay');
+        this.rightOverlay = this.element.querySelector('.right-overlay');
+        this.centerOverlay = this.element.querySelector('.center-overlay');
+
+        this.mediaPlayer = this.element.querySelector('#mediaPlayer');
+        this.playPauseBtn = this.element.querySelector('#playPauseButton');
+        this.playPauseIcon = this.element.querySelector('#playPauseIcon');
+        this.muteBtn = this.element.querySelector('#muteButton');
+        this.muteIcon = this.element.querySelector('#muteIcon');
+
         if (this.data.format === 'webstory') {
-            this.mediaPlayer = this.element.querySelector('#mediaPlayer');
-            this.playPauseBtn = this.element.querySelector('#playPauseButton');
-            this.playPauseIcon = this.element.querySelector('#playPauseIcon');
-            this.muteBtn = this.element.querySelector('#muteButton');
-            this.muteIcon = this.element.querySelector('#muteIcon');
-            
             const allFills = this.element.querySelectorAll('.progress-fill');
             this.currentProgressFill = allFills[this.currentNestedIndex];
-
-            this.leftOverlay = this.element.querySelector('.left-overlay');
-            this.rightOverlay = this.element.querySelector('.right-overlay');
-            this.centerOverlay = this.element.querySelector('.center-overlay');
         } else {
-            this.videoPlayerArea = this.element.querySelector('.video-player');
             this.shareBtnDesktop = this.element.querySelector('#btn-share-social-desktop');
             this.shareMenuDesktop = this.element.querySelector('#share-link-media-desktop');
             this.readMoreBtns = this.element.querySelectorAll('.read-more-section');
             this.copyLinkBtns = this.element.querySelectorAll('.copy-link');
+            this.emotes = this.element.querySelectorAll('.emote div');
 
             this.mobileVideoInfo = this.element.querySelector('#mobile-video-info');
             this.sectionContentDesc = this.element.querySelector('#section-content-description');
+            
             this.popupShortsOverlay = this.element.querySelector('.popup-shorts-overlay');
             this.popupShortsContent = this.element.querySelector('.popup-shorts-content');
             this.closeDescBtn = this.element.querySelector('#closedescription');
@@ -245,7 +291,6 @@ class VideoStoryPlayer {
             this.popupShareOverlay = this.element.querySelector('.popup-share-overlay');
             this.popupShareContent = this.element.querySelector('.popup-share-content');
             this.closeShareBtn = this.element.querySelector('#closedescriptionShare');
-            this.emotes = this.element.querySelectorAll('.emote div');
         }
     }
 
@@ -256,36 +301,53 @@ class VideoStoryPlayer {
         if (this.scrollUp) this.scrollUp.addEventListener('click', () => this.playPrevGroup());
         if (this.scrollDown) this.scrollDown.addEventListener('click', () => this.playNextGroup());
 
+        if (this.centerOverlay && this.mediaPlayer) {
+            const pauseMedia = () => { 
+                this.isPaused = true; 
+                if(this.data.type === 'mp4') this.mediaPlayer.pause(); 
+            };
+            const resumeMedia = () => { 
+                this.isPaused = false; 
+                if(this.data.type === 'mp4') {
+                    const playPromise = this.mediaPlayer.play();
+                    if (playPromise !== undefined) playPromise.catch(e => console.log(e));
+                }
+            };
+            this.centerOverlay.addEventListener('touchstart', pauseMedia, {passive: true});
+            this.centerOverlay.addEventListener('mousedown', pauseMedia);
+            this.centerOverlay.addEventListener('touchend', resumeMedia);
+            this.centerOverlay.addEventListener('mouseup', resumeMedia);
+        }
+
+        if (this.playPauseBtn && this.mediaPlayer) {
+            this.playPauseBtn.addEventListener('click', () => {
+                this.isPaused = !this.isPaused;
+                if (this.data.type === 'mp4') {
+                    if (this.isPaused) {
+                        this.mediaPlayer.pause();
+                    } else {
+                        const playPromise = this.mediaPlayer.play();
+                        if (playPromise !== undefined) playPromise.catch(e => console.log(e));
+                    }
+                }
+                this.playPauseIcon.src = this.isPaused ? 'https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/play.svg' : 'https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/pause.svg';
+            });
+        }
+
+        if (this.muteBtn && this.mediaPlayer) {
+            if (this.data.type === 'image') {
+                this.muteBtn.style.display = 'none';
+            } else {
+                this.muteBtn.addEventListener('click', () => {
+                    this.mediaPlayer.muted = !this.mediaPlayer.muted;
+                    this.muteIcon.src = this.mediaPlayer.muted ? 'https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/mute.svg' : 'https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/sound.svg';
+                });
+            }
+        }
+
         if (this.data.format === 'webstory') {
             if (this.leftOverlay) this.leftOverlay.addEventListener('click', () => this.playPrevNested());
             if (this.rightOverlay) this.rightOverlay.addEventListener('click', () => this.playNextNested());
-
-            if (this.centerOverlay) {
-                const pauseMedia = () => { this.isPaused = true; if(this.data.type === 'mp4') this.mediaPlayer.pause(); };
-                const resumeMedia = () => { this.isPaused = false; if(this.data.type === 'mp4') this.mediaPlayer.play(); };
-
-                this.centerOverlay.addEventListener('touchstart', pauseMedia, {passive: true});
-                this.centerOverlay.addEventListener('mousedown', pauseMedia);
-                this.centerOverlay.addEventListener('touchend', resumeMedia);
-                this.centerOverlay.addEventListener('mouseup', resumeMedia);
-            }
-
-            if (this.playPauseBtn) {
-                this.playPauseBtn.addEventListener('click', () => {
-                    this.isPaused = !this.isPaused;
-                    if (this.data.type === 'mp4') this.isPaused ? this.mediaPlayer.pause() : this.mediaPlayer.play();
-                    this.playPauseIcon.src = this.isPaused ? 'https://telkomsel.com/themes/custom/telkomsel/assets/img/revamp/play.svg' : 'https://telkomsel.com/themes/custom/telkomsel/assets/img/revamp/pause.svg';
-                });
-            }
-
-            if (this.muteBtn && this.data.type === 'mp4') {
-                this.muteBtn.addEventListener('click', () => {
-                    this.mediaPlayer.muted = !this.mediaPlayer.muted;
-                    this.muteIcon.src = this.mediaPlayer.muted ? 'https://telkomsel.com/themes/custom/telkomsel/assets/img/revamp/mute.svg' : 'https://telkomsel.com/themes/custom/telkomsel/assets/img/revamp/sound.svg';
-                });
-            } else if (this.muteBtn && this.data.type === 'image') {
-                this.muteBtn.style.display = 'none';
-            }
         } 
         else {
             if (this.shareBtnDesktop && this.shareMenuDesktop) {
@@ -294,46 +356,57 @@ class VideoStoryPlayer {
                 });
             }
 
-            this.readMoreBtns.forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const descContainer = e.target.previousElementSibling;
-                    const isExpanded = descContainer.classList.toggle('expanded');
-                    e.target.textContent = isExpanded ? 'Sembunyikan' : 'Selengkapnya';
+            if (this.readMoreBtns) {
+                this.readMoreBtns.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const descContainer = e.target.previousElementSibling;
+                        const isExpanded = descContainer.classList.toggle('expanded');
+                        e.target.textContent = isExpanded ? 'Sembunyikan' : 'Selengkapnya';
+                    });
                 });
-            });
+            }
 
-            this.copyLinkBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const urlToCopy = btn.querySelector('div').getAttribute('data-url');
-                    navigator.clipboard.writeText(urlToCopy).catch(() => {});
+            if (this.copyLinkBtns) {
+                this.copyLinkBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const urlToCopy = btn.querySelector('div').getAttribute('data-url');
+                        navigator.clipboard.writeText(urlToCopy).catch(() => {});
+                    });
                 });
-            });
+            }
 
             if (this.emotes) {
                 this.emotes.forEach(emote => emote.addEventListener('click', (e) => this.animateEmote(e.currentTarget)));
             }
 
-            const openDescModal = () => {
-                this.popupShortsOverlay.classList.add('popup-video-shorts-active');
-                this.popupShortsContent.classList.add('popup-shorts-active');
-                if (this.closeBtn) this.closeBtn.style.display = 'none';
+            // MODAL LOGIC Mulus tanpa Tabrakan Animasi
+            const openDescModal = (e) => {
+                if(e) e.stopPropagation();
+                if (this.popupShortsOverlay) this.popupShortsOverlay.classList.add('popup-video-shorts-active');
+                if (this.popupShortsContent) this.popupShortsContent.classList.add('popup-shorts-active');
             };
 
-            const openShareModal = () => {
-                this.popupShareOverlay.classList.add('popup-video-share-active');
-                this.popupShareContent.classList.add('popup-share-active');
-                this.popupShortsOverlay.classList.remove('popup-video-shorts-active');
-                this.popupShortsContent.classList.remove('popup-shorts-active');
-                if (this.closeBtn) this.closeBtn.style.display = 'none';
+            const openShareModal = (e) => {
+                if(e) e.stopPropagation();
+                if (this.popupShortsContent) {
+                    this.popupShortsContent.style.transition = 'none'; 
+                    this.popupShortsContent.classList.remove('popup-shorts-active');
+                    setTimeout(() => {
+                        if (this.popupShortsContent) this.popupShortsContent.style.transition = 'bottom 0.4s ease-out';
+                    }, 50);
+                }
+                if (this.popupShortsOverlay) this.popupShortsOverlay.classList.remove('popup-video-shorts-active');
+
+                if (this.popupShareOverlay) this.popupShareOverlay.classList.add('popup-video-share-active');
+                if (this.popupShareContent) this.popupShareContent.classList.add('popup-share-active');
             };
 
             const closeAllModals = () => {
-                this.popupShortsOverlay.classList.remove('popup-video-shorts-active');
-                this.popupShortsContent.classList.remove('popup-shorts-active');
-                this.popupShareOverlay.classList.remove('popup-video-share-active');
-                this.popupShareContent.classList.remove('popup-share-active');
-                if (this.closeBtn) this.closeBtn.style.display = 'block';
+                if (this.popupShortsOverlay) this.popupShortsOverlay.classList.remove('popup-video-shorts-active');
+                if (this.popupShortsContent) this.popupShortsContent.classList.remove('popup-shorts-active');
+                if (this.popupShareOverlay) this.popupShareOverlay.classList.remove('popup-video-share-active');
+                if (this.popupShareContent) this.popupShareContent.classList.remove('popup-share-active');
             };
 
             if (this.mobileVideoInfo) this.mobileVideoInfo.addEventListener('click', openDescModal);
@@ -343,17 +416,20 @@ class VideoStoryPlayer {
             if (this.closeDescBtn) this.closeDescBtn.addEventListener('click', (e) => { e.stopPropagation(); closeAllModals(); });
             if (this.closeShareBtn) this.closeShareBtn.addEventListener('click', (e) => { e.stopPropagation(); closeAllModals(); });
 
-            const overlays = [this.popupShortsContent, this.popupShareContent];
-            overlays.forEach(overlay => {
-                if (overlay) overlay.addEventListener('click', (e) => { if (e.target === overlay) closeAllModals(); });
+            const outsideTargets = [this.popupShortsOverlay, this.popupShareOverlay];
+            outsideTargets.forEach(target => {
+                if (target) {
+                    target.addEventListener('click', (e) => {
+                        if (e.target === target) closeAllModals();
+                    });
+                }
             });
         }
     }
 
     startMediaProgress() {
         this.cancelCurrentAnimation();
-
-        if (this.data.type === 'mp4') {
+        if (this.data.type === 'mp4' && this.mediaPlayer) {
             this.mediaPlayer.addEventListener('timeupdate', () => {
                 if (!this.isPaused && this.currentProgressFill) {
                     const percentage = (this.mediaPlayer.currentTime / this.mediaPlayer.duration) * 100;
@@ -361,7 +437,6 @@ class VideoStoryPlayer {
                 }
             });
             this.mediaPlayer.addEventListener('ended', () => this.playNextNested());
-        
         } else if (this.data.type === 'image') {
             this.startTime = Date.now() - this.elapsedTime;
             const animateImageProgress = () => {
@@ -437,6 +512,7 @@ class VideoStoryPlayer {
     }
 
     initTouchSwipeWebStory() {
+        if(!this.element) return;
         let startY = 0, isDragging = false;
         this.element.addEventListener("touchstart", (e) => { startY = e.touches[0].clientY; isDragging = false; }, { passive: true });
         this.element.addEventListener("touchmove", (e) => {
@@ -452,8 +528,8 @@ class VideoStoryPlayer {
     }
 
     initTouchHandlingDefault() {
-        let startY = 0, isDragging = false;
         if (!this.videoPlayerArea) return;
+        let startY = 0, isDragging = false;
 
         this.element.addEventListener('touchstart', (e) => {
             startY = e.touches[0].clientY;
@@ -464,14 +540,11 @@ class VideoStoryPlayer {
         this.element.addEventListener('touchmove', (e) => {
             let currentY = e.touches[0].clientY;
             let deltaY = Math.abs(currentY - startY);
-            
             if (deltaY > 10) {
                 isDragging = true;
                 if (e.cancelable) e.preventDefault();
                 if ((this.currentGroupIndex === 0 && currentY - startY > 0) || 
-                    (this.currentGroupIndex === this.allGroups.length - 1 && currentY - startY < 0)) {
-                    return;
-                }
+                    (this.currentGroupIndex === this.allGroups.length - 1 && currentY - startY < 0)) return;
             }
         }, { passive: false });
 
@@ -495,23 +568,8 @@ class VideoStoryPlayer {
         else if (e.key === "Escape") this.destroy(true);
     }
 
-    addOverlayStyles() {
-        if (document.getElementById('video-touch-styles')) return;
-        const style = document.createElement('style');
-        style.id = 'video-touch-styles';
-        style.innerHTML = `
-            .video-player { -webkit-overflow-scrolling: touch; position: relative; }
-            .video-player iframe.video-element { position: relative; z-index: 1; pointer-events: auto !important; }
-            .touch-overlay { position: absolute; z-index: 10; background: transparent; touch-action: none; user-select: none; }
-            .top-overlay { top: 0; left: 0; width: 100%; height: 15%; }
-            .left-overlay { top: 15%; left: 0; width: 40%; height: 70%; }
-            .right-overlay { top: 15%; right: 0; width: 40%; height: 70%; }
-            .center-overlay { top: 15%; left: 30%; width: 40%; height: 70%; cursor: pointer;}
-        `;
-        document.head.appendChild(style);
-    }
-
     updateButtonState() {
+        if (!this.scrollUp || !this.scrollDown) return;
         if (this.currentGroupIndex === 0 && this.currentNestedIndex === 0) this.scrollUp.classList.add('disabled');
         else this.scrollUp.classList.remove('disabled');
 
@@ -526,36 +584,19 @@ class VideoStoryPlayer {
         history.pushState({ videoId: this.data.id }, "", url.toString());
     }
 
-    sendStatistic() {
-        if (!this.data.nid) return;
-        const formData = new URLSearchParams();
-        formData.append('nid', this.data.nid);
-        fetch('/core/modules/statistics/statistics.php', { method: 'POST', body: formData }).catch(() => {});
-    }
-
-    // ANIMASI REAKSI: Berada di dalam Player secara mutlak (Absolute positioning)
     animateEmote(emoteElement) {
-        if(!this.videoPlayerArea) return; // Hanya digunakan di format Default
+        if(!this.videoPlayerArea) return;
         const emoteContent = emoteElement.innerHTML;
         const floatingEmote = document.createElement('div');
         floatingEmote.className = 'floating-emote';
         floatingEmote.innerHTML = emoteContent;
         
-        // Letakkan secara 'absolute' di dalam video player
         Object.assign(floatingEmote.style, {
-            position: "absolute", 
-            bottom: "20px", 
-            right: "20px", 
-            fontSize: "2.5rem",
-            opacity: "0", 
-            zIndex: "999999", // Cukup tinggi agar tembus layer di dalam player
-            pointerEvents: "none"
+            position: "absolute", bottom: "20px", right: "20px", fontSize: "2.5rem",
+            opacity: "0", zIndex: "9999", pointerEvents: "none"
         });
 
-        // MASUKKAN KE DALAM VIDEO PLAYER
         this.videoPlayerArea.appendChild(floatingEmote);
-        
-        // Tinggi dikira berdasarkan kawasan player tersebut
         const flyDistance = this.videoPlayerArea.offsetHeight;
 
         const animation = floatingEmote.animate([
@@ -570,17 +611,13 @@ class VideoStoryPlayer {
     destroy(fullClose = true) {
         this.cancelCurrentAnimation();
         document.removeEventListener('keydown', this.handleKeydown);
-        
         if (this.element) this.element.remove();
-        
         if (fullClose) {
             const url = new URL(window.location.href);
             url.searchParams.delete('video');
             history.pushState({}, "", url.toString());
-            
             const siteHeader = document.getElementById('site-header');
             if (siteHeader) siteHeader.style.display = 'block';
-
             if (typeof this.data.onClose === 'function') this.data.onClose();
         }
     }
@@ -594,7 +631,6 @@ class VideoStoryPlayer {
                 const group = item.closest('[data-story-group]');
                 const items = Array.from(group.querySelectorAll('[data-story-item]'));
                 const nestedIndex = items.indexOf(item);
-
                 new VideoStoryPlayer({
                     triggerGroup: group,
                     nestedIndex: nestedIndex !== -1 ? nestedIndex : 0,
