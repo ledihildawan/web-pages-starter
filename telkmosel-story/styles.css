@@ -60,7 +60,6 @@ body.no-scroll { overflow: hidden; }
 .core-video-container .read-more { display: none; }
 .core-video-container .video-info { position: relative; bottom: 0; width: 235px; }
 
-/* Truncate -webkit-box is required for line-clamp in all modern browsers */
 .core-video-container .video-info h3,
 .core-video-container .video-info p,
 .core-video-container .video-info span,
@@ -85,7 +84,6 @@ body.no-scroll { overflow: hidden; }
 .video-player-show { width: 80%; height: 90%; opacity: 0; }
 .video-player video, .long-video-element, .video-element { width: 100%; height: 100%; object-fit: cover; border-radius: 16px 16px 0px 0px; }
 
-.close-button, .close-btn-story { position: absolute; top: 0px; right: 20px; color: white; font-size: 30px; cursor: pointer; z-index: 1005; }
 .sound-mute { position: absolute; cursor: pointer; z-index: 1005; transform: translate(-50%, -50%); left: 60%; top: 80%; }
 
 .section-media { position: absolute; top: 21.5%; left: 78%; transform: translate(-50%, -50%); }
@@ -125,7 +123,7 @@ body.no-scroll { overflow: hidden; }
 .video-controls-scroll .scroll-btn.disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
 
 /* =========================================================
-   5. WEB STORIES (IG STYLE) 
+   5. WEB STORIES (IG STYLE) & NEW CONTROLS LAYOUT
 ========================================================= */
 .core-video-web-stories { padding: 0; }
 .core-video-web-stories.detail { padding: 0px 0px 20px 0px; }
@@ -159,16 +157,18 @@ body.no-scroll { overflow: hidden; }
 .web-story-element { object-fit: contain; width: 100%; height: 100%; border-radius: 12px; }
 .video-container-story { position: relative; width: 100%; height: 100%; margin: 0 auto; }
 
-/* FIX UKURAN TOMBOL IKON AGAR KONSISTEN */
-.controls { position: absolute; top: 0px; right: 0; display: flex; align-items: center; padding: 25px 3px 0px 0px; z-index: 1002;}
-.control-button { border: none; color: white; cursor: pointer; background: rgba(0,0,0,0.2); border-radius: 50%; width: 32px; height: 32px; margin-right: 4px; display: flex; justify-content: center; align-items: center; }
-.control-button img { width: 16px !important; height: 16px !important; object-fit: contain; display: block; }
-
-/* FIX POSISI TENGAH PROGRESS BAR DAN INFO TEKS */
-.progress-bar-container { display: flex; gap: 5px; position: absolute; top: 53px; left: 50%; transform: translateX(-50%); width: 360px; padding: 0 10px; height: 3px; z-index: 1001; }
+/* FIX: Susunan Navigasi Atas (Progress Bar & Buttons) */
+.progress-bar-container { display: flex; gap: 5px; position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 360px; padding: 0 10px; height: 3px; z-index: 1001; }
 .progress-bar-segment { flex: 1; background-color: rgba(255,255,255,0.5); border-radius: 4px; overflow: hidden; }
 .progress-bar-segment .progress-fill { width: 0; height: 100%; background-color: #ffffff; transition: width 100ms linear; }
 
+.controls { position: absolute; top: 25px; right: 15px; display: flex; align-items: center; z-index: 1002;}
+.control-button { border: none; color: white; cursor: pointer; background: rgba(0,0,0,0.2); border-radius: 50%; width: 32px; height: 32px; margin-right: 6px; display: flex; justify-content: center; align-items: center; }
+.control-button img { width: 16px !important; height: 16px !important; object-fit: contain; display: block; }
+
+.close-button, .close-btn-story { position: absolute; top: 25px; right: 25px; color: white; font-size: 32px; line-height: 1; cursor: pointer; z-index: 1005; width: 32px; height: 32px; display: flex; justify-content: center; align-items: center; }
+
+/* FIX: Info Story Teks Center */
 .story-video-info { position: absolute; bottom: 65px; left: 50%; transform: translateX(-50%); width: 360px; padding: 0 16px; color: white; z-index: 1001; }
 .story-video-info h3 { font-size: 12px; font-weight: 700; font-family: 'telkomsel-bartik-bold'; margin-bottom: 5px; text-shadow: 1px 1px 4px rgba(0,0,0,0.6); }
 .story-video-info .content-story-desc p { font-family: 'Poppins-Regular'; font-size: 10px; line-height: 18px; margin: 0; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; text-shadow: 1px 1px 4px rgba(0,0,0,0.6); }
@@ -349,8 +349,6 @@ body.no-scroll { overflow: hidden; }
     .video-player-container, .web-story-container { overflow-y: scroll; scroll-snap-align: start; height: 100dvh; }
     .video-player, .web-story, .video-player-show { width: 100%; height: 100%; top: 50% !important; left: 50% !important; border-radius: 0; }
     .video-player video, .web-story-element { border-radius: 0; }
-    .close-button, .close-btn-story { top: 40px; right: 10px; }
-    .sound-mute { top: 40px; left: 82%; }
     
     .section-media { display: none; position: fixed; top: 50% !important; left: 50% !important; width: 100%; z-index: 1005; transition: opacity 0.3s ease; }
     .section-media-wrapper { border-radius: 20px; width: 100%; height: 100%; }
@@ -363,10 +361,12 @@ body.no-scroll { overflow: hidden; }
     .fullscreen-video-info p { width: 88%; }
     .video-controls-scroll { display: none; }
 
-    /* Web Story Controls (Fix Centering for Mobile) */
-    .progress-bar-container { left: 0; top: 15px; width: 100%; transform: none; padding: 0 16px; }
+    /* FIX MOBILE: Layout Controls & Bar agar tidak nabrak di HP */
+    .progress-bar-container { top: 12px; left: 0; width: 100%; transform: none; padding: 0 16px; }
+    .close-button, .close-btn-story { top: 25px; right: 16px; }
+    .controls { top: 25px; right: 60px; } /* Geser ke kiri menghindari tombol X */
+
     .story-video-info { left: 0; bottom: 70px; width: 100%; transform: none; padding: 0 24px; }
-    .controls { top: 22px; right: 0; }
     .video-container-story { width: 100%; }
 
     /* Popups/Modals inside player */
