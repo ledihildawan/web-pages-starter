@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Video Story Component - Final DX</title>
+        <title>Video Story Component - Final DX + Alt</title>
         <link rel="stylesheet" href="./styles.css">
         <style>
             *,
@@ -17,7 +17,6 @@
                 padding: 0 0 50px;
                 background-color: #fafafb;
             }
-
             .main-header {
                 text-align: center;
                 color: #fff;
@@ -34,7 +33,6 @@
                 color: #a9b5c7;
                 font-size: 16px;
             }
-
             .story-section {
                 max-width: 1000px;
                 margin: 0 auto 40px;
@@ -47,7 +45,6 @@
                 padding-bottom: 8px;
                 border-bottom: 2px solid #e9e8ed;
             }
-
             .thumbnail-container {
                 display: flex;
                 gap: 20px;
@@ -116,7 +113,7 @@
 
         <header class="main-header">
             <h1>Pusat Video & Story</h1>
-            <p>Struktur Parent-Child (Group -> Trigger -> Item)</p>
+            <p>Aksesibilitas Tinggi dengan tag Alt</p>
         </header>
 
         <section class="story-section" data-story-group="promotions" data-story-format="webstory">
@@ -130,9 +127,9 @@
                     <span class="format-badge ws">Web Story</span>
 
                     <div style="display: none;">
-                        <div data-story-item="data-story-item" data-story-id="ws-001" data-story-type="mp4" data-story-url="https://assets.telkomsel.com/public/2025-08/simpati-terbaikuntukmu-video-content.mp4" data-story-title="🎉 Promo Spesial 1" data-story-views="12K" data-story-desc-content="<p>Tonton video ini sampai habis!</p>"></div>
-                        <div data-story-item="data-story-item" data-story-id="ws-002" data-story-type="image" data-story-url="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1000&auto=format&fit=crop" data-story-title="🎮 Mode Gaming" data-story-views="8.3K" data-story-desc-content="<p>Mabar makin lancar pakai layanan terbaik kami!</p>"></div>
-                        <div data-story-item="data-story-item" data-story-id="ws-003" data-story-type="mp4" data-story-url="https://assets.telkomsel.com/public/2025-08/simpati-terbaikuntukmu-video-content.mp4" data-story-title="🚀 Extra Kuota" data-story-views="22K" data-story-desc-content="<p>Dapatkan sekarang juga di aplikasi.</p>"></div>
+                        <div data-story-item="data-story-item" data-story-id="ws-001" data-story-type="mp4" data-story-url="https://assets.telkomsel.com/public/2025-08/simpati-terbaikuntukmu-video-content.mp4" data-story-title="🎉 Promo Spesial 1" data-story-alt="Video promosi paket spesial dengan diskon besar" data-story-views="12K" data-story-desc-content="<p>Tonton video ini sampai habis!</p>"></div>
+                        <div data-story-item="data-story-item" data-story-id="ws-002" data-story-type="image" data-story-url="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1000&auto=format&fit=crop" data-story-title="🎮 Mode Gaming" data-story-alt="Seseorang sedang bermain game di smartphone dengan lampu neon" data-story-views="8.3K" data-story-desc-content="<p>Mabar makin lancar pakai layanan terbaik kami!</p>"></div>
+                        <div data-story-item="data-story-item" data-story-id="ws-003" data-story-type="mp4" data-story-url="https://assets.telkomsel.com/public/2025-08/simpati-terbaikuntukmu-video-content.mp4" data-story-title="🚀 Extra Kuota" data-story-alt="Animasi roket menandakan kuota melimpah dan cepat" data-story-views="22K" data-story-desc-content="<p>Dapatkan sekarang juga di aplikasi.</p>"></div>
                     </div>
                 </div>
 
@@ -148,7 +145,7 @@
                     <p>Vlog Perjalanan</p>
                     <span class="format-badge">MP4 Video</span>
                     <div style="display: none;">
-                        <div data-story-item="data-story-item" data-story-id="vid-002" data-story-type="mp4" data-story-url="https://assets.telkomsel.com/public/2025-08/simpati-terbaikuntukmu-video-content.mp4" data-story-title="Seru banget jalan-jalan hari ini! ✈️" data-story-views="5.4K" data-story-desc-content="<p>Vlog perjalanan seru ke tempat-tempat indah.</p>"></div>
+                        <div data-story-item="data-story-item" data-story-id="vid-002" data-story-type="mp4" data-story-url="https://assets.telkomsel.com/public/2025-08/simpati-terbaikuntukmu-video-content.mp4" data-story-title="Seru banget jalan-jalan hari ini! ✈️" data-story-alt="Vlog perjalanan ke tempat wisata alam yang indah" data-story-views="5.4K" data-story-desc-content="<p>Vlog perjalanan seru ke tempat-tempat indah.</p>"></div>
                     </div>
                 </div>
 
@@ -164,7 +161,7 @@
                     <p>Edisi Ketinggalan</p>
                     <span class="format-badge">YouTube</span>
                     <div style="display: none;">
-                        <div data-story-item="data-story-item" data-story-id="vid-001" data-story-type="youtube" data-story-url="https://www.youtube.com/embed/IHolHlnDP9s" data-story-title="Pantes aja betah dan ketinggalan di rumah!" data-story-views="380" data-story-desc-content="<p>Ini adalah deskripsi lucu dari video pertama. 😁</p>"></div>
+                        <div data-story-item="data-story-item" data-story-id="vid-001" data-story-type="youtube" data-story-url="https://www.youtube.com/embed/IHolHlnDP9s" data-story-title="Pantes aja betah dan ketinggalan di rumah!" data-story-alt="Video komedi singkat tentang orang yang betah di rumah" data-story-views="380" data-story-desc-content="<p>Ini adalah deskripsi lucu dari video pertama. 😁</p>"></div>
                     </div>
                 </div>
 
@@ -173,7 +170,7 @@
                     <p>Bahas Teknologi</p>
                     <span class="format-badge">YouTube</span>
                     <div style="display: none;">
-                        <div data-story-item="data-story-item" data-story-id="vid-003" data-story-type="youtube" data-story-url="https://www.youtube.com/embed/ScMzIvxBSi4" data-story-title="Masa Depan Teknologi" data-story-views="1.2M" data-story-desc-content="<p>Diskusi seru mengenai masa depan kita.</p>"></div>
+                        <div data-story-item="data-story-item" data-story-id="vid-003" data-story-type="youtube" data-story-url="https://www.youtube.com/embed/ScMzIvxBSi4" data-story-title="Masa Depan Teknologi" data-story-alt="Sesi talkshow mendalam mengenai AI dan teknologi masa depan" data-story-views="1.2M" data-story-desc-content="<p>Diskusi seru mengenai masa depan kita.</p>"></div>
                     </div>
                 </div>
 

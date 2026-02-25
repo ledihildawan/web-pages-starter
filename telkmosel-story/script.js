@@ -21,6 +21,7 @@ class VideoStoryPlayer {
             views: this.currentItem.getAttribute('data-story-views') || "0",
             content: this.currentItem.getAttribute('data-story-desc-content') || "",
             readMoreText: this.currentItem.getAttribute('data-story-readmore') || "Selengkapnya",
+            altText: this.currentItem.getAttribute('data-story-alt') || "Story Media",
             onClose: options.onClose
         };
 
@@ -72,18 +73,18 @@ class VideoStoryPlayer {
     }
 
     getVideoElement() {
-        const { type, videoUrl } = this.data;
+        const { type, videoUrl, altText } = this.data;
         if (type === "youtube") {
             const youtubeId = videoUrl.includes("youtube") || videoUrl.includes("youtu.be") ? this.getYouTubeId(videoUrl) : videoUrl;
-            return `<iframe id="mediaPlayer" loading="lazy" class="unified-media-element" src="https://www.youtube.com/embed/${youtubeId}?autoplay=1&controls=0&rel=0&showinfo=0&enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+            return `<iframe id="mediaPlayer" loading="lazy" class="unified-media-element" src="https://www.youtube.com/embed/${youtubeId}?autoplay=1&controls=0&rel=0&showinfo=0&enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen title="${altText}"></iframe>`;
         } else if (type === "mp4") {
-            return `<video class="unified-media-element" id="mediaPlayer" autoplay playsinline preload="auto">
+            return `<video class="unified-media-element" id="mediaPlayer" autoplay playsinline preload="auto" title="${altText}">
                         <source src="${videoUrl}" type="video/mp4">
                     </video>`;
         } else if (type === "image") {
-            return `<img class="unified-media-element img-element" id="mediaPlayer" src="${videoUrl}" alt="Story Image">`;
+            return `<img class="unified-media-element img-element" id="mediaPlayer" src="${videoUrl}" alt="${altText}">`;
         } else {
-            return `<iframe id="mediaPlayer" loading="lazy" class="unified-media-element" src="${videoUrl}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+            return `<iframe id="mediaPlayer" loading="lazy" class="unified-media-element" src="${videoUrl}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen title="${altText}"></iframe>`;
         }
     }
 
@@ -129,7 +130,7 @@ class VideoStoryPlayer {
 
                     <div class="touch-overlay top-overlay"></div>
                     <div class="touch-overlay left-overlay"></div>
-                    <div class="touch-overlay center-overlay"></div>
+                    <div class="touch-overlay center-overlay ${!isNotYoutube ? 'youtube-overlay' : ''}"></div>
                     <div class="touch-overlay right-overlay"></div>
                 </div>
 
@@ -278,7 +279,10 @@ class VideoStoryPlayer {
         this.muteBtn = this.element.querySelector('#muteButton');
         this.muteIcon = this.element.querySelector('#muteIcon');
 
-        if (this.format !== 'webstory') {
+        if (this.format === 'webstory') {
+            const allFills = this.element.querySelectorAll('.progress-fill');
+            this.currentProgressFill = allFills[this.currentItemIndex]; 
+        } else {
             this.shareBtnDesktop = this.element.querySelector('#btn-share-social-desktop');
             this.shareMenuDesktop = this.element.querySelector('#share-link-media-desktop');
             this.readMoreBtns = this.element.querySelectorAll('.read-more-section');
@@ -439,37 +443,52 @@ class VideoStoryPlayer {
 
     initTouchGestures() {
         if (!this.videoPlayerArea) return;
-        let startY = 0, isDragging = false;
+        let startY = 0, currentY = 0;
+        let isDragging = false;
 
         this.element.addEventListener('touchstart', (e) => {
+            if (e.touches.length > 1) return;
             startY = e.touches[0].clientY;
             isDragging = false;
+
+            if (this.mediaPlayer && this.data.type === 'youtube') {
+                this.mediaPlayer.style.pointerEvents = 'none';
+            }
         }, { passive: true });
 
         this.element.addEventListener('touchmove', (e) => {
-            let currentY = e.touches[0].clientY;
+            if (e.touches.length > 1) return;
+            currentY = e.touches[0].clientY;
             let deltaY = currentY - startY; 
             
             if (Math.abs(deltaY) > 10) {
                 isDragging = true;
-                if (e.cancelable) e.preventDefault();
+                if (e.cancelable) e.preventDefault(); 
             }
         }, { passive: false });
 
         this.element.addEventListener('touchend', (e) => {
+            if (this.mediaPlayer && this.data.type === 'youtube') {
+                this.mediaPlayer.style.pointerEvents = 'auto';
+            }
+
             if (!isDragging) return;
-            let deltaY = e.changedTouches[0].clientY - startY;
+            let deltaY = currentY - startY;
             
             if (deltaY < -50) {
                 this.playNextTrigger();
-            } else if (deltaY > 50) {
+            } 
+            else if (deltaY > 50) {
                 if (this.currentTriggerIndex > 0) {
                     this.playPrevTrigger();
                 } else {
-                    this.destroy(true);
+                    this.destroy(true); 
                 }
             }
+            
             isDragging = false;
+            startY = 0;
+            currentY = 0;
         });
     }
 
