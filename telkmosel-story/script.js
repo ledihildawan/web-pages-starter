@@ -43,13 +43,11 @@ class VideoStoryPlayer {
         this.updateButtonState();
         this.updateURLWithVideoId();
 
+        // UNIVERSAL GESTURES (Berlaku untuk semua tipe dan format)
+        this.initTouchGestures();
+
         if (this.data.format === 'webstory') {
             this.startMediaProgress();
-            this.initTouchSwipeWebStory();
-        } else {
-            if (window.innerWidth <= 768) {
-                this.initTouchHandlingDefault();
-            }
         }
     }
 
@@ -173,7 +171,6 @@ class VideoStoryPlayer {
                     </div>
 
                     <div class="modal-wrapper-hidden">
-                        
                         <div class="dialog-video-description">
                             <div class="popup-shorts-overlay"></div>
                             <div class="popup-shorts popup-shorts-content">
@@ -231,7 +228,6 @@ class VideoStoryPlayer {
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 ` : ''}
 
@@ -301,6 +297,12 @@ class VideoStoryPlayer {
         if (this.scrollUp) this.scrollUp.addEventListener('click', () => this.playPrevGroup());
         if (this.scrollDown) this.scrollDown.addEventListener('click', () => this.playNextGroup());
 
+        // UNIVERSAL TAP GESTURE: Kiri (Prev) / Kanan (Next)
+        // Berlaku untuk semua format agar konsisten 100%
+        if (this.leftOverlay) this.leftOverlay.addEventListener('click', () => this.playPrevNested());
+        if (this.rightOverlay) this.rightOverlay.addEventListener('click', () => this.playNextNested());
+
+        // Universal Play/Mute controls
         if (this.centerOverlay && this.mediaPlayer) {
             const pauseMedia = () => { 
                 this.isPaused = true; 
@@ -345,11 +347,8 @@ class VideoStoryPlayer {
             }
         }
 
-        if (this.data.format === 'webstory') {
-            if (this.leftOverlay) this.leftOverlay.addEventListener('click', () => this.playPrevNested());
-            if (this.rightOverlay) this.rightOverlay.addEventListener('click', () => this.playNextNested());
-        } 
-        else {
+        // Logic Khusus Default (Modals, Panels)
+        if (this.data.format !== 'webstory') {
             if (this.shareBtnDesktop && this.shareMenuDesktop) {
                 this.shareBtnDesktop.addEventListener('click', () => {
                     this.shareMenuDesktop.style.display = window.getComputedStyle(this.shareMenuDesktop).display === 'none' ? 'flex' : 'none';
@@ -380,7 +379,7 @@ class VideoStoryPlayer {
                 this.emotes.forEach(emote => emote.addEventListener('click', (e) => this.animateEmote(e.currentTarget)));
             }
 
-            // MODAL LOGIC Mulus tanpa Tabrakan Animasi
+            // MODAL LOGIC Mulus
             const openDescModal = (e) => {
                 if(e) e.stopPropagation();
                 if (this.popupShortsOverlay) this.popupShortsOverlay.classList.add('popup-video-shorts-active');
@@ -416,6 +415,7 @@ class VideoStoryPlayer {
             if (this.closeDescBtn) this.closeDescBtn.addEventListener('click', (e) => { e.stopPropagation(); closeAllModals(); });
             if (this.closeShareBtn) this.closeShareBtn.addEventListener('click', (e) => { e.stopPropagation(); closeAllModals(); });
 
+            // OUTSIDE CLICK UNTUK TUTUP MODAL
             const outsideTargets = [this.popupShortsOverlay, this.popupShareOverlay];
             outsideTargets.forEach(target => {
                 if (target) {
@@ -425,6 +425,44 @@ class VideoStoryPlayer {
                 }
             });
         }
+    }
+
+    // UNIVERSAL SWIPE GESTURE (Mendukung sentuhan layar di HP/Tablet)
+    initTouchGestures() {
+        if (!this.videoPlayerArea) return;
+        let startY = 0, isDragging = false;
+
+        this.element.addEventListener('touchstart', (e) => {
+            startY = e.touches[0].clientY;
+            isDragging = false;
+            this.videoPlayerArea.style.transition = 'none';
+        }, { passive: true });
+
+        this.element.addEventListener('touchmove', (e) => {
+            let currentY = e.touches[0].clientY;
+            let deltaY = Math.abs(currentY - startY);
+            if (deltaY > 10) {
+                isDragging = true;
+                if (e.cancelable) e.preventDefault();
+                // Batasi drag agar tidak bablas di ujung awal/akhir group
+                if ((this.currentGroupIndex === 0 && currentY - startY > 0) || 
+                    (this.currentGroupIndex === this.allGroups.length - 1 && currentY - startY < 0)) return;
+            }
+        }, { passive: false });
+
+        this.element.addEventListener('touchend', (e) => {
+            if (!isDragging) return;
+            let deltaY = e.changedTouches[0].clientY - startY;
+            this.videoPlayerArea.style.transition = 'transform 0.3s ease-out';
+            
+            // Jarak swipe minimal 50px untuk berpindah video
+            if (deltaY < -50 && this.currentGroupIndex < this.allGroups.length - 1) {
+                this.playNextGroup();
+            } else if (deltaY > 50 && this.currentGroupIndex > 0) {
+                this.playPrevGroup();
+            }
+            isDragging = false;
+        });
     }
 
     startMediaProgress() {
@@ -509,54 +547,6 @@ class VideoStoryPlayer {
             this.destroy(false);
             new VideoStoryPlayer({ triggerGroup: this.allGroups[this.currentGroupIndex - 1], nestedIndex: 0, onClose: onClose });
         }
-    }
-
-    initTouchSwipeWebStory() {
-        if(!this.element) return;
-        let startY = 0, isDragging = false;
-        this.element.addEventListener("touchstart", (e) => { startY = e.touches[0].clientY; isDragging = false; }, { passive: true });
-        this.element.addEventListener("touchmove", (e) => {
-            if (Math.abs(e.touches[0].clientY - startY) > 50) { isDragging = true; if (e.cancelable) e.preventDefault(); }
-        }, { passive: false });
-        this.element.addEventListener("touchend", (e) => {
-            if (!isDragging) return;
-            let deltaY = e.changedTouches[0].clientY - startY;
-            if (deltaY < -50) this.playNextGroup(); 
-            else if (deltaY > 50) this.playPrevGroup(); 
-            isDragging = false;
-        });
-    }
-
-    initTouchHandlingDefault() {
-        if (!this.videoPlayerArea) return;
-        let startY = 0, isDragging = false;
-
-        this.element.addEventListener('touchstart', (e) => {
-            startY = e.touches[0].clientY;
-            isDragging = false;
-            this.videoPlayerArea.style.transition = 'none';
-        }, { passive: true });
-
-        this.element.addEventListener('touchmove', (e) => {
-            let currentY = e.touches[0].clientY;
-            let deltaY = Math.abs(currentY - startY);
-            if (deltaY > 10) {
-                isDragging = true;
-                if (e.cancelable) e.preventDefault();
-                if ((this.currentGroupIndex === 0 && currentY - startY > 0) || 
-                    (this.currentGroupIndex === this.allGroups.length - 1 && currentY - startY < 0)) return;
-            }
-        }, { passive: false });
-
-        this.element.addEventListener('touchend', (e) => {
-            let deltaY = e.changedTouches[0].clientY - startY;
-            this.videoPlayerArea.style.transition = 'transform 0.3s ease-out';
-            if (isDragging && Math.abs(deltaY) > 50) {
-                if (deltaY < 0 && this.currentGroupIndex < this.allGroups.length - 1) this.playNextGroup();
-                else if (deltaY > 0 && this.currentGroupIndex > 0) this.playPrevGroup();
-            }
-            isDragging = false;
-        });
     }
 
     handleKeydown(e) {
