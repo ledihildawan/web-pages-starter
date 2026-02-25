@@ -75,7 +75,7 @@ class VideoStoryPlayer {
         const { type, videoUrl } = this.data;
         if (type === "youtube") {
             const youtubeId = videoUrl.includes("youtube") || videoUrl.includes("youtu.be") ? this.getYouTubeId(videoUrl) : videoUrl;
-            return `<iframe id="mediaPlayer" loading="lazy" class="unified-media-element" src="https://www.youtube.com/embed/${youtubeId}?autoplay=1&controls=1&rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+            return `<iframe id="mediaPlayer" loading="lazy" class="unified-media-element" src="https://www.youtube.com/embed/${youtubeId}?autoplay=1&controls=0&rel=0&showinfo=0&enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
         } else if (type === "mp4") {
             return `<video class="unified-media-element" id="mediaPlayer" autoplay playsinline preload="auto">
                         <source src="${videoUrl}" type="video/mp4">
@@ -111,10 +111,8 @@ class VideoStoryPlayer {
                     ${isWebStory ? `<div class="progress-bar-container">${this.renderProgressBars()}</div>` : ''}
                     
                     <div class="unified-top-controls">
-                        ${isNotYoutube ? `
-                            <button id="playPauseButton" class="control-button" aria-label="Play/Pause"><img id="playPauseIcon" src="/themes/custom/telkomsel/assets/img/revamp/pause.svg" alt="pause"></button>
-                            <button id="muteButton" class="control-button" aria-label="Mute/Unmute"><img id="muteIcon" src="/themes/custom/telkomsel/assets/img/revamp/sound.svg" alt="sound"></button>
-                        ` : ''}
+                        <button id="playPauseButton" class="control-button" aria-label="Play/Pause"><img id="playPauseIcon" src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/pause.svg" alt="pause"></button>
+                        ${isNotYoutube ? `<button id="muteButton" class="control-button" aria-label="Mute/Unmute"><img id="muteIcon" src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/sound.svg" alt="sound"></button>` : ''}
                         <button class="close-button" aria-label="Tutup">×</button>
                     </div>
 
@@ -122,7 +120,7 @@ class VideoStoryPlayer {
                         <div class="story-video-info">
                             <h3>${this.data.title}</h3>
                             <div class="view-content view-content-light">
-                                <img src="/themes/custom/telkomsel/assets/img/revamp/icons/ico_eye_open.svg" alt="views">
+                                <img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/ico_eye_open.svg" alt="views">
                                 <div class="view-content-number">${this.data.views}</div>
                             </div>
                             <div class="content-story-desc">${this.data.content}</div>
@@ -131,7 +129,7 @@ class VideoStoryPlayer {
 
                     <div class="touch-overlay top-overlay"></div>
                     <div class="touch-overlay left-overlay"></div>
-                    <div class="touch-overlay center-overlay ${!isNotYoutube ? 'youtube-overlay' : ''}"></div>
+                    <div class="touch-overlay center-overlay"></div>
                     <div class="touch-overlay right-overlay"></div>
                 </div>
 
@@ -139,7 +137,7 @@ class VideoStoryPlayer {
                     <div class="fullscreen-video-info" id="mobile-video-info">
                         <h3>${this.data.title}</h3>
                         <div class="view-content view-content-light">
-                            <img src="/themes/custom/telkomsel/assets/img/revamp/icons/ico_eye_open.svg" alt="views">
+                            <img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/ico_eye_open.svg" alt="views">
                             <div class="view-content-number">${this.data.views}</div>
                         </div>
                         <div class="content-desc" id="section-content-description">${this.data.content}</div>
@@ -150,7 +148,7 @@ class VideoStoryPlayer {
                             <div class="content">
                                 <p>${this.data.title}</p>
                                 <div class="view-content">
-                                    <img src="/themes/custom/telkomsel/assets/img/revamp/icons/ico_eye_open.svg" alt="views">
+                                    <img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/ico_eye_open.svg" alt="views">
                                     <div class="view-content-number">${this.data.views}</div>
                                 </div>
                                 <div class="desc-content desktop-desc">${this.data.content}</div>
@@ -171,12 +169,12 @@ class VideoStoryPlayer {
                                 </div>
                                 <div class="share-link" id="share-link-media-desktop">
                                     <div class="share-icon-social-media">
-                                        <div class="icon-social"><a href="https://api.whatsapp.com/send?text=${encodedUrl}" target="_blank"><img src="/themes/custom/telkomsel/assets/img/revamp/icons/social/whatsapp.svg" alt="wa"></a><span>Whatsapp</span></div>
-                                        <div class="icon-social"><a href="https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}" target="_blank"><img src="/themes/custom/telkomsel/assets/img/revamp/icons/social/telegram.svg" alt="tg"></a><span>Telegram</span></div>
-                                        <div class="icon-social"><a href="https://x.com/intent/tweet?url=${encodedUrl}" target="_blank"><img src="/themes/custom/telkomsel/assets/img/revamp/icons/social/x.svg" alt="x"></a><span>X</span></div>
-                                        <div class="icon-social"><a href="https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}" target="_blank"><img src="/themes/custom/telkomsel/assets/img/revamp/icons/social/facebook.svg" alt="fb"></a><span>Facebook</span></div>
-                                        <div class="icon-social"><a href="mailto:?subject=${encodedTitle}&body=${encodedUrl}" target="_blank"><img src="/themes/custom/telkomsel/assets/img/revamp/icons/social/mail.svg" alt="mail"></a><span>Email</span></div>
-                                        <div class="icon-social copy-link"><div data-url="${currentUrl}"><img src="/themes/custom/telkomsel/assets/img/revamp/icons/social/link.svg" alt="link"></div><span>Copy Link</span></div>
+                                        <div class="icon-social"><a href="https://api.whatsapp.com/send?text=${encodedUrl}" target="_blank"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/whatsapp.svg" alt="wa"></a><span>Whatsapp</span></div>
+                                        <div class="icon-social"><a href="https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}" target="_blank"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/telegram.svg" alt="tg"></a><span>Telegram</span></div>
+                                        <div class="icon-social"><a href="https://x.com/intent/tweet?url=${encodedUrl}" target="_blank"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/x.svg" alt="x"></a><span>X</span></div>
+                                        <div class="icon-social"><a href="https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}" target="_blank"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/facebook.svg" alt="fb"></a><span>Facebook</span></div>
+                                        <div class="icon-social"><a href="mailto:?subject=${encodedTitle}&body=${encodedUrl}" target="_blank"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/mail.svg" alt="mail"></a><span>Email</span></div>
+                                        <div class="icon-social copy-link"><div data-url="${currentUrl}"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/link.svg" alt="link"></div><span>Copy Link</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -193,7 +191,7 @@ class VideoStoryPlayer {
                                         <div class="content">
                                             <p>${this.data.title}</p>
                                             <div class="view-content">
-                                                <img src="/themes/custom/telkomsel/assets/img/revamp/icons/ico_eye_open.svg" alt="views">
+                                                <img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/ico_eye_open.svg" alt="views">
                                                 <div class="view-content-number">${this.data.views}</div>
                                             </div>
                                             <div class="desc-content mobile-desc-content">${this.data.content}</div>
@@ -228,12 +226,12 @@ class VideoStoryPlayer {
                                             <div class="share-link" id="share-link-media">
                                                 <div class="title-link title-link-share">Bagikan Dengan yang lain</div>
                                                 <div class="share-icon-social-media">
-                                                    <div class="icon-social"><a href="https://api.whatsapp.com/send?text=${encodedUrl}" target="_blank"><img src="/themes/custom/telkomsel/assets/img/revamp/icons/social/whatsapp.svg" alt="wa"></a><span>Whatsapp</span></div>
-                                                    <div class="icon-social"><a href="https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}" target="_blank"><img src="/themes/custom/telkomsel/assets/img/revamp/icons/social/telegram.svg" alt="tg"></a><span>Telegram</span></div>
-                                                    <div class="icon-social"><a href="https://x.com/intent/tweet?url=${encodedUrl}" target="_blank"><img src="/themes/custom/telkomsel/assets/img/revamp/icons/social/x.svg" alt="x"></a><span>X</span></div>
-                                                    <div class="icon-social"><a href="https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}" target="_blank"><img src="/themes/custom/telkomsel/assets/img/revamp/icons/social/facebook.svg" alt="fb"></a><span>Facebook</span></div>
-                                                    <div class="icon-social"><a href="mailto:?subject=${encodedTitle}&body=${encodedUrl}" target="_blank"><img src="/themes/custom/telkomsel/assets/img/revamp/icons/social/mail.svg" alt="mail"></a><span>Email</span></div>
-                                                    <div class="icon-social copy-link"><div data-url="${currentUrl}"><img src="/themes/custom/telkomsel/assets/img/revamp/icons/social/link.svg" alt="link"></div><span>Copy Link</span></div>
+                                                    <div class="icon-social"><a href="https://api.whatsapp.com/send?text=${encodedUrl}" target="_blank"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/whatsapp.svg" alt="wa"></a><span>Whatsapp</span></div>
+                                                    <div class="icon-social"><a href="https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}" target="_blank"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/telegram.svg" alt="tg"></a><span>Telegram</span></div>
+                                                    <div class="icon-social"><a href="https://x.com/intent/tweet?url=${encodedUrl}" target="_blank"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/x.svg" alt="x"></a><span>X</span></div>
+                                                    <div class="icon-social"><a href="https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}" target="_blank"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/facebook.svg" alt="fb"></a><span>Facebook</span></div>
+                                                    <div class="icon-social"><a href="mailto:?subject=${encodedTitle}&body=${encodedUrl}" target="_blank"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/mail.svg" alt="mail"></a><span>Email</span></div>
+                                                    <div class="icon-social copy-link"><div data-url="${currentUrl}"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/link.svg" alt="link"></div><span>Copy Link</span></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -245,8 +243,8 @@ class VideoStoryPlayer {
                 ` : ''}
 
                 <div class="video-controls-scroll">
-                    <div class="scroll-btn" id="scrollUp"><img src="/themes/custom/telkomsel/assets/img/revamp/icons/ico_chevron_up.svg" loading="lazy" alt="up"></div>
-                    <div class="scroll-btn" id="scrollDown"><img src="/themes/custom/telkomsel/assets/img/revamp/icons/ico_chevron_down.svg" loading="lazy" alt="down"></div>
+                    <div class="scroll-btn" id="scrollUp"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/ico_chevron_up.svg" loading="lazy" alt="up"></div>
+                    <div class="scroll-btn" id="scrollDown"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/ico_chevron_down.svg" loading="lazy" alt="down"></div>
                 </div>
             </div>
         `;
@@ -311,18 +309,24 @@ class VideoStoryPlayer {
         if (this.leftOverlay) this.leftOverlay.addEventListener('click', () => this.playPrevItem());
         if (this.rightOverlay) this.rightOverlay.addEventListener('click', () => this.playNextItem());
 
-        if (this.centerOverlay && this.data.type !== 'youtube') {
+        if (this.centerOverlay && this.mediaPlayer) {
             const pauseMedia = () => { 
                 this.isPaused = true; 
-                if(this.data.type === 'mp4' && this.mediaPlayer) this.mediaPlayer.pause(); 
+                if(this.data.type === 'mp4') {
+                    this.mediaPlayer.pause(); 
+                } else if (this.data.type === 'youtube') {
+                    this.mediaPlayer.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'pauseVideo' }), '*');
+                }
             };
             const resumeMedia = () => { 
                 this.isPaused = false; 
-                if(this.data.type === 'mp4' && this.mediaPlayer) {
-                    const playPromise = this.mediaPlayer.play();
-                    if (playPromise !== undefined) playPromise.catch(e => console.log(e));
+                if(this.data.type === 'mp4') {
+                    this.mediaPlayer.play().catch(e => console.log(e));
+                } else if (this.data.type === 'youtube') {
+                    this.mediaPlayer.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo' }), '*');
                 }
             };
+
             this.centerOverlay.addEventListener('touchstart', pauseMedia, {passive: true});
             this.centerOverlay.addEventListener('mousedown', pauseMedia);
             this.centerOverlay.addEventListener('touchend', resumeMedia);
@@ -330,13 +334,17 @@ class VideoStoryPlayer {
         }
 
         if (this.playPauseBtn && this.mediaPlayer) {
-            this.playPauseBtn.addEventListener('click', () => {
+            this.playPauseBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
                 this.isPaused = !this.isPaused;
                 if (this.data.type === 'mp4') {
                     if (this.isPaused) this.mediaPlayer.pause();
                     else this.mediaPlayer.play().catch(e => console.log(e));
+                } else if (this.data.type === 'youtube') {
+                    const command = this.isPaused ? 'pauseVideo' : 'playVideo';
+                    this.mediaPlayer.contentWindow.postMessage(JSON.stringify({ event: 'command', func: command }), '*');
                 }
-                this.playPauseIcon.src = this.isPaused ? '/themes/custom/telkomsel/assets/img/revamp/play.svg' : '/themes/custom/telkomsel/assets/img/revamp/pause.svg';
+                this.playPauseIcon.src = this.isPaused ? 'https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/play.svg' : 'https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/pause.svg';
             });
         }
 
@@ -346,7 +354,7 @@ class VideoStoryPlayer {
             } else {
                 this.muteBtn.addEventListener('click', () => {
                     this.mediaPlayer.muted = !this.mediaPlayer.muted;
-                    this.muteIcon.src = this.mediaPlayer.muted ? '/themes/custom/telkomsel/assets/img/revamp/mute.svg' : '/themes/custom/telkomsel/assets/img/revamp/sound.svg';
+                    this.muteIcon.src = this.mediaPlayer.muted ? 'https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/mute.svg' : 'https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/sound.svg';
                 });
             }
         }
@@ -431,55 +439,37 @@ class VideoStoryPlayer {
 
     initTouchGestures() {
         if (!this.videoPlayerArea) return;
-        let startY = 0, currentY = 0;
-        let isDragging = false;
+        let startY = 0, isDragging = false;
 
         this.element.addEventListener('touchstart', (e) => {
-            if (e.touches.length > 1) return;
-            
             startY = e.touches[0].clientY;
             isDragging = false;
-
-            if (this.mediaPlayer && this.data.type === 'youtube') {
-                this.mediaPlayer.style.pointerEvents = 'none';
-            }
         }, { passive: true });
 
         this.element.addEventListener('touchmove', (e) => {
-            if (e.touches.length > 1) return;
-
-            currentY = e.touches[0].clientY;
+            let currentY = e.touches[0].clientY;
             let deltaY = currentY - startY; 
             
             if (Math.abs(deltaY) > 10) {
                 isDragging = true;
-                if (e.cancelable) e.preventDefault(); 
+                if (e.cancelable) e.preventDefault();
             }
         }, { passive: false });
 
         this.element.addEventListener('touchend', (e) => {
-            if (this.mediaPlayer && this.data.type === 'youtube') {
-                this.mediaPlayer.style.pointerEvents = 'auto';
-            }
-
             if (!isDragging) return;
-            
-            let deltaY = currentY - startY;
+            let deltaY = e.changedTouches[0].clientY - startY;
             
             if (deltaY < -50) {
                 this.playNextTrigger();
-            } 
-            else if (deltaY > 50) {
+            } else if (deltaY > 50) {
                 if (this.currentTriggerIndex > 0) {
                     this.playPrevTrigger();
                 } else {
-                    this.destroy(true); 
+                    this.destroy(true);
                 }
             }
-            
             isDragging = false;
-            startY = 0;
-            currentY = 0;
         });
     }
 
@@ -576,7 +566,7 @@ class VideoStoryPlayer {
                 onClose: onClose 
             });
         } else {
-            this.destroy(true);
+            this.destroy(true); 
         }
     }
 
