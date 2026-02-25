@@ -2,18 +2,17 @@ class VideoStoryPlayer {
     constructor(options = {}) {
         this.targetElement = options.target || document.body;
         this.triggerGroup = options.triggerGroup;
-        
-        this.allGroups = Array.from(document.querySelectorAll('[data-story-group]'));
-        this.currentGroupIndex = this.allGroups.indexOf(this.triggerGroup);
-        
-        this.items = Array.from(this.triggerGroup.querySelectorAll('[data-story-item]'));
-        this.currentNestedIndex = options.nestedIndex || 0;
-        
-        if (this.currentNestedIndex >= this.items.length) this.currentNestedIndex = 0;
-        this.currentItem = this.items[this.currentNestedIndex];
+        this.format = this.triggerGroup.getAttribute('data-story-format') || "default";
+        this.triggers = Array.from(this.triggerGroup.querySelectorAll('[data-story-trigger]'));
+        this.currentTriggerIndex = options.currentTriggerIndex || 0;
+        this.activeTrigger = this.triggers[this.currentTriggerIndex];
+        this.items = Array.from(this.activeTrigger.querySelectorAll('[data-story-item]'));
+        this.currentItemIndex = options.currentItemIndex || 0;
+        if (this.currentItemIndex >= this.items.length) this.currentItemIndex = 0;
+
+        this.currentItem = this.items[this.currentItemIndex];
 
         this.data = {
-            format: this.triggerGroup.getAttribute('data-story-format') || "default",
             id: this.currentItem.getAttribute('data-story-id') || "",
             nid: this.currentItem.getAttribute('data-story-nid') || "",
             type: this.currentItem.getAttribute('data-story-type') || "youtube", 
@@ -40,15 +39,31 @@ class VideoStoryPlayer {
         this.render();
         this.cacheDOM();
         this.bindEvents();
+        
         this.updateButtonState();
         this.updateURLWithVideoId();
-
-        // UNIVERSAL GESTURES (Berlaku untuk semua tipe dan format)
         this.initTouchGestures();
 
-        if (this.data.format === 'webstory') {
+        if (this.format === 'webstory') {
             this.startMediaProgress();
         }
+
+        if (this.format === 'default') {
+            this.sendStatistic();
+        }
+    }
+
+    sendStatistic() {
+        if (!this.data.id) return; 
+
+        var formData = new URLSearchParams();
+        formData.append('nid', this.data.id); 
+
+        fetch('/core/modules/statistics/statistics.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: formData.toString()
+        }).catch(err => console.log('Gagal mengirim statistik:', err));
     }
 
     getYouTubeId(url) {
@@ -60,7 +75,7 @@ class VideoStoryPlayer {
         const { type, videoUrl } = this.data;
         if (type === "youtube") {
             const youtubeId = videoUrl.includes("youtube") || videoUrl.includes("youtu.be") ? this.getYouTubeId(videoUrl) : videoUrl;
-            return `<iframe loading="lazy" class="unified-media-element" src="https://www.youtube.com/embed/${youtubeId}?autoplay=1&controls=1&rel=0&showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+            return `<iframe id="mediaPlayer" loading="lazy" class="unified-media-element" src="https://www.youtube.com/embed/${youtubeId}?autoplay=1&controls=1&rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
         } else if (type === "mp4") {
             return `<video class="unified-media-element" id="mediaPlayer" autoplay playsinline preload="auto">
                         <source src="${videoUrl}" type="video/mp4">
@@ -68,15 +83,15 @@ class VideoStoryPlayer {
         } else if (type === "image") {
             return `<img class="unified-media-element img-element" id="mediaPlayer" src="${videoUrl}" alt="Story Image">`;
         } else {
-            return `<iframe loading="lazy" class="unified-media-element" src="${videoUrl}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+            return `<iframe id="mediaPlayer" loading="lazy" class="unified-media-element" src="${videoUrl}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
         }
     }
 
     renderProgressBars() {
         let barsHtml = '';
         for (let i = 0; i < this.items.length; i++) {
-            let fillClass = i < this.currentNestedIndex ? 'width: 100%;' : 'width: 0%;';
-            let activeClass = i === this.currentNestedIndex ? 'active' : '';
+            let fillClass = i < this.currentItemIndex ? 'width: 100%;' : 'width: 0%;';
+            let activeClass = i === this.currentItemIndex ? 'active' : '';
             barsHtml += `<div class="progress-bar-segment ${activeClass}"><div class="progress-fill" style="${fillClass}"></div></div>`;
         }
         return barsHtml;
@@ -86,21 +101,19 @@ class VideoStoryPlayer {
         const currentUrl = window.location.origin + window.location.pathname + "?video=" + this.data.id;
         const encodedUrl = encodeURIComponent(currentUrl);
         const encodedTitle = encodeURIComponent(this.data.title);
-        
-        const isWebStory = this.data.format === 'webstory';
+        const isWebStory = this.format === 'webstory';
         const isNotYoutube = this.data.type !== 'youtube';
 
         return `
             <div class="video-player-container">
                 <div class="unified-video-wrapper">
                     ${this.getVideoElement()}
-
                     ${isWebStory ? `<div class="progress-bar-container">${this.renderProgressBars()}</div>` : ''}
                     
                     <div class="unified-top-controls">
                         ${isNotYoutube ? `
-                            <button id="playPauseButton" class="control-button" aria-label="Play/Pause"><img id="playPauseIcon" src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/pause.svg" alt="pause"></button>
-                            <button id="muteButton" class="control-button" aria-label="Mute/Unmute"><img id="muteIcon" src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/sound.svg" alt="sound"></button>
+                            <button id="playPauseButton" class="control-button" aria-label="Play/Pause"><img id="playPauseIcon" src="/themes/custom/telkomsel/assets/img/revamp/pause.svg" alt="pause"></button>
+                            <button id="muteButton" class="control-button" aria-label="Mute/Unmute"><img id="muteIcon" src="/themes/custom/telkomsel/assets/img/revamp/sound.svg" alt="sound"></button>
                         ` : ''}
                         <button class="close-button" aria-label="Tutup">×</button>
                     </div>
@@ -109,7 +122,7 @@ class VideoStoryPlayer {
                         <div class="story-video-info">
                             <h3>${this.data.title}</h3>
                             <div class="view-content view-content-light">
-                                <img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/ico_eye_open.svg" alt="views">
+                                <img src="/themes/custom/telkomsel/assets/img/revamp/icons/ico_eye_open.svg" alt="views">
                                 <div class="view-content-number">${this.data.views}</div>
                             </div>
                             <div class="content-story-desc">${this.data.content}</div>
@@ -118,7 +131,7 @@ class VideoStoryPlayer {
 
                     <div class="touch-overlay top-overlay"></div>
                     <div class="touch-overlay left-overlay"></div>
-                    ${isNotYoutube ? '<div class="touch-overlay center-overlay"></div>' : ''}
+                    <div class="touch-overlay center-overlay ${!isNotYoutube ? 'youtube-overlay' : ''}"></div>
                     <div class="touch-overlay right-overlay"></div>
                 </div>
 
@@ -126,7 +139,7 @@ class VideoStoryPlayer {
                     <div class="fullscreen-video-info" id="mobile-video-info">
                         <h3>${this.data.title}</h3>
                         <div class="view-content view-content-light">
-                            <img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/ico_eye_open.svg" alt="views">
+                            <img src="/themes/custom/telkomsel/assets/img/revamp/icons/ico_eye_open.svg" alt="views">
                             <div class="view-content-number">${this.data.views}</div>
                         </div>
                         <div class="content-desc" id="section-content-description">${this.data.content}</div>
@@ -137,7 +150,7 @@ class VideoStoryPlayer {
                             <div class="content">
                                 <p>${this.data.title}</p>
                                 <div class="view-content">
-                                    <img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/ico_eye_open.svg" alt="views">
+                                    <img src="/themes/custom/telkomsel/assets/img/revamp/icons/ico_eye_open.svg" alt="views">
                                     <div class="view-content-number">${this.data.views}</div>
                                 </div>
                                 <div class="desc-content desktop-desc">${this.data.content}</div>
@@ -146,11 +159,11 @@ class VideoStoryPlayer {
                             <div class="content-footer">
                                 <div class="content-outer-card">
                                     <div class="emote">
-                                        <div class="emote-icon-sad">😭</div>
-                                        <div class="emote-icon-clap">👏🏻</div>
-                                        <div class="emote-icon-laugh">🤣</div>
-                                        <div class="emote-icon-celebrate">🎉</div>
-                                        <div class="emote-icon-heart">❤️</div>
+                                        <div class="emote-icon">😭</div>
+                                        <div class="emote-icon">👏🏻</div>
+                                        <div class="emote-icon">🤣</div>
+                                        <div class="emote-icon">🎉</div>
+                                        <div class="emote-icon">❤️</div>
                                     </div>
                                     <div class="btn-share">
                                         <button class="button-primary-global" id="btn-share-social-desktop">Bagikan</button>
@@ -158,12 +171,12 @@ class VideoStoryPlayer {
                                 </div>
                                 <div class="share-link" id="share-link-media-desktop">
                                     <div class="share-icon-social-media">
-                                        <div class="icon-social"><a href="https://api.whatsapp.com/send?text=${encodedUrl}" target="_blank"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/whatsapp.svg" alt="wa"></a><span>Whatsapp</span></div>
-                                        <div class="icon-social"><a href="https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}" target="_blank"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/telegram.svg" alt="tg"></a><span>Telegram</span></div>
-                                        <div class="icon-social"><a href="https://x.com/intent/tweet?url=${encodedUrl}" target="_blank"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/x.svg" alt="x"></a><span>X</span></div>
-                                        <div class="icon-social"><a href="https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}" target="_blank"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/facebook.svg" alt="fb"></a><span>Facebook</span></div>
-                                        <div class="icon-social"><a href="mailto:?subject=${encodedTitle}&body=${encodedUrl}" target="_blank"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/mail.svg" alt="mail"></a><span>Email</span></div>
-                                        <div class="icon-social copy-link"><div data-url="${currentUrl}"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/link.svg" alt="link"></div><span>Copy Link</span></div>
+                                        <div class="icon-social"><a href="https://api.whatsapp.com/send?text=${encodedUrl}" target="_blank"><img src="/themes/custom/telkomsel/assets/img/revamp/icons/social/whatsapp.svg" alt="wa"></a><span>Whatsapp</span></div>
+                                        <div class="icon-social"><a href="https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}" target="_blank"><img src="/themes/custom/telkomsel/assets/img/revamp/icons/social/telegram.svg" alt="tg"></a><span>Telegram</span></div>
+                                        <div class="icon-social"><a href="https://x.com/intent/tweet?url=${encodedUrl}" target="_blank"><img src="/themes/custom/telkomsel/assets/img/revamp/icons/social/x.svg" alt="x"></a><span>X</span></div>
+                                        <div class="icon-social"><a href="https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}" target="_blank"><img src="/themes/custom/telkomsel/assets/img/revamp/icons/social/facebook.svg" alt="fb"></a><span>Facebook</span></div>
+                                        <div class="icon-social"><a href="mailto:?subject=${encodedTitle}&body=${encodedUrl}" target="_blank"><img src="/themes/custom/telkomsel/assets/img/revamp/icons/social/mail.svg" alt="mail"></a><span>Email</span></div>
+                                        <div class="icon-social copy-link"><div data-url="${currentUrl}"><img src="/themes/custom/telkomsel/assets/img/revamp/icons/social/link.svg" alt="link"></div><span>Copy Link</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -180,7 +193,7 @@ class VideoStoryPlayer {
                                         <div class="content">
                                             <p>${this.data.title}</p>
                                             <div class="view-content">
-                                                <img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/ico_eye_open.svg" alt="views">
+                                                <img src="/themes/custom/telkomsel/assets/img/revamp/icons/ico_eye_open.svg" alt="views">
                                                 <div class="view-content-number">${this.data.views}</div>
                                             </div>
                                             <div class="desc-content mobile-desc-content">${this.data.content}</div>
@@ -189,11 +202,11 @@ class VideoStoryPlayer {
                                         <div class="content-footer">
                                             <div class="content-outer-card">
                                                 <div class="emote">
-                                                    <div class="emote-icon-sad">😭</div>
-                                                    <div class="emote-icon-clap">👏🏻</div>
-                                                    <div class="emote-icon-laugh">🤣</div>
-                                                    <div class="emote-icon-celebrate">🎉</div>
-                                                    <div class="emote-icon-heart">❤️</div>
+                                                    <div class="emote-icon">😭</div>
+                                                    <div class="emote-icon">👏🏻</div>
+                                                    <div class="emote-icon">🤣</div>
+                                                    <div class="emote-icon">🎉</div>
+                                                    <div class="emote-icon">❤️</div>
                                                 </div>
                                                 <div class="btn-share">
                                                     <button class="button-primary-global" id="btn-share-mobile">Bagikan</button>
@@ -215,12 +228,12 @@ class VideoStoryPlayer {
                                             <div class="share-link" id="share-link-media">
                                                 <div class="title-link title-link-share">Bagikan Dengan yang lain</div>
                                                 <div class="share-icon-social-media">
-                                                    <div class="icon-social"><a href="https://api.whatsapp.com/send?text=${encodedUrl}" target="_blank"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/whatsapp.svg" alt="wa"></a><span>Whatsapp</span></div>
-                                                    <div class="icon-social"><a href="https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}" target="_blank"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/telegram.svg" alt="tg"></a><span>Telegram</span></div>
-                                                    <div class="icon-social"><a href="https://x.com/intent/tweet?url=${encodedUrl}" target="_blank"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/x.svg" alt="x"></a><span>X</span></div>
-                                                    <div class="icon-social"><a href="https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}" target="_blank"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/facebook.svg" alt="fb"></a><span>Facebook</span></div>
-                                                    <div class="icon-social"><a href="mailto:?subject=${encodedTitle}&body=${encodedUrl}" target="_blank"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/mail.svg" alt="mail"></a><span>Email</span></div>
-                                                    <div class="icon-social copy-link"><div data-url="${currentUrl}"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/social/link.svg" alt="link"></div><span>Copy Link</span></div>
+                                                    <div class="icon-social"><a href="https://api.whatsapp.com/send?text=${encodedUrl}" target="_blank"><img src="/themes/custom/telkomsel/assets/img/revamp/icons/social/whatsapp.svg" alt="wa"></a><span>Whatsapp</span></div>
+                                                    <div class="icon-social"><a href="https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}" target="_blank"><img src="/themes/custom/telkomsel/assets/img/revamp/icons/social/telegram.svg" alt="tg"></a><span>Telegram</span></div>
+                                                    <div class="icon-social"><a href="https://x.com/intent/tweet?url=${encodedUrl}" target="_blank"><img src="/themes/custom/telkomsel/assets/img/revamp/icons/social/x.svg" alt="x"></a><span>X</span></div>
+                                                    <div class="icon-social"><a href="https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}" target="_blank"><img src="/themes/custom/telkomsel/assets/img/revamp/icons/social/facebook.svg" alt="fb"></a><span>Facebook</span></div>
+                                                    <div class="icon-social"><a href="mailto:?subject=${encodedTitle}&body=${encodedUrl}" target="_blank"><img src="/themes/custom/telkomsel/assets/img/revamp/icons/social/mail.svg" alt="mail"></a><span>Email</span></div>
+                                                    <div class="icon-social copy-link"><div data-url="${currentUrl}"><img src="/themes/custom/telkomsel/assets/img/revamp/icons/social/link.svg" alt="link"></div><span>Copy Link</span></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -232,8 +245,8 @@ class VideoStoryPlayer {
                 ` : ''}
 
                 <div class="video-controls-scroll">
-                    <div class="scroll-btn" id="scrollUp"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/ico_chevron_up.svg" loading="lazy" alt="up"></div>
-                    <div class="scroll-btn" id="scrollDown"><img src="https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/icons/ico_chevron_down.svg" loading="lazy" alt="down"></div>
+                    <div class="scroll-btn" id="scrollUp"><img src="/themes/custom/telkomsel/assets/img/revamp/icons/ico_chevron_up.svg" loading="lazy" alt="up"></div>
+                    <div class="scroll-btn" id="scrollDown"><img src="/themes/custom/telkomsel/assets/img/revamp/icons/ico_chevron_down.svg" loading="lazy" alt="down"></div>
                 </div>
             </div>
         `;
@@ -253,6 +266,7 @@ class VideoStoryPlayer {
     cacheDOM() {
         this.videoPlayerArea = this.element.querySelector('.unified-video-wrapper');
         this.closeBtn = this.element.querySelector('.close-button');
+        
         this.scrollUp = this.element.querySelector('#scrollUp');
         this.scrollDown = this.element.querySelector('#scrollDown');
 
@@ -266,15 +280,12 @@ class VideoStoryPlayer {
         this.muteBtn = this.element.querySelector('#muteButton');
         this.muteIcon = this.element.querySelector('#muteIcon');
 
-        if (this.data.format === 'webstory') {
-            const allFills = this.element.querySelectorAll('.progress-fill');
-            this.currentProgressFill = allFills[this.currentNestedIndex];
-        } else {
+        if (this.format !== 'webstory') {
             this.shareBtnDesktop = this.element.querySelector('#btn-share-social-desktop');
             this.shareMenuDesktop = this.element.querySelector('#share-link-media-desktop');
             this.readMoreBtns = this.element.querySelectorAll('.read-more-section');
             this.copyLinkBtns = this.element.querySelectorAll('.copy-link');
-            this.emotes = this.element.querySelectorAll('.emote div');
+            this.emotes = this.element.querySelectorAll('.emote-icon');
 
             this.mobileVideoInfo = this.element.querySelector('#mobile-video-info');
             this.sectionContentDesc = this.element.querySelector('#section-content-description');
@@ -293,24 +304,21 @@ class VideoStoryPlayer {
     bindEvents() {
         if (this.closeBtn) this.closeBtn.addEventListener('click', () => this.destroy(true));
         document.addEventListener('keydown', this.handleKeydown);
-        
-        if (this.scrollUp) this.scrollUp.addEventListener('click', () => this.playPrevGroup());
-        if (this.scrollDown) this.scrollDown.addEventListener('click', () => this.playNextGroup());
 
-        // UNIVERSAL TAP GESTURE: Kiri (Prev) / Kanan (Next)
-        // Berlaku untuk semua format agar konsisten 100%
-        if (this.leftOverlay) this.leftOverlay.addEventListener('click', () => this.playPrevNested());
-        if (this.rightOverlay) this.rightOverlay.addEventListener('click', () => this.playNextNested());
+        if (this.scrollUp) this.scrollUp.addEventListener('click', () => this.playPrevTrigger());
+        if (this.scrollDown) this.scrollDown.addEventListener('click', () => this.playNextTrigger());
 
-        // Universal Play/Mute controls
-        if (this.centerOverlay && this.mediaPlayer) {
+        if (this.leftOverlay) this.leftOverlay.addEventListener('click', () => this.playPrevItem());
+        if (this.rightOverlay) this.rightOverlay.addEventListener('click', () => this.playNextItem());
+
+        if (this.centerOverlay && this.data.type !== 'youtube') {
             const pauseMedia = () => { 
                 this.isPaused = true; 
-                if(this.data.type === 'mp4') this.mediaPlayer.pause(); 
+                if(this.data.type === 'mp4' && this.mediaPlayer) this.mediaPlayer.pause(); 
             };
             const resumeMedia = () => { 
                 this.isPaused = false; 
-                if(this.data.type === 'mp4') {
+                if(this.data.type === 'mp4' && this.mediaPlayer) {
                     const playPromise = this.mediaPlayer.play();
                     if (playPromise !== undefined) playPromise.catch(e => console.log(e));
                 }
@@ -325,14 +333,10 @@ class VideoStoryPlayer {
             this.playPauseBtn.addEventListener('click', () => {
                 this.isPaused = !this.isPaused;
                 if (this.data.type === 'mp4') {
-                    if (this.isPaused) {
-                        this.mediaPlayer.pause();
-                    } else {
-                        const playPromise = this.mediaPlayer.play();
-                        if (playPromise !== undefined) playPromise.catch(e => console.log(e));
-                    }
+                    if (this.isPaused) this.mediaPlayer.pause();
+                    else this.mediaPlayer.play().catch(e => console.log(e));
                 }
-                this.playPauseIcon.src = this.isPaused ? 'https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/play.svg' : 'https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/pause.svg';
+                this.playPauseIcon.src = this.isPaused ? '/themes/custom/telkomsel/assets/img/revamp/play.svg' : '/themes/custom/telkomsel/assets/img/revamp/pause.svg';
             });
         }
 
@@ -342,13 +346,12 @@ class VideoStoryPlayer {
             } else {
                 this.muteBtn.addEventListener('click', () => {
                     this.mediaPlayer.muted = !this.mediaPlayer.muted;
-                    this.muteIcon.src = this.mediaPlayer.muted ? 'https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/mute.svg' : 'https://telkomsel.com//themes/custom/telkomsel/assets/img/revamp/sound.svg';
+                    this.muteIcon.src = this.mediaPlayer.muted ? '/themes/custom/telkomsel/assets/img/revamp/mute.svg' : '/themes/custom/telkomsel/assets/img/revamp/sound.svg';
                 });
             }
         }
 
-        // Logic Khusus Default (Modals, Panels)
-        if (this.data.format !== 'webstory') {
+        if (this.format !== 'webstory') {
             if (this.shareBtnDesktop && this.shareMenuDesktop) {
                 this.shareBtnDesktop.addEventListener('click', () => {
                     this.shareMenuDesktop.style.display = window.getComputedStyle(this.shareMenuDesktop).display === 'none' ? 'flex' : 'none';
@@ -376,10 +379,11 @@ class VideoStoryPlayer {
             }
 
             if (this.emotes) {
-                this.emotes.forEach(emote => emote.addEventListener('click', (e) => this.animateEmote(e.currentTarget)));
+                this.emotes.forEach(emote => {
+                    emote.addEventListener('click', (e) => this.animateEmote(e.currentTarget));
+                });
             }
 
-            // MODAL LOGIC Mulus
             const openDescModal = (e) => {
                 if(e) e.stopPropagation();
                 if (this.popupShortsOverlay) this.popupShortsOverlay.classList.add('popup-video-shorts-active');
@@ -396,7 +400,6 @@ class VideoStoryPlayer {
                     }, 50);
                 }
                 if (this.popupShortsOverlay) this.popupShortsOverlay.classList.remove('popup-video-shorts-active');
-
                 if (this.popupShareOverlay) this.popupShareOverlay.classList.add('popup-video-share-active');
                 if (this.popupShareContent) this.popupShareContent.classList.add('popup-share-active');
             };
@@ -415,7 +418,6 @@ class VideoStoryPlayer {
             if (this.closeDescBtn) this.closeDescBtn.addEventListener('click', (e) => { e.stopPropagation(); closeAllModals(); });
             if (this.closeShareBtn) this.closeShareBtn.addEventListener('click', (e) => { e.stopPropagation(); closeAllModals(); });
 
-            // OUTSIDE CLICK UNTUK TUTUP MODAL
             const outsideTargets = [this.popupShortsOverlay, this.popupShareOverlay];
             outsideTargets.forEach(target => {
                 if (target) {
@@ -427,41 +429,57 @@ class VideoStoryPlayer {
         }
     }
 
-    // UNIVERSAL SWIPE GESTURE (Mendukung sentuhan layar di HP/Tablet)
     initTouchGestures() {
         if (!this.videoPlayerArea) return;
-        let startY = 0, isDragging = false;
+        let startY = 0, currentY = 0;
+        let isDragging = false;
 
         this.element.addEventListener('touchstart', (e) => {
+            if (e.touches.length > 1) return;
+            
             startY = e.touches[0].clientY;
             isDragging = false;
-            this.videoPlayerArea.style.transition = 'none';
+
+            if (this.mediaPlayer && this.data.type === 'youtube') {
+                this.mediaPlayer.style.pointerEvents = 'none';
+            }
         }, { passive: true });
 
         this.element.addEventListener('touchmove', (e) => {
-            let currentY = e.touches[0].clientY;
-            let deltaY = Math.abs(currentY - startY);
-            if (deltaY > 10) {
+            if (e.touches.length > 1) return;
+
+            currentY = e.touches[0].clientY;
+            let deltaY = currentY - startY; 
+            
+            if (Math.abs(deltaY) > 10) {
                 isDragging = true;
-                if (e.cancelable) e.preventDefault();
-                // Batasi drag agar tidak bablas di ujung awal/akhir group
-                if ((this.currentGroupIndex === 0 && currentY - startY > 0) || 
-                    (this.currentGroupIndex === this.allGroups.length - 1 && currentY - startY < 0)) return;
+                if (e.cancelable) e.preventDefault(); 
             }
         }, { passive: false });
 
         this.element.addEventListener('touchend', (e) => {
-            if (!isDragging) return;
-            let deltaY = e.changedTouches[0].clientY - startY;
-            this.videoPlayerArea.style.transition = 'transform 0.3s ease-out';
-            
-            // Jarak swipe minimal 50px untuk berpindah video
-            if (deltaY < -50 && this.currentGroupIndex < this.allGroups.length - 1) {
-                this.playNextGroup();
-            } else if (deltaY > 50 && this.currentGroupIndex > 0) {
-                this.playPrevGroup();
+            if (this.mediaPlayer && this.data.type === 'youtube') {
+                this.mediaPlayer.style.pointerEvents = 'auto';
             }
+
+            if (!isDragging) return;
+            
+            let deltaY = currentY - startY;
+            
+            if (deltaY < -50) {
+                this.playNextTrigger();
+            } 
+            else if (deltaY > 50) {
+                if (this.currentTriggerIndex > 0) {
+                    this.playPrevTrigger();
+                } else {
+                    this.destroy(true); 
+                }
+            }
+            
             isDragging = false;
+            startY = 0;
+            currentY = 0;
         });
     }
 
@@ -474,7 +492,7 @@ class VideoStoryPlayer {
                     this.currentProgressFill.style.width = percentage + '%';
                 }
             });
-            this.mediaPlayer.addEventListener('ended', () => this.playNextNested());
+            this.mediaPlayer.addEventListener('ended', () => this.playNextItem());
         } else if (this.data.type === 'image') {
             this.startTime = Date.now() - this.elapsedTime;
             const animateImageProgress = () => {
@@ -485,7 +503,7 @@ class VideoStoryPlayer {
 
                     if (percentage >= 100) {
                         if (this.currentProgressFill) this.currentProgressFill.style.width = '100%';
-                        this.playNextNested();
+                        this.playNextItem();
                         return;
                     } else {
                         if (this.currentProgressFill) this.currentProgressFill.style.width = percentage + '%';
@@ -506,64 +524,104 @@ class VideoStoryPlayer {
         }
     }
 
-    playNextNested() {
-        if (this.currentNestedIndex < this.items.length - 1) {
+    playNextItem() {
+        if (this.currentItemIndex < this.items.length - 1) {
             const onClose = this.data.onClose;
             this.destroy(false); 
-            new VideoStoryPlayer({ triggerGroup: this.triggerGroup, nestedIndex: this.currentNestedIndex + 1, onClose: onClose });
+            new VideoStoryPlayer({ 
+                triggerGroup: this.triggerGroup, 
+                triggerElement: this.triggerElement, 
+                currentTriggerIndex: this.currentTriggerIndex,
+                currentItemIndex: this.currentItemIndex + 1, 
+                onClose: onClose 
+            });
         } else {
-            this.playNextGroup();
+            this.playNextTrigger();
         }
     }
 
-    playPrevNested() {
-        const onClose = this.data.onClose;
-        if (this.currentNestedIndex > 0) {
+    playPrevItem() {
+        if (this.currentItemIndex > 0) {
+            const onClose = this.data.onClose;
             this.destroy(false);
-            new VideoStoryPlayer({ triggerGroup: this.triggerGroup, nestedIndex: this.currentNestedIndex - 1, onClose: onClose });
+            new VideoStoryPlayer({ 
+                triggerGroup: this.triggerGroup, 
+                triggerElement: this.triggerElement, 
+                currentTriggerIndex: this.currentTriggerIndex,
+                currentItemIndex: this.currentItemIndex - 1, 
+                onClose: onClose 
+            });
         } else {
-            if (this.currentGroupIndex > 0) {
-                this.destroy(false);
-                const prevGroup = this.allGroups[this.currentGroupIndex - 1];
-                const prevItemsCount = prevGroup.querySelectorAll('[data-story-item]').length;
-                new VideoStoryPlayer({ triggerGroup: prevGroup, nestedIndex: prevItemsCount - 1, onClose: onClose });
+            if(this.data.type === 'mp4' && this.mediaPlayer){
+                this.mediaPlayer.currentTime = 0;
+                this.mediaPlayer.play().catch(e => console.log(e));
+            } else if (this.data.type === 'image') {
+                this.elapsedTime = 0;
+                this.startTime = Date.now();
+            } else {
+                this.playPrevTrigger();
             }
         }
     }
 
-    playNextGroup() {
-        if (this.currentGroupIndex < this.allGroups.length - 1) {
+    playNextTrigger() {
+        if (this.currentTriggerIndex < this.triggers.length - 1) {
             const onClose = this.data.onClose;
             this.destroy(false);
-            new VideoStoryPlayer({ triggerGroup: this.allGroups[this.currentGroupIndex + 1], nestedIndex: 0, onClose: onClose });
+            new VideoStoryPlayer({ 
+                triggerGroup: this.triggerGroup, 
+                triggerElement: this.triggers[this.currentTriggerIndex + 1],
+                currentTriggerIndex: this.currentTriggerIndex + 1,
+                currentItemIndex: 0, 
+                onClose: onClose 
+            });
         } else {
-            this.destroy(true); 
+            this.destroy(true);
         }
     }
 
-    playPrevGroup() {
-        if (this.currentGroupIndex > 0) {
+    playPrevTrigger() {
+        if (this.currentTriggerIndex > 0) {
             const onClose = this.data.onClose;
             this.destroy(false);
-            new VideoStoryPlayer({ triggerGroup: this.allGroups[this.currentGroupIndex - 1], nestedIndex: 0, onClose: onClose });
+            new VideoStoryPlayer({ 
+                triggerGroup: this.triggerGroup, 
+                triggerElement: this.triggers[this.currentTriggerIndex - 1],
+                currentTriggerIndex: this.currentTriggerIndex - 1,
+                currentItemIndex: 0, 
+                onClose: onClose 
+            });
+        } else {
+            this.destroy(true);
         }
     }
 
     handleKeydown(e) {
         if (!document.querySelector('.video-player-container')) return;
-        if (e.key === "ArrowLeft") this.playPrevNested();
-        else if (e.key === "ArrowRight") this.playNextNested();
-        else if (e.key === "ArrowUp") this.playPrevGroup();
-        else if (e.key === "ArrowDown") this.playNextGroup();
+        
+        if (e.key === "ArrowLeft") this.playPrevItem();
+        else if (e.key === "ArrowRight") this.playNextItem();
+        else if (e.key === "ArrowUp") this.playPrevTrigger();
+        else if (e.key === "ArrowDown") this.playNextTrigger();
         else if (e.key === "Escape") this.destroy(true);
     }
 
     updateButtonState() {
         if (!this.scrollUp || !this.scrollDown) return;
-        if (this.currentGroupIndex === 0 && this.currentNestedIndex === 0) this.scrollUp.classList.add('disabled');
+
+        if (this.triggers.length <= 1) {
+            this.scrollUp.style.display = 'none';
+            this.scrollDown.style.display = 'none';
+            return;
+        } else {
+            this.scrollUp.style.display = 'flex';
+            this.scrollDown.style.display = 'flex';
+        }
+
+        if (this.currentTriggerIndex === 0) this.scrollUp.classList.add('disabled');
         else this.scrollUp.classList.remove('disabled');
 
-        if (this.currentGroupIndex === this.allGroups.length - 1 && this.currentNestedIndex === this.items.length - 1) this.scrollDown.classList.add('disabled');
+        if (this.currentTriggerIndex === this.triggers.length - 1) this.scrollDown.classList.add('disabled');
         else this.scrollDown.classList.remove('disabled');
     }
 
@@ -612,18 +670,45 @@ class VideoStoryPlayer {
         }
     }
 
-    static initFromURL() {
+    static init() {
+        const triggers = document.querySelectorAll('[data-story-trigger]');
+        
+        triggers.forEach(trigger => {
+            trigger.addEventListener('click', function () {
+                const group = this.closest('[data-story-group]');
+                const triggersInGroup = Array.from(group.querySelectorAll('[data-story-trigger]'));
+                const triggerIndex = triggersInGroup.indexOf(this);
+
+                new VideoStoryPlayer({
+                    triggerGroup: group,
+                    triggerElement: this, 
+                    currentTriggerIndex: triggerIndex,
+                    currentItemIndex: 0, 
+                    onClose: () => document.body.classList.remove('no-scroll')
+                });
+                document.body.classList.add('no-scroll');
+            });
+        });
+
         const urlParams = new URLSearchParams(window.location.search);
         const videoId = urlParams.get('video');
         if (videoId) {
             const item = document.querySelector(`[data-story-id="${videoId}"]`);
             if (item) {
+                const trigger = item.closest('[data-story-trigger]');
                 const group = item.closest('[data-story-group]');
-                const items = Array.from(group.querySelectorAll('[data-story-item]'));
-                const nestedIndex = items.indexOf(item);
+                
+                const triggersInGroup = Array.from(group.querySelectorAll('[data-story-trigger]'));
+                const triggerIndex = triggersInGroup.indexOf(trigger);
+                
+                const itemsInTrigger = Array.from(trigger.querySelectorAll('[data-story-item]'));
+                const itemIndex = itemsInTrigger.indexOf(item);
+                
                 new VideoStoryPlayer({
                     triggerGroup: group,
-                    nestedIndex: nestedIndex !== -1 ? nestedIndex : 0,
+                    triggerElement: trigger,
+                    currentTriggerIndex: triggerIndex,
+                    currentItemIndex: itemIndex,
                     onClose: () => document.body.classList.remove('no-scroll')
                 });
                 document.body.classList.add('no-scroll');
