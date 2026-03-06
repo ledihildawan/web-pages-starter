@@ -4,7 +4,7 @@
   {# --- HERO SECTION --- #}
   <section class="relative pt-44 pb-24 px-6 text-center overflow-hidden">
     {# Spotlight Effect #}
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-[120%] bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-violet-600/15 via-transparent to-transparent -z-10 blur-3xl opacity-60"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-[120%] bg-[radial-gradient(circle_at_top,var(--tw-gradient-stops))] from-violet-600/15 via-transparent to-transparent -z-10 blur-3xl opacity-60"></div>
 
     <div class="max-w-6xl mx-auto relative">
       {# Badge #}
@@ -18,7 +18,7 @@
         </span>
       </div>
 
-      <h1 class="text-6xl md:text-8xl font-black tracking-tighter mb-8 leading-[1] bg-linear-to-b from-white to-slate-400 bg-clip-text text-transparent">
+      <h1 class="text-6xl md:text-8xl font-black tracking-tighter mb-8 leading-none bg-linear-to-b from-white to-slate-400 bg-clip-text text-transparent">
         <span>{{ i18n.t('page.hero.title_start') }}</span>
         <span class="block bg-linear-to-r from-violet-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent">
           {{ i18n.t('page.hero.title_highlight') }}
@@ -38,10 +38,10 @@
       </p>
 
       <div class="flex flex-col sm:flex-row items-center justify-center gap-6 mb-12">
-        <a href="{{ page.hero.primary_btn.url }}" class="group relative w-full sm:w-auto min-h-[56px] px-12 py-4 bg-white text-slate-950 rounded-2xl font-black text-lg flex items-center justify-center transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] active:scale-95">
+        <a href="{{ page.hero.primary_btn.url }}" class="group relative w-full sm:w-auto min-h-14 px-12 py-4 bg-white text-slate-950 rounded-2xl font-black text-lg flex items-center justify-center transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] active:scale-95">
           {{ i18n.t('page.hero.primary_btn.label') }}
         </a>
-        <a href="{{ page.hero.secondary_btn.url }}" class="w-full sm:w-auto min-h-[56px] px-12 py-4 bg-slate-900/50 backdrop-blur-md text-white border border-white/10 rounded-2xl font-black text-lg flex items-center justify-center hover:bg-slate-800 transition-all hover:border-white/20 active:scale-95">
+        <a href="{{ page.hero.secondary_btn.url }}" class="w-full sm:w-auto min-h-14 px-12 py-4 bg-slate-900/50 backdrop-blur-md text-white border border-white/10 rounded-2xl font-black text-lg flex items-center justify-center hover:bg-slate-800 transition-all hover:border-white/20 active:scale-95">
           {{ i18n.t('page.hero.secondary_btn.label') }}
         </a>
       </div>
@@ -93,7 +93,7 @@
   </section>
 
   {# --- STATS SECTION --- #}
-  <section class="py-24 px-6 relative bg-white/[0.02] border-y border-white/5">
+  <section class="py-24 px-6 relative bg-white/2 border-y border-white/5">
     <div class="max-w-6xl mx-auto">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-16 text-center">
         {% for stat in page.stats %}

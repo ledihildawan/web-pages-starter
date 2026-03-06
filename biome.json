@@ -20,8 +20,15 @@
         "useSortedClasses": {
           "level": "error",
           "options": {
-            "attributes": ["classList"],
-            "functions": ["clsx", "cva", "tw", "tw.*"]
+            "attributes": [
+              "classList"
+            ],
+            "functions": [
+              "clsx",
+              "cva",
+              "tw",
+              "tw.*"
+            ]
           }
         }
       }
@@ -34,7 +41,8 @@
   },
   "css": {
     "parser": {
-      "cssModules": true
+      "cssModules": true,
+      "tailwindDirectives": true
     }
   },
   "assist": {

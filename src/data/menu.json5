@@ -1,0 +1,16 @@
+{
+  "header": [
+    {
+      "label": "features",
+      "url": "/features",
+    },
+    {
+      "label": "pricing",
+      "url": "/pricing",
+    },
+    {
+      "label": "about",
+      "url": "/about",
+    }
+  ]
+}

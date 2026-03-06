@@ -1,43 +1,37 @@
+import Alpine from 'alpinejs';
 import i18next from 'i18next';
 import { translatePage } from '../i18n';
 
-document.addEventListener('alpine:init', () => {
+export const registerI18nStore = () => {
   Alpine.store('i18n', {
-    // State Awal
-    current: localStorage.getItem('i18nextLng') || 'id',
-    isLoading: false,
+    current: i18next.language?.split('-')[0] || 'id',
+    isChanging: false,
 
-    // Action: Ganti Bahasa
     async change(lng) {
-      // Cek agar tidak reload bahasa yang sama
-      if (this.current === lng) return;
+      if (this.current === lng || this.isChanging) return;
 
-      this.isLoading = true;
-      document.documentElement.classList.add('i18n-loading');
-      document.documentElement.classList.remove('i18n-ready');
+      this.isChanging = true;
+      document.documentElement.classList.replace('i18n-ready', 'i18n-loading');
 
       try {
-        // 1. Proses Ganti Bahasa
         await i18next.changeLanguage(lng);
-
-        // 2. Translate halaman (untuk elemen data-i18n)
         await translatePage();
 
-        // 3. Update State (Reactivity Alpine akan mengupdate UI otomatis)
         this.current = lng;
         localStorage.setItem('i18nextLng', lng);
 
-        // 4. Selesai (Delay sedikit untuk UX)
         setTimeout(() => {
-          this.isLoading = false;
-          document.documentElement.classList.remove('i18n-loading');
-          document.documentElement.classList.add('i18n-ready');
+          this.isChanging = false;
+          document.documentElement.classList.replace(
+            'i18n-loading',
+            'i18n-ready',
+          );
         }, 150);
-      } catch (error) {
-        console.error('[i18n] Switch Failed:', error);
-        this.isLoading = false;
-        document.documentElement.classList.remove('i18n-loading');
+      } catch (err) {
+        console.error('[i18n Store] Switch Error:', err);
+        this.isChanging = false;
+        document.documentElement.classList.add('i18n-ready');
       }
     },
   });
-});
+};
