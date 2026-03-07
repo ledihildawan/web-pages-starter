@@ -16,7 +16,6 @@ export const translatePage = async (): Promise<void> => {
 
   return new Promise((resolve) => {
     requestAnimationFrame(() => {
-      // 1. Sinkronisasi Teks
       document.querySelectorAll('[data-i18n]').forEach((el) => {
         const key = el.getAttribute('data-i18n');
         if (key) {
@@ -24,7 +23,6 @@ export const translatePage = async (): Promise<void> => {
         }
       });
 
-      // 2. Sinkronisasi Atribut
       document.querySelectorAll('[data-i18n-attr]').forEach((el) => {
         const raw = el.getAttribute('data-i18n-attr');
         if (raw?.includes(':')) {
@@ -35,7 +33,6 @@ export const translatePage = async (): Promise<void> => {
         }
       });
 
-      // 3. Update Arah Teks (RTL/LTR)
       let direction = 'ltr';
       try {
         const locale = new Intl.Locale(currentLng) as unknown as {
