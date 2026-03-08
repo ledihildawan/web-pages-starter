@@ -9,6 +9,7 @@ import {
 } from '@rspack/core';
 import { minify } from 'html-minifier-terser';
 import JSON5 from 'json5';
+import { DEFAULT_LANG, SUPPORTED_LANG_CODES } from './src/configs/languages';
 
 // --- Types & Constants ---
 type JsonValue =
@@ -316,43 +317,43 @@ export default defineConfig({
     template: ({ entryName }) => path.join('src/pages', entryName, 'index.njk'),
     templateParameters: (params) => {
       const name = String(params.entryName || 'home');
-      const lang = 'id';
+      const lang = DEFAULT_LANG; // Bahasa default saat pertama kali render (SSR/Nunjucks)
       const templatePath = resolveRoot(`src/pages/${name}/index.njk`);
 
       const usedComponents = getUsedComponents(templatePath);
-      const supportedLangs = ['id', 'en', 'ja', 'zh', 'ar'];
 
-      // --- 1. Load data untuk bahasa default (Indonesia) untuk di-render oleh Nunjucks ---
+      // --- 1. UPDATE: Daftar bahasa harus sinkron dengan i18n.ts dan Alpine Store ---
+      const supportedLangs = SUPPORTED_LANG_CODES;
+
+      // --- 2. Load data untuk bahasa default (id) ---
       const mergedLocales: JsonData = {
         ...readJSON5(resolveRoot(`src/locales/${lang}/common.json5`)),
         page: readJSON5(resolveRoot(`src/locales/${lang}/${name}.json5`)),
         comp: loadSelectedComponentLocales(lang, usedComponents),
       };
 
-      // --- 2. Load data untuk bahasa lainnya (Inject ke Window) ---
-      const preloadedI18nData: Record<string, JsonData> = {};
+      // --- 3. UPDATE: Load data untuk SEMUA bahasa (Inject ke Window) ---
+      // Kita memuat semua agar saat user ganti bahasa, datanya sudah instan di memory
+      const allI18nData: Record<string, JsonData> = {};
+      
       supportedLangs.forEach(l => {
-        if (l !== lang) {
-          preloadedI18nData[l] = {
-            common: readJSON5(resolveRoot(`src/locales/${l}/common.json5`)),
-            page: readJSON5(resolveRoot(`src/locales/${l}/${name}.json5`)),
-            comp: loadSelectedComponentLocales(l, usedComponents),
-          };
-        }
+        allI18nData[l] = {
+          // Mencari folder src/locales/en-US, src/locales/zh-CN, dsb.
+          common: readJSON5(resolveRoot(`src/locales/${l}/common.json5`)),
+          page: readJSON5(resolveRoot(`src/locales/${l}/${name}.json5`)),
+          comp: loadSelectedComponentLocales(l, usedComponents),
+        };
       });
 
-      // Inject ID halaman, komponen, dan seluruh JSON ke memori HTML
+      // Inject data ke Window Object
       const clientI18nScript = `
         <script>
-    (function() {
-      window.__PAGE_ID__ = ${JSON.stringify(name)};
-      window.__USED_COMPONENTS__ = ${JSON.stringify(usedComponents)};
-      window.__I18N_DATA__ = ${JSON.stringify({
-        ...preloadedI18nData,
-        [lang]: mergedLocales
-      })};
-    })();
-  </script>
+          (function() {
+            window.__PAGE_ID__ = ${JSON.stringify(name)};
+            window.__USED_COMPONENTS__ = ${JSON.stringify(usedComponents)};
+            window.__I18N_DATA__ = ${JSON.stringify(allI18nData)};
+          })();
+        </script>
       `;
 
       const globalData = loadGlobalData();
@@ -386,6 +387,7 @@ export default defineConfig({
             clientKey = key.replace('page.', '');
           } else if (key.startsWith('comp.')) {
             const p = key.split('.');
+            // p[1] adalah nama komponen, p.slice(2) adalah key di dalam komponen itu
             ns = `components/${p[1]}`;
             clientKey = p.slice(2).join('.');
           }
@@ -393,7 +395,6 @@ export default defineConfig({
           const result = _resolve(key, vars);
           return {
             v: result,
-            // Format ini (namespace:key) yang akan dibaca oleh client script di main.njk
             k: `${ns}:${clientKey}`,
             vars: Object.keys(vars).length ? JSON.stringify(vars) : null,
           };

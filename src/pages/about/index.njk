@@ -2,27 +2,27 @@
 
 {% block content %}
   {# --- HERO SECTION --- #}
-  <section class="relative pt-44 pb-24 px-6 overflow-hidden">
-    {# Background Spotlight #}
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-full bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-violet-600/15 via-transparent to-transparent -z-10 blur-3xl opacity-60"></div>
+  <section class="relative pbs-44 pbe-24 px-6 overflow-hidden">
+    {# Background Spotlight (Logical Centering dengan dukungan RTL) #}
+    <div class="absolute inset-bs-0 inset-s-1/2 ltr:-translate-x-1/2 rtl:translate-x-1/2 inline-[120%] block-full bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-violet-600/15 via-transparent to-transparent -z-10 blur-3xl opacity-60"></div>
 
-    <div class="max-w-4xl mx-auto text-center">
-      <h1 class="text-6xl md:text-8xl font-black tracking-tighter mb-8 leading-[1] bg-linear-to-b from-white to-slate-400 bg-clip-text text-transparent">
+    <div class="max-inline-4xl mx-auto text-center">
+      <h1 class="text-6xl md:text-8xl font-black tracking-tighter mbe-8 leading-[1] bg-linear-to-b from-white to-slate-400 bg-clip-text text-transparent">
         {{ i18n.t('page.' + page.hero.t_key + '.title_part1') }}
         <span class="block bg-linear-to-r from-violet-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent">
           {{ i18n.t('page.' + page.hero.t_key + '.title_highlight') }}
         </span>
       </h1>
 
-      <p class="text-xl md:text-2xl text-slate-300 leading-relaxed max-w-2xl mx-auto mb-20 font-medium">
+      <p class="text-xl md:text-2xl text-slate-300 leading-relaxed max-inline-2xl mx-auto mbe-20 font-medium">
         {{ i18n.t('page.' + page.hero.t_key + '.description') }}
       </p>
 
-      {# Stats Grid - Kontras Diperbaiki #}
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 py-12 px-6 border border-white/10 bg-white/[0.03] backdrop-blur-md rounded-[2.5rem] shadow-2xl">
+      {# Stats Grid - Kontras & Logical Padding #}
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 pbs-12 pbe-12 px-6 border border-white/10 bg-white/[0.03] backdrop-blur-md rounded-[2.5rem] shadow-2xl gpu-boost">
         {% for stat in page.stats %}
           <div class="relative group">
-            <div class="text-5xl font-black text-white mb-2 tracking-tighter group-hover:text-{{ stat.color }}-400 transition-all duration-500 group-hover:scale-110">
+            <div class="text-5xl font-black text-white mbe-2 tracking-tighter group-hover:text-{{ stat.color }}-400 transition-all duration-500 ease-emphasized group-hover:scale-110">
               {{ stat.val }}
             </div>
             <div class="text-[10px] text-slate-400 font-black uppercase tracking-[0.2em]">
@@ -35,21 +35,21 @@
   </section>
 
   {# --- STORY SECTION --- #}
-  <section class="py-32 px-6">
-    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-24 items-center">
+  <section class="pbs-32 pbe-32 px-6">
+    <div class="max-inline-6xl mx-auto grid md:grid-cols-2 gap-24 items-center">
       <div class="relative group">
-        {# Glow effect #}
-        <div class="absolute -inset-4 bg-linear-to-r from-violet-600/30 to-pink-600/30 rounded-[3rem] blur-3xl opacity-40 group-hover:opacity-70 transition duration-1000"></div>
+        {# Glow effect (Inset logis) #}
+        <div class="absolute inset-[-1rem] bg-linear-to-r from-violet-600/30 to-pink-600/30 rounded-[3rem] blur-3xl opacity-40 group-hover:opacity-70 transition-opacity duration-1000 ease-emphasized"></div>
 
-        <div class="relative h-[500px] bg-slate-900 rounded-[2.5rem] border border-white/10 flex items-center justify-center overflow-hidden shadow-2xl">
+        <div class="relative block-[500px] bg-slate-900 rounded-[2.5rem] border border-white/10 flex items-center justify-center overflow-hidden shadow-2xl gpu-boost">
           <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-slate-800 to-slate-950"></div>
 
           {# Technical grid overlay #}
           <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#6366f1 1px, transparent 1px); background-size: 32px 32px;"></div>
 
           <div class="relative text-center p-10">
-            <div class="w-24 h-24 bg-violet-500/10 rounded-3xl flex items-center justify-center mx-auto mb-8 border border-violet-500/30 shadow-inner group-hover:rotate-6 transition-transform duration-700">
-              <svg class="w-12 h-12 text-violet-400" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <div class="inline-24 block-24 bg-violet-500/10 rounded-3xl flex items-center justify-center mx-auto mbe-8 border border-violet-500/30 shadow-inner group-hover:rotate-6 transition-transform duration-700 ease-emphasized">
+              <svg class="inline-12 block-12 text-violet-400" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                 <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.168.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
               </svg>
             </div>
@@ -69,12 +69,12 @@
           <p>{{ i18n.t('page.' + page.story.t_key + '.para1') }}</p>
           <p>{{ i18n.t('page.' + page.story.t_key + '.para2') }}</p>
 
-          <ul class="space-y-6 pt-8">
+          <ul class="space-y-6 pbs-8">
             {% set value_colors = ['violet', 'fuchsia', 'pink'] %}
             {% for i in range(1, 4) %}
-              <li class="flex items-center gap-5 text-white group">
-                <span class="flex-none flex items-center justify-center w-8 h-8 rounded-xl bg-{{ value_colors[i-1] }}-500/20 text-{{ value_colors[i-1] }}-400 text-xs font-black border border-{{ value_colors[i-1] }}-500/30 group-hover:scale-110 transition-transform shadow-lg">
-                  <svg class="w-4 h-4" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+              <li class="flex items-center gap-5 text-white group cursor-default">
+                <span class="flex-none flex items-center justify-center inline-8 block-8 rounded-xl bg-{{ value_colors[i-1] }}-500/20 text-{{ value_colors[i-1] }}-400 text-xs font-black border border-{{ value_colors[i-1] }}-500/30 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <svg class="inline-4 block-4" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                 </span>
                 <span class="tracking-tight">{{ i18n.t('page.' + page.story.t_key + '.val' + i) }}</span>
               </li>
@@ -86,34 +86,36 @@
   </section>
 
   {# --- TEAM SECTION --- #}
-  <section class="py-32 px-6 relative bg-white/[0.02] border-y border-white/5">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-24 space-y-6">
+  <section class="pbs-32 pbe-32 px-6 relative bg-white/[0.02] border-bs border-be border-white/5">
+    <div class="max-inline-6xl mx-auto">
+      <div class="text-center mbe-24 space-y-6">
         <h2 class="text-5xl font-black tracking-tighter text-white">
           {{ i18n.t('page.' + page.team.t_key + '.title') }}
         </h2>
-        <p class="text-slate-300 text-xl max-w-2xl mx-auto font-medium">
+        <p class="text-slate-300 text-xl max-inline-2xl mx-auto font-medium">
           {{ i18n.t('page.' + page.team.t_key + '.subtitle') }}
         </p>
-        <div class="h-1.5 w-20 bg-linear-to-r from-violet-500 to-fuchsia-500 mx-auto rounded-full"></div>
+        <div class="block-1.5 inline-20 bg-linear-to-r from-violet-500 to-fuchsia-500 mx-auto rounded-full"></div>
       </div>
 
       <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-10">
         {% for member in page.team.members %}
-          <div class="group p-10 rounded-[2.5rem] bg-slate-900/40 border border-white/5 hover:border-{{ member.color }}-500/50 hover:bg-slate-900/80 transition-all duration-700 text-center relative overflow-hidden backdrop-blur-sm shadow-2xl">
-            <div class="absolute -bottom-16 -right-16 w-32 h-32 bg-{{ member.color }}-500/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div class="group p-10 rounded-[2.5rem] bg-slate-900/40 border border-white/5 hover:border-{{ member.color }}-500/50 hover:bg-slate-900/80 transition-all duration-700 ease-emphasized text-center relative overflow-hidden backdrop-blur-sm shadow-2xl gpu-boost">
+            
+            {# Glow (Logical End & Bottom) #}
+            <div class="absolute -inset-be-16 -inset-e-16 inline-32 block-32 bg-{{ member.color }}-500/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
-            <div class="relative w-32 h-32 mx-auto mb-8">
-              <div class="absolute inset-0 bg-linear-to-br from-{{ member.color }}-500 to-transparent rounded-full blur-md opacity-20 group-hover:opacity-60 transition-opacity"></div>
-              <div class="relative w-full h-full rounded-full bg-slate-800 border-2 border-white/10 group-hover:border-{{ member.color }}-500/50 transition-all duration-500 flex items-center justify-center overflow-hidden shadow-inner">
-                <svg class="w-14 h-14 text-slate-600 group-hover:text-{{ member.color }}-400 transition-colors" fill="currentColor" viewbox="0 0 24 24">
+            <div class="relative inline-32 block-32 mx-auto mbe-8">
+              <div class="absolute inset-0 bg-linear-to-br from-{{ member.color }}-500 to-transparent rounded-full blur-md opacity-20 group-hover:opacity-60 transition-opacity duration-500"></div>
+              <div class="relative inline-full block-full rounded-full bg-slate-800 border-2 border-white/10 group-hover:border-{{ member.color }}-500/50 transition-all duration-500 flex items-center justify-center overflow-hidden shadow-inner">
+                <svg class="inline-14 block-14 text-slate-600 group-hover:text-{{ member.color }}-400 transition-colors duration-500" fill="currentColor" viewbox="0 0 24 24">
                   <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"/>
                 </svg>
               </div>
             </div>
 
-            <h3 class="text-2xl font-black text-white mb-2 tracking-tight group-hover:text-{{ member.color }}-300 transition-colors">{{ member.name }}</h3>
-            <p class="text-xs font-black text-{{ member.color }}-400 mb-6 uppercase tracking-[0.2em]">{{ member.role }}</p>
+            <h3 class="text-2xl font-black text-white mbe-2 tracking-tight group-hover:text-{{ member.color }}-300 transition-colors duration-500">{{ member.name }}</h3>
+            <p class="text-xs font-black text-{{ member.color }}-400 mbe-6 uppercase tracking-[0.2em]">{{ member.role }}</p>
             <p class="text-sm text-slate-400 leading-relaxed font-medium">
               {{ i18n.t(member.desc_key) }}
             </p>

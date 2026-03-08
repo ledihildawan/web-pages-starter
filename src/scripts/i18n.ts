@@ -1,3 +1,5 @@
+
+import { DEFAULT_LANG, SUPPORTED_LANG_CODES } from '@configs/languages';
 import i18next, { type Resource } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
@@ -11,9 +13,6 @@ const getVars = (el: Element): Record<string, unknown> => {
 };
 
 export const translatePage = async (): Promise<void> => {
-  const currentLng = i18next.language.split('-')[0];
-  const htmlEl = document.documentElement;
-
   return new Promise((resolve) => {
     requestAnimationFrame(() => {
       document.querySelectorAll('[data-i18n]').forEach((el) => {
@@ -33,21 +32,6 @@ export const translatePage = async (): Promise<void> => {
         }
       });
 
-      let direction = 'ltr';
-      try {
-        const locale = new Intl.Locale(currentLng) as unknown as {
-          getTextInfo: () => { direction: string };
-        };
-        if (typeof locale.getTextInfo === 'function') {
-          direction = locale.getTextInfo().direction;
-        }
-      } catch {
-        if (['ar', 'he', 'fa', 'ur'].includes(currentLng)) direction = 'rtl';
-      }
-
-      console.log(currentLng)
-      htmlEl.lang = currentLng;
-      htmlEl.dir = direction;
       resolve();
     });
   });
@@ -75,13 +59,14 @@ export const initI18n = async (): Promise<void> => {
   try {
     await i18next.use(LanguageDetector).init({
       resources,
-      fallbackLng: 'id',
-      supportedLngs: ['id', 'en', 'ja', 'zh', 'ar'],
+      fallbackLng: DEFAULT_LANG,
+      supportedLngs: SUPPORTED_LANG_CODES,
       ns: ['common', pageID],
       defaultNS: 'common',
       detection: {
         order: ['localStorage', 'navigator'],
         caches: ['localStorage'],
+        lookupLocalStorage: 'i18nextLng', 
       },
       interpolation: {
         escapeValue: false,
@@ -89,6 +74,7 @@ export const initI18n = async (): Promise<void> => {
     });
 
     await translatePage();
+    
     document.documentElement.classList.replace('i18n-loading', 'i18n-ready');
   } catch (error) {
     console.error('[i18n Init Error]:', error);

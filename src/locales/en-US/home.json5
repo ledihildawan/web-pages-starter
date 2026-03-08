@@ -33,9 +33,13 @@
     }
   },
   "stats": {
-    "community": "Developer Community",
-    "projects": "Projects Built",
-    "uptime": "Service Uptime",
-    "rating": "User Rating"
+    "community": "Dev Community",
+    "community_val": "10K+",
+    "projects": "Built Projects",
+    "projects_val": "50K+",
+    "uptime": "24/7 Availability",
+    "uptime_val": "99.9%",
+    "rating": "User Rating",
+    "rating_val": "4.9/5"
   }
 }

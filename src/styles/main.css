@@ -1,1 +1,88 @@
+/* src/styles/main.css */
 @import "tailwindcss";
+
+/* Menginjeksi Utilitas Custom ke dalam ekosistem Tailwind */
+@layer utilities {
+  .ease-emphasized {
+    transition-timing-function: cubic-bezier(0.05, 0.7, 0.1, 1);
+  }
+  
+  .gpu-boost {
+    transform: translateZ(0);
+    will-change: transform, opacity;
+  }
+  
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Base Styles & Global Resets */
+@layer base {
+  [x-cloak] { 
+    display: none !important; 
+  }
+  
+  /* Smart Scroll Behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* RTL Logical Alignment Fix */
+  [dir="rtl"] {
+    text-align: start;
+  }
+
+  /* Logical Scrollbar Premium Design */
+  ::-webkit-scrollbar { 
+    inline-size: 10px; 
+  }
+  ::-webkit-scrollbar-track { 
+    background: #020617; /* slate-950 */
+  }
+  ::-webkit-scrollbar-thumb { 
+    background: #1e293b; /* slate-800 */
+    border-radius: 5px; 
+    border: 2px solid #020617; 
+  }
+  ::-webkit-scrollbar-thumb:hover { 
+    background: #334155; /* slate-700 */
+  }
+
+  /* Smart Scroll Lock untuk Mobile Menu Navbar */
+  .no-scroll {
+    position: fixed;
+    inset-inline: 0;
+    inset-block-start: 0;
+    inline-size: 100%;
+    overflow-y: scroll;
+    padding-inline-end: var(--scrollbar-width, 0px);
+  }
+}
+
+/* --- i18n Hydration States (Zero Layout Shift) --- */
+html.i18n-loading [data-i18n] {
+  color: transparent !important;
+  background-color: rgba(255,255,255,0.03);
+  border-radius: 0.375rem;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transition: none !important;
+  pointer-events: none;
+}
+
+html.i18n-loading [data-i18n-attr] {
+  color: inherit !important;
+  background-color: transparent !important;
+}
+
+html.i18n-ready [data-i18n] {
+  color: inherit;
+  background-color: transparent;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}

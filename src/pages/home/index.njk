@@ -2,85 +2,89 @@
 
 {% block content %}
   {# --- HERO SECTION --- #}
-  <section class="relative pt-44 pb-24 px-6 text-center overflow-hidden">
-    {# Spotlight Effect #}
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-[120%] bg-[radial-gradient(circle_at_top,var(--tw-gradient-stops))] from-violet-600/15 via-transparent to-transparent -z-10 blur-3xl opacity-60"></div>
+  <section class="relative pbs-44 pbe-24 px-6 text-center overflow-hidden">
+    
+    {# Spotlight Effect (Logical Centering dengan dukungan RTL) #}
+    <div class="absolute inset-bs-0 inset-s-1/2 ltr:-translate-x-1/2 rtl:translate-x-1/2 inline-[120%] block-[120%] bg-[radial-gradient(circle_at_top,var(--tw-gradient-stops))] from-violet-600/15 via-transparent to-transparent -z-10 blur-3xl opacity-60"></div>
 
-    <div class="max-w-6xl mx-auto relative">
+    <div class="max-inline-6xl mx-auto relative">
+      
       {# Badge #}
-      <div class="inline-flex items-center gap-3 px-4 py-2 bg-violet-500/10 border border-violet-500/30 rounded-full text-violet-100 text-sm mb-10 transition-colors hover:bg-violet-500/20 cursor-default">
-        <span class="relative flex h-2 w-2">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+      <div class="inline-flex items-center gap-3 px-4 py-2 bg-violet-500/10 border border-violet-500/30 rounded-full text-violet-100 text-sm mbe-10 transition-colors hover:bg-violet-500/20 cursor-default gpu-boost">
+        <span class="relative flex block-2 inline-2">
+          <span class="animate-ping absolute inline-flex block-full inline-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full block-2 inline-2 bg-emerald-500"></span>
         </span>
         <span class="font-bold tracking-wide uppercase text-[10px]">
           {{ i18n.t('page.hero.badge') }}
         </span>
       </div>
 
-      <h1 class="text-6xl md:text-8xl font-black tracking-tighter mb-8 leading-none bg-linear-to-b from-white to-slate-400 bg-clip-text text-transparent">
+      <h1 class="text-6xl md:text-8xl font-black tracking-tighter mbe-8 leading-none bg-linear-to-b from-white to-slate-400 bg-clip-text text-transparent">
         <span>{{ i18n.t('page.hero.title_start') }}</span>
         <span class="block bg-linear-to-r from-violet-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent">
           {{ i18n.t('page.hero.title_highlight') }}
         </span>
       </h1>
 
-      {# Image LCP #}
-      <div class="relative group max-w-2xl mx-auto my-16">
-        <div class="absolute -inset-1 bg-linear-to-r from-violet-600 to-fuchsia-600 rounded-3xl blur-2xl opacity-20 group-hover:opacity-40 transition duration-700"></div>
-        <div class="relative bg-slate-900 rounded-2xl p-2 border border-white/10 shadow-2xl overflow-hidden">
-          <img width="1200" height="800" src="{% static 'images/hero-test.webp' %}" alt="Dashboard Preview" class="w-full h-auto rounded-xl transition-transform duration-700 group-hover:scale-[1.02]" fetchpriority="high">
-        </div>
-      </div>
-
-      <p class="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto mb-14 leading-relaxed font-medium">
+      <p class="text-xl md:text-2xl text-slate-300 max-inline-3xl mx-auto mbe-14 leading-relaxed font-medium">
         {{ i18n.t('page.hero.description') }}
       </p>
 
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-6 mb-12">
-        <a href="{{ page.hero.primary_btn.url }}" class="group relative w-full sm:w-auto min-h-14 px-12 py-4 bg-white text-slate-950 rounded-2xl font-black text-lg flex items-center justify-center transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] active:scale-95">
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-6 mbe-12">
+        <a href="{{ page.hero.primary_btn.url }}" class="group relative inline-full sm:inline-auto min-block-14 px-12 py-4 bg-white text-slate-950 rounded-2xl font-black text-lg flex items-center justify-center transition-all duration-300 ease-emphasized hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] active:scale-95 gpu-boost">
           {{ i18n.t('page.hero.primary_btn.label') }}
         </a>
-        <a href="{{ page.hero.secondary_btn.url }}" class="w-full sm:w-auto min-h-14 px-12 py-4 bg-slate-900/50 backdrop-blur-md text-white border border-white/10 rounded-2xl font-black text-lg flex items-center justify-center hover:bg-slate-800 transition-all hover:border-white/20 active:scale-95">
+        <a href="{{ page.hero.secondary_btn.url }}" class="inline-full sm:inline-auto min-block-14 px-12 py-4 bg-slate-900/50 backdrop-blur-md text-white border border-white/10 rounded-2xl font-black text-lg flex items-center justify-center hover:bg-slate-800 transition-all duration-300 ease-emphasized hover:border-white/20 active:scale-95 gpu-boost">
           {{ i18n.t('page.hero.secondary_btn.label') }}
         </a>
       </div>
 
-      <p class="text-[11px] text-slate-400 font-bold tracking-[0.2em] uppercase">
+      <p class="text-[11px] text-slate-400 font-bold tracking-[0.2em] uppercase mbe-16">
         {{ i18n.t('page.hero.note') }}
       </p>
+
+      {# Image LCP #}
+      <div class="relative group max-inline-2xl mx-auto">
+        <div class="absolute -inset-1 bg-linear-to-r from-violet-600 to-fuchsia-600 rounded-3xl blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-700 ease-emphasized"></div>
+        <div class="relative bg-slate-900 rounded-2xl p-2 border border-white/10 shadow-2xl overflow-hidden gpu-boost">
+          <img width="1200" height="800" src="{% static 'images/hero-test.avif' %}" alt="Dashboard Preview" class="inline-full block-auto rounded-xl transition-transform duration-700 ease-emphasized group-hover:scale-[1.02]" fetchpriority="high">
+        </div>
+      </div>
+      
     </div>
   </section>
 
   {# --- FEATURES GRID --- #}
-  <section id="features" class="py-32 px-6 relative">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-24 space-y-6">
+  <section id="features" class="pbs-32 pbe-32 px-6 relative text-start">
+    <div class="max-inline-6xl mx-auto">
+      <div class="text-center mbe-24 space-y-6">
         <h2 class="text-4xl md:text-5xl font-black tracking-tight text-white">
           {{ i18n.t('page.features.heading') }}
         </h2>
-        <p class="text-slate-400 max-w-2xl mx-auto text-lg md:text-xl leading-relaxed">
+        <p class="text-slate-400 max-inline-2xl mx-auto text-lg md:text-xl leading-relaxed">
           {{ i18n.t('page.features.subheading') }}
         </p>
-        <div class="h-1.5 w-20 bg-linear-to-r from-violet-500 to-fuchsia-500 mx-auto rounded-full"></div>
+        <div class="block-1.5 inline-20 bg-linear-to-r from-violet-500 to-fuchsia-500 mx-auto rounded-full"></div>
       </div>
 
       <div class="grid md:grid-cols-3 gap-10">
         {% for item in page.features.list %}
-          <div class="group p-12 rounded-[2.5rem] bg-slate-900/40 border border-white/5 hover:bg-slate-900/60 hover:border-{{ item.color }}-500/30 transition-all duration-500 relative overflow-hidden shadow-2xl">
-            {# Glow #}
-            <div class="absolute -bottom-16 -right-16 w-32 h-32 bg-{{ item.color }}-500/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div class="group p-12 rounded-[2.5rem] bg-slate-900/40 border border-white/5 hover:bg-slate-900/60 hover:border-{{ item.color }}-500/30 transition-all duration-500 ease-emphasized relative overflow-hidden shadow-2xl gpu-boost">
+            
+            {# Glow Logical (inset-be / inset-e menggantikan bottom / right) #}
+            <div class="absolute -inset-be-16 -inset-e-16 inline-32 block-32 bg-{{ item.color }}-500/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
-            <div class="w-16 h-16 rounded-2xl bg-{{ item.color }}-500/10 flex items-center justify-center text-{{ item.color }}-400 mb-10 border border-{{ item.color }}-500/20 group-hover:rotate-6 transition-all duration-500">
+            <div class="inline-16 block-16 rounded-2xl bg-{{ item.color }}-500/10 flex items-center justify-center text-{{ item.color }}-400 mbe-10 border border-{{ item.color }}-500/20 group-hover:rotate-6 transition-transform duration-500 ease-emphasized">
               {% if item.icon == 'lightning' %}
-                <svg class="w-8 h-8" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+                <svg class="inline-8 block-8" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
               {% elif item.icon == 'design' %}
-                <svg class="w-8 h-8" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.39m3.421 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42"/></svg>
+                <svg class="inline-8 block-8" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.39m3.421 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42"/></svg>
               {% elif item.icon == 'shield' %}
-                <svg class="w-8 h-8" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/></svg>
+                <svg class="inline-8 block-8" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/></svg>
               {% endif %}
             </div>
-            <h3 class="text-2xl font-black mb-5 text-white tracking-tight">
+            <h3 class="text-2xl font-black mbe-5 text-white tracking-tight">
               {{ i18n.t('page.features.list.' + item.t_key + '.title') }}
             </h3>
             <p class="text-slate-400 leading-relaxed text-lg">
@@ -93,12 +97,12 @@
   </section>
 
   {# --- STATS SECTION --- #}
-  <section class="py-24 px-6 relative bg-white/2 border-y border-white/5">
-    <div class="max-w-6xl mx-auto">
+  <section class="pbs-24 pbe-24 px-6 relative bg-white/[0.02] border-bs border-be border-white/5">
+    <div class="max-inline-6xl mx-auto">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-16 text-center">
         {% for stat in page.stats %}
-          <div class="group">
-            <p class="text-6xl font-black text-{{ stat.color }}-400 tracking-tighter mb-3 transition-transform group-hover:scale-110 duration-500">
+          <div class="group gpu-boost">
+            <p class="text-6xl font-black text-{{ stat.color }}-400 tracking-tighter mbe-3 transition-transform ease-emphasized group-hover:scale-110 duration-500">
               {{ i18n.t('page.stats.' + stat.t_key + '_val') }}
             </p>
             <p class="text-slate-300 font-bold uppercase tracking-[0.2em] text-[10px]">

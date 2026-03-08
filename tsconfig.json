@@ -37,6 +37,7 @@
       "@data/*": ["./src/data/*"],
       "@pages/*": ["./src/pages/*"],
       "@assets/*": ["./src/assets/*"],
+      "@configs/*": ["./src/configs/*"],
       "@layouts/*": ["./src/layouts/*"],
       "@components/*": ["./src/components/*"]
     },
