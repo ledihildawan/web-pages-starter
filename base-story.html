@@ -1626,32 +1626,25 @@
                 const initEventListeners = () => {
                     domRefs
                             .btnPlayPause
-                            ?
-                            .addEventListener('click', togglePlayPause);
+                            ?.addEventListener('click', togglePlayPause);
                     domRefs
                             .btnMute
-                            ?
-                            .addEventListener('click', toggleMute);
+                            ?.addEventListener('click', toggleMute);
                     domRefs
                             .storyClickLayer
-                            ?
-                            .addEventListener('click', handleStoryClick);
+                            ?.addEventListener('click', handleStoryClick);
                     domRefs
                             .btnPrevStory
-                            ?
-                            .addEventListener('click', prevVideo);
+                            ?.addEventListener('click', prevVideo);
                     domRefs
                             .btnNextStory
-                            ?
-                            .addEventListener('click', nextVideo);
+                            ?.addEventListener('click', nextVideo);
                     domRefs
                             .btnStoryClosePlayer
-                            ?
-                            .addEventListener('click', closeStory);
+                            ?.addEventListener('click', closeStory);
                     domRefs
                             .btnOpenContext
-                            ?
-                            .addEventListener('click', openContext);
+                            ?.addEventListener('click', openContext);
 
                     document
                         .querySelectorAll('.story-close-btn, .overlay-backdrop')
@@ -1661,16 +1654,13 @@
 
                     domRefs
                             .btnToggleReaction
-                            ?
-                            .addEventListener('click', toggleReactionMenu);
+                            ?.addEventListener('click', toggleReactionMenu);
                     domRefs
                             .btnShare
-                            ?
-                            .addEventListener('click', nativeShare);
+                            ?.addEventListener('click', nativeShare);
                     domRefs
                             .btnCleanMode
-                            ?
-                            .addEventListener('click', toggleCleanMode);
+                            ?.addEventListener('click', toggleCleanMode);
 
                     document
                         .querySelectorAll('.reaction-option-btn')
