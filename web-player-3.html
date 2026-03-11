@@ -111,12 +111,11 @@
 
       .media-container iframe, .media-container video, .media-container img { width: 100%; height: 100%; border: none; pointer-events: none; }
       .ambient-media-container { width: 100%; height: 100%; opacity: 0; transition: opacity 0.6s var(--ease-out); }
-      .story-viewport { position: absolute; inset: 0; z-index: 10; overflow: hidden; border-radius: inherit; transition: filter 0.6s var(--ease-out), transform 0.6s var(--ease-out); will-change: filter, transform; contain: paint; }
+      .story-viewport { position: absolute; inset: 0; z-index: 10; overflow: hidden; border-radius: inherit; transition: filter 0.6s var(--ease-out), transform 0.6s var(--ease-spring); will-change: filter, transform; contain: paint; }
       
       .story-video-wrapper { position: relative; width: 100%; height: 100%; background-color: var(--brand-dark); transition: filter 0.5s var(--ease-out); }
       .story-container.is-paused .story-video-wrapper { filter: brightness(0.65) grayscale(0.2); }
       
-      /* UI Polish: Legibility Gradient yang lebih mulus untuk teks atas dan bawah */
       .story-video-wrapper::after { 
         content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 5; 
         background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, transparent 15%, transparent 65%, rgba(0, 0, 0, 0.9) 100%); 
@@ -167,19 +166,16 @@
       .story-gesture-layer { position: absolute; inset: 0; z-index: 20; display: flex; cursor: pointer; touch-action: pan-y; user-select: none; -webkit-touch-callout: none; }
       .gesture-zone { height: 100%; } .gesture-zone--left, .gesture-zone--right { width: 30%; } .gesture-zone--center { width: 40%; }
       
-      /* UI Polish: Progress Bar diletakkan di ATAS layaknya standar Story sesungguhnya */
-      .story-progress-bar-wrapper { position: absolute; top: max(12px, env(safe-area-inset-top)); left: 12px; right: 12px; height: 20px; z-index: 55; cursor: pointer; display: flex; align-items: center; gap: 4px; opacity: 0; transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-spring); transform: translateY(-10px); }
+      .story-progress-bar-wrapper { position: absolute; bottom: max(16px, env(safe-area-inset-bottom)); left: 16px; right: 16px; height: 24px; z-index: 55; cursor: pointer; display: flex; align-items: center; gap: 4px; opacity: 0; transition: opacity 0.8s var(--ease-out); }
       .story-container.is-story-format .story-progress-bar-wrapper { opacity: 1 !important; transform: translateY(0) !important; pointer-events: auto !important; }
-      .story-progress-bar { flex: 1; height: 3px; background: rgba(255, 255, 255, 0.35); border-radius: 4px; overflow: hidden; transition: height 0.2s var(--ease-out); box-shadow: 0 1px 4px rgba(0,0,0,0.25); }
-      .story-progress-bar-wrapper:hover .story-progress-bar { height: 6px; }
+      .story-progress-bar { flex: 1; height: 4px; background: rgba(255, 255, 255, 0.25); border-radius: 4px; overflow: hidden; transition: height 0.2s var(--ease-out); }
+      .story-progress-bar-wrapper:hover .story-progress-bar { height: 8px; }
       .story-progress-bar__fill { height: 100%; width: 100%; background: rgba(255, 255, 255, 0.95); transform-origin: left; transform: scaleX(0); border-radius: inherit; box-shadow: 0 0 8px rgba(255, 255, 255, 0.5); will-change: transform; }
       
-      /* UI Polish: Menyesuaikan posisi Top Actions karena progress bar di atas */
       :is(.story-top-actions, .story-player-actions) { position: absolute; z-index: 55; display: flex; gap: 12px; opacity: 0; pointer-events: none; transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-spring); }
-      .story-top-actions { top: max(40px, calc(env(safe-area-inset-top) + 24px)); left: 16px; transform: translateY(-20px); }
-      .story-player-actions { bottom: max(32px, env(safe-area-inset-bottom)); right: 16px; flex-direction: column; align-items: center; transform: translateY(20px); }
+      .story-top-actions { top: max(16px, env(safe-area-inset-top)); left: 16px; transform: translateY(-20px); }
+      .story-player-actions { bottom: max(48px, env(safe-area-inset-bottom)); right: 16px; flex-direction: column; align-items: center; transform: translateY(20px); }
       
-      /* UI Polish: True Glassmorphism pada FAB */
       :is(.player-fab, .reaction-option-btn, .external-nav-btn) { 
         width: var(--fab-size); height: var(--fab-size); border-radius: 50%; 
         background-color: var(--glass-bg); 
@@ -191,8 +187,7 @@
       :is(.player-fab, .reaction-option-btn, .external-nav-btn):active:not(.is-disabled) { background-color: rgba(255, 255, 255, 0.2); box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); transform: scale(0.9); }
       .external-nav-btn.is-disabled { opacity: 0.3; cursor: not-allowed; pointer-events: none; }
       
-      /* UI Polish: Story Excerpt lebih rapi di atas notch bawah */
-      .story-excerpt { position: absolute; bottom: max(32px, env(safe-area-inset-bottom)); left: 16px; right: 20px; padding-right: 70px; z-index: 40; color: #fff; cursor: pointer; opacity: 0; pointer-events: none; transform: translateY(20px); transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-spring); background: transparent; border: none; text-align: left; font-family: inherit; display: block; }
+      .story-excerpt { position: absolute; bottom: max(48px, env(safe-area-inset-bottom)); left: 20px; right: 20px; padding-right: 70px; z-index: 55; color: #fff; cursor: pointer; opacity: 0; pointer-events: none; transform: translateY(20px); transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-spring); background: transparent; border: none; text-align: left; font-family: inherit; display: block; }
       :is(.story-excerpt__badges, .story-view__badges) { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
       .story-badge-item { background: rgba(255, 255, 255, 0.15); color: #fff; -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border: 0.5px solid var(--glass-border); font-size: 11px; font-weight: 700; text-transform: uppercase; padding: 6px 12px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
       .story-view__badges .story-badge-item { background: var(--brand-red); border: none; }
@@ -231,7 +226,6 @@
       
       :is(.story-sheet__content, .story-popup__content) { position: relative; background-color: var(--surface); z-index: 101; pointer-events: auto; display: flex; flex-direction: column; contain: paint; }
       
-      /* UI Polish: Padding Bawah untuk memperhitungkan Home Indicator iOS */
       .story-sheet__content { border-radius: 28px 28px 0 0; width: 100%; padding: 12px 0 max(24px, env(safe-area-inset-bottom)); transform: translateY(100%); max-height: 88vh; transition: transform 0.6s var(--ease-spring); box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2); will-change: transform; }
       .story-sheet.is-active .story-sheet__content { transform: translateY(0); } 
       .story-sheet__content.is-dragging { transition: transform 0.1s ease-out; }
@@ -251,7 +245,7 @@
       .story-view__meta { font-size: 13px; font-weight: 500; color: #888; display: block; }
       
       .story-body { flex: 1 1 auto; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 0 28px 32px; min-height: 0; overscroll-behavior-y: contain; }
-      .story-body::-webkit-scrollbar { display: none; } /* Menyembunyikan scrollbar sepenuhnya */
+      .story-body::-webkit-scrollbar { display: none; } 
       .story-body__cms-content { font-size: 15px; color: var(--text-sub); line-height: 1.6; } 
       .story-body__cms-content p { margin-bottom: 16px; }
       
@@ -263,6 +257,45 @@
        * 6. RESPONSIVE MEDIA QUERIES
        * ==========================================================
        */
+      @media (max-width: 767px) {
+        .story-popup { display: none; }
+        .story-header { padding: 0 28px; }
+        
+        .layout-wrapper.is-ui-open .story-viewport { 
+          filter: none !important; 
+          transform-origin: top center;
+          transform: scale(0.36) translateY(max(16px, env(safe-area-inset-top))); 
+          border-radius: 32px; 
+          box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        .story-sheet.is-active .overlay-backdrop {
+          background: transparent !important;
+          -webkit-backdrop-filter: none !important;
+          backdrop-filter: none !important;
+          opacity: 1 !important;
+          pointer-events: auto !important; 
+        }
+
+        .layout-wrapper.is-ui-open .story-viewport :is(.story-excerpt, .story-player-actions, .story-top-actions, .story-progress-bar-wrapper) { 
+          opacity: 0 !important; pointer-events: none; 
+        }
+        
+        .layout-wrapper.is-ui-open .story-close-player { opacity: 0; pointer-events: none; }
+        .layout-wrapper.is-clean-mode .story-close-player { display: none; }
+        
+        .story-sheet__content {
+          height: 62dvh;
+          transition: transform 0.6s var(--ease-spring), height 0.5s var(--ease-spring);
+          box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.4); 
+        }
+        
+        .story-sheet__content.is-full-sheet {
+          height: 100dvh; 
+          padding-top: max(16px, env(safe-area-inset-top)); 
+        }
+      }
+      
       @media (min-width: 768px) {
         .story-loader__spinner-simple { display: none; }
         .story-loader__spinner-complex { display: block; width: 64px; height: 64px; position: relative; pointer-events: none; }
@@ -277,29 +310,7 @@
         @keyframes story-spin-ease { 12.5% { transform: rotate(135deg); } 25% { transform: rotate(270deg); } 37.5% { transform: rotate(405deg); } 50% { transform: rotate(540deg); } 62.5% { transform: rotate(675deg); } 75% { transform: rotate(810deg); } 87.5% { transform: rotate(945deg); } to { transform: rotate(3turn); } }
         @keyframes story-spin-left { from { transform: rotate(130deg); } 50% { transform: rotate(-5deg); } to { transform: rotate(130deg); } }
         @keyframes story-spin-right { from { transform: rotate(-130deg); } 50% { transform: rotate(5deg); } to { transform: rotate(-130deg); } }
-      }
-      
-      @media (hover: hover) and (pointer: fine) {
-        .story-container.show-ui .story-excerpt:hover { opacity: 1; }
-        :is(.player-fab, .reaction-option-btn, .external-nav-btn:not(.is-disabled)):hover { background-color: rgba(255, 255, 255, 0.35); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); }
-        .story-close-btn:hover { background-color: #e9ecef; color: var(--text-main); }
-      }
-      
-      .desktop-controls-wrapper { position: fixed; right: 16px; top: 0; bottom: 0; display: flex; flex-direction: column; align-items: center; pointer-events: none; z-index: 60; opacity: 1; transition: opacity 0.8s var(--ease-out); }
-      .desktop-controls-wrapper > * { pointer-events: auto; }
-      .story-close-player { position: fixed; top: max(16px, env(safe-area-inset-top)); right: 16px; }
-      .external-nav-group { display: none; flex-direction: column; gap: 12px; }
-      
-      @media (max-width: 767px) {
-        .story-popup { display: none; }
-        .story-header { padding: 0 28px; }
-        .layout-wrapper.is-ui-open .story-viewport { filter: blur(12px) brightness(0.5); transform: scale(0.96); border-radius: var(--frame-radius); }
-        .layout-wrapper.is-ui-open .story-viewport :is(.story-excerpt, .story-player-actions, .story-top-actions) { opacity: 0; pointer-events: none; }
-        .layout-wrapper.is-ui-open .story-close-player { opacity: 0; pointer-events: none; }
-        .layout-wrapper.is-clean-mode .story-close-player { display: none; }
-      }
-      
-      @media (min-width: 768px) {
+
         .story-sheet { display: none; }
         .ambient-layer { display: block; }
         .external-nav-group { display: flex; margin: auto 0; }
@@ -316,6 +327,17 @@
           .layout-wrapper.is-ui-open .story-viewport :is(.story-excerpt, .story-player-actions, .story-top-actions) { opacity: 0; pointer-events: none; }
         }
       }
+      
+      @media (hover: hover) and (pointer: fine) {
+        .story-container.show-ui .story-excerpt:hover { opacity: 1; }
+        :is(.player-fab, .reaction-option-btn, .external-nav-btn:not(.is-disabled)):hover { background-color: rgba(255, 255, 255, 0.35); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); }
+        .story-close-btn:hover { background-color: #e9ecef; color: var(--text-main); }
+      }
+      
+      .desktop-controls-wrapper { position: fixed; right: 16px; top: 0; bottom: 0; display: flex; flex-direction: column; align-items: center; pointer-events: none; z-index: 60; opacity: 1; transition: opacity 0.8s var(--ease-out); }
+      .desktop-controls-wrapper > * { pointer-events: auto; }
+      .story-close-player { fixed; top: max(16px, env(safe-area-inset-top)); right: 16px; }
+      .external-nav-group { display: none; flex-direction: column; gap: 12px; }
       
       @media (min-width: 1366px) {
         .story-popup { display: none; }
@@ -488,7 +510,7 @@
             items: [
               { type: 'image', url: 'https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?q=80&w=1080&auto=format&fit=crop', thumbnail: 'https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?q=80&w=200&auto=format&fit=crop', isVertical: false, excerpt: 'Slide 1: Pemandangan alam yang indah. Gambar otomatis lanjut.' },
               { type: 'youtube', url: 'https://www.youtube.com/shorts/Km5xz7NKqlA', excerpt: 'Slide 2: Cuplikan trik bermain bola singkat.' },
-              { type: 'video', url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4', excerpt: 'Slide 3: Trailer animasi native MP4. Selesai video, otomatis geser bawah.' }
+              { type: 'video', url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4', excerpt: 'Slide 3: Trailer animasi native MP4. Selesai video, otomatis geser bawah.', thumbnail: 'https://cdn.dribbble.com/userupload/43723892/file/original-2ccd229bcf3732cdbe1394c5b2ec34cd.jpg?resize=2400x1800&vertical=center', thumbnailFit: 'cover' }
             ]
           },
           { 
@@ -516,17 +538,19 @@
       const rootContainer = document.querySelector('.js-layout-wrapper') || document.body;
       const dom = (selector) => rootContainer.querySelector(selector);
       
+      // Menggunakan AbortController untuk manajemen memori event yang mutlak bersih
       class EventRegistry {
-        static listeners = [];
-        static add(target, type, handler, options) {
-          target.addEventListener(type, handler, options);
-          this.listeners.push({ target, type, handler, options });
+        static controller = new AbortController();
+        
+        static add(target, type, handler, options = {}) {
+          const opts = typeof options === 'boolean' ? { capture: options } : { ...options };
+          opts.signal = this.controller.signal;
+          target.addEventListener(type, handler, opts);
         }
+        
         static clear() {
-          this.listeners.forEach(({ target, type, handler, options }) => {
-            target.removeEventListener(type, handler, options);
-          });
-          this.listeners = [];
+          this.controller.abort();
+          this.controller = new AbortController();
         }
       }
 
@@ -600,27 +624,9 @@
             img.onerror = () => saveAndCall(hqResUrl); 
             img.src = `https://i.ytimg.com/vi/${cacheKey}/maxresdefault.jpg`; 
           } else if (data.type === 'video') { 
-            if (data.thumbnail) return saveAndCall(data.thumbnail); 
-            const video = document.createElement('video'); 
-            video.crossOrigin = 'anonymous'; 
-            video.muted = true; 
-            video.playsInline = true; 
-            video.src = data.url; 
-            video.onloadedmetadata = () => {
-              video.currentTime = Math.min(1, video.duration / 2 || 1);
-            }; 
-            video.onseeked = () => { 
-              try { 
-                const canvas = document.createElement('canvas'); 
-                canvas.width = video.videoWidth || 640; 
-                canvas.height = video.videoHeight || 360; 
-                canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height); 
-                saveAndCall(canvas.toDataURL('image/webp', 0.8)); 
-              } catch { 
-                saveAndCall(null); 
-              } 
-            }; 
-            video.onerror = () => saveAndCall(null); 
+            // Optimalisasi: Pakai thumbnail dari data json, jika tidak ada biarkan transparan.
+            // Tidak perlu merender canvas yang sangat membebani RAM dan rawan CORS error.
+            saveAndCall(data.thumbnail || null); 
           } else { 
             saveAndCall(data.thumbnail || data.url); 
           }
@@ -714,6 +720,7 @@
             if (this.isDestroyed) return;
             const state = this.player?.getPlayerState?.();
             
+            // Failsafe: Cegah layar loading nge-hang jika diblokir browser
             if (state === -1 || state === 5) {
               this.emitStateChange(CONFIG.MEDIA_STATE.PAUSED);
             }
@@ -1091,7 +1098,7 @@
         const thumbOverlay = dom('.js-thumbnail-overlay'); 
         const blurBg = dom('.js-video-blur');
         const isShort = (data.type === 'youtube' && Utils.parseYouTubeData(data.url).isShort) || data.isVertical === true;
-        const objectFitStyle = isShort ? 'cover' : 'contain';
+        const objectFitStyle = data.thumbnailFit ? data.thumbnailFit : (isShort ? 'cover' : 'contain');
         
         if (thumbOverlay) { 
           thumbOverlay.style.transition = 'none'; 
@@ -1099,7 +1106,17 @@
         }
         
         ThumbnailResolver.resolve(data, (url) => {
-          if (!url || AppState.currentVideoIndex !== currentRenderIndex || AppState.currentSubIndex !== currentRenderSubIndex) return;
+          if (!url || AppState.currentVideoIndex !== currentRenderIndex || AppState.currentSubIndex !== currentRenderSubIndex) {
+              // Jika tidak ada thumbnail, pastikan bersih/transparan
+              if (blurBg && AppState.currentVideoIndex === currentRenderIndex) {
+                  blurBg.style.backgroundImage = 'none';
+                  blurBg.style.opacity = '0';
+              }
+              if (thumbOverlay && AppState.currentVideoIndex === currentRenderIndex) {
+                  thumbOverlay.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E";
+              }
+              return;
+          }
           
           if (blurBg) { 
             blurBg.style.transition = 'none'; 
@@ -1464,10 +1481,15 @@
           rootContainer.classList.remove('is-clean-mode'); 
           ctx.classList.toggle('is-active', open);
           
+          const sheetContent = dom('.js-story-sheet')?.querySelector('.story-sheet__content');
+          
           if (open) { 
             if (dom('.icon-enter-fs')) dom('.icon-enter-fs').style.display = 'block'; 
             if (dom('.icon-exit-fs')) dom('.icon-exit-fs').style.display = 'none'; 
-            if (window.innerWidth < 1366) AppState.currentMedia?.pause(); 
+            
+            if (window.innerWidth < 1366 && window.innerWidth >= 768) AppState.currentMedia?.pause(); 
+            if (sheetContent) sheetContent.classList.remove('is-full-sheet');
+            
             closeReactionMenu(); 
             initFocusTrap(ctx); 
             setTimeout(() => (ctx.querySelector('.story-view__title') || firstFocusable)?.focus(), 100); 
@@ -1475,8 +1497,12 @@
             dom('.js-story-sheet')?.classList.remove('is-active'); 
             dom('.js-story-popup')?.classList.remove('is-active'); 
             dom('.js-story-card')?.classList.remove('is-active'); 
-            const sheetContent = dom('.js-story-sheet')?.querySelector('.story-sheet__content'); 
-            if (sheetContent) sheetContent.style.transform = ''; 
+            
+            if (sheetContent) {
+                sheetContent.style.transform = ''; 
+                sheetContent.classList.remove('is-full-sheet'); 
+            }
+            
             if (window.innerWidth < 1366) AppState.currentMedia?.play(); 
             ctx.removeEventListener('keydown', handleFocusTrap); 
             dom('.js-btn-open-context')?.focus(); 
@@ -1514,6 +1540,8 @@
         
         const initProgressBarGestures = () => {
           let isScrubbing = false, wasPlaying = false, pendingSeekTime = 0;
+          let scrubController = null;
+          
           const updateUIOnly = (clientX) => { 
             const wrapper = dom('.js-progress-wrapper'); if (!wrapper) return; 
             const rect = wrapper.getBoundingClientRect(); 
@@ -1538,21 +1566,31 @@
                 if (AppState.currentAmbient) AppState.currentAmbient.seekTo(pendingSeekTime);
             }
             if (wasPlaying) AppState.currentMedia?.play(); 
-            ['mousemove', 'touchmove', 'mouseup', 'touchend', 'touchcancel'].forEach(evt => window.removeEventListener(evt, evt.includes('move') ? moveScrub : stopScrub)); 
+            
+            if (scrubController) {
+                scrubController.abort();
+                scrubController = null;
+            }
           };
           const startScrub = (e) => { 
             const groupData = CONFIG.PLAYLIST[AppState.currentVideoIndex];
             const isMulti = groupData.items && groupData.items.length > 1;
             if (groupData.format === 'story' || isMulti) return; 
+            
             isScrubbing = true; 
             wasPlaying = AppState.currentMedia?.getState() === CONFIG.MEDIA_STATE.PLAYING; 
             if (wasPlaying) AppState.currentMedia?.pause(); 
             updateUIOnly(getClientX(e)); 
-            window.addEventListener('mousemove', moveScrub); 
-            window.addEventListener('touchmove', moveScrub, { passive: false }); 
-            window.addEventListener('mouseup', stopScrub); 
-            window.addEventListener('touchend', stopScrub); 
-            window.addEventListener('touchcancel', stopScrub); 
+            
+            scrubController = new AbortController();
+            const opts = { signal: scrubController.signal };
+            const optsPassive = { passive: false, signal: scrubController.signal };
+            
+            window.addEventListener('mousemove', moveScrub, opts); 
+            window.addEventListener('touchmove', moveScrub, optsPassive); 
+            window.addEventListener('mouseup', stopScrub, opts); 
+            window.addEventListener('touchend', stopScrub, opts); 
+            window.addEventListener('touchcancel', stopScrub, opts); 
           };
           const wrapper = dom('.js-progress-wrapper'); 
           wrapper?.addEventListener('mousedown', startScrub); 
@@ -1567,7 +1605,7 @@
           let singleTapTimer = null;
           let multiTapExecuteTimer = null;
           let cumulativeSeek = 0;
-          let lastTapAction = null;
+          let lastTapAction = null; 
           
           const layer = dom('.js-gesture-layer'); 
           layer?.addEventListener('contextmenu', (e) => e.preventDefault());
@@ -1668,7 +1706,7 @@
               } 
               else if (holdAction === 'rewind' || holdAction === 'forward') { 
                 if (isVideo) {
-                    cumulativeSeek += 10;
+                    cumulativeSeek += 5;
                     const isFwd = holdAction === 'forward';
                     showRipple(isFwd ? 'right' : 'left', `${isFwd ? '⏩' : '⏪'} ${cumulativeSeek}s`);
                     
@@ -1689,44 +1727,95 @@
               clearTimeout(singleTapTimer);
               startX = 0; 
               tapCount = 0;
+              
+              if (isLongPressActive) {
+                  isLongPressActive = false;
+                  AppState.currentMedia?.setPlaybackRate(1);
+                  if (AppState.currentAmbient) AppState.currentAmbient.setPlaybackRate(1);
+                  hideSteadyIcon();
+              }
           });
         };
         
         const initDrag = () => {
           let rAFDrag = null;
+          let sheetState = 'half'; 
+          let dragController = null;
+          
           const move = (e) => { 
             if (!state.isDragging || window.innerWidth >= 768) return; 
             if (e.cancelable) e.preventDefault(); 
             cancelAnimationFrame(rAFDrag); 
             rAFDrag = requestAnimationFrame(() => { 
               state.currentY = getClientY(e) - state.startY; 
-              if (state.currentY < 0) state.currentY *= 0.2; 
+              
+              if (sheetState === 'full' && state.currentY < 0) state.currentY *= 0.2; 
+              
               const sheet = dom('.js-story-sheet')?.querySelector('.story-sheet__content'); 
               if (sheet) sheet.style.transform = `translateY(${state.currentY}px)`; 
             }); 
           };
+          
           const end = () => { 
             if (!state.isDragging || window.innerWidth >= 768) return; 
             state.isDragging = false; 
             const sheet = dom('.js-story-sheet')?.querySelector('.story-sheet__content'); 
-            if (sheet) sheet.classList.remove('is-dragging'); 
-            ['mousemove', 'touchmove', 'mouseup', 'touchend'].forEach((evt) => window.removeEventListener(evt, evt.includes('move') ? move : end)); 
-            if (state.currentY > 120) closeContext(); 
-            else if (sheet) sheet.style.transform = ''; 
+            
+            if (sheet) {
+                sheet.classList.remove('is-dragging'); 
+                sheet.style.transform = ''; 
+                
+                if (sheetState === 'half') {
+                    if (state.currentY < -50) { 
+                        sheetState = 'full';
+                        sheet.classList.add('is-full-sheet');
+                        AppState.currentMedia?.pause(); 
+                        AppState.currentAmbient?.pause();
+                    } else if (state.currentY > 80) { 
+                        sheetState = 'half';
+                        closeContext();
+                    }
+                } else if (sheetState === 'full') {
+                    if (state.currentY > 150) { 
+                        sheetState = 'half';
+                        closeContext();
+                    } else if (state.currentY > 50) { 
+                        sheetState = 'half';
+                        sheet.classList.remove('is-full-sheet');
+                        AppState.currentMedia?.play(); 
+                        AppState.currentAmbient?.play();
+                    }
+                }
+            }
+            
+            if (dragController) {
+                dragController.abort();
+                dragController = null;
+            }
             state.currentY = 0; 
           };
+          
           const start = (e) => { 
             if (window.innerWidth >= 768) return; 
             state.startY = getClientY(e); 
             state.isDragging = true; 
             const sheet = dom('.js-story-sheet')?.querySelector('.story-sheet__content'); 
-            if (sheet) sheet.classList.add('is-dragging'); 
-            window.addEventListener('mousemove', move); 
-            window.addEventListener('touchmove', move, { passive: false }); 
-            window.addEventListener('mouseup', end); 
-            window.addEventListener('touchend', end); 
+            if (sheet) {
+                sheet.classList.add('is-dragging'); 
+                sheetState = sheet.classList.contains('is-full-sheet') ? 'full' : 'half';
+            }
+            
+            dragController = new AbortController();
+            const opts = { signal: dragController.signal };
+            const optsPassive = { passive: false, signal: dragController.signal };
+            
+            window.addEventListener('mousemove', move, opts); 
+            window.addEventListener('touchmove', move, optsPassive); 
+            window.addEventListener('mouseup', end, opts); 
+            window.addEventListener('touchend', end, opts); 
           };
-          const handle = dom('.js-sheet-handle'); 
+          
+          const handle = dom('.story-sheet__handle-wrapper'); 
           handle?.addEventListener('mousedown', start); 
           handle?.addEventListener('touchstart', start, { passive: true });
         };
@@ -1825,11 +1914,11 @@
               ArrowUp: () => switchVideo(-1), 
               ArrowRight: () => { 
                 if (groupData.format === 'story' || isMulti) navigateNext();
-                else { seekVideo(10); showRipple('right', `⏩ 10s`); }
+                else { seekVideo(5); showRipple('right', `⏩ 5s`); } 
               }, 
               ArrowLeft: () => { 
                 if (groupData.format === 'story' || isMulti) navigatePrev();
-                else { seekVideo(-10); showRipple('left', `⏪ 10s`); }
+                else { seekVideo(-5); showRipple('left', `⏪ 5s`); } 
               }
             };
             if (keyMap[e.code]) keyMap[e.code]();
