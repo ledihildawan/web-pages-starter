@@ -118,15 +118,38 @@
       
       .story-video-wrapper::after { 
         content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 5; 
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, transparent 15%, transparent 65%, rgba(0, 0, 0, 0.9) 100%); 
+        /* Disempurnakan agar teks lebih tebaca walau background cerah */
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, transparent 15%, transparent 60%, rgba(0, 0, 0, 0.85) 90%, rgba(0, 0, 0, 0.95) 100%); 
         transition: opacity 0.4s var(--ease-out); 
       }
       
-      .video-blur-bg { position: absolute; inset: -10%; width: 120%; height: 120%; background-size: cover; background-position: center; filter: blur(25px) brightness(0.4); z-index: 1; opacity: 0; pointer-events: none; transition: opacity 0.5s ease, background-image 0.5s ease; will-change: opacity; }
+      .video-blur-bg { 
+        position: absolute; 
+        inset: -20%; 
+        width: 140%; 
+        height: 140%; 
+        background-size: cover; 
+        background-position: center; 
+        filter: blur(80px) saturate(200%) brightness(0.45); 
+        z-index: 1; 
+        opacity: 0; 
+        pointer-events: none; 
+        transition: opacity 0.5s ease, background-image 0.5s ease; 
+        will-change: opacity; 
+      }
       .thumbnail-overlay { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 8; pointer-events: none; transition: opacity 0.4s ease; color: transparent; }
       .main-media-container { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; opacity: 0; transition: opacity 0.25s var(--ease-out); } 
       
-      @keyframes innerBreathe { 0%, 100% { transform: scale(1); filter: blur(25px) brightness(0.4); } 50% { transform: scale(1.05); filter: blur(30px) brightness(0.5); } }
+      @keyframes innerBreathe { 
+        0%, 100% { 
+          transform: scale(1); 
+          filter: blur(80px) saturate(200%) brightness(0.45); 
+        } 
+        50% { 
+          transform: scale(1.05); 
+          filter: blur(100px) saturate(250%) brightness(0.55); 
+        } 
+      }
       .is-inner-breathing { animation: innerBreathe 8s ease-in-out infinite; }
       
       /**
@@ -134,7 +157,7 @@
        * 4. OVERLAYS, UI CONTROLS & ANIMATIONS
        * ==========================================================
        */
-      .story-loader { position: absolute; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.5); transition: opacity 0.3s var(--ease-out); pointer-events: none; }
+      .story-loader { position: absolute; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.4); transition: opacity 0.3s var(--ease-out); pointer-events: none; }
       .story-container.has-started .story-loader { opacity: 0; }
       .story-container.has-started.is-loading .story-loader { opacity: 1; }
       .story-loader__spinner-simple { width: 32px; height: 32px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.15); border-top-color: var(--brand-red); animation: story-spin-simple 0.8s linear infinite; }
@@ -166,9 +189,9 @@
       .story-gesture-layer { position: absolute; inset: 0; z-index: 20; display: flex; cursor: pointer; touch-action: pan-y; user-select: none; -webkit-touch-callout: none; }
       .gesture-zone { height: 100%; } .gesture-zone--left, .gesture-zone--right { width: 30%; } .gesture-zone--center { width: 40%; }
       
-      .story-progress-bar-wrapper { position: absolute; bottom: max(16px, env(safe-area-inset-bottom)); left: 16px; right: 16px; height: 24px; z-index: 55; cursor: pointer; display: flex; align-items: center; gap: 4px; opacity: 0; transition: opacity 0.8s var(--ease-out); }
+      .story-progress-bar-wrapper { position: absolute; bottom: max(16px, env(safe-area-inset-bottom)); left: 16px; right: 16px; height: 24px; z-index: 55; cursor: pointer; display: flex; align-items: center; gap: 4px; opacity: 0; transition: opacity 0.8s var(--ease-out); filter: drop-shadow(0 1px 4px rgba(0,0,0,0.6)); }
       .story-container.is-story-format .story-progress-bar-wrapper { opacity: 1 !important; transform: translateY(0) !important; pointer-events: auto !important; }
-      .story-progress-bar { flex: 1; height: 4px; background: rgba(255, 255, 255, 0.25); border-radius: 4px; overflow: hidden; transition: height 0.2s var(--ease-out); }
+      .story-progress-bar { flex: 1; height: 4px; background: rgba(255, 255, 255, 0.3); border-radius: 4px; overflow: hidden; transition: height 0.2s var(--ease-out); }
       .story-progress-bar-wrapper:hover .story-progress-bar { height: 8px; }
       .story-progress-bar__fill { height: 100%; width: 100%; background: rgba(255, 255, 255, 0.95); transform-origin: left; transform: scaleX(0); border-radius: inherit; box-shadow: 0 0 8px rgba(255, 255, 255, 0.5); will-change: transform; }
       
@@ -508,7 +531,7 @@
           { 
             format: 'story', title: 'Multiple Story (Ala IG) 📸', meta: 'Telkomsel Update • Baru Saja', categories: ['Update', 'Promo'], content: '<p>Kumpulan promo menarik dan event terbaru bulan ini.</p>',
             items: [
-              { type: 'image', url: 'https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?q=80&w=1080&auto=format&fit=crop', thumbnail: 'https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?q=80&w=200&auto=format&fit=crop', isVertical: false, excerpt: 'Slide 1: Pemandangan alam yang indah. Gambar otomatis lanjut.' },
+              { type: 'image', url: 'https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?q=80&w=1080&auto=format&fit=crop', thumbnail: 'https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?q=80&w=200&auto=format&fit=crop', isVertical: false, duration: 7, excerpt: 'Slide 1: Pemandangan alam yang indah. Gambar otomatis lanjut dalam 7 detik.' },
               { type: 'youtube', url: 'https://www.youtube.com/shorts/Km5xz7NKqlA', excerpt: 'Slide 2: Cuplikan trik bermain bola singkat.' },
               { type: 'video', url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4', excerpt: 'Slide 3: Trailer animasi native MP4. Selesai video, otomatis geser bawah.', thumbnail: 'https://cdn.dribbble.com/userupload/43723892/file/original-2ccd229bcf3732cdbe1394c5b2ec34cd.jpg?resize=2400x1800&vertical=center', thumbnailFit: 'cover' }
             ]
@@ -538,7 +561,6 @@
       const rootContainer = document.querySelector('.js-layout-wrapper') || document.body;
       const dom = (selector) => rootContainer.querySelector(selector);
       
-      // Menggunakan AbortController untuk manajemen memori event yang mutlak bersih
       class EventRegistry {
         static controller = new AbortController();
         
@@ -624,8 +646,6 @@
             img.onerror = () => saveAndCall(hqResUrl); 
             img.src = `https://i.ytimg.com/vi/${cacheKey}/maxresdefault.jpg`; 
           } else if (data.type === 'video') { 
-            // Optimalisasi: Pakai thumbnail dari data json, jika tidak ada biarkan transparan.
-            // Tidak perlu merender canvas yang sangat membebani RAM dan rawan CORS error.
             saveAndCall(data.thumbnail || null); 
           } else { 
             saveAndCall(data.thumbnail || data.url); 
@@ -719,8 +739,6 @@
           this.autoplayCheckTimer = setTimeout(() => {
             if (this.isDestroyed) return;
             const state = this.player?.getPlayerState?.();
-            
-            // Failsafe: Cegah layar loading nge-hang jika diblokir browser
             if (state === -1 || state === 5) {
               this.emitStateChange(CONFIG.MEDIA_STATE.PAUSED);
             }
@@ -756,7 +774,8 @@
       class ImageHandler extends BaseMediaHandler {
         constructor(container, data, callbacks, isAmbient = false) { 
           super(container, data, callbacks, isAmbient); 
-          this.duration = 5; 
+          // ENHANCEMENT: Ambil durasi dinamis dari properti data jika ada, default 5 detik.
+          this.duration = this.data.duration || 5; 
           this.currentTime = 0; 
           this.timer = null; 
           this.lastTick = 0; 
@@ -945,9 +964,10 @@
           container?.classList.add('has-started', 'show-ui'); 
           container?.classList.remove('is-paused', 'is-loading');
           
+          // ENHANCEMENT: Timing transisi crossfade diperhalus. Memastikan loading berkedip seminimal mungkin.
           if (thumbOverlay && thumbOverlay.style.display !== 'none') { 
-            thumbOverlay.style.transition = 'opacity 0.8s var(--ease-out)'; 
-            AppState.crossfadeTimer = setTimeout(() => { thumbOverlay.style.opacity = '0'; }, 150); 
+            thumbOverlay.style.transition = 'opacity 0.6s var(--ease-out)'; 
+            AppState.crossfadeTimer = setTimeout(() => { thumbOverlay.style.opacity = '0'; }, 200); 
           }
           
           if (blurBg && AppState.currentMedia?.data?.type !== 'image') { 
@@ -1107,7 +1127,6 @@
         
         ThumbnailResolver.resolve(data, (url) => {
           if (!url || AppState.currentVideoIndex !== currentRenderIndex || AppState.currentSubIndex !== currentRenderSubIndex) {
-              // Jika tidak ada thumbnail, pastikan bersih/transparan
               if (blurBg && AppState.currentVideoIndex === currentRenderIndex) {
                   blurBg.style.backgroundImage = 'none';
                   blurBg.style.opacity = '0';
@@ -1193,18 +1212,19 @@
           StoryManager.checkNavState(); 
         }
         
-        const oldPreload = document.getElementById('videoPreloadLink'); 
+        const oldPreload = document.getElementById('mediaPreloadLink'); 
         if (oldPreload) oldPreload.remove();
         
+        // ENHANCEMENT: Smart Preloader - Preload Image juga, tidak hanya Video
         let nextData = groupData.items ? groupData.items[AppState.currentSubIndex + 1] : null;
         if (!nextData) nextData = CONFIG.PLAYLIST[AppState.currentVideoIndex + 1];
-        if (nextData && nextData.type === 'video') { 
+        if (nextData) { 
           const link = document.createElement('link'); 
-          link.id = 'videoPreloadLink'; 
+          link.id = 'mediaPreloadLink'; 
           link.rel = 'preload'; 
-          link.as = 'video'; 
-          link.href = nextData.url; 
-          document.head.appendChild(link); 
+          if (nextData.type === 'video') { link.as = 'video'; link.href = nextData.url; }
+          else if (nextData.type === 'image') { link.as = 'image'; link.href = nextData.url; }
+          if (link.href) document.head.appendChild(link); 
         }
       };
       
@@ -1685,6 +1705,7 @@
             tapCount++; 
 
             if (tapCount === 1) { 
+              // ENHANCEMENT: Turunkan delay tap tunggal sedikit agar lebih gesit
               singleTapTimer = setTimeout(() => { 
                 tapCount = 0; 
                 cumulativeSeek = 0;
@@ -1693,7 +1714,7 @@
                 else if (holdAction === 'forward') navigateNext();
                 else if (holdAction === 'playpause') togglePlayPause(); 
                 
-              }, 250); 
+              }, 200); 
               
             } else { 
               clearTimeout(singleTapTimer); 
@@ -1714,7 +1735,7 @@
                         seekVideo(isFwd ? cumulativeSeek : -cumulativeSeek);
                         tapCount = 0;
                         cumulativeSeek = 0;
-                    }, 500); 
+                    }, 400); 
                 } else {
                     tapCount = 0; 
                 }
