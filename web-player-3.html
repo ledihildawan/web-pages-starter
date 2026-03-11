@@ -45,12 +45,13 @@
           -webkit-tap-highlight-color: transparent; 
         }
         
-        body {
+        /* Pelindung ekstrim agar tidak bentrok dengan efek pull-to-refresh bawaan HP */
+        html, body {
           background-color: var(--bg-dark);
           font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', Roboto, Helvetica, Arial, sans-serif;
           color: var(--text-main); 
           overflow: hidden; 
-          overscroll-behavior-y: none; 
+          overscroll-behavior: none; 
           opacity: 0; 
           animation: smoothLoad 0.6s var(--ease-out) forwards;
         }
@@ -60,6 +61,7 @@
         :is(button) {
           font-family: inherit;
           user-select: none;
+          touch-action: manipulation; /* Mencegah double-tap zoom pada tombol */
           &:focus-visible { 
             outline: 0.125rem solid var(--brand-red); 
             outline-offset: 0.25rem; 
@@ -132,9 +134,8 @@
           
           &.has-started {
             &:not(.is-paused) .ambient-layer { opacity: 0.4; filter: blur(1rem) saturate(180%); }
-            /* Loader transisi hilang tanpa nge-block UI */
-            .story-loader { opacity: 0; pointer-events: none; transform: scale(0.9); }
-            &.is-loading .story-loader { opacity: 1; transform: scale(1); }
+            .story-loader { opacity: 0; pointer-events: none; transform: scale(0.9) translateZ(0); }
+            &.is-loading .story-loader { opacity: 1; transform: scale(1) translateZ(0); }
           }
           
           &.is-paused {
@@ -142,12 +143,12 @@
             .story-video-wrapper { filter: brightness(0.65) grayscale(0.2); }
           }
           
-          &.is-story-format .story-progress-bar-wrapper { opacity: 1 !important; transform: translateY(0) !important; pointer-events: auto !important; }
+          &.is-story-format .story-progress-bar-wrapper { opacity: 1 !important; transform: translateY(0) translateZ(0) !important; pointer-events: auto !important; }
           
-          /* UI Cinematic Entrance */
+          /* UI Cinematic Entrance Seragam */
           &.show-ui {
             :is(.story-excerpt, .story-player-actions, .story-progress-bar-wrapper, .story-top-actions) { 
-              opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); 
+              opacity: 1 !important; pointer-events: auto; transform: translateY(0) scale(1) translateZ(0); 
             }
           }
         }
@@ -183,6 +184,11 @@
           :is(iframe, video, img) { inline-size: 100%; block-size: 100%; border: none; pointer-events: none; }
         }
         
+        /* Ken Burns Effect untuk Gambar Statis */
+        @keyframes slowPan { 0% { transform: scale(1) translateZ(0); } 100% { transform: scale(1.05) translateZ(0); } }
+        .main-media-container img { animation: slowPan 15s ease-out forwards; will-change: transform; }
+        .story-container.is-paused .main-media-container img { animation-play-state: paused !important; }
+
         .ambient-media-container { inline-size: 100%; block-size: 100%; opacity: 0; transition: opacity 0.6s var(--ease-out); }
         
         .story-viewport { 
@@ -207,17 +213,17 @@
         /* OPTIMASI LOADER: Background Transparan & Visibility Guard */
         .story-loader { 
           position: absolute; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; 
-          background: transparent; /* Clean tanpa background gelap ganda */
+          background: transparent; 
           transition: opacity 0.4s var(--ease-spring), transform 0.4s var(--ease-spring), visibility 0.4s; 
           pointer-events: none; 
         }
-        .story-container.has-started:not(.is-loading) .story-loader { opacity: 0; transform: scale(0.9); visibility: hidden; }
-        .story-container.has-started.is-loading .story-loader { opacity: 1; transform: scale(1); visibility: visible; }
+        .story-container.has-started:not(.is-loading) .story-loader { opacity: 0; transform: scale(0.9) translateZ(0); visibility: hidden; }
+        .story-container.has-started.is-loading .story-loader { opacity: 1; transform: scale(1) translateZ(0); visibility: visible; }
         
         .story-loader__spinner-simple { 
           inline-size: 2rem; block-size: 2rem; border-radius: 50%; 
           border: 0.125rem solid color-mix(in oklch, oklch(1 0 0) 15%, transparent); 
-          border-top-color: var(--brand-red); 
+          border-top-color: oklch(0.54 0 0); /* Warna #666 Modern */
           animation: story-spin-simple 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite; 
           animation-play-state: running; 
         }
@@ -238,8 +244,8 @@
           &.is-visible { opacity: 1; pointer-events: auto; }
           .error-content { text-align: center; padding-inline: 2rem; color: var(--text-main); } 
           .error-icon { font-size: 3rem; margin-block-end: 1rem; display: block; } 
-          .error-title { font-size: 1.25rem; font-weight: 700; margin-block-end: 0.5rem; } 
-          .error-desc { font-size: 0.875rem; color: var(--text-sub); margin-block-end: 1.5rem; }
+          .error-title { font-size: 1.25rem; font-weight: 700; margin-block-end: 0.5rem; text-wrap: balance; } 
+          .error-desc { font-size: 0.875rem; color: var(--text-sub); margin-block-end: 1.5rem; text-wrap: balance; }
           .error-retry-btn { background: var(--brand-red); color: oklch(1 0 0); border: none; padding: 0.75rem 1.5rem; border-radius: 2rem; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: transform 0.2s; &:active { transform: scale(0.95); } }
         }
         
@@ -248,8 +254,8 @@
         @keyframes drop-physics { 0% { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 0; } 10%, 80% { opacity: 1; } 100% { transform: translate3d(var(--drift), 120vh, 0) rotate(var(--rotation)); opacity: 0; } }
         
         .story-center-play { 
-          position: absolute; inset-block-start: 50%; inset-inline-start: 50%; transform: translate(-50%, -50%) scale(1.5); font-size: 4rem; z-index: 15; opacity: 0; pointer-events: none; transition: opacity 0.4s ease-out, transform 0.4s ease-out; filter: drop-shadow(0 0.25rem 0.75rem oklch(0 0 0 / 0.6)); will-change: transform, opacity; 
-          &:is(.is-flashing, .is-steady) { opacity: 0.9; transform: translate(-50%, -50%) scale(1); transition: opacity 0.1s ease-in, transform 0.3s var(--ease-spring); }
+          position: absolute; inset-block-start: 50%; inset-inline-start: 50%; transform: translate(-50%, -50%) scale(1.5) translateZ(0); font-size: 4rem; z-index: 15; opacity: 0; pointer-events: none; transition: opacity 0.4s ease-out, transform 0.4s ease-out; filter: drop-shadow(0 0.25rem 0.75rem oklch(0 0 0 / 0.6)); will-change: transform, opacity; 
+          &:is(.is-flashing, .is-steady) { opacity: 0.9; transform: translate(-50%, -50%) scale(1) translateZ(0); transition: opacity 0.1s ease-in, transform 0.3s var(--ease-spring); }
         }
         
         .ripple-edge { 
@@ -263,16 +269,19 @@
         
         @keyframes edgeRippleAnim { 0% { opacity: 0; } 15% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; } }
 
-        .story-gesture-layer { position: absolute; inset: 0; z-index: 20; display: flex; cursor: pointer; touch-action: pan-y; user-select: none; -webkit-touch-callout: none; }
+        .story-gesture-layer { position: absolute; inset: 0; z-index: 20; display: flex; cursor: pointer; touch-action: none; user-select: none; -webkit-touch-callout: none; }
         .gesture-zone { block-size: 100%; } .gesture-zone--left, .gesture-zone--right { inline-size: 30%; } .gesture-zone--center { inline-size: 40%; }
         
         .story-progress-bar-wrapper { 
-          position: absolute; inset-block-end: max(0.75rem, env(safe-area-inset-bottom)); inset-inline: 1rem; block-size: 1.5rem; z-index: 55; cursor: pointer; display: flex; align-items: center; gap: 0.25rem; opacity: 0; transition: opacity 0.8s var(--ease-out); filter: drop-shadow(0 0.0625rem 0.25rem color-mix(in oklch, var(--bg-dark) 80%, transparent)); 
+          position: absolute; inset-block-end: max(0.75rem, env(safe-area-inset-bottom)); inset-inline: 1rem; block-size: 1.5rem; z-index: 55; cursor: pointer; display: flex; align-items: center; gap: 0.25rem; opacity: 0; transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-spring); filter: drop-shadow(0 0.0625rem 0.25rem color-mix(in oklch, var(--bg-dark) 80%, transparent)); 
+          transform: translateY(1.5rem) scale(0.98) translateZ(0);
           &:hover .story-progress-bar { block-size: 0.375rem; }
+          /* Scrubbing Bloom Effect */
+          &.is-scrubbing .story-progress-bar { block-size: 0.4rem; filter: drop-shadow(0 0 0.4rem var(--brand-red)); }
         }
         
-        .story-progress-bar { flex: 1; block-size: 0.2rem; background: color-mix(in oklch, oklch(1 0 0) 30%, transparent); border-radius: 0.25rem; overflow: hidden; transition: block-size 0.2s var(--ease-out); }
-        .story-progress-bar__fill { block-size: 100%; inline-size: 100%; background: oklch(1 0 0); transform-origin: left; transform: scaleX(0); border-radius: inherit; box-shadow: 0 0 0.5rem color-mix(in oklch, oklch(1 0 0) 60%, transparent); will-change: transform; }
+        .story-progress-bar { flex: 1; block-size: 0.2rem; background: color-mix(in oklch, oklch(1 0 0) 30%, transparent); border-radius: 0.25rem; overflow: hidden; transition: block-size 0.2s var(--ease-out), filter 0.2s var(--ease-out); }
+        .story-progress-bar__fill { block-size: 100%; inline-size: 100%; background: oklch(1 0 0); transform-origin: left; transform: scaleX(0) translateZ(0); border-radius: inherit; box-shadow: 0 0 0.5rem color-mix(in oklch, oklch(1 0 0) 60%, transparent); will-change: transform; }
         
         /* -------------------------------------
            PLAYER OVERLAYS (Cinematic Entrance)
@@ -280,11 +289,11 @@
         :is(.story-top-actions, .story-player-actions) { position: absolute; z-index: 55; display: flex; opacity: 0; pointer-events: none; transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-spring); }
         
         .story-top-actions { 
-          inset-block-start: max(1rem, env(safe-area-inset-top)); inset-inline-start: 1rem; gap: 0.75rem; transform: translateY(-1.5rem) scale(0.95); 
+          inset-block-start: max(1rem, env(safe-area-inset-top)); inset-inline-start: 1rem; gap: 0.75rem; transform: translateY(-1.5rem) scale(0.95) translateZ(0); 
         }
         
         .story-player-actions { 
-          inset-block-end: max(2.5rem, env(safe-area-inset-bottom)); inset-inline-end: 0.75rem; flex-direction: column; align-items: center; gap: 1rem; transform: translateX(1.5rem) scale(0.95); 
+          inset-block-end: max(2.5rem, env(safe-area-inset-bottom)); inset-inline-end: 0.75rem; flex-direction: column; align-items: center; gap: 1rem; transform: translateX(1.5rem) scale(0.95) translateZ(0); 
         }
         
         :is(.player-fab, .reaction-option-btn, .external-nav-btn) { 
@@ -301,13 +310,14 @@
           position: absolute; inset-block-end: max(2.5rem, env(safe-area-inset-bottom)); inset-inline-start: 1rem; 
           inline-size: calc(100% - 4.5rem); display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem;
           z-index: 55; color: var(--text-main); cursor: pointer; opacity: 0; pointer-events: none; 
-          transform: translateY(1.5rem) scale(0.98); transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-spring); background: transparent; border: none; text-align: start; 
+          transform: translateY(1.5rem) scale(0.98) translateZ(0); transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-spring); background: transparent; border: none; text-align: start; 
         }
         
         .story-excerpt__badges { display: flex; flex-wrap: wrap; gap: 0.5rem; }
         .story-badge-item { background: color-mix(in oklch, oklch(1 0 0) 15%, transparent); color: oklch(1 0 0); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border: 0.0625rem solid var(--glass-border); font-size: 0.625rem; font-weight: 700; text-transform: uppercase; padding: 0.25rem 0.625rem; border-radius: 1rem; letter-spacing: 0.02em; }
         
-        .story-excerpt__title { font-size: 1.125rem; font-weight: 800; text-shadow: 0 0.125rem 0.5rem oklch(0 0 0 / 0.8); line-height: 1.3; letter-spacing: -0.01em; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        /* Typographic Balance */
+        .story-excerpt__title { text-wrap: balance; font-size: 1.125rem; font-weight: 800; text-shadow: 0 0.125rem 0.5rem oklch(0 0 0 / 0.8); line-height: 1.3; letter-spacing: -0.01em; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .story-excerpt__text { font-size: 0.875rem; line-height: 1.4; color: color-mix(in oklch, oklch(1 0 0) 90%, transparent); text-shadow: 0 0.125rem 0.5rem oklch(0 0 0 / 0.8); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .story-read-more { font-weight: 800; color: oklch(1 0 0); margin-inline-start: 0.25rem; text-shadow: 0 1px 4px oklch(0 0 0 / 0.9); }
         
@@ -366,7 +376,7 @@
         .story-view__badges { display: flex; flex-wrap: wrap; gap: 0.375rem; }
         .story-view__badges .story-badge-item { background-color: color-mix(in oklch, var(--brand-red) 20%, transparent); color: color-mix(in oklch, var(--brand-red) 90%, white); border: none; font-size: 0.6875rem; font-weight: 700; padding: 0.25rem 0.625rem; border-radius: 2rem; letter-spacing: 0.02em; }
         
-        .story-view__title { font-size: 1.375rem; font-weight: 700; color: var(--text-main); line-height: 1.3; letter-spacing: -0.01em; outline: none; } 
+        .story-view__title { text-wrap: balance; font-size: 1.375rem; font-weight: 700; color: var(--text-main); line-height: 1.3; letter-spacing: -0.01em; outline: none; } 
         .story-view__meta { font-size: 0.8125rem; font-weight: 500; color: var(--text-sub); display: block; }
         
         .story-body { flex: 1 1 auto; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-inline: 1.5rem; padding-block-end: calc(2rem + env(safe-area-inset-bottom)); min-block-size: 0; overscroll-behavior-y: contain; scrollbar-width: none; -ms-overflow-style: none; }
@@ -407,7 +417,8 @@
                 /* DIJAMIN 100% CLEAN SAAT SHEET DIBUKA (Sinkron Visibility) */
                 :is(.story-top-actions, .story-excerpt, .story-player-actions, .story-progress-bar-wrapper, .story-center-play, .story-gesture-layer, .ripple-edge, .reaction-container-layer) { 
                   opacity: 0 !important; pointer-events: none !important; visibility: hidden !important; 
-                  transition: opacity 0.8s var(--ease-out), visibility 0.8s var(--ease-out) !important;
+                  transform: translateY(1.5rem) scale(0.95) translateZ(0) !important;
+                  transition: opacity 0.4s var(--ease-out), transform 0.6s var(--ease-spring), visibility 0.4s !important;
                 }
               } 
               .story-video-wrapper::after { opacity: 0 !important; }
@@ -426,7 +437,8 @@
           .story-loader__rotator { position: absolute; inline-size: 100%; block-size: 100%; animation: story-spin-ease 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both; }
           .story-loader__left, .story-loader__right { position: absolute; inset-block: 0; overflow: hidden; }
           .story-loader__left { inset-inline-start: 0; inset-inline-end: 49%; } .story-loader__right { inset-inline-start: 49%; inset-inline-end: 0; }
-          .story-loader__circle { box-sizing: border-box; position: absolute; inline-size: 200%; block-size: 100%; border-style: solid; border-color: var(--brand-red) var(--brand-red) transparent; border-radius: 50%; border-width: 0.375rem; }
+          
+          .story-loader__circle { box-sizing: border-box; position: absolute; inline-size: 200%; block-size: 100%; border-style: solid; border-color: oklch(0.54 0 0) oklch(0.54 0 0) transparent; border-radius: 50%; border-width: 0.375rem; }
           .story-loader__left .story-loader__circle { inset-inline-start: 0; inset-inline-end: -100%; border-right-color: transparent; animation: story-spin-left 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both; }
           .story-loader__right .story-loader__circle { inset-inline-start: -100%; inset-inline-end: 0; border-left-color: transparent; animation: story-spin-right 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both; }
           
@@ -1166,7 +1178,10 @@
         Utils.updateEls('.story-body__cms-content', 'innerHTML', Utils.sanitizeHTML(displayContent));
         
         const a11yAnnouncer = document.querySelector('.js-a11y'); 
-        if (a11yAnnouncer) a11yAnnouncer.textContent = `Memutar media: ${displayTitle}`;
+        if (a11yAnnouncer) {
+            a11yAnnouncer.textContent = '';
+            setTimeout(() => { a11yAnnouncer.textContent = `Memutar media: ${displayTitle}`; }, 50);
+        }
         
         const hasDetailContent = Boolean(displayContent?.trim());
         rootContainer.querySelectorAll('.story-excerpt__text').forEach((el) => {
@@ -1604,7 +1619,6 @@
           const sheetContent = dom('.js-story-sheet')?.querySelector('.story-sheet__content');
           
           if (open) { 
-            // Simpan status video sebelum ditutupi sheet
             wasPlayingBeforeContext = AppState.currentMedia?.getState() === CONFIG.MEDIA_STATE.PLAYING;
 
             if (dom('.icon-enter-fs')) dom('.icon-enter-fs').style.display = 'block'; 
@@ -1628,7 +1642,6 @@
             ctx.removeEventListener('keydown', handleFocusTrap); 
             dom('.js-btn-open-context')?.focus(); 
 
-            // Putar video hanya jika sebelum sheet dibuka videonya dalam keadaan play
             if (wasPlayingBeforeContext) {
                 AppState.currentMedia?.play();
                 AppState.currentAmbient?.play();
@@ -1680,9 +1693,14 @@
           
           const updateUIOnly = (clientX) => { 
             const wrapper = dom('.js-progress-wrapper'); if (!wrapper) return; 
-            const rect = wrapper.getBoundingClientRect(); 
+            
+            const activeBar = wrapper.children[AppState.currentSubIndex];
+            if (!activeBar) return;
+            
+            const rect = activeBar.getBoundingClientRect(); 
             const percentage = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width)); 
-            const progressFill = dom(`[data-progress-index="${AppState.currentSubIndex}"]`); 
+            
+            const progressFill = activeBar.querySelector('.story-progress-bar__fill'); 
             if (progressFill) progressFill.style.transform = `scaleX(${percentage})`; 
             
             if (AppState.currentMedia && AppState.currentMedia.getDuration() > 0) {
@@ -1697,6 +1715,8 @@
           const stopScrub = () => { 
             if (!isScrubbing) return; 
             isScrubbing = false; 
+            dom('.js-progress-wrapper')?.classList.remove('is-scrubbing');
+            
             if (pendingSeekTime > 0) {
                 AppState.currentMedia?.seekTo(pendingSeekTime); 
                 if (AppState.currentAmbient) AppState.currentAmbient.seekTo(pendingSeekTime);
@@ -1710,10 +1730,28 @@
           };
           const startScrub = (e) => { 
             const groupData = CONFIG.PLAYLIST[AppState.currentVideoIndex];
-            const isMulti = (groupData.items?.length ?? 0) > 1;
-            if (groupData.format === 'story' || isMulti) return; 
+            const currentItem = groupData.items?.[AppState.currentSubIndex] ?? groupData;
+            
+            const wrapper = dom('.js-progress-wrapper'); 
+            const bars = Array.from(wrapper.children);
+            const targetBar = e.target.closest('.story-progress-bar');
+            
+            if (targetBar) {
+                const idx = bars.indexOf(targetBar);
+                if (idx !== -1 && idx !== AppState.currentSubIndex) {
+                    triggerTransition(() => {
+                        AppState.currentSubIndex = idx;
+                        resetVideoState();
+                        updateVideoUI();
+                    });
+                    return; 
+                }
+            }
+
+            if (currentItem.type === 'image') return;
             
             isScrubbing = true; 
+            wrapper.classList.add('is-scrubbing');
             wasPlaying = AppState.currentMedia?.getState() === CONFIG.MEDIA_STATE.PLAYING; 
             if (wasPlaying) AppState.currentMedia?.pause(); 
             updateUIOnly(getClientX(e)); 
@@ -1894,14 +1932,15 @@
             const scrollableArea = sheet?.querySelector('.story-body');
             const viewport = dom('.story-viewport');
             
-            // Logika Cerdas: Cek apakah pengguna bermaksud untuk scroll teks bacaan alih-alih drag
             if (scrollableArea && scrollableArea.contains(e.target) && scrollableArea.scrollTop <= 0 && deltaY < 0) {
                 isContentScroll = true;
                 state.isDragging = false;
                 if (sheet) sheet.classList.remove('is-dragging');
                 
                 if (viewport) {
-                    viewport.style.transition = '';
+                    /* Mengembalikan transisi saat drag batal */
+                    void viewport.offsetHeight;
+                    viewport.style.transition = 'transform 0.6s var(--ease-spring), border-radius 0.6s var(--ease-spring), box-shadow 0.6s var(--ease-spring)';
                     viewport.style.transform = '';
                     viewport.style.borderRadius = '';
                 }
@@ -1912,7 +1951,6 @@
             
             const now = performance.now();
             const dt = now - lastTime;
-            /* Failsafe Velocity: Mencegah Infinity jika dt terlalu kecil */
             if (dt > 1) velocity = (currentClientY - lastY) / dt;
             
             lastY = currentClientY;
@@ -1928,7 +1966,6 @@
               
               if (sheet) sheet.style.transform = `translateY(${state.currentY}px)`; 
 
-              /* REAL-TIME MINI PLAYER RESIZE (Keajaiban Spasial UI) */
               if (viewport) {
                   viewport.style.transition = 'none'; 
                   
@@ -1937,10 +1974,10 @@
                       const scale = 0.35 + (0.65 * progress);
                       const radius = 2 - (2 * progress); 
                       
-                      viewport.style.transform = `scale(${scale}) translateY(calc((env(safe-area-inset-top) + 2rem) * ${1 - progress}))`;
+                      viewport.style.transform = `scale(${scale}) translateY(calc((env(safe-area-inset-top) + 2rem) * ${1 - progress})) translateZ(0)`;
                       viewport.style.borderRadius = `${radius}rem`;
                   } else {
-                      viewport.style.transform = `scale(0.35) translateY(calc(env(safe-area-inset-top) + 2rem))`;
+                      viewport.style.transform = `scale(0.35) translateY(calc(env(safe-area-inset-top) + 2rem)) translateZ(0)`;
                       viewport.style.borderRadius = `2rem`;
                   }
               }
@@ -1954,48 +1991,52 @@
             const sheet = dom('.js-story-sheet')?.querySelector('.story-sheet__content'); 
             const viewport = dom('.story-viewport');
             
-            if (viewport) {
-                viewport.style.transition = '';
-                viewport.style.transform = '';
-                viewport.style.borderRadius = '';
-            }
-            
-            if (sheet) {
-                sheet.classList.remove('is-dragging'); 
-                sheet.style.transform = ''; 
+            /* Jaminan Rilis Frame-Perfect */
+            requestAnimationFrame(() => {
+                if (viewport) {
+                    void viewport.offsetHeight; /* Paksa Reflow membuang frame kosong */
+                    viewport.style.transition = 'transform 0.6s var(--ease-spring), border-radius 0.6s var(--ease-spring), box-shadow 0.6s var(--ease-spring)';
+                    viewport.style.transform = '';
+                    viewport.style.borderRadius = '';
+                }
                 
-                const isFastSwipeUp = velocity < -0.5;
-                const isFastSwipeDown = velocity > 0.5;
+                if (sheet) {
+                    sheet.classList.remove('is-dragging'); 
+                    sheet.style.transform = ''; 
+                    
+                    const isFastSwipeUp = velocity < -0.5;
+                    const isFastSwipeDown = velocity > 0.5;
 
-                if (sheetState === 'half') {
-                    if (state.currentY < -50 || isFastSwipeUp) { 
-                        sheetState = 'full';
-                        sheet.classList.add('is-full-sheet');
-                        AppState.currentMedia?.pause(); 
-                        AppState.currentAmbient?.pause();
-                        navigator.vibrate?.(15); /* Haptic on Snap Full */
-                    } else if (state.currentY > 50 || isFastSwipeDown) { 
-                        sheetState = 'half';
-                        closeContext();
-                        navigator.vibrate?.(10); /* Haptic on Dismiss */
-                    }
-                } else if (sheetState === 'full') {
-                    if (state.currentY > 150 || (isFastSwipeDown && state.currentY > 50)) { 
-                        sheetState = 'half';
-                        sheet.classList.remove('is-full-sheet');
-                        closeContext();
-                        navigator.vibrate?.(10);
-                    } else if (state.currentY > 50 || (isFastSwipeDown && state.currentY > 10)) { 
-                        sheetState = 'half';
-                        sheet.classList.remove('is-full-sheet');
-                        if (wasPlayingBeforeContext) {
-                            AppState.currentMedia?.play();
-                            AppState.currentAmbient?.play();
+                    if (sheetState === 'half') {
+                        if (state.currentY < -50 || isFastSwipeUp) { 
+                            sheetState = 'full';
+                            sheet.classList.add('is-full-sheet');
+                            AppState.currentMedia?.pause(); 
+                            AppState.currentAmbient?.pause();
+                            navigator.vibrate?.(15); 
+                        } else if (state.currentY > 50 || isFastSwipeDown) { 
+                            sheetState = 'half';
+                            closeContext();
+                            navigator.vibrate?.(10); 
                         }
-                        navigator.vibrate?.(15); /* Haptic on Snap Half */
+                    } else if (sheetState === 'full') {
+                        if (state.currentY > 150 || (isFastSwipeDown && state.currentY > 50)) { 
+                            sheetState = 'half';
+                            sheet.classList.remove('is-full-sheet');
+                            closeContext();
+                            navigator.vibrate?.(10);
+                        } else if (state.currentY > 50 || (isFastSwipeDown && state.currentY > 10)) { 
+                            sheetState = 'half';
+                            sheet.classList.remove('is-full-sheet');
+                            if (wasPlayingBeforeContext) {
+                                AppState.currentMedia?.play();
+                                AppState.currentAmbient?.play();
+                            }
+                            navigator.vibrate?.(15); 
+                        }
                     }
                 }
-            }
+            });
             
             if (dragController) {
                 dragController.abort();
@@ -2058,7 +2099,6 @@
             slot.className = 'story-slot';
             slot.dataset.index = index;
             
-            /* Inisialisasi slot pertama agar langsung aktif */
             if(index === AppState.currentVideoIndex) {
                 slot.classList.add('is-active');
             }
@@ -2082,7 +2122,6 @@
                   const targetIndex = parseInt(entry.target.dataset.index);
                   
                   if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-                      /* Efek 3D Card saat scroll masuk */
                       entry.target.classList.add('is-active');
                       
                       if (AppState.currentVideoIndex !== targetIndex) {
@@ -2097,10 +2136,8 @@
                           });
                       }
                   } else if (entry.intersectionRatio < 0.5) {
-                      /* Lepas efek 3D saat scroll keluar */
                       entry.target.classList.remove('is-active');
                       
-                      /* MEMORY MANAGEMENT: Hapus background gambar jika jarak video > 3 */
                       if (Math.abs(AppState.currentVideoIndex - targetIndex) > 3) {
                           const dummy = entry.target.querySelector('.story-dummy-card');
                           if (dummy && dummy.style.backgroundImage !== 'none' && dummy.style.backgroundImage !== '') {
