@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Braille Loaders - Open Source UI Library</title>
+  <style>
+    /* =========================================
+       1. TEMA & FISIKA CAHAYA (OKLCH)
+       ========================================= */
+    :root {
+      --zinc-950: oklch(14% 0.005 285); --zinc-900: oklch(20% 0.005 285);
+      --zinc-800: oklch(27% 0.005 285); --zinc-500: oklch(55% 0.005 285);
+      --zinc-400: oklch(71% 0.005 285); --zinc-50: oklch(98.5% 0.005 285);
+      --pure-white: oklch(100% 0 0);
+
+      /* --- DARK MODE --- */
+      --bg-color: var(--zinc-950);
+      --bg-pattern: color-mix(in oklch, var(--pure-white) 4%, transparent);
+      --text-primary: var(--zinc-50);
+      --text-secondary: color-mix(in oklch, var(--text-primary) 65%, var(--bg-color));
+      
+      --card-bg: var(--zinc-900);
+      --card-bg-hover: color-mix(in oklch, var(--card-bg) 85%, var(--pure-white));
+      --card-border: var(--zinc-800);
+      --card-border-hover: var(--zinc-500);
+      --card-ring: color-mix(in oklch, var(--pure-white) 6%, transparent);
+      
+      --nav-bg: color-mix(in oklch, var(--bg-color) 70%, transparent);
+      --nav-border: var(--card-border);
+      --card-shadow: transparent;
+      --card-shadow-hover: color-mix(in oklch, var(--pure-white) 4%, transparent);
+
+      --shimmer-base: color-mix(in oklch, var(--card-bg) 60%, var(--pure-white));
+      --shimmer-peak: var(--pure-white);
+
+      --glow-color: var(--pure-white);
+      --glow-spread-lg: 10px; --glow-spread-sm: 6px;
+    }
+
+    /* --- LIGHT MODE --- */
+    :root:has(#theme-switch:checked) {
+      --bg-color: var(--zinc-50); 
+      --bg-pattern: color-mix(in oklch, var(--zinc-950) 6%, transparent);
+      --text-primary: var(--zinc-950);
+      --text-secondary: color-mix(in oklch, var(--text-primary) 60%, var(--bg-color));
+      
+      --card-bg: var(--pure-white);
+      --card-bg-hover: color-mix(in oklch, var(--card-bg) 95%, var(--zinc-950));
+      --card-border: color-mix(in oklch, var(--pure-white) 85%, var(--zinc-950));
+      --card-border-hover: var(--zinc-400);
+      --card-ring: color-mix(in oklch, var(--zinc-950) 3%, transparent);
+      
+      --nav-bg: color-mix(in oklch, var(--bg-color) 70%, transparent);
+      --nav-border: var(--card-border);
+      --card-shadow: color-mix(in oklch, var(--zinc-950) 4%, transparent);
+      --card-shadow-hover: color-mix(in oklch, var(--zinc-950) 8%, transparent);
+      
+      --shimmer-base: color-mix(in oklch, var(--pure-white) 75%, var(--zinc-950));
+      --shimmer-peak: var(--zinc-950);
+
+      --glow-color: color-mix(in oklch, var(--zinc-950) 40%, transparent);
+      --glow-spread-lg: 4px; --glow-spread-sm: 2px;
+    }
+
+    body { 
+      margin: 0; padding: 0; 
+      background-color: var(--bg-color); 
+      /* Developer Dot Grid Pattern */
+      background-image: radial-gradient(var(--bg-pattern) 1px, transparent 1px);
+      background-size: 24px 24px;
+      color: var(--text-secondary); 
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; 
+      -webkit-font-smoothing: antialiased; 
+      transition: all .4s ease; 
+    }
+
+    /* =========================================
+       2. LAYOUT & UI COMPONENTS
+       ========================================= */
+    .navbar { position:fixed; top:0; width:100%; height:64px; display:flex; align-items:center; justify-content:space-between; padding:0 5%; box-sizing:border-box; background:var(--nav-bg); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid var(--nav-border); z-index:1000; transition:all .4s ease; }
+    .navbar-logo { font-size:1.1rem; font-weight:600; letter-spacing:2px; color:var(--text-primary); text-transform:uppercase; display:flex; align-items:center; gap:8px; }
+    .badge { font-size: 10px; padding: 2px 8px; border-radius: 12px; border: 1px solid var(--card-border-hover); color: var(--text-secondary); letter-spacing: 0; }
+    
+    .toggle-switch { cursor:pointer; width:44px; height:24px; background:var(--card-border); border-radius:24px; position:relative; display:flex; align-items:center; transition:.3s; }
+    .toggle-switch::after { content:""; position:absolute; left:3px; width:18px; height:18px; background:var(--text-primary); border-radius:50%; transition:transform .4s cubic-bezier(.4,0,.2,1), background .3s; }
+    :root:has(#theme-switch:checked) .toggle-switch { background: color-mix(in oklch, var(--card-border) 60%, var(--zinc-950)); }
+    :root:has(#theme-switch:checked) .toggle-switch::after { transform:translateX(20px); }
+
+    .main-content { padding:140px 20px 80px; max-width:1200px; margin:0 auto; }
+    .header-section { text-align:center; margin-bottom:80px; }
+    .header-section h1 { font-size:2.5rem; letter-spacing:1px; color:var(--text-primary); margin:0 0 16px; font-weight:800; }
+    .header-section p { font-size: 1.1rem; max-width: 600px; margin: 0 auto; line-height: 1.6; }
+
+    .grid-container { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:24px; }
+    
+    /* --- CARD INTERACTION (COPY READY) --- */
+    .card { 
+      cursor: pointer;
+      background: linear-gradient(180deg, var(--card-bg) 0%, color-mix(in oklch, var(--card-bg) 98%, var(--zinc-950)) 100%);
+      border: 1px solid var(--card-border); border-radius: 12px; padding: 24px; min-height: 180px;
+      display: flex; flex-direction: column; align-items: center; position: relative;
+      box-shadow: inset 0 1px 0 0 var(--card-ring), 0 4px 12px var(--card-shadow);
+      transition: all .4s cubic-bezier(.4,0,.2,1); 
+      overflow: hidden;
+    }
+    .card:hover { 
+      border-color: var(--card-border-hover); transform: translateY(-4px); 
+      box-shadow: inset 0 1px 0 0 var(--card-ring), 0 16px 32px -8px var(--card-shadow-hover); 
+    }
+    
+    .card-title { 
+      font-size: 10px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; 
+      color: var(--text-secondary); margin-bottom: auto; padding: 6px 14px;
+      border: 1px solid transparent; border-radius: 20px; transition: all .3s ease; 
+      position: relative; z-index: 2;
+    }
+    .card:hover .card-title { 
+      color: var(--text-primary); border-color: var(--card-border-hover);
+      background: color-mix(in oklch, var(--text-primary) 5%, transparent);
+      box-shadow: 0 0 12px color-mix(in oklch, var(--glow-color) 20%, transparent);
+    }
+
+    .spinner-wrapper { width: 100%; flex-grow: 1; display: flex; align-items: center; justify-content: center; font-size: 48px; padding-top: 10px; transition: transform 0.3s; }
+    .card:hover .spinner-wrapper { transform: scale(1.05); }
+
+    /* Hover Hint (Click to copy) */
+    .copy-hint {
+      position: absolute; bottom: 15px; font-size: 10px; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--text-secondary); opacity: 0;
+      transform: translateY(10px); transition: all 0.3s ease;
+    }
+    .card:hover .copy-hint { opacity: 1; transform: translateY(0); }
+
+    /* Toast Notification */
+    #toast {
+      position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px);
+      background: var(--text-primary); color: var(--bg-color); padding: 12px 24px;
+      border-radius: 30px; font-weight: 600; font-size: 14px; letter-spacing: 1px;
+      opacity: 0; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 9999;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2); pointer-events: none;
+    }
+    #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+    /* =========================================
+       3. CORE ENGINE (ANIMASI & SINKRONISASI)
+       ========================================= */
+    .braille-loader::after {
+      display:inline-block; white-space:pre;
+      background:linear-gradient(90deg,var(--shimmer-base) 0%,var(--shimmer-base) 30%,var(--shimmer-peak) 50%,var(--shimmer-base) 70%,var(--shimmer-base) 100%);
+      background-size:200% auto; color:transparent; -webkit-background-clip:text; background-clip:text;
+      will-change: background-position, filter, opacity;
+    }
+
+    @keyframes l-swp { 0%{background-position:200% center} 100%{background-position:-200% center} } 
+    @keyframes l-swp-y { 0%{background-position:center 200%} 100%{background-position:center -200%} }
+    @keyframes l-swp-y-dn { 0%{background-position:center -200%} 100%{background-position:center 200%} }
+    
+    @keyframes l-brt-sync { 0%,100%{opacity:.4; filter:drop-shadow(0 0 0 transparent)} 45%,55%{opacity:1; filter:drop-shadow(0 0 var(--glow-spread-lg) var(--glow-color))} }
+    @keyframes l-pls-sync { 0%,50%,100%{opacity:.4; filter:drop-shadow(0 0 0 transparent)} 18%{opacity:1; filter:drop-shadow(0 0 var(--glow-spread-lg) var(--glow-color))} }
+    @keyframes l-glc-sync { 0%,60%,100%{filter:contrast(1) drop-shadow(0 0 0 transparent)} 12%,18%,45%,85%,90%{filter:contrast(2.5) brightness(1.2) drop-shadow(0 0 var(--glow-spread-sm) var(--glow-color))} }
+
+    /* =========================================
+       4. VARIAN SPINNER
+       ========================================= */
+    .spinner-cascade::after { content:"⠁⠀⠀⠀"; animation:sp-csc 1.1s step-end infinite, l-swp 1.1s linear infinite; }
+    @keyframes sp-csc { 0%,100%{content:"⠁⠀⠀⠀"} 7.1%{content:"⠋⠀⠀⠀"} 14.2%{content:"⠞⠁⠀⠀"} 21.4%{content:"⡴⠋⠀⠀"} 28.5%{content:"⣠⠞⠁⠀"} 35.7%{content:"⢀⡴⠋⠀"} 42.8%{content:"⠀⣠⠞⠁"} 50%{content:"⠀⢀⡴⠋"} 57.1%{content:"⠀⠀⣠⠞"} 64.2%{content:"⠀⠀⢀⡴"} 71.4%{content:"⠀⠀⠀⣠"} 78.5%{content:"⠀⠀⠀⢀"} 85.7%,92.8%{content:"⠀⠀⠀⠀"} }
+
+    .spinner-wave::after { content:"⠑⢄⠔⠑"; animation:sp-wav .8s step-end infinite, l-swp .8s linear infinite; }
+    @keyframes sp-wav { 0%,100%{content:"⠑⢄⠔⠑"} 12.5%{content:"⠊⠆⢄⠊"} 25%{content:"⠢⠑⢄⠢"} 37.5%{content:"⢄⠢⠑⢄"} 50%{content:"⠔⢄⠢⠔"} 62.5%{content:"⠒⠔⢄⠒"} 75%{content:"⠆⠒⠔⠆"} 87.5%{content:"⠁⠆⠒⠁"} }
+
+    .spinner-helix::after { content:"⢁⠦⠔⡈"; animation:sp-hlx .6s step-end infinite, l-swp .6s linear infinite; }
+    @keyframes sp-hlx { 0%,100%{content:"⢁⠦⠔⡈"} 16.6%{content:"⠦⠔⡈⠔"} 33.3%{content:"⠔⡈⠔⠦"} 50%{content:"⡈⠔⠦⢁"} 66.6%{content:"⠔⠦⢁⠦"} 83.3%{content:"⠦⢁⠦⠔"} }
+
+    .spinner-rain::after { background:linear-gradient(180deg,var(--shimmer-base) 0%,var(--shimmer-peak) 50%,var(--shimmer-base) 100%); background-size:100% 200%; -webkit-background-clip:text; content:"⠁⠄⠂⡀"; animation:sp-ran .7s step-end infinite, l-swp-y-dn .7s linear infinite; }
+    @keyframes sp-ran { 0%,100%{content:"⠁⠄⠂⡀"} 12.5%{content:"⠊⡀⠌⠀"} 25%{content:"⠔⠈⡐⠁"} 37.5%{content:"⡀⠑⠡⠊"} 50%{content:"⠡⠢⢂⠔"} 62.5%{content:"⢂⢄⠄⡠"} 75%{content:"⠄⡀⡀⢀"} 87.5%{content:"⡀⠀⠁⠁"} }
+
+    .spinner-breathe::after { content:"⠀"; animation:sp-brt 2.2s step-end infinite, l-brt-sync 2.2s ease-in-out infinite; }
+    @keyframes sp-brt { 0%{content:"⠀"} 8%{content:"⠁"} 15%{content:"⠑"} 21%{content:"⠕"} 26%{content:"⢕"} 30%{content:"⢝"} 34%{content:"⢟"} 38%{content:"⢿"} 45%,55%{content:"⣿"} 62%{content:"⢿"} 66%{content:"⢟"} 70%{content:"⢝"} 74%{content:"⢕"} 79%{content:"⠕"} 85%{content:"⠑"} 92%{content:"⠁"} 100%{content:"⠀"} }
+
+    .spinner-diagonal::after { content:"⠀⠀"; animation:sp-dgl 1.12s step-end infinite, l-swp 1.12s linear infinite; }
+    @keyframes sp-dgl { 0%,100%{content:"⠀⠀"} 7.1%{content:"⠁⠀"} 14.2%{content:"⠋⠀"} 21.4%{content:"⠟⠁"} 28.5%{content:"⡿⠋"} 35.7%{content:"⣿⠟"} 42.8%{content:"⣿⡿"} 50%{content:"⣿⣿"} 57.1%{content:"⣾⣿"} 64.2%{content:"⣴⣿"} 71.4%{content:"⣠⣾"} 78.5%{content:"⢀⣴"} 85.7%{content:"⠀⣠"} 92.8%{content:"⠀⢀"} }
+
+    .spinner-pulse::after { content:"⠀⠶⠀"; animation:sp-pls 1.4s step-end infinite, l-pls-sync 1.4s cubic-bezier(.4,0,.6,1) infinite; }
+    @keyframes sp-pls { 0%,100%{content:"⠀⠶⠀"} 10%{content:"⠰⣿⠆"} 18%{content:"⢾⣿⡷"} 26%{content:"⢾⣉⡷"} 34%{content:"⣏⣉⣹"} 42%{content:"⡁⠀⢈"} 50%{content:"⠀⠶⠀"} }
+
+    .spinner-snake::after { content:"⣁⠀⠀"; animation:sp-snk 1.2s step-end infinite, l-swp .3s linear infinite alternate; }
+    @keyframes sp-snk { 0%{content:"⣁⠀⠀"} 6.25%{content:"⡉⠀⠀"} 12.5%{content:"⠉⠀⠁"} 18.75%{content:"⠈⠀⠉"} 25%{content:"⠀⠀⠙"} 31.25%{content:"⠀⠀⠚"} 37.5%{content:"⠐⠀⠒"} 43.75%{content:"⠒⠀⠂"} 50%{content:"⠖⠀⠀"} 56.25%{content:"⠦⠀⠀"} 62.5%{content:"⠤⠀⠄"} 68.75%{content:"⠠⠀⠤"} 75%{content:"⠀⠀⢤"} 81.25%{content:"⠀⠀⣠"} 87.5%{content:"⢀⠀⣀"} 93.75%{content:"⣀⠀⡀"} 100%{content:"⣁⠀⠀"} }
+
+    .spinner-glitch::after { content:"⢕⢕⢕"; animation:sp-glc .8s step-end infinite, l-glc-sync .8s step-end infinite; }
+    @keyframes sp-glc { 0%,60%,100%{content:"⢕⢕⢕"} 12%,85%{content:"⡪⡪⡪"} 18%,90%{content:"⢊⠔⡡"} 45%{content:"⡡⢊⠔"} }
+
+    .spinner-columns::after { content:"⠀⠀⠀"; animation:sp-col 1.8s step-end infinite, l-swp 1.8s linear infinite; }
+    @keyframes sp-col { 0%,100%{content:"⠀⠀⠀"} 4%{content:"⡀⠀⠀"} 8%{content:"⡄⠀⠀"} 12%{content:"⡆⠀⠀"} 16%{content:"⡇⠀⠀"} 20%{content:"⣇⠀⠀"} 24%{content:"⣧⠀⠀"} 28%{content:"⣷⠀⠀"} 32%{content:"⣿⠀⠀"} 36%{content:"⣿⡀⠀"} 40%{content:"⣿⡄⠀"} 44%{content:"⣿⡆⠀"} 48%{content:"⣿⡇⠀"} 52%{content:"⣿⣇⠀"} 56%{content:"⣿⣧⠀"} 60%{content:"⣿⣷⠀"} 64%{content:"⣿⣿⠀"} 68%{content:"⣿⣿⡀"} 72%{content:"⣿⣿⡄"} 76%{content:"⣿⣿⡆"} 80%{content:"⣿⣿⡇"} 84%{content:"⣿⣿⣇"} 88%{content:"⣿⣿⣧"} 92%{content:"⣿⣿⣷"} 96%{content:"⣿⣿⣿"} }
+
+    .spinner-scan::after { content:"⣿⠀⠀⠀"; animation:sp-scn .6s step-end infinite alternate, l-swp .6s linear infinite alternate; }
+    @keyframes sp-scn { 0%{content:"⣿⠀⠀⠀"} 16.6%{content:"⢸⡇⠀⠀"} 33.3%{content:"⠀⣿⠀⠀"} 50%{content:"⠀⢸⡇⠀"} 66.6%{content:"⠀⠀⣿⠀"} 83.3%{content:"⠀⠀⢸⡇"} 100%{content:"⠀⠀⠀⣿"} }
+
+    .spinner-sweep::after { background:linear-gradient(0deg,var(--shimmer-base) 0%,var(--shimmer-peak) 50%,var(--shimmer-base) 100%); background-size:100% 200%; -webkit-background-clip:text; content:"⠀⠀⠀"; animation:sp-swp 1.4s step-end infinite, l-swp-y .7s ease-in-out infinite alternate; }
+    @keyframes sp-swp { 0%{content:"⠀⠀⠀"} 12.5%{content:"⣀⠀⣀"} 25%{content:"⣤⠀⣤"} 37.5%{content:"⣶⠀⣶"} 50%{content:"⣿⠀⣿"} 62.5%{content:"⣶⠀⣶"} 75%{content:"⣤⠀⣤"} 87.5%{content:"⣀⠀⣀"} 100%{content:"⠀⠀⠀"} }
+
+    .spinner-orbit::after { content:"⠉"; animation:sp-orb .6s step-end infinite, l-swp .6s linear infinite; }
+    @keyframes sp-orb { 0%{content:"⠉"} 12.5%{content:"⠘"} 25%{content:"⠰"} 37.5%{content:"⢠"} 50%{content:"⣀"} 62.5%{content:"⡄"} 75%{content:"⠆"} 87.5%{content:"⠃"} 100%{content:"⠉"} }
+
+    .spinner-sparkle::after { content:"⠀⠁⠀⠂"; animation:sp-spr .5s step-end infinite, l-glc-sync .5s step-end infinite; }
+    @keyframes sp-spr { 0%,90%,100%{content:"⠀⠁⠀⠂"} 10%{content:"⠠⠀⢀⠀"} 20%{content:"⠀⠐⠉⠁"} 30%{content:"⠁⠂⠀⠐"} 40%{content:"⠑⠊⠔⠢"} 50%{content:"⠀⢀⠠⠀"} 60%{content:"⠂⠀⠁⠀"} 70%{content:"⠐⠀⠐⠀"} 80%{content:"⢀⠠⠑⠊"} }
+
+    .spinner-basic::after { content:"⠋"; animation:sp-bsc .8s step-end infinite, l-swp .8s linear infinite; }
+    @keyframes sp-bsc { 0%{content:"⠋"} 10%{content:"⠙"} 20%{content:"⠹"} 30%{content:"⠸"} 40%{content:"⠼"} 50%{content:"⠴"} 60%{content:"⠦"} 70%{content:"⠧"} 80%{content:"⠇"} 90%{content:"⠏"} 100%{content:"⠋"} }
+  </style>
+</head>
+<body>
+
+  <input type="checkbox" id="theme-switch" hidden>
+
+  <nav class="navbar">
+    <div class="navbar-logo">⠷ Braille Loaders <span class="badge">v1.0</span></div>
+    <label for="theme-switch" class="toggle-switch" title="Toggle Light/Dark Mode"></label>
+  </nav>
+
+  <main class="main-content">
+    <div class="header-section">
+      <h1>Pure CSS Loading Animations</h1>
+      <p>A minimalist collection of Braille-based loading spinners. Perfectly synced shimmer, zero SVG, copy-paste ready for your next project.</p>
+    </div>
+
+    <div class="grid-container">
+      <div class="card" onclick="copySnippet('spinner-cascade')"><div class="card-title">Cascade</div><div class="spinner-wrapper"><span class="braille-loader spinner-cascade"></span></div><div class="copy-hint">Click to copy</div></div>
+      <div class="card" onclick="copySnippet('spinner-wave')"><div class="card-title">Wave Rows</div><div class="spinner-wrapper"><span class="braille-loader spinner-wave"></span></div><div class="copy-hint">Click to copy</div></div>
+      <div class="card" onclick="copySnippet('spinner-helix')"><div class="card-title">Helix</div><div class="spinner-wrapper"><span class="braille-loader spinner-helix"></span></div><div class="copy-hint">Click to copy</div></div>
+      <div class="card" onclick="copySnippet('spinner-rain')"><div class="card-title">Rain</div><div class="spinner-wrapper"><span class="braille-loader spinner-rain"></span></div><div class="copy-hint">Click to copy</div></div>
+      <div class="card" onclick="copySnippet('spinner-breathe')"><div class="card-title">Breathe</div><div class="spinner-wrapper"><span class="braille-loader spinner-breathe"></span></div><div class="copy-hint">Click to copy</div></div>
+      <div class="card" onclick="copySnippet('spinner-diagonal')"><div class="card-title">Diagonal Swipe</div><div class="spinner-wrapper"><span class="braille-loader spinner-diagonal"></span></div><div class="copy-hint">Click to copy</div></div>
+      <div class="card" onclick="copySnippet('spinner-pulse')"><div class="card-title">Pulse</div><div class="spinner-wrapper"><span class="braille-loader spinner-pulse"></span></div><div class="copy-hint">Click to copy</div></div>
+      <div class="card" onclick="copySnippet('spinner-snake')"><div class="card-title">Snake Horizontal</div><div class="spinner-wrapper"><span class="braille-loader spinner-snake"></span></div><div class="copy-hint">Click to copy</div></div>
+      <div class="card" onclick="copySnippet('spinner-glitch')"><div class="card-title">Checkerboard Glitch</div><div class="spinner-wrapper"><span class="braille-loader spinner-glitch"></span></div><div class="copy-hint">Click to copy</div></div>
+      <div class="card" onclick="copySnippet('spinner-columns')"><div class="card-title">Columns</div><div class="spinner-wrapper"><span class="braille-loader spinner-columns"></span></div><div class="copy-hint">Click to copy</div></div>
+      <div class="card" onclick="copySnippet('spinner-scan')"><div class="card-title">Scan</div><div class="spinner-wrapper"><span class="braille-loader spinner-scan"></span></div><div class="copy-hint">Click to copy</div></div>
+      <div class="card" onclick="copySnippet('spinner-sweep')"><div class="card-title">Fill Sweep</div><div class="spinner-wrapper"><span class="braille-loader spinner-sweep"></span></div><div class="copy-hint">Click to copy</div></div>
+      <div class="card" onclick="copySnippet('spinner-orbit')"><div class="card-title">Orbit</div><div class="spinner-wrapper"><span class="braille-loader spinner-orbit"></span></div><div class="copy-hint">Click to copy</div></div>
+      <div class="card" onclick="copySnippet('spinner-sparkle')"><div class="card-title">Sparkle</div><div class="spinner-wrapper"><span class="braille-loader spinner-sparkle"></span></div><div class="copy-hint">Click to copy</div></div>
+      <div class="card" onclick="copySnippet('spinner-basic')"><div class="card-title">Basic Spinner</div><div class="spinner-wrapper"><span class="braille-loader spinner-basic"></span></div><div class="copy-hint">Click to copy</div></div>
+    </div>
+  </main>
+
+  <div id="toast">Copied to clipboard!</div>
+
+  <script>
+    function copySnippet(className) {
+      // Menyalin markup HTML dasar untuk digunakan developer
+      const snippet = `<span class="braille-loader ${className}"></span>`;
+      
+      navigator.clipboard.writeText(snippet).then(() => {
+        const toast = document.getElementById('toast');
+        toast.innerText = `<${className}> Copied!`;
+        toast.classList.add('show');
+        
+        // Sembunyikan toast setelah 2 detik
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 2000);
+      });
+    }
+  </script>
+
+</body>
+</html>
