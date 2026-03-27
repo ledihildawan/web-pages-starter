@@ -140,12 +140,7 @@
         }
       }
       .story-feed { position: absolute; inset: 0; inline-size: 100%; block-size: 100dvh; overflow-y: scroll; scroll-snap-type: y mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; z-index: 10; display: flex; flex-direction: column; align-items: center; transition: transform .6s var(--ease-spring); overscroll-behavior-y: contain; will-change: transform; &::-webkit-scrollbar { display: none; } }
-      
-      .story-slot { 
-        position: relative; flex-shrink: 0; inline-size: 100%; block-size: 100dvh; 
-        scroll-snap-align: center; scroll-snap-stop: always; transform: translateZ(0); 
-        content-visibility: auto; contain-intrinsic-size: 100dvh; 
-      }
+      .story-slot { position: relative; flex-shrink: 0; inline-size: 100%; block-size: 100dvh; scroll-snap-align: center; scroll-snap-stop: always; transform: translateZ(0); content-visibility: auto; contain-intrinsic-size: 100dvh; }
     }
 
     @layer components {
@@ -329,23 +324,18 @@
       
       .story-sheet__content.is-dragging { cursor: grabbing !important; transition: none !important; } 
       
-      .story-sheet[open] .story-sheet__content { 
-        transform: translateY(35dvh); 
-        animation: sheetSlideUpHalf 0.6s var(--ease-spring); 
-      }
+      .story-sheet[open] .story-sheet__content { transform: translateY(35dvh); }
+      .story-sheet[open] .story-sheet__content.is-full-sheet { transform: translateY(0); }
       
-      .story-sheet[open] .story-sheet__content.is-full-sheet { 
-        transform: translateY(0); 
-      }
+      .story-sheet__content.is-entering { animation: sheetSlideUpHalf 0.6s var(--ease-spring) forwards; }
       
-      .story-sheet.is-exiting .story-sheet__content { 
-        transform: translateY(100%) !important; animation: none !important; transition: transform 0.5s var(--ease-out) !important; 
-      }
+      .story-sheet.is-exiting .story-sheet__content { transform: translateY(100%) !important; transition: transform 0.5s var(--ease-out) !important; }
       .story-sheet.is-exiting::backdrop { opacity: 0; }
       
       .story-popup__content { inline-size: var(--card-inline-size); padding-block: 2rem 0; opacity: 0; transform: translateY(2rem) scale(0.95); max-block-size: calc(100dvh - 5rem); border-radius: var(--frame-radius); transition: transform .6s var(--ease-spring), opacity .4s var(--ease-out); } 
-      .story-popup[open] .story-popup__content { opacity: 1; transform: translateY(0) scale(1); animation: popupFadeIn 0.6s var(--ease-spring) forwards; }
-      .story-popup.is-exiting .story-popup__content { transform: translateY(2rem) scale(0.95) !important; opacity: 0 !important; animation: none !important; transition: transform 0.5s var(--ease-out), opacity 0.4s var(--ease-out) !important; }
+      .story-popup[open] .story-popup__content { opacity: 1; transform: translateY(0) scale(1); }
+      .story-popup__content.is-entering { animation: popupFadeIn 0.6s var(--ease-spring) forwards; }
+      .story-popup.is-exiting .story-popup__content { transform: translateY(2rem) scale(0.95) !important; opacity: 0 !important; transition: transform 0.5s var(--ease-out), opacity 0.4s var(--ease-out) !important; }
       .story-popup.is-exiting::backdrop { opacity: 0; }
 
       .story-sheet__handle-wrapper { inline-size: 100%; padding-block: 1rem 1.5rem; cursor: grab; display: flex; justify-content: center; flex-shrink: 0; touch-action: none; &:active { cursor: grabbing; } } 
@@ -1625,6 +1615,7 @@
         }
         
         this.startProgressBar();
+        A11yAnnouncer.speak('Video diputar');
       } else if (mediaState === MEDIA_STATE.PAUSED) {
         if (this.dom.btnPlay) { 
             const icon = this.dom.btnPlay.querySelector('.fab-inner'); 
@@ -1636,6 +1627,7 @@
             this.dom.storyContainer.classList.remove('is-loading'); 
         }
         this.stopProgressBar();
+        A11yAnnouncer.speak('Video dijeda');
       } else if (mediaState === MEDIA_STATE.BUFFERING) {
         clearTimeout(this.state.timers.loading); 
         this.state.timers.loading = setTimeout(() => { 
@@ -1772,6 +1764,14 @@
           requestAnimationFrame(() => { element.style.transition = 'opacity 0.4s ease-in'; }); 
         } 
       });
+      
+      const sheetContent = DOMHelper.select(DOM_SELECTORS.SHEET_CONTENT); 
+      if (sheetContent) { 
+          sheetContent.style.transform = ''; 
+          sheetContent.classList.remove('is-entering');
+      }
+      const popupContent = DOMHelper.select('.story-popup__content');
+      if (popupContent) popupContent.classList.remove('is-entering');
     }
 
     getActiveContext() { 
@@ -1789,6 +1789,9 @@
       DOMHelper.root.classList.remove('is-clean-mode', 'is-gesture-active');
       const feed = DOMHelper.select(DOM_SELECTORS.FEED);
       
+      const targetContentSheet = contextElement.querySelector('.story-sheet__content');
+      const targetContentPopup = contextElement.querySelector('.story-popup__content');
+
       if (openState) {
         this.previousFocusElement = document.activeElement;
 
@@ -1803,13 +1806,21 @@
           contextElement.classList.add('is-active'); 
         }
         
+        if (targetContentSheet && !this.state.prefersReducedMotion) {
+            targetContentSheet.classList.add('is-entering');
+            setTimeout(() => targetContentSheet.classList.remove('is-entering'), 600);
+        }
+        if (targetContentPopup && !this.state.prefersReducedMotion) {
+            targetContentPopup.classList.add('is-entering');
+            setTimeout(() => targetContentPopup.classList.remove('is-entering'), 600);
+        }
+
         if (feed) feed.setAttribute('inert', '');
         if (DOMHelper.select('.icon-enter-fs')) DOMHelper.select('.icon-enter-fs').style.display = 'block'; 
         if (DOMHelper.select('.icon-exit-fs')) DOMHelper.select('.icon-exit-fs').style.display = 'none';
         
         if (window.innerWidth < 1366 && window.innerWidth >= 768) this.appEvents.emit('PLAYER:FORCE_PAUSE');
-        const sheetContent = DOMHelper.select(DOM_SELECTORS.SHEET_CONTENT); 
-        if (sheetContent) sheetContent.classList.remove('is-full-sheet');
+        if (targetContentSheet) targetContentSheet.classList.remove('is-full-sheet');
         this.closeReactionMenu(); 
         
         A11yAnnouncer.speak('Detail dibuka');
@@ -1823,6 +1834,9 @@
           document.removeEventListener('keydown', this.focusTrapHandler);
           this.focusTrapHandler = null;
         }
+
+        if (targetContentSheet) targetContentSheet.classList.remove('is-entering');
+        if (targetContentPopup) targetContentPopup.classList.remove('is-entering');
 
         const sheet = DOMHelper.select('.js-story-sheet'); 
         if (sheet?.open) {
@@ -1841,10 +1855,9 @@
         DOMHelper.select('.js-story-card')?.classList.remove('is-active'); 
         
         if (feed) feed.removeAttribute('inert');
-        const sheetContent = DOMHelper.select(DOM_SELECTORS.SHEET_CONTENT); 
-        if (sheetContent) { 
-            sheetContent.style.transform = ''; 
-            sheetContent.classList.remove('is-full-sheet'); 
+        if (targetContentSheet) { 
+            targetContentSheet.style.transform = ''; 
+            targetContentSheet.classList.remove('is-full-sheet'); 
         }
         if (window.innerWidth < 1366) this.appEvents.emit('PLAYER:FORCE_PLAY'); 
         
