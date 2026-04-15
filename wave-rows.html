@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animasi Loading Wave Rows</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #050a14; /* Biru malam yang sangat dalam */
+      color: #00d4ff; /* Warna cyan cerah untuk efek air */
+    }
+
+    .loading-container {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 32px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      /* Efek glow agar gelombang terlihat seperti neon di bawah air */
+      text-shadow: 0 0 10px rgba(0, 212, 255, 0.7);
+    }
+
+    /* Elemen spinner Wave */
+    .braille-wave::after {
+      content: "⠑⢄⠔⠑"; 
+      display: inline-block;
+      white-space: pre; 
+      /* Menggunakan 0.8s agar flow gelombang terasa natural, tidak terlalu lambat */
+      animation: wave-flow 0.8s step-end infinite; 
+    }
+
+    /* Keyframes 8 langkah untuk menggeser pola gelombang horizontal */
+    @keyframes wave-flow {
+      0%    { content: "⠑⢄⠔⠑"; } /* Frame 1 */
+      12.5% { content: "⠊⠆⢄⠊"; } /* Frame 2 */
+      25%   { content: "⠢⠑⢄⠢"; } /* Frame 3 */
+      37.5% { content: "⢄⠢⠑⢄"; } /* Frame 4 */
+      50%   { content: "⠔⢄⠢⠔"; } /* Frame 5 */
+      62.5% { content: "⠒⠔⢄⠒"; } /* Frame 6 */
+      75%   { content: "⠆⠒⠔⠆"; } /* Frame 7 */
+      87.5% { content: "⠁⠆⠒⠁"; } /* Frame 8 */
+      100%  { content: "⠑⢄⠔⠑"; } /* Loop Kembali */
+    }
+
+    .loading-text {
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-size: 18px;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="loading-container">
+    <span class="braille-wave"></span> 
+    <span class="loading-text">Menyelaraskan arus</span>
+  </div>
+
+</body>
+</html>

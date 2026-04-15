@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Braille Loading UI - Basic Solid Theme</title>
+  <style>
+    /* =========================================
+       SISTEM TEMA (PURE CSS TOGGLE HACK)
+       ========================================= */
+    :root {
+      /* --- Default: Dark Mode --- */
+      --bg-color: #09090b;
+      --text-primary: #fafafa;
+      --text-secondary: #a1a1aa;
+      --loader-color: #e4e4e7; /* Warna padat untuk braille di Dark Mode */
+      
+      --card-bg: #18181b;
+      --card-bg-hover: #1f1f22;
+      --card-border: #27272a;
+      --card-border-hover: #52525b;
+      --card-shadow: transparent;
+      --card-shadow-hover: rgba(255, 255, 255, 0.05);
+      
+      --nav-bg: rgba(9, 9, 11, 0.7);
+      --nav-border: #27272a;
+    }
+
+    /* Saat checkbox dicentang -> Ubah ke Light Mode */
+    :root:has(#theme-switch:checked) {
+      --bg-color: #fafafa;
+      --text-primary: #18181b;
+      --text-secondary: #71717a;
+      --loader-color: #18181b; /* Warna padat untuk braille di Light Mode */
+      
+      --card-bg: #ffffff;
+      --card-bg-hover: #f4f4f5;
+      --card-border: #e4e4e7;
+      --card-border-hover: #a1a1aa;
+      --card-shadow: rgba(0, 0, 0, 0.04);
+      --card-shadow-hover: rgba(0, 0, 0, 0.08);
+      
+      --nav-bg: rgba(250, 250, 250, 0.7);
+      --nav-border: #e4e4e7;
+    }
+
+    /* --- Pengaturan Global --- */
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-color);
+      color: var(--text-secondary);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+
+    /* =========================================
+       NAVBAR & TOGGLE SWITCH
+       ========================================= */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      background-color: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--nav-border);
+      z-index: 1000;
+      transition: all 0.4s ease;
+    }
+
+    .navbar-logo {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: var(--text-primary);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Minimalist Toggle Switch */
+    .toggle-switch {
+      cursor: pointer;
+      width: 44px;
+      height: 24px;
+      background-color: var(--card-border);
+      border-radius: 24px;
+      position: relative;
+      transition: background-color 0.3s ease;
+      display: flex;
+      align-items: center;
+    }
+
+    .toggle-switch::after {
+      content: "";
+      position: absolute;
+      left: 3px;
+      width: 18px;
+      height: 18px;
+      background-color: var(--text-primary);
+      border-radius: 50%;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
+    }
+
+    /* Animasi Toggle saat state berubah */
+    :root:has(#theme-switch:checked) .toggle-switch {
+      background-color: #d4d4d8; 
+    }
+    
+    :root:has(#theme-switch:checked) .toggle-switch::after {
+      transform: translateX(20px); 
+    }
+
+    /* --- Area Konten Utama --- */
+    .main-content {
+      padding: 120px 20px 60px; 
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .header-section {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .header-section h1 {
+      font-size: 2rem;
+      letter-spacing: 2px;
+      color: var(--text-primary);
+      margin: 0 0 10px 0;
+    }
+
+    /* =========================================
+       LAYOUT GRID & CARDS
+       ========================================= */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 35px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 2px 8px var(--card-shadow);
+    }
+
+    .card:hover {
+      border-color: var(--card-border-hover);
+      background-color: var(--card-bg-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px -10px var(--card-shadow-hover);
+    }
+
+    .card-title {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .card:hover .card-title {
+      color: var(--text-primary);
+    }
+
+    /* --- Basic Spinner Styling --- */
+    .spinner-wrapper {
+      font-size: 40px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+    }
+
+    .braille-loader {
+      display: inline-block;
+      position: relative;
+      color: var(--loader-color); /* Kembali ke warna solid yang elegan */
+      transition: color 0.4s ease;
+    }
+
+    .braille-loader::after {
+      display: inline-block;
+      white-space: pre;
+    }
+
+    /* =========================================
+       DAFTAR ANIMASI (TIMING PRESISI)
+       ========================================= */
+    .spinner-basic::after { content: "⠋"; animation: spin-basic 0.8s step-end infinite; }
+    @keyframes spin-basic {
+      0% { content: "⠋"; } 10% { content: "⠙"; } 20% { content: "⠹"; }
+      30% { content: "⠸"; } 40% { content: "⠼"; } 50% { content: "⠴"; }
+      60% { content: "⠦"; } 70% { content: "⠧"; } 80% { content: "⠇"; }
+      90% { content: "⠏"; } 100% { content: "⠋"; }
+    }
+
+    .spinner-orbit::after { content: "⠉"; animation: spin-orbit 0.6s step-end infinite; }
+    @keyframes spin-orbit {
+      0% { content: "⠉"; } 12.5% { content: "⠘"; } 25% { content: "⠰"; }
+      37.5% { content: "⢠"; } 50% { content: "⣀"; } 62.5% { content: "⡄"; }
+      75% { content: "⠆"; } 87.5% { content: "⠃"; } 100% { content: "⠉"; }
+    }
+
+    .spinner-breathe::after { content: "⠀"; animation: spin-breathe 2.2s step-end infinite; }
+    @keyframes spin-breathe {
+      0% { content: "⠀"; } 8% { content: "⠁"; } 15% { content: "⠑"; } 21% { content: "⠕"; } 
+      26% { content: "⢕"; } 30% { content: "⢝"; } 34% { content: "⢟"; } 38% { content: "⢿"; } 
+      45%, 55% { content: "⣿"; } 62% { content: "⢿"; } 66% { content: "⢟"; } 70% { content: "⢝"; } 
+      74% { content: "⢕"; } 79% { content: "⠕"; } 85% { content: "⠑"; } 92% { content: "⠁"; } 100% { content: "⠀"; }
+    }
+
+    .spinner-snake::after { content: "⣁⠀⠀"; animation: spin-snake 1.2s step-end infinite; }
+    @keyframes spin-snake {
+      0% { content: "⣁⠀⠀"; } 6.25% { content: "⡉⠀⠀"; } 12.5% { content: "⠉⠀⠁"; }
+      18.75% { content: "⠈⠀⠉"; } 25% { content: "⠀⠀⠙"; } 31.25% { content: "⠀⠀⠚"; }
+      37.5% { content: "⠐⠀⠒"; } 43.75% { content: "⠒⠀⠂"; } 50% { content: "⠖⠀⠀"; }
+      56.25% { content: "⠦⠀⠀"; } 62.5% { content: "⠤⠀⠄"; } 68.75% { content: "⠠⠀⠤"; }
+      75% { content: "⠀⠀⢤"; } 81.25% { content: "⠀⠀⣠"; } 87.5% { content: "⢀⠀⣀"; }
+      93.75% { content: "⣀⠀⡀"; } 100% { content: "⣁⠀⠀"; }
+    }
+
+    .spinner-sweep::after { content: "⠀⠀⠀"; animation: spin-sweep 1.4s step-end infinite; }
+    @keyframes spin-sweep {
+      0% { content: "⠀⠀⠀"; } 12.5% { content: "⣀⠀⣀"; } 25% { content: "⣤⠀⣤"; }
+      37.5% { content: "⣶⠀⣶"; } 50% { content: "⣿⠀⣿"; } 62.5% { content: "⣶⠀⣶"; }
+      75% { content: "⣤⠀⣤"; } 87.5% { content: "⣀⠀⣀"; } 100% { content: "⠀⠀⠀"; }
+    }
+
+    .spinner-pulse::after { content: "⠀⠶⠀"; animation: spin-pulse 1.4s step-end infinite; }
+    @keyframes spin-pulse {
+      0% { content: "⠀⠶⠀"; } 10% { content: "⠰⣿⠆"; } 18% { content: "⢾⣿⡷"; } 
+      26% { content: "⢾⣉⡷"; } 34% { content: "⣏⣉⣹"; } 42% { content: "⡁⠀⢈"; } 
+      50%, 100% { content: "⠀⠶⠀"; } 
+    }
+
+    .spinner-columns::after { content: "⠀⠀⠀"; animation: spin-columns 1.8s step-end infinite; }
+    @keyframes spin-columns {
+      0% { content: "⠀⠀⠀"; } 4% { content: "⡀⠀⠀"; } 8% { content: "⡄⠀⠀"; }
+      12% { content: "⡆⠀⠀"; } 16% { content: "⡇⠀⠀"; } 20% { content: "⣇⠀⠀"; }
+      24% { content: "⣧⠀⠀"; } 28% { content: "⣷⠀⠀"; } 32% { content: "⣿⠀⠀"; }
+      36% { content: "⣿⡀⠀"; } 40% { content: "⣿⡄⠀"; } 44% { content: "⣿⡆⠀"; }
+      48% { content: "⣿⡇⠀"; } 52% { content: "⣿⣇⠀"; } 56% { content: "⣿⣧⠀"; }
+      60% { content: "⣿⣷⠀"; } 64% { content: "⣿⣿⠀"; } 68% { content: "⣿⣿⡀"; }
+      72% { content: "⣿⣿⡄"; } 76% { content: "⣿⣿⡆"; } 80% { content: "⣿⣿⡇"; }
+      84% { content: "⣿⣿⣇"; } 88% { content: "⣿⣿⣧"; } 92% { content: "⣿⣿⣷"; }
+      96% { content: "⣿⣿⣿"; } 100% { content: "⠀⠀⠀"; }
+    }
+
+    .spinner-diagonal::after { content: "⠀⠀"; animation: spin-diagonal 1.12s step-end infinite; }
+    @keyframes spin-diagonal {
+      0%    { content: "⠀⠀"; } 7.1%  { content: "⠁⠀"; } 14.2% { content: "⠋⠀"; }
+      21.4% { content: "⠟⠁"; } 28.5% { content: "⡿⠋"; } 35.7% { content: "⣿⠟"; }
+      42.8% { content: "⣿⡿"; } 50%   { content: "⣿⣿"; } 57.1% { content: "⣾⣿"; }
+      64.2% { content: "⣴⣿"; } 71.4% { content: "⣠⣾"; } 78.5% { content: "⢀⣴"; }
+      85.7% { content: "⠀⣠"; } 92.8% { content: "⠀⢀"; } 100%  { content: "⠀⠀"; }
+    }
+
+    .spinner-glitch::after { content: "⢕⢕⢕"; animation: spin-glitch 0.8s step-end infinite; }
+    @keyframes spin-glitch {
+      0% { content: "⢕⢕⢕"; } 12% { content: "⡪⡪⡪"; } 18% { content: "⢊⠔⡡"; } 
+      45% { content: "⡡⢊⠔"; } 60% { content: "⢕⢕⢕"; } 85% { content: "⡪⡪⡪"; } 
+      90% { content: "⢊⠔⡡"; } 100% { content: "⢕⢕⢕"; }
+    }
+
+    .spinner-scan::after { content: "⣿⠀⠀⠀"; animation: spin-scan 0.6s step-end infinite alternate; }
+    @keyframes spin-scan {
+      0% { content: "⣿⠀⠀⠀"; } 16.6% { content: "⢸⡇⠀⠀"; } 33.3% { content: "⠀⣿⠀⠀"; }
+      50% { content: "⠀⢸⡇⠀"; } 66.6% { content: "⠀⠀⣿⠀"; } 83.3% { content: "⠀⠀⢸⡇"; }
+      100% { content: "⠀⠀⠀⣿"; }
+    }
+
+    .spinner-rain::after { content: "⠁⠄⠂⡀"; animation: spin-rain 0.7s step-end infinite; }
+    @keyframes spin-rain {
+      0% { content: "⠁⠄⠂⡀"; } 12.5% { content: "⠊⡀⠌⠀"; } 25% { content: "⠔⠈⡐⠁"; }
+      37.5% { content: "⡀⠑⠡⠊"; } 50% { content: "⠡⠢⢂⠔"; } 62.5% { content: "⢂⢄⠄⡠"; }
+      75% { content: "⠄⡀⡀⢀"; } 87.5% { content: "⡀⠀⠁⠁"; } 100% { content: "⠁⠄⠂⡀"; }
+    }
+
+    .spinner-cascade::after { content: "⠁⠀⠀⠀"; animation: spin-cascade 1.1s step-end infinite; }
+    @keyframes spin-cascade {
+      0% { content: "⠁⠀⠀⠀"; } 7.1% { content: "⠋⠀⠀⠀"; } 14.2% { content: "⠞⠁⠀⠀"; }
+      21.4% { content: "⡴⠋⠀⠀"; } 28.5% { content: "⣠⠞⠁⠀"; } 35.7% { content: "⢀⡴⠋⠀"; }
+      42.8% { content: "⠀⣠⠞⠁"; } 50% { content: "⠀⢀⡴⠋"; } 57.1% { content: "⠀⠀⣠⠞"; }
+      64.2% { content: "⠀⠀⢀⡴"; } 71.4% { content: "⠀⠀⠀⣠"; } 78.5% { content: "⠀⠀⠀⢀"; }
+      85.7% { content: "⠀⠀⠀⠀"; } 92.8% { content: "⠀⠀⠀⠀"; } 100% { content: "⠁⠀⠀⠀"; }
+    }
+
+    .spinner-sparkle::after { content: "⠀⠁⠀⠂"; animation: spin-sparkle 0.5s step-end infinite; }
+    @keyframes spin-sparkle {
+      0% { content: "⠀⠁⠀⠂"; } 10% { content: "⠠⠀⢀⠀"; } 20% { content: "⠀⠐⠉⠁"; }
+      30% { content: "⠁⠂⠀⠐"; } 40% { content: "⠑⠊⠔⠢"; } 50% { content: "⠀⢀⠠⠀"; }
+      60% { content: "⠂⠀⠁⠀"; } 70% { content: "⠐⠀⠐⠀"; } 80% { content: "⢀⠠⠑⠊"; }
+      90% { content: "⠀⠁⠀⠂"; } 100% { content: "⠀⠁⠀⠂"; }
+    }
+
+    .spinner-wave::after { content: "⠑⢄⠔⠑"; animation: spin-wave 0.8s step-end infinite; }
+    @keyframes spin-wave {
+      0% { content: "⠑⢄⠔⠑"; } 12.5% { content: "⠊⠆⢄⠊"; } 25% { content: "⠢⠑⢄⠢"; }
+      37.5% { content: "⢄⠢⠑⢄"; } 50% { content: "⠔⢄⠢⠔"; } 62.5% { content: "⠒⠔⢄⠒"; }
+      75% { content: "⠆⠒⠔⠆"; } 87.5% { content: "⠁⠆⠒⠁"; } 100% { content: "⠑⢄⠔⠑"; }
+    }
+
+    .spinner-helix::after { content: "⢁⠦⠔⡈"; animation: spin-helix 0.6s step-end infinite; }
+    @keyframes spin-helix {
+      0% { content: "⢁⠦⠔⡈"; } 16.6% { content: "⠦⠔⡈⠔"; } 33.3% { content: "⠔⡈⠔⠦"; }
+      50% { content: "⡈⠔⠦⢁"; } 66.6% { content: "⠔⠦⢁⠦"; } 83.3% { content: "⠦⢁⠦⠔"; }
+      100% { content: "⢁⠦⠔⡈"; }
+    }
+  </style>
+</head>
+<body>
+
+  <input type="checkbox" id="theme-switch" hidden>
+
+  <nav class="navbar">
+    <div class="navbar-logo">
+      ⠷ Braille UI
+    </div>
+    <label for="theme-switch" class="toggle-switch" title="Toggle Light/Dark Mode"></label>
+  </nav>
+
+  <main class="main-content">
+    
+    <div class="header-section">
+      <h1>Koleksi Spinner Braille</h1>
+      <p>Pure CSS • Interactive Theme • Clean & Minimal</p>
+    </div>
+
+    <div class="grid-container">
+      <div class="card"><div class="card-title">1. Basic Spinner</div><div class="spinner-wrapper"><span class="braille-loader spinner-basic"></span></div></div>
+      <div class="card"><div class="card-title">2. Orbit</div><div class="spinner-wrapper"><span class="braille-loader spinner-orbit"></span></div></div>
+      <div class="card"><div class="card-title">3. Breathe</div><div class="spinner-wrapper"><span class="braille-loader spinner-breathe"></span></div></div>
+      <div class="card"><div class="card-title">4. Snake Horizontal</div><div class="spinner-wrapper"><span class="braille-loader spinner-snake"></span></div></div>
+      <div class="card"><div class="card-title">5. Fill Sweep</div><div class="spinner-wrapper"><span class="braille-loader spinner-sweep"></span></div></div>
+      <div class="card"><div class="card-title">6. Pulse</div><div class="spinner-wrapper"><span class="braille-loader spinner-pulse"></span></div></div>
+      <div class="card"><div class="card-title">7. Columns</div><div class="spinner-wrapper"><span class="braille-loader spinner-columns"></span></div></div>
+      <div class="card"><div class="card-title">8. Diagonal Swipe</div><div class="spinner-wrapper"><span class="braille-loader spinner-diagonal"></span></div></div>
+      <div class="card"><div class="card-title">9. Checkerboard Glitch</div><div class="spinner-wrapper"><span class="braille-loader spinner-glitch"></span></div></div>
+      <div class="card"><div class="card-title">10. Scan</div><div class="spinner-wrapper"><span class="braille-loader spinner-scan"></span></div></div>
+      <div class="card"><div class="card-title">11. Rain</div><div class="spinner-wrapper"><span class="braille-loader spinner-rain"></span></div></div>
+      <div class="card"><div class="card-title">12. Cascade</div><div class="spinner-wrapper"><span class="braille-loader spinner-cascade"></span></div></div>
+      <div class="card"><div class="card-title">13. Sparkle</div><div class="spinner-wrapper"><span class="braille-loader spinner-sparkle"></span></div></div>
+      <div class="card"><div class="card-title">14. Wave Rows</div><div class="spinner-wrapper"><span class="braille-loader spinner-wave"></span></div></div>
+      <div class="card"><div class="card-title">15. Helix DNA</div><div class="spinner-wrapper"><span class="braille-loader spinner-helix"></span></div></div>
+    </div>
+
+  </main>
+
+</body>
+</html>
