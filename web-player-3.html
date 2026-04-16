@@ -353,14 +353,59 @@
     }
 
     @layer utilities {
-      @container story-player (width < 48rem) {
+      /* ==================================================================== */
+      /* 🚫 BLOCKER LANDSCAPE: SURUH USER PUTAR HP KE PORTRAIT (KHUSUS HP)    */
+      /* ==================================================================== */
+      @media screen and (orientation: landscape) and (max-height: 600px) and (pointer: coarse) {
+        /* Buat layar jadi gelap pekat */
+        .layout-wrapper::before {
+          content: "";
+          position: fixed;
+          inset: 0;
+          z-index: 999998;
+          background-color: #0f0f11; /* Warna tema Anda */
+        }
+        /* Tampilkan teks peringatan dan ikon di tengah */
+        .layout-wrapper::after {
+          content: "📱\A\A Putar layar menjadi tegak (Portrait)\A untuk melanjutkan.";
+          white-space: pre;
+          position: fixed;
+          inset: 0;
+          z-index: 999999;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          color: #ffffff;
+          font-family: var(--ngs-font, 'Plus Jakarta Sans', sans-serif);
+          font-size: 1.125rem;
+          font-weight: 700;
+          line-height: 1.5;
+          padding: 2rem;
+          animation: floatPhone 2s ease-in-out infinite;
+        }
+        /* Sembunyikan library agar tidak bocor/kepencet saat landscape */
+        .layout-wrapper > * {
+          display: none !important;
+        }
+      }
+
+      @keyframes floatPhone {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+
+      /* ==================================================================== */
+      /* 📱 MOBILE UI (Berlaku saat di HP mode Portrait)                      */
+      /* ==================================================================== */
+      @container story-player ((width < 48rem) or (height < 45rem)) {
         .story-popup { display: none !important; }
         .story-header, .story-body { padding-inline: var(--space-6); }
         .layout-wrapper.is-ui-open .story-viewport { filter: brightness(0.6) !important; transform-origin: top center; border-radius: var(--space-10); box-shadow: 0 40px 80px var(--ngs-shadow); transform: translateY(max(var(--space-4), env(safe-area-inset-top))) scale(0.94); transition: transform 0.25s var(--ease-out), filter 0.25s var(--ease-out), border-radius 0.25s var(--ease-out); }
         .story-sheet[open]::backdrop { background: color-mix(in oklch, var(--ngs-bg) 75%, transparent) !important; backdrop-filter: blur(8px) !important; }
+        
         .desktop-controls-wrapper { display: none !important; }
         
-        /* UPDATE: Tambahkan elemen carousel ke sini */
         .layout-wrapper.is-ui-open, .layout-wrapper.is-gesture-active[data-action="pinch"] { 
           .story-viewport { 
             .story-mobile-top-actions, .story-excerpt, .story-player-actions, .story-top-actions, .story-progress-bar-wrapper, .story-carousel-indicators, .story-carousel-arrow { opacity: 0 !important; pointer-events: none !important; visibility: hidden !important; transform: scale(0.9) !important; transition: transform 0.25s var(--ease-out), opacity 0.2s var(--ease-out), visibility 0.2s var(--ease-out) !important; } 
@@ -370,7 +415,10 @@
         .layout-wrapper.is-gesture-active[data-action="pinch"] .story-viewport :is(.story-mobile-top-actions, .story-excerpt, .story-player-actions, .story-top-actions, .story-progress-bar-wrapper, .story-carousel-indicators, .story-carousel-arrow) { transform: translateY(var(--space-5)) scale(0.95) !important; }
       }
       
-      @container story-player (width >= 48rem) {
+      /* ==================================================================== */
+      /* 💻 DESKTOP/TABLET UI (Layar Besar, Tetap Aman)                       */
+      /* ==================================================================== */
+      @container story-player ((width >= 48rem) and (height >= 45rem)) {
         .story-loader__spinner-simple { display: none; }
         .story-loader__spinner-complex { display: block; inline-size: var(--space-16); block-size: var(--space-16); position: relative; pointer-events: none; filter: drop-shadow(0 8px 16px var(--ngs-shadow)); }
         .story-loader__container { position: absolute; inline-size: 100%; block-size: 100%; animation: story-spin-linear 1.568s linear infinite; }
@@ -382,7 +430,9 @@
         .story-loader__left .story-loader__circle { inset-inline-start: 0; inset-inline-end: -100%; border-right-color: transparent; animation: story-spin-left 1333ms cubic-bezier(.4, 0, .2, 1) infinite both; }
         .story-loader__right .story-loader__circle { inset-inline-start: -100%; inset-inline-end: 0; border-left-color: transparent; animation: story-spin-right 1333ms cubic-bezier(.4, 0, .2, 1) infinite both; }
         .story-sheet { display: none !important; }
+        
         .story-mobile-top-actions { display: none !important; }
+        
         .ambient-layer { display: block; }
         .story-feed { gap: var(--space-10); padding-block: 5dvh; }
         .story-slot { inline-size: auto; block-size: 90dvh; aspect-ratio: 9/16; }
@@ -400,7 +450,7 @@
         }
       }
       
-      @container story-player (width >= 80rem) {
+      @container story-player ((width >= 80rem) and (height >= 45rem)) {
         .story-popup { display: none !important; }
         .ambient-layer { opacity: .75; }
         .story-feed { gap: var(--space-12); padding-block: 6dvh; }
@@ -567,7 +617,7 @@
         const lastRect = containerElement.getBoundingClientRect(); const lastRadius = window.getComputedStyle(containerElement).borderRadius;
         const deltaX = firstRect.left - lastRect.left; const deltaY = firstRect.top - lastRect.top; const deltaW = firstRect.width / lastRect.width; const deltaH = firstRect.height / lastRect.height;
         if (Math.abs(deltaX) < 1 && Math.abs(deltaY) < 1 && Math.abs(deltaW - 1) < 0.01 && Math.abs(deltaH - 1) < 0.01) return;
-        containerElement.animate([ { transformOrigin: 'top left', transform: `translate(${deltaX}px, ${deltaY}px) scale(${deltaW}, ${deltaH})`, borderRadius: firstRadius }, { transformOrigin: 'top left', transform: 'translate(0, 0) scale(1, 1)', borderRadius: lastRadius } ], { duration: 500, easing: 'linear(0, 0.006, 0.025 1.8%, 0.103 4%, 0.233 6.4%, 0.407 9.1%, 0.589 12%, 0.748 15.2%, 0.869 18.6%, 0.949 22.3%, 0.995 26.5%, 1.018 31.4%, 1.025 37.1%, 1.018 43.8%, 1.006 51.5%, 0.998 60.5%, 1)', fill: 'both' });
+        containerElement.animate([ { transformOrigin: 'top left', transform: `translate(${deltaX}px, ${deltaY}px) scale(${deltaW}, ${deltaH})`, borderRadius: firstRadius }, { transformOrigin: 'top left', transform: 'translate(0, 0) scale(1, 1)', borderRadius: lastRadius } ], { duration: 500, easing: 'linear(0, 0.006, 0.025 1.8%, 0.103 4%, 0.233 6.4%, 0.407 9.1%, 0.589 12%, 0.748 15.2%, 0.869 18.6%, 0.949 22.3%, 0.995 26.5%, 1.018 31.4%, 1.025 37.1%, 1.018 43.8%, 1.006 51.5%, 0.998 60.5%, 1)' });
       }
     }
 
@@ -668,18 +718,64 @@
     }
 
     class WakeLockManager {
-      static wakeLock = null; static isRequested = false;
+      static wakeLock = null; 
+      static isRequested = false;
+      static pendingRequest = null; // Menyimpan status request yang sedang berjalan
+
       static async request() {
         this.isRequested = true;
-        if (navigator.wakeLock && !this.wakeLock && document.visibilityState === 'visible') {
-          try { this.wakeLock = await navigator.wakeLock.request('screen'); this.wakeLock.addEventListener('release', () => { this.wakeLock = null; }); } catch (e) {}
+        if (navigator.wakeLock && document.visibilityState === 'visible') {
+          try {
+            if (this.wakeLock) return; // Jika sudah ter-lock, abaikan
+            
+            // Jika ada request yang sedang berjalan, tunggu selesai
+            if (this.pendingRequest) {
+              await this.pendingRequest;
+              return;
+            }
+
+            this.pendingRequest = navigator.wakeLock.request('screen');
+            this.wakeLock = await this.pendingRequest;
+            
+            this.wakeLock.addEventListener('release', () => { 
+              this.wakeLock = null; 
+            });
+
+            // PENGECEKAN KRUSIAL:
+            // Jika selama menunggu promise tsb, ternyata video di-pause (isRequested jadi false)
+            // maka kita harus LANGSUNG me-release lock yang baru saja didapat ini.
+            if (!this.isRequested && this.wakeLock) {
+              this.wakeLock.release().catch(() => {});
+              this.wakeLock = null;
+            }
+
+          } catch (e) {
+            this.wakeLock = null;
+          } finally {
+            this.pendingRequest = null;
+          }
         }
       }
-      static release() {
+
+      static async release() {
         this.isRequested = false;
-        if (this.wakeLock) { this.wakeLock.release().catch(() => {}); this.wakeLock = null; }
+        
+        // Tunggu request yang masih menggantung selesai agar objek lock-nya tidak terlewat
+        if (this.pendingRequest) {
+          try { await this.pendingRequest; } catch (e) {}
+        }
+
+        if (this.wakeLock) { 
+          this.wakeLock.release().catch(() => {}); 
+          this.wakeLock = null; 
+        }
       }
-      static handleVisibilityChange() { if (document.visibilityState === 'visible' && this.isRequested) this.request(); }
+
+      static handleVisibilityChange() { 
+        if (document.visibilityState === 'visible' && this.isRequested) {
+          this.request();
+        }
+      }
     }
     document.addEventListener('visibilitychange', () => WakeLockManager.handleVisibilityChange(), { passive: true });
 
@@ -734,6 +830,7 @@
       static worker = null; static workerBlobUrl = null; static callbacks = new Map(); static idCounter = 0;
       static colorCache = new Map(); 
       static pendingRequests = new Map(); 
+      static isProcessingVideo = false;
 
       static init() {
         if (this.worker) return;
@@ -763,6 +860,7 @@
         try {
           const blob = new Blob([workerCode], { type: 'application/javascript' }); this.workerBlobUrl = URL.createObjectURL(blob); this.worker = new Worker(this.workerBlobUrl);
           this.worker.onmessage = (e) => {
+            this.isProcessingVideo = false;
             const { id, gradStart, gradEnd, error } = e.data;
             if (this.callbacks.has(id)) {
               const { elements, isInstant, srcUrl } = this.callbacks.get(id);
@@ -813,8 +911,9 @@
         }
 
         this.init(); if (!this.worker) return; 
-        if (src instanceof HTMLVideoElement && src.readyState < 2) {
-           src.addEventListener('loadeddata', () => this.extract(src, targetElements, isInstant), { once: true }); return;
+        if (src instanceof HTMLVideoElement) {
+          if (src.readyState < 2 || this.isProcessingVideo) return; 
+          this.isProcessingVideo = true; 
         }
         try {
           const bm = await createImageBitmap(src, { resizeWidth: 32, resizeHeight: 32 }); const id = this.idCounter++;
@@ -822,7 +921,9 @@
           
           this.callbacks.set(id, { elements: els, isInstant, srcUrl: safeCacheKey }); 
           this.worker.postMessage({ id, bitmap: bm }, [bm]);
-        } catch (e) {}
+        } catch (e) {
+          this.isProcessingVideo = false;
+        }
       }
 
       static extractFromUrl(url, targetElements, isInstant = true) {
@@ -1399,7 +1500,10 @@
       #startColorThief() {
         if (this.isAmbient || this.#rvfcId || !this.videoElement.requestVideoFrameCallback || this.state.isEcoMode) return;
         const step = (now) => {
-          if (this.isDestroyed || this.videoElement.paused) { this.#rvfcId = null; return; }
+          if (this.isDestroyed || this.videoElement.paused || this.state.isEcoMode) { 
+            this.#rvfcId = null; 
+            return; 
+          }
           if (now - this.#lastColorTime > 800) { this.#extractColors(); this.#lastColorTime = now; }
           this.#rvfcId = this.videoElement.requestVideoFrameCallback(step);
         };
@@ -1619,14 +1723,11 @@
           el.muted = this.state.isGlobalMuted || this.cConfig.videoMuted;
           el.loop = this.cConfig.videoLoop;
           el.playsInline = true;
-          el.preload = 'metadata'; 
-          
-          // [PATCH]: Pasang poster HANYA di awal sebagai placeholder mentah
+          el.preload = 'metadata';
+
           if (media.thumbnail) el.poster = media.thumbnail;
           
-          // [PATCH]: Logika Anti-Flicker
           const removePoster = () => {
-            // Jika video sudah siap/mulai main, hapus poster agar tidak kedip saat replay atau seek
             el.removeAttribute('poster');
           };
 
@@ -1706,8 +1807,6 @@
             if (el.tagName === 'VIDEO') {
               el.load(); 
               
-              // [PATCH]: Cek apakah video ini sudah di-cache/preload oleh MemoryNetworkManager
-              // Jika readyState sudah cukup tinggi, hapus poster instan sebelum swipe selesai
               if (el.readyState >= 3) {
                 el.removeAttribute('poster');
               }
@@ -2687,7 +2786,8 @@
       
       handleMediaStateChange(mediaState) {
         const activeMedia = this.state.getActiveMediaData();
-        const isCarousel = activeMedia && activeMedia.type === 'carousel';
+        
+        const isCarouselFormat = activeMedia && activeMedia.format === 'carousel';
 
         if (mediaState === MEDIA_STATE.PLAYING || mediaState === MEDIA_STATE.PAUSED) {
           const rootLayer = DOMHelper.select(DOM_SELECTORS.ROOT);
@@ -2698,7 +2798,24 @@
         
         if (mediaState === MEDIA_STATE.PLAYING) {
           clearTimeout(this.state.timers.loading);
-          if (!isCarousel) WakeLockManager.request(); else WakeLockManager.release();
+          
+          let needsWakeLock = true;
+          
+          if (isCarouselFormat) {
+             const carouselHandler = this.state.currentMedia;
+             if (carouselHandler && carouselHandler.mediaItems) {
+                const currentSlide = carouselHandler.mediaItems[carouselHandler.currentIndex];
+                if (currentSlide && currentSlide.type !== 'video') {
+                   needsWakeLock = false;
+                }
+             }
+          }
+
+          if (needsWakeLock) {
+             WakeLockManager.request();
+          } else {
+             WakeLockManager.release();
+          }
 
           if (activeMedia && activeMedia.format !== 'carousel') {
             const trackId = activeMedia.id || `story_${this.state.currentVideoIndex}_${this.state.currentSubIndex}`;
@@ -3635,10 +3752,6 @@
         });
       }
 
-      // ==========================================
-      // 🚀 PUBLIC API (Developer Facing)
-      // ==========================================
-
       get currentIndex() { return this.state?.currentVideoIndex || 0; }
       get currentSubIndex() { return this.state?.currentSubIndex || 0; }
       get isPlaying() { return this.state?.currentMedia?.getState() === MEDIA_STATE.PLAYING; }
@@ -3742,10 +3855,6 @@
         this.appEvents.off(`PUBLIC:${eventName}`, callback); 
         return this; 
       }
-
-      // ==========================================
-      // ⚙️ INTERNAL METHODS
-      // ==========================================
 
       injectDOM() {
         if (document.querySelector('.js-layout-wrapper')) return;
@@ -4086,6 +4195,25 @@
       }
       
       attachWindowBindings() {
+        const landscapeBlockerQuery = window.matchMedia('(orientation: landscape) and (max-height: 600px) and (pointer: coarse)');
+        
+        landscapeBlockerQuery.addEventListener('change', (e) => {
+          const rootLayer = document.querySelector('.js-layout-wrapper');
+          const isLandscapeAllowed = rootLayer?.getAttribute('data-allow-landscape') === 'true';
+          
+          if (e.matches && !isLandscapeAllowed) {
+            if (this.state.currentMedia?.getState() === MEDIA_STATE.PLAYING) {
+              this.state.wasPlayingBeforeLandscape = true;
+              this.appEvents.emit('PLAYER:FORCE_PAUSE');
+            }
+          } else {
+            if (this.state.wasPlayingBeforeLandscape && !rootLayer?.classList.contains('is-idle')) {
+              this.appEvents.emit('PLAYER:FORCE_PLAY');
+              this.state.wasPlayingBeforeLandscape = false;
+            }
+          }
+        });
+
         EventRegistry.add(document, 'fullscreenchange', () => {
           this.isProgrammaticScroll = true; clearTimeout(this.fsLockTimer); this.fsLockTimer = setTimeout(() => this.isProgrammaticScroll = false, 800);
           const rootLayer = document.querySelector(DOM_SELECTORS.ROOT), bI = document.querySelectorAll('.js-btn-clean .fab-inner');
@@ -4154,10 +4282,6 @@
         window.addEventListener('orientationchange', () => { setTimeout(() => { const currentFeed = DOMHelper.select(DOM_SELECTORS.FEED); if (currentFeed) { const slots = currentFeed.querySelectorAll('.story-slot'); if (slots[this.state.currentVideoIndex]) { slots[this.state.currentVideoIndex].scrollIntoView({ block: 'center' }); } } }, 150); });
       }
 
-      // ==========================================
-      // 🧹 LIFECYCLE
-      // ==========================================
-
       async destroy() {
         if (typeof this.state.config.onBeforeClose === 'function') {
           try {
@@ -4167,22 +4291,50 @@
             if (shouldClose === false) { if (wasPlaying) this.appEvents.emit('PLAYER:FORCE_PLAY'); return; }
           } catch (err) { return; }
         }
-        if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
         
-        const executeDestroy = () => {
-          const layout = document.querySelector(DOM_SELECTORS.ROOT); if (layout) layout.classList.add('is-closing');
+        if (document.fullscreenElement) {
+          document.exitFullscreen().catch(() => {});
+        }
+        
+        const executeDestroy = async () => {
+          const layout = document.querySelector(DOM_SELECTORS.ROOT); 
+          if (layout) layout.classList.add('is-closing');
           
           this.playerManager.flushAnalytics();
 
-          this.appEvents.emit('PLAYER:FORCE_PAUSE'); WakeLockManager.release();
-          if ('mediaSession' in navigator) { navigator.mediaSession.metadata = null; navigator.mediaSession.playbackState = 'none'; }
-          EventRegistry.clear('app'); if (this.feedObserver) { this.feedObserver.disconnect(); this.feedObserver = null; } this.observers.forEach(obs => obs.disconnect()); this.observers = [];
-          try { this.state.currentMedia?.destroy(); } catch (e) {} try { this.state.currentAmbient?.destroy(); } catch (e) {}
-          this.state.currentMedia = null; this.state.currentAmbient = null; this.state.playlist = [];
-          window.history.replaceState({}, '', window.location.pathname); const metaTheme = document.getElementById('meta-theme-color'); if (metaTheme) metaTheme.setAttribute('content', '#0f0f11');
-          DominantColorService.destroy(); MediaPool.clear();MemoryNetworkManager.destroyAll();this.hardwareManager.destroy();
+          this.appEvents.emit('PLAYER:FORCE_PAUSE'); 
+          
+          await WakeLockManager.release(); 
+          
+          if ('mediaSession' in navigator) { 
+            navigator.mediaSession.metadata = null; 
+            navigator.mediaSession.playbackState = 'none'; 
+          }
+          
+          EventRegistry.clear('app'); 
+          if (this.feedObserver) { this.feedObserver.disconnect(); this.feedObserver = null; } 
+          this.observers.forEach(obs => obs.disconnect()); 
+          this.observers = [];
+          
+          try { this.state.currentMedia?.destroy(); } catch (e) {} 
+          try { this.state.currentAmbient?.destroy(); } catch (e) {}
+          
+          this.state.currentMedia = null; 
+          this.state.currentAmbient = null; 
+          this.state.playlist = [];
+          
+          window.history.replaceState({}, '', window.location.pathname); 
+          const metaTheme = document.getElementById('meta-theme-color'); 
+          if (metaTheme) metaTheme.setAttribute('content', '#0f0f11');
+          
+          DominantColorService.destroy(); 
+          MediaPool.clear();
+          MemoryNetworkManager.destroyAll();
+          this.hardwareManager.destroy();
+          
           setTimeout(() => { if (layout) layout.remove(); }, 600);
         };
+        
         executeDestroy();
       }
     }
@@ -4223,8 +4375,7 @@
           if (globalThis.YT && globalThis.YT.Player) {
             launchStory();
           } else {
-            if (!window.ytCallbacks) window.ytCallbacks = [];
-            window.ytCallbacks.push(launchStory);
+            window.pendingStoryLaunch = launchStory;
             
             if (!document.querySelector('script[src*="youtube.com/iframe_api"]')) {
               const scriptTag = document.createElement('script');
@@ -4233,8 +4384,10 @@
               document.head.appendChild(scriptTag);
               
               window.onYouTubeIframeAPIReady = () => {
-                window.ytCallbacks.forEach(cb => cb());
-                window.ytCallbacks = [];
+                if (typeof window.pendingStoryLaunch === 'function') {
+                  window.pendingStoryLaunch();
+                  window.pendingStoryLaunch = null;
+                }
               };
             }
           }
