@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "title": "Accueil | Starter App",
+    "description": "Constructeur d'applications web modernes."
+  },
+  "hero": {
+    "badge": "Nouveau: La version 2.0 est arrivée",
+    "title_start": "Construisez quelque chose",
+    "title_highlight": "de beau aujourd'hui",
+    "description": "La façon moderne de construire des applications web. Rapide, flexible et conçu pour les développeurs qui se soucient de leur art.",
+    "image_alt": "Dashboard Preview",
+    "primary_btn": {
+      "label": "Commencer à Construire",
+      "url": "/start"
+    },
+    "secondary_btn": {
+      "label": "Voir la Démo",
+      "url": "/demo"
+    },
+    "note": "Aucune carte de crédit requise"
+  },
+  "features": {
+    "heading": "Tout Ce Dont Vous Avez Besoin",
+    "subheading": "Fonctionnalités puissantes pour vous aider à construire plus vite.",
+    "list": {
+      "speed": {
+        "title": "Rapide comme l'Éclair",
+        "description": "Optimisé pour les performances. Vos applications se chargent instantanément."
+      },
+      "design": {
+        "title": "Design Magnifique",
+        "description": "Conçu avec soin. Chaque pixel a du sens et un but."
+      },
+      "security": {
+        "title": "Sécurisé par Défaut",
+        "description": "Sécurité de niveau entreprise. Vos données sont protégées à chaque couche."
+      }
+    }
+  },
+  "stats": {
+    "community": "Communauté de Dév",
+    "community_val": "10K+",
+    "projects": "Projets Construits",
+    "projects_val": "50K+",
+    "uptime": "Disponibilité 24/7",
+    "uptime_val": "99,9%",
+    "rating": "Note Utilisateurs",
+    "rating_val": "4.9/5"
+  }
+}

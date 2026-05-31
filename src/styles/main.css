@@ -1,60 +1,129 @@
-/* src/styles/main.css */
 @import "tailwindcss";
 
-/* Menginjeksi Utilitas Custom ke dalam ekosistem Tailwind */
+/* ========================================
+   Direction Variable for RTL/LTR Toggles
+   ======================================== */
+
+:root {
+  --dir: 1;
+}
+
+[dir="rtl"] {
+  --dir: -1;
+}
+
+/* ========================================
+   Multi-Language Font System
+   ======================================== */
+
+:root {
+  /* Latin-based languages (Indonesian, English, Spanish, Portuguese, French, German, Russian) */
+  --font-latin: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
+
+  /* Japanese - CJK with Hiragana, Katakana, Kanji support */
+  --font-japanese: 'Noto Sans JP Variable', 'Noto Sans CJK JP', 'Hiragino Kaku Gothic ProN', 'Meiryo', ui-sans-serif, system-ui, sans-serif;
+
+  /* Chinese Simplified - CJK with Hanzi support */
+  --font-chinese: 'Noto Sans SC Variable', 'Noto Sans CJK SC', 'PingFang SC', 'Microsoft YaHei', ui-sans-serif, system-ui, sans-serif;
+
+  /* Arabic - RTL with proper Arabic script support */
+  --font-arabic: 'Noto Sans Arabic Variable', 'Noto Sans Arabic', 'Arial', ui-sans-serif, system-ui, sans-serif;
+
+  /* Hindi - Devanagari script support */
+  --font-devanagari: 'Noto Sans Variable', 'Noto Sans Devanagari', 'Mangal', ui-sans-serif, system-ui, sans-serif;
+
+  /* Korean - Hangul with Jamo support */
+  --font-hangul: 'Noto Sans KR Variable', 'Noto Sans KR', 'Malgun Gothic', 'Apple SD Gothic Neo', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Apply fonts based on lang attribute */
+[lang="id-ID"],
+[lang="en-US"],
+[lang="es-ES"],
+[lang="pt-BR"],
+[lang="fr-FR"],
+[lang="de-DE"],
+[lang="ru-RU"] {
+  font-family: var(--font-latin);
+}
+
+[lang="ja-JP"] {
+  font-family: var(--font-japanese);
+}
+
+[lang="zh-CN"] {
+  font-family: var(--font-chinese);
+}
+
+[lang="ar-SA"] {
+  font-family: var(--font-arabic);
+}
+
+[lang="hi-IN"] {
+  font-family: var(--font-devanagari);
+}
+
+[lang="ko-KR"] {
+  font-family: var(--font-hangul);
+}
+
 @layer utilities {
   .ease-emphasized {
     transition-timing-function: cubic-bezier(0.05, 0.7, 0.1, 1);
   }
-  
+
   .gpu-boost {
     transform: translateZ(0);
     will-change: transform, opacity;
+    contain: layout style paint;
   }
-  
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;
+
+  .contain-layout {
+    contain: layout;
   }
-  
-  .hide-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+
+  .contain-layout-style {
+    contain: layout style;
+  }
+
+  .contain-layout-style-paint {
+    contain: layout style paint;
+  }
+
+  @media (width < 640px) {
+    .gpu-boost {
+      will-change: auto;
+    }
+  }
+
+  @media (width >= 1024px) {
+    .gpu-boost {
+      backface-visibility: hidden;
+      perspective: 1000px;
+    }
   }
 }
 
-/* Base Styles & Global Resets */
 @layer base {
-  [x-cloak] { 
-    display: none !important; 
-  }
-  
-  /* Smart Scroll Behavior */
-  html {
-    scroll-behavior: smooth;
-  }
-  
-  /* RTL Logical Alignment Fix */
-  [dir="rtl"] {
-    text-align: start;
+  [x-cloak] {
+    display: none !important;
   }
 
-  /* Logical Scrollbar Premium Design */
-  ::-webkit-scrollbar { 
-    inline-size: 10px; 
+  ::-webkit-scrollbar {
+    inline-size: 10px;
   }
-  ::-webkit-scrollbar-track { 
-    background: #020617; /* slate-950 */
+  ::-webkit-scrollbar-track {
+    background: #020617;
   }
-  ::-webkit-scrollbar-thumb { 
-    background: #1e293b; /* slate-800 */
-    border-radius: 5px; 
-    border: 2px solid #020617; 
+  ::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 5px;
+    border: 2px solid #020617;
   }
-  ::-webkit-scrollbar-thumb:hover { 
-    background: #334155; /* slate-700 */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #334155;
   }
 
-  /* Smart Scroll Lock untuk Mobile Menu Navbar */
   .no-scroll {
     position: fixed;
     inset-inline: 0;
@@ -65,24 +134,39 @@
   }
 }
 
-/* --- i18n Hydration States (Zero Layout Shift) --- */
-html.i18n-loading [data-i18n] {
-  color: transparent !important;
-  background-color: rgba(255,255,255,0.03);
-  border-radius: 0.375rem;
-  opacity: 1 !important;
-  visibility: visible !important;
-  transition: none !important;
-  pointer-events: none;
+@media (width >= 1024px) {
+  ::-webkit-scrollbar {
+    inline-size: 12px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #334155 0%, #1e293b 100%);
+    border-radius: 6px;
+    border: 2px solid #0f172a;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #475569 0%, #334155 100%);
+  }
 }
 
-html.i18n-loading [data-i18n-attr] {
-  color: inherit !important;
-  background-color: transparent !important;
+[x-show] {
+  min-block-size: 0;
 }
 
-html.i18n-ready [data-i18n] {
-  color: inherit;
-  background-color: transparent;
-  transition: color 0.3s ease, background-color 0.3s ease;
+[x-cloak] + * {
+  min-block-size: 0;
+}
+
+@media (width < 640px) {
+  [role="listbox"] {
+    min-inline-size: 12rem;
+  }
+}
+
+@media (width >= 1024px) and (prefers-reduced-motion: no-preference) {
+  .bg-linear-to-r,
+  .bg-linear-to-b {
+    background-attachment: fixed;
+  }
 }

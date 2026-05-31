@@ -1,36 +1,58 @@
 {% extends "main.njk" %}
 
 {% block content %}
-  <section class="min-block-[90vh] flex items-center justify-center relative overflow-hidden px-6">
-    
-    {# Background Aura Dekoratif (Logical Centering) #}
-    <div class="absolute inset-bs-1/2 inset-s-1/2 ltr:-translate-x-1/2 rtl:translate-x-1/2 -translate-y-1/2 inline-[600px] block-[600px] bg-violet-600/10 blur-[120px] rounded-full -z-10 animate-pulse gpu-boost"></div>
+  <section class="relative pbs-52 pbe-28 px-6 text-center overflow-hidden min-block-screen flex flex-col items-center justify-center noise-texture">
+    <!-- Enhanced Background Effects with Morphing Shapes -->
+    <div class="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+      <div class="absolute inset-bs-0 inset-s-1/2 ltr:-translate-x-1/2 rtl:translate-x-1/2 inline-[150%] block-[150%] bg-[radial-gradient(circle_at_top,var(--tw-gradient-stops))] from-violet-600/20 via-fuchsia-600/10 to-transparent -z-10 blur-3xl animate-pulse-glow"></div>
+      <div class="absolute inset-bs-[10%] inset-s-[10%] inline-96 block-96 bg-violet-600/10 blur-[100px] animate-float morph-shape"></div>
+      <div class="absolute inset-be-[10%] inset-e-[10%] inline-80 block-80 bg-fuchsia-600/8 blur-[80px] animate-float delay-300 morph-shape"></div>
+      <div class="hidden sm:absolute sm:inset-0 opacity-30 grid-pattern"></div>
+    </div>
 
-    <div class="text-center z-10 max-inline-2xl mx-auto">
-      {# 1. Heading 404 - Huge & Logical #}
-      <h1 class="text-[10rem] md:text-[18rem] font-black leading-none tracking-tighter bg-linear-to-b from-white via-white to-slate-800 bg-clip-text text-transparent opacity-20 select-none">
-        {{ i18n.t('page.heading') }}
-      </h1>
+    <div class="max-inline-5xl mx-auto relative z-10">
+      <!-- Big 404 Number -->
+      <div class="relative mb-8 animate-fade-in-up">
+        <h1 class="text-[10rem] md:text-[16rem] lg:text-[20rem] font-black leading-none tracking-tighter bg-gradient-to-b from-white/40 via-white/20 to-transparent bg-clip-text text-transparent select-none">
+          {{ i18n.t('page.heading') }}
+        </h1>
+        <div class="absolute inset-0 bg-gradient-to-b from-violet-600/30 to-fuchsia-600/20 blur-3xl -z-10"></div>
+      </div>
 
-      {# 2. Subheading - Menggunakan mbs (margin-block-start) negatif untuk overlap yang presisi #}
-      <h2 class="text-3xl md:text-5xl font-black text-white mbe-6 mbs-[-2.5rem] md:mbs-[-5rem] tracking-tight">
-        {{ i18n.t('page.subheading') }}
+      <!-- Subheading -->
+      <h2 class="text-4xl md:text-6xl lg:text-7xl font-black text-white mbe-6 tracking-tight animate-fade-in-up delay-100">
+        <span class="bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
+          {{ i18n.t('page.subheading') }}
+        </span>
       </h2>
 
-      {# 3. Description - max-inline-md menggantikan max-w-md #}
-      <p class="text-slate-300 text-lg md:text-xl mbe-10 max-inline-md mx-auto font-medium leading-relaxed">
+      <!-- Description -->
+      <p class="text-xl md:text-2xl lg:text-3xl text-slate-300 max-inline-3xl mx-auto mbe-14 leading-relaxed font-medium animate-fade-in-up delay-200">
         {{ i18n.t('page.description') }}
       </p>
 
-      {# 4. Button - Smart Directional Arrow #}
-      <a href="/" class="group inline-flex items-center gap-3 px-10 pbs-4 pbe-4 bg-white text-slate-950 font-black rounded-2xl transition-all duration-500 ease-emphasized transform hover:scale-105 active:scale-95 shadow-[0_20px_40px_rgba(255,255,255,0.15)] hover:bg-slate-100 gpu-boost">
-        
-        <svg class="inline-5 block-5 transition-transform duration-500 ltr:group-hover:-translate-x-1 rtl:group-hover:translate-x-1" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-          <path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>
-        </svg>
+      <!-- Back Button with Modern Interactions -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-5 mbe-14 animate-fade-in-up delay-300">
+        <a href="/" class="magnetic-btn btn-press ripple-effect group relative inline-full sm:inline-auto min-block-14 px-14 py-4 bg-white text-slate-950 rounded-2xl font-black text-lg flex items-center justify-center transition-all duration-500 ease-emphasized hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:scale-105 overflow-hidden">
+          <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></span>
+          <span class="relative flex items-center gap-3">
+            <svg class="inline-5 block-5 transition-transform duration-300 ltr:group-hover:-translate-x-1 rtl:group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m12 19-7-7 7-7"/><path d="M19 12H5"/>
+            </svg>
+            {{ i18n.t('page.button_text') }}
+          </span>
+        </a>
+      </div>
 
-        <span>{{ i18n.t('page.button_text') }}</span>
-      </a>
+      <!-- Suggested links with smooth color transition -->
+      <div class="flex flex-wrap items-center justify-center gap-6 text-sm text-slate-400 animate-fade-in-up">
+        <span class="font-medium">{{ i18n.t('page.or_try') }}</span>
+        <a href="/" class="color-shift text-slate-400 hover:text-white transition-colors duration-300 font-medium hover:underline decoration-violet-500 underline-offset-4">{{ i18n.t('home') }}</a>
+        <span class="text-slate-700">•</span>
+        <a href="/features" class="color-shift text-slate-400 hover:text-white transition-colors duration-300 font-medium hover:underline decoration-violet-500 underline-offset-4">{{ i18n.t('features') }}</a>
+        <span class="text-slate-700">•</span>
+        <a href="/pricing" class="color-shift text-slate-400 hover:text-white transition-colors duration-300 font-medium hover:underline decoration-violet-500 underline-offset-4">{{ i18n.t('pricing') }}</a>
+      </div>
     </div>
   </section>
 {% endblock %}

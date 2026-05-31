@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "title": "Kontaktieren Sie uns | Starter App",
+    "description": "Kontaktieren Sie uns für Fragen und Unterstützung."
+  },
+  "contact": {
+    "badge": "Kontakt Aufnehmen",
+    "title_part1": "Lassen Sie uns",
+    "title_highlight": "verbinden",
+    "description": "Haben Sie Fragen oder möchten zusammenarbeiten? Wir würden gerne von Ihnen hören. Senden Sie uns eine Nachricht und wir werden so schnell wie möglich antworten.",
+    "form_title": "Eine Nachricht Senden",
+    "form_subtitle": "Füllen Sie das untenstehende Formular aus und wir werden uns in Kürze bei Ihnen melden.",
+    "social_title": "Folgen Sie uns",
+    "social_subtitle": "Bleiben Sie mit unseren neuesten Nachrichten auf Social Media auf dem Laufenden",
+    "info": {
+      "response_time": {
+        "title": "Schnelle Antwort",
+        "description": "Wir bemühen uns, jede Nachricht innerhalb von 24 Stunden an Werktagen zu beantworten."
+      },
+      "working_hours": {
+        "title": "Arbeitszeiten",
+        "description": "Montag - Freitag: 09:00 - 18:00. Wochenenden: Nach Priorität."
+      },
+      "support": {
+        "title": "Laufende Unterstützung",
+        "description": "Unser Unterstützungs-Team ist immer bereit, Ihnen bei der Lösung technischer Probleme zu helfen."
+      }
+    },
+    "form": {
+      "name": "Name",
+      "name_placeholder": "Geben Sie Ihren Namen ein",
+      "email": "E-Mail",
+      "email_placeholder": "name@beispiel.de",
+      "subject": "Betreff",
+      "subject_placeholder": "Was würden Sie gerne besprechen?",
+      "message": "Nachricht",
+      "message_placeholder": "Erzählen Sie uns mehr über Ihre Anfrage...",
+      "submit": "Nachricht Senden"
+    }
+  },
+  "email_label": "E-Mail",
+  "email_value": "hello@starter.app",
+  "phone_label": "Telefon",
+  "phone_value": "+49 30 12345678",
+  "location_label": "Standort",
+  "location_value": "Berlin, Deutschland"
+}

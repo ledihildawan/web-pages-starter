@@ -6,21 +6,35 @@
   "plans": [
     {
       "id": "hobby",
-      "price": "0",
+      "pricing": {
+        "base": 0
+      },
       "color": "slate",
       "featured": false,
       "feature_count": 3
     },
     {
       "id": "pro",
-      "price": "29",
+      "pricing": {
+        "base": 29,
+        "id-ID": 500000,
+        "ar-SA": 108.75,
+        "ja-JP": 4500,
+        "zh-CN": 210
+      },
       "color": "violet",
       "featured": true,
       "feature_count": 4
     },
     {
       "id": "enterprise",
-      "price": "99",
+      "pricing": {
+        "base": 99,
+        "id-ID": 1500000,
+        "ar-SA": 370,
+        "ja-JP": 15000,
+        "zh-CN": 720
+      },
       "color": "slate",
       "featured": false,
       "feature_count": 4

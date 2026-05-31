@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "title": "Teste i18n | Demo",
+    "description": "Página de teste completa de recursos de internacionalização"
+  },
+  "hero": {
+    "badge": "Recursos i18n",
+    "title": "Teste completo de <span class='text-violet-400'>i18n</span>",
+    "description": "Experimente todos os recursos i18n: tradução, pluralização, formatação de números, moeda e conversão de moeda."
+  },
+  "language_info": {
+    "title": "Informações de Idioma Atual",
+    "code": "Código de Idioma",
+    "currency": "Moeda",
+    "direction": "Direção do Texto",
+    "current_code": "pt-BR",
+    "current_currency": "BRL",
+    "current_direction": "LTR (Esquerda para Direita)"
+  },
+  "numbers": {
+    "title": "Formatação de Números",
+    "description": "Números formatados de acordo com o idioma ativo.",
+    "large": "Número Grande",
+    "decimal": "Decimal",
+    "million": "Milhão",
+    "percent": "Porcentagem",
+    "raw": "Raw"
+  },
+  "currency": {
+    "title": "Formatação de Moeda",
+    "description": "Preços em USD convertidos para a moeda do idioma ativo.",
+    "small": "Pequeno",
+    "medium": "Médio",
+    "large": "Grande",
+    "enterprise": "Empresarial",
+    "base": "USD (Base)"
+  },
+  "currency_comparison": {
+    "title": "Comparação de Moedas",
+    "description": "Mesmo preço ($99 USD) em todas as moedas suportadas.",
+    "base_price": "Preço Base",
+    "idr": "IDR",
+    "usd": "USD",
+    "jpy": "JPY",
+    "cny": "CNY",
+    "sar": "SAR"
+  },
+  "pluralization": {
+    "title": "Pluralização",
+    "description": "As formas plurais variam de acordo com o idioma.",
+    "item_title": "Item (Substantivo)",
+    "user_title": "Usuário (Pessoa)",
+    "product_title": "Produto (Bens)"
+  },
+  "form": {
+    "title": "Formulário com Placeholders Traduzidos",
+    "description": "Placeholders e rótulos carregados de arquivos de localização.",
+    "name_label": "Nome",
+    "name_placeholder": "Digite seu nome completo",
+    "email_label": "E-mail",
+    "email_placeholder": "exemplo@email.com",
+    "message_label": "Mensagem",
+    "message_placeholder": "Digite sua mensagem aqui...",
+    "submit": "Enviar"
+  },
+  "missing_keys": {
+    "title": "Manipulador de Chaves Ausentes",
+    "description": "Chaves ausentes são exibidas entre colchetes."
+  },
+  "html_content": {
+    "title": "Conteúdo HTML",
+    "description": "As traduções podem incluir tags HTML para estilo.",
+    "example": "Este é um exemplo com <span class='text-emerald-400'>destaque colorido</span> e <strong>texto em negrito</strong>.",
+    "note": "Nota: HTML nas traduções deve ter um único elemento raiz."
+  },
+  "switcher": {
+    "title": "Trocar Idioma",
+    "description": "Clique nos botões abaixo para mudar o idioma e ver i18n em ação."
+  },
+  "advanced": {
+    "title": "Formatação Avançada",
+    "description": "Recursos avançados de formatação para porcentagens, unidades, bytes, listas e ordinais.",
+    "percentages": "Porcentagens",
+    "units": "Unidades",
+    "bytes": "Bytes",
+    "bytes_unit": "bytes",
+    "lists": "Listas",
+    "ordinals": "Ordinais",
+    "cardinals": "Cardinais",
+    "scientific": "Notação Científica",
+    "abbreviated": "Abreviado",
+    "date_formats": "Formatos de Data",
+    "time_formats": "Formatos de Hora",
+    "durations": "Durações",
+    "relative_time": "Tempo Relativo",
+    "regional_pricing": "Preços Regionais",
+    "fifty_percent": "Cinquenta Por Cento",
+    "small_percent": "Pequena Porcentagem",
+    "ninety_nine": "Noventa e Nove",
+    "hundred": "Cem",
+    "kilobyte": "Kilobyte",
+    "distance": "Distância",
+    "temperature": "Temperatura",
+    "weight": "Peso",
+    "half_kb": "Meio KB",
+    "one_and_half_kb": "Um KB e Meio",
+    "one_mb": "Um MB",
+    "one_gb": "Um GB",
+    "two_items": "Dois Itens",
+    "three_items": "Três Itens",
+    "four_items": "Quatro Itens",
+    "date_short": "Data Curta",
+    "date_long": "Data Longa",
+    "time_short": "Hora Curta",
+    "time_long": "Hora Longa",
+    "day_ago": "há 1 dia",
+    "months_ago": "há 2 meses",
+    "hour_in": "em 1 hora",
+    "starter_plan": "Plano Inicial",
+    "pro_plan": "Plano Pro",
+    "discount_20": "20% Desconto",
+    "number_modes": "Modos de Número",
+    "number_modes_desc": "Demonstração de tNative (dígitos nativos) e tUniversal (universal 0-9).",
+    "native_label": "Nativo (٠١٢٣٤)",
+    "universal_label": "Universal (0-9)",
+    "plain_label": "Simples (auto)"
+  },
+  "template_macros": {
+    "title": "Macros de Template",
+    "description": "Macros para obter valores brutos sem marcação HTML.",
+    "raw_value": "Valor bruto sem formatação",
+    "current_year": "O ano atual é {{year}}"
+  }
+}

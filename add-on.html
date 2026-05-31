@@ -5,17 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Isolated Add-On Widget Component</title>
 
-        <!-- 1. Preconnect ke server Google -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
-
-        <!-- 2. Preload stylesheet agar diunduh secepat mungkin tanpa memblokir render -->
         <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
-
-        <!-- 3. Terapkan stylesheet secara asynchronous (trik media="print" -> "all") -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" media="print" onload="this.media='all'">
-
-        <!-- 4. Fallback jika user mematikan JavaScript di browsernya -->
         <noscript>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
         </noscript>
@@ -23,9 +16,6 @@
         <style>
             @layer reset, global, composition, block, exception, utility;
 
-            /* =========================================
-           1. RESET & NORMALIZE
-           ========================================= */
             @layer reset {
                 *,
                 *::after,
@@ -73,9 +63,6 @@
                 }
             }
 
-            /* =========================================
-           2. GLOBAL TOKENS
-           ========================================= */
             @layer global {
                 :root {
                     --gradient-purple: linear-gradient(to bottom, #bb2dff 0%, #8a12d8 22%, #5a0298 48%, #2f004f 78%, #140021 100%);
@@ -88,7 +75,6 @@
                     --radius-l: clamp(1rem, 2vw, 1.5rem);
                     --radius-pill: 200px;
 
-                    /* --- FLUID TYPOGRAPHY & HEIGHT (375px -> 1440px) --- */
                     --fs-title: clamp(0.875rem, calc(0.875rem + 0.375 * ((100vw - 23.4375rem) / 66.5625)), 1.25rem);
                     --lh-title: clamp(1.25rem, calc(1.25rem + 0.5 * ((100vw - 23.4375rem) / 66.5625)), 1.75rem);
                     --fs-small: clamp(0.75rem, calc(0.75rem + 0.25 * ((100vw - 23.4375rem) / 66.5625)), 1rem);
@@ -105,7 +91,6 @@
                     --size-icon-btn: clamp(1rem, calc(1rem + 0.5 * ((100vw - 23.4375rem) / 66.5625)), 1.5rem);
                     --size-icon-sm: clamp(0.875rem, 1vw, 1.25rem);
 
-                    /* --- FLUID GAPS --- */
                     --gap-card: clamp(0.75rem, calc(0.75rem + 0.25 * ((100vw - 23.4375rem) / 66.5625)), 1rem);
                     --gap-content: clamp(0.5rem, calc(0.5rem + 0.25 * ((100vw - 23.4375rem) / 66.5625)), 0.75rem);
                 }
@@ -116,9 +101,6 @@
                 }
             }
 
-            /* =========================================
-           3. COMPOSITION
-           ========================================= */
             @layer composition {
                 .addon-widget {
                     display: grid;
@@ -130,9 +112,6 @@
                 }
             }
 
-            /* =========================================
-           4. BLOCK
-           ========================================= */
             @layer block {
                 .addon-card {
                     container-type: inline-size;
@@ -269,18 +248,13 @@
                 }
             }
 
-            /* =========================================
-           5. EXCEPTION
-           ========================================= */
             @layer exception {
-
                 .addon-widget[data-layout="1x2"] > :nth-child(n+4),
                 .addon-widget[data-layout="1x2x1"] > :nth-child(n+5),
                 .addon-widget[data-layout="2x2"] > :nth-child(n+5) {
                     display: none !important;
                 }
 
-                /* --- HALF CARD --- */
                 .addon-widget[data-layout="2x2"] > *,
                 :is(.addon-widget[data-layout="1x2x1"], .addon-widget[data-layout="1x2"]) > :is(:nth-child(2), :nth-child(3)) {
                     --card-padding: 1rem 0.75rem;
@@ -308,7 +282,6 @@
                     grid-column: span 2;
                 }
 
-                /* --- FULL CARD --- */
                 :is(.addon-widget[data-layout="1x2x1"], .addon-widget[data-layout="1x2"]) > :first-child,
                 .addon-widget[data-layout="1x2x1"] > :last-child {
                     grid-column: 1 / -1;
@@ -329,7 +302,6 @@
                     gap: 1.5rem;
                 }
 
-                /* --- RESET DESKTOP --- */
                 @media (width >= 60rem) {
                     .addon-widget[data-layout="1x2"] {
                         grid-template-columns: repeat(3, 1fr);
@@ -350,9 +322,6 @@
                 }
             }
 
-            /* =========================================
-           6. UTILITY
-           ========================================= */
             @layer utility {
                 .u-bg-purple {
                     background: var(--gradient-purple) !important;
@@ -363,7 +332,6 @@
                 .u-bg-blue {
                     background: var(--gradient-blue) !important;
                 }
-                /* Tambahan utility red */
                 .u-bg-red {
                     background: var(--gradient-red) !important;
                 }
@@ -384,7 +352,6 @@
             <symbol id="icon-telp" viewbox="0 0 14 14" fill="white">
                 <path d="M4.19979 1.75009C4.6239 1.74555 5.02541 1.91815 5.32772 2.29924L5.38696 2.37785C5.43993 2.45203 5.49408 2.52538 5.54875 2.59831C5.76629 2.89016 6.04415 3.26441 6.20784 3.64079C6.31715 3.8928 6.39364 4.18152 6.36564 4.48845C6.3371 4.80399 6.20106 5.10213 5.94637 5.37029C5.75792 5.56898 5.70499 5.85727 5.8256 6.24927C5.94785 6.64503 6.23375 7.08334 6.61173 7.45809C6.98973 7.83392 7.42484 8.11172 7.81144 8.22372C8.19153 8.33352 8.46182 8.27341 8.64543 8.0796C8.88389 7.82875 9.15947 7.68877 9.45605 7.64779C9.74252 7.60848 10.018 7.66598 10.2587 7.75375C10.4927 7.84356 10.7181 7.95488 10.9315 8.08643C11.0359 8.14885 11.1219 8.20329 11.2026 8.25334C11.2935 8.3107 11.3854 8.36634 11.4784 8.42025C11.9269 8.67872 12.1707 9.06872 12.2332 9.50489C12.2935 9.92328 12.1844 10.3531 12.0013 10.7257C11.8123 11.1052 11.5478 11.4422 11.2243 11.7163C10.9115 11.979 10.5286 12.1851 10.1237 12.225C8.05811 12.4286 6.01202 11.3638 4.48006 9.8313C2.9471 8.29723 1.85593 6.224 1.75195 4.28394C1.73041 3.88062 1.8895 3.46732 2.11027 3.11784C2.34423 2.75082 2.64817 2.43302 3.00407 2.18246C3.35295 1.93808 3.77073 1.75439 4.19979 1.75009Z"/>
             </symbol>
-            <!-- Ikon Alert Tambahan untuk Kartu Keempat -->
             <symbol id="icon-alert" viewbox="0 0 14 14" fill="white">
                 <path d="M7.00008 1.16669C3.77841 1.16669 1.16675 3.77835 1.16675 7.00002C1.16675 10.2217 3.77841 12.8334 7.00008 12.8334C10.2217 12.8334 12.8334 10.2217 12.8334 7.00002C12.8334 3.77835 10.2217 1.16669 7.00008 1.16669ZM7.58341 9.91669H6.41675V8.75002H7.58341V9.91669ZM7.58341 7.58335H6.41675V4.08335H7.58341V7.58335Z"/>
             </symbol>
@@ -393,139 +360,165 @@
             </symbol>
         </svg>
 
-        <!-- WIDGET ADD ON -->
-        <section class="addon-widget" aria-label="Penawaran Add On Ekstra" data-layout="1x2">
+        <header style="text-align: center; margin-bottom: 3rem;">
+            <h1>Add-On Widget</h1>
+        </header>
 
-            <!-- CARD 1 -->
-            <article class="addon-card u-bg-purple">
-                <figure class="addon-media">
-                    <picture>
-                        <source media="(width >= 60rem)" srcset="public/a81mlvgju5j62wvqsx5d.webp">
-                        <source media="(width >= 48rem)" srcset="public/bjtgaipbbxcsboikozeg.webp">
-                        <img src="public/rhifer5ysidnuiuzzt5z.webp" alt="Ilustrasi Roaming" fetchpriority="high" decoding="sync" width="120" height="120">
-                    </picture>
-                </figure>
-                <div class="addon-content">
-                    <div class="addon-badge">
-                        <span class="icon-wrapper">
-                            <svg>
-                                <use href="#icon-roaming"></use>
-                            </svg>
-                        </span>
-                        <span>Roaming Global</span>
-                    </div>
-                    <header class="addon-title-wrapper">
-                        <h3 class="addon-title">Internet lancar di 100+ negara tanpa ganti kartu</h3>
-                    </header>
-                    <button type="button" class="addon-btn">
-                        <span>Aktifkan Roaming</span>
-                        <span class="icon-wrapper">
-                            <svg>
-                                <use href="#icon-chevron"></use>
-                            </svg>
-                        </span>
-                    </button>
-                </div>
-            </article>
-
-            <!-- CARD 2 -->
-            <article class="addon-card u-bg-orange">
-                <figure class="addon-media">
-                    <picture>
-                        <source media="(width >= 60rem)" srcset="public/ngltvh1vrq4i7bgrrhrn.webp">
-                        <source media="(width >= 48rem)" srcset="public/in9mlcxattrz7aetk2mb.webp">
-                        <img src="public/wwsnrurxefz6ufsfrvsy.webp" alt="Ilustrasi Layanan Digital" fetchpriority="high" decoding="sync" width="120" height="120">
-                    </picture>
-                </figure>
-                <div class="addon-content">
-                    <div class="addon-badge">
-                        <span class="icon-wrapper">
-                            <svg>
-                                <use href="#icon-digital"></use>
-                            </svg>
-                        </span>
-                        <span>Hiburan Digital</span>
-                    </div>
-                    <header class="addon-title-wrapper">
-                        <h3 class="addon-title">Akses VIP film & musik favoritmu tanpa jeda iklan</h3>
-                    </header>
-                    <button type="button" class="addon-btn">
-                        <span>Langganan Premium</span>
-                        <span class="icon-wrapper">
-                            <svg>
-                                <use href="#icon-chevron"></use>
-                            </svg>
-                        </span>
-                    </button>
-                </div>
-            </article>
-
-            <!-- CARD 3 -->
-            <article class="addon-card u-bg-blue">
-                <figure class="addon-media">
-                    <picture>
-                        <source media="(width >= 60rem)" srcset="public/qptilhcsjbpibsfiq0ku.webp">
-                        <source media="(width >= 48rem)" srcset="public/lixov2qwe9agzwuewkjf.webp">
-                        <img src="public/hkjhwlfsuuuv8rh1fjt1.webp" alt="Ilustrasi Telp dan SMS" fetchpriority="high" decoding="sync" width="120" height="120">
-                    </picture>
-                </figure>
-                <div class="addon-content">
-                    <div class="addon-badge">
-                        <span class="icon-wrapper">
-                            <svg>
-                                <use href="#icon-telp"></use>
-                            </svg>
-                        </span>
-                        <span>Ekstra Kuota</span>
-                    </div>
-                    <header class="addon-title-wrapper">
-                        <h3 class="addon-title">Bebas nelpon & SMS sepuasnya ke semua operator</h3>
-                    </header>
-                    <button type="button" class="addon-btn">
-                        <span>Beli Ekstra Kuota</span>
-                        <span class="icon-wrapper">
-                            <svg>
-                                <use href="#icon-chevron"></use>
-                            </svg>
-                        </span>
-                    </button>
-                </div>
-            </article>
-
-            <!-- CARD 4 (Tersembunyi jika layout 1x2, tampil jika layout 2x2 atau 1x2x1) -->
-            <article class="addon-card u-bg-red">
-                <figure class="addon-media">
-                    <!-- Ganti src di bawah ini dengan gambar ilustrasi darurat/promo jika ada -->
-                    <picture>
-                        <source media="(width >= 60rem)" srcset="public/qptilhcsjbpibsfiq0ku.webp">
-                        <source media="(width >= 48rem)" srcset="public/lixov2qwe9agzwuewkjf.webp">
-                        <img src="public/hkjhwlfsuuuv8rh1fjt1.webp" alt="Ilustrasi Promo Kilat" fetchpriority="high" decoding="sync" width="120" height="120">
-                    </picture>
-                </figure>
-                <div class="addon-content">
-                    <div class="addon-badge">
-                        <span class="icon-wrapper">
-                            <svg>
-                                <use href="#icon-alert"></use>
-                            </svg>
-                        </span>
-                        <span>Promo Kilat</span>
-                    </div>
-                    <header class="addon-title-wrapper">
-                        <h3 class="addon-title">Nikmati diskon hingga 50% untuk pembelian hari ini</h3>
-                    </header>
-                    <button type="button" class="addon-btn">
-                        <span>Lihat Promo</span>
-                        <span class="icon-wrapper">
-                            <svg>
-                                <use href="#icon-chevron"></use>
-                            </svg>
-                        </span>
-                    </button>
-                </div>
-            </article>
-
-        </section>
+        <main>
+            <section>
+                <header style="margin-block: 24px 32px; text-align: center;">
+                    <h2 style="color: #181C21;">Penawaran Paket Lainnya</h2>
+                    <p style="color: #757F90">Berbagai pilihan untuk kebutuhanmu</p>
+                </header>
+                <section class="addon-widget" data-layout="1x2">
+                    <article class="addon-card u-bg-purple">
+                        <figure class="addon-media">
+                            <picture>
+                                <source media="(width >= 60rem)" srcset="public/a81mlvgju5j62wvqsx5d.webp">
+                                <source media="(width >= 48rem)" srcset="public/bjtgaipbbxcsboikozeg.webp">
+                                <img src="public/rhifer5ysidnuiuzzt5z.webp" alt="Ilustrasi Roaming" width="120" height="120" fetchpriority="high" decoding="sync">
+                            </picture>
+                        </figure>
+                        <div class="addon-content">
+                            <div class="addon-badge">
+                                <span class="icon-wrapper">
+                                    <svg>
+                                        <use href="#icon-roaming"></use>
+                                    </svg>
+                                </span>
+                                <span>Roaming Global</span>
+                            </div>
+                            <header class="addon-title-wrapper">
+                                <h3 class="addon-title">Internet lancar di 100+ negara tanpa ganti kartu</h3>
+                            </header>
+                            <button type="button" class="addon-btn">
+                                <span>Aktifkan Roaming</span>
+                                <span class="icon-wrapper">
+                                    <svg>
+                                        <use href="#icon-chevron"></use>
+                                    </svg>
+                                </span>
+                            </button>
+                        </div>
+                    </article>
+                    <article class="addon-card u-bg-orange">
+                        <figure class="addon-media">
+                            <picture>
+                                <source media="(width >= 60rem)" srcset="public/ngltvh1vrq4i7bgrrhrn.webp">
+                                <source media="(width >= 48rem)" srcset="public/in9mlcxattrz7aetk2mb.webp">
+                                <img src="public/wwsnrurxefz6ufsfrvsy.webp" alt="Ilustrasi Layanan Digital" width="120" height="120" loading="lazy" decoding="async">
+                            </picture>
+                        </figure>
+                        <div class="addon-content">
+                            <div class="addon-badge">
+                                <span class="icon-wrapper">
+                                    <svg>
+                                        <use href="#icon-digital"></use>
+                                    </svg>
+                                </span>
+                                <span>Hiburan Digital</span>
+                            </div>
+                            <header class="addon-title-wrapper">
+                                <h3 class="addon-title">Akses VIP film & musik favoritmu tanpa jeda iklan</h3>
+                            </header>
+                            <button type="button" class="addon-btn">
+                                <span>Langganan Premium</span>
+                                <span class="icon-wrapper">
+                                    <svg>
+                                        <use href="#icon-chevron"></use>
+                                    </svg>
+                                </span>
+                            </button>
+                        </div>
+                    </article>
+                    <article class="addon-card u-bg-blue">
+                        <figure class="addon-media">
+                            <picture>
+                                <source media="(width >= 60rem)" srcset="public/qptilhcsjbpibsfiq0ku.webp">
+                                <source media="(width >= 48rem)" srcset="public/lixov2qwe9agzwuewkjf.webp">
+                                <img src="public/hkjhwlfsuuuv8rh1fjt1.webp" alt="Ilustrasi Telp dan SMS" width="120" height="120" loading="lazy" decoding="async">
+                            </picture>
+                        </figure>
+                        <div class="addon-content">
+                            <div class="addon-badge">
+                                <span class="icon-wrapper">
+                                    <svg>
+                                        <use href="#icon-telp"></use>
+                                    </svg>
+                                </span>
+                                <span>Ekstra Kuota</span>
+                            </div>
+                            <header class="addon-title-wrapper">
+                                <h3 class="addon-title">Bebas nelpon & SMS sepuasnya ke semua operator</h3>
+                            </header>
+                            <button type="button" class="addon-btn">
+                                <span>Beli Ekstra Kuota</span>
+                                <span class="icon-wrapper">
+                                    <svg>
+                                        <use href="#icon-chevron"></use>
+                                    </svg>
+                                </span>
+                            </button>
+                        </div>
+                    </article>
+                    <article class="addon-card u-bg-red">
+                        <figure class="addon-media">
+                            <picture>
+                                <source media="(width >= 60rem)" srcset="public/qptilhcsjbpibsfiq0ku.webp">
+                                <source media="(width >= 48rem)" srcset="public/lixov2qwe9agzwuewkjf.webp">
+                                <img src="public/hkjhwlfsuuuv8rh1fjt1.webp" alt="Ilustrasi Promo Kilat" width="120" height="120" loading="lazy" decoding="async">
+                            </picture>
+                        </figure>
+                        <div class="addon-content">
+                            <div class="addon-badge">
+                                <span class="icon-wrapper">
+                                    <svg>
+                                        <use href="#icon-alert"></use>
+                                    </svg>
+                                </span>
+                                <span>Promo Kilat</span>
+                            </div>
+                            <header class="addon-title-wrapper">
+                                <h3 class="addon-title">Nikmati diskon hingga 50% untuk pembelian hari ini</h3>
+                            </header>
+                            <button type="button" class="addon-btn">
+                                <span>Lihat Promo</span>
+                                <span class="icon-wrapper">
+                                    <svg>
+                                        <use href="#icon-chevron"></use>
+                                    </svg>
+                                </span>
+                            </button>
+                        </div>
+                    </article>
+                </section>
+                <footer style="margin-block-start: 16px; text-align: center;">
+                    <button style="border: 1px solid var(--Stroke-Red, #ED0226); box-shadow: 0px 2px 4px 0px #00000014;font-family: Poppins;
+font-weight: 600;
+font-style: SemiBold;
+font-size: 12px;
+leading-trim: NONE;
+line-height: 16px;
+letter-spacing: 0%;
+text-align: center;
+vertical-align: middle;
+background: var(--Text-Red, #ED0226);
+width: 343;
+height: 40;
+max-width: 608px;
+border-radius: Full;
+border-width: 1px;
+padding-top: M;
+padding-right: XL;
+padding-bottom: M;
+padding-left: XL;
+gap: 8;
+angle: 0 deg;
+opacity: 1;
+">Lihat Selengkapnya</button>
+                </footer>
+            </section>
+        </main>
 
         <script>
             document.addEventListener("DOMContentLoaded", () => {

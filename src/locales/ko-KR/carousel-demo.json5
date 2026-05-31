@@ -1,0 +1,17 @@
+{
+  "meta": {
+    "page_title": "Splide 지연 로드 데모 | Starter"
+  },
+  "hero": {
+    "slide_1": {
+      "title": "지연 로드의 본질",
+      "subtitle": "이미지는 대역폭을 절약하기 위해 지능적으로 로드됩니다.",
+      "alt": "아름다운 산 경치"
+    },
+    "slide_2": {
+      "title": "성능 우선",
+      "subtitle": "필요한 것만 로드하세요.",
+      "alt": "눈 쌓인 산 경치"
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "title": "ホーム | Starter App",
+    "description": "モダンなWebアプリビルダー。"
+  },
+  "hero": {
+    "badge": "NEW: バージョン 2.0 がリリース",
+    "title_start": "今すぐ",
+    "title_highlight": "美しいものを作ろう",
+    "description": "ウェブアプリケーション構築のモダンな手法。高速で柔軟、そして品質にこだわる開発者のために設計されています。",
+    "image_alt": "ダッシュボードプレビュー",
+    "primary_btn": {
+      "label": "構築を始める",
+      "url": "/start"
+    },
+    "secondary_btn": {
+      "label": "デモを見る",
+      "url": "/demo"
+    },
+    "note": "クレジットカードは不要です"
+  },
+  "features": {
+    "heading": "必要な機能がすべて揃いました",
+    "subheading": "開発スピードを加速させる強力な機能を搭載。",
+    "list": {
+      "speed": {
+        "title": "超高速",
+        "description": "パフォーマンス最適化済み。アプリが瞬時に起動します。"
+      },
+      "design": {
+        "title": "美しいデザイン",
+        "description": "細部まで丁寧に作り込み。すべてのピクセルに意味と目的があります。"
+      },
+      "security": {
+        "title": "デフォルトでセキュア",
+        "description": "エンタープライズ級セキュリティ。すべてのレイヤーでデータを保護します。"
+      }
+    }
+  },
+  "stats": {
+    "community": "開発者コミュニティ",
+    "community_val": "1万+",
+    "projects": "構築済みプロジェクト",
+    "projects_val": "5万+",
+    "uptime": "24/7稼働率",
+    "uptime_val": "99.9%",
+    "rating": "ユーザー評価",
+    "rating_val": "4.9/5"
+  }
+}

@@ -1,4 +1,9 @@
 {
+  "pricing": {
+    "badge": "Choose Your Plan"
+  },
+  "period_monthly": "mo",
+  "period_yearly": "yr",
   "hero": {
     "title_part1": "Simple, transparent ",
     "title_highlight": "pricing",
@@ -6,7 +11,10 @@
   },
   "toggle": {
     "monthly": "Monthly",
-    "yearly": "Yearly"
+    "yearly": "Yearly",
+    "yearly_hint": "billed annually",
+    "discount": "SAVE 20%",
+    "aria_label": "Toggle Pricing Plan"
   },
   "plans": {
     "hobby": {

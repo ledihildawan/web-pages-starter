@@ -1,0 +1,500 @@
+{% extends "main.njk" %}
+
+{% block content %}
+  {# Hero Section #}
+  <section class="relative pt-24 pb-16 lg:pt-32 lg:pb-20 px-6 text-center overflow-hidden">
+    {# Background Effects #}
+    <div class="absolute inset-0 -z-10">
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-violet-500/10 rounded-full blur-[120px]"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/50 to-slate-950"></div>
+    </div>
+
+    <div class="max-w-4xl mx-auto relative">
+      {# Badge #}
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-xs font-bold uppercase tracking-wider mb-8">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        {{ i18n.t('page.' + page.hero.t_key + '.badge') }}
+      </div>
+
+      {# Title #}
+      <h1 class="text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 leading-[1.1]">
+        <span class="bg-gradient-to-br from-white via-white to-slate-400 bg-clip-text text-transparent">
+          {{ i18n.html('page.' + page.hero.t_key + '.title') }}
+        </span>
+      </h1>
+
+      {# Description #}
+      <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-12 leading-relaxed">
+        {{ i18n.t('page.' + page.hero.t_key + '.description') }}
+      </p>
+
+      {# Quick Stats #}
+      <div class="flex items-center justify-center gap-8 md:gap-12 text-sm">
+        <div class="flex items-center gap-3">
+          <span class="text-2xl">🌍</span>
+          <div class="text-left">
+            <div class="text-2xl font-black text-white leading-none">12</div>
+            <div class="text-xs text-slate-500">{{ i18n.t('page.language_info.title') }}</div>
+          </div>
+        </div>
+        <div class="w-px h-12 bg-white/10"></div>
+        <div class="flex items-center gap-3">
+          <span class="text-2xl">💱</span>
+          <div class="text-left">
+            <div class="text-2xl font-black text-white leading-none">5</div>
+            <div class="text-xs text-slate-500">{{ i18n.t('page.currency.title') }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {# Language Info Bar #}
+  <section class="py-8 px-6 border-y border-white/5 bg-slate-900/30">
+    <div class="max-w-5xl mx-auto">
+      <div class="flex items-center justify-center gap-4 md:gap-8 flex-wrap">
+        <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/50 border border-white/5">
+          <span class="text-xs text-slate-500 uppercase tracking-wider">Code</span>
+          <span class="text-sm font-bold text-white tabular-nums">{{ i18n.t('page.language_info.current_code') }}</span>
+        </div>
+        <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
+          <span class="text-xs text-slate-500 uppercase tracking-wider">Currency</span>
+          <span class="text-sm font-bold text-emerald-400 tabular-nums">{{ i18n.t('page.language_info.current_currency') }}</span>
+        </div>
+        <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/50 border border-white/5">
+          <span class="text-xs text-slate-500 uppercase tracking-wider">Direction</span>
+          <span class="text-sm font-bold text-white">{{ i18n.t('page.language_info.current_direction') }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {# Core Features Section #}
+  <section class="py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+      {# Section Header #}
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-black text-white mb-4">Core Features</h2>
+        <p class="text-slate-500 text-lg">Translation, Pluralization & HTML Content</p>
+      </div>
+
+      {# Features Grid #}
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {# Number Formatting #}
+        <div class="group p-6 rounded-3xl bg-gradient-to-br from-violet-500/[0.08] to-transparent border border-violet-500/10 hover:border-violet-500/30 hover:shadow-xl hover:shadow-violet-500/10 transition-all duration-300">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-14 h-14 rounded-2xl bg-violet-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">#</div>
+            <h3 class="text-lg font-bold text-white">{{ i18n.t('page.numbers.title') }}</h3>
+          </div>
+          <div class="space-y-3">
+            {% for num in page.numbers %}
+              {% if loop.index <= page.display.max_numbers %}
+              <div class="flex items-center justify-between py-3 border-b border-white/5 last:border-0">
+                <span class="text-sm text-slate-400">{{ i18n.t('page.' + num.label) }}</span>
+                <span class="text-xl font-black text-violet-400 tabular-nums">{{ i18n.formatNumber(num.val) }}</span>
+              </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+        {# Pluralization #}
+        <div class="group p-6 rounded-3xl bg-gradient-to-br from-fuchsia-500/[0.08] to-transparent border border-fuchsia-500/10 hover:border-fuchsia-500/30 hover:shadow-xl hover:shadow-fuchsia-500/10 transition-all duration-300">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-14 h-14 rounded-2xl bg-fuchsia-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">a</div>
+            <h3 class="text-lg font-bold text-white">{{ i18n.t('page.pluralization.title') }}</h3>
+          </div>
+          <div class="space-y-3">
+            {% for count in page.display.simple_plural_counts %}
+              <div class="flex items-center justify-between py-3 border-b border-white/5 last:border-0">
+                <span class="text-sm text-slate-400 tabular-nums">{{ count }}</span>
+                <span class="text-base text-fuchsia-400 font-medium">{{ i18n.plural('item', count) }}</span>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        {# HTML Content #}
+        <div class="group p-6 rounded-3xl bg-gradient-to-br from-emerald-500/[0.08] to-transparent border border-emerald-500/10 hover:border-emerald-500/30 hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-14 h-14 rounded-2xl bg-emerald-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">&lt;/&gt;</div>
+            <h3 class="text-lg font-bold text-white">{{ i18n.t('page.html_content.title') }}</h3>
+          </div>
+          <div class="text-center py-4 px-3 rounded-2xl bg-emerald-500/5">
+            <div class="text-base text-white mb-2">{{ i18n.html('page.html_content.example') }}</div>
+          </div>
+        </div>
+
+        {# Form #}
+        <div class="group p-6 rounded-3xl bg-gradient-to-br from-amber-500/[0.08] to-transparent border border-amber-500/10 hover:border-amber-500/30 hover:shadow-xl hover:shadow-amber-500/10 transition-all duration-300 lg:col-span-2">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-14 h-14 rounded-2xl bg-amber-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">📝</div>
+            <h3 class="text-lg font-bold text-white">{{ i18n.t('page.form.title') }}</h3>
+          </div>
+          <form class="grid md:grid-cols-3 gap-4">
+            {% for field in page.form_fields %}
+              {% if loop.index <= page.display.max_form_fields %}
+              <input type="{{ field.type }}" {{ i18n.attr('page.form.' + field.key + '_placeholder', 'placeholder') }} class="w-full px-4 py-3 bg-slate-900/50 border border-white/10 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-500/30 focus:ring-2 focus:ring-amber-500/10 transition-all">
+              {% endif %}
+            {% endfor %}
+            <button type="submit" class="px-6 py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-xl font-bold text-sm transition-all hover:shadow-lg hover:shadow-amber-500/20">
+              {{ i18n.t('page.form.submit') }}
+            </button>
+          </form>
+        </div>
+
+        {# Missing Keys #}
+        <div class="group p-6 rounded-3xl bg-gradient-to-br from-red-500/[0.08] to-transparent border border-red-500/10 hover:border-red-500/30 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-14 h-14 rounded-2xl bg-red-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">!</div>
+            <h3 class="text-lg font-bold text-white">{{ i18n.t('page.missing_keys.title') }}</h3>
+          </div>
+          <div class="space-y-2">
+            {% for key in page.missing_keys %}
+              {% if loop.index <= page.display.max_missing_keys %}
+              <div class="px-4 py-3 rounded-xl bg-red-950/30 border border-red-500/10">
+                <code class="text-red-400 text-sm">{{ key }}</code>
+              </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {# Currency Section #}
+  <section class="py-24 px-6 bg-gradient-to-b from-slate-900/30 to-transparent">
+    <div class="max-w-6xl mx-auto">
+      {# Section Header #}
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-black text-white mb-4">{{ i18n.t('page.currency.title') }}</h2>
+        <p class="text-slate-500 text-lg">{{ i18n.t('page.currency.description') }}</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        {# Currency Conversion #}
+        <div class="p-8 rounded-3xl bg-slate-900/40 border border-white/5 hover:border-white/10 transition-all">
+          <div class="flex items-center gap-3 mb-8">
+            <div class="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center">
+              <span class="text-xl">💰</span>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-white">IDR → Local Currency</h3>
+              <p class="text-sm text-slate-500">Real-time conversion</p>
+            </div>
+          </div>
+          <div class="space-y-4">
+            {% for price in page.currencies %}
+              {% if loop.index <= page.display.max_currencies %}
+              <div class="flex items-center justify-between py-4 border-b border-white/5 last:border-0">
+                <div class="flex items-center gap-4">
+                  <span class="text-sm text-slate-400">{{ i18n.t('page.' + price.label) }}</span>
+                  <span class="text-sm font-mono text-slate-500 tabular-nums">{{ i18n.formatNumber(price.val_idr) }}</span>
+                </div>
+                <span class="text-2xl font-black text-emerald-400 tabular-nums">{{ i18n.convertCurrency(price.val_idr) }}</span>
+              </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+        {# Currency Comparison #}
+        <div class="p-8 rounded-3xl bg-slate-900/40 border border-white/5 hover:border-white/10 transition-all">
+          <div class="flex items-center gap-3 mb-8">
+            <div class="w-12 h-12 rounded-xl bg-violet-500/20 flex items-center justify-center">
+              <span class="text-xl">🌐</span>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-white">{{ i18n.t('page.currency_comparison.title') }}</h3>
+              <p class="text-sm text-slate-500">Multi-currency view</p>
+            </div>
+          </div>
+          <div class="text-center mb-8 p-6 rounded-2xl bg-violet-500/5">
+            <div class="text-4xl font-black text-white mb-2">{{ i18n.formatCurrency(page.display.currency_comparison_base, 'IDR') }}</div>
+            <div class="text-sm text-slate-500">{{ i18n.t('page.currency_comparison.base_price') }}</div>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            {% for curr in page.display.currency_comparison_currencies %}
+              <div class="p-4 rounded-xl bg-slate-800/30 border border-white/5 hover:border-white/10 transition-all text-center">
+                <div class="text-xs text-slate-500 mb-2">{{ i18n.t('page.currency_comparison.' + curr) }}</div>
+                <div class="text-lg font-black tabular-nums {% if curr == 'usd' %}text-emerald-400{% elif curr == 'jpy' %}text-fuchsia-400{% elif curr == 'cny' %}text-amber-400{% else %}text-rose-400{% endif %}">{{ i18n.convertCurrency(page.display.currency_comparison_base, curr | upper) }}</div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {# Advanced Formatting Section #}
+  <section class="py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+      {# Section Header #}
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-black text-white mb-4">{{ i18n.t('page.advanced.title') }}</h2>
+        <p class="text-slate-500 text-lg">{{ i18n.t('page.advanced.description') }}</p>
+      </div>
+
+      {# Advanced Grid #}
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {# Percentages #}
+        <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-emerald-500/20 hover:shadow-lg hover:shadow-emerald-500/5 transition-all">
+          <div class="text-xs text-slate-500 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.percentages') }}</div>
+          <div class="space-y-3">
+            {% for pct in page.percentages %}
+              {% if loop.index <= page.display.max_percentages %}
+              <div class="flex justify-between items-baseline">
+                <span class="text-xs text-slate-400">{{ i18n.t('page.' + pct.label) }}</span>
+                <span class="text-lg font-black text-emerald-400 tabular-nums">{{ i18n.formatPercent(pct.val) }}</span>
+              </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+        {# Bytes #}
+        <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-violet-500/20 hover:shadow-lg hover:shadow-violet-500/5 transition-all">
+          <div class="text-xs text-slate-500 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.bytes') }}</div>
+          <div class="space-y-3">
+            {% for byte in page.bytes %}
+              {% if loop.index <= page.display.max_bytes %}
+              <div class="flex justify-between items-baseline">
+                <span class="text-xs text-slate-400">{{ i18n.t('page.' + byte.label) }}</span>
+                <span class="text-lg font-black text-violet-400 tabular-nums">{{ i18n.formatBytes(byte.val) }}</span>
+              </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+        {# Ordinals #}
+        <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-rose-500/20 hover:shadow-lg hover:shadow-rose-500/5 transition-all">
+          <div class="text-xs text-slate-500 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.ordinals') }}</div>
+          <div class="space-y-3">
+            {% for ord in page.ordinals %}
+              {% if loop.index <= page.display.max_ordinals %}
+              <div class="flex justify-between items-baseline">
+                <span class="text-xs font-mono text-slate-400">{{ ord }}</span>
+                <span class="text-sm font-black text-rose-400">{{ i18n.formatOrdinal(ord) }}</span>
+              </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+        {# Cardinals #}
+        <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-orange-500/20 hover:shadow-lg hover:shadow-orange-500/5 transition-all">
+          <div class="text-xs text-slate-500 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.cardinals') }}</div>
+          <div class="space-y-3">
+            {% for card in page.cardinals %}
+              {% if loop.index <= page.display.max_cardinals %}
+              <div class="flex justify-between items-baseline">
+                <span class="text-xs font-mono text-slate-400">{{ card }}</span>
+                <span class="text-sm font-black text-orange-400">{{ i18n.formatCardinal(card) }}</span>
+              </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+        {# Scientific #}
+        <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-cyan-500/20 hover:shadow-lg hover:shadow-cyan-500/5 transition-all">
+          <div class="text-xs text-slate-500 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.scientific') }}</div>
+          <div class="space-y-3">
+            {% for sci in page.scientific %}
+              {% if loop.index <= page.display.max_scientific %}
+              <div class="flex justify-between items-baseline">
+                <span class="text-xs font-mono text-slate-400">{{ sci }}</span>
+                <span class="text-sm font-black text-cyan-400 tabular-nums">{{ i18n.formatScientific(sci) }}</span>
+              </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+        {# Abbreviated #}
+        <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-lime-500/20 hover:shadow-lg hover:shadow-lime-500/5 transition-all">
+          <div class="text-xs text-slate-500 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.abbreviated') }}</div>
+          <div class="space-y-3">
+            {% for abb in page.abbreviated %}
+              {% if loop.index <= page.display.max_abbreviated %}
+              <div class="flex justify-between items-baseline">
+                <span class="text-xs font-mono text-slate-400">{{ abb }}</span>
+                <span class="text-sm font-black text-lime-400 tabular-nums">{{ i18n.formatAbbreviated(abb) }}</span>
+              </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+        {# Date Formats #}
+        <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-indigo-500/20 hover:shadow-lg hover:shadow-indigo-500/5 transition-all">
+          <div class="text-xs text-slate-500 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.date_formats') }}</div>
+          <div class="space-y-3">
+            {% for dateFmt in page.date_formats %}
+              <div class="flex justify-between items-baseline">
+                <span class="text-xs text-slate-400">{{ i18n.t('page.' + dateFmt.label) }}</span>
+                <span class="text-sm font-black text-indigo-400">{{ i18n.formatDate(dateFmt.val) }}</span>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        {# Time Formats #}
+        <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-purple-500/20 hover:shadow-lg hover:shadow-purple-500/5 transition-all">
+          <div class="text-xs text-slate-500 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.time_formats') }}</div>
+          <div class="space-y-3">
+            {% for timeFmt in page.time_formats %}
+              <div class="flex justify-between items-baseline">
+                <span class="text-xs text-slate-400">{{ i18n.t('page.' + timeFmt.label) }}</span>
+                <span class="text-sm font-black text-purple-400">{{ i18n.formatTime(timeFmt.val) }}</span>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        {# Durations #}
+        <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-teal-500/20 hover:shadow-lg hover:shadow-teal-500/5 transition-all">
+          <div class="text-xs text-slate-500 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.durations') }}</div>
+          <div class="space-y-3">
+            {% for dur in page.durations %}
+              {% if loop.index <= page.display.max_durations %}
+              <div class="flex justify-between items-baseline">
+                <span class="text-xs font-mono text-slate-400">{{ dur }}s</span>
+                <span class="text-sm font-bold text-teal-400">{{ i18n.formatDuration(dur) }}</span>
+              </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+        {# Relative Time #}
+        <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-pink-500/20 hover:shadow-lg hover:shadow-pink-500/5 transition-all">
+          <div class="text-xs text-slate-500 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.relative_time') }}</div>
+          <div class="space-y-3">
+            {% for rel in page.relative_time %}
+              <div class="flex justify-between items-baseline">
+                <span class="text-xs font-mono text-slate-400">{{ rel.val }}{{ rel.unit[0] }}</span>
+                <span class="text-sm font-bold text-pink-400">{{ i18n.formatRelativeTime(rel.val, rel.unit) }}</span>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        {# Lists #}
+        <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-amber-500/20 hover:shadow-lg hover:shadow-amber-500/5 transition-all">
+          <div class="text-xs text-slate-500 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.lists') }}</div>
+          <div class="space-y-3">
+            {% for lst in page.lists %}
+              {% if loop.index <= page.display.max_lists %}
+              <div class="text-sm text-amber-400">{{ i18n.formatList(lst.items) }}</div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+        {# Regional Pricing #}
+        <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-emerald-500/20 hover:shadow-lg hover:shadow-emerald-500/5 transition-all">
+          <div class="text-xs text-slate-500 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.regional_pricing') }}</div>
+          <div class="space-y-3">
+            {% for plan in page.regional_pricing %}
+              <div class="flex justify-between items-baseline">
+                <span class="text-xs text-slate-400">{{ i18n.t('page.advanced.' + plan.id + '_plan') }}</span>
+                <span class="text-lg font-black text-emerald-400 tabular-nums">{{ i18n.formatLocalPrice(plan) }}</span>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {# Number Modes Section #}
+  <section class="py-24 px-6 bg-gradient-to-b from-slate-900/30 to-transparent">
+    <div class="max-w-4xl mx-auto">
+      {# Section Header #}
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-black text-white mb-4">{{ i18n.t('page.advanced.number_modes') }}</h2>
+        <p class="text-slate-500 text-lg">{{ i18n.t('page.advanced.number_modes_desc') }}</p>
+      </div>
+
+      <div class="p-10 rounded-3xl bg-slate-900/40 border border-white/5">
+        {# Example Number #}
+        <div class="text-center mb-12">
+          <div class="text-6xl md:text-7xl font-black text-white tabular-nums mb-4">{{ i18n.formatNumber(page.display.number_modes_example) }}</div>
+          <div class="text-sm text-slate-500">Example: {{ page.display.number_modes_example }}</div>
+        </div>
+
+        {# Mode Comparison #}
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="p-6 rounded-2xl bg-slate-800/30 text-center">
+            <div class="text-xs text-slate-500 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.plain_label') }}</div>
+            <div class="text-2xl font-black text-white tabular-nums">{{ i18n.formatNumber(page.display.number_modes_example, {}, '', '', false) }}</div>
+          </div>
+          <div class="p-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 text-center">
+            <div class="text-xs text-slate-500 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.native_label') }}</div>
+            <div class="text-2xl font-black text-violet-400 tabular-nums">{{ i18n.formatNumber(page.display.number_modes_example, {}, '', '', true) }}</div>
+          </div>
+          <div class="p-6 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-center">
+            <div class="text-xs text-slate-500 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.universal_label') }}</div>
+            <div class="text-2xl font-black text-emerald-400 tabular-nums">{{ page.display.number_modes_example }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {# Language Switcher #}
+  <section class="py-24 px-6">
+    <div class="max-w-4xl mx-auto">
+      {# Section Header #}
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-black text-white mb-4">{{ i18n.t('page.switcher.title') }}</h2>
+        <p class="text-slate-500 text-lg">{{ i18n.t('page.switcher.description') }}</p>
+      </div>
+
+      {# Language Buttons #}
+      <div class="flex flex-wrap justify-center gap-3">
+        <button onclick="localStorage.setItem('i18nextLng', 'id-ID'); location.reload();" class="flex items-center gap-3 px-5 py-3 rounded-xl bg-slate-900/30 border border-white/5 hover:bg-violet-500/10 hover:border-violet-500/30 hover:shadow-lg hover:shadow-violet-500/10 text-white text-sm font-medium transition-all">
+          <span class="text-xl">🇮🇩</span><span>Indonesia</span>
+        </button>
+        <button onclick="localStorage.setItem('i18nextLng', 'en-US'); location.reload();" class="flex items-center gap-3 px-5 py-3 rounded-xl bg-slate-900/30 border border-white/5 hover:bg-emerald-500/10 hover:border-emerald-500/30 hover:shadow-lg hover:shadow-emerald-500/10 text-white text-sm font-medium transition-all">
+          <span class="text-xl">🇺🇸</span><span>English</span>
+        </button>
+        <button onclick="localStorage.setItem('i18nextLng', 'ja-JP'); location.reload();" class="flex items-center gap-3 px-5 py-3 rounded-xl bg-slate-900/30 border border-white/5 hover:bg-fuchsia-500/10 hover:border-fuchsia-500/30 hover:shadow-lg hover:shadow-fuchsia-500/10 text-white text-sm font-medium transition-all">
+          <span class="text-xl">🇯🇵</span><span>日本語</span>
+        </button>
+        <button onclick="localStorage.setItem('i18nextLng', 'zh-CN'); location.reload();" class="flex items-center gap-3 px-5 py-3 rounded-xl bg-slate-900/30 border border-white/5 hover:bg-amber-500/10 hover:border-amber-500/30 hover:shadow-lg hover:shadow-amber-500/10 text-white text-sm font-medium transition-all">
+          <span class="text-xl">🇨🇳</span><span>简体中文</span>
+        </button>
+        <button onclick="localStorage.setItem('i18nextLng', 'ar-SA'); location.reload();" class="flex items-center gap-3 px-5 py-3 rounded-xl bg-slate-900/30 border border-white/5 hover:bg-rose-500/10 hover:border-rose-500/30 hover:shadow-lg hover:shadow-rose-500/10 text-white text-sm font-medium transition-all">
+          <span class="text-xl">🇸🇦</span><span>العربية</span>
+        </button>
+        <button onclick="localStorage.setItem('i18nextLng', 'es-ES'); location.reload();" class="flex items-center gap-3 px-5 py-3 rounded-xl bg-slate-900/30 border border-white/5 hover:bg-orange-500/10 hover:border-orange-500/30 hover:shadow-lg hover:shadow-orange-500/10 text-white text-sm font-medium transition-all">
+          <span class="text-xl">🇪🇸</span><span>Español</span>
+        </button>
+        <button onclick="localStorage.setItem('i18nextLng', 'pt-BR'); location.reload();" class="flex items-center gap-3 px-5 py-3 rounded-xl bg-slate-900/30 border border-white/5 hover:bg-lime-500/10 hover:border-lime-500/30 hover:shadow-lg hover:shadow-lime-500/10 text-white text-sm font-medium transition-all">
+          <span class="text-xl">🇧🇷</span><span>Português</span>
+        </button>
+        <button onclick="localStorage.setItem('i18nextLng', 'fr-FR'); location.reload();" class="flex items-center gap-3 px-5 py-3 rounded-xl bg-slate-900/30 border border-white/5 hover:bg-sky-500/10 hover:border-sky-500/30 hover:shadow-lg hover:shadow-sky-500/10 text-white text-sm font-medium transition-all">
+          <span class="text-xl">🇫🇷</span><span>Français</span>
+        </button>
+        <button onclick="localStorage.setItem('i18nextLng', 'de-DE'); location.reload();" class="flex items-center gap-3 px-5 py-3 rounded-xl bg-slate-900/30 border border-white/5 hover:bg-yellow-500/10 hover:border-yellow-500/30 hover:shadow-lg hover:shadow-yellow-500/10 text-white text-sm font-medium transition-all">
+          <span class="text-xl">🇩🇪</span><span>Deutsch</span>
+        </button>
+        <button onclick="localStorage.setItem('i18nextLng', 'ru-RU'); location.reload();" class="flex items-center gap-3 px-5 py-3 rounded-xl bg-slate-900/30 border border-white/5 hover:bg-blue-500/10 hover:border-blue-500/30 hover:shadow-lg hover:shadow-blue-500/10 text-white text-sm font-medium transition-all">
+          <span class="text-xl">🇷🇺</span><span>Русский</span>
+        </button>
+        <button onclick="localStorage.setItem('i18nextLng', 'ko-KR'); location.reload();" class="flex items-center gap-3 px-5 py-3 rounded-xl bg-slate-900/30 border border-white/5 hover:bg-cyan-500/10 hover:border-cyan-500/30 hover:shadow-lg hover:shadow-cyan-500/10 text-white text-sm font-medium transition-all">
+          <span class="text-xl">🇰🇷</span><span>한국어</span>
+        </button>
+        <button onclick="localStorage.setItem('i18nextLng', 'hi-IN'); location.reload();" class="flex items-center gap-3 px-5 py-3 rounded-xl bg-slate-900/30 border border-white/5 hover:bg-pink-500/10 hover:border-pink-500/30 hover:shadow-lg hover:shadow-pink-500/10 text-white text-sm font-medium transition-all">
+          <span class="text-xl">🇮🇳</span><span>हिन्दी</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  {% include "cta.njk" %}
+{% endblock %}

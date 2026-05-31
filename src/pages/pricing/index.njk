@@ -1,86 +1,115 @@
 {% extends "main.njk" %}
 
 {% block content %}
-  {# --- HERO SECTION --- #}
-  <section class="relative pbs-44 pbe-20 px-6 text-center overflow-hidden">
-    {# Background Spotlight (Logical Centering) #}
-    <div class="absolute inset-bs-0 inset-s-1/2 ltr:-translate-x-1/2 rtl:translate-x-1/2 inline-full block-[500px] bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-violet-600/20 via-transparent to-transparent -z-10 blur-3xl opacity-60"></div>
+<div x-data="{ yearly: false }">
+  <!-- Enhanced Hero Section -->
+  <section class="relative pbs-48 pbe-28 px-6 text-center overflow-hidden">
+    <!-- Enhanced background effects -->
+    <div class="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+      <div class="absolute inset-bs-0 inset-s-1/2 ltr:-translate-x-1/2 rtl:translate-x-1/2 inline-[150%] block-[150%] bg-[radial-gradient(circle_at_top,var(--tw-gradient-stops))] from-violet-600/20 via-fuchsia-600/10 to-transparent blur-3xl animate-pulse-glow"></div>
+      <div class="absolute inset-bs-[20%] inset-s-[20%] inline-64 block-64 bg-violet-600/10 rounded-full blur-[80px] animate-float"></div>
+      <div class="absolute inset-be-[20%] inset-e-[20%] inline-48 block-48 bg-fuchsia-600/8 rounded-full blur-[60px] animate-float delay-300"></div>
+    </div>
 
-    <div class="max-inline-4xl mx-auto">
-      <h1 class="text-6xl md:text-7xl font-black tracking-tighter mbe-8 leading-[1.1] bg-linear-to-b from-white to-slate-400 bg-clip-text text-transparent">
-        {{ i18n.t('page.' + page.hero.t_key + '.title_part1') }}
-        <span class="block bg-linear-to-r from-violet-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent">
-          {{ i18n.t('page.' + page.hero.t_key + '.title_highlight') }}
+    <div class="max-inline-5xl mx-auto relative">
+      <!-- Enhanced badge -->
+      <div class="inline-flex items-center gap-3 px-5 py-2.5 bg-gradient-to-r from-violet-500/10 to-fuchsia-500/10 border border-violet-500/30 rounded-full text-violet-100 text-sm mbe-12 transition-all duration-500 hover:bg-violet-500/20 hover:border-violet-500/40 hover:shadow-[0_0_30px_rgba(139,92,246,0.3)] cursor-default">
+        <span class="relative flex block-2.5 inline-2.5">
+          <span class="animate-ping absolute inline-flex block-full inline-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full block-2.5 inline-2.5 bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.6)]"></span>
+        </span>
+        <span class="font-bold tracking-wide uppercase text-[10px]">
+          {{ i18n.t('page.pricing.badge') }}
+        </span>
+      </div>
+
+      <!-- Enhanced title -->
+      <h1 class="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter mbe-8 leading-[1.1]">
+        <span class="block bg-gradient-to-b from-white to-slate-400 bg-clip-text text-transparent">
+          {{ i18n.t('page.hero.title_part1') }}
+        </span>
+        <span class="block bg-gradient-to-r from-violet-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent animate-gradient bg-size-[200%_auto]">
+          {{ i18n.t('page.hero.title_highlight') }}
         </span>
       </h1>
 
-      <p class="text-xl text-slate-300 max-inline-2xl mx-auto mbe-14 leading-relaxed font-medium">
-        {{ i18n.t('page.' + page.hero.t_key + '.description') }}
+      <p class="text-xl md:text-2xl lg:text-3xl text-slate-300 max-inline-3xl mx-auto mbe-14 leading-relaxed font-medium">
+        {{ i18n.t('page.hero.description') }}
       </p>
 
-      {# --- TOGGLE SWITCHER (ALPINIZED) --- #}
-      <div class="flex items-center justify-center gap-6 mbe-16" x-data="{ yearly: true }">
-        <span class="text-xs font-black uppercase tracking-[0.2em] transition-colors" :class="!yearly ? 'text-white' : 'text-slate-500'">
+      <!-- Enhanced pricing toggle -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-6 mbe-20 p-6 bg-slate-900/40 backdrop-blur-xl rounded-3xl border border-white/10 max-inline-lg mx-auto">
+        <span class="text-sm font-bold uppercase tracking-[0.15em] transition-all duration-500" :class="!yearly ? 'text-white scale-105' : 'text-slate-500'">
           {{ i18n.t('page.toggle.monthly') }}
         </span>
-
-        <button 
-          @click="yearly = !yearly"
-          aria-label="Toggle Pricing Plan"
-          class="group inline-16 block-8 bg-slate-800 rounded-full relative p-1 transition-all border border-white/10 flex items-center cursor-pointer min-block-[44px] sm:min-block-0 gpu-boost">
-          <div class="inline-6 block-6 bg-white rounded-full shadow-[0_0_15px_rgba(255,255,255,0.5)] transition-all duration-500 ease-emphasized"
-               :class="yearly ? 'inset-s-[34px]' : 'inset-s-1'"></div>
+        <button @click="yearly = !yearly" aria-label="{{ i18n.v('page.toggle.aria_label') }}" class="group relative inline-16 block-8 bg-slate-800 rounded-full transition-all duration-500 border border-white/10 cursor-pointer hover:border-violet-500/50 hover:shadow-[0_0_30px_rgba(139,92,246,0.3)] hover:scale-105 shadow-lg" :class="yearly ? 'border-violet-500/50 shadow-[0_0_30px_rgba(139,92,246,0.3)]' : ''">
+          <div class="absolute inset-0 bg-gradient-to-r from-violet-500/20 to-fuchsia-500/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" :class="yearly ? 'opacity-100' : ''"></div>
+          <div class="absolute inset-0 flex items-center px-1.5">
+            <div class="w-5 h-5 bg-gradient-to-br rounded-full shadow-[0_4px_12px_rgba(255,255,255,0.4)] transition-all duration-500 ease-emphasized"
+                 :class="yearly ? 'from-violet-400 to-fuchsia-400 shadow-[0_0_20px_rgba(139,92,246,0.5)]' : 'from-white to-slate-200'"
+                 :style="yearly ? 'transform: translateX(calc(32px * var(--dir)))' : 'transform: translateX(0)'"></div>
+          </div>
         </button>
-
         <div class="flex items-center gap-3">
-          <span class="text-xs font-black uppercase tracking-[0.2em] transition-colors" :class="yearly ? 'text-white' : 'text-slate-500'">
+          <span class="text-sm font-bold uppercase tracking-[0.15em] transition-all duration-500" :class="yearly ? 'text-white scale-105' : 'text-slate-500'">
             {{ i18n.t('page.toggle.yearly') }}
           </span>
-          <span class="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-[10px] font-black rounded-full border border-emerald-500/20 shadow-[0_0_10px_rgba(16,185,129,0.1)]">
-            SAVE 20%
+          <span class="px-4 py-2 text-[11px] font-black rounded-full border shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-all duration-500" :class="yearly ? 'bg-gradient-to-r from-emerald-500/30 to-emerald-500/20 text-emerald-300 border-emerald-500/50 shadow-[0_0_30px_rgba(16,185,129,0.4)] scale-110' : 'bg-gradient-to-r from-emerald-500/10 to-emerald-500/5 text-emerald-400/60 border-emerald-500/20'">
+            {{ i18n.t('page.toggle.discount') }}
           </span>
         </div>
       </div>
     </div>
   </section>
 
-  {# --- PRICING CARDS --- #}
-  <section class="pbe-32 px-6">
+  <!-- Enhanced Pricing Cards -->
+  <section class="pbe-40 px-6 content-auto">
     <div class="max-inline-7xl mx-auto grid md:grid-cols-3 gap-8 items-stretch">
       {% for plan in page.plans %}
         <div class="{% if plan.featured %}
-          relative p-12 rounded-[2.5rem] bg-slate-900 border-is border-ie border-bs border-be border-violet-500/50 shadow-[0_20px_50px_rgba(139,92,246,0.15)] md:-translate-y-8 z-10
+          spotlight-card card-border-glow relative p-12 lg:p-14 rounded-[2.5rem] bg-gradient-to-br from-violet-900/40 to-slate-900/60 border border-violet-500/40 shadow-[0_25px_60px_rgba(139,92,246,0.25)] md:-translate-y-8 z-10 hover:shadow-[0_30px_80px_rgba(139,92,246,0.35)] hover:-translate-y-10
           {% else %}
-          group p-10 rounded-[2.5rem] bg-slate-900/40 border border-white/5 backdrop-blur-sm hover:border-white/20 transition-all duration-500 ease-emphasized
-          {% endif %} flex flex-col gpu-boost">
+          spotlight-card card-border-glow group relative p-10 lg:p-12 rounded-[2.5rem] bg-gradient-to-br from-slate-900/60 to-slate-900/40 border border-white/5 backdrop-blur-xl hover:border-white/20 hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)] hover:-translate-y-2
+          {% endif %} flex flex-col transition-all duration-700 ease-emphasized">
 
           {% if plan.featured %}
-            <div class="absolute -inset-bs-5 inset-s-1/2 ltr:-translate-x-1/2 rtl:translate-x-1/2 px-6 py-2 bg-linear-to-r from-violet-500 via-fuchsia-500 to-pink-500 rounded-full text-[10px] font-black text-white uppercase tracking-[0.2em] shadow-xl whitespace-nowrap">
-              {{ i18n.t('page.plans.' + plan.id + '.badge') | default('MOST POPULAR') }}
+            <!-- Enhanced featured badge with Morphing Shape -->
+            <div class="absolute -inset-bs-6 inset-s-1/2 ltr:-translate-x-1/2 rtl:translate-x-1/2 px-6 py-2.5 bg-gradient-to-r from-violet-500 via-fuchsia-500 to-pink-500 rounded-full text-[10px] font-black text-white uppercase tracking-[0.2em] shadow-[0_10px_30px_rgba(139,92,246,0.4)] whitespace-nowrap animate-pulse-glow morph-shape">
+              {{ i18n.t('page.plans.' + plan.id + '.badge') }}
             </div>
           {% endif %}
 
-          <h3 class="text-xs font-black uppercase tracking-[0.2em] text-{{ 'violet-300' if plan.featured else 'slate-400' }} mbe-8">
+          <!-- Plan name -->
+          <h3 class="text-xs font-black uppercase tracking-[0.2em] mbe-8 {% if plan.featured %}text-violet-300{% else %}text-slate-500 group-hover:text-slate-400{% endif %} transition-colors duration-500">
             {{ i18n.t('page.plans.' + plan.id + '.name') }}
           </h3>
 
-          <div class="flex items-baseline gap-2 mbe-6">
-            <span class="text-6xl font-black text-white tracking-tighter">${{ plan.price }}</span>
-            <span class="text-slate-400 font-bold">/mo</span>
+          <!-- Price -->
+          <div class="mbe-6">
+            <div class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black leading-[1.1] tracking-tight tabular-nums {% if plan.featured %}text-white{% else %}text-slate-200{% endif %} mbe-1" style="word-break: keep-all; overflow-wrap: break-word;">
+              <span x-show="!yearly">{{ i18n.formatLocalPrice(plan) }}</span>
+              <span x-show="yearly">{{ i18n.formatLocalPriceDiscounted(plan, 0.8) }}</span>
+            </div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-slate-400 font-bold text-xs sm:text-sm">/{{ i18n.t('page.period_monthly') }}</span>
+              <span x-show="yearly" class="text-[10px] sm:text-xs text-violet-400 font-semibold">{{ i18n.t('page.toggle.yearly_hint') }}</span>
+            </div>
           </div>
 
-          <p class="text-slate-300 mbe-10 leading-relaxed font-medium">
+          <!-- Description -->
+          <p class="text-slate-400 mbe-10 leading-relaxed font-medium">
             {{ i18n.t('page.plans.' + plan.id + '.desc') }}
           </p>
 
-          {# Separator #}
-          <div class="block-px inline-full bg-white/5 mbe-10"></div>
+          <!-- Divider -->
+          <div class="block-px inline-full bg-gradient-to-r from-transparent via-white/10 to-transparent mbe-10"></div>
 
-          <ul class="space-y-5 flex-grow mbe-12">
+          <!-- Features -->
+          <ul class="space-y-5 grow mbe-12">
             {% for i in range(0, plan.feature_count) %}
-              <li class="flex items-start gap-4 text-sm {% if plan.featured %}text-slate-200{% else %}text-slate-300{% endif %}">
-                <div class="mbs-1 flex-none inline-5 block-5 rounded-full bg-{{ 'violet-500/20' if plan.featured else 'white/5' }} flex items-center justify-center">
-                  <svg class="inline-3.5 block-3.5 text-{{ 'violet-400' if plan.featured else 'slate-500' }}" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="4">
+              <li class="flex items-start gap-4 text-sm {% if plan.featured %}text-slate-200{% else %}text-slate-400{% endif %}">
+                <div class="mbs-1 flex-none inline-5.5 block-5.5 rounded-full bg-{{ 'violet-500/20' if plan.featured else 'white/5' }} flex items-center justify-center border border-{{ 'violet-500/30' if plan.featured else 'white/10' }}">
+                  <svg class="inline-3.5 block-3.5 text-{{ 'violet-400' if plan.featured else 'slate-500' }}" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
                   </svg>
                 </div>
@@ -89,36 +118,51 @@
             {% endfor %}
           </ul>
 
-          <a href="#" class="group relative flex items-center justify-center inline-full min-block-[60px] px-8 py-4 rounded-2xl font-black text-lg transition-all duration-300 ease-emphasized active:scale-95 overflow-hidden gpu-boost
+          <!-- CTA Button -->
+          <a href="#" class="magnetic-btn btn-press ripple-effect group relative flex items-center justify-center inline-full min-block-16 px-8 py-4 rounded-2xl font-black text-lg transition-all duration-500 ease-emphasized overflow-hidden
             {% if plan.featured %}
-            bg-white text-slate-950 shadow-[0_10px_25px_rgba(255,255,255,0.1)]
+            bg-gradient-to-r from-violet-500 via-fuchsia-500 to-pink-500 text-white shadow-[0_15px_35px_rgba(139,92,246,0.4)] hover:shadow-[0_20px_50px_rgba(139,92,246,0.5)] hover:scale-105
             {% else %}
-            bg-slate-800 text-white border border-white/10 hover:bg-slate-700
+            bg-slate-800 text-white border border-white/10 hover:bg-slate-700 hover:border-white/20
             {% endif %}">
-            <span class="relative z-10">{{ i18n.t('page.plans.' + plan.id + '.btn') }}</span>
+            {% if plan.featured %}
+            <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
+            {% endif %}
+            <span class="relative flex items-center gap-2">
+              {{ i18n.t('page.plans.' + plan.id + '.btn') }}
+              <svg class="inline-5 block-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+              </svg>
+            </span>
           </a>
         </div>
       {% endfor %}
     </div>
   </section>
+</div>
 
-  {# --- FAQ SECTION --- #}
-  <section class="pbs-32 pbe-32 px-6 relative bg-white/[0.01] border-bs border-white/5">
-    <div class="max-inline-4xl mx-auto">
-      <div class="text-center mbe-20 space-y-4">
-        <h2 class="text-4xl font-black tracking-tighter text-white">{{ i18n.t('page.faq.title') }}</h2>
-        <p class="text-slate-400 text-lg">{{ i18n.t('page.faq.subtitle') | default('Punya pertanyaan? Kami punya jawabannya.') }}</p>
-        <div class="block-1.5 inline-16 bg-linear-to-r from-violet-500 to-fuchsia-500 mx-auto rounded-full shadow-[0_0_15px_rgba(139,92,246,0.3)]"></div>
+<!-- Enhanced FAQ Section -->
+<section class="pbs-40 pbe-40 px-6 relative bg-gradient-to-b from-white/[0.02] to-transparent border-bs border-be border-white/5 content-auto">
+    <div class="max-inline-5xl mx-auto">
+      <div class="text-center mbe-24 space-y-4">
+        <div class="inline-flex items-center gap-2.5 px-4 py-2 bg-violet-500/10 border border-violet-500/30 rounded-full text-violet-300 text-sm mb-6">
+          <svg class="inline-4 block-4" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+          </svg>
+          <span class="font-bold tracking-wide uppercase text-[10px]">{{ i18n.t('page.faq.title') }}</span>
+        </div>
+        <h2 class="text-4xl md:text-6xl font-black tracking-tight text-white">{{ i18n.t('page.faq.title') }}</h2>
+        <p class="text-slate-400 text-lg max-inline-2xl mx-auto">{{ i18n.t('page.faq.subtitle') }}</p>
+        <div class="block-1.5 inline-20 bg-gradient-to-r from-violet-500 via-fuchsia-500 to-pink-500 mx-auto rounded-full shadow-[0_0_20px_rgba(139,92,246,0.4)]"></div>
       </div>
-
-      <div class="grid gap-4">
+      <div class="grid gap-5">
         {% for i in range(0, page.faq_count) %}
-          <div class="p-8 rounded-3xl bg-slate-900/40 border border-white/5 hover:border-white/10 transition-all duration-500 ease-emphasized group cursor-default gpu-boost">
-            <h3 class="text-xl font-black text-white mbe-4 flex items-start gap-4">
-              <span class="text-transparent bg-linear-to-b from-violet-400 to-fuchsia-500 bg-clip-text font-mono text-sm mbs-1">0{{ i + 1 }}.</span>
-              <span class="flex-grow">{{ i18n.t('page.faq.q_' + i) }}</span>
+          <div class="spotlight-card card-border-glow group p-8 lg:p-10 rounded-[2.5rem] bg-gradient-to-br from-slate-900/60 to-slate-900/40 border border-white/5 hover:shadow-[0_15px_40px_rgba(0,0,0,0.3)] transition-all duration-500 ease-emphasized cursor-default">
+            <h3 class="text-xl lg:text-2xl font-black text-white mbe-5 flex items-start gap-5">
+              <span class="text-transparent bg-gradient-to-br from-violet-400 to-fuchsia-500 bg-clip-text font-mono text-sm mbs-1.5">{{ i18n.formatNumber(i + 1, tag='span', useNative=true) }}</span>
+              <span class="grow group-hover:text-slate-200 transition-colors duration-300">{{ i18n.t('page.faq.q_' + i) }}</span>
             </h3>
-            <p class="text-slate-400 leading-relaxed pis-11 font-medium">
+            <p class="text-slate-400 leading-relaxed pis-14 font-medium group-hover:text-slate-300 transition-colors duration-300">
               {{ i18n.t('page.faq.a_' + i) }}
             </p>
           </div>

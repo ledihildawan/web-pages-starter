@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "title": "Inicio | Starter App",
+    "description": "Constructor de aplicaciones web modernas."
+  },
+  "hero": {
+    "badge": "Nuevo: Versión 2.0 está aquí",
+    "title_start": "Construye algo",
+    "title_highlight": "hermoso hoy",
+    "description": "La forma moderna de construir aplicaciones web. Rápido, flexible y diseñado para desarrolladores que se preocupan por su oficio.",
+    "image_alt": "Dashboard Preview",
+    "primary_btn": {
+      "label": "Comenzar a Construir",
+      "url": "/start"
+    },
+    "secondary_btn": {
+      "label": "Ver Demo",
+      "url": "/demo"
+    },
+    "note": "No se requiere tarjeta de crédito"
+  },
+  "features": {
+    "heading": "Todo Lo Que Necesitas",
+    "subheading": "Características poderosas para ayudarte a construir más rápido.",
+    "list": {
+      "speed": {
+        "title": "Rápido como el Rayo",
+        "description": "Optimizado para el rendimiento. Tus aplicaciones se cargan al instante."
+      },
+      "design": {
+        "title": "Diseño Hermoso",
+        "description": "Creado con cuidado. Cada píxel tiene significado y propósito."
+      },
+      "security": {
+        "title": "Seguro por Defecto",
+        "description": "Seguridad de nivel empresarial. Tus datos están protegidos en cada capa."
+      }
+    }
+  },
+  "stats": {
+    "community": "Comunidad de Desarrolladores",
+    "community_val": "10K+",
+    "projects": "Proyectos Construidos",
+    "projects_val": "50K+",
+    "uptime": "Disponibilidad 24/7",
+    "uptime_val": "99.9%",
+    "rating": "Calificación de Usuarios",
+    "rating_val": "4.9/5"
+  }
+}

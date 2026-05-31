@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "title": "اتصل بنا | Starter App",
+    "description": "تواصل معنا للأسئلة والدعم."
+  },
+  "contact": {
+    "badge": "تواصل معنا",
+    "title_part1": "دعنا نتواصل",
+    "title_highlight": "معاً",
+    "description": "لديك أسئلة أو ترغب في التعاون؟ نود سماعك منك. أرسل لنا رسالة وسنرد في أسرع وقت ممكن.",
+    "form_title": "أرسل رسالة",
+    "form_subtitle": "املأ النموذج أدناه وسنرد عليك في أقرب وقت ممكن.",
+    "social_title": "تابعنا",
+    "social_subtitle": "ابق على اطلاع بآخر أخبارنا على وسائل التواصل الاجتماعي",
+    "info": {
+      "response_time": {
+        "title": "استجابة سريعة",
+        "description": "نسعى للرد على كل رسالة خلال 24 ساعة في أيام العمل."
+      },
+      "working_hours": {
+        "title": "ساعات العمل",
+        "description": "الاثنين - الجمعة: 09:00 - 18:00. عطلة نهاية الأسبوع: حسب الأولوية."
+      },
+      "support": {
+        "title": "دعم مستمر",
+        "description": "فريق الدعم لدينا جاهز دائماً لمساعدتك في حل المشاكل التقنية."
+      }
+    },
+    "form": {
+      "name": "الاسم",
+      "name_placeholder": "أدخل اسمك",
+      "email": "البريد الإلكتروني",
+      "email_placeholder": "name@example.com",
+      "subject": "الموضوع",
+      "subject_placeholder": "ما الذي تريد مناقشته؟",
+      "message": "الرسالة",
+      "message_placeholder": "أخبرنا المزيد عن استفسارك...",
+      "submit": "إرسال الرسالة"
+    }
+  },
+  "email_label": "البريد الإلكتروني",
+  "phone_label": "الهاتف",
+  "location_label": "الموقع"
+}

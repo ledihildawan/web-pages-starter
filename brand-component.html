@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LH StaggeredGrid | Production Build</title>
+    
+    <style>
+        /* ====================================================================
+           1. CORE DESIGN TOKENS (OKLCH + LIGHT-DARK)
+           ==================================================================== */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            color-scheme: light dark;
+
+            --bg-base: light-dark(oklch(0.98 0.01 250), oklch(0.12 0.01 250));
+            --bg-surface: light-dark(oklch(1 0 0), oklch(0.16 0.02 250));
+            --bg-surface-hover: light-dark(oklch(0.96 0.01 250), oklch(0.19 0.03 250));
+            
+            --border-subtle: light-dark(oklch(0.85 0.02 250 / 0.8), oklch(0.35 0.02 250 / 0.4));
+            --border-focus: light-dark(oklch(0.6 0.05 250), oklch(0.85 0.05 250));
+            
+            --text-primary: light-dark(oklch(0.15 0.02 250), oklch(0.98 0.01 250));
+            --text-secondary: light-dark(oklch(0.45 0.02 250), oklch(0.65 0.02 250));
+            
+            --accent-glow: light-dark(oklch(0.6 0.15 250 / 0.08), oklch(0.7 0.2 250 / 0.15));
+            --success: oklch(0.7 0.15 150);
+            
+            --spring-snappy: linear(0, 0.006, 0.025 2.8%, 0.101 6.1%, 0.539 18.9%, 0.728 25.3%, 0.849 31.5%, 0.937 38.1%, 0.968 41.8%, 0.991 45.7%, 1.006 50.1%, 1.015 55%, 1.017 63.9%, 1.001 87.2%, 1);
+            
+            --font-sans: 'Inter', system-ui, sans-serif;
+        }
+
+        body {
+            margin: 0; background: var(--bg-base); color: var(--text-primary);
+            font-family: var(--font-sans); overflow-x: hidden; padding-bottom: 8rem;
+            background-image: radial-gradient(circle at 50% -10%, var(--accent-glow) 0%, transparent 60%);
+        }
+
+        .wrapper { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+
+        @keyframes heroFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero { 
+            padding: 8rem 0 6rem; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1.5rem; 
+            animation: heroFadeIn 0.8s var(--spring-snappy) both;
+            
+            & .hero-pill {
+                background: oklch(from var(--bg-surface) l c h / 0.5); border: 1px solid var(--border-subtle);
+                padding: 0.5rem 1.2rem; border-radius: 99px; font-size: 0.9rem; font-weight: 500;
+                backdrop-filter: blur(12px); display: flex; gap: 0.6rem; align-items: center;
+                transition: transform 0.4s var(--spring-snappy), background 0.3s ease;
+                &:hover { transform: translateY(-2px); background: oklch(from var(--bg-surface) l c h / 0.8); }
+                & span { width: 8px; height: 8px; background: var(--success); border-radius: 50%; box-shadow: 0 0 10px var(--success); }
+            }
+            & h1 { font-size: clamp(3rem, 6vw, 4.5rem); font-weight: 800; margin: 0; letter-spacing: -0.04em; line-height: 1.1; }
+            & p { font-size: 1.25rem; color: var(--text-secondary); max-width: 650px; margin: 0; line-height: 1.6; }
+        }
+
+        .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; }
+
+        @keyframes cardEnter {
+            from { opacity: 0; transform: translateY(50px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .bento-card {
+            background: var(--bg-surface); border: 1px solid var(--border-subtle);
+            border-radius: 32px; padding: 2.5rem; display: flex; flex-direction: column; gap: 2.5rem;
+            transition: all 0.4s var(--spring-snappy); position: relative; overflow: hidden;
+            animation: cardEnter 0.8s var(--spring-snappy) backwards;
+            
+            &:nth-child(1) { animation-delay: 0.1s; }
+            &:nth-child(2) { animation-delay: 0.2s; }
+            &:nth-child(3) { animation-delay: 0.3s; }
+            &:nth-child(4) { animation-delay: 0.4s; }
+
+            &:hover { border-color: var(--border-focus); background: var(--bg-surface-hover); }
+        }
+
+        .col-12 { grid-column: span 12; }
+        .col-6 { grid-column: span 6; }
+        @media (max-width: 900px) { .col-6 { grid-column: span 12; } }
+
+        /* ====================================================================
+           3. SECTION VARIANTS & NAMESPACED HOOKS
+           ==================================================================== */
+        
+        #grid-nusantara-utama {
+            height: 250px; --lh-gap: 1.5rem; --lh-perspective: 800px;
+            --lh-transform-out-top: translate3d(0, -50%, -150px) scale(0.5);
+            --lh-transform-out-bottom: translate3d(0, 50%, -150px) scale(0.5);
+            --lh-filter-out: blur(12px) opacity(0);
+            
+            &::part(cell) { width: 80px; height: 80px; margin: auto; transition: transform 0.4s var(--spring-snappy); }
+            &::part(item) { width: 100%; height: 100%; object-fit: contain; transition: transform 0.4s var(--spring-snappy); }
+            &::part(cell):hover { transform: scale(1.15) translateY(-5px) translateZ(0); }
+        }
+
+        .grid-enterprise {
+            height: 220px; --lh-gap: 2rem; 
+            mask: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+            --lh-transform-out-top: translate3d(0, -60%, 0) scale(0.85);
+            --lh-transform-out-bottom: translate3d(0, 60%, 0) scale(0.85);
+            --lh-filter-out: blur(14px);
+            
+            &::part(cell) { border-radius: 20px; transition: transform 0.4s var(--spring-snappy), background 0.3s ease; }
+            &::part(item) { width: 50px; opacity: 0.4; filter: grayscale(1); object-fit: contain; transition: all 0.4s var(--spring-snappy); }
+            &::part(cell):hover { background: light-dark(oklch(0 0 0 / 0.03), oklch(1 1 1 / 0.04)); transform: scale(1.05); }
+            &::part(cell):hover::part(item) { opacity: 1; filter: grayscale(0) drop-shadow(0 8px 16px light-dark(oklch(0 0 0 / 0.1), oklch(1 1 1 / 0.15))); transform: scale(1.1); }
+        }
+
+        .grid-cyber { 
+            height: 380px; --lh-gap: 1.5rem; --lh-perspective: 600px;
+            --lh-transform-out-top: translate3d(0, -70%, -80px) rotateX(65deg);
+            --lh-transform-out-bottom: translate3d(0, 70%, -80px) rotateX(-65deg);
+            --lh-filter-out: blur(6px) hue-rotate(90deg);
+
+            &::part(cell) { background: oklch(0.7 0.1 200 / 0.05); border: 1px solid oklch(0.7 0.1 200 / 0.2); width: 85px; height: 85px; margin: auto; border-radius: 24px; transition: all 0.4s var(--spring-snappy); }
+            &::part(item) { width: 45px; filter: drop-shadow(0 0 5px oklch(0.7 0.1 200)); object-fit: contain; transition: 0.3s ease; }
+            &::part(cell):hover { border-color: oklch(0.7 0.1 200); transform: scale(1.1) rotate(4deg); box-shadow: 0 0 25px oklch(0.7 0.1 200 / 0.3); }
+        }
+        
+        .grid-brutal { 
+            height: 380px; --lh-gap: 1.5rem; 
+            --lh-transform-out-top: translate3d(15%, -100%, 0) rotateZ(15deg);
+            --lh-transform-out-bottom: translate3d(-15%, 100%, 0) rotateZ(-15deg);
+            --lh-filter-out: grayscale(1) blur(2px);
+
+            &::part(cell) { background: #e5e5e5; border: 2px solid #000; border-radius: 20px; width: 80px; height: 80px; margin: auto; box-shadow: 4px 4px 0 #000; transition: transform 0.4s var(--spring-snappy); }
+            &::part(item) { width: 36px; filter: invert(1); object-fit: contain; transition: transform 0.3s ease; }
+            &::part(cell):hover { transform: translate(-4px, -4px); box-shadow: 8px 8px 0 var(--text-primary); }
+        }
+
+        /* ====================================================================
+           4. TOAST UI
+           ==================================================================== */
+        #toast-container { position: fixed; bottom: 2rem; right: 2rem; z-index: 9999; display: flex; flex-direction: column; gap: 0.75rem; pointer-events: none; }
+        .toast { background: var(--text-primary); color: var(--bg-base); padding: 0.8rem 1.25rem; border-radius: 14px; font-size: 0.9rem; font-weight: 600; display: flex; align-items: center; gap: 0.75rem; box-shadow: 0 20px 40px light-dark(oklch(0 0 0 / 0.15), oklch(0 0 0 / 0.4)); pointer-events: auto; animation: toastEnter 0.6s var(--spring-snappy) forwards; }
+        .toast img { width: 24px; height: 24px; object-fit: contain; border-radius: 6px; background: light-dark(oklch(0.1 0.01 250), oklch(0.9 0.01 250)); padding: 2px; }
+        @keyframes toastEnter { 0% { transform: translateY(60px) scale(0.8) rotate(2deg); opacity: 0; } 100% { transform: translateY(0) scale(1) rotate(0); opacity: 1; } }
+        @keyframes toastExit { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(0.85) translateY(20px); opacity: 0; } }
+    </style>
+</head>
+<body>
+
+    <main class="wrapper">
+        <header class="hero">
+            <div class="hero-pill"><span></span> v1.0.0 • Production Ready</div>
+            <h1>Motion-Driven Grid.</h1>
+            <p>Implementasi grid dinamis dengan arsitektur <i>signature namespace</i> dan penanganan event terisolasi mutlak tanpa kebocoran.</p>
+        </header>
+
+        <section class="bento-grid">
+            <article class="bento-card col-12">
+                <div class="card-header">
+                    <h2 class="card-title">Kekuatan Nusantara</h2>
+                    <p class="card-desc">Barisan institusi terbesar Indonesia dengan animasi <i>Depth Scaling</i> dan penanganan event spesifik.</p>
+                </div>
+                <lh-staggered-grid id="grid-nusantara-utama" columns="6" duration="26s" stagger="110ms"
+                    items='[
+                        {"src":"https://upload.wikimedia.org/wikipedia/commons/e/e6/Pertamina_Logo.svg", "alt":"Pertamina"},
+                        {"src":"https://upload.wikimedia.org/wikipedia/commons/9/97/Logo_PLN.png", "alt":"PLN"},
+                        {"src":"https://upload.wikimedia.org/wikipedia/commons/a/a8/Logo_of_PT_Astra_International_Tbk_terbaru_2025.png", "alt":"Astra"},
+                        {"src":"https://upload.wikimedia.org/wikipedia/commons/2/2e/BRI_2020.svg", "alt":"BRI"},
+                        {"src":"https://upload.wikimedia.org/wikipedia/commons/a/ad/Bank_Mandiri_logo_2016.svg", "alt":"Mandiri"},
+                        {"src":"https://upload.wikimedia.org/wikipedia/commons/2/22/Telkom_Indonesia_logo.png", "alt":"Telkom"},
+                        {"src":"https://upload.wikimedia.org/wikipedia/commons/5/5c/Bank_Central_Asia.svg", "alt":"BCA"},
+                        {"src":"https://upload.wikimedia.org/wikipedia/commons/d/d3/Alfamart.svg", "alt":"Alfamart"},
+                        {"src":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Indofood_logo-en.svg/3840px-Indofood_logo-en.svg.png", "alt":"Indofood"},
+                        {"src":"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Bank_Negara_Indonesia_logo_%282004%29.svg/3840px-Bank_Negara_Indonesia_logo_%282004%29.svg.png", "alt":"BNI"},
+                        {"src":"https://adaroindonesia.com/theme/images/Logo-Adaro-Andalan-Indonesia-Color.png", "alt":"Adaro"},
+                        {"src":"https://upload.wikimedia.org/wikipedia/commons/f/fb/Indosat_Ooredoo_Hutchison.svg", "alt":"Indosat"},
+                        {"src":"https://upload.wikimedia.org/wikipedia/id/f/fe/Garuda_Indonesia_Logo.svg", "alt":"Garuda Indonesia"},
+                        {"src":"https://upload.wikimedia.org/wikipedia/commons/8/88/GoTo_logo.svg", "alt":"GoTo"},
+                        {"src":"https://upload.wikimedia.org/wikipedia/commons/a/a7/Tokopedia.svg", "alt":"Tokopedia"},
+                        {"src":"https://upload.wikimedia.org/wikipedia/commons/5/5b/Bukalapak_%282020%29.svg", "alt":"Bukalapak"},
+                        {"src":"https://upload.wikimedia.org/wikipedia/id/3/30/Logo_Antam.svg", "alt":"Antam"},
+                        {"src":"https://upload.wikimedia.org/wikipedia/commons/a/a0/Bank_Syariah_Indonesia.svg", "alt":"BSI"}
+                    ]'>
+                </lh-staggered-grid>
+            </article>
+
+            <article class="bento-card col-12">
+                <div class="card-header">
+                    <h2 class="card-title">Enterprise Showcase</h2>
+                    <p class="card-desc">Ekosistem teknologi global dengan efek <i>smooth deep blur</i>.</p>
+                </div>
+                <lh-staggered-grid class="grid-enterprise" columns="6" duration="28s" stagger="100ms"
+                    items='[
+                        {"src":"https://cdn.simpleicons.org/vercel/ffffff", "alt":"Vercel"}, 
+                        {"src":"https://cdn.simpleicons.org/nextdotjs/ffffff", "alt":"Next.js"}, 
+                        {"src":"https://cdn.simpleicons.org/react/ffffff", "alt":"React"}, 
+                        {"src":"https://cdn.simpleicons.org/stripe/ffffff", "alt":"Stripe"}, 
+                        {"src":"https://cdn.simpleicons.org/github/ffffff", "alt":"GitHub"},
+                        {"src":"https://cdn.simpleicons.org/figma/ffffff", "alt":"Figma"},
+                        {"src":"https://cdn.simpleicons.org/docker/ffffff", "alt":"Docker"},
+                        {"src":"https://cdn.simpleicons.org/kubernetes/ffffff", "alt":"Kubernetes"},
+                        {"src":"https://cdn.simpleicons.org/supabase/ffffff", "alt":"Supabase"},
+                        {"src":"https://cdn.simpleicons.org/redis/ffffff", "alt":"Redis"},
+                        {"src":"https://cdn.simpleicons.org/cloudflare/ffffff", "alt":"Cloudflare"},
+                        {"src":"https://cdn.simpleicons.org/typescript/ffffff", "alt":"TypeScript"},
+                        {"src":"https://cdn.simpleicons.org/googlecloud/ffffff", "alt":"Google Cloud"},
+                        {"src":"https://cdn.simpleicons.org/microsoftazure/ffffff", "alt":"Azure"},
+                        {"src":"https://cdn.simpleicons.org/digitalocean/ffffff", "alt":"DigitalOcean"},
+                        {"src":"https://cdn.simpleicons.org/nginx/ffffff", "alt":"Nginx"},
+                        {"src":"https://cdn.simpleicons.org/graphql/ffffff", "alt":"GraphQL"},
+                        {"src":"https://cdn.simpleicons.org/prisma/ffffff", "alt":"Prisma"}
+                    ]'>
+                </lh-staggered-grid>
+            </article>
+
+            <article class="bento-card col-6">
+                <div class="card-header">
+                    <h2 class="card-title">Cyber Variant</h2>
+                    <p class="card-desc">Gaya neon dengan rotasi 3D Flip.</p>
+                </div>
+                <lh-staggered-grid class="grid-cyber" columns="4" duration="20s" stagger="150ms"
+                    items='[
+                        {"src":"https://cdn.simpleicons.org/discord/ffffff", "alt":"Discord"}, 
+                        {"src":"https://cdn.simpleicons.org/twitch/ffffff", "alt":"Twitch"}, 
+                        {"src":"https://cdn.simpleicons.org/ethereum/ffffff", "alt":"Ethereum"}, 
+                        {"src":"https://cdn.simpleicons.org/binance/ffffff", "alt":"Binance"},
+                        {"src":"https://cdn.simpleicons.org/solana/ffffff", "alt":"Solana"},
+                        {"src":"https://cdn.simpleicons.org/polygon/ffffff", "alt":"Polygon"},
+                        {"src":"https://cdn.simpleicons.org/openai/ffffff", "alt":"OpenAI"},
+                        {"src":"https://cdn.simpleicons.org/anthropic/ffffff", "alt":"Anthropic"},
+                        {"src":"https://cdn.simpleicons.org/bitcoin/ffffff", "alt":"Bitcoin"},
+                        {"src":"https://cdn.simpleicons.org/nvidia/ffffff", "alt":"NVIDIA"},
+                        {"src":"https://cdn.simpleicons.org/tensorflow/ffffff", "alt":"TensorFlow"},
+                        {"src":"https://cdn.simpleicons.org/unity/ffffff", "alt":"Unity"},
+                        {"src":"https://cdn.simpleicons.org/unrealengine/ffffff", "alt":"Unreal Engine"},
+                        {"src":"https://cdn.simpleicons.org/avalanche/ffffff", "alt":"Avalanche"},
+                        {"src":"https://cdn.simpleicons.org/chainlink/ffffff", "alt":"Chainlink"},
+                        {"src":"https://cdn.simpleicons.org/pytorch/ffffff", "alt":"PyTorch"}
+                    ]'>
+                </lh-staggered-grid>
+            </article>
+
+            <article class="bento-card col-6">
+                <div class="card-header">
+                    <h2 class="card-title">Brutalist Variant</h2>
+                    <p class="card-desc">Gaya tegas dengan Card Toss animation.</p>
+                </div>
+                <lh-staggered-grid class="grid-brutal" columns="4" duration="22s" stagger="120ms"
+                    items='[
+                        { "src": "https://cdn.simpleicons.org/framer", "alt": "Framer" },
+                        { "src": "https://cdn.simpleicons.org/notion", "alt": "Notion" },
+                        { "src": "https://cdn.simpleicons.org/slack", "alt": "Slack" },
+                        { "src": "https://cdn.simpleicons.org/linear", "alt": "Linear" },
+                        { "src": "https://cdn.simpleicons.org/dribbble", "alt": "Dribbble" },
+                        { "src": "https://cdn.simpleicons.org/behance", "alt": "Behance" },
+                        { "src": "https://cdn.simpleicons.org/raycast", "alt": "Raycast" },
+                        { "src": "https://cdn.simpleicons.org/awwwards", "alt": "Awwwards" },
+                        { "src": "https://cdn.simpleicons.org/github", "alt": "GitHub" },
+                        { "src": "https://cdn.simpleicons.org/asana", "alt": "Asana" },
+                        { "src": "https://cdn.simpleicons.org/jira", "alt": "Jira" },
+                        { "src": "https://cdn.simpleicons.org/loom", "alt": "Loom" },
+                        { "src": "https://cdn.simpleicons.org/miro", "alt": "Miro" },
+                        { "src": "https://cdn.simpleicons.org/trello", "alt": "Trello" },
+                        { "src": "https://cdn.simpleicons.org/gitlab", "alt": "GitLab" },
+                        { "src": "https://cdn.simpleicons.org/basecamp", "alt": "Basecamp" }
+                    ]'>
+                </lh-staggered-grid>
+            </article>
+
+        </section>
+    </main>
+
+    <div id="toast-container" aria-live="polite"></div>
+
+    <script>
+        class LhStaggeredGrid extends HTMLElement {
+            static get observedAttributes() { return ['items', 'columns', 'duration', 'stagger']; }
+            #parsedData = [];
+            #maxItems = 0;
+            #sheet = new CSSStyleSheet();
+
+            constructor() {
+                super();
+                this.attachShadow({ mode: 'open' });
+                this.shadowRoot.adoptedStyleSheets = [this.#sheet];
+            }
+
+            connectedCallback() {
+                this.#render();
+                this.#setupInteractions();
+            }
+
+            attributeChangedCallback(name, oldValue, newValue) {
+                if (oldValue !== newValue && this.shadowRoot.innerHTML !== '') this.#render();
+            }
+
+            #setupInteractions() {
+                this.shadowRoot.addEventListener('click', (e) => {
+                    const cell = e.composedPath().find(el => el.classList?.contains('cell'));
+                    if (cell) {
+                        const itemData = this.#parsedData[parseInt(cell.dataset.c, 10)]?.[parseInt(cell.dataset.r, 10)];
+                        if (itemData) this.dispatchEvent(new CustomEvent('lh-staggered-grid:item-click', { detail: itemData, bubbles: true, composed: true }));
+                    }
+                });
+            }
+
+            #getProcessedData() {
+                let data = [];
+                try { data = JSON.parse(this.getAttribute('items') || '[]'); } catch (e) { return []; }
+                if (!Array.isArray(data) || data.length === 0) return [];
+                if (!Array.isArray(data[0])) {
+                    let cols = parseInt(this.getAttribute('columns'), 10) || 5;
+                    const chunked = Array.from({ length: cols }, () => []);
+                    data.forEach((item, index) => chunked[index % cols].push(item));
+                    this.#maxItems = Math.max(...chunked.map(c => c.length));
+                    return chunked;
+                }
+                this.#maxItems = Math.max(...data.map(c => c.length));
+                return data;
+            }
+
+            #render() {
+                this.#parsedData = this.#getProcessedData();
+                const colCount = this.#parsedData.length || 1;
+                let columnsHTML = '';
+                this.#parsedData.forEach((col, colIndex) => {
+                    let cellsHTML = '';
+                    col.forEach((item, cellIndex) => {
+                        const src = typeof item === 'object' ? item.src : item;
+                        const alt = typeof item === 'object' && item.alt ? item.alt : '';
+                        const href = typeof item === 'object' && item.href ? item.href : null;
+                        let contentHTML = `<img class="item" part="item" src="${src}" alt="${alt}" loading="lazy" decoding="async">`;
+                        if (href) contentHTML = `<a href="${href}" part="link" target="_blank" tabindex="0" aria-label="${alt}">${contentHTML}</a>`;
+                        cellsHTML += `<div class="cell" part="cell" role="gridcell" tabindex="${href ? '-1' : '0'}" data-c="${colIndex}" data-r="${cellIndex}">${contentHTML}</div>`;
+                    });
+                    columnsHTML += `<div class="column" part="column" role="row" style="--col-index: ${colIndex};">${cellsHTML}</div>`;
+                });
+
+                const baseCSS = `
+                    :host { 
+                        display: block; position: relative; box-sizing: border-box; overflow: hidden; 
+                        user-select: none; -webkit-user-select: none; -webkit-user-drag: none;
+                        --lh-duration: ${this.getAttribute('duration') || '22s'}; 
+                        --lh-stagger: ${this.getAttribute('stagger') || '100ms'}; 
+                        --lh-easing: linear(0, 0.006, 0.025 2.8%, 0.101 6.1%, 0.539 18.9%, 0.728 25.3%, 0.849 31.5%, 0.937 38.1%, 0.968 41.8%, 0.991 45.7%, 1.006 50.1%, 1.015 55%, 1.017 63.9%, 1.001 87.2%, 1); 
+                    }
+                    * { box-sizing: inherit; margin: 0; padding: 0; }
+                    .grid { width: 100%; height: 100%; display: grid; gap: var(--lh-gap, 1.5rem); grid-template-columns: repeat(${colCount}, 1fr); --grid-state: running; }
+                    .grid:hover, .grid:focus-within { --grid-state: paused; }
+                    .column { position: relative; height: 100%; display: flex; align-items: center; justify-content: center; perspective: var(--lh-perspective, none); }
+                    .cell { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; will-change: transform, opacity, filter; animation: yoyo var(--lh-duration) var(--lh-easing) infinite both; animation-delay: calc(var(--col-index) * var(--lh-stagger)); animation-play-state: var(--grid-state); }
+                    .cell:hover { z-index: 10; }
+                    .cell:focus-visible { outline: 2px solid light-dark(oklch(0.6 0.05 250), oklch(0.85 0.05 250)); outline-offset: 4px; border-radius: inherit; }
+                    img.item { pointer-events: none; max-width: 100%; max-height: 100%; display: block; -webkit-user-drag: none; }
+                    a { display: contents; outline: none; }
+                `;
+
+                this.shadowRoot.innerHTML = `<div class="grid" part="grid" role="grid">${columnsHTML}</div>`;
+                this.#sheet.replaceSync(baseCSS + this.#generateKeyframes());
+            }
+
+            #generateKeyframes() {
+                const total = this.#maxItems;
+                if (total < 2) return ''; 
+                const steps = (total - 1) * 2, step = 100 / steps, dwell = step * 0.85, trans = step - dwell;
+                let css = '';
+                for (let i = 0; i < total; i++) {
+                    const fS = i * step, fE = fS + dwell, bS = (steps - i) * step, bE = bS + dwell;
+                    let kf = `@keyframes yoyo${i} {\n`;
+                    const c = `transform: var(--lh-transform-active, translate3d(0, 0, 0) scale(1)); opacity: var(--lh-opacity-active, 1); filter: var(--lh-filter-active, blur(0px));`;
+                    const t = `transform: var(--lh-transform-out-top, translate3d(0, -100%, 0) scale(0.85)); opacity: var(--lh-opacity-out, 0); filter: var(--lh-filter-out, blur(0px));`;
+                    const b = `transform: var(--lh-transform-out-bottom, translate3d(0, 100%, 0) scale(0.85)); opacity: var(--lh-opacity-out, 0); filter: var(--lh-filter-out, blur(0px));`;
+
+                    if (i === 0) kf += `0%, ${fE}% {${c}} ${fE + trans}%, ${bS - trans}% {${t}} 100% {${c}}`;
+                    else if (i === total - 1) kf += `0%, ${fS - trans}% {${b}} ${fS}%, ${fE}% {${c}} ${fE + trans}%, 100% {${b}}`;
+                    else kf += `0%, ${fS - trans}% {${b}} ${fS}%, ${fE}% {${c}} ${fE + trans}%, ${bS - trans}% {${t}} ${bS}%, ${bE}% {${c}} ${bE + trans}%, 100% {${b}}`;
+                    css += `${kf}}\n.cell[data-r="${i}"]{animation-name: yoyo${i};}\n`;
+                }
+                return css;
+            }
+        }
+        
+        if (!customElements.get('lh-staggered-grid')) customElements.define('lh-staggered-grid', LhStaggeredGrid);
+
+        const toastContainer = document.getElementById('toast-container');
+        const showToast = (src, text) => {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `<img src="${src}" alt="icon"> ${text}`;
+            toastContainer.appendChild(toast);
+            setTimeout(() => {
+                toast.style.animation = 'toastExit 0.4s cubic-bezier(0.5, 0, 0, 1) forwards';
+                toast.addEventListener('animationend', () => toast.remove());
+            }, 3000);
+        };
+
+        const gridNusantara = document.getElementById('grid-nusantara-utama');
+        if (gridNusantara) {
+            gridNusantara.addEventListener('lh-staggered-grid:item-click', (e) => {
+                e.stopPropagation();
+                showToast(e.detail.src, `Aset Nasional: <b>${e.detail.alt}</b>`);
+            });
+        }
+
+        const gridEnterprise = document.querySelector('.grid-enterprise');
+        if (gridEnterprise) {
+            gridEnterprise.addEventListener('lh-staggered-grid:item-click', (e) => {
+                e.stopPropagation();
+                showToast(e.detail.src, `Enterprise Partner: <b>${e.detail.alt}</b>`);
+            });
+        }
+
+        const otherGrids = document.querySelectorAll('.grid-cyber, .grid-brutal');
+        otherGrids.forEach(grid => {
+            grid.addEventListener('lh-staggered-grid:item-click', (e) => {
+                e.stopPropagation();
+                showToast(e.detail.src, `Interaksi Tertangkap: <b>${e.detail.alt}</b>`);
+            });
+        });
+    </script>
+</body>
+</html>

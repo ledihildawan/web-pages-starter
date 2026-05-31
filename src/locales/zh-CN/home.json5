@@ -1,11 +1,16 @@
 {
+  "meta": {
+    "title": "首页 | Starter App",
+    "description": "现代 Web 应用构建器。"
+  },
   "hero": {
     "badge": "新发布：版本 2.0 已上线",
     "title_start": "立即打造 ",
     "title_highlight": "精美之作",
     "description": "构建 Web 应用程序的现代方式。快速、灵活，专为追求卓越的开发者而设计。",
+    "image_alt": "仪表板预览",
     "primary_btn": {
-      "label": "开始构建 →",
+      "label": "开始构建",
       "url": "/start"
     },
     "secondary_btn": {

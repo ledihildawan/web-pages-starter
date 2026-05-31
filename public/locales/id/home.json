@@ -1,0 +1,49 @@
+{
+  "meta": {
+    "title": "Beranda | Starter App",
+    "description": "Pembangun aplikasi web modern."
+  },
+  "hero": {
+    "badge": "Baru: Versi 2.0 sudah hadir",
+    "title_start": "Bangun sesuatu",
+    "title_highlight": "yang indah hari ini",
+    "description": "Cara modern membangun aplikasi web. Cepat, fleksibel, dan dirancang untuk developer yang peduli dengan karya mereka.",
+    "primary_btn": {
+      "label": "Mulai Membangun",
+      "url": "/start"
+    },
+    "secondary_btn": {
+      "label": "Lihat Demo",
+      "url": "/demo"
+    },
+    "note": "Tidak perlu kartu kredit"
+  },
+  "features": {
+    "heading": "Semua yang Anda butuhkan",
+    "subheading": "Fitur bertenaga untuk membantu Anda membangun lebih cepat.",
+    "list": {
+      "speed": {
+        "title": "Sangat Cepat",
+        "description": "Dioptimalkan untuk performa. Aplikasi Anda dimuat secara instan."
+      },
+      "design": {
+        "title": "Desain Menawan",
+        "description": "Dibuat dengan teliti. Setiap piksel memiliki makna dan tujuan."
+      },
+      "security": {
+        "title": "Aman Secara Bawaan",
+        "description": "Keamanan kelas perusahaan. Data Anda dilindungi di setiap lapisan."
+      }
+    }
+  },
+  "stats": {
+    "community": "Komunitas Dev",
+    "community_val": "10Rb+",
+    "projects": "Proyek Terbangun",
+    "projects_val": "50Rb+",
+    "uptime": "Ketersediaan 24/7",
+    "uptime_val": "99.9%",
+    "rating": "Rating Pengguna",
+    "rating_val": "4.9/5"
+  }
+}

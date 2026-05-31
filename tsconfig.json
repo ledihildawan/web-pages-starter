@@ -31,25 +31,19 @@
     "forceConsistentCasingInFileNames": true,
 
     /* ALIAS PATHS - Harus Sinkron dengan rsbuild.config.ts */
+    "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
       "@data/*": ["./src/data/*"],
-      "@pages/*": ["./src/pages/*"],
       "@assets/*": ["./src/assets/*"],
       "@configs/*": ["./src/configs/*"],
-      "@layouts/*": ["./src/layouts/*"],
-      "@components/*": ["./src/components/*"]
+      "@components/*": ["./src/components/*"],
+      "@generated/*": ["./generated/*"]
     },
 
     "types": ["bun-types", "node"]
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.json",
-    "rsbuild.config.ts",
-    "src/scripts/i18n.js"
-  ],
+  "include": ["src/**/*.ts", "tools/**/*.ts", "rsbuild.config.ts"],
   "exclude": ["dist", "node_modules"]
 }

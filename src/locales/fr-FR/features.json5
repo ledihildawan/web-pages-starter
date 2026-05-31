@@ -1,0 +1,55 @@
+{
+  "hero": {
+    "badge": "Puissance sous le capot",
+    "title": "Tout ce dont vous avez besoin pour <br> <span class='bg-linear-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent'>évoluer plus vite</span>",
+    "description": "Des analyses puissantes aux intégrations transparentes, nous fournissons la boîte à outils dont vous avez besoin pour construire des applications de classe mondiale sans les maux de tête."
+  },
+  "sections": {
+    "sync": {
+      "title": "Synchronisation en Temps Réel",
+      "description": "Les modifications se propagent instantanément sur tous les appareils. Que vos utilisateurs soient sur mobile, ordinateur de bureau ou tablette, ils voient les mêmes données exactement au même moment.",
+      "check_0": "Latence de sous-millisecondes",
+      "check_1": "Support hors ligne prêt à l'emploi",
+      "check_2": "Gestion de la résolution des conflits"
+    },
+    "analytics": {
+      "title": "Analyses Actionnables",
+      "description": "Ne volez pas à l'aveugle. Obtenez des informations approfondies sur le comportement des utilisateurs, les performances du système et les métriques de revenus. Visualisez vos données avec des graphiques interactifs magnifiques.",
+      "check_0": "Tableaux de bord personnalisables",
+      "check_1": "Exporter en PDF, CSV ou Excel",
+      "check_2": "Rapports hebdomadaires automatisés"
+    }
+  },
+  "more_title": "Et bien plus encore...",
+  "more": {
+    "dark_mode": {
+      "title": "Mode Sombre",
+      "desc": "Support intégré pour les thèmes clairs et sombres avec détection automatique du système."
+    },
+    "api_first": {
+      "title": "API d'Abord",
+      "desc": "API REST et GraphQL disponibles pour un contrôle programmatique complet."
+    },
+    "sso": {
+      "title": "Connexion SSO",
+      "desc": "Support de connexion unique de niveau entreprise pour Google, GitHub et Okta."
+    },
+    "audit": {
+      "title": "Journaux d'Audit",
+      "desc": "Suivez chaque modification apportée à votre projet avec des horodatages détaillés."
+    },
+    "rbac": {
+      "title": "Accès Basé sur les Rôles",
+      "desc": "Contrôles d'autorisation granulaires pour les administrateurs, éditeurs et spectateurs."
+    },
+    "uptime": {
+      "title": "99.99% de Disponibilité",
+      "desc": "Disponibilité garantie avec notre CDN distribuée mondialement."
+    }
+  },
+  "cta": {
+    "heading": "Prêt à commencer?",
+    "btn_create": "Créer un Compte",
+    "btn_docs": "Lire la Documentation"
+  }
+}

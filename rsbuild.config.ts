@@ -2,16 +2,22 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { defineConfig } from '@rsbuild/core';
 import { pluginImageCompress } from '@rsbuild/plugin-image-compress';
-import {
-  type Compilation,
-  type Compiler,
-  CopyRspackPlugin,
-} from '@rspack/core';
 import { minify } from 'html-minifier-terser';
-import JSON5 from 'json5';
-import { DEFAULT_LANG, SUPPORTED_LANG_CODES } from './src/configs/languages';
+import pluralize from 'pluralize';
+import type { I18nTranslationKeys } from './generated/i18n';
+import {
+  BASE_CURRENCY,
+  DEFAULT_LANG,
+  LANGUAGES,
+  SUPPORTED_LANG_CODES,
+} from './src/configs/locales';
+import { EXCHANGE_RATES, convertCurrency as convertCurrencyRaw } from './generated/exchange-rates';
+import { getValueByPath, jsonAttr } from './src/scripts/utils/common';
+import * as intl from './src/scripts/utils/intl';
+import { readJson5File } from './tools/parse-json5';
+import { getPluralSuffix, getFallbackChain } from './src/scripts/utils/locale';
+import type { DateTimePreset } from '@/types/common';
 
-// --- Types & Constants ---
 type JsonValue =
   | string
   | number
@@ -19,12 +25,14 @@ type JsonValue =
   | null
   | { [key: string]: JsonValue }
   | JsonValue[];
+
 type JsonData = Record<string, JsonValue>;
 
 const ROOT = process.cwd();
 const isProd = process.env.NODE_ENV === 'production';
 const shouldMinify = isProd && process.env.MINIFY !== 'false';
 const shouldMinifyHTML = shouldMinify && process.env.MINIFY_HTML !== 'false';
+
 const MANAGED_EXTS = [
   'ts',
   'css',
@@ -37,7 +45,6 @@ const MANAGED_EXTS = [
   'gif',
 ];
 
-// --- Helpers ---
 const resolveRoot = (...args: string[]): string => path.resolve(ROOT, ...args);
 
 const readJSON5 = (filePath: string): JsonData => {
@@ -47,31 +54,17 @@ const readJSON5 = (filePath: string): JsonData => {
       finalPath = filePath.replace(/\.json5$/, '.json');
       if (!fs.existsSync(finalPath)) return {};
     }
-    return JSON5.parse(fs.readFileSync(finalPath, 'utf-8')) as JsonData;
+    return readJson5File(finalPath) as JsonData;
   } catch (err) {
     console.warn(`[JSON5 Read Error]: ${filePath}`, err);
     return {};
   }
 };
 
-const getValueByPath = (
-  obj: JsonData,
-  jsonPath: string,
-): JsonValue | undefined => {
-  return jsonPath
-    .split('.')
-    .reduce((prev: JsonValue | undefined, curr: string) => {
-      if (prev && typeof prev === 'object' && !Array.isArray(prev)) {
-        return (prev as Record<string, JsonValue>)[curr];
-      }
-      return undefined;
-    }, obj);
-};
-
-// --- Data Loaders & Scanner ---
 const loadGlobalData = (): JsonData => {
   const dir = resolveRoot('src/data');
   const globalData: JsonData = {};
+
   if (!fs.existsSync(dir)) return globalData;
 
   const files = fs.readdirSync(dir);
@@ -79,6 +72,7 @@ const loadGlobalData = (): JsonData => {
     if (file.endsWith('.json5') || file.endsWith('.json')) {
       const name = file.replace(/\.json5?$/, '');
       const data = readJSON5(path.join(dir, file));
+
       if (name === 'global') {
         Object.assign(globalData, data);
       } else {
@@ -127,19 +121,20 @@ const getUsedComponents = (
     }
     match = componentRegex.exec(content);
   }
+
   return Array.from(found);
 };
 
-// --- Entry Resolvers ---
 const getEntries = (): Record<string, string | string[]> => {
   const dir = resolveRoot('src/pages');
   const entries: Record<string, string | string[]> = {};
+
   if (!fs.existsSync(dir)) return entries;
 
-  const folders = fs.readdirSync(dir);
-  for (const folder of folders) {
+  for (const folder of fs.readdirSync(dir)) {
     const tsFile = path.join(dir, folder, 'index.ts');
     const cssFile = path.join(dir, folder, 'index.css');
+
     if (fs.existsSync(tsFile)) {
       entries[folder] = fs.existsSync(cssFile) ? [tsFile, cssFile] : tsFile;
     }
@@ -154,34 +149,10 @@ const getGlobalEntries = (): string[] => {
   ].filter((p) => fs.existsSync(p));
 };
 
-// --- Custom Plugins ---
-const WatchJson5Plugin = {
-  apply(compiler: Compiler) {
-    compiler.hooks.afterCompile.tap(
-      'WatchJson5Plugin',
-      (compilation: Compilation) => {
-        const watchDirs = ['data', 'pages', 'locales', 'components'];
-        for (const d of watchDirs) {
-          const full = resolveRoot('src', d);
-          if (fs.existsSync(full)) {
-            const files = fs.readdirSync(full, { recursive: true }) as string[];
-            for (const f of files) {
-              const fileStr = f as string;
-              if (fileStr.match(/\.(json5?|njk)$/)) {
-                compilation.fileDependencies.add(path.join(full, fileStr));
-              }
-            }
-          }
-        }
-      },
-    );
-  },
-};
-
-// --- Main Config ---
 export default defineConfig({
   server: {
     open: '/',
+    port: 8888,
     strictPort: true,
     historyApiFallback: {
       rewrites: [
@@ -190,11 +161,6 @@ export default defineConfig({
       ],
       disableDotRule: true,
     },
-  },
-
-  performance: {
-    chunkSplit: { strategy: 'split-by-experience' },
-    removeConsole: shouldMinify,
   },
 
   dev: {
@@ -216,6 +182,8 @@ export default defineConfig({
       '@': resolveRoot('src'),
       '@components': resolveRoot('src/components'),
       '@assets': resolveRoot('src/assets'),
+      '@generated': resolveRoot('generated'),
+      '@configs': resolveRoot('src/configs'),
     },
   },
 
@@ -234,9 +202,11 @@ export default defineConfig({
     assetPrefix: '/',
     cleanDistPath: true,
     minify: shouldMinify,
-    inlineStyles: ({ size }) => size < 14 * 1024,
-    inlineScripts: ({ size }) => size < 5 * 1024,
-    sourceMap: !shouldMinify ? { js: 'cheap-module-source-map', css: true } : false,
+    inlineStyles: ({ size }) => size < 20 * 1_024,
+    inlineScripts: ({ size }) => size < 8 * 1_024,
+    sourceMap: !shouldMinify
+      ? { js: 'cheap-module-source-map', css: true }
+      : false,
     filename: {
       js: '[name].[contenthash:8].js',
       css: '[name].[contenthash:8].css',
@@ -244,13 +214,19 @@ export default defineConfig({
       image: '[name].[hash:8][ext]',
     },
     legalComments: 'none',
+    copy: [
+      {
+        from: resolveRoot('src/assets'),
+        to: 'assets',
+        globOptions: { ignore: MANAGED_EXTS.map((ext) => `**/*.${ext}`) },
+        noErrorOnMissing: true,
+      },
+    ],
   },
 
   plugins: [
     pluginImageCompress(
-      { use: 'jpeg', quality: 70 },
-      { use: 'png' },
-      { use: 'webp', quality: 70 },
+      { use: 'avif', quality: 75 }
     ),
   ],
 
@@ -270,26 +246,23 @@ export default defineConfig({
             removeScriptTypeAttributes: true,
             removeStyleLinkTypeAttributes: true,
             useShortDoctype: true,
-            removeEmptyAttributes: true,
-            collapseInlineTagWhitespace: true,
-            conservativeCollapse: false,
+            continueOnParseError: true,
+            customEventAttributes: [/^on[a-z]{3,}$/],
+            removeAttributeQuotes: false,
+            keepClosingSlash: true,
+            ignoreCustomFragments: [
+              /\{\{[\s\S]*?\}\}/,
+              /\{%[\s\S]*?%\}/,
+              /\{#[\s\S]*?#\}/,
+            ],
+            conservativeCollapse: true,
+            collapseInlineTagWhitespace: false,
+            removeEmptyAttributes: false,
           });
+
       return config;
     },
     rspack: {
-      plugins: [
-        new CopyRspackPlugin({
-          patterns: [
-            {
-              from: resolveRoot('src/assets'),
-              to: 'assets',
-              globOptions: { ignore: MANAGED_EXTS.map((ext) => `**/*.${ext}`) },
-              noErrorOnMissing: true,
-            },
-          ],
-        }),
-        WatchJson5Plugin,
-      ],
       module: {
         rules: [
           {
@@ -302,6 +275,25 @@ export default defineConfig({
                     resolveRoot('src', d),
                   ),
                   assetsPaths: [resolveRoot('src/assets')],
+                  configureLocal: (njk: any) => {
+                    // Add slice filter for Nunjucks
+                    njk.addFilter('slice', (arr: any[], start: number, end?: number) => {
+                      if (!Array.isArray(arr)) return arr;
+                      return end !== undefined ? arr.slice(start, end) : arr.slice(start);
+                    });
+                    // Add truncate filter
+                    njk.addFilter('truncate', (str: string, length: number, killwords = false) => {
+                      if (typeof str !== 'string') return str;
+                      if (str.length <= length) return str;
+                      const trimmed = str.trim();
+                      if (killwords) {
+                        return trimmed.substring(0, length);
+                      }
+                      const spaceIndex = trimmed.lastIndexOf(' ', length);
+                      if (spaceIndex === -1) return trimmed.substring(0, length);
+                      return trimmed.substring(0, spaceIndex) + '...';
+                    });
+                  },
                 },
               },
             ],
@@ -315,43 +307,54 @@ export default defineConfig({
     inject: 'head',
     scriptLoading: 'defer',
     template: ({ entryName }) => path.join('src/pages', entryName, 'index.njk'),
+
     templateParameters: (params) => {
       const name = String(params.entryName || 'home');
-      const lang = DEFAULT_LANG; // Bahasa default saat pertama kali render (SSR/Nunjucks)
+      const lang = DEFAULT_LANG;
       const templatePath = resolveRoot(`src/pages/${name}/index.njk`);
 
       const usedComponents = getUsedComponents(templatePath);
-
-      // --- 1. UPDATE: Daftar bahasa harus sinkron dengan i18n.ts dan Alpine Store ---
       const supportedLangs = SUPPORTED_LANG_CODES;
 
-      // --- 2. Load data untuk bahasa default (id) ---
       const mergedLocales: JsonData = {
         ...readJSON5(resolveRoot(`src/locales/${lang}/common.json5`)),
         page: readJSON5(resolveRoot(`src/locales/${lang}/${name}.json5`)),
         comp: loadSelectedComponentLocales(lang, usedComponents),
       };
 
-      // --- 3. UPDATE: Load data untuk SEMUA bahasa (Inject ke Window) ---
-      // Kita memuat semua agar saat user ganti bahasa, datanya sudah instan di memory
       const allI18nData: Record<string, JsonData> = {};
-      
-      supportedLangs.forEach(l => {
+      for (const l of supportedLangs) {
         allI18nData[l] = {
-          // Mencari folder src/locales/en-US, src/locales/zh-CN, dsb.
           common: readJSON5(resolveRoot(`src/locales/${l}/common.json5`)),
-          page: readJSON5(resolveRoot(`src/locales/${l}/${name}.json5`)),
           comp: loadSelectedComponentLocales(l, usedComponents),
+          page: readJSON5(resolveRoot(`src/locales/${l}/${name}.json5`)),
         };
-      });
+      }
 
-      // Inject data ke Window Object
       const clientI18nScript = `
         <script>
-          (function() {
+          (() => {
+            const defaultLng = "${lang}";
+            const savedLng = localStorage.getItem('i18nextLng') || defaultLng;
+            const languages = ${JSON.stringify(LANGUAGES)};
+
             window.__PAGE_ID__ = ${JSON.stringify(name)};
             window.__USED_COMPONENTS__ = ${JSON.stringify(usedComponents)};
             window.__I18N_DATA__ = ${JSON.stringify(allI18nData)};
+            window.__SAVED_LNG__ = savedLng;
+
+            const htmlEl = document.documentElement;
+            const langConfig = languages.find(l => l.code === savedLng);
+            const dir = langConfig?.dir || 'ltr';
+
+            htmlEl.setAttribute('dir', dir);
+            htmlEl.setAttribute('lang', savedLng);
+
+            if (dir === 'rtl') {
+              htmlEl.classList.add('is-rtl');
+            } else {
+              htmlEl.classList.remove('is-rtl');
+            }
           })();
         </script>
       `;
@@ -359,16 +362,57 @@ export default defineConfig({
       const globalData = loadGlobalData();
       const pageData = readJSON5(resolveRoot('src/pages', name, 'index.json5'));
 
+      const isDev = process.env.NODE_ENV !== 'production';
+
       const _resolve = (
         jsonPath: string,
         vars: Record<string, unknown> = {},
       ): string => {
         const val = getValueByPath(mergedLocales, jsonPath);
         let str = val !== undefined ? String(val) : jsonPath;
+
+        if (val === undefined && isDev) {
+          console.warn(`[i18n] Missing key "${jsonPath}" in locale "${lang}"`);
+        }
+
         for (const key of Object.keys(vars)) {
-          str = str.split('{{' + key + '}}').join(String(vars[key]));
+          str = str.split(`{{${key}}}`).join(String(vars[key]));
         }
         return str;
+      };
+
+      const normalizeI18nKey = (key: string): { ns: string; clientKey: string } => {
+        let ns = 'common';
+        let clientKey = key;
+
+        if (key.startsWith('page.')) {
+          ns = name;
+          clientKey = key.replace('page.', '');
+        } else if (key.startsWith('comp.')) {
+          const p = key.split('.');
+          ns = `components/${p[1]}`;
+          clientKey = p.slice(2).join('.');
+        }
+
+        return { ns, clientKey };
+      };
+
+      const i18nItem = (key: string | undefined, vars: Record<string, unknown> = {}) => {
+        if (!key) {
+          return {
+            v: `[missing_key]`,
+            k: 'common:site_name' as I18nTranslationKeys,
+            vars: null,
+          };
+        }
+
+        const { ns, clientKey } = normalizeI18nKey(key);
+
+        return {
+          v: _resolve(key, vars),
+          k: `${ns}:${clientKey}` as I18nTranslationKeys,
+          vars: Object.keys(vars).length ? JSON.stringify(vars) : null,
+        };
       };
 
       return {
@@ -378,25 +422,88 @@ export default defineConfig({
         page_id: name,
         global: globalData,
         page: pageData,
-        i18n: (key: string, vars: Record<string, unknown> = {}) => {
-          let ns = 'common';
-          let clientKey = key;
+        nunjucksFilters: {
+          jsonAttr,
+          dump: (value: unknown) => JSON.stringify(value),
+          formatNumber: (value: number, lng: string, options?: Intl.NumberFormatOptions, useNative?: boolean) =>
+            intl.formatNumber(value, lng, options, { useNativeNumberingSystem: useNative }),
+          formatPercent: (value: number, lng: string, options?: Intl.NumberFormatOptions, useNative?: boolean) =>
+            intl.formatPercent(value, lng, options, { useNativeNumberingSystem: useNative }),
+          formatBytes: intl.formatBytes as (bytes: number, decimals?: number) => string,
+          formatDuration: intl.formatDuration as (seconds: number, lng: string) => string,
+          formatDate: intl.formatDate as (date: DateTimePreset, lng: string, options?: Intl.DateTimeFormatOptions) => string,
+          formatDateTime: intl.formatDateTime as (date: DateTimePreset, lng: string, options?: Intl.DateTimeFormatOptions) => string,
+          formatOrdinal: (value: number) => intl.formatOrdinal(value, lang),
+          formatCardinal: (value: number) => intl.formatCardinal(value, lang),
+          formatScientific: (value: number, options?: Intl.NumberFormatOptions, useNative?: boolean) =>
+            intl.formatScientific(value, lang, options, { useNativeNumberingSystem: useNative }),
+          formatAbbreviated: (value: number) => intl.formatAbbreviated(value, lang),
+          formatList: (items: string[]) => Array.isArray(items) ? intl.formatList(items, lang) : String(items),
+          formatCurrency: (value: number, lng: string, currency?: string, options?: Intl.NumberFormatOptions, useNative?: boolean) =>
+            intl.formatCurrency(value, lng, currency ?? BASE_CURRENCY, options, { useNativeNumberingSystem: useNative }),
+          formatUnit: (value: number, lng: string, unit: string, options?: Intl.NumberFormatOptions, useNative?: boolean) =>
+            intl.formatUnit(value, lng, unit, options, { useNativeNumberingSystem: useNative }),
+          formatTime: (date: DateTimePreset, lng: string, preset?: DateTimePreset) =>
+            intl.formatTime(date, lng, preset ?? 'short'),
+          formatDatePreset: (date: DateTimePreset, lng: string, preset?: DateTimePreset) =>
+            intl.formatDatePreset(date, lng, preset ?? 'medium'),
+          getPluralSuffix,
+          convertCurrency: (value: number, lng: string, targetCurrency?: string, options?: Intl.NumberFormatOptions, useNative?: boolean) => {
+            const currency = targetCurrency || LANGUAGES.find((l) => l.code === lng)?.currency || BASE_CURRENCY;
+            const converted = convertCurrencyRaw(value, BASE_CURRENCY, currency, EXCHANGE_RATES);
+            return intl.formatCurrency(converted, lng, currency, options, { useNativeNumberingSystem: useNative });
+          },
+          getLocalPrice: (plan: { pricing: { base: number; [locale: string]: number } }, lng: string) => {
+            return intl.getLocalPrice(plan, lng);
+          },
+          getLocalPriceCurrency: (plan: { pricing: { base: number; [locale: string]: number } }, lng: string) => {
+            return intl.getLocalPriceCurrency(plan, lng);
+          },
+          convertLocalPrice: (plan: { pricing: { base: number; [locale: string]: number } }, lng: string, targetCurrency?: string, options?: Intl.NumberFormatOptions) => {
+            const price = intl.getLocalPrice(plan, lng);
+            const fromCurrency = intl.getLocalPriceCurrency(plan, lng);
+            const toCurrency = targetCurrency || LANGUAGES.find((l) => l.code === lng)?.currency || BASE_CURRENCY;
+            if (fromCurrency === toCurrency) {
+              return intl.formatCurrency(price, lng, toCurrency, options);
+            }
+            const converted = convertCurrencyRaw(price, fromCurrency, toCurrency, EXCHANGE_RATES);
+            return intl.formatCurrency(converted, lng, toCurrency, options);
+          },
+          convertLocalPriceDiscounted: (plan: { pricing: { base: number; [locale: string]: number } }, lng: string, discountMultiplier: number, targetCurrency?: string, options?: Intl.NumberFormatOptions) => {
+            const price = intl.getLocalPrice(plan, lng) * discountMultiplier;
+            const fromCurrency = intl.getLocalPriceCurrency(plan, lng);
+            const toCurrency = targetCurrency || LANGUAGES.find((l) => l.code === lng)?.currency || BASE_CURRENCY;
+            if (fromCurrency === toCurrency) {
+              return intl.formatCurrency(price, lng, toCurrency, options);
+            }
+            const converted = convertCurrencyRaw(price, fromCurrency, toCurrency, EXCHANGE_RATES);
+            return intl.formatCurrency(converted, lng, toCurrency, options);
+          },
+          pluralize: (word: string, count?: number, inclusive = false) => {
+            if (inclusive && count !== undefined) return pluralize(word, count);
+            return count === undefined ? pluralize(word) : pluralize(word, count);
+          },
+          singularize: (word: string) => pluralize.singular(word),
+          formatRelativeTime: (value: number, lng: string, unit: Intl.RelativeTimeFormatUnit) => {
+            try {
+              return new Intl.RelativeTimeFormat(lng, { numeric: 'auto' }).format(value, unit);
+            } catch {
+              return `${value} ${unit}`;
+            }
+          },
+          nativeNumbers: (text: string, lng: string, force?: boolean) => intl.toNativeDigits(text, lng, force),
+        },
+        i18n: i18nItem,
+        i18nPlural: (key: string | undefined, count: number, vars: Record<string, unknown> = {}) => {
+          if (!key) return i18nItem(key, vars);
+          const mergedVars = { ...vars, count };
+          const lookupKey = `${key}${getPluralSuffix(count, lang)}`;
+          const item = i18nItem(lookupKey, mergedVars);
+          const { ns, clientKey } = normalizeI18nKey(key);
 
-          if (key.startsWith('page.')) {
-            ns = name;
-            clientKey = key.replace('page.', '');
-          } else if (key.startsWith('comp.')) {
-            const p = key.split('.');
-            // p[1] adalah nama komponen, p.slice(2) adalah key di dalam komponen itu
-            ns = `components/${p[1]}`;
-            clientKey = p.slice(2).join('.');
-          }
-
-          const result = _resolve(key, vars);
           return {
-            v: result,
-            k: `${ns}:${clientKey}`,
-            vars: Object.keys(vars).length ? JSON.stringify(vars) : null,
+            ...item,
+            k: `${ns}:${clientKey}` as I18nTranslationKeys,
           };
         },
       };

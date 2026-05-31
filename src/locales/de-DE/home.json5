@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "title": "Startseite | Starter App",
+    "description": "Moderne Webanwendungsentwicklung."
+  },
+  "hero": {
+    "badge": "Neu: Version 2.0 ist da",
+    "title_start": "Bauen Sie etwas",
+    "title_highlight": "Schönes heute",
+    "description": "Die moderne Art, Webanwendungen zu entwickeln. Schnell, flexibel und für Entwickler konzipiert, die ihr Handwerk achten.",
+    "image_alt": "Dashboard Preview",
+    "primary_btn": {
+      "label": "Jetzt Loslegen",
+      "url": "/start"
+    },
+    "secondary_btn": {
+      "label": "Demo Ansehen",
+      "url": "/demo"
+    },
+    "note": "Keine Kreditkarte erforderlich"
+  },
+  "features": {
+    "heading": "Alles Was Sie Brauchen",
+    "subheading": "Leistungsstarke Funktionen, die Ihnen helfen, schneller zu entwickeln.",
+    "list": {
+      "speed": {
+        "title": "Blitzschnell",
+        "description": "Optimiert für Leistung. Ihre Anwendungen laden sofort."
+      },
+      "design": {
+        "title": "Schönes Design",
+        "description": "Mit Sorgfalt erstellt. Jedes Pixel hat Bedeutung und Zweck."
+      },
+      "security": {
+        "title": "Sicher von Haus aus",
+        "description": "Sicherheit auf Enterprise-Niveau. Ihre Daten sind auf jeder Ebene geschützt."
+      }
+    }
+  },
+  "stats": {
+    "community": "Entwickler-Community",
+    "community_val": "10K+",
+    "projects": "Erstellte Projekte",
+    "projects_val": "50K+",
+    "uptime": "24/7 Verfügbarkeit",
+    "uptime_val": "99,9%",
+    "rating": "Benutzerbewertung",
+    "rating_val": "4.9/5"
+  }
+}

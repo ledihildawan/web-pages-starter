@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "title": "홈 | Starter App",
+    "description": "현대적인 웹 애플리케이션 빌더."
+  },
+  "hero": {
+    "badge": "새로운 기능: 버전 2.0 출시",
+    "title_start": "아름다운 것을",
+    "title_highlight": "만드세요",
+    "description": "웹 애플리케이션을 구축하는 현대적인 방법입니다. 빠르고 유연하며 자신의 기술을 소중히 여기는 개발자를 위해 설계되었습니다.",
+    "image_alt": "Dashboard Preview",
+    "primary_btn": {
+      "label": "빌드 시작",
+      "url": "/start"
+    },
+    "secondary_btn": {
+      "label": "데모 보기",
+      "url": "/demo"
+    },
+    "note": "신용카드 불필요"
+  },
+  "features": {
+    "heading": "필요한 모든 것",
+    "subheading": "더 빠르게 구축할 수 있는 강력한 기능.",
+    "list": {
+      "speed": {
+        "title": "번개 같은 속도",
+        "description": "성능에 최적화되었습니다. 앱이 즉시 로드됩니다."
+      },
+      "design": {
+        "title": "아름다운 디자인",
+        "description": "세심하게 제작되었습니다. 모든 픽셀에 의미와 목적이 있습니다."
+      },
+      "security": {
+        "title": "기본 보안",
+        "description": "엔터프라이즈급 보안입니다. 모든 계층에서 데이터가 보호됩니다."
+      }
+    }
+  },
+  "stats": {
+    "community": "개발자 커뮤니티",
+    "community_val": "1만+",
+    "projects": "구축된 프로젝트",
+    "projects_val": "5만+",
+    "uptime": "24/7 가용성",
+    "uptime_val": "99.9%",
+    "rating": "사용자 평점",
+    "rating_val": "4.9/5"
+  }
+}

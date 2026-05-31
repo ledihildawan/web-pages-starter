@@ -1,4 +1,9 @@
 {
+  "pricing": {
+    "badge": "选择您的方案"
+  },
+  "period_monthly": "月",
+  "period_yearly": "年",
   "hero": {
     "title_part1": "简单透明的 ",
     "title_highlight": "定价方案",
@@ -6,7 +11,10 @@
   },
   "toggle": {
     "monthly": "按月付费",
-    "yearly": "按年付费"
+    "yearly": "按年付费",
+    "yearly_hint": "按年计费",
+    "discount": "节省 20%",
+    "aria_label": "Toggle Pricing Plan"
   },
   "plans": {
     "hobby": {

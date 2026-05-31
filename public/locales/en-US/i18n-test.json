@@ -1,0 +1,97 @@
+{
+  "meta": {
+    "title": "i18n Test | Demo",
+    "description": "Complete internationalization feature test page"
+  },
+  "hero": {
+    "badge": "i18n Features",
+    "title": "Complete <span class='text-violet-400'>i18n</span> Testing",
+    "description": "Try all i18n features: translation, pluralization, number formatting, currency, and currency conversion."
+  },
+  "language_info": {
+    "title": "Current Language Info",
+    "code": "Language Code",
+    "currency": "Currency",
+    "direction": "Text Direction",
+    "current_code": "en-US",
+    "current_currency": "USD",
+    "current_direction": "LTR (Left to Right)"
+  },
+  "numbers": {
+    "title": "Number Formatting",
+    "description": "Numbers formatted according to active language locale.",
+    "large": "Large Number",
+    "decimal": "Decimal",
+    "million": "Million",
+    "percent": "Percent"
+  },
+  "currency": {
+    "title": "Currency Formatting",
+    "description": "Prices in USD converted to active language currency.",
+    "small": "Small",
+    "medium": "Medium",
+    "large": "Large",
+    "enterprise": "Enterprise"
+  },
+  "currency_comparison": {
+    "title": "Currency Comparison",
+    "description": "Same price ($99 USD) in all supported currencies.",
+    "base_price": "Base Price"
+  },
+  "pluralization": {
+    "title": "Pluralization",
+    "description": "Plural forms vary by language.",
+    "item_title": "Item (Noun)",
+    "user_title": "User (Person)",
+    "product_title": "Product (Goods)"
+  },
+  "form": {
+    "title": "Form with Translated Placeholders",
+    "description": "Placeholders and labels loaded from locale files.",
+    "name_label": "Name",
+    "name_placeholder": "Enter your full name",
+    "email_label": "Email",
+    "email_placeholder": "example@email.com",
+    "message_label": "Message",
+    "message_placeholder": "Type your message here...",
+    "submit": "Submit"
+  },
+  "missing_keys": {
+    "title": "Missing Key Handler",
+    "description": "Missing keys are displayed in square brackets."
+  },
+  "html_content": {
+    "title": "HTML Content",
+    "description": "Translations can include HTML tags for styling.",
+    "example": "This is an example with <span class='text-emerald-400'>colored highlight</span> and <strong>bold text</strong>.",
+    "note": "Note: HTML in translations must have a single root element."
+  },
+  "switcher": {
+    "title": "Switch Language",
+    "description": "Click buttons below to change language and see i18n in action."
+  },
+  "advanced": {
+    "title": "Advanced Formatting",
+    "description": "Advanced formatting features for percentages, units, bytes, lists, and ordinals.",
+    "percentages": "Percentages",
+    "units": "Units",
+    "bytes": "Bytes",
+    "lists": "Lists",
+    "ordinals": "Ordinals",
+    "fifty_percent": "Fifty Percent",
+    "small_percent": "Small Percent",
+    "ninety_nine": "Ninety Nine",
+    "hundred": "One Hundred",
+    "kilobyte": "Kilobyte",
+    "distance": "Distance",
+    "temperature": "Temperature",
+    "weight": "Weight",
+    "half_kb": "Half KB",
+    "one_and_half_kb": "One and Half KB",
+    "one_mb": "One MB",
+    "one_gb": "One GB",
+    "two_items": "Two Items",
+    "three_items": "Three Items",
+    "four_items": "Four Items"
+  }
+}

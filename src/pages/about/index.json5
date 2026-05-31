@@ -6,22 +6,22 @@
   "stats": [
     {
       "val": "3+",
-      "label": "page.stats.years",
+      "label": "years",
       "color": "violet"
     },
     {
       "val": "120+",
-      "label": "page.stats.clients",
+      "label": "clients",
       "color": "fuchsia"
     },
     {
       "val": "15",
-      "label": "page.stats.countries",
+      "label": "countries",
       "color": "pink"
     },
     {
       "val": "24/7",
-      "label": "page.stats.support",
+      "label": "support",
       "color": "amber"
     }
   ],
@@ -29,6 +29,38 @@
     "t_key": "story",
     "visual_type": "illustration"
   },
+  "values": [
+    {
+      "icon": "heart",
+      "color": "pink",
+      "t_key": "values.passion"
+    },
+    {
+      "icon": "users",
+      "color": "violet",
+      "t_key": "values.collaboration"
+    },
+    {
+      "icon": "light",
+      "color": "amber",
+      "t_key": "values.innovation"
+    },
+    {
+      "icon": "shield",
+      "color": "emerald",
+      "t_key": "values.integrity"
+    },
+    {
+      "icon": "rocket",
+      "color": "fuchsia",
+      "t_key": "values.excellence"
+    },
+    {
+      "icon": "star",
+      "color": "blue",
+      "t_key": "values.quality"
+    }
+  ],
   "team": {
     "t_key": "team",
     "members": [
@@ -36,25 +68,25 @@
         "name": "Alex Morgan",
         "role": "Founder & CEO",
         "color": "violet",
-        "desc_key": "page.team.alex_desc"
+        "desc_key": "team.alex_desc"
       },
       {
         "name": "Sarah Chen",
         "role": "Lead Engineer",
         "color": "fuchsia",
-        "desc_key": "page.team.sarah_desc"
+        "desc_key": "team.sarah_desc"
       },
       {
         "name": "Mike Ross",
         "role": "Product Design",
         "color": "pink",
-        "desc_key": "page.team.mike_desc"
+        "desc_key": "team.mike_desc"
       },
       {
         "name": "Jessica Lee",
         "role": "Marketing",
         "color": "amber",
-        "desc_key": "page.team.jessica_desc"
+        "desc_key": "team.jessica_desc"
       }
     ]
   }

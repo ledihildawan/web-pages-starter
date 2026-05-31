@@ -1,41 +1,110 @@
-<section class="relative pt-40 pb-20 px-6 text-center overflow-hidden">
-  {# Background Glow #}
-  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-violet-500/10 via-transparent to-transparent -z-10"></div>
+<section class="relative pbs-52 pbe-28 px-6 text-center overflow-hidden noise-texture">
+  <!-- Enhanced Background Effects -->
+  <div class="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+    <!-- Main radial gradient -->
+    <div class="absolute inset-bs-0 inset-s-1/2 ltr:-translate-x-1/2 rtl:translate-x-1/2 inline-[150%] block-[150%] bg-[radial-gradient(circle_at_top,var(--tw-gradient-stops))] from-violet-600/20 via-fuchsia-600/10 to-transparent -z-10 blur-3xl animate-pulse-glow"></div>
 
-  <div class="max-w-6xl mx-auto">
-    <div class="inline-flex items-center gap-2 px-4 py-2 bg-violet-500/10 border border-violet-500/20 rounded-full text-violet-300 text-sm mb-8 animate-fade-in">
-      <span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
-      {{ i18n.t('page.hero.badge') }}
+    <!-- Floating glow points with morphing shapes -->
+    <div class="absolute inset-bs-[10%] inset-s-[10%] inline-96 block-96 bg-violet-600/10 blur-[100px] animate-float morph-shape"></div>
+    <div class="absolute inset-be-[10%] inset-e-[10%] inline-80 block-80 bg-fuchsia-600/10 blur-[80px] animate-float delay-300 morph-shape"></div>
+    <div class="absolute inset-bs-[30%] inset-e-[20%] inline-64 block-64 bg-pink-600/8 blur-[60px] animate-float delay-500 morph-shape"></div>
+
+    <!-- Grid pattern -->
+    <div class="hidden sm:absolute sm:inset-0 opacity-30 grid-pattern"></div>
+  </div>
+
+  <div class="max-inline-6xl mx-auto relative">
+    <!-- LCP Element: Enhanced Badge with Concentric Radius -->
+    <div class="concentric-radius color-shift inline-flex items-center gap-3 px-5 py-2.5 bg-gradient-to-r from-violet-500/10 to-fuchsia-500/10 border border-violet-500/30 rounded-full text-violet-100 text-sm mbe-12 transition-all duration-500 hover:bg-violet-500/20 hover:border-violet-500/40 hover:shadow-[0_0_30px_rgba(139,92,246,0.3)] cursor-default animate-fade-in-up">
+      <span class="relative flex block-2.5 inline-2.5" aria-hidden="true">
+        <span class="animate-ping absolute inline-flex block-full inline-full rounded-full bg-emerald-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full block-2.5 inline-2.5 bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.6)]"></span>
+      </span>
+      <span class="font-bold tracking-wide uppercase text-[10px]">
+        {{ i18n.t('page.hero.badge') }}
+      </span>
     </div>
 
-    <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-[1.1] bg-linear-to-b from-white to-slate-400 bg-clip-text text-transparent">
-      {{ i18n.t('page.hero.title_start') }}
-      <span class="block bg-linear-to-r from-violet-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent">
-        {{ i18n.t('page.hero.title_highlight') }}
+    <!-- LCP Candidate: Enhanced Hero Title with Text Reveal -->
+    <h1 class="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter mbe-8 leading-none stagger-children">
+      <span class="block text-reveal bg-gradient-to-b from-white to-slate-400 bg-clip-text text-transparent">
+        <span>{{ i18n.t('page.hero.title_start') }}</span>
+      </span>
+      <span class="block text-reveal bg-gradient-to-r from-violet-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent animate-gradient bg-size-[200%_auto]">
+        <span>{{ i18n.t('page.hero.title_highlight') }}</span>
       </span>
     </h1>
 
-    {# Image Test dengan Styling Konsisten #}
-    <div class="relative group max-w-lg mx-auto my-12">
-      <div class="absolute -inset-1 bg-linear-to-r from-violet-500 to-fuchsia-500 rounded-2xl blur-md opacity-20 group-hover:opacity-40 transition duration-500"></div>
-      <img width="512" height="344" src="{% static 'images/hero-test.webp' %}" alt="Hero Illustration" class="relative w-full h-auto rounded-2xl shadow-2xl border border-white/10 group-hover:scale-[1.01] transition-transform duration-500" fetchpriority="high">
-    </div>
-
-    <p class="text-xl text-slate-400 max-w-2xl mx-auto mb-12 leading-relaxed">
+    <p class="text-xl md:text-2xl lg:text-3xl text-slate-300 max-inline-3xl mx-auto mbe-16 leading-relaxed font-medium animate-fade-in-up delay-200">
       {{ i18n.t('page.hero.description') }}
     </p>
 
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
-      <a href="{{ page.hero.primary_btn.url }}" class="group relative w-full sm:w-auto px-10 py-4 bg-white text-slate-950 rounded-xl font-bold text-lg overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-lg shadow-white/5">
-        <span class="relative">{{ i18n.t('page.hero.primary_btn.label') }}</span>
+    <!-- Enhanced Button Group with Modern Interactions -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-5 mbe-14 stagger-children">
+      <a href="{{ page.hero.primary_btn.url }}" class="magnetic-btn btn-press ripple-effect group relative inline-full sm:inline-auto min-block-14 px-14 py-4 bg-white text-slate-950 rounded-2xl font-black text-lg flex items-center justify-center transition-all duration-500 ease-emphasized hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:scale-105 overflow-hidden">
+        <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></span>
+        <span class="relative flex items-center gap-3">
+          {{ i18n.t('page.hero.primary_btn.label') }}
+          <svg class="inline-5 block-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+          </svg>
+        </span>
       </a>
-      <a href="{{ page.hero.secondary_btn.url }}" class="w-full sm:w-auto px-10 py-4 bg-slate-900 text-white border border-white/10 rounded-xl font-bold text-lg hover:bg-slate-800 transition-all hover:border-white/20">
-        {{ i18n.t('page.hero.secondary_btn.label') }}
+      <a href="{{ page.hero.secondary_btn.url }}" class="magnetic-btn btn-press spotlight-card group inline-full sm:inline-auto min-block-14 px-14 py-4 bg-slate-900/60 backdrop-blur-xl text-white border border-white/10 rounded-2xl font-black text-lg flex items-center justify-center hover:bg-slate-800/80 hover:border-white/20 transition-all duration-500 ease-emphasized hover:shadow-[0_0_30px_rgba(139,92,246,0.2)] hover:scale-105">
+        <span class="relative flex items-center gap-3">
+          {{ i18n.t('page.hero.secondary_btn.label') }}
+          <svg class="inline-5 block-5 transition-transform duration-300 group-hover:rotate-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"/>
+          </svg>
+        </span>
       </a>
     </div>
 
-    <p class="text-sm text-slate-500 font-medium tracking-wide">
-      {{ i18n.t('page.hero.note') }}
+    <!-- Trust indicators -->
+    <p class="text-[11px] text-slate-400 font-bold tracking-[0.2em] uppercase mbe-20 flex items-center justify-center gap-3 animate-fade-in-up delay-400">
+      <span class="flex items-center gap-1.5">
+        <svg class="inline-4 block-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/>
+        </svg>
+        {{ i18n.t('page.hero.note') }}
+      </span>
+      <span class="inline-1 block-1 rounded-full bg-slate-700"></span>
+      <span class="flex items-center gap-1.5">
+        <svg class="inline-4 block-4 text-violet-400" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+        </svg>
+        {{ i18n.t('rating') }}
+      </span>
     </p>
+
+    <!-- LCP Element: Enhanced Hero Image -->
+    <div class="relative group max-inline-3xl mx-auto aspect-[16/10] animate-fade-in-up delay-500">
+      <!-- Enhanced glow effect -->
+      <div class="absolute -inset-1 bg-gradient-to-r from-violet-600 via-fuchsia-600 to-pink-600 rounded-3xl blur-2xl opacity-30 group-hover:opacity-60 transition-all duration-1000 ease-emphasized animate-pulse-glow" aria-hidden="true"></div>
+
+      <!-- Secondary glow -->
+      <div class="absolute inset-4 bg-gradient-to-br from-violet-500/20 via-transparent to-fuchsia-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" aria-hidden="true"></div>
+
+      <div class="relative bg-slate-900/80 backdrop-blur-xl rounded-2xl p-2 border border-white/10 shadow-2xl overflow-hidden group-hover:shadow-[0_25px_50px_rgba(139,92,246,0.3)] transition-all duration-700">
+        <!-- Image container with subtle shine effect -->
+        <div class="relative overflow-hidden rounded-xl">
+          <div class="absolute inset-0 bg-gradient-to-tr from-white/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+          <img
+            width="1600"
+            height="1000"
+            src="/assets/images/hero-test.avif"
+            alt="{{ i18n.v('page.hero.image_alt') }}"
+            class="inline-full block-auto rounded-xl group-hover:scale-[1.02] transition-transform duration-700 ease-emphasized"
+            fetchpriority="high"
+            decoding="sync"
+            loading="eager"
+          >
+        </div>
+      </div>
+
+      <!-- Floating elements -->
+      <div class="absolute -inset-bs-8 -inset-s-8 inline-20 block-20 bg-violet-500/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-1000 animate-float"></div>
+      <div class="absolute -inset-be-8 -inset-e-8 inline-16 block-16 bg-fuchsia-500/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-1000 animate-float delay-200"></div>
+    </div>
   </div>
 </section>

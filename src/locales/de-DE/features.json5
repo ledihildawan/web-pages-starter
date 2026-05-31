@@ -1,0 +1,55 @@
+{
+  "hero": {
+    "badge": "Power unter der Haube",
+    "title": "Alles, was Sie brauchen, um <br> <span class='bg-linear-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent'>schneller zu skalieren</span>",
+    "description": "Von leistungsstarken Analysen bis nahtlosen Integrationen bieten wir das Toolkit, das Sie für den Bau von erstklassigen Anwendungen ohne Kopfschmerzen benötigen."
+  },
+  "sections": {
+    "sync": {
+      "title": "Echtzeit-Synchronisation",
+      "description": "Änderungen breiten sich sofort auf alle Geräte aus. Ob Ihre Nutzer auf Mobilgerät, Desktop oder Tablet sind, sie sehen dieselben Daten genau zur gleichen Zeit.",
+      "check_0": "Sub-Millisekunden-Latenz",
+      "check_1": "Offline-Unterstützung von Haus aus",
+      "check_2": "Konfliktlösungs-Handling"
+    },
+    "analytics": {
+      "title": "Handlungsorientierte Analysen",
+      "description": "Fliegen Sie nicht blind. Erhalten Sie tiefgreifende Einblicke in das Nutzerverhalten, Systemleistung und Umsatzkennzahlen. Visualisieren Sie Ihre Daten mit schönen, interaktiven Diagrammen.",
+      "check_0": "Anpassbare Dashboards",
+      "check_1": "Exportieren nach PDF, CSV oder Excel",
+      "check_2": "Automatisierte wöchentliche Berichte"
+    }
+  },
+  "more_title": "Und vieles mehr...",
+  "more": {
+    "dark_mode": {
+      "title": "Dunkler Modus",
+      "desc": "Integrierte Unterstützung für helle und dunkle Themen mit automatischer Systemerkennung."
+    },
+    "api_first": {
+      "title": "API Zuerst",
+      "desc": "REST- und GraphQL-APIs verfügbar für vollständige programmierte Steuerung."
+    },
+    "sso": {
+      "title": "SSO-Login",
+      "desc": "Single Sign-On der Unternehmensklasse für Google, GitHub und Okta."
+    },
+    "audit": {
+      "title": "Audit-Logs",
+      "desc": "Verfolgen Sie jede Änderung an Ihrem Projekt mit detaillierten Zeitstempeln."
+    },
+    "rbac": {
+      "title": "Rollenbasierte Zugriff",
+      "desc": "Granulare Berechtigungssteuerungen für Administratoren, Editoren und Betrachter."
+    },
+    "uptime": {
+      "title": "99,99% Uptime",
+      "desc": "Garantierte Verfügbarkeit mit unserem weltweit verteilten CDN."
+    }
+  },
+  "cta": {
+    "heading": "Bereit anzufangen?",
+    "btn_create": "Konto Erstellen",
+    "btn_docs": "Dokumentation Lesen"
+  }
+}

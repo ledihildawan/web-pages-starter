@@ -1,0 +1,97 @@
+{
+  "meta": {
+    "title": "Tes i18n | Demo",
+    "description": "Halaman tes lengkap untuk fitur internasionalisasi"
+  },
+  "hero": {
+    "badge": "Fitur i18n",
+    "title": "Tes <span class='text-violet-400'>Lengkap</span> Internasionalisasi",
+    "description": "Coba semua fitur i18n: translasi, pluralisasi, format angka, mata uang, dan konversi mata uang."
+  },
+  "language_info": {
+    "title": "Informasi Bahasa Saat Ini",
+    "code": "Kode Bahasa",
+    "currency": "Mata Uang",
+    "direction": "Arah Teks",
+    "current_code": "id",
+    "current_currency": "IDR",
+    "current_direction": "LTR (Kiri ke Kanan)"
+  },
+  "numbers": {
+    "title": "Format Angka",
+    "description": "Angka diformat sesuai dengan lokal bahasa aktif.",
+    "large": "Angka Besar",
+    "decimal": "Desimal",
+    "million": "Juta",
+    "percent": "Persen"
+  },
+  "currency": {
+    "title": "Format Mata Uang",
+    "description": "Harga dalam USD dikonversi ke mata uang bahasa aktif.",
+    "small": "Kecil",
+    "medium": "Sedang",
+    "large": "Besar",
+    "enterprise": "Enterprise"
+  },
+  "currency_comparison": {
+    "title": "Perbandingan Mata Uang",
+    "description": "Harga yang sama ($99 USD) dalam semua mata uang yang didukung.",
+    "base_price": "Harga Dasar"
+  },
+  "pluralization": {
+    "title": "Pluralisasi",
+    "description": "Bentuk plural berbeda untuk setiap bahasa.",
+    "item_title": "Item (Kata Benda)",
+    "user_title": "User (Pengguna)",
+    "product_title": "Product (Produk)"
+  },
+  "form": {
+    "title": "Formulir dengan Placeholder Terjemahan",
+    "description": "Placeholder dan label diambil dari file lokal.",
+    "name_label": "Nama",
+    "name_placeholder": "Masukkan nama lengkap Anda",
+    "email_label": "Email",
+    "email_placeholder": "contoh@email.com",
+    "message_label": "Pesan",
+    "message_placeholder": "Tulis pesan Anda di sini...",
+    "submit": "Kirim"
+  },
+  "missing_keys": {
+    "title": "Missing Key Handler",
+    "description": "Kunci yang tidak ditemukan akan ditampilkan dalam kurung siku."
+  },
+  "html_content": {
+    "title": "Konten HTML",
+    "description": "Translasi dapat menyertakan tag HTML untuk styling.",
+    "example": "Ini adalah contoh teks dengan <span class='text-emerald-400'>highlight warna</span> dan <strong>tebal</strong>.",
+    "note": "Perhatikan: HTML dalam translasi harus memiliki satu elemen root."
+  },
+  "switcher": {
+    "title": "Ganti Bahasa",
+    "description": "Klik tombol di bawah untuk mengganti bahasa dan melihat semua fitur i18n beraksi."
+  },
+  "advanced": {
+    "title": "Format Lanjutan",
+    "description": "Fitur format lanjutan untuk persentase, satuan, byte, daftar, dan ordinal.",
+    "percentages": "Persentase",
+    "units": "Satuan",
+    "bytes": "Byte",
+    "lists": "Daftar",
+    "ordinals": "Ordinal",
+    "fifty_percent": "Lima Puluh Persen",
+    "small_percent": "Persentase Kecil",
+    "ninety_nine": "Sembilan Puluh Sembilan",
+    "hundred": "Seratus",
+    "kilobyte": "Kilobyte",
+    "distance": "Jarak",
+    "temperature": "Suhu",
+    "weight": "Berat",
+    "half_kb": "Setengah KB",
+    "one_and_half_kb": "Satu Setengah KB",
+    "one_mb": "Satu MB",
+    "one_gb": "Satu GB",
+    "two_items": "Dua Item",
+    "three_items": "Tiga Item",
+    "four_items": "Empat Item"
+  }
+}
