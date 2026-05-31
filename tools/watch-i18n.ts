@@ -1,8 +1,9 @@
 import { execSync } from 'node:child_process';
 import path from 'node:path';
 import chokidar from 'chokidar';
+import { PATHS } from '../src/configs/paths';
 
-const LOCALE_DIR = path.resolve(process.cwd(), 'src/locales');
+const LOCALE_DIR = path.resolve(process.cwd(), PATHS.LOCALES);
 
 console.log('Watching for changes in:', LOCALE_DIR);
 

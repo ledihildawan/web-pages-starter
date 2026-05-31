@@ -1,9 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { DEFAULT_LANG, SUPPORTED_LANG_CODES } from '../src/configs/locales';
+import { PATHS } from '../src/configs/paths';
 
 const ROOT = process.cwd();
-const LOCALES_ROOT = path.join(ROOT, 'src/locales');
+const LOCALES_ROOT = path.join(ROOT, PATHS.LOCALES);
 
 function createLocale(targetLang: string, sourceDir: string, targetDir: string): number {
   let created = 0;

@@ -21,31 +21,31 @@
   "story": {
     "tag": "Our Story",
     "visual_label": "Creative Studio Illustration",
-    "title": "Driven by <br>excellence.",
-    "para1": "Our journey began with a simple idea: make web development accessible and enjoyable for everyone.",
-    "para2": "Today, we are a diverse team of engineers, designers, and thinkers working together to solve complex problems.",
+    "title": "Driven by passion, <br>defined by excellence.",
+    "para1": "Our journey began with a simple idea: make web development accessible and enjoyable for everyone. We were tired of bloated frameworks and complex configurations.",
+    "para2": "Today, we are a diverse team of engineers, designers, and thinkers working together to solve complex problems with elegant solutions.",
     "val1": "User-centric design philosophy",
     "val2": "Performance-first architecture",
     "val3": "Transparency and open communication"
   },
   "mission": {
     "title": "Our Mission",
-    "description": "Empowering developers and businesses with elegant, fast, and easy-to-use tools to build amazing digital products."
+    "description": "Empowering developers and businesses with elegant, fast, and easy-to-use tools to build exceptional digital products."
   },
   "vision": {
     "title": "Our Vision",
-    "description": "To become the go-to platform for modern developers who value beauty, performance, and user experience in every line of code."
+    "description": "To be the platform of choice for modern developers who value beauty, performance, and user experience in every line of code."
   },
   "values": {
     "title": "Our Values",
-    "subtitle": "The principles that guide every decision we make.",
+    "subtitle": "Principles that guide every decision we make.",
     "passion": {
       "title": "Passion",
       "description": "We love what we do, and it shows in every detail of our products."
     },
     "collaboration": {
       "title": "Collaboration",
-      "description": "Working together yields the best results. We believe in the power of great teams."
+      "description": "Working together produces the best results. We believe in the power of solid teams."
     },
     "innovation": {
       "title": "Innovation",

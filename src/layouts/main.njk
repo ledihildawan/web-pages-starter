@@ -1,28 +1,50 @@
-{% import "macros/i18n.njk" as i18n with context %}
+﻿{% import "macros/i18n.njk" as i18n with context %}
 {% import "macros/seo.njk" as seo %}
+{% import "icons.njk" as icon with context %}
+{% import "hero-section.njk" as hero with context %}
+{% import "section-header.njk" as section with context %}
 
 <!DOCTYPE html>
-<html class="scroll-smooth selection:bg-violet-500/30 selection:text-violet-200">
+<html lang="{{ lang }}" dir="{% if lang == 'ar-SA' %}rtl{% else %}ltr{% endif %}" class="scroll-smooth selection:bg-violet-500/30 selection:text-violet-200">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#020617">
+    <meta name="theme-color" content="#020617" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#020617" media="(prefers-color-scheme: dark)">
+    <meta name="msapplication-TileColor" content="#020617">
 
     <meta name="format-detection" content="telephone=no">
-    <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="format-detection" content="email=no">
+    <meta name="format-detection" content="address=no">
+
+    <!-- Critical rendering path optimizations -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Performance hints -->
+    <link rel="dns-prefetch" href="//flagcdn.com">
+
+
+    <!-- Note: Security headers should be set server-side, not in meta tags -->
+    <!-- Configure these in your server (nginx, apache, etc.) or dev server config -->
+    <!-- X-Content-Type-Options: nosniff -->
+    <!-- X-Frame-Options: DENY -->
+    <!-- Referrer-Policy: strict-origin-when-cross-origin -->
+    <!-- Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=() -->
+
+    <link rel="manifest" href="/manifest.json">
 
     {{ seo.render_tags(page, global) }}
 
     {% block resource_hints %}
-      <link rel="dns-prefetch" href="https://flagcdn.com">
-      <link rel="preconnect" href="https://flagcdn.com" crossorigin>
+      {# CRITICAL: Preload LCP image with highest priority #}
+      <link rel="preload" href="/assets/images/hero-test.avif" as="image" fetchpriority="high">
 
-      {# Inter fonts for Latin-based languages #}
-      <link rel="preload" href="/assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous" importance="high">
-      <link rel="preload" href="/assets/fonts/inter-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous" importance="high">
+      {# Preconnect to origin for scripts #}
+      <link rel="preconnect" href="/">
+      <link rel="preconnect" href="/" crossorigin>
 
       {# Noto Sans fonts for non-Latin languages #}
       {% if lang == 'ja-JP' %}
@@ -54,16 +76,23 @@
   </head>
 
   <body class="min-block-screen bg-slate-950 text-slate-200 antialiased" data-page="{{ page_id }}">
+    <a href="#main-content" class="skip-to-content">
+      <svg class="inline-5 block-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0l-10.5 10.5M21 3v10.5"/>
+      </svg>
+      {{ i18n.t('skip_to_content') | default('Skip to main content') }}
+    </a>
+
     <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
       <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(139,92,246,0.08),transparent_50%),radial-gradient(circle_at_0%_100%,rgba(217,70,239,0.05),transparent_40%)]"></div>
-      <div class="absolute inset-bs-[-10%] inset-s-[-10%] inline-[60%] block-[60%] bg-violet-600/8 rounded-full blur-[100px] sm:blur-[140px] animate-pulse-glow"></div>
-      <div class="absolute inset-be-[-10%] inset-e-[-10%] inline-[50%] block-[50%] bg-fuchsia-600/6 rounded-full blur-[100px] sm:blur-[140px] animate-pulse-glow delay-[1500ms]"></div>
-      <div class="hidden sm:absolute sm:inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.03)_1px,transparent_0)] bg-[length:64px_64px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]"></div>
+      <div class="absolute inset-bs-[-10%] inset-s-[-10%] inline-[60%] block-[60%] bg-violet-600/8 rounded-full blur-[120px]"></div>
+      <div class="absolute inset-be-[-10%] inset-e-[-10%] inline-[50%] block-[50%] bg-fuchsia-600/6 rounded-full blur-[120px]"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.03)_1px,transparent_0)] bg-[length:64px_64px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]"></div>
     </div>
 
     {% include "navbar.njk" %}
 
-    <main id="main-content" class="relative z-10 flex flex-col min-block-screen contain-layout-style">
+    <main id="main-content" class="relative z-10 flex flex-col min-block-screen">
       {% block content %}{% endblock %}
     </main>
 

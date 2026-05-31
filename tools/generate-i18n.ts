@@ -1,16 +1,17 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { DEFAULT_LANG, SUPPORTED_LANG_CODES } from '../src/configs/locales.js';
-import { readJson5File } from './parse-json5.ts';
+import { DEFAULT_LANG, SUPPORTED_LANG_CODES } from '../src/configs/locales';
+import { LOCALE_FILE_EXTENSIONS, PATHS } from '../src/configs/paths';
+import { readJson5File } from '../src/scripts/utils/parse-json5';
 
 const ROOT = process.cwd();
-const LOCALES_ROOT = path.join(ROOT, 'src', 'locales');
+const LOCALES_ROOT = path.join(ROOT, PATHS.LOCALES);
 const DEFAULT_LOCALE_DIR = path.join(LOCALES_ROOT, DEFAULT_LANG);
-const GENERATED_DIR = path.join(ROOT, 'generated');
+const GENERATED_DIR = path.join(ROOT, PATHS.GENERATED);
 const OUTPUT_FILE = path.join(GENERATED_DIR, 'i18n.d.ts');
 
 const INDENT = '  ';
-const LOCALE_EXTS = ['.json5', '.json'] as const;
+const LOCALE_EXTS = LOCALE_FILE_EXTENSIONS;
 
 function getFlattenedKeys(obj: unknown, prefix = ''): string[] {
     if (typeof obj !== 'object' || obj === null || Array.isArray(obj)) {

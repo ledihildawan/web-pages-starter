@@ -1,16 +1,16 @@
 .splide__pagination {
-    bottom: 2.5rem;
+    inset-block-end: 2.5rem;
     justify-content: flex-start;
-    padding-left: 2.5rem;
+    padding-inline-start: 2.5rem;
 }
 
 .splide__pagination__page {
-    background: rgba(255, 255, 255, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    width: 10px;
-    height: 10px;
-    margin: 0 6px;
-    transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  inline-size: 10px;
+  block-size: 10px;
+  margin-inline: 0 6px;
+  transition: all 0.2s ease;
 }
 
 .splide__pagination__page.is-active {
@@ -19,20 +19,20 @@
 }
 
 .splide__arrow svg {
-    fill: none; 
-    height: auto;
-    width: auto;
+  fill: none;
+  block-size: auto;
+  inline-size: auto;
 }
 
 .splide__spinner {
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-left-color: #fff; /* Warna putaran */
-    width: 40px;
-    height: 40px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-inline-start-color: #fff; /* Warna putaran */
+  inline-size: 40px;
+  block-size: 40px;
 }
 
 .splide__slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
 }

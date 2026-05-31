@@ -1,13 +1,14 @@
 #!/usr/bin/env bun
 import fs from 'node:fs';
 import path from 'node:path';
-import { SUPPORTED_LANG_CODES } from '../src/configs/locales';
-import { readJson5File } from './parse-json5';
+import { DEFAULT_LANG, SUPPORTED_LANG_CODES } from '../src/configs/locales';
+import { PATHS } from '../src/configs/paths';
+import { readJson5File } from '../src/scripts/utils/parse-json5';
 
 type JsonObject = Record<string, unknown>;
 
-const LOCALES_DIR = path.resolve('src/locales');
-const BASE_LOCALE = 'id-ID';
+const LOCALES_DIR = path.resolve(PATHS.LOCALES);
+const BASE_LOCALE = DEFAULT_LANG;
 
 function getAllKeys(obj: unknown, prefix = ''): Set<string> {
   const keys = new Set<string>();

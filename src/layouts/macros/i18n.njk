@@ -15,7 +15,7 @@
 
 {% macro t(key, vars = {}, class = '') %}
   {% set item = i18n(key, vars) %}
-  {% set translatedValue = nunjucksFilters.nativeNumbers(item.v, lang) %}
+  {% set translatedValue = i18n.nativeNumbers(item.v) %}
   {% set varsJson = (item.vars | replace('"', '&quot;')) if item.vars else '' %}
   {{ _renderTag('span', class, translatedValue | safe, {
     'data-i18n': item.k
@@ -26,7 +26,7 @@
 
 {% macro tNative(key, vars = {}, class = '') %}
   {% set item = i18n(key, vars) %}
-  {% set translatedValue = nunjucksFilters.nativeNumbers(item.v, lang, true) %}
+  {% set translatedValue = i18n.nativeNumbers(item.v, true) %}
   {% set varsJson = (item.vars | replace('"', '&quot;')) if item.vars else '' %}
   {{ _renderTag('span', class, translatedValue | safe, {
     'data-i18n': item.k,
@@ -54,7 +54,7 @@
 
 {% macro html(key, vars = {}) %}
   {% set item = i18n(key, vars) %}
-  {% set translatedValue = nunjucksFilters.nativeNumbers(item.v, lang) %}
+  {% set translatedValue = i18n.nativeNumbers(item.v) %}
   {% set varsJson = (item.vars | replace('"', '&quot;')) if item.vars else '' %}
   <div data-i18n-html="{{ item.k }}" {% if item.vars %} data-i18n-vars='{{ varsJson | safe }}' {% endif %} class="contents">
     {{ translatedValue | safe }}
@@ -81,8 +81,8 @@
 {% endmacro %}
 
 {% macro plural(key, count, vars = {}, class = '') %}
-  {% set item = i18nPlural(key, count, vars) %}
-  {% set translatedValue = nunjucksFilters.nativeNumbers(item.v, lang) %}
+  {% set item = i18n.plural(key, count, vars) %}
+  {% set translatedValue = i18n.nativeNumbers(item.v) %}
   {% set varsJson = (item.vars | replace('"', '&quot;')) if item.vars else '' %}
   {{ _renderTag('span', class, translatedValue | safe, {
     'data-i18n-plural': item.k,
@@ -92,45 +92,42 @@
   }) }}
 {% endmacro %}
 
-{% macro formatNumber(value, options = {}, tag = '', class = '', useNative = false) %}
-  {% set formatted = nunjucksFilters.formatNumber(value, lang, options, useNative) %}
+{% macro formatNumber(value, tag = '', class = '', useNative = false) %}
+  {% set formatted = i18n.formatNumber(value, { useNativeNumberingSystem: useNative }) %}
   {{ _renderTag(tag, class, formatted, {
     'data-format-number': value,
-    'data-use-native': useNative,
-    'data-numbering-options': options | default('')
+    'data-use-native': useNative
   }) }}
 {% endmacro %}
 
-{% macro formatCurrency(value, currency = '', options = {}, tag = '', class = '', useNative = false) %}
-  {% set formatted = nunjucksFilters.formatCurrency(value, lang, currency, options, useNative) %}
+{% macro formatCurrency(value, currency = '', tag = '', class = '', useNative = false) %}
+  {% set formatted = i18n.formatCurrency(value, currency, { useNativeNumberingSystem: useNative }) %}
   {{ _renderTag(tag, class, formatted, {
     'data-format-currency': value,
+    'data-currency-code': currency,
     'data-use-native': useNative
-  }, {
-    'data-target-currency': currency
   }) }}
 {% endmacro %}
 
-{% macro convertCurrency(value, targetCurrency = '', options = {}, tag = '', class = '', useNative = false) %}
-  {% set formatted = nunjucksFilters.convertCurrency(value, lang, targetCurrency, options, useNative) %}
+{% macro convertCurrency(value, targetCurrency = '', tag = '', class = '', useNative = false) %}
+  {% set formatted = i18n.convertCurrency(value, targetCurrency, { useNativeNumberingSystem: useNative }) %}
   {{ _renderTag(tag, class, formatted, {
     'data-convert-currency': value,
+    'data-target-currency': targetCurrency,
     'data-use-native': useNative
-  }, {
-    'data-target-currency': targetCurrency
   }) }}
 {% endmacro %}
 
-{% macro formatPercent(value, options = {}, tag = '', class = '', useNative = false) %}
-  {% set formatted = nunjucksFilters.formatPercent(value, lang, options, useNative) %}
+{% macro formatPercent(value, tag = '', class = '', useNative = false) %}
+  {% set formatted = i18n.formatPercent(value, { useNativeNumberingSystem: useNative }) %}
   {{ _renderTag(tag, class, formatted, {
     'data-format-percent': value,
     'data-use-native': useNative
   }) }}
 {% endmacro %}
 
-{% macro formatUnit(value, unit, options = {}, tag = '', class = '', useNative = false) %}
-  {% set formatted = nunjucksFilters.formatUnit(value, lang, unit, options, useNative) %}
+{% macro formatUnit(value, unit = 'byte', tag = '', class = '', useNative = false) %}
+  {% set formatted = i18n.formatUnit(value, unit, { useNativeNumberingSystem: useNative }) %}
   {{ _renderTag(tag, class, formatted, {
     'data-format-unit': value,
     'data-unit': unit,
@@ -138,8 +135,8 @@
   }) }}
 {% endmacro %}
 
-{% macro formatScientific(value, options = {}, tag = '', class = '', useNative = false) %}
-  {% set formatted = nunjucksFilters.formatScientific(value, lang, options, useNative) %}
+{% macro formatScientific(value, tag = '', class = '', useNative = false) %}
+  {% set formatted = i18n.formatScientific(value, { useNativeNumberingSystem: useNative }) %}
   {{ _renderTag(tag, class, formatted, {
     'data-format-scientific': value,
     'data-use-native': useNative
@@ -147,7 +144,7 @@
 {% endmacro %}
 
 {% macro formatBytes(bytes, decimals = 2, tag = '', class = '') %}
-  {% set formatted = nunjucksFilters.formatBytes(bytes, decimals) %}
+  {% set formatted = i18n.formatBytes(bytes, decimals) %}
   {{ _renderTag(tag, class, formatted, {
     'data-format-bytes': bytes,
     'data-bytes-decimals': decimals
@@ -155,36 +152,36 @@
 {% endmacro %}
 
 {% macro formatDuration(seconds, tag = '', class = '') %}
-  {% set formatted = nunjucksFilters.formatDuration(seconds, lang) %}
+  {% set formatted = i18n.formatDuration(seconds) %}
   {{ _renderTag(tag, class, formatted, {
     'data-format-duration': seconds
   }) }}
 {% endmacro %}
 
-{% macro formatDate(date, options = {}, tag = '', class = '') %}
-  {% set formatted = nunjucksFilters.formatDate(date, lang, options) %}
+{% macro formatDate(date, tag = '', class = '') %}
+  {% set formatted = i18n.formatDate(date) %}
   {{ _renderTag(tag, class, formatted, {
     'data-format-date': date
   }) }}
 {% endmacro %}
 
 {% macro formatTime(date, preset = 'short', tag = '', class = '') %}
-  {% set formatted = nunjucksFilters.formatTime(date, lang, preset) %}
+  {% set formatted = i18n.formatTime(date, { timeStyle: preset }) %}
   {{ _renderTag(tag, class, formatted, {
     'data-format-time': date,
     'data-time-preset': preset
   }) }}
 {% endmacro %}
 
-{% macro formatDateTime(date, options = {}, tag = '', class = '') %}
-  {% set formatted = nunjucksFilters.formatDateTime(date, lang, options) %}
+{% macro formatDateTime(date, tag = '', class = '') %}
+  {% set formatted = i18n.formatDateTime(date) %}
   {{ _renderTag(tag, class, formatted, {
     'data-format-datetime': date
   }) }}
 {% endmacro %}
 
 {% macro formatDatePreset(date, preset = 'medium', tag = '', class = '') %}
-  {% set formatted = nunjucksFilters.formatDatePreset(date, lang, preset) %}
+  {% set formatted = i18n.formatDate(date, { dateStyle: preset }) %}
   {{ _renderTag(tag, class, formatted, {
     'data-format-date-preset': date,
     'data-date-preset': preset
@@ -192,65 +189,85 @@
 {% endmacro %}
 
 {% macro formatOrdinal(value, tag = '', class = '') %}
-  {% set formatted = nunjucksFilters.formatOrdinal(value, lang) %}
+  {% set formatted = i18n.formatOrdinal(value) %}
   {{ _renderTag(tag, class, formatted, {
     'data-format-ordinal': value
   }) }}
 {% endmacro %}
 
 {% macro formatCardinal(value, tag = '', class = '') %}
-  {% set formatted = nunjucksFilters.formatCardinal(value, lang) %}
+  {% set formatted = i18n.formatCardinal(value) %}
   {{ _renderTag(tag, class, formatted, {
     'data-format-cardinal': value
   }) }}
 {% endmacro %}
 
 {% macro formatAbbreviated(value, tag = '', class = '') %}
-  {% set formatted = nunjucksFilters.formatAbbreviated(value, lang) %}
+  {% set formatted = i18n.formatAbbreviated(value) %}
   {{ _renderTag(tag, class, formatted, {
     'data-format-abbreviated': value
   }) }}
 {% endmacro %}
 
 {% macro formatList(items, tag = '', class = '') %}
-  {% set formatted = nunjucksFilters.formatList(items) %}
+  {% set formatted = i18n.formatList(items) %}
+  {{ _renderTag(tag, class, formatted, {
+    'data-format-list': items | length
+  }) }}
+{% endmacro %}
+
+{% macro formatLocalPrice(plan, tag = '', class = '') %}
+  {% set formatted = i18n.formatLocalPrice(plan) %}
   {{ _renderTag(tag, class, formatted, {}) }}
 {% endmacro %}
 
-{% macro formatRelativeTime(value, unit, tag = '', class = '') %}
-  {% set formatted = nunjucksFilters.formatRelativeTime(value, lang, unit) %}
+{% macro formatLocalPriceDiscounted(plan, discountMultiplier, targetCurrency = '', tag = '', class = '', useNative = false) %}
+  {% set formatted = i18n.formatLocalPriceDiscounted(plan, discountMultiplier, targetCurrency, { useNativeNumberingSystem: useNative }) %}
+  {{ _renderTag(tag, class, formatted, {
+    'data-discount-multiplier': discountMultiplier,
+    'data-target-currency': targetCurrency
+  }) }}
+{% endmacro %}
+
+{% macro localPrice(plan, tag = '', class = '') %}
+  {% set formatted = i18n.localPrice(plan) %}
   {{ _renderTag(tag, class, formatted, {}) }}
 {% endmacro %}
 
-{% macro pluralizeWord(word, count, inclusive = false, tag = '', class = '') %}
-  {% set pluralized = nunjucksFilters.pluralize(word, count, inclusive) %}
-  {{ _renderTag(tag, class, pluralized, {}) }}
+{% macro localPriceCurrency(plan) %}
+  {{ i18n.localPriceCurrency(plan) }}
 {% endmacro %}
 
-{% macro singularizeWord(word, tag = '', class = '') %}
-  {% set singularized = nunjucksFilters.singularize(word) %}
-  {{ _renderTag(tag, class, singularized, {}) }}
+{% macro convertLocalPrice(plan, targetCurrency = '', tag = '', class = '', useNative = false) %}
+  {% set formatted = i18n.convertLocalPrice(plan, targetCurrency, { useNativeNumberingSystem: useNative }) %}
+  {{ _renderTag(tag, class, formatted, {
+    'data-convert-local-price': plan,
+    'data-target-currency': targetCurrency,
+    'data-use-native': useNative
+  }) }}
 {% endmacro %}
 
-{% macro formatLocalPrice(plan, targetCurrency = '', options = {}, tag = '', class = '', pricingKey = 'pricing') %}
-  {% set formatted = nunjucksFilters.convertLocalPrice(plan, lang, targetCurrency, options) %}
-  {% set pricingJson = ((plan[pricingKey] | dump) | replace('"', '&quot;')) | safe %}
-  {% set attrs = {
-    'data-local-price': plan.id,
-    'data-pricing': pricingJson,
-    'data-currency': targetCurrency or i18n.currency
-  } %}
-  {{ _renderTag(tag, class, formatted, attrs) }}
+{% macro pluralize(word, count = 1, inclusive = false) %}
+  {{ i18n.pluralize(word, count, inclusive) }}
 {% endmacro %}
 
-{% macro formatLocalPriceDiscounted(plan, discountMultiplier = 0.8, targetCurrency = '', options = {}, tag = '', class = '', pricingKey = 'pricing') %}
-  {% set formatted = nunjucksFilters.convertLocalPriceDiscounted(plan, lang, discountMultiplier, targetCurrency, options) %}
-  {% set pricingJson = ((plan[pricingKey] | dump) | replace('"', '&quot;')) | safe %}
-  {% set attrs = {
-    'data-local-price': plan.id,
-    'data-discount': discountMultiplier,
-    'data-pricing': pricingJson,
-    'data-currency': targetCurrency or i18n.currency
-  } %}
-  {{ _renderTag(tag, class, formatted, attrs) }}
+{% macro singularize(word) %}
+  {{ i18n.singularize(word) }}
+{% endmacro %}
+
+{% macro nativeDigits(text, force = false, tag = '', class = '') %}
+  {% set formatted = i18n.nativeNumbers(text, force) %}
+  {{ _renderTag(tag, class, formatted, {
+    'data-native-digits': text,
+    'data-force': force
+  }) }}
+{% endmacro %}
+
+{% macro formatRelativeTime(value, unit = 'second', numeric = 'always', tag = '', class = '') %}
+  {% set formatted = i18n.formatRelativeTime(value, { unit, numeric }) %}
+  {{ _renderTag(tag, class, formatted, {
+    'data-relative-time': value,
+    'data-unit': unit,
+    'data-numeric': numeric
+  }) }}
 {% endmacro %}

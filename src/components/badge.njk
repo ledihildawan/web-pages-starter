@@ -1,0 +1,6 @@
+﻿{% macro badge(text, icon = null, variant = 'violet') %}
+<div class="inline-flex items-center gap-2.5 px-4 py-2 bg-{{ variant }}-500/10 border border-{{ variant }}-500/30 rounded-full text-{{ variant }}-300 text-sm">
+  {% if icon %}{{ icon | safe }}{% endif %}
+  <span class="font-bold tracking-wide uppercase text-[10px]">{{ i18n.t(text) }}</span>
+</div>
+{% endmacro %}

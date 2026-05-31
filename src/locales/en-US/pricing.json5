@@ -12,7 +12,7 @@
   "toggle": {
     "monthly": "Monthly",
     "yearly": "Yearly",
-    "yearly_hint": "billed annually",
+    "yearly_hint": "billed yearly",
     "discount": "SAVE 20%",
     "aria_label": "Toggle Pricing Plan"
   },

@@ -1,5 +1,8 @@
 {
+  "page_id": "home",
   "meta": {
+    "title": "Home | Starter - Modern Web Application Builder",
+    "description": "Build lightning-fast, beautiful web applications with Starter. Experience enterprise-grade security, modern design, and developer-friendly tools for your next project.",
     "t_title": "meta.title",
     "t_description": "meta.description"
   },

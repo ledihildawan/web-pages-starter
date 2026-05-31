@@ -1,50 +1,24 @@
-{% macro render_tags(page, global, localeTitle = '', localeDescription = '') %}
-  {% set title = localeTitle or page.meta.title or global.site_name or "Starter App" %}
-  {% set description = localeDescription or page.meta.description or global.site_description or "Default description for the site." %}
-  {% set site_name = global.site_name or "Starter App" %}
-  {% set og_locale = lang | replace('-', '_') %}
+{% macro render_tags(page, global) %}
+  {# 1. Logic Penentuan Title #}
+  {% set title = page.title or global.site_name or "Starter App" %}
 
-  {% set page_url = page.canonical or page.url or '/' %}
-  {% set base_url = global.site_url or '' %}
-  {% set full_url = base_url ~ page_url %}
+  {# 2. Logic Penentuan Description #}
+  {% set description = page.description or global.site_description or "Default description for the site." %}
 
-  <title>{{ title }} - {{ site_name }}</title>
+  {# --- Render SEO Tags --- #}
+  <title>{{ title }}</title>
   <meta name="description" content="{{ description }}">
-  <meta name="keywords" content="{{ page.meta.keywords or global.site_keywords or '' }}">
 
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="{{ full_url }}">
+  {# Open Graph / Social Media #}
   <meta property="og:title" content="{{ title }}">
   <meta property="og:description" content="{{ description }}">
-  <meta property="og:site_name" content="{{ site_name }}">
-  <meta property="og:locale" content="{{ og_locale }}">
-
-  {% set og_image = page.meta.image or global.site_image %}
-  {% if og_image %}
-    <meta property="og:image" content="{{ og_image }}">
-    {% if page.meta.image_alt %}<meta property="og:image:alt" content="{{ page.meta.image_alt }}">{% endif %}
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:type" content="website">
+  {% if page.image or global.site_image %}
+    <meta property="og:image" content="{{ page.image or global.site_image }}">
   {% endif %}
 
+  {# Twitter Card #}
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="{{ full_url }}">
   <meta name="twitter:title" content="{{ title }}">
   <meta name="twitter:description" content="{{ description }}">
-  {% if og_image %}
-    <meta name="twitter:image" content="{{ og_image }}">
-  {% endif %}
-
-  <link rel="canonical" href="{{ full_url }}">
-
-  {% if global.supported_langs %}
-    {% for lang in global.supported_langs %}
-      <link rel="alternate" hreflang="{{ lang }}" href="{{ page.url | default('/') }}">
-    {% endfor %}
-    <link rel="alternate" hreflang="x-default" href="{{ page.url | default('/') }}">
-  {% endif %}
-
-  <meta name="robots" content="{{ page.meta.robots or 'index, follow' }}">
-  {% if page.meta.noindex %}<meta name="robots" content="noindex, nofollow">{% endif %}
 {% endmacro %}

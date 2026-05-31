@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "packageManager": "bun@1.1.8",
+  "engines": {
+    "bun": ">=1.0.0"
+  },
   "scripts": {
     "dev": "bun run fetch:rates && concurrently \"bun run watch:i18n\" \"rsbuild dev\"",
     "build": "bun run fetch:rates && bun run gen:i18n && bun run ./tools/build.ts",

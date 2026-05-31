@@ -376,7 +376,7 @@
             {% for rel in page.relative_time %}
               <div class="flex justify-between items-baseline">
                 <span class="text-xs font-mono text-slate-400">{{ rel.val }}{{ rel.unit[0] }}</span>
-                <span class="text-sm font-bold text-pink-400">{{ i18n.formatRelativeTime(rel.val, rel.unit) }}</span>
+                <span class="text-sm font-bold text-pink-400">{{ i18n.formatRelativeTime(rel.val, { unit: rel.unit }) }}</span>
               </div>
             {% endfor %}
           </div>

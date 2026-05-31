@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Home | Starter App",
-    "description": "Modern web application builder."
+    "description": "Modern web app builder."
   },
   "hero": {
     "badge": "New: Version 2.0 is here",
@@ -10,7 +10,7 @@
     "description": "The modern way to build web applications. Fast, flexible, and designed for developers who care about their craft.",
     "image_alt": "Dashboard Preview",
     "primary_btn": {
-      "label": "Start Building",
+      "label": "Start Building →",
       "url": "/start"
     },
     "secondary_btn": {

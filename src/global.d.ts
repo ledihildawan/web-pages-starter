@@ -1,9 +1,5 @@
+import type { I18nCommon, I18nComponents, I18nPages } from '@generated/i18n';
 import type { Alpine as AlpineType } from 'alpinejs';
-import type {
-  I18nCommon,
-  I18nComponents,
-  I18nPages,
-} from '@generated/i18n';
 import type { SupportedLanguage } from './configs/locales';
 
 declare global {
@@ -19,6 +15,14 @@ declare global {
         comp?: Partial<I18nComponents>;
       }
     >;
-    Alpine?: AlpineType;
+  }
+
+  var Alpine: AlpineType | undefined;
+
+  interface Navigator {
+    connection?: {
+      saveData?: boolean;
+      effectiveType?: string;
+    };
   }
 }

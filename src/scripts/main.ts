@@ -1,87 +1,83 @@
-import '@fontsource-variable/noto-sans/index.css';
-import '@fontsource-variable/noto-sans-jp/index.css';
-import '@fontsource-variable/noto-sans-sc/index.css';
-import '@fontsource-variable/noto-sans-arabic/index.css';
-import '@fontsource-variable/noto-sans-kr/index.css';
-import '@fontsource/inter/400.css';
-import Alpine from 'alpinejs';
-import { initI18n } from './libs/i18n';
-import { registerI18nStore } from './stores/i18n';
+import { DEFAULT_LANG } from '@/configs/locales';
 
-window.Alpine = Alpine;
+// ============================================
+// APP BOOTSTRAP
+// ============================================
 
-const isSlowConnection = () => {
-  const connection = (navigator as any).connection || (navigator as any).mozConnection || (navigator as any).webkitConnection;
-  if (connection) {
-    return connection.saveData || (connection.effectiveType && ['slow-2g', '2g'].includes(connection.effectiveType));
-  }
-  return false;
+import '@fontsource/inter/900.css';
+
+const lang = document.documentElement.lang || DEFAULT_LANG;
+const isSlowConnection = navigator.connection?.saveData ||
+  ['slow-2g', '2g', '3g'].includes(navigator.connection?.effectiveType ?? '');
+
+// ============================================
+// RESOURCE LOADERS
+// ============================================
+
+const loadLanguageFonts = () => {
+  const fontMap = {
+    'ja-JP': () => import('@fontsource-variable/noto-sans-jp/index.css'),
+    'zh-CN': () => import('@fontsource-variable/noto-sans-sc/index.css'),
+    'ar-SA': () => import('@fontsource-variable/noto-sans-arabic/index.css'),
+    'ko-KR': () => import('@fontsource-variable/noto-sans-kr/index.css'),
+  } as Record<string, () => Promise<void>>;
+
+  fontMap[lang]?.();
 };
 
-const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
-
-const deferNonCritical = () => {
-  const isSlow = isSlowConnection();
-
-  if (isDesktop && !isSlow) {
+const loadSecondaryFonts = () => {
+  if (!isSlowConnection) {
     Promise.all([
-      import('@fontsource/inter/700.css'),
-      import('@fontsource/inter/900.css')
+      import('@fontsource/inter/400.css'),
+      import('@fontsource/inter/700.css')
     ]);
-    import('@alpinejs/collapse').then(module => Alpine.plugin(module.default));
-    import('@alpinejs/focus').then(module => Alpine.plugin(module.default));
-  } else if (isSlow) {
-    requestIdleCallback(() => {
-      import('@fontsource/inter/700.css');
-    }, { timeout: 2_000 });
-  } else {
-    requestIdleCallback(() => {
-      import('@fontsource/inter/700.css');
-      import('@fontsource/inter/900.css');
-    });
-    requestIdleCallback(() => {
-      import('@alpinejs/collapse').then(module => Alpine.plugin(module.default));
-    });
-    requestIdleCallback(() => {
-      import('@alpinejs/focus').then(module => Alpine.plugin(module.default));
-    });
   }
 };
+
+// ============================================
+// BOOTSTRAP
+// ============================================
 
 async function bootstrap() {
   try {
-    await initI18n();
-    registerI18nStore();
+    const [{ initIntl }, { registerIntlStore }, AlpineModule, collapse, focus] = await Promise.all([
+      import('./lib/i18n'),
+      import('./stores/i18n'),
+      import('alpinejs'),
+      import('@alpinejs/collapse'),
+      import('@alpinejs/focus')
+    ]);
+
+    await initIntl();
+
+    const Alpine = AlpineModule.default;
+    globalThis.Alpine = Alpine;
+    Alpine.plugin(collapse.default);
+    Alpine.plugin(focus.default);
+    registerIntlStore();
+
+    // ============================================
+    // CLEANUP: Remove any leftover body lock styles
+    // ============================================
+    document.body.classList.remove('no-scroll');
+    document.body.style.insetBlockStart = '';
+    document.documentElement.style.removeProperty('--scrollbar-width');
+
+    Alpine.start();
+
+    loadLanguageFonts();
+    loadSecondaryFonts();
   } catch (error) {
     console.error('Bootstrap failed:', error);
-  } finally {
-    if (isDesktop) {
-      document.documentElement.classList.add('is-desktop');
-    } else {
-      document.documentElement.classList.add('is-mobile');
-    }
-    if (isSlowConnection()) {
-      document.documentElement.classList.add('slow-connection');
-    }
-    Alpine.start();
-    deferNonCritical();
   }
 }
 
-const scheduleBootstrap = () => {
-  const isSlow = isSlowConnection();
-
-  if (isSlow) {
-    requestIdleCallback(() => bootstrap(), { timeout: 2_000 });
-  } else if ('requestIdleCallback' in window) {
-    requestIdleCallback(() => bootstrap());
-  } else {
-    requestAnimationFrame(() => setTimeout(bootstrap, 0));
-  }
-};
+// ============================================
+// STARTUP
+// ============================================
 
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', scheduleBootstrap);
+  document.addEventListener('DOMContentLoaded', bootstrap, { once: true });
 } else {
-  scheduleBootstrap();
+  bootstrap();
 }

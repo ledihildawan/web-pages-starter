@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { SUPPORTED_LANG_CODES } from '../src/configs/locales';
+import { PATHS } from '../src/configs/paths';
 
 const args = process.argv.slice(2);
 const pageName = args[0];
@@ -17,8 +18,8 @@ const titleCase = pageName
   .replace(/\b\w/g, (l) => l.toUpperCase());
 
 const ROOT = process.cwd();
-const targetDir = path.resolve(ROOT, 'src/pages', formattedName);
-const baseLocaleDir = path.resolve(ROOT, 'src/locales');
+const targetDir = path.resolve(ROOT, PATHS.SRC, 'pages', formattedName);
+const baseLocaleDir = path.resolve(ROOT, PATHS.LOCALES);
 
 if (fs.existsSync(targetDir)) {
   console.error(`Error: Page "${formattedName}" already exists!`);

@@ -1,4 +1,16 @@
-import type { SupportedLanguage } from "@/types/common";
+export type SupportedLanguage =
+  | 'id-ID'
+  | 'en-US'
+  | 'ja-JP'
+  | 'zh-CN'
+  | 'ar-SA'
+  | 'es-ES'
+  | 'pt-BR'
+  | 'hi-IN'
+  | 'ko-KR'
+  | 'fr-FR'
+  | 'de-DE'
+  | 'ru-RU';
 
 export const LANGUAGES = [
   {

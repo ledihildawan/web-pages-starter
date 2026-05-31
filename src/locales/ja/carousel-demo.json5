@@ -1,0 +1,17 @@
+{
+  "meta": {
+    "page_title": "Splide Lazy Load デモ | Starter"
+  },
+  "hero": {
+    "slide_1": {
+      "title": "自然の遅延読み込み",
+      "subtitle": "帯域幅を節約するために、画像はインテリジェントに読み込まれます。",
+      "alt": "美しい山の景色"
+    },
+    "slide_2": {
+      "title": "パフォーマンス優先",
+      "subtitle": "必要なものだけを読み込む。",
+      "alt": "雪山の景色"
+    }
+  }
+}

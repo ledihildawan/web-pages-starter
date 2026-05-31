@@ -48,20 +48,28 @@ export const getFallbackChain = (locale: string): string[] => {
   return [DEFAULT_LANG];
 }
 
-export const getLanguage = (lng?: string): string => {
-  if (!lng) return DEFAULT_LANG;
+let currentLanguage: string | undefined;
 
-  if (SUPPORTED_LANG_CODES.includes(lng as typeof SUPPORTED_LANG_CODES[number])) {
-    return lng;
+export const setLanguage = (lng: string): void => {
+  currentLanguage = lng;
+};
+
+export const getLanguage = (lng?: string): string => {
+  // Use explicitly provided language, or current set language, or default
+  const target = lng || currentLanguage;
+  if (!target) return DEFAULT_LANG;
+
+  if (SUPPORTED_LANG_CODES.includes(target as typeof SUPPORTED_LANG_CODES[number])) {
+    return target;
   }
 
-  return getFallbackChain(lng)[0] ?? DEFAULT_LANG;
+  return getFallbackChain(target)[0] ?? DEFAULT_LANG;
 };
 
 export const getLangCode = (lng: string): string => lng.split('-')[0];
 
 export const getLanguageConfig = (lng: string) =>
-  LANGUAGES.find((l) => l.code === lng || lng.startsWith(`${l.code}-`));
+  LANGUAGES.find((l) => l.code === lng || (typeof lng === 'string' && lng.startsWith(`${l.code}-`)));
 
 export const getCurrency = (lng: string): string => getLanguageConfig(lng)?.currency || BASE_CURRENCY;
 export const getTimezone = (lng: string): string => getLanguageConfig(lng)?.timezone || 'UTC';
@@ -76,8 +84,9 @@ export const getCountryCode = (lng: string): string | undefined => getRegion(lng
 export const getDirection = (lng: string): 'ltr' | 'rtl' => getLanguageConfig(lng)?.dir || 'ltr';
 export const isRTL = (lng: string): boolean => getDirection(lng) === 'rtl';
 
-export const getPluralSuffix = (n: number, lng: string): string => {
-  const rules = getLanguageConfig(lng)?.pluralRules;
+export const getPluralSuffix = (n: number, lng?: string): string => {
+  const language = getLanguage(lng);
+  const rules = getLanguageConfig(language)?.pluralRules;
 
   if (rules === 'other') return '_other';
 

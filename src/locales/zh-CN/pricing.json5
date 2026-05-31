@@ -14,7 +14,7 @@
     "yearly": "按年付费",
     "yearly_hint": "按年计费",
     "discount": "节省 20%",
-    "aria_label": "Toggle Pricing Plan"
+    "aria_label": "切换定价方案"
   },
   "plans": {
     "hobby": {
