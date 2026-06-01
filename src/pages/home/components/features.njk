@@ -11,13 +11,13 @@
     <div class="text-center mbe-24 space-y-4">
       <div class="inline-flex items-center gap-2.5 px-4 py-2 bg-violet-500/10 border border-violet-500/30 rounded-full text-violet-300 text-sm mbe-6">
         {{ icon.icon('lightning', 'inline-4 block-4') }}
-        <span class="font-bold tracking-wide uppercase text-[10px]">{{ i18n.t('features') }}</span>
+        <span class="font-bold tracking-wide uppercase text-[10px]">{{ i18n.t('features') | safe }}</span>
       </div>
       <h2 id="features-heading" class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white">
-        {{ i18n.t('page.features.heading') }}
+        {{ i18n.t('page.features.heading') | safe }}
       </h2>
       <p class="text-slate-400 max-inline-2xl mx-auto text-lg md:text-xl leading-relaxed">
-        {{ i18n.t('page.features.subheading') }}
+        {{ i18n.t('page.features.subheading') | safe }}
       </p>
       <div class="block-1.5 inline-24 bg-gradient-to-r from-violet-500 via-fuchsia-500 to-pink-500 mx-auto rounded-full shadow-[0_0_20px_rgba(139,92,246,0.4)]"></div>
     </div>
@@ -46,17 +46,17 @@
 
             <!-- Title with gradient -->
             <h3 class="text-2xl lg:text-3xl font-black mbe-4 text-white tracking-tight group-hover:text-{{ item.color }}-200 transition-colors duration-300">
-              {{ i18n.t('page.features.list.' + item.t_key + '.title') }}
+              {{ i18n.t('page.features.list.' + item.t_key + '.title') | safe }}
             </h3>
 
             <!-- Description -->
             <p class="text-slate-400 leading-relaxed text-base lg:text-lg group-hover:text-slate-300 transition-colors duration-300">
-              {{ i18n.t('page.features.list.' + item.t_key + '.description') }}
+              {{ i18n.t('page.features.list.' + item.t_key + '.description') | safe }}
             </p>
 
             <!-- Learn more link (appears on hover) -->
             <div class="mt-6 flex items-center gap-2 text-{{ item.color }}-400 text-sm font-bold opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-              <span>{{ i18n.t('learn_more') }}</span>
+              <span>{{ i18n.t('learn_more') | safe }}</span>
               {{ icon.icon('arrow-right', 'inline-4 block-4 group-hover:translate-x-1 transition-transform duration-300', size='md') }}
             </div>
           </div>

@@ -456,42 +456,12 @@
 
       {# Language Buttons #}
       <div class="flex flex-wrap justify-center gap-3">
-        <button onclick="localStorage.setItem('i18nextLng', 'id-ID'); location.reload();" class="flex items-center gap-3 px-5 py-3 rounded-xl bg-slate-900/30 border border-white/5 hover:bg-violet-500/10 hover:border-violet-500/30 hover:shadow-lg hover:shadow-violet-500/10 text-white text-sm font-medium transition-all">
-          <span class="text-xl">🇮🇩</span><span>Indonesia</span>
+        {% for locale in locales %}
+        <button onclick="localStorage.setItem('{{ localeStorageKey }}', '{{ locale.code }}'); location.reload();" class="flex items-center gap-3 px-5 py-3 rounded-xl bg-slate-900/30 border border-white/5 hover:bg-violet-500/10 hover:border-violet-500/30 hover:shadow-lg hover:shadow-violet-500/10 text-white text-sm font-medium transition-all">
+          <img src="https://flagcdn.com/w40/{{ locale.flag }}.png" alt="{{ locale.label }}" class="w-6 h-4 rounded shadow-sm object-cover" loading="lazy">
+          <span>{{ locale.label }}</span>
         </button>
-        <button onclick="localStorage.setItem('i18nextLng', 'en-US'); location.reload();" class="flex items-center gap-3 px-5 py-3 rounded-xl bg-slate-900/30 border border-white/5 hover:bg-emerald-500/10 hover:border-emerald-500/30 hover:shadow-lg hover:shadow-emerald-500/10 text-white text-sm font-medium transition-all">
-          <span class="text-xl">🇺🇸</span><span>English</span>
-        </button>
-        <button onclick="localStorage.setItem('i18nextLng', 'ja-JP'); location.reload();" class="flex items-center gap-3 px-5 py-3 rounded-xl bg-slate-900/30 border border-white/5 hover:bg-fuchsia-500/10 hover:border-fuchsia-500/30 hover:shadow-lg hover:shadow-fuchsia-500/10 text-white text-sm font-medium transition-all">
-          <span class="text-xl">🇯🇵</span><span>日本語</span>
-        </button>
-        <button onclick="localStorage.setItem('i18nextLng', 'zh-CN'); location.reload();" class="flex items-center gap-3 px-5 py-3 rounded-xl bg-slate-900/30 border border-white/5 hover:bg-amber-500/10 hover:border-amber-500/30 hover:shadow-lg hover:shadow-amber-500/10 text-white text-sm font-medium transition-all">
-          <span class="text-xl">🇨🇳</span><span>简体中文</span>
-        </button>
-        <button onclick="localStorage.setItem('i18nextLng', 'ar-SA'); location.reload();" class="flex items-center gap-3 px-5 py-3 rounded-xl bg-slate-900/30 border border-white/5 hover:bg-rose-500/10 hover:border-rose-500/30 hover:shadow-lg hover:shadow-rose-500/10 text-white text-sm font-medium transition-all">
-          <span class="text-xl">🇸🇦</span><span>العربية</span>
-        </button>
-        <button onclick="localStorage.setItem('i18nextLng', 'es-ES'); location.reload();" class="flex items-center gap-3 px-5 py-3 rounded-xl bg-slate-900/30 border border-white/5 hover:bg-orange-500/10 hover:border-orange-500/30 hover:shadow-lg hover:shadow-orange-500/10 text-white text-sm font-medium transition-all">
-          <span class="text-xl">🇪🇸</span><span>Español</span>
-        </button>
-        <button onclick="localStorage.setItem('i18nextLng', 'pt-BR'); location.reload();" class="flex items-center gap-3 px-5 py-3 rounded-xl bg-slate-900/30 border border-white/5 hover:bg-lime-500/10 hover:border-lime-500/30 hover:shadow-lg hover:shadow-lime-500/10 text-white text-sm font-medium transition-all">
-          <span class="text-xl">🇧🇷</span><span>Português</span>
-        </button>
-        <button onclick="localStorage.setItem('i18nextLng', 'fr-FR'); location.reload();" class="flex items-center gap-3 px-5 py-3 rounded-xl bg-slate-900/30 border border-white/5 hover:bg-sky-500/10 hover:border-sky-500/30 hover:shadow-lg hover:shadow-sky-500/10 text-white text-sm font-medium transition-all">
-          <span class="text-xl">🇫🇷</span><span>Français</span>
-        </button>
-        <button onclick="localStorage.setItem('i18nextLng', 'de-DE'); location.reload();" class="flex items-center gap-3 px-5 py-3 rounded-xl bg-slate-900/30 border border-white/5 hover:bg-yellow-500/10 hover:border-yellow-500/30 hover:shadow-lg hover:shadow-yellow-500/10 text-white text-sm font-medium transition-all">
-          <span class="text-xl">🇩🇪</span><span>Deutsch</span>
-        </button>
-        <button onclick="localStorage.setItem('i18nextLng', 'ru-RU'); location.reload();" class="flex items-center gap-3 px-5 py-3 rounded-xl bg-slate-900/30 border border-white/5 hover:bg-blue-500/10 hover:border-blue-500/30 hover:shadow-lg hover:shadow-blue-500/10 text-white text-sm font-medium transition-all">
-          <span class="text-xl">🇷🇺</span><span>Русский</span>
-        </button>
-        <button onclick="localStorage.setItem('i18nextLng', 'ko-KR'); location.reload();" class="flex items-center gap-3 px-5 py-3 rounded-xl bg-slate-900/30 border border-white/5 hover:bg-cyan-500/10 hover:border-cyan-500/30 hover:shadow-lg hover:shadow-cyan-500/10 text-white text-sm font-medium transition-all">
-          <span class="text-xl">🇰🇷</span><span>한국어</span>
-        </button>
-        <button onclick="localStorage.setItem('i18nextLng', 'hi-IN'); location.reload();" class="flex items-center gap-3 px-5 py-3 rounded-xl bg-slate-900/30 border border-white/5 hover:bg-pink-500/10 hover:border-pink-500/30 hover:shadow-lg hover:shadow-pink-500/10 text-white text-sm font-medium transition-all">
-          <span class="text-xl">🇮🇳</span><span>हिन्दी</span>
-        </button>
+        {% endfor %}
       </div>
     </div>
   </section>

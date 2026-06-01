@@ -17,11 +17,11 @@
             Starter
           </span>
           <span class="text-[10px] text-slate-500 font-black tracking-[0.25em] uppercase mbs-1.5 transition-colors duration-200 group-hover:text-slate-300">
-            {{ i18n.t('engine_name') }}
+            {{ i18n.t('engine_name') | safe }}
           </span>
         </a>
         <p class="text-[11px] text-slate-400 font-medium tracking-wide text-center md:text-start">
-          {{ i18n.t('site_tagline') }}
+          {{ i18n.t('site_tagline') | safe }}
         </p>
       </div>
 
@@ -29,7 +29,7 @@
       <nav class="flex flex-wrap justify-center items-center gap-inline-6 gap-block-2" aria-label="Footer navigation">
         {% for item in global.menu.header %}
           <a href="{{ item.url }}" class="group relative text-sm text-slate-400 hover:text-white transition-colors duration-300 px-4 py-2.5 flex items-center font-bold">
-            {{ i18n.t(item.label) }}
+            {{ i18n.t(item.label) | safe }}
             <span class="absolute inset-bs-0 inset-s-0 inline-0 group-hover:inline-full block-0.5 bg-gradient-to-r from-violet-500 to-fuchsia-500 transition-all duration-200"></span>
           </a>
         {% endfor %}
@@ -41,7 +41,7 @@
           {{ i18n.html('copyright', { year: 2026 }) }}
         </p>
         <p class="text-[10px] text-slate-500 font-black uppercase tracking-widest">
-          {{ i18n.t('rights_reserved') }}
+          {{ i18n.t('rights_reserved') | safe }}
         </p>
       </div>
     </div>
@@ -62,11 +62,11 @@
       <div class="flex items-center gap-4 text-[10px] text-slate-500 font-bold uppercase tracking-wider">
         <span class="flex items-center gap-2">
           {{ icon.icon('shield', 'inline-4 block-4 text-emerald-400', size='md') | safe }}
-          {{ i18n.t('secure') }}
+          {{ i18n.t('secure') | safe }}
         </span>
         <span class="flex items-center gap-2">
           {{ icon.icon('lightning', 'inline-4 block-4 text-violet-400', size='md') | safe }}
-          {{ i18n.t('fast') }}
+          {{ i18n.t('fast') | safe }}
         </span>
       </div>
     </div>

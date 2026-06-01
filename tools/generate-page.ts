@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { SUPPORTED_LANG_CODES } from '../src/configs/locales';
+import { LOCALE_CODES } from '../src/configs/locales';
 import { PATHS } from '../src/configs/paths';
 
 const args = process.argv.slice(2);
@@ -98,7 +98,7 @@ try {
   fs.writeFileSync(path.join(targetDir, 'index.json5'), jsonContent);
 
   if (fs.existsSync(baseLocaleDir)) {
-    for (const lng of SUPPORTED_LANG_CODES) {
+    for (const lng of LOCALE_CODES) {
       const lngDir = path.join(baseLocaleDir, lng);
       const filePath = path.join(lngDir, `${formattedName}.json5`);
 

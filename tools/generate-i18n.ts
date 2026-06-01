@@ -1,12 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { DEFAULT_LANG, SUPPORTED_LANG_CODES } from '../src/configs/locales';
+import { DEFAULT_LOCALE, LOCALE_CODES } from '../src/configs/locales';
 import { LOCALE_FILE_EXTENSIONS, PATHS } from '../src/configs/paths';
-import { readJson5File } from '../src/scripts/utils/parse-json5';
+import { readJson5File } from '../src/scripts/utils/json5';
 
 const ROOT = process.cwd();
 const LOCALES_ROOT = path.join(ROOT, PATHS.LOCALES);
-const DEFAULT_LOCALE_DIR = path.join(LOCALES_ROOT, DEFAULT_LANG);
+const DEFAULT_LOCALE_DIR = path.join(LOCALES_ROOT, DEFAULT_LOCALE);
 const GENERATED_DIR = path.join(ROOT, PATHS.GENERATED);
 const OUTPUT_FILE = path.join(GENERATED_DIR, 'i18n.d.ts');
 
@@ -139,7 +139,7 @@ try {
         throw new Error(`Missing default common locale: ${path.join(DEFAULT_LOCALE_DIR, 'common.json5')}`);
     }
 
-    const parityErrors = SUPPORTED_LANG_CODES.flatMap((lang) => {
+    const parityErrors = LOCALE_CODES.flatMap((lang) => {
         const langDir = path.join(LOCALES_ROOT, lang);
         if (!fs.existsSync(langDir)) return [`${lang}: missing locale directory`];
         return compareLocaleParity(defaultNamespaces, readLocaleTree(langDir), lang);

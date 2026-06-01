@@ -1,12 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { BASE_CURRENCY, LANGUAGES } from '../src/configs/locales';
+import { BASE_CURRENCY, LOCALES } from '../src/configs/locales';
 import { EXCHANGE_RATES_URL, PATHS } from '../src/configs/paths';
 
 const GENERATED_DIR = path.resolve(process.cwd(), PATHS.GENERATED);
 const EXCHANGE_RATES_FILE = path.resolve(GENERATED_DIR, 'exchange-rates.ts');
 
-const LOCALE_CURRENCIES = [...new Set(LANGUAGES.map((l) => l.currency))];
+const LOCALE_CURRENCIES = [...new Set(LOCALES.map((l) => l.currency))];
 
 async function fetchExchangeRates(): Promise<Record<string, number>> {
   const quotes = LOCALE_CURRENCIES.filter((c) => c !== BASE_CURRENCY).join(',');

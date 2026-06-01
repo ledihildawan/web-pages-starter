@@ -1,22 +1,8 @@
-/**
- * Centralized path and directory constants
- * Used by build tools and scripts
- */
-
 export const PATHS = {
-  /** Source root directory */
   SRC: 'src',
-
-  /** Locales directory */
   LOCALES: 'src/locales',
-
-  /** Generated files directory */
   GENERATED: 'generated',
-
-  /** Components directory inside locales */
   LOCALES_COMPONENTS: 'src/locales/components',
-
-  /** Dist/build directory */
   DIST: 'dist',
 } as const;
 

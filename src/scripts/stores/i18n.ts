@@ -1,44 +1,38 @@
 import {
-  LANGUAGES as ALL_LANGUAGES,
-  LANGUAGE_STORAGE_KEY,
-  SUPPORTED_LANG_CODES,
+  LOCALE,
+  LOCALE_CODES,
+  LOCALE_STORAGE_KEY,
+  LOCALES,
+  type LocaleCode,
 } from '@/configs/locales';
 
-interface Language {
-  code: string;
-  label: string;
-  flag: string;
-}
-
-// Use languages from config
-const LANGUAGES: Language[] = ALL_LANGUAGES.map((l) => ({
-  code: l.code,
-  label: l.label,
-  flag: l.flag,
-}));
-
-export function registerIntlStore() {
+export function registerI18nStore(): void {
   if (typeof window === 'undefined') {
     return;
   }
 
-  // Alpine must be available
   if (!globalThis.Alpine) {
     return;
   }
 
   globalThis.Alpine.store('i18n', {
-    languages: LANGUAGES.filter((l) =>
-      SUPPORTED_LANG_CODES.includes(l.code as any),
-    ),
+    languages: LOCALES.map((l) => ({
+      code: l.code,
+      label: l.label,
+      flag: l.flag,
+    })).filter((l) => LOCALE_CODES.includes(l.code)),
 
-    get current() {
-      return localStorage.getItem(LANGUAGE_STORAGE_KEY) || 'en-US';
+    get current(): string {
+      return localStorage.getItem(LOCALE_STORAGE_KEY) || LOCALE.EN_US;
     },
 
-    change(code: string) {
-      localStorage.setItem(LANGUAGE_STORAGE_KEY, code);
+    change(code: string): void {
+      localStorage.setItem(LOCALE_STORAGE_KEY, code);
       window.location.reload();
     },
+  } satisfies {
+    languages: Array<{ code: LocaleCode; label: string; flag: string }>;
+    current: string;
+    change: (code: string) => void;
   });
 }

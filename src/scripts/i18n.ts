@@ -1,5 +1,5 @@
 
-import { DEFAULT_LANG, SUPPORTED_LANG_CODES } from '@configs/languages';
+import { DEFAULT_LOCALE, LOCALE_CODES, LOCALE_STORAGE_KEY } from '@/configs/locales';
 import i18next, { type Resource } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
@@ -45,7 +45,7 @@ export const initI18n = async (): Promise<void> => {
   for (const lng of Object.keys(rawData)) {
     const data = rawData[lng];
     resources[lng] = {
-      common: (data.common || (lng === 'id' ? data : {})) as Record<string, string>,
+      common: (data.common || {}) as Record<string, string>,
       [pageID]: (data.page || {}) as Record<string, string>,
     };
 
@@ -59,14 +59,14 @@ export const initI18n = async (): Promise<void> => {
   try {
     await i18next.use(LanguageDetector).init({
       resources,
-      fallbackLng: DEFAULT_LANG,
-      supportedLngs: SUPPORTED_LANG_CODES,
+      fallbackLng: DEFAULT_LOCALE,
+      supportedLngs: LOCALE_CODES,
       ns: ['common', pageID],
       defaultNS: 'common',
       detection: {
         order: ['localStorage', 'navigator'],
         caches: ['localStorage'],
-        lookupLocalStorage: 'i18nextLng', 
+        lookupLocalStorage: LOCALE_STORAGE_KEY, 
       },
       interpolation: {
         escapeValue: false,

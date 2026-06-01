@@ -1,10 +1,11 @@
 {
-  "about": "حول",
-  "pricing": "التسعير",
-  "features": "الميزات",
-  "get_started": "ابدأ الآن",
-  "engine_name": "محرك الويب",
-  "site_tagline": "بنيت من أجل الأداء",
-  "rights_reserved": "جميع الحقوق محفوظة.",
-  "select_language": "اختر اللغة"
+    "skip_to_content":  "تخطى إلى المحتوى الرئيسي",
+    "about":  "حول",
+    "pricing":  "التسعير",
+    "features":  "الميزات",
+    "get_started":  "ابدأ الآن",
+    "engine_name":  "محرك الويب",
+    "site_tagline":  "بنيت من أجل الأداء",
+    "rights_reserved":  "جميع الحقوق محفوظة.",
+    "select_language":  "اختر اللغة"
 }

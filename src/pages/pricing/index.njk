@@ -3,7 +3,7 @@
 {% block content %}
   <div x-data="{ yearly: false }">
     {# Enhanced Hero Section #}
-    {{ hero.hero_section('hero', badge=true, intl=intl) }}
+    {{ hero.hero_section('hero', badge=true, i18n=i18n) }}
 
     {# Enhanced Pricing Toggle #}
     <section class="pbe-40 px-6">
@@ -12,7 +12,7 @@
           <span class="text-sm font-bold uppercase tracking-[0.15em] transition-all duration-200" :class="!yearly ? 'text-slate-500' : 'text-white scale-105'">
             {{ i18n.t('page.toggle.monthly') }}
           </span>
-          <button @click="yearly = !yearly" aria-label="{{ i18n.v('page.toggle.aria_label') }}" class="toggle-btn group relative inline-16 block-11 bg-slate-800 rounded-full transition-all duration-200 border border-white/10 cursor-pointer hover:border-violet-500/50 hover:scale-105 shadow-lg btn-squash icon-squash anticipate-press" :class="yearly ? 'border-violet-500/50 toggle-active' : ''">
+          <button @click="yearly = !yearly" aria-label="{{ i18n.text('page.toggle.aria_label') }}" class="toggle-btn group relative inline-16 block-11 bg-slate-800 rounded-full transition-all duration-200 border border-white/10 cursor-pointer hover:border-violet-500/50 hover:scale-105 shadow-lg btn-squash icon-squash anticipate-press" :class="yearly ? 'border-violet-500/50 toggle-active' : ''">
             <div class="absolute inset-0 bg-gradient-to-r from-violet-500/20 to-fuchsia-500/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" :class="yearly ? 'opacity-100' : ''"></div>
             <div class="absolute inset-0 flex items-center px-1.5">
               <div class="toggle-knob inline-5 block-5 bg-gradient-to-br rounded-full shadow transition-all duration-200 ease-emphasized"
@@ -107,7 +107,7 @@
           'page.faq.title',
           'page.faq.subtitle',
           icon.icon('question', 'inline-4 block-4'),
-          intl=intl
+          i18n=i18n
         ) }}
 
         <div class="grid gap-5">

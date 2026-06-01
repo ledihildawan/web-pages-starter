@@ -1,91 +1,90 @@
-import { DEFAULT_LANG, LANGUAGES, BASE_CURRENCY, SUPPORTED_LANG_CODES } from '../../configs/locales';
+import {
+  BASE_CURRENCY,
+  CALENDAR,
+  DEFAULT_LOCALE,
+  DIR,
+  type DirectionCode,
+  LOCALE,
+  LOCALE_CODES,
+  LOCALE_FALLBACKS,
+  LOCALES,
+  type LocaleCode,
+  type LocaleConfig,
+  NUMBERING_SYSTEM,
+} from '../../configs/locales';
 
-const FALLBACK_CHAINS: Record<string, string[]> = {
-  'zh-SG': ['zh-CN'],
-  'zh-TW': ['zh-CN'],
-  'zh-HK': ['zh-CN'],
-  'en-GB': ['en-US'],
-  'en-CA': ['en-US'],
-  'en-AU': ['en-US'],
-  'en-IN': ['en-US'],
-  'es-MX': ['es-ES'],
-  'es-AR': ['es-ES'],
-  'es-CO': ['es-ES'],
-  'es-PE': ['es-ES'],
-  'pt-PT': ['pt-BR'],
-  'pt-AO': ['pt-BR'],
-  'pt-MZ': ['pt-BR'],
-  'fr-CA': ['fr-FR'],
-  'fr-BE': ['fr-FR'],
-  'fr-CH': ['fr-FR'],
-  'de-AT': ['de-DE'],
-  'de-CH': ['de-DE'],
-  'ar-AE': ['ar-SA'],
-  'ar-EG': ['ar-SA'],
-  'ar-MA': ['ar-SA'],
-  'ar-TN': ['ar-SA'],
-  'hi-NP': ['hi-IN'],
-  'ko-KP': ['ko-KR'],
-};
-
-export const getFallbackChain = (locale: string): string[] => {
-  if (SUPPORTED_LANG_CODES.includes(locale as typeof SUPPORTED_LANG_CODES[number])) {
+export const getFallbackChain = (locale: string): LocaleCode[] => {
+  if (LOCALE_CODES.includes(locale as LocaleCode)) {
     return [];
   }
 
-  const chain = FALLBACK_CHAINS[locale];
-  if (chain) {
-    return [...chain, DEFAULT_LANG];
+  const explicitFallback =
+    LOCALE_FALLBACKS[locale as keyof typeof LOCALE_FALLBACKS];
+  if (explicitFallback) {
+    return [explicitFallback, DEFAULT_LOCALE];
   }
 
   const langCode = locale.split('-')[0];
-  const matched = SUPPORTED_LANG_CODES.find((c) => c.startsWith(`${langCode}-`));
+  const matched = LOCALE_CODES.find((c) => c.startsWith(`${langCode}-`));
 
   if (matched) {
-    return [matched, DEFAULT_LANG];
+    return [matched, DEFAULT_LOCALE];
   }
 
-  return [DEFAULT_LANG];
-}
-
-let currentLanguage: string | undefined;
-
-export const setLanguage = (lng: string): void => {
-  currentLanguage = lng;
+  return [DEFAULT_LOCALE];
 };
 
-export const getLanguage = (lng?: string): string => {
-  // Use explicitly provided language, or current set language, or default
-  const target = lng || currentLanguage;
-  if (!target) return DEFAULT_LANG;
+let currentLocale: LocaleCode | undefined;
 
-  if (SUPPORTED_LANG_CODES.includes(target as typeof SUPPORTED_LANG_CODES[number])) {
+export const setLocale = (locale: LocaleCode): void => {
+  currentLocale = locale;
+};
+
+export const getLocale = (locale?: LocaleCode): LocaleCode => {
+  const target = locale || currentLocale;
+  if (!target) return DEFAULT_LOCALE;
+
+  if (LOCALE_CODES.includes(target)) {
     return target;
   }
 
-  return getFallbackChain(target)[0] ?? DEFAULT_LANG;
+  return getFallbackChain(target)[0] ?? DEFAULT_LOCALE;
 };
 
-export const getLangCode = (lng: string): string => lng.split('-')[0];
+export const getLangCode = (locale: LocaleCode): string => locale.split('-')[0];
 
-export const getLanguageConfig = (lng: string) =>
-  LANGUAGES.find((l) => l.code === lng || (typeof lng === 'string' && lng.startsWith(`${l.code}-`)));
+export const getLanguageConfig = (
+  locale: LocaleCode,
+): LocaleConfig | undefined =>
+  LOCALES.find((l) => l.code === locale || locale.startsWith(`${l.code}-`));
 
-export const getCurrency = (lng: string): string => getLanguageConfig(lng)?.currency || BASE_CURRENCY;
-export const getTimezone = (lng: string): string => getLanguageConfig(lng)?.timezone || 'UTC';
-export const getTimezoneOffset = (lng: string): number => getLanguageConfig(lng)?.timezoneOffset ?? 0;
-export const getCalendar = (lng: string): string => getLanguageConfig(lng)?.calendar || 'gregory';
-export const getFirstDayOfWeek = (lng: string): number => getLanguageConfig(lng)?.firstDayOfWeek ?? 0;
-export const getNumberingSystem = (lng: string): string => getLanguageConfig(lng)?.numberingSystem || 'latn';
-export const getNativeNumberingSystem = (lng: string): string => getLanguageConfig(lng)?.nativeNumberingSystem || 'latn';
-export const getUseNativeNumbers = (lng: string): boolean => getLanguageConfig(lng)?.useNativeNumbers ?? false;
-export const getRegion = (lng: string): string | undefined => getLanguageConfig(lng)?.region;
-export const getCountryCode = (lng: string): string | undefined => getRegion(lng);
-export const getDirection = (lng: string): 'ltr' | 'rtl' => getLanguageConfig(lng)?.dir || 'ltr';
-export const isRTL = (lng: string): boolean => getDirection(lng) === 'rtl';
+export const getCurrency = (locale: LocaleCode): string =>
+  getLanguageConfig(locale)?.currency || BASE_CURRENCY;
+export const getTimezone = (locale: LocaleCode): string =>
+  getLanguageConfig(locale)?.timezone || 'UTC';
+export const getTimezoneOffset = (locale: LocaleCode): number =>
+  getLanguageConfig(locale)?.timezoneOffset ?? 0;
+export const getCalendar = (locale: LocaleCode): string =>
+  getLanguageConfig(locale)?.calendar || CALENDAR.GREGORY;
+export const getFirstDayOfWeek = (locale: LocaleCode): number =>
+  getLanguageConfig(locale)?.firstDayOfWeek ?? 0;
+export const getNumberingSystem = (locale: LocaleCode): string =>
+  getLanguageConfig(locale)?.numberingSystem || NUMBERING_SYSTEM.LATN;
+export const getNativeNumberingSystem = (locale: LocaleCode): string =>
+  getLanguageConfig(locale)?.nativeNumberingSystem || NUMBERING_SYSTEM.LATN;
+export const getDefaultNativeDigits = (locale: LocaleCode): boolean =>
+  getLanguageConfig(locale)?.nativeDigits ?? false;
+export const getRegion = (locale: LocaleCode): string | undefined =>
+  getLanguageConfig(locale)?.region;
+export const getCountryCode = (locale: LocaleCode): string | undefined =>
+  getRegion(locale);
+export const getDirection = (locale: LocaleCode): DirectionCode =>
+  getLanguageConfig(locale)?.dir || DIR.LTR;
+export const isRTL = (locale: LocaleCode): boolean =>
+  getDirection(locale) === DIR.RTL;
 
-export const getPluralSuffix = (n: number, lng?: string): string => {
-  const language = getLanguage(lng);
+export const getPluralSuffix = (n: number, locale?: LocaleCode): string => {
+  const language = getLocale(locale);
   const rules = getLanguageConfig(language)?.pluralRules;
 
   if (rules === 'other') return '_other';
@@ -107,7 +106,8 @@ export const getPluralSuffix = (n: number, lng?: string): string => {
     const rem100 = n % 100;
 
     if (rem10 === 1 && rem100 !== 11) return '_one';
-    if (rem10 >= 2 && rem10 <= 4 && !(rem100 >= 12 && rem100 <= 14)) return '_few';
+    if (rem10 >= 2 && rem10 <= 4 && !(rem100 >= 12 && rem100 <= 14))
+      return '_few';
     return '_many';
   }
 

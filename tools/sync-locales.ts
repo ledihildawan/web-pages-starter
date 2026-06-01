@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { DEFAULT_LANG, SUPPORTED_LANG_CODES } from '../src/configs/locales';
+import { DEFAULT_LOCALE, LOCALE_CODES } from '../src/configs/locales';
 import { PATHS } from '../src/configs/paths';
 
 const ROOT = process.cwd();
@@ -49,8 +49,8 @@ function createLocale(targetLang: string, sourceDir: string, targetDir: string):
 }
 
 try {
-  console.log(`Configured languages: ${SUPPORTED_LANG_CODES.length}`);
-  console.log(`Default: ${DEFAULT_LANG}\n`);
+  console.log(`Configured languages: ${LOCALE_CODES.length}`);
+  console.log(`Default: ${DEFAULT_LOCALE}\n`);
 
   const existingLocales = fs.existsSync(LOCALES_ROOT)
     ? fs.readdirSync(LOCALES_ROOT).filter((f) => {
@@ -59,7 +59,7 @@ try {
       })
     : [];
 
-  const missingLocales = SUPPORTED_LANG_CODES.filter((code) => !existingLocales.includes(code));
+  const missingLocales = LOCALE_CODES.filter((code) => !existingLocales.includes(code));
 
   if (missingLocales.length === 0) {
     console.log('✅ All configured locales exist.');
@@ -67,12 +67,12 @@ try {
     process.exit(0);
   }
 
-  const sourceDir = path.join(LOCALES_ROOT, DEFAULT_LANG);
+  const sourceDir = path.join(LOCALES_ROOT, DEFAULT_LOCALE);
   if (!fs.existsSync(sourceDir)) {
     throw new Error(`Default locale directory not found: ${sourceDir}`);
   }
 
-  console.log(`Creating ${missingLocales.length} missing locale(s) from ${DEFAULT_LANG}:\n`);
+  console.log(`Creating ${missingLocales.length} missing locale(s) from ${DEFAULT_LOCALE}:\n`);
 
   let totalCreated = 0;
   for (const lang of missingLocales) {

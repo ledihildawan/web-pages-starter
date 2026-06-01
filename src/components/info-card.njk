@@ -14,7 +14,7 @@
   </div>
 
   {# Content #}
-  <h3 class="text-lg lg:text-xl font-black text-white mbe-3 tracking-tight group-hover:text-{{ color }}-200 transition-colors duration-300">{{ i18n.t(label + '_label') }}</h3>
-  <p class="text-slate-400 font-medium group-hover:text-slate-300 transition-colors duration-300">{{ i18n.t(value + '_value') }}</p>
+  <h3 class="text-lg lg:text-xl font-black text-white mbe-3 tracking-tight group-hover:text-{{ color }}-200 transition-colors duration-300">{{ i18n.t(label + '_label') | safe }}</h3>
+  <p class="text-slate-400 font-medium group-hover:text-slate-300 transition-colors duration-300">{{ i18n.t(value + '_value') | safe }}</p>
 </div>
 {% endmacro %}

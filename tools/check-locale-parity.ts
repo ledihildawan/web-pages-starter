@@ -1,14 +1,14 @@
 #!/usr/bin/env bun
 import fs from 'node:fs';
 import path from 'node:path';
-import { DEFAULT_LANG, SUPPORTED_LANG_CODES } from '../src/configs/locales';
+import { DEFAULT_LOCALE, LOCALE_CODES } from '../src/configs/locales';
 import { PATHS } from '../src/configs/paths';
-import { readJson5File } from '../src/scripts/utils/parse-json5';
+import { readJson5File } from '../src/scripts/utils/json5';
 
 type JsonObject = Record<string, unknown>;
 
 const LOCALES_DIR = path.resolve(PATHS.LOCALES);
-const BASE_LOCALE = DEFAULT_LANG;
+const BASE_LOCALE = DEFAULT_LOCALE;
 
 function getAllKeys(obj: unknown, prefix = ''): Set<string> {
   const keys = new Set<string>();
@@ -63,7 +63,7 @@ function checkFileParity(
     extraKeys: [],
   };
 
-  for (const locale of SUPPORTED_LANG_CODES) {
+  for (const locale of LOCALE_CODES) {
     if (locale === BASE_LOCALE) continue;
 
     const localeKeys = getAllKeys(readJson5(locale, filePath));
@@ -86,7 +86,7 @@ function checkParity() {
   const components = new Map<string, ParityReport>();
   const localeStats = new Map<string, { missing: number; extra: number }>();
 
-  for (const locale of SUPPORTED_LANG_CODES) {
+  for (const locale of LOCALE_CODES) {
     localeStats.set(locale, { missing: 0, extra: 0 });
   }
 

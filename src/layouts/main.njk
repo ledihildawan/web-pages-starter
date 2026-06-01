@@ -1,11 +1,11 @@
-﻿{% import "macros/i18n.njk" as i18n with context %}
+﻿{# i18n methods now available directly in context - no import needed #}
 {% import "macros/seo.njk" as seo %}
 {% import "icons.njk" as icon with context %}
 {% import "hero-section.njk" as hero with context %}
 {% import "section-header.njk" as section with context %}
 
 <!DOCTYPE html>
-<html lang="{{ lang }}" dir="{% if lang == 'ar-SA' %}rtl{% else %}ltr{% endif %}" class="scroll-smooth selection:bg-violet-500/30 selection:text-violet-200">
+<html lang="{{ lang }}" dir="{{ localeConfig.dir or 'ltr' }}" class="scroll-smooth selection:bg-violet-500/30 selection:text-violet-200">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -47,22 +47,23 @@
       <link rel="preconnect" href="/" crossorigin>
 
       {# Noto Sans fonts for non-Latin languages #}
-      {% if lang == 'ja-JP' %}
+      {% set ns = localeConfig.nativeNumberingSystem or 'latn' %}
+      {% if ns == 'jpan' %}
         <link rel="preload" href="/assets/fonts/noto-sans-jp-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous" importance="high">
         <link rel="preload" href="/assets/fonts/noto-sans-jp-37-wght-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous" importance="high">
-      {% elif lang == 'zh-CN' %}
+      {% elif ns == 'hans' or ns == 'hant' %}
         <link rel="preload" href="/assets/fonts/noto-sans-sc-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous" importance="high">
         <link rel="preload" href="/assets/fonts/noto-sans-sc-21-wght-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous" importance="high">
-      {% elif lang == 'ko-KR' %}
+      {% elif ns == 'kore' %}
         <link rel="preload" href="/assets/fonts/noto-sans-kr-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous" importance="high">
         <link rel="preload" href="/assets/fonts/noto-sans-kr-37-wght-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous" importance="high">
-      {% elif lang == 'ar-SA' %}
+      {% elif ns == 'arab' %}
         <link rel="preload" href="/assets/fonts/noto-sans-arabic-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous" importance="high">
         <link rel="preload" href="/assets/fonts/noto-sans-arabic-arabic-wght-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous" importance="high">
-      {% elif lang == 'hi-IN' %}
+      {% elif ns == 'deva' %}
         <link rel="preload" href="/assets/fonts/noto-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous" importance="high">
         <link rel="preload" href="/assets/fonts/noto-sans-devanagari-wght-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous" importance="high">
-      {% elif lang == 'ru-RU' %}
+      {% elif ns == 'cyrl' %}
         <link rel="preload" href="/assets/fonts/inter-cyrillic-400-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous" importance="high">
         <link rel="preload" href="/assets/fonts/inter-cyrillic-900-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous" importance="high">
       {% endif %}
@@ -80,7 +81,7 @@
       <svg class="inline-5 block-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0l-10.5 10.5M21 3v10.5"/>
       </svg>
-      {{ i18n.t('skip_to_content') | default('Skip to main content') }}
+      {{ i18n.t('skip_to_content') | safe }}
     </a>
 
     <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
