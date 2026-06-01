@@ -4,8 +4,8 @@ import { defineConfig } from '@rsbuild/core';
 import { pluginImageCompress } from '@rsbuild/plugin-image-compress';
 import { minify } from 'html-minifier-terser';
 import {
-  LANGUAGE_STORAGE_KEY,
-  SUPPORTED_LANG_CODES,
+  LOCALE_CODES,
+  LOCALE_STORAGE_KEY,
 } from './src/configs/locales';
 import { PATHS } from './src/configs/paths';
 import { createTemplateParams } from './src/scripts/lib/template';
@@ -190,6 +190,6 @@ export default defineConfig({
     template: ({ entryName }) =>
       path.join(PATHS.SRC, 'pages', entryName, 'index.njk'),
     templateParameters: (params) =>
-      createTemplateParams(params, LANGUAGE_STORAGE_KEY, SUPPORTED_LANG_CODES),
+      createTemplateParams(params, LOCALE_STORAGE_KEY, LOCALE_CODES),
   },
 });
