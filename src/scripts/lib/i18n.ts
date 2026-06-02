@@ -4,7 +4,7 @@ import i18next, { type Resource } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import {
   BASE_CURRENCY,
-  CURRENCY,
+  CURRENCY_CODE,
   DEFAULT_LOCALE,
   LOCALE_CODES,
   LOCALE_FALLBACKS,

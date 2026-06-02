@@ -1,4 +1,6 @@
 {% extends "main.njk" %}
+{% import "hero-section.njk" as hero with context %}
+{% import "section-header.njk" as section with context %}
 
 {% block content %}
   {# Enhanced Hero Section #}
@@ -16,7 +18,7 @@
                    :style="`transition-delay: {{ loop.index0 * 100 }}ms`">
                 {{ i18n.t('page.stats.' + stat.label + '_val') }}
               </div>
-              <div class="text-[10px] text-slate-500 font-black uppercase tracking-[0.2em] group-hover:text-slate-400 transition-colors duration-200">
+              <div class="text-[10px] text-slate-400 font-black uppercase tracking-[0.2em] group-hover:text-slate-400 transition-colors duration-200">
                 {{ i18n.t('page.stats.' + stat.label) }}
               </div>
             </div>

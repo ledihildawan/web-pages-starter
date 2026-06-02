@@ -17,12 +17,12 @@ declare global {
     >;
   }
 
-  var Alpine: AlpineType | undefined;
+  var Alpine: AlpineType;
 
   interface Navigator {
     connection?: {
-      saveData?: boolean;
-      effectiveType?: string;
+      saveData: boolean;
+      effectiveType: 'slow-2g' | '2g' | '3g' | '4g';
     };
   }
 }

@@ -1,22 +1,23 @@
 {% macro section_header(badge, title, description, icon = null, show_gradient = true, i18n = {}) %}
-<div class="text-center mbe-24 space-y-4">
-  {% if badge %}
-  <div class="inline-flex items-center gap-2.5 px-4 py-2 bg-violet-500/10 border border-violet-500/30 rounded-full text-violet-300 text-sm mbe-6">
-    {% if icon %}{{ icon}}{% endif %}
-    <span class="font-bold tracking-wide uppercase text-[10px]">{{ i18n.t(badge) }}</span>
+  <div class="text-center mbe-24 space-y-4">
+    {% if badge %}
+      <div class="inline-flex items-center gap-2.5 px-4 py-2 bg-violet-500/10 border border-violet-500/30 rounded-full text-violet-300 text-sm mbe-6">
+        {% if icon %}{{ icon}}
+        {% endif %}
+        <span class="font-bold tracking-wide uppercase text-[10px]">{{ i18n.t(badge) }}</span>
+      </div>
+    {% endif %}
+
+    <h2 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white">
+      {{ i18n.t(title) }}
+    </h2>
+
+    <p class="text-slate-400 max-inline-2xl mx-auto text-lg md:text-xl leading-relaxed">
+      {{ i18n.t(description) }}
+    </p>
+
+    {% if show_gradient %}
+      <div class="block-1.5 inline-24 bg-linear-to-r from-violet-500 via-fuchsia-500 to-pink-500 mx-auto rounded-full shadow-[0_0_20px_rgba(139,92,246,0.4)]"></div>
+    {% endif %}
   </div>
-  {% endif %}
-
-  <h2 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white">
-    {{ i18n.t(title) }}
-  </h2>
-
-  <p class="text-slate-400 max-inline-2xl mx-auto text-lg md:text-xl leading-relaxed">
-    {{ i18n.t(description) }}
-  </p>
-
-  {% if show_gradient %}
-  <div class="block-1.5 inline-24 bg-gradient-to-r from-violet-500 via-fuchsia-500 to-pink-500 mx-auto rounded-full shadow-[0_0_20px_rgba(139,92,246,0.4)]"></div>
-  {% endif %}
-</div>
 {% endmacro %}

@@ -1,4 +1,6 @@
 {% extends "main.njk" %}
+{% import "hero-section.njk" as hero with context %}
+{% import "section-header.njk" as section with context %}
 
 {% block content %}
   <div x-data="{ yearly: false }">
@@ -9,10 +11,10 @@
     <section class="pbe-40 px-6">
       <div class="max-inline-lg mx-auto">
         <div class="flex flex-col sm:flex-row items-center justify-center gap-6 p-6 bg-slate-900/40 backdrop-blur-xl radius-card-md border border-white/10">
-          <span class="text-sm font-bold uppercase tracking-[0.15em] transition-all duration-200" :class="!yearly ? 'text-slate-500' : 'text-white scale-105'">
+          <span class="text-sm font-bold uppercase tracking-[0.15em] transition-all duration-200" :class="!yearly ? 'text-slate-400' : 'text-white scale-105'">
             {{ i18n.t('page.toggle.monthly') }}
           </span>
-          <button @click="yearly = !yearly" aria-label="{{ i18n.text('page.toggle.aria_label') }}" class="toggle-btn group relative inline-16 block-11 bg-slate-800 rounded-full transition-all duration-200 border border-white/10 cursor-pointer hover:border-violet-500/50 hover:scale-105 shadow-lg btn-squash icon-squash anticipate-press" :class="yearly ? 'border-violet-500/50 toggle-active' : ''">
+          <button @click="yearly = !yearly" aria-label="{{ i18n.t('page.toggle.aria_label') }}" class="toggle-btn group relative inline-16 block-11 bg-slate-800 rounded-full transition-all duration-200 border border-white/10 cursor-pointer hover:border-violet-500/50 hover:scale-105 shadow-lg btn-squash icon-squash anticipate-press" :class="yearly ? 'border-violet-500/50 toggle-active' : ''">
             <div class="absolute inset-0 bg-gradient-to-r from-violet-500/20 to-fuchsia-500/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" :class="yearly ? 'opacity-100' : ''"></div>
             <div class="absolute inset-0 flex items-center px-1.5">
               <div class="toggle-knob inline-5 block-5 bg-gradient-to-br rounded-full shadow transition-all duration-200 ease-emphasized"
@@ -21,7 +23,7 @@
             </div>
           </button>
           <div class="flex items-center gap-3">
-            <span class="text-sm font-bold uppercase tracking-[0.15em] transition-all duration-200" :class="yearly ? 'text-white scale-105' : 'text-slate-500'">
+            <span class="text-sm font-bold uppercase tracking-[0.15em] transition-all duration-200" :class="yearly ? 'text-white scale-105' : 'text-slate-400'">
               {{ i18n.t('page.toggle.yearly') }}
             </span>
             <span class="px-4 py-2 text-[11px] font-black rounded-full border shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-all duration-200" :class="yearly ? 'bg-gradient-to-r from-emerald-500/30 to-emerald-500/20 text-emerald-300 border-emerald-500/50 shadow-[0_0_30px_rgba(16,185,129,0.4)] scale-110' : 'bg-gradient-to-r from-emerald-500/10 to-emerald-500/5 text-emerald-400/60 border-emerald-500/20'">
@@ -48,7 +50,7 @@
               </div>
             {% endif %}
 
-            <h3 class="text-xs font-black uppercase tracking-[0.2em] mbe-8 {% if plan.featured %}text-violet-300{% else %}text-slate-500 group-hover:text-slate-400{% endif %} transition-colors duration-200">
+            <h3 class="text-xs font-black uppercase tracking-[0.2em] mbe-8 {% if plan.featured %}text-violet-300{% else %}text-slate-400 group-hover:text-slate-400{% endif %} transition-colors duration-200">
               {{ i18n.t('page.plans.' + plan.id + '.name') }}
             </h3>
 

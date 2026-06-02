@@ -4,18 +4,16 @@ import {
   EXCHANGE_RATES,
 } from '../../../generated/exchange-rates';
 import {
-  ARABIC_LANGUAGES,
   BASE_CURRENCY,
-  CJK_LANGUAGES,
-  CYRILLIC_LANGUAGES,
-  DEVANAGARI_LANGUAGES,
-  LANGUAGE,
-  type LanguageCode,
+  type CurrencyCode,
+  LANGUAGE_CODE,
   LOCALES,
+  NUMBERING_SYSTEM_CODE,
+  NUMBERING_SYSTEM_CODES,
+  WRITING_SYSTEMS,
 } from '../../configs/locales';
 import type {
   CardinalOptions,
-  DateTimePreset,
   DateValue,
   DurationOptions,
   FormatOptions,
@@ -33,122 +31,38 @@ import {
   getLocale,
 } from './locale';
 
-const ARABIC_INDIC_DIGITS: readonly string[] = [
-  '٠',
-  '١',
-  '٢',
-  '٣',
-  '٤',
-  '٥',
-  '٦',
-  '٧',
-  '٨',
-  '٩',
-];
+// Create digit converter factory
+const createDigitConverter = (digitsArray: readonly string[]) => (num: number | string) =>
+  String(num).replace(/\d/g, (d) => digitsArray[Number(d)]);
 
-const DEVANAGARI_DIGITS: readonly string[] = [
-  '०',
-  '१',
-  '२',
-  '३',
-  '४',
-  '५',
-  '६',
-  '७',
-  '८',
-  '९',
-];
+// Generate NATIVE_DIGITS_MAP dynamically from LOCALES and NUMBERING_SYSTEM_DIGITS
+const NATIVE_DIGITS_MAP = LOCALES.reduce((acc, locale) => {
+  const lang = locale.language;
+  const ns = locale.nativeNumberingSystem;
 
-const JP_DIGITS: readonly string[] = [
-  '〇',
-  '一',
-  '二',
-  '三',
-  '四',
-  '五',
-  '六',
-  '七',
-  '八',
-  '九',
-];
+  // Skip if already mapped
+  if (acc[lang]) return acc;
 
-const ZH_DIGITS: readonly string[] = [
-  '〇',
-  '一',
-  '二',
-  '三',
-  '四',
-  '五',
-  '六',
-  '七',
-  '八',
-  '九',
-];
+  // Get digit array for this numbering system
+  const digits = NUMBERING_SYSTEM_CODES[ns];
+  if (digits) {
+    acc[lang] = createDigitConverter(digits);
+  }
 
-const KO_DIGITS: readonly string[] = [
-  '영',
-  '일',
-  '이',
-  '삼',
-  '사',
-  '오',
-  '육',
-  '칠',
-  '팔',
-  '구',
-];
+  return acc;
+}, {} as Record<string, (num: number | string) => string>);
 
-const RU_DIGITS: readonly string[] = [
-  '⁰',
-  '¹',
-  '²',
-  '³',
-  '⁴',
-  '⁵',
-  '⁶',
-  '⁷',
-  '⁸',
-  '⁹',
-];
-
-const getNumberingSystem = (options: FormatOptions = {}): string =>
+const getNumberingSystem = (options: FormatOptions = {}) =>
   options.nativeDigits
-    ? getLanguageConfig(getLocale())?.nativeNumberingSystem || 'latn'
+    ? getLanguageConfig(getLocale())?.nativeNumberingSystem || NUMBERING_SYSTEM_CODE.LATN
     : options.numberingSystem ||
     getLanguageConfig(getLocale())?.numberingSystem ||
-    'latn';
+    NUMBERING_SYSTEM_CODE.LATN;
 
-export const getNativeNumberingSystem = (): string =>
-  getLanguageConfig(getLocale())?.nativeNumberingSystem || 'latn';
+export const getNativeNumberingSystem = () =>
+  getLanguageConfig(getLocale())?.nativeNumberingSystem || NUMBERING_SYSTEM_CODE.LATN;
 
-const toArabicIndicDigits = (num: number | string): string =>
-  String(num).replace(/\d/g, (d) => ARABIC_INDIC_DIGITS[Number(d)]);
-
-const toDevanagariDigits = (num: number | string): string =>
-  String(num).replace(/\d/g, (d) => DEVANAGARI_DIGITS[Number(d)]);
-
-const toJapaneseDigits = (num: number | string): string =>
-  String(num).replace(/\d/g, (d) => JP_DIGITS[Number(d)]);
-
-const toChineseDigits = (num: number | string): string =>
-  String(num).replace(/\d/g, (d) => ZH_DIGITS[Number(d)]);
-
-const toKoreanDigits = (num: number | string): string =>
-  String(num).replace(/\d/g, (d) => KO_DIGITS[Number(d)]);
-
-const toRussianDigits = (num: number | string): string =>
-  String(num).replace(/\d/g, (d) => RU_DIGITS[Number(d)]);
-
-const NATIVE_DIGITS_MAP: Record<string, (num: number | string) => string> = {
-  ar: toArabicIndicDigits,
-  ja: toJapaneseDigits,
-  zh: toChineseDigits,
-  hi: toDevanagariDigits,
-  ko: toKoreanDigits,
-  ru: toRussianDigits,
-};
-
-export const toNativeDigits = (text: string, force?: boolean): string => {
+export const toNativeDigits = (text: string, force?: boolean) => {
   if (force === false) return text;
 
   const localeConfig = getLanguageConfig(getLocale());
@@ -159,7 +73,7 @@ export const toNativeDigits = (text: string, force?: boolean): string => {
 
   try {
     const formatter = new Intl.NumberFormat(getLocale(), {
-      numberingSystem: localeConfig?.nativeNumberingSystem || 'latn',
+      numberingSystem: localeConfig?.nativeNumberingSystem || NUMBERING_SYSTEM_CODE.LATN,
     });
     const testNum = 0;
     const formatted = formatter.format(testNum);
@@ -177,7 +91,7 @@ const safeIntlFormat = (
   options: Intl.NumberFormatOptions,
   num: number,
   fallback: string,
-): string => {
+) => {
   try {
     return new Intl.NumberFormat(getLocale(), options).format(num);
   } catch {
@@ -469,7 +383,7 @@ const CARDINAL_STRATEGY: Record<string, (num: number) => string> = {
 export const formatCardinal = (
   value: number | string,
   _options?: CardinalOptions,
-): string => {
+) => {
   const num = typeof value === 'number' ? value : parseInt(value, 10);
   if (Number.isNaN(num)) return `${value}`;
   return CARDINAL_STRATEGY[getLangCode(getLocale())]?.(num) ?? `${num}`;
@@ -558,7 +472,7 @@ const ORDINAL_STRATEGY: Record<string, (num: number) => string> = {
 export const formatOrdinal = (
   value: number | string,
   _options?: OrdinalOptions,
-): string => {
+) => {
   const num = typeof value === 'number' ? value : parseInt(value, 10);
   if (Number.isNaN(num)) return `${value}`;
 
@@ -585,59 +499,61 @@ export const formatOrdinal = (
   }
 };
 
-interface FormatterConfigs {
-  invalid: (val: string | number) => string;
-  intlFallback: (num: number) => string;
-  cjk?: (num: number, _langCode?: string) => string;
-  arabicFallback: (num: number) => string;
-  devanagariFallback: (num: number) => string;
-  cyrillicFallback: (num: number) => string;
-}
 
 const processNumeric = (
   value: number | string,
   options: FormatOptions,
   intlOptions: Intl.NumberFormatOptions,
-  config: FormatterConfigs,
-): string => {
+  config: {
+    invalid: (val: string | number) => string;
+    intlFallback: (num: number) => string;
+    cjk?: (num: number, _langCode?: string) => string;
+    arabicFallback: (num: number) => string;
+    devanagariFallback: (num: number) => string;
+    cyrillicFallback: (num: number) => string;
+  },
+) => {
   const num = typeof value === 'number' ? value : parseFloat(value);
+
   if (Number.isNaN(num)) return config.invalid(value);
 
   const langCode = getLangCode(getLocale());
 
   if (options.nativeDigits) {
-    if (config.cjk && CJK_LANGUAGES.includes(langCode as LanguageCode)) {
-      return config.cjk(num, langCode);
-    }
-    if (ARABIC_LANGUAGES.includes(langCode as LanguageCode)) {
+    if (config.cjk && WRITING_SYSTEMS.CJK.includes(langCode)) return config.cjk(num, langCode);
+
+    const digitRules = [
+      {
+        languages: WRITING_SYSTEMS.ARABIC,
+        converter: NATIVE_DIGITS_MAP[LANGUAGE_CODE.AR],
+        fallback: config.arabicFallback,
+      },
+      {
+        languages: WRITING_SYSTEMS.DEVANAGARI,
+        converter: NATIVE_DIGITS_MAP[LANGUAGE_CODE.HI],
+        fallback: config.devanagariFallback,
+      },
+      {
+        languages: WRITING_SYSTEMS.CYRILLIC,
+        converter: NATIVE_DIGITS_MAP[LANGUAGE_CODE.RU],
+        fallback: config.cyrillicFallback,
+      },
+    ];
+
+    const matchedRule = digitRules.find((rule) =>
+      rule.languages.includes(langCode),
+    );
+
+    if (matchedRule) {
       const intlResult = safeIntlFormat(
         { ...intlOptions, ...options },
         num,
         '',
       );
+
       return intlResult
-        ? toArabicIndicDigits(intlResult)
-        : config.arabicFallback(num);
-    }
-    if (DEVANAGARI_LANGUAGES.includes(langCode as LanguageCode)) {
-      const intlResult = safeIntlFormat(
-        { ...intlOptions, ...options },
-        num,
-        '',
-      );
-      return intlResult
-        ? toDevanagariDigits(intlResult)
-        : config.devanagariFallback(num);
-    }
-    if (CYRILLIC_LANGUAGES.includes(langCode as LanguageCode)) {
-      const intlResult = safeIntlFormat(
-        { ...intlOptions, ...options },
-        num,
-        '',
-      );
-      return intlResult
-        ? toRussianDigits(intlResult)
-        : config.cyrillicFallback(num);
+        ? matchedRule.converter(intlResult)
+        : matchedRule.fallback(num);
     }
   }
 
@@ -655,7 +571,7 @@ const processNumeric = (
 export const formatNumber = (
   value: number | string,
   options: FormatOptions = {},
-): string =>
+) =>
   processNumeric(
     value,
     options,
@@ -664,9 +580,9 @@ export const formatNumber = (
       invalid: String,
       intlFallback: String,
       cjk: (num, _langCode) => formatCardinal(num),
-      arabicFallback: toArabicIndicDigits,
-      devanagariFallback: toDevanagariDigits,
-      cyrillicFallback: toRussianDigits,
+      arabicFallback: NATIVE_DIGITS_MAP[LANGUAGE_CODE.AR],
+      devanagariFallback: NATIVE_DIGITS_MAP[LANGUAGE_CODE.HI],
+      cyrillicFallback: NATIVE_DIGITS_MAP[LANGUAGE_CODE.RU],
     },
   );
 
@@ -674,7 +590,7 @@ export const formatCurrency = (
   value: number | string,
   currency: string,
   options: FormatOptions = {},
-): string => {
+) => {
   return processNumeric(
     value,
     options,
@@ -684,9 +600,9 @@ export const formatCurrency = (
       intlFallback: (num) => `${currency} ${num}`,
       cjk: (num, _langCode) =>
         `${currency || getLanguageConfig(getLocale())?.currency || ''}${formatCardinal(num)}`,
-      arabicFallback: (num) => `${currency} ${toArabicIndicDigits(num)}`,
-      devanagariFallback: (num) => `${currency} ${toDevanagariDigits(num)}`,
-      cyrillicFallback: (num) => `${currency} ${toRussianDigits(num)}`,
+      arabicFallback: (num) => `${currency} ${NATIVE_DIGITS_MAP[LANGUAGE_CODE.AR](num)}`,
+      devanagariFallback: (num) => `${currency} ${NATIVE_DIGITS_MAP[LANGUAGE_CODE.HI](num)}`,
+      cyrillicFallback: (num) => `${currency} ${NATIVE_DIGITS_MAP[LANGUAGE_CODE.RU](num)}`,
     },
   );
 };
@@ -694,7 +610,7 @@ export const formatCurrency = (
 export const formatPercent = (
   value: number | string,
   options: FormatOptions = {},
-): string => {
+) => {
   return processNumeric(
     value,
     options,
@@ -703,11 +619,11 @@ export const formatPercent = (
       invalid: (v) => `${v}%`,
       intlFallback: (num) => `${num * 100}%`,
       cjk: (num, _langCode) => `${formatCardinal(Math.round(num * 100))}%`,
-      arabicFallback: (num) => `${toArabicIndicDigits(Math.round(num * 100))}%`,
+      arabicFallback: (num) => `${NATIVE_DIGITS_MAP[LANGUAGE_CODE.AR](Math.round(num * 100))}%`,
       devanagariFallback: (num) =>
-        `${toDevanagariDigits(Math.round(num * 100))}%`,
+        `${NATIVE_DIGITS_MAP[LANGUAGE_CODE.HI](Math.round(num * 100))}%`,
       cyrillicFallback: (num) =>
-        `${toRussianDigits(Math.round(num * 100))}%`,
+        `${NATIVE_DIGITS_MAP[LANGUAGE_CODE.RU](Math.round(num * 100))}%`,
     },
   );
 };
@@ -716,7 +632,7 @@ export const formatUnit = (
   value: number | string,
   unit: string,
   options: FormatOptions = {},
-): string => {
+) => {
   return processNumeric(
     value,
     options,
@@ -725,9 +641,9 @@ export const formatUnit = (
       invalid: (v) => `${v} ${unit}`,
       intlFallback: (num) => `${num} ${unit}`,
       cjk: (num, _langCode) => `${formatCardinal(num)}${unit}`,
-      arabicFallback: (num) => `${toArabicIndicDigits(num)} ${unit}`,
-      devanagariFallback: (num) => `${toDevanagariDigits(num)} ${unit}`,
-      cyrillicFallback: (num) => `${toRussianDigits(num)} ${unit}`,
+      arabicFallback: (num) => `${NATIVE_DIGITS_MAP[LANGUAGE_CODE.AR](num)} ${unit}`,
+      devanagariFallback: (num) => `${NATIVE_DIGITS_MAP[LANGUAGE_CODE.HI](num)} ${unit}`,
+      cyrillicFallback: (num) => `${NATIVE_DIGITS_MAP[LANGUAGE_CODE.RU](num)} ${unit}`,
     },
   );
 };
@@ -735,12 +651,13 @@ export const formatUnit = (
 export const formatScientific = (
   value: number | string,
   options: FormatOptions = {},
-): string => {
+) => {
   const num = typeof value === 'number' ? value : parseFloat(value);
   const numberingSystem = getNumberingSystem(options);
+
   if (num === 0) {
-    if (numberingSystem === 'arab') return '٠';
-    if (numberingSystem === 'deva') return '०';
+    if (numberingSystem === NUMBERING_SYSTEM_CODE.ARAB) return '٠';
+    if (numberingSystem === NUMBERING_SYSTEM_CODE.DEVA) return '०';
     return '0';
   }
 
@@ -768,37 +685,40 @@ export const formatScientific = (
         const exp = Math.floor(Math.log10(Math.abs(n)));
         const cMan = formatCardinal(Math.abs(n) / 10 ** exp);
         const cExp = formatCardinal(10 ** Math.abs(exp));
-        return `${n < 0 ? (langCode === LANGUAGE.JA ? 'マイナス' : '负') : ''}${cMan}×${cExp}`;
+        return `${n < 0 ? (langCode === LANGUAGE_CODE.JA ? 'マイナス' : '负') : ''}${cMan}×${cExp}`;
       },
       arabicFallback: (n) => {
         const exp = Math.floor(Math.log10(Math.abs(n)));
-        return `${n < 0 ? '−' : ''}${toArabicIndicDigits((Math.abs(n) / 10 ** exp).toFixed(1))}×١٠${toArabicIndicDigits(Math.abs(exp))}`;
+        return `${n < 0 ? '−' : ''}${NATIVE_DIGITS_MAP[LANGUAGE_CODE.AR]((Math.abs(n) / 10 ** exp).toFixed(1))}×١٠${NATIVE_DIGITS_MAP[LANGUAGE_CODE.AR](Math.abs(exp))}`;
       },
       devanagariFallback: (n) => {
         const exp = Math.floor(Math.log10(Math.abs(n)));
-        return `${n < 0 ? '-' : ''}${toDevanagariDigits((Math.abs(n) / 10 ** exp).toFixed(1))}×१०${toDevanagariDigits(Math.abs(exp))}`;
+        return `${n < 0 ? '-' : ''}${NATIVE_DIGITS_MAP[LANGUAGE_CODE.HI]((Math.abs(n) / 10 ** exp).toFixed(1))}×१०${NATIVE_DIGITS_MAP[LANGUAGE_CODE.HI](Math.abs(exp))}`;
       },
       cyrillicFallback: (n) => {
         const exp = Math.floor(Math.log10(Math.abs(n)));
-        return `${n < 0 ? '−' : ''}${toRussianDigits((Math.abs(n) / 10 ** exp).toFixed(1))}×¹⁰${toRussianDigits(Math.abs(exp))}`;
+        return `${n < 0 ? '−' : ''}${NATIVE_DIGITS_MAP[LANGUAGE_CODE.RU]((Math.abs(n) / 10 ** exp).toFixed(1))}×¹⁰${NATIVE_DIGITS_MAP[LANGUAGE_CODE.RU](Math.abs(exp))}`;
       },
     },
   );
 };
 
-export const formatBytes = (bytes: number, decimals: number = 1): string => {
+export const formatBytes = (bytes: number, decimals: number = 1) => {
   if (bytes === 0) return '0 B';
+
   const k = 1_024;
   const i = Math.floor(Math.log(bytes) / Math.log(k));
   const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
+
   return `${parseFloat((bytes / k ** i).toFixed(Math.max(0, decimals)))} ${sizes[i]}`;
 };
 
 export const formatAbbreviated = (
   value: number,
   options: FormatOptions = {},
-): string => {
+) => {
   const tier = Math.floor(Math.log10(Math.abs(value)) / 3) | 0;
+
   if (tier === 0) return formatNumber(value, options);
 
   const suffix = ['', 'K', 'M', 'B', 'T'][tier];
@@ -817,7 +737,7 @@ export const formatAbbreviated = (
 const formatIntlDate = (
   date: DateValue,
   options?: Intl.DateTimeFormatOptions,
-): string => {
+) => {
   try {
     const config = getLanguageConfig(getLocale());
     return new Intl.DateTimeFormat(getLocale(), {
@@ -833,17 +753,17 @@ const formatIntlDate = (
 export const formatDate = (
   date: DateValue,
   options?: Intl.DateTimeFormatOptions,
-): string => formatIntlDate(date, options);
+) => formatIntlDate(date, options);
 
 export const formatTime = (
   date: DateValue,
   options?: TimeFormatOptions,
-): string => formatIntlDate(date, { timeStyle: options?.timeStyle ?? 'short' });
+) => formatIntlDate(date, { timeStyle: options?.timeStyle ?? 'short' });
 
 export const formatDateTime = (
   date: DateValue,
   options?: Intl.DateTimeFormatOptions,
-): string =>
+) =>
   formatIntlDate(date, {
     dateStyle: 'short',
     timeStyle: 'short',
@@ -853,12 +773,13 @@ export const formatDateTime = (
 export const formatDuration = (
   seconds: number,
   options?: DurationOptions,
-): string => {
+) => {
   try {
     const rtf = new Intl.RelativeTimeFormat(getLocale(), {
       numeric: options?.numeric ?? 'auto',
       ...options,
     });
+
     const h = Math.floor(seconds / 3_600);
     const m = Math.floor((seconds % 3_600) / 60);
     const s = seconds % 60;
@@ -881,7 +802,7 @@ export const formatDuration = (
 export const formatList = (
   items: string[],
   options?: ListFormatOptions,
-): string => {
+) => {
   try {
     return new Intl.ListFormat(getLocale(), {
       style: options?.style ?? 'long',
@@ -895,29 +816,32 @@ export const formatList = (
 
 export const localPrice = (plan: RegionalPrice): number => {
   const locale = getLocale();
+
   if (plan.pricing[locale]) {
     return plan.pricing[locale];
   }
+
   return plan.pricing.base;
 };
 
-export const localPriceCurrency = (plan: RegionalPrice): string => {
+export const localPriceCurrency = (plan: RegionalPrice) => {
   const locale = getLocale();
+
   if (plan.pricing[locale]) {
     return getCurrency(locale);
   }
-  return 'USD';
+
+  return BASE_CURRENCY;
 };
 
 export const convertCurrency = (
   value: number,
   targetCurrency?: string,
   options?: FormatOptions,
-): string => {
-  const lang = getLocale();
+) => {
   const currency =
     targetCurrency ||
-    LOCALES.find((l) => l.code === lang)?.currency ||
+    LOCALES.find((l) => l.code === getLocale())?.currency ||
     BASE_CURRENCY;
   const converted = convertCurrencyRaw(
     value,
@@ -925,30 +849,33 @@ export const convertCurrency = (
     currency,
     EXCHANGE_RATES,
   );
+
   return formatCurrency(converted, currency, options);
 };
 
 export const convertLocalPrice = (
   plan: { pricing: { base: number;[locale: string]: number } },
-  targetCurrency?: string,
+  targetCurrency?: CurrencyCode,
   options?: FormatOptions,
-): string => {
-  const lang = getLocale();
+) => {
   const price = localPrice(plan);
   const fromCurrency = localPriceCurrency(plan);
   const toCurrency =
     targetCurrency ||
-    LOCALES.find((l) => l.code === lang)?.currency ||
+    LOCALES.find((l) => l.code === getLocale())?.currency ||
     BASE_CURRENCY;
+
   if (fromCurrency === toCurrency) {
     return formatCurrency(price, toCurrency, options);
   }
+
   const converted = convertCurrencyRaw(
     price,
     fromCurrency,
     toCurrency,
     EXCHANGE_RATES,
   );
+
   return formatCurrency(converted, toCurrency, options);
 };
 
@@ -957,34 +884,37 @@ export const formatLocalPrice = (
     pricing: { base: number;[locale: string]: number };
   },
   options?: FormatOptions,
-): string => {
+) => {
   const price = localPrice(plan);
   const currency = localPriceCurrency(plan);
+
   return formatCurrency(price, currency, options);
 };
 
 export const formatLocalPriceDiscounted = (
   plan: { pricing: { base: number;[locale: string]: number } },
   discountMultiplier: number,
-  targetCurrency?: string,
+  targetCurrency?: CurrencyCode,
   options?: FormatOptions,
-): string => {
-  const lang = getLocale();
+) => {
   const price = localPrice(plan) * discountMultiplier;
   const fromCurrency = localPriceCurrency(plan);
   const toCurrency =
     targetCurrency ||
-    LOCALES.find((l) => l.code === lang)?.currency ||
+    LOCALES.find((l) => l.code === getLocale())?.currency ||
     BASE_CURRENCY;
+
   if (fromCurrency === toCurrency) {
     return formatCurrency(price, toCurrency, options);
   }
+
   const converted = convertCurrencyRaw(
     price,
     fromCurrency,
     toCurrency,
     EXCHANGE_RATES,
   );
+
   return formatCurrency(converted, toCurrency, options);
 };
 
@@ -992,17 +922,17 @@ export const plural = (
   word: string,
   count?: number,
   inclusive = false,
-): string => {
+) => {
   if (inclusive && count !== undefined) return pluralize(word, count);
   return count === undefined ? pluralize(word) : pluralize(word, count);
 };
 
-export const singular = (word: string): string => pluralize.singular(word);
+export const singular = (word: string) => pluralize.singular(word);
 
 export const formatRelativeTime = (
   value: number,
   options: RelativeTimeOptions,
-): string => {
+) => {
   const lang = getLocale();
   try {
     return new Intl.RelativeTimeFormat(lang, {

@@ -11,10 +11,10 @@ import { PATHS } from './src/configs/paths';
 import { createTemplateParams } from './src/scripts/lib/template';
 
 const ROOT = process.cwd();
+const PORT = 8888;
 const isProd = process.env.NODE_ENV === 'production';
 const shouldMinify = isProd && process.env.MINIFY !== 'false';
 const shouldMinifyHTML = shouldMinify && process.env.MINIFY_HTML !== 'false';
-
 const MANAGED_EXTS = [
   'ts',
   'css',
@@ -55,8 +55,7 @@ const getGlobalEntries = (): string[] => {
 
 export default defineConfig({
   server: {
-    open: '/',
-    port: 8888,
+    port: PORT,
     strictPort: true,
     historyApiFallback: {
       rewrites: [
@@ -66,7 +65,6 @@ export default defineConfig({
       disableDotRule: true,
     },
   },
-
   dev: {
     client: { overlay: true, reconnect: 5 },
     watchFiles: {
@@ -80,7 +78,32 @@ export default defineConfig({
       type: 'reload-page',
     },
   },
-
+  performance: {
+    chunkSplit: {
+      strategy: 'split-by-size',
+      minSize: 20000,
+      maxSize: 50000,
+      override: {
+        chunks: 'all',
+        minSize: 20000,
+        maxSize: 50000,
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            priority: 10,
+            reuseExistingChunk: true,
+          },
+          styles: {
+            name: 'styles',
+            test: /\.(?:css|less|sass|scss|styl)$/,
+            priority: 30,
+            reuseExistingChunk: true,
+          },
+        },
+      },
+    },
+  },
   resolve: {
     alias: {
       '@': resolveRoot(PATHS.SRC),
@@ -90,12 +113,10 @@ export default defineConfig({
       '@configs': resolveRoot(PATHS.SRC, 'configs'),
     },
   },
-
   source: {
     preEntry: getGlobalEntries(),
     entry: getEntries(),
   },
-
   output: {
     distPath: {
       js: 'assets/scripts',
@@ -117,7 +138,6 @@ export default defineConfig({
       font: '[name][ext]',
       image: '[name].[hash:8][ext]',
     },
-    legalComments: 'none',
     copy: [
       {
         from: resolveRoot(PATHS.SRC, 'assets'),
@@ -125,11 +145,19 @@ export default defineConfig({
         globOptions: { ignore: MANAGED_EXTS.map((ext) => `**/*.${ext}`) },
         noErrorOnMissing: true,
       },
+      {
+        from: resolveRoot('public', 'manifest.json'),
+        to: 'manifest.json',
+        noErrorOnMissing: true,
+      },
+      {
+        from: resolveRoot('public', 'sw.js'),
+        to: 'sw.js',
+        noErrorOnMissing: true,
+      },
     ],
   },
-
   plugins: [pluginImageCompress({ use: 'avif', quality: 75 })],
-
   tools: {
     htmlPlugin: (config) => {
       config.minify = (html) =>
@@ -184,7 +212,6 @@ export default defineConfig({
       },
     },
   },
-
   html: {
     inject: 'head',
     scriptLoading: 'defer',

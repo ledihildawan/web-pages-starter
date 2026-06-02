@@ -34,7 +34,7 @@
           <span class="text-2xl">🌍</span>
           <div class="text-left">
             <div class="text-2xl font-black text-white leading-none">12</div>
-            <div class="text-xs text-slate-500">{{ i18n.t('page.language_info.title')}}</div>
+            <div class="text-xs text-slate-400">{{ i18n.t('page.language_info.title')}}</div>
           </div>
         </div>
         <div class="w-px h-12 bg-white/10"></div>
@@ -42,7 +42,7 @@
           <span class="text-2xl">💱</span>
           <div class="text-left">
             <div class="text-2xl font-black text-white leading-none">5</div>
-            <div class="text-xs text-slate-500">{{ i18n.t('page.currency.title')}}</div>
+            <div class="text-xs text-slate-400">{{ i18n.t('page.currency.title')}}</div>
           </div>
         </div>
       </div>
@@ -54,15 +54,15 @@
     <div class="max-w-5xl mx-auto">
       <div class="flex items-center justify-center gap-4 md:gap-8 flex-wrap">
         <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/50 border border-white/5">
-          <span class="text-xs text-slate-500 uppercase tracking-wider">Code</span>
+          <span class="text-xs text-slate-400 uppercase tracking-wider">Code</span>
           <span class="text-sm font-bold text-white tabular-nums">{{ i18n.t('page.language_info.current_code')}}</span>
         </div>
         <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
-          <span class="text-xs text-slate-500 uppercase tracking-wider">Currency</span>
+          <span class="text-xs text-slate-400 uppercase tracking-wider">Currency</span>
           <span class="text-sm font-bold text-emerald-400 tabular-nums">{{ i18n.t('page.language_info.current_currency')}}</span>
         </div>
         <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/50 border border-white/5">
-          <span class="text-xs text-slate-500 uppercase tracking-wider">Direction</span>
+          <span class="text-xs text-slate-400 uppercase tracking-wider">Direction</span>
           <span class="text-sm font-bold text-white">{{ i18n.t('page.language_info.current_direction')}}</span>
         </div>
       </div>
@@ -75,7 +75,7 @@
       {# Section Header #}
       <div class="text-center mb-16">
         <h2 class="text-3xl md:text-4xl font-black text-white mb-4">Core Features</h2>
-        <p class="text-slate-500 text-lg">Translation, Pluralization & HTML Content</p>
+        <p class="text-slate-400 text-lg">Translation, Pluralization & HTML Content</p>
       </div>
 
       {# Features Grid #}
@@ -169,7 +169,7 @@
       {# Section Header #}
       <div class="text-center mb-16">
         <h2 class="text-3xl md:text-4xl font-black text-white mb-4">{{ i18n.t('page.currency.title')}}</h2>
-        <p class="text-slate-500 text-lg">{{ i18n.t('page.currency.description')}}</p>
+        <p class="text-slate-400 text-lg">{{ i18n.t('page.currency.description')}}</p>
       </div>
 
       <div class="grid md:grid-cols-2 gap-8">
@@ -181,7 +181,7 @@
             </div>
             <div>
               <h3 class="text-lg font-bold text-white">IDR → Local Currency</h3>
-              <p class="text-sm text-slate-500">Real-time conversion</p>
+              <p class="text-sm text-slate-400">Real-time conversion</p>
             </div>
           </div>
           <div class="space-y-4">
@@ -190,7 +190,7 @@
               <div class="flex items-center justify-between py-4 border-b border-white/5 last:border-0">
                 <div class="flex items-center gap-4">
                   <span class="text-sm text-slate-400">{{ i18n.t('page.' + price.label)}}</span>
-                  <span class="text-sm font-mono text-slate-500 tabular-nums">{{ i18n.formatNumber(price.val_idr)}}</span>
+                  <span class="text-sm font-mono text-slate-400 tabular-nums">{{ i18n.formatNumber(price.val_idr)}}</span>
                 </div>
                 <span class="text-2xl font-black text-emerald-400 tabular-nums">{{ i18n.convertCurrency(price.val_idr)}}</span>
               </div>
@@ -207,17 +207,17 @@
             </div>
             <div>
               <h3 class="text-lg font-bold text-white">{{ i18n.t('page.currency_comparison.title')}}</h3>
-              <p class="text-sm text-slate-500">Multi-currency view</p>
+              <p class="text-sm text-slate-400">Multi-currency view</p>
             </div>
           </div>
           <div class="text-center mb-8 p-6 rounded-2xl bg-violet-500/5">
             <div class="text-4xl font-black text-white mb-2">{{ i18n.formatCurrency(page.display.currency_comparison_base, 'IDR')}}</div>
-            <div class="text-sm text-slate-500">{{ i18n.t('page.currency_comparison.base_price')}}</div>
+            <div class="text-sm text-slate-400">{{ i18n.t('page.currency_comparison.base_price')}}</div>
           </div>
           <div class="grid grid-cols-2 gap-3">
             {% for curr in page.display.currency_comparison_currencies %}
               <div class="p-4 rounded-xl bg-slate-800/30 border border-white/5 hover:border-white/10 transition-all text-center">
-                <div class="text-xs text-slate-500 mb-2">{{ i18n.t('page.currency_comparison.' + curr)}}</div>
+                <div class="text-xs text-slate-400 mb-2">{{ i18n.t('page.currency_comparison.' + curr)}}</div>
                 <div class="text-lg font-black tabular-nums {% if curr == 'usd' %}text-emerald-400{% elif curr == 'jpy' %}text-fuchsia-400{% elif curr == 'cny' %}text-amber-400{% else %}text-rose-400{% endif %}">{{ i18n.convertCurrency(page.display.currency_comparison_base, curr | upper)}}</div>
               </div>
             {% endfor %}
@@ -233,14 +233,14 @@
       {# Section Header #}
       <div class="text-center mb-16">
         <h2 class="text-3xl md:text-4xl font-black text-white mb-4">{{ i18n.t('page.advanced.title')}}</h2>
-        <p class="text-slate-500 text-lg">{{ i18n.t('page.advanced.description')}}</p>
+        <p class="text-slate-400 text-lg">{{ i18n.t('page.advanced.description')}}</p>
       </div>
 
       {# Advanced Grid #}
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {# Percentages #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-emerald-500/20 hover:shadow-lg hover:shadow-emerald-500/5 transition-all">
-          <div class="text-xs text-slate-500 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.percentages')}}</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.percentages')}}</div>
           <div class="space-y-3">
             {% for pct in page.percentages %}
               {% if loop.index <= page.display.max_percentages %}
@@ -255,7 +255,7 @@
 
         {# Bytes #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-violet-500/20 hover:shadow-lg hover:shadow-violet-500/5 transition-all">
-          <div class="text-xs text-slate-500 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.bytes')}}</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.bytes')}}</div>
           <div class="space-y-3">
             {% for byte in page.bytes %}
               {% if loop.index <= page.display.max_bytes %}
@@ -270,7 +270,7 @@
 
         {# Ordinals #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-rose-500/20 hover:shadow-lg hover:shadow-rose-500/5 transition-all">
-          <div class="text-xs text-slate-500 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.ordinals')}}</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.ordinals')}}</div>
           <div class="space-y-3">
             {% for ord in page.ordinals %}
               {% if loop.index <= page.display.max_ordinals %}
@@ -285,7 +285,7 @@
 
         {# Cardinals #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-orange-500/20 hover:shadow-lg hover:shadow-orange-500/5 transition-all">
-          <div class="text-xs text-slate-500 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.cardinals')}}</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.cardinals')}}</div>
           <div class="space-y-3">
             {% for card in page.cardinals %}
               {% if loop.index <= page.display.max_cardinals %}
@@ -300,7 +300,7 @@
 
         {# Scientific #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-cyan-500/20 hover:shadow-lg hover:shadow-cyan-500/5 transition-all">
-          <div class="text-xs text-slate-500 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.scientific')}}</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.scientific')}}</div>
           <div class="space-y-3">
             {% for sci in page.scientific %}
               {% if loop.index <= page.display.max_scientific %}
@@ -315,7 +315,7 @@
 
         {# Abbreviated #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-lime-500/20 hover:shadow-lg hover:shadow-lime-500/5 transition-all">
-          <div class="text-xs text-slate-500 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.abbreviated')}}</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.abbreviated')}}</div>
           <div class="space-y-3">
             {% for abb in page.abbreviated %}
               {% if loop.index <= page.display.max_abbreviated %}
@@ -330,7 +330,7 @@
 
         {# Date Formats #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-indigo-500/20 hover:shadow-lg hover:shadow-indigo-500/5 transition-all">
-          <div class="text-xs text-slate-500 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.date_formats')}}</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.date_formats')}}</div>
           <div class="space-y-3">
             {% for dateFmt in page.date_formats %}
               <div class="flex justify-between items-baseline">
@@ -343,7 +343,7 @@
 
         {# Time Formats #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-purple-500/20 hover:shadow-lg hover:shadow-purple-500/5 transition-all">
-          <div class="text-xs text-slate-500 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.time_formats')}}</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.time_formats')}}</div>
           <div class="space-y-3">
             {% for timeFmt in page.time_formats %}
               <div class="flex justify-between items-baseline">
@@ -356,7 +356,7 @@
 
         {# Durations #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-teal-500/20 hover:shadow-lg hover:shadow-teal-500/5 transition-all">
-          <div class="text-xs text-slate-500 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.durations')}}</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.durations')}}</div>
           <div class="space-y-3">
             {% for dur in page.durations %}
               {% if loop.index <= page.display.max_durations %}
@@ -371,7 +371,7 @@
 
         {# Relative Time #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-pink-500/20 hover:shadow-lg hover:shadow-pink-500/5 transition-all">
-          <div class="text-xs text-slate-500 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.relative_time')}}</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.relative_time')}}</div>
           <div class="space-y-3">
             {% for rel in page.relative_time %}
               <div class="flex justify-between items-baseline">
@@ -384,7 +384,7 @@
 
         {# Lists #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-amber-500/20 hover:shadow-lg hover:shadow-amber-500/5 transition-all">
-          <div class="text-xs text-slate-500 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.lists')}}</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.lists')}}</div>
           <div class="space-y-3">
             {% for lst in page.lists %}
               {% if loop.index <= page.display.max_lists %}
@@ -396,7 +396,7 @@
 
         {# Regional Pricing #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-emerald-500/20 hover:shadow-lg hover:shadow-emerald-500/5 transition-all">
-          <div class="text-xs text-slate-500 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.regional_pricing')}}</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.regional_pricing')}}</div>
           <div class="space-y-3">
             {% for plan in page.regional_pricing %}
               <div class="flex justify-between items-baseline">
@@ -416,28 +416,28 @@
       {# Section Header #}
       <div class="text-center mb-16">
         <h2 class="text-3xl md:text-4xl font-black text-white mb-4">{{ i18n.t('page.advanced.number_modes')}}</h2>
-        <p class="text-slate-500 text-lg">{{ i18n.t('page.advanced.number_modes_desc')}}</p>
+        <p class="text-slate-400 text-lg">{{ i18n.t('page.advanced.number_modes_desc')}}</p>
       </div>
 
       <div class="p-10 rounded-3xl bg-slate-900/40 border border-white/5">
         {# Example Number #}
         <div class="text-center mb-12">
           <div class="text-6xl md:text-7xl font-black text-white tabular-nums mb-4">{{ i18n.formatNumber(page.display.number_modes_example)}}</div>
-          <div class="text-sm text-slate-500">Example: {{ page.display.number_modes_example }}</div>
+          <div class="text-sm text-slate-400">Example: {{ page.display.number_modes_example }}</div>
         </div>
 
         {# Mode Comparison #}
         <div class="grid md:grid-cols-3 gap-4">
           <div class="p-6 rounded-2xl bg-slate-800/30 text-center">
-            <div class="text-xs text-slate-500 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.plain_label')}}</div>
+            <div class="text-xs text-slate-400 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.plain_label')}}</div>
             <div class="text-2xl font-black text-white tabular-nums">{{ i18n.formatNumber(page.display.number_modes_example, {}, '', '', false)}}</div>
           </div>
           <div class="p-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 text-center">
-            <div class="text-xs text-slate-500 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.native_label')}}</div>
+            <div class="text-xs text-slate-400 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.native_label')}}</div>
             <div class="text-2xl font-black text-violet-400 tabular-nums">{{ i18n.formatNumber(page.display.number_modes_example, {}, '', '', true)}}</div>
           </div>
           <div class="p-6 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-center">
-            <div class="text-xs text-slate-500 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.universal_label')}}</div>
+            <div class="text-xs text-slate-400 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.universal_label')}}</div>
             <div class="text-2xl font-black text-emerald-400 tabular-nums">{{ page.display.number_modes_example }}</div>
           </div>
         </div>
@@ -451,7 +451,7 @@
       {# Section Header #}
       <div class="text-center mb-16">
         <h2 class="text-3xl md:text-4xl font-black text-white mb-4">{{ i18n.t('page.switcher.title')}}</h2>
-        <p class="text-slate-500 text-lg">{{ i18n.t('page.switcher.description')}}</p>
+        <p class="text-slate-400 text-lg">{{ i18n.t('page.switcher.description')}}</p>
       </div>
 
       {# Language Buttons #}

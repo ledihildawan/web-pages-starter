@@ -1,5 +1,4 @@
 {% macro icon(name, classes = '', size = 'md') -%}
-  {# Size mapping #}
   {% set sizeMap = {
     'xs': '16',
     'sm': '20',
@@ -9,14 +8,8 @@
     '2xl': '48'
   } %}
   {% set iconSize = sizeMap[size] or sizeMap.md %}
-
-  {# Base classes #}
   {% set baseClasses = 'icon shrink-0' %}
-
-  {# Combine all classes #}
   {% set allClasses = baseClasses + ' ' + classes %}
-
-  {# Icon SVG paths mapping #}
   {% set icons = {
     'arrow-right': '<path d="M5 12h14M12 5l7 7-7 7"/>',
     'arrow-left': '<path d="M19 12H5M12 19l-7-7 7-7"/>',
@@ -56,12 +49,7 @@
     'question': '<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/>',
     'design': '<path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/>'
   } %}
-
-  {# Get SVG path or fallback #}
   {% set iconPath = icons[name] or '<rect width="24" height="24" fill="currentColor"/>' %}
-
-  {# Render SVG icon as SafeString #}
   {% set svgHtml = '<svg xmlns="http://www.w3.org/2000/svg" width="' + iconSize + '" height="' + iconSize + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="' + allClasses | trim + '">' + iconPath + '</svg>' %}
-
   {{ svgHtml }}
 {%- endmacro %}

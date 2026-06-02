@@ -59,3 +59,50 @@ export interface RegionalPrice {
     [locale: string]: number;
   };
 }
+
+/**
+ * Page meta configuration (from pages/*/index.json5)
+ */
+export interface PageMetaConfig {
+  title?: string;
+  description?: string;
+  image?: string;
+  image_alt?: string;
+  canonical?: string;
+  no_index?: boolean;
+  theme_color?: string;
+  og_type?: string;
+}
+
+/**
+ * Page data structure from index.json5
+ */
+export interface PageData {
+  page_id: string;
+  meta?: PageMetaConfig;
+  [key: string]: JsonValue;
+}
+
+/**
+ * Global SEO configuration (from data/global.json5)
+ */
+export interface GlobalSeoConfig {
+  theme_color?: string;
+  og_type?: string;
+  twitter_card?: string;
+  manifest_path?: string;
+  favicon_path?: string;
+  apple_touch_icon_path?: string;
+}
+
+/**
+ * Global data structure
+ */
+export interface GlobalData {
+  site_name?: string;
+  site_description?: string;
+  site_url?: string;
+  site_image?: string;
+  seo?: GlobalSeoConfig;
+  [key: string]: JsonValue;
+}

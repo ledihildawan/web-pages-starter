@@ -1,0 +1,37 @@
+{
+  "site_name": "Starter App",
+  "site_description": "Build lightning-fast, beautiful web applications with Starter.",
+  "site_url": "",
+  "site_image": "/assets/images/og-default.jpg",
+
+  "seo": {
+    "theme_color": "#020617",
+    "og_type": "website",
+    "twitter_card": "summary_large_image",
+    "manifest_path": "/manifest.json",
+    "favicon_path": "/favicon.ico",
+    "apple_touch_icon_path": "/favicon.ico"
+  },
+
+  "pwa": {
+    "mobile_web_app_capable": true,
+    "apple_mobile_web_app_capable": true,
+    "apple_mobile_web_app_status_bar_style": "default",
+    "msapplication_tile_color": "#020617"
+  },
+
+  "format_detection": {
+    "telephone": false,
+    "email": false,
+    "address": false
+  },
+
+  "compatibility": {
+    "x_ua_compatible": "IE=edge",
+    "referrer": "strict-origin-when-cross-origin"
+  },
+
+  "dns_prefetch": [
+    "//flagcdn.com"
+  ]
+}

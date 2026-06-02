@@ -1,9 +1,21 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import type { I18nTranslationKeys } from '../../../generated/i18n';
-import { DEFAULT_LOCALE, LOCALES, type LocaleCode, type LocaleConfig } from '../../configs/locales';
+import {
+  type CurrencyCode,
+  DEFAULT_LOCALE,
+  LOCALES,
+  type LocaleCode,
+  type LocaleConfig,
+} from '../../configs/locales';
 import { PATHS } from '../../configs/paths';
-import type { DateValue, FormatOptions, I18nItem, JsonData, TemplateParams } from '../../types/common';
+import type {
+  DateValue,
+  FormatOptions,
+  I18nItem,
+  JsonData,
+  TemplateParams,
+} from '../../types/common';
 import { getValueByPath } from '../utils/common';
 import {
   convertCurrency,
@@ -31,12 +43,12 @@ import {
   singular,
   toNativeDigits,
 } from '../utils/i18n-format';
-import { getPluralSuffix, setLocale } from '../utils/locale';
 import {
   loadGlobalData,
   loadSelectedComponentLocales,
   readJSON5,
 } from '../utils/json5';
+import { getPluralSuffix, setLocale } from '../utils/locale';
 
 interface TemplateFormatOptions extends FormatOptions {
   raw?: boolean;
@@ -84,7 +96,11 @@ const generateClientI18nScript = (
       l,
       {
         common: readJSON5(resolveRoot(`${PATHS.LOCALES}/${l}/common.json5`)),
-        comp: loadSelectedComponentLocales(l, usedComponents, resolveRoot(PATHS.LOCALES)),
+        comp: loadSelectedComponentLocales(
+          l,
+          usedComponents,
+          resolveRoot(PATHS.LOCALES),
+        ),
         page: readJSON5(resolveRoot(`${PATHS.LOCALES}/${l}/${name}.json5`)),
       },
     ]),
@@ -120,12 +136,12 @@ const generateClientI18nScript = (
 };
 
 const createI18nObject = (
-  lang: LocaleCode,
+  localeCode: LocaleCode,
   _mergedLocales: JsonData,
   _resolve: (jsonPath: string, vars?: Record<string, unknown>) => string,
   normalizeI18nKey: (key: string) => { ns: string; clientKey: string },
 ) => {
-  setLocale(lang);
+  setLocale(localeCode);
 
   const createItem = (
     key: string | undefined,
@@ -159,8 +175,10 @@ const createI18nObject = (
     return `${parts.ns}:${parts.clientKey}` as I18nTranslationKeys;
   };
 
-  const getValue = (key: string | undefined, vars: Record<string, unknown> = {}) =>
-    createItem(key, vars).v;
+  const getValue = (
+    key: string | undefined,
+    vars: Record<string, unknown> = {},
+  ) => createItem(key, vars).v;
 
   const renderHtml = (
     content: string,
@@ -178,11 +196,18 @@ const createI18nObject = (
     t: (
       key: string | undefined,
       vars?: Record<string, unknown>,
-      options?: { raw?: boolean; native?: boolean; universal?: boolean; className?: string },
+      options?: {
+        raw?: boolean;
+        native?: boolean;
+        universal?: boolean;
+        className?: string;
+      },
     ) => {
       const item = createItem(key, vars ?? {});
-      const translated = options?.native ? toNativeDigits(item.v, true)
-        : options?.universal ? item.v
+      const translated = options?.native
+        ? toNativeDigits(item.v, true)
+        : options?.universal
+          ? item.v
           : toNativeDigits(item.v);
 
       if (options?.raw) return translated;
@@ -196,8 +221,11 @@ const createI18nObject = (
 
     text: getValue,
     html: getValue,
-    attr: (key: string | undefined, attrName: string, vars: Record<string, unknown> = {}) =>
-      `${attrName}="${createItem(key, vars).v}"`,
+    attr: (
+      key: string | undefined,
+      attrName: string,
+      vars: Record<string, unknown> = {},
+    ) => `${attrName}="${createItem(key, vars).v}"`,
 
     plural: (
       key: string | undefined,
@@ -225,10 +253,14 @@ const createI18nObject = (
     formatNumber: (value: number | string, options?: TemplateFormatOptions) => {
       const formatted = formatNumber(value, options);
       if (options?.raw) return formatted;
-      return renderHtml(formatted, {
-        'format-number': value,
-        ...(options?.nativeDigits ? { 'use-native': 'true' } : {}),
-      }, options?.className);
+      return renderHtml(
+        formatted,
+        {
+          'format-number': value,
+          ...(options?.nativeDigits ? { 'use-native': 'true' } : {}),
+        },
+        options?.className,
+      );
     },
 
     formatCurrency: (
@@ -238,114 +270,210 @@ const createI18nObject = (
     ) => {
       const formatted = formatCurrency(value, currency, options);
       if (options?.raw) return formatted;
-      return renderHtml(formatted, {
-        'format-currency': value,
-        'currency-code': currency,
-        ...(options?.nativeDigits ? { 'use-native': 'true' } : {}),
-      }, options?.className);
+      return renderHtml(
+        formatted,
+        {
+          'format-currency': value,
+          'currency-code': currency,
+          ...(options?.nativeDigits ? { 'use-native': 'true' } : {}),
+        },
+        options?.className,
+      );
     },
 
-    formatPercent: (value: number | string, options?: TemplateFormatOptions) => {
+    formatPercent: (
+      value: number | string,
+      options?: TemplateFormatOptions,
+    ) => {
       const formatted = formatPercent(value, options);
       if (options?.raw) return formatted;
-      return renderHtml(formatted, {
-        'format-percent': value,
-        ...(options?.nativeDigits ? { 'use-native': 'true' } : {}),
-      }, options?.className);
+      return renderHtml(
+        formatted,
+        {
+          'format-percent': value,
+          ...(options?.nativeDigits ? { 'use-native': 'true' } : {}),
+        },
+        options?.className,
+      );
     },
 
-    formatBytes: (bytes: number, decimals = 1, options?: TemplateFormatOptions) => {
+    formatBytes: (
+      bytes: number,
+      decimals = 1,
+      options?: TemplateFormatOptions,
+    ) => {
       const formatted = formatBytes(bytes, decimals);
       if (options?.raw) return formatted;
-      return renderHtml(formatted, { 'format-bytes': bytes, 'bytes-decimals': decimals }, options?.className);
+      return renderHtml(
+        formatted,
+        { 'format-bytes': bytes, 'bytes-decimals': decimals },
+        options?.className,
+      );
     },
 
     formatDuration: (seconds: number, options?: TemplateFormatOptions) => {
       const formatted = formatDuration(seconds);
       if (options?.raw) return formatted;
-      return renderHtml(formatted, { 'format-duration': seconds }, options?.className);
+      return renderHtml(
+        formatted,
+        { 'format-duration': seconds },
+        options?.className,
+      );
     },
 
     formatDate: (date: DateValue, options?: TemplateFormatOptions) => {
       const { raw, className, ...formatOpts } = options ?? {};
-      const formatted = formatDate(date, formatOpts as Intl.DateTimeFormatOptions);
+      const formatted = formatDate(
+        date,
+        formatOpts as Intl.DateTimeFormatOptions,
+      );
       if (options?.raw) return formatted;
-      return renderHtml(formatted, { 'format-date': String(date) }, options?.className);
+      return renderHtml(
+        formatted,
+        { 'format-date': String(date) },
+        options?.className,
+      );
     },
 
-    formatTime: (date: DateValue, preset: 'short' | 'medium' | 'long' | 'full' = 'short', options?: TemplateFormatOptions) => {
+    formatTime: (
+      date: DateValue,
+      preset: 'short' | 'medium' | 'long' | 'full' = 'short',
+      options?: TemplateFormatOptions,
+    ) => {
       const formatted = formatTime(date, { timeStyle: preset });
       if (options?.raw) return formatted;
-      return renderHtml(formatted, { 'format-time': String(date), 'time-preset': preset }, options?.className);
+      return renderHtml(
+        formatted,
+        { 'format-time': String(date), 'time-preset': preset },
+        options?.className,
+      );
     },
 
     formatDateTime: (date: DateValue, options?: TemplateFormatOptions) => {
       const { raw, className, ...formatOpts } = options ?? {};
-      const formatted = formatDateTime(date, formatOpts as Intl.DateTimeFormatOptions);
+      const formatted = formatDateTime(
+        date,
+        formatOpts as Intl.DateTimeFormatOptions,
+      );
       if (options?.raw) return formatted;
-      return renderHtml(formatted, { 'format-datetime': String(date) }, options?.className);
+      return renderHtml(
+        formatted,
+        { 'format-datetime': String(date) },
+        options?.className,
+      );
     },
 
-    formatOrdinal: (value: number | string, options?: TemplateFormatOptions) => {
+    formatOrdinal: (
+      value: number | string,
+      options?: TemplateFormatOptions,
+    ) => {
       const formatted = formatOrdinal(value);
       if (options?.raw) return formatted;
-      return renderHtml(formatted, { 'format-ordinal': value }, options?.className);
+      return renderHtml(
+        formatted,
+        { 'format-ordinal': value },
+        options?.className,
+      );
     },
 
-    formatCardinal: (value: number | string, options?: TemplateFormatOptions) => {
+    formatCardinal: (
+      value: number | string,
+      options?: TemplateFormatOptions,
+    ) => {
       const formatted = formatCardinal(value);
       if (options?.raw) return formatted;
-      return renderHtml(formatted, { 'format-cardinal': value }, options?.className);
+      return renderHtml(
+        formatted,
+        { 'format-cardinal': value },
+        options?.className,
+      );
     },
 
-    formatScientific: (value: number | string, options?: TemplateFormatOptions) => {
+    formatScientific: (
+      value: number | string,
+      options?: TemplateFormatOptions,
+    ) => {
       const formatted = formatScientific(value, options);
       if (options?.raw) return formatted;
-      return renderHtml(formatted, {
-        'format-scientific': value,
-        ...(options?.nativeDigits ? { 'use-native': 'true' } : {}),
-      }, options?.className);
+      return renderHtml(
+        formatted,
+        {
+          'format-scientific': value,
+          ...(options?.nativeDigits ? { 'use-native': 'true' } : {}),
+        },
+        options?.className,
+      );
     },
 
     formatAbbreviated: (value: number, options?: TemplateFormatOptions) => {
       const formatted = formatAbbreviated(value);
       if (options?.raw) return formatted;
-      return renderHtml(formatted, { 'format-abbreviated': value }, options?.className);
+      return renderHtml(
+        formatted,
+        { 'format-abbreviated': value },
+        options?.className,
+      );
     },
 
     formatList: (items: string[], options?: TemplateFormatOptions) => {
       const formatted = formatList(items);
       if (options?.raw) return formatted;
-      return renderHtml(formatted, { 'format-list': items.length }, options?.className);
+      return renderHtml(
+        formatted,
+        { 'format-list': items.length },
+        options?.className,
+      );
     },
 
-    formatUnit: (value: number | string, unit: string, options?: TemplateFormatOptions) => {
+    formatUnit: (
+      value: number | string,
+      unit: string,
+      options?: TemplateFormatOptions,
+    ) => {
       const formatted = formatUnit(value, unit, options);
       if (options?.raw) return formatted;
-      return renderHtml(formatted, {
-        'format-unit': value,
-        unit,
-        ...(options?.nativeDigits ? { 'use-native': 'true' } : {}),
-      }, options?.className);
+      return renderHtml(
+        formatted,
+        {
+          'format-unit': value,
+          unit,
+          ...(options?.nativeDigits ? { 'use-native': 'true' } : {}),
+        },
+        options?.className,
+      );
     },
 
-    convertCurrency: (value: number, targetCurrency: string, options?: TemplateFormatOptions) => {
+    convertCurrency: (
+      value: number,
+      targetCurrency: string,
+      options?: TemplateFormatOptions,
+    ) => {
       const formatted = convertCurrency(value, targetCurrency, options);
       if (options?.raw) return formatted;
-      return renderHtml(formatted, {
-        'convert-currency': value,
-        'target-currency': targetCurrency,
-        ...(options?.nativeDigits ? { 'use-native': 'true' } : {}),
-      }, options?.className);
+      return renderHtml(
+        formatted,
+        {
+          'convert-currency': value,
+          'target-currency': targetCurrency,
+          ...(options?.nativeDigits ? { 'use-native': 'true' } : {}),
+        },
+        options?.className,
+      );
     },
 
-    localPrice: (plan: { pricing: { base: number;[locale: string]: number } }, options?: TemplateFormatOptions) => {
+    localPrice: (
+      plan: { pricing: { base: number;[locale: string]: number } },
+      options?: TemplateFormatOptions,
+    ) => {
       const formatted = String(localPrice(plan));
       if (options?.raw) return formatted;
       return renderHtml(formatted, {}, options?.className);
     },
 
-    localPriceCurrency: (plan: { pricing: { base: number;[locale: string]: number } }, options?: TemplateFormatOptions) => {
+    localPriceCurrency: (
+      plan: { pricing: { base: number;[locale: string]: number } },
+      options?: TemplateFormatOptions,
+    ) => {
       const formatted = localPriceCurrency(plan);
       if (options?.raw) return formatted;
       return renderHtml(formatted, {}, options?.className);
@@ -353,45 +481,74 @@ const createI18nObject = (
 
     convertLocalPrice: (
       plan: { pricing: { base: number;[locale: string]: number } },
-      targetCurrency: string,
+      targetCurrency: CurrencyCode,
       options?: TemplateFormatOptions,
     ) => {
       const formatted = convertLocalPrice(plan, targetCurrency, options);
       if (options?.raw) return formatted;
-      return renderHtml(formatted, {
-        'convert-local-price': JSON.stringify(plan),
-        'target-currency': targetCurrency,
-        ...(options?.nativeDigits ? { 'use-native': 'true' } : {}),
-      }, options?.className);
+      return renderHtml(
+        formatted,
+        {
+          'convert-local-price': JSON.stringify(plan),
+          'target-currency': targetCurrency,
+          ...(options?.nativeDigits ? { 'use-native': 'true' } : {}),
+        },
+        options?.className,
+      );
     },
 
-    formatLocalPrice: (plan: { pricing: { base: number;[locale: string]: number } }, options?: TemplateFormatOptions) => {
+    formatLocalPrice: (
+      plan: { pricing: { base: number;[locale: string]: number } },
+      options?: TemplateFormatOptions,
+    ) => {
       const formatted = formatLocalPrice(plan, options);
       if (options?.raw) return formatted;
-      return renderHtml(formatted, {
-        ...(options?.nativeDigits ? { 'use-native': 'true' } : {}),
-      }, options?.className);
+      return renderHtml(
+        formatted,
+        {
+          ...(options?.nativeDigits ? { 'use-native': 'true' } : {}),
+        },
+        options?.className,
+      );
     },
 
     formatLocalPriceDiscounted: (
       plan: { pricing: { base: number;[locale: string]: number } },
       discountMultiplier: number,
-      targetCurrency: string,
+      targetCurrency: CurrencyCode,
       options?: TemplateFormatOptions,
     ) => {
-      const formatted = formatLocalPriceDiscounted(plan, discountMultiplier, targetCurrency, options);
+      const formatted = formatLocalPriceDiscounted(
+        plan,
+        discountMultiplier,
+        targetCurrency,
+        options,
+      );
       if (options?.raw) return formatted;
-      return renderHtml(formatted, {
-        'discount-multiplier': discountMultiplier,
-        'target-currency': targetCurrency,
-        ...(options?.nativeDigits ? { 'use-native': 'true' } : {}),
-      }, options?.className);
+      return renderHtml(
+        formatted,
+        {
+          'discount-multiplier': discountMultiplier,
+          'target-currency': targetCurrency,
+          ...(options?.nativeDigits ? { 'use-native': 'true' } : {}),
+        },
+        options?.className,
+      );
     },
 
-    pluralize: (word: string, count?: number, inclusive = false, options?: TemplateFormatOptions) => {
+    pluralize: (
+      word: string,
+      count?: number,
+      inclusive = false,
+      options?: TemplateFormatOptions,
+    ) => {
       const formatted = plural(word, count, inclusive);
       if (options?.raw) return formatted;
-      return renderHtml(formatted, { pluralized: word, count: count ?? 1, inclusive }, options?.className);
+      return renderHtml(
+        formatted,
+        { pluralized: word, count: count ?? 1, inclusive },
+        options?.className,
+      );
     },
 
     singularize: (word: string, options?: TemplateFormatOptions) => {
@@ -402,17 +559,41 @@ const createI18nObject = (
 
     formatRelativeTime: (
       value: number,
-      options: { unit: Intl.RelativeTimeFormatUnit; numeric?: 'always' | 'auto'; raw?: boolean; className?: string },
+      options: {
+        unit: Intl.RelativeTimeFormatUnit;
+        numeric?: 'always' | 'auto';
+        raw?: boolean;
+        className?: string;
+      },
     ) => {
-      const formatted = formatRelativeTime(value, { unit: options.unit, numeric: options.numeric });
+      const formatted = formatRelativeTime(value, {
+        unit: options.unit,
+        numeric: options.numeric,
+      });
       if (options?.raw) return formatted;
-      return renderHtml(formatted, { 'relative-time': value, unit: options.unit, numeric: options.numeric ?? 'always' }, options?.className);
+      return renderHtml(
+        formatted,
+        {
+          'relative-time': value,
+          unit: options.unit,
+          numeric: options.numeric ?? 'always',
+        },
+        options?.className,
+      );
     },
 
-    nativeDigits: (text: string, force = false, options?: TemplateFormatOptions) => {
+    nativeDigits: (
+      text: string,
+      force = false,
+      options?: TemplateFormatOptions,
+    ) => {
       const formatted = toNativeDigits(text, force);
       if (options?.raw) return formatted;
-      return renderHtml(formatted, { 'native-digits': text, force }, options?.className);
+      return renderHtml(
+        formatted,
+        { 'native-digits': text, force },
+        options?.className,
+      );
     },
 
     getPluralSuffix,
@@ -434,7 +615,11 @@ export const createTemplateParams = (
   const mergedLocales: JsonData = {
     ...readJSON5(resolveRoot(`${PATHS.LOCALES}/${lang}/common.json5`)),
     page: readJSON5(resolveRoot(`${PATHS.LOCALES}/${lang}/${name}.json5`)),
-    comp: loadSelectedComponentLocales(lang, usedComponents, resolveRoot(PATHS.LOCALES)),
+    comp: loadSelectedComponentLocales(
+      lang,
+      usedComponents,
+      resolveRoot(PATHS.LOCALES),
+    ),
   };
 
   const _resolve = (
@@ -456,18 +641,28 @@ export const createTemplateParams = (
 
   const normalizeI18nKey = (key: string): { ns: string; clientKey: string } => {
     if (key.startsWith('page.')) {
-      return { ns: name, clientKey: key.slice(5) }; // 'page.'.length === 5
+      return { ns: name, clientKey: key.slice(5) };
     }
     if (key.startsWith('comp.')) {
       const parts = key.split('.');
-      return { ns: `components/${parts[1]}`, clientKey: parts.slice(2).join('.') };
+      return {
+        ns: `components/${parts[1]}`,
+        clientKey: parts.slice(2).join('.'),
+      };
     }
     return { ns: 'common', clientKey: key };
   };
 
-  const i18n = createI18nObject(lang, mergedLocales, _resolve, normalizeI18nKey);
+  const i18n = createI18nObject(
+    lang,
+    mergedLocales,
+    _resolve,
+    normalizeI18nKey,
+  );
 
-  const localeConfig: LocaleConfig | undefined = LOCALES.find((l) => l.code === lang);
+  const localeConfig: LocaleConfig | undefined = LOCALES.find(
+    (l) => l.code === lang,
+  );
 
   const localeStorageKey = 'i18nextLocale' as const;
 

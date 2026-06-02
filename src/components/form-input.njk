@@ -1,33 +1,21 @@
 {% macro form_input(type, label_key, placeholder_key, name, rows, i18n) %}
-{# Generate unique ID - use a simple pattern that works with Nunjucks #}
-{% set input_id = name %}
-{# Determine autocomplete based on field name #}
-{% set autocomplete_map = {'name': 'name', 'email': 'email', 'subject': '', 'message': ''} %}
-{% set autocomplete_val = autocomplete_map[name] or '' %}
+  {% set input_id = name %}
+  {% set autocomplete_map = {
+    'name': 'name',
+    'email': 'email',
+    'subject': '',
+    'message': ''
+  } %}
+  {% set autocomplete_val = autocomplete_map[name] or '' %}
 
-<div class="space-y-3">
-  <label for="{{ input_id }}" class="block text-sm font-black uppercase tracking-[0.15em] text-slate-400">
-    {{ i18n.t(label_key) }}
-  </label>
-  {% if rows %}
-  <textarea
-    id="{{ input_id }}"
-    rows="{{ rows }}"
-    {{ i18n.attr(placeholder_key, 'placeholder') }}
-    name="{{ name }}"
-    required
-    class="inline-full px-6 py-4 bg-slate-800/50 border border-white/10 radius-btn text-white placeholder-slate-500 focus:outline-none focus:border-violet-500/50 focus:ring-2 focus:ring-violet-500/20 transition-all duration-200 font-medium resize-none hover:border-white/20 input-active"
-  ></textarea>
-  {% else %}
-  <input
-    id="{{ input_id }}"
-    type="{{ type }}"
-    {{ i18n.attr(placeholder_key, 'placeholder') }}
-    name="{{ name }}"
-    {% if autocomplete_val %}autocomplete="{{ autocomplete_val }}"{% endif %}
-    required
-    class="inline-full px-6 py-4 bg-slate-800/50 border border-white/10 radius-btn text-white placeholder-slate-500 focus:outline-none focus:border-violet-500/50 focus:ring-2 focus:ring-violet-500/20 transition-all duration-200 font-medium hover:border-white/20 input-active"
-  >
-  {% endif %}
-</div>
+  <div class="space-y-3">
+    <label for="{{ input_id }}" class="block text-sm font-black uppercase tracking-[0.15em] text-slate-400">
+      {{ i18n.t(label_key) }}
+    </label>
+    {% if rows %}
+      <textarea id="{{ input_id }}" rows="{{ rows }}" {{ i18n.attr(placeholder_key, 'placeholder') }} name="{{ name }}" required="required" class="inline-full px-6 py-4 bg-slate-800/50 border border-white/10 radius-btn text-white placeholder-slate-500 focus:outline-none focus:border-violet-500/50 focus:ring-2 focus:ring-violet-500/20 transition-all duration-200 font-medium resize-none hover:border-white/20 input-active"></textarea>
+    {% else %}
+      <input id="{{ input_id }}" type="{{ type }}" {{ i18n.attr(placeholder_key, 'placeholder') }} name="{{ name }}" {% if autocomplete_val %} autocomplete="{{ autocomplete_val }}" {% endif %} required="required" class="inline-full px-6 py-4 bg-slate-800/50 border border-white/10 radius-btn text-white placeholder-slate-500 focus:outline-none focus:border-violet-500/50 focus:ring-2 focus:ring-violet-500/20 transition-all duration-200 font-medium hover:border-white/20 input-active">
+    {% endif %}
+  </div>
 {% endmacro %}

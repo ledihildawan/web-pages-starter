@@ -1,16 +1,18 @@
 import {
   BASE_CURRENCY,
   CALENDAR,
+  type CurrencyCode,
   DEFAULT_LOCALE,
   DIR,
   type DirectionCode,
+  type LanguageCode,
   LOCALE,
   LOCALE_CODES,
   LOCALE_FALLBACKS,
   LOCALES,
   type LocaleCode,
   type LocaleConfig,
-  NUMBERING_SYSTEM,
+  NUMBERING_SYSTEM_CODE,
 } from '../../configs/locales';
 
 export const getFallbackChain = (locale: string): LocaleCode[] => {
@@ -51,14 +53,14 @@ export const getLocale = (locale?: LocaleCode): LocaleCode => {
   return getFallbackChain(target)[0] ?? DEFAULT_LOCALE;
 };
 
-export const getLangCode = (locale: LocaleCode): string => locale.split('-')[0];
+export const getLangCode = (locale: LocaleCode) => locale.split('-')[0] as LanguageCode;
 
 export const getLanguageConfig = (
   locale: LocaleCode,
 ): LocaleConfig | undefined =>
   LOCALES.find((l) => l.code === locale || locale.startsWith(`${l.code}-`));
 
-export const getCurrency = (locale: LocaleCode): string =>
+export const getCurrency = (locale: LocaleCode): CurrencyCode =>
   getLanguageConfig(locale)?.currency || BASE_CURRENCY;
 export const getTimezone = (locale: LocaleCode): string =>
   getLanguageConfig(locale)?.timezone || 'UTC';
@@ -69,9 +71,10 @@ export const getCalendar = (locale: LocaleCode): string =>
 export const getFirstDayOfWeek = (locale: LocaleCode): number =>
   getLanguageConfig(locale)?.firstDayOfWeek ?? 0;
 export const getNumberingSystem = (locale: LocaleCode): string =>
-  getLanguageConfig(locale)?.numberingSystem || NUMBERING_SYSTEM.LATN;
+  getLanguageConfig(locale)?.numberingSystem || NUMBERING_SYSTEM_CODE.LATN;
 export const getNativeNumberingSystem = (locale: LocaleCode): string =>
-  getLanguageConfig(locale)?.nativeNumberingSystem || NUMBERING_SYSTEM.LATN;
+  getLanguageConfig(locale)?.nativeNumberingSystem ||
+  NUMBERING_SYSTEM_CODE.LATN;
 export const getDefaultNativeDigits = (locale: LocaleCode): boolean =>
   getLanguageConfig(locale)?.nativeDigits ?? false;
 export const getRegion = (locale: LocaleCode): string | undefined =>

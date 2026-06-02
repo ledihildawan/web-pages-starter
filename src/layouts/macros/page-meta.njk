@@ -1,0 +1,65 @@
+{#
+  Page Meta Tags Renderer (Per-Page Dynamic SEO)
+
+  Renders page-specific meta tags with proper fallbacks:
+  - Title, Description, Canonical URL
+  - Open Graph (og:*), Twitter Cards
+
+  Fixed tags (PWA, theme-color, favicon) are in main.njk
+
+  Usage: {{ page_meta.render(page, global) }}
+#}
+{% macro render(page, global) %}
+
+  {# --- Resolve Title --- #}
+  {% set title = page.meta.title or page.title or global.site_name or "Starter App" %}
+
+  {# --- Resolve Description --- #}
+  {% set description = page.meta.description or global.site_description or "Default description for the site." %}
+
+  {# --- Resolve Canonical URL --- #}
+  {% set canonical_url = page.meta.canonical or global.site_url or "" %}
+
+  {# --- Resolve Image --- #}
+  {% set image = page.meta.image or global.site_image or "" %}
+  {% set image_alt = page.meta.image_alt or page.meta.title or title %}
+
+  {# --- Resolve OG Config --- #}
+  {% set seo_config = global.seo or {} %}
+  {% set og_type = page.meta.og_type or seo_config.og_type or "website" %}
+  {% set twitter_card = seo_config.twitter_card or "summary_large_image" %}
+
+  {# ============================================ #}
+  {#           RENDER META TAGS                  #}
+  {# ============================================ #}
+
+  {# --- Basic Meta Tags --- #}
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ description }}">
+
+  {# --- Canonical URL --- #}
+  {% if canonical_url %}
+    <link rel="canonical" href="{{ canonical_url }}">
+  {% endif %}
+
+  {# --- Open Graph --- #}
+  <meta property="og:title" content="{{ title }}">
+  <meta property="og:description" content="{{ description }}">
+  <meta property="og:type" content="{{ og_type }}">
+  {% if canonical_url %}
+    <meta property="og:url" content="{{ canonical_url }}">
+  {% endif %}
+  {% if image %}
+    <meta property="og:image" content="{{ image }}">
+    <meta property="og:image:alt" content="{{ image_alt }}">
+  {% endif %}
+
+  {# --- Twitter Card --- #}
+  <meta name="twitter:card" content="{{ twitter_card }}">
+  <meta name="twitter:title" content="{{ title }}">
+  <meta name="twitter:description" content="{{ description }}">
+  {% if image %}
+    <meta name="twitter:image" content="{{ image }}">
+  {% endif %}
+
+{% endmacro %}
