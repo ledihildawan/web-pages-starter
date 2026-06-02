@@ -1,17 +1,25 @@
 {
   "meta": {
-    "page_title": "Demo Lazy Load Splide | Starter"
+    "title": "Carousel Demo | Starter App"
   },
   "hero": {
-    "slide_1": {
-      "title": "Lazy Load Alam",
-      "subtitle": "Gambar dimuat secara cerdas untuk menghemat kuota.",
-      "alt": "Pemandangan Gunung yang Indah"
+    "badge": "Interactive Demo",
+    "title_part1": "Explore Our ",
+    "title_highlight": "Features",
+    "description": "See our platform in action with this interactive demonstration."
+  },
+  "slides": {
+    "performance": {
+      "title": "Blazing Performance",
+      "description": "Optimized for speed with cutting-edge technology."
     },
-    "slide_2": {
-      "title": "Performa Utama",
-      "subtitle": "Hanya memuat apa yang Anda butuhkan.",
-      "alt": "Pemandangan Pegunungan Salju"
+    "security": {
+      "title": "Enterprise Security",
+      "description": "Your data is protected with industry-leading security measures."
+    },
+    "ux": {
+      "title": "Beautiful UX",
+      "description": "Designed with users in mind, offering a delightful experience."
     }
   }
 }

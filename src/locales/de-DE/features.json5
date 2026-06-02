@@ -1,7 +1,8 @@
 {
   "hero": {
     "badge": "Power unter der Haube",
-    "title": "Alles, was Sie brauchen, um <br> <span class='bg-linear-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent'>schneller zu skalieren</span>",
+    "title_part1": "Alles, was Sie brauchen, um",
+    "title_highlight": "schneller zu skalieren",
     "description": "Von leistungsstarken Analysen bis nahtlosen Integrationen bieten wir das Toolkit, das Sie für den Bau von erstklassigen Anwendungen ohne Kopfschmerzen benötigen."
   },
   "sections": {
@@ -21,6 +22,7 @@
     }
   },
   "more_title": "Und vieles mehr...",
+  "more_subtitle": "Erkunden Sie zusätzliche Funktionen, die Ihre Anwendung hervorheben.",
   "more": {
     "dark_mode": {
       "title": "Dunkler Modus",

@@ -32,7 +32,7 @@
       "email": "البريد الإلكتروني",
       "email_placeholder": "name@example.com",
       "subject": "الموضوع",
-      "subject_placeholder": "ما الذي تريد مناقشته؟",
+      "subject_placeholder": "ما الذي تريد مناقشة؟",
       "message": "الرسالة",
       "message_placeholder": "أخبرنا المزيد عن استفسارك...",
       "submit": "إرسال الرسالة"

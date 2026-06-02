@@ -1,12 +1,12 @@
 {
   "about": {
-    "badge": "Acerca de Nosotros"
+    "badge": "Acerca de"
   },
   "hero": {
-    "badge": "Acerca de Nosotros",
+    "badge": "Acerca de",
     "title_part1": "Estamos creando el ",
     "title_highlight": "futuro digital",
-    "description": "Fundada en 2024, Starter existe para ayudar a los desarrolladores a construir mejores aplicaciones más rápido. Creemos en el poder del código limpio, el diseño hermoso y la colaboración de código abierto."
+    "description": "Fundado en 2024, Starter existe para ayudar a los desarrolladores a construir mejores aplicaciones más rápido. Creemos en el poder del código limpio, el diseño hermoso y la colaboración de código abierto."
   },
   "stats": {
     "years": "Años de Experiencia",
@@ -21,55 +21,55 @@
   "story": {
     "tag": "Nuestra Historia",
     "visual_label": "Ilustración de Estudio Creativo",
-    "title": "Impulsados por <br>la excelencia.",
-    "para1": "Nuestro viaje comenzó con una idea simple: hacer el desarrollo web accesible y agradable para todos.",
-    "para2": "Hoy, somos un equipo diverso de ingenieros, diseñadores y pensadores trabajando juntos para resolver problemas complejos.",
+    "title": "Impulsados por la pasión, <br>definidos por la excelencia.",
+    "para1": "Nuestro viaje comenzó con una idea simple: hacer el desarrollo web accesible y divertido para todos. Estábamos cansados de frameworks hinchados y configuraciones complejas.",
+    "para2": "Hoy, somos un equipo diverso de ingenieros, diseñadores y pensadores trabajando juntos para resolver problemas complejos con soluciones elegantes.",
     "val1": "Filosofía de diseño centrada en el usuario",
-    "val2": "Arquitectura con prioridad de rendimiento",
+    "val2": "Arquitectura de rendimiento primero",
     "val3": "Transparencia y comunicación abierta"
   },
   "mission": {
     "title": "Nuestra Misión",
-    "description": "Empoderar a desarrolladores y empresas con herramientas elegantes, rápidas y fáciles de usar para construir productos digitales increíbles."
+    "description": "Empoderar a desarrolladores y empresas con herramientas elegantes, rápidas y fáciles de usar para construir productos digitales excepcionales."
   },
   "vision": {
     "title": "Nuestra Visión",
-    "description": "Convertirnos en la plataforma preferida para desarrolladores modernos que valoran la belleza, el rendimiento y la experiencia del usuario en cada línea de código."
+    "description": "Ser la plataforma de elección para desarrolladores modernos que valoran la belleza, el rendimiento y la experiencia del usuario en cada línea de código."
   },
   "values": {
     "title": "Nuestros Valores",
-    "subtitle": "Los principios que guían cada decisión que tomamos.",
-    "passion": {
-      "title": "Pasión",
-      "description": "Amamos lo que hacemos, y se nota en cada detalle de nuestros productos."
-    },
-    "collaboration": {
-      "title": "Colaboración",
-      "description": "Trabajar juntos produce los mejores resultados. Creemos en el poder de grandes equipos."
-    },
-    "innovation": {
-      "title": "Innovación",
-      "description": "Siempre buscando mejores formas de resolver problemas y crear valor."
-    },
-    "integrity": {
-      "title": "Integridad",
-      "description": "La honestidad y la transparencia son la base de cada relación que construimos."
-    },
-    "excellence": {
-      "title": "Excelencia",
-      "description": "No nos conformamos con lo suficiente. Siempre aspiramos a lo mejor."
-    },
-    "quality": {
-      "title": "Calidad",
-      "description": "Código limpio, diseño hermoso y experiencias perfectas son nuestros estándares."
-    }
+    "subtitle": "Principios que guían cada decisión que tomamos."
+  },
+  "passion": {
+    "title": "Pasión",
+    "description": "Amamos lo que hacemos, y se nota en cada detalle de nuestros productos."
+  },
+  "collaboration": {
+    "title": "Colaboración",
+    "description": "Trabajar juntos produce los mejores resultados. Creemos en el poder de equipos sólidos."
+  },
+  "innovation": {
+    "title": "Innovación",
+    "description": "Siempre buscando mejores formas de resolver problemas y crear valor."
+  },
+  "integrity": {
+    "title": "Integridad",
+    "description": "La honestidad y la transparencia son la base de cada relación que construimos."
+  },
+  "excellence": {
+    "title": "Excelencia",
+    "description": "No nos conformamos con lo suficientemente bueno. Siempre nos esforzamos por lo mejor."
+  },
+  "quality": {
+    "title": "Calidad",
+    "description": "Código limpio, diseño hermoso y experiencias fluidas son nuestros estándares."
   },
   "team": {
     "title": "Conoce al Equipo",
     "subtitle": "Las mentes brillantes detrás de cada línea de código que escribimos.",
-    "alex_desc": "Líder visionario con más de 10 años de experiencia en el desarrollo de ecosistemas SaaS.",
-    "sarah_desc": "Maga del full-stack especializada en construir arquitecturas de sistemas a gran escala.",
-    "mike_desc": "Profundamente obsesionado con los detalles de píxeles, flujos de UX fluidos y estándares de accesibilidad.",
+    "alex_desc": "Líder visionario con 10+ años de experiencia en desarrollo de ecosistema SaaS.",
+    "sarah_desc": "Full-stack wizard especializada en construir arquitecturas de sistemas a gran escala.",
+    "mike_desc": "Profundamente obsesionado con detalles de píxel, flujos UX suaves y estándares de accesibilidad.",
     "jessica_desc": "Narradora creativa ayudando a las marcas a encontrar su voz única en el mundo digital."
   }
 }

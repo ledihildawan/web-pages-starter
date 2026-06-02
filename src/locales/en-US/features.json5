@@ -1,7 +1,8 @@
 {
   "hero": {
     "badge": "Power under the hood",
-    "title": "Everything you need to <br> <span class='bg-linear-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent'>scale faster</span>",
+    "title_part1": "Everything you need to",
+    "title_highlight": "scale faster",
     "description": "From powerful analytics to seamless integrations, we provide the toolkit you need to build world-class applications without the headache."
   },
   "sections": {
@@ -21,6 +22,7 @@
     }
   },
   "more_title": "And so much more...",
+  "more_subtitle": "Powerful features designed to help you build faster and scale better.",
   "more": {
     "dark_mode": {
       "title": "Dark Mode",

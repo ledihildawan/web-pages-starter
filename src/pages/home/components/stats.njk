@@ -1,4 +1,4 @@
-﻿{% import "icons.njk" as icon %}
+{% import "icons.njk" as icon %}
 
 <section aria-labelledby="stats-heading" class="pbs-40 pbe-40 px-6 relative bg-gradient-to-b from-white/[0.02] to-transparent border-bs border-be border-white/5 overflow-hidden">
   <!-- Subtle background effects -->
@@ -18,12 +18,12 @@
           <div class="relative">
             <!-- Stat number -->
             <p class="text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter tabular-nums mbe-3 text-{{ stat.color }}-400 group-hover:scale-110 group-hover:text-{{ stat.color }}-300 transition-all duration-400 ease-emphasized">
-              {{ i18n.t('page.stats.' + stat.t_key + '_val') | safe }}
+              {{ i18n.t('page.stats.' + stat.t_key + '_val') }}
             </p>
 
             <!-- Stat label -->
             <p class="text-slate-400 font-bold uppercase tracking-[0.2em] text-[10px] md:text-[11px] group-hover:text-slate-300 transition-colors duration-200">
-              {{ i18n.t('page.stats.' + stat.t_key) | safe }}
+              {{ i18n.t('page.stats.' + stat.t_key) }}
             </p>
 
             <!-- Decorative underline (appears on hover) -->
@@ -37,15 +37,15 @@
     <div class="mt-16 flex flex-wrap items-center justify-center gap-8 opacity-50">
       <div class="flex items-center gap-2 text-slate-400 text-xs font-bold uppercase tracking-wider">
         {{ icon.icon('shield', 'inline-5 block-5', size='lg') }}
-        {{ i18n.t('soc2_compliant') | safe }}
+        {{ i18n.t('soc2_compliant') }}
       </div>
       <div class="flex items-center gap-2 text-slate-400 text-xs font-bold uppercase tracking-wider">
         {{ icon.icon('shield', 'inline-5 block-5', size='lg') }}
-        {{ i18n.t('gdpr_ready') | safe }}
+        {{ i18n.t('gdpr_ready') }}
       </div>
       <div class="flex items-center gap-2 text-slate-400 text-xs font-bold uppercase tracking-wider">
         {{ icon.icon('shield', 'inline-5 block-5', size='lg') }}
-        {{ i18n.t('uptime_guarantee') | safe }}
+        {{ i18n.t('uptime_guarantee') }}
       </div>
     </div>
   </div>

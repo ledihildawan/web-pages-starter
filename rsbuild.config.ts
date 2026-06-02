@@ -171,6 +171,7 @@ export default defineConfig({
               {
                 loader: 'simple-nunjucks-loader',
                 options: {
+                  autoescape: false,
                   searchPaths: ['pages', 'layouts', 'components', ''].map((d) =>
                     resolveRoot(PATHS.SRC, d),
                   ),

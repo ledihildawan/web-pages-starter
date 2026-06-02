@@ -1,7 +1,8 @@
 {
   "hero": {
     "badge": "Potencia bajo el capó",
-    "title": "Todo lo que necesitas para <br> <span class='bg-linear-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent'>escalar más rápido</span>",
+    "title_part1": "Todo lo que necesitas para",
+    "title_highlight": "escalar más rápido",
     "description": "Desde análisis potentes hasta integraciones perfectas, proporcionamos el toolkit que necesitas para construir aplicaciones de clase mundial sin dolores de cabeza."
   },
   "sections": {
@@ -21,6 +22,7 @@
     }
   },
   "more_title": "Y mucho más...",
+  "more_subtitle": "Explora capacidades adicionales que hacen que tu aplicación se destaque.",
   "more": {
     "dark_mode": {
       "title": "Modo Oscuro",

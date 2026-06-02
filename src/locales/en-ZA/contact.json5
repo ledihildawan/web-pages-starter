@@ -1,47 +1,47 @@
 {
   "meta": {
-    "title": "Hubungi Kami | Starter App",
-    "description": "Hubungi kami untuk pertanyaan dan dukungan."
+    "title": "Contact Us | Starter App",
+    "description": "Get in touch with us for questions and support."
   },
   "contact": {
-    "badge": "Siap Membantu",
-    "title_part1": "Mari",
-    "title_highlight": "terhubung",
-    "description": "Punya pertanyaan atau ingin berkolaborasi? Kami senang mendengar dari Anda. Kirim pesan dan kami akan segera merespons.",
-    "form_title": "Kirim Pesan",
-    "form_subtitle": "Isi form di bawah dan kami akan segera merespons.",
-    "social_title": "Ikuti Kami",
-    "social_subtitle": "Dapatkan update terbaru melalui media sosial kami",
+    "badge": "Get in Touch",
+    "title_part1": "Let's get",
+    "title_highlight": "connected",
+    "description": "Have questions or want to collaborate? We'd love to hear from you. Send us a message and we'll respond as soon as possible.",
+    "form_title": "Send a Message",
+    "form_subtitle": "Fill out the form below and we'll get back to you shortly.",
+    "social_title": "Follow Us",
+    "social_subtitle": "Stay updated with our latest news on social media",
     "info": {
       "response_time": {
-        "title": "Respon Cepat",
-        "description": "Kami berusaha merespons setiap pesan dalam waktu 24 jam pada hari kerja."
+        "title": "Quick Response",
+        "description": "We strive to respond to every message within 24 hours on business days."
       },
       "working_hours": {
-        "title": "Jam Operasional",
-        "description": "Senin - Jumat: 09:00 - 18:00 WIB. Akhir pekan: Dengan prioritas."
+        "title": "Working Hours",
+        "description": "Monday - Friday: 09:00 - 18:00. Weekends: By priority."
       },
       "support": {
-        "title": "Dukungan Berkelanjutan",
-        "description": "Tim support kami selalu siap membantu menyelesaikan masalah teknis Anda."
+        "title": "Ongoing Support",
+        "description": "Our support team is always ready to help resolve your technical issues."
       }
     },
     "form": {
-      "name": "Nama",
-      "name_placeholder": "Masukkan nama Anda",
+      "name": "Name",
+      "name_placeholder": "Enter your name",
       "email": "Email",
-      "email_placeholder": "nama@email.com",
-      "subject": "Subjek",
-      "subject_placeholder": "Apa yang ingin Anda diskusikan?",
-      "message": "Pesan",
-      "message_placeholder": "Ceritakan lebih lanjut tentang pertanyaan Anda...",
-      "submit": "Kirim Pesan"
+      "email_placeholder": "name@example.com",
+      "subject": "Subject",
+      "subject_placeholder": "What would you like to discuss?",
+      "message": "Message",
+      "message_placeholder": "Tell us more about your inquiry...",
+      "submit": "Send Message"
     }
   },
   "email_label": "Email",
   "email_value": "hello@starter.app",
-  "phone_label": "Telepon",
-  "phone_value": "+62 812 3456 7890",
-  "location_label": "Lokasi",
-  "location_value": "Jakarta, Indonesia"
+  "phone_label": "Phone",
+  "phone_value": "+27 11 123 4567",
+  "location_label": "Location",
+  "location_value": "Johannesburg, South Africa"
 }

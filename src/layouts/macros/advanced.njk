@@ -10,8 +10,8 @@
   {% for name, value in ext.items() %}
     {% set extStr = extStr + ' ' + name + '="' + value + '"' %}
   {% endfor %}
-  <{{ tag }} class="{{ class }}" data-i18n="{{ item.k }}"{{ extStr | safe }}{% if item.vars %} data-i18n-vars='{{ varsJson | safe }}'{% endif %}>
-    {{ caller(item) | safe }}
+  <{{ tag }} class="{{ class }}" data-i18n="{{ item.k }}"{{ extStr}}{% if item.vars %} data-i18n-vars='{{ varsJson}}'{% endif %}>
+    {{ caller(item)}}
   </{{ tag }}>
 {% endmacro %}
 
@@ -25,8 +25,8 @@
   {% for name, value in ext.items() %}
     {% set extStr = extStr + ' ' + name + '="' + value + '"' %}
   {% endfor %}
-  <{{ tag }} class="{{ class }}" data-i18n="{{ item.k }}"{{ extStr | safe }}{% if item.vars %} data-i18n-vars='{{ varsJson | safe }}'{% endif %}>
-    {{ caller(item) | safe }}
+  <{{ tag }} class="{{ class }}" data-i18n="{{ item.k }}"{{ extStr}}{% if item.vars %} data-i18n-vars='{{ varsJson}}'{% endif %}>
+    {{ caller(item)}}
   </{{ tag }}>
 {% endmacro %}
 
@@ -35,7 +35,7 @@
   {% set item = i18n(key, vars) %}
   {% set translated = i18n.nativeNumbers(item.v) %}
   {% set varsJson = (item.vars | replace('"', '&quot;')) if item.vars else '' %}
-  <div data-i18n-html="{{ item.k }}" {% if item.vars %} data-i18n-vars='{{ varsJson | safe }}' {% endif %} class="contents">
-    {{ translated | safe }}
+  <div data-i18n-html="{{ item.k }}" {% if item.vars %} data-i18n-vars='{{ varsJson}}' {% endif %} class="contents">
+    {{ translated}}
   </div>
 {% endmacro %}

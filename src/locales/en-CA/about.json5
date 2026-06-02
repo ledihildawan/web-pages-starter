@@ -1,75 +1,75 @@
 {
   "about": {
-    "badge": "Tentang Kami"
+    "badge": "About Us"
   },
   "hero": {
-    "badge": "Tentang Kami",
-    "title_part1": "Kami Mewujudkan ",
-    "title_highlight": "Masa Depan Digital",
-    "description": "Didirikan pada tahun 2024, Starter hadir untuk membantu developer membangun aplikasi lebih baik dan lebih cepat. Kami percaya pada kekuatan kode yang bersih dan desain yang indah."
+    "badge": "About Us",
+    "title_part1": "We're Crafting the ",
+    "title_highlight": "Digital Future",
+    "description": "Founded in 2024, Starter exists to help developers build better applications faster. We believe in the power of clean code, beautiful design, and open source collaboration."
   },
   "stats": {
-    "years": "Tahun Pengalaman",
+    "years": "Years of Experience",
     "years_val": "3+",
-    "clients": "Klien Global",
+    "clients": "Global Clients",
     "clients_val": "120+",
-    "countries": "Negara",
+    "countries": "Countries Reached",
     "countries_val": "15",
-    "support": "Dukungan Teknis",
+    "support": "Expert Support",
     "support_val": "24/7"
   },
   "story": {
-    "tag": "Cerita Kami",
-    "visual_label": "Ilustrasi Studio Kreatif",
-    "title": "Digerakkan oleh <br>Keunggulan.",
-    "para1": "Perjalanan kami dimulai dengan ide sederhana: membuat pengembangan web dapat diakses dan menyenangkan untuk semua.",
-    "para2": "Hari ini, kami adalah tim beragam yang terdiri dari engineer, desainer, dan thinker yang bekerja sama memecahkan masalah kompleks.",
-    "val1": "Filosofi desain berpusat pada pengguna",
-    "val2": "Arsitektur berbasis performa",
-    "val3": "Transparansi dan komunikasi terbuka"
+    "tag": "Our Story",
+    "visual_label": "Creative Studio Illustration",
+    "title": "Driven by passion, <br>defined by excellence.",
+    "para1": "Our journey began with a simple idea: make web development accessible and enjoyable for everyone. We were tired of bloated frameworks and complex configurations.",
+    "para2": "Today, we're a diverse team of engineers, designers, and thinkers working together to solve complex problems with elegant solutions.",
+    "val1": "User-centred design philosophy",
+    "val2": "Performance-first architecture",
+    "val3": "Transparency and open communication"
   },
   "mission": {
-    "title": "Misi Kami",
-    "description": "Memberdayakan pengembang dan bisnis dengan tools yang elegan, cepat, dan mudah digunakan untuk membangun produk digital yang luar biasa."
+    "title": "Our Mission",
+    "description": "Empowering developers and businesses with elegant, fast, and easy-to-use tools to build exceptional digital products."
   },
   "vision": {
-    "title": "Visi Kami",
-    "description": "Menjadi platform pilihan utama bagi pengembang modern yang menghargai keindahan, performa, dan pengalaman pengguna dalam setiap baris kode."
+    "title": "Our Vision",
+    "description": "To be the platform of choice for modern developers who value beauty, performance, and user experience in every line of code."
   },
   "values": {
-    "title": "Nilai-Nilai Kami",
-    "subtitle": "Prinsip yang membimbing setiap keputusan yang kami buat.",
-    "passion": {
-      "title": "Semangat",
-      "description": "Kami mencintai apa yang kami lakukan, dan itu terlihat dalam setiap detail produk kami."
-    },
-    "collaboration": {
-      "title": "Kolaborasi",
-      "description": "Bekerja sama menghasilkan hasil terbaik. Kami percaya pada kekuatan tim yang solid."
-    },
-    "innovation": {
-      "title": "Inovasi",
-      "description": "Selalu mencari cara yang lebih baik untuk menyelesaikan masalah dan menciptakan nilai."
-    },
-    "integrity": {
-      "title": "Integritas",
-      "description": "Kejujuran dan transparansi adalah fondasi dari setiap hubungan yang kami bangun."
-    },
-    "excellence": {
-      "title": "Keunggulan",
-      "description": "Kami tidak puas dengan yang cukup baik. Kami selalu berusaha untuk yang terbaik."
-    },
-    "quality": {
-      "title": "Kualitas",
-      "description": "Kode yang bersih, desain yang indah, dan pengalaman yang mulus adalah standar kami."
-    }
+    "title": "Our Values",
+    "subtitle": "Principles that guide every decision we make."
+  },
+  "passion": {
+    "title": "Passion",
+    "description": "We love what we do, and it shows in every detail of our products."
+  },
+  "collaboration": {
+    "title": "Collaboration",
+    "description": "Working together produces the best results. We believe in the power of solid teams."
+  },
+  "innovation": {
+    "title": "Innovation",
+    "description": "Always seeking better ways to solve problems and create value."
+  },
+  "integrity": {
+    "title": "Integrity",
+    "description": "Honesty and transparency are the foundation of every relationship we build."
+  },
+  "excellence": {
+    "title": "Excellence",
+    "description": "We don't settle for good enough. We always strive for the best."
+  },
+  "quality": {
+    "title": "Quality",
+    "description": "Clean code, beautiful design, and seamless experiences are our standards."
   },
   "team": {
-    "title": "Kenali Tim Kami",
-    "subtitle": "Pikiran brilian di balik setiap baris kode yang kami buat.",
-    "alex_desc": "Pemimpin visioner dengan 10+ tahun pengalaman dalam pengembangan ekosistem SaaS.",
-    "sarah_desc": "Ahli full-stack yang spesialis dalam membangun arsitektur sistem berskala besar.",
-    "mike_desc": "Sangat terobsesi dengan detail pixel, alur UX yang mulus, dan standar aksesibilitas.",
-    "jessica_desc": "Creative storyteller yang membantu brand menemukan suara unik mereka di dunia digital."
+    "title": "Meet the Team",
+    "subtitle": "The brilliant minds behind every line of code we write.",
+    "alex_desc": "Visionary leader with 10+ years of experience in SaaS ecosystem development.",
+    "sarah_desc": "Full-stack wizard specializing in building large-scale system architectures.",
+    "mike_desc": "Deeply obsessed with pixel details, smooth UX flows, and accessibility standards.",
+    "jessica_desc": "Creative storyteller helping brands find their unique voice in the digital world."
   }
 }

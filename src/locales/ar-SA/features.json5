@@ -1,7 +1,8 @@
 {
   "hero": {
     "badge": "قوة حقيقية تحت الغطاء",
-    "title": "كل ما تحتاجه لـ <br> <span class='bg-linear-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent'>التوسع بشكل أسرع</span>",
+    "title_part1": "كل ما تحتاجه لـ",
+    "title_highlight": "التوسع بشكل أسرع",
     "description": "من التحليلات القوية إلى التكامل السلس، نوفر لك الأدوات التي تحتاجها لبناء تطبيقات عالمية المستوى دون عناء."
   },
   "sections": {
@@ -21,6 +22,7 @@
     }
   },
   "more_title": "وأكثر من ذلك بكثير...",
+  "more_subtitle": "ميزات إضافية قوية مصممة لمساعدتك في البناء بشكل أسرع وتحسين التوسع.",
   "more": {
     "dark_mode": {
       "title": "الوضع الداكن",

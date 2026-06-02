@@ -37,7 +37,7 @@
     },
     "enterprise": {
       "name": "Enterprise",
-      "desc": "For large scale applications and organisations.",
+      "desc": "For large scale applications and orgs.",
       "btn": "Contact Sales",
       "feature_0": "Everything in Pro",
       "feature_1": "Dedicated Manager",
@@ -53,6 +53,6 @@
     "q_1": "Do you offer a free trial?",
     "a_1": "We offer a 14-day free trial for the Pro plan. No credit card required to start.",
     "q_2": "What payment methods do you accept?",
-    "a_2": "We accept all major credit cards (Visa, Mastercard, Amex) and PayPal. For Enterprise plans, we support BPAY, POLi and wire transfers."
+    "a_2": "We accept all major credit cards (Visa, Mastercard, Amex) and PayPal. For Enterprise plans, we support wire transfers."
   }
 }

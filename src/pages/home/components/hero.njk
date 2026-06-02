@@ -1,4 +1,4 @@
-﻿{% import "icons.njk" as icon %}
+{% import "icons.njk" as icon %}
 
 <section aria-labelledby="hero-heading" class="relative pbs-52 pbe-28 px-6 text-center overflow-hidden">
   <!-- Enhanced Background Effects -->
@@ -18,22 +18,22 @@
         <span class="relative inline-flex rounded-full block-2.5 inline-2.5 bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.6)]"></span>
       </span>
       <span class="font-bold tracking-wide uppercase text-[10px]">
-        {{ i18n.t('page.hero.badge') | safe }}
+        {{ i18n.t('page.hero.badge') }}
       </span>
     </div>
 
     <!-- LCP Candidate: Enhanced Hero Title -->
     <h1 id="hero-heading" class="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter mbe-8 leading-[1.1]">
       <span class="block text-gradient-white">
-        {{ i18n.t('page.hero.title_start') | safe }}
+        {{ i18n.t('page.hero.title_start') }}
       </span>
       <span class="block text-gradient">
-        {{ i18n.t('page.hero.title_highlight') | safe }}
+        {{ i18n.t('page.hero.title_highlight') }}
       </span>
     </h1>
 
     <p class="text-xl md:text-2xl lg:text-3xl text-slate-300 max-inline-3xl mx-auto mbe-16 leading-relaxed font-medium">
-      {{ i18n.t('page.hero.description') | safe }}
+      {{ i18n.t('page.hero.description') }}
     </p>
 
     <!-- Enhanced Button Group with Modern Interactions -->
@@ -41,13 +41,13 @@
       <a href="{{ page.hero.primary_btn.url }}" class="magnetic-btn btn-press btn-squash anticipate-press hover-lift ripple-click group relative inline-full sm:inline-auto min-block-14 px-14 py-4 bg-white text-slate-950 radius-btn font-black text-lg flex items-center justify-center overflow-hidden duration-standard">
         <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-400 ease-in-out"></span>
         <span class="relative flex items-center gap-3">
-          {{ i18n.t('page.hero.primary_btn.label') | safe }}
+          {{ i18n.t('page.hero.primary_btn.label') }}
           {{ icon.icon('arrow-right', 'inline-5 block-5 icon-transition group-hover:translate-x-1', size='lg') }}
         </span>
       </a>
       <a href="{{ page.hero.secondary_btn.url }}" class="magnetic-btn btn-press btn-squash anticipate-press hover-lift ripple-click spotlight-card group inline-full sm:inline-auto min-block-14 px-14 py-4 bg-slate-900/60 backdrop-blur-xl text-white border border-white/10 radius-btn font-black text-lg flex items-center justify-center hover:bg-slate-800/80 hover:border-white/20 duration-standard">
         <span class="relative flex items-center gap-3">
-          {{ i18n.t('page.hero.secondary_btn.label') | safe }}
+          {{ i18n.t('page.hero.secondary_btn.label') }}
           {{ icon.icon('question', 'inline-5 block-5 icon-bounce icon-anticipate', size='lg') }}
         </span>
       </a>
@@ -57,12 +57,12 @@
     <p class="text-[11px] text-slate-400 font-bold tracking-[0.2em] uppercase mbe-20 flex items-center justify-center gap-3">
       <span class="flex items-center gap-1.5">
         {{ icon.icon('check', 'inline-4 block-4 text-emerald-400', size='md') }}
-        {{ i18n.t('page.hero.note') | safe }}
+        {{ i18n.t('page.hero.note') }}
       </span>
       <span class="inline-1 block-1 rounded-full bg-slate-700"></span>
       <span class="flex items-center gap-1.5">
         {{ icon.icon('star', 'inline-4 block-4 text-violet-400', size='md') }}
-        {{ i18n.t('rating') | safe }}
+        {{ i18n.t('rating') }}
       </span>
     </p>
 

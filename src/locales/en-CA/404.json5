@@ -1,7 +1,12 @@
 {
-    "heading": "404",
-    "subheading": "Houston, kita punya masalah.",
-    "description": "Halaman yang Anda cari mungkin telah dipindahkan, dihapus, atau tersedot ke dalam Black Hole di ruang hampa.",
-    "button_text": "Kembali ke Bumi (Beranda)",
-    "or_try": "atau coba"
+  "meta": {
+    "title": "Page Not Found | Starter App"
+  },
+  "hero": {
+    "badge": "404",
+    "title_part1": "Page not",
+    "title_highlight": "found",
+    "description": "Sorry, we couldn't find the page you're looking for. The page may have been moved or deleted.",
+    "back_btn": "Go Back Home"
+  }
 }

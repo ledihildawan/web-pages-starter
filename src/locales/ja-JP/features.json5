@@ -1,7 +1,8 @@
 {
   "hero": {
     "badge": "内部に秘められた圧倒的なパワー",
-    "title": "<span class='bg-linear-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent'>迅速なスケール</span>に必要な<br>すべてをここに",
+    "title_part1": "に必要なすべてをここに",
+    "title_highlight": "迅速なスケール",
     "description": "強力な分析機能からシームレスな統合まで、煩わしさを排除し、世界クラスのアプリケーションを構築するために必要なツール一式を提供します。"
   },
   "sections": {
@@ -21,6 +22,7 @@
     }
   },
   "more_title": "他にも充実の機能が満載...",
+  "more_subtitle": "さらに強力な機能で、優れたアプリケーションをより早く構築し、スケールしやすく。",
   "more": {
     "dark_mode": {
       "title": "ダークモード",

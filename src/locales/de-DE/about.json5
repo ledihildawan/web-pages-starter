@@ -1,75 +1,75 @@
 {
   "about": {
-    "badge": "Über uns"
+    "badge": "Über Uns"
   },
   "hero": {
-    "badge": "Über uns",
+    "badge": "Über Uns",
     "title_part1": "Wir gestalten die ",
     "title_highlight": "digitale Zukunft",
-    "description": "Gegründet 2024, existiert Starter, um Entwicklern zu helfen, bessere Anwendungen schneller zu entwickeln. Wir glauben an die Kraft von sauberem Code, schönem Design und Open-Source-Zusammenarbeit."
+    "description": "Gegründet 2024, existiert Starter um Entwicklern zu helfen, bessere Anwendungen schneller zu构建. Wir glauben an die Kraft von sauberem Code, schönem Design und Open-Source-Zusammenarbeit."
   },
   "stats": {
     "years": "Jahre Erfahrung",
     "years_val": "3+",
-    "clients": "Globale Kunden",
+    "clients": "_globale Kunden",
     "clients_val": "120+",
     "countries": "Erreichte Länder",
     "countries_val": "15",
-    "support": "Experten-Unterstützung",
+    "support": "Experten-Support",
     "support_val": "24/7"
   },
   "story": {
     "tag": "Unsere Geschichte",
     "visual_label": "Kreatives Studio Illustration",
-    "title": "Angetrieben von <br>Exzellenz.",
-    "para1": "Unsere Reise begann mit einer einfachen Idee: Webentwicklung für jeden zugänglich und angenehm machen.",
-    "para2": "Heute sind wir ein diverses Team von Ingenieuren, Designern und Denkern, die zusammenarbeiten, um komplexe Probleme zu lösen.",
-    "val1": "Benutzerzentrierte Design-Philosophie",
-    "val2": "Leistungsorientierte Architektur",
+    "title": "Angetrieben von Leidenschaft, <br>definiert durch Exzellenz.",
+    "para1": "Unsere Reise begann mit einer einfachen Idee: Web-Entwicklung zugänglich und angenehm für alle zu machen. Wir waren von aufgeblähten Frameworks und komplexen Konfigurationen müde.",
+    "para2": "Heute sind wir ein vielfältiges Team von Ingenieuren, Designern und Denkern, die zusammenarbeiten, um komplexe Probleme mit eleganten Lösungen zu lösen.",
+    "val1": "Benutzerzentrierte Designphilosophie",
+    "val2": "Performance-first Architektur",
     "val3": "Transparenz und offene Kommunikation"
   },
   "mission": {
     "title": "Unsere Mission",
-    "description": "Entwickler und Unternehmen mit eleganten, schnellen und benutzerfreundlichen Tools befähigen, um erstaunliche digitale Produkte zu erstellen."
+    "description": "Entwickler und Unternehmen mit eleganten, schnellen und benutzerfreundlichen Tools befähigen, außergewöhnliche digitale Produkte zu erstellen."
   },
   "vision": {
     "title": "Unsere Vision",
-    "description": "Die bevorzugte Plattform für moderne Entwickler zu werden, die Schönheit, Leistung und Benutzererfahrung in jeder Codezeile wertschätzen."
+    "description": "Die Plattform der Wahl für moderne Entwickler zu sein, die Schönheit, Performance und Benutzererfahrung in jeder Codezeile schätzen."
   },
   "values": {
     "title": "Unsere Werte",
-    "subtitle": "Die Prinzipien, die jede Entscheidung leiten, die wir treffen.",
-    "passion": {
-      "title": "Leidenschaft",
-      "description": "Wir lieben, was wir tun, und das zeigt sich in jedem Detail unserer Produkte."
-    },
-    "collaboration": {
-      "title": "Zusammenarbeit",
-      "description": "Zusammenarbeiten liefert die besten Ergebnisse. Wir glauben an die Kraft großer Teams."
-    },
-    "innovation": {
-      "title": "Innovation",
-      "description": "Immer auf der Suche nach besseren Wegen, um Probleme zu lösen und Werte zu schaffen."
-    },
-    "integrity": {
-      "title": "Integrität",
-      "description": "Ehrlichkeit und Transparenz sind das Fundament jeder Beziehung, die wir aufbauen."
-    },
-    "excellence": {
-      "title": "Exzellenz",
-      "description": "Wir begnügen uns nicht mit gut genug. Wir streben immer nach dem Besten."
-    },
-    "quality": {
-      "title": "Qualität",
-      "description": "Sauberer Code, schönes Design und nahtlose Erfahrungen sind unsere Standards."
-    }
+    "subtitle": "Prinzipien, die jede Entscheidung leiten, die wir treffen."
+  },
+  "passion": {
+    "title": "Leidenschaft",
+    "description": "Wir lieben was wir tun, und es zeigt sich in jedem Detail unserer Produkte."
+  },
+  "collaboration": {
+    "title": "Zusammenarbeit",
+    "description": "Zusammenarbeiten erzeugt die besten Ergebnisse. Wir glauben an die Kraft solider Teams."
+  },
+  "innovation": {
+    "title": "Innovation",
+    "description": "Immer bessere Wege suchen, Probleme zu lösen und Wert zu schaffen."
+  },
+  "integrity": {
+    "title": "Integrität",
+    "description": "Ehrlichkeit und Transparenz sind das Fundament jeder Beziehung, die wir aufbauen."
+  },
+  "excellence": {
+    "title": "Exzellenz",
+    "description": "Wir geben uns nicht mit gut genug zufrieden. Wir streben immer nach dem Besten."
+  },
+  "quality": {
+    "title": "Qualität",
+    "description": "Sauberer Code, schönes Design und nahtlose Erfahrungen sind unsere Standards."
   },
   "team": {
     "title": "Lernen Sie das Team Kennen",
     "subtitle": "Die brillanten Köpfe hinter jeder Codezeile, die wir schreiben.",
-    "alex_desc": "Visionärer Anführer mit über 10 Jahren Erfahrung in der Entwicklung von SaaS-Ökosystemen.",
-    "sarah_desc": "Full-stack-Zauberin, spezialisiert auf den Bau von Large-Scale-Systemarchitekturen.",
-    "mike_desc": "Tief besessen von Pixeldetails, sanften UX-Flows und Barrierefreiheitsstandards.",
-    "jessica_desc": "Kreative Geschichtenerzählerin, die Marken dabei hilft, ihre einzigartige Stimme in der digitalen Welt zu finden."
+    "alex_desc": "Visionärer Führung mit 10+ Jahren Erfahrung in SaaS-Ökosystem-Entwicklung.",
+    "sarah_desc": "Full-Stack-Assistentin, spezialisiert auf den Bau von großangelegten Systemarchitekturen.",
+    "mike_desc": "Tief besessen von Pixeldetails, glatten UX-Flows und Barrierefreiheitsstandards.",
+    "jessica_desc": "Kreative Geschichtenerzählerin, die Marken hilft, ihre einzigartige Stimme in der digitalen Welt zu finden."
   }
 }

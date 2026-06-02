@@ -1,7 +1,8 @@
 {
   "hero": {
     "badge": "후드 아래의 파워",
-    "title": "더 빠르게 확장하는 데 <br> <span class='bg-linear-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent'>필요한 모든 것</span>",
+    "title_part1": "더 빠르게 확장하는 데",
+    "title_highlight": "필요한 모든 것",
     "description": "강력한 분석부터 원활한 통합까지, 우리는 고품질 애플리케이션을 헤드없이 구축하는 데 필요한 도구 키트를 제공합니다."
   },
   "sections": {
@@ -21,6 +22,7 @@
     }
   },
   "more_title": "그리고 훨씬 더 많은 것...",
+  "more_subtitle": "애플리케이션을 돋보이게 만드는 추가 기능을 살펴보세요.",
   "more": {
     "dark_mode": {
       "title": "다크 모드",

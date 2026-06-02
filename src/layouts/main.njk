@@ -1,4 +1,4 @@
-﻿{# i18n methods now available directly in context - no import needed #}
+{# i18n methods now available directly in context - no import needed #}
 {% import "macros/seo.njk" as seo %}
 {% import "icons.njk" as icon with context %}
 {% import "hero-section.njk" as hero with context %}
@@ -68,9 +68,9 @@
         <link rel="preload" href="/assets/fonts/inter-cyrillic-900-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous" importance="high">
       {% endif %}
 
-      <style>{{ critical_css | safe }}</style>
+      <style>{{ critical_css}}</style>
 
-      {{ clientI18nScript | safe }}
+      {{ clientI18nScript }}
     {% endblock %}
 
     {% block extra_head %}{% endblock %}
@@ -81,7 +81,7 @@
       <svg class="inline-5 block-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0l-10.5 10.5M21 3v10.5"/>
       </svg>
-      {{ i18n.t('skip_to_content') | safe }}
+      {{ i18n.t('skip_to_content') }}
     </a>
 
     <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">

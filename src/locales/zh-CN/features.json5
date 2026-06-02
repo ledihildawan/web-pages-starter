@@ -1,7 +1,8 @@
 {
   "hero": {
     "badge": "强劲核心，动力十足",
-    "title": "助您<span class='bg-linear-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent'>快速扩展</span><br>所需的一切功能",
+    "title_part1": "助您",
+    "title_highlight": "快速扩展",
     "description": "从强大的分析功能到无缝集成，我们为您提供构建世界级应用所需的所有工具集，让您彻底告别繁琐的开发过程。"
   },
   "sections": {
@@ -21,6 +22,7 @@
     }
   },
   "more_title": "以及更多精彩功能...",
+  "more_subtitle": "以及更多强大的功能，助您构建卓越应用。",
   "more": {
     "dark_mode": {
       "title": "深色模式",

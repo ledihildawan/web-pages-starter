@@ -153,7 +153,7 @@ export const translatePage = (): void => {
       : el.hasAttribute('data-force-universal')
         ? false
         : undefined;
-    el.textContent = toNativeDigits(translated, forceNative);
+    el.innerHTML = toNativeDigits(translated, forceNative);
   });
 
   processElements('[data-i18n-attr]', 'data-i18n-attr', (el, raw) => {

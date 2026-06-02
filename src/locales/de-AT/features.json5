@@ -1,7 +1,8 @@
 {
   "hero": {
     "badge": "Fitur Unggulan",
-    "title": "Semua yang Anda butuhkan untuk <br> <span class='bg-linear-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent'>skala lebih cepat</span>",
+    "title_part1": "Semua yang Anda butuhkan untuk",
+    "title_highlight": "skala lebih cepat",
     "description": "Dari analitik yang kuat hingga integrasi yang mulus, kami menyediakan toolkit yang Anda butuhkan untuk membangun aplikasi kelas dunia tanpa pusing."
   },
   "sections": {
@@ -21,6 +22,7 @@
     }
   },
   "more_title": "Dan masih banyak lagi...",
+  "more_subtitle": "Erkunden Sie zusätzliche Funktionen, die Ihre Anwendung hervorheben.",
   "more": {
     "dark_mode": {
       "title": "Mode Gelap",

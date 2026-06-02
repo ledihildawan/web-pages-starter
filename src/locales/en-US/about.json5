@@ -38,31 +38,31 @@
   },
   "values": {
     "title": "Our Values",
-    "subtitle": "Principles that guide every decision we make.",
-    "passion": {
-      "title": "Passion",
-      "description": "We love what we do, and it shows in every detail of our products."
-    },
-    "collaboration": {
-      "title": "Collaboration",
-      "description": "Working together produces the best results. We believe in the power of solid teams."
-    },
-    "innovation": {
-      "title": "Innovation",
-      "description": "Always seeking better ways to solve problems and create value."
-    },
-    "integrity": {
-      "title": "Integrity",
-      "description": "Honesty and transparency are the foundation of every relationship we build."
-    },
-    "excellence": {
-      "title": "Excellence",
-      "description": "We don't settle for good enough. We always strive for the best."
-    },
-    "quality": {
-      "title": "Quality",
-      "description": "Clean code, beautiful design, and seamless experiences are our standards."
-    }
+    "subtitle": "Principles that guide every decision we make."
+  },
+  "passion": {
+    "title": "Passion",
+    "description": "We love what we do, and it shows in every detail of our products."
+  },
+  "collaboration": {
+    "title": "Collaboration",
+    "description": "Working together produces the best results. We believe in the power of solid teams."
+  },
+  "innovation": {
+    "title": "Innovation",
+    "description": "Always seeking better ways to solve problems and create value."
+  },
+  "integrity": {
+    "title": "Integrity",
+    "description": "Honesty and transparency are the foundation of every relationship we build."
+  },
+  "excellence": {
+    "title": "Excellence",
+    "description": "We don't settle for good enough. We always strive for the best."
+  },
+  "quality": {
+    "title": "Quality",
+    "description": "Clean code, beautiful design, and seamless experiences are our standards."
   },
   "team": {
     "title": "Meet the Team",

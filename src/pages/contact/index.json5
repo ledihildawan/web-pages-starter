@@ -1,10 +1,44 @@
 {
+  "page_id": "contact",
   "meta": {
-    "title": "Contact | Starter App",
-    "description": "Information about Contact"
+    "t_key": "hero",
+    "theme_color": "violet"
   },
   "hero": {
-    "title": "Welcome to Contact",
-    "description": "This content is managed locally in src/pages/contact/index.json"
-  }
+    "t_key": "hero"
+  },
+  "contact_items": [
+    {
+      "label": "email",
+      "color": "emerald",
+      "icon": "envelope"
+    },
+    {
+      "label": "phone",
+      "color": "violet",
+      "icon": "phone"
+    },
+    {
+      "label": "location",
+      "color": "fuchsia",
+      "icon": "map-pin"
+    }
+  ],
+  "socials": [
+    {
+      "url": "https://github.com",
+      "name": "GitHub",
+      "color": "emerald"
+    },
+    {
+      "url": "https://twitter.com",
+      "name": "Twitter",
+      "color": "violet"
+    },
+    {
+      "url": "https://linkedin.com",
+      "name": "LinkedIn",
+      "color": "fuchsia"
+    }
+  ]
 }

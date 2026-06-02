@@ -1,55 +1,57 @@
 {
   "hero": {
-    "badge": "Fitur Unggulan",
-    "title": "Semua yang Anda butuhkan untuk <br> <span class='bg-linear-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent'>skala lebih cepat</span>",
-    "description": "Dari analitik yang kuat hingga integrasi yang mulus, kami menyediakan toolkit yang Anda butuhkan untuk membangun aplikasi kelas dunia tanpa pusing."
+    "badge": "Power under the hood",
+    "title_part1": "Everything you need to",
+    "title_highlight": "scale faster",
+    "description": "From powerful analytics to seamless integrations, we provide the toolkit you need to build world-class applications without the headache."
   },
   "sections": {
     "sync": {
-      "title": "Sinkronisasi Real-time",
-      "description": "Perubahan tersebar secara instan di semua perangkat. Baik pengguna Anda menggunakan ponsel, desktop, atau tablet, mereka melihat data yang sama di waktu yang sama.",
-      "check_0": "Latensi di bawah milidetik",
-      "check_1": "Dukungan offline bawaan",
-      "check_2": "Penanganan resolusi konflik"
+      "title": "Real-time Synchronisation",
+      "description": "Changes propagate instantly across all devices. Whether your users are on cellphone, desktop, or tablet, they see the same data at the exact same time.",
+      "check_0": "Sub-millisecond latency",
+      "check_1": "Offline support out of the box",
+      "check_2": "Conflict resolution handling"
     },
     "analytics": {
-      "title": "Analitik yang Dapat Ditindaklanjuti",
-      "description": "Jangan menebak-nebak. Dapatkan wawasan mendalam tentang perilaku pengguna, kinerja sistem, dan metrik pendapatan. Visualisasikan data Anda dengan grafik interaktif.",
-      "check_0": "Dashboard yang dapat disesuaikan",
-      "check_1": "Ekspor ke PDF, CSV, atau Excel",
-      "check_2": "Laporan mingguan otomatis"
+      "title": "Actionable Analytics",
+      "description": "Don't fly blind. Get deep insights into user behaviour, system performance, and revenue metrics. Visualise your data with beautiful, interactive charts.",
+      "check_0": "Customisable dashboards",
+      "check_1": "Export to PDF, CSV, or Excel",
+      "check_2": "Automated weekly reports"
     }
   },
-  "more_title": "Dan masih banyak lagi...",
+  "more_title": "And so much more...",
+  "more_subtitle": "Powerful features designed to help you build faster and scale better.",
   "more": {
     "dark_mode": {
-      "title": "Mode Gelap",
-      "desc": "Dukungan bawaan untuk tema terang dan gelap dengan deteksi otomatis."
+      "title": "Dark Mode",
+      "desc": "Built-in support for light and dark themes with automatic system detection."
     },
     "api_first": {
       "title": "API First",
-      "desc": "API REST dan GraphQL tersedia untuk kontrol terprogram penuh."
+      "desc": "REST and GraphQL APIs available for full programme control."
     },
     "sso": {
-      "title": "Login SSO",
-      "desc": "Single Sign-On kelas enterprise untuk Google, GitHub, dan Okta."
+      "title": "SSO Login",
+      "desc": "Enterprise-grade Single Sign-On support for Google, GitHub, and Okta."
     },
     "audit": {
-      "title": "Log Audit",
-      "desc": "Lacak setiap perubahan pada proyek Anda dengan stempel waktu terperinci."
+      "title": "Audit Logs",
+      "desc": "Track every change made to your project with detailed timestamps."
     },
     "rbac": {
-      "title": "Akses Berbasis Peran",
-      "desc": "Kontrol izin granular untuk admin, editor, dan viewer."
+      "title": "Role Based Access",
+      "desc": "Granular permission controls for admins, editors, and viewers."
     },
     "uptime": {
-      "title": "Uptime 99.99%",
-      "desc": "Ketersediaan terjamin dengan CDN kami yang terdistribusi secara global."
+      "title": "99.99% Uptime",
+      "desc": "Guaranteed availability with our globally distributed CDN."
     }
   },
   "cta": {
-    "heading": "Siap untuk memulai?",
-    "btn_create": "Buat Akun",
-    "btn_docs": "Baca Dokumentasi"
+    "heading": "Ready to get started?",
+    "btn_create": "Create Account",
+    "btn_docs": "Read Documentation"
   }
 }

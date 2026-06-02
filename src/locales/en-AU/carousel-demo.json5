@@ -1,17 +1,17 @@
 {
   "meta": {
-    "page_title": "Demo Lazy Load Splide | Starter"
+    "page_title": "Splide Lazy Load Demo | Starter"
   },
   "hero": {
     "slide_1": {
-      "title": "Lazy Load Alam",
-      "subtitle": "Gambar dimuat secara cerdas untuk menghemat kuota.",
-      "alt": "Pemandangan Gunung yang Indah"
+      "title": "Lazy Load Nature",
+      "subtitle": "Images are loaded intelligently to save bandwidth.",
+      "alt": "Beautiful Mountain View"
     },
     "slide_2": {
-      "title": "Performa Utama",
-      "subtitle": "Hanya memuat apa yang Anda butuhkan.",
-      "alt": "Pemandangan Pegunungan Salju"
+      "title": "Performance First",
+      "subtitle": "Only load what you need.",
+      "alt": "Snowy Mountains View"
     }
   }
 }

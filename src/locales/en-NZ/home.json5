@@ -1,50 +1,50 @@
 {
   "meta": {
-    "title": "Beranda | Starter App",
-    "description": "Pembangun aplikasi web modern."
+    "title": "Home | Starter App",
+    "description": "Modern web app builder."
   },
   "hero": {
-    "badge": "Baru: Versi 2.0 Telah Hadir",
-    "title_start": "Buat Sesuatu",
-    "title_highlight": "Indah Hari Ini",
-    "description": "Cara modern dalam membangun aplikasi web. Cepat, fleksibel, dan dirancang untuk developer yang peduli terhadap kualitas karya.",
-    "image_alt": "Pratinjau Dasbor",
+    "badge": "New: Version 2.0 is here",
+    "title_start": "Build something",
+    "title_highlight": "beautiful today",
+    "description": "The modern way to build web applications. Fast, flexible, and designed for developers who care about their craft.",
+    "image_alt": "Dashboard Preview",
     "primary_btn": {
-      "label": "Mulai Membangun",
+      "label": "Start Building →",
       "url": "/start"
     },
     "secondary_btn": {
-      "label": "Lihat Demo",
+      "label": "View Demo",
       "url": "/demo"
     },
-    "note": "Tidak perlu kartu kredit",
+    "note": "No credit card required"
   },
   "features": {
-    "heading": "Semua yang Anda Butuhkan",
-    "subheading": "Fitur canggih untuk membantu Anda membangun lebih cepat.",
+    "heading": "Everything You Need",
+    "subheading": "Powerful features to help you build faster.",
     "list": {
       "speed": {
-        "title": "Super Cepat",
-        "description": "Dioptimalkan untuk performa maksimal. Aplikasi Anda dimuat instan."
+        "title": "Lightning Fast",
+        "description": "Optimised for performance. Your apps load instantly."
       },
       "design": {
-        "title": "Desain Elegan",
-        "description": "Dibuat dengan teliti. Setiap piksel memiliki makna dan tujuan."
+        "title": "Beautiful Design",
+        "description": "Crafted with care. Every pixel has meaning and purpose."
       },
       "security": {
-        "title": "Keamanan Terjamin",
-        "description": "Keamanan kelas enterprise. Data Anda dilindungi di setiap lapisan."
+        "title": "Secure by Default",
+        "description": "Enterprise-grade security. Your data is protected at every layer."
       }
     }
   },
   "stats": {
-    "community": "Komunitas Developer",
-    "community_val": "10Rb+",
-    "projects": "Proyek Terbangun",
-    "projects_val": "50Rb+",
-    "uptime": "Uptime 24/7",
+    "community": "Dev Community",
+    "community_val": "10K+",
+    "projects": "Built Projects",
+    "projects_val": "50K+",
+    "uptime": "24/7 Availability",
     "uptime_val": "99.9%",
-    "rating": "Rating Pengguna",
+    "rating": "User Rating",
     "rating_val": "4.9/5"
   }
 }

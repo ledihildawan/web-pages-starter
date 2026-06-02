@@ -1,17 +1,17 @@
 {
   "about": {
-    "badge": "À Propos de Nous"
+    "badge": "À Propos"
   },
   "hero": {
-    "badge": "À Propos de Nous",
-    "title_part1": "Nous façonnons le ",
-    "title_highlight": "futur numérique",
-    "description": "Fondée en 2024, Starter existe pour aider les développeurs à construire de meilleures applications plus rapidement. Nous croyons en la puissance du code propre, du design magnifique et de la collaboration open source."
+    "badge": "À Propos",
+    "title_part1": "Nous créons l' ",
+    "title_highlight": "avenir numérique",
+    "description": "Fondé en 2024, Starter existe pour aider les développeurs à construire de meilleures applications plus rapidement. Nous croyons au pouvoir du code propre, du design beau et de la collaboration open source."
   },
   "stats": {
     "years": "Années d'Expérience",
     "years_val": "3+",
-    "clients": "Clients Mondiaux",
+    "clients": "Clients Globaux",
     "clients_val": "120+",
     "countries": "Pays Atteints",
     "countries_val": "15",
@@ -21,55 +21,55 @@
   "story": {
     "tag": "Notre Histoire",
     "visual_label": "Illustration de Studio Créatif",
-    "title": "Guidés par <br>l'excellence.",
-    "para1": "Notre voyage a commencé avec une idée simple: rendre le développement web accessible et agréable pour tous.",
-    "para2": "Aujourd'hui, nous sommes une équipe diversifiée d'ingénieurs, de designers et de penseurs travaillant ensemble pour résoudre des problèmes complexes.",
+    "title": "Guidés par la passion, <br>définis par l'excellence.",
+    "para1": "Notre voyage a commencé avec une idée simple: rendre le développement web accessible et amusant pour tous. Nous étions fatigués des frameworks gonflés et des configurations complexes.",
+    "para2": "Aujourd'hui, nous sommes une équipe diversifiée d'ingénieurs, de concepteurs et de penseurs travaillant ensemble pour résoudre des problèmes complexes avec des solutions élégantes.",
     "val1": "Philosophie de design centrée sur l'utilisateur",
-    "val2": "Architecture axée sur les performances",
+    "val2": "Architecture performance d'abord",
     "val3": "Transparence et communication ouverte"
   },
   "mission": {
     "title": "Notre Mission",
-    "description": "Donner aux développeurs et aux entreprises des outils élégants, rapides et faciles à utiliser pour construire des produits numériques étonnants."
+    "description": "Autonomiser les développeurs et les entreprises avec des outils élégants, rapides et faciles à utiliser pour construire des produits numériques exceptionnels."
   },
   "vision": {
     "title": "Notre Vision",
-    "description": "Devenir la plateforme de référence pour les développeurs modernes qui valorisent la beauté, les performances et l'expérience utilisateur dans chaque ligne de code."
+    "description": "Être la plateforme de choix pour les développeurs modernes qui valorisent la beauté, la performance et l'expérience utilisateur dans chaque ligne de code."
   },
   "values": {
     "title": "Nos Valeurs",
-    "subtitle": "Les principes qui guident chaque décision que nous prenons.",
-    "passion": {
-      "title": "Passion",
-      "description": "Nous aimons ce que nous faisons, et cela se voit dans chaque détail de nos produits."
-    },
-    "collaboration": {
-      "title": "Collaboration",
-      "description": "Travailler ensemble donne les meilleurs résultats. Nous croyons en la puissance des grandes équipes."
-    },
-    "innovation": {
-      "title": "Innovation",
-      "description": "Toujours à la recherche de meilleures façons de résoudre les problèmes et de créer de la valeur."
-    },
-    "integrity": {
-      "title": "Intégrité",
-      "description": "L'honnêteté et la transparence sont la fondation de chaque relation que nous construisons."
-    },
-    "excellence": {
-      "title": "Excellence",
-      "description": "Nous ne nous contentons pas du suffisant. Nous aspirons toujours au meilleur."
-    },
-    "quality": {
-      "title": "Qualité",
-      "description": "Code propre, design magnifique et expériences fluides sont nos standards."
-    }
+    "subtitle": "Principes qui guident chaque décision que nous prenons."
+  },
+  "passion": {
+    "title": "Passion",
+    "description": "Nous aimons ce que nous faisons, et cela se voit dans chaque détail de nos produits."
+  },
+  "collaboration": {
+    "title": "Collaboration",
+    "description": "Travailler ensemble donne les meilleurs résultats. Nous croyons au pouvoir d'équipes solides."
+  },
+  "innovation": {
+    "title": "Innovation",
+    "description": "Toujours chercher de meilleures façons de résoudre les problèmes et de créer de la valeur."
+  },
+  "integrity": {
+    "title": "Intégrité",
+    "description": "L'honnêteté et la transparence sont la fondation de chaque relation que nous construisons."
+  },
+  "excellence": {
+    "title": "Excellence",
+    "description": "Nous ne nous contentons pas de assez bon. Nous nous efforçons toujours du meilleur."
+  },
+  "quality": {
+    "title": "Qualité",
+    "description": "Code propre, design beau et expériences fluides sont nos standards."
   },
   "team": {
     "title": "Rencontrez l'Équipe",
     "subtitle": "Les esprits brillants derrière chaque ligne de code que nous écrivons.",
-    "alex_desc": "Leader visionnaire avec plus de 10 ans d'expérience dans le développement d'écosystèmes SaaS.",
-    "sarah_desc": "Maga du full-stack spécialisée dans la construction d'architectures de systèmes à grande échelle.",
-    "mike_desc": "Profondément obsédé par les détails de pixels, les flux UX fluides et les normes d'accessibilité.",
+    "alex_desc": "Leader visionnaire avec 10+ ans d'expérience dans le développement d'écosystème SaaS.",
+    "sarah_desc": "Full-stack wizard spécialisée dans la construction d'architectures de systèmes à grande échelle.",
+    "mike_desc": "Profondément obsédé par les détails de pixels, flux UX fluides et standards d'accessibilité.",
     "jessica_desc": "Narratrice créative aidant les marques à trouver leur voix unique dans le monde numérique."
   }
 }

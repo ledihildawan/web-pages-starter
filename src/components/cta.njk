@@ -1,4 +1,4 @@
-﻿{% import "icons.njk" as icon %}
+{% import "icons.njk" as icon %}
 
 <section aria-labelledby="cta-heading" class="pbs-40 pbe-40 px-6 relative overflow-hidden">
   <!-- Background effects -->
@@ -19,19 +19,19 @@
     <div class="absolute inset-be-[10%] inset-e-[10%] inline-32 block-32 bg-fuchsia-500/15 rounded-full blur-[50px]"></div>
 
     <h2 id="cta-heading" class="text-5xl md:text-6xl lg:text-7xl font-black mbe-8 text-white tracking-tighter">
-      {{ i18n.t('comp.cta.heading') | safe }}
+      {{ i18n.t('comp.cta.heading') }}
     </h2>
 
     <p class="text-slate-300 mbe-14 max-inline-2xl mx-auto text-xl md:text-2xl leading-relaxed font-medium">
-      {{ i18n.t('comp.cta.description') | safe }}
+      {{ i18n.t('comp.cta.description') }}
     </p>
 
     <a href="/contact" class="magnetic-btn btn-press btn-squash anticipate-press hover-lift ripple-click sparkle-hover group relative inline-flex items-center justify-center min-block-16 px-8 sm:px-12 md:px-16 lg:px-20 py-4 sm:py-5 md:py-6 bg-white text-slate-950 radius-btn font-black text-lg sm:text-xl md:text-2xl transition-all duration-250 ease-emphasized hover:scale-105 hover:shadow-[0_25px_60px_rgba(255,255,255,0.3)] overflow-hidden">
       <!-- Shimmer effect -->
       <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></span>
       <span class="relative flex items-center gap-3">
-        {{ i18n.t('comp.cta.button_text') | safe }}
-        {{ icon.icon('arrow-right', 'inline-6 block-6 icon-transition group-hover:translate-x-1', size='xl') | safe }}
+        {{ i18n.t('comp.cta.button_text') }}
+        {{ icon.icon('arrow-right', 'inline-6 block-6 icon-transition group-hover:translate-x-1', size='xl') }}
       </span>
     </a>
   </div>

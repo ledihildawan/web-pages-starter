@@ -1,7 +1,8 @@
 {
   "hero": {
     "badge": "Puissance sous le capot",
-    "title": "Tout ce dont vous avez besoin pour <br> <span class='bg-linear-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent'>évoluer plus vite</span>",
+    "title_part1": "Tout ce dont vous avez besoin pour",
+    "title_highlight": "évoluer plus vite",
     "description": "Des analyses puissantes aux intégrations transparentes, nous fournissons la boîte à outils dont vous avez besoin pour construire des applications de classe mondiale sans les maux de tête."
   },
   "sections": {
@@ -21,6 +22,7 @@
     }
   },
   "more_title": "Et bien plus encore...",
+  "more_subtitle": "Explorez les capacités supplémentaires qui font ressortir votre application.",
   "more": {
     "dark_mode": {
       "title": "Mode Sombre",
