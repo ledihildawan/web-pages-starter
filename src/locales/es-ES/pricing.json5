@@ -1,13 +1,11 @@
 {
-  "pricing": {
-    "badge": "Elige Tu Plan"
-  },
   "period_monthly": "mes",
   "period_yearly": "año",
   "hero": {
     "title_part1": "Precios simples, ",
     "title_highlight": "transparentes",
-    "description": "Sin tarifas ocultas. Sin cargos sorpresa. Elige el plan que se ajuste perfectamente a tus necesidades."
+    "description": "Sin tarifas ocultas. Sin cargos sorpresa. Elige el plan que se ajuste perfectamente a tus necesidades.",
+    "badge": "Elige tu plan"
   },
   "toggle": {
     "monthly": "Mensual",

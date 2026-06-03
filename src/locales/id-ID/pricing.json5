@@ -1,10 +1,8 @@
 {
-  "pricing": {
-    "badge": "Pilih Paket Anda"
-  },
   "period_monthly": "bln",
   "period_yearly": "thn",
   "hero": {
+    "badge": "Pilih Paket Anda",
     "title_part1": "Harga Sederhana & ",
     "title_highlight": "Transparan",
     "description": "Tanpa biaya tersembunyi. Tanpa biaya kejutan. Pilih paket yang paling sesuai dengan kebutuhan Anda."

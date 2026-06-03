@@ -1,13 +1,11 @@
 {
-  "pricing": {
-    "badge": "Choose Your Plan"
-  },
   "period_monthly": "mo",
   "period_yearly": "yr",
   "hero": {
     "title_part1": "Simple & ",
     "title_highlight": "Transparent Pricing",
-    "description": "No hidden fees. No surprise charges. Please choose the plan that best suits your needs."
+    "description": "No hidden fees. No surprise charges. Please choose the plan that best suits your needs.",
+    "badge": "Choose Your Plan"
   },
   "toggle": {
     "monthly": "Monthly",

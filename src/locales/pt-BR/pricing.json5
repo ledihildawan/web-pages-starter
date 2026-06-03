@@ -1,13 +1,11 @@
 {
-  "pricing": {
-    "badge": "Escolha Seu Plano"
-  },
   "period_monthly": "mês",
   "period_yearly": "ano",
   "hero": {
     "title_part1": "Preços simples, ",
     "title_highlight": "transparentes",
-    "description": "Sem taxas ocultas. Sem cobranças surpresa. Escolha o plano que se ajusta perfeitamente às suas necessidades."
+    "description": "Sem taxas ocultas. Sem cobranças surpresa. Escolha o plano que se ajusta perfeitamente às suas necessidades.",
+    "badge": "Escolha seu plano"
   },
   "toggle": {
     "monthly": "Mensal",

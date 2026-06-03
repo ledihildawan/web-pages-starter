@@ -1,13 +1,11 @@
 {
-  "pricing": {
-    "badge": "Wählen Sie Ihren Plan"
-  },
   "period_monthly": "Monat",
   "period_yearly": "Jahr",
   "hero": {
     "title_part1": "Einfache, transparente ",
     "title_highlight": "Preise",
-    "description": "Keine versteckten Gebühren. Keine Überraschungskosten. Wählen Sie den Plan, der perfekt zu Ihren Bedürfnissen passt."
+    "description": "Keine versteckten Gebühren. Keine Überraschungskosten. Wählen Sie den Plan, der perfekt zu Ihren Bedürfnissen passt.",
+    "badge": "Wählen Sie Ihren Plan"
   },
   "toggle": {
     "monthly": "Monatlich",

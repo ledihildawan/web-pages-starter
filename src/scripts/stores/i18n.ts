@@ -1,4 +1,5 @@
 import {
+  getLocaleLabelCountry,
   LOCALE,
   LOCALE_CODES,
   LOCALE_STORAGE_KEY,
@@ -18,7 +19,7 @@ export function registerI18nStore(): void {
   globalThis.Alpine.store('i18n', {
     languages: LOCALES.map((l) => ({
       code: l.code,
-      label: l.label,
+      label: getLocaleLabelCountry(l.code),
       flag: l.flag,
     })).filter((l) => LOCALE_CODES.includes(l.code)),
 

@@ -41,7 +41,7 @@
         <button @click="langOpen = !langOpen" @click.outside="langOpen = false" :aria-expanded="langOpen.toString()" aria-haspopup="listbox" aria-label="Select language" class="flex items-center gap-2.5 px-3.5 py-2.5 block-11 bg-white/5 border border-white/10 radius-icon text-slate-400 hover:text-white hover:bg-white/8 hover:border-white/15 transition-all duration-200 font-black text-[10px] group icon-squash">
           <span class="inline-5 block-3.5 shrink-0 flex items-center justify-center overflow-hidden rounded-xs opacity-70 group-hover:opacity-100 transition-opacity duration-300 bg-white/5 aspect-4/3">
             <template x-if="$store.i18n.languages.find(l => l.code === $store.i18n.current)">
-              <img :src="`https://flagcdn.com/w20/${$store.i18n.languages.find(l => l.code === $store.i18n.current).flag}.png`" width="20" height="15" class="inline-full block-full object-cover" loading="lazy" :alt="`${$store.i18n.languages.find(l => l.code === $store.i18n.current)?.label || 'Language'} flag - ${$store.i18n.current.toUpperCase()}`">
+              <img :src="`https://flagcdn.com/w20/${$store.i18n.languages.find(l => l.code === $store.i18n.current).flag.toLowerCase()}.png`" width="20" height="15" class="inline-full block-full object-cover" loading="lazy" :alt="`${$store.i18n.languages.find(l => l.code === $store.i18n.current)?.label || 'Language'} flag - ${$store.i18n.languages.find(l => l.code === $store.i18n.current).flag.toUpperCase()}`">
             </template>
           </span>
           <span x-text="$store.i18n.languages.find(l => l.code === $store.i18n.current)?.label || $store.i18n.current.toUpperCase()" class="tracking-[0.15em]"></span>
@@ -52,7 +52,7 @@
             <template x-for="lang in $store.i18n.languages" :key="lang.code">
               <button @click="$store.i18n.change(lang.code); langOpen = false" class="inline-full px-3 py-2.5 block-10 flex items-center gap-3 text-start radius-icon text-[12px] font-bold transition-all duration-300 group" :class="$store.i18n.current === lang.code ? 'bg-linear-to-r from-violet-500/20 to-fuchsia-500/20 text-white border border-violet-500/30' : 'text-slate-400 hover:text-white hover:bg-white/5'" role="option" :aria-selected="$store.i18n.current === lang.code.toString()">
                 <span class="inline-5 block-3.5 shrink-0 overflow-hidden rounded-xs bg-white/5 flex items-center justify-center aspect-4/3">
-                  <img :src="`https://flagcdn.com/w20/${lang.flag}.png`" width="20" height="15" class="inline-full block-full object-cover transition-all duration-300" :class="$store.i18n.current === lang.code ? 'opacity-100 grayscale-0' : 'opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-100'" loading="lazy" :alt="`${lang.label} flag - ${lang.code.toUpperCase()}`">
+                  <img :src="`https://flagcdn.com/w20/${lang.flag.toLowerCase()}.png`" width="20" height="15" class="inline-full block-full object-cover transition-all duration-300" :class="$store.i18n.current === lang.code ? 'opacity-100 grayscale-0' : 'opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-100'" loading="lazy" :alt="`${lang.label} flag - ${lang.flag.toUpperCase()}`">
                 </span>
                 <span class="truncate" x-text="lang.label"></span>
               </button>
@@ -119,13 +119,13 @@
         <p class="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase mbe-5 ps-1">{{ i18n.t('select_language') }}</p>
         <div class="grid grid-cols-2 gap-2" role="listbox" aria-label="Select language">
           <template x-for="lang in $store.i18n.languages" :key="lang.code">
-            <button @click="$store.i18n.change(lang.code); closeMobileMenu(); hapticFeedback()" @touchstart.passive="$store.i18n.current !== lang.code && hapticFeedback()" class="group relative flex items-center gap-3 px-4 pbs-4 pbe-4 radius-btn transition-all duration-300 border text-start active:scale-95" :class="$store.i18n.current === lang.code ? 'bg-linear-to-r from-violet-500/20 to-fuchsia-500/20 border-violet-500/30 text-white' : 'bg-white/3 border-transparent text-slate-400 hover:text-slate-300 hover:bg-white/6 active:bg-white/8'" role="option" :aria-selected="$store.i18n.current === lang.code.toString()" :aria-label="lang.label + ' (' + lang.code.toUpperCase() + ')'">
+            <button @click="$store.i18n.change(lang.code); closeMobileMenu(); hapticFeedback()" @touchstart.passive="$store.i18n.current !== lang.code && hapticFeedback()" class="group relative flex items-center gap-3 px-4 pbs-4 pbe-4 radius-btn transition-all duration-300 border text-start active:scale-95" :class="$store.i18n.current === lang.code ? 'bg-linear-to-r from-violet-500/20 to-fuchsia-500/20 border-violet-500/30 text-white' : 'bg-white/3 border-transparent text-slate-400 hover:text-slate-300 hover:bg-white/6 active:bg-white/8'" role="option" :aria-selected="$store.i18n.current === lang.code.toString()" :aria-label="lang.label + ' (' + lang.flag.toUpperCase() + ')'">
               <div class="relative shrink-0 inline-5 block-3.5 overflow-hidden rounded-xs bg-white/5 aspect-4/3">
-                <img :src="`https://flagcdn.com/w40/${lang.flag}.png`" width="40" height="30" class="inline-full block-full object-cover transition-all duration-200" :class="$store.i18n.current === lang.code ? 'opacity-100 grayscale-0' : 'opacity-30 grayscale group-hover:opacity-60 group-hover:grayscale-0'" loading="lazy" :alt="`${lang.label} flag - ${lang.code.toUpperCase()}`">
+                <img :src="`https://flagcdn.com/w40/${lang.flag.toLowerCase()}.png`" width="40" height="30" class="inline-full block-full object-cover transition-all duration-200" :class="$store.i18n.current === lang.code ? 'opacity-100 grayscale-0' : 'opacity-30 grayscale group-hover:opacity-60 group-hover:grayscale-0'" loading="lazy" :alt="`${lang.label} flag - ${lang.flag.toUpperCase()}`">
               </div>
               <div class="flex flex-col min-inline-0">
                 <span class="text-[13px] font-bold truncate leading-none" x-text="lang.label"></span>
-                <span class="text-[9px] font-black opacity-20 tracking-widest mbs-1.5" x-text="lang.code.toUpperCase()"></span>
+                <span class="text-[9px] font-black opacity-20 tracking-widest mbs-1.5" x-text="lang.flag.toUpperCase()"></span>
               </div>
             </button>
           </template>

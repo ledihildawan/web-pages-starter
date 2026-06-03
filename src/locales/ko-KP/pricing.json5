@@ -1,13 +1,11 @@
 {
-  "pricing": {
-    "badge": "Pilih Paket Anda"
-  },
   "period_monthly": "bln",
   "period_yearly": "thn",
   "hero": {
     "title_part1": "Harga Sederhana & ",
     "title_highlight": "Transparan",
-    "description": "Tanpa biaya tersembunyi. Tanpa biaya kejutan. Pilih paket yang paling sesuai dengan kebutuhan Anda."
+    "description": "Tanpa biaya tersembunyi. Tanpa biaya kejutan. Pilih paket yang paling sesuai dengan kebutuhan Anda.",
+    "badge": "플랜 선택"
   },
   "toggle": {
     "monthly": "Bulanan",

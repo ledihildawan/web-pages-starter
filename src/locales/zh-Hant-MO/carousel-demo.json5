@@ -1,0 +1,17 @@
+{
+  "meta": {
+    "page_title": "Splide 延遲加載演示 | Starter"
+  },
+  "hero": {
+    "slide_1": {
+      "title": "延遲加載自然風景",
+      "subtitle": "智能加載圖像以節省帶寬。",
+      "alt": "美麗的群山景色"
+    },
+    "slide_2": {
+      "title": "性能至上",
+      "subtitle": "只加載您需要的內容。",
+      "alt": "雪山風景"
+    }
+  }
+}

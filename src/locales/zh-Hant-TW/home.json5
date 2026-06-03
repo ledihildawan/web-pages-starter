@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "title": "首頁 | Starter 應用",
+    "description": "現代 Web 應用構建器。"
+  },
+  "hero": {
+    "badge": "新發布：版本 2.0 已上線",
+    "title_start": "立即打造 ",
+    "title_highlight": "精美之作",
+    "description": "構建 Web 應用程式的現代方式。快速、靈活，專為追求卓越的開發者而設計。",
+    "image_alt": "儀表板預覽",
+    "primary_btn": {
+      "label": "開始構建 →",
+      "url": "/start"
+    },
+    "secondary_btn": {
+      "label": "查看演示",
+      "url": "/demo"
+    },
+    "note": "無需信用卡"
+  },
+  "features": {
+    "heading": "所需功能，一應俱全",
+    "subheading": "強大的功能助您提升構建速度。",
+    "list": {
+      "speed": {
+        "title": "極速響應",
+        "description": "性能優化。您的應用可實現秒開。"
+      },
+      "design": {
+        "title": "精美設計",
+        "description": "精心打造。每一個像素都蘊含意義與目的。"
+      },
+      "security": {
+        "title": "默認安全",
+        "description": "企業級安全保障。在每一層級保護您的數據。"
+      }
+    }
+  },
+  "stats": {
+    "community": "開發者社區",
+    "community_val": "1萬+",
+    "projects": "已構建項目",
+    "projects_val": "5萬+",
+    "uptime": "服務在線率",
+    "uptime_val": "99.9%",
+    "rating": "用戶評分",
+    "rating_val": "4.9/5"
+  }
+}

@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import type { I18nTranslationKeys } from '../../../generated/i18n';
 import {
+  getLocaleLabelCountry,
   type CurrencyCode,
   DEFAULT_LOCALE,
   LOCALES,
@@ -680,7 +681,10 @@ export const createTemplateParams = (
     lang,
     localeConfig,
     localeStorageKey,
-    locales: LOCALES,
+    locales: LOCALES.map((l) => ({
+      ...l,
+      label: getLocaleLabelCountry(l.code),
+    })),
     clientI18nScript,
     page_id: name,
     global: loadGlobalData(resolveRoot(`${PATHS.SRC}/data`)),

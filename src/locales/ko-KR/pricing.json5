@@ -1,13 +1,11 @@
 {
-  "pricing": {
-    "badge": "플랜 선택"
-  },
   "period_monthly": "월",
   "period_yearly": "년",
   "hero": {
     "title_part1": "간단하고 투명한 ",
     "title_highlight": "가격",
-    "description": "숨겨진 수수료 없음. 예기치 않은 요금 없음. 필요에 완벽하게 맞는 플랜을 선택하세요."
+    "description": "숨겨진 수수료 없음. 예기치 않은 요금 없음. 필요에 완벽하게 맞는 플랜을 선택하세요.",
+    "badge": "플랜 선택"
   },
   "toggle": {
     "monthly": "월간",

@@ -6,10 +6,14 @@ import {
   BASE_CURRENCY,
   CURRENCY_CODE,
   DEFAULT_LOCALE,
+  LANGUAGE_CODE,
+  LANGUAGES,
   LOCALE_CODES,
   LOCALE_FALLBACKS,
   LOCALE_STORAGE_KEY,
+  LOCALES,
   type LocaleCode,
+  REGIONS,
 } from '@/configs/locales';
 import type { DateTimePreset } from '@/types/common';
 import {
@@ -40,8 +44,15 @@ const getFallbackForLocale = (lng: string): string[] => {
   const explicit = LOCALE_FALLBACKS[locale];
   if (explicit) return [explicit, DEFAULT_LOCALE];
 
-  const lang = locale.split('-')[0];
-  const matched = LOCALE_CODES.find((c) => c.startsWith(`${lang}-`));
+  // Extract base language code from BCP 47 tag
+  // e.g., 'zh-Hans-CN' → 'zh', 'en-US' → 'en'
+  const parts = locale.split('-');
+  const baseLang =
+    parts.length > 1 && parts[1]?.length === 4
+      ? parts[0] // Skip script tag (e.g., 'zh-Hans' → 'zh')
+      : parts[0]; // No script, use first part as-is (e.g., 'en-US' → 'en')
+
+  const matched = LOCALE_CODES.find((c) => c.startsWith(`${baseLang}-`));
   if (matched) return [matched, DEFAULT_LOCALE];
 
   return [DEFAULT_LOCALE];
@@ -98,9 +109,75 @@ export async function initIntl(): Promise<void> {
 
     translatePage();
     updateFormattedElements();
-  } catch {
-  }
+
+    // Update store labels after a short delay to ensure Alpine is ready
+    setTimeout(() => {
+      updateI18nStoreLabels();
+    }, 100);
+  } catch { }
 }
+
+/**
+ * Mapping from language code to translation key in common.json5
+ */
+const LANGUAGE_KEY_MAP: Record<string, string> = {
+  [LANGUAGE_CODE.ID]: 'lang_indonesia',
+  [LANGUAGE_CODE.EN]: 'lang_inggris',
+  [LANGUAGE_CODE.JA]: 'lang_jepang',
+  zh: 'lang_tiongkok',
+  'zh-Hans': 'lang_tiongkok_sederhana',
+  'zh-Hant': 'lang_tiongkok_tradisional',
+  ar: 'lang_arab',
+  es: 'lang_spanyol',
+  pt: 'lang_portugis',
+  hi: 'lang_hindi',
+  ko: 'lang_korea',
+  fr: 'lang_perancis',
+  de: 'lang_jerman',
+  ru: 'lang_rusia',
+  th: 'lang_thailand',
+};
+
+/**
+ * Update the Alpine i18n store with translated language and region names
+ * Uses translations from common.json5 (lang_* and region_* keys)
+ * Call this after i18n is initialized
+ */
+const updateI18nStoreLabels = (): void => {
+  if (typeof window === 'undefined' || !globalThis.Alpine) {
+    return;
+  }
+
+  const store = globalThis.Alpine.store('i18n');
+  if (!store) {
+    return;
+  }
+
+  const updatedLanguages = LOCALES.filter((l) =>
+    LOCALE_CODES.includes(l.code),
+  ).map((l) => {
+    // Get translated language name from common.json5
+    const langKey = LANGUAGE_KEY_MAP[l.language];
+    const langName = langKey ? i18next.t(langKey) : l.language;
+
+    // Get translated region name from common.json5
+    const regionKey = `region_${l.region.toLowerCase()}`;
+    const regionName = i18next.t(regionKey);
+
+    // Format: "Translated Language Name (Translated Country Name)"
+    return {
+      code: l.code,
+      label: `${langName} (${regionName})`,
+      flag: l.flag,
+    };
+  });
+
+  // Update each item in the languages array to trigger reactivity
+  store.languages.length = 0;
+  updatedLanguages.forEach((lang) => {
+    store.languages.push(lang);
+  });
+};
 
 export const t = (
   key: I18nTranslationKeys,
@@ -181,11 +258,7 @@ export const translatePage = (): void => {
 
 const FORMATTERS: {
   attr: string;
-  format: (
-    v: string,
-    el: HTMLElement,
-    defaultCurrency: string,
-  ) => string;
+  format: (v: string, el: HTMLElement, defaultCurrency: string) => string;
 }[] = [
     {
       attr: 'data-format-number',
@@ -236,22 +309,28 @@ const FORMATTERS: {
       attr: 'data-format-time',
       format: (v, el) =>
         formatTime(v as DateTimePreset, {
-          timeStyle: (el.getAttribute('data-time-preset') ?? 'short') as DateTimePreset,
+          timeStyle: (el.getAttribute('data-time-preset') ??
+            'short') as DateTimePreset,
         }),
     },
     {
       attr: 'data-format-date-preset',
       format: (v, el) =>
         formatDate(v as DateTimePreset, {
-          dateStyle: (el.getAttribute('data-date-preset') ?? 'medium') as DateTimePreset,
+          dateStyle: (el.getAttribute('data-date-preset') ??
+            'medium') as DateTimePreset,
         }),
     },
     {
       attr: 'data-format-currency',
       format: (v, el, dc) =>
-        formatCurrency(parseFloat(v), el.getAttribute('data-target-currency') ?? dc, {
-          nativeDigits: el.getAttribute('data-use-native') === 'true',
-        }),
+        formatCurrency(
+          parseFloat(v),
+          el.getAttribute('data-target-currency') ?? dc,
+          {
+            nativeDigits: el.getAttribute('data-use-native') === 'true',
+          },
+        ),
     },
     {
       attr: 'data-convert-currency',

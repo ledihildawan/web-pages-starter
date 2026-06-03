@@ -53,7 +53,21 @@ export const getLocale = (locale?: LocaleCode): LocaleCode => {
   return getFallbackChain(target)[0] ?? DEFAULT_LOCALE;
 };
 
-export const getLangCode = (locale: LocaleCode) => locale.split('-')[0] as LanguageCode;
+export const getLangCode = (locale: LocaleCode): LanguageCode => {
+  // BCP 47: language-script-region or language-region
+  // Extract just the base language code (2-3 letters)
+  const parts = locale.split('-');
+
+  // If second part is 4 letters, it's a script tag (e.g., Hans, Hant, Latn)
+  // In that case, the base language is just the first part
+  // e.g., 'zh-Hans-CN' → 'zh', 'zh-Hant' → 'zh'
+  if (parts.length > 1 && parts[1]?.length === 4) {
+    return parts[0] as LanguageCode;
+  }
+
+  // Otherwise, return first part as-is (e.g., 'en-US' → 'en')
+  return parts[0] as LanguageCode;
+};
 
 export const getLanguageConfig = (
   locale: LocaleCode,

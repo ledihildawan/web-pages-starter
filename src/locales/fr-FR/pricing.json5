@@ -1,13 +1,11 @@
 {
-  "pricing": {
-    "badge": "Choisissez Votre Plan"
-  },
   "period_monthly": "mois",
   "period_yearly": "an",
   "hero": {
     "title_part1": "Tarifs simples, ",
     "title_highlight": "transparents",
-    "description": "Aucuns frais cachés. Aucunes charges surprise. Choisissez le plan qui correspond parfaitement à vos besoins."
+    "description": "Aucuns frais cachés. Aucunes charges surprise. Choisissez le plan qui correspond parfaitement à vos besoins.",
+    "badge": "Choisissez votre forfait"
   },
   "toggle": {
     "monthly": "Mensuel",

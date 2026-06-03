@@ -10,7 +10,7 @@ type AppModules = Awaited<ReturnType<typeof loadAppModules>>;
 const LANGUAGE_FONT_LOADERS: Readonly<Partial<Record<NumberingSystemCode, FontLoader>>> = {
   [NUMBERING_SYSTEM_CODE.JPAN]: () => import('@fontsource-variable/noto-sans-jp/index.css'),
   [NUMBERING_SYSTEM_CODE.HANS]: () => import('@fontsource-variable/noto-sans-sc/index.css'),
-  [NUMBERING_SYSTEM_CODE.HANT]: () => import('@fontsource-variable/noto-sans-sc/index.css'),
+  [NUMBERING_SYSTEM_CODE.HANT]: () => import('@fontsource-variable/noto-sans-tc/index.css'),
   [NUMBERING_SYSTEM_CODE.ARAB]: () => import('@fontsource-variable/noto-sans-arabic/index.css'),
   [NUMBERING_SYSTEM_CODE.DEVA]: () => import('@fontsource-variable/noto-sans/index.css'),
   [NUMBERING_SYSTEM_CODE.KORE]: () => import('@fontsource-variable/noto-sans-kr/index.css'),
@@ -19,6 +19,7 @@ const LANGUAGE_FONT_LOADERS: Readonly<Partial<Record<NumberingSystemCode, FontLo
     import('@fontsource/inter/cyrillic-700.css'),
     import('@fontsource/inter/cyrillic-900.css'),
   ]),
+  [NUMBERING_SYSTEM_CODE.THAI]: () => import('@fontsource-variable/noto-sans-thai/index.css'),
 };
 
 const isProd = process.env.NODE_ENV === 'production';
@@ -130,8 +131,8 @@ async function bootstrap() {
     ]);
 
     setupAlpine(vendors);
-    await appModules.initIntl();
     registerAppModules(appModules);
+    await appModules.initIntl();
 
     clearStartupLocks();
 

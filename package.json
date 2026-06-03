@@ -28,6 +28,8 @@
     "@fontsource-variable/noto-sans-jp": "^5.2.10",
     "@fontsource-variable/noto-sans-kr": "^5.2.10",
     "@fontsource-variable/noto-sans-sc": "^5.2.10",
+    "@fontsource-variable/noto-sans-tc": "^5.2.10",
+    "@fontsource-variable/noto-sans-thai": "^5.2.8",
     "@fontsource/inter": "^5.2.8",
     "@fontsource/open-sans": "^5.2.7",
     "@splidejs/splide": "^4.1.4",
