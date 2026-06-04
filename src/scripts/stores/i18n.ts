@@ -34,7 +34,7 @@ export function registerI18nStore(): void {
               const htmlEl = document.documentElement;
               htmlEl.setAttribute('lang', code);
               htmlEl.setAttribute('dir', locale.dir);
-              htmlEl.setAttribute('data-script', locale.writingSystem);
+              htmlEl.setAttribute('data-script', locale.writingSystem.toLowerCase());
               htmlEl.classList.toggle('is-rtl', locale.dir === 'rtl');
             }
 

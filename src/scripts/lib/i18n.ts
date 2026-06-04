@@ -5,11 +5,11 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 
 import {
   BASE_CURRENCY,
+  getLocaleLabelCountry,
   LOCALE_CODES,
   LOCALE_FALLBACKS,
   LOCALE_STORAGE_KEY,
   LOCALES,
-  LANGUAGE_CODE,
   type LocaleCode,
 } from '@/configs/locales';
 import type { DateTimePreset } from '@/types/common';
@@ -37,28 +37,6 @@ export { i18next };
 
 const isDev = import.meta.env.DEV;
 const missingKeys = new Set<string>();
-
-const LANGUAGE_KEY_MAP: Record<string, string> = {
-  [LANGUAGE_CODE.ID]: 'lang_indonesia',
-  [LANGUAGE_CODE.EN]: 'lang_inggris',
-  [LANGUAGE_CODE.JA]: 'lang_jepang',
-  [LANGUAGE_CODE.ZH]: 'lang_tiongkok',
-  ar: 'lang_arab',
-  es: 'lang_spanyol',
-  pt: 'lang_portugis',
-  hi: 'lang_hindi',
-  ko: 'lang_korea',
-  fr: 'lang_perancis',
-  de: 'lang_jerman',
-  ru: 'lang_rusia',
-  th: 'lang_thailand',
-};
-
-// Map for Chinese script variants (language-script combination)
-const CHINESE_SCRIPT_KEY_MAP: Record<string, string> = {
-  'zh-Hans': 'lang_tiongkok_sederhana',
-  'zh-Hant': 'lang_tiongkok_tradisional',
-};
 
 const getFallbackForLocale = (locale: string): string[] => {
   const localeCode = locale as LocaleCode;
@@ -344,25 +322,9 @@ export const updateI18nStoreLabels = (): void => {
   const updatedLanguages = LOCALES.filter((l) =>
     LOCALE_CODES.includes(l.code),
   ).map((l) => {
-    // For Chinese with script variants, use script-specific translation key
-    let langKey = LANGUAGE_KEY_MAP[l.language];
-    let langName: string;
-
-    if (l.language === 'zh' && l.script) {
-      // Chinese with script (Hans or Hant)
-      const scriptKey = `zh-${l.script}` as const;
-      langKey = CHINESE_SCRIPT_KEY_MAP[scriptKey] || langKey;
-      langName = langKey ? i18next.t(langKey) : l.language;
-    } else {
-      langName = langKey ? i18next.t(langKey) : l.language;
-    }
-
-    const regionKey = `region_${l.region.toLowerCase()}`;
-    const regionName = i18next.t(regionKey);
-
     return {
       code: l.code,
-      label: `${langName} (${regionName})`,
+      label: getLocaleLabelCountry(l.code),
       flag: l.flag,
     };
   });

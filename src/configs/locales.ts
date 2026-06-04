@@ -477,10 +477,15 @@ export const getLocaleLabel = (localeCode: LocaleCode): string => {
 };
 
 /**
- * Generate locale label in format: "Native Language (Country)"
- * Example: "Bahasa Indonesia (Indonesia)", "English (United States)"
- * @param localeCode - The locale code to get label for
+ * Generate locale label in native language, with region code when the language
+ * has multiple configured regional variants.
  */
+const getLocaleDisplayRegion = (regionCode: RegionCode): string => {
+  if (regionCode === REGION_CODE.GB) return 'UK';
+
+  return regionCode;
+};
+
 export const getLocaleLabelCountry = (
   localeCode: LocaleCode,
 ): string => {
@@ -488,13 +493,15 @@ export const getLocaleLabelCountry = (
   if (!locale) return localeCode;
 
   const language = LANGUAGES.find(l => l.code === locale.language);
-  const region = REGIONS.find(r => r.code === locale.region);
 
   if (!language) return localeCode;
 
-  // Format: "Native Language Name (Country Name)"
-  const countryName = region?.name || locale.region;
-  return `${language.nativeName} (${countryName})`;
+  const nativeName = locale.language === LANGUAGE_CODE.ZH && locale.script
+    ? locale.script === SCRIPT_CODE.HANS ? '简体中文' : '繁體中文'
+    : language.nativeName;
+  const regionSuffix = ` (${getLocaleDisplayRegion(locale.region)})`;
+
+  return `${nativeName}${regionSuffix}`;
 };
 
 export const LOCALE = LOCALES.reduce((acc, locale) => {

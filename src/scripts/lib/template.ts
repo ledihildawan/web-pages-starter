@@ -123,7 +123,7 @@ const generateClientI18nScript = (
   const htmlEl = document.documentElement;
   const localeConfig = locales.find(l => l.code === savedLocale);
   const dir = localeConfig?.dir ?? 'ltr';
-  const ws = localeConfig?.writingSystem || 'latin';
+  const ws = (localeConfig?.writingSystem || 'latin').toLowerCase();
 
   htmlEl.setAttribute('dir', dir);
   htmlEl.setAttribute('lang', savedLocale);
