@@ -5,7 +5,6 @@ import {
   type CurrencyCode,
   DEFAULT_LOCALE,
   getLocaleLabelCountry,
-  getNumberingSystemScriptData,
   LOCALES,
   type LocaleCode,
   type LocaleConfig,
@@ -110,9 +109,6 @@ const generateClientI18nScript = (
     ]),
   ) as Record<string, JsonData>;
 
-  // Get numbering system to writing system mapping from master data
-  const { numberingSystemOrder, writingSystems } = getNumberingSystemScriptData();
-
   return `<script>
 (() => {
   const defaultLocale = ${JSON.stringify(lang)};
@@ -127,17 +123,11 @@ const generateClientI18nScript = (
   const htmlEl = document.documentElement;
   const localeConfig = locales.find(l => l.code === savedLocale);
   const dir = localeConfig?.dir ?? 'ltr';
-  const ns = localeConfig?.numberingSystem || 'latn';
-
-  const getScript = (n) => {
-    const m = { ${numberingSystemOrder.map((code, i) => `${code}:${i + 1}`).join(',')} };
-    const s = [${writingSystems.map((s) => `'${s}'`).join(',')}];
-    return s[m[n]] || 'latin';
-  };
+  const ws = localeConfig?.writingSystem || 'latin';
 
   htmlEl.setAttribute('dir', dir);
   htmlEl.setAttribute('lang', savedLocale);
-  htmlEl.setAttribute('data-script', getScript(ns));
+  htmlEl.setAttribute('data-script', ws);
   htmlEl.classList.toggle('is-rtl', dir === 'rtl');
 })();
 </script>`;

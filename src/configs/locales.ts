@@ -140,20 +140,28 @@ export const REGIONS = [
 ] as const;
 
 export const LANGUAGES = [
-  { code: 'id', name: 'Indonesian', nameId: 'Indonesia', nativeName: 'Bahasa Indonesia', family: 'Austronesian', script: 'Latin' },
-  { code: 'en', name: 'English', nameId: 'Inggris', nativeName: 'English', family: 'Germanic', script: 'Latin' },
-  { code: 'ja', name: 'Japanese', nameId: 'Jepang', nativeName: '日本語', family: 'Japonic', script: 'Japanese' },
-  { code: 'zh-Hans', name: 'Chinese (Simplified)', nameId: 'Tiongkok (Sederhana)', nativeName: '简体中文', family: 'Sinitic', script: 'Simplified Han' },
-  { code: 'zh-Hant', name: 'Chinese (Traditional)', nameId: 'Tiongkok (Tradisional)', nativeName: '繁體中文', family: 'Sinitic', script: 'Traditional Han' },
-  { code: 'ar', name: 'Arabic', nameId: 'Arab', nativeName: 'العربية', family: 'Semitic', script: 'Arabic' },
-  { code: 'es', name: 'Spanish', nameId: 'Spanyol', nativeName: 'Español', family: 'Romance', script: 'Latin' },
-  { code: 'pt', name: 'Portuguese', nameId: 'Portugis', nativeName: 'Português', family: 'Romance', script: 'Latin' },
-  { code: 'hi', name: 'Hindi', nameId: 'Hindi', nativeName: 'हिन्दी', family: 'Indo-Aryan', script: 'Devanagari' },
-  { code: 'ko', name: 'Korean', nameId: 'Korea', nativeName: '한국어', family: 'Koreanic', script: 'Hangul' },
-  { code: 'fr', name: 'French', nameId: 'Perancis', nativeName: 'Français', family: 'Romance', script: 'Latin' },
-  { code: 'de', name: 'German', nameId: 'Jerman', nativeName: 'Deutsch', family: 'Germanic', script: 'Latin' },
-  { code: 'ru', name: 'Russian', nameId: 'Rusia', nativeName: 'Русский', family: 'Slavic', script: 'Cyrillic' },
-  { code: 'th', name: 'Thai', nameId: 'Thailand', nativeName: 'ภาษาไทย', family: 'Kra-Dai', script: 'Thai' },
+  { code: 'id', name: 'Indonesian', nameId: 'Indonesia', nativeName: 'Bahasa Indonesia', family: 'Austronesian', defaultScript: 'Latn' },
+  { code: 'en', name: 'English', nameId: 'Inggris', nativeName: 'English', family: 'Germanic', defaultScript: 'Latn' },
+  { code: 'ja', name: 'Japanese', nameId: 'Jepang', nativeName: '日本語', family: 'Japonic', defaultScript: 'Jpan' },
+  { code: 'zh', name: 'Chinese', nameId: 'Tiongkok', nativeName: '中文', family: 'Sinitic', defaultScript: 'Hani' },
+  { code: 'ar', name: 'Arabic', nameId: 'Arab', nativeName: 'العربية', family: 'Semitic', defaultScript: 'Arab' },
+  { code: 'es', name: 'Spanish', nameId: 'Spanyol', nativeName: 'Español', family: 'Romance', defaultScript: 'Latn' },
+  { code: 'pt', name: 'Portuguese', nameId: 'Portugis', nativeName: 'Português', family: 'Romance', defaultScript: 'Latn' },
+  { code: 'hi', name: 'Hindi', nameId: 'Hindi', nativeName: 'हिन्दी', family: 'Indo-Aryan', defaultScript: 'Deva' },
+  { code: 'ko', name: 'Korean', nameId: 'Korea', nativeName: '한국어', family: 'Koreanic', defaultScript: 'Hang' },
+  { code: 'fr', name: 'French', nameId: 'Perancis', nativeName: 'Français', family: 'Romance', defaultScript: 'Latn' },
+  { code: 'de', name: 'German', nameId: 'Jerman', nativeName: 'Deutsch', family: 'Germanic', defaultScript: 'Latn' },
+  { code: 'ru', name: 'Russian', nameId: 'Rusia', nativeName: 'Русский', family: 'Slavic', defaultScript: 'Cyrl' },
+  { code: 'th', name: 'Thai', nameId: 'Thailand', nativeName: 'ภาษาไทย', family: 'Kra-Dai', defaultScript: 'Thai' },
+] as const;
+
+/**
+ * ISO 15924 Scripts for BCP 47 locale tags
+ * Format: language-script-region (e.g., zh-Hans-CN)
+ */
+export const SCRIPTS = [
+  { code: 'Hans', name: 'Simplified Han', nameId: 'Han Sederhana' },
+  { code: 'Hant', name: 'Traditional Han', nameId: 'Han Tradisional' },
 ] as const;
 
 export const REGION_CODES = REGIONS.map(r => r.code) as RegionCode[];
@@ -305,6 +313,7 @@ export const PLURAL_RULES = [
 
 export const NUMBERING_SYSTEM_CODES = NUMBERING_SYSTEMS.map(c => c.code) as NumberingSystemCode[];
 export const LANGUAGE_CODES = LANGUAGES.map(l => l.code) as LanguageCode[];
+export const SCRIPT_CODES = SCRIPTS.map(s => s.code) as ScriptCode[];
 export const FLAG_CODES = FLAGS.map(f => f.code) as FlagCode[];
 export const DIRECTION_CODES = DIRECTIONS.map(d => d.code) as DirectionCode[];
 export const CALENDAR_CODES = CALENDARS.map(c => c.code) as CalendarCode[];
@@ -324,18 +333,14 @@ export const LANGUAGE_CODE = LANGUAGE_CODES.reduce((acc, language) => {
   return Object.assign(acc, { [key]: language });
 }, {} as Record<string, LanguageCode>) as {
     [K in LanguageCode as Uppercase<K>]: K
-  } & {
-    ZH_HANS: 'zh-Hans';
-    ZH_HANT: 'zh-Hant';
   };
 
-// Explicitly ensure ZH_HANS and ZH_HANT exist at runtime
-if (!LANGUAGE_CODE.ZH_HANS) {
-  (LANGUAGE_CODE as Record<string, string>).ZH_HANS = 'zh-Hans';
-}
-if (!LANGUAGE_CODE.ZH_HANT) {
-  (LANGUAGE_CODE as Record<string, string>).ZH_HANT = 'zh-Hant';
-}
+export const SCRIPT_CODE = SCRIPT_CODES.reduce((acc, script) => {
+  const key = script.toUpperCase();
+  return Object.assign(acc, { [key]: script });
+}, {} as Record<string, ScriptCode>) as {
+    [K in ScriptCode as Uppercase<K>]: K
+  };
 
 export const FLAG_CODE = FLAG_CODES.reduce((acc, flag) => {
   const key = flag.toUpperCase();
@@ -384,49 +389,77 @@ export const PLURAL_RULE_CODE = PLURAL_RULE_CODES.reduce((acc, rule) => {
   ONE_FEW_MANY: 'one-few-many';
 };
 
+export const WRITING_SYSTEMS = NUMBERING_SYSTEMS.map(ns => ns.group) as WritingSystem[];
+export const WRITING_SYSTEM = WRITING_SYSTEMS.reduce((acc, ws) => {
+  return Object.assign(acc, { [ws]: ws });
+}, {} as Record<string, WritingSystem>) as {
+  LATIN: 'LATIN';
+  ARABIC: 'ARABIC';
+  DEVANAGARI: 'DEVANAGARI';
+  CJK: 'CJK';
+  CYRILLIC: 'CYRILLIC';
+  THAI: 'THAI';
+  BENGALI: 'BENGALI';
+  TAMIL: 'TAMIL';
+  TELUGU: 'TELUGU';
+  KANNADA: 'KANNADA';
+  MALAYALAM: 'MALAYALAM';
+  GUJARATI: 'GUJARATI';
+  GURMUKHI: 'GURMUKHI';
+  SINHALA: 'SINHALA';
+  GEORGIAN: 'GEORGIAN';
+  ARMENIAN: 'ARMENIAN';
+  ETHIOPIC: 'ETHIOPIC';
+  KHMER: 'KHMER';
+  LAO: 'LAO';
+  MYANMAR: 'MYANMAR';
+  GREEK: 'GREEK';
+  HEBREW: 'HEBREW';
+};
+
 export const LOCALES = [
-  { code: 'id-ID', language: LANGUAGE_CODE.ID, region: REGION_CODE.ID, flag: FLAG_CODE.ID, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.IDR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, timezone: TIMEZONE_CODE.ASIA_JAKARTA, timezoneOffset: 7, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.OTHER },
-  { code: 'en-US', language: LANGUAGE_CODE.EN, region: REGION_CODE.US, flag: FLAG_CODE.US, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.USD, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, timezone: TIMEZONE_CODE.AMERICA_NEW_YORK, timezoneOffset: -5, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'en-GB', language: LANGUAGE_CODE.EN, region: REGION_CODE.GB, flag: FLAG_CODE.GB, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.GBP, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, timezone: TIMEZONE_CODE.EUROPE_LONDON, timezoneOffset: 0, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'en-CA', language: LANGUAGE_CODE.EN, region: REGION_CODE.CA, flag: FLAG_CODE.CA, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.CAD, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, timezone: TIMEZONE_CODE.AMERICA_TORONTO, timezoneOffset: -5, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'en-AU', language: LANGUAGE_CODE.EN, region: REGION_CODE.AU, flag: FLAG_CODE.AU, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.AUD, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, timezone: TIMEZONE_CODE.AUSTRALIA_SYDNEY, timezoneOffset: 10, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'en-IN', language: LANGUAGE_CODE.EN, region: REGION_CODE.IN, flag: FLAG_CODE.IN, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.INR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, timezone: TIMEZONE_CODE.ASIA_KOLKATA, timezoneOffset: 5.5, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'en-NZ', language: LANGUAGE_CODE.EN, region: REGION_CODE.NZ, flag: FLAG_CODE.NZ, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.NZD, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, timezone: TIMEZONE_CODE.PACIFIC_AUCKLAND, timezoneOffset: 12, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'en-ZA', language: LANGUAGE_CODE.EN, region: REGION_CODE.ZA, flag: FLAG_CODE.ZA, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.ZAR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, timezone: TIMEZONE_CODE.AFRICA_JOHANNESBURG, timezoneOffset: 2, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'ja-JP', language: LANGUAGE_CODE.JA, region: REGION_CODE.JP, flag: FLAG_CODE.JP, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.JPY, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.JPAN, nativeDigits: false, timezone: TIMEZONE_CODE.ASIA_TOKYO, timezoneOffset: 9, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.OTHER },
-  { code: 'zh-Hans-CN', language: LANGUAGE_CODE.ZH_HANS, region: REGION_CODE.CN, flag: FLAG_CODE.CN, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.CNY, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.HANS, nativeDigits: false, timezone: TIMEZONE_CODE.ASIA_SHANGHAI, timezoneOffset: 8, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.OTHER },
-  { code: 'zh-Hans-SG', language: LANGUAGE_CODE.ZH_HANS, region: REGION_CODE.SG, flag: FLAG_CODE.SG, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.SGD, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.HANS, nativeDigits: false, timezone: TIMEZONE_CODE.ASIA_SINGAPORE, timezoneOffset: 8, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.OTHER },
-  { code: 'zh-Hans-MY', language: LANGUAGE_CODE.ZH_HANS, region: REGION_CODE.MY, flag: FLAG_CODE.MY, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.MYR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.HANS, nativeDigits: false, timezone: TIMEZONE_CODE.ASIA_KUALA_LUMPUR, timezoneOffset: 8, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.OTHER },
-  { code: 'zh-Hant-TW', language: LANGUAGE_CODE.ZH_HANT, region: REGION_CODE.TW, flag: FLAG_CODE.TW, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.TWD, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.HANT, nativeDigits: false, timezone: TIMEZONE_CODE.ASIA_TAIPEI, timezoneOffset: 8, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.OTHER },
-  { code: 'zh-Hant-HK', language: LANGUAGE_CODE.ZH_HANT, region: REGION_CODE.HK, flag: FLAG_CODE.HK, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.HKD, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.HANT, nativeDigits: false, timezone: TIMEZONE_CODE.ASIA_HONG_KONG, timezoneOffset: 8, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.OTHER },
-  { code: 'zh-Hant-MO', language: LANGUAGE_CODE.ZH_HANT, region: REGION_CODE.MO, flag: FLAG_CODE.MO, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.MOP, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.HANT, nativeDigits: false, timezone: TIMEZONE_CODE.ASIA_MACAU, timezoneOffset: 8, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.OTHER },
-  { code: 'ar-SA', language: LANGUAGE_CODE.AR, region: REGION_CODE.SA, flag: FLAG_CODE.SA, dir: DIRECTION_CODE.RTL, currency: CURRENCY_CODE.SAR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.ARAB, nativeDigits: true, timezone: TIMEZONE_CODE.ASIA_RIYADH, timezoneOffset: 3, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 6, pluralRules: PLURAL_RULE_CODE.ZERO_ONE_TWO_FEW_MANY_OTHER },
-  { code: 'ar-AE', language: LANGUAGE_CODE.AR, region: REGION_CODE.AE, flag: FLAG_CODE.AE, dir: DIRECTION_CODE.RTL, currency: CURRENCY_CODE.AED, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.ARAB, nativeDigits: true, timezone: TIMEZONE_CODE.ASIA_DUBAI, timezoneOffset: 4, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 6, pluralRules: PLURAL_RULE_CODE.ZERO_ONE_TWO_FEW_MANY_OTHER },
-  { code: 'ar-EG', language: LANGUAGE_CODE.AR, region: REGION_CODE.EG, flag: FLAG_CODE.EG, dir: DIRECTION_CODE.RTL, currency: CURRENCY_CODE.EGP, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.ARAB, nativeDigits: true, timezone: TIMEZONE_CODE.AFRICA_CAIRO, timezoneOffset: 2, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 6, pluralRules: PLURAL_RULE_CODE.ZERO_ONE_TWO_FEW_MANY_OTHER },
-  { code: 'ar-MA', language: LANGUAGE_CODE.AR, region: REGION_CODE.MA, flag: FLAG_CODE.MA, dir: DIRECTION_CODE.RTL, currency: CURRENCY_CODE.MAD, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.ARAB, nativeDigits: true, timezone: TIMEZONE_CODE.AFRICA_CASABLANCA, timezoneOffset: 0, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 6, pluralRules: PLURAL_RULE_CODE.ZERO_ONE_TWO_FEW_MANY_OTHER },
-  { code: 'ar-TN', language: LANGUAGE_CODE.AR, region: REGION_CODE.TN, flag: FLAG_CODE.TN, dir: DIRECTION_CODE.RTL, currency: CURRENCY_CODE.TND, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.ARAB, nativeDigits: true, timezone: TIMEZONE_CODE.AFRICA_TUNIS, timezoneOffset: 1, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 6, pluralRules: PLURAL_RULE_CODE.ZERO_ONE_TWO_FEW_MANY_OTHER },
-  { code: 'es-ES', language: LANGUAGE_CODE.ES, region: REGION_CODE.ES, flag: FLAG_CODE.ES, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.EUR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, timezone: TIMEZONE_CODE.EUROPE_MADRID, timezoneOffset: 1, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'es-MX', language: LANGUAGE_CODE.ES, region: REGION_CODE.MX, flag: FLAG_CODE.MX, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.MXN, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, timezone: TIMEZONE_CODE.AMERICA_MEXICO_CITY, timezoneOffset: -6, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'es-AR', language: LANGUAGE_CODE.ES, region: REGION_CODE.AR, flag: FLAG_CODE.AR, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.ARS, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, timezone: TIMEZONE_CODE.AMERICA_ARGENTINA_BUENOS_AIRES, timezoneOffset: -3, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'es-CO', language: LANGUAGE_CODE.ES, region: REGION_CODE.CO, flag: FLAG_CODE.CO, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.COP, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, timezone: TIMEZONE_CODE.AMERICA_BOGOTA, timezoneOffset: -5, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'es-PE', language: LANGUAGE_CODE.ES, region: REGION_CODE.PE, flag: FLAG_CODE.PE, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.PEN, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, timezone: TIMEZONE_CODE.AMERICA_LIMA, timezoneOffset: -5, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'pt-BR', language: LANGUAGE_CODE.PT, region: REGION_CODE.BR, flag: FLAG_CODE.BR, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.BRL, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, timezone: TIMEZONE_CODE.AMERICA_SAO_PAULO, timezoneOffset: -3, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'pt-PT', language: LANGUAGE_CODE.PT, region: REGION_CODE.PT, flag: FLAG_CODE.PT, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.EUR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, timezone: TIMEZONE_CODE.EUROPE_LISBON, timezoneOffset: 0, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'pt-AO', language: LANGUAGE_CODE.PT, region: REGION_CODE.AO, flag: FLAG_CODE.AO, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.AOA, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, timezone: TIMEZONE_CODE.AFRICA_LUANDA, timezoneOffset: 1, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'pt-MZ', language: LANGUAGE_CODE.PT, region: REGION_CODE.MZ, flag: FLAG_CODE.MZ, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.MZN, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, timezone: TIMEZONE_CODE.AFRICA_MAPUTO, timezoneOffset: 2, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'hi-IN', language: LANGUAGE_CODE.HI, region: REGION_CODE.IN, flag: FLAG_CODE.IN, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.INR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.DEVA, nativeDigits: true, timezone: TIMEZONE_CODE.ASIA_KOLKATA, timezoneOffset: 5.5, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'hi-NP', language: LANGUAGE_CODE.HI, region: REGION_CODE.NP, flag: FLAG_CODE.NP, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.NPR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.DEVA, nativeDigits: true, timezone: TIMEZONE_CODE.ASIA_KATHMANDU, timezoneOffset: 5.75, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'ko-KR', language: LANGUAGE_CODE.KO, region: REGION_CODE.KR, flag: FLAG_CODE.KR, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.KRW, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.KORE, nativeDigits: false, timezone: TIMEZONE_CODE.ASIA_SEOUL, timezoneOffset: 9, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.OTHER },
-  { code: 'ko-KP', language: LANGUAGE_CODE.KO, region: REGION_CODE.KP, flag: FLAG_CODE.KP, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.KPW, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.KORE, nativeDigits: false, timezone: TIMEZONE_CODE.ASIA_PYONGYANG, timezoneOffset: 9, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.OTHER },
-  { code: 'fr-FR', language: LANGUAGE_CODE.FR, region: REGION_CODE.FR, flag: FLAG_CODE.FR, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.EUR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, timezone: TIMEZONE_CODE.EUROPE_PARIS, timezoneOffset: 1, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'fr-CA', language: LANGUAGE_CODE.FR, region: REGION_CODE.CA, flag: FLAG_CODE.CA, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.CAD, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, timezone: TIMEZONE_CODE.AMERICA_MONTREAL, timezoneOffset: -5, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'fr-BE', language: LANGUAGE_CODE.FR, region: REGION_CODE.BE, flag: FLAG_CODE.BE, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.EUR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, timezone: TIMEZONE_CODE.EUROPE_BRUSSELS, timezoneOffset: 1, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'fr-CH', language: LANGUAGE_CODE.FR, region: REGION_CODE.CH, flag: FLAG_CODE.CH, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.CHF, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, timezone: TIMEZONE_CODE.EUROPE_ZURICH, timezoneOffset: 1, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'de-DE', language: LANGUAGE_CODE.DE, region: REGION_CODE.DE, flag: FLAG_CODE.DE, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.EUR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, timezone: TIMEZONE_CODE.EUROPE_BERLIN, timezoneOffset: 1, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'de-AT', language: LANGUAGE_CODE.DE, region: REGION_CODE.AT, flag: FLAG_CODE.AT, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.EUR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, timezone: TIMEZONE_CODE.EUROPE_VIENNA, timezoneOffset: 1, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'de-CH', language: LANGUAGE_CODE.DE, region: REGION_CODE.CH, flag: FLAG_CODE.CH, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.CHF, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, timezone: TIMEZONE_CODE.EUROPE_ZURICH, timezoneOffset: 1, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'ru-RU', language: LANGUAGE_CODE.RU, region: REGION_CODE.RU, flag: FLAG_CODE.RU, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.RUB, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.CYRL, nativeDigits: false, timezone: TIMEZONE_CODE.EUROPE_MOSCOW, timezoneOffset: 3, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_FEW_MANY },
-  { code: 'th-TH', language: LANGUAGE_CODE.TH, region: REGION_CODE.TH, flag: FLAG_CODE.TH, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.THB, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.THAI, nativeDigits: true, timezone: TIMEZONE_CODE.ASIA_BANGKOK, timezoneOffset: 7, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.OTHER },
+  { code: 'id-ID', language: LANGUAGE_CODE.ID, region: REGION_CODE.ID, flag: FLAG_CODE.ID, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.IDR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.ASIA_JAKARTA, timezoneOffset: 7, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.OTHER },
+  { code: 'en-US', language: LANGUAGE_CODE.EN, region: REGION_CODE.US, flag: FLAG_CODE.US, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.USD, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.AMERICA_NEW_YORK, timezoneOffset: -5, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
+  { code: 'en-GB', language: LANGUAGE_CODE.EN, region: REGION_CODE.GB, flag: FLAG_CODE.GB, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.GBP, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.EUROPE_LONDON, timezoneOffset: 0, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
+  { code: 'en-CA', language: LANGUAGE_CODE.EN, region: REGION_CODE.CA, flag: FLAG_CODE.CA, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.CAD, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.AMERICA_TORONTO, timezoneOffset: -5, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
+  { code: 'en-AU', language: LANGUAGE_CODE.EN, region: REGION_CODE.AU, flag: FLAG_CODE.AU, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.AUD, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.AUSTRALIA_SYDNEY, timezoneOffset: 10, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
+  { code: 'en-IN', language: LANGUAGE_CODE.EN, region: REGION_CODE.IN, flag: FLAG_CODE.IN, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.INR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.ASIA_KOLKATA, timezoneOffset: 5.5, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
+  { code: 'en-NZ', language: LANGUAGE_CODE.EN, region: REGION_CODE.NZ, flag: FLAG_CODE.NZ, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.NZD, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.PACIFIC_AUCKLAND, timezoneOffset: 12, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
+  { code: 'en-ZA', language: LANGUAGE_CODE.EN, region: REGION_CODE.ZA, flag: FLAG_CODE.ZA, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.ZAR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.AFRICA_JOHANNESBURG, timezoneOffset: 2, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
+  { code: 'ja-JP', language: LANGUAGE_CODE.JA, region: REGION_CODE.JP, flag: FLAG_CODE.JP, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.JPY, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.JPAN, nativeDigits: false, writingSystem: WRITING_SYSTEM.CJK, timezone: TIMEZONE_CODE.ASIA_TOKYO, timezoneOffset: 9, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.OTHER },
+  { code: 'zh-Hans-CN', language: LANGUAGE_CODE.ZH, script: SCRIPT_CODE.HANS, region: REGION_CODE.CN, flag: FLAG_CODE.CN, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.CNY, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.HANS, nativeDigits: false, writingSystem: WRITING_SYSTEM.CJK, timezone: TIMEZONE_CODE.ASIA_SHANGHAI, timezoneOffset: 8, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.OTHER },
+  { code: 'zh-Hans-SG', language: LANGUAGE_CODE.ZH, script: SCRIPT_CODE.HANS, region: REGION_CODE.SG, flag: FLAG_CODE.SG, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.SGD, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.HANS, nativeDigits: false, writingSystem: WRITING_SYSTEM.CJK, timezone: TIMEZONE_CODE.ASIA_SINGAPORE, timezoneOffset: 8, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.OTHER },
+  { code: 'zh-Hans-MY', language: LANGUAGE_CODE.ZH, script: SCRIPT_CODE.HANS, region: REGION_CODE.MY, flag: FLAG_CODE.MY, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.MYR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.HANS, nativeDigits: false, writingSystem: WRITING_SYSTEM.CJK, timezone: TIMEZONE_CODE.ASIA_KUALA_LUMPUR, timezoneOffset: 8, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.OTHER },
+  { code: 'zh-Hant-TW', language: LANGUAGE_CODE.ZH, script: SCRIPT_CODE.HANT, region: REGION_CODE.TW, flag: FLAG_CODE.TW, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.TWD, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.HANT, nativeDigits: false, writingSystem: WRITING_SYSTEM.CJK, timezone: TIMEZONE_CODE.ASIA_TAIPEI, timezoneOffset: 8, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.OTHER },
+  { code: 'zh-Hant-HK', language: LANGUAGE_CODE.ZH, script: SCRIPT_CODE.HANT, region: REGION_CODE.HK, flag: FLAG_CODE.HK, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.HKD, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.HANT, nativeDigits: false, writingSystem: WRITING_SYSTEM.CJK, timezone: TIMEZONE_CODE.ASIA_HONG_KONG, timezoneOffset: 8, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.OTHER },
+  { code: 'zh-Hant-MO', language: LANGUAGE_CODE.ZH, script: SCRIPT_CODE.HANT, region: REGION_CODE.MO, flag: FLAG_CODE.MO, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.MOP, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.HANT, nativeDigits: false, writingSystem: WRITING_SYSTEM.CJK, timezone: TIMEZONE_CODE.ASIA_MACAU, timezoneOffset: 8, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.OTHER },
+  { code: 'ar-SA', language: LANGUAGE_CODE.AR, region: REGION_CODE.SA, flag: FLAG_CODE.SA, dir: DIRECTION_CODE.RTL, currency: CURRENCY_CODE.SAR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.ARAB, nativeDigits: true, writingSystem: WRITING_SYSTEM.ARABIC, timezone: TIMEZONE_CODE.ASIA_RIYADH, timezoneOffset: 3, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 6, pluralRules: PLURAL_RULE_CODE.ZERO_ONE_TWO_FEW_MANY_OTHER },
+  { code: 'ar-AE', language: LANGUAGE_CODE.AR, region: REGION_CODE.AE, flag: FLAG_CODE.AE, dir: DIRECTION_CODE.RTL, currency: CURRENCY_CODE.AED, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.ARAB, nativeDigits: true, writingSystem: WRITING_SYSTEM.ARABIC, timezone: TIMEZONE_CODE.ASIA_DUBAI, timezoneOffset: 4, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 6, pluralRules: PLURAL_RULE_CODE.ZERO_ONE_TWO_FEW_MANY_OTHER },
+  { code: 'ar-EG', language: LANGUAGE_CODE.AR, region: REGION_CODE.EG, flag: FLAG_CODE.EG, dir: DIRECTION_CODE.RTL, currency: CURRENCY_CODE.EGP, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.ARAB, nativeDigits: true, writingSystem: WRITING_SYSTEM.ARABIC, timezone: TIMEZONE_CODE.AFRICA_CAIRO, timezoneOffset: 2, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 6, pluralRules: PLURAL_RULE_CODE.ZERO_ONE_TWO_FEW_MANY_OTHER },
+  { code: 'ar-MA', language: LANGUAGE_CODE.AR, region: REGION_CODE.MA, flag: FLAG_CODE.MA, dir: DIRECTION_CODE.RTL, currency: CURRENCY_CODE.MAD, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.ARAB, nativeDigits: true, writingSystem: WRITING_SYSTEM.ARABIC, timezone: TIMEZONE_CODE.AFRICA_CASABLANCA, timezoneOffset: 0, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 6, pluralRules: PLURAL_RULE_CODE.ZERO_ONE_TWO_FEW_MANY_OTHER },
+  { code: 'ar-TN', language: LANGUAGE_CODE.AR, region: REGION_CODE.TN, flag: FLAG_CODE.TN, dir: DIRECTION_CODE.RTL, currency: CURRENCY_CODE.TND, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.ARAB, nativeDigits: true, writingSystem: WRITING_SYSTEM.ARABIC, timezone: TIMEZONE_CODE.AFRICA_TUNIS, timezoneOffset: 1, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 6, pluralRules: PLURAL_RULE_CODE.ZERO_ONE_TWO_FEW_MANY_OTHER },
+  { code: 'es-ES', language: LANGUAGE_CODE.ES, region: REGION_CODE.ES, flag: FLAG_CODE.ES, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.EUR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.EUROPE_MADRID, timezoneOffset: 1, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
+  { code: 'es-MX', language: LANGUAGE_CODE.ES, region: REGION_CODE.MX, flag: FLAG_CODE.MX, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.MXN, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.AMERICA_MEXICO_CITY, timezoneOffset: -6, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
+  { code: 'es-AR', language: LANGUAGE_CODE.ES, region: REGION_CODE.AR, flag: FLAG_CODE.AR, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.ARS, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.AMERICA_ARGENTINA_BUENOS_AIRES, timezoneOffset: -3, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
+  { code: 'es-CO', language: LANGUAGE_CODE.ES, region: REGION_CODE.CO, flag: FLAG_CODE.CO, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.COP, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.AMERICA_BOGOTA, timezoneOffset: -5, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
+  { code: 'es-PE', language: LANGUAGE_CODE.ES, region: REGION_CODE.PE, flag: FLAG_CODE.PE, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.PEN, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.AMERICA_LIMA, timezoneOffset: -5, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
+  { code: 'pt-BR', language: LANGUAGE_CODE.PT, region: REGION_CODE.BR, flag: FLAG_CODE.BR, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.BRL, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.AMERICA_SAO_PAULO, timezoneOffset: -3, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
+  { code: 'pt-PT', language: LANGUAGE_CODE.PT, region: REGION_CODE.PT, flag: FLAG_CODE.PT, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.EUR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.EUROPE_LISBON, timezoneOffset: 0, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
+  { code: 'pt-AO', language: LANGUAGE_CODE.PT, region: REGION_CODE.AO, flag: FLAG_CODE.AO, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.AOA, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.AFRICA_LUANDA, timezoneOffset: 1, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
+  { code: 'pt-MZ', language: LANGUAGE_CODE.PT, region: REGION_CODE.MZ, flag: FLAG_CODE.MZ, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.MZN, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.AFRICA_MAPUTO, timezoneOffset: 2, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
+  { code: 'hi-IN', language: LANGUAGE_CODE.HI, region: REGION_CODE.IN, flag: FLAG_CODE.IN, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.INR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.DEVA, nativeDigits: true, writingSystem: WRITING_SYSTEM.DEVANAGARI, timezone: TIMEZONE_CODE.ASIA_KOLKATA, timezoneOffset: 5.5, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
+  { code: 'hi-NP', language: LANGUAGE_CODE.HI, region: REGION_CODE.NP, flag: FLAG_CODE.NP, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.NPR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.DEVA, nativeDigits: true, writingSystem: WRITING_SYSTEM.DEVANAGARI, timezone: TIMEZONE_CODE.ASIA_KATHMANDU, timezoneOffset: 5.75, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
+  { code: 'ko-KR', language: LANGUAGE_CODE.KO, region: REGION_CODE.KR, flag: FLAG_CODE.KR, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.KRW, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.KORE, nativeDigits: false, writingSystem: WRITING_SYSTEM.CJK, timezone: TIMEZONE_CODE.ASIA_SEOUL, timezoneOffset: 9, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.OTHER },
+  { code: 'ko-KP', language: LANGUAGE_CODE.KO, region: REGION_CODE.KP, flag: FLAG_CODE.KP, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.KPW, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.KORE, nativeDigits: false, writingSystem: WRITING_SYSTEM.CJK, timezone: TIMEZONE_CODE.ASIA_PYONGYANG, timezoneOffset: 9, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.OTHER },
+  { code: 'fr-FR', language: LANGUAGE_CODE.FR, region: REGION_CODE.FR, flag: FLAG_CODE.FR, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.EUR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.EUROPE_PARIS, timezoneOffset: 1, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
+  { code: 'fr-CA', language: LANGUAGE_CODE.FR, region: REGION_CODE.CA, flag: FLAG_CODE.CA, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.CAD, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.AMERICA_MONTREAL, timezoneOffset: -5, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
+  { code: 'fr-BE', language: LANGUAGE_CODE.FR, region: REGION_CODE.BE, flag: FLAG_CODE.BE, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.EUR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.EUROPE_BRUSSELS, timezoneOffset: 1, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
+  { code: 'fr-CH', language: LANGUAGE_CODE.FR, region: REGION_CODE.CH, flag: FLAG_CODE.CH, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.CHF, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.EUROPE_ZURICH, timezoneOffset: 1, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
+  { code: 'de-DE', language: LANGUAGE_CODE.DE, region: REGION_CODE.DE, flag: FLAG_CODE.DE, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.EUR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.EUROPE_BERLIN, timezoneOffset: 1, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
+  { code: 'de-AT', language: LANGUAGE_CODE.DE, region: REGION_CODE.AT, flag: FLAG_CODE.AT, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.EUR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.EUROPE_VIENNA, timezoneOffset: 1, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
+  { code: 'de-CH', language: LANGUAGE_CODE.DE, region: REGION_CODE.CH, flag: FLAG_CODE.CH, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.CHF, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.EUROPE_ZURICH, timezoneOffset: 1, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
+  { code: 'ru-RU', language: LANGUAGE_CODE.RU, region: REGION_CODE.RU, flag: FLAG_CODE.RU, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.RUB, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.CYRL, nativeDigits: false, writingSystem: WRITING_SYSTEM.CYRILLIC, timezone: TIMEZONE_CODE.EUROPE_MOSCOW, timezoneOffset: 3, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_FEW_MANY },
+  { code: 'th-TH', language: LANGUAGE_CODE.TH, region: REGION_CODE.TH, flag: FLAG_CODE.TH, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.THB, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.THAI, nativeDigits: true, writingSystem: WRITING_SYSTEM.THAI, timezone: TIMEZONE_CODE.ASIA_BANGKOK, timezoneOffset: 7, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.OTHER },
 ] as const;
 
 export const LOCALE_CODES = LOCALES.map(l => l.code) as LocaleCode[];
@@ -472,8 +505,10 @@ export const LOCALE = LOCALES.reduce((acc, locale) => {
   };
 
 const LOCALE_FALLBACK_TARGETS = {
-  [LANGUAGE_CODE.ZH_HANS]: { [REGION_CODE.SG]: [REGION_CODE.MY] },
-  [LANGUAGE_CODE.ZH_HANT]: { [REGION_CODE.HK]: [REGION_CODE.MO] },
+  [LANGUAGE_CODE.ZH]: {
+    'Hans': { [REGION_CODE.CN]: [REGION_CODE.SG, REGION_CODE.MY] },
+    'Hant': { [REGION_CODE.TW]: [REGION_CODE.HK, REGION_CODE.MO] },
+  },
   [LANGUAGE_CODE.EN]: {
     [REGION_CODE.GB]: [REGION_CODE.ZA, REGION_CODE.IE, REGION_CODE.SG, REGION_CODE.MY, REGION_CODE.HK],
     [REGION_CODE.AU]: [REGION_CODE.NZ, REGION_CODE.FJ, REGION_CODE.PG, REGION_CODE.CK, REGION_CODE.TO, REGION_CODE.WS],
@@ -509,13 +544,26 @@ const LOCALE_FALLBACK_TARGETS = {
 
 export const LOCALE_FALLBACKS: Record<string, LocaleCode> = Object.entries(
   LOCALE_FALLBACK_TARGETS,
-).reduce((acc, [lang, targets]) => {
-  Object.entries(targets).forEach(([region, sources]) => {
-    const targetLocale = `${lang}-${region}` as LocaleCode;
-    sources.forEach((source: RegionCode) => {
-      acc[`${lang}-${source}`] = targetLocale;
+).reduce((acc, [lang, scriptTargets]) => {
+  // For Chinese: lang = 'zh', scriptTargets = { 'Hans': {...}, 'Hant': {...} }
+  if (typeof scriptTargets === 'object' && 'Hans' in scriptTargets) {
+    Object.entries(scriptTargets).forEach(([script, targets]) => {
+      Object.entries(targets).forEach(([region, sources]) => {
+        const targetLocale = `${lang}-${script}-${region}` as LocaleCode;
+        sources.forEach((source: RegionCode) => {
+          acc[`${lang}-${script}-${source}`] = targetLocale;
+        });
+      });
     });
-  });
+  } else {
+    // For other languages without script
+    Object.entries(scriptTargets).forEach(([region, sources]) => {
+      const targetLocale = `${lang}-${region}` as LocaleCode;
+      sources.forEach((source: RegionCode) => {
+        acc[`${lang}-${source}`] = targetLocale;
+      });
+    });
+  }
   return acc;
 }, {} as Record<string, LocaleCode>);
 
@@ -523,6 +571,8 @@ export type LocaleCode = typeof LOCALES[number]['code'];
 export type LocaleConfig = (typeof LOCALES)[number];
 export type LanguageCode = typeof LANGUAGES[number]['code'];
 export type LanguageConfig = (typeof LANGUAGES)[number];
+export type ScriptCode = typeof SCRIPTS[number]['code'];
+export type ScriptConfig = (typeof SCRIPTS)[number];
 export type RegionCode = typeof REGIONS[number]['code'];
 export type RegionConfig = (typeof REGIONS)[number];
 export type CurrencyCode = typeof CURRENCIES[number]['code'];
@@ -539,34 +589,6 @@ export type PluralRuleCode = typeof PLURAL_RULES[number]['code'];
 export type PluralRuleConfig = (typeof PLURAL_RULES)[number];
 export type NumberingSystemCode = typeof NUMBERING_SYSTEMS[number]['code'];
 export type WritingSystem = typeof NUMBERING_SYSTEMS[number]['group'];
-
-export const WRITING_SYSTEMS = NUMBERING_SYSTEMS.map(ns => ns.group) as WritingSystem[];
-export const WRITING_SYSTEM = WRITING_SYSTEMS.reduce((acc, ws) => {
-  return Object.assign(acc, { [ws]: ws });
-}, {} as Record<string, WritingSystem>) as {
-  LATIN: 'LATIN';
-  ARABIC: 'ARABIC';
-  DEVANAGARI: 'DEVANAGARI';
-  CJK: 'CJK';
-  CYRILLIC: 'CYRILLIC';
-  THAI: 'THAI';
-  BENGALI: 'BENGALI';
-  TAMIL: 'TAMIL';
-  TELUGU: 'TELUGU';
-  KANNADA: 'KANNADA';
-  MALAYALAM: 'MALAYALAM';
-  GUJARATI: 'GUJARATI';
-  GURMUKHI: 'GURMUKHI';
-  SINHALA: 'SINHALA';
-  GEORGIAN: 'GEORGIAN';
-  ARMENIAN: 'ARMENIAN';
-  ETHIOPIC: 'ETHIOPIC';
-  KHMER: 'KHMER';
-  LAO: 'LAO';
-  MYANMAR: 'MYANMAR';
-  GREEK: 'GREEK';
-  HEBREW: 'HEBREW';
-};
 
 // Lowercase writing systems for client-side script use
 export const WRITING_SYSTEMS_LOWER = NUMBERING_SYSTEMS.map(

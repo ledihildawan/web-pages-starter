@@ -42,8 +42,7 @@ const LANGUAGE_KEY_MAP: Record<string, string> = {
   [LANGUAGE_CODE.ID]: 'lang_indonesia',
   [LANGUAGE_CODE.EN]: 'lang_inggris',
   [LANGUAGE_CODE.JA]: 'lang_jepang',
-  'zh-Hans': 'lang_tiongkok_sederhana',
-  'zh-Hant': 'lang_tiongkok_tradisional',
+  [LANGUAGE_CODE.ZH]: 'lang_tiongkok',
   ar: 'lang_arab',
   es: 'lang_spanyol',
   pt: 'lang_portugis',
@@ -53,6 +52,12 @@ const LANGUAGE_KEY_MAP: Record<string, string> = {
   de: 'lang_jerman',
   ru: 'lang_rusia',
   th: 'lang_thailand',
+};
+
+// Map for Chinese script variants (language-script combination)
+const CHINESE_SCRIPT_KEY_MAP: Record<string, string> = {
+  'zh-Hans': 'lang_tiongkok_sederhana',
+  'zh-Hant': 'lang_tiongkok_tradisional',
 };
 
 const getFallbackForLocale = (locale: string): string[] => {
@@ -339,8 +344,18 @@ export const updateI18nStoreLabels = (): void => {
   const updatedLanguages = LOCALES.filter((l) =>
     LOCALE_CODES.includes(l.code),
   ).map((l) => {
-    const langKey = LANGUAGE_KEY_MAP[l.language];
-    const langName = langKey ? i18next.t(langKey) : l.language;
+    // For Chinese with script variants, use script-specific translation key
+    let langKey = LANGUAGE_KEY_MAP[l.language];
+    let langName: string;
+
+    if (l.language === 'zh' && l.script) {
+      // Chinese with script (Hans or Hant)
+      const scriptKey = `zh-${l.script}` as const;
+      langKey = CHINESE_SCRIPT_KEY_MAP[scriptKey] || langKey;
+      langName = langKey ? i18next.t(langKey) : l.language;
+    } else {
+      langName = langKey ? i18next.t(langKey) : l.language;
+    }
 
     const regionKey = `region_${l.region.toLowerCase()}`;
     const regionName = i18next.t(regionKey);

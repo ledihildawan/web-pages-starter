@@ -1,5 +1,5 @@
 
-import { DEFAULT_LOCALE, LOCALE_CODES, LOCALE_STORAGE_KEY } from '@/configs/locales';
+import { DEFAULT_LOCALE, LOCALE_CODES, LOCALE_FALLBACKS, LOCALE_STORAGE_KEY, type LocaleCode } from '@/configs/locales';
 import i18next, { type Resource } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
@@ -10,6 +10,44 @@ const getVars = (el: Element): Record<string, unknown> => {
   } catch {
     return {};
   }
+};
+
+/**
+ * Get fallback chain for a locale using explicit fallbacks or smart defaults
+ * Priority: explicit fallback → language-script-region → language → default
+ */
+const getFallbackForLocale = (locale: string): string[] => {
+  const localeCode = locale as LocaleCode;
+  if (LOCALE_CODES.includes(localeCode)) return [localeCode];
+
+  // Check explicit fallbacks (e.g., zh-Hans-MY → zh-Hans-CN → en-US)
+  const explicit = LOCALE_FALLBACKS[localeCode];
+  if (explicit) return [explicit, DEFAULT_LOCALE];
+
+  // For Chinese script variants without explicit fallback
+  if (locale.startsWith('zh-')) {
+    const parts = locale.split('-');
+    if (parts.length >= 2) {
+      // Try zh-Hans → zh-Hans-CN or zh-Hant → zh-Hant-TW
+      const scriptBase = parts.slice(0, 2).join('-');
+      const scriptFallback = LOCALE_CODES.find(c => c.startsWith(scriptBase));
+      if (scriptFallback) return [scriptFallback, DEFAULT_LOCALE];
+    }
+  }
+
+  // For other language variants, try to find base locale
+  const parts = locale.split('-');
+  const languageSubtag = parts[0];
+
+  // Try language-region match first (e.g., en-AU → en-GB)
+  const matched = LOCALE_CODES.find((c) => {
+    const cParts = c.split('-');
+    return cParts[0] === languageSubtag && cParts.length > 1;
+  });
+
+  if (matched) return [matched, DEFAULT_LOCALE];
+
+  return [DEFAULT_LOCALE];
 };
 
 export const translatePage = async (): Promise<void> => {
@@ -59,7 +97,7 @@ export const initI18n = async (): Promise<void> => {
   try {
     await i18next.use(LanguageDetector).init({
       resources,
-      fallbackLng: DEFAULT_LOCALE,
+      fallbackLng: getFallbackForLocale,
       supportedLngs: LOCALE_CODES,
       ns: ['common', pageID],
       defaultNS: 'common',

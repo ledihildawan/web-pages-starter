@@ -4,13 +4,8 @@ import {
   LOCALE_CODES,
   LOCALE_STORAGE_KEY,
   LOCALES,
-  NUMBERING_SYSTEM_TO_WRITING_SYSTEM,
   type LocaleCode,
-  type NumberingSystemCode,
 } from '@/configs/locales';
-
-const getWritingSystem = (ns: NumberingSystemCode): string =>
-  NUMBERING_SYSTEM_TO_WRITING_SYSTEM[ns] || 'latin';
 
 export function registerI18nStore(): void {
   if (typeof window === 'undefined' || !globalThis.Alpine) {
@@ -39,7 +34,7 @@ export function registerI18nStore(): void {
               const htmlEl = document.documentElement;
               htmlEl.setAttribute('lang', code);
               htmlEl.setAttribute('dir', locale.dir);
-              htmlEl.setAttribute('data-script', getWritingSystem(locale.numberingSystem));
+              htmlEl.setAttribute('data-script', locale.writingSystem);
               htmlEl.classList.toggle('is-rtl', locale.dir === 'rtl');
             }
 

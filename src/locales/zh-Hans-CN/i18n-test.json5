@@ -13,7 +13,7 @@
     "code": "语言代码",
     "currency": "货币",
     "direction": "文本方向",
-    "current_code": "zh-CN",
+    "current_code": "zh-Hans-CN",
     "current_currency": "CNY",
     "current_direction": "LTR (从左到右)"
   },
