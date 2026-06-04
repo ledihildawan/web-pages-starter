@@ -2,9 +2,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import type { I18nTranslationKeys } from '../../../generated/i18n';
 import {
-  getLocaleLabelCountry,
   type CurrencyCode,
   DEFAULT_LOCALE,
+  getLocaleLabelCountry,
+  getNumberingSystemScriptData,
   LOCALES,
   type LocaleCode,
   type LocaleConfig,
@@ -59,6 +60,9 @@ interface TemplateFormatOptions extends FormatOptions {
 const ROOT = process.cwd();
 const resolveRoot = (...args: string[]): string => path.resolve(ROOT, ...args);
 
+const escapeHtmlAttr = (value: string | number | boolean): string =>
+  String(value).replace(/"/g, '&quot;');
+
 export const getUsedComponents = (
   templatePath: string,
   found = new Set<string>(),
@@ -69,8 +73,7 @@ export const getUsedComponents = (
   const componentRegex =
     /(?:include|import|extends)\s+['"](?:components\/)?([\w-]+)\.njk['"]/g;
 
-  const matches = content.matchAll(componentRegex);
-  for (const match of matches) {
+  for (const match of content.matchAll(componentRegex)) {
     const compName = match[1];
     if (!found.has(compName)) {
       const compPath = resolveRoot(`${PATHS.SRC}/components/${compName}.njk`);
@@ -107,30 +110,34 @@ const generateClientI18nScript = (
     ]),
   ) as Record<string, JsonData>;
 
-  const langJson = JSON.stringify(lang);
-  const nameJson = JSON.stringify(name);
-  const componentsJson = JSON.stringify(usedComponents);
-  const dataJson = JSON.stringify(allI18nData);
-  const languagesJson = JSON.stringify(LOCALES);
+  // Get numbering system to writing system mapping from master data
+  const { numberingSystemOrder, writingSystems } = getNumberingSystemScriptData();
 
   return `<script>
 (() => {
-  const defaultLocale = ${langJson};
+  const defaultLocale = ${JSON.stringify(lang)};
   const savedLocale = localStorage.getItem('${LOCALE_STORAGE_KEY}') ?? defaultLocale;
-  const locales = ${languagesJson};
+  const locales = ${JSON.stringify(LOCALES)};
 
-  window.__PAGE_ID__ = ${nameJson};
-  window.__USED_COMPONENTS__ = ${componentsJson};
-  window.__I18N_DATA__ = ${dataJson};
+  window.__PAGE_ID__ = ${JSON.stringify(name)};
+  window.__USED_COMPONENTS__ = ${JSON.stringify(usedComponents)};
+  window.__I18N_DATA__ = ${JSON.stringify(allI18nData)};
   window.__SAVED_LOCALE__ = savedLocale;
 
   const htmlEl = document.documentElement;
   const localeConfig = locales.find(l => l.code === savedLocale);
   const dir = localeConfig?.dir ?? 'ltr';
+  const ns = localeConfig?.numberingSystem || 'latn';
+
+  const getScript = (n) => {
+    const m = { ${numberingSystemOrder.map((code, i) => `${code}:${i + 1}`).join(',')} };
+    const s = [${writingSystems.map((s) => `'${s}'`).join(',')}];
+    return s[m[n]] || 'latin';
+  };
 
   htmlEl.setAttribute('dir', dir);
   htmlEl.setAttribute('lang', savedLocale);
-
+  htmlEl.setAttribute('data-script', getScript(ns));
   htmlEl.classList.toggle('is-rtl', dir === 'rtl');
 })();
 </script>`;
@@ -138,8 +145,7 @@ const generateClientI18nScript = (
 
 const createI18nObject = (
   localeCode: LocaleCode,
-  _mergedLocales: JsonData,
-  _resolve: (jsonPath: string, vars?: Record<string, unknown>) => string,
+  resolveFn: (jsonPath: string, vars?: Record<string, unknown>) => string,
   normalizeI18nKey: (key: string) => { ns: string; clientKey: string },
 ) => {
   setLocale(localeCode);
@@ -160,26 +166,11 @@ const createI18nObject = (
     const varsJson = Object.keys(vars).length ? JSON.stringify(vars) : null;
 
     return {
-      v: _resolve(key, vars),
+      v: resolveFn(key, vars),
       k: `${ns}:${clientKey}` as I18nTranslationKeys,
       vars: varsJson,
     };
   };
-
-  const i18nFn = (
-    key: string | undefined,
-    vars: Record<string, unknown> = {},
-  ) => createItem(key, vars);
-
-  const getNormalizedKeyStr = (key: string) => {
-    const parts = normalizeI18nKey(key);
-    return `${parts.ns}:${parts.clientKey}` as I18nTranslationKeys;
-  };
-
-  const getValue = (
-    key: string | undefined,
-    vars: Record<string, unknown> = {},
-  ) => createItem(key, vars).v;
 
   const renderHtml = (
     content: string,
@@ -187,16 +178,32 @@ const createI18nObject = (
     className = '',
   ): string => {
     const attrs = Object.entries(dataAttrs)
-      .map(([k, v]) => ` data-${k}="${v}"`)
+      .map(([k, v]) => ` data-${k}="${escapeHtmlAttr(v)}"`)
       .join('');
     const classAttr = className ? ` class="${className}"` : '';
     return `<span${classAttr}${attrs}>${content}</span>`;
   };
 
+  const buildAttrs = (
+    base: Record<string, string | number | boolean>,
+    vars?: string | null,
+    nativeDigits?: boolean,
+  ): Record<string, string | number | boolean> => {
+    const result = { ...base };
+    if (vars) result['i18n-vars'] = vars;
+    if (nativeDigits) result['use-native'] = 'true';
+    return result;
+  };
+
+  const i18nFn = (
+    key: string | undefined,
+    vars: Record<string, unknown> = {},
+  ) => createItem(key, vars);
+
   return Object.assign(i18nFn, {
     t: (
       key: string | undefined,
-      vars?: Record<string, unknown>,
+      vars: Record<string, unknown> = {},
       options?: {
         raw?: boolean;
         native?: boolean;
@@ -204,7 +211,7 @@ const createI18nObject = (
         className?: string;
       },
     ) => {
-      const item = createItem(key, vars ?? {});
+      const item = createItem(key, vars);
       const translated = options?.native
         ? toNativeDigits(item.v, true)
         : options?.universal
@@ -213,15 +220,24 @@ const createI18nObject = (
 
       if (options?.raw) return translated;
 
-      const attrs: Record<string, string | number | boolean> = { i18n: item.k };
+      const attrs = buildAttrs(
+        { i18n: item.k },
+        item.vars?.replace(/"/g, '&quot;'),
+        options?.native ? true : undefined,
+      );
+
       if (options?.native) attrs['force-native'] = 'true';
       if (options?.universal) attrs['force-universal'] = 'true';
-      if (item.vars) attrs['i18n-vars'] = item.vars.replace(/"/g, '&quot;');
+
       return renderHtml(translated, attrs, options?.className);
     },
 
-    text: getValue,
-    html: getValue,
+    text: (key: string | undefined, vars: Record<string, unknown> = {}) =>
+      createItem(key, vars).v,
+
+    html: (key: string | undefined, vars: Record<string, unknown> = {}) =>
+      createItem(key, vars).v,
+
     attr: (
       key: string | undefined,
       attrName: string,
@@ -231,7 +247,7 @@ const createI18nObject = (
     plural: (
       key: string | undefined,
       count: number,
-      vars?: Record<string, unknown>,
+      vars: Record<string, unknown> = {},
       options?: { raw?: boolean; className?: string },
     ) => {
       if (!key) return '';
@@ -243,11 +259,11 @@ const createI18nObject = (
 
       if (options?.raw) return translated;
 
-      const attrs: Record<string, string | number | boolean> = {
-        'i18n-plural': item.k,
-        'i18n-count': count,
-      };
-      if (item.vars) attrs['i18n-vars'] = item.vars.replace(/"/g, '&quot;');
+      const attrs = buildAttrs(
+        { 'i18n-plural': item.k, 'i18n-count': count },
+        item.vars?.replace(/"/g, '&quot;'),
+      );
+
       return renderHtml(translated, attrs, options?.className);
     },
 
@@ -256,10 +272,11 @@ const createI18nObject = (
       if (options?.raw) return formatted;
       return renderHtml(
         formatted,
-        {
-          'format-number': value,
-          ...(options?.nativeDigits ? { 'use-native': 'true' } : {}),
-        },
+        buildAttrs(
+          { 'format-number': value },
+          undefined,
+          options?.nativeDigits,
+        ),
         options?.className,
       );
     },
@@ -273,11 +290,11 @@ const createI18nObject = (
       if (options?.raw) return formatted;
       return renderHtml(
         formatted,
-        {
-          'format-currency': value,
-          'currency-code': currency,
-          ...(options?.nativeDigits ? { 'use-native': 'true' } : {}),
-        },
+        buildAttrs(
+          { 'format-currency': value, 'currency-code': currency },
+          undefined,
+          options?.nativeDigits,
+        ),
         options?.className,
       );
     },
@@ -290,10 +307,11 @@ const createI18nObject = (
       if (options?.raw) return formatted;
       return renderHtml(
         formatted,
-        {
-          'format-percent': value,
-          ...(options?.nativeDigits ? { 'use-native': 'true' } : {}),
-        },
+        buildAttrs(
+          { 'format-percent': value },
+          undefined,
+          options?.nativeDigits,
+        ),
         options?.className,
       );
     },
@@ -398,10 +416,11 @@ const createI18nObject = (
       if (options?.raw) return formatted;
       return renderHtml(
         formatted,
-        {
-          'format-scientific': value,
-          ...(options?.nativeDigits ? { 'use-native': 'true' } : {}),
-        },
+        buildAttrs(
+          { 'format-scientific': value },
+          undefined,
+          options?.nativeDigits,
+        ),
         options?.className,
       );
     },
@@ -421,7 +440,10 @@ const createI18nObject = (
       if (options?.raw) return formatted;
       return renderHtml(
         formatted,
-        { 'format-list': items.length },
+        {
+          'format-list': '',
+          items: escapeHtmlAttr(JSON.stringify(items)),
+        },
         options?.className,
       );
     },
@@ -435,11 +457,11 @@ const createI18nObject = (
       if (options?.raw) return formatted;
       return renderHtml(
         formatted,
-        {
-          'format-unit': value,
-          unit,
-          ...(options?.nativeDigits ? { 'use-native': 'true' } : {}),
-        },
+        buildAttrs(
+          { 'format-unit': value, unit },
+          undefined,
+          options?.nativeDigits,
+        ),
         options?.className,
       );
     },
@@ -453,11 +475,11 @@ const createI18nObject = (
       if (options?.raw) return formatted;
       return renderHtml(
         formatted,
-        {
-          'convert-currency': value,
-          'target-currency': targetCurrency,
-          ...(options?.nativeDigits ? { 'use-native': 'true' } : {}),
-        },
+        buildAttrs(
+          { 'convert-currency': value, 'target-currency': targetCurrency },
+          undefined,
+          options?.nativeDigits,
+        ),
         options?.className,
       );
     },
@@ -489,11 +511,14 @@ const createI18nObject = (
       if (options?.raw) return formatted;
       return renderHtml(
         formatted,
-        {
-          'convert-local-price': JSON.stringify(plan),
-          'target-currency': targetCurrency,
-          ...(options?.nativeDigits ? { 'use-native': 'true' } : {}),
-        },
+        buildAttrs(
+          {
+            'local-price': escapeHtmlAttr(JSON.stringify(plan.pricing)),
+            'target-currency': targetCurrency,
+          },
+          undefined,
+          options?.nativeDigits,
+        ),
         options?.className,
       );
     },
@@ -506,9 +531,11 @@ const createI18nObject = (
       if (options?.raw) return formatted;
       return renderHtml(
         formatted,
-        {
-          ...(options?.nativeDigits ? { 'use-native': 'true' } : {}),
-        },
+        buildAttrs(
+          { 'local-price': escapeHtmlAttr(JSON.stringify(plan.pricing)) },
+          undefined,
+          options?.nativeDigits,
+        ),
         options?.className,
       );
     },
@@ -528,11 +555,15 @@ const createI18nObject = (
       if (options?.raw) return formatted;
       return renderHtml(
         formatted,
-        {
-          'discount-multiplier': discountMultiplier,
-          'target-currency': targetCurrency,
-          ...(options?.nativeDigits ? { 'use-native': 'true' } : {}),
-        },
+        buildAttrs(
+          {
+            'local-price': escapeHtmlAttr(JSON.stringify(plan.pricing)),
+            discount: discountMultiplier,
+            'target-currency': targetCurrency,
+          },
+          undefined,
+          options?.nativeDigits,
+        ),
         options?.className,
       );
     },
@@ -608,7 +639,6 @@ export const createTemplateParams = (
 ) => {
   const name = String(params.entryName || 'home');
   const lang = DEFAULT_LOCALE;
-  const isDev = process.env.NODE_ENV !== 'production';
 
   const templatePath = resolveRoot(`${PATHS.SRC}/pages/${name}/index.njk`);
   const usedComponents = getUsedComponents(templatePath);
@@ -623,14 +653,14 @@ export const createTemplateParams = (
     ),
   };
 
-  const _resolve = (
+  const resolve = (
     jsonPath: string,
     vars: Record<string, unknown> = {},
   ): string => {
     const val = getValueByPath(mergedLocales, jsonPath);
     let str = val !== undefined ? String(val) : jsonPath;
 
-    if (val === undefined && isDev) {
+    if (val === undefined && process.env.NODE_ENV !== 'production') {
       console.warn(`[i18n] Missing key "${jsonPath}" in locale "${lang}"`);
     }
 
@@ -654,18 +684,11 @@ export const createTemplateParams = (
     return { ns: 'common', clientKey: key };
   };
 
-  const i18n = createI18nObject(
-    lang,
-    mergedLocales,
-    _resolve,
-    normalizeI18nKey,
-  );
+  const i18n = createI18nObject(lang, resolve, normalizeI18nKey);
 
   const localeConfig: LocaleConfig | undefined = LOCALES.find(
     (l) => l.code === lang,
   );
-
-  const localeStorageKey = 'i18nextLocale' as const;
 
   const clientI18nScript = generateClientI18nScript(
     lang,
@@ -680,10 +703,11 @@ export const createTemplateParams = (
     ...params,
     lang,
     localeConfig,
-    localeStorageKey,
+    localeStorageKey: LOCALE_STORAGE_KEY,
     locales: LOCALES.map((l) => ({
       ...l,
       label: getLocaleLabelCountry(l.code),
+      flag: l.flag.toLowerCase(),
     })),
     clientI18nScript,
     page_id: name,

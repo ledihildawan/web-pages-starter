@@ -42,16 +42,16 @@ export const initI18n = async (): Promise<void> => {
   const rawData = window.__I18N_DATA__ || {};
   const resources: Resource = {};
 
-  for (const lng of Object.keys(rawData)) {
-    const data = rawData[lng];
-    resources[lng] = {
+  for (const locale of Object.keys(rawData)) {
+    const data = rawData[locale];
+    resources[locale] = {
       common: (data.common || {}) as Record<string, string>,
       [pageID]: (data.page || {}) as Record<string, string>,
     };
 
     if (data.comp) {
       for (const compName of Object.keys(data.comp)) {
-        resources[lng][`components/${compName}`] = data.comp[compName] as Record<string, string>;
+        resources[locale][`components/${compName}`] = data.comp[compName] as Record<string, string>;
       }
     }
   }

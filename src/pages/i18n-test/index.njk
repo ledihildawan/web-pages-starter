@@ -29,20 +29,28 @@
       </p>
 
       {# Quick Stats #}
-      <div class="flex items-center justify-center gap-8 md:gap-12 text-sm">
+      <div class="flex items-center justify-center gap-6 md:gap-10 text-sm">
         <div class="flex items-center gap-3">
           <span class="text-2xl">🌍</span>
           <div class="text-left">
-            <div class="text-2xl font-black text-white leading-none">12</div>
-            <div class="text-xs text-slate-400">{{ i18n.t('page.language_info.title')}}</div>
+            <div class="text-2xl font-black text-white leading-none tabular-nums">42</div>
+            <div class="text-xs text-slate-400">{{ i18n.t('page.language_info.languages')}}</div>
           </div>
         </div>
         <div class="w-px h-12 bg-white/10"></div>
         <div class="flex items-center gap-3">
           <span class="text-2xl">💱</span>
           <div class="text-left">
-            <div class="text-2xl font-black text-white leading-none">5</div>
-            <div class="text-xs text-slate-400">{{ i18n.t('page.currency.title')}}</div>
+            <div class="text-2xl font-black text-white leading-none tabular-nums">16</div>
+            <div class="text-xs text-slate-400">{{ i18n.t('page.currency.currencies')}}</div>
+          </div>
+        </div>
+        <div class="w-px h-12 bg-white/10"></div>
+        <div class="flex items-center gap-3">
+          <span class="text-2xl">🔄</span>
+          <div class="text-left">
+            <div class="text-2xl font-black text-white leading-none">Live</div>
+            <div class="text-xs text-slate-400">{{ i18n.t('page.language_info.switching')}}</div>
           </div>
         </div>
       </div>
@@ -54,16 +62,20 @@
     <div class="max-w-5xl mx-auto">
       <div class="flex items-center justify-center gap-4 md:gap-8 flex-wrap">
         <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/50 border border-white/5">
-          <span class="text-xs text-slate-400 uppercase tracking-wider">Code</span>
-          <span class="text-sm font-bold text-white tabular-nums">{{ i18n.t('page.language_info.current_code')}}</span>
+          <span class="text-xs text-slate-400 uppercase tracking-wider">Locale</span>
+          <span class="text-sm font-bold text-white tabular-nums">{{ lang }}</span>
         </div>
         <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
           <span class="text-xs text-slate-400 uppercase tracking-wider">Currency</span>
-          <span class="text-sm font-bold text-emerald-400 tabular-nums">{{ i18n.t('page.language_info.current_currency')}}</span>
+          <span class="text-sm font-bold text-emerald-400 tabular-nums">{{ localeConfig.currency }}</span>
         </div>
         <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/50 border border-white/5">
           <span class="text-xs text-slate-400 uppercase tracking-wider">Direction</span>
-          <span class="text-sm font-bold text-white">{{ i18n.t('page.language_info.current_direction')}}</span>
+          <span class="text-sm font-bold text-white">{{ localeConfig.dir }}</span>
+        </div>
+        <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/50 border border-white/5">
+          <span class="text-xs text-slate-400 uppercase tracking-wider">Native Digits</span>
+          <span class="text-sm font-bold text-white">{% if localeConfig.nativeDigits %}Enabled{% else %}Disabled{% endif %}</span>
         </div>
       </div>
     </div>
@@ -83,7 +95,7 @@
         {# Number Formatting #}
         <div class="group p-6 rounded-3xl bg-gradient-to-br from-violet-500/[0.08] to-transparent border border-violet-500/10 hover:border-violet-500/30 hover:shadow-xl hover:shadow-violet-500/10 transition-all duration-300">
           <div class="flex items-center gap-4 mb-6">
-            <div class="w-14 h-14 rounded-2xl bg-violet-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">#</div>
+            <div class="w-14 h-14 rounded-2xl bg-violet-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🔢</div>
             <h3 class="text-lg font-bold text-white">{{ i18n.t('page.numbers.title')}}</h3>
           </div>
           <div class="space-y-3">
@@ -146,7 +158,7 @@
         {# Missing Keys #}
         <div class="group p-6 rounded-3xl bg-gradient-to-br from-red-500/[0.08] to-transparent border border-red-500/10 hover:border-red-500/30 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300">
           <div class="flex items-center gap-4 mb-6">
-            <div class="w-14 h-14 rounded-2xl bg-red-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">!</div>
+            <div class="w-14 h-14 rounded-2xl bg-red-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">⚠️</div>
             <h3 class="text-lg font-bold text-white">{{ i18n.t('page.missing_keys.title')}}</h3>
           </div>
           <div class="space-y-2">
@@ -172,33 +184,7 @@
         <p class="text-slate-400 text-lg">{{ i18n.t('page.currency.description')}}</p>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-8">
-        {# Currency Conversion #}
-        <div class="p-8 rounded-3xl bg-slate-900/40 border border-white/5 hover:border-white/10 transition-all">
-          <div class="flex items-center gap-3 mb-8">
-            <div class="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center">
-              <span class="text-xl">💰</span>
-            </div>
-            <div>
-              <h3 class="text-lg font-bold text-white">IDR → Local Currency</h3>
-              <p class="text-sm text-slate-400">Real-time conversion</p>
-            </div>
-          </div>
-          <div class="space-y-4">
-            {% for price in page.currencies %}
-              {% if loop.index <= page.display.max_currencies %}
-              <div class="flex items-center justify-between py-4 border-b border-white/5 last:border-0">
-                <div class="flex items-center gap-4">
-                  <span class="text-sm text-slate-400">{{ i18n.t('page.' + price.label)}}</span>
-                  <span class="text-sm font-mono text-slate-400 tabular-nums">{{ i18n.formatNumber(price.val_idr)}}</span>
-                </div>
-                <span class="text-2xl font-black text-emerald-400 tabular-nums">{{ i18n.convertCurrency(price.val_idr)}}</span>
-              </div>
-              {% endif %}
-            {% endfor %}
-          </div>
-        </div>
-
+      <div class="max-w-3xl mx-auto">
         {# Currency Comparison #}
         <div class="p-8 rounded-3xl bg-slate-900/40 border border-white/5 hover:border-white/10 transition-all">
           <div class="flex items-center gap-3 mb-8">
@@ -211,14 +197,14 @@
             </div>
           </div>
           <div class="text-center mb-8 p-6 rounded-2xl bg-violet-500/5">
-            <div class="text-4xl font-black text-white mb-2">{{ i18n.formatCurrency(page.display.currency_comparison_base, 'IDR')}}</div>
+            <div class="text-4xl font-black text-white mb-2">{{ i18n.formatCurrency(page.display.currency_comparison_base, 'USD', {raw: true})}}</div>
             <div class="text-sm text-slate-400">{{ i18n.t('page.currency_comparison.base_price')}}</div>
           </div>
           <div class="grid grid-cols-2 gap-3">
             {% for curr in page.display.currency_comparison_currencies %}
               <div class="p-4 rounded-xl bg-slate-800/30 border border-white/5 hover:border-white/10 transition-all text-center">
-                <div class="text-xs text-slate-400 mb-2">{{ i18n.t('page.currency_comparison.' + curr)}}</div>
-                <div class="text-lg font-black tabular-nums {% if curr == 'usd' %}text-emerald-400{% elif curr == 'jpy' %}text-fuchsia-400{% elif curr == 'cny' %}text-amber-400{% else %}text-rose-400{% endif %}">{{ i18n.convertCurrency(page.display.currency_comparison_base, curr | upper)}}</div>
+                <div class="text-xs text-slate-400 mb-2">{{ i18n.t('page.currency_comparison.' + curr | lower)}}</div>
+                <div class="text-lg font-black tabular-nums {% if curr == 'USD' %}text-emerald-400{% elif curr == 'JPY' %}text-fuchsia-400{% elif curr == 'CNY' %}text-amber-400{% else %}text-rose-400{% endif %}">{{ i18n.convertCurrency(page.display.currency_comparison_base, curr)}}</div>
               </div>
             {% endfor %}
           </div>
@@ -240,7 +226,10 @@
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {# Percentages #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-emerald-500/20 hover:shadow-lg hover:shadow-emerald-500/5 transition-all">
-          <div class="text-xs text-slate-400 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.percentages')}}</div>
+          <div class="flex items-center gap-2 mb-4">
+            <span class="text-lg">%</span>
+            <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.advanced.percentages')}}</span>
+          </div>
           <div class="space-y-3">
             {% for pct in page.percentages %}
               {% if loop.index <= page.display.max_percentages %}
@@ -255,7 +244,10 @@
 
         {# Bytes #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-violet-500/20 hover:shadow-lg hover:shadow-violet-500/5 transition-all">
-          <div class="text-xs text-slate-400 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.bytes')}}</div>
+          <div class="flex items-center gap-2 mb-4">
+            <span class="text-lg">💾</span>
+            <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.advanced.bytes')}}</span>
+          </div>
           <div class="space-y-3">
             {% for byte in page.bytes %}
               {% if loop.index <= page.display.max_bytes %}
@@ -270,7 +262,10 @@
 
         {# Ordinals #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-rose-500/20 hover:shadow-lg hover:shadow-rose-500/5 transition-all">
-          <div class="text-xs text-slate-400 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.ordinals')}}</div>
+          <div class="flex items-center gap-2 mb-4">
+            <span class="text-lg">🥇</span>
+            <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.advanced.ordinals')}}</span>
+          </div>
           <div class="space-y-3">
             {% for ord in page.ordinals %}
               {% if loop.index <= page.display.max_ordinals %}
@@ -285,7 +280,10 @@
 
         {# Cardinals #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-orange-500/20 hover:shadow-lg hover:shadow-orange-500/5 transition-all">
-          <div class="text-xs text-slate-400 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.cardinals')}}</div>
+          <div class="flex items-center gap-2 mb-4">
+            <span class="text-lg">🔢</span>
+            <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.advanced.cardinals')}}</span>
+          </div>
           <div class="space-y-3">
             {% for card in page.cardinals %}
               {% if loop.index <= page.display.max_cardinals %}
@@ -300,7 +298,10 @@
 
         {# Scientific #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-cyan-500/20 hover:shadow-lg hover:shadow-cyan-500/5 transition-all">
-          <div class="text-xs text-slate-400 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.scientific')}}</div>
+          <div class="flex items-center gap-2 mb-4">
+            <span class="text-lg">🔬</span>
+            <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.advanced.scientific')}}</span>
+          </div>
           <div class="space-y-3">
             {% for sci in page.scientific %}
               {% if loop.index <= page.display.max_scientific %}
@@ -315,7 +316,10 @@
 
         {# Abbreviated #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-lime-500/20 hover:shadow-lg hover:shadow-lime-500/5 transition-all">
-          <div class="text-xs text-slate-400 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.abbreviated')}}</div>
+          <div class="flex items-center gap-2 mb-4">
+            <span class="text-lg">📊</span>
+            <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.advanced.abbreviated')}}</span>
+          </div>
           <div class="space-y-3">
             {% for abb in page.abbreviated %}
               {% if loop.index <= page.display.max_abbreviated %}
@@ -330,7 +334,10 @@
 
         {# Date Formats #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-indigo-500/20 hover:shadow-lg hover:shadow-indigo-500/5 transition-all">
-          <div class="text-xs text-slate-400 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.date_formats')}}</div>
+          <div class="flex items-center gap-2 mb-4">
+            <span class="text-lg">📅</span>
+            <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.advanced.date_formats')}}</span>
+          </div>
           <div class="space-y-3">
             {% for dateFmt in page.date_formats %}
               <div class="flex justify-between items-baseline">
@@ -343,7 +350,10 @@
 
         {# Time Formats #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-purple-500/20 hover:shadow-lg hover:shadow-purple-500/5 transition-all">
-          <div class="text-xs text-slate-400 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.time_formats')}}</div>
+          <div class="flex items-center gap-2 mb-4">
+            <span class="text-lg">🕐</span>
+            <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.advanced.time_formats')}}</span>
+          </div>
           <div class="space-y-3">
             {% for timeFmt in page.time_formats %}
               <div class="flex justify-between items-baseline">
@@ -356,7 +366,10 @@
 
         {# Durations #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-teal-500/20 hover:shadow-lg hover:shadow-teal-500/5 transition-all">
-          <div class="text-xs text-slate-400 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.durations')}}</div>
+          <div class="flex items-center gap-2 mb-4">
+            <span class="text-lg">⏱️</span>
+            <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.advanced.durations')}}</span>
+          </div>
           <div class="space-y-3">
             {% for dur in page.durations %}
               {% if loop.index <= page.display.max_durations %}
@@ -371,7 +384,10 @@
 
         {# Relative Time #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-pink-500/20 hover:shadow-lg hover:shadow-pink-500/5 transition-all">
-          <div class="text-xs text-slate-400 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.relative_time')}}</div>
+          <div class="flex items-center gap-2 mb-4">
+            <span class="text-lg">⏰</span>
+            <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.advanced.relative_time')}}</span>
+          </div>
           <div class="space-y-3">
             {% for rel in page.relative_time %}
               <div class="flex justify-between items-baseline">
@@ -384,7 +400,10 @@
 
         {# Lists #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-amber-500/20 hover:shadow-lg hover:shadow-amber-500/5 transition-all">
-          <div class="text-xs text-slate-400 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.lists')}}</div>
+          <div class="flex items-center gap-2 mb-4">
+            <span class="text-lg">📝</span>
+            <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.advanced.lists')}}</span>
+          </div>
           <div class="space-y-3">
             {% for lst in page.lists %}
               {% if loop.index <= page.display.max_lists %}
@@ -396,7 +415,10 @@
 
         {# Regional Pricing #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-emerald-500/20 hover:shadow-lg hover:shadow-emerald-500/5 transition-all">
-          <div class="text-xs text-slate-400 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.regional_pricing')}}</div>
+          <div class="flex items-center gap-2 mb-4">
+            <span class="text-lg">💵</span>
+            <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.advanced.regional_pricing')}}</span>
+          </div>
           <div class="space-y-3">
             {% for plan in page.regional_pricing %}
               <div class="flex justify-between items-baseline">

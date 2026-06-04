@@ -28,22 +28,34 @@
   },
   "currency": {
     "title": "통화 서식",
-    "description": "USD 가격이 활성 언어 통화로 변환됩니다.",
+    "description": "IDR 가격이 활성 언어 통화로 변환됩니다.",
     "small": "작음",
     "medium": "중간",
     "large": "큼",
     "enterprise": "엔터프라이즈",
-    "base": "USD (기본)"
+    "base": "IDR (기본)"
   },
   "currency_comparison": {
     "title": "통화 비교",
-    "description": "지원되는 모든 통화에서 동일한 가격($99 USD).",
+    "description": "지원되는 모든 통화에서 동일한 가격.",
     "base_price": "기본 가격",
-    "idr": "IDR",
-    "usd": "USD",
-    "jpy": "JPY",
+    "aed": "AED 디르함",
+    "aud": "호주 달러",
+    "brl": "브라질 헤알",
+    "cad": "캐나다 달러",
+    "chf": "스위스 프랑",
     "cny": "CNY",
-    "sar": "SAR"
+    "eur": "유로",
+    "gbp": "영국 파운드",
+    "idr": "IDR",
+    "inr": "인도 루피",
+    "jpy": "JPY",
+    "krw": "원",
+    "mxn": "멕시코 페소",
+    "sar": "SAR",
+    "sgd": "싱가포르 달러",
+    "usd": "USD",
+    "zar": "남아프리카 공화국 랜드"
   },
   "pluralization": {
     "title": "복수화",

@@ -20,6 +20,32 @@ const LANGUAGE_FONT_LOADERS: Readonly<Partial<Record<NumberingSystemCode, FontLo
     import('@fontsource/inter/cyrillic-900.css'),
   ]),
   [NUMBERING_SYSTEM_CODE.THAI]: () => import('@fontsource-variable/noto-sans-thai/index.css'),
+  // South Asian scripts
+  [NUMBERING_SYSTEM_CODE.BENG]: () => import('@fontsource-variable/noto-sans-bengali/index.css'),
+  [NUMBERING_SYSTEM_CODE.TAML]: () => import('@fontsource-variable/noto-sans-tamil/index.css'),
+  [NUMBERING_SYSTEM_CODE.TELU]: () => import('@fontsource-variable/noto-sans-telugu/index.css'),
+  [NUMBERING_SYSTEM_CODE.KNADA]: () => import('@fontsource-variable/noto-sans-kannada/index.css'),
+  [NUMBERING_SYSTEM_CODE.MLYM]: () => import('@fontsource-variable/noto-sans-malayalam/index.css'),
+  [NUMBERING_SYSTEM_CODE.GUJR]: () => import('@fontsource-variable/noto-sans-gujarati/index.css'),
+  [NUMBERING_SYSTEM_CODE.GURU]: () => import('@fontsource-variable/noto-sans-gurmukhi/index.css'),
+  [NUMBERING_SYSTEM_CODE.SINH]: () => import('@fontsource-variable/noto-sans-sinhala/index.css'),
+  // Southeast Asian scripts
+  [NUMBERING_SYSTEM_CODE.KHMR]: () => import('@fontsource-variable/noto-sans-khmer/index.css'),
+  [NUMBERING_SYSTEM_CODE.LAOO]: () => import('@fontsource-variable/noto-sans-lao/index.css'),
+  [NUMBERING_SYSTEM_CODE.MYM]: () => import('@fontsource-variable/noto-sans-myanmar/index.css'),
+  // Middle Eastern scripts (Inter already includes Hebrew & Greek support)
+  [NUMBERING_SYSTEM_CODE.HEBR]: () => Promise.all([
+    import('@fontsource/inter/400.css'),
+    import('@fontsource/inter/700.css'),
+  ]),
+  [NUMBERING_SYSTEM_CODE.GREK]: () => Promise.all([
+    import('@fontsource/inter/400.css'),
+    import('@fontsource/inter/700.css'),
+  ]),
+  // Other scripts
+  [NUMBERING_SYSTEM_CODE.GEOR]: () => import('@fontsource-variable/noto-sans-georgian/index.css'),
+  [NUMBERING_SYSTEM_CODE.ETHI]: () => import('@fontsource-variable/noto-sans-ethiopic/index.css'),
+  [NUMBERING_SYSTEM_CODE.ARMN]: () => import('@fontsource-variable/noto-sans-armenian/index.css'),
 };
 
 const isProd = process.env.NODE_ENV === 'production';

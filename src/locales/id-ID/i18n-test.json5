@@ -27,23 +27,34 @@
     "raw": "Asli"
   },
   "currency": {
-    "title": "Format Mata Uang",
-    "description": "Harga dalam USD dikonversi ke mata uang bahasa aktif.",
+    "title": "Konversi Mata Uang",
+    "description": "Harga dalam IDR dikonversi ke mata uang bahasa yang aktif.",
     "small": "Kecil",
     "medium": "Sedang",
     "large": "Besar",
-    "enterprise": "Enterprise",
-    "base": "USD (Dasar)"
+    "enterprise": "Enterprise"
   },
   "currency_comparison": {
     "title": "Perbandingan Mata Uang",
-    "description": "Harga yang sama ($99 USD) dalam semua mata uang yang didukung.",
-    "base_price": "Harga Dasar",
-    "idr": "IDR",
-    "usd": "USD",
-    "jpy": "JPY",
-    "cny": "CNY",
-    "sar": "SAR"
+    "description": "Harga yang sama dalam berbagai mata uang yang didukung.",
+    "base_price": "Harga Dasar (USD)",
+    "aed": "Dirham UAE",
+    "aud": "Dolar Australia",
+    "brl": "Real Brasil",
+    "cad": "Dolar Kanada",
+    "chf": "Franc Swiss",
+    "cny": "Yuan Cina",
+    "eur": "Euro",
+    "gbp": "Pound Sterling",
+    "idr": "Rupiah",
+    "inr": "Rupia India",
+    "jpy": "Yen Jepang",
+    "krw": "Won Korea",
+    "mxn": "Peso Meksiko",
+    "sar": "Riyal Saudi",
+    "sgd": "Dolar Singapura",
+    "usd": "Dolar AS",
+    "zar": "Rand Afrika Selatan"
   },
   "pluralization": {
     "title": "Pluralisasi",
@@ -64,14 +75,14 @@
     "submit": "Kirim"
   },
   "missing_keys": {
-    "title": "Missing Key Handler",
-    "description": "Kunci yang tidak ditemukan akan ditampilkan dalam kurung siku."
+    "title": "Penangan Kunci Hilang",
+    "description": "Kunci terjemahan yang tidak ditemukan akan ditampilkan dalam kurung siku."
   },
   "html_content": {
     "title": "Konten HTML",
-    "description": "Translasi dapat menyertakan tag HTML untuk styling.",
-    "example": "Ini adalah contoh teks dengan <span class='text-emerald-400'>highlight warna</span> dan <strong>tebal</strong>.",
-    "note": "Perhatikan: HTML dalam translasi harus memiliki satu elemen root."
+    "description": "Terjemahan dapat menyertakan tag HTML untuk formatting.",
+    "example": "Ini adalah contoh teks dengan <span class='text-emerald-400'>highlight warna</span> dan <strong>teks tebal</strong>.",
+    "note": "Catatan: Tag HTML dalam terjemahan harus berada dalam satu elemen pembungkus."
   },
   "switcher": {
     "title": "Ganti Bahasa",
@@ -120,10 +131,10 @@
     "pro_plan": "Paket Pro",
     "discount_20": "Diskon 20%",
     "number_modes": "Mode Angka",
-    "number_modes_desc": "Demonstrasi tNative (native digits) dan tUniversal (universal 0-9).",
-    "native_label": "Native (٠١٢٣٤)",
+    "number_modes_desc": "Perbandingan format digit asli (٠١٢٣٤) dan format universal (0-9).",
+    "native_label": "Digit Asli (٠١٢٣٤)",
     "universal_label": "Universal (0-9)",
-    "plain_label": "Biasa (auto)"
+    "plain_label": "Otomatis"
   },
   "template_macros": {
     "title": "Template Macros",

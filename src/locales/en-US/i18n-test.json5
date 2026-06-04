@@ -27,23 +27,34 @@
     "raw": "Raw"
   },
   "currency": {
-    "title": "Currency Formatting",
-    "description": "Prices in USD converted to active language currency.",
+    "title": "Currency Conversion",
+    "description": "Prices in IDR converted to active language currency.",
     "small": "Small",
     "medium": "Medium",
     "large": "Large",
-    "enterprise": "Enterprise",
-    "base": "USD (Base)"
+    "enterprise": "Enterprise"
   },
   "currency_comparison": {
     "title": "Currency Comparison",
-    "description": "Same price ($99 USD) in all supported currencies.",
-    "base_price": "Base Price",
-    "idr": "IDR",
-    "usd": "USD",
-    "jpy": "JPY",
-    "cny": "CNY",
-    "sar": "SAR"
+    "description": "Same price in different supported currencies.",
+    "aed": "UAE Dirham",
+    "aud": "Australian Dollar",
+    "base_price": "Base Price (USD)",
+    "brl": "Brazilian Real",
+    "cad": "Canadian Dollar",
+    "chf": "Swiss Franc",
+    "cny": "Chinese Yuan",
+    "eur": "Euro",
+    "gbp": "British Pound",
+    "idr": "Indonesian Rupiah",
+    "inr": "Indian Rupee",
+    "jpy": "Japanese Yen",
+    "krw": "Korean Won",
+    "mxn": "Mexican Peso",
+    "sar": "Saudi Riyal",
+    "sgd": "Singapore Dollar",
+    "usd": "US Dollar",
+    "zar": "South African Rand"
   },
   "pluralization": {
     "title": "Pluralization",
@@ -69,9 +80,9 @@
   },
   "html_content": {
     "title": "HTML Content",
-    "description": "Translations can include HTML tags for styling.",
+    "description": "Translations can include HTML tags for formatting.",
     "example": "This is an example with <span class='text-emerald-400'>colored highlight</span> and <strong>bold text</strong>.",
-    "note": "Note: HTML in translations must have a single root element."
+    "note": "Note: HTML tags in translations must be wrapped in a single container element."
   },
   "switcher": {
     "title": "Switch Language",
@@ -120,10 +131,10 @@
     "pro_plan": "Pro Plan",
     "discount_20": "20% Discount",
     "number_modes": "Number Modes",
-    "number_modes_desc": "Demonstration of tNative (native digits) and tUniversal (universal 0-9).",
-    "native_label": "Native (٠١٢٣٤)",
+    "number_modes_desc": "Comparison of native digit format (٠١٢٣٤) and universal format (0-9).",
+    "native_label": "Native Digits (٠١٢٣٤)",
     "universal_label": "Universal (0-9)",
-    "plain_label": "Plain (auto)"
+    "plain_label": "Auto"
   },
   "template_macros": {
     "title": "Template Macros",

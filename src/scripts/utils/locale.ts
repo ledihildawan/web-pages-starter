@@ -1,9 +1,9 @@
 import {
   BASE_CURRENCY,
-  CALENDAR,
+  CALENDAR_CODE,
   type CurrencyCode,
   DEFAULT_LOCALE,
-  DIR,
+  DIRECTION_CODE,
   type DirectionCode,
   type LanguageCode,
   LOCALE,
@@ -26,8 +26,8 @@ export const getFallbackChain = (locale: string): LocaleCode[] => {
     return [explicitFallback, DEFAULT_LOCALE];
   }
 
-  const langCode = locale.split('-')[0];
-  const matched = LOCALE_CODES.find((c) => c.startsWith(`${langCode}-`));
+  const languageSubtag = locale.split('-')[0];
+  const matched = LOCALE_CODES.find((c) => c.startsWith(`${languageSubtag}-`));
 
   if (matched) {
     return [matched, DEFAULT_LOCALE];
@@ -53,8 +53,13 @@ export const getLocale = (locale?: LocaleCode): LocaleCode => {
   return getFallbackChain(target)[0] ?? DEFAULT_LOCALE;
 };
 
-export const getLangCode = (locale: LocaleCode): LanguageCode => {
-  // BCP 47: language-script-region or language-region
+/**
+ * Extract BCP 47 language subtag from locale code
+ * BCP 47 format: language-script-region or language-region
+ * @param locale - BCP 47 locale code (e.g., 'zh-Hans-CN', 'en-US')
+ * @returns Language subtag (e.g., 'zh', 'en')
+ */
+export const getLanguageSubtag = (locale: LocaleCode): LanguageCode => {
   // Extract just the base language code (2-3 letters)
   const parts = locale.split('-');
 
@@ -81,7 +86,7 @@ export const getTimezone = (locale: LocaleCode): string =>
 export const getTimezoneOffset = (locale: LocaleCode): number =>
   getLanguageConfig(locale)?.timezoneOffset ?? 0;
 export const getCalendar = (locale: LocaleCode): string =>
-  getLanguageConfig(locale)?.calendar || CALENDAR.GREGORY;
+  getLanguageConfig(locale)?.calendar || CALENDAR_CODE.GREGORY;
 export const getFirstDayOfWeek = (locale: LocaleCode): number =>
   getLanguageConfig(locale)?.firstDayOfWeek ?? 0;
 export const getNumberingSystem = (locale: LocaleCode): string =>
@@ -91,14 +96,20 @@ export const getNativeNumberingSystem = (locale: LocaleCode): string =>
   NUMBERING_SYSTEM_CODE.LATN;
 export const getDefaultNativeDigits = (locale: LocaleCode): boolean =>
   getLanguageConfig(locale)?.nativeDigits ?? false;
-export const getRegion = (locale: LocaleCode): string | undefined =>
+
+/**
+ * Extract BCP 47 region subtag from locale code
+ * @param locale - BCP 47 locale code (e.g., 'en-US', 'id-ID')
+ * @returns Region subtag (e.g., 'US', 'ID')
+ */
+export const getRegionSubtag = (locale: LocaleCode): string | undefined =>
   getLanguageConfig(locale)?.region;
-export const getCountryCode = (locale: LocaleCode): string | undefined =>
-  getRegion(locale);
+
 export const getDirection = (locale: LocaleCode): DirectionCode =>
-  getLanguageConfig(locale)?.dir || DIR.LTR;
+  getLanguageConfig(locale)?.dir || DIRECTION_CODE.LTR;
+
 export const isRTL = (locale: LocaleCode): boolean =>
-  getDirection(locale) === DIR.RTL;
+  getDirection(locale) === DIRECTION_CODE.RTL;
 
 export const getPluralSuffix = (n: number, locale?: LocaleCode): string => {
   const language = getLocale(locale);

@@ -28,22 +28,34 @@
   },
   "currency": {
     "title": "Formatação de Moeda",
-    "description": "Preços em USD convertidos para a moeda do idioma ativo.",
+    "description": "Preços em IDR convertidos para a moeda do idioma ativo.",
     "small": "Pequeno",
     "medium": "Médio",
     "large": "Grande",
     "enterprise": "Empresarial",
-    "base": "USD (Base)"
+    "base": "IDR (Base)"
   },
   "currency_comparison": {
     "title": "Comparação de Moedas",
-    "description": "Mesmo preço ($99 USD) em todas as moedas suportadas.",
+    "description": "Mesmo preço em todas as moedas suportadas.",
+    "aed": "Dirham dos EAU",
+    "aud": "Dólar Australiano",
     "base_price": "Preço Base",
-    "idr": "IDR",
-    "usd": "USD",
-    "jpy": "JPY",
+    "brl": "Real Brasileiro",
+    "cad": "Dólar Canadense",
+    "chf": "Franco Suíço",
     "cny": "CNY",
-    "sar": "SAR"
+    "eur": "Euro",
+    "gbp": "Libra Esterlina",
+    "idr": "IDR",
+    "inr": "Rúpia Indiana",
+    "jpy": "JPY",
+    "krw": "Won sul-coreano",
+    "mxn": "Peso Mexicano",
+    "sar": "SAR",
+    "sgd": "Dólar de Singapura",
+    "usd": "USD",
+    "zar": "Rand Sul-Africano"
   },
   "pluralization": {
     "title": "Pluralização",

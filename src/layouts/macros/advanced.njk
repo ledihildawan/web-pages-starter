@@ -5,7 +5,7 @@
   {# Wrap translated content with custom tag and attributes #}
   {# Usage: {% call wrap('key') %}Custom content{% endcall %} #}
   {% set item = i18n(key, vars) %}
-  {% set varsJson = (item.vars | replace('"', '&quot;')) if item.vars else '' %}
+  {% set varsJson = item.vars or '' %}
   {% set extStr = '' %}
   {% for name, value in ext.items() %}
     {% set extStr = extStr + ' ' + name + '="' + value + '"' %}
@@ -20,7 +20,7 @@
   {# Usage: {% call wrap_html('key') %}Custom content{% endcall %} #}
   {% set item = i18n(key, vars) %}
   {% set translated = i18n.nativeNumbers(item.v) %}
-  {% set varsJson = (item.vars | replace('"', '&quot;')) if item.vars else '' %}
+  {% set varsJson = item.vars or '' %}
   {% set extStr = '' %}
   {% for name, value in ext.items() %}
     {% set extStr = extStr + ' ' + name + '="' + value + '"' %}
@@ -34,7 +34,7 @@
   {# Render HTML content block with data attributes for client-side i18n #}
   {% set item = i18n(key, vars) %}
   {% set translated = i18n.nativeNumbers(item.v) %}
-  {% set varsJson = (item.vars | replace('"', '&quot;')) if item.vars else '' %}
+  {% set varsJson = item.vars or '' %}
   <div data-i18n-html="{{ item.k }}" {% if item.vars %} data-i18n-vars='{{ varsJson}}' {% endif %} class="contents">
     {{ translated}}
   </div>

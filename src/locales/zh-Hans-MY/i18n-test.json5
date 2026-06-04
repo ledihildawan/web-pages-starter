@@ -13,7 +13,7 @@
     "code": "语言代码",
     "currency": "货币",
     "direction": "文本方向",
-    "current_code": "zh-MY",
+    "current_code": "zh-Hans",
     "current_currency": "MYR",
     "current_direction": "LTR (从左到右)"
   },
@@ -28,22 +28,34 @@
   },
   "currency": {
     "title": "货币格式",
-    "description": "美元价格转换为活动语言货币。",
+    "description": "印尼盾价格转换为活动语言货币。",
     "small": "小型",
     "medium": "中型",
     "large": "大型",
     "enterprise": "企业",
-    "base": "美元（基础）"
+    "base": "印尼盾（基础）"
   },
   "currency_comparison": {
     "title": "货币比较",
-    "description": "所有支持货币中的相同价格 ($99 USD)。",
+    "description": "所有支持货币中的相同价格。",
     "base_price": "基础价格",
-    "idr": "印尼盾",
-    "usd": "美元",
-    "jpy": "日元",
+    "aed": "阿联酋迪拉姆",
+    "aud": "澳元",
+    "brl": "巴西雷亚尔",
+    "cad": "加拿大元",
+    "chf": "瑞士法郎",
     "cny": "人民币",
-    "sar": "沙特里亚al"
+    "eur": "欧元",
+    "gbp": "英镑",
+    "idr": "印尼盾",
+    "inr": "印度卢比",
+    "jpy": "日元",
+    "krw": "韩元",
+    "mxn": "墨西哥比索",
+    "sar": "沙特里亚尔",
+    "sgd": "新加坡元",
+    "usd": "美元",
+    "zar": "南非兰特"
   },
   "pluralization": {
     "title": "复数形式",

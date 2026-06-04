@@ -5,7 +5,6 @@
   },
   "display": {
     "max_numbers": 3,
-    "max_currencies": 4,
     "max_percentages": 3,
     "max_bytes": 3,
     "max_ordinals": 3,
@@ -18,20 +17,14 @@
     "max_missing_keys": 2,
     "simple_plural_counts": [0, 1, 2, 5],
     "number_modes_example": 1234567.89,
-    "currency_comparison_base": 1500000,
-    "currency_comparison_currencies": ["usd", "jpy", "cny", "sar"]
+    "currency_comparison_base": 100,
+    "currency_comparison_currencies": ["EUR", "GBP", "JPY", "CNY", "KRW", "AUD", "CAD", "SGD", "INR", "SAR", "AED", "BRL", "ZAR", "CHF", "MXN", "IDR"]
   },
   "numbers": [
     { "val": 1234567.89, "label": "numbers.large" },
     { "val": 0.1234, "label": "numbers.decimal" },
     { "val": 1000000, "label": "numbers.million" },
     { "val": 0.5, "label": "numbers.percent" }
-  ],
-  "currencies": [
-    { "val_idr": 150000, "label": "currency.small" },
-    { "val_idr": 1500000, "label": "currency.medium" },
-    { "val_idr": 15000000, "label": "currency.large" },
-    { "val_idr": 150000000, "label": "currency.enterprise" }
   ],
   "plurals": [
     { "key": "item", "counts": [0, 1, 2, 5, 100] },

@@ -28,22 +28,34 @@
   },
   "currency": {
     "title": "通貨フォーマット",
-    "description": "USD の価格がアクティブな言語の通貨に換算されます。",
+    "description": "IDR の価格がアクティブな言語の通貨に換算されます。",
     "small": "小",
     "medium": "中",
     "large": "大",
     "enterprise": "エンタープライズ",
-    "base": "USD (ベース)"
+    "base": "IDR (ベース)"
   },
   "currency_comparison": {
     "title": "通貨比較",
-    "description": "すべてのサポートされている通貨での同じ価格 ($99 USD)。",
+    "description": "すべてのサポートされている通貨での同じ価格。",
     "base_price": "基本価格",
-    "idr": "IDR",
-    "usd": "USD",
-    "jpy": "JPY",
+    "aed": "UAEディルハム",
+    "aud": "オーストラリア・ドル",
+    "brl": "ブラジル・レアル",
+    "cad": "カナダ・ドル",
+    "chf": "スイス・フラン",
     "cny": "CNY",
-    "sar": "SAR"
+    "eur": "ユーロ",
+    "gbp": "UKポンド",
+    "idr": "IDR",
+    "inr": "インド・ルピー",
+    "jpy": "JPY",
+    "krw": "ウォン",
+    "mxn": "メキシコ・ペソ",
+    "sar": "SAR",
+    "sgd": "シンガポール・ドル",
+    "usd": "USD",
+    "zar": "南アフリカ・ランド"
   },
   "pluralization": {
     "title": "複数形",

@@ -28,22 +28,34 @@
   },
   "currency": {
     "title": "Währungsformatierung",
-    "description": "Preise in USD konvertiert zur aktiven Sprachwährung.",
+    "description": "Preise in IDR konvertiert zur aktiven Sprachwährung.",
     "small": "Klein",
     "medium": "Mittel",
     "large": "Groß",
     "enterprise": "Unternehmen",
-    "base": "USD (Basis)"
+    "base": "IDR (Basis)"
   },
   "currency_comparison": {
     "title": "Währungsvergleich",
-    "description": "Gleicher Preis ($99 USD) in allen unterstützten Währungen.",
+    "description": "Gleicher Preis in allen unterstützten Währungen.",
+    "aed": "VAE-Dirham",
+    "aud": "Australischer Dollar",
     "base_price": "Basispreis",
-    "idr": "IDR",
-    "usd": "USD",
-    "jpy": "JPY",
+    "brl": "Brasilianischer Real",
+    "cad": "Kanadischer Dollar",
+    "chf": "Schweizer Franken",
     "cny": "CNY",
-    "sar": "SAR"
+    "eur": "Euro",
+    "gbp": "Pfund Sterling",
+    "idr": "IDR",
+    "inr": "Indische Rupie",
+    "jpy": "JPY",
+    "krw": "Korean Won",
+    "mxn": "Mexikanischer Peso",
+    "sar": "SAR",
+    "sgd": "Singapur-Dollar",
+    "usd": "USD",
+    "zar": "Südafrikanischer Rand"
   },
   "pluralization": {
     "title": "Pluralisierung",

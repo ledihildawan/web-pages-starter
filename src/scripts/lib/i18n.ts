@@ -2,18 +2,15 @@ import { EXCHANGE_RATES } from '@generated/exchange-rates';
 import type { I18nTranslationKeys } from '@generated/i18n';
 import i18next, { type Resource } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
+
 import {
   BASE_CURRENCY,
-  CURRENCY_CODE,
-  DEFAULT_LOCALE,
-  LANGUAGE_CODE,
-  LANGUAGES,
   LOCALE_CODES,
   LOCALE_FALLBACKS,
   LOCALE_STORAGE_KEY,
   LOCALES,
+  LANGUAGE_CODE,
   type LocaleCode,
-  REGIONS,
 } from '@/configs/locales';
 import type { DateTimePreset } from '@/types/common';
 import {
@@ -24,9 +21,11 @@ import {
   formatDate,
   formatDateTime,
   formatDuration,
+  formatList,
   formatNumber,
   formatOrdinal,
   formatPercent,
+  formatRelativeTime,
   formatScientific,
   formatTime,
   formatUnit,
@@ -34,29 +33,242 @@ import {
 } from '../utils/i18n-format';
 import { getCurrency, getLocale, setLocale } from '../utils/locale';
 
+export { i18next };
+
 const isDev = import.meta.env.DEV;
 const missingKeys = new Set<string>();
 
-const getFallbackForLocale = (lng: string): string[] => {
-  const locale = lng as LocaleCode;
-  if (LOCALE_CODES.includes(locale)) return [locale];
-
-  const explicit = LOCALE_FALLBACKS[locale];
-  if (explicit) return [explicit, DEFAULT_LOCALE];
-
-  // Extract base language code from BCP 47 tag
-  // e.g., 'zh-Hans-CN' → 'zh', 'en-US' → 'en'
-  const parts = locale.split('-');
-  const baseLang =
-    parts.length > 1 && parts[1]?.length === 4
-      ? parts[0] // Skip script tag (e.g., 'zh-Hans' → 'zh')
-      : parts[0]; // No script, use first part as-is (e.g., 'en-US' → 'en')
-
-  const matched = LOCALE_CODES.find((c) => c.startsWith(`${baseLang}-`));
-  if (matched) return [matched, DEFAULT_LOCALE];
-
-  return [DEFAULT_LOCALE];
+const LANGUAGE_KEY_MAP: Record<string, string> = {
+  [LANGUAGE_CODE.ID]: 'lang_indonesia',
+  [LANGUAGE_CODE.EN]: 'lang_inggris',
+  [LANGUAGE_CODE.JA]: 'lang_jepang',
+  'zh-Hans': 'lang_tiongkok_sederhana',
+  'zh-Hant': 'lang_tiongkok_tradisional',
+  ar: 'lang_arab',
+  es: 'lang_spanyol',
+  pt: 'lang_portugis',
+  hi: 'lang_hindi',
+  ko: 'lang_korea',
+  fr: 'lang_perancis',
+  de: 'lang_jerman',
+  ru: 'lang_rusia',
+  th: 'lang_thailand',
 };
+
+const getFallbackForLocale = (locale: string): string[] => {
+  const localeCode = locale as LocaleCode;
+  if (LOCALE_CODES.includes(localeCode)) return [localeCode];
+
+  const explicit = LOCALE_FALLBACKS[localeCode];
+  if (explicit) return [explicit, 'en-US'];
+
+  const parts = locale.split('-');
+  const languageSubtag =
+    parts.length > 1 && parts[1]?.length === 4
+      ? parts[0]
+      : parts[0];
+
+  const matched = LOCALE_CODES.find((c) => c.startsWith(`${languageSubtag}-`));
+  if (matched) return [matched, 'en-US'];
+
+  return ['en-US'];
+};
+
+const getVars = (el: HTMLElement): Record<string, string | number | boolean> => {
+  const vars = el.getAttribute('data-i18n-vars');
+  if (!vars) return {};
+  try {
+    return JSON.parse(vars);
+  } catch {
+    return {};
+  }
+};
+
+const processElements = (
+  selector: string,
+  attr: string,
+  callback: (el: HTMLElement, val: string) => void,
+) => {
+  document.querySelectorAll<HTMLElement>(selector).forEach((el) => {
+    const val = el.getAttribute(attr);
+    if (val !== null) callback(el, val);
+  });
+};
+
+const getNativeDigitSetting = (el: HTMLElement): boolean | undefined => {
+  if (el.hasAttribute('data-force-native')) return true;
+  if (el.hasAttribute('data-force-universal')) return false;
+  return undefined;
+};
+
+const FORMATTERS = [
+  {
+    attr: 'data-format-number',
+    format: (v: string, el: HTMLElement) =>
+      formatNumber(parseFloat(v), {
+        nativeDigits: el.getAttribute('data-use-native') === 'true',
+      }),
+  },
+  {
+    attr: 'data-format-percent',
+    format: (v: string, el: HTMLElement) =>
+      formatPercent(parseFloat(v), {
+        nativeDigits: el.getAttribute('data-use-native') === 'true',
+      }),
+  },
+  {
+    attr: 'data-format-duration',
+    format: (v: string) => formatDuration(parseFloat(v)),
+  },
+  {
+    attr: 'data-format-ordinal',
+    format: (v: string) => formatOrdinal(parseFloat(v)),
+  },
+  {
+    attr: 'data-format-cardinal',
+    format: (v: string) => formatCardinal(parseFloat(v)),
+  },
+  {
+    attr: 'data-format-scientific',
+    format: (v: string, el: HTMLElement) =>
+      formatScientific(parseFloat(v), {
+        nativeDigits: el.getAttribute('data-use-native') === 'true',
+      }),
+  },
+  {
+    attr: 'data-format-abbreviated',
+    format: (v: string) => formatAbbreviated(parseFloat(v)),
+  },
+  {
+    attr: 'data-format-date',
+    format: (v: string) => formatDate(v as DateTimePreset),
+  },
+  {
+    attr: 'data-format-datetime',
+    format: (v: string) => formatDateTime(v as DateTimePreset),
+  },
+  {
+    attr: 'data-format-time',
+    format: (v: string, el: HTMLElement) =>
+      formatTime(v as DateTimePreset, {
+        timeStyle: (el.getAttribute('data-time-preset') ?? 'short') as DateTimePreset,
+      }),
+  },
+  {
+    attr: 'data-format-date-preset',
+    format: (v: string, el: HTMLElement) =>
+      formatDate(v as DateTimePreset, {
+        dateStyle: (el.getAttribute('data-date-preset') ?? 'medium') as DateTimePreset,
+      }),
+  },
+  {
+    attr: 'data-format-currency',
+    format: (v: string, el: HTMLElement, dc: string) =>
+      formatCurrency(
+        parseFloat(v),
+        el.getAttribute('data-target-currency') ?? dc,
+        {
+          nativeDigits: el.getAttribute('data-use-native') === 'true',
+        },
+      ),
+  },
+  {
+    attr: 'data-convert-currency',
+    format: (v: string, el: HTMLElement, dc: string) => {
+      const currency = el.getAttribute('data-target-currency') ?? dc;
+      const rate = EXCHANGE_RATES[currency as keyof typeof EXCHANGE_RATES] ?? 1;
+      return formatCurrency(parseFloat(v) * rate, currency, {
+        nativeDigits: el.getAttribute('data-use-native') === 'true',
+      });
+    },
+  },
+  {
+    attr: 'data-convert-to-locale',
+    format: (v: string, _el: HTMLElement, dc: string) => {
+      const rate = EXCHANGE_RATES[dc as keyof typeof EXCHANGE_RATES] ?? 1;
+      return formatCurrency(parseFloat(v) * rate, dc, { nativeDigits: false });
+    },
+  },
+  {
+    attr: 'data-local-price',
+    format: (_v: string, el: HTMLElement, _dc: string) => {
+      const pricingStr = el.getAttribute('data-local-price') ?? '{}';
+      const discountStr = el.getAttribute('data-discount');
+
+      let price = 0;
+      let fromCurrency = BASE_CURRENCY;
+      const locale = getLocale();
+
+      try {
+        const pricing = JSON.parse(pricingStr);
+        if (pricing[locale]) {
+          price = pricing[locale];
+          fromCurrency = getCurrency(locale);
+        } else if (pricing.base) {
+          price = pricing.base;
+          fromCurrency = BASE_CURRENCY;
+        }
+      } catch {}
+
+      if (discountStr) {
+        price = price * parseFloat(discountStr);
+      }
+
+      const targetCurrency = getCurrency(locale);
+
+      if (fromCurrency === targetCurrency) {
+        return formatCurrency(price, targetCurrency);
+      }
+
+      const rate = EXCHANGE_RATES[targetCurrency as keyof typeof EXCHANGE_RATES] ?? 1;
+      const converted = price * rate;
+      return formatCurrency(converted, targetCurrency);
+    },
+  },
+  {
+    attr: 'data-format-unit',
+    format: (v: string, el: HTMLElement) => {
+      const unit = el.getAttribute('data-unit');
+      return unit
+        ? formatUnit(parseFloat(v), unit, {
+            nativeDigits: el.getAttribute('data-use-native') === 'true',
+          })
+        : v;
+    },
+  },
+  {
+    attr: 'data-format-bytes',
+    format: (v: string, el: HTMLElement) =>
+      formatBytes(
+        parseFloat(v),
+        parseInt(el.getAttribute('data-bytes-decimals') ?? '2', 10),
+      ),
+  },
+  {
+    attr: 'data-relative-time',
+    format: (v: string, el: HTMLElement) => {
+      const unit = el.getAttribute('data-unit') ?? 'second';
+      const numeric = el.getAttribute('data-numeric') ?? 'auto';
+      const value = parseFloat(v);
+      return formatRelativeTime(value, {
+        unit,
+        numeric: numeric as 'always' | 'auto',
+      });
+    },
+  },
+  {
+    attr: 'data-format-list',
+    format: (_v: string, el: HTMLElement) => {
+      const itemsStr = el.getAttribute('data-items') ?? '[]';
+      try {
+        const items = JSON.parse(itemsStr);
+        return Array.isArray(items) ? formatList(items) : itemsStr;
+      } catch {
+        return itemsStr;
+      }
+    },
+  },
+] as const;
 
 export async function initIntl(): Promise<void> {
   const pageID = (window.__PAGE_ID__ ?? 'home') as string;
@@ -68,11 +280,11 @@ export async function initIntl(): Promise<void> {
   for (const [lngKey, data] of Object.entries(rawData)) {
     const compData = data.comp
       ? Object.fromEntries(
-        Object.entries(data.comp).map(([name, content]) => [
-          `components/${name}`,
-          content,
-        ]),
-      )
+          Object.entries(data.comp).map(([name, content]) => [
+            `components/${name}`,
+            content,
+          ]),
+        )
       : {};
 
     resources[lngKey] = {
@@ -99,9 +311,7 @@ export async function initIntl(): Promise<void> {
       parseMissingKeyHandler: (key) => {
         if (isDev && !missingKeys.has(key)) {
           missingKeys.add(key);
-          console.warn(
-            `[i18n] Missing key "${key}" in locale "${i18next.language}"`,
-          );
+          console.warn(`[i18n] Missing key "${key}" in locale "${i18next.language}"`);
         }
         return `[${key}]`;
       },
@@ -110,40 +320,13 @@ export async function initIntl(): Promise<void> {
     translatePage();
     updateFormattedElements();
 
-    // Update store labels after a short delay to ensure Alpine is ready
     setTimeout(() => {
       updateI18nStoreLabels();
     }, 100);
-  } catch { }
+  } catch {}
 }
 
-/**
- * Mapping from language code to translation key in common.json5
- */
-const LANGUAGE_KEY_MAP: Record<string, string> = {
-  [LANGUAGE_CODE.ID]: 'lang_indonesia',
-  [LANGUAGE_CODE.EN]: 'lang_inggris',
-  [LANGUAGE_CODE.JA]: 'lang_jepang',
-  zh: 'lang_tiongkok',
-  'zh-Hans': 'lang_tiongkok_sederhana',
-  'zh-Hant': 'lang_tiongkok_tradisional',
-  ar: 'lang_arab',
-  es: 'lang_spanyol',
-  pt: 'lang_portugis',
-  hi: 'lang_hindi',
-  ko: 'lang_korea',
-  fr: 'lang_perancis',
-  de: 'lang_jerman',
-  ru: 'lang_rusia',
-  th: 'lang_thailand',
-};
-
-/**
- * Update the Alpine i18n store with translated language and region names
- * Uses translations from common.json5 (lang_* and region_* keys)
- * Call this after i18n is initialized
- */
-const updateI18nStoreLabels = (): void => {
+export const updateI18nStoreLabels = (): void => {
   if (typeof window === 'undefined' || !globalThis.Alpine) {
     return;
   }
@@ -156,15 +339,12 @@ const updateI18nStoreLabels = (): void => {
   const updatedLanguages = LOCALES.filter((l) =>
     LOCALE_CODES.includes(l.code),
   ).map((l) => {
-    // Get translated language name from common.json5
     const langKey = LANGUAGE_KEY_MAP[l.language];
     const langName = langKey ? i18next.t(langKey) : l.language;
 
-    // Get translated region name from common.json5
     const regionKey = `region_${l.region.toLowerCase()}`;
     const regionName = i18next.t(regionKey);
 
-    // Format: "Translated Language Name (Translated Country Name)"
     return {
       code: l.code,
       label: `${langName} (${regionName})`,
@@ -172,7 +352,6 @@ const updateI18nStoreLabels = (): void => {
     };
   });
 
-  // Update each item in the languages array to trigger reactivity
   store.languages.length = 0;
   updatedLanguages.forEach((lang) => {
     store.languages.push(lang);
@@ -190,47 +369,15 @@ export const t = (
   return result === key ? `[${key}]` : result;
 };
 
-const getVars = (
-  el: HTMLElement,
-): Record<string, string | number | boolean> => {
-  const vars = el.getAttribute('data-i18n-vars');
-  if (!vars) return {};
-  try {
-    return JSON.parse(vars);
-  } catch {
-    return {};
-  }
-};
-
-const processElements = (
-  selector: string,
-  attr: string,
-  callback: (el: HTMLElement, val: string) => void,
-) => {
-  document.querySelectorAll<HTMLElement>(selector).forEach((el) => {
-    const val = el.getAttribute(attr);
-    if (val) callback(el, val);
-  });
-};
-
 export const translatePage = (): void => {
   processElements('[data-i18n-html]', 'data-i18n-html', (el, key) => {
     const translated = i18next.t(key, getVars(el));
-    const forceNative = el.hasAttribute('data-force-native')
-      ? true
-      : el.hasAttribute('data-force-universal')
-        ? false
-        : undefined;
-    el.innerHTML = toNativeDigits(translated, forceNative);
+    el.innerHTML = toNativeDigits(translated, getNativeDigitSetting(el));
   });
+
   processElements('[data-i18n]', 'data-i18n', (el, key) => {
     const translated = t(key as I18nTranslationKeys, getVars(el));
-    const forceNative = el.hasAttribute('data-force-native')
-      ? true
-      : el.hasAttribute('data-force-universal')
-        ? false
-        : undefined;
-    el.innerHTML = toNativeDigits(translated, forceNative);
+    el.innerHTML = toNativeDigits(translated, getNativeDigitSetting(el));
   });
 
   processElements('[data-i18n-attr]', 'data-i18n-attr', (el, raw) => {
@@ -255,153 +402,6 @@ export const translatePage = (): void => {
 
   updateFormattedElements();
 };
-
-const FORMATTERS: {
-  attr: string;
-  format: (v: string, el: HTMLElement, defaultCurrency: string) => string;
-}[] = [
-    {
-      attr: 'data-format-number',
-      format: (v, el) =>
-        formatNumber(parseFloat(v), {
-          nativeDigits: el.getAttribute('data-use-native') === 'true',
-        }),
-    },
-    {
-      attr: 'data-format-percent',
-      format: (v, el) =>
-        formatPercent(parseFloat(v), {
-          nativeDigits: el.getAttribute('data-use-native') === 'true',
-        }),
-    },
-    {
-      attr: 'data-format-duration',
-      format: (v) => formatDuration(parseFloat(v)),
-    },
-    {
-      attr: 'data-format-ordinal',
-      format: (v) => formatOrdinal(parseFloat(v)),
-    },
-    {
-      attr: 'data-format-cardinal',
-      format: (v) => formatCardinal(parseFloat(v)),
-    },
-    {
-      attr: 'data-format-scientific',
-      format: (v, el) =>
-        formatScientific(parseFloat(v), {
-          nativeDigits: el.getAttribute('data-use-native') === 'true',
-        }),
-    },
-    {
-      attr: 'data-format-abbreviated',
-      format: (v) => formatAbbreviated(parseFloat(v)),
-    },
-    {
-      attr: 'data-format-date',
-      format: (v) => formatDate(v as DateTimePreset),
-    },
-    {
-      attr: 'data-format-datetime',
-      format: (v) => formatDateTime(v as DateTimePreset),
-    },
-    {
-      attr: 'data-format-time',
-      format: (v, el) =>
-        formatTime(v as DateTimePreset, {
-          timeStyle: (el.getAttribute('data-time-preset') ??
-            'short') as DateTimePreset,
-        }),
-    },
-    {
-      attr: 'data-format-date-preset',
-      format: (v, el) =>
-        formatDate(v as DateTimePreset, {
-          dateStyle: (el.getAttribute('data-date-preset') ??
-            'medium') as DateTimePreset,
-        }),
-    },
-    {
-      attr: 'data-format-currency',
-      format: (v, el, dc) =>
-        formatCurrency(
-          parseFloat(v),
-          el.getAttribute('data-target-currency') ?? dc,
-          {
-            nativeDigits: el.getAttribute('data-use-native') === 'true',
-          },
-        ),
-    },
-    {
-      attr: 'data-convert-currency',
-      format: (v, el, dc) => {
-        const currency = el.getAttribute('data-target-currency') ?? dc;
-        const rate = EXCHANGE_RATES[currency as keyof typeof EXCHANGE_RATES] ?? 1;
-        return formatCurrency(parseFloat(v) * rate, currency, {
-          nativeDigits: el.getAttribute('data-use-native') === 'true',
-        });
-      },
-    },
-    {
-      attr: 'data-local-price',
-      format: (_v, el, _dc) => {
-        let pricingStr = el.getAttribute('data-pricing') ?? '{}';
-        const discountStr = el.getAttribute('data-discount');
-
-        // Decode HTML entities (&quot; → ")
-        pricingStr = pricingStr.replace(/&quot;/g, '"');
-
-        let price = 0;
-        let fromCurrency = BASE_CURRENCY;
-        const locale = getLocale();
-
-        try {
-          const pricing = JSON.parse(pricingStr);
-          if (pricing[locale]) {
-            price = pricing[locale];
-            fromCurrency = getCurrency(locale);
-          } else if (pricing.base) {
-            price = pricing.base;
-            fromCurrency = BASE_CURRENCY;
-          }
-        } catch { }
-
-        if (discountStr) {
-          price = price * parseFloat(discountStr);
-        }
-
-        const targetCurrency = getCurrency(locale);
-
-        if (fromCurrency === targetCurrency) {
-          return formatCurrency(price, targetCurrency);
-        }
-
-        const rate =
-          EXCHANGE_RATES[targetCurrency as keyof typeof EXCHANGE_RATES] ?? 1;
-        const converted = price * rate;
-        return formatCurrency(converted, targetCurrency);
-      },
-    },
-    {
-      attr: 'data-format-unit',
-      format: (v, el) => {
-        const unit = el.getAttribute('data-unit');
-        return unit
-          ? formatUnit(parseFloat(v), unit, {
-            nativeDigits: el.getAttribute('data-use-native') === 'true',
-          })
-          : v;
-      },
-    },
-    {
-      attr: 'data-format-bytes',
-      format: (v, el) =>
-        formatBytes(
-          parseFloat(v),
-          parseInt(el.getAttribute('data-bytes-decimals') ?? '2', 10),
-        ),
-    },
-  ];
 
 export const updateFormattedElements = (): void => {
   const locale = getLocale(i18next.language as LocaleCode);

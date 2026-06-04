@@ -1,4 +1,4 @@
-const NUMBERING_SYSTEMS = [
+export const NUMBERING_SYSTEMS = [
   { code: 'latn', label: 'Latin', group: 'LATIN', digits: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'] },
   { code: 'arab', label: 'Arabic-Indic', group: 'ARABIC', digits: ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'] },
   { code: 'deva', label: 'Devanagari', group: 'DEVANAGARI', digits: ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'] },
@@ -568,8 +568,26 @@ export const WRITING_SYSTEM = WRITING_SYSTEMS.reduce((acc, ws) => {
   HEBREW: 'HEBREW';
 };
 
-export const CALENDAR = CALENDAR_CODE;
-export const DIR = DIRECTION_CODE;
+// Lowercase writing systems for client-side script use
+export const WRITING_SYSTEMS_LOWER = NUMBERING_SYSTEMS.map(
+  (ns) => ns.group.toLowerCase(),
+) as readonly string[];
+
+// Numbering system to writing system map for runtime use
+export const NUMBERING_SYSTEM_TO_WRITING_SYSTEM: Partial<
+  Record<NumberingSystemCode, string>
+> = Object.fromEntries(
+  NUMBERING_SYSTEMS.map((ns) => [ns.code, ns.group.toLowerCase()]),
+) as Partial<Record<NumberingSystemCode, string>>;
+
+/**
+ * Generate numbering system to writing system map for client-side script
+ * Returns an object with code->index mapping and lowercase writing systems array
+ */
+export const getNumberingSystemScriptData = () => {
+  const numberingSystemOrder = NUMBERING_SYSTEMS.map((ns) => ns.code);
+  return { numberingSystemOrder, writingSystems: WRITING_SYSTEMS_LOWER };
+};
 
 export const DEFAULT_LOCALE: LocaleCode = LOCALE.ID_ID;
 export const BASE_CURRENCY: CurrencyCode = CURRENCY_CODE.USD;

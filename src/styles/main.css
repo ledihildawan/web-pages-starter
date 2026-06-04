@@ -16,6 +16,21 @@
     --font-arabic: 'Noto Sans Arabic Variable', 'Noto Sans Arabic', 'Arial', ui-sans-serif, system-ui, sans-serif;
     --font-devanagari: 'Noto Sans Variable', 'Noto Sans Devanagari', 'Mangal', ui-sans-serif, system-ui, sans-serif;
     --font-hangul: 'Noto Sans KR Variable', 'Noto Sans KR', 'Malgun Gothic', 'Apple SD Gothic Neo', ui-sans-serif, system-ui, sans-serif;
+    --font-thai: 'Noto Sans Thai Variable', 'Noto Sans Thai', 'Sarabun', ui-sans-serif, system-ui, sans-serif;
+    --font-bengali: 'Noto Sans Bengali Variable', 'Noto Sans Bengali', 'Bangla', ui-sans-serif, system-ui, sans-serif;
+    --font-tamil: 'Noto Sans Tamil Variable', 'Noto Sans Tamil', 'Tamil', ui-sans-serif, system-ui, sans-serif;
+    --font-telugu: 'Noto Sans Telugu Variable', 'Noto Sans Telugu', 'Telugu', ui-sans-serif, system-ui, sans-serif;
+    --font-kannada: 'Noto Sans Kannada Variable', 'Noto Sans Kannada', 'Kannada', ui-sans-serif, system-ui, sans-serif;
+    --font-malayalam: 'Noto Sans Malayalam Variable', 'Noto Sans Malayalam', 'Malayalam', ui-sans-serif, system-ui, sans-serif;
+    --font-gujarati: 'Noto Sans Gujarati Variable', 'Noto Sans Gujarati', 'Gujarati', ui-sans-serif, system-ui, sans-serif;
+    --font-gurmukhi: 'Noto Sans Gurmukhi Variable', 'Noto Sans Gurmukhi', 'Gurmukhi', ui-sans-serif, system-ui, sans-serif;
+    --font-sinhala: 'Noto Sans Sinhala Variable', 'Noto Sans Sinhala', 'Sinhala', ui-sans-serif, system-ui, sans-serif;
+    --font-khmer: 'Noto Sans Khmer Variable', 'Noto Sans Khmer', 'Khmer', ui-sans-serif, system-ui, sans-serif;
+    --font-lao: 'Noto Sans Lao Variable', 'Noto Sans Lao', 'Lao', ui-sans-serif, system-ui, sans-serif;
+    --font-myanmar: 'Noto Sans Myanmar Variable', 'Noto Sans Myanmar', 'Myanmar', ui-sans-serif, system-ui, sans-serif;
+    --font-georgian: 'Noto Sans Georgian Variable', 'Noto Sans Georgian', 'Georgian', ui-sans-serif, system-ui, sans-serif;
+    --font-ethiopic: 'Noto Sans Ethiopic Variable', 'Noto Sans Ethiopic', 'Ethiopic', ui-sans-serif, system-ui, sans-serif;
+    --font-armenian: 'Noto Sans Armenian Variable', 'Noto Sans Armenian', 'Armenian', ui-sans-serif, system-ui, sans-serif;
 
     /* ----- Gradients ----- */
     /* Primary brand gradient - more sophisticated */
@@ -418,36 +433,112 @@
 
   /* ========================================
      LANGUAGE FONT ASSIGNMENTS
+     Based on writing system/numbering system
      ======================================== */
 
-  [lang="id-ID"],
-  [lang="en-US"],
-  [lang="es-ES"],
-  [lang="pt-BR"],
-  [lang="fr-FR"],
-  [lang="de-DE"],
-  [lang="ru-RU"] {
+  /* Latin script (Western languages) */
+  [data-script="latin"] {
     font-family: var(--font-latin);
   }
 
-  [lang="ja-JP"] {
+  /* Japanese */
+  [data-script="japanese"] {
     font-family: var(--font-japanese);
   }
 
-  [lang="zh-CN"] {
+  /* Chinese (Simplified & Traditional) */
+  [data-script="chinese"] {
     font-family: var(--font-chinese);
   }
 
-  [lang="ar-SA"] {
+  /* Arabic */
+  [data-script="arabic"] {
     font-family: var(--font-arabic);
   }
 
-  [lang="hi-IN"] {
+  /* Devanagari (Hindi) */
+  [data-script="devanagari"] {
     font-family: var(--font-devanagari);
   }
 
-  [lang="ko-KR"] {
+  /* Korean */
+  [data-script="hangul"] {
     font-family: var(--font-hangul);
+  }
+
+  /* Thai */
+  [data-script="thai"] {
+    font-family: var(--font-thai);
+  }
+
+  /* Bengali */
+  [data-script="bengali"] {
+    font-family: var(--font-bengali);
+  }
+
+  /* Tamil */
+  [data-script="tamil"] {
+    font-family: var(--font-tamil);
+  }
+
+  /* Telugu */
+  [data-script="telugu"] {
+    font-family: var(--font-telugu);
+  }
+
+  /* Kannada */
+  [data-script="kannada"] {
+    font-family: var(--font-kannada);
+  }
+
+  /* Malayalam */
+  [data-script="malayalam"] {
+    font-family: var(--font-malayalam);
+  }
+
+  /* Gujarati */
+  [data-script="gujarati"] {
+    font-family: var(--font-gujarati);
+  }
+
+  /* Gurmukhi */
+  [data-script="gurmukhi"] {
+    font-family: var(--font-gurmukhi);
+  }
+
+  /* Sinhala */
+  [data-script="sinhala"] {
+    font-family: var(--font-sinhala);
+  }
+
+  /* Khmer */
+  [data-script="khmer"] {
+    font-family: var(--font-khmer);
+  }
+
+  /* Lao */
+  [data-script="lao"] {
+    font-family: var(--font-lao);
+  }
+
+  /* Myanmar */
+  [data-script="myanmar"] {
+    font-family: var(--font-myanmar);
+  }
+
+  /* Georgian */
+  [data-script="georgian"] {
+    font-family: var(--font-georgian);
+  }
+
+  /* Ethiopic */
+  [data-script="ethiopic"] {
+    font-family: var(--font-ethiopic);
+  }
+
+  /* Armenian */
+  [data-script="armenian"] {
+    font-family: var(--font-armenian);
   }
 
   /* ========================================
