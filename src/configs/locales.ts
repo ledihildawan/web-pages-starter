@@ -389,32 +389,32 @@ export const PLURAL_RULE_CODE = PLURAL_RULE_CODES.reduce((acc, rule) => {
   ONE_FEW_MANY: 'one-few-many';
 };
 
-export const WRITING_SYSTEMS = NUMBERING_SYSTEMS.map(ns => ns.group) as WritingSystem[];
+export const WRITING_SYSTEMS = NUMBERING_SYSTEMS.map(ns => ns.group.toLowerCase()) as WritingSystem[];
 export const WRITING_SYSTEM = WRITING_SYSTEMS.reduce((acc, ws) => {
-  return Object.assign(acc, { [ws]: ws });
+  return Object.assign(acc, { [ws.toUpperCase()]: ws });
 }, {} as Record<string, WritingSystem>) as {
-  LATIN: 'LATIN';
-  ARABIC: 'ARABIC';
-  DEVANAGARI: 'DEVANAGARI';
-  CJK: 'CJK';
-  CYRILLIC: 'CYRILLIC';
-  THAI: 'THAI';
-  BENGALI: 'BENGALI';
-  TAMIL: 'TAMIL';
-  TELUGU: 'TELUGU';
-  KANNADA: 'KANNADA';
-  MALAYALAM: 'MALAYALAM';
-  GUJARATI: 'GUJARATI';
-  GURMUKHI: 'GURMUKHI';
-  SINHALA: 'SINHALA';
-  GEORGIAN: 'GEORGIAN';
-  ARMENIAN: 'ARMENIAN';
-  ETHIOPIC: 'ETHIOPIC';
-  KHMER: 'KHMER';
-  LAO: 'LAO';
-  MYANMAR: 'MYANMAR';
-  GREEK: 'GREEK';
-  HEBREW: 'HEBREW';
+  LATIN: 'latin';
+  ARABIC: 'arabic';
+  DEVANAGARI: 'devanagari';
+  CJK: 'cjk';
+  CYRILLIC: 'cyrillic';
+  THAI: 'thai';
+  BENGALI: 'bengali';
+  TAMIL: 'tamil';
+  TELUGU: 'telugu';
+  KANNADA: 'kannada';
+  MALAYALAM: 'malayalam';
+  GUJARATI: 'gujarati';
+  GURMUKHI: 'gurmukhi';
+  SINHALA: 'sinhala';
+  GEORGIAN: 'georgian';
+  ARMENIAN: 'armenian';
+  ETHIOPIC: 'ethiopic';
+  KHMER: 'khmer';
+  LAO: 'lao';
+  MYANMAR: 'myanmar';
+  GREEK: 'greek';
+  HEBREW: 'hebrew';
 };
 
 export const LOCALES = [
@@ -597,11 +597,6 @@ export type PluralRuleConfig = (typeof PLURAL_RULES)[number];
 export type NumberingSystemCode = typeof NUMBERING_SYSTEMS[number]['code'];
 export type WritingSystem = typeof NUMBERING_SYSTEMS[number]['group'];
 
-// Lowercase writing systems for client-side script use
-export const WRITING_SYSTEMS_LOWER = NUMBERING_SYSTEMS.map(
-  (ns) => ns.group.toLowerCase(),
-) as readonly string[];
-
 // Numbering system to writing system map for runtime use
 export const NUMBERING_SYSTEM_TO_WRITING_SYSTEM: Partial<
   Record<NumberingSystemCode, string>
@@ -611,11 +606,11 @@ export const NUMBERING_SYSTEM_TO_WRITING_SYSTEM: Partial<
 
 /**
  * Generate numbering system to writing system map for client-side script
- * Returns an object with code->index mapping and lowercase writing systems array
+ * Returns an object with code->index mapping and writing systems array
  */
 export const getNumberingSystemScriptData = () => {
   const numberingSystemOrder = NUMBERING_SYSTEMS.map((ns) => ns.code);
-  return { numberingSystemOrder, writingSystems: WRITING_SYSTEMS_LOWER };
+  return { numberingSystemOrder, writingSystems: WRITING_SYSTEMS };
 };
 
 export const DEFAULT_LOCALE: LocaleCode = LOCALE.ID_ID;
