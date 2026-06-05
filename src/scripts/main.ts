@@ -5,7 +5,7 @@ import {
   NUMBERING_SYSTEM_TO_WRITING_SYSTEM,
   WRITING_SYSTEM,
 } from '@/configs/locales';
-import { getLocale, getNativeNumberingSystem } from './utils/locale';
+import { getLanguageConfig, getLocale, getNativeNumberingSystem } from './utils/locale';
 
 type FontLoader = () => Promise<unknown>;
 
@@ -114,7 +114,12 @@ const LANGUAGE_FONT_LOADERS: Readonly<
   [NUMBERING_SYSTEM_CODE.ARAB]: () =>
     import('@fontsource-variable/noto-sans-arabic/index.css'),
   [NUMBERING_SYSTEM_CODE.DEVA]: () =>
-    import('@fontsource-variable/noto-sans/index.css'),
+    Promise.all([
+      import('@fontsource/noto-sans-devanagari/400.css'),
+      import('@fontsource/noto-sans-devanagari/500.css'),
+      import('@fontsource/noto-sans-devanagari/600.css'),
+      import('@fontsource/noto-sans-devanagari/700.css'),
+    ]),
   [NUMBERING_SYSTEM_CODE.BENG]: () =>
     import('@fontsource-variable/noto-sans-bengali/index.css'),
   [NUMBERING_SYSTEM_CODE.TAML]: () =>
@@ -168,7 +173,7 @@ const loadFont = async (loader: FontLoader | undefined): Promise<void> => {
   }
 };
 
-const loadLanguageFonts = (): void => {
+export const loadLanguageFonts = (): void => {
   const nativeNumberingSystem = getNativeNumberingSystem(getLocale());
 
   if (nativeNumberingSystem in LANGUAGE_FONT_LOADERS) {
@@ -178,7 +183,7 @@ const loadLanguageFonts = (): void => {
   }
 };
 
-const loadFallbackFonts = (): void => {
+export const loadFallbackFonts = (): void => {
   const nativeNumberingSystem = getNativeNumberingSystem(getLocale());
   const writingSystemCode = NUMBERING_SYSTEM_TO_WRITING_SYSTEM[
     nativeNumberingSystem as NumberingSystemCode
@@ -208,13 +213,9 @@ const loadFallbackFonts = (): void => {
 
 export const setupFontStackCSS = (): void => {
   const root = document.documentElement;
-  const nativeNumberingSystem = getNativeNumberingSystem(getLocale());
-  const writingSystemCode = NUMBERING_SYSTEM_TO_WRITING_SYSTEM[
-    nativeNumberingSystem as NumberingSystemCode
-  ] as WritingSystemCode | undefined;
-
-  const writingSystem = writingSystemCode
-    ? getWritingSystem(writingSystemCode)
+  const locale = getLanguageConfig(getLocale());
+  const writingSystem = locale
+    ? getWritingSystem(locale.writingSystem)
     : undefined;
 
   const primaryFont = writingSystem?.defaultFont ?? FONT_STACK.primary.family;

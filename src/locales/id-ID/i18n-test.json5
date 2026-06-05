@@ -13,6 +13,11 @@
     "code": "Kode Bahasa",
     "currency": "Mata Uang",
     "direction": "Arah Teks",
+    "digits": "Digit Asli",
+    "enabled": "Aktif",
+    "disabled": "Nonaktif",
+    "languages": "Bahasa",
+    "switching": "Beralih Tanpa Reload",
     "current_code": "id",
     "current_currency": "IDR",
     "current_direction": "LTR (Kiri ke Kanan)"
@@ -29,6 +34,7 @@
   "currency": {
     "title": "Konversi Mata Uang",
     "description": "Harga dalam IDR dikonversi ke mata uang bahasa yang aktif.",
+    "currencies": "Mata Uang",
     "small": "Kecil",
     "medium": "Sedang",
     "large": "Besar",
@@ -55,6 +61,10 @@
     "sgd": "Dolar Singapura",
     "usd": "Dolar AS",
     "zar": "Rand Afrika Selatan"
+  },
+  "core": {
+    "title": "Fitur Inti",
+    "description": "Terjemahan, pluralisasi, dan konten HTML."
   },
   "pluralization": {
     "title": "Pluralisasi",
@@ -102,6 +112,7 @@
     "abbreviated": "Singkat",
     "date_formats": "Format Tanggal",
     "time_formats": "Format Waktu",
+    "datetime": "Tgl + Waktu",
     "durations": "Durasi",
     "relative_time": "Waktu Relatif",
     "regional_pricing": "Harga Regional",
@@ -141,5 +152,35 @@
     "description": "Macro untuk mendapatkan nilai mentah tanpa markup HTML.",
     "raw_value": "Nilai mentah tanpa markup",
     "current_year": "Tahun saat ini adalah {{year}}"
+  },
+  "datetime": {
+    "title": "Tanggal & Waktu",
+    "description": "Format gabungan tanggal dan waktu.",
+    "iso": "Standar ISO",
+    "eve": "Malam Natal"
+  },
+  "unit": {
+    "title": "Format Satuan"
+  },
+  "native_digits": {
+    "title": "Digit Asli (SSR)",
+    "description": "Teks dengan digit ASCII ditampilkan dalam digit asli. SSR saja, tidak diperbarui saat ganti bahasa."
+  },
+  "inflection": {
+    "title": "Infleksi Bahasa Inggris (SSR)",
+    "description": "Pluralisasi dan singularisasi bahasa Inggris pada saat SSR. Tidak diperbarui saat ganti bahasa."
+  },
+  "ssr_only": "Awal saja",
+  "pricing_details": {
+    "title": "Detail Harga",
+    "description": "Pipeline lengkap: nilai mentah, kode mata uang, format, diskon, dan konversi.",
+    "raw_value": "Nilai Mentah",
+    "raw_currency": "Kode Mata Uang",
+    "formatted": "Terformat",
+    "discounted": "Diskon 20%",
+    "converted_usd": "Konversi ke USD"
+  },
+  "live_update": {
+    "note": "Perhatikan semua angka, tanggal, dan harga berubah seketika saat Anda mengganti bahasa — tanpa memuat ulang halaman."
   }
 }

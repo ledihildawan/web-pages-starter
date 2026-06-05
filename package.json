@@ -27,6 +27,7 @@
     "@fontsource-variable/noto-sans-arabic": "^5.2.10",
     "@fontsource-variable/noto-sans-armenian": "^5.2.8",
     "@fontsource-variable/noto-sans-bengali": "^5.2.11",
+    "@fontsource/noto-sans-devanagari": "^5.2.5",
     "@fontsource-variable/noto-sans-ethiopic": "^5.2.7",
     "@fontsource-variable/noto-sans-georgian": "^5.2.8",
     "@fontsource-variable/noto-sans-gujarati": "^5.2.7",

@@ -8,6 +8,7 @@ import {
   LOCALES,
   type LocaleCode,
   type LocaleConfig,
+  WRITING_SYSTEMS,
 } from '../../configs/locales';
 import { PATHS } from '../../configs/paths';
 import type {
@@ -62,6 +63,8 @@ const resolveRoot = (...args: string[]): string => path.resolve(ROOT, ...args);
 const escapeHtmlAttr = (value: string | number | boolean): string =>
   String(value).replace(/"/g, '&quot;');
 
+const warnedKeys = new Set<string>();
+
 export const getUsedComponents = (
   templatePath: string,
   found = new Set<string>(),
@@ -109,14 +112,20 @@ const generateClientI18nScript = (
     ]),
   ) as Record<string, JsonData>;
 
+  const writingSystemFonts = Object.fromEntries(
+    WRITING_SYSTEMS.map((ws) => [ws.code, ws.defaultFont]),
+  );
+
   return `<script>
 (() => {
   const defaultLocale = ${JSON.stringify(lang)};
 
-  const pathLocale = window.location.pathname.match(/^\\/([a-z]{2}(-[A-Z]{2})?)\\//)?.[1];
+  const pathParts = window.location.pathname.split('/').filter(Boolean);
+  const pathLocale = pathParts[0]?.match(/^[a-z]{2}(-[A-Z]{2})?$/)?.[0];
 
   const savedLocale = localStorage.getItem('${LOCALE_STORAGE_KEY}') ?? pathLocale ?? defaultLocale;
   const locales = ${JSON.stringify(LOCALES)};
+  const writingSystemFonts = ${JSON.stringify(writingSystemFonts)};
 
   window.__PAGE_ID__ = ${JSON.stringify(name)};
   window.__USED_COMPONENTS__ = ${JSON.stringify(usedComponents)};
@@ -127,10 +136,12 @@ const generateClientI18nScript = (
   const localeConfig = locales.find(l => l.code === savedLocale);
   const dir = localeConfig?.dir ?? 'ltr';
   const ws = localeConfig?.writingSystem || 'latin';
+  const font = writingSystemFonts[ws] || 'Inter, system-ui';
 
   htmlEl.setAttribute('dir', dir);
   htmlEl.setAttribute('lang', savedLocale);
   htmlEl.setAttribute('data-script', ws);
+  htmlEl.style.setProperty('--font-primary', font);
   htmlEl.classList.toggle('is-rtl', dir === 'rtl');
 })();
 </script>`;
@@ -165,6 +176,17 @@ const createI18nObject = (
     };
   };
 
+  const buildAttrs = (
+    base: Record<string, string | number | boolean>,
+    vars?: string | null,
+    nativeDigits?: boolean,
+  ): Record<string, string | number | boolean> => {
+    const result = { ...base };
+    if (vars) result['i18n-vars'] = vars;
+    if (nativeDigits) result['use-native'] = 'true';
+    return result;
+  };
+
   const renderHtml = (
     content: string,
     dataAttrs: Record<string, string | number | boolean>,
@@ -175,17 +197,6 @@ const createI18nObject = (
       .join('');
     const classAttr = className ? ` class="${className}"` : '';
     return `<span${classAttr}${attrs}>${content}</span>`;
-  };
-
-  const buildAttrs = (
-    base: Record<string, string | number | boolean>,
-    vars?: string | null,
-    nativeDigits?: boolean,
-  ): Record<string, string | number | boolean> => {
-    const result = { ...base };
-    if (vars) result['i18n-vars'] = vars;
-    if (nativeDigits) result['use-native'] = 'true';
-    return result;
   };
 
   const i18nFn = (
@@ -478,7 +489,7 @@ const createI18nObject = (
     },
 
     localPrice: (
-      plan: { pricing: { base: number; [locale: string]: number } },
+      plan: { pricing: { base: number;[locale: string]: number } },
       options?: TemplateFormatOptions,
     ) => {
       const formatted = String(localPrice(plan));
@@ -487,7 +498,7 @@ const createI18nObject = (
     },
 
     localPriceCurrency: (
-      plan: { pricing: { base: number; [locale: string]: number } },
+      plan: { pricing: { base: number;[locale: string]: number } },
       options?: TemplateFormatOptions,
     ) => {
       const formatted = localPriceCurrency(plan);
@@ -496,7 +507,7 @@ const createI18nObject = (
     },
 
     convertLocalPrice: (
-      plan: { pricing: { base: number; [locale: string]: number } },
+      plan: { pricing: { base: number;[locale: string]: number } },
       targetCurrency: CurrencyCode,
       options?: TemplateFormatOptions,
     ) => {
@@ -517,7 +528,7 @@ const createI18nObject = (
     },
 
     formatLocalPrice: (
-      plan: { pricing: { base: number; [locale: string]: number } },
+      plan: { pricing: { base: number;[locale: string]: number } },
       options?: TemplateFormatOptions,
     ) => {
       const formatted = formatLocalPrice(plan, options);
@@ -534,7 +545,7 @@ const createI18nObject = (
     },
 
     formatLocalPriceDiscounted: (
-      plan: { pricing: { base: number; [locale: string]: number } },
+      plan: { pricing: { base: number;[locale: string]: number } },
       discountMultiplier: number,
       targetCurrency: CurrencyCode,
       options?: TemplateFormatOptions,
@@ -653,7 +664,8 @@ export const createTemplateParams = (
     const val = getValueByPath(mergedLocales, jsonPath);
     let str = val !== undefined ? String(val) : jsonPath;
 
-    if (val === undefined && process.env.NODE_ENV !== 'production') {
+    if (val === undefined && process.env.NODE_ENV !== 'production' && !warnedKeys.has(jsonPath)) {
+      warnedKeys.add(jsonPath);
       console.warn(`[i18n] Missing key "${jsonPath}" in locale "${lang}"`);
     }
 

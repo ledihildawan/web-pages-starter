@@ -48,6 +48,8 @@ export function registerI18nStore(): void {
 
             import('@/scripts/main').then((mainModule) => {
               mainModule.setupFontStackCSS();
+              mainModule.loadLanguageFonts();
+              mainModule.loadFallbackFonts();
             });
           });
         }

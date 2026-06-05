@@ -13,6 +13,11 @@
     "code": "رمز اللغة",
     "currency": "العملة",
     "direction": "اتجاه النص",
+    "digits": "الأرقام الأصلية",
+    "enabled": "مفعّل",
+    "disabled": "معطّل",
+    "languages": "اللغات",
+    "switching": "التبديل بدون إعادة تحميل",
     "current_code": "ar",
     "current_currency": "AED",
     "current_direction": "RTL (من اليمين إلى اليسار)"
@@ -33,7 +38,7 @@
     "medium": "متوسط",
     "large": "كبير",
     "enterprise": "مؤسسي",
-    "base": "روبية إندونيسية (أساسي)"
+    "currencies": "العملات"
   },
   "currency_comparison": {
     "title": "مقارنة العملات",
@@ -103,6 +108,7 @@
     "abbreviated": "المختصر",
     "date_formats": "تنسيقات التاريخ",
     "time_formats": "تنسيقات الوقت",
+    "datetime": "التاريخ + الوقت",
     "durations": "المدد",
     "relative_time": "الوقت النسبي",
     "regional_pricing": "التسعير الإقليمي",
@@ -142,5 +148,39 @@
     "description": "ماكروز للحصول على القيم الخام بدون ترميز HTML.",
     "raw_value": "قيمة خام بدون ترميز",
     "current_year": "السنة الحالية هي {{year}}"
+  },
+  "datetime": {
+    "title": "التاريخ والوقت",
+    "description": "تنسيق مشترك للتاريخ والوقت.",
+    "iso": "معيار ISO",
+    "eve": "ليلة عيد الميلاد"
+  },
+  "unit": {
+    "title": "تنسيق الوحدات"
+  },
+  "native_digits": {
+    "title": "الأرقام الأصلية (SSR)",
+    "description": "يتم عرض النص بالأرقام ASCII بالأرقام الأصلية للإعدادات المحلية النشطة. فقط SSR — لا يتم التحديث في وقت التشغيل."
+  },
+  "inflection": {
+    "title": "تصريف الإنجليزية (SSR)",
+    "description": "الجمع والتفرد الإنجليزية في SSR. لا يتم التحديث في وقت التشغيل."
+  },
+  "ssr_only": "أولي فقط",
+  "pricing_details": {
+    "title": "تفاصيل الأسعار",
+    "description": "خط أنابيب كامل: قيمة خام، رمز العملة، منسق، مع خصم، ومحول.",
+    "raw_value": "قيمة خام",
+    "raw_currency": "رمز العملة",
+    "formatted": "منسّق",
+    "discounted": "خصم 20٪",
+    "converted_usd": "محول إلى USD"
+  },
+  "live_update": {
+    "note": "لاحظ كيف يتم تحديث جميع الأرقام والتواريخ والأسعار فوراً عند تغيير اللغة — بدون إعادة تحميل الصفحة."
+  },
+  "core": {
+    "title": "الميزات الأساسية",
+    "description": "الترجمة والجمع ومحتوى HTML."
   }
 }

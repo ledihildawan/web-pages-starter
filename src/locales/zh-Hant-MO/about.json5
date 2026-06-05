@@ -38,31 +38,31 @@
   },
   "values": {
     "title": "我們的價值觀",
-    "subtitle": "指導我們每一個決策的原則。",
-    "passion": {
-      "title": "激情",
-      "description": "我們熱愛自己的工作，這份熱愛體現在我們產品的每一個細節中。"
-    },
-    "collaboration": {
-      "title": "協作",
-      "description": "團隊合作能夠創造最佳成果。我們相信團隊的強大力量。"
-    },
-    "innovation": {
-      "title": "創新",
-      "description": "始終尋求更好的方式來解決問題和創造價值。"
-    },
-    "integrity": {
-      "title": "誠信",
-      "description": "誠實和透明是我們建立的所有關係的基石。"
-    },
-    "excellence": {
-      "title": "卓越",
-      "description": "我們從不滿足於\\\"足夠好\\\"，始終追求最好的結果。"
-    },
-    "quality": {
-      "title": "品質",
-      "description": "簡潔的代碼、美觀的設計和無縫的體驗是我們的標準。"
-    }
+    "subtitle": "指導我們每一個決策的原則。"
+  },
+  "passion": {
+    "title": "激情",
+    "description": "我們熱愛自己的工作，這份熱愛體現在我們產品的每一個細節中。"
+  },
+  "collaboration": {
+    "title": "協作",
+    "description": "團隊合作能夠創造最佳成果。我們相信團隊的強大力量。"
+  },
+  "innovation": {
+    "title": "創新",
+    "description": "始終尋求更好的方式來解決問題和創造價值。"
+  },
+  "integrity": {
+    "title": "誠信",
+    "description": "誠實和透明是我們建立的所有關係的基石。"
+  },
+  "excellence": {
+    "title": "卓越",
+    "description": "我們從不滿足於\"足夠好\"，始終追求最好的結果。"
+  },
+  "quality": {
+    "title": "品質",
+    "description": "簡潔的代碼、美觀的設計和無縫的體驗是我們的標準。"
   },
   "team": {
     "title": "團隊介紹",
@@ -70,6 +70,6 @@
     "alex_desc": "在 SaaS 生態系統開發方面擁有 10 多年經驗的遠見卓識的領導者。",
     "sarah_desc": "擅長構建大規模系統架構的全棧高手。",
     "mike_desc": "痴迷於像素細節、流暢的 UX 流程和無障礙標準。",
-    "jessica_desc": "通過創意敘事幫助品牌在數碼世界中找到獨特聲音的專家。"
+    "jessica_desc": "通過創意敘事幫助品牌在數字世界中找到獨特聲音的專家。"
   }
 }

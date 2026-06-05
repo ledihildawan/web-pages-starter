@@ -13,6 +13,11 @@
     "code": "Código de Idioma",
     "currency": "Moneda",
     "direction": "Dirección del Texto",
+    "digits": "Dígitos Nativos",
+    "enabled": "Habilitado",
+    "disabled": "Deshabilitado",
+    "languages": "Idiomas",
+    "switching": "Cambio Sin Recarga",
     "current_code": "es",
     "current_currency": "COP",
     "current_direction": "LTR (Izquierda a Derecha)"
@@ -33,7 +38,7 @@
     "medium": "Mediano",
     "large": "Grande",
     "enterprise": "Empresarial",
-    "base": "IDR (Base)"
+    "currencies": "Monedas"
   },
   "currency_comparison": {
     "title": "Comparación de Monedas",
@@ -103,6 +108,7 @@
     "abbreviated": "Abreviado",
     "date_formats": "Formatos de Fecha",
     "time_formats": "Formatos de Hora",
+    "datetime": "Fecha + Hora",
     "durations": "Duraciones",
     "relative_time": "Tiempo Relativo",
     "regional_pricing": "Precios Regionales",
@@ -142,5 +148,39 @@
     "description": "Macros para obtener valores sin marcado HTML.",
     "raw_value": "Valor sin formato",
     "current_year": "El año actual es {{year}}"
+  },
+  "datetime": {
+    "title": "Fecha y Hora",
+    "description": "Formato combinado de fecha y hora.",
+    "iso": "Estándar ISO",
+    "eve": "Noche de Navidad"
+  },
+  "unit": {
+    "title": "Formato de Unidades"
+  },
+  "native_digits": {
+    "title": "Dígitos Nativos (SSR)",
+    "description": "El texto con dígitos ASCII se renderiza en los dígitos nativos de la configuración regional activa. Solo SSR — no se actualiza en tiempo de ejecución."
+  },
+  "inflection": {
+    "title": "Inflexión del Inglés (SSR)",
+    "description": "Pluralización y singularización del inglés en SSR. No se actualiza en tiempo de ejecución."
+  },
+  "ssr_only": "Solo inicial",
+  "pricing_details": {
+    "title": "Detalles de Precios",
+    "description": "Pipeline completo: valor raw, código de moneda, formateado, descuento y convertido.",
+    "raw_value": "Valor Raw",
+    "raw_currency": "Código de Moneda",
+    "formatted": "Formateado",
+    "discounted": "20% Descuento",
+    "converted_usd": "Convertido a USD"
+  },
+  "live_update": {
+    "note": "Observe cómo todos los números, fechas y precios se actualizan al instante cuando cambia el idioma — sin recarga de página."
+  },
+  "core": {
+    "title": "Características Principales",
+    "description": "Traducción, pluralización y contenido HTML."
   }
 }

@@ -7,9 +7,56 @@
     "badge": "Our Features",
     "title_part1": "Everything you need to ",
     "title_highlight": "succeed",
-    "description": "Comprehensive tools designed for modern developers who demand excellence.",
-    "more_title": "Built for Performance",
-    "more_subtitle": "Optimised for speed without compromising on quality or user experience."
+    "description": "Comprehensive tools designed for modern developers who demand excellence."
+  },
+  "sections": {
+    "sync": {
+      "title": "Real-time Sync",
+      "description": "Changes propagate instantly across all devices. Whether your users are on mobile, desktop, or tablet, they see the same data at the same time.",
+      "check_0": "Sub-millisecond latency",
+      "check_1": "Built-in offline support",
+      "check_2": "Conflict resolution handling"
+    },
+    "analytics": {
+      "title": "Actionable Analytics",
+      "description": "Don't guess. Get deep insights into user behaviour, system performance, and revenue metrics. Visualise your data with interactive charts.",
+      "check_0": "Customisable dashboards",
+      "check_1": "Export to PDF, CSV, or Excel",
+      "check_2": "Automated weekly reports"
+    }
+  },
+  "more_title": "And much more...",
+  "more_subtitle": "Advanced features designed to help you build faster and more scaleably.",
+  "more": {
+    "dark_mode": {
+      "title": "Dark Mode",
+      "desc": "Built-in support for light and dark themes with automatic detection."
+    },
+    "api_first": {
+      "title": "API First",
+      "desc": "REST and GraphQL APIs available for full programmatic control."
+    },
+    "sso": {
+      "title": "SSO Login",
+      "desc": "Enterprise-grade Single Sign-On for Google, GitHub, and Okta."
+    },
+    "audit": {
+      "title": "Audit Logs",
+      "desc": "Track every change to your projects with detailed timestamps."
+    },
+    "rbac": {
+      "title": "Role-Based Access",
+      "desc": "Granular permission controls for admins, editors, and viewers."
+    },
+    "uptime": {
+      "title": "99.99% Uptime",
+      "desc": "Guaranteed availability with our globally distributed CDN."
+    }
+  },
+  "cta": {
+    "heading": "Ready to get started?",
+    "btn_create": "Create Account",
+    "btn_docs": "Read Documentation"
   },
   "categories": {
     "performance": {

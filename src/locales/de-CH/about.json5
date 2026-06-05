@@ -38,31 +38,31 @@
   },
   "values": {
     "title": "Nilai-Nilai Kami",
-    "subtitle": "Prinsip yang membimbing setiap keputusan yang kami buat.",
-    "passion": {
-      "title": "Semangat",
-      "description": "Kami mencintai apa yang kami lakukan, dan itu terlihat dalam setiap detail produk kami."
-    },
-    "collaboration": {
-      "title": "Kolaborasi",
-      "description": "Bekerja sama menghasilkan hasil terbaik. Kami percaya pada kekuatan tim yang solid."
-    },
-    "innovation": {
-      "title": "Inovasi",
-      "description": "Selalu mencari cara yang lebih baik untuk menyelesaikan masalah dan menciptakan nilai."
-    },
-    "integrity": {
-      "title": "Integritas",
-      "description": "Kejujuran dan transparansi adalah fondasi dari setiap hubungan yang kami bangun."
-    },
-    "excellence": {
-      "title": "Keunggulan",
-      "description": "Kami tidak puas dengan yang cukup baik. Kami selalu berusaha untuk yang terbaik."
-    },
-    "quality": {
-      "title": "Kualitas",
-      "description": "Kode yang bersih, desain yang indah, dan pengalaman yang mulus adalah standar kami."
-    }
+    "subtitle": "Prinsip yang membimbing setiap keputusan yang kami buat。"
+  },
+  "passion": {
+    "title": "Semangat",
+    "description": "Kami mencintai apa yang kami lakukan, dan itu terlihat dalam setiap detail produk kami."
+  },
+  "collaboration": {
+    "title": "Kolaborasi",
+    "description": "Bekerja sama menghasilkan hasil terbaik. Kami percaya pada kekuatan tim yang solid."
+  },
+  "innovation": {
+    "title": "Inovasi",
+    "description": "Selalu mencari cara yang lebih baik untuk menyelesaikan masalah dan menciptakan nilai."
+  },
+  "integrity": {
+    "title": "Integritas",
+    "description": "Kejujuran dan transparansi adalah fondasi dari setiap hubungan yang kami bangun."
+  },
+  "excellence": {
+    "title": "Keunggulan",
+    "description": "Kami tidak puas dengan yang cukup baik. Kami selalu berusaha untuk yang terbaik."
+  },
+  "quality": {
+    "title": "Kualitas",
+    "description": "Kode yang bersih, desain yang indah, dan pengalaman yang mulus adalah standar kami."
   },
   "team": {
     "title": "Kenali Tim Kami",

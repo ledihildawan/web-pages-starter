@@ -1,210 +1,158 @@
 # Web Pages Starter
 
-> Modern Multi-Page Application framework with i18n, Inline Hydration, and Zero-Touch Automation.
+A minimal multi-page starter for content sites that need to ship in many languages from day one. **Rsbuild + Nunjucks + Alpine + Tailwind + i18next** wired together so that copy, formatting, RTL, native digits, and regional pricing all flow from one source of truth.
 
-Lightning-fast MPA framework built with **Rsbuild**, **Nunjucks**, **Alpine.js**, and **Tailwind CSS**. Supports **42 locales** with auto RTL, native digits, and locale-specific formatting.
+- **42 BCP 47 locales** out of the box (`id-ID`, `en-US`, `zh-Hans-CN`, `zh-Hant-TW`, `ar-SA`, `ja-JP`, …)
+- **One source of truth** — `src/locales/{locale}/*.json5` for copy, `src/configs/locales.ts` for behavior
+- **Inline hydration** — templates emit `<span data-i18n="…">` so i18next can swap text in place
+- **Zero-touch scaffolding** — drop a folder under `src/pages/` and it becomes a route
+- **No hand-rolled formatting** — every number, currency, date, and price goes through `i18n.*`
 
----
+See **[`docs/i18n.md`](docs/i18n.md)** for the full i18n reference.
 
 ## Quick Start
 
 ```bash
-# Install dependencies
 bun install
-
-# Start development server
-bun run dev
-
-# Build for production
-bun run build
-
-# Preview production build
-bun run preview
+bun run dev          # http://localhost:8888
+bun run build        # production build to ./dist
+bun run preview      # serve the production build
 ```
 
-Visit [http://localhost:8888](http://localhost:8888)
+Requires [Bun](https://bun.sh) `>= 1.0`.
 
----
-
-## Generate New Page
+## Generate a Page
 
 ```bash
-bun run gen:page my-page
+bun run gen:page pricing
 ```
 
-Creates:
-```
-src/pages/my-page/
-├── index.njk          # Template
-├── index.json5        # Page data
-├── index.ts           # Page JS
-├── index.css          # Page CSS
+This scaffolds:
 
-src/locales/{locale}/my-page.json5  # 42 translation files
+```
+src/pages/pricing/
+  index.njk         # Nunjucks template (required)
+  index.ts          # Page entry (optional)
+  index.css         # Page styles (optional)
+
+src/locales/{locale}/pricing.json5   # 42 translation files
 ```
 
----
+The build picks up the page automatically; no router config to touch.
 
 ## Project Structure
 
 ```
 src/
-├── configs/           # 🔥 Single source of truth
-│   ├── locales.ts      # i18n data & BCP 47 configs
-│   └── paths.ts        # Path constants
-├── pages/              # 🔥 Routes (auto-detected)
+├── configs/
+│   ├── locales.ts        # languages, regions, currencies, timezones, fallbacks (single source of truth)
+│   └── paths.ts          # filesystem path constants
+├── pages/                # routes — one folder per page
 │   └── {page}/
-│       ├── index.njk   # Template (required)
-│       ├── index.json5 # Page data (optional)
-│       ├── index.ts    # Page JS (optional)
-│       └── index.css  # Page CSS (optional)
-├── components/         # Nunjucks components
-├── layouts/            # Base templates
-├── locales/{locale}/   # 42 translation files
-├── scripts/            # JS modules
-└── styles/             # Global styles
+│       ├── index.njk     # template (required)
+│       ├── index.json5   # static page data (optional)
+│       ├── index.ts      # page entry (optional)
+│       └── index.css     # page styles (optional)
+├── components/           # reusable Nunjucks partials
+├── layouts/              # base templates (main.njk)
+├── locales/              # translation source of truth
+│   └── {locale}/
+│       ├── common.json5
+│       ├── {page}.json5
+│       └── components/{name}.json5
+├── scripts/              # client TS — bootstrap, i18n, stores, formatters
+├── styles/               # global styles (Tailwind entry)
+├── assets/               # images, fonts, raw assets
+└── types/                # shared TS types
+
+tools/                    # build-time scripts (gen, sync, parity, exchange rates)
+generated/                # auto-generated: i18n.d.ts, exchange-rates.ts
+docs/                     # guides (i18n.md)
 ```
 
----
+## How i18n Works
 
-## Key Features
+```
+src/locales/{locale}/*.json5
+        │
+        ├─► Nunjucks build (src/scripts/lib/template.ts)
+        │     resolves keys with the default locale and emits HTML
+        │     with data-* attributes
+        │
+        └─► Inline bootstrap in <head>
+              exposes window.__I18N_DATA__ for every locale
+                       │
+                       ▼
+              src/scripts/lib/i18n.ts
+                  i18next.init(...)
+                  translatePage()          (data-i18n, data-i18n-plural, …)
+                  updateFormattedElements() (data-format-*, data-convert-*, …)
+```
 
-### 🌍 i18n System
-- **42 locales** with full translation support
-- **Auto RTL** layout for Arabic/Hebrew
-- **Native digits** (٠١٢٣ for Arabic, ๐๑๒๓ for Thai)
-- **Locale formatting** (numbers, dates, currencies)
-- **BCP 47 compliant** naming
+The same translation key (`i18n.t('page.hero.title')`) renders the initial HTML at build time and is updated in place by i18next when the user changes language — no full reload, no second fetch.
+
+## At a Glance
 
 ```njk
-{{ i18n.t('page.title') }}                    <!-- Translation -->
-{{ i18n.formatNumber(1234.56) }}             <!-- 1,234.56 -->
-{{ i18n.formatCurrency(99.99, 'USD') }}       <!-- $99.99 -->
-{{ i18n.formatLocalPrice(plan) }}            <!-- Regional pricing -->
+{# translation with runtime data attribute #}
+<h1>{{ i18n.t('page.hero.title') }}</h1>
+
+{# formatters — locale-aware numbers, currency, dates #}
+<span>{{ i18n.formatNumber(1234.56) }}</span>
+<span>{{ i18n.formatCurrency(99, 'USD') }}</span>
+<time>{{ i18n.formatDate('2026-06-04', { dateStyle: 'long' }) }}</time>
+
+{# regional pricing — picks the right currency for the active locale #}
+<span>{{ i18n.formatLocalPrice(plan) }}</span>
+
+{# language switcher #}
+<button @click="$store.i18n.change('en-US')">English</button>
 ```
 
-### 🚀 Zero-Touch Automation
-- **Auto asset injection** - No manual `<link>` or `<script>` tags
-- **Auto entry detection** - Every `src/pages/{folder}` becomes a route
-- **Auto data injection** - `index.json5` available in templates
-- **Auto locale files** - Generated for all 42 languages
+## Commands
 
-### 🎨 Inline Hydration
-- Clean HTML with manual tags
-- i18n functions output inline `<span>` elements
-- Runtime language switching without refresh
-- SEO-friendly (content exists at build time)
+| Command | What it does |
+| --- | --- |
+| `bun run dev` | Fetch rates, watch JSON5, start the Rsbuild dev server |
+| `bun run build` | Fetch rates, regenerate i18n types, production build |
+| `bun run preview` | Serve the production build |
+| `bun run gen:page <name>` | Scaffold a new page and 42 translation files |
+| `bun run gen:i18n` | Regenerate `generated/i18n.d.ts` |
+| `bun run watch:i18n` | Watch JSON5 files and rerun `gen:i18n` |
+| `bun run sync:locales` | Create missing locale folders from the default |
+| `bun run check:parity` | Diff keys across all locales |
+| `bun run fetch:rates` | Update exchange rates (24h cache) |
+| `bun run fetch:rates:force` | Bypass the rate cache |
+| `bun run clean` | Wipe `dist`, `node_modules`, and reinstall |
 
-### ⚡ Performance
-- **Rsbuild** for lightning-fast builds
-- **Asset hashing** for cache busting
-- **Code splitting** for optimal loading
-- **Image optimization** with AVIF
-- **Font subsetting** for smaller files
+## Locales
 
----
+42 locales are configured in [`src/configs/locales.ts`](src/configs/locales.ts). The default is `id-ID`. Add a new locale by adding an entry there and running `bun run sync:locales`.
 
-## Template Usage
+Highlights:
 
-```njk
-{% extends "main.njk" %}
-
-{% block content %}
-  <!-- Include components -->
-  {% include "navbar.njk" %}
-  {% include "hero.njk" %}
-
-  <!-- Use i18n -->
-  <h1>{{ i18n.html('page.title') }}</h1>
-  <p>{{ i18n.t('page.description') }}</p>
-
-  <!-- Use page data -->
-  <span>{{ page.meta.title }}</span>
-
-  <!-- Include CTA -->
-  {% include "cta.njk" %}
-{% endblock %}
-```
-
----
-
-## CLI Commands
-
-| Command | Description |
-|---------|-------------|
-| `bun run dev` | Start dev server with hot reload |
-| `bun run build` | Production build |
-| `bun run preview` | Preview production build |
-| `bun run gen:page <name>` | Generate new page |
-| `bun run gen:i18n` | Generate i18n types |
-| `bun run sync:locales` | Copy locale files |
-| `bun run check:parity` | Check translation completeness |
-| `bun run fetch:rates` | Update exchange rates |
-| `bun run clean` | Clean and reinstall |
-
----
-
-## i18n Quick Reference
-
-### Supported Locales (42)
-
-Indonesian: `id`, `id-ID`
-English: `en-US`, `en-GB`, `en-AU`, `en-CA`, `en-IN`, `en-NZ`, `en-ZA`
-Arabic: `ar`, `ar-SA`, `ar-AE`, `ar-EG`, `ar-MA`, `ar-TN` (RTL + Native Digits)
-Chinese: `zh-CN`, `zh-HK`, `zh-SG`, `zh-TW`
-And 25+ more...
-
-### Formatting Functions
-
-```njk
-{{ i18n.formatNumber(1234.56) }}              <!-- 1,234.56 -->
-{{ i18n.formatCurrency(99.99, 'USD') }}       <!-- $99.99 -->
-{{ i18n.formatPercent(0.85) }}                <!-- 85% -->
-{{ i18n.formatDate(new Date()) }}             <!-- 6/2/26 -->
-{{ i18n.formatTime(date, 'short') }}          <!-- 1:30 PM -->
-{{ i18n.formatRelativeTime(-1, {unit: 'day'}) }} <!-- 1 day ago -->
-{{ i18n.formatLocalPrice(plan) }}             <!-- Auto currency by locale -->
-```
-
-### Options
-
-```njk
-{{ i18n.formatNumber(1234, {raw: true}) }}    <!-- Just "1234" -->
-{{ i18n.t('page.price', {native: true}) }}     <!-- Native: ٠١٢٣٤ -->
-{{ i18n.t('page.price', {universal: true}) }}  <!-- Universal: 1234 -->
-{{ i18n.t('page.highlight', {className: 'text-red'}) }}
-```
-
----
+| Group | Codes | Notes |
+| --- | --- | --- |
+| Indonesian | `id-ID` | Default |
+| English | `en-US`, `en-GB`, `en-CA`, `en-AU`, `en-IN`, `en-NZ`, `en-ZA` | Region-specific currencies |
+| Chinese | `zh-Hans-CN`, `zh-Hans-SG`, `zh-Hans-MY`, `zh-Hant-TW`, `zh-Hant-HK`, `zh-Hant-MO` | Script variants |
+| Arabic | `ar-SA`, `ar-AE`, `ar-EG`, `ar-MA`, `ar-TN` | RTL, native digits, six-form plurals |
+| Japanese, Korean, Thai, Hindi, Russian | `ja-JP`, `ko-KR`, `ko-KP`, `th-TH`, `hi-IN`, `hi-NP`, `ru-RU` | Native digits where applicable |
+| Spanish, Portuguese, French, German | regional variants | Latin script, two-form plurals |
 
 ## Tech Stack
 
-- **Build Tool:** Rsbuild v2
-- **Template:** Nunjucks (autoescape disabled)
-- **Reactive:** Alpine.js with plugins
-- **Styling:** Tailwind CSS v4
-- **i18n:** i18next with browser detector
-- **Language:** TypeScript
-- **Package Manager:** Bun
-
----
-
-## Documentation
-
-- **[Architecture Guide](docs/architecture.md)** - Complete system documentation
-- **[i18n System Guide](docs/i18n.md)** - Internationalization details
-
----
+- **Build:** Rsbuild v2, Rspack, html-minifier-terser
+- **Templates:** Nunjucks (autoescape off), `simple-nunjucks-loader`
+- **Reactive UI:** Alpine.js + `@alpinejs/collapse`, `@alpinejs/focus`
+- **Styling:** Tailwind CSS v4 (logical properties for RTL)
+- **i18n:** i18next + `i18next-browser-languagedetector`
+- **Types:** TypeScript
+- **Runtime:** Bun
 
 ## Browser Support
 
-```
-last 2 versions, not dead
-Edge >= 79, Firefox >= 68, Chrome >= 80
-Safari >= 13.1, iOS >= 13.4
-```
-
----
+`last 2 versions, not dead` · `Edge >= 79` · `Firefox >= 68` · `Chrome >= 80` · `Safari >= 13.1` · `iOS >= 13.4`
 
 ## License
 

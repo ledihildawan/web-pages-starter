@@ -38,31 +38,31 @@
   },
   "values": {
     "title": "我们的价值观",
-    "subtitle": "指导我们每一个决策的原则。",
-    "passion": {
-      "title": "激情",
-      "description": "我们热爱自己的工作，这份热爱体现在我们产品的每一个细节中。"
-    },
-    "collaboration": {
-      "title": "协作",
-      "description": "团队合作能够创造最佳成果。我们相信团队的强大力量。"
-    },
-    "innovation": {
-      "title": "创新",
-      "description": "始终寻求更好的方式来解决问题和创造价值。"
-    },
-    "integrity": {
-      "title": "诚信",
-      "description": "诚实和透明是我们建立的所有关系的基石。"
-    },
-    "excellence": {
-      "title": "卓越",
-      "description": "我们从不满足于\\\"足够好\\\"，始终追求最好的结果。"
-    },
-    "quality": {
-      "title": "品质",
-      "description": "简洁的代码、美观的设计和无缝的体验是我们的标准。"
-    }
+    "subtitle": "指导我们每一个决策的原则。"
+  },
+  "passion": {
+    "title": "激情",
+    "description": "我们热爱自己的工作，这份热爱体现在我们产品的每一个细节中。"
+  },
+  "collaboration": {
+    "title": "协作",
+    "description": "团队合作能够创造最佳成果。我们相信团队的强大力量。"
+  },
+  "innovation": {
+    "title": "创新",
+    "description": "始终寻求更好的方式来解决问题和创造价值。"
+  },
+  "integrity": {
+    "title": "诚信",
+    "description": "诚实和透明是我们建立的所有关系的基石。"
+  },
+  "excellence": {
+    "title": "卓越",
+    "description": "我们从不满足于\"足够好\"，始终追求最好的结果。"
+  },
+  "quality": {
+    "title": "品质",
+    "description": "简洁的代码、美观的设计和无缝的体验是我们的标准。"
   },
   "team": {
     "title": "团队介绍",

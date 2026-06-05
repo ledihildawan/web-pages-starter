@@ -13,6 +13,11 @@
     "code": "भाषा कोड",
     "currency": "मुद्रा",
     "direction": "पाठ दिशा",
+    "digits": "मूल अंक",
+    "enabled": "सक्षम",
+    "disabled": "अक्षम",
+    "languages": "भाषाएं",
+    "switching": "पुनः लोड किए बिना स्विचिंग",
     "current_code": "hi-IN",
     "current_currency": "INR",
     "current_direction": "LTR (बाएं से दाएं)"
@@ -33,7 +38,7 @@
     "medium": "मध्यम",
     "large": "बड़ा",
     "enterprise": "एंटरप्राइज़",
-    "base": "IDR (आधार)"
+    "currencies": "मुद्राएं"
   },
   "currency_comparison": {
     "title": "मुद्रा तुलना",
@@ -103,6 +108,7 @@
     "abbreviated": "संक्षिप्त",
     "date_formats": "दिनांक प्रारूप",
     "time_formats": "समय प्रारूप",
+    "datetime": "दिनांक + समय",
     "durations": "अवधि",
     "relative_time": "सापेक्ष समय",
     "regional_pricing": "क्षेत्रीय मूल्य",
@@ -142,5 +148,39 @@
     "description": "HTML मार्कअप के बिना कच्चे मान प्राप्त करने के लिए मैक्रोज़।",
     "raw_value": "बिना मार्कअप कच्चा मान",
     "current_year": "वर्तमान वर्ष {{year}} है"
+  },
+  "datetime": {
+    "title": "दिनांक और समय",
+    "description": "संयुक्त दिनांक और समय प्रारूप।",
+    "iso": "ISO मानक",
+    "eve": "क्रिसमस की पूर्व संध्या"
+  },
+  "unit": {
+    "title": "इकाई प्रारूप"
+  },
+  "native_digits": {
+    "title": "मूल अंक (SSR)",
+    "description": "ASCII अंकों वाला टेक्स्ट सक्रिय लोकेल के मूल अंकों में प्रस्तुत किया जाता है। केवल SSR — रनटाइम पर अपडेट नहीं होता।"
+  },
+  "inflection": {
+    "title": "अंग्रेजी व्याकरण (SSR)",
+    "description": "SSR पर अंग्रेजी बहुवचन और एकवचन। रनटाइम पर अपडेट नहीं होता।"
+  },
+  "ssr_only": "केवल प्रारंभिक",
+  "pricing_details": {
+    "title": "मूल्य विवरण",
+    "description": "पूर्ण पाइपलाइन: कच्चा मान, मुद्रा कोड, स्वरूपित, छूट और परिवर्तित।",
+    "raw_value": "कच्चा मान",
+    "raw_currency": "मुद्रा कोड",
+    "formatted": "स्वरूपित",
+    "discounted": "20% छूट",
+    "converted_usd": "USD में परिवर्तित"
+  },
+  "live_update": {
+    "note": "ध्यान दें कि जब आप भाषा बदलते हैं तो सभी संख्याएं, तिथियां और कीमतें तुरंत अपडेट होती हैं — बिना पेज रीलोड के।"
+  },
+  "core": {
+    "title": "मुख्य सुविधाएं",
+    "description": "अनुवाद, बहुवचन और HTML सामग्री।"
   }
 }

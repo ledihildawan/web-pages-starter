@@ -14,7 +14,11 @@
     "max_durations": 3,
     "max_lists": 2,
     "max_form_fields": 2,
-    "max_missing_keys": 2,
+    "max_missing_keys": 3,
+    "max_datetime": 2,
+    "max_native_samples": 3,
+    "max_inflection": 3,
+    "discount_multiplier": 0.8,
     "simple_plural_counts": [0, 1, 2, 5],
     "number_modes_example": 1234567.89,
     "currency_comparison_base": 100,
@@ -38,7 +42,8 @@
   ],
   "missing_keys": [
     "page.nonexistent.key",
-    "page.another.missing.key"
+    "page.another.missing.key",
+    "page.also.missing"
   ],
   "percentages": [
     { "val": 0.5, "label": "advanced.fifty_percent" },
@@ -100,5 +105,19 @@
         "ar-SA": 371.25
       }
     }
+  ],
+  "datetime": [
+    { "val": "2026-05-29T14:30:00", "label": "datetime.iso" },
+    { "val": "2026-12-25T18:00:00", "label": "datetime.eve" }
+  ],
+  "native_digit_samples": [
+    "Page 10 of 25",
+    "Order #12345",
+    "2026-01-15 09:00"
+  ],
+  "inflection_pairs": [
+    { "singular": "project", "plural": "projects" },
+    { "singular": "child", "plural": "children" },
+    { "singular": "category", "plural": "categories" }
   ]
 }

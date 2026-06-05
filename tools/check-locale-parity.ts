@@ -3,42 +3,15 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { DEFAULT_LOCALE, LOCALE_CODES } from '../src/configs/locales';
 import { PATHS } from '../src/configs/paths';
-import { readJson5File } from '../src/scripts/utils/json5';
-
-type JsonObject = Record<string, unknown>;
+import { collectKeys, readJSON5 } from '../src/scripts/utils/json5';
 
 const LOCALES_DIR = path.resolve(PATHS.LOCALES);
 const BASE_LOCALE = DEFAULT_LOCALE;
 
-function getAllKeys(obj: unknown, prefix = ''): Set<string> {
-  const keys = new Set<string>();
+const collectKeySet = (obj: unknown): Set<string> => new Set(collectKeys(obj));
 
-  if (typeof obj === 'object' && obj !== null) {
-    for (const [key, value] of Object.entries(obj)) {
-      const fullKey = prefix ? `${prefix}.${key}` : key;
-      keys.add(fullKey);
-
-      if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
-        const nestedKeys = getAllKeys(value, fullKey);
-        nestedKeys.forEach((k) => keys.add(k));
-      }
-    }
-  }
-
-  return keys;
-}
-
-function readJson5(locale: string, filename: string): JsonObject {
-  const filePath = path.join(LOCALES_DIR, locale, filename);
-  if (!fs.existsSync(filePath)) return {};
-
-  try {
-    return readJson5File(filePath) as JsonObject;
-  } catch (error) {
-    console.warn(`Failed to read ${filePath}:`, error);
-    return {};
-  }
-}
+const readLocaleFile = (locale: string, filename: string) =>
+  readJSON5(path.join(LOCALES_DIR, locale, filename));
 
 interface ParityReport {
   file: string;
@@ -55,7 +28,7 @@ function checkFileParity(
   filePath: string,
   localeStats: Map<string, { missing: number; extra: number }>
 ): ParityReport {
-  const baseKeys = getAllKeys(readJson5(BASE_LOCALE, filePath));
+  const baseKeys = collectKeySet(readLocaleFile(BASE_LOCALE, filePath));
   const report: ParityReport = {
     file: filePath,
     totalKeys: baseKeys.size,
@@ -66,14 +39,15 @@ function checkFileParity(
   for (const locale of LOCALE_CODES) {
     if (locale === BASE_LOCALE) continue;
 
-    const localeKeys = getAllKeys(readJson5(locale, filePath));
+    const localeKeys = collectKeySet(readLocaleFile(locale, filePath));
     const missing = getSetDifference(baseKeys, localeKeys);
     const extra = getSetDifference(localeKeys, baseKeys);
 
     if (missing.length > 0) report.missingKeys.push({ locale, keys: missing });
     if (extra.length > 0) report.extraKeys.push({ locale, keys: extra });
 
-    const stats = localeStats.get(locale)!;
+    const stats = localeStats.get(locale) ?? { missing: 0, extra: 0 };
+    localeStats.set(locale, stats);
     stats.missing += missing.length;
     stats.extra += extra.length;
   }
@@ -165,7 +139,7 @@ function printReportSection(title: string, reports: ParityReport[], verbose: boo
 }
 
 function printReport(report: ReturnType<typeof checkParity>, verbose = false): void {
-  console.log('\n' + '='.repeat(60));
+  console.log(`\n${'='.repeat(60)}`);
   console.log('🌍 LOCALE PARITY CHECK REPORT');
   console.log('='.repeat(60));
 
@@ -195,14 +169,14 @@ function printReport(report: ReturnType<typeof checkParity>, verbose = false): v
     0
   );
 
-  console.log('\n' + '='.repeat(60));
+  console.log(`\n${'='.repeat(60)}`);
   if (totalIssues === 0) {
     console.log('✅ All locales have perfect parity!');
   } else {
     console.log(`❌ Found ${totalIssues} parity issues across all locales.`);
     console.log('   Run with --verbose to see all missing/extra keys.');
   }
-  console.log('='.repeat(60) + '\n');
+  console.log(`${'='.repeat(60)}\n`);
 }
 
 const args = process.argv.slice(2);

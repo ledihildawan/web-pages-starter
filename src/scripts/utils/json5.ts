@@ -76,6 +76,21 @@ export const parseJson5 = (source: string): unknown =>
 export const readJson5File = (filePath: string): unknown =>
   parseJson5(fs.readFileSync(filePath, 'utf-8'));
 
+export const collectKeys = (obj: unknown, prefix = ''): string[] => {
+  if (typeof obj !== 'object' || obj === null || Array.isArray(obj)) {
+    return prefix ? [prefix] : [];
+  }
+
+  return Object.entries(obj)
+    .sort(([a], [b]) => a.localeCompare(b))
+    .flatMap(([key, value]) => {
+      const nextKey = prefix ? `${prefix}.${key}` : key;
+      return typeof value === 'object' && value !== null && !Array.isArray(value)
+        ? collectKeys(value, nextKey)
+        : [nextKey];
+    });
+};
+
 export const readJSON5 = (filePath: string): JsonData => {
   try {
     let finalPath = filePath;

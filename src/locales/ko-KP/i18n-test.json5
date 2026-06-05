@@ -15,7 +15,12 @@
     "direction": "텍스트 방향",
     "current_code": "ko",
     "current_currency": "KPW",
-    "current_direction": "LTR (왼쪽에서 오른쪽으로)"
+    "current_direction": "LTR (왼쪽에서 오른쪽으로)",
+    "digits": "원본 숫자",
+    "enabled": "활성화",
+    "disabled": "비활성화",
+    "languages": "언어",
+    "switching": "재로드 없이 전환"
   },
   "numbers": {
     "title": "숫자 서식",
@@ -33,7 +38,7 @@
     "medium": "중간",
     "large": "큼",
     "enterprise": "엔터프라이즈",
-    "base": "IDR (기본)"
+    "currencies": "통화"
   },
   "currency_comparison": {
     "title": "통화 비교",
@@ -103,6 +108,7 @@
     "abbreviated": "약어",
     "date_formats": "날짜 형식",
     "time_formats": "시간 형식",
+    "datetime": "날짜 + 시간",
     "durations": "기간",
     "relative_time": "상대 시간",
     "regional_pricing": "지역 가격",
@@ -142,5 +148,39 @@
     "description": "HTML 마크업 없이 원시 값을 가져오는 매크로.",
     "raw_value": "형식화되지 않은 원시 값",
     "current_year": "현재 연도는 {{year}}년입니다"
+  },
+  "datetime": {
+    "title": "날짜와 시간",
+    "description": "날짜와 시간의 복합 형식.",
+    "iso": "ISO 표준",
+    "eve": "크리스마스 이브"
+  },
+  "unit": {
+    "title": "단위 형식"
+  },
+  "native_digits": {
+    "title": "원본 숫자 (SSR)",
+    "description": "ASCII 숫자가 포함된 텍스트가 활성 로케일의 원본 숫자로 렌더링됩니다. SSR만 — 런타임에서 업데이트되지 않습니다."
+  },
+  "inflection": {
+    "title": "영어 굴절 (SSR)",
+    "description": "SSR에서의 영어 복수형과 단수형. 런타임에서 업데이트되지 않습니다."
+  },
+  "ssr_only": "초기만",
+  "pricing_details": {
+    "title": "가격 상세",
+    "description": "완전한 파이프라인: 원시 값, 통화 코드, 형식화, 할인, 변환.",
+    "raw_value": "원시 값",
+    "raw_currency": "통화 코드",
+    "formatted": "형식화됨",
+    "discounted": "20% 할인",
+    "converted_usd": "USD로 변환"
+  },
+  "live_update": {
+    "note": "언어를 변경하면 모든 숫자, 날짜, 가격이 즉시 업데이트됩니다 — 페이지 새로고침 없이."
+  },
+  "core": {
+    "title": "핵심 기능",
+    "description": "번역, 복수화, HTML 콘텐츠."
   }
 }

@@ -1,11 +1,11 @@
 {
   "page_id": "contact",
   "meta": {
-    "t_key": "hero",
+    "t_key": "contact",
     "theme_color": "violet"
   },
-  "hero": {
-    "t_key": "hero"
+  "contact": {
+    "t_key": "contact"
   },
   "contact_items": [
     {

@@ -64,7 +64,7 @@ async function generateExchangeRates(forceRefresh = false): Promise<void> {
   const existing = await loadExistingRates();
 
   if (!forceRefresh && existing && isRatesFresh(existing)) {
-    console.log('Using cached exchange rates (last updated:', existing.lastUpdated + ')');
+    console.log('Using cached exchange rates (last updated:', `${existing.lastUpdated})`);
     return;
   }
 

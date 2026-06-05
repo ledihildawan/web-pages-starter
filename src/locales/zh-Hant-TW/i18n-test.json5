@@ -13,6 +13,11 @@
     "code": "語言代碼",
     "currency": "貨幣",
     "direction": "文本方向",
+    "digits": "原生數字",
+    "enabled": "已啟用",
+    "disabled": "已停用",
+    "languages": "語言",
+    "switching": "無重載切換",
     "current_code": "zh-Hant-TW",
     "current_currency": "TWD",
     "current_direction": "LTR (從左到右)"
@@ -33,7 +38,7 @@
     "medium": "中型",
     "large": "大型",
     "enterprise": "企業",
-    "base": "美元（基礎）"
+    "currencies": "貨幣"
   },
   "currency_comparison": {
     "title": "貨幣比較",
@@ -103,6 +108,7 @@
     "abbreviated": "縮寫",
     "date_formats": "日期格式",
     "time_formats": "時間格式",
+    "datetime": "日期 + 時間",
     "durations": "持續時間",
     "relative_time": "相對時間",
     "regional_pricing": "區域定價",
@@ -142,5 +148,39 @@
     "description": "用於獲取無HTML標記原始值的宏。",
     "raw_value": "無標記的原始值",
     "current_year": "當前年份是{{year}}"
+  },
+  "datetime": {
+    "title": "日期和時間",
+    "description": "組合日期和時間格式。",
+    "iso": "ISO 標準",
+    "eve": "聖誕夜"
+  },
+  "unit": {
+    "title": "單位格式"
+  },
+  "native_digits": {
+    "title": "原生數字 (SSR)",
+    "description": "帶有 ASCII 數字的文字以活動語言環境的原生數字呈現。仅 SSR — 運行時不更新。"
+  },
+  "inflection": {
+    "title": "英語屈折 (SSR)",
+    "description": "SSR 時的英語複數和單數形式。運行時不更新。"
+  },
+  "ssr_only": "僅初始",
+  "pricing_details": {
+    "title": "價格詳情",
+    "description": "完整流程：原始值、貨幣代碼、格式化、折扣和轉換。",
+    "raw_value": "原始值",
+    "raw_currency": "貨幣代碼",
+    "formatted": "已格式化",
+    "discounted": "20% 折扣",
+    "converted_usd": "轉換為 USD"
+  },
+  "live_update": {
+    "note": "請注意，當您更改語言時，所有數字、日期和價格都會立即更新 — 無需重新載入頁面。"
+  },
+  "core": {
+    "title": "核心功能",
+    "description": "翻譯、複數和 HTML 內容。"
   }
 }

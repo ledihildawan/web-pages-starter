@@ -13,6 +13,11 @@
     "code": "Language Code",
     "currency": "Currency",
     "direction": "Text Direction",
+    "digits": "Native Digits",
+    "enabled": "Enabled",
+    "disabled": "Disabled",
+    "languages": "Languages",
+    "switching": "No-Reload Switching",
     "current_code": "en",
     "current_currency": "ZAR",
     "current_direction": "LTR (Left to Right)"
@@ -29,6 +34,7 @@
   "currency": {
     "title": "Currency Conversion",
     "description": "Prices in IDR converted to active language currency.",
+    "currencies": "Currencies",
     "small": "Small",
     "medium": "Medium",
     "large": "Large",
@@ -102,6 +108,7 @@
     "abbreviated": "Abbreviated",
     "date_formats": "Date Formats",
     "time_formats": "Time Formats",
+    "datetime": "Date + Time",
     "durations": "Durations",
     "relative_time": "Relative Time",
     "regional_pricing": "Regional Pricing",
@@ -141,5 +148,39 @@
     "description": "Macros for getting raw values without HTML markup.",
     "raw_value": "Raw value without markup",
     "current_year": "The current year is {{year}}"
+  },
+  "datetime": {
+    "title": "Date & Time",
+    "description": "Combined date and time formatting.",
+    "iso": "ISO Standard",
+    "eve": "Christmas Eve"
+  },
+  "unit": {
+    "title": "Unit Formatting"
+  },
+  "native_digits": {
+    "title": "Native Digits (SSR)",
+    "description": "Text with ASCII digits is rendered in the active locale's native digits. SSR only — not refreshed at runtime."
+  },
+  "inflection": {
+    "title": "English Inflection (SSR)",
+    "description": "English pluralisation and singularisation at SSR. Not refreshed at runtime."
+  },
+  "ssr_only": "Initial only",
+  "pricing_details": {
+    "title": "Pricing Details",
+    "description": "Full pipeline: raw value, currency code, formatted, discounted, and converted.",
+    "raw_value": "Raw Value",
+    "raw_currency": "Currency Code",
+    "formatted": "Formatted",
+    "discounted": "20% Discount",
+    "converted_usd": "Converted to USD"
+  },
+  "live_update": {
+    "note": "Notice all numbers, dates, and prices update instantly when you change language — no page reload."
+  },
+  "core": {
+    "title": "Core Features",
+    "description": "Translation, pluralisation, and HTML content."
   }
 }

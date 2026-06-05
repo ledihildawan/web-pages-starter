@@ -2,6 +2,11 @@
   "meta": {
     "title": "Page Not Found | Starter App"
   },
+  "heading": "404",
+  "subheading": "Houston, we've had a problem.",
+  "description": "The page you're looking for may have been moved, deleted, or sucked into a black hole in the vacuum of space.",
+  "button_text": "Back to Earth (Home)",
+  "or_try": "or try",
   "hero": {
     "badge": "404",
     "title_part1": "Page not",

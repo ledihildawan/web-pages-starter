@@ -13,6 +13,11 @@
     "code": "言語コード",
     "currency": "通貨",
     "direction": "テキスト方向",
+    "digits": "ネイティブ数字",
+    "enabled": "有効",
+    "disabled": "無効",
+    "languages": "言語",
+    "switching": "リロードなし切り替え",
     "current_code": "ja",
     "current_currency": "JPY",
     "current_direction": "LTR (左から右)"
@@ -29,11 +34,11 @@
   "currency": {
     "title": "通貨フォーマット",
     "description": "IDR の価格がアクティブな言語の通貨に換算されます。",
+    "currencies": "通貨",
     "small": "小",
     "medium": "中",
     "large": "大",
-    "enterprise": "エンタープライズ",
-    "base": "IDR (ベース)"
+    "enterprise": "エンタープライズ"
   },
   "currency_comparison": {
     "title": "通貨比較",
@@ -103,6 +108,7 @@
     "abbreviated": "省略形",
     "date_formats": "日付形式",
     "time_formats": "時刻形式",
+    "datetime": "日付 + 時刻",
     "durations": "期間",
     "relative_time": "相対時刻",
     "regional_pricing": "地域別料金",
@@ -142,5 +148,39 @@
     "description": "HTMLマークアップなしの生値を取得するマクロ。",
     "raw_value": "マークアップなしの生値",
     "current_year": "現在の年は{{year}}年です"
+  },
+  "datetime": {
+    "title": "日付と時刻",
+    "description": "日付と時刻の複合フォーマット。",
+    "iso": "ISO規格",
+    "eve": "クリスマス・イヴ"
+  },
+  "unit": {
+    "title": "単位フォーマット"
+  },
+  "native_digits": {
+    "title": "ネイティブ数字 (SSR)",
+    "description": "ASCII数字を含むテキストがアクティブなロケールのネイティブ数字でレンダリングされます。SSRのみ — ランタイムで更新されません。"
+  },
+  "inflection": {
+    "title": "英語の曲用 (SSR)",
+    "description": "SSRでの英語の複数形と単数形。ランタイムで更新されません。"
+  },
+  "ssr_only": "初期のみ",
+  "pricing_details": {
+    "title": "料金詳細",
+    "description": "完全なパイプライン：生値、通貨コード、フォーマット、割引、換算。",
+    "raw_value": "生値",
+    "raw_currency": "通貨コード",
+    "formatted": "フォーマット済み",
+    "discounted": "20%割引",
+    "converted_usd": "USDに換算"
+  },
+  "live_update": {
+    "note": "言語を変更すると、すべての数値、日付、価格が即座に更新されます — ページのリoloadはありません。"
+  },
+  "core": {
+    "title": "コア機能",
+    "description": "翻訳、複数形、HTMLコンテンツ。"
   }
 }

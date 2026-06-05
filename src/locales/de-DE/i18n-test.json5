@@ -13,6 +13,11 @@
     "code": "Sprachcode",
     "currency": "Währung",
     "direction": "Textrichtung",
+    "digits": "Native Ziffern",
+    "enabled": "Aktiviert",
+    "disabled": "Deaktiviert",
+    "languages": "Sprachen",
+    "switching": "Wechseln Ohne Neuladen",
     "current_code": "de-DE",
     "current_currency": "EUR",
     "current_direction": "LTR (Links nach Rechts)"
@@ -29,11 +34,11 @@
   "currency": {
     "title": "Währungsformatierung",
     "description": "Preise in IDR konvertiert zur aktiven Sprachwährung.",
+    "currencies": "Währungen",
     "small": "Klein",
     "medium": "Mittel",
     "large": "Groß",
-    "enterprise": "Unternehmen",
-    "base": "IDR (Basis)"
+    "enterprise": "Unternehmen"
   },
   "currency_comparison": {
     "title": "Währungsvergleich",
@@ -103,6 +108,7 @@
     "abbreviated": "Abgekürzt",
     "date_formats": "Datumsformate",
     "time_formats": "Zeitformate",
+    "datetime": "Datum + Zeit",
     "durations": "Dauern",
     "relative_time": "Relative Zeit",
     "regional_pricing": "Regionale Preise",
@@ -142,5 +148,39 @@
     "description": "Makros zum Abrufen von Rohwerten ohne HTML-Markup.",
     "raw_value": "Rohwert ohne Formatierung",
     "current_year": "Das aktuelle Jahr ist {{year}}"
+  },
+  "datetime": {
+    "title": "Datum und Zeit",
+    "description": "Kombiniertes Datums- und Zeitformat.",
+    "iso": "ISO-Standard",
+    "eve": "Heiligabend"
+  },
+  "unit": {
+    "title": "Einheitenformatierung"
+  },
+  "native_digits": {
+    "title": "Native Ziffern (SSR)",
+    "description": "Text mit ASCII-Ziffern wird in den nativen Ziffern des aktiven Gebietsschemas gerendert. Nur SSR — wird zur Laufzeit nicht aktualisiert."
+  },
+  "inflection": {
+    "title": "Englische Flexion (SSR)",
+    "description": " Englische Pluralisierung und Singularisierung bei SSR. Wird zur Laufzeit nicht aktualisiert."
+  },
+  "ssr_only": "Nur initial",
+  "pricing_details": {
+    "title": "Preisdetails",
+    "description": "Vollständige Pipeline: Rohwert, Währungscode, formatiert, rabattiert und umgerechnet.",
+    "raw_value": "Rohwert",
+    "raw_currency": "Währungscode",
+    "formatted": "Formatiert",
+    "discounted": "20% Rabatt",
+    "converted_usd": "In USD umgerechnet"
+  },
+  "live_update": {
+    "note": "Beachten Sie, wie sich alle Zahlen, Daten und Preise sofort ändern, wenn Sie die Sprache wechseln — ohne Seitenreload."
+  },
+  "core": {
+    "title": "Kernfunktionen",
+    "description": "Übersetzung, Pluralisierung und HTML-Inhalt."
   }
 }

@@ -15,7 +15,12 @@
     "direction": "Direction du Texte",
     "current_code": "fr",
     "current_currency": "CHF",
-    "current_direction": "LTR (Gauche à Droite)"
+    "current_direction": "LTR (Gauche à Droite)",
+    "digits": "Chiffres Natifs",
+    "enabled": "Activé",
+    "disabled": "Désactivé",
+    "languages": "Langues",
+    "switching": "Changement Sans Rechargement"
   },
   "numbers": {
     "title": "Formatage des Nombres",
@@ -33,7 +38,7 @@
     "medium": "Moyen",
     "large": "Grand",
     "enterprise": "Entreprise",
-    "base": "IDR (Base)"
+    "currencies": "Devises"
   },
   "currency_comparison": {
     "title": "Comparaison de Devises",
@@ -103,6 +108,7 @@
     "abbreviated": "Abrégé",
     "date_formats": "Formats de Date",
     "time_formats": "Formats d'Heure",
+    "datetime": "Date + Heure",
     "durations": "Durées",
     "relative_time": "Temps Relatif",
     "regional_pricing": "Tarification Régionale",
@@ -142,5 +148,39 @@
     "description": "Macros pour obtenir des valeurs brutes sans balisage HTML.",
     "raw_value": "Valeur brute sans formatage",
     "current_year": "L'année actuelle est {{year}}"
+  },
+  "datetime": {
+    "title": "Date et Heure",
+    "description": "Format combiné de date et heure.",
+    "iso": "Standard ISO",
+    "eve": "Réveillon de Noël"
+  },
+  "unit": {
+    "title": "Formatage d'Unités"
+  },
+  "native_digits": {
+    "title": "Chiffres Natifs (SSR)",
+    "description": "Le texte avec des chiffres ASCII est rendu dans les chiffres natifs de la locale active. SSR uniquement — non actualisé au runtime."
+  },
+  "inflection": {
+    "title": "Inflexion de l'Anglais (SSR)",
+    "description": "Pluralisation et singularisation de l'anglais au SSR. Non actualisé au runtime."
+  },
+  "ssr_only": "Initial uniquement",
+  "pricing_details": {
+    "title": "Détails des Prix",
+    "description": "Pipeline complet : valeur raw, code devise, formaté, discounté et converti.",
+    "raw_value": "Valeur Raw",
+    "raw_currency": "Code Devise",
+    "formatted": "Formaté",
+    "discounted": "20% Réduction",
+    "converted_usd": "Converti en USD"
+  },
+  "live_update": {
+    "note": "Remarquez comment tous les chiffres, dates et prix se mettent à jour instantanément lorsque vous changez de langue — sans rechargement de page."
+  },
+  "core": {
+    "title": "Fonctionnalités Principales",
+    "description": "Traduction, pluralisation et contenu HTML."
   }
 }
