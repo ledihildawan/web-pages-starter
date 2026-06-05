@@ -36,12 +36,19 @@ export function registerI18nStore(): void {
               htmlEl.setAttribute('lang', code);
               htmlEl.setAttribute('dir', locale.dir);
               htmlEl.setAttribute('data-script', locale.writingSystem);
-              htmlEl.classList.toggle('is-rtl', locale.dir === DIRECTION_CODE.RTL);
+              htmlEl.classList.toggle(
+                'is-rtl',
+                locale.dir === DIRECTION_CODE.RTL,
+              );
             }
 
             m.translatePage();
             m.updateFormattedElements();
             m.updateI18nStoreLabels?.();
+
+            import('@/scripts/main').then((mainModule) => {
+              mainModule.setupFontStackCSS();
+            });
           });
         }
       });

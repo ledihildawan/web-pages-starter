@@ -1,7 +1,8 @@
 import type { NumberingSystemCode, WritingSystemCode } from '@/configs/locales';
 import {
+  getWritingSystem,
   NUMBERING_SYSTEM_CODE,
-  NUMBERING_SYSTEMS,
+  NUMBERING_SYSTEM_TO_WRITING_SYSTEM,
   WRITING_SYSTEM,
 } from '@/configs/locales';
 import { getLocale, getNativeNumberingSystem } from './utils/locale';
@@ -11,33 +12,38 @@ type FontLoader = () => Promise<unknown>;
 type VendorModules = Awaited<ReturnType<typeof loadVendors>>;
 type AppModules = Awaited<ReturnType<typeof loadAppModules>>;
 
-type FontWeightList = readonly [number, number, number, number, number, number];
+type FontWeightList = readonly number[];
 
 type FontConfig = {
   name: string;
+  family: string;
   variants: {
     default: FontWeightList;
     cyrillic?: FontWeightList;
   };
 };
 
-const DEFAULT_FONT: FontConfig = {
-  name: 'inter',
-  variants: {
-    default: [400, 500, 600, 700, 800, 900] as const,
-    cyrillic: [400, 500, 600, 700, 800, 900] as const,
+type FontStack = {
+  primary: FontConfig;
+  secondary?: FontConfig;
+  monospace?: FontConfig;
+};
+
+const FONT_STACK: FontStack = {
+  primary: {
+    name: 'inter',
+    family: 'Inter',
+    variants: {
+      default: [400, 500, 600, 700, 800, 900],
+      cyrillic: [400, 500, 600, 700, 800, 900],
+    },
   },
 };
 
 const getFontWeights = (
-  numberingSystem: NumberingSystemCode,
-  fontConfig: FontConfig = DEFAULT_FONT,
+  writingSystemCode: WritingSystemCode,
+  fontConfig: FontConfig,
 ): readonly [FontWeightList, 'cyrillic-' | ''] | null => {
-  const nsConfig = NUMBERING_SYSTEMS.find((ns) => ns.code === numberingSystem);
-  if (!nsConfig) return null;
-
-  const writingSystemCode = nsConfig.writingSystem as WritingSystemCode;
-
   if (
     writingSystemCode === WRITING_SYSTEM.LATIN ||
     writingSystemCode === WRITING_SYSTEM.GREEK ||
@@ -57,10 +63,10 @@ const getFontWeights = (
 };
 
 const createFontLoader = (
-  numberingSystem: NumberingSystemCode,
-  fontConfig: FontConfig = DEFAULT_FONT,
+  writingSystemCode: WritingSystemCode,
+  fontConfig: FontConfig,
 ): FontLoader | null => {
-  const result = getFontWeights(numberingSystem, fontConfig);
+  const result = getFontWeights(writingSystemCode, fontConfig);
 
   if (result === null) {
     return null;
@@ -78,14 +84,13 @@ const createFontLoader = (
   return () => Promise.all(imports);
 };
 
-const createFontLoaderOrThrow = (
-  numberingSystem: NumberingSystemCode,
-  fontConfig: FontConfig = DEFAULT_FONT,
+const createPrimaryLoader = (
+  writingSystemCode: WritingSystemCode,
 ): FontLoader => {
-  const loader = createFontLoader(numberingSystem, fontConfig);
+  const loader = createFontLoader(writingSystemCode, FONT_STACK.primary);
   if (!loader) {
     throw new Error(
-      `Font "${fontConfig.name}" not available for numbering system: ${numberingSystem}`,
+      `Font "${FONT_STACK.primary.name}" not available for writing system: ${writingSystemCode}`,
     );
   }
   return loader;
@@ -94,10 +99,7 @@ const createFontLoaderOrThrow = (
 const LANGUAGE_FONT_LOADERS: Readonly<
   Partial<Record<NumberingSystemCode, FontLoader>>
 > = {
-  [NUMBERING_SYSTEM_CODE.LATN]: createFontLoaderOrThrow(
-    NUMBERING_SYSTEM_CODE.LATN,
-  ),
-
+  [NUMBERING_SYSTEM_CODE.LATN]: createPrimaryLoader(WRITING_SYSTEM.LATIN),
   [NUMBERING_SYSTEM_CODE.JPAN]: () =>
     import('@fontsource-variable/noto-sans-jp/index.css'),
   [NUMBERING_SYSTEM_CODE.HANS]: () =>
@@ -106,21 +108,11 @@ const LANGUAGE_FONT_LOADERS: Readonly<
     import('@fontsource-variable/noto-sans-tc/index.css'),
   [NUMBERING_SYSTEM_CODE.KORE]: () =>
     import('@fontsource-variable/noto-sans-kr/index.css'),
-
-  [NUMBERING_SYSTEM_CODE.CYRL]: createFontLoaderOrThrow(
-    NUMBERING_SYSTEM_CODE.CYRL,
-  ),
-
-  [NUMBERING_SYSTEM_CODE.HEBR]: createFontLoaderOrThrow(
-    NUMBERING_SYSTEM_CODE.HEBR,
-  ),
-  [NUMBERING_SYSTEM_CODE.GREK]: createFontLoaderOrThrow(
-    NUMBERING_SYSTEM_CODE.GREK,
-  ),
-
+  [NUMBERING_SYSTEM_CODE.CYRL]: createPrimaryLoader(WRITING_SYSTEM.CYRILLIC),
+  [NUMBERING_SYSTEM_CODE.HEBR]: createPrimaryLoader(WRITING_SYSTEM.HEBREW),
+  [NUMBERING_SYSTEM_CODE.GREK]: createPrimaryLoader(WRITING_SYSTEM.GREEK),
   [NUMBERING_SYSTEM_CODE.ARAB]: () =>
     import('@fontsource-variable/noto-sans-arabic/index.css'),
-
   [NUMBERING_SYSTEM_CODE.DEVA]: () =>
     import('@fontsource-variable/noto-sans/index.css'),
   [NUMBERING_SYSTEM_CODE.BENG]: () =>
@@ -139,7 +131,6 @@ const LANGUAGE_FONT_LOADERS: Readonly<
     import('@fontsource-variable/noto-sans-gurmukhi/index.css'),
   [NUMBERING_SYSTEM_CODE.SINH]: () =>
     import('@fontsource-variable/noto-sans-sinhala/index.css'),
-
   [NUMBERING_SYSTEM_CODE.THAI]: () =>
     import('@fontsource-variable/noto-sans-thai/index.css'),
   [NUMBERING_SYSTEM_CODE.KHMR]: () =>
@@ -148,7 +139,6 @@ const LANGUAGE_FONT_LOADERS: Readonly<
     import('@fontsource-variable/noto-sans-lao/index.css'),
   [NUMBERING_SYSTEM_CODE.MYM]: () =>
     import('@fontsource-variable/noto-sans-myanmar/index.css'),
-
   [NUMBERING_SYSTEM_CODE.GEOR]: () =>
     import('@fontsource-variable/noto-sans-georgian/index.css'),
   [NUMBERING_SYSTEM_CODE.ETHI]: () =>
@@ -190,27 +180,45 @@ const loadLanguageFonts = (): void => {
 
 const loadFallbackFonts = (): void => {
   const nativeNumberingSystem = getNativeNumberingSystem(getLocale());
+  const writingSystemCode = NUMBERING_SYSTEM_TO_WRITING_SYSTEM[
+    nativeNumberingSystem as NumberingSystemCode
+  ] as WritingSystemCode | undefined;
 
   if (getIsSlowConnection()) return;
 
   if (
-    nativeNumberingSystem === NUMBERING_SYSTEM_CODE.LATN ||
-    nativeNumberingSystem === NUMBERING_SYSTEM_CODE.HEBR ||
-    nativeNumberingSystem === NUMBERING_SYSTEM_CODE.GREK ||
-    nativeNumberingSystem === NUMBERING_SYSTEM_CODE.CYRL
+    writingSystemCode === WRITING_SYSTEM.LATIN ||
+    writingSystemCode === WRITING_SYSTEM.HEBREW ||
+    writingSystemCode === WRITING_SYSTEM.GREEK ||
+    writingSystemCode === WRITING_SYSTEM.CYRILLIC
   )
     return;
 
-  const fontConfig = DEFAULT_FONT;
-  const weights = fontConfig.variants.default;
+  const weights = FONT_STACK.primary.variants.default;
 
   void loadFont(() =>
     Promise.all(
       weights.map(
-        (weight) => import(`@fontsource/${fontConfig.name}/${weight}.css`),
+        (weight) =>
+          import(`@fontsource/${FONT_STACK.primary.name}/${weight}.css`),
       ),
     ),
   );
+};
+
+export const setupFontStackCSS = (): void => {
+  const root = document.documentElement;
+  const nativeNumberingSystem = getNativeNumberingSystem(getLocale());
+  const writingSystemCode = NUMBERING_SYSTEM_TO_WRITING_SYSTEM[
+    nativeNumberingSystem as NumberingSystemCode
+  ] as WritingSystemCode | undefined;
+
+  const writingSystem = writingSystemCode
+    ? getWritingSystem(writingSystemCode)
+    : undefined;
+
+  const primaryFont = writingSystem?.defaultFont ?? FONT_STACK.primary.family;
+  root.style.setProperty('--font-primary', primaryFont);
 };
 
 const loadVendors = async () => {
@@ -263,6 +271,7 @@ const clearStartupLocks = (): void => {
 };
 
 const loadFonts = (): void => {
+  setupFontStackCSS();
   loadLanguageFonts();
   loadFallbackFonts();
 };

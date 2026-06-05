@@ -6,71 +6,6 @@
   :root {
     --dir: 1;
 
-    --font-latin:
-      "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Roboto",
-      "Helvetica Neue", "Arial", sans-serif;
-    --font-cjk:
-      "Noto Sans JP Variable", "Noto Sans CJK JP", "Noto Sans SC Variable", "Noto Sans CJK SC", "Noto Sans TC Variable", "Noto Sans CJK TC", "Noto Sans KR Variable", "Noto Sans CJK KR", "Hiragino Kaku Gothic ProN", "Meiryo", "PingFang SC", "Microsoft YaHei", "Malgun Gothic", "Apple SD Gothic Neo", ui-sans-serif, system-ui, sans-serif;
-    --font-arabic:
-      "Noto Sans Arabic Variable", "Noto Sans Arabic", "Arial", ui-sans-serif,
-      system-ui, sans-serif;
-    --font-devanagari:
-      "Noto Sans Variable", "Noto Sans Devanagari", "Mangal", ui-sans-serif,
-      system-ui, sans-serif;
-    --font-thai:
-      "Noto Sans Thai Variable", "Noto Sans Thai", "Sarabun", ui-sans-serif,
-      system-ui, sans-serif;
-    --font-bengali:
-      "Noto Sans Bengali Variable", "Noto Sans Bengali", "Bangla",
-      ui-sans-serif, system-ui, sans-serif;
-    --font-tamil:
-      "Noto Sans Tamil Variable", "Noto Sans Tamil", "Tamil", ui-sans-serif,
-      system-ui, sans-serif;
-    --font-telugu:
-      "Noto Sans Telugu Variable", "Noto Sans Telugu", "Telugu", ui-sans-serif,
-      system-ui, sans-serif;
-    --font-kannada:
-      "Noto Sans Kannada Variable", "Noto Sans Kannada", "Kannada",
-      ui-sans-serif, system-ui, sans-serif;
-    --font-malayalam:
-      "Noto Sans Malayalam Variable", "Noto Sans Malayalam", "Malayalam",
-      ui-sans-serif, system-ui, sans-serif;
-    --font-gujarati:
-      "Noto Sans Gujarati Variable", "Noto Sans Gujarati", "Gujarati",
-      ui-sans-serif, system-ui, sans-serif;
-    --font-gurmukhi:
-      "Noto Sans Gurmukhi Variable", "Noto Sans Gurmukhi", "Gurmukhi",
-      ui-sans-serif, system-ui, sans-serif;
-    --font-sinhala:
-      "Noto Sans Sinhala Variable", "Noto Sans Sinhala", "Sinhala",
-      ui-sans-serif, system-ui, sans-serif;
-    --font-khmer:
-      "Noto Sans Khmer Variable", "Noto Sans Khmer", "Khmer", ui-sans-serif,
-      system-ui, sans-serif;
-    --font-lao:
-      "Noto Sans Lao Variable", "Noto Sans Lao", "Lao", ui-sans-serif,
-      system-ui, sans-serif;
-    --font-myanmar:
-      "Noto Sans Myanmar Variable", "Noto Sans Myanmar", "Myanmar",
-      ui-sans-serif, system-ui, sans-serif;
-    --font-georgian:
-      "Noto Sans Georgian Variable", "Noto Sans Georgian", "Georgian",
-      ui-sans-serif, system-ui, sans-serif;
-    --font-ethiopic:
-      "Noto Sans Ethiopic Variable", "Noto Sans Ethiopic", "Ethiopic",
-      ui-sans-serif, system-ui, sans-serif;
-    --font-armenian:
-      "Noto Sans Armenian Variable", "Noto Sans Armenian", "Armenian",
-      ui-sans-serif, system-ui, sans-serif;
-    --font-cyrillic:
-      "Inter Cyrillic", "Inter", ui-sans-serif, system-ui, sans-serif;
-    --font-greek:
-      "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Roboto",
-      "Helvetica Neue", "Arial", sans-serif;
-    --font-hebrew:
-      "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Roboto",
-      "Helvetica Neue", "Arial", sans-serif;
-
     --gradient-primary: linear-gradient(
       135deg,
       #7c3aed 0%,
@@ -236,6 +171,9 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: auto;
+    font-family: var(--font-primary);
+    scrollbar-width: thin;
+    scrollbar-color: #1e293b #020617;
   }
 
   img {
@@ -246,99 +184,6 @@
   img:not([class*="rounded"]):not(.flag-image) {
     outline: 1px solid rgba(0, 0, 0, 0.1);
     outline-offset: -1px;
-  }
-
-  [data-script="latin"] {
-    font-family: var(--font-latin);
-  }
-
-  [data-script="cjk"] {
-    font-family: var(--font-cjk);
-  }
-
-  [data-script="arabic"] {
-    font-family: var(--font-arabic);
-  }
-
-  [data-script="devanagari"] {
-    font-family: var(--font-devanagari);
-  }
-
-  [data-script="thai"] {
-    font-family: var(--font-thai);
-  }
-
-  [data-script="bengali"] {
-    font-family: var(--font-bengali);
-  }
-
-  [data-script="tamil"] {
-    font-family: var(--font-tamil);
-  }
-
-  [data-script="telugu"] {
-    font-family: var(--font-telugu);
-  }
-
-  [data-script="kannada"] {
-    font-family: var(--font-kannada);
-  }
-
-  [data-script="malayalam"] {
-    font-family: var(--font-malayalam);
-  }
-
-  [data-script="gujarati"] {
-    font-family: var(--font-gujarati);
-  }
-
-  [data-script="gurmukhi"] {
-    font-family: var(--font-gurmukhi);
-  }
-
-  [data-script="sinhala"] {
-    font-family: var(--font-sinhala);
-  }
-
-  [data-script="khmer"] {
-    font-family: var(--font-khmer);
-  }
-
-  [data-script="lao"] {
-    font-family: var(--font-lao);
-  }
-
-  [data-script="myanmar"] {
-    font-family: var(--font-myanmar);
-  }
-
-  [data-script="georgian"] {
-    font-family: var(--font-georgian);
-  }
-
-  [data-script="ethiopic"] {
-    font-family: var(--font-ethiopic);
-  }
-
-  [data-script="armenian"] {
-    font-family: var(--font-armenian);
-  }
-
-  [data-script="cyrillic"] {
-    font-family: var(--font-cyrillic);
-  }
-
-  [data-script="greek"] {
-    font-family: var(--font-greek);
-  }
-
-  [data-script="hebrew"] {
-    font-family: var(--font-hebrew);
-  }
-
-  html {
-    scrollbar-width: thin;
-    scrollbar-color: #1e293b #020617;
   }
 
   ::-webkit-scrollbar {
