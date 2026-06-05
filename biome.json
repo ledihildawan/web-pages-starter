@@ -45,6 +45,18 @@
       "tailwindDirectives": true
     }
   },
+  "overrides": [
+    {
+      "includes": ["src/styles/main.css"],
+      "linter": {
+        "rules": {
+          "complexity": {
+            "noImportantStyles": "off"
+          }
+        }
+      }
+    }
+  ],
   "assist": {
     "actions": {
       "source": {
