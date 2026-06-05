@@ -1,4 +1,5 @@
-export const toDateObj = (date: string | number | Date): Date => typeof date === 'string' || typeof date === 'number' ? new Date(date) : date;
+export const toDateObj = (date: string | number | Date): Date =>
+  typeof date === 'string' || typeof date === 'number' ? new Date(date) : date;
 
 export const jsonAttr = (value: unknown): string => {
   return JSON.stringify(value).replace(/"/g, '&quot;');
@@ -6,7 +7,7 @@ export const jsonAttr = (value: unknown): string => {
 
 export const getValueByPath = (
   obj: Record<string, any> | null | undefined,
-  path: string
+  path: string,
 ): any => {
   if (!obj || !path) return undefined;
 

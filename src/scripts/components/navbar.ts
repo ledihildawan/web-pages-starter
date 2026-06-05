@@ -90,7 +90,9 @@ export function navbarData() {
         }
       };
 
-      window.addEventListener('touchstart', handleTouchStart, { passive: true });
+      window.addEventListener('touchstart', handleTouchStart, {
+        passive: true,
+      });
       window.addEventListener('touchmove', handleTouchMove, { passive: true });
       window.addEventListener('touchend', handleTouchEnd);
 
@@ -110,13 +112,15 @@ export function navbarData() {
 
       this.mobileMenuOpen = false;
 
-      const menuButton = document.querySelector('[aria-controls="mobile-menu"]');
+      const menuButton = document.querySelector(
+        '[aria-controls="mobile-menu"]',
+      );
       if (menuButton) {
         setTimeout(() => menuButton.focus(), 550);
       }
 
-      let targetUrl = typeof url === 'string' ? url : null;
-      let isAnchorLink = targetUrl && targetUrl.includes('#');
+      const targetUrl = typeof url === 'string' ? url : null;
+      const isAnchorLink = targetUrl && targetUrl.includes('#');
 
       if (targetUrl && !isAnchorLink) {
         setTimeout(() => {
@@ -137,7 +141,9 @@ export function navbarData() {
         if (isAnchorLink) {
           this.navHidden = true;
           window.location.href = targetUrl!;
-          setTimeout(() => { this.lastScroll = window.scrollY; }, 50);
+          setTimeout(() => {
+            this.lastScroll = window.scrollY;
+          }, 50);
         } else {
           this.navHidden = this.scrollY > 150;
           this.lastScroll = this.scrollY;
@@ -167,11 +173,15 @@ export function navbarData() {
         this.focusedElement = document.activeElement;
 
         this.scrollY = window.scrollY;
-        const sbWidth = window.innerWidth - document.documentElement.clientWidth;
+        const sbWidth =
+          window.innerWidth - document.documentElement.clientWidth;
 
         document.body.style.insetBlockStart = `-${this.scrollY}px`;
         document.body.classList.add('no-scroll');
-        document.documentElement.style.setProperty('--scrollbar-width', `${sbWidth}px`);
+        document.documentElement.style.setProperty(
+          '--scrollbar-width',
+          `${sbWidth}px`,
+        );
 
         this.mobileMenuOpen = true;
         this.navHidden = false;

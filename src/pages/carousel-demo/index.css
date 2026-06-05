@@ -1,7 +1,7 @@
 .splide__pagination {
-    inset-block-end: 2.5rem;
-    justify-content: flex-start;
-    padding-inline-start: 2.5rem;
+  inset-block-end: 2.5rem;
+  justify-content: flex-start;
+  padding-inline-start: 2.5rem;
 }
 
 .splide__pagination__page {
@@ -14,8 +14,8 @@
 }
 
 .splide__pagination__page.is-active {
-    background: #fff;
-    transform: scale(1.4);
+  background: #fff;
+  transform: scale(1.4);
 }
 
 .splide__arrow svg {

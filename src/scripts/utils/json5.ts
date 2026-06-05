@@ -47,7 +47,10 @@ const stripJson5Syntax = (source: string): string => {
 
     if (char === '/' && next === '*') {
       index += 2;
-      while (index < source.length && !(source[index] === '*' && source[index + 1] === '/')) {
+      while (
+        index < source.length &&
+        !(source[index] === '*' && source[index + 1] === '/')
+      ) {
         if (source[index] === '\n') output += '\n';
         index += 1;
       }

@@ -1,1 +1,1 @@
-import("./components/features.css")
+import('./components/features.css');

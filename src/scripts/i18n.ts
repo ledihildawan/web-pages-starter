@@ -1,7 +1,12 @@
-
-import { DEFAULT_LOCALE, LOCALE_CODES, LOCALE_FALLBACKS, LOCALE_STORAGE_KEY, type LocaleCode } from '@/configs/locales';
 import i18next, { type Resource } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
+import {
+  DEFAULT_LOCALE,
+  LOCALE_CODES,
+  LOCALE_FALLBACKS,
+  LOCALE_STORAGE_KEY,
+  type LocaleCode,
+} from '@/configs/locales';
 
 const getVars = (el: Element): Record<string, unknown> => {
   try {
@@ -12,42 +17,39 @@ const getVars = (el: Element): Record<string, unknown> => {
   }
 };
 
-/**
- * Get fallback chain for a locale using explicit fallbacks or smart defaults
- * Priority: explicit fallback → language-script-region → language → default
- */
+const getChineseScriptFallback = (locale: string): string[] | null => {
+  if (!locale.startsWith('zh-')) return null;
+
+  const [, script] = locale.split('-');
+  const scriptBase = `zh-${script}`;
+  const scriptFallback = LOCALE_CODES.find((code) =>
+    code.startsWith(scriptBase),
+  );
+
+  return scriptFallback ? [scriptFallback, DEFAULT_LOCALE] : null;
+};
+
+const getLanguageRegionFallback = (locale: string): string[] | null => {
+  const [language] = locale.split('-');
+  const matched = LOCALE_CODES.find((code) => {
+    const [codeLang] = code.split('-');
+    return codeLang === language && code.includes('-');
+  });
+
+  return matched ? [matched, DEFAULT_LOCALE] : null;
+};
+
 const getFallbackForLocale = (locale: string): string[] => {
   const localeCode = locale as LocaleCode;
   if (LOCALE_CODES.includes(localeCode)) return [localeCode];
 
-  // Check explicit fallbacks (e.g., zh-Hans-MY → zh-Hans-CN → en-US)
-  const explicit = LOCALE_FALLBACKS[localeCode];
-  if (explicit) return [explicit, DEFAULT_LOCALE];
+  const explicitFallback = LOCALE_FALLBACKS[localeCode];
+  if (explicitFallback) return [explicitFallback, DEFAULT_LOCALE];
 
-  // For Chinese script variants without explicit fallback
-  if (locale.startsWith('zh-')) {
-    const parts = locale.split('-');
-    if (parts.length >= 2) {
-      // Try zh-Hans → zh-Hans-CN or zh-Hant → zh-Hant-TW
-      const scriptBase = parts.slice(0, 2).join('-');
-      const scriptFallback = LOCALE_CODES.find(c => c.startsWith(scriptBase));
-      if (scriptFallback) return [scriptFallback, DEFAULT_LOCALE];
-    }
-  }
-
-  // For other language variants, try to find base locale
-  const parts = locale.split('-');
-  const languageSubtag = parts[0];
-
-  // Try language-region match first (e.g., en-AU → en-GB)
-  const matched = LOCALE_CODES.find((c) => {
-    const cParts = c.split('-');
-    return cParts[0] === languageSubtag && cParts.length > 1;
-  });
-
-  if (matched) return [matched, DEFAULT_LOCALE];
-
-  return [DEFAULT_LOCALE];
+  return (
+    getChineseScriptFallback(locale) ||
+    getLanguageRegionFallback(locale) || [DEFAULT_LOCALE]
+  );
 };
 
 export const translatePage = async (): Promise<void> => {
@@ -89,7 +91,9 @@ export const initI18n = async (): Promise<void> => {
 
     if (data.comp) {
       for (const compName of Object.keys(data.comp)) {
-        resources[locale][`components/${compName}`] = data.comp[compName] as Record<string, string>;
+        resources[locale][`components/${compName}`] = data.comp[
+          compName
+        ] as Record<string, string>;
       }
     }
   }
@@ -104,7 +108,7 @@ export const initI18n = async (): Promise<void> => {
       detection: {
         order: ['localStorage', 'navigator'],
         caches: ['localStorage'],
-        lookupLocalStorage: LOCALE_STORAGE_KEY, 
+        lookupLocalStorage: LOCALE_STORAGE_KEY,
       },
       interpolation: {
         escapeValue: false,
@@ -112,7 +116,7 @@ export const initI18n = async (): Promise<void> => {
     });
 
     await translatePage();
-    
+
     document.documentElement.classList.replace('i18n-loading', 'i18n-ready');
   } catch (error) {
     console.error('[i18n Init Error]:', error);

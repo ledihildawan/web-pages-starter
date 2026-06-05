@@ -6,7 +6,6 @@ import {
   DIRECTION_CODE,
   type DirectionCode,
   type LanguageCode,
-  LOCALE,
   LOCALE_CODES,
   LOCALE_FALLBACKS,
   LOCALES,
@@ -53,25 +52,11 @@ export const getLocale = (locale?: LocaleCode): LocaleCode => {
   return getFallbackChain(target)[0] ?? DEFAULT_LOCALE;
 };
 
-/**
- * Extract BCP 47 language subtag from locale code
- * BCP 47 format: language-script-region or language-region
- * @param locale - BCP 47 locale code (e.g., 'zh-Hans-CN', 'en-US')
- * @returns Language subtag (e.g., 'zh', 'en')
- */
 export const getLanguageSubtag = (locale: LocaleCode): LanguageCode => {
-  // Extract just the base language code (2-3 letters)
-  const parts = locale.split('-');
+  const [language, secondPart] = locale.split('-');
 
-  // If second part is 4 letters, it's a script tag (e.g., Hans, Hant, Latn)
-  // In that case, the base language is just the first part
-  // e.g., 'zh-Hans-CN' → 'zh', 'zh-Hant' → 'zh'
-  if (parts.length > 1 && parts[1]?.length === 4) {
-    return parts[0] as LanguageCode;
-  }
-
-  // Otherwise, return first part as-is (e.g., 'en-US' → 'en')
-  return parts[0] as LanguageCode;
+  const isScriptTag = secondPart?.length === 4;
+  return isScriptTag ? language : (locale.split('-')[0] as LanguageCode);
 };
 
 export const getLanguageConfig = (
@@ -97,11 +82,6 @@ export const getNativeNumberingSystem = (locale: LocaleCode): string =>
 export const getDefaultNativeDigits = (locale: LocaleCode): boolean =>
   getLanguageConfig(locale)?.nativeDigits ?? false;
 
-/**
- * Extract BCP 47 region subtag from locale code
- * @param locale - BCP 47 locale code (e.g., 'en-US', 'id-ID')
- * @returns Region subtag (e.g., 'US', 'ID')
- */
 export const getRegionSubtag = (locale: LocaleCode): string | undefined =>
   getLanguageConfig(locale)?.region;
 

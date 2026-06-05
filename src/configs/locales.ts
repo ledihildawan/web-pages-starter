@@ -1,177 +1,1127 @@
-export const NUMBERING_SYSTEMS = [
-  { code: 'latn', label: 'Latin', group: 'LATIN', digits: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'] },
-  { code: 'arab', label: 'Arabic-Indic', group: 'ARABIC', digits: ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'] },
-  { code: 'deva', label: 'Devanagari', group: 'DEVANAGARI', digits: ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'] },
-  { code: 'jpan', label: 'Japanese', group: 'CJK', digits: ['〇', '一', '二', '三', '四', '五', '六', '七', '八', '九'] },
-  { code: 'hans', label: 'Chinese Simplified', group: 'CJK', digits: ['〇', '一', '二', '三', '四', '五', '六', '七', '八', '九'] },
-  { code: 'hant', label: 'Chinese Traditional', group: 'CJK', digits: ['〇', '一', '二', '三', '四', '五', '六', '七', '八', '九'] },
-  { code: 'kore', label: 'Korean', group: 'CJK', digits: ['영', '일', '이', '삼', '사', '오', '육', '칠', '팔', '구'] },
-  { code: 'cyrl', label: 'Cyrillic', group: 'CYRILLIC', digits: ['⁰', '¹', '²', '³', '⁴', '⁵', '⁶', '⁷', '⁸', '⁹'] },
-  { code: 'thai', label: 'Thai', group: 'THAI', digits: ['๐', '๑', '๒', '๓', '๔', '๕', '๖', '๗', '๘', '๙'] },
-  { code: 'beng', label: 'Bengali', group: 'BENGALI', digits: ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'] },
-  { code: 'taml', label: 'Tamil', group: 'TAMIL', digits: ['௦', '௧', '௨', '௩', '௪', '௫', '௬', '௭', '௮', '௯'] },
-  { code: 'telu', label: 'Telugu', group: 'TELUGU', digits: ['౦', '౧', '౨', '౩', '౪', '౫', '౬', '౭', '౮', '౯'] },
-  { code: 'knada', label: 'Kannada', group: 'KANNADA', digits: ['೦', '೧', '೨', '೩', '೪', '೫', '೬', '೭', '೮', '೯'] },
-  { code: 'mlym', label: 'Malayalam', group: 'MALAYALAM', digits: ['൦', '൧', '൨', '൩', '൪', '൫', '൬', '൭', '൮', '൯'] },
-  { code: 'gujr', label: 'Gujarati', group: 'GUJARATI', digits: ['૦', '૧', '૨', '૩', '૪', '૫', '૬', '૭', '૮', '૯'] },
-  { code: 'guru', label: 'Gurmukhi', group: 'GURMUKHI', digits: ['੦', '੧', '੨', '੩', '੪', '੫', '੬', '੭', '੮', '੯'] },
-  { code: 'sinh', label: 'Sinhala', group: 'SINHALA', digits: ['෦', '෧', '෨', '෩', '෪', '෫', '෬', '෭', '෮', '෯'] },
-  { code: 'geor', label: 'Georgian', group: 'GEORGIAN', digits: ['₀', '₁', '₂', '₃', '₄', '₅', '₆', '₇', '₈', '₉'] },
-  { code: 'armn', label: 'Armenian', group: 'ARMENIAN', digits: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'] },
-  { code: 'ethi', label: 'Ethiopic', group: 'ETHIOPIC', digits: ['፩', '፪', '፫', '፬', '፭', '፮', '፯', '፰', '፱', '፲'] },
-  { code: 'khmr', label: 'Khmer', group: 'KHMER', digits: ['០', '១', '២', '៣', '៤', '៥', '៦', '៧', '៨', '៩'] },
-  { code: 'laoo', label: 'Lao', group: 'LAO', digits: ['໐', '໑', '໒', '໓', '໔', '໕', '໖', '໗', '໘', '໙'] },
-  { code: 'mym', label: 'Myanmar', group: 'MYANMAR', digits: ['၀', '၁', '၂', '၃', '၄', '၅', '၆', '၇', '၈', '၉'] },
-  { code: 'grek', label: 'Greek', group: 'GREEK', digits: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'] },
-  { code: 'hebr', label: 'Hebrew', group: 'HEBREW', digits: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'] },
+export const WRITING_SYSTEMS = [
+  {
+    code: 'latin',
+    name: 'Latin Script',
+    nameId: 'Skrip Latin',
+    description:
+      'Latin alphabet and variants used in Western and many other languages',
+    languages: ['id', 'en', 'es', 'pt', 'fr', 'de'] as LanguageCode[],
+    numberingSystems: ['latn'] as NumberingSystemCode[],
+    direction: 'ltr' as const,
+    defaultFont: 'Inter, system-ui',
+  },
+  {
+    code: 'cjk',
+    name: 'CJK Unified Ideographs',
+    nameId: 'Ideografi CJK Terpadu',
+    description:
+      'Chinese, Japanese, Korean unified characters and their variants',
+    languages: ['zh', 'ja', 'ko'] as LanguageCode[],
+    numberingSystems: ['jpan', 'hans', 'hant', 'kore'] as NumberingSystemCode[],
+    direction: 'ltr' as const,
+    defaultFont: 'Noto Sans CJK',
+  },
+  {
+    code: 'arabic',
+    name: 'Arabic Script',
+    nameId: 'Skrip Arab',
+    description:
+      'Arabic alphabet and variants used in Arabic and other languages',
+    languages: ['ar'] as LanguageCode[],
+    numberingSystems: ['arab'] as NumberingSystemCode[],
+    direction: 'rtl' as const,
+    defaultFont: 'Noto Sans Arabic, Noto Naskh Arabic',
+  },
+  {
+    code: 'devanagari',
+    name: 'Devanagari Script',
+    nameId: 'Skrip Devanagari',
+    description: 'Devanagari script used in Hindi and other Indian languages',
+    languages: ['hi'] as LanguageCode[],
+    numberingSystems: ['deva'] as NumberingSystemCode[],
+    direction: 'ltr' as const,
+    defaultFont: 'Noto Sans Devanagari',
+  },
+  {
+    code: 'cyrillic',
+    name: 'Cyrillic Script',
+    nameId: 'Skrip Cyrillic',
+    description: 'Cyrillic alphabet used in Russian and other Slavic languages',
+    languages: ['ru'] as LanguageCode[],
+    numberingSystems: ['cyrl'] as NumberingSystemCode[],
+    direction: 'ltr' as const,
+    defaultFont: 'Inter Cyrillic',
+  },
+  {
+    code: 'thai',
+    name: 'Thai Script',
+    nameId: 'Skrip Thai',
+    description: 'Thai script used in Thai language',
+    languages: ['th'] as LanguageCode[],
+    numberingSystems: ['thai'] as NumberingSystemCode[],
+    direction: 'ltr' as const,
+    defaultFont: 'Noto Sans Thai',
+  },
+  {
+    code: 'bengali',
+    name: 'Bengali Script',
+    nameId: 'Skrip Bengali',
+    description: 'Bengali script used in Bengali and Assamese languages',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['beng'] as NumberingSystemCode[],
+    direction: 'ltr' as const,
+    defaultFont: 'Noto Sans Bengali',
+  },
+  {
+    code: 'tamil',
+    name: 'Tamil Script',
+    nameId: 'Skrip Tamil',
+    description: 'Tamil script used in Tamil language',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['taml'] as NumberingSystemCode[],
+    direction: 'ltr' as const,
+    defaultFont: 'Noto Sans Tamil',
+  },
+  {
+    code: 'telugu',
+    name: 'Telugu Script',
+    nameId: 'Skrip Telugu',
+    description: 'Telugu script used in Telugu language',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['telu'] as NumberingSystemCode[],
+    direction: 'ltr' as const,
+    defaultFont: 'Noto Sans Telugu',
+  },
+  {
+    code: 'kannada',
+    name: 'Kannada Script',
+    nameId: 'Skrip Kannada',
+    description: 'Kannada script used in Kannada language',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['knada'] as NumberingSystemCode[],
+    direction: 'ltr' as const,
+    defaultFont: 'Noto Sans Kannada',
+  },
+  {
+    code: 'malayalam',
+    name: 'Malayalam Script',
+    nameId: 'Skrip Malayalam',
+    description: 'Malayalam script used in Malayalam language',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['mlym'] as NumberingSystemCode[],
+    direction: 'ltr' as const,
+    defaultFont: 'Noto Sans Malayalam',
+  },
+  {
+    code: 'gujarati',
+    name: 'Gujarati Script',
+    nameId: 'Skrip Gujarati',
+    description: 'Gujarati script used in Gujarati language',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['gujr'] as NumberingSystemCode[],
+    direction: 'ltr' as const,
+    defaultFont: 'Noto Sans Gujarati',
+  },
+  {
+    code: 'gurmukhi',
+    name: 'Gurmukhi Script',
+    nameId: 'Skrip Gurmukhi',
+    description: 'Gurmukhi script used in Punjabi language',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['guru'] as NumberingSystemCode[],
+    direction: 'ltr' as const,
+    defaultFont: 'Noto Sans Gurmukhi',
+  },
+  {
+    code: 'sinhala',
+    name: 'Sinhala Script',
+    nameId: 'Skrip Sinhala',
+    description: 'Sinhala script used in Sinhala language',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['sinh'] as NumberingSystemCode[],
+    direction: 'ltr' as const,
+    defaultFont: 'Noto Sans Sinhala',
+  },
+  {
+    code: 'georgian',
+    name: 'Georgian Script',
+    nameId: 'Skrip Georgian',
+    description: 'Georgian script used in Georgian language',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['geor'] as NumberingSystemCode[],
+    direction: 'ltr' as const,
+    defaultFont: 'Noto Sans Georgian',
+  },
+  {
+    code: 'armenian',
+    name: 'Armenian Script',
+    nameId: 'Skrip Armenian',
+    description: 'Armenian script used in Armenian language',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['armn'] as NumberingSystemCode[],
+    direction: 'ltr' as const,
+    defaultFont: 'Noto Sans Armenian',
+  },
+  {
+    code: 'ethiopic',
+    name: 'Ethiopic Script',
+    nameId: 'Skrip Ethiopic',
+    description:
+      'Ethiopic script used in Amharic and other Ethiopian languages',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['ethi'] as NumberingSystemCode[],
+    direction: 'ltr' as const,
+    defaultFont: 'Noto Sans Ethiopic',
+  },
+  {
+    code: 'khmer',
+    name: 'Khmer Script',
+    nameId: 'Skrip Khmer',
+    description: 'Khmer script used in Khmer language',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['khmr'] as NumberingSystemCode[],
+    direction: 'ltr' as const,
+    defaultFont: 'Noto Sans Khmer',
+  },
+  {
+    code: 'lao',
+    name: 'Lao Script',
+    nameId: 'Skrip Lao',
+    description: 'Lao script used in Lao language',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['laoo'] as NumberingSystemCode[],
+    direction: 'ltr' as const,
+    defaultFont: 'Noto Sans Lao',
+  },
+  {
+    code: 'myanmar',
+    name: 'Myanmar Script',
+    nameId: 'Skrip Myanmar',
+    description: 'Myanmar script used in Burmese language',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['mym'] as NumberingSystemCode[],
+    direction: 'ltr' as const,
+    defaultFont: 'Noto Sans Myanmar',
+  },
+  {
+    code: 'greek',
+    name: 'Greek Script',
+    nameId: 'Skrip Yunani',
+    description: 'Greek script used in Greek language (included in Inter font)',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['grek'] as NumberingSystemCode[],
+    direction: 'ltr' as const,
+    defaultFont: 'Inter (includes Greek)',
+  },
+  {
+    code: 'hebrew',
+    name: 'Hebrew Script',
+    nameId: 'Skrip Ibrani',
+    description:
+      'Hebrew script used in Hebrew language (included in Inter font)',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['hebr'] as NumberingSystemCode[],
+    direction: 'rtl' as const,
+    defaultFont: 'Inter (includes Hebrew)',
+  },
 ] as const;
 
 export const REGIONS = [
-  { code: 'AE', name: 'United Arab Emirates', nameId: 'Uni Emirat Arab', continent: 'AS', callingCode: '+971' },
-  { code: 'AM', name: 'Armenia', nameId: 'Armenia', continent: 'AS', callingCode: '+374' },
-  { code: 'AO', name: 'Angola', nameId: 'Angola', continent: 'AF', callingCode: '+244' },
-  { code: 'AR', name: 'Argentina', nameId: 'Argentina', continent: 'SA', callingCode: '+54' },
-  { code: 'AS', name: 'American Samoa', nameId: 'Samoa Amerika', continent: 'OC', callingCode: '+1' },
-  { code: 'AT', name: 'Austria', nameId: 'Austria', continent: 'EU', callingCode: '+43' },
-  { code: 'AU', name: 'Australia', nameId: 'Australia', continent: 'OC', callingCode: '+61' },
-  { code: 'AZ', name: 'Azerbaijan', nameId: 'Azerbaijan', continent: 'AS', callingCode: '+994' },
-  { code: 'BE', name: 'Belgium', nameId: 'Belgia', continent: 'EU', callingCode: '+32' },
-  { code: 'BH', name: 'Bahrain', nameId: 'Bahrain', continent: 'AS', callingCode: '+973' },
-  { code: 'BO', name: 'Bolivia', nameId: 'Bolivia', continent: 'SA', callingCode: '+591' },
-  { code: 'BR', name: 'Brazil', nameId: 'Brasil', continent: 'SA', callingCode: '+55' },
-  { code: 'BY', name: 'Belarus', nameId: 'Belarus', continent: 'EU', callingCode: '+375' },
-  { code: 'BZ', name: 'Belize', nameId: 'Belize', continent: 'NA', callingCode: '+501' },
-  { code: 'CA', name: 'Canada', nameId: 'Kanada', continent: 'NA', callingCode: '+1' },
-  { code: 'CH', name: 'Switzerland', nameId: 'Swiss', continent: 'EU', callingCode: '+41' },
-  { code: 'CK', name: 'Cook Islands', nameId: 'Kepulauan Cook', continent: 'OC', callingCode: '+682' },
-  { code: 'CL', name: 'Chile', nameId: 'Cile', continent: 'SA', callingCode: '+56' },
-  { code: 'CN', name: 'China', nameId: 'Tiongkok', continent: 'AS', callingCode: '+86' },
-  { code: 'CO', name: 'Colombia', nameId: 'Kolombia', continent: 'SA', callingCode: '+57' },
-  { code: 'CR', name: 'Costa Rica', nameId: 'Kosta Rika', continent: 'NA', callingCode: '+506' },
-  { code: 'CU', name: 'Cuba', nameId: 'Kuba', continent: 'NA', callingCode: '+53' },
-  { code: 'CV', name: 'Cape Verde', nameId: 'Tanjung Verde', continent: 'AF', callingCode: '+238' },
-  { code: 'DE', name: 'Germany', nameId: 'Jerman', continent: 'EU', callingCode: '+49' },
-  { code: 'DO', name: 'Dominican Republic', nameId: 'Republik Dominika', continent: 'NA', callingCode: '+1' },
-  { code: 'DZ', name: 'Algeria', nameId: 'Aljazair', continent: 'AF', callingCode: '+213' },
-  { code: 'EC', name: 'Ecuador', nameId: 'Ekuador', continent: 'SA', callingCode: '+593' },
-  { code: 'EG', name: 'Egypt', nameId: 'Mesir', continent: 'AF', callingCode: '+20' },
-  { code: 'ES', name: 'Spain', nameId: 'Spanyol', continent: 'EU', callingCode: '+34' },
-  { code: 'EU', name: 'European Union', nameId: 'Uni Eropa', continent: 'EU', callingCode: '' },
-  { code: 'FJ', name: 'Fiji', nameId: 'Fiji', continent: 'OC', callingCode: '+679' },
-  { code: 'FR', name: 'France', nameId: 'Perancis', continent: 'EU', callingCode: '+33' },
-  { code: 'GB', name: 'United Kingdom', nameId: 'Britania Raya', continent: 'EU', callingCode: '+44' },
-  { code: 'GE', name: 'Georgia', nameId: 'Georgia', continent: 'AS', callingCode: '+995' },
-  { code: 'GU', name: 'Guam', nameId: 'Guam', continent: 'OC', callingCode: '+1' },
-  { code: 'GT', name: 'Guatemala', nameId: 'Guatemala', continent: 'NA', callingCode: '+502' },
-  { code: 'GW', name: 'Guinea-Bissau', nameId: 'Guinea-Bissau', continent: 'AF', callingCode: '+245' },
-  { code: 'HK', name: 'Hong Kong', nameId: 'Hong Kong', continent: 'AS', callingCode: '+852' },
-  { code: 'HN', name: 'Honduras', nameId: 'Honduras', continent: 'NA', callingCode: '+504' },
-  { code: 'ID', name: 'Indonesia', nameId: 'Indonesia', continent: 'AS', callingCode: '+62' },
-  { code: 'IE', name: 'Ireland', nameId: 'Irlandia', continent: 'EU', callingCode: '+353' },
-  { code: 'IN', name: 'India', nameId: 'India', continent: 'AS', callingCode: '+91' },
-  { code: 'IQ', name: 'Iraq', nameId: 'Irak', continent: 'AS', callingCode: '+964' },
-  { code: 'IR', name: 'Iran', nameId: 'Iran', continent: 'AS', callingCode: '+98' },
-  { code: 'JO', name: 'Jordan', nameId: 'Yordania', continent: 'AS', callingCode: '+962' },
-  { code: 'JP', name: 'Japan', nameId: 'Jepang', continent: 'AS', callingCode: '+81' },
-  { code: 'KG', name: 'Kyrgyzstan', nameId: 'Kirgizstan', continent: 'AS', callingCode: '+996' },
-  { code: 'KH', name: 'Cambodia', nameId: 'Kamboja', continent: 'AS', callingCode: '+855' },
-  { code: 'KP', name: 'North Korea', nameId: 'Korea Utara', continent: 'AS', callingCode: '+850' },
-  { code: 'KR', name: 'South Korea', nameId: 'Korea Selatan', continent: 'AS', callingCode: '+82' },
-  { code: 'KW', name: 'Kuwait', nameId: 'Kuwait', continent: 'AS', callingCode: '+965' },
-  { code: 'KZ', name: 'Kazakhstan', nameId: 'Kazakhstan', continent: 'AS', callingCode: '+7' },
-  { code: 'LA', name: 'Laos', nameId: 'Laos', continent: 'AS', callingCode: '+856' },
-  { code: 'LB', name: 'Lebanon', nameId: 'Lebanon', continent: 'AS', callingCode: '+961' },
-  { code: 'LI', name: 'Liechtenstein', nameId: 'Liechtenstein', continent: 'EU', callingCode: '+423' },
-  { code: 'LS', name: 'Lesotho', nameId: 'Lesotho', continent: 'AF', callingCode: '+266' },
-  { code: 'LT', name: 'Lithuania', nameId: 'Lituania', continent: 'EU', callingCode: '+370' },
-  { code: 'LU', name: 'Luxembourg', nameId: 'Luksemburg', continent: 'EU', callingCode: '+352' },
-  { code: 'LV', name: 'Latvia', nameId: 'Latvia', continent: 'EU', callingCode: '+371' },
-  { code: 'LY', name: 'Libya', nameId: 'Libya', continent: 'AF', callingCode: '+218' },
-  { code: 'MA', name: 'Morocco', nameId: 'Maroko', continent: 'AF', callingCode: '+212' },
-  { code: 'MC', name: 'Monaco', nameId: 'Monako', continent: 'EU', callingCode: '+377' },
-  { code: 'MD', name: 'Moldova', nameId: 'Moldova', continent: 'EU', callingCode: '+373' },
-  { code: 'MG', name: 'Madagascar', nameId: 'Madagaskar', continent: 'AF', callingCode: '+261' },
-  { code: 'MK', name: 'North Macedonia', nameId: 'Makedonia Utara', continent: 'EU', callingCode: '+389' },
-  { code: 'MM', name: 'Myanmar', nameId: 'Myanmar', continent: 'AS', callingCode: '+95' },
-  { code: 'MO', name: 'Macau', nameId: 'Makau', continent: 'AS', callingCode: '+853' },
-  { code: 'MP', name: 'Northern Mariana Islands', nameId: 'Kepulauan Mariana Utara', continent: 'OC', callingCode: '+1' },
-  { code: 'MX', name: 'Mexico', nameId: 'Meksiko', continent: 'NA', callingCode: '+52' },
-  { code: 'MY', name: 'Malaysia', nameId: 'Malaysia', continent: 'AS', callingCode: '+60' },
-  { code: 'MZ', name: 'Mozambique', nameId: 'Mozambik', continent: 'AF', callingCode: '+258' },
-  { code: 'NA', name: 'Namibia', nameId: 'Namibia', continent: 'AF', callingCode: '+264' },
-  { code: 'NI', name: 'Nicaragua', nameId: 'Nikaragua', continent: 'NA', callingCode: '+505' },
-  { code: 'NP', name: 'Nepal', nameId: 'Nepal', continent: 'AS', callingCode: '+977' },
-  { code: 'NZ', name: 'New Zealand', nameId: 'Selandia Baru', continent: 'OC', callingCode: '+64' },
-  { code: 'OM', name: 'Oman', nameId: 'Oman', continent: 'AS', callingCode: '+968' },
-  { code: 'PA', name: 'Panama', nameId: 'Panama', continent: 'NA', callingCode: '+507' },
-  { code: 'PE', name: 'Peru', nameId: 'Peru', continent: 'SA', callingCode: '+51' },
-  { code: 'PG', name: 'Papua New Guinea', nameId: 'Papua Nugini', continent: 'OC', callingCode: '+675' },
-  { code: 'PH', name: 'Philippines', nameId: 'Filipina', continent: 'AS', callingCode: '+63' },
-  { code: 'PR', name: 'Puerto Rico', nameId: 'Puerto Riko', continent: 'NA', callingCode: '+1' },
-  { code: 'PS', name: 'Palestine', nameId: 'Palestina', continent: 'AS', callingCode: '+970' },
-  { code: 'PT', name: 'Portugal', nameId: 'Portugal', continent: 'EU', callingCode: '+351' },
-  { code: 'PY', name: 'Paraguay', nameId: 'Paraguay', continent: 'SA', callingCode: '+595' },
-  { code: 'QA', name: 'Qatar', nameId: 'Qatar', continent: 'AS', callingCode: '+974' },
-  { code: 'RU', name: 'Russia', nameId: 'Rusia', continent: 'EU', callingCode: '+7' },
-  { code: 'SA', name: 'Saudi Arabia', nameId: 'Arab Saudi', continent: 'AS', callingCode: '+966' },
-  { code: 'SD', name: 'Sudan', nameId: 'Sudan', continent: 'AF', callingCode: '+249' },
-  { code: 'SG', name: 'Singapore', nameId: 'Singapura', continent: 'AS', callingCode: '+65' },
-  { code: 'ST', name: 'São Tomé and Príncipe', nameId: 'Sao Tome dan Principe', continent: 'AF', callingCode: '+239' },
-  { code: 'SV', name: 'El Salvador', nameId: 'El Salvador', continent: 'NA', callingCode: '+503' },
-  { code: 'SO', name: 'Somalia', nameId: 'Somalia', continent: 'AF', callingCode: '+252' },
-  { code: 'SY', name: 'Syria', nameId: 'Suriah', continent: 'AS', callingCode: '+963' },
-  { code: 'TH', name: 'Thailand', nameId: 'Thailand', continent: 'AS', callingCode: '+66' },
-  { code: 'TD', name: 'Chad', nameId: 'Chad', continent: 'AF', callingCode: '+235' },
-  { code: 'TJ', name: 'Tajikistan', nameId: 'Tajikistan', continent: 'AS', callingCode: '+992' },
-  { code: 'TL', name: 'Timor-Leste', nameId: 'Timor Leste', continent: 'AS', callingCode: '+670' },
-  { code: 'TM', name: 'Turkmenistan', nameId: 'Turkmenistan', continent: 'AS', callingCode: '+993' },
-  { code: 'TN', name: 'Tunisia', nameId: 'Tunisia', continent: 'AF', callingCode: '+216' },
-  { code: 'TO', name: 'Tonga', nameId: 'Tonga', continent: 'OC', callingCode: '+676' },
-  { code: 'TW', name: 'Taiwan', nameId: 'Taiwan', continent: 'AS', callingCode: '+886' },
-  { code: 'UA', name: 'Ukraine', nameId: 'Ukraina', continent: 'EU', callingCode: '+380' },
-  { code: 'US', name: 'United States', nameId: 'Amerika Serikat', continent: 'NA', callingCode: '+1' },
-  { code: 'UY', name: 'Uruguay', nameId: 'Uruguay', continent: 'SA', callingCode: '+598' },
-  { code: 'UZ', name: 'Uzbekistan', nameId: 'Uzbekistan', continent: 'AS', callingCode: '+998' },
-  { code: 'VE', name: 'Venezuela', nameId: 'Venezuela', continent: 'SA', callingCode: '+58' },
-  { code: 'VI', name: 'Virgin Islands (US)', nameId: 'Kepulauan Virgin (AS)', continent: 'NA', callingCode: '+1' },
-  { code: 'WS', name: 'Samoa', nameId: 'Samoa', continent: 'OC', callingCode: '+685' },
-  { code: 'YE', name: 'Yemen', nameId: 'Yaman', continent: 'AS', callingCode: '+967' },
-  { code: 'ZA', name: 'South Africa', nameId: 'Afrika Selatan', continent: 'AF', callingCode: '+27' },
+  {
+    code: 'AE',
+    name: 'United Arab Emirates',
+    nameId: 'Uni Emirat Arab',
+    continent: 'AS',
+    callingCode: '+971',
+  },
+  {
+    code: 'AM',
+    name: 'Armenia',
+    nameId: 'Armenia',
+    continent: 'AS',
+    callingCode: '+374',
+  },
+  {
+    code: 'AO',
+    name: 'Angola',
+    nameId: 'Angola',
+    continent: 'AF',
+    callingCode: '+244',
+  },
+  {
+    code: 'AR',
+    name: 'Argentina',
+    nameId: 'Argentina',
+    continent: 'SA',
+    callingCode: '+54',
+  },
+  {
+    code: 'AS',
+    name: 'American Samoa',
+    nameId: 'Samoa Amerika',
+    continent: 'OC',
+    callingCode: '+1',
+  },
+  {
+    code: 'AT',
+    name: 'Austria',
+    nameId: 'Austria',
+    continent: 'EU',
+    callingCode: '+43',
+  },
+  {
+    code: 'AU',
+    name: 'Australia',
+    nameId: 'Australia',
+    continent: 'OC',
+    callingCode: '+61',
+  },
+  {
+    code: 'AZ',
+    name: 'Azerbaijan',
+    nameId: 'Azerbaijan',
+    continent: 'AS',
+    callingCode: '+994',
+  },
+  {
+    code: 'BE',
+    name: 'Belgium',
+    nameId: 'Belgia',
+    continent: 'EU',
+    callingCode: '+32',
+  },
+  {
+    code: 'BH',
+    name: 'Bahrain',
+    nameId: 'Bahrain',
+    continent: 'AS',
+    callingCode: '+973',
+  },
+  {
+    code: 'BO',
+    name: 'Bolivia',
+    nameId: 'Bolivia',
+    continent: 'SA',
+    callingCode: '+591',
+  },
+  {
+    code: 'BR',
+    name: 'Brazil',
+    nameId: 'Brasil',
+    continent: 'SA',
+    callingCode: '+55',
+  },
+  {
+    code: 'BY',
+    name: 'Belarus',
+    nameId: 'Belarus',
+    continent: 'EU',
+    callingCode: '+375',
+  },
+  {
+    code: 'BZ',
+    name: 'Belize',
+    nameId: 'Belize',
+    continent: 'NA',
+    callingCode: '+501',
+  },
+  {
+    code: 'CA',
+    name: 'Canada',
+    nameId: 'Kanada',
+    continent: 'NA',
+    callingCode: '+1',
+  },
+  {
+    code: 'CH',
+    name: 'Switzerland',
+    nameId: 'Swiss',
+    continent: 'EU',
+    callingCode: '+41',
+  },
+  {
+    code: 'CK',
+    name: 'Cook Islands',
+    nameId: 'Kepulauan Cook',
+    continent: 'OC',
+    callingCode: '+682',
+  },
+  {
+    code: 'CL',
+    name: 'Chile',
+    nameId: 'Cile',
+    continent: 'SA',
+    callingCode: '+56',
+  },
+  {
+    code: 'CN',
+    name: 'China',
+    nameId: 'Tiongkok',
+    continent: 'AS',
+    callingCode: '+86',
+  },
+  {
+    code: 'CO',
+    name: 'Colombia',
+    nameId: 'Kolombia',
+    continent: 'SA',
+    callingCode: '+57',
+  },
+  {
+    code: 'CR',
+    name: 'Costa Rica',
+    nameId: 'Kosta Rika',
+    continent: 'NA',
+    callingCode: '+506',
+  },
+  {
+    code: 'CU',
+    name: 'Cuba',
+    nameId: 'Kuba',
+    continent: 'NA',
+    callingCode: '+53',
+  },
+  {
+    code: 'CV',
+    name: 'Cape Verde',
+    nameId: 'Tanjung Verde',
+    continent: 'AF',
+    callingCode: '+238',
+  },
+  {
+    code: 'DE',
+    name: 'Germany',
+    nameId: 'Jerman',
+    continent: 'EU',
+    callingCode: '+49',
+  },
+  {
+    code: 'DO',
+    name: 'Dominican Republic',
+    nameId: 'Republik Dominika',
+    continent: 'NA',
+    callingCode: '+1',
+  },
+  {
+    code: 'DZ',
+    name: 'Algeria',
+    nameId: 'Aljazair',
+    continent: 'AF',
+    callingCode: '+213',
+  },
+  {
+    code: 'EC',
+    name: 'Ecuador',
+    nameId: 'Ekuador',
+    continent: 'SA',
+    callingCode: '+593',
+  },
+  {
+    code: 'EG',
+    name: 'Egypt',
+    nameId: 'Mesir',
+    continent: 'AF',
+    callingCode: '+20',
+  },
+  {
+    code: 'ES',
+    name: 'Spain',
+    nameId: 'Spanyol',
+    continent: 'EU',
+    callingCode: '+34',
+  },
+  {
+    code: 'EU',
+    name: 'European Union',
+    nameId: 'Uni Eropa',
+    continent: 'EU',
+    callingCode: '',
+  },
+  {
+    code: 'FJ',
+    name: 'Fiji',
+    nameId: 'Fiji',
+    continent: 'OC',
+    callingCode: '+679',
+  },
+  {
+    code: 'FR',
+    name: 'France',
+    nameId: 'Perancis',
+    continent: 'EU',
+    callingCode: '+33',
+  },
+  {
+    code: 'GB',
+    name: 'United Kingdom',
+    nameId: 'Britania Raya',
+    continent: 'EU',
+    callingCode: '+44',
+  },
+  {
+    code: 'GE',
+    name: 'Georgia',
+    nameId: 'Georgia',
+    continent: 'AS',
+    callingCode: '+995',
+  },
+  {
+    code: 'GU',
+    name: 'Guam',
+    nameId: 'Guam',
+    continent: 'OC',
+    callingCode: '+1',
+  },
+  {
+    code: 'GT',
+    name: 'Guatemala',
+    nameId: 'Guatemala',
+    continent: 'NA',
+    callingCode: '+502',
+  },
+  {
+    code: 'GW',
+    name: 'Guinea-Bissau',
+    nameId: 'Guinea-Bissau',
+    continent: 'AF',
+    callingCode: '+245',
+  },
+  {
+    code: 'HK',
+    name: 'Hong Kong',
+    nameId: 'Hong Kong',
+    continent: 'AS',
+    callingCode: '+852',
+  },
+  {
+    code: 'HN',
+    name: 'Honduras',
+    nameId: 'Honduras',
+    continent: 'NA',
+    callingCode: '+504',
+  },
+  {
+    code: 'ID',
+    name: 'Indonesia',
+    nameId: 'Indonesia',
+    continent: 'AS',
+    callingCode: '+62',
+  },
+  {
+    code: 'IE',
+    name: 'Ireland',
+    nameId: 'Irlandia',
+    continent: 'EU',
+    callingCode: '+353',
+  },
+  {
+    code: 'IN',
+    name: 'India',
+    nameId: 'India',
+    continent: 'AS',
+    callingCode: '+91',
+  },
+  {
+    code: 'IQ',
+    name: 'Iraq',
+    nameId: 'Irak',
+    continent: 'AS',
+    callingCode: '+964',
+  },
+  {
+    code: 'IR',
+    name: 'Iran',
+    nameId: 'Iran',
+    continent: 'AS',
+    callingCode: '+98',
+  },
+  {
+    code: 'JO',
+    name: 'Jordan',
+    nameId: 'Yordania',
+    continent: 'AS',
+    callingCode: '+962',
+  },
+  {
+    code: 'JP',
+    name: 'Japan',
+    nameId: 'Jepang',
+    continent: 'AS',
+    callingCode: '+81',
+  },
+  {
+    code: 'KG',
+    name: 'Kyrgyzstan',
+    nameId: 'Kirgizstan',
+    continent: 'AS',
+    callingCode: '+996',
+  },
+  {
+    code: 'KH',
+    name: 'Cambodia',
+    nameId: 'Kamboja',
+    continent: 'AS',
+    callingCode: '+855',
+  },
+  {
+    code: 'KP',
+    name: 'North Korea',
+    nameId: 'Korea Utara',
+    continent: 'AS',
+    callingCode: '+850',
+  },
+  {
+    code: 'KR',
+    name: 'South Korea',
+    nameId: 'Korea Selatan',
+    continent: 'AS',
+    callingCode: '+82',
+  },
+  {
+    code: 'KW',
+    name: 'Kuwait',
+    nameId: 'Kuwait',
+    continent: 'AS',
+    callingCode: '+965',
+  },
+  {
+    code: 'KZ',
+    name: 'Kazakhstan',
+    nameId: 'Kazakhstan',
+    continent: 'AS',
+    callingCode: '+7',
+  },
+  {
+    code: 'LA',
+    name: 'Laos',
+    nameId: 'Laos',
+    continent: 'AS',
+    callingCode: '+856',
+  },
+  {
+    code: 'LB',
+    name: 'Lebanon',
+    nameId: 'Lebanon',
+    continent: 'AS',
+    callingCode: '+961',
+  },
+  {
+    code: 'LI',
+    name: 'Liechtenstein',
+    nameId: 'Liechtenstein',
+    continent: 'EU',
+    callingCode: '+423',
+  },
+  {
+    code: 'LS',
+    name: 'Lesotho',
+    nameId: 'Lesotho',
+    continent: 'AF',
+    callingCode: '+266',
+  },
+  {
+    code: 'LT',
+    name: 'Lithuania',
+    nameId: 'Lituania',
+    continent: 'EU',
+    callingCode: '+370',
+  },
+  {
+    code: 'LU',
+    name: 'Luxembourg',
+    nameId: 'Luksemburg',
+    continent: 'EU',
+    callingCode: '+352',
+  },
+  {
+    code: 'LV',
+    name: 'Latvia',
+    nameId: 'Latvia',
+    continent: 'EU',
+    callingCode: '+371',
+  },
+  {
+    code: 'LY',
+    name: 'Libya',
+    nameId: 'Libya',
+    continent: 'AF',
+    callingCode: '+218',
+  },
+  {
+    code: 'MA',
+    name: 'Morocco',
+    nameId: 'Maroko',
+    continent: 'AF',
+    callingCode: '+212',
+  },
+  {
+    code: 'MC',
+    name: 'Monaco',
+    nameId: 'Monako',
+    continent: 'EU',
+    callingCode: '+377',
+  },
+  {
+    code: 'MD',
+    name: 'Moldova',
+    nameId: 'Moldova',
+    continent: 'EU',
+    callingCode: '+373',
+  },
+  {
+    code: 'MG',
+    name: 'Madagascar',
+    nameId: 'Madagaskar',
+    continent: 'AF',
+    callingCode: '+261',
+  },
+  {
+    code: 'MK',
+    name: 'North Macedonia',
+    nameId: 'Makedonia Utara',
+    continent: 'EU',
+    callingCode: '+389',
+  },
+  {
+    code: 'MM',
+    name: 'Myanmar',
+    nameId: 'Myanmar',
+    continent: 'AS',
+    callingCode: '+95',
+  },
+  {
+    code: 'MO',
+    name: 'Macau',
+    nameId: 'Makau',
+    continent: 'AS',
+    callingCode: '+853',
+  },
+  {
+    code: 'MP',
+    name: 'Northern Mariana Islands',
+    nameId: 'Kepulauan Mariana Utara',
+    continent: 'OC',
+    callingCode: '+1',
+  },
+  {
+    code: 'MX',
+    name: 'Mexico',
+    nameId: 'Meksiko',
+    continent: 'NA',
+    callingCode: '+52',
+  },
+  {
+    code: 'MY',
+    name: 'Malaysia',
+    nameId: 'Malaysia',
+    continent: 'AS',
+    callingCode: '+60',
+  },
+  {
+    code: 'MZ',
+    name: 'Mozambique',
+    nameId: 'Mozambik',
+    continent: 'AF',
+    callingCode: '+258',
+  },
+  {
+    code: 'NA',
+    name: 'Namibia',
+    nameId: 'Namibia',
+    continent: 'AF',
+    callingCode: '+264',
+  },
+  {
+    code: 'NI',
+    name: 'Nicaragua',
+    nameId: 'Nikaragua',
+    continent: 'NA',
+    callingCode: '+505',
+  },
+  {
+    code: 'NP',
+    name: 'Nepal',
+    nameId: 'Nepal',
+    continent: 'AS',
+    callingCode: '+977',
+  },
+  {
+    code: 'NZ',
+    name: 'New Zealand',
+    nameId: 'Selandia Baru',
+    continent: 'OC',
+    callingCode: '+64',
+  },
+  {
+    code: 'OM',
+    name: 'Oman',
+    nameId: 'Oman',
+    continent: 'AS',
+    callingCode: '+968',
+  },
+  {
+    code: 'PA',
+    name: 'Panama',
+    nameId: 'Panama',
+    continent: 'NA',
+    callingCode: '+507',
+  },
+  {
+    code: 'PE',
+    name: 'Peru',
+    nameId: 'Peru',
+    continent: 'SA',
+    callingCode: '+51',
+  },
+  {
+    code: 'PG',
+    name: 'Papua New Guinea',
+    nameId: 'Papua Nugini',
+    continent: 'OC',
+    callingCode: '+675',
+  },
+  {
+    code: 'PH',
+    name: 'Philippines',
+    nameId: 'Filipina',
+    continent: 'AS',
+    callingCode: '+63',
+  },
+  {
+    code: 'PR',
+    name: 'Puerto Rico',
+    nameId: 'Puerto Riko',
+    continent: 'NA',
+    callingCode: '+1',
+  },
+  {
+    code: 'PS',
+    name: 'Palestine',
+    nameId: 'Palestina',
+    continent: 'AS',
+    callingCode: '+970',
+  },
+  {
+    code: 'PT',
+    name: 'Portugal',
+    nameId: 'Portugal',
+    continent: 'EU',
+    callingCode: '+351',
+  },
+  {
+    code: 'PY',
+    name: 'Paraguay',
+    nameId: 'Paraguay',
+    continent: 'SA',
+    callingCode: '+595',
+  },
+  {
+    code: 'QA',
+    name: 'Qatar',
+    nameId: 'Qatar',
+    continent: 'AS',
+    callingCode: '+974',
+  },
+  {
+    code: 'RU',
+    name: 'Russia',
+    nameId: 'Rusia',
+    continent: 'EU',
+    callingCode: '+7',
+  },
+  {
+    code: 'SA',
+    name: 'Saudi Arabia',
+    nameId: 'Arab Saudi',
+    continent: 'AS',
+    callingCode: '+966',
+  },
+  {
+    code: 'SD',
+    name: 'Sudan',
+    nameId: 'Sudan',
+    continent: 'AF',
+    callingCode: '+249',
+  },
+  {
+    code: 'SG',
+    name: 'Singapore',
+    nameId: 'Singapura',
+    continent: 'AS',
+    callingCode: '+65',
+  },
+  {
+    code: 'ST',
+    name: 'São Tomé and Príncipe',
+    nameId: 'Sao Tome dan Principe',
+    continent: 'AF',
+    callingCode: '+239',
+  },
+  {
+    code: 'SV',
+    name: 'El Salvador',
+    nameId: 'El Salvador',
+    continent: 'NA',
+    callingCode: '+503',
+  },
+  {
+    code: 'SO',
+    name: 'Somalia',
+    nameId: 'Somalia',
+    continent: 'AF',
+    callingCode: '+252',
+  },
+  {
+    code: 'SY',
+    name: 'Syria',
+    nameId: 'Suriah',
+    continent: 'AS',
+    callingCode: '+963',
+  },
+  {
+    code: 'TH',
+    name: 'Thailand',
+    nameId: 'Thailand',
+    continent: 'AS',
+    callingCode: '+66',
+  },
+  {
+    code: 'TD',
+    name: 'Chad',
+    nameId: 'Chad',
+    continent: 'AF',
+    callingCode: '+235',
+  },
+  {
+    code: 'TJ',
+    name: 'Tajikistan',
+    nameId: 'Tajikistan',
+    continent: 'AS',
+    callingCode: '+992',
+  },
+  {
+    code: 'TL',
+    name: 'Timor-Leste',
+    nameId: 'Timor Leste',
+    continent: 'AS',
+    callingCode: '+670',
+  },
+  {
+    code: 'TM',
+    name: 'Turkmenistan',
+    nameId: 'Turkmenistan',
+    continent: 'AS',
+    callingCode: '+993',
+  },
+  {
+    code: 'TN',
+    name: 'Tunisia',
+    nameId: 'Tunisia',
+    continent: 'AF',
+    callingCode: '+216',
+  },
+  {
+    code: 'TO',
+    name: 'Tonga',
+    nameId: 'Tonga',
+    continent: 'OC',
+    callingCode: '+676',
+  },
+  {
+    code: 'TW',
+    name: 'Taiwan',
+    nameId: 'Taiwan',
+    continent: 'AS',
+    callingCode: '+886',
+  },
+  {
+    code: 'UA',
+    name: 'Ukraine',
+    nameId: 'Ukraina',
+    continent: 'EU',
+    callingCode: '+380',
+  },
+  {
+    code: 'US',
+    name: 'United States',
+    nameId: 'Amerika Serikat',
+    continent: 'NA',
+    callingCode: '+1',
+  },
+  {
+    code: 'UY',
+    name: 'Uruguay',
+    nameId: 'Uruguay',
+    continent: 'SA',
+    callingCode: '+598',
+  },
+  {
+    code: 'UZ',
+    name: 'Uzbekistan',
+    nameId: 'Uzbekistan',
+    continent: 'AS',
+    callingCode: '+998',
+  },
+  {
+    code: 'VE',
+    name: 'Venezuela',
+    nameId: 'Venezuela',
+    continent: 'SA',
+    callingCode: '+58',
+  },
+  {
+    code: 'VI',
+    name: 'Virgin Islands (US)',
+    nameId: 'Kepulauan Virgin (AS)',
+    continent: 'NA',
+    callingCode: '+1',
+  },
+  {
+    code: 'WS',
+    name: 'Samoa',
+    nameId: 'Samoa',
+    continent: 'OC',
+    callingCode: '+685',
+  },
+  {
+    code: 'YE',
+    name: 'Yemen',
+    nameId: 'Yaman',
+    continent: 'AS',
+    callingCode: '+967',
+  },
+  {
+    code: 'ZA',
+    name: 'South Africa',
+    nameId: 'Afrika Selatan',
+    continent: 'AF',
+    callingCode: '+27',
+  },
 ] as const;
 
 export const LANGUAGES = [
-  { code: 'id', name: 'Indonesian', nameId: 'Indonesia', nativeName: 'Bahasa Indonesia', family: 'Austronesian', defaultScript: 'Latn' },
-  { code: 'en', name: 'English', nameId: 'Inggris', nativeName: 'English', family: 'Germanic', defaultScript: 'Latn' },
-  { code: 'ja', name: 'Japanese', nameId: 'Jepang', nativeName: '日本語', family: 'Japonic', defaultScript: 'Jpan' },
-  { code: 'zh', name: 'Chinese', nameId: 'Tiongkok', nativeName: '中文', family: 'Sinitic', defaultScript: 'Hani' },
-  { code: 'ar', name: 'Arabic', nameId: 'Arab', nativeName: 'العربية', family: 'Semitic', defaultScript: 'Arab' },
-  { code: 'es', name: 'Spanish', nameId: 'Spanyol', nativeName: 'Español', family: 'Romance', defaultScript: 'Latn' },
-  { code: 'pt', name: 'Portuguese', nameId: 'Portugis', nativeName: 'Português', family: 'Romance', defaultScript: 'Latn' },
-  { code: 'hi', name: 'Hindi', nameId: 'Hindi', nativeName: 'हिन्दी', family: 'Indo-Aryan', defaultScript: 'Deva' },
-  { code: 'ko', name: 'Korean', nameId: 'Korea', nativeName: '한국어', family: 'Koreanic', defaultScript: 'Hang' },
-  { code: 'fr', name: 'French', nameId: 'Perancis', nativeName: 'Français', family: 'Romance', defaultScript: 'Latn' },
-  { code: 'de', name: 'German', nameId: 'Jerman', nativeName: 'Deutsch', family: 'Germanic', defaultScript: 'Latn' },
-  { code: 'ru', name: 'Russian', nameId: 'Rusia', nativeName: 'Русский', family: 'Slavic', defaultScript: 'Cyrl' },
-  { code: 'th', name: 'Thai', nameId: 'Thailand', nativeName: 'ภาษาไทย', family: 'Kra-Dai', defaultScript: 'Thai' },
+  {
+    code: 'id',
+    name: 'Indonesian',
+    nameId: 'Indonesia',
+    nativeName: 'Bahasa Indonesia',
+    family: 'Austronesian',
+    defaultScript: 'Latn',
+  },
+  {
+    code: 'en',
+    name: 'English',
+    nameId: 'Inggris',
+    nativeName: 'English',
+    family: 'Germanic',
+    defaultScript: 'Latn',
+  },
+  {
+    code: 'ja',
+    name: 'Japanese',
+    nameId: 'Jepang',
+    nativeName: '日本語',
+    family: 'Japonic',
+    defaultScript: 'Jpan',
+  },
+  {
+    code: 'zh',
+    name: 'Chinese',
+    nameId: 'Tiongkok',
+    nativeName: '中文',
+    family: 'Sinitic',
+    defaultScript: 'Hani',
+  },
+  {
+    code: 'ar',
+    name: 'Arabic',
+    nameId: 'Arab',
+    nativeName: 'العربية',
+    family: 'Semitic',
+    defaultScript: 'Arab',
+  },
+  {
+    code: 'es',
+    name: 'Spanish',
+    nameId: 'Spanyol',
+    nativeName: 'Español',
+    family: 'Romance',
+    defaultScript: 'Latn',
+  },
+  {
+    code: 'pt',
+    name: 'Portuguese',
+    nameId: 'Portugis',
+    nativeName: 'Português',
+    family: 'Romance',
+    defaultScript: 'Latn',
+  },
+  {
+    code: 'hi',
+    name: 'Hindi',
+    nameId: 'Hindi',
+    nativeName: 'हिन्दी',
+    family: 'Indo-Aryan',
+    defaultScript: 'Deva',
+  },
+  {
+    code: 'ko',
+    name: 'Korean',
+    nameId: 'Korea',
+    nativeName: '한국어',
+    family: 'Koreanic',
+    defaultScript: 'Hang',
+  },
+  {
+    code: 'fr',
+    name: 'French',
+    nameId: 'Perancis',
+    nativeName: 'Français',
+    family: 'Romance',
+    defaultScript: 'Latn',
+  },
+  {
+    code: 'de',
+    name: 'German',
+    nameId: 'Jerman',
+    nativeName: 'Deutsch',
+    family: 'Germanic',
+    defaultScript: 'Latn',
+  },
+  {
+    code: 'ru',
+    name: 'Russian',
+    nameId: 'Rusia',
+    nativeName: 'Русский',
+    family: 'Slavic',
+    defaultScript: 'Cyrl',
+  },
+  {
+    code: 'th',
+    name: 'Thai',
+    nameId: 'Thailand',
+    nativeName: 'ภาษาไทย',
+    family: 'Kra-Dai',
+    defaultScript: 'Thai',
+  },
 ] as const;
 
-/**
- * ISO 15924 Scripts for BCP 47 locale tags
- * Format: language-script-region (e.g., zh-Hans-CN)
- */
 export const SCRIPTS = [
   { code: 'Hans', name: 'Simplified Han', nameId: 'Han Sederhana' },
   { code: 'Hant', name: 'Traditional Han', nameId: 'Han Tradisional' },
 ] as const;
 
-export const REGION_CODES = REGIONS.map(r => r.code) as RegionCode[];
+export const REGION_CODES = REGIONS.map((r) => r.code) as RegionCode[];
 
-export const REGION_CODE = REGION_CODES.reduce((acc, region) => {
-  const key = region.toUpperCase();
-  return Object.assign(acc, { [key]: region });
-}, {} as Record<string, RegionCode>) as {
-    [K in RegionCode as Uppercase<K>]: K
-  };
+export const REGION_CODE = REGION_CODES.reduce(
+  (acc, region) => {
+    const key = region.toUpperCase();
+    return Object.assign(acc, { [key]: region });
+  },
+  {} as Record<string, RegionCode>,
+) as {
+  [K in RegionCode as Uppercase<K>]: K;
+};
 
 export const FLAGS = [
   { code: 'ID', emoji: '🇮🇩', name: 'Indonesia', region: REGION_CODE.ID },
@@ -190,7 +1140,12 @@ export const FLAGS = [
   { code: 'MO', emoji: '🇲🇴', name: 'Macau', region: REGION_CODE.MO },
   { code: 'MY', emoji: '🇲🇾', name: 'Malaysia', region: REGION_CODE.MY },
   { code: 'SA', emoji: '🇸🇦', name: 'Saudi Arabia', region: REGION_CODE.SA },
-  { code: 'AE', emoji: '🇦🇪', name: 'United Arab Emirates', region: REGION_CODE.AE },
+  {
+    code: 'AE',
+    emoji: '🇦🇪',
+    name: 'United Arab Emirates',
+    region: REGION_CODE.AE,
+  },
   { code: 'EG', emoji: '🇪🇬', name: 'Egypt', region: REGION_CODE.EG },
   { code: 'MA', emoji: '🇲🇦', name: 'Morocco', region: REGION_CODE.MA },
   { code: 'TN', emoji: '🇹🇳', name: 'Tunisia', region: REGION_CODE.TN },
@@ -216,401 +1171,1999 @@ export const FLAGS = [
 ] as const;
 
 export const DIRECTIONS = [
-  { code: 'ltr', label: 'Left to Right', description: 'Text and UI elements flow from left to right', symbol: '←', languages: ['id', 'en', 'ja', 'es', 'pt', 'hi', 'ko', 'fr', 'de', 'ru', 'th'] },
-  { code: 'rtl', label: 'Right to Left', description: 'Text and UI elements flow from right to left', symbol: '→', languages: ['ar'] },
+  {
+    code: 'ltr',
+    label: 'Left to Right',
+    description: 'Text and UI elements flow from left to right',
+    symbol: '←',
+    languages: [
+      'id',
+      'en',
+      'ja',
+      'es',
+      'pt',
+      'hi',
+      'ko',
+      'fr',
+      'de',
+      'ru',
+      'th',
+    ],
+  },
+  {
+    code: 'rtl',
+    label: 'Right to Left',
+    description: 'Text and UI elements flow from right to left',
+    symbol: '→',
+    languages: ['ar'],
+  },
 ] as const;
 
 export const CALENDARS = [
-  { code: 'gregory', name: 'Gregorian Calendar', nameId: 'Kalender Gregorian', description: 'The internationally accepted civil calendar', eras: ['BC', 'AD'], months: 12, daysInWeek: 7, origin: 'Vatican', yearAdopted: 1582 },
+  {
+    code: 'gregory',
+    name: 'Gregorian Calendar',
+    nameId: 'Kalender Gregorian',
+    description: 'The internationally accepted civil calendar',
+    eras: ['BC', 'AD'],
+    months: 12,
+    daysInWeek: 7,
+    origin: 'Vatican',
+    yearAdopted: 1582,
+  },
 ] as const;
 
 const CURRENCIES = [
   { code: 'AED', name: 'UAE Dirham', symbol: 'د.إ', decimals: 2, region: 'AE' },
-  { code: 'AOA', name: 'Angolan Kwanza', symbol: 'Kz', decimals: 2, region: 'AO' },
-  { code: 'ARS', name: 'Argentine Peso', symbol: '$', decimals: 2, region: 'AR' },
-  { code: 'AUD', name: 'Australian Dollar', symbol: '$', decimals: 2, region: 'AU' },
-  { code: 'BRL', name: 'Brazilian Real', symbol: 'R$', decimals: 2, region: 'BR' },
-  { code: 'CAD', name: 'Canadian Dollar', symbol: '$', decimals: 2, region: 'CA' },
+  {
+    code: 'AOA',
+    name: 'Angolan Kwanza',
+    symbol: 'Kz',
+    decimals: 2,
+    region: 'AO',
+  },
+  {
+    code: 'ARS',
+    name: 'Argentine Peso',
+    symbol: '$',
+    decimals: 2,
+    region: 'AR',
+  },
+  {
+    code: 'AUD',
+    name: 'Australian Dollar',
+    symbol: '$',
+    decimals: 2,
+    region: 'AU',
+  },
+  {
+    code: 'BRL',
+    name: 'Brazilian Real',
+    symbol: 'R$',
+    decimals: 2,
+    region: 'BR',
+  },
+  {
+    code: 'CAD',
+    name: 'Canadian Dollar',
+    symbol: '$',
+    decimals: 2,
+    region: 'CA',
+  },
   { code: 'CHF', name: 'Swiss Franc', symbol: 'Fr', decimals: 2, region: 'CH' },
   { code: 'CNY', name: 'Chinese Yuan', symbol: '¥', decimals: 2, region: 'CN' },
-  { code: 'COP', name: 'Colombian Peso', symbol: '$', decimals: 2, region: 'CO' },
-  { code: 'EGP', name: 'Egyptian Pound', symbol: 'E£', decimals: 2, region: 'EG' },
+  {
+    code: 'COP',
+    name: 'Colombian Peso',
+    symbol: '$',
+    decimals: 2,
+    region: 'CO',
+  },
+  {
+    code: 'EGP',
+    name: 'Egyptian Pound',
+    symbol: 'E£',
+    decimals: 2,
+    region: 'EG',
+  },
   { code: 'EUR', name: 'Euro', symbol: '€', decimals: 2, region: 'EU' },
-  { code: 'GBP', name: 'British Pound', symbol: '£', decimals: 2, region: 'GB' },
-  { code: 'HKD', name: 'Hong Kong Dollar', symbol: '$', decimals: 2, region: 'HK' },
-  { code: 'IDR', name: 'Indonesian Rupiah', symbol: 'Rp', decimals: 0, region: 'ID' },
+  {
+    code: 'GBP',
+    name: 'British Pound',
+    symbol: '£',
+    decimals: 2,
+    region: 'GB',
+  },
+  {
+    code: 'HKD',
+    name: 'Hong Kong Dollar',
+    symbol: '$',
+    decimals: 2,
+    region: 'HK',
+  },
+  {
+    code: 'IDR',
+    name: 'Indonesian Rupiah',
+    symbol: 'Rp',
+    decimals: 0,
+    region: 'ID',
+  },
   { code: 'INR', name: 'Indian Rupee', symbol: '₹', decimals: 2, region: 'IN' },
   { code: 'JPY', name: 'Japanese Yen', symbol: '¥', decimals: 0, region: 'JP' },
-  { code: 'KPW', name: 'North Korean Won', symbol: '₩', decimals: 2, region: 'KP' },
-  { code: 'KRW', name: 'South Korean Won', symbol: '₩', decimals: 0, region: 'KR' },
-  { code: 'MAD', name: 'Moroccan Dirham', symbol: 'DH', decimals: 2, region: 'MA' },
-  { code: 'MOP', name: 'Macanese Pataca', symbol: 'MOP$', decimals: 2, region: 'MO' },
+  {
+    code: 'KPW',
+    name: 'North Korean Won',
+    symbol: '₩',
+    decimals: 2,
+    region: 'KP',
+  },
+  {
+    code: 'KRW',
+    name: 'South Korean Won',
+    symbol: '₩',
+    decimals: 0,
+    region: 'KR',
+  },
+  {
+    code: 'MAD',
+    name: 'Moroccan Dirham',
+    symbol: 'DH',
+    decimals: 2,
+    region: 'MA',
+  },
+  {
+    code: 'MOP',
+    name: 'Macanese Pataca',
+    symbol: 'MOP$',
+    decimals: 2,
+    region: 'MO',
+  },
   { code: 'MXN', name: 'Mexican Peso', symbol: '$', decimals: 2, region: 'MX' },
-  { code: 'MYR', name: 'Malaysian Ringgit', symbol: 'RM', decimals: 2, region: 'MY' },
-  { code: 'MZN', name: 'Mozambican Metical', symbol: 'MT', decimals: 2, region: 'MZ' },
-  { code: 'NPR', name: 'Nepalese Rupee', symbol: '₨', decimals: 2, region: 'NP' },
-  { code: 'NZD', name: 'New Zealand Dollar', symbol: '$', decimals: 2, region: 'NZ' },
-  { code: 'PEN', name: 'Peruvian Sol', symbol: 'S/', decimals: 2, region: 'PE' },
-  { code: 'RUB', name: 'Russian Ruble', symbol: '₽', decimals: 2, region: 'RU' },
-  { code: 'SAR', name: 'Saudi Riyal', symbol: 'ر.س', decimals: 2, region: 'SA' },
-  { code: 'SGD', name: 'Singapore Dollar', symbol: '$', decimals: 2, region: 'SG' },
-  { code: 'TND', name: 'Tunisian Dinar', symbol: 'DT', decimals: 3, region: 'TN' },
+  {
+    code: 'MYR',
+    name: 'Malaysian Ringgit',
+    symbol: 'RM',
+    decimals: 2,
+    region: 'MY',
+  },
+  {
+    code: 'MZN',
+    name: 'Mozambican Metical',
+    symbol: 'MT',
+    decimals: 2,
+    region: 'MZ',
+  },
+  {
+    code: 'NPR',
+    name: 'Nepalese Rupee',
+    symbol: '₨',
+    decimals: 2,
+    region: 'NP',
+  },
+  {
+    code: 'NZD',
+    name: 'New Zealand Dollar',
+    symbol: '$',
+    decimals: 2,
+    region: 'NZ',
+  },
+  {
+    code: 'PEN',
+    name: 'Peruvian Sol',
+    symbol: 'S/',
+    decimals: 2,
+    region: 'PE',
+  },
+  {
+    code: 'RUB',
+    name: 'Russian Ruble',
+    symbol: '₽',
+    decimals: 2,
+    region: 'RU',
+  },
+  {
+    code: 'SAR',
+    name: 'Saudi Riyal',
+    symbol: 'ر.س',
+    decimals: 2,
+    region: 'SA',
+  },
+  {
+    code: 'SGD',
+    name: 'Singapore Dollar',
+    symbol: '$',
+    decimals: 2,
+    region: 'SG',
+  },
+  {
+    code: 'TND',
+    name: 'Tunisian Dinar',
+    symbol: 'DT',
+    decimals: 3,
+    region: 'TN',
+  },
   { code: 'THB', name: 'Thai Baht', symbol: '฿', decimals: 2, region: 'TH' },
-  { code: 'TWD', name: 'Taiwan Dollar', symbol: '$', decimals: 2, region: 'TW' },
+  {
+    code: 'TWD',
+    name: 'Taiwan Dollar',
+    symbol: '$',
+    decimals: 2,
+    region: 'TW',
+  },
   { code: 'USD', name: 'US Dollar', symbol: '$', decimals: 2, region: 'US' },
-  { code: 'ZAR', name: 'South African Rand', symbol: 'R', decimals: 2, region: 'ZA' },
+  {
+    code: 'ZAR',
+    name: 'South African Rand',
+    symbol: 'R',
+    decimals: 2,
+    region: 'ZA',
+  },
 ] as const;
 
 export const TIMEZONES = [
-  { code: 'Africa/Cairo', name: 'Eastern European Time (Cairo)', region: 'Africa', city: 'Cairo', offset: 2, dst: true },
-  { code: 'Africa/Casablanca', name: 'Western European Time (Casablanca)', region: 'Africa', city: 'Casablanca', offset: 0, dst: false },
-  { code: 'Africa/Johannesburg', name: 'South Africa Standard Time', region: 'Africa', city: 'Johannesburg', offset: 2, dst: false },
-  { code: 'Africa/Luanda', name: 'West Africa Standard Time (Luanda)', region: 'Africa', city: 'Luanda', offset: 1, dst: false },
-  { code: 'Africa/Maputo', name: 'Central Africa Time (Maputo)', region: 'Africa', city: 'Maputo', offset: 2, dst: false },
-  { code: 'Africa/Tunis', name: 'Central European Time (Tunis)', region: 'Africa', city: 'Tunis', offset: 1, dst: false },
-  { code: 'America/Argentina/Buenos_Aires', name: 'Argentina Time', region: 'America', city: 'Buenos Aires', offset: -3, dst: false },
-  { code: 'America/Bogota', name: 'Colombia Time', region: 'America', city: 'Bogota', offset: -5, dst: false },
-  { code: 'America/Lima', name: 'Peru Time', region: 'America', city: 'Lima', offset: -5, dst: false },
-  { code: 'America/Mexico_City', name: 'Central Standard Time (Mexico)', region: 'America', city: 'Mexico City', offset: -6, dst: true },
-  { code: 'America/Montreal', name: 'Eastern Standard Time (Montreal)', region: 'America', city: 'Montreal', offset: -5, dst: true },
-  { code: 'America/New_York', name: 'Eastern Standard Time (New York)', region: 'America', city: 'New York', offset: -5, dst: true },
-  { code: 'America/Sao_Paulo', name: 'Brasilia Time', region: 'America', city: 'Sao Paulo', offset: -3, dst: true },
-  { code: 'America/Toronto', name: 'Eastern Standard Time (Toronto)', region: 'America', city: 'Toronto', offset: -5, dst: true },
-  { code: 'Asia/Dubai', name: 'Gulf Standard Time (Dubai)', region: 'Asia', city: 'Dubai', offset: 4, dst: false },
-  { code: 'Asia/Hong_Kong', name: 'Hong Kong Time', region: 'Asia', city: 'Hong Kong', offset: 8, dst: false },
-  { code: 'Asia/Jakarta', name: 'Western Indonesia Time (Jakarta)', region: 'Asia', city: 'Jakarta', offset: 7, dst: false },
-  { code: 'Asia/Kathmandu', name: 'Nepal Time', region: 'Asia', city: 'Kathmandu', offset: 5.75, dst: false },
-  { code: 'Asia/Kuala_Lumpur', name: 'Malaysia Time', region: 'Asia', city: 'Kuala Lumpur', offset: 8, dst: false },
-  { code: 'Asia/Kolkata', name: 'India Standard Time', region: 'Asia', city: 'Kolkata', offset: 5.5, dst: false },
-  { code: 'Asia/Macau', name: 'China Standard Time (Macau)', region: 'Asia', city: 'Macau', offset: 8, dst: false },
-  { code: 'Asia/Pyongyang', name: 'Korea Standard Time (Pyongyang)', region: 'Asia', city: 'Pyongyang', offset: 9, dst: false },
-  { code: 'Asia/Riyadh', name: 'Arabian Standard Time (Riyadh)', region: 'Asia', city: 'Riyadh', offset: 3, dst: false },
-  { code: 'Asia/Seoul', name: 'Korea Standard Time (Seoul)', region: 'Asia', city: 'Seoul', offset: 9, dst: false },
-  { code: 'Asia/Shanghai', name: 'China Standard Time (Shanghai)', region: 'Asia', city: 'Shanghai', offset: 8, dst: false },
-  { code: 'Asia/Bangkok', name: 'Indochina Time (Bangkok)', region: 'Asia', city: 'Bangkok', offset: 7, dst: false },
-  { code: 'Asia/Singapore', name: 'Singapore Time', region: 'Asia', city: 'Singapore', offset: 8, dst: false },
-  { code: 'Asia/Taipei', name: 'Taiwan Time', region: 'Asia', city: 'Taipei', offset: 8, dst: false },
-  { code: 'Asia/Tokyo', name: 'Japan Standard Time', region: 'Asia', city: 'Tokyo', offset: 9, dst: false },
-  { code: 'Australia/Sydney', name: 'Australian Eastern Standard Time (Sydney)', region: 'Australia', city: 'Sydney', offset: 10, dst: true },
-  { code: 'Europe/Berlin', name: 'Central European Time (Berlin)', region: 'Europe', city: 'Berlin', offset: 1, dst: true },
-  { code: 'Europe/Brussels', name: 'Central European Time (Brussels)', region: 'Europe', city: 'Brussels', offset: 1, dst: true },
-  { code: 'Europe/Lisbon', name: 'Western European Time (Lisbon)', region: 'Europe', city: 'Lisbon', offset: 0, dst: true },
-  { code: 'Europe/London', name: 'Greenwich Mean Time', region: 'Europe', city: 'London', offset: 0, dst: true },
-  { code: 'Europe/Madrid', name: 'Central European Time (Madrid)', region: 'Europe', city: 'Madrid', offset: 1, dst: true },
-  { code: 'Europe/Moscow', name: 'Moscow Standard Time', region: 'Europe', city: 'Moscow', offset: 3, dst: false },
-  { code: 'Europe/Paris', name: 'Central European Time (Paris)', region: 'Europe', city: 'Paris', offset: 1, dst: true },
-  { code: 'Europe/Vienna', name: 'Central European Time (Vienna)', region: 'Europe', city: 'Vienna', offset: 1, dst: true },
-  { code: 'Europe/Zurich', name: 'Central European Time (Zurich)', region: 'Europe', city: 'Zurich', offset: 1, dst: true },
-  { code: 'Pacific/Auckland', name: 'New Zealand Standard Time (Auckland)', region: 'Pacific', city: 'Auckland', offset: 12, dst: true },
+  {
+    code: 'Africa/Cairo',
+    name: 'Eastern European Time (Cairo)',
+    region: 'Africa',
+    city: 'Cairo',
+    offset: 2,
+    dst: true,
+  },
+  {
+    code: 'Africa/Casablanca',
+    name: 'Western European Time (Casablanca)',
+    region: 'Africa',
+    city: 'Casablanca',
+    offset: 0,
+    dst: false,
+  },
+  {
+    code: 'Africa/Johannesburg',
+    name: 'South Africa Standard Time',
+    region: 'Africa',
+    city: 'Johannesburg',
+    offset: 2,
+    dst: false,
+  },
+  {
+    code: 'Africa/Luanda',
+    name: 'West Africa Standard Time (Luanda)',
+    region: 'Africa',
+    city: 'Luanda',
+    offset: 1,
+    dst: false,
+  },
+  {
+    code: 'Africa/Maputo',
+    name: 'Central Africa Time (Maputo)',
+    region: 'Africa',
+    city: 'Maputo',
+    offset: 2,
+    dst: false,
+  },
+  {
+    code: 'Africa/Tunis',
+    name: 'Central European Time (Tunis)',
+    region: 'Africa',
+    city: 'Tunis',
+    offset: 1,
+    dst: false,
+  },
+  {
+    code: 'America/Argentina/Buenos_Aires',
+    name: 'Argentina Time',
+    region: 'America',
+    city: 'Buenos Aires',
+    offset: -3,
+    dst: false,
+  },
+  {
+    code: 'America/Bogota',
+    name: 'Colombia Time',
+    region: 'America',
+    city: 'Bogota',
+    offset: -5,
+    dst: false,
+  },
+  {
+    code: 'America/Lima',
+    name: 'Peru Time',
+    region: 'America',
+    city: 'Lima',
+    offset: -5,
+    dst: false,
+  },
+  {
+    code: 'America/Mexico_City',
+    name: 'Central Standard Time (Mexico)',
+    region: 'America',
+    city: 'Mexico City',
+    offset: -6,
+    dst: true,
+  },
+  {
+    code: 'America/Montreal',
+    name: 'Eastern Standard Time (Montreal)',
+    region: 'America',
+    city: 'Montreal',
+    offset: -5,
+    dst: true,
+  },
+  {
+    code: 'America/New_York',
+    name: 'Eastern Standard Time (New York)',
+    region: 'America',
+    city: 'New York',
+    offset: -5,
+    dst: true,
+  },
+  {
+    code: 'America/Sao_Paulo',
+    name: 'Brasilia Time',
+    region: 'America',
+    city: 'Sao Paulo',
+    offset: -3,
+    dst: true,
+  },
+  {
+    code: 'America/Toronto',
+    name: 'Eastern Standard Time (Toronto)',
+    region: 'America',
+    city: 'Toronto',
+    offset: -5,
+    dst: true,
+  },
+  {
+    code: 'Asia/Dubai',
+    name: 'Gulf Standard Time (Dubai)',
+    region: 'Asia',
+    city: 'Dubai',
+    offset: 4,
+    dst: false,
+  },
+  {
+    code: 'Asia/Hong_Kong',
+    name: 'Hong Kong Time',
+    region: 'Asia',
+    city: 'Hong Kong',
+    offset: 8,
+    dst: false,
+  },
+  {
+    code: 'Asia/Jakarta',
+    name: 'Western Indonesia Time (Jakarta)',
+    region: 'Asia',
+    city: 'Jakarta',
+    offset: 7,
+    dst: false,
+  },
+  {
+    code: 'Asia/Kathmandu',
+    name: 'Nepal Time',
+    region: 'Asia',
+    city: 'Kathmandu',
+    offset: 5.75,
+    dst: false,
+  },
+  {
+    code: 'Asia/Kuala_Lumpur',
+    name: 'Malaysia Time',
+    region: 'Asia',
+    city: 'Kuala Lumpur',
+    offset: 8,
+    dst: false,
+  },
+  {
+    code: 'Asia/Kolkata',
+    name: 'India Standard Time',
+    region: 'Asia',
+    city: 'Kolkata',
+    offset: 5.5,
+    dst: false,
+  },
+  {
+    code: 'Asia/Macau',
+    name: 'China Standard Time (Macau)',
+    region: 'Asia',
+    city: 'Macau',
+    offset: 8,
+    dst: false,
+  },
+  {
+    code: 'Asia/Pyongyang',
+    name: 'Korea Standard Time (Pyongyang)',
+    region: 'Asia',
+    city: 'Pyongyang',
+    offset: 9,
+    dst: false,
+  },
+  {
+    code: 'Asia/Riyadh',
+    name: 'Arabian Standard Time (Riyadh)',
+    region: 'Asia',
+    city: 'Riyadh',
+    offset: 3,
+    dst: false,
+  },
+  {
+    code: 'Asia/Seoul',
+    name: 'Korea Standard Time (Seoul)',
+    region: 'Asia',
+    city: 'Seoul',
+    offset: 9,
+    dst: false,
+  },
+  {
+    code: 'Asia/Shanghai',
+    name: 'China Standard Time (Shanghai)',
+    region: 'Asia',
+    city: 'Shanghai',
+    offset: 8,
+    dst: false,
+  },
+  {
+    code: 'Asia/Bangkok',
+    name: 'Indochina Time (Bangkok)',
+    region: 'Asia',
+    city: 'Bangkok',
+    offset: 7,
+    dst: false,
+  },
+  {
+    code: 'Asia/Singapore',
+    name: 'Singapore Time',
+    region: 'Asia',
+    city: 'Singapore',
+    offset: 8,
+    dst: false,
+  },
+  {
+    code: 'Asia/Taipei',
+    name: 'Taiwan Time',
+    region: 'Asia',
+    city: 'Taipei',
+    offset: 8,
+    dst: false,
+  },
+  {
+    code: 'Asia/Tokyo',
+    name: 'Japan Standard Time',
+    region: 'Asia',
+    city: 'Tokyo',
+    offset: 9,
+    dst: false,
+  },
+  {
+    code: 'Australia/Sydney',
+    name: 'Australian Eastern Standard Time (Sydney)',
+    region: 'Australia',
+    city: 'Sydney',
+    offset: 10,
+    dst: true,
+  },
+  {
+    code: 'Europe/Berlin',
+    name: 'Central European Time (Berlin)',
+    region: 'Europe',
+    city: 'Berlin',
+    offset: 1,
+    dst: true,
+  },
+  {
+    code: 'Europe/Brussels',
+    name: 'Central European Time (Brussels)',
+    region: 'Europe',
+    city: 'Brussels',
+    offset: 1,
+    dst: true,
+  },
+  {
+    code: 'Europe/Lisbon',
+    name: 'Western European Time (Lisbon)',
+    region: 'Europe',
+    city: 'Lisbon',
+    offset: 0,
+    dst: true,
+  },
+  {
+    code: 'Europe/London',
+    name: 'Greenwich Mean Time',
+    region: 'Europe',
+    city: 'London',
+    offset: 0,
+    dst: true,
+  },
+  {
+    code: 'Europe/Madrid',
+    name: 'Central European Time (Madrid)',
+    region: 'Europe',
+    city: 'Madrid',
+    offset: 1,
+    dst: true,
+  },
+  {
+    code: 'Europe/Moscow',
+    name: 'Moscow Standard Time',
+    region: 'Europe',
+    city: 'Moscow',
+    offset: 3,
+    dst: false,
+  },
+  {
+    code: 'Europe/Paris',
+    name: 'Central European Time (Paris)',
+    region: 'Europe',
+    city: 'Paris',
+    offset: 1,
+    dst: true,
+  },
+  {
+    code: 'Europe/Vienna',
+    name: 'Central European Time (Vienna)',
+    region: 'Europe',
+    city: 'Vienna',
+    offset: 1,
+    dst: true,
+  },
+  {
+    code: 'Europe/Zurich',
+    name: 'Central European Time (Zurich)',
+    region: 'Europe',
+    city: 'Zurich',
+    offset: 1,
+    dst: true,
+  },
+  {
+    code: 'Pacific/Auckland',
+    name: 'New Zealand Standard Time (Auckland)',
+    region: 'Pacific',
+    city: 'Auckland',
+    offset: 12,
+    dst: true,
+  },
 ] as const;
 
 export const PLURAL_RULES = [
-  { code: 'other', name: 'Other Only', description: 'All numbers use the "other" category', categories: ['other'], examples: [{ value: 0, form: 'other' }, { value: 1, form: 'other' }, { value: 2, form: 'other' }, { value: 100, form: 'other' }], locales: ['id', 'ja', 'ko', 'vi', 'tr', 'th'] },
-  { code: 'one-other', name: 'One/Other', description: 'Numbers ending in 1 use "one", everything else uses "other" (except numbers ending in 11, 12, 13)', categories: ['one', 'other'], examples: [{ value: 0, form: 'other' }, { value: 1, form: 'one' }, { value: 2, form: 'other' }, { value: 11, form: 'other' }, { value: 21, form: 'one' }], locales: ['en', 'es', 'pt', 'hi', 'fr', 'de', 'it', 'nl', 'sv', 'da', 'no', 'fi'] },
-  { code: 'zero-one-two-few-many-other', name: 'Arabic (Six Forms)', description: 'Complex plural system with six categories based on number mod 100', categories: ['zero', 'one', 'two', 'few', 'many', 'other'], examples: [{ value: 0, form: 'zero' }, { value: 1, form: 'one' }, { value: 2, form: 'two' }, { value: 3, form: 'few' }, { value: 11, form: 'many' }, { value: 100, form: 'other' }], locales: ['ar'] },
-  { code: 'one-few-many', name: 'Slavic (Three Forms)', description: 'Numbers ending in 1 (not 11) use "one", ending in 2-4 (not 12-14) use "few", everything else uses "many"', categories: ['one', 'few', 'many'], examples: [{ value: 1, form: 'one' }, { value: 2, form: 'few' }, { value: 5, form: 'many' }, { value: 11, form: 'many' }, { value: 21, form: 'one' }], locales: ['ru', 'uk', 'be', 'sr', 'hr'] },
+  {
+    code: 'other',
+    name: 'Other Only',
+    description: 'All numbers use the "other" category',
+    categories: ['other'],
+    examples: [
+      { value: 0, form: 'other' },
+      { value: 1, form: 'other' },
+      { value: 2, form: 'other' },
+      { value: 100, form: 'other' },
+    ],
+    locales: ['id', 'ja', 'ko', 'vi', 'tr', 'th'],
+  },
+  {
+    code: 'one-other',
+    name: 'One/Other',
+    description:
+      'Numbers ending in 1 use "one", everything else uses "other" (except numbers ending in 11, 12, 13)',
+    categories: ['one', 'other'],
+    examples: [
+      { value: 0, form: 'other' },
+      { value: 1, form: 'one' },
+      { value: 2, form: 'other' },
+      { value: 11, form: 'other' },
+      { value: 21, form: 'one' },
+    ],
+    locales: [
+      'en',
+      'es',
+      'pt',
+      'hi',
+      'fr',
+      'de',
+      'it',
+      'nl',
+      'sv',
+      'da',
+      'no',
+      'fi',
+    ],
+  },
+  {
+    code: 'zero-one-two-few-many-other',
+    name: 'Arabic (Six Forms)',
+    description:
+      'Complex plural system with six categories based on number mod 100',
+    categories: ['zero', 'one', 'two', 'few', 'many', 'other'],
+    examples: [
+      { value: 0, form: 'zero' },
+      { value: 1, form: 'one' },
+      { value: 2, form: 'two' },
+      { value: 3, form: 'few' },
+      { value: 11, form: 'many' },
+      { value: 100, form: 'other' },
+    ],
+    locales: ['ar'],
+  },
+  {
+    code: 'one-few-many',
+    name: 'Slavic (Three Forms)',
+    description:
+      'Numbers ending in 1 (not 11) use "one", ending in 2-4 (not 12-14) use "few", everything else uses "many"',
+    categories: ['one', 'few', 'many'],
+    examples: [
+      { value: 1, form: 'one' },
+      { value: 2, form: 'few' },
+      { value: 5, form: 'many' },
+      { value: 11, form: 'many' },
+      { value: 21, form: 'one' },
+    ],
+    locales: ['ru', 'uk', 'be', 'sr', 'hr'],
+  },
 ] as const;
 
-export const NUMBERING_SYSTEM_CODES = NUMBERING_SYSTEMS.map(c => c.code) as NumberingSystemCode[];
-export const LANGUAGE_CODES = LANGUAGES.map(l => l.code) as LanguageCode[];
-export const SCRIPT_CODES = SCRIPTS.map(s => s.code) as ScriptCode[];
-export const FLAG_CODES = FLAGS.map(f => f.code) as FlagCode[];
-export const DIRECTION_CODES = DIRECTIONS.map(d => d.code) as DirectionCode[];
-export const CALENDAR_CODES = CALENDARS.map(c => c.code) as CalendarCode[];
-export const CURRENCY_CODES = CURRENCIES.map(c => c.code) as CurrencyCode[];
-export const TIMEZONE_CODES = TIMEZONES.map(t => t.code) as TimezoneCode[];
-export const PLURAL_RULE_CODES = PLURAL_RULES.map(p => p.code) as PluralRuleCode[];
+export const LANGUAGE_CODES = LANGUAGES.map((l) => l.code) as LanguageCode[];
+export const SCRIPT_CODES = SCRIPTS.map((s) => s.code) as ScriptCode[];
+export const FLAG_CODES = FLAGS.map((f) => f.code) as FlagCode[];
+export const DIRECTION_CODES = DIRECTIONS.map((d) => d.code) as DirectionCode[];
+export const CALENDAR_CODES = CALENDARS.map((c) => c.code) as CalendarCode[];
+export const CURRENCY_CODES = CURRENCIES.map((c) => c.code) as CurrencyCode[];
+export const TIMEZONE_CODES = TIMEZONES.map((t) => t.code) as TimezoneCode[];
+export const PLURAL_RULE_CODES = PLURAL_RULES.map(
+  (p) => p.code,
+) as PluralRuleCode[];
 
-export const NUMBERING_SYSTEM_CODE = NUMBERING_SYSTEM_CODES.reduce((acc, ns) => {
-  const key = ns.toUpperCase();
-  return Object.assign(acc, { [key]: ns });
-}, {} as Record<string, NumberingSystemCode>) as {
-    [K in NumberingSystemCode as Uppercase<K>]: K
-  };
+export const LANGUAGE_CODE = LANGUAGE_CODES.reduce(
+  (acc, language) => {
+    const key = language.toUpperCase();
+    return Object.assign(acc, { [key]: language });
+  },
+  {} as Record<string, LanguageCode>,
+) as {
+  [K in LanguageCode as Uppercase<K>]: K;
+};
 
-export const LANGUAGE_CODE = LANGUAGE_CODES.reduce((acc, language) => {
-  const key = language.toUpperCase();
-  return Object.assign(acc, { [key]: language });
-}, {} as Record<string, LanguageCode>) as {
-    [K in LanguageCode as Uppercase<K>]: K
-  };
+export const SCRIPT_CODE = SCRIPT_CODES.reduce(
+  (acc, script) => {
+    const key = script.toUpperCase();
+    return Object.assign(acc, { [key]: script });
+  },
+  {} as Record<string, ScriptCode>,
+) as {
+  [K in ScriptCode as Uppercase<K>]: K;
+};
 
-export const SCRIPT_CODE = SCRIPT_CODES.reduce((acc, script) => {
-  const key = script.toUpperCase();
-  return Object.assign(acc, { [key]: script });
-}, {} as Record<string, ScriptCode>) as {
-    [K in ScriptCode as Uppercase<K>]: K
-  };
+export const FLAG_CODE = FLAG_CODES.reduce(
+  (acc, flag) => {
+    const key = flag.toUpperCase();
+    return Object.assign(acc, { [key]: flag });
+  },
+  {} as Record<string, FlagCode>,
+) as {
+  [K in FlagCode as Uppercase<K>]: K;
+};
 
-export const FLAG_CODE = FLAG_CODES.reduce((acc, flag) => {
-  const key = flag.toUpperCase();
-  return Object.assign(acc, { [key]: flag });
-}, {} as Record<string, FlagCode>) as {
-    [K in FlagCode as Uppercase<K>]: K
-  };
+export const DIRECTION_CODE = DIRECTION_CODES.reduce(
+  (acc, dir) => {
+    const key = dir.toUpperCase();
+    return Object.assign(acc, { [key]: dir });
+  },
+  {} as Record<string, DirectionCode>,
+) as {
+  [K in DirectionCode as Uppercase<K>]: K;
+};
 
-export const DIRECTION_CODE = DIRECTION_CODES.reduce((acc, dir) => {
-  const key = dir.toUpperCase();
-  return Object.assign(acc, { [key]: dir });
-}, {} as Record<string, DirectionCode>) as {
-    [K in DirectionCode as Uppercase<K>]: K
-  };
+export const CALENDAR_CODE = CALENDAR_CODES.reduce(
+  (acc, calendar) => {
+    const key = calendar.toUpperCase();
+    return Object.assign(acc, { [key]: calendar });
+  },
+  {} as Record<string, CalendarCode>,
+) as {
+  [K in CalendarCode as Uppercase<K>]: K;
+};
 
-export const CALENDAR_CODE = CALENDAR_CODES.reduce((acc, calendar) => {
-  const key = calendar.toUpperCase();
-  return Object.assign(acc, { [key]: calendar });
-}, {} as Record<string, CalendarCode>) as {
-    [K in CalendarCode as Uppercase<K>]: K
-  };
+export const CURRENCY_CODE = CURRENCY_CODES.reduce(
+  (acc, currency) => {
+    const key = currency.toUpperCase();
+    return Object.assign(acc, { [key]: currency });
+  },
+  {} as Record<string, CurrencyCode>,
+) as {
+  [K in CurrencyCode as Uppercase<K>]: K;
+};
 
-export const CURRENCY_CODE = CURRENCY_CODES.reduce((acc, currency) => {
-  const key = currency.toUpperCase();
-  return Object.assign(acc, { [key]: currency });
-}, {} as Record<string, CurrencyCode>) as {
-    [K in CurrencyCode as Uppercase<K>]: K
-  };
-
-export const TIMEZONE_CODE = TIMEZONE_CODES.reduce((acc, timezone) => {
-  const key = timezone.replace(/\//g, '_').toUpperCase();
-  return Object.assign(acc, { [key]: timezone });
-}, {} as Record<string, TimezoneCode>) as {
-  [K in TimezoneCode as K extends `${infer R}/${infer C}` ? `${Uppercase<R>}_${Uppercase<C>}` : never]: K
+export const TIMEZONE_CODE = TIMEZONE_CODES.reduce(
+  (acc, timezone) => {
+    const key = timezone.replace(/\//g, '_').toUpperCase();
+    return Object.assign(acc, { [key]: timezone });
+  },
+  {} as Record<string, TimezoneCode>,
+) as {
+  [K in TimezoneCode as K extends `${infer R}/${infer C}`
+    ? `${Uppercase<R>}_${Uppercase<C>}`
+    : never]: K;
 } & {
   AMERICA_ARGENTINA_BUENOS_AIRES: 'America/Argentina/Buenos_Aires';
 };
 
-export const PLURAL_RULE_CODE = PLURAL_RULE_CODES.reduce((acc, rule) => {
-  const key = rule.replace(/-/g, '_').toUpperCase();
-  return Object.assign(acc, { [key]: rule });
-}, {} as Record<string, PluralRuleCode>) as {
+export const PLURAL_RULE_CODE = PLURAL_RULE_CODES.reduce(
+  (acc, rule) => {
+    const key = rule.replace(/-/g, '_').toUpperCase();
+    return Object.assign(acc, { [key]: rule });
+  },
+  {} as Record<string, PluralRuleCode>,
+) as {
   OTHER: 'other';
   ONE_OTHER: 'one-other';
   ZERO_ONE_TWO_FEW_MANY_OTHER: 'zero-one-two-few-many-other';
   ONE_FEW_MANY: 'one-few-many';
 };
 
-export const WRITING_SYSTEMS = NUMBERING_SYSTEMS.map(ns => ns.group.toLowerCase()) as WritingSystem[];
-export const WRITING_SYSTEM = WRITING_SYSTEMS.reduce((acc, ws) => {
-  return Object.assign(acc, { [ws.toUpperCase()]: ws });
-}, {} as Record<string, WritingSystem>) as {
+export const WRITING_SYSTEM_CODES = WRITING_SYSTEMS.map(
+  (ws) => ws.code,
+) as WritingSystemCode[];
+
+export const WRITING_SYSTEM = WRITING_SYSTEMS.reduce(
+  (acc, ws) => {
+    const languages = ws.languages as LanguageCode[];
+    return Object.assign(acc, {
+      [ws.code.toUpperCase()]: ws.code,
+      [`${ws.code.toUpperCase()}_LANGUAGES`]: languages,
+    });
+  },
+  {} as Record<string, WritingSystemCode | LanguageCode[]>,
+) as {
   LATIN: 'latin';
+  LATIN_LANGUAGES: ['id', 'en', 'es', 'pt', 'fr', 'de'];
   ARABIC: 'arabic';
+  ARABIC_LANGUAGES: ['ar'];
   DEVANAGARI: 'devanagari';
+  DEVANAGARI_LANGUAGES: ['hi'];
   CJK: 'cjk';
+  CJK_LANGUAGES: ['zh', 'ja', 'ko'];
   CYRILLIC: 'cyrillic';
+  CYRILLIC_LANGUAGES: ['ru'];
   THAI: 'thai';
+  THAI_LANGUAGES: ['th'];
   BENGALI: 'bengali';
+  BENGALI_LANGUAGES: [];
   TAMIL: 'tamil';
+  TAMIL_LANGUAGES: [];
   TELUGU: 'telugu';
+  TELUGU_LANGUAGES: [];
   KANNADA: 'kannada';
+  KANNADA_LANGUAGES: [];
   MALAYALAM: 'malayalam';
+  MALAYALAM_LANGUAGES: [];
   GUJARATI: 'gujarati';
+  GUJARATI_LANGUAGES: [];
   GURMUKHI: 'gurmukhi';
+  GURMUKHI_LANGUAGES: [];
   SINHALA: 'sinhala';
+  SINHALA_LANGUAGES: [];
   GEORGIAN: 'georgian';
+  GEORGIAN_LANGUAGES: [];
   ARMENIAN: 'armenian';
+  ARMENIAN_LANGUAGES: [];
   ETHIOPIC: 'ethiopic';
+  ETHIOPIC_LANGUAGES: [];
   KHMER: 'khmer';
+  KHMER_LANGUAGES: [];
   LAO: 'lao';
+  LAO_LANGUAGES: [];
   MYANMAR: 'myanmar';
+  MYANMAR_LANGUAGES: [];
   GREEK: 'greek';
+  GREEK_LANGUAGES: [];
   HEBREW: 'hebrew';
+  HEBREW_LANGUAGES: [];
+};
+
+export const NUMBERING_SYSTEMS = [
+  {
+    code: 'latn',
+    label: 'Latin',
+    writingSystem: WRITING_SYSTEM.LATIN,
+    digits: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
+  },
+  {
+    code: 'arab',
+    label: 'Arabic-Indic',
+    writingSystem: WRITING_SYSTEM.ARABIC,
+    digits: ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'],
+  },
+  {
+    code: 'deva',
+    label: 'Devanagari',
+    writingSystem: WRITING_SYSTEM.DEVANAGARI,
+    digits: ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'],
+  },
+  {
+    code: 'jpan',
+    label: 'Japanese',
+    writingSystem: WRITING_SYSTEM.CJK,
+    digits: ['〇', '一', '二', '三', '四', '五', '六', '七', '八', '九'],
+  },
+  {
+    code: 'hans',
+    label: 'Chinese Simplified',
+    writingSystem: WRITING_SYSTEM.CJK,
+    digits: ['〇', '一', '二', '三', '四', '五', '六', '七', '八', '九'],
+  },
+  {
+    code: 'hant',
+    label: 'Chinese Traditional',
+    writingSystem: WRITING_SYSTEM.CJK,
+    digits: ['〇', '一', '二', '三', '四', '五', '六', '七', '八', '九'],
+  },
+  {
+    code: 'kore',
+    label: 'Korean',
+    writingSystem: WRITING_SYSTEM.CJK,
+    digits: ['영', '일', '이', '삼', '사', '오', '육', '칠', '팔', '구'],
+  },
+  {
+    code: 'cyrl',
+    label: 'Cyrillic',
+    writingSystem: WRITING_SYSTEM.CYRILLIC,
+    digits: ['⁰', '¹', '²', '³', '⁴', '⁵', '⁶', '⁷', '⁸', '⁹'],
+  },
+  {
+    code: 'thai',
+    label: 'Thai',
+    writingSystem: WRITING_SYSTEM.THAI,
+    digits: ['๐', '๑', '๒', '๓', '๔', '๕', '๖', '๗', '๘', '๙'],
+  },
+  {
+    code: 'beng',
+    label: 'Bengali',
+    writingSystem: WRITING_SYSTEM.BENGALI,
+    digits: ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'],
+  },
+  {
+    code: 'taml',
+    label: 'Tamil',
+    writingSystem: WRITING_SYSTEM.TAMIL,
+    digits: ['௦', '௧', '௨', '௩', '௪', '௫', '௬', '௭', '௮', '௯'],
+  },
+  {
+    code: 'telu',
+    label: 'Telugu',
+    writingSystem: WRITING_SYSTEM.TELUGU,
+    digits: ['౦', '౧', '౨', '౩', '౪', '౫', '౬', '౭', '౮', '౯'],
+  },
+  {
+    code: 'knada',
+    label: 'Kannada',
+    writingSystem: WRITING_SYSTEM.KANNADA,
+    digits: ['೦', '೧', '೨', '೩', '೪', '೫', '೬', '೭', '೮', '೯'],
+  },
+  {
+    code: 'mlym',
+    label: 'Malayalam',
+    writingSystem: WRITING_SYSTEM.MALAYALAM,
+    digits: ['൦', '൧', '൨', '൩', '൪', '൫', '൬', '൭', '൮', '൯'],
+  },
+  {
+    code: 'gujr',
+    label: 'Gujarati',
+    writingSystem: WRITING_SYSTEM.GUJARATI,
+    digits: ['૦', '૧', '૨', '૩', '૪', '૫', '૬', '૭', '૮', '૯'],
+  },
+  {
+    code: 'guru',
+    label: 'Gurmukhi',
+    writingSystem: WRITING_SYSTEM.GURMUKHI,
+    digits: ['੦', '੧', '੨', '੩', '੪', '੫', '੬', '੭', '੮', '੯'],
+  },
+  {
+    code: 'sinh',
+    label: 'Sinhala',
+    writingSystem: WRITING_SYSTEM.SINHALA,
+    digits: ['෦', '෧', '෨', '෩', '෪', '෫', '෬', '෭', '෮', '෯'],
+  },
+  {
+    code: 'geor',
+    label: 'Georgian',
+    writingSystem: WRITING_SYSTEM.GEORGIAN,
+    digits: ['₀', '₁', '₂', '₃', '₄', '₅', '₆', '₇', '₈', '₉'],
+  },
+  {
+    code: 'armn',
+    label: 'Armenian',
+    writingSystem: WRITING_SYSTEM.ARMENIAN,
+    digits: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
+  },
+  {
+    code: 'ethi',
+    label: 'Ethiopic',
+    writingSystem: WRITING_SYSTEM.ETHIOPIC,
+    digits: ['፩', '፪', '፫', '፬', '፭', '፮', '፯', '፰', '፱', '፲'],
+  },
+  {
+    code: 'khmr',
+    label: 'Khmer',
+    writingSystem: WRITING_SYSTEM.KHMER,
+    digits: ['០', '១', '២', '៣', '៤', '៥', '៦', '៧', '៨', '៩'],
+  },
+  {
+    code: 'laoo',
+    label: 'Lao',
+    writingSystem: WRITING_SYSTEM.LAO,
+    digits: ['໐', '໑', '໒', '໓', '໔', '໕', '໖', '໗', '໘', '໙'],
+  },
+  {
+    code: 'mym',
+    label: 'Myanmar',
+    writingSystem: WRITING_SYSTEM.MYANMAR,
+    digits: ['၀', '၁', '၂', '၃', '၄', '၅', '၆', '၇', '၈', '၉'],
+  },
+  {
+    code: 'grek',
+    label: 'Greek',
+    writingSystem: WRITING_SYSTEM.GREEK,
+    digits: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
+  },
+  {
+    code: 'hebr',
+    label: 'Hebrew',
+    writingSystem: WRITING_SYSTEM.HEBREW,
+    digits: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
+  },
+] as const;
+
+export const NUMBERING_SYSTEM_CODES = NUMBERING_SYSTEMS.map(
+  (c) => c.code,
+) as NumberingSystemCode[];
+
+export const NUMBERING_SYSTEM_CODE = NUMBERING_SYSTEM_CODES.reduce(
+  (acc, ns) => {
+    const key = ns.toUpperCase();
+    return Object.assign(acc, { [key]: ns });
+  },
+  {} as Record<string, NumberingSystemCode>,
+) as {
+  [K in NumberingSystemCode as Uppercase<K>]: K;
 };
 
 export const LOCALES = [
-  { code: 'id-ID', language: LANGUAGE_CODE.ID, region: REGION_CODE.ID, flag: FLAG_CODE.ID, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.IDR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.ASIA_JAKARTA, timezoneOffset: 7, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.OTHER },
-  { code: 'en-US', language: LANGUAGE_CODE.EN, region: REGION_CODE.US, flag: FLAG_CODE.US, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.USD, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.AMERICA_NEW_YORK, timezoneOffset: -5, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'en-GB', language: LANGUAGE_CODE.EN, region: REGION_CODE.GB, flag: FLAG_CODE.GB, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.GBP, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.EUROPE_LONDON, timezoneOffset: 0, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'en-CA', language: LANGUAGE_CODE.EN, region: REGION_CODE.CA, flag: FLAG_CODE.CA, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.CAD, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.AMERICA_TORONTO, timezoneOffset: -5, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'en-AU', language: LANGUAGE_CODE.EN, region: REGION_CODE.AU, flag: FLAG_CODE.AU, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.AUD, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.AUSTRALIA_SYDNEY, timezoneOffset: 10, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'en-IN', language: LANGUAGE_CODE.EN, region: REGION_CODE.IN, flag: FLAG_CODE.IN, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.INR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.ASIA_KOLKATA, timezoneOffset: 5.5, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'en-NZ', language: LANGUAGE_CODE.EN, region: REGION_CODE.NZ, flag: FLAG_CODE.NZ, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.NZD, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.PACIFIC_AUCKLAND, timezoneOffset: 12, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'en-ZA', language: LANGUAGE_CODE.EN, region: REGION_CODE.ZA, flag: FLAG_CODE.ZA, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.ZAR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.AFRICA_JOHANNESBURG, timezoneOffset: 2, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'ja-JP', language: LANGUAGE_CODE.JA, region: REGION_CODE.JP, flag: FLAG_CODE.JP, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.JPY, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.JPAN, nativeDigits: false, writingSystem: WRITING_SYSTEM.CJK, timezone: TIMEZONE_CODE.ASIA_TOKYO, timezoneOffset: 9, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.OTHER },
-  { code: 'zh-Hans-CN', language: LANGUAGE_CODE.ZH, script: SCRIPT_CODE.HANS, region: REGION_CODE.CN, flag: FLAG_CODE.CN, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.CNY, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.HANS, nativeDigits: false, writingSystem: WRITING_SYSTEM.CJK, timezone: TIMEZONE_CODE.ASIA_SHANGHAI, timezoneOffset: 8, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.OTHER },
-  { code: 'zh-Hans-SG', language: LANGUAGE_CODE.ZH, script: SCRIPT_CODE.HANS, region: REGION_CODE.SG, flag: FLAG_CODE.SG, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.SGD, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.HANS, nativeDigits: false, writingSystem: WRITING_SYSTEM.CJK, timezone: TIMEZONE_CODE.ASIA_SINGAPORE, timezoneOffset: 8, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.OTHER },
-  { code: 'zh-Hans-MY', language: LANGUAGE_CODE.ZH, script: SCRIPT_CODE.HANS, region: REGION_CODE.MY, flag: FLAG_CODE.MY, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.MYR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.HANS, nativeDigits: false, writingSystem: WRITING_SYSTEM.CJK, timezone: TIMEZONE_CODE.ASIA_KUALA_LUMPUR, timezoneOffset: 8, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.OTHER },
-  { code: 'zh-Hant-TW', language: LANGUAGE_CODE.ZH, script: SCRIPT_CODE.HANT, region: REGION_CODE.TW, flag: FLAG_CODE.TW, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.TWD, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.HANT, nativeDigits: false, writingSystem: WRITING_SYSTEM.CJK, timezone: TIMEZONE_CODE.ASIA_TAIPEI, timezoneOffset: 8, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.OTHER },
-  { code: 'zh-Hant-HK', language: LANGUAGE_CODE.ZH, script: SCRIPT_CODE.HANT, region: REGION_CODE.HK, flag: FLAG_CODE.HK, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.HKD, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.HANT, nativeDigits: false, writingSystem: WRITING_SYSTEM.CJK, timezone: TIMEZONE_CODE.ASIA_HONG_KONG, timezoneOffset: 8, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.OTHER },
-  { code: 'zh-Hant-MO', language: LANGUAGE_CODE.ZH, script: SCRIPT_CODE.HANT, region: REGION_CODE.MO, flag: FLAG_CODE.MO, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.MOP, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.HANT, nativeDigits: false, writingSystem: WRITING_SYSTEM.CJK, timezone: TIMEZONE_CODE.ASIA_MACAU, timezoneOffset: 8, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.OTHER },
-  { code: 'ar-SA', language: LANGUAGE_CODE.AR, region: REGION_CODE.SA, flag: FLAG_CODE.SA, dir: DIRECTION_CODE.RTL, currency: CURRENCY_CODE.SAR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.ARAB, nativeDigits: true, writingSystem: WRITING_SYSTEM.ARABIC, timezone: TIMEZONE_CODE.ASIA_RIYADH, timezoneOffset: 3, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 6, pluralRules: PLURAL_RULE_CODE.ZERO_ONE_TWO_FEW_MANY_OTHER },
-  { code: 'ar-AE', language: LANGUAGE_CODE.AR, region: REGION_CODE.AE, flag: FLAG_CODE.AE, dir: DIRECTION_CODE.RTL, currency: CURRENCY_CODE.AED, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.ARAB, nativeDigits: true, writingSystem: WRITING_SYSTEM.ARABIC, timezone: TIMEZONE_CODE.ASIA_DUBAI, timezoneOffset: 4, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 6, pluralRules: PLURAL_RULE_CODE.ZERO_ONE_TWO_FEW_MANY_OTHER },
-  { code: 'ar-EG', language: LANGUAGE_CODE.AR, region: REGION_CODE.EG, flag: FLAG_CODE.EG, dir: DIRECTION_CODE.RTL, currency: CURRENCY_CODE.EGP, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.ARAB, nativeDigits: true, writingSystem: WRITING_SYSTEM.ARABIC, timezone: TIMEZONE_CODE.AFRICA_CAIRO, timezoneOffset: 2, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 6, pluralRules: PLURAL_RULE_CODE.ZERO_ONE_TWO_FEW_MANY_OTHER },
-  { code: 'ar-MA', language: LANGUAGE_CODE.AR, region: REGION_CODE.MA, flag: FLAG_CODE.MA, dir: DIRECTION_CODE.RTL, currency: CURRENCY_CODE.MAD, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.ARAB, nativeDigits: true, writingSystem: WRITING_SYSTEM.ARABIC, timezone: TIMEZONE_CODE.AFRICA_CASABLANCA, timezoneOffset: 0, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 6, pluralRules: PLURAL_RULE_CODE.ZERO_ONE_TWO_FEW_MANY_OTHER },
-  { code: 'ar-TN', language: LANGUAGE_CODE.AR, region: REGION_CODE.TN, flag: FLAG_CODE.TN, dir: DIRECTION_CODE.RTL, currency: CURRENCY_CODE.TND, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.ARAB, nativeDigits: true, writingSystem: WRITING_SYSTEM.ARABIC, timezone: TIMEZONE_CODE.AFRICA_TUNIS, timezoneOffset: 1, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 6, pluralRules: PLURAL_RULE_CODE.ZERO_ONE_TWO_FEW_MANY_OTHER },
-  { code: 'es-ES', language: LANGUAGE_CODE.ES, region: REGION_CODE.ES, flag: FLAG_CODE.ES, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.EUR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.EUROPE_MADRID, timezoneOffset: 1, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'es-MX', language: LANGUAGE_CODE.ES, region: REGION_CODE.MX, flag: FLAG_CODE.MX, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.MXN, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.AMERICA_MEXICO_CITY, timezoneOffset: -6, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'es-AR', language: LANGUAGE_CODE.ES, region: REGION_CODE.AR, flag: FLAG_CODE.AR, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.ARS, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.AMERICA_ARGENTINA_BUENOS_AIRES, timezoneOffset: -3, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'es-CO', language: LANGUAGE_CODE.ES, region: REGION_CODE.CO, flag: FLAG_CODE.CO, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.COP, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.AMERICA_BOGOTA, timezoneOffset: -5, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'es-PE', language: LANGUAGE_CODE.ES, region: REGION_CODE.PE, flag: FLAG_CODE.PE, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.PEN, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.AMERICA_LIMA, timezoneOffset: -5, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'pt-BR', language: LANGUAGE_CODE.PT, region: REGION_CODE.BR, flag: FLAG_CODE.BR, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.BRL, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.AMERICA_SAO_PAULO, timezoneOffset: -3, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'pt-PT', language: LANGUAGE_CODE.PT, region: REGION_CODE.PT, flag: FLAG_CODE.PT, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.EUR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.EUROPE_LISBON, timezoneOffset: 0, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'pt-AO', language: LANGUAGE_CODE.PT, region: REGION_CODE.AO, flag: FLAG_CODE.AO, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.AOA, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.AFRICA_LUANDA, timezoneOffset: 1, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'pt-MZ', language: LANGUAGE_CODE.PT, region: REGION_CODE.MZ, flag: FLAG_CODE.MZ, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.MZN, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.AFRICA_MAPUTO, timezoneOffset: 2, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'hi-IN', language: LANGUAGE_CODE.HI, region: REGION_CODE.IN, flag: FLAG_CODE.IN, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.INR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.DEVA, nativeDigits: true, writingSystem: WRITING_SYSTEM.DEVANAGARI, timezone: TIMEZONE_CODE.ASIA_KOLKATA, timezoneOffset: 5.5, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'hi-NP', language: LANGUAGE_CODE.HI, region: REGION_CODE.NP, flag: FLAG_CODE.NP, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.NPR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.DEVA, nativeDigits: true, writingSystem: WRITING_SYSTEM.DEVANAGARI, timezone: TIMEZONE_CODE.ASIA_KATHMANDU, timezoneOffset: 5.75, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'ko-KR', language: LANGUAGE_CODE.KO, region: REGION_CODE.KR, flag: FLAG_CODE.KR, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.KRW, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.KORE, nativeDigits: false, writingSystem: WRITING_SYSTEM.CJK, timezone: TIMEZONE_CODE.ASIA_SEOUL, timezoneOffset: 9, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.OTHER },
-  { code: 'ko-KP', language: LANGUAGE_CODE.KO, region: REGION_CODE.KP, flag: FLAG_CODE.KP, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.KPW, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.KORE, nativeDigits: false, writingSystem: WRITING_SYSTEM.CJK, timezone: TIMEZONE_CODE.ASIA_PYONGYANG, timezoneOffset: 9, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.OTHER },
-  { code: 'fr-FR', language: LANGUAGE_CODE.FR, region: REGION_CODE.FR, flag: FLAG_CODE.FR, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.EUR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.EUROPE_PARIS, timezoneOffset: 1, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'fr-CA', language: LANGUAGE_CODE.FR, region: REGION_CODE.CA, flag: FLAG_CODE.CA, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.CAD, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.AMERICA_MONTREAL, timezoneOffset: -5, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'fr-BE', language: LANGUAGE_CODE.FR, region: REGION_CODE.BE, flag: FLAG_CODE.BE, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.EUR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.EUROPE_BRUSSELS, timezoneOffset: 1, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'fr-CH', language: LANGUAGE_CODE.FR, region: REGION_CODE.CH, flag: FLAG_CODE.CH, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.CHF, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.EUROPE_ZURICH, timezoneOffset: 1, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'de-DE', language: LANGUAGE_CODE.DE, region: REGION_CODE.DE, flag: FLAG_CODE.DE, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.EUR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.EUROPE_BERLIN, timezoneOffset: 1, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'de-AT', language: LANGUAGE_CODE.DE, region: REGION_CODE.AT, flag: FLAG_CODE.AT, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.EUR, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.EUROPE_VIENNA, timezoneOffset: 1, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'de-CH', language: LANGUAGE_CODE.DE, region: REGION_CODE.CH, flag: FLAG_CODE.CH, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.CHF, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeDigits: false, writingSystem: WRITING_SYSTEM.LATIN, timezone: TIMEZONE_CODE.EUROPE_ZURICH, timezoneOffset: 1, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_OTHER },
-  { code: 'ru-RU', language: LANGUAGE_CODE.RU, region: REGION_CODE.RU, flag: FLAG_CODE.RU, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.RUB, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.CYRL, nativeDigits: false, writingSystem: WRITING_SYSTEM.CYRILLIC, timezone: TIMEZONE_CODE.EUROPE_MOSCOW, timezoneOffset: 3, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 1, pluralRules: PLURAL_RULE_CODE.ONE_FEW_MANY },
-  { code: 'th-TH', language: LANGUAGE_CODE.TH, region: REGION_CODE.TH, flag: FLAG_CODE.TH, dir: DIRECTION_CODE.LTR, currency: CURRENCY_CODE.THB, numberingSystem: NUMBERING_SYSTEM_CODE.LATN, nativeNumberingSystem: NUMBERING_SYSTEM_CODE.THAI, nativeDigits: true, writingSystem: WRITING_SYSTEM.THAI, timezone: TIMEZONE_CODE.ASIA_BANGKOK, timezoneOffset: 7, calendar: CALENDAR_CODE.GREGORY, dateFormat: 'short', timeFormat: 'short', firstDayOfWeek: 0, pluralRules: PLURAL_RULE_CODE.OTHER },
+  {
+    code: 'id-ID',
+    language: LANGUAGE_CODE.ID,
+    region: REGION_CODE.ID,
+    flag: FLAG_CODE.ID,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.IDR,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.LATIN,
+    timezone: TIMEZONE_CODE.ASIA_JAKARTA,
+    timezoneOffset: 7,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 1,
+    pluralRules: PLURAL_RULE_CODE.OTHER,
+  },
+  {
+    code: 'en-US',
+    language: LANGUAGE_CODE.EN,
+    region: REGION_CODE.US,
+    flag: FLAG_CODE.US,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.USD,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.LATIN,
+    timezone: TIMEZONE_CODE.AMERICA_NEW_YORK,
+    timezoneOffset: -5,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 0,
+    pluralRules: PLURAL_RULE_CODE.ONE_OTHER,
+  },
+  {
+    code: 'en-GB',
+    language: LANGUAGE_CODE.EN,
+    region: REGION_CODE.GB,
+    flag: FLAG_CODE.GB,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.GBP,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.LATIN,
+    timezone: TIMEZONE_CODE.EUROPE_LONDON,
+    timezoneOffset: 0,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 1,
+    pluralRules: PLURAL_RULE_CODE.ONE_OTHER,
+  },
+  {
+    code: 'en-CA',
+    language: LANGUAGE_CODE.EN,
+    region: REGION_CODE.CA,
+    flag: FLAG_CODE.CA,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.CAD,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.LATIN,
+    timezone: TIMEZONE_CODE.AMERICA_TORONTO,
+    timezoneOffset: -5,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 0,
+    pluralRules: PLURAL_RULE_CODE.ONE_OTHER,
+  },
+  {
+    code: 'en-AU',
+    language: LANGUAGE_CODE.EN,
+    region: REGION_CODE.AU,
+    flag: FLAG_CODE.AU,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.AUD,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.LATIN,
+    timezone: TIMEZONE_CODE.AUSTRALIA_SYDNEY,
+    timezoneOffset: 10,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 1,
+    pluralRules: PLURAL_RULE_CODE.ONE_OTHER,
+  },
+  {
+    code: 'en-IN',
+    language: LANGUAGE_CODE.EN,
+    region: REGION_CODE.IN,
+    flag: FLAG_CODE.IN,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.INR,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.LATIN,
+    timezone: TIMEZONE_CODE.ASIA_KOLKATA,
+    timezoneOffset: 5.5,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 1,
+    pluralRules: PLURAL_RULE_CODE.ONE_OTHER,
+  },
+  {
+    code: 'en-NZ',
+    language: LANGUAGE_CODE.EN,
+    region: REGION_CODE.NZ,
+    flag: FLAG_CODE.NZ,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.NZD,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.LATIN,
+    timezone: TIMEZONE_CODE.PACIFIC_AUCKLAND,
+    timezoneOffset: 12,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 1,
+    pluralRules: PLURAL_RULE_CODE.ONE_OTHER,
+  },
+  {
+    code: 'en-ZA',
+    language: LANGUAGE_CODE.EN,
+    region: REGION_CODE.ZA,
+    flag: FLAG_CODE.ZA,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.ZAR,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.LATIN,
+    timezone: TIMEZONE_CODE.AFRICA_JOHANNESBURG,
+    timezoneOffset: 2,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 1,
+    pluralRules: PLURAL_RULE_CODE.ONE_OTHER,
+  },
+  {
+    code: 'ja-JP',
+    language: LANGUAGE_CODE.JA,
+    region: REGION_CODE.JP,
+    flag: FLAG_CODE.JP,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.JPY,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.JPAN,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.CJK,
+    timezone: TIMEZONE_CODE.ASIA_TOKYO,
+    timezoneOffset: 9,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 0,
+    pluralRules: PLURAL_RULE_CODE.OTHER,
+  },
+  {
+    code: 'zh-Hans-CN',
+    language: LANGUAGE_CODE.ZH,
+    script: SCRIPT_CODE.HANS,
+    region: REGION_CODE.CN,
+    flag: FLAG_CODE.CN,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.CNY,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.HANS,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.CJK,
+    timezone: TIMEZONE_CODE.ASIA_SHANGHAI,
+    timezoneOffset: 8,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 1,
+    pluralRules: PLURAL_RULE_CODE.OTHER,
+  },
+  {
+    code: 'zh-Hans-SG',
+    language: LANGUAGE_CODE.ZH,
+    script: SCRIPT_CODE.HANS,
+    region: REGION_CODE.SG,
+    flag: FLAG_CODE.SG,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.SGD,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.HANS,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.CJK,
+    timezone: TIMEZONE_CODE.ASIA_SINGAPORE,
+    timezoneOffset: 8,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 1,
+    pluralRules: PLURAL_RULE_CODE.OTHER,
+  },
+  {
+    code: 'zh-Hans-MY',
+    language: LANGUAGE_CODE.ZH,
+    script: SCRIPT_CODE.HANS,
+    region: REGION_CODE.MY,
+    flag: FLAG_CODE.MY,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.MYR,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.HANS,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.CJK,
+    timezone: TIMEZONE_CODE.ASIA_KUALA_LUMPUR,
+    timezoneOffset: 8,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 1,
+    pluralRules: PLURAL_RULE_CODE.OTHER,
+  },
+  {
+    code: 'zh-Hant-TW',
+    language: LANGUAGE_CODE.ZH,
+    script: SCRIPT_CODE.HANT,
+    region: REGION_CODE.TW,
+    flag: FLAG_CODE.TW,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.TWD,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.HANT,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.CJK,
+    timezone: TIMEZONE_CODE.ASIA_TAIPEI,
+    timezoneOffset: 8,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 1,
+    pluralRules: PLURAL_RULE_CODE.OTHER,
+  },
+  {
+    code: 'zh-Hant-HK',
+    language: LANGUAGE_CODE.ZH,
+    script: SCRIPT_CODE.HANT,
+    region: REGION_CODE.HK,
+    flag: FLAG_CODE.HK,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.HKD,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.HANT,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.CJK,
+    timezone: TIMEZONE_CODE.ASIA_HONG_KONG,
+    timezoneOffset: 8,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 1,
+    pluralRules: PLURAL_RULE_CODE.OTHER,
+  },
+  {
+    code: 'zh-Hant-MO',
+    language: LANGUAGE_CODE.ZH,
+    script: SCRIPT_CODE.HANT,
+    region: REGION_CODE.MO,
+    flag: FLAG_CODE.MO,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.MOP,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.HANT,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.CJK,
+    timezone: TIMEZONE_CODE.ASIA_MACAU,
+    timezoneOffset: 8,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 1,
+    pluralRules: PLURAL_RULE_CODE.OTHER,
+  },
+  {
+    code: 'ar-SA',
+    language: LANGUAGE_CODE.AR,
+    region: REGION_CODE.SA,
+    flag: FLAG_CODE.SA,
+    dir: DIRECTION_CODE.RTL,
+    currency: CURRENCY_CODE.SAR,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.ARAB,
+    nativeDigits: true,
+    writingSystem: WRITING_SYSTEM.ARABIC,
+    timezone: TIMEZONE_CODE.ASIA_RIYADH,
+    timezoneOffset: 3,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 6,
+    pluralRules: PLURAL_RULE_CODE.ZERO_ONE_TWO_FEW_MANY_OTHER,
+  },
+  {
+    code: 'ar-AE',
+    language: LANGUAGE_CODE.AR,
+    region: REGION_CODE.AE,
+    flag: FLAG_CODE.AE,
+    dir: DIRECTION_CODE.RTL,
+    currency: CURRENCY_CODE.AED,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.ARAB,
+    nativeDigits: true,
+    writingSystem: WRITING_SYSTEM.ARABIC,
+    timezone: TIMEZONE_CODE.ASIA_DUBAI,
+    timezoneOffset: 4,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 6,
+    pluralRules: PLURAL_RULE_CODE.ZERO_ONE_TWO_FEW_MANY_OTHER,
+  },
+  {
+    code: 'ar-EG',
+    language: LANGUAGE_CODE.AR,
+    region: REGION_CODE.EG,
+    flag: FLAG_CODE.EG,
+    dir: DIRECTION_CODE.RTL,
+    currency: CURRENCY_CODE.EGP,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.ARAB,
+    nativeDigits: true,
+    writingSystem: WRITING_SYSTEM.ARABIC,
+    timezone: TIMEZONE_CODE.AFRICA_CAIRO,
+    timezoneOffset: 2,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 6,
+    pluralRules: PLURAL_RULE_CODE.ZERO_ONE_TWO_FEW_MANY_OTHER,
+  },
+  {
+    code: 'ar-MA',
+    language: LANGUAGE_CODE.AR,
+    region: REGION_CODE.MA,
+    flag: FLAG_CODE.MA,
+    dir: DIRECTION_CODE.RTL,
+    currency: CURRENCY_CODE.MAD,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.ARAB,
+    nativeDigits: true,
+    writingSystem: WRITING_SYSTEM.ARABIC,
+    timezone: TIMEZONE_CODE.AFRICA_CASABLANCA,
+    timezoneOffset: 0,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 6,
+    pluralRules: PLURAL_RULE_CODE.ZERO_ONE_TWO_FEW_MANY_OTHER,
+  },
+  {
+    code: 'ar-TN',
+    language: LANGUAGE_CODE.AR,
+    region: REGION_CODE.TN,
+    flag: FLAG_CODE.TN,
+    dir: DIRECTION_CODE.RTL,
+    currency: CURRENCY_CODE.TND,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.ARAB,
+    nativeDigits: true,
+    writingSystem: WRITING_SYSTEM.ARABIC,
+    timezone: TIMEZONE_CODE.AFRICA_TUNIS,
+    timezoneOffset: 1,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 6,
+    pluralRules: PLURAL_RULE_CODE.ZERO_ONE_TWO_FEW_MANY_OTHER,
+  },
+  {
+    code: 'es-ES',
+    language: LANGUAGE_CODE.ES,
+    region: REGION_CODE.ES,
+    flag: FLAG_CODE.ES,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.EUR,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.LATIN,
+    timezone: TIMEZONE_CODE.EUROPE_MADRID,
+    timezoneOffset: 1,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 1,
+    pluralRules: PLURAL_RULE_CODE.ONE_OTHER,
+  },
+  {
+    code: 'es-MX',
+    language: LANGUAGE_CODE.ES,
+    region: REGION_CODE.MX,
+    flag: FLAG_CODE.MX,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.MXN,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.LATIN,
+    timezone: TIMEZONE_CODE.AMERICA_MEXICO_CITY,
+    timezoneOffset: -6,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 0,
+    pluralRules: PLURAL_RULE_CODE.ONE_OTHER,
+  },
+  {
+    code: 'es-AR',
+    language: LANGUAGE_CODE.ES,
+    region: REGION_CODE.AR,
+    flag: FLAG_CODE.AR,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.ARS,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.LATIN,
+    timezone: TIMEZONE_CODE.AMERICA_ARGENTINA_BUENOS_AIRES,
+    timezoneOffset: -3,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 1,
+    pluralRules: PLURAL_RULE_CODE.ONE_OTHER,
+  },
+  {
+    code: 'es-CO',
+    language: LANGUAGE_CODE.ES,
+    region: REGION_CODE.CO,
+    flag: FLAG_CODE.CO,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.COP,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.LATIN,
+    timezone: TIMEZONE_CODE.AMERICA_BOGOTA,
+    timezoneOffset: -5,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 1,
+    pluralRules: PLURAL_RULE_CODE.ONE_OTHER,
+  },
+  {
+    code: 'es-PE',
+    language: LANGUAGE_CODE.ES,
+    region: REGION_CODE.PE,
+    flag: FLAG_CODE.PE,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.PEN,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.LATIN,
+    timezone: TIMEZONE_CODE.AMERICA_LIMA,
+    timezoneOffset: -5,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 1,
+    pluralRules: PLURAL_RULE_CODE.ONE_OTHER,
+  },
+  {
+    code: 'pt-BR',
+    language: LANGUAGE_CODE.PT,
+    region: REGION_CODE.BR,
+    flag: FLAG_CODE.BR,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.BRL,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.LATIN,
+    timezone: TIMEZONE_CODE.AMERICA_SAO_PAULO,
+    timezoneOffset: -3,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 0,
+    pluralRules: PLURAL_RULE_CODE.ONE_OTHER,
+  },
+  {
+    code: 'pt-PT',
+    language: LANGUAGE_CODE.PT,
+    region: REGION_CODE.PT,
+    flag: FLAG_CODE.PT,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.EUR,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.LATIN,
+    timezone: TIMEZONE_CODE.EUROPE_LISBON,
+    timezoneOffset: 0,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 1,
+    pluralRules: PLURAL_RULE_CODE.ONE_OTHER,
+  },
+  {
+    code: 'pt-AO',
+    language: LANGUAGE_CODE.PT,
+    region: REGION_CODE.AO,
+    flag: FLAG_CODE.AO,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.AOA,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.LATIN,
+    timezone: TIMEZONE_CODE.AFRICA_LUANDA,
+    timezoneOffset: 1,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 1,
+    pluralRules: PLURAL_RULE_CODE.ONE_OTHER,
+  },
+  {
+    code: 'pt-MZ',
+    language: LANGUAGE_CODE.PT,
+    region: REGION_CODE.MZ,
+    flag: FLAG_CODE.MZ,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.MZN,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.LATIN,
+    timezone: TIMEZONE_CODE.AFRICA_MAPUTO,
+    timezoneOffset: 2,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 1,
+    pluralRules: PLURAL_RULE_CODE.ONE_OTHER,
+  },
+  {
+    code: 'hi-IN',
+    language: LANGUAGE_CODE.HI,
+    region: REGION_CODE.IN,
+    flag: FLAG_CODE.IN,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.INR,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.DEVA,
+    nativeDigits: true,
+    writingSystem: WRITING_SYSTEM.DEVANAGARI,
+    timezone: TIMEZONE_CODE.ASIA_KOLKATA,
+    timezoneOffset: 5.5,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 0,
+    pluralRules: PLURAL_RULE_CODE.ONE_OTHER,
+  },
+  {
+    code: 'hi-NP',
+    language: LANGUAGE_CODE.HI,
+    region: REGION_CODE.NP,
+    flag: FLAG_CODE.NP,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.NPR,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.DEVA,
+    nativeDigits: true,
+    writingSystem: WRITING_SYSTEM.DEVANAGARI,
+    timezone: TIMEZONE_CODE.ASIA_KATHMANDU,
+    timezoneOffset: 5.75,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 0,
+    pluralRules: PLURAL_RULE_CODE.ONE_OTHER,
+  },
+  {
+    code: 'ko-KR',
+    language: LANGUAGE_CODE.KO,
+    region: REGION_CODE.KR,
+    flag: FLAG_CODE.KR,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.KRW,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.KORE,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.CJK,
+    timezone: TIMEZONE_CODE.ASIA_SEOUL,
+    timezoneOffset: 9,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 0,
+    pluralRules: PLURAL_RULE_CODE.OTHER,
+  },
+  {
+    code: 'ko-KP',
+    language: LANGUAGE_CODE.KO,
+    region: REGION_CODE.KP,
+    flag: FLAG_CODE.KP,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.KPW,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.KORE,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.CJK,
+    timezone: TIMEZONE_CODE.ASIA_PYONGYANG,
+    timezoneOffset: 9,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 0,
+    pluralRules: PLURAL_RULE_CODE.OTHER,
+  },
+  {
+    code: 'fr-FR',
+    language: LANGUAGE_CODE.FR,
+    region: REGION_CODE.FR,
+    flag: FLAG_CODE.FR,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.EUR,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.LATIN,
+    timezone: TIMEZONE_CODE.EUROPE_PARIS,
+    timezoneOffset: 1,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 1,
+    pluralRules: PLURAL_RULE_CODE.ONE_OTHER,
+  },
+  {
+    code: 'fr-CA',
+    language: LANGUAGE_CODE.FR,
+    region: REGION_CODE.CA,
+    flag: FLAG_CODE.CA,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.CAD,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.LATIN,
+    timezone: TIMEZONE_CODE.AMERICA_MONTREAL,
+    timezoneOffset: -5,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 0,
+    pluralRules: PLURAL_RULE_CODE.ONE_OTHER,
+  },
+  {
+    code: 'fr-BE',
+    language: LANGUAGE_CODE.FR,
+    region: REGION_CODE.BE,
+    flag: FLAG_CODE.BE,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.EUR,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.LATIN,
+    timezone: TIMEZONE_CODE.EUROPE_BRUSSELS,
+    timezoneOffset: 1,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 1,
+    pluralRules: PLURAL_RULE_CODE.ONE_OTHER,
+  },
+  {
+    code: 'fr-CH',
+    language: LANGUAGE_CODE.FR,
+    region: REGION_CODE.CH,
+    flag: FLAG_CODE.CH,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.CHF,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.LATIN,
+    timezone: TIMEZONE_CODE.EUROPE_ZURICH,
+    timezoneOffset: 1,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 1,
+    pluralRules: PLURAL_RULE_CODE.ONE_OTHER,
+  },
+  {
+    code: 'de-DE',
+    language: LANGUAGE_CODE.DE,
+    region: REGION_CODE.DE,
+    flag: FLAG_CODE.DE,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.EUR,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.LATIN,
+    timezone: TIMEZONE_CODE.EUROPE_BERLIN,
+    timezoneOffset: 1,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 1,
+    pluralRules: PLURAL_RULE_CODE.ONE_OTHER,
+  },
+  {
+    code: 'de-AT',
+    language: LANGUAGE_CODE.DE,
+    region: REGION_CODE.AT,
+    flag: FLAG_CODE.AT,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.EUR,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.LATIN,
+    timezone: TIMEZONE_CODE.EUROPE_VIENNA,
+    timezoneOffset: 1,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 1,
+    pluralRules: PLURAL_RULE_CODE.ONE_OTHER,
+  },
+  {
+    code: 'de-CH',
+    language: LANGUAGE_CODE.DE,
+    region: REGION_CODE.CH,
+    flag: FLAG_CODE.CH,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.CHF,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.LATIN,
+    timezone: TIMEZONE_CODE.EUROPE_ZURICH,
+    timezoneOffset: 1,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 1,
+    pluralRules: PLURAL_RULE_CODE.ONE_OTHER,
+  },
+  {
+    code: 'ru-RU',
+    language: LANGUAGE_CODE.RU,
+    region: REGION_CODE.RU,
+    flag: FLAG_CODE.RU,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.RUB,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.CYRL,
+    nativeDigits: false,
+    writingSystem: WRITING_SYSTEM.CYRILLIC,
+    timezone: TIMEZONE_CODE.EUROPE_MOSCOW,
+    timezoneOffset: 3,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 1,
+    pluralRules: PLURAL_RULE_CODE.ONE_FEW_MANY,
+  },
+  {
+    code: 'th-TH',
+    language: LANGUAGE_CODE.TH,
+    region: REGION_CODE.TH,
+    flag: FLAG_CODE.TH,
+    dir: DIRECTION_CODE.LTR,
+    currency: CURRENCY_CODE.THB,
+    numberingSystem: NUMBERING_SYSTEM_CODE.LATN,
+    nativeNumberingSystem: NUMBERING_SYSTEM_CODE.THAI,
+    nativeDigits: true,
+    writingSystem: WRITING_SYSTEM.THAI,
+    timezone: TIMEZONE_CODE.ASIA_BANGKOK,
+    timezoneOffset: 7,
+    calendar: CALENDAR_CODE.GREGORY,
+    dateFormat: 'short',
+    timeFormat: 'short',
+    firstDayOfWeek: 0,
+    pluralRules: PLURAL_RULE_CODE.OTHER,
+  },
 ] as const;
 
-export const LOCALE_CODES = LOCALES.map(l => l.code) as LocaleCode[];
+export const LOCALE_CODES = LOCALES.map((l) => l.code) as LocaleCode[];
 
-/**
- * Generate locale label from existing data
- * Uses language nativeName directly from LANGUAGES master data
- */
 export const getLocaleLabel = (localeCode: LocaleCode): string => {
-  const locale = LOCALES.find(l => l.code === localeCode);
+  const locale = LOCALES.find((l) => l.code === localeCode);
   if (!locale) return localeCode;
 
-  const language = LANGUAGES.find(l => l.code === locale.language);
+  const language = LANGUAGES.find((l) => l.code === locale.language);
   return language?.nativeName || localeCode;
 };
 
-/**
- * Generate locale label in native language, with region code when the language
- * has multiple configured regional variants.
- */
 const getLocaleDisplayRegion = (regionCode: RegionCode): string => {
   if (regionCode === REGION_CODE.GB) return 'UK';
 
   return regionCode;
 };
 
-export const getLocaleLabelCountry = (
-  localeCode: LocaleCode,
-): string => {
-  const locale = LOCALES.find(l => l.code === localeCode);
+export const getLocaleLabelCountry = (localeCode: LocaleCode): string => {
+  const locale = LOCALES.find((l) => l.code === localeCode);
   if (!locale) return localeCode;
 
-  const language = LANGUAGES.find(l => l.code === locale.language);
+  const language = LANGUAGES.find((l) => l.code === locale.language);
 
   if (!language) return localeCode;
 
-  const nativeName = locale.language === LANGUAGE_CODE.ZH && locale.script
-    ? locale.script === SCRIPT_CODE.HANS ? '简体中文' : '繁體中文'
-    : language.nativeName;
+  const nativeName =
+    locale.language === LANGUAGE_CODE.ZH && locale.script
+      ? locale.script === SCRIPT_CODE.HANS
+        ? '简体中文'
+        : '繁體中文'
+      : language.nativeName;
   const regionSuffix = ` (${getLocaleDisplayRegion(locale.region)})`;
 
   return `${nativeName}${regionSuffix}`;
 };
 
-export const LOCALE = LOCALES.reduce((acc, locale) => {
-  const key = locale.code.replace(/-/g, '_').toUpperCase();
-  return Object.assign(acc, { [key]: locale.code });
-}, {} as Record<string, LocaleCode>) as {
-    [K in LocaleCode as K extends `${infer L}-${infer R}` ? `${Uppercase<L>}_${Uppercase<R>}` : never]: K
-  };
+export const LOCALE = LOCALES.reduce(
+  (acc, locale) => {
+    const key = locale.code.replace(/-/g, '_').toUpperCase();
+    return Object.assign(acc, { [key]: locale.code });
+  },
+  {} as Record<string, LocaleCode>,
+) as {
+  [K in LocaleCode as K extends `${infer L}-${infer R}`
+    ? `${Uppercase<L>}_${Uppercase<R>}`
+    : never]: K;
+};
 
 const LOCALE_FALLBACK_TARGETS = {
   [LANGUAGE_CODE.ZH]: {
-    'Hans': { [REGION_CODE.CN]: [REGION_CODE.SG, REGION_CODE.MY] },
-    'Hant': { [REGION_CODE.TW]: [REGION_CODE.HK, REGION_CODE.MO] },
+    Hans: { [REGION_CODE.CN]: [REGION_CODE.SG, REGION_CODE.MY] },
+    Hant: { [REGION_CODE.TW]: [REGION_CODE.HK, REGION_CODE.MO] },
   },
   [LANGUAGE_CODE.EN]: {
-    [REGION_CODE.GB]: [REGION_CODE.ZA, REGION_CODE.IE, REGION_CODE.SG, REGION_CODE.MY, REGION_CODE.HK],
-    [REGION_CODE.AU]: [REGION_CODE.NZ, REGION_CODE.FJ, REGION_CODE.PG, REGION_CODE.CK, REGION_CODE.TO, REGION_CODE.WS],
-    [REGION_CODE.US]: [REGION_CODE.PH, REGION_CODE.PR, REGION_CODE.VI, REGION_CODE.BZ, REGION_CODE.GU, REGION_CODE.MP, REGION_CODE.AS],
+    [REGION_CODE.GB]: [
+      REGION_CODE.ZA,
+      REGION_CODE.IE,
+      REGION_CODE.SG,
+      REGION_CODE.MY,
+      REGION_CODE.HK,
+    ],
+    [REGION_CODE.AU]: [
+      REGION_CODE.NZ,
+      REGION_CODE.FJ,
+      REGION_CODE.PG,
+      REGION_CODE.CK,
+      REGION_CODE.TO,
+      REGION_CODE.WS,
+    ],
+    [REGION_CODE.US]: [
+      REGION_CODE.PH,
+      REGION_CODE.PR,
+      REGION_CODE.VI,
+      REGION_CODE.BZ,
+      REGION_CODE.GU,
+      REGION_CODE.MP,
+      REGION_CODE.AS,
+    ],
     [REGION_CODE.ZA]: [REGION_CODE.LS, REGION_CODE.NA],
   },
   [LANGUAGE_CODE.ES]: {
-    [REGION_CODE.MX]: [REGION_CODE.PA, REGION_CODE.CU, REGION_CODE.DO, REGION_CODE.GT, REGION_CODE.HN, REGION_CODE.SV, REGION_CODE.NI, REGION_CODE.CR],
+    [REGION_CODE.MX]: [
+      REGION_CODE.PA,
+      REGION_CODE.CU,
+      REGION_CODE.DO,
+      REGION_CODE.GT,
+      REGION_CODE.HN,
+      REGION_CODE.SV,
+      REGION_CODE.NI,
+      REGION_CODE.CR,
+    ],
     [REGION_CODE.CO]: [REGION_CODE.VE, REGION_CODE.EC],
     [REGION_CODE.AR]: [REGION_CODE.CL, REGION_CODE.PY, REGION_CODE.UY],
     [REGION_CODE.PE]: [REGION_CODE.BO],
   },
   [LANGUAGE_CODE.PT]: {
-    [REGION_CODE.PT]: [REGION_CODE.CV, REGION_CODE.GW, REGION_CODE.ST, REGION_CODE.TL, REGION_CODE.AO, REGION_CODE.MZ],
+    [REGION_CODE.PT]: [
+      REGION_CODE.CV,
+      REGION_CODE.GW,
+      REGION_CODE.ST,
+      REGION_CODE.TL,
+      REGION_CODE.AO,
+      REGION_CODE.MZ,
+    ],
   },
   [LANGUAGE_CODE.FR]: {
-    [REGION_CODE.FR]: [REGION_CODE.LU, REGION_CODE.MC, REGION_CODE.MA, REGION_CODE.TN, REGION_CODE.DZ],
+    [REGION_CODE.FR]: [
+      REGION_CODE.LU,
+      REGION_CODE.MC,
+      REGION_CODE.MA,
+      REGION_CODE.TN,
+      REGION_CODE.DZ,
+    ],
   },
   [LANGUAGE_CODE.DE]: {
     [REGION_CODE.DE]: [REGION_CODE.LU],
     [REGION_CODE.CH]: [REGION_CODE.LI],
   },
   [LANGUAGE_CODE.AR]: {
-    [REGION_CODE.AE]: [REGION_CODE.QA, REGION_CODE.KW, REGION_CODE.BH, REGION_CODE.OM, REGION_CODE.YE, REGION_CODE.IQ],
-    [REGION_CODE.SA]: [REGION_CODE.JO, REGION_CODE.LB, REGION_CODE.PS, REGION_CODE.SY, REGION_CODE.SO],
+    [REGION_CODE.AE]: [
+      REGION_CODE.QA,
+      REGION_CODE.KW,
+      REGION_CODE.BH,
+      REGION_CODE.OM,
+      REGION_CODE.YE,
+      REGION_CODE.IQ,
+    ],
+    [REGION_CODE.SA]: [
+      REGION_CODE.JO,
+      REGION_CODE.LB,
+      REGION_CODE.PS,
+      REGION_CODE.SY,
+      REGION_CODE.SO,
+    ],
     [REGION_CODE.MA]: [REGION_CODE.DZ, REGION_CODE.LY, REGION_CODE.TD],
     [REGION_CODE.EG]: [REGION_CODE.SD],
   },
   [LANGUAGE_CODE.RU]: {
-    [REGION_CODE.RU]: [REGION_CODE.BY, REGION_CODE.KZ, REGION_CODE.KG, REGION_CODE.UA, REGION_CODE.UZ, REGION_CODE.TJ, REGION_CODE.TM, REGION_CODE.AM, REGION_CODE.AZ, REGION_CODE.GE, REGION_CODE.MD],
+    [REGION_CODE.RU]: [
+      REGION_CODE.BY,
+      REGION_CODE.KZ,
+      REGION_CODE.KG,
+      REGION_CODE.UA,
+      REGION_CODE.UZ,
+      REGION_CODE.TJ,
+      REGION_CODE.TM,
+      REGION_CODE.AM,
+      REGION_CODE.AZ,
+      REGION_CODE.GE,
+      REGION_CODE.MD,
+    ],
   },
 } as const;
 
 export const LOCALE_FALLBACKS: Record<string, LocaleCode> = Object.entries(
   LOCALE_FALLBACK_TARGETS,
-).reduce((acc, [lang, scriptTargets]) => {
-  // For Chinese: lang = 'zh', scriptTargets = { 'Hans': {...}, 'Hant': {...} }
-  if (typeof scriptTargets === 'object' && 'Hans' in scriptTargets) {
-    Object.entries(scriptTargets).forEach(([script, targets]) => {
-      Object.entries(targets).forEach(([region, sources]) => {
-        const targetLocale = `${lang}-${script}-${region}` as LocaleCode;
-        sources.forEach((source: RegionCode) => {
-          acc[`${lang}-${script}-${source}`] = targetLocale;
+).reduce(
+  (acc, [lang, scriptTargets]) => {
+    if (typeof scriptTargets === 'object' && 'Hans' in scriptTargets) {
+      Object.entries(scriptTargets).forEach(([script, targets]) => {
+        Object.entries(targets).forEach(([region, sources]) => {
+          const targetLocale = `${lang}-${script}-${region}` as LocaleCode;
+          sources.forEach((source: RegionCode) => {
+            acc[`${lang}-${script}-${source}`] = targetLocale;
+          });
         });
       });
-    });
-  } else {
-    // For other languages without script
-    Object.entries(scriptTargets).forEach(([region, sources]) => {
-      const targetLocale = `${lang}-${region}` as LocaleCode;
-      sources.forEach((source: RegionCode) => {
-        acc[`${lang}-${source}`] = targetLocale;
+    } else {
+      Object.entries(scriptTargets).forEach(([region, sources]) => {
+        const targetLocale = `${lang}-${region}` as LocaleCode;
+        sources.forEach((source: RegionCode) => {
+          acc[`${lang}-${source}`] = targetLocale;
+        });
       });
-    });
-  }
-  return acc;
-}, {} as Record<string, LocaleCode>);
+    }
+    return acc;
+  },
+  {} as Record<string, LocaleCode>,
+);
 
-export type LocaleCode = typeof LOCALES[number]['code'];
+export type LocaleCode = (typeof LOCALES)[number]['code'];
 export type LocaleConfig = (typeof LOCALES)[number];
-export type LanguageCode = typeof LANGUAGES[number]['code'];
+export type LanguageCode = (typeof LANGUAGES)[number]['code'];
 export type LanguageConfig = (typeof LANGUAGES)[number];
-export type ScriptCode = typeof SCRIPTS[number]['code'];
+export type ScriptCode = (typeof SCRIPTS)[number]['code'];
 export type ScriptConfig = (typeof SCRIPTS)[number];
-export type RegionCode = typeof REGIONS[number]['code'];
+export type RegionCode = (typeof REGIONS)[number]['code'];
 export type RegionConfig = (typeof REGIONS)[number];
-export type CurrencyCode = typeof CURRENCIES[number]['code'];
+export type CurrencyCode = (typeof CURRENCIES)[number]['code'];
 export type CurrencyConfig = (typeof CURRENCIES)[number];
-export type FlagCode = typeof FLAGS[number]['code'];
+export type FlagCode = (typeof FLAGS)[number]['code'];
 export type FlagConfig = (typeof FLAGS)[number];
-export type CalendarCode = typeof CALENDARS[number]['code'];
+export type CalendarCode = (typeof CALENDARS)[number]['code'];
 export type CalendarConfig = (typeof CALENDARS)[number];
-export type DirectionCode = typeof DIRECTIONS[number]['code'];
+export type DirectionCode = (typeof DIRECTIONS)[number]['code'];
 export type DirectionConfig = (typeof DIRECTIONS)[number];
-export type TimezoneCode = typeof TIMEZONES[number]['code'];
+export type TimezoneCode = (typeof TIMEZONES)[number]['code'];
 export type TimezoneConfig = (typeof TIMEZONES)[number];
-export type PluralRuleCode = typeof PLURAL_RULES[number]['code'];
+export type PluralRuleCode = (typeof PLURAL_RULES)[number]['code'];
 export type PluralRuleConfig = (typeof PLURAL_RULES)[number];
-export type NumberingSystemCode = typeof NUMBERING_SYSTEMS[number]['code'];
-export type WritingSystem = typeof NUMBERING_SYSTEMS[number]['group'];
+export type NumberingSystemCode = (typeof NUMBERING_SYSTEMS)[number]['code'];
+export type WritingSystemCode = (typeof WRITING_SYSTEMS)[number]['code'];
+export type WritingSystemConfig = (typeof WRITING_SYSTEMS)[number];
 
-// Numbering system to writing system map for runtime use
 export const NUMBERING_SYSTEM_TO_WRITING_SYSTEM: Partial<
-  Record<NumberingSystemCode, string>
+  Record<NumberingSystemCode, WritingSystemCode>
 > = Object.fromEntries(
-  NUMBERING_SYSTEMS.map((ns) => [ns.code, ns.group.toLowerCase()]),
-) as Partial<Record<NumberingSystemCode, string>>;
+  NUMBERING_SYSTEMS.map((ns) => [
+    ns.code,
+    ns.writingSystem as WritingSystemCode,
+  ]),
+) as Partial<Record<NumberingSystemCode, WritingSystemCode>>;
 
-/**
- * Generate numbering system to writing system map for client-side script
- * Returns an object with code->index mapping and writing systems array
- */
+export const getWritingSystem = (
+  code: WritingSystemCode,
+): WritingSystemConfig | undefined =>
+  WRITING_SYSTEMS.find((ws) => ws.code === code);
+
+export const getNumberingSystemsForWritingSystem = (
+  wsCode: WritingSystemCode,
+): NumberingSystemCode[] =>
+  WRITING_SYSTEMS.find((ws) => ws.code === wsCode)?.numberingSystems || [];
+
+export const languageUsesWritingSystem = (
+  langCode: LanguageCode,
+  wsCode: WritingSystemCode,
+): boolean =>
+  WRITING_SYSTEMS.find((ws) => ws.code === wsCode)?.languages.includes(
+    langCode,
+  ) || false;
+
 export const getNumberingSystemScriptData = () => {
   const numberingSystemOrder = NUMBERING_SYSTEMS.map((ns) => ns.code);
-  return { numberingSystemOrder, writingSystems: WRITING_SYSTEMS };
+  const writingSystems = WRITING_SYSTEM_CODES;
+  return { numberingSystemOrder, writingSystems };
 };
 
 export const DEFAULT_LOCALE: LocaleCode = LOCALE.ID_ID;

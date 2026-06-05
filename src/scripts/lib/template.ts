@@ -112,7 +112,10 @@ const generateClientI18nScript = (
   return `<script>
 (() => {
   const defaultLocale = ${JSON.stringify(lang)};
-  const savedLocale = localStorage.getItem('${LOCALE_STORAGE_KEY}') ?? defaultLocale;
+
+  const pathLocale = window.location.pathname.match(/^\\/([a-z]{2}(-[A-Z]{2})?)\\//)?.[1];
+
+  const savedLocale = localStorage.getItem('${LOCALE_STORAGE_KEY}') ?? pathLocale ?? defaultLocale;
   const locales = ${JSON.stringify(LOCALES)};
 
   window.__PAGE_ID__ = ${JSON.stringify(name)};
@@ -475,7 +478,7 @@ const createI18nObject = (
     },
 
     localPrice: (
-      plan: { pricing: { base: number;[locale: string]: number } },
+      plan: { pricing: { base: number; [locale: string]: number } },
       options?: TemplateFormatOptions,
     ) => {
       const formatted = String(localPrice(plan));
@@ -484,7 +487,7 @@ const createI18nObject = (
     },
 
     localPriceCurrency: (
-      plan: { pricing: { base: number;[locale: string]: number } },
+      plan: { pricing: { base: number; [locale: string]: number } },
       options?: TemplateFormatOptions,
     ) => {
       const formatted = localPriceCurrency(plan);
@@ -493,7 +496,7 @@ const createI18nObject = (
     },
 
     convertLocalPrice: (
-      plan: { pricing: { base: number;[locale: string]: number } },
+      plan: { pricing: { base: number; [locale: string]: number } },
       targetCurrency: CurrencyCode,
       options?: TemplateFormatOptions,
     ) => {
@@ -514,7 +517,7 @@ const createI18nObject = (
     },
 
     formatLocalPrice: (
-      plan: { pricing: { base: number;[locale: string]: number } },
+      plan: { pricing: { base: number; [locale: string]: number } },
       options?: TemplateFormatOptions,
     ) => {
       const formatted = formatLocalPrice(plan, options);
@@ -531,7 +534,7 @@ const createI18nObject = (
     },
 
     formatLocalPriceDiscounted: (
-      plan: { pricing: { base: number;[locale: string]: number } },
+      plan: { pricing: { base: number; [locale: string]: number } },
       discountMultiplier: number,
       targetCurrency: CurrencyCode,
       options?: TemplateFormatOptions,

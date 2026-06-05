@@ -1,4 +1,5 @@
 import {
+  DIRECTION_CODE,
   getLocaleLabelCountry,
   LOCALE,
   LOCALE_CODES,
@@ -35,7 +36,7 @@ export function registerI18nStore(): void {
               htmlEl.setAttribute('lang', code);
               htmlEl.setAttribute('dir', locale.dir);
               htmlEl.setAttribute('data-script', locale.writingSystem);
-              htmlEl.classList.toggle('is-rtl', locale.dir === 'rtl');
+              htmlEl.classList.toggle('is-rtl', locale.dir === DIRECTION_CODE.RTL);
             }
 
             m.translatePage();

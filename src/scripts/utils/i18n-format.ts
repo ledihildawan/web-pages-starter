@@ -9,9 +9,8 @@ import {
   LANGUAGE_CODE,
   LOCALES,
   NUMBERING_SYSTEM_CODE,
-  NUMBERING_SYSTEM_CODES,
+  NUMBERING_SYSTEMS,
   WRITING_SYSTEM,
-  WRITING_SYSTEMS,
 } from '../../configs/locales';
 import type {
   CardinalOptions,
@@ -27,41 +26,43 @@ import type {
 import { toDateObj } from './common';
 import {
   getCurrency,
-  getLanguageSubtag,
   getLanguageConfig,
+  getLanguageSubtag,
   getLocale,
 } from './locale';
 
-// Create digit converter factory
-const createDigitConverter = (digitsArray: readonly string[]) => (num: number | string) =>
-  String(num).replace(/\d/g, (d) => digitsArray[Number(d)]);
+const createDigitConverter =
+  (digitsArray: readonly string[]) => (num: number | string) =>
+    String(num).replace(/\d/g, (d) => digitsArray[Number(d)]);
 
-// Generate NATIVE_DIGITS_MAP dynamically from LOCALES and NUMBERING_SYSTEM_DIGITS
-const NATIVE_DIGITS_MAP = LOCALES.reduce((acc, locale) => {
-  const lang = locale.language;
-  const ns = locale.nativeNumberingSystem;
+const NATIVE_DIGITS_MAP = LOCALES.reduce(
+  (acc, locale) => {
+    const lang = locale.language;
+    const ns = locale.nativeNumberingSystem;
 
-  // Skip if already mapped
-  if (acc[lang]) return acc;
+    if (acc[lang]) return acc;
 
-  // Get digit array for this numbering system
-  const digits = NUMBERING_SYSTEM_CODES[ns];
-  if (digits) {
-    acc[lang] = createDigitConverter(digits);
-  }
+    const nsConfig = NUMBERING_SYSTEMS.find((config) => config.code === ns);
+    if (nsConfig?.digits) {
+      acc[lang] = createDigitConverter(nsConfig.digits);
+    }
 
-  return acc;
-}, {} as Record<string, (num: number | string) => string>);
+    return acc;
+  },
+  {} as Record<string, (num: number | string) => string>,
+);
 
 const getNumberingSystem = (options: FormatOptions = {}) =>
   options.nativeDigits
-    ? getLanguageConfig(getLocale())?.nativeNumberingSystem || NUMBERING_SYSTEM_CODE.LATN
+    ? getLanguageConfig(getLocale())?.nativeNumberingSystem ||
+      NUMBERING_SYSTEM_CODE.LATN
     : options.numberingSystem ||
-    getLanguageConfig(getLocale())?.numberingSystem ||
-    NUMBERING_SYSTEM_CODE.LATN;
+      getLanguageConfig(getLocale())?.numberingSystem ||
+      NUMBERING_SYSTEM_CODE.LATN;
 
 export const getNativeNumberingSystem = () =>
-  getLanguageConfig(getLocale())?.nativeNumberingSystem || NUMBERING_SYSTEM_CODE.LATN;
+  getLanguageConfig(getLocale())?.nativeNumberingSystem ||
+  NUMBERING_SYSTEM_CODE.LATN;
 
 export const toNativeDigits = (text: string, force?: boolean) => {
   if (force === false) return text;
@@ -74,14 +75,15 @@ export const toNativeDigits = (text: string, force?: boolean) => {
 
   try {
     const formatter = new Intl.NumberFormat(getLocale(), {
-      numberingSystem: localeConfig?.nativeNumberingSystem || NUMBERING_SYSTEM_CODE.LATN,
+      numberingSystem:
+        localeConfig?.nativeNumberingSystem || NUMBERING_SYSTEM_CODE.LATN,
     });
     const testNum = 0;
     const formatted = formatter.format(testNum);
     if (formatted !== '0') {
       return text.replace(/\d/g, (d) => formatter.format(Number(d)));
     }
-  } catch { }
+  } catch {}
 
   const languageSubtag = getLanguageSubtag(getLocale());
   const converter = NATIVE_DIGITS_MAP[languageSubtag];
@@ -175,17 +177,17 @@ const indonesianCardinal = buildCardinal('nol', (s) => `minus ${s}`, [
       r
         ? `${['', '', 'dua puluh', 'tiga puluh', 'empat puluh', 'lima puluh', 'enam puluh', 'tujuh puluh', 'delapan puluh', 'sembilan puluh'][q]} ${rec(r)}`
         : [
-          '',
-          '',
-          'dua puluh',
-          'tiga puluh',
-          'empat puluh',
-          'lima puluh',
-          'enam puluh',
-          'tujuh puluh',
-          'delapan puluh',
-          'sembilan puluh',
-        ][q],
+            '',
+            '',
+            'dua puluh',
+            'tiga puluh',
+            'empat puluh',
+            'lima puluh',
+            'enam puluh',
+            'tujuh puluh',
+            'delapan puluh',
+            'sembilan puluh',
+          ][q],
   },
   {
     limit: 1_000,
@@ -377,6 +379,7 @@ const arabicCardinal = buildCardinal('صِفْر', (s) => `سالب ${s}`, [
 const CARDINAL_STRATEGY: Record<string, (num: number) => string> = {
   id: indonesianCardinal,
   ja: japaneseCardinal,
+  zh: chineseCardinal,
   ar: arabicCardinal,
 };
 
@@ -393,18 +396,18 @@ const ORDINAL_STRATEGY: Record<string, (num: number) => string> = {
   id: (num) =>
     num < 11
       ? [
-        'ke-',
-        'kesatu',
-        'kedua',
-        'ketiga',
-        'keempat',
-        'kelima',
-        'keenam',
-        'ketujuh',
-        'kedelapan',
-        'kesembilan',
-        'kesepuluh',
-      ][num]
+          'ke-',
+          'kesatu',
+          'kedua',
+          'ketiga',
+          'keempat',
+          'kelima',
+          'keenam',
+          'ketujuh',
+          'kedelapan',
+          'kesembilan',
+          'kesepuluh',
+        ][num]
       : `ke-${num}`,
   ja: (num) => `第${num < 1 ? num : japaneseCardinal(num)}`,
   ar: (num) => {
@@ -498,7 +501,6 @@ export const formatOrdinal = (
   }
 };
 
-
 const processNumeric = (
   value: number | string,
   options: FormatOptions,
@@ -506,7 +508,7 @@ const processNumeric = (
   config: {
     invalid: (val: string | number) => string;
     intlFallback: (num: number) => string;
-    cjk?: (num: number, _languageSubtag?: string) => string;
+    cjk?: (num: number, languageSubtag: string) => string;
     arabicFallback: (num: number) => string;
     devanagariFallback: (num: number) => string;
     cyrillicFallback: (num: number) => string;
@@ -519,21 +521,27 @@ const processNumeric = (
   const languageSubtag = getLanguageSubtag(getLocale());
 
   if (options.nativeDigits) {
-    if (config.cjk && WRITING_SYSTEM.CJK.includes(languageSubtag)) return config.cjk(num, languageSubtag);
+    const cjkLanguages = WRITING_SYSTEM.CJK_LANGUAGES as readonly string[];
+    if (config.cjk && cjkLanguages.includes(languageSubtag))
+      return config.cjk(num, languageSubtag);
 
-    const digitRules = [
+    const digitRules: {
+      languages: readonly string[];
+      converter: (num: number | string) => string;
+      fallback: (num: number) => string;
+    }[] = [
       {
-        languages: WRITING_SYSTEM.ARABIC,
+        languages: WRITING_SYSTEM.ARABIC_LANGUAGES as readonly string[],
         converter: NATIVE_DIGITS_MAP[LANGUAGE_CODE.AR],
         fallback: config.arabicFallback,
       },
       {
-        languages: WRITING_SYSTEM.DEVANAGARI,
+        languages: WRITING_SYSTEM.DEVANAGARI_LANGUAGES as readonly string[],
         converter: NATIVE_DIGITS_MAP[LANGUAGE_CODE.HI],
         fallback: config.devanagariFallback,
       },
       {
-        languages: WRITING_SYSTEM.CYRILLIC,
+        languages: WRITING_SYSTEM.CYRILLIC_LANGUAGES as readonly string[],
         converter: NATIVE_DIGITS_MAP[LANGUAGE_CODE.RU],
         fallback: config.cyrillicFallback,
       },
@@ -599,9 +607,12 @@ export const formatCurrency = (
       intlFallback: (num) => `${currency} ${num}`,
       cjk: (num, _languageSubtag) =>
         `${currency || getLanguageConfig(getLocale())?.currency || ''}${formatCardinal(num)}`,
-      arabicFallback: (num) => `${currency} ${NATIVE_DIGITS_MAP[LANGUAGE_CODE.AR](num)}`,
-      devanagariFallback: (num) => `${currency} ${NATIVE_DIGITS_MAP[LANGUAGE_CODE.HI](num)}`,
-      cyrillicFallback: (num) => `${currency} ${NATIVE_DIGITS_MAP[LANGUAGE_CODE.RU](num)}`,
+      arabicFallback: (num) =>
+        `${currency} ${NATIVE_DIGITS_MAP[LANGUAGE_CODE.AR](num)}`,
+      devanagariFallback: (num) =>
+        `${currency} ${NATIVE_DIGITS_MAP[LANGUAGE_CODE.HI](num)}`,
+      cyrillicFallback: (num) =>
+        `${currency} ${NATIVE_DIGITS_MAP[LANGUAGE_CODE.RU](num)}`,
     },
   );
 };
@@ -617,8 +628,10 @@ export const formatPercent = (
     {
       invalid: (v) => `${v}%`,
       intlFallback: (num) => `${num * 100}%`,
-      cjk: (num, _languageSubtag) => `${formatCardinal(Math.round(num * 100))}%`,
-      arabicFallback: (num) => `${NATIVE_DIGITS_MAP[LANGUAGE_CODE.AR](Math.round(num * 100))}%`,
+      cjk: (num, _languageSubtag) =>
+        `${formatCardinal(Math.round(num * 100))}%`,
+      arabicFallback: (num) =>
+        `${NATIVE_DIGITS_MAP[LANGUAGE_CODE.AR](Math.round(num * 100))}%`,
       devanagariFallback: (num) =>
         `${NATIVE_DIGITS_MAP[LANGUAGE_CODE.HI](Math.round(num * 100))}%`,
       cyrillicFallback: (num) =>
@@ -640,9 +653,12 @@ export const formatUnit = (
       invalid: (v) => `${v} ${unit}`,
       intlFallback: (num) => `${num} ${unit}`,
       cjk: (num, _languageSubtag) => `${formatCardinal(num)}${unit}`,
-      arabicFallback: (num) => `${NATIVE_DIGITS_MAP[LANGUAGE_CODE.AR](num)} ${unit}`,
-      devanagariFallback: (num) => `${NATIVE_DIGITS_MAP[LANGUAGE_CODE.HI](num)} ${unit}`,
-      cyrillicFallback: (num) => `${NATIVE_DIGITS_MAP[LANGUAGE_CODE.RU](num)} ${unit}`,
+      arabicFallback: (num) =>
+        `${NATIVE_DIGITS_MAP[LANGUAGE_CODE.AR](num)} ${unit}`,
+      devanagariFallback: (num) =>
+        `${NATIVE_DIGITS_MAP[LANGUAGE_CODE.HI](num)} ${unit}`,
+      cyrillicFallback: (num) =>
+        `${NATIVE_DIGITS_MAP[LANGUAGE_CODE.RU](num)} ${unit}`,
     },
   );
 };
@@ -754,10 +770,8 @@ export const formatDate = (
   options?: Intl.DateTimeFormatOptions,
 ) => formatIntlDate(date, options);
 
-export const formatTime = (
-  date: DateValue,
-  options?: TimeFormatOptions,
-) => formatIntlDate(date, { timeStyle: options?.timeStyle ?? 'short' });
+export const formatTime = (date: DateValue, options?: TimeFormatOptions) =>
+  formatIntlDate(date, { timeStyle: options?.timeStyle ?? 'short' });
 
 export const formatDateTime = (
   date: DateValue,
@@ -769,10 +783,7 @@ export const formatDateTime = (
     ...options,
   });
 
-export const formatDuration = (
-  seconds: number,
-  options?: DurationOptions,
-) => {
+export const formatDuration = (seconds: number, options?: DurationOptions) => {
   try {
     const rtf = new Intl.RelativeTimeFormat(getLocale(), {
       numeric: options?.numeric ?? 'auto',
@@ -798,10 +809,7 @@ export const formatDuration = (
   }
 };
 
-export const formatList = (
-  items: string[],
-  options?: ListFormatOptions,
-) => {
+export const formatList = (items: string[], options?: ListFormatOptions) => {
   try {
     return new Intl.ListFormat(getLocale(), {
       style: options?.style ?? 'long',
@@ -861,7 +869,7 @@ export const convertCurrency = (
 };
 
 export const convertLocalPrice = (
-  plan: { pricing: { base: number;[locale: string]: number } },
+  plan: { pricing: { base: number; [locale: string]: number } },
   targetCurrency?: CurrencyCode,
   options?: FormatOptions,
 ) => {
@@ -888,7 +896,7 @@ export const convertLocalPrice = (
 
 export const formatLocalPrice = (
   plan: {
-    pricing: { base: number;[locale: string]: number };
+    pricing: { base: number; [locale: string]: number };
   },
   options?: FormatOptions,
 ) => {
@@ -899,7 +907,7 @@ export const formatLocalPrice = (
 };
 
 export const formatLocalPriceDiscounted = (
-  plan: { pricing: { base: number;[locale: string]: number } },
+  plan: { pricing: { base: number; [locale: string]: number } },
   discountMultiplier: number,
   targetCurrency?: CurrencyCode,
   options?: FormatOptions,
@@ -925,11 +933,7 @@ export const formatLocalPriceDiscounted = (
   return formatCurrency(converted, toCurrency, options);
 };
 
-export const plural = (
-  word: string,
-  count?: number,
-  inclusive = false,
-) => {
+export const plural = (word: string, count?: number, inclusive = false) => {
   if (inclusive && count !== undefined) return pluralize(word, count);
   return count === undefined ? pluralize(word) : pluralize(word, count);
 };

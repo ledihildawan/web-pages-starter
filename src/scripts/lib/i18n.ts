@@ -47,9 +47,7 @@ const getFallbackForLocale = (locale: string): string[] => {
 
   const parts = locale.split('-');
   const languageSubtag =
-    parts.length > 1 && parts[1]?.length === 4
-      ? parts[0]
-      : parts[0];
+    parts.length > 1 && parts[1]?.length === 4 ? parts[0] : parts[0];
 
   const matched = LOCALE_CODES.find((c) => c.startsWith(`${languageSubtag}-`));
   if (matched) return [matched, 'en-US'];
@@ -57,7 +55,9 @@ const getFallbackForLocale = (locale: string): string[] => {
   return ['en-US'];
 };
 
-const getVars = (el: HTMLElement): Record<string, string | number | boolean> => {
+const getVars = (
+  el: HTMLElement,
+): Record<string, string | number | boolean> => {
   const vars = el.getAttribute('data-i18n-vars');
   if (!vars) return {};
   try {
@@ -134,14 +134,16 @@ const FORMATTERS = [
     attr: 'data-format-time',
     format: (v: string, el: HTMLElement) =>
       formatTime(v as DateTimePreset, {
-        timeStyle: (el.getAttribute('data-time-preset') ?? 'short') as DateTimePreset,
+        timeStyle: (el.getAttribute('data-time-preset') ??
+          'short') as DateTimePreset,
       }),
   },
   {
     attr: 'data-format-date-preset',
     format: (v: string, el: HTMLElement) =>
       formatDate(v as DateTimePreset, {
-        dateStyle: (el.getAttribute('data-date-preset') ?? 'medium') as DateTimePreset,
+        dateStyle: (el.getAttribute('data-date-preset') ??
+          'medium') as DateTimePreset,
       }),
   },
   {
@@ -203,7 +205,8 @@ const FORMATTERS = [
         return formatCurrency(price, targetCurrency);
       }
 
-      const rate = EXCHANGE_RATES[targetCurrency as keyof typeof EXCHANGE_RATES] ?? 1;
+      const rate =
+        EXCHANGE_RATES[targetCurrency as keyof typeof EXCHANGE_RATES] ?? 1;
       const converted = price * rate;
       return formatCurrency(converted, targetCurrency);
     },
@@ -230,7 +233,8 @@ const FORMATTERS = [
   {
     attr: 'data-relative-time',
     format: (v: string, el: HTMLElement) => {
-      const unit = el.getAttribute('data-unit') ?? 'second';
+      const unit = (el.getAttribute('data-unit') ??
+        'second') as Intl.RelativeTimeFormatUnit;
       const numeric = el.getAttribute('data-numeric') ?? 'auto';
       const value = parseFloat(v);
       return formatRelativeTime(value, {
@@ -294,7 +298,9 @@ export async function initIntl(): Promise<void> {
       parseMissingKeyHandler: (key) => {
         if (isDev && !missingKeys.has(key)) {
           missingKeys.add(key);
-          console.warn(`[i18n] Missing key "${key}" in locale "${i18next.language}"`);
+          console.warn(
+            `[i18n] Missing key "${key}" in locale "${i18next.language}"`,
+          );
         }
         return `[${key}]`;
       },
@@ -314,7 +320,9 @@ export const updateI18nStoreLabels = (): void => {
     return;
   }
 
-  const store = globalThis.Alpine.store('i18n');
+  const store = globalThis.Alpine.store('i18n') as {
+    languages: Array<{ code: string; label: string; flag: string }>;
+  };
   if (!store) {
     return;
   }

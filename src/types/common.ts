@@ -60,9 +60,6 @@ export interface RegionalPrice {
   };
 }
 
-/**
- * Page meta configuration (from pages/*/index.json5)
- */
 export interface PageMetaConfig {
   title?: string;
   description?: string;
@@ -74,18 +71,12 @@ export interface PageMetaConfig {
   og_type?: string;
 }
 
-/**
- * Page data structure from index.json5
- */
 export interface PageData {
   page_id: string;
   meta?: PageMetaConfig;
   [key: string]: JsonValue;
 }
 
-/**
- * Global SEO configuration (from data/global.json5)
- */
 export interface GlobalSeoConfig {
   theme_color?: string;
   og_type?: string;
@@ -95,9 +86,6 @@ export interface GlobalSeoConfig {
   apple_touch_icon_path?: string;
 }
 
-/**
- * Global data structure
- */
 export interface GlobalData {
   site_name?: string;
   site_description?: string;
