@@ -26,7 +26,7 @@
 
 .splide__spinner {
   border: 2px solid rgba(255, 255, 255, 0.2);
-  border-inline-start-color: #fff; /* Warna putaran */
+  border-inline-start-color: #fff;
   inline-size: 40px;
   block-size: 40px;
 }

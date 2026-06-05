@@ -3,15 +3,12 @@
 {% import "section-header.njk" as section with context %}
 
 {% block content %}
-  {# Enhanced Hero Section #}
   {{ hero.hero_section('hero', badge=true, i18n=i18n) }}
 
-  {# Enhanced Main Features Section #}
   <section class="pbs-40 pbe-40 px-6 space-y-32 lg:space-y-40">
     {% for feature in page.main_features %}
       <div class="max-inline-7xl mx-auto grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
         <div class="{{ 'order-2' if feature.reverse else 'order-2 md:order-1' }} space-y-8">
-          {# Enhanced Icon with Concentric Radius #}
           <div class="inline-flex items-center justify-center inline-16 lg:inline-20 block-16 lg:block-20 radius-card-md bg-gradient-to-br from-{{ feature.accent }}-500/20 to-{{ feature.accent }}-500/5 flex items-center justify-center text-{{ feature.accent }}-400 border border-{{ feature.accent }}-500/30 group-hover:scale-110 transition-all duration-200 shadow-lg group-hover:shadow-[0_0_50px_rgba(139,92,246,0.3)]">
             {% if feature.icon == 'lightning' %}
               {{ icon.icon('lightning', 'inline-8 block-8 lg:inline-10 lg:block-10', size='xl') }}
@@ -20,7 +17,6 @@
             {% endif %}
           </div>
 
-          {# Content #}
           <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.1]">
             {{ i18n.t('page.' + feature.t_key + '.title') }}
           </h2>
@@ -29,7 +25,6 @@
             {{ i18n.t('page.' + feature.t_key + '.description') }}
           </p>
 
-          {# Enhanced Checklist #}
           <ul class="grid grid-cols-1 gap-5 pbs-4">
             {% for i in range(0, feature.checklist_count) %}
               <li class="flex items-center gap-5 text-slate-300 group cursor-default">
@@ -42,7 +37,6 @@
           </ul>
         </div>
 
-        {# Enhanced Visual/Preview with Tilt Effect #}
         <div class="{{ 'order-1' if feature.reverse else 'order-1 md:order-2' }} relative group tilt-card" style="--tilt-x: 0deg; --tilt-y: 0deg;">
           <div class="absolute -inset-4 bg-gradient-to-r from-{{ feature.accent }}-500/40 via-fuchsia-500/20 to-pink-500/40 radius-card-lg blur-2xl opacity-40 group-hover:opacity-70 transition-opacity duration-1000 ease-emphasized"></div>
 
@@ -123,7 +117,6 @@
     {% endfor %}
   </section>
 
-  {# Enhanced Additional Features Section #}
   <section class="pbs-40 pbe-40 px-6 relative bg-gradient-to-b from-white/[0.02] to-transparent border-bs border-be border-white/5">
     <div class="max-inline-7xl mx-auto">
       {{ section.section_header(

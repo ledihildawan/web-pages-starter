@@ -1,34 +1,28 @@
 {% extends "main.njk" %}
 
 {% block content %}
-  {# Hero Section #}
   <section class="relative pt-24 pb-16 lg:pt-32 lg:pb-20 px-6 text-center overflow-hidden">
-    {# Background Effects #}
     <div class="absolute inset-0 -z-10">
       <div class="absolute top-0 left-1/2 -translate-x-1/2 w-200 h-100 bg-violet-500/10 rounded-full blur-[120px]"></div>
       <div class="absolute inset-0 bg-linear-to-b from-transparent via-slate-950/50 to-slate-950"></div>
     </div>
 
     <div class="max-w-4xl mx-auto relative">
-      {# Badge #}
       <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-xs font-bold uppercase tracking-wider mb-8">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
         {{ i18n.t('page.' + page.hero.t_key + '.badge')}}
       </div>
 
-      {# Title #}
       <h1 class="text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 leading-[1.1]">
         <span class="bg-linear-to-br from-white via-white to-slate-400 bg-clip-text text-transparent">
           {{ i18n.html('page.' + page.hero.t_key + '.title')}}
         </span>
       </h1>
 
-      {# Description #}
       <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-12 leading-relaxed">
         {{ i18n.t('page.' + page.hero.t_key + '.description')}}
       </p>
 
-      {# Quick Stats #}
       <div class="flex items-center justify-center gap-6 md:gap-10 text-sm">
         <div class="flex items-center gap-3">
           <span class="text-2xl">🌍</span>
@@ -57,7 +51,6 @@
     </div>
   </section>
 
-  {# Language Info Bar #}
   <section class="py-8 px-6 border-y border-white/5 bg-slate-900/30">
     <div class="max-w-5xl mx-auto">
       <div class="flex items-center justify-center gap-4 md:gap-8 flex-wrap">
@@ -83,18 +76,14 @@
     </div>
   </section>
 
-  {# Core Features Section #}
   <section class="py-24 px-6">
     <div class="max-w-6xl mx-auto">
-      {# Section Header #}
       <div class="text-center mb-16">
         <h2 class="text-3xl md:text-4xl font-black text-white mb-4">Core Features</h2>
         <p class="text-slate-400 text-lg">Translation, Pluralization & HTML Content</p>
       </div>
 
-      {# Features Grid #}
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {# Number Formatting #}
         <div class="group p-6 rounded-3xl bg-linear-to-br from-violet-500/8 to-transparent border border-violet-500/10 hover:border-violet-500/30 hover:shadow-xl hover:shadow-violet-500/10 transition-all duration-300">
           <div class="flex items-center gap-4 mb-6">
             <div class="w-14 h-14 rounded-2xl bg-violet-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🔢</div>
@@ -112,7 +101,6 @@
           </div>
         </div>
 
-        {# Pluralization #}
         <div class="group p-6 rounded-3xl bg-linear-to-br from-fuchsia-500/8 to-transparent border border-fuchsia-500/10 hover:border-fuchsia-500/30 hover:shadow-xl hover:shadow-fuchsia-500/10 transition-all duration-300">
           <div class="flex items-center gap-4 mb-6">
             <div class="w-14 h-14 rounded-2xl bg-fuchsia-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">a</div>
@@ -128,7 +116,6 @@
           </div>
         </div>
 
-        {# HTML Content #}
         <div class="group p-6 rounded-3xl bg-linear-to-br from-emerald-500/8 to-transparent border border-emerald-500/10 hover:border-emerald-500/30 hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300">
           <div class="flex items-center gap-4 mb-6">
             <div class="w-14 h-14 rounded-2xl bg-emerald-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">&lt;/&gt;</div>
@@ -139,7 +126,6 @@
           </div>
         </div>
 
-        {# Form #}
         <div class="group p-6 rounded-3xl bg-linear-to-br from-amber-500/8 to-transparent border border-amber-500/10 hover:border-amber-500/30 hover:shadow-xl hover:shadow-amber-500/10 transition-all duration-300 lg:col-span-2">
           <div class="flex items-center gap-4 mb-6">
             <div class="w-14 h-14 rounded-2xl bg-amber-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">📝</div>
@@ -157,7 +143,6 @@
           </form>
         </div>
 
-        {# Missing Keys #}
         <div class="group p-6 rounded-3xl bg-linear-to-br from-red-500/8 to-transparent border border-red-500/10 hover:border-red-500/30 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300">
           <div class="flex items-center gap-4 mb-6">
             <div class="w-14 h-14 rounded-2xl bg-red-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">⚠️</div>
@@ -177,17 +162,14 @@
     </div>
   </section>
 
-  {# Currency Section #}
   <section class="py-24 px-6 bg-linear-to-b from-slate-900/30 to-transparent">
     <div class="max-w-6xl mx-auto">
-      {# Section Header #}
       <div class="text-center mb-16">
         <h2 class="text-3xl md:text-4xl font-black text-white mb-4">{{ i18n.t('page.currency.title')}}</h2>
         <p class="text-slate-400 text-lg">{{ i18n.t('page.currency.description')}}</p>
       </div>
 
       <div class="max-w-3xl mx-auto">
-        {# Currency Comparison #}
         <div class="p-8 rounded-3xl bg-slate-900/40 border border-white/5 hover:border-white/10 transition-all">
           <div class="flex items-center gap-3 mb-8">
             <div class="w-12 h-12 rounded-xl bg-violet-500/20 flex items-center justify-center">
@@ -215,18 +197,14 @@
     </div>
   </section>
 
-  {# Advanced Formatting Section #}
   <section class="py-24 px-6">
     <div class="max-w-6xl mx-auto">
-      {# Section Header #}
       <div class="text-center mb-16">
         <h2 class="text-3xl md:text-4xl font-black text-white mb-4">{{ i18n.t('page.advanced.title')}}</h2>
         <p class="text-slate-400 text-lg">{{ i18n.t('page.advanced.description')}}</p>
       </div>
 
-      {# Advanced Grid #}
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {# Percentages #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-emerald-500/20 hover:shadow-lg hover:shadow-emerald-500/5 transition-all">
           <div class="flex items-center gap-2 mb-4">
             <span class="text-lg">%</span>
@@ -244,7 +222,6 @@
           </div>
         </div>
 
-        {# Bytes #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-violet-500/20 hover:shadow-lg hover:shadow-violet-500/5 transition-all">
           <div class="flex items-center gap-2 mb-4">
             <span class="text-lg">💾</span>
@@ -262,7 +239,6 @@
           </div>
         </div>
 
-        {# Ordinals #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-rose-500/20 hover:shadow-lg hover:shadow-rose-500/5 transition-all">
           <div class="flex items-center gap-2 mb-4">
             <span class="text-lg">🥇</span>
@@ -280,7 +256,6 @@
           </div>
         </div>
 
-        {# Cardinals #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-orange-500/20 hover:shadow-lg hover:shadow-orange-500/5 transition-all">
           <div class="flex items-center gap-2 mb-4">
             <span class="text-lg">🔢</span>
@@ -298,7 +273,6 @@
           </div>
         </div>
 
-        {# Scientific #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-cyan-500/20 hover:shadow-lg hover:shadow-cyan-500/5 transition-all">
           <div class="flex items-center gap-2 mb-4">
             <span class="text-lg">🔬</span>
@@ -316,7 +290,6 @@
           </div>
         </div>
 
-        {# Abbreviated #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-lime-500/20 hover:shadow-lg hover:shadow-lime-500/5 transition-all">
           <div class="flex items-center gap-2 mb-4">
             <span class="text-lg">📊</span>
@@ -334,7 +307,6 @@
           </div>
         </div>
 
-        {# Date Formats #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-indigo-500/20 hover:shadow-lg hover:shadow-indigo-500/5 transition-all">
           <div class="flex items-center gap-2 mb-4">
             <span class="text-lg">📅</span>
@@ -350,7 +322,6 @@
           </div>
         </div>
 
-        {# Time Formats #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-purple-500/20 hover:shadow-lg hover:shadow-purple-500/5 transition-all">
           <div class="flex items-center gap-2 mb-4">
             <span class="text-lg">🕐</span>
@@ -366,7 +337,6 @@
           </div>
         </div>
 
-        {# Durations #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-teal-500/20 hover:shadow-lg hover:shadow-teal-500/5 transition-all">
           <div class="flex items-center gap-2 mb-4">
             <span class="text-lg">⏱️</span>
@@ -384,7 +354,6 @@
           </div>
         </div>
 
-        {# Relative Time #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-pink-500/20 hover:shadow-lg hover:shadow-pink-500/5 transition-all">
           <div class="flex items-center gap-2 mb-4">
             <span class="text-lg">⏰</span>
@@ -400,7 +369,6 @@
           </div>
         </div>
 
-        {# Lists #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-amber-500/20 hover:shadow-lg hover:shadow-amber-500/5 transition-all">
           <div class="flex items-center gap-2 mb-4">
             <span class="text-lg">📝</span>
@@ -415,7 +383,6 @@
           </div>
         </div>
 
-        {# Regional Pricing #}
         <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-emerald-500/20 hover:shadow-lg hover:shadow-emerald-500/5 transition-all">
           <div class="flex items-center gap-2 mb-4">
             <span class="text-lg">💵</span>
@@ -434,24 +401,20 @@
     </div>
   </section>
 
-  {# Number Modes Section #}
   <section class="py-24 px-6 bg-linear-to-b from-slate-900/30 to-transparent">
     <div class="max-w-4xl mx-auto">
-      {# Section Header #}
       <div class="text-center mb-16">
         <h2 class="text-3xl md:text-4xl font-black text-white mb-4">{{ i18n.t('page.advanced.number_modes')}}</h2>
         <p class="text-slate-400 text-lg">{{ i18n.t('page.advanced.number_modes_desc')}}</p>
       </div>
 
       <div class="p-10 rounded-3xl bg-slate-900/40 border border-white/5">
-        {# Example Number #}
         <div class="text-center mb-12">
           <div class="text-6xl md:text-7xl font-black text-white tabular-nums mb-4">{{ i18n.formatNumber(page.display.number_modes_example)}}</div>
           <div class="text-sm text-slate-400">Example:
             {{ page.display.number_modes_example }}</div>
         </div>
 
-        {# Mode Comparison #}
         <div class="grid md:grid-cols-3 gap-4">
           <div class="p-6 rounded-2xl bg-slate-800/30 text-center">
             <div class="text-xs text-slate-400 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.plain_label')}}</div>
@@ -470,16 +433,13 @@
     </div>
   </section>
 
-  {# Language Switcher #}
   <section class="py-24 px-6">
     <div class="max-w-4xl mx-auto">
-      {# Section Header #}
       <div class="text-center mb-16">
         <h2 class="text-3xl md:text-4xl font-black text-white mb-4">{{ i18n.t('page.switcher.title')}}</h2>
         <p class="text-slate-400 text-lg">{{ i18n.t('page.switcher.description')}}</p>
       </div>
 
-      {# Language Buttons #}
       <div class="flex flex-wrap justify-center gap-3">
         {% for locale in locales %}
           <button onclick="localStorage.setItem('{{ localeStorageKey }}', '{{ locale.code }}'); location.reload();" class="flex items-center gap-3 px-5 py-3 rounded-xl bg-slate-900/30 border border-white/5 hover:bg-violet-500/10 hover:border-violet-500/30 hover:shadow-lg hover:shadow-violet-500/10 text-white text-sm font-medium transition-all">

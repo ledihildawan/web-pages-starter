@@ -1,32 +1,27 @@
 {% import "macros/page-meta.njk" as page_meta %}
 {% import "icons.njk" as icon with context %}
 
-{# --- Resolve Fixed SEO Config --- #}
 {% set seo_config = global.seo or {} %}
 {% set theme_color = seo_config.theme_color or "#020617" %}
 {% set manifest_path = seo_config.manifest_path or "/manifest.json" %}
 {% set favicon_path = seo_config.favicon_path or "/favicon.ico" %}
 {% set apple_icon_path = seo_config.apple_touch_icon_path or "/favicon.ico" %}
 
-{# --- Resolve PWA Config --- #}
 {% set pwa = global.pwa or {} %}
 {% set mobile_capable = pwa.mobile_web_app_capable !== false %}
 {% set apple_capable = pwa.apple_mobile_web_app_capable !== false %}
 {% set apple_status_style = pwa.apple_mobile_web_app_status_bar_style or "default" %}
 {% set ms_tile_color = pwa.msapplication_tile_color or theme_color %}
 
-{# --- Resolve Format Detection --- #}
 {% set fmt = global.format_detection or {} %}
 {% set noTelephone = fmt.telephone === false %}
 {% set noEmail = fmt.email === false %}
 {% set noAddress = fmt.address === false %}
 
-{# --- Resolve Compatibility --- #}
 {% set compat = global.compatibility or {} %}
 {% set x_ua = compat.x_ua_compatible %}
 {% set referrer = compat.referrer %}
 
-{# --- Resolve DNS Prefetch --- #}
 {% set dns_prefetch = global.dns_prefetch or[] %}
 
 <!DOCTYPE html>
@@ -35,11 +30,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-    {# ============================================ #}
-    {#       FIXED SEO TAGS (Site-wide)            #}
-    {# ============================================ #}
-
-    {# --- PWA & Mobile Meta --- #}
     {% if mobile_capable %}
       <meta name="mobile-web-app-capable" content="yes">
     {% endif %}
@@ -48,18 +38,15 @@
       <meta name="apple-mobile-web-app-status-bar-style" content="{{ apple_status_style }}">
     {% endif %}
 
-    {# --- Theme Color --- #}
     <meta name="theme-color" content="{{ theme_color }}">
     <meta name="theme-color" content="{{ theme_color }}" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="{{ theme_color }}" media="(prefers-color-scheme: dark)">
     <meta name="msapplication-TileColor" content="{{ ms_tile_color }}">
 
-    {# --- PWA Manifest & Icons --- #}
     <link rel="manifest" href="{{ manifest_path }}">
     <link rel="icon" href="{{ favicon_path }}">
     <link rel="apple-touch-icon" href="{{ apple_icon_path }}">
 
-    {# --- Format Detection --- #}
     {% if noTelephone %}
       <meta name="format-detection" content="telephone=no">
     {% endif %}
@@ -70,7 +57,6 @@
       <meta name="format-detection" content="address=no">
     {% endif %}
 
-    {# --- Compatibility & Referrer --- #}
     {% if x_ua %}
       <meta http-equiv="X-UA-Compatible" content="{{ x_ua }}">
     {% endif %}
@@ -78,20 +64,14 @@
       <meta name="referrer" content="{{ referrer }}">
     {% endif %}
 
-    {# --- DNS Prefetch --- #}
     {% for href in dns_prefetch %}
       <link rel="dns-prefetch" href="{{ href }}">
     {% endfor %}
 
-    {# ============================================ #}
-    {#     DYNAMIC SEO TAGS (Default)               #}
-    {#     Override via {% block extra_head %}      #}
-    {# ============================================ #}
     {% block extra_head %}
       {{ page_meta.render(page, global) }}
     {% endblock %}
 
-    {# --- Resource Hints (override per-page) --- #}
     {% block resource_hints %}
       <style>
         {{critical_css}}

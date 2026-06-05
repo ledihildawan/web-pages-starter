@@ -4,10 +4,8 @@
 
 {% block content %}
   <div x-data="{ yearly: false }">
-    {# Enhanced Hero Section #}
     {{ hero.hero_section('hero', badge=true, i18n=i18n) }}
 
-    {# Enhanced Pricing Toggle #}
     <section class="pbe-40 px-6">
       <div class="max-inline-lg mx-auto">
         <div class="flex flex-col sm:flex-row items-center justify-center gap-6 p-6 bg-slate-900/40 backdrop-blur-xl radius-card-md border border-white/10">
@@ -34,7 +32,6 @@
       </div>
     </section>
 
-    {# Enhanced Pricing Cards #}
     <section class="pbe-40 px-6">
       <div class="max-inline-7xl mx-auto grid md:grid-cols-3 gap-8 items-stretch">
         {% for plan in page.plans %}
@@ -101,7 +98,6 @@
       </div>
     </section>
 
-    {# Enhanced FAQ Section #}
     <section class="pbs-40 pbe-40 px-6 relative bg-gradient-to-b from-white/[0.02] to-transparent border-bs border-be border-white/5">
       <div class="max-inline-6xl mx-auto">
         {{ section.section_header(

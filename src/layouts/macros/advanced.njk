@@ -1,8 +1,4 @@
-{# Advanced Nunjucks macros for i18n that require special features like caller() #}
-{# These are for rare/advanced use cases. Most common usage is in i18n object methods #}
-
 {% macro wrap(key, vars = {}, tag = 'div', class = '', ext = {}) %}
-  {# Wrap translated content with custom tag and attributes #}
   {# Usage: {% call wrap('key') %}Custom content{% endcall %} #}
   {% set item = i18n(key, vars) %}
   {% set varsJson = item.vars or '' %}
@@ -16,7 +12,6 @@
 {% endmacro %}
 
 {% macro wrap_html(key, vars = {}, tag = 'div', class = '', ext = {}) %}
-  {# Wrap translated content with custom tag using native digits #}
   {# Usage: {% call wrap_html('key') %}Custom content{% endcall %} #}
   {% set item = i18n(key, vars) %}
   {% set translated = i18n.nativeNumbers(item.v) %}
@@ -31,7 +26,6 @@
 {% endmacro %}
 
 {% macro html_content(key, vars = {}) %}
-  {# Render HTML content block with data attributes for client-side i18n #}
   {% set item = i18n(key, vars) %}
   {% set translated = i18n.nativeNumbers(item.v) %}
   {% set varsJson = item.vars or '' %}
