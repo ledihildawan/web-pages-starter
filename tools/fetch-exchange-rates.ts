@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { BASE_CURRENCY } from '../src/configs/locales/currencies';
-import { LOCALES } from '../src/configs/locales/data';
 import { EXCHANGE_RATES_URL, PATHS } from '../src/configs/paths';
+import { BASE_CURRENCY } from '../src/scripts/lib/i18n/currencies';
+import { LOCALES } from '../src/scripts/lib/i18n/data';
 
 const GENERATED_DIR = path.resolve(process.cwd(), PATHS.GENERATED);
 const EXCHANGE_RATES_FILE = path.resolve(GENERATED_DIR, 'exchange-rates.ts');
@@ -20,7 +20,10 @@ async function fetchExchangeRates(): Promise<Record<string, number>> {
     throw new Error(`Failed to fetch exchange rates: ${response.statusText}`);
   }
 
-  const data = await response.json() as Array<{ quote: string; rate: number }>;
+  const data = (await response.json()) as Array<{
+    quote: string;
+    rate: number;
+  }>;
 
   const ratesObj: Record<string, number> = {
     [BASE_CURRENCY]: 1,
@@ -55,7 +58,8 @@ async function loadExistingRates(): Promise<{ lastUpdated: Date } | null> {
 
 function isRatesFresh(data: { lastUpdated: Date }): boolean {
   const now = new Date();
-  const hoursSinceUpdate = (now.getTime() - data.lastUpdated.getTime()) / (1_000 * 60 * 60);
+  const hoursSinceUpdate =
+    (now.getTime() - data.lastUpdated.getTime()) / (1_000 * 60 * 60);
   return hoursSinceUpdate < 24;
 }
 
@@ -65,7 +69,10 @@ async function generateExchangeRates(forceRefresh = false): Promise<void> {
   const existing = await loadExistingRates();
 
   if (!forceRefresh && existing && isRatesFresh(existing)) {
-    console.log('Using cached exchange rates (last updated:', `${existing.lastUpdated})`);
+    console.log(
+      'Using cached exchange rates (last updated:',
+      `${existing.lastUpdated})`,
+    );
     return;
   }
 

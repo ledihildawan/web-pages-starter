@@ -1,22 +1,4 @@
-import {
-  getCalendar,
-  getCurrency,
-  getDefaultNativeDigits,
-  getDirection,
-  getFallbackChain,
-  getFirstDayOfWeek,
-  getLanguageConfig,
-  getLanguageSubtag,
-  getLocale,
-  getNativeNumberingSystem,
-  getNumberingSystem,
-  getPluralSuffix,
-  getRegionSubtag,
-  getTimezone,
-  getTimezoneOffset,
-  isRTL,
-  setLocale,
-} from './helpers';
+import { LOCALES, type LocaleCode } from './data';
 import {
   convertCurrency,
   convertLocalPrice,
@@ -43,15 +25,46 @@ import {
   singular,
   toNativeDigits,
 } from './formatters';
-import { LOCALES, type LocaleCode } from './data';
+import {
+  getCalendar,
+  getCurrency,
+  getDefaultNativeDigits,
+  getDirection,
+  getFallbackChain,
+  getFirstDayOfWeek,
+  getLanguageConfig,
+  getLanguageSubtag,
+  getLocale,
+  getNativeNumberingSystem,
+  getNumberingSystem,
+  getPluralSuffix,
+  getRegionSubtag,
+  getTimezone,
+  getTimezoneOffset,
+  isRTL,
+  setLocale,
+} from './helpers';
 import { LANGUAGE_CODE, LANGUAGES, SCRIPT_CODE } from './languages';
 import { REGION_CODE, type RegionCode } from './regions';
 
+export { BASE_CURRENCY } from './currencies';
 export { LOCALE_FALLBACKS } from './fallbacks';
+
+export type {
+  CardinalOptions,
+  DurationOptions,
+  FormatOptions,
+  I18nItem,
+  ListFormatOptions,
+  OrdinalOptions,
+  RegionalPrice,
+  RelativeTimeOptions,
+  TemplateParams,
+  TimeFormatOptions,
+} from './types';
 
 const getLocaleDisplayRegion = (regionCode: RegionCode): string => {
   if (regionCode === REGION_CODE.GB) return 'UK';
-
   return regionCode;
 };
 
@@ -68,13 +81,11 @@ export const getLocaleLabelCountry = (localeCode: LocaleCode): string => {
   if (!locale) return localeCode;
 
   const language = LANGUAGES.find((l) => l.code === locale.language);
-
   if (!language) return localeCode;
 
   let nativeName: string;
   if (locale.language === LANGUAGE_CODE.ZH && locale.script) {
-    nativeName =
-      locale.script === SCRIPT_CODE.HANS ? '简体中文' : '繁體中文';
+    nativeName = locale.script === SCRIPT_CODE.HANS ? '简体中文' : '繁體中文';
   } else {
     nativeName = language.nativeName;
   }

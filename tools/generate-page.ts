@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { LOCALE_CODES } from '../src/configs/locales/data';
 import { PATHS } from '../src/configs/paths';
+import { LOCALE_CODES } from '../src/scripts/lib/i18n/data';
 
 const args = process.argv.slice(2);
 const pageName = args[0];
@@ -104,7 +104,9 @@ try {
 
       if (!fs.existsSync(filePath)) {
         fs.writeFileSync(filePath, localeContent, 'utf-8');
-        console.log(`Created locale [${lng}]: src/locales/${lng}/${formattedName}.json5`);
+        console.log(
+          `Created locale [${lng}]: src/locales/${lng}/${formattedName}.json5`,
+        );
       }
     }
   }

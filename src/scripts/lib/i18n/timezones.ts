@@ -1,4 +1,4 @@
-import type { ReplaceAll } from '../../types/helpers';
+import type { ReplaceAll } from '../../utils/types';
 
 export const TIMEZONES = [
   {

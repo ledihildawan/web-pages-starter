@@ -1,6 +1,24 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import type { I18nTranslationKeys } from '../../../generated/i18n';
+import type { I18nTranslationKeys } from '../../../../generated/i18n';
+import { PATHS } from '../../../configs/paths';
+import type {
+  DateValue,
+  JsonData,
+} from '../../utils/types';
+import type {
+  FormatOptions,
+  I18nItem,
+  TemplateParams,
+} from './types';
+import { getValueByPath } from '../../utils/common';
+import type { CurrencyCode } from './currencies';
+import {
+  DEFAULT_LOCALE,
+  LOCALES,
+  type LocaleCode,
+  type LocaleConfig,
+} from './data';
 import {
   convertCurrency,
   convertLocalPrice,
@@ -29,29 +47,13 @@ import {
   setLocale,
   singular,
   toNativeDigits,
-} from '../../configs/locales';
-import type { CurrencyCode } from '../../configs/locales/currencies';
-import {
-  DEFAULT_LOCALE,
-  LOCALES,
-  type LocaleCode,
-  type LocaleConfig,
-} from '../../configs/locales/data';
-import { NUMBERING_SYSTEMS } from '../../configs/locales/numbering-systems';
-import { PATHS } from '../../configs/paths';
-import type {
-  DateValue,
-  FormatOptions,
-  I18nItem,
-  JsonData,
-  TemplateParams,
-} from '../../types/common';
-import { getValueByPath } from '../utils/common';
+} from './index';
 import {
   loadGlobalData,
   loadSelectedComponentLocales,
   readJSON5,
-} from '../utils/json5';
+} from '../../utils/json5';
+import { NUMBERING_SYSTEMS } from './numbering-systems';
 
 interface TemplateFormatOptions extends FormatOptions {
   raw?: boolean;
@@ -96,7 +98,7 @@ const generateClientI18nScript = (
   usedComponents: string[],
   supportedLangs: string[],
   LOCALE_STORAGE_KEY: string,
-  LOCALES: typeof import('@/configs/locales/data').LOCALES,
+  LOCALES: typeof import('./data').LOCALES,
 ): string => {
   const allI18nData = Object.fromEntries(
     supportedLangs.map((l) => [

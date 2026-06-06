@@ -1,12 +1,16 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { DEFAULT_LOCALE, LOCALE_CODES } from '../src/configs/locales/data';
 import { PATHS } from '../src/configs/paths';
+import { DEFAULT_LOCALE, LOCALE_CODES } from '../src/scripts/lib/i18n/data';
 
 const ROOT = process.cwd();
 const LOCALES_ROOT = path.join(ROOT, PATHS.LOCALES);
 
-function createLocale(targetLang: string, sourceDir: string, targetDir: string): number {
+function createLocale(
+  targetLang: string,
+  sourceDir: string,
+  targetDir: string,
+): number {
   let created = 0;
 
   if (!fs.existsSync(targetDir)) {
@@ -26,7 +30,9 @@ function createLocale(targetLang: string, sourceDir: string, targetDir: string):
         fs.mkdirSync(compTargetDir, { recursive: true });
       }
 
-      const compFiles = fs.readdirSync(sourcePath).filter((f) => f.endsWith('.json5'));
+      const compFiles = fs
+        .readdirSync(sourcePath)
+        .filter((f) => f.endsWith('.json5'));
       for (const compFile of compFiles) {
         const targetPath = path.join(compTargetDir, compFile);
         if (!fs.existsSync(targetPath)) {
@@ -54,12 +60,14 @@ try {
 
   const existingLocales = fs.existsSync(LOCALES_ROOT)
     ? fs.readdirSync(LOCALES_ROOT).filter((f) => {
-        const stat = fs.statSync(path.join(LOCALES_ROOT, f));
-        return stat.isDirectory() && !f.startsWith('.');
-      })
+      const stat = fs.statSync(path.join(LOCALES_ROOT, f));
+      return stat.isDirectory() && !f.startsWith('.');
+    })
     : [];
 
-  const missingLocales = LOCALE_CODES.filter((code) => !existingLocales.includes(code));
+  const missingLocales = LOCALE_CODES.filter(
+    (code) => !existingLocales.includes(code),
+  );
 
   if (missingLocales.length === 0) {
     console.log('✅ All configured locales exist.');
@@ -72,12 +80,18 @@ try {
     throw new Error(`Default locale directory not found: ${sourceDir}`);
   }
 
-  console.log(`Creating ${missingLocales.length} missing locale(s) from ${DEFAULT_LOCALE}:\n`);
+  console.log(
+    `Creating ${missingLocales.length} missing locale(s) from ${DEFAULT_LOCALE}:\n`,
+  );
 
   let totalCreated = 0;
   for (const lang of missingLocales) {
     console.log(`${lang}:`);
-    totalCreated += createLocale(lang, sourceDir, path.join(LOCALES_ROOT, lang));
+    totalCreated += createLocale(
+      lang,
+      sourceDir,
+      path.join(LOCALES_ROOT, lang),
+    );
     console.log('');
   }
 

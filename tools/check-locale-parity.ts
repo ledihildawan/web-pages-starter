@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { DEFAULT_LOCALE, LOCALE_CODES } from '../src/configs/locales/data';
 import { PATHS } from '../src/configs/paths';
+import { DEFAULT_LOCALE, LOCALE_CODES } from '../src/scripts/lib/i18n/data';
 import { collectKeys, readJSON5 } from '../src/scripts/utils/json5';
 
 const LOCALES_DIR = path.resolve(PATHS.LOCALES);
@@ -25,7 +25,7 @@ function getSetDifference(setA: Set<string>, setB: Set<string>): string[] {
 
 function checkFileParity(
   filePath: string,
-  localeStats: Map<string, { missing: number; extra: number }>
+  localeStats: Map<string, { missing: number; extra: number }>,
 ): ParityReport {
   const baseKeys = collectKeySet(readLocaleFile(BASE_LOCALE, filePath));
   const report: ParityReport = {
@@ -68,7 +68,8 @@ function checkParity() {
 
   const baseLocaleDir = path.join(LOCALES_DIR, BASE_LOCALE);
   if (fs.existsSync(baseLocaleDir)) {
-    const pageFiles = fs.readdirSync(baseLocaleDir)
+    const pageFiles = fs
+      .readdirSync(baseLocaleDir)
       .filter((f) => f.endsWith('.json5') && f !== 'common.json5');
 
     for (const pageFile of pageFiles) {
@@ -82,7 +83,8 @@ function checkParity() {
 
   const componentsDir = path.join(LOCALES_DIR, BASE_LOCALE, 'components');
   if (fs.existsSync(componentsDir)) {
-    const componentFiles = fs.readdirSync(componentsDir)
+    const componentFiles = fs
+      .readdirSync(componentsDir)
       .filter((f) => f.endsWith('.json5'));
 
     for (const compFile of componentFiles) {
@@ -106,13 +108,16 @@ function printKeysList(
   type: 'missing' | 'extra',
   items: { locale: string; keys: string[] }[],
   verbose: boolean,
-  indent: string = '  '
+  indent: string = '  ',
 ) {
   const icon = type === 'missing' ? '❌' : '⚠️ ';
   const sign = type === 'missing' ? '-' : '+';
 
   for (const { locale, keys } of items) {
-    const message = type === 'missing' ? `missing ${keys.length} keys` : `${keys.length} extra keys`;
+    const message =
+      type === 'missing'
+        ? `missing ${keys.length} keys`
+        : `${keys.length} extra keys`;
     console.log(`${indent}${icon} ${locale}: ${message}`);
 
     if (verbose) {
@@ -126,7 +131,11 @@ function printKeysList(
   }
 }
 
-function printReportSection(title: string, reports: ParityReport[], verbose: boolean) {
+function printReportSection(
+  title: string,
+  reports: ParityReport[],
+  verbose: boolean,
+) {
   if (reports.length === 0) return;
 
   console.log(`\n${title}`);
@@ -137,7 +146,10 @@ function printReportSection(title: string, reports: ParityReport[], verbose: boo
   }
 }
 
-function printReport(report: ReturnType<typeof checkParity>, verbose = false): void {
+function printReport(
+  report: ReturnType<typeof checkParity>,
+  verbose = false,
+): void {
   console.log(`\n${'='.repeat(60)}`);
   console.log('🌍 LOCALE PARITY CHECK REPORT');
   console.log('='.repeat(60));
@@ -149,23 +161,32 @@ function printReport(report: ReturnType<typeof checkParity>, verbose = false): v
   for (const { locale, missing, extra } of report.summary) {
     const status = missing === 0 && extra === 0 ? '✅ OK' : '❌ Issues';
     console.log(
-      `| ${locale.padEnd(12)} | ${String(missing).padStart(7)} | ${String(extra).padStart(5)} | ${status.padEnd(6)} |`
+      `| ${locale.padEnd(12)} | ${String(missing).padStart(7)} | ${String(extra).padStart(5)} | ${status.padEnd(6)} |`,
     );
   }
 
-  const hasCommonIssues = report.common.missingKeys.length > 0 || report.common.extraKeys.length > 0;
+  const hasCommonIssues =
+    report.common.missingKeys.length > 0 || report.common.extraKeys.length > 0;
   if (hasCommonIssues) {
     console.log(`\n📋 common.json5 (${report.common.totalKeys} keys):`);
     printKeysList('missing', report.common.missingKeys, verbose, '  ');
     printKeysList('extra', report.common.extraKeys, verbose, '  ');
   }
 
-  printReportSection('📄 Pages with parity issues:', [...report.pages.values()], verbose);
-  printReportSection('🧩 Components with parity issues:', [...report.components.values()], verbose);
+  printReportSection(
+    '📄 Pages with parity issues:',
+    [...report.pages.values()],
+    verbose,
+  );
+  printReportSection(
+    '🧩 Components with parity issues:',
+    [...report.components.values()],
+    verbose,
+  );
 
   const totalIssues = report.summary.reduce(
     (acc, { missing, extra }) => acc + missing + extra,
-    0
+    0,
   );
 
   console.log(`\n${'='.repeat(60)}`);
@@ -186,7 +207,7 @@ printReport(report, verbose);
 
 const totalIssues = report.summary.reduce(
   (acc, { missing, extra }) => acc + missing + extra,
-  0
+  0,
 );
 
 if (totalIssues > 0) {

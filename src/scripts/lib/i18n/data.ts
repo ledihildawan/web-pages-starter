@@ -1,4 +1,4 @@
-﻿import type { ReplaceAll } from '../../types/helpers';
+﻿import type { ReplaceAll } from '../../utils/types';
 import { CALENDAR_CODE } from './calendars';
 import { CURRENCY_CODE } from './currencies';
 import { DIRECTION_CODE } from './directions';

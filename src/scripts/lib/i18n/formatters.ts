@@ -1,11 +1,13 @@
 import {
   convertCurrency as convertCurrencyRaw,
   EXCHANGE_RATES,
-} from '../../../generated/exchange-rates';
+} from '../../../../generated/exchange-rates';
 import pluralize from 'pluralize';
 import type {
-  CardinalOptions,
   DateValue,
+} from '../../utils/types';
+import type {
+  CardinalOptions,
   DurationOptions,
   FormatOptions,
   ListFormatOptions,
@@ -13,7 +15,7 @@ import type {
   RegionalPrice,
   RelativeTimeOptions,
   TimeFormatOptions,
-} from '../../types/common';
+} from './types';
 import {
   getCurrency,
   getLanguageConfig,

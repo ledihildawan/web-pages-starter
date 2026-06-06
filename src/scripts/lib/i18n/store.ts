@@ -1,11 +1,6 @@
-import { getLocaleLabelCountry, LOCALE_STORAGE_KEY } from '@/configs/locales';
-import {
-  LOCALE,
-  LOCALE_CODES,
-  LOCALES,
-  type LocaleCode,
-} from '@/configs/locales/data';
-import { DIRECTION_CODE } from '@/configs/locales/directions';
+import { getLocaleLabelCountry, LOCALE_STORAGE_KEY } from './index';
+import { LOCALE, LOCALE_CODES, LOCALES, type LocaleCode } from './data';
+import { DIRECTION_CODE } from './directions';
 
 const updateDocumentAttributes = (code: string): void => {
   const locale = LOCALES.find((l) => l.code === code);
@@ -19,14 +14,14 @@ const updateDocumentAttributes = (code: string): void => {
 };
 
 const refreshFonts = async (): Promise<void> => {
-  const fonts = await import('@/scripts/lib/font-loader');
+  const fonts = await import('./fonts');
   fonts.setupFontStackCSS();
   fonts.loadLanguageFonts();
   fonts.loadFallbackFonts();
 };
 
 const changeLanguage = async (code: string): Promise<void> => {
-  const m = await import('@/scripts/lib/i18n');
+  const m = await import('./runtime');
   if (!m.i18next.isInitialized) return;
 
   await m.i18next.changeLanguage(code);

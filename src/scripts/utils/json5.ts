@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import type { JsonData } from '@/types/common';
+import type { JsonData } from './types';
 
 const stripJson5Syntax = (source: string): string => {
   let output = '';

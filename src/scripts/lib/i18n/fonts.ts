@@ -1,7 +1,7 @@
-import { FONT_STACK, type FontConfig } from '@/configs/fonts';
-import { LOCALES, type LocaleConfig } from '@/configs/locales/data';
-import { NUMBERING_SYSTEMS, type NumberingSystemCode } from '@/configs/locales/numbering-systems';
-import { WRITING_SYSTEM_CODE, type WritingSystemCode } from '@/configs/locales/writing-systems';
+import { FONT_STACK, type FontConfig } from '../../../configs/fonts';
+import { LOCALES, type LocaleConfig } from './data';
+import { NUMBERING_SYSTEMS, type NumberingSystemCode } from './numbering-systems';
+import { WRITING_SYSTEM_CODE, type WritingSystemCode } from './writing-systems';
 
 import '@fontsource-variable/noto-sans';
 

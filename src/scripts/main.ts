@@ -4,7 +4,7 @@ import {
   preloadActiveFont,
   setupFontStackCSS,
   watchScriptAndLoadFont,
-} from "./lib/font-loader";
+} from "./lib/i18n/fonts";
 
 type VendorModules = Awaited<ReturnType<typeof loadVendors>>;
 type AppModules = Awaited<ReturnType<typeof loadAppModules>>;
@@ -28,8 +28,8 @@ const loadVendors = async () => {
 const loadAppModules = async () => {
   const [{ initIntl }, { registerI18nStore }, { registerNavbarComponent }] =
     await Promise.all([
-      import("./lib/i18n"),
-      import("./stores/i18n"),
+      import("./lib/i18n/runtime"),
+      import("./lib/i18n/store"),
       import("./components/navbar"),
     ]);
 

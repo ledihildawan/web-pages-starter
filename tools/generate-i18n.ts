@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { DEFAULT_LOCALE, LOCALE_CODES } from '../src/configs/locales/data';
 import { LOCALE_FILE_EXTENSIONS, PATHS } from '../src/configs/paths';
+import { DEFAULT_LOCALE, LOCALE_CODES } from '../src/scripts/lib/i18n/data';
 import { collectKeys, readJson5File } from '../src/scripts/utils/json5';
 
 const ROOT = process.cwd();
@@ -60,7 +60,9 @@ function readLocaleTree(dirPath: string): Record<string, unknown> {
 
       const namespace = `${prefix}${stripLocaleExt(entry)}`;
       if (namespaces[namespace]) {
-        throw new Error(`Duplicate locale namespace "${namespace}" in ${currentDir}`);
+        throw new Error(
+          `Duplicate locale namespace "${namespace}" in ${currentDir}`,
+        );
       }
 
       namespaces[namespace] = readJson5File(entryPath);
@@ -71,23 +73,35 @@ function readLocaleTree(dirPath: string): Record<string, unknown> {
   return namespaces;
 }
 
-function pickPages(namespaces: Record<string, unknown>): Record<string, unknown> {
+function pickPages(
+  namespaces: Record<string, unknown>,
+): Record<string, unknown> {
   return Object.fromEntries(
-    Object.entries(namespaces).filter(([namespace]) =>
-      namespace !== 'common' && !namespace.startsWith('components/'),
+    Object.entries(namespaces).filter(
+      ([namespace]) =>
+        namespace !== 'common' && !namespace.startsWith('components/'),
     ),
   );
 }
 
-function pickComponents(namespaces: Record<string, unknown>): Record<string, unknown> {
+function pickComponents(
+  namespaces: Record<string, unknown>,
+): Record<string, unknown> {
   return Object.fromEntries(
     Object.entries(namespaces)
       .filter(([namespace]) => namespace.startsWith('components/'))
-      .map(([namespace, data]) => [namespace.replace(/^components\//, ''), data]),
+      .map(([namespace, data]) => [
+        namespace.replace(/^components\//, ''),
+        data,
+      ]),
   );
 }
 
-function compareLocaleParity(defaultData: Record<string, unknown>, langData: Record<string, unknown>, lang: string): string[] {
+function compareLocaleParity(
+  defaultData: Record<string, unknown>,
+  langData: Record<string, unknown>,
+  lang: string,
+): string[] {
   const errors: string[] = [];
   const defaultNamespaces = Object.keys(defaultData).sort();
   const langNamespaces = Object.keys(langData).sort();
@@ -98,17 +112,20 @@ function compareLocaleParity(defaultData: Record<string, unknown>, langData: Rec
       continue;
     }
 
-        const defaultKeys = new Set(collectKeys(defaultData[namespace]));
-        const langKeys = new Set(collectKeys(langData[namespace]));
+    const defaultKeys = new Set(collectKeys(defaultData[namespace]));
+    const langKeys = new Set(collectKeys(langData[namespace]));
     const missingKeys = [...defaultKeys].filter((key) => !langKeys.has(key));
     const extraKeys = [...langKeys].filter((key) => !defaultKeys.has(key));
 
-    for (const key of missingKeys) errors.push(`${lang}:${namespace} missing key "${key}"`);
-    for (const key of extraKeys) errors.push(`${lang}:${namespace} extra key "${key}"`);
+    for (const key of missingKeys)
+      errors.push(`${lang}:${namespace} missing key "${key}"`);
+    for (const key of extraKeys)
+      errors.push(`${lang}:${namespace} extra key "${key}"`);
   }
 
   for (const namespace of langNamespaces) {
-    if (!(namespace in defaultData)) errors.push(`${lang}: extra namespace "${namespace}"`);
+    if (!(namespace in defaultData))
+      errors.push(`${lang}: extra namespace "${namespace}"`);
   }
 
   return errors;
@@ -123,13 +140,19 @@ try {
   const componentsData = pickComponents(defaultNamespaces);
 
   if (!commonData) {
-    throw new Error(`Missing default common locale: ${path.join(DEFAULT_LOCALE_DIR, 'common.json5')}`);
+    throw new Error(
+      `Missing default common locale: ${path.join(DEFAULT_LOCALE_DIR, 'common.json5')}`,
+    );
   }
 
   const parityErrors = LOCALE_CODES.flatMap((lang) => {
     const langDir = path.join(LOCALES_ROOT, lang);
     if (!fs.existsSync(langDir)) return [`${lang}: missing locale directory`];
-    return compareLocaleParity(defaultNamespaces, readLocaleTree(langDir), lang);
+    return compareLocaleParity(
+      defaultNamespaces,
+      readLocaleTree(langDir),
+      lang,
+    );
   });
 
   if (parityErrors.length > 0) {
@@ -141,15 +164,17 @@ try {
     );
   }
 
-    const commonKeys = collectKeys(commonData).map((k) => `'common:${k}'`);
-    const pageKeys = Object.entries(pagesData).flatMap(([page, data]) =>
-        collectKeys(data).map((k) => `'${page}:${k}'`)
-    );
-    const compKeys = Object.entries(componentsData).flatMap(([comp, data]) =>
-        collectKeys(data).map((k) => `'components/${comp}:${k}'`)
-    );
+  const commonKeys = collectKeys(commonData).map((k) => `'common:${k}'`);
+  const pageKeys = Object.entries(pagesData).flatMap(([page, data]) =>
+    collectKeys(data).map((k) => `'${page}:${k}'`),
+  );
+  const compKeys = Object.entries(componentsData).flatMap(([comp, data]) =>
+    collectKeys(data).map((k) => `'components/${comp}:${k}'`),
+  );
 
-  const allKeys = [...commonKeys, ...pageKeys, ...compKeys].map(k => `  | ${k}`).join('\n');
+  const allKeys = [...commonKeys, ...pageKeys, ...compKeys]
+    .map((k) => `  | ${k}`)
+    .join('\n');
 
   const timestamp = new Date().toISOString();
   const output = `/**
