@@ -1,22 +1,10 @@
-import { LOCALE_FALLBACKS } from '../../configs/locales';
-import { CALENDAR_CODE } from '../../configs/locales/calendars';
-import {
-  BASE_CURRENCY,
-  type CurrencyCode,
-} from '../../configs/locales/currencies';
-import {
-  DEFAULT_LOCALE,
-  LOCALE_CODES,
-  LOCALES,
-  type LocaleCode,
-  type LocaleConfig,
-} from '../../configs/locales/data';
-import {
-  DIRECTION_CODE,
-  type DirectionCode,
-} from '../../configs/locales/directions';
-import type { LanguageCode } from '../../configs/locales/languages';
-import { NUMBERING_SYSTEM_CODE } from '../../configs/locales/numbering-systems';
+import { CALENDAR_CODE } from './calendars';
+import { BASE_CURRENCY, type CurrencyCode } from './currencies';
+import { DEFAULT_LOCALE, LOCALE_CODES, LOCALES, type LocaleCode, type LocaleConfig } from './data';
+import { DIRECTION_CODE, type DirectionCode } from './directions';
+import { LOCALE_FALLBACKS } from './fallbacks';
+import type { LanguageCode } from './languages';
+import { NUMBERING_SYSTEM_CODE } from './numbering-systems';
 
 export const getFallbackChain = (locale: string): LocaleCode[] => {
   if (LOCALE_CODES.includes(locale as LocaleCode)) {
@@ -70,19 +58,26 @@ export const getLanguageConfig = (
 
 export const getCurrency = (locale: LocaleCode): CurrencyCode =>
   getLanguageConfig(locale)?.currency || BASE_CURRENCY;
+
 export const getTimezone = (locale: LocaleCode): string =>
   getLanguageConfig(locale)?.timezone || 'UTC';
+
 export const getTimezoneOffset = (locale: LocaleCode): number =>
   getLanguageConfig(locale)?.timezoneOffset ?? 0;
+
 export const getCalendar = (locale: LocaleCode): string =>
   getLanguageConfig(locale)?.calendar || CALENDAR_CODE.GREGORY;
+
 export const getFirstDayOfWeek = (locale: LocaleCode): number =>
   getLanguageConfig(locale)?.firstDayOfWeek ?? 0;
+
 export const getNumberingSystem = (locale: LocaleCode): string =>
   getLanguageConfig(locale)?.numberingSystem || NUMBERING_SYSTEM_CODE.LATN;
+
 export const getNativeNumberingSystem = (locale: LocaleCode): string =>
   getLanguageConfig(locale)?.nativeNumberingSystem ||
   NUMBERING_SYSTEM_CODE.LATN;
+
 export const getDefaultNativeDigits = (locale: LocaleCode): boolean =>
   getLanguageConfig(locale)?.nativeDigits ?? false;
 

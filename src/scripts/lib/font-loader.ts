@@ -60,10 +60,6 @@ function createPrimaryLoader(writingSystemCode: WritingSystemCode): FontLoader {
   return loader;
 }
 
-// NOTE: Each path appears twice — once as `css` and once inside the loader's
-// `import()` call. The loader MUST have a literal string for Rsbuild/Rspack to
-// code-split into per-font chunks. Using `import(constVariable)` merges all
-// fonts into one chunk (~226 kB CSS, loaded on initial page).
 const NOTO_SANS: Partial<
   Record<NumberingSystemCode, { css: string; loader: FontLoader }>
 > = {

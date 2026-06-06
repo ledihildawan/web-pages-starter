@@ -3,7 +3,7 @@
 A minimal multi-page starter for content sites that need to ship in many languages from day one. **Rsbuild + Nunjucks + Alpine + Tailwind + i18next** wired together so that copy, formatting, RTL, native digits, and regional pricing all flow from one source of truth.
 
 - **42 BCP 47 locales** out of the box (`id-ID`, `en-US`, `zh-Hans-CN`, `zh-Hant-TW`, `ar-SA`, `ja-JP`, …)
-- **One source of truth** — `src/locales/{locale}/*.json5` for copy, `src/configs/locales.ts` for behavior
+- **One source of truth** — `src/locales/{locale}/*.json5` for copy, `src/configs/locales/` for behavior
 - **Inline hydration** — templates emit `<span data-i18n="…">` so i18next can swap text in place
 - **Zero-touch scaffolding** — drop a folder under `src/pages/` and it becomes a route
 - **No hand-rolled formatting** — every number, currency, date, and price goes through `i18n.*`
@@ -127,7 +127,7 @@ The same translation key (`i18n.t('page.hero.title')`) renders the initial HTML 
 
 ## Locales
 
-42 locales are configured in [`src/configs/locales.ts`](src/configs/locales.ts). The default is `id-ID`. Add a new locale by adding an entry there and running `bun run sync:locales`.
+42 locales are configured in [`src/configs/locales/data.ts`](src/configs/locales/data.ts) (re-exported via [`src/configs/locales/index.ts`](src/configs/locales/index.ts)). The default is `id-ID`. Add a new locale by adding an entry there and running `bun run sync:locales`.
 
 Highlights:
 

@@ -1,19 +1,8 @@
-import pluralize from 'pluralize';
 import {
   convertCurrency as convertCurrencyRaw,
   EXCHANGE_RATES,
 } from '../../../generated/exchange-rates';
-import {
-  BASE_CURRENCY,
-  type CurrencyCode,
-} from '../../configs/locales/currencies';
-import { LOCALES } from '../../configs/locales/data';
-import { LANGUAGE_CODE } from '../../configs/locales/languages';
-import {
-  NUMBERING_SYSTEM_CODE,
-  NUMBERING_SYSTEMS,
-} from '../../configs/locales/numbering-systems';
-import { WRITING_SYSTEM } from '../../configs/locales/writing-systems';
+import pluralize from 'pluralize';
 import type {
   CardinalOptions,
   DateValue,
@@ -25,13 +14,25 @@ import type {
   RelativeTimeOptions,
   TimeFormatOptions,
 } from '../../types/common';
-import { toDateObj } from './common';
 import {
   getCurrency,
   getLanguageConfig,
   getLanguageSubtag,
   getLocale,
-} from './locale';
+} from './helpers';
+import { BASE_CURRENCY, type CurrencyCode } from './currencies';
+import { LOCALES } from './data';
+import { LANGUAGE_CODE } from './languages';
+import {
+  NUMBERING_SYSTEM_CODE,
+  NUMBERING_SYSTEMS,
+} from './numbering-systems';
+import { WRITING_SYSTEM } from './writing-systems';
+
+const toDateObj = (date: DateValue): Date =>
+  typeof date === 'string' || typeof date === 'number'
+    ? new Date(date)
+    : date;
 
 const createDigitConverter =
   (digitsArray: readonly string[]) => (num: number | string) =>
@@ -57,10 +58,10 @@ const NATIVE_DIGITS_MAP = LOCALES.reduce(
 const getNumberingSystem = (options: FormatOptions = {}) =>
   options.nativeDigits
     ? getLanguageConfig(getLocale())?.nativeNumberingSystem ||
-      NUMBERING_SYSTEM_CODE.LATN
+    NUMBERING_SYSTEM_CODE.LATN
     : options.numberingSystem ||
-      getLanguageConfig(getLocale())?.numberingSystem ||
-      NUMBERING_SYSTEM_CODE.LATN;
+    getLanguageConfig(getLocale())?.numberingSystem ||
+    NUMBERING_SYSTEM_CODE.LATN;
 
 export const getNativeNumberingSystem = () =>
   getLanguageConfig(getLocale())?.nativeNumberingSystem ||
@@ -85,7 +86,7 @@ export const toNativeDigits = (text: string, force?: boolean) => {
     if (formatted !== '0') {
       return text.replace(/\d/g, (d) => formatter.format(Number(d)));
     }
-  } catch {}
+  } catch { }
 
   const languageSubtag = getLanguageSubtag(getLocale());
   const converter = NATIVE_DIGITS_MAP[languageSubtag];
@@ -344,7 +345,7 @@ const arabicCardinal = buildCardinal('صِفْر', (s) => `سالب ${s}`, [
         'أربَعون',
         'خَمسون',
         'سِتّون',
-        'سِبعون',
+        'سَبعون',
         'ثَمانون',
         'تِسعون',
       ];
@@ -531,22 +532,22 @@ const processNumeric = (
       converter: (num: number | string) => string;
       fallback: (num: number) => string;
     }[] = [
-      {
-        languages: WRITING_SYSTEM.ARABIC_LANGUAGES as readonly string[],
-        converter: NATIVE_DIGITS_MAP[LANGUAGE_CODE.AR],
-        fallback: config.arabicFallback,
-      },
-      {
-        languages: WRITING_SYSTEM.DEVANAGARI_LANGUAGES as readonly string[],
-        converter: NATIVE_DIGITS_MAP[LANGUAGE_CODE.HI],
-        fallback: config.devanagariFallback,
-      },
-      {
-        languages: WRITING_SYSTEM.CYRILLIC_LANGUAGES as readonly string[],
-        converter: NATIVE_DIGITS_MAP[LANGUAGE_CODE.RU],
-        fallback: config.cyrillicFallback,
-      },
-    ];
+        {
+          languages: WRITING_SYSTEM.ARABIC_LANGUAGES as readonly string[],
+          converter: NATIVE_DIGITS_MAP[LANGUAGE_CODE.AR],
+          fallback: config.arabicFallback,
+        },
+        {
+          languages: WRITING_SYSTEM.DEVANAGARI_LANGUAGES as readonly string[],
+          converter: NATIVE_DIGITS_MAP[LANGUAGE_CODE.HI],
+          fallback: config.devanagariFallback,
+        },
+        {
+          languages: WRITING_SYSTEM.CYRILLIC_LANGUAGES as readonly string[],
+          converter: NATIVE_DIGITS_MAP[LANGUAGE_CODE.RU],
+          fallback: config.cyrillicFallback,
+        },
+      ];
 
     const matchedRule = digitRules.find((rule) =>
       rule.languages.includes(languageSubtag),
@@ -917,7 +918,7 @@ export const convertCurrency = (
 };
 
 export const convertLocalPrice = (
-  plan: { pricing: { base: number; [locale: string]: number } },
+  plan: { pricing: { base: number;[locale: string]: number } },
   targetCurrency?: CurrencyCode,
   options?: FormatOptions,
 ) => {
@@ -944,7 +945,7 @@ export const convertLocalPrice = (
 
 export const formatLocalPrice = (
   plan: {
-    pricing: { base: number; [locale: string]: number };
+    pricing: { base: number;[locale: string]: number };
   },
   options?: FormatOptions,
 ) => {
@@ -955,7 +956,7 @@ export const formatLocalPrice = (
 };
 
 export const formatLocalPriceDiscounted = (
-  plan: { pricing: { base: number; [locale: string]: number } },
+  plan: { pricing: { base: number;[locale: string]: number } },
   discountMultiplier: number,
   targetCurrency?: CurrencyCode,
   options?: FormatOptions,

@@ -3,14 +3,6 @@ import type { I18nTranslationKeys } from '@generated/i18n';
 import i18next, { type Resource } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import {
-  getLocaleLabelCountry,
-  LOCALE_FALLBACKS,
-  LOCALE_STORAGE_KEY,
-} from '@/configs/locales';
-import { BASE_CURRENCY } from '@/configs/locales/currencies';
-import { LOCALE_CODES, LOCALES, type LocaleCode } from '@/configs/locales/data';
-import type { DateTimePreset } from '@/types/common';
-import {
   formatAbbreviated,
   formatBytes,
   formatCardinal,
@@ -26,9 +18,17 @@ import {
   formatScientific,
   formatTime,
   formatUnit,
+  getCurrency,
+  getLocale,
+  getLocaleLabelCountry,
+  LOCALE_FALLBACKS,
+  LOCALE_STORAGE_KEY,
+  setLocale,
   toNativeDigits,
-} from '../utils/i18n-format';
-import { getCurrency, getLocale, setLocale } from '../utils/locale';
+} from '@/configs/locales';
+import { BASE_CURRENCY } from '@/configs/locales/currencies';
+import { LOCALE_CODES, LOCALES, type LocaleCode } from '@/configs/locales/data';
+import type { DateTimePreset } from '@/types/common';
 
 export { i18next };
 
@@ -190,7 +190,7 @@ const FORMATTERS = [
           price = pricing.base;
           fromCurrency = BASE_CURRENCY;
         }
-      } catch {}
+      } catch { }
 
       if (discountStr) {
         price = price * parseFloat(discountStr);
@@ -214,8 +214,8 @@ const FORMATTERS = [
       const unit = el.getAttribute('data-unit');
       return unit
         ? formatUnit(parseFloat(v), unit, {
-            nativeDigits: el.getAttribute('data-use-native') === 'true',
-          })
+          nativeDigits: el.getAttribute('data-use-native') === 'true',
+        })
         : v;
     },
   },
@@ -275,11 +275,11 @@ export async function initIntl(): Promise<void> {
   for (const [lngKey, data] of Object.entries(rawData)) {
     const compData = data.comp
       ? Object.fromEntries(
-          Object.entries(data.comp).map(([name, content]) => [
-            `components/${name}`,
-            content,
-          ]),
-        )
+        Object.entries(data.comp).map(([name, content]) => [
+          `components/${name}`,
+          content,
+        ]),
+      )
       : {};
 
     resources[lngKey] = {
@@ -320,7 +320,7 @@ export async function initIntl(): Promise<void> {
     setTimeout(() => {
       updateI18nStoreLabels();
     }, 100);
-  } catch {}
+  } catch { }
 }
 
 export const updateI18nStoreLabels = (): void => {

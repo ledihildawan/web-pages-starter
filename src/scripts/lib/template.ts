@@ -1,24 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import type { I18nTranslationKeys } from '../../../generated/i18n';
-import { getLocaleLabelCountry } from '../../configs/locales';
-import type { CurrencyCode } from '../../configs/locales/currencies';
-import {
-  DEFAULT_LOCALE,
-  LOCALES,
-  type LocaleCode,
-  type LocaleConfig,
-} from '../../configs/locales/data';
-import { NUMBERING_SYSTEMS } from '../../configs/locales/numbering-systems';
-import { PATHS } from '../../configs/paths';
-import type {
-  DateValue,
-  FormatOptions,
-  I18nItem,
-  JsonData,
-  TemplateParams,
-} from '../../types/common';
-import { getValueByPath } from '../utils/common';
 import {
   convertCurrency,
   convertLocalPrice,
@@ -39,18 +21,37 @@ import {
   formatScientific,
   formatTime,
   formatUnit,
+  getLocaleLabelCountry,
+  getPluralSuffix,
   localPrice,
   localPriceCurrency,
   plural,
+  setLocale,
   singular,
   toNativeDigits,
-} from '../utils/i18n-format';
+} from '../../configs/locales';
+import type { CurrencyCode } from '../../configs/locales/currencies';
+import {
+  DEFAULT_LOCALE,
+  LOCALES,
+  type LocaleCode,
+  type LocaleConfig,
+} from '../../configs/locales/data';
+import { NUMBERING_SYSTEMS } from '../../configs/locales/numbering-systems';
+import { PATHS } from '../../configs/paths';
+import type {
+  DateValue,
+  FormatOptions,
+  I18nItem,
+  JsonData,
+  TemplateParams,
+} from '../../types/common';
+import { getValueByPath } from '../utils/common';
 import {
   loadGlobalData,
   loadSelectedComponentLocales,
   readJSON5,
 } from '../utils/json5';
-import { getPluralSuffix, setLocale } from '../utils/locale';
 
 interface TemplateFormatOptions extends FormatOptions {
   raw?: boolean;
@@ -490,7 +491,7 @@ const createI18nObject = (
     },
 
     localPrice: (
-      plan: { pricing: { base: number; [locale: string]: number } },
+      plan: { pricing: { base: number;[locale: string]: number } },
       options?: TemplateFormatOptions,
     ) => {
       const formatted = String(localPrice(plan));
@@ -499,7 +500,7 @@ const createI18nObject = (
     },
 
     localPriceCurrency: (
-      plan: { pricing: { base: number; [locale: string]: number } },
+      plan: { pricing: { base: number;[locale: string]: number } },
       options?: TemplateFormatOptions,
     ) => {
       const formatted = localPriceCurrency(plan);
@@ -508,7 +509,7 @@ const createI18nObject = (
     },
 
     convertLocalPrice: (
-      plan: { pricing: { base: number; [locale: string]: number } },
+      plan: { pricing: { base: number;[locale: string]: number } },
       targetCurrency: CurrencyCode,
       options?: TemplateFormatOptions,
     ) => {
@@ -529,7 +530,7 @@ const createI18nObject = (
     },
 
     formatLocalPrice: (
-      plan: { pricing: { base: number; [locale: string]: number } },
+      plan: { pricing: { base: number;[locale: string]: number } },
       options?: TemplateFormatOptions,
     ) => {
       const formatted = formatLocalPrice(plan, options);
@@ -546,7 +547,7 @@ const createI18nObject = (
     },
 
     formatLocalPriceDiscounted: (
-      plan: { pricing: { base: number; [locale: string]: number } },
+      plan: { pricing: { base: number;[locale: string]: number } },
       discountMultiplier: number,
       targetCurrency: CurrencyCode,
       options?: TemplateFormatOptions,
