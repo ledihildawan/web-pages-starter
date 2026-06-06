@@ -1,7 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { i18nConfig } from '../src/configs/i18n';
 import { PATHS } from '../src/configs/paths';
-import { DEFAULT_LOCALE, LOCALE_CODES } from '../src/scripts/lib/i18n/data';
+import { LOCALE_CODES } from '../src/scripts/lib/i18n/data';
 
 const ROOT = process.cwd();
 const LOCALES_ROOT = path.join(ROOT, PATHS.LOCALES);
@@ -56,7 +57,7 @@ function createLocale(
 
 try {
   console.log(`Configured languages: ${LOCALE_CODES.length}`);
-  console.log(`Default: ${DEFAULT_LOCALE}\n`);
+  console.log(`Default: ${i18nConfig.defaultLocale}\n`);
 
   const existingLocales = fs.existsSync(LOCALES_ROOT)
     ? fs.readdirSync(LOCALES_ROOT).filter((f) => {
@@ -75,13 +76,13 @@ try {
     process.exit(0);
   }
 
-  const sourceDir = path.join(LOCALES_ROOT, DEFAULT_LOCALE);
+  const sourceDir = path.join(LOCALES_ROOT, i18nConfig.defaultLocale);
   if (!fs.existsSync(sourceDir)) {
     throw new Error(`Default locale directory not found: ${sourceDir}`);
   }
 
   console.log(
-    `Creating ${missingLocales.length} missing locale(s) from ${DEFAULT_LOCALE}:\n`,
+    `Creating ${missingLocales.length} missing locale(s) from ${i18nConfig.defaultLocale}:\n`,
   );
 
   let totalCreated = 0;

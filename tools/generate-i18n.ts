@@ -1,17 +1,18 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { LOCALE_FILE_EXTENSIONS, PATHS } from '../src/configs/paths';
-import { DEFAULT_LOCALE, LOCALE_CODES } from '../src/scripts/lib/i18n/data';
+import { i18nConfig } from '../src/configs/i18n';
+import { PATHS } from '../src/configs/paths';
+import { LOCALE_CODES } from '../src/scripts/lib/i18n/data';
 import { collectKeys, readJson5File } from '../src/scripts/utils/json5';
 
 const ROOT = process.cwd();
 const LOCALES_ROOT = path.join(ROOT, PATHS.LOCALES);
-const DEFAULT_LOCALE_DIR = path.join(LOCALES_ROOT, DEFAULT_LOCALE);
+const DEFAULT_LOCALE_DIR = path.join(LOCALES_ROOT, i18nConfig.defaultLocale);
 const GENERATED_DIR = path.join(ROOT, PATHS.GENERATED);
 const OUTPUT_FILE = path.join(GENERATED_DIR, 'i18n.d.ts');
 
 const INDENT = '  ';
-const LOCALE_EXTS = LOCALE_FILE_EXTENSIONS;
+const LOCALE_EXTS = ['.json5', '.json'] as const;
 
 function toTsInterface(obj: unknown, indent = INDENT): string {
   if (typeof obj !== 'object' || obj === null || Array.isArray(obj)) {

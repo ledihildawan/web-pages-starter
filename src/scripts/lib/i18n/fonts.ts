@@ -1,6 +1,10 @@
-import { FONT_STACK, type FontConfig } from '../../../configs/fonts';
+import { i18nConfig } from '../../../configs/i18n';
 import { LOCALES, type LocaleConfig } from './data';
-import { NUMBERING_SYSTEMS, type NumberingSystemCode } from './numbering-systems';
+import {
+  NUMBERING_SYSTEMS,
+  type NumberingSystemCode,
+} from './numbering-systems';
+import type { FontConfig } from './types';
 import { WRITING_SYSTEM_CODE, type WritingSystemCode } from './writing-systems';
 
 import '@fontsource-variable/noto-sans';
@@ -17,14 +21,11 @@ function getFontWeights(
     writingSystemCode === WRITING_SYSTEM_CODE.GREEK ||
     writingSystemCode === WRITING_SYSTEM_CODE.HEBREW
   ) {
-    return [fontConfig.variants.default, ''];
+    return [fontConfig.weights, ''];
   }
 
-  if (
-    writingSystemCode === WRITING_SYSTEM_CODE.CYRILLIC &&
-    fontConfig.variants.cyrillic
-  ) {
-    return [fontConfig.variants.cyrillic, 'cyrillic-'];
+  if (writingSystemCode === WRITING_SYSTEM_CODE.CYRILLIC) {
+    return [fontConfig.weights, 'cyrillic-'];
   }
 
   return null;
@@ -51,10 +52,10 @@ function createFontLoader(
 }
 
 function createPrimaryLoader(writingSystemCode: WritingSystemCode): FontLoader {
-  const loader = createFontLoader(writingSystemCode, FONT_STACK.primary);
+  const loader = createFontLoader(writingSystemCode, i18nConfig.fonts.primary);
   if (!loader) {
     throw new Error(
-      `Font "${FONT_STACK.primary.name}" not available for writing system: ${writingSystemCode}`,
+      `Font "${i18nConfig.fonts.primary.name}" not available for writing system: ${writingSystemCode}`,
     );
   }
   return loader;
@@ -191,7 +192,10 @@ function handleLoadError(context: string, err: unknown): void {
   console.warn(`[fonts] ${context}:`, message);
 }
 
-function loadFontForLang(lang: string | null, mode: 'preload' | 'dynamic'): void {
+function loadFontForLang(
+  lang: string | null,
+  mode: 'preload' | 'dynamic',
+): void {
   if (!lang) return;
 
   const locale = findLocale(lang);
@@ -214,7 +218,9 @@ function loadFontForLang(lang: string | null, mode: 'preload' | 'dynamic'): void
   const loader = SCRIPT_FONT_LOADERS[ns];
   if (!loader || loaded.has(ns)) return;
   loaded.add(ns);
-  loader().catch((err: unknown) => handleLoadError(`load failed for "${ns}"`, err));
+  loader().catch((err: unknown) =>
+    handleLoadError(`load failed for "${ns}"`, err),
+  );
 }
 
 function isLatinBased(writingSystem: WritingSystemCode): boolean {
@@ -262,7 +268,7 @@ export const setupFontStackCSS = (): void => {
   const ns = locale?.nativeNumberingSystem;
   const nsConfig = ns ? getNumberingSystemConfig(ns) : undefined;
 
-  const primaryFont = nsConfig?.fontFamily ?? FONT_STACK.primary.family;
+  const primaryFont = nsConfig?.fontFamily ?? i18nConfig.fonts.primary.family;
   document.documentElement.style.setProperty('--font-primary', primaryFont);
 };
 
@@ -280,12 +286,14 @@ export const loadFallbackFonts = (): void => {
   const locale = findLocale(lang);
   const ns = locale?.nativeNumberingSystem;
   const nsConfig = ns ? getNumberingSystemConfig(ns) : undefined;
-  const writingSystem = nsConfig?.writingSystem as WritingSystemCode | undefined;
+  const writingSystem = nsConfig?.writingSystem as
+    | WritingSystemCode
+    | undefined;
 
   if (!writingSystem || isLatinBased(writingSystem)) return;
 
-  const weights = FONT_STACK.primary.variants.default;
-  const fontName = FONT_STACK.primary.name;
+  const weights = i18nConfig.fonts.primary.weights;
+  const fontName = i18nConfig.fonts.primary.name;
 
   void Promise.all(
     weights.map((weight) => import(`@fontsource/${fontName}/${weight}.css`)),

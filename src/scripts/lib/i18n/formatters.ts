@@ -1,11 +1,19 @@
+import pluralize from 'pluralize';
 import {
   convertCurrency as convertCurrencyRaw,
   EXCHANGE_RATES,
 } from '../../../../generated/exchange-rates';
-import pluralize from 'pluralize';
-import type {
-  DateValue,
-} from '../../utils/types';
+import type { DateValue } from '../../utils/types';
+import type { CurrencyCode } from './currencies';
+import { LOCALES } from './data';
+import {
+  getCurrency,
+  getLanguageConfig,
+  getLanguageSubtag,
+  getLocale,
+} from './helpers';
+import { LANGUAGE_CODE } from './languages';
+import { NUMBERING_SYSTEM_CODE, NUMBERING_SYSTEMS } from './numbering-systems';
 import type {
   CardinalOptions,
   DurationOptions,
@@ -16,25 +24,10 @@ import type {
   RelativeTimeOptions,
   TimeFormatOptions,
 } from './types';
-import {
-  getCurrency,
-  getLanguageConfig,
-  getLanguageSubtag,
-  getLocale,
-} from './helpers';
-import { BASE_CURRENCY, type CurrencyCode } from './currencies';
-import { LOCALES } from './data';
-import { LANGUAGE_CODE } from './languages';
-import {
-  NUMBERING_SYSTEM_CODE,
-  NUMBERING_SYSTEMS,
-} from './numbering-systems';
 import { WRITING_SYSTEM } from './writing-systems';
 
 const toDateObj = (date: DateValue): Date =>
-  typeof date === 'string' || typeof date === 'number'
-    ? new Date(date)
-    : date;
+  typeof date === 'string' || typeof date === 'number' ? new Date(date) : date;
 
 const createDigitConverter =
   (digitsArray: readonly string[]) => (num: number | string) =>
@@ -182,17 +175,17 @@ const indonesianCardinal = buildCardinal('nol', (s) => `minus ${s}`, [
       r
         ? `${['', '', 'dua puluh', 'tiga puluh', 'empat puluh', 'lima puluh', 'enam puluh', 'tujuh puluh', 'delapan puluh', 'sembilan puluh'][q]} ${rec(r)}`
         : [
-            '',
-            '',
-            'dua puluh',
-            'tiga puluh',
-            'empat puluh',
-            'lima puluh',
-            'enam puluh',
-            'tujuh puluh',
-            'delapan puluh',
-            'sembilan puluh',
-          ][q],
+          '',
+          '',
+          'dua puluh',
+          'tiga puluh',
+          'empat puluh',
+          'lima puluh',
+          'enam puluh',
+          'tujuh puluh',
+          'delapan puluh',
+          'sembilan puluh',
+        ][q],
   },
   {
     limit: 1_000,
@@ -406,18 +399,18 @@ const ORDINAL_STRATEGY: Record<string, (num: number) => string> = {
   id: (num) =>
     num < 11
       ? [
-          'ke-',
-          'kesatu',
-          'kedua',
-          'ketiga',
-          'keempat',
-          'kelima',
-          'keenam',
-          'ketujuh',
-          'kedelapan',
-          'kesembilan',
-          'kesepuluh',
-        ][num]
+        'ke-',
+        'kesatu',
+        'kedua',
+        'ketiga',
+        'keempat',
+        'kelima',
+        'keenam',
+        'ketujuh',
+        'kedelapan',
+        'kesembilan',
+        'kesepuluh',
+      ][num]
       : `ke-${num}`,
   ja: (num) => `第${num < 1 ? num : japaneseCardinal(num)}`,
   ar: (num) => {
@@ -886,18 +879,8 @@ export const localPrice = (plan: RegionalPrice): number => {
   return plan.pricing.base;
 };
 
-export const localPriceCurrency = (plan: RegionalPrice) => {
-  const locale = getLocale();
-
-  if (!plan?.pricing) {
-    return BASE_CURRENCY;
-  }
-
-  if (plan.pricing[locale]) {
-    return getCurrency(locale);
-  }
-
-  return BASE_CURRENCY;
+export const localPriceCurrency = (_plan: RegionalPrice) => {
+  return getCurrency(getLocale());
 };
 
 export const convertCurrency = (
@@ -905,13 +888,10 @@ export const convertCurrency = (
   targetCurrency?: string,
   options?: FormatOptions,
 ) => {
-  const currency =
-    targetCurrency ||
-    LOCALES.find((l) => l.code === getLocale())?.currency ||
-    BASE_CURRENCY;
+  const currency = targetCurrency || getCurrency(getLocale());
   const converted = convertCurrencyRaw(
     value,
-    BASE_CURRENCY,
+    getCurrency(getLocale()),
     currency,
     EXCHANGE_RATES,
   );
@@ -926,10 +906,7 @@ export const convertLocalPrice = (
 ) => {
   const price = localPrice(plan);
   const fromCurrency = localPriceCurrency(plan);
-  const toCurrency =
-    targetCurrency ||
-    LOCALES.find((l) => l.code === getLocale())?.currency ||
-    BASE_CURRENCY;
+  const toCurrency = targetCurrency || getCurrency(getLocale());
 
   if (fromCurrency === toCurrency) {
     return formatCurrency(price, toCurrency, options);
@@ -965,10 +942,7 @@ export const formatLocalPriceDiscounted = (
 ) => {
   const price = localPrice(plan) * discountMultiplier;
   const fromCurrency = localPriceCurrency(plan);
-  const toCurrency =
-    targetCurrency ||
-    LOCALES.find((l) => l.code === getLocale())?.currency ||
-    BASE_CURRENCY;
+  const toCurrency = targetCurrency || getCurrency(getLocale());
 
   if (fromCurrency === toCurrency) {
     return formatCurrency(price, toCurrency, options);

@@ -1,12 +1,13 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { EXCHANGE_RATES_URL, PATHS } from '../src/configs/paths';
-import { BASE_CURRENCY } from '../src/scripts/lib/i18n/currencies';
+import { PATHS } from '../src/configs/paths';
+import { CURRENCY_CODE } from '../src/scripts/lib/i18n/currencies';
 import { LOCALES } from '../src/scripts/lib/i18n/data';
 
+const EXCHANGE_RATES_URL = 'https://api.frankfurter.dev/v2/rates';
 const GENERATED_DIR = path.resolve(process.cwd(), PATHS.GENERATED);
 const EXCHANGE_RATES_FILE = path.resolve(GENERATED_DIR, 'exchange-rates.ts');
-
+const BASE_CURRENCY = CURRENCY_CODE.USD;
 const LOCALE_CURRENCIES = [...new Set(LOCALES.map((l) => l.currency))];
 
 async function fetchExchangeRates(): Promise<Record<string, number>> {

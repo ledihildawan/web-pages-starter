@@ -1,11 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { i18nConfig } from '../src/configs/i18n';
 import { PATHS } from '../src/configs/paths';
-import { DEFAULT_LOCALE, LOCALE_CODES } from '../src/scripts/lib/i18n/data';
+import { LOCALE_CODES } from '../src/scripts/lib/i18n/data';
 import { collectKeys, readJSON5 } from '../src/scripts/utils/json5';
 
 const LOCALES_DIR = path.resolve(PATHS.LOCALES);
-const BASE_LOCALE = DEFAULT_LOCALE;
+const BASE_LOCALE = i18nConfig.defaultLocale;
 
 const collectKeySet = (obj: unknown): Set<string> => new Set(collectKeys(obj));
 

@@ -47,7 +47,6 @@ import {
 import { LANGUAGE_CODE, LANGUAGES, SCRIPT_CODE } from './languages';
 import { REGION_CODE, type RegionCode } from './regions';
 
-export { BASE_CURRENCY } from './currencies';
 export { LOCALE_FALLBACKS } from './fallbacks';
 
 export type {

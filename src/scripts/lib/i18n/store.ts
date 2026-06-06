@@ -1,6 +1,7 @@
-import { getLocaleLabelCountry, LOCALE_STORAGE_KEY } from './index';
-import { LOCALE, LOCALE_CODES, LOCALES, type LocaleCode } from './data';
+import { i18nConfig } from '../../../configs/i18n';
+import { LOCALE_CODES, LOCALES } from './data';
 import { DIRECTION_CODE } from './directions';
+import { getLocaleLabelCountry, LOCALE_STORAGE_KEY } from './index';
 
 const updateDocumentAttributes = (code: string): void => {
   const locale = LOCALES.find((l) => l.code === code);
@@ -36,14 +37,18 @@ export function registerI18nStore(): void {
   if (typeof window === 'undefined' || !globalThis.Alpine) return;
 
   globalThis.Alpine.store('i18n', {
-    languages: LOCALES.map((l) => ({
-      code: l.code,
-      label: getLocaleLabelCountry(l.code),
-      flag: l.flag.toLowerCase(),
-    })).filter((l) => LOCALE_CODES.includes(l.code)),
+    languages: LOCALES.filter((l) => LOCALE_CODES.includes(l.code)).map(
+      (l) => ({
+        code: l.code,
+        label: getLocaleLabelCountry(l.code),
+        flag: l.flag.toLowerCase(),
+      }),
+    ),
 
     get current(): string {
-      return localStorage.getItem(LOCALE_STORAGE_KEY) || LOCALE.EN_US;
+      return (
+        localStorage.getItem(LOCALE_STORAGE_KEY) || i18nConfig.defaultLocale
+      );
     },
 
     change(code: string): void {
@@ -54,7 +59,7 @@ export function registerI18nStore(): void {
       });
     },
   } satisfies {
-    languages: Array<{ code: LocaleCode; label: string; flag: string }>;
+    languages: Array<{ code: string; label: string; flag: string }>;
     current: string;
     change: (code: string) => void;
   });

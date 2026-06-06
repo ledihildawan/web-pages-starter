@@ -190,10 +190,8 @@ export const CURRENCY_CODES = CURRENCIES.map((c) => c.code) as CurrencyCode[];
 export const CURRENCY_CODE = Object.fromEntries(
   CURRENCY_CODES.map((currency) => [currency.toUpperCase(), currency] as const),
 ) as {
-  [K in CurrencyCode as Uppercase<K>]: K;
-};
+    [K in CurrencyCode as Uppercase<K>]: K;
+  };
 
 export type CurrencyCode = (typeof CURRENCIES)[number]['code'];
 export type CurrencyConfig = (typeof CURRENCIES)[number];
-
-export const BASE_CURRENCY: CurrencyCode = CURRENCY_CODE.USD;

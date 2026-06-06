@@ -1,6 +1,12 @@
+import { i18nConfig } from '../../../configs/i18n';
 import { CALENDAR_CODE } from './calendars';
-import { BASE_CURRENCY, type CurrencyCode } from './currencies';
-import { DEFAULT_LOCALE, LOCALE_CODES, LOCALES, type LocaleCode, type LocaleConfig } from './data';
+import type { CurrencyCode } from './currencies';
+import {
+  LOCALE_CODES,
+  LOCALES,
+  type LocaleCode,
+  type LocaleConfig,
+} from './data';
 import { DIRECTION_CODE, type DirectionCode } from './directions';
 import { LOCALE_FALLBACKS } from './fallbacks';
 import type { LanguageCode } from './languages';
@@ -14,17 +20,17 @@ export const getFallbackChain = (locale: string): LocaleCode[] => {
   const explicitFallback =
     LOCALE_FALLBACKS[locale as keyof typeof LOCALE_FALLBACKS];
   if (explicitFallback) {
-    return [explicitFallback, DEFAULT_LOCALE];
+    return [explicitFallback, i18nConfig.defaultLocale];
   }
 
   const languageSubtag = locale.split('-')[0];
   const matched = LOCALE_CODES.find((c) => c.startsWith(`${languageSubtag}-`));
 
   if (matched) {
-    return [matched, DEFAULT_LOCALE];
+    return [matched, i18nConfig.defaultLocale];
   }
 
-  return [DEFAULT_LOCALE];
+  return [i18nConfig.defaultLocale];
 };
 
 let currentLocale: LocaleCode | undefined;
@@ -35,13 +41,13 @@ export const setLocale = (locale: LocaleCode): void => {
 
 export const getLocale = (locale?: LocaleCode): LocaleCode => {
   const target = locale || currentLocale;
-  if (!target) return DEFAULT_LOCALE;
+  if (!target) return i18nConfig.defaultLocale;
 
   if (LOCALE_CODES.includes(target)) {
     return target;
   }
 
-  return getFallbackChain(target)[0] ?? DEFAULT_LOCALE;
+  return getFallbackChain(target)[0] ?? i18nConfig.defaultLocale;
 };
 
 export const getLanguageSubtag = (locale: LocaleCode): LanguageCode => {
@@ -57,7 +63,7 @@ export const getLanguageConfig = (
   LOCALES.find((l) => l.code === locale || locale.startsWith(`${l.code}-`));
 
 export const getCurrency = (locale: LocaleCode): CurrencyCode =>
-  getLanguageConfig(locale)?.currency || BASE_CURRENCY;
+  getLanguageConfig(locale)?.currency || LOCALES[0].currency;
 
 export const getTimezone = (locale: LocaleCode): string =>
   getLanguageConfig(locale)?.timezone || 'UTC';

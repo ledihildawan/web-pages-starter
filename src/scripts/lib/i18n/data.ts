@@ -776,16 +776,14 @@ export const LOCALES = [
 
 export const LOCALE_CODES = LOCALES.map((l) => l.code) as LocaleCode[];
 
-export const LOCALE = Object.fromEntries(
-  LOCALES.map((locale) => [
-    locale.code.replace(/-/g, '_').toUpperCase(),
-    locale.code,
+export const LOCALE_CODE = Object.fromEntries(
+  LOCALE_CODES.map((code) => [
+    code.replace(/-/g, '_').toUpperCase(),
+    code,
   ] as const),
 ) as {
-  [K in LocaleCode as ReplaceAll<Uppercase<K>, '-', '_'>]: K;
-};
+    [K in LocaleCode as ReplaceAll<Uppercase<K>, '-', '_'>]: K;
+  };
 
 export type LocaleCode = (typeof LOCALES)[number]['code'];
 export type LocaleConfig = (typeof LOCALES)[number];
-
-export const DEFAULT_LOCALE: LocaleCode = LOCALE.ID_ID;

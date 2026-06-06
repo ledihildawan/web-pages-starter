@@ -3,7 +3,7 @@ import type { I18nTranslationKeys } from '@generated/i18n';
 import i18next, { type Resource } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import type { DateTimePreset } from '../../utils/types';
-import { BASE_CURRENCY } from './currencies';
+import { CURRENCY_CODE } from './currencies';
 import { LOCALE_CODES, LOCALES, type LocaleCode } from './data';
 import {
   formatAbbreviated,
@@ -178,7 +178,7 @@ const FORMATTERS = [
       const discountStr = el.getAttribute('data-discount');
 
       let price = 0;
-      let fromCurrency = BASE_CURRENCY;
+      let fromCurrency: string = CURRENCY_CODE.USD;
       const locale = getLocale();
 
       try {
@@ -188,7 +188,7 @@ const FORMATTERS = [
           fromCurrency = getCurrency(locale);
         } else if (pricing.base) {
           price = pricing.base;
-          fromCurrency = BASE_CURRENCY;
+          fromCurrency = CURRENCY_CODE.USD;
         }
       } catch { }
 
@@ -214,8 +214,8 @@ const FORMATTERS = [
       const unit = el.getAttribute('data-unit');
       return unit
         ? formatUnit(parseFloat(v), unit, {
-            nativeDigits: el.getAttribute('data-use-native') === 'true',
-          })
+          nativeDigits: el.getAttribute('data-use-native') === 'true',
+        })
         : v;
     },
   },
@@ -275,11 +275,11 @@ export async function initIntl(): Promise<void> {
   for (const [lngKey, data] of Object.entries(rawData)) {
     const compData = data.comp
       ? Object.fromEntries(
-          Object.entries(data.comp).map(([name, content]) => [
-            `components/${name}`,
-            content,
-          ]),
-        )
+        Object.entries(data.comp).map(([name, content]) => [
+          `components/${name}`,
+          content,
+        ]),
+      )
       : {};
 
     resources[lngKey] = {

@@ -45,7 +45,7 @@ The build picks up the page automatically; no router config to touch.
 ```
 src/
 ├── configs/
-│   ├── locales.ts        # languages, regions, currencies, timezones, fallbacks (single source of truth)
+│   ├── i18n.ts           # defaultLocale + fonts config (the only file you edit for setup)
 │   └── paths.ts          # filesystem path constants
 ├── pages/                # routes — one folder per page
 │   └── {page}/
@@ -60,7 +60,10 @@ src/
 │       ├── common.json5
 │       ├── {page}.json5
 │       └── components/{name}.json5
-├── scripts/              # client TS — bootstrap, i18n, stores, formatters
+├── scripts/
+│   ├── lib/i18n/         # i18n engine — data, formatters, runtime, store, template, fonts
+│   ├── main.ts           # app bootstrap
+│   └── components/       # client-side components
 ├── styles/               # global styles (Tailwind entry)
 ├── assets/               # images, fonts, raw assets
 └── types/                # shared TS types
@@ -83,7 +86,7 @@ src/locales/{locale}/*.json5
               exposes window.__I18N_DATA__ for every locale
                        │
                        ▼
-              src/scripts/lib/i18n.ts
+              src/scripts/lib/i18n/runtime.ts
                   i18next.init(...)
                   translatePage()          (data-i18n, data-i18n-plural, …)
                   updateFormattedElements() (data-format-*, data-convert-*, …)
@@ -127,7 +130,7 @@ The same translation key (`i18n.t('page.hero.title')`) renders the initial HTML 
 
 ## Locales
 
-42 locales are configured in [`src/scripts/lib/i18n/data.ts`](src/scripts/lib/i18n/data.ts) (re-exported via [`src/scripts/lib/i18n/index.ts`](src/scripts/lib/i18n/index.ts)). The default is `id-ID`. Add a new locale by adding an entry there and running `bun run sync:locales`.
+42 locales are configured in [`src/scripts/lib/i18n/data.ts`](src/scripts/lib/i18n/data.ts). The default locale is set in [`src/configs/i18n.ts`](src/configs/i18n.ts) (`i18nConfig.defaultLocale`, currently `id-ID`). Add a new locale by adding an entry to `data.ts` and running `bun run sync:locales`.
 
 Highlights:
 

@@ -1,24 +1,17 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import type { I18nTranslationKeys } from '../../../../generated/i18n';
+import { i18nConfig } from '../../../configs/i18n';
 import { PATHS } from '../../../configs/paths';
-import type {
-  DateValue,
-  JsonData,
-} from '../../utils/types';
-import type {
-  FormatOptions,
-  I18nItem,
-  TemplateParams,
-} from './types';
 import { getValueByPath } from '../../utils/common';
-import type { CurrencyCode } from './currencies';
 import {
-  DEFAULT_LOCALE,
-  LOCALES,
-  type LocaleCode,
-  type LocaleConfig,
-} from './data';
+  loadGlobalData,
+  loadSelectedComponentLocales,
+  readJSON5,
+} from '../../utils/json5';
+import type { DateValue, JsonData } from '../../utils/types';
+import type { CurrencyCode } from './currencies';
+import { LOCALES, type LocaleCode, type LocaleConfig } from './data';
 import {
   convertCurrency,
   convertLocalPrice,
@@ -48,12 +41,8 @@ import {
   singular,
   toNativeDigits,
 } from './index';
-import {
-  loadGlobalData,
-  loadSelectedComponentLocales,
-  readJSON5,
-} from '../../utils/json5';
 import { NUMBERING_SYSTEMS } from './numbering-systems';
+import type { FormatOptions, I18nItem, TemplateParams } from './types';
 
 interface TemplateFormatOptions extends FormatOptions {
   raw?: boolean;
@@ -96,9 +85,9 @@ const generateClientI18nScript = (
   lang: string,
   name: string,
   usedComponents: string[],
-  supportedLangs: string[],
+  supportedLangs: readonly string[],
   LOCALE_STORAGE_KEY: string,
-  LOCALES: typeof import('./data').LOCALES,
+  locales: typeof LOCALES,
 ): string => {
   const allI18nData = Object.fromEntries(
     supportedLangs.map((l) => [
@@ -127,7 +116,7 @@ const generateClientI18nScript = (
   const pathLocale = pathParts[0]?.match(/^[a-z]{2}(-[A-Z]{2})?$/)?.[0];
 
   const savedLocale = localStorage.getItem('${LOCALE_STORAGE_KEY}') ?? pathLocale ?? defaultLocale;
-  const locales = ${JSON.stringify(LOCALES)};
+  const locales = ${JSON.stringify(locales)};
   const numberingSystemFonts = ${JSON.stringify(numberingSystemFonts)};
 
   window.__PAGE_ID__ = ${JSON.stringify(name)};
@@ -643,10 +632,10 @@ const createI18nObject = (
 export const createTemplateParams = (
   params: TemplateParams,
   LOCALE_STORAGE_KEY: string,
-  LOCALE_CODES: string[],
+  LOCALE_CODES: readonly string[],
 ) => {
   const name = String(params.entryName || 'home');
-  const lang = DEFAULT_LOCALE;
+  const lang = i18nConfig.defaultLocale;
 
   const templatePath = resolveRoot(`${PATHS.SRC}/pages/${name}/index.njk`);
   const usedComponents = getUsedComponents(templatePath);
