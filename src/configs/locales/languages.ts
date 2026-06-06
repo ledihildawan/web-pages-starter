@@ -113,22 +113,14 @@ export const SCRIPTS = [
 export const LANGUAGE_CODES = LANGUAGES.map((l) => l.code) as LanguageCode[];
 export const SCRIPT_CODES = SCRIPTS.map((s) => s.code) as ScriptCode[];
 
-export const LANGUAGE_CODE = LANGUAGE_CODES.reduce(
-  (acc, language) => {
-    const key = language.toUpperCase();
-    return Object.assign(acc, { [key]: language });
-  },
-  {} as Record<string, LanguageCode>,
+export const LANGUAGE_CODE = Object.fromEntries(
+  LANGUAGE_CODES.map((language) => [language.toUpperCase(), language] as const),
 ) as {
   [K in LanguageCode as Uppercase<K>]: K;
 };
 
-export const SCRIPT_CODE = SCRIPT_CODES.reduce(
-  (acc, script) => {
-    const key = script.toUpperCase();
-    return Object.assign(acc, { [key]: script });
-  },
-  {} as Record<string, ScriptCode>,
+export const SCRIPT_CODE = Object.fromEntries(
+  SCRIPT_CODES.map((script) => [script.toUpperCase(), script] as const),
 ) as {
   [K in ScriptCode as Uppercase<K>]: K;
 };

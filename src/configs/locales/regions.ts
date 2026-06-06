@@ -773,12 +773,8 @@ export const REGIONS = [
 
 export const REGION_CODES = REGIONS.map((r) => r.code) as RegionCode[];
 
-export const REGION_CODE = REGION_CODES.reduce(
-  (acc, region) => {
-    const key = region.toUpperCase();
-    return Object.assign(acc, { [key]: region });
-  },
-  {} as Record<string, RegionCode>,
+export const REGION_CODE = Object.fromEntries(
+  REGION_CODES.map((region) => [region.toUpperCase(), region] as const),
 ) as {
   [K in RegionCode as Uppercase<K>]: K;
 };

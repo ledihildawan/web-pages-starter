@@ -776,12 +776,11 @@ export const LOCALES = [
 
 export const LOCALE_CODES = LOCALES.map((l) => l.code) as LocaleCode[];
 
-export const LOCALE = LOCALES.reduce(
-  (acc, locale) => {
-    const key = locale.code.replace(/-/g, '_').toUpperCase();
-    return Object.assign(acc, { [key]: locale.code });
-  },
-  {} as Record<string, LocaleCode>,
+export const LOCALE = Object.fromEntries(
+  LOCALES.map((locale) => [
+    locale.code.replace(/-/g, '_').toUpperCase(),
+    locale.code,
+  ] as const),
 ) as {
   [K in LocaleCode as ReplaceAll<Uppercase<K>, '-', '_'>]: K;
 };

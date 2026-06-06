@@ -29,12 +29,8 @@ export const DIRECTIONS = [
 
 export const DIRECTION_CODES = DIRECTIONS.map((d) => d.code) as DirectionCode[];
 
-export const DIRECTION_CODE = DIRECTION_CODES.reduce(
-  (acc, dir) => {
-    const key = dir.toUpperCase();
-    return Object.assign(acc, { [key]: dir });
-  },
-  {} as Record<string, DirectionCode>,
+export const DIRECTION_CODE = Object.fromEntries(
+  DIRECTION_CODES.map((dir) => [dir.toUpperCase(), dir] as const),
 ) as {
   [K in DirectionCode as Uppercase<K>]: K;
 };

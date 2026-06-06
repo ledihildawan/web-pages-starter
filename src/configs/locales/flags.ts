@@ -49,12 +49,8 @@ export const FLAGS = [
 
 export const FLAG_CODES = FLAGS.map((f) => f.code) as FlagCode[];
 
-export const FLAG_CODE = FLAG_CODES.reduce(
-  (acc, flag) => {
-    const key = flag.toUpperCase();
-    return Object.assign(acc, { [key]: flag });
-  },
-  {} as Record<string, FlagCode>,
+export const FLAG_CODE = Object.fromEntries(
+  FLAG_CODES.map((flag) => [flag.toUpperCase(), flag] as const),
 ) as {
   [K in FlagCode as Uppercase<K>]: K;
 };

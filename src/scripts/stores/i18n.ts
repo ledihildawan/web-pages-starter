@@ -7,10 +7,38 @@ import {
 } from '@/configs/locales/data';
 import { DIRECTION_CODE } from '@/configs/locales/directions';
 
+const updateDocumentAttributes = (code: string): void => {
+  const locale = LOCALES.find((l) => l.code === code);
+  if (!locale) return;
+
+  const htmlEl = document.documentElement;
+  htmlEl.setAttribute('lang', code);
+  htmlEl.setAttribute('dir', locale.dir);
+  htmlEl.setAttribute('data-script', locale.writingSystem);
+  htmlEl.classList.toggle('is-rtl', locale.dir === DIRECTION_CODE.RTL);
+};
+
+const refreshFonts = async (): Promise<void> => {
+  const fonts = await import('@/scripts/lib/font-loader');
+  fonts.setupFontStackCSS();
+  fonts.loadLanguageFonts();
+  fonts.loadFallbackFonts();
+};
+
+const changeLanguage = async (code: string): Promise<void> => {
+  const m = await import('@/scripts/lib/i18n');
+  if (!m.i18next.isInitialized) return;
+
+  await m.i18next.changeLanguage(code);
+  updateDocumentAttributes(code);
+  m.translatePage();
+  m.updateFormattedElements();
+  m.updateI18nStoreLabels?.();
+  await refreshFonts();
+};
+
 export function registerI18nStore(): void {
-  if (typeof window === 'undefined' || !globalThis.Alpine) {
-    return;
-  }
+  if (typeof window === 'undefined' || !globalThis.Alpine) return;
 
   globalThis.Alpine.store('i18n', {
     languages: LOCALES.map((l) => ({
@@ -25,33 +53,9 @@ export function registerI18nStore(): void {
 
     change(code: string): void {
       localStorage.setItem(LOCALE_STORAGE_KEY, code);
-
-      import('@/scripts/lib/i18n').then((m) => {
-        if (m.i18next.isInitialized) {
-          m.i18next.changeLanguage(code).then(() => {
-            const locale = LOCALES.find((l) => l.code === code);
-            if (locale) {
-              const htmlEl = document.documentElement;
-              htmlEl.setAttribute('lang', code);
-              htmlEl.setAttribute('dir', locale.dir);
-              htmlEl.setAttribute('data-script', locale.writingSystem);
-              htmlEl.classList.toggle(
-                'is-rtl',
-                locale.dir === DIRECTION_CODE.RTL,
-              );
-            }
-
-            m.translatePage();
-            m.updateFormattedElements();
-            m.updateI18nStoreLabels?.();
-
-            import('@/scripts/main').then((mainModule) => {
-              mainModule.setupFontStackCSS();
-              mainModule.loadLanguageFonts();
-              mainModule.loadFallbackFonts();
-            });
-          });
-        }
+      void changeLanguage(code).catch((err: unknown) => {
+        const message = err instanceof Error ? err.message : String(err);
+        console.error('[i18n change] failed:', message);
       });
     },
   } satisfies {

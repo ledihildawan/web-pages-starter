@@ -187,12 +187,8 @@ export const CURRENCIES = [
 
 export const CURRENCY_CODES = CURRENCIES.map((c) => c.code) as CurrencyCode[];
 
-export const CURRENCY_CODE = CURRENCY_CODES.reduce(
-  (acc, currency) => {
-    const key = currency.toUpperCase();
-    return Object.assign(acc, { [key]: currency });
-  },
-  {} as Record<string, CurrencyCode>,
+export const CURRENCY_CODE = Object.fromEntries(
+  CURRENCY_CODES.map((currency) => [currency.toUpperCase(), currency] as const),
 ) as {
   [K in CurrencyCode as Uppercase<K>]: K;
 };

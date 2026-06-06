@@ -14,12 +14,8 @@ export const CALENDARS = [
 
 export const CALENDAR_CODES = CALENDARS.map((c) => c.code) as CalendarCode[];
 
-export const CALENDAR_CODE = CALENDAR_CODES.reduce(
-  (acc, calendar) => {
-    const key = calendar.toUpperCase();
-    return Object.assign(acc, { [key]: calendar });
-  },
-  {} as Record<string, CalendarCode>,
+export const CALENDAR_CODE = Object.fromEntries(
+  CALENDAR_CODES.map((calendar) => [calendar.toUpperCase(), calendar] as const),
 ) as {
   [K in CalendarCode as Uppercase<K>]: K;
 };

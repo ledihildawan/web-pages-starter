@@ -194,22 +194,24 @@ const indonesianCardinal = buildCardinal('nol', (s) => `minus ${s}`, [
   {
     limit: 1_000,
     div: 100,
-    format: (_, q, r, rec) =>
-      r
-        ? `${q === 1 ? 'seratus' : `${rec(q)} ratus`} ${rec(r)}`
-        : q === 1
-          ? 'seratus'
-          : `${rec(q)} ratus`,
+    format: (_, q, r, rec) => {
+      if (r) {
+        const prefix = q === 1 ? 'seratus' : `${rec(q)} ratus`;
+        return `${prefix} ${rec(r)}`;
+      }
+      return q === 1 ? 'seratus' : `${rec(q)} ratus`;
+    },
   },
   {
     limit: 1_000_000,
     div: 1_000,
-    format: (_, q, r, rec) =>
-      r
-        ? `${q === 1 ? 'seribu' : `${rec(q)} ribu`} ${rec(r)}`
-        : q === 1
-          ? 'seribu'
-          : `${rec(q)} ribu`,
+    format: (_, q, r, rec) => {
+      if (r) {
+        const prefix = q === 1 ? 'seribu' : `${rec(q)} ribu`;
+        return `${prefix} ${rec(r)}`;
+      }
+      return q === 1 ? 'seribu' : `${rec(q)} ribu`;
+    },
   },
   {
     limit: 1_000_000_000,
@@ -354,25 +356,28 @@ const arabicCardinal = buildCardinal('صِفْر', (s) => `سالب ${s}`, [
   {
     limit: 1_000,
     div: 100,
-    format: (_, q, r, rec) =>
-      r
-        ? `${q === 1 ? 'مِئة' : `${rec(q)} مِئة`} و${rec(r)}`
-        : q === 1
-          ? 'مِئة'
-          : `${rec(q)} مِئة`,
+    format: (_, q, r, rec) => {
+      if (r) {
+        const prefix = q === 1 ? 'مِئة' : `${rec(q)} مِئة`;
+        return `${prefix} و${rec(r)}`;
+      }
+      return q === 1 ? 'مِئة' : `${rec(q)} مِئة`;
+    },
   },
   {
     limit: 1_000_000,
     div: 1_000,
     format: (_, q, r, rec) => {
-      const tw =
-        q === 1
-          ? 'ألف'
-          : q === 2
-            ? 'ألفان'
-            : q > 2 && q < 11
-              ? `${rec(q)} آلاف`
-              : `${rec(q)} ألف`;
+      let tw: string;
+      if (q === 1) {
+        tw = 'ألف';
+      } else if (q === 2) {
+        tw = 'ألفان';
+      } else if (q > 2 && q < 11) {
+        tw = `${rec(q)} آلاف`;
+      } else {
+        tw = `${rec(q)} ألف`;
+      }
       return r ? `${tw} و${rec(r)}` : tw;
     },
   },
@@ -684,19 +689,27 @@ export const formatScientific = (
       invalid: String,
       intlFallback: (n) => {
         const exp = Math.floor(Math.log10(Math.abs(n)));
-        const expStr =
-          numberingSystem === 'arab'
-            ? ` × ١٠${Math.abs(exp)}`
-            : numberingSystem === 'deva'
-              ? ` × १०${Math.abs(exp)}`
-              : `×10${Math.abs(exp)}`;
+        let expStr: string;
+        if (numberingSystem === 'arab') {
+          expStr = ` × ١٠${Math.abs(exp)}`;
+        } else if (numberingSystem === 'deva') {
+          expStr = ` × १०${Math.abs(exp)}`;
+        } else {
+          expStr = `×10${Math.abs(exp)}`;
+        }
         return `${n < 0 ? '-' : ''}${(Math.abs(n) / 10 ** exp).toFixed(exp === 0 ? 0 : 1)}${expStr}`;
       },
       cjk: (n, languageSubtag) => {
         const exp = Math.floor(Math.log10(Math.abs(n)));
         const cMan = formatCardinal(Math.abs(n) / 10 ** exp);
         const cExp = formatCardinal(10 ** Math.abs(exp));
-        return `${n < 0 ? (languageSubtag === LANGUAGE_CODE.JA ? 'マイナス' : '负') : ''}${cMan}×${cExp}`;
+        const minus =
+          n < 0
+            ? languageSubtag === LANGUAGE_CODE.JA
+              ? 'マイナス'
+              : '负'
+            : '';
+        return `${minus}${cMan}×${cExp}`;
       },
       arabicFallback: (n) => {
         const exp = Math.floor(Math.log10(Math.abs(n)));
@@ -765,7 +778,14 @@ export const formatAbbreviated = (
 
     const suffix = ['', 'K', 'M', 'B', 'T'][tier];
     const scaled = value / 10 ** (tier * 3);
-    const decimals = scaled % 1 === 0 ? 0 : scaled % 0.1 === 0 ? 1 : 2;
+    let decimals: number;
+    if (scaled % 1 === 0) {
+      decimals = 0;
+    } else if (scaled % 0.1 === 0) {
+      decimals = 1;
+    } else {
+      decimals = 2;
+    }
 
     return (
       formatNumber(scaled, {

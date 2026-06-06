@@ -242,12 +242,8 @@ export const NUMBERING_SYSTEM_CODES = NUMBERING_SYSTEMS.map(
   (c) => c.code,
 ) as NumberingSystemCode[];
 
-export const NUMBERING_SYSTEM_CODE = NUMBERING_SYSTEM_CODES.reduce(
-  (acc, ns) => {
-    const key = ns.toUpperCase();
-    return Object.assign(acc, { [key]: ns });
-  },
-  {} as Record<string, NumberingSystemCode>,
+export const NUMBERING_SYSTEM_CODE = Object.fromEntries(
+  NUMBERING_SYSTEM_CODES.map((ns) => [ns.toUpperCase(), ns] as const),
 ) as {
   [K in NumberingSystemCode as Uppercase<K>]: K;
 };

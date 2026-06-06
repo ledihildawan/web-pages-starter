@@ -1,3 +1,5 @@
+import type { ReplaceAll } from '../../types/helpers';
+
 export const TIMEZONES = [
   {
     code: 'Africa/Cairo',
@@ -323,18 +325,13 @@ export const TIMEZONES = [
 
 export const TIMEZONE_CODES = TIMEZONES.map((t) => t.code) as TimezoneCode[];
 
-export const TIMEZONE_CODE = TIMEZONE_CODES.reduce(
-  (acc, timezone) => {
-    const key = timezone.replace(/\//g, '_').toUpperCase();
-    return Object.assign(acc, { [key]: timezone });
-  },
-  {} as Record<string, TimezoneCode>,
+export const TIMEZONE_CODE = Object.fromEntries(
+  TIMEZONE_CODES.map(
+    (timezone) =>
+      [timezone.replace(/\//g, '_').toUpperCase(), timezone] as const,
+  ),
 ) as {
-  [K in TimezoneCode as K extends `${infer R}/${infer C}`
-    ? `${Uppercase<R>}_${Uppercase<C>}`
-    : never]: K;
-} & {
-  AMERICA_ARGENTINA_BUENOS_AIRES: 'America/Argentina/Buenos_Aires';
+  [K in TimezoneCode as ReplaceAll<Uppercase<K>, '/', '_'>]: K;
 };
 
 export type TimezoneCode = (typeof TIMEZONES)[number]['code'];

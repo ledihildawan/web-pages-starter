@@ -90,12 +90,13 @@ export const getLocaleLabelCountry = (localeCode: LocaleCode): string => {
 
   if (!language) return localeCode;
 
-  const nativeName =
-    locale.language === LANGUAGE_CODE.ZH && locale.script
-      ? locale.script === SCRIPT_CODE.HANS
-        ? '简体中文'
-        : '繁體中文'
-      : language.nativeName;
+  let nativeName: string;
+  if (locale.language === LANGUAGE_CODE.ZH && locale.script) {
+    nativeName =
+      locale.script === SCRIPT_CODE.HANS ? '简体中文' : '繁體中文';
+  } else {
+    nativeName = language.nativeName;
+  }
   const regionSuffix = ` (${getLocaleDisplayRegion(locale.region)})`;
 
   return `${nativeName}${regionSuffix}`;

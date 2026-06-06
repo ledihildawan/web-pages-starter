@@ -243,24 +243,19 @@ export const WRITING_SYSTEM_CODES = WRITING_SYSTEMS.map(
   (ws) => ws.code,
 ) as WritingSystemCode[];
 
-export const WRITING_SYSTEM_CODE = WRITING_SYSTEM_CODES.reduce(
-  (acc, writingSystem) => {
-    const key = writingSystem.toUpperCase();
-    return Object.assign(acc, { [key]: writingSystem });
-  },
-  {} as Record<string, WritingSystemCode>,
+export const WRITING_SYSTEM_CODE = Object.fromEntries(
+  WRITING_SYSTEM_CODES.map(
+    (writingSystem) => [writingSystem.toUpperCase(), writingSystem] as const,
+  ),
 ) as {
   [K in WritingSystemCode as Uppercase<K>]: K;
 };
 
-export const WRITING_SYSTEM = WRITING_SYSTEMS.reduce(
-  (acc, ws) => {
-    return Object.assign(acc, {
-      [ws.code.toUpperCase()]: ws.code,
-      [`${ws.code.toUpperCase()}_LANGUAGES`]: ws.languages,
-    });
-  },
-  {} as Record<string, WritingSystemCode | readonly LanguageCode[]>,
+export const WRITING_SYSTEM = Object.fromEntries(
+  WRITING_SYSTEMS.flatMap((ws) => [
+    [ws.code.toUpperCase(), ws.code],
+    [`${ws.code.toUpperCase()}_LANGUAGES`, ws.languages],
+  ] as const),
 ) as typeof WRITING_SYSTEM_CODE & {
   [K in WritingSystemCode as `${Uppercase<K>}_LANGUAGES`]: readonly LanguageCode[];
 };
