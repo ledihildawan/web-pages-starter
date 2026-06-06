@@ -159,14 +159,14 @@
     "title": "Unit Formatting"
   },
   "native_digits": {
-    "title": "Native Digits (SSR)",
-    "description": "Text with ASCII digits is rendered in the active locale's native digits. SSR only — not refreshed at runtime."
+    "title": "Native Digits",
+    "description": "Text with ASCII digits is rendered in the active locale's native digits. Refreshed live on language switch."
   },
   "inflection": {
-    "title": "English Inflection (SSR)",
-    "description": "English pluralization and singularization at SSR. Not refreshed at runtime."
+    "title": "English Inflection",
+    "description": "English pluralization and singularization. Refreshed live on language switch."
   },
-  "ssr_only": "Initial only",
+  "live_label": "Live",
   "pricing_details": {
     "title": "Pricing Details",
     "description": "Full pipeline: raw value, currency code, formatted, discounted, and converted.",

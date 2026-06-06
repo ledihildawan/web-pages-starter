@@ -170,11 +170,14 @@ const createI18nObject = (
   };
 
   const buildAttrs = (
-    base: Record<string, string | number | boolean>,
+    base: Record<string, string | number | boolean | undefined>,
     vars?: string | null,
     nativeDigits?: boolean,
   ): Record<string, string | number | boolean> => {
-    const result = { ...base };
+    const result: Record<string, string | number | boolean> = {};
+    for (const [key, value] of Object.entries(base)) {
+      if (value !== undefined) result[key] = value;
+    }
     if (vars) result['i18n-vars'] = vars;
     if (nativeDigits) result['use-native'] = 'true';
     return result;

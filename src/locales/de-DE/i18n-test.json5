@@ -159,14 +159,14 @@
     "title": "Einheitenformatierung"
   },
   "native_digits": {
-    "title": "Native Ziffern (SSR)",
-    "description": "Text mit ASCII-Ziffern wird in den nativen Ziffern des aktiven Gebietsschemas gerendert. Nur SSR — wird zur Laufzeit nicht aktualisiert."
+    "title": "Native Ziffern",
+    "description": "Text mit ASCII-Ziffern wird in den nativen Ziffern des aktiven Gebietsschemas gerendert. Wird bei Sprachwechsel live aktualisiert."
   },
   "inflection": {
-    "title": "Englische Flexion (SSR)",
-    "description": " Englische Pluralisierung und Singularisierung bei SSR. Wird zur Laufzeit nicht aktualisiert."
+    "title": "Englische Flexion",
+    "description": "Englische Pluralisierung und Singularisierung. Wird bei Sprachwechsel live aktualisiert."
   },
-  "ssr_only": "Nur initial",
+  "live_label": "Live",
   "pricing_details": {
     "title": "Preisdetails",
     "description": "Vollständige Pipeline: Rohwert, Währungscode, formatiert, rabattiert und umgerechnet.",

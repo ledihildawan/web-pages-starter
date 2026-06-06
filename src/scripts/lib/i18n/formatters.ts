@@ -295,104 +295,101 @@ const chineseCardinal = buildCardinal('〇', (s) => `负${s}`, [
   },
 ]);
 
-const arabicCardinal = buildCardinal('صِفْر', (s) => `سالب ${s}`, [
-  {
-    limit: 11,
-    format: (n) =>
-      [
-        '',
-        'واحِد',
-        'اِثنان',
-        'ثَلاثة',
-        'أرْبَعَة',
-        'خَمْة',
-        'سِتَّة',
-        'سَبْعَة',
-        'ثَمانِية',
-        'تِسْعة',
-        'عَشرة',
-      ][n],
-  },
-  {
-    limit: 20,
-    format: (n) =>
-      [
-        '',
-        'أحدَ عشر',
-        'اِثنا عشر',
-        'ثَلاثة عشر',
-        'أربَعة عشر',
-        'خَمسة عشر',
-        'سِتَّة عشر',
-        'سَبعَة عشر',
-        'ثَمانية عشر',
-        'تِسعة عشر',
-      ][n - 10],
-  },
-  {
-    limit: 100,
-    div: 10,
-    format: (_, q, r) => {
-      const tens = [
-        '',
-        'عشرون',
-        'ثَلاثون',
-        'أربَعون',
-        'خَمسون',
-        'سِتّون',
-        'سَبعون',
-        'ثَمانون',
-        'تِسعون',
-      ];
-      return r === 0
-        ? tens[q]
-        : `${['', 'واحِد', 'اِثنان', 'ثَلاثة', 'أرْبَعَة', 'خَمْة', 'سِتَّة', 'سَبْعَة', 'ثَمانِية', 'تِسْعة'][r]} و${tens[q]}`;
-    },
-  },
-  {
-    limit: 1_000,
-    div: 100,
-    format: (_, q, r, rec) => {
-      if (r) {
-        const prefix = q === 1 ? 'مِئة' : `${rec(q)} مِئة`;
-        return `${prefix} و${rec(r)}`;
-      }
-      return q === 1 ? 'مِئة' : `${rec(q)} مِئة`;
-    },
-  },
-  {
-    limit: 1_000_000,
-    div: 1_000,
-    format: (_, q, r, rec) => {
-      let tw: string;
-      if (q === 1) {
-        tw = 'ألف';
-      } else if (q === 2) {
-        tw = 'ألفان';
-      } else if (q > 2 && q < 11) {
-        tw = `${rec(q)} آلاف`;
-      } else {
-        tw = `${rec(q)} ألف`;
-      }
-      return r ? `${tw} و${rec(r)}` : tw;
-    },
-  },
-]);
+const arabicCardinal = (
+  num: number,
+  gender: 'masculine' | 'feminine' = 'masculine',
+) => {
+  const units = {
+    masculine: ['', 'واحِد', 'اِثنان', 'ثَلاثة', 'أرْبَعَة', 'خَمْسة', 'سِتَّة', 'سَبْعَة', 'ثَمانِية', 'تِسْعة'],
+    feminine: ['', 'واحِدَة', 'اِثنتان', 'ثَلاث', 'أرْبَع', 'خَمس', 'سِتّ', 'سَبع', 'ثَمان', 'تِسع'],
+  }[gender];
 
-const CARDINAL_STRATEGY: Record<string, (num: number) => string> = {
-  id: indonesianCardinal,
-  ja: japaneseCardinal,
-  zh: chineseCardinal,
+  const tenWord = gender === 'feminine' ? 'عَشر' : 'عَشرة';
+  const teens = {
+    masculine: ['', 'أحدَ عشر', 'اِثنا عشر', 'ثَلاثة عشر', 'أربَعة عشر', 'خَمسة عشر', 'سِتَّة عشر', 'سَبعَة عشر', 'ثَمانية عشر', 'تِسعة عشر'],
+    feminine: ['', 'إحدى عَشرة', 'اِثنتا عَشرة', 'ثَلاثَ عَشرة', 'أربَعَ عَشرة', 'خَمسَ عَشرة', 'سِتَّ عَشرة', 'سَبعَ عَشرة', 'ثَمانَ عَشرة', 'تِسعَ عَشرة'],
+  }[gender];
+
+  const tens = ['', 'عشرون', 'ثَلاثون', 'أربَعون', 'خَمسون', 'سِتّون', 'سَبعون', 'ثَمانون', 'تِسْعون', 'تِسْعون'];
+
+  return buildCardinal('صِفْر', (s) => `سالب ${s}`, [
+    {
+      limit: 11,
+      format: (n) => n === 10 ? tenWord : units[n],
+    },
+    {
+      limit: 20,
+      format: (n) => teens[n - 10],
+    },
+    {
+      limit: 100,
+      div: 10,
+      format: (_, q, r) => {
+        if (r === 0) return tens[q];
+        return `${units[r]} و${tens[q]}`;
+      },
+    },
+    {
+      limit: 1_000,
+      div: 100,
+      format: (_, q, r, rec) => {
+        const hundreds = ['', 'مِئة', 'مِئتان', 'ثَلاث مِئة', 'أربَع مِئة', 'خَمس مِئة', 'سِتّ مِئة', 'سَبع مِئة', 'ثَمان مِئة', 'تِسع مِئة'];
+        const prefix = hundreds[q];
+        return r ? `${prefix} و${rec(r)}` : prefix;
+      },
+    },
+    {
+      limit: 1_000_000,
+      div: 1_000,
+      format: (_, q, r, rec) => {
+        const two = 'ألفان';
+        const plural = `${rec(q)} آلاف`;
+        const singular = `${rec(q)} ألف`;
+        let tw: string;
+        if (q === 1) tw = 'ألف';
+        else if (q === 2) tw = two;
+        else if (q >= 3 && q < 11) tw = plural;
+        else tw = singular;
+        return r ? `${tw} و${rec(r)}` : tw;
+      },
+    },
+    {
+      limit: 1_000_000_000_000,
+      div: 1_000_000,
+      format: (_, q, r, rec) => {
+        const two = 'مليونان';
+        const plural = `${rec(q)} ملايين`;
+        const singular = `${rec(q)} مليون`;
+        let tw: string;
+        if (q === 1) tw = 'مليون';
+        else if (q === 2) tw = two;
+        else if (q >= 3 && q < 11) tw = plural;
+        else tw = singular;
+        return r ? `${tw} و${rec(r)}` : tw;
+      },
+    },
+  ])(num);
+};
+
+const CARDINAL_STRATEGY: Record<
+  string,
+  (num: number, gender?: 'masculine' | 'feminine') => string
+> = {
+  id: (n) => indonesianCardinal(n),
+  ja: (n) => japaneseCardinal(n),
+  zh: (n) => chineseCardinal(n),
   ar: arabicCardinal,
 };
 
 export const formatCardinal = (
   value: number | string,
-  _options?: CardinalOptions,
+  options: CardinalOptions = {},
 ) => {
-  const num = typeof value === 'number' ? value : parseInt(value, 10);
+  const num = parseInt(`${value}`, 10);
   if (Number.isNaN(num)) return `${value}`;
-  return CARDINAL_STRATEGY[getLanguageSubtag(getLocale())]?.(num) ?? `${num}`;
+  const strategy = CARDINAL_STRATEGY[getLanguageSubtag(getLocale())];
+  if (!strategy) return `${num}`;
+  return strategy(num, options.gender) ?? `${num}`;
 };
 
 const ORDINAL_STRATEGY: Record<string, (num: number) => string> = {

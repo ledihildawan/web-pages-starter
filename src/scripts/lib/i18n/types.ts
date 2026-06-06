@@ -37,6 +37,7 @@ export interface FormatOptions extends Intl.NumberFormatOptions {
 
 export interface CardinalOptions {
   style?: 'full' | 'short';
+  gender?: 'masculine' | 'feminine';
 }
 
 export interface OrdinalOptions {

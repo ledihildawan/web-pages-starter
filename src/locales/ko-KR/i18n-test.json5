@@ -159,14 +159,14 @@
     "title": "단위 형식"
   },
   "native_digits": {
-    "title": "네이티브 숫자 (SSR)",
-    "description": "ASCII 숫자가 포함된 텍스트가 활성 로케일의 네이티브 숫자로 렌더링됩니다. SSR만 — 런타임에서 업데이트되지 않습니다."
+    "title": "네이티브 숫자",
+    "description": "ASCII 숫자가 포함된 텍스트가 활성 로케일의 네이티브 숫자로 렌더링됩니다. 언어 전환 시 실시간 업데이트됩니다."
   },
   "inflection": {
-    "title": "영어 굴절 (SSR)",
-    "description": "SSR에서의 영어 복수형과 단수형. 런타임에서 업데이트되지 않습니다."
+    "title": "영어 굴절",
+    "description": "영어 복수형과 단수형. 언어 전환 시 실시간 업데이트됩니다."
   },
-  "ssr_only": "초기만",
+  "live_label": "라이브",
   "pricing_details": {
     "title": "가격 상세",
     "description": "완전한 파이프라인: 원시 값, 통화 코드, 형식화, 할인, 변환.",

@@ -159,14 +159,14 @@
     "title": "單位格式"
   },
   "native_digits": {
-    "title": "原生數字 (SSR)",
-    "description": "帶有 ASCII 數字的文字以活動語言環境的原生數字呈現。仅 SSR — 運行時不更新。"
+    "title": "原生數字",
+    "description": "帶有 ASCII 數字的文字以活動語言環境的原生數字呈現。切換語言時實時更新。"
   },
   "inflection": {
-    "title": "英語屈折 (SSR)",
-    "description": "SSR 時的英語複數和單數形式。運行時不更新。"
+    "title": "英語屈折",
+    "description": "英語的複數和單數形式。切換語言時實時更新。"
   },
-  "ssr_only": "僅初始",
+  "live_label": "實時",
   "pricing_details": {
     "title": "價格詳情",
     "description": "完整流程：原始值、貨幣代碼、格式化、折扣和轉換。",

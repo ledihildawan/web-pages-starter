@@ -159,14 +159,14 @@
     "title": "Formatage d'Unités"
   },
   "native_digits": {
-    "title": "Chiffres Natifs (SSR)",
-    "description": "Le texte avec des chiffres ASCII est rendu dans les chiffres natifs de la locale active. SSR uniquement — non actualisé au runtime."
+    "title": "Chiffres Natifs",
+    "description": "Le texte avec des chiffres ASCII est rendu dans les chiffres natifs de la locale active. Actualisé en direct lors du changement de langue."
   },
   "inflection": {
-    "title": "Inflexion de l'Anglais (SSR)",
-    "description": "Pluralisation et singularisation de l'anglais au SSR. Non actualisé au runtime."
+    "title": "Inflexion de l'Anglais",
+    "description": "Pluralisation et singularisation de l'anglais. Actualisé en direct lors du changement de langue."
   },
-  "ssr_only": "Initial uniquement",
+  "live_label": "En direct",
   "pricing_details": {
     "title": "Détails des Prix",
     "description": "Pipeline complet : valeur raw, code devise, formaté, discounté et converti.",

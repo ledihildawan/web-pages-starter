@@ -163,14 +163,14 @@
     "title": "Format Satuan"
   },
   "native_digits": {
-    "title": "Digit Asli (SSR)",
-    "description": "Teks dengan digit ASCII ditampilkan dalam digit asli. SSR saja, tidak diperbarui saat ganti bahasa."
+    "title": "Digit Asli",
+    "description": "Teks dengan digit ASCII ditampilkan dalam digit asli ketika lokal mengaktifkannya. Diperbarui secara langsung saat ganti bahasa."
   },
   "inflection": {
-    "title": "Infleksi Bahasa Inggris (SSR)",
-    "description": "Pluralisasi dan singularisasi bahasa Inggris pada saat SSR. Tidak diperbarui saat ganti bahasa."
+    "title": "Infleksi Bahasa Inggris",
+    "description": "Pluralisasi dan singularisasi bahasa Inggris. Diperbarui secara langsung saat ganti bahasa."
   },
-  "ssr_only": "Awal saja",
+  "live_label": "Live",
   "pricing_details": {
     "title": "Detail Harga",
     "description": "Pipeline lengkap: nilai mentah, kode mata uang, format, diskon, dan konversi.",

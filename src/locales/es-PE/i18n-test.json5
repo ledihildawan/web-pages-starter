@@ -159,14 +159,14 @@
     "title": "Formato de Unidades"
   },
   "native_digits": {
-    "title": "Dígitos Nativos (SSR)",
-    "description": "El texto con dígitos ASCII se renderiza en los dígitos nativos de la configuración regional activa. Solo SSR — no se actualiza en tiempo de ejecución."
+    "title": "Dígitos Nativos",
+    "description": "El texto con dígitos ASCII se renderiza en los dígitos nativos de la configuración regional activa. Se actualiza en vivo al cambiar de idioma."
   },
   "inflection": {
-    "title": "Inflexión del Inglés (SSR)",
-    "description": "Pluralización y singularización del inglés en SSR. No se actualiza en tiempo de ejecución."
+    "title": "Inflexión del Inglés",
+    "description": "Pluralización y singularización del inglés. Se actualiza en vivo al cambiar de idioma."
   },
-  "ssr_only": "Solo inicial",
+  "live_label": "En vivo",
   "pricing_details": {
     "title": "Detalles de Precios",
     "description": "Pipeline completo: valor raw, código de moneda, formateado, descuento y convertido.",

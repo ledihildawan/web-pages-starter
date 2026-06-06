@@ -1,4 +1,4 @@
-import { EXCHANGE_RATES } from '@generated/exchange-rates';
+import { EXCHANGE_RATES, convertCurrency as convertCurrencyRaw } from '@generated/exchange-rates';
 import type { I18nTranslationKeys } from '@generated/i18n';
 import i18next, { type Resource } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
@@ -26,7 +26,9 @@ import {
   getLocaleLabelCountry,
   LOCALE_FALLBACKS,
   LOCALE_STORAGE_KEY,
+  plural,
   setLocale,
+  singular,
   toNativeDigits,
 } from './index';
 
@@ -176,6 +178,7 @@ const FORMATTERS = [
     format: (_v: string, el: HTMLElement, _dc: string) => {
       const pricingStr = el.getAttribute('data-local-price') ?? '{}';
       const discountStr = el.getAttribute('data-discount');
+      const explicitTarget = el.getAttribute('data-target-currency');
 
       let price = 0;
       let fromCurrency: string = CURRENCY_CODE.USD;
@@ -196,15 +199,21 @@ const FORMATTERS = [
         price = price * parseFloat(discountStr);
       }
 
-      const targetCurrency = getCurrency(locale);
+      const targetCurrency =
+        explicitTarget && explicitTarget !== 'undefined'
+          ? explicitTarget
+          : getCurrency(locale);
 
       if (fromCurrency === targetCurrency) {
         return formatCurrency(price, targetCurrency);
       }
 
-      const rate =
-        EXCHANGE_RATES[targetCurrency as keyof typeof EXCHANGE_RATES] ?? 1;
-      const converted = price * rate;
+      const converted = convertCurrencyRaw(
+        price,
+        fromCurrency,
+        targetCurrency,
+        EXCHANGE_RATES,
+      );
       return formatCurrency(converted, targetCurrency);
     },
   },
@@ -250,6 +259,27 @@ const FORMATTERS = [
       } catch {
         return itemsStr;
       }
+    },
+  },
+  {
+    attr: 'data-pluralized',
+    format: (word: string, el: HTMLElement) => {
+      const countStr = el.getAttribute('data-count');
+      const count = countStr ? parseInt(countStr, 10) : undefined;
+      const inclusive = el.getAttribute('data-inclusive') === 'true';
+      return plural(word, count, inclusive);
+    },
+  },
+  {
+    attr: 'data-singularized',
+    format: (word: string) => singular(word),
+  },
+  {
+    attr: 'data-native-digits',
+    format: (text: string, el: HTMLElement) => {
+      const forceAttr = el.getAttribute('data-force');
+      if (forceAttr === null) return toNativeDigits(text);
+      return toNativeDigits(text, forceAttr === 'true');
     },
   },
 ] as const;
