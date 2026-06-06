@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { LOCALE_CODES } from '../src/configs/locales';
+import { LOCALE_CODES } from '../src/configs/locales/data';
 import { PATHS } from '../src/configs/paths';
 
 const args = process.argv.slice(2);

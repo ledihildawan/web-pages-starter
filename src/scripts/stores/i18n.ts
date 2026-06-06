@@ -1,12 +1,11 @@
+import { getLocaleLabelCountry, LOCALE_STORAGE_KEY } from '@/configs/locales';
 import {
-  DIRECTION_CODE,
-  getLocaleLabelCountry,
   LOCALE,
   LOCALE_CODES,
-  LOCALE_STORAGE_KEY,
   LOCALES,
   type LocaleCode,
-} from '@/configs/locales';
+} from '@/configs/locales/data';
+import { DIRECTION_CODE } from '@/configs/locales/directions';
 
 export function registerI18nStore(): void {
   if (typeof window === 'undefined' || !globalThis.Alpine) {

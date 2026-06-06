@@ -85,7 +85,9 @@ export const collectKeys = (obj: unknown, prefix = ''): string[] => {
     .sort(([a], [b]) => a.localeCompare(b))
     .flatMap(([key, value]) => {
       const nextKey = prefix ? `${prefix}.${key}` : key;
-      return typeof value === 'object' && value !== null && !Array.isArray(value)
+      return typeof value === 'object' &&
+        value !== null &&
+        !Array.isArray(value)
         ? collectKeys(value, nextKey)
         : [nextKey];
     });

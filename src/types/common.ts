@@ -74,7 +74,7 @@ export interface PageMetaConfig {
 export interface PageData {
   page_id: string;
   meta?: PageMetaConfig;
-  [key: string]: JsonValue;
+  [key: string]: JsonValue | PageMetaConfig | undefined;
 }
 
 export interface GlobalSeoConfig {
@@ -92,5 +92,5 @@ export interface GlobalData {
   site_url?: string;
   site_image?: string;
   seo?: GlobalSeoConfig;
-  [key: string]: JsonValue;
+  [key: string]: JsonValue | GlobalSeoConfig | undefined;
 }

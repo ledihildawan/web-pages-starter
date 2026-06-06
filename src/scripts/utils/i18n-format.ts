@@ -6,12 +6,14 @@ import {
 import {
   BASE_CURRENCY,
   type CurrencyCode,
-  LANGUAGE_CODE,
-  LOCALES,
+} from '../../configs/locales/currencies';
+import { LOCALES } from '../../configs/locales/data';
+import { LANGUAGE_CODE } from '../../configs/locales/languages';
+import {
   NUMBERING_SYSTEM_CODE,
   NUMBERING_SYSTEMS,
-  WRITING_SYSTEM,
-} from '../../configs/locales';
+} from '../../configs/locales/numbering-systems';
+import { WRITING_SYSTEM } from '../../configs/locales/writing-systems';
 import type {
   CardinalOptions,
   DateValue,
@@ -459,16 +461,6 @@ const ORDINAL_STRATEGY: Record<string, (num: number) => string> = {
     }
     return `ال${arabicCardinal(num)}`;
   },
-  fr: (num) => {
-    if (num === 1) return `${num}er`;
-    return `${num}e`;
-  },
-  es: (num) => `${num}.º`,
-  pt: (num) => `${num}.º`,
-  de: (num) => `${num}.`,
-  ru: (num) => `${num}-й`,
-  ko: (num) => `제${num}`,
-  hi: (num) => `${num}वाँ`,
 };
 
 export const formatOrdinal = (
@@ -482,18 +474,22 @@ export const formatOrdinal = (
   if (ORDINAL_STRATEGY[code]) return ORDINAL_STRATEGY[code](num);
 
   try {
-    const sfx = new Intl.PluralRules(getLocale(), { type: 'ordinal' }).select(
-      num,
-    );
-    const suffixMap: Record<string, string> = {
-      one: 'st',
-      two: 'nd',
-      few: 'rd',
-      other: 'th',
-      zero: 'th',
-      many: 'th',
+    const ordinalSuffixes: Record<string, Record<string, string>> = {
+      one: { en: 'st' },
+      two: { en: 'nd' },
+      few: { en: 'rd' },
+      other: { en: 'th' },
+      zero: { en: 'th' },
+      many: { en: 'th' },
     };
-    return `${num}${suffixMap[sfx] ?? 'th'}`;
+    const category = new Intl.PluralRules(getLocale(), {
+      type: 'ordinal',
+    }).select(num);
+    const suffix =
+      ordinalSuffixes[category]?.[getLanguageSubtag(getLocale())] ??
+      ordinalSuffixes[category]?.en ??
+      'th';
+    return `${num}${suffix}`;
   } catch {
     const rem = num % 100;
     if (rem >= 11 && rem <= 13) return `${num}th`;
@@ -719,34 +715,66 @@ export const formatScientific = (
 };
 
 export const formatBytes = (bytes: number, decimals: number = 1) => {
-  if (bytes === 0) return '0 B';
+  if (bytes === 0) {
+    try {
+      return new Intl.NumberFormat(getLocale(), {
+        style: 'unit',
+        unit: 'byte',
+      }).format(0);
+    } catch {
+      return '0 B';
+    }
+  }
 
+  const units = [
+    'byte',
+    'kilobyte',
+    'megabyte',
+    'gigabyte',
+    'terabyte',
+    'petabyte',
+  ];
   const k = 1_024;
   const i = Math.floor(Math.log(bytes) / Math.log(k));
-  const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
+  const scaled = bytes / k ** i;
 
-  return `${parseFloat((bytes / k ** i).toFixed(Math.max(0, decimals)))} ${sizes[i]}`;
+  try {
+    return new Intl.NumberFormat(getLocale(), {
+      style: 'unit',
+      unit: units[Math.min(i, units.length - 1)],
+      maximumFractionDigits: Math.max(0, decimals),
+    }).format(scaled);
+  } catch {
+    const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
+    return `${parseFloat(scaled.toFixed(Math.max(0, decimals)))} ${sizes[Math.min(i, sizes.length - 1)]}`;
+  }
 };
 
 export const formatAbbreviated = (
   value: number,
   options: FormatOptions = {},
 ) => {
-  const tier = Math.floor(Math.log10(Math.abs(value)) / 3) | 0;
-
-  if (tier === 0) return formatNumber(value, options);
-
-  const suffix = ['', 'K', 'M', 'B', 'T'][tier];
-  const scaled = value / 10 ** (tier * 3);
-  const decimals = scaled % 1 === 0 ? 0 : scaled % 0.1 === 0 ? 1 : 2;
-
-  return (
-    formatNumber(scaled, {
-      maximumFractionDigits: decimals,
-      minimumFractionDigits: decimals,
+  try {
+    return new Intl.NumberFormat(getLocale(), {
+      notation: 'compact',
       ...options,
-    }) + suffix
-  );
+    }).format(value);
+  } catch {
+    const tier = Math.floor(Math.log10(Math.abs(value)) / 3) | 0;
+    if (tier === 0) return formatNumber(value, options);
+
+    const suffix = ['', 'K', 'M', 'B', 'T'][tier];
+    const scaled = value / 10 ** (tier * 3);
+    const decimals = scaled % 1 === 0 ? 0 : scaled % 0.1 === 0 ? 1 : 2;
+
+    return (
+      formatNumber(scaled, {
+        maximumFractionDigits: decimals,
+        minimumFractionDigits: decimals,
+        ...options,
+      }) + suffix
+    );
+  }
 };
 
 const formatIntlDate = (

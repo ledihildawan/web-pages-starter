@@ -1,7 +1,6 @@
-#!/usr/bin/env bun
 import fs from 'node:fs';
 import path from 'node:path';
-import { DEFAULT_LOCALE, LOCALE_CODES } from '../src/configs/locales';
+import { DEFAULT_LOCALE, LOCALE_CODES } from '../src/configs/locales/data';
 import { PATHS } from '../src/configs/paths';
 import { collectKeys, readJSON5 } from '../src/scripts/utils/json5';
 

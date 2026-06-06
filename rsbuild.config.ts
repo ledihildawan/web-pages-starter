@@ -3,10 +3,8 @@ import path from 'node:path';
 import { defineConfig } from '@rsbuild/core';
 import { pluginImageCompress } from '@rsbuild/plugin-image-compress';
 import { minify } from 'html-minifier-terser';
-import {
-  LOCALE_CODES,
-  LOCALE_STORAGE_KEY,
-} from './src/configs/locales';
+import { LOCALE_STORAGE_KEY } from './src/configs/locales';
+import { LOCALE_CODES } from './src/configs/locales/data';
 import { PATHS } from './src/configs/paths';
 import { createTemplateParams } from './src/scripts/lib/template';
 

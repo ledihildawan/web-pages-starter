@@ -1,12 +1,11 @@
 import i18next, { type Resource } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
+import { LOCALE_FALLBACKS, LOCALE_STORAGE_KEY } from '@/configs/locales';
 import {
   DEFAULT_LOCALE,
   LOCALE_CODES,
-  LOCALE_FALLBACKS,
-  LOCALE_STORAGE_KEY,
   type LocaleCode,
-} from '@/configs/locales';
+} from '@/configs/locales/data';
 
 const getVars = (el: Element): Record<string, unknown> => {
   try {
@@ -82,17 +81,17 @@ export const initI18n = async (): Promise<void> => {
   const rawData = window.__I18N_DATA__ || {};
   const resources: Resource = {};
 
-  for (const locale of Object.keys(rawData)) {
+  for (const locale of Object.keys(rawData) as LocaleCode[]) {
     const data = rawData[locale];
     resources[locale] = {
-      common: (data.common || {}) as Record<string, string>,
+      common: (data.common || {}) as unknown as Record<string, string>,
       [pageID]: (data.page || {}) as Record<string, string>,
     };
 
     if (data.comp) {
       for (const compName of Object.keys(data.comp)) {
         resources[locale][`components/${compName}`] = data.comp[
-          compName
+          compName as keyof typeof data.comp
         ] as Record<string, string>;
       }
     }

@@ -1,0 +1,266 @@
+import { DIRECTION_CODE } from './directions';
+import { LANGUAGE_CODE, type LanguageCode } from './languages';
+
+export const WRITING_SYSTEMS = [
+  {
+    code: 'latin',
+    name: 'Latin Script',
+    nameId: 'Skrip Latin',
+    description:
+      'Latin alphabet and variants used in Western and many other languages',
+    languages: [
+      LANGUAGE_CODE.ID,
+      LANGUAGE_CODE.EN,
+      LANGUAGE_CODE.ES,
+      LANGUAGE_CODE.PT,
+      LANGUAGE_CODE.FR,
+      LANGUAGE_CODE.DE,
+    ],
+    numberingSystems: ['latn'],
+    direction: DIRECTION_CODE.LTR,
+    defaultFont: 'Inter, system-ui',
+  },
+  {
+    code: 'cjk',
+    name: 'CJK Unified Ideographs',
+    nameId: 'Ideografi CJK Terpadu',
+    description:
+      'Chinese, Japanese, Korean unified characters and their variants',
+    languages: [LANGUAGE_CODE.ZH, LANGUAGE_CODE.JA, LANGUAGE_CODE.KO],
+    numberingSystems: ['jpan', 'hans', 'hant', 'kore', 'hanidec', 'fullwide'],
+    direction: DIRECTION_CODE.LTR,
+    defaultFont: 'Noto Sans CJK',
+  },
+  {
+    code: 'arabic',
+    name: 'Arabic Script',
+    nameId: 'Skrip Arab',
+    description:
+      'Arabic alphabet and variants used in Arabic and other languages',
+    languages: [LANGUAGE_CODE.AR],
+    numberingSystems: ['arab'],
+    direction: 'rtl' as const,
+    defaultFont: 'Noto Sans Arabic, Noto Naskh Arabic',
+  },
+  {
+    code: 'devanagari',
+    name: 'Devanagari Script',
+    nameId: 'Skrip Devanagari',
+    description: 'Devanagari script used in Hindi and other Indian languages',
+    languages: [LANGUAGE_CODE.HI],
+    numberingSystems: ['deva'],
+    direction: DIRECTION_CODE.LTR,
+    defaultFont: 'Noto Sans Devanagari',
+  },
+  {
+    code: 'cyrillic',
+    name: 'Cyrillic Script',
+    nameId: 'Skrip Cyrillic',
+    description: 'Cyrillic alphabet used in Russian and other Slavic languages',
+    languages: [LANGUAGE_CODE.RU],
+    numberingSystems: ['cyrl'],
+    direction: DIRECTION_CODE.LTR,
+    defaultFont: 'Inter Cyrillic',
+  },
+  {
+    code: 'thai',
+    name: 'Thai Script',
+    nameId: 'Skrip Thai',
+    description: 'Thai script used in Thai language',
+    languages: [LANGUAGE_CODE.TH],
+    numberingSystems: ['thai'],
+    direction: DIRECTION_CODE.LTR,
+    defaultFont: 'Noto Sans Thai',
+  },
+  {
+    code: 'bengali',
+    name: 'Bengali Script',
+    nameId: 'Skrip Bengali',
+    description: 'Bengali script used in Bengali and Assamese languages',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['beng'],
+    direction: DIRECTION_CODE.LTR,
+    defaultFont: 'Noto Sans Bengali',
+  },
+  {
+    code: 'tamil',
+    name: 'Tamil Script',
+    nameId: 'Skrip Tamil',
+    description: 'Tamil script used in Tamil language',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['tamldec', 'taml'],
+    direction: DIRECTION_CODE.LTR,
+    defaultFont: 'Noto Sans Tamil',
+  },
+  {
+    code: 'telugu',
+    name: 'Telugu Script',
+    nameId: 'Skrip Telugu',
+    description: 'Telugu script used in Telugu language',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['telu'],
+    direction: DIRECTION_CODE.LTR,
+    defaultFont: 'Noto Sans Telugu',
+  },
+  {
+    code: 'kannada',
+    name: 'Kannada Script',
+    nameId: 'Skrip Kannada',
+    description: 'Kannada script used in Kannada language',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['knda'],
+    direction: DIRECTION_CODE.LTR,
+    defaultFont: 'Noto Sans Kannada',
+  },
+  {
+    code: 'malayalam',
+    name: 'Malayalam Script',
+    nameId: 'Skrip Malayalam',
+    description: 'Malayalam script used in Malayalam language',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['mlym'],
+    direction: DIRECTION_CODE.LTR,
+    defaultFont: 'Noto Sans Malayalam',
+  },
+  {
+    code: 'gujarati',
+    name: 'Gujarati Script',
+    nameId: 'Skrip Gujarati',
+    description: 'Gujarati script used in Gujarati language',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['gujr'],
+    direction: DIRECTION_CODE.LTR,
+    defaultFont: 'Noto Sans Gujarati',
+  },
+  {
+    code: 'gurmukhi',
+    name: 'Gurmukhi Script',
+    nameId: 'Skrip Gurmukhi',
+    description: 'Gurmukhi script used in Punjabi language',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['guru'],
+    direction: DIRECTION_CODE.LTR,
+    defaultFont: 'Noto Sans Gurmukhi',
+  },
+  {
+    code: 'sinhala',
+    name: 'Sinhala Script',
+    nameId: 'Skrip Sinhala',
+    description: 'Sinhala script used in Sinhala language',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['sinh'],
+    direction: DIRECTION_CODE.LTR,
+    defaultFont: 'Noto Sans Sinhala',
+  },
+  {
+    code: 'georgian',
+    name: 'Georgian Script',
+    nameId: 'Skrip Georgian',
+    description: 'Georgian script used in Georgian language',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['geor'],
+    direction: DIRECTION_CODE.LTR,
+    defaultFont: 'Noto Sans Georgian',
+  },
+  {
+    code: 'armenian',
+    name: 'Armenian Script',
+    nameId: 'Skrip Armenian',
+    description: 'Armenian script used in Armenian language',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['armn'],
+    direction: DIRECTION_CODE.LTR,
+    defaultFont: 'Noto Sans Armenian',
+  },
+  {
+    code: 'ethiopic',
+    name: 'Ethiopic Script',
+    nameId: 'Skrip Ethiopic',
+    description:
+      'Ethiopic script used in Amharic and other Ethiopian languages',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['ethi'],
+    direction: DIRECTION_CODE.LTR,
+    defaultFont: 'Noto Sans Ethiopic',
+  },
+  {
+    code: 'khmer',
+    name: 'Khmer Script',
+    nameId: 'Skrip Khmer',
+    description: 'Khmer script used in Khmer language',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['khmr'],
+    direction: DIRECTION_CODE.LTR,
+    defaultFont: 'Noto Sans Khmer',
+  },
+  {
+    code: 'lao',
+    name: 'Lao Script',
+    nameId: 'Skrip Lao',
+    description: 'Lao script used in Lao language',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['laoo'],
+    direction: DIRECTION_CODE.LTR,
+    defaultFont: 'Noto Sans Lao',
+  },
+  {
+    code: 'myanmar',
+    name: 'Myanmar Script',
+    nameId: 'Skrip Myanmar',
+    description: 'Myanmar script used in Burmese language',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['mymr'],
+    direction: DIRECTION_CODE.LTR,
+    defaultFont: 'Noto Sans Myanmar',
+  },
+  {
+    code: 'greek',
+    name: 'Greek Script',
+    nameId: 'Skrip Yunani',
+    description: 'Greek script used in Greek language (included in Inter font)',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['grek'],
+    direction: DIRECTION_CODE.LTR,
+    defaultFont: 'Inter (includes Greek)',
+  },
+  {
+    code: 'hebrew',
+    name: 'Hebrew Script',
+    nameId: 'Skrip Ibrani',
+    description:
+      'Hebrew script used in Hebrew language (included in Inter font)',
+    languages: [] as LanguageCode[],
+    numberingSystems: ['hebr'],
+    direction: 'rtl' as const,
+    defaultFont: 'Inter (includes Hebrew)',
+  },
+] as const;
+
+export type WritingSystemCode = (typeof WRITING_SYSTEMS)[number]['code'];
+export type WritingSystemConfig = (typeof WRITING_SYSTEMS)[number];
+
+export const WRITING_SYSTEM_CODES = WRITING_SYSTEMS.map(
+  (ws) => ws.code,
+) as WritingSystemCode[];
+
+export const WRITING_SYSTEM_CODE = WRITING_SYSTEM_CODES.reduce(
+  (acc, writingSystem) => {
+    const key = writingSystem.toUpperCase();
+    return Object.assign(acc, { [key]: writingSystem });
+  },
+  {} as Record<string, WritingSystemCode>,
+) as {
+  [K in WritingSystemCode as Uppercase<K>]: K;
+};
+
+export const WRITING_SYSTEM = WRITING_SYSTEMS.reduce(
+  (acc, ws) => {
+    return Object.assign(acc, {
+      [ws.code.toUpperCase()]: ws.code,
+      [`${ws.code.toUpperCase()}_LANGUAGES`]: ws.languages,
+    });
+  },
+  {} as Record<string, WritingSystemCode | readonly LanguageCode[]>,
+) as typeof WRITING_SYSTEM_CODE & {
+  [K in WritingSystemCode as `${Uppercase<K>}_LANGUAGES`]: readonly LanguageCode[];
+};

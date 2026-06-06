@@ -13,7 +13,8 @@ export function navbarData() {
     touchStartY: 0,
     touchCurrentY: 0,
     isDragging: false,
-    focusedElement: null,
+    focusedElement: null as Element | null,
+    $cleanup: null as (() => void) | null,
 
     isActive(path: string) {
       const current = this.currentPath.replace(/\/$/, '') || '/';
@@ -116,11 +117,11 @@ export function navbarData() {
         '[aria-controls="mobile-menu"]',
       );
       if (menuButton) {
-        setTimeout(() => menuButton.focus(), 550);
+        setTimeout(() => (menuButton as HTMLElement).focus(), 550);
       }
 
       const targetUrl = typeof url === 'string' ? url : null;
-      const isAnchorLink = targetUrl && targetUrl.includes('#');
+      const isAnchorLink = targetUrl?.includes('#');
 
       if (targetUrl && !isAnchorLink) {
         setTimeout(() => {

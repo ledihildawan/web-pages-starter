@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { DEFAULT_LOCALE, LOCALE_CODES } from '../src/configs/locales';
+import { DEFAULT_LOCALE, LOCALE_CODES } from '../src/configs/locales/data';
 import { PATHS } from '../src/configs/paths';
 
 const ROOT = process.cwd();

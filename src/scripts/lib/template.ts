@@ -1,15 +1,15 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import type { I18nTranslationKeys } from '../../../generated/i18n';
+import { getLocaleLabelCountry } from '../../configs/locales';
+import type { CurrencyCode } from '../../configs/locales/currencies';
 import {
-  type CurrencyCode,
   DEFAULT_LOCALE,
-  getLocaleLabelCountry,
   LOCALES,
   type LocaleCode,
   type LocaleConfig,
-  WRITING_SYSTEMS,
-} from '../../configs/locales';
+} from '../../configs/locales/data';
+import { NUMBERING_SYSTEMS } from '../../configs/locales/numbering-systems';
 import { PATHS } from '../../configs/paths';
 import type {
   DateValue,
@@ -95,7 +95,7 @@ const generateClientI18nScript = (
   usedComponents: string[],
   supportedLangs: string[],
   LOCALE_STORAGE_KEY: string,
-  LOCALES: typeof import('@/configs/locales').LOCALES,
+  LOCALES: typeof import('@/configs/locales/data').LOCALES,
 ): string => {
   const allI18nData = Object.fromEntries(
     supportedLangs.map((l) => [
@@ -112,8 +112,8 @@ const generateClientI18nScript = (
     ]),
   ) as Record<string, JsonData>;
 
-  const writingSystemFonts = Object.fromEntries(
-    WRITING_SYSTEMS.map((ws) => [ws.code, ws.defaultFont]),
+  const numberingSystemFonts = Object.fromEntries(
+    NUMBERING_SYSTEMS.map((ns) => [ns.code, ns.fontFamily]),
   );
 
   return `<script>
@@ -125,7 +125,7 @@ const generateClientI18nScript = (
 
   const savedLocale = localStorage.getItem('${LOCALE_STORAGE_KEY}') ?? pathLocale ?? defaultLocale;
   const locales = ${JSON.stringify(LOCALES)};
-  const writingSystemFonts = ${JSON.stringify(writingSystemFonts)};
+  const numberingSystemFonts = ${JSON.stringify(numberingSystemFonts)};
 
   window.__PAGE_ID__ = ${JSON.stringify(name)};
   window.__USED_COMPONENTS__ = ${JSON.stringify(usedComponents)};
@@ -135,8 +135,9 @@ const generateClientI18nScript = (
   const htmlEl = document.documentElement;
   const localeConfig = locales.find(l => l.code === savedLocale);
   const dir = localeConfig?.dir ?? 'ltr';
+  const ns = localeConfig?.nativeNumberingSystem || 'latn';
   const ws = localeConfig?.writingSystem || 'latin';
-  const font = writingSystemFonts[ws] || 'Inter, system-ui';
+  const font = numberingSystemFonts[ns] || 'Inter, system-ui';
 
   htmlEl.setAttribute('dir', dir);
   htmlEl.setAttribute('lang', savedLocale);
@@ -489,7 +490,7 @@ const createI18nObject = (
     },
 
     localPrice: (
-      plan: { pricing: { base: number;[locale: string]: number } },
+      plan: { pricing: { base: number; [locale: string]: number } },
       options?: TemplateFormatOptions,
     ) => {
       const formatted = String(localPrice(plan));
@@ -498,7 +499,7 @@ const createI18nObject = (
     },
 
     localPriceCurrency: (
-      plan: { pricing: { base: number;[locale: string]: number } },
+      plan: { pricing: { base: number; [locale: string]: number } },
       options?: TemplateFormatOptions,
     ) => {
       const formatted = localPriceCurrency(plan);
@@ -507,7 +508,7 @@ const createI18nObject = (
     },
 
     convertLocalPrice: (
-      plan: { pricing: { base: number;[locale: string]: number } },
+      plan: { pricing: { base: number; [locale: string]: number } },
       targetCurrency: CurrencyCode,
       options?: TemplateFormatOptions,
     ) => {
@@ -528,7 +529,7 @@ const createI18nObject = (
     },
 
     formatLocalPrice: (
-      plan: { pricing: { base: number;[locale: string]: number } },
+      plan: { pricing: { base: number; [locale: string]: number } },
       options?: TemplateFormatOptions,
     ) => {
       const formatted = formatLocalPrice(plan, options);
@@ -545,7 +546,7 @@ const createI18nObject = (
     },
 
     formatLocalPriceDiscounted: (
-      plan: { pricing: { base: number;[locale: string]: number } },
+      plan: { pricing: { base: number; [locale: string]: number } },
       discountMultiplier: number,
       targetCurrency: CurrencyCode,
       options?: TemplateFormatOptions,
@@ -664,7 +665,11 @@ export const createTemplateParams = (
     const val = getValueByPath(mergedLocales, jsonPath);
     let str = val !== undefined ? String(val) : jsonPath;
 
-    if (val === undefined && process.env.NODE_ENV !== 'production' && !warnedKeys.has(jsonPath)) {
+    if (
+      val === undefined &&
+      process.env.NODE_ENV !== 'production' &&
+      !warnedKeys.has(jsonPath)
+    ) {
       warnedKeys.add(jsonPath);
       console.warn(`[i18n] Missing key "${jsonPath}" in locale "${lang}"`);
     }

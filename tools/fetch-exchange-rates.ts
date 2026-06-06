@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { BASE_CURRENCY, LOCALES } from '../src/configs/locales';
+import { BASE_CURRENCY } from '../src/configs/locales/currencies';
+import { LOCALES } from '../src/configs/locales/data';
 import { EXCHANGE_RATES_URL, PATHS } from '../src/configs/paths';
 
 const GENERATED_DIR = path.resolve(process.cwd(), PATHS.GENERATED);

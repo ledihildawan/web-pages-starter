@@ -2,16 +2,13 @@ import { EXCHANGE_RATES } from '@generated/exchange-rates';
 import type { I18nTranslationKeys } from '@generated/i18n';
 import i18next, { type Resource } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
-
 import {
-  BASE_CURRENCY,
   getLocaleLabelCountry,
-  LOCALE_CODES,
   LOCALE_FALLBACKS,
   LOCALE_STORAGE_KEY,
-  LOCALES,
-  type LocaleCode,
 } from '@/configs/locales';
+import { BASE_CURRENCY } from '@/configs/locales/currencies';
+import { LOCALE_CODES, LOCALES, type LocaleCode } from '@/configs/locales/data';
 import type { DateTimePreset } from '@/types/common';
 import {
   formatAbbreviated,
@@ -260,6 +257,17 @@ const FORMATTERS = [
 export async function initIntl(): Promise<void> {
   const pageID = (window.__PAGE_ID__ ?? 'home') as string;
   const rawData = window.__I18N_DATA__;
+
+  const savedLocale = localStorage.getItem(
+    LOCALE_STORAGE_KEY,
+  ) as LocaleCode | null;
+  const htmlLang = document.documentElement.getAttribute(
+    'lang',
+  ) as LocaleCode | null;
+  const initialLocale = savedLocale || htmlLang;
+  if (initialLocale) {
+    setLocale(getLocale(initialLocale));
+  }
 
   if (!rawData) return;
 

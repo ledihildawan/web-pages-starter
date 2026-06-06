@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { DEFAULT_LOCALE, LOCALE_CODES } from '../src/configs/locales';
+import { DEFAULT_LOCALE, LOCALE_CODES } from '../src/configs/locales/data';
 import { LOCALE_FILE_EXTENSIONS, PATHS } from '../src/configs/paths';
 import { collectKeys, readJson5File } from '../src/scripts/utils/json5';
 

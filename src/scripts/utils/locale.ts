@@ -1,18 +1,22 @@
+import { LOCALE_FALLBACKS } from '../../configs/locales';
+import { CALENDAR_CODE } from '../../configs/locales/calendars';
 import {
   BASE_CURRENCY,
-  CALENDAR_CODE,
   type CurrencyCode,
+} from '../../configs/locales/currencies';
+import {
   DEFAULT_LOCALE,
-  DIRECTION_CODE,
-  type DirectionCode,
-  type LanguageCode,
   LOCALE_CODES,
-  LOCALE_FALLBACKS,
   LOCALES,
   type LocaleCode,
   type LocaleConfig,
-  NUMBERING_SYSTEM_CODE,
-} from '../../configs/locales';
+} from '../../configs/locales/data';
+import {
+  DIRECTION_CODE,
+  type DirectionCode,
+} from '../../configs/locales/directions';
+import type { LanguageCode } from '../../configs/locales/languages';
+import { NUMBERING_SYSTEM_CODE } from '../../configs/locales/numbering-systems';
 
 export const getFallbackChain = (locale: string): LocaleCode[] => {
   if (LOCALE_CODES.includes(locale as LocaleCode)) {
@@ -54,9 +58,9 @@ export const getLocale = (locale?: LocaleCode): LocaleCode => {
 
 export const getLanguageSubtag = (locale: LocaleCode): LanguageCode => {
   const [language, secondPart] = locale.split('-');
-
-  const isScriptTag = secondPart?.length === 4;
-  return isScriptTag ? language : (locale.split('-')[0] as LanguageCode);
+  return (
+    secondPart?.length === 4 ? language : locale.split('-')[0]
+  ) as LanguageCode;
 };
 
 export const getLanguageConfig = (
@@ -92,32 +96,11 @@ export const isRTL = (locale: LocaleCode): boolean =>
   getDirection(locale) === DIRECTION_CODE.RTL;
 
 export const getPluralSuffix = (n: number, locale?: LocaleCode): string => {
-  const language = getLocale(locale);
-  const rules = getLanguageConfig(language)?.pluralRules;
-
-  if (rules === 'other') return '_other';
-
-  if (rules === 'zero-one-two-few-many-other') {
-    if (n === 0) return '_zero';
-    if (n === 1) return '_one';
-    if (n === 2) return '_two';
-
-    const rem = n % 100;
-    if (rem >= 3 && rem <= 10) return '_few';
-    if (rem >= 11 && rem <= 99) return '_many';
-
-    return '_other';
+  const loc = getLocale(locale);
+  try {
+    const category = new Intl.PluralRules(loc).select(n);
+    return `_${category}`;
+  } catch {
+    return n === 1 ? '_one' : '_other';
   }
-
-  if (rules === 'one-few-many') {
-    const rem10 = n % 10;
-    const rem100 = n % 100;
-
-    if (rem10 === 1 && rem100 !== 11) return '_one';
-    if (rem10 >= 2 && rem10 <= 4 && !(rem100 >= 12 && rem100 <= 14))
-      return '_few';
-    return '_many';
-  }
-
-  return n === 1 ? '_one' : '_other';
 };

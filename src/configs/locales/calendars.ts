@@ -1,0 +1,28 @@
+export const CALENDARS = [
+  {
+    code: 'gregory',
+    name: 'Gregorian Calendar',
+    nameId: 'Kalender Gregorian',
+    description: 'The internationally accepted civil calendar',
+    eras: ['BC', 'AD'],
+    months: 12,
+    daysInWeek: 7,
+    origin: 'Vatican',
+    yearAdopted: 1582,
+  },
+] as const;
+
+export const CALENDAR_CODES = CALENDARS.map((c) => c.code) as CalendarCode[];
+
+export const CALENDAR_CODE = CALENDAR_CODES.reduce(
+  (acc, calendar) => {
+    const key = calendar.toUpperCase();
+    return Object.assign(acc, { [key]: calendar });
+  },
+  {} as Record<string, CalendarCode>,
+) as {
+  [K in CalendarCode as Uppercase<K>]: K;
+};
+
+export type CalendarCode = (typeof CALENDARS)[number]['code'];
+export type CalendarConfig = (typeof CALENDARS)[number];
