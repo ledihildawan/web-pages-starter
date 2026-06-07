@@ -1,0 +1,57 @@
+{
+  "hero": {
+    "badge": "Característiques destacades",
+    "title_part1": "Tot el que necessiteu per",
+    "title_highlight": "escalar més ràpid",
+    "description": "Des d'anàlisis potents fins a integracions perfectes, us proporcionem el conjunt d'eines que necessiteu per crear aplicacions de classe mundial sense complicacions."
+  },
+  "sections": {
+    "sync": {
+      "title": "Sincronització en temps real",
+      "description": "Els canvis es propaguen a tots els dispositius a l'instant. Tant si els vostres usuaris fan servir mòbil, escriptori o tauleta, veuen les mateixes dades al mateix temps.",
+      "check_0": "Latència per sota del mil·lisegon",
+      "check_1": "Suport fora de línia integrat",
+      "check_2": "Gestió de resolució de conflictes"
+    },
+    "analytics": {
+      "title": "Anàlisis accionables",
+      "description": "Deixeu d'endevinar. Obteniu informació detallada sobre el comportament dels usuaris, el rendiment del sistema i les mètriques d'ingressos. Visualitzeu les vostres dades amb gràfics interactius.",
+      "check_0": "Panells personalitzables",
+      "check_1": "Exportació a PDF, CSV o Excel",
+      "check_2": "Informes setmanals automatitzats"
+    }
+  },
+  "more_title": "I molt més...",
+  "more_subtitle": "Característiques avançades dissenyades per ajudar-vos a construir més ràpid i de manera més escalable.",
+  "more": {
+    "dark_mode": {
+      "title": "Mode fosc",
+      "desc": "Suport integrat per a temes clars i foscos amb detecció automàtica."
+    },
+    "api_first": {
+      "title": "API First",
+      "desc": "API REST i GraphQL disponibles per al control programàtic complet."
+    },
+    "sso": {
+      "title": "Inici de sessió SSO",
+      "desc": "Single Sign-On de classe empresarial per a Google, GitHub i Okta."
+    },
+    "audit": {
+      "title": "Registre d'auditoria",
+      "desc": "Seguiment de cada canvi als vostres projectes amb marques de temps detallades."
+    },
+    "rbac": {
+      "title": "Accés basat en rols",
+      "desc": "Control granular de permisos per a administradors, editors i visualitzadors."
+    },
+    "uptime": {
+      "title": "99,99% de temps d'activitat",
+      "desc": "Disponibilitat garantida amb la nostra CDN distribuïda globalment."
+    }
+  },
+  "cta": {
+    "heading": "Llestos per començar?",
+    "btn_create": "Crear compte",
+    "btn_docs": "Llegir la documentació"
+  }
+}

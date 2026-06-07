@@ -182,5 +182,21 @@
   "core": {
     "title": "核心功能",
     "description": "翻译、复数和 HTML 内容。"
+  },
+  "section_modes": {
+    "title": "数字模式",
+    "description": "比较当前区域设置的本机数字、通用格式和自动模式。"
+  },
+  "section_systems": {
+    "title": "书写系统",
+    "description": "系统级别的全部 7 套算法系统和 4 套附加数字系统,字体加载器已连接。"
+  },
+  "nav": {
+    "translations": "翻译",
+    "formatting": "数字",
+    "pricing": "价格",
+    "modes": "模式",
+    "systems": "系统",
+    "switcher": "切换区域"
   }
 }

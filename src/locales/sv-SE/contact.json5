@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "title": "Kontakta oss | Starter App",
+    "description": "Kom i kontakt med oss för frågor och support."
+  },
+  "contact": {
+    "badge": "Redo att hjälpa",
+    "title_part1": "Låt oss koppla",
+    "title_highlight": "ihop",
+    "description": "Har du en fråga eller vill du samarbeta? Vi vill gärna höra från dig. Skicka ett meddelande så svarar vi snart.",
+    "form_title": "Skicka ett meddelande",
+    "form_subtitle": "Fyll i formuläret nedan så svarar vi dig snart.",
+    "social_title": "Följ oss",
+    "social_subtitle": "Få de senaste uppdateringarna via våra sociala kanaler",
+    "info": {
+      "response_time": {
+        "title": "Snabbt svar",
+        "description": "Vi strävar efter att svara på varje meddelande inom 24 timmar på vardagar."
+      },
+      "working_hours": {
+        "title": "Arbetstider",
+        "description": "Måndag - fredag: 09:00 - 18:00. Helger: med prioritet."
+      },
+      "support": {
+        "title": "Kontinuerlig support",
+        "description": "Vårt supportteam är alltid redo att lösa dina tekniska problem."
+      }
+    },
+    "form": {
+      "name": "Namn",
+      "name_placeholder": "Ange ditt namn",
+      "email": "E-post",
+      "email_placeholder": "namn@epost.se",
+      "subject": "Ämne",
+      "subject_placeholder": "Vad vill du diskutera?",
+      "message": "Meddelande",
+      "message_placeholder": "Berätta mer om din fråga...",
+      "submit": "Skicka meddelande"
+    }
+  },
+  "email_label": "E-post",
+  "email_value": "hello@starter.app",
+  "phone_label": "Telefon",
+  "phone_value": "+46 8 123 456 78",
+  "location_label": "Plats",
+  "location_value": "Stockholm, Sverige"
+}

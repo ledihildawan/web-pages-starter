@@ -182,5 +182,21 @@
   "core": {
     "title": "Características Principales",
     "description": "Traducción, pluralización y contenido HTML."
+  },
+  "section_modes": {
+    "title": "Modos de Número",
+    "description": "Compara dígitos nativos, formato universal y modo automático para la localización activa."
+  },
+  "section_systems": {
+    "title": "Sistemas de Escritura",
+    "description": "Los 7 sistemas algorítmicos y 4 sistemas numéricos adicionales a nivel de sistema, con cargadores de fuentes conectados."
+  },
+  "nav": {
+    "translations": "Traducciones",
+    "formatting": "Números",
+    "pricing": "Precios",
+    "modes": "Modos",
+    "systems": "Sistemas",
+    "switcher": "Cambiar Locale"
   }
 }

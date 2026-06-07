@@ -1,0 +1,57 @@
+{
+  "hero": {
+    "badge": "Utvalgte funksjoner",
+    "title_part1": "Alt du trenger for å",
+    "title_highlight": "skalere raskere",
+    "description": "Fra kraftig analyse til sømløse integrasjoner gir vi deg verktøysettet du trenger for å bygge applikasjoner i verdensklasse uten komplikasjoner."
+  },
+  "sections": {
+    "sync": {
+      "title": "Sanntidssynkronisering",
+      "description": "Endringer spres umiddelbart til alle enheter. Enten brukerne dine er på mobil, desktop eller nettbrett, ser de de samme dataene til samme tid.",
+      "check_0": "Latens under millisekundet",
+      "check_1": "Innebygd offline-støtte",
+      "check_2": "Håndtering av konfliktløsning"
+    },
+    "analytics": {
+      "title": "Handlingsdyktig analyse",
+      "description": "Slutt å gjette. Få detaljert innsikt i brukeratferd, systemytelse og inntektsmålinger. Visualiser dataene dine med interaktive diagrammer.",
+      "check_0": "Tilpassbare dashbord",
+      "check_1": "Eksporter til PDF, CSV eller Excel",
+      "check_2": "Automatiserte ukentlige rapporter"
+    }
+  },
+  "more_title": "Og mye mer...",
+  "more_subtitle": "Avanserte funksjoner designet for å hjelpe deg å bygge raskere og mer skalerbart.",
+  "more": {
+    "dark_mode": {
+      "title": "Mørk modus",
+      "desc": "Innebygd støtte for lyse og mørke temaer med automatisk deteksjon."
+    },
+    "api_first": {
+      "title": "API-først",
+      "desc": "REST- og GraphQL-APIer tilgjengelig for fullstendig programmatisk kontroll."
+    },
+    "sso": {
+      "title": "SSO-pålogging",
+      "desc": "Enterprise Single Sign-On for Google, GitHub og Okta."
+    },
+    "audit": {
+      "title": "Revisjonslogg",
+      "desc": "Spor hver endring i prosjektene dine med detaljerte tidsstempler."
+    },
+    "rbac": {
+      "title": "Rollebasert tilgang",
+      "desc": "Granulær tillatelseskontroll for administratorer, redaktører og seere."
+    },
+    "uptime": {
+      "title": "99,99% oppetid",
+      "desc": "Garantert tilgjengelighet med vår globalt distribuerte CDN."
+    }
+  },
+  "cta": {
+    "heading": "Klar til å starte?",
+    "btn_create": "Opprett konto",
+    "btn_docs": "Les dokumentasjonen"
+  }
+}

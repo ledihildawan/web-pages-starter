@@ -182,5 +182,21 @@
   "core": {
     "title": "핵심 기능",
     "description": "번역, 복수화, HTML 콘텐츠."
+  },
+  "section_modes": {
+    "title": "숫자 모드",
+    "description": "활성 로케일의 네이티브 숫자, 유니버설 형식, 자동 모드를 비교합니다."
+  },
+  "section_systems": {
+    "title": "문자 체계",
+    "description": "시스템 레벨의 7개 알고리즘 시스템과 4개 추가 숫자 시스템 모두에 글꼴 로더가 연결되어 있습니다."
+  },
+  "nav": {
+    "translations": "번역",
+    "formatting": "숫자",
+    "pricing": "가격",
+    "modes": "모드",
+    "systems": "체계",
+    "switcher": "로케일 변경"
   }
 }

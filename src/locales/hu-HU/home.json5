@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "title": "Főoldal | Starter App",
+    "description": "Modern webalkalmazás készítő."
+  },
+  "hero": {
+    "badge": "Újdonság: 2.0-ás verzió megjelent",
+    "title_start": "Építs valami",
+    "title_highlight": "csodálatosat ma",
+    "description": "A modern módja a webalkalmazások építésének. Gyors, rugalmas és a minőséget fontosnak tartó fejlesztőknek tervezve.",
+    "image_alt": "Műszerfal előnézet",
+    "primary_btn": {
+      "label": "Kezdj el építeni",
+      "url": "/start"
+    },
+    "secondary_btn": {
+      "label": "Demo megtekintése",
+      "url": "/demo"
+    },
+    "note": "Nincs szükség hitelkártyára",
+  },
+  "features": {
+    "heading": "Minden, amire szükséged van",
+    "subheading": "Fejlett funkciók, amelyek segítenek gyorsabban építeni.",
+    "list": {
+      "speed": {
+        "title": "Villámgyors",
+        "description": "Maximális teljesítményre optimalizálva. Az alkalmazásod azonnal betöltődik."
+      },
+      "design": {
+        "title": "Elegáns dizájn",
+        "description": "Gondosan készítve. Minden pixelnek van célja és jelentése."
+      },
+      "security": {
+        "title": "Garantált biztonság",
+        "description": "Vállalati szintű biztonság. Az adataid minden rétegben védettek."
+      }
+    }
+  },
+  "stats": {
+    "community": "Fejlesztői közösség",
+    "community_val": "10K+",
+    "projects": "Épített projektek",
+    "projects_val": "50K+",
+    "uptime": "Rendelkezésre állás 24/7",
+    "uptime_val": "99,9%",
+    "rating": "Felhasználói értékelés",
+    "rating_val": "4,9/5"
+  }
+}

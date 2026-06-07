@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "title": "Skontaktuj się z nami | Starter App",
+    "description": "Skontaktuj się z nami w sprawie pytań i wsparcia."
+  },
+  "contact": {
+    "badge": "Gotowi pomóc",
+    "title_part1": "Połączmy",
+    "title_highlight": "się",
+    "description": "Masz pytanie lub chcesz współpracować? Chętnie Cię wysłuchamy. Wyślij wiadomość, a wkrótce odpowiemy.",
+    "form_title": "Wyślij wiadomość",
+    "form_subtitle": "Wypełnij poniższy formularz, a wkrótce się odezwiemy.",
+    "social_title": "Śledź nas",
+    "social_subtitle": "Otrzymuj najnowsze aktualizacje przez nasze kanały społecznościowe",
+    "info": {
+      "response_time": {
+        "title": "Szybka odpowiedź",
+        "description": "Staramy się odpowiadać na każdą wiadomość w ciągu 24 godzin w dni robocze."
+      },
+      "working_hours": {
+        "title": "Godziny pracy",
+        "description": "Poniedziałek - piątek: 09:00 - 18:00. Weekendy: z priorytetem."
+      },
+      "support": {
+        "title": "Ciągłe wsparcie",
+        "description": "Nasz zespół wsparcia jest zawsze gotowy rozwiązać Twoje problemy techniczne."
+      }
+    },
+    "form": {
+      "name": "Imię",
+      "name_placeholder": "Wpisz swoje imię",
+      "email": "E-mail",
+      "email_placeholder": "imie@email.pl",
+      "subject": "Temat",
+      "subject_placeholder": "Co chciałbyś omówić?",
+      "message": "Wiadomość",
+      "message_placeholder": "Opowiedz nam więcej o swoim pytaniu...",
+      "submit": "Wyślij wiadomość"
+    }
+  },
+  "email_label": "E-mail",
+  "email_value": "hello@starter.app",
+  "phone_label": "Telefon",
+  "phone_value": "+48 22 123 45 67",
+  "location_label": "Lokalizacja",
+  "location_value": "Warszawa, Polska"
+}

@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "title": "Inici | Starter App",
+    "description": "Constructor d'aplicacions web modernes."
+  },
+  "hero": {
+    "badge": "Nou: la versió 2.0 ja és aquí",
+    "title_start": "Creeu quelcom",
+    "title_highlight": "meravellós avui",
+    "description": "La manera moderna de construir aplicacions web. Ràpida, flexible i dissenyada per a desenvolupadors que es preocupen per la qualitat.",
+    "image_alt": "Vista prèvia del tauler",
+    "primary_btn": {
+      "label": "Comença a construir",
+      "url": "/start"
+    },
+    "secondary_btn": {
+      "label": "Veure demo",
+      "url": "/demo"
+    },
+    "note": "No cal targeta de crèdit",
+  },
+  "features": {
+    "heading": "Tot el que necessiteu",
+    "subheading": "Característiques avançades per ajudar-vos a construir més ràpid.",
+    "list": {
+      "speed": {
+        "title": "Molt ràpid",
+        "description": "Optimitzat per al màxim rendiment. La vostra aplicació es carrega a l'instant."
+      },
+      "design": {
+        "title": "Disseny elegant",
+        "description": "Fet amb cura. Cada píxel té significat i propòsit."
+      },
+      "security": {
+        "title": "Seguretat garantida",
+        "description": "Seguretat de classe empresarial. Les vostres dades estan protegides a cada capa."
+      }
+    }
+  },
+  "stats": {
+    "community": "Comunitat de desenvolupadors",
+    "community_val": "10K+",
+    "projects": "Projectes construïts",
+    "projects_val": "50K+",
+    "uptime": "Temps d'activitat 24/7",
+    "uptime_val": "99,9%",
+    "rating": "Valoració dels usuaris",
+    "rating_val": "4,9/5"
+  }
+}

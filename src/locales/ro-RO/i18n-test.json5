@@ -1,0 +1,202 @@
+{
+  "meta": {
+    "title": "Test i18n | Demo",
+    "description": "Pagină de test cuprinzătoare pentru funcționalitățile de internaționalizare"
+  },
+  "hero": {
+    "badge": "Funcționalități i18n",
+    "title": "Test <span class='text-violet-400'>cuprinzător</span> de internaționalizare",
+    "description": "Testează toate funcționalitățile i18n: traducere, pluralizare, formatare numere, valute și conversie valutară."
+  },
+  "language_info": {
+    "title": "Informații despre limba curentă",
+    "code": "Cod limbă",
+    "currency": "Valută",
+    "direction": "Direcția textului",
+    "digits": "Cifre native",
+    "enabled": "Activat",
+    "disabled": "Dezactivat",
+    "languages": "Limbi",
+    "switching": "Comutare fără reîncărcare",
+    "current_code": "ro",
+    "current_currency": "RON",
+    "current_direction": "LTR (de la stânga la dreapta)"
+  },
+  "numbers": {
+    "title": "Formatare numere",
+    "description": "Numerele sunt formatate conform localizării active.",
+    "large": "Număr mare",
+    "decimal": "Zecimal",
+    "million": "Milion",
+    "percent": "Procent",
+    "raw": "Brut"
+  },
+  "currency": {
+    "title": "Conversie valutară",
+    "description": "Prețuri în RON convertite în valuta limbii active.",
+    "currencies": "Valute",
+    "small": "Mic",
+    "medium": "Mediu",
+    "large": "Mare",
+    "enterprise": "Enterprise"
+  },
+  "currency_comparison": {
+    "title": "Comparație valute",
+    "description": "Același preț în diverse valute suportate.",
+    "base_price": "Preț de bază (USD)",
+    "aed": "Dirham EAU",
+    "aud": "Dolar australian",
+    "brl": "Real brazilian",
+    "cad": "Dolar canadian",
+    "chf": "Franc elvețian",
+    "cny": "Yuan chinezesc",
+    "eur": "Euro",
+    "gbp": "Liră sterlină",
+    "idr": "Rupie",
+    "inr": "Rupie indiană",
+    "jpy": "Yen japonez",
+    "krw": "Won coreean",
+    "mxn": "Peso mexican",
+    "sar": "Riyal saudit",
+    "sgd": "Dolar singaporez",
+    "usd": "Dolar american",
+    "zar": "Rand sud-african"
+  },
+  "core": {
+    "title": "Funcționalități de bază",
+    "description": "Traducere, pluralizare și conținut HTML."
+  },
+  "pluralization": {
+    "title": "Pluralizare",
+    "description": "Forme diferite de plural pentru fiecare limbă.",
+    "item_title": "Item (element)",
+    "user_title": "User (utilizator)",
+    "product_title": "Product (produs)"
+  },
+  "form": {
+    "title": "Formular cu placeholder-uri traduse",
+    "description": "Placeholder-urile și etichetele sunt preluate din fișierele de limbă.",
+    "name_label": "Nume",
+    "name_placeholder": "Introdu numele tău complet",
+    "email_label": "E-mail",
+    "email_placeholder": "exemplu@email.ro",
+    "message_label": "Mesaj",
+    "message_placeholder": "Scrie mesajul tău aici...",
+    "submit": "Trimite"
+  },
+  "missing_keys": {
+    "title": "Gestionarea cheilor lipsă",
+    "description": "Cheile de traducere lipsă sunt afișate în paranteze pătrate."
+  },
+  "html_content": {
+    "title": "Conținut HTML",
+    "description": "Traducerile pot include tag-uri HTML pentru formatare.",
+    "example": "Acesta este un text exemplu cu <span class='text-emerald-400'>evidențiere colorată</span> și <strong>text îngroșat</strong>.",
+    "note": "Notă: tag-urile HTML din traduceri trebuie să fie în interiorul unui element container."
+  },
+  "switcher": {
+    "title": "Comută limba",
+    "description": "Apasă butonul de mai jos pentru a comuta limba și a vedea toate funcționalitățile i18n în acțiune."
+  },
+  "advanced": {
+    "title": "Formatare avansată",
+    "description": "Funcționalități avansate de formatare pentru procente, unități, octeți, liste și numerale ordinale.",
+    "percentages": "Procente",
+    "units": "Unități",
+    "bytes": "Octeți",
+    "bytes_unit": "octet",
+    "lists": "Liste",
+    "ordinals": "Numerale ordinale",
+    "cardinals": "Numerale cardinale",
+    "scientific": "Notație științifică",
+    "abbreviated": "Abreviate",
+    "date_formats": "Formate de dată",
+    "time_formats": "Formate de oră",
+    "datetime": "Dată + oră",
+    "durations": "Durate",
+    "relative_time": "Timp relativ",
+    "regional_pricing": "Prețuri regionale",
+    "fifty_percent": "Cincizeci la sută",
+    "small_percent": "Procent mic",
+    "ninety_nine": "Nouăzeci și nouă",
+    "hundred": "O sută",
+    "kilobyte": "Kilooctet",
+    "distance": "Distanță",
+    "temperature": "Temperatură",
+    "weight": "Greutate",
+    "half_kb": "Jumătate de KB",
+    "one_and_half_kb": "Un KB și jumătate",
+    "one_mb": "Un MB",
+    "one_gb": "Un GB",
+    "two_items": "Două elemente",
+    "three_items": "Trei elemente",
+    "four_items": "Patru elemente",
+    "date_short": "Dată scurtă",
+    "date_long": "Dată lungă",
+    "time_short": "Oră scurtă",
+    "time_long": "Oră lungă",
+    "day_ago": "Zile în urmă",
+    "months_ago": "Luni în urmă",
+    "hour_in": "În 1 oră",
+    "starter_plan": "Plan Starter",
+    "pro_plan": "Plan Pro",
+    "discount_20": "20% reducere",
+    "number_modes": "Moduri de numere",
+    "number_modes_desc": "Comparație între cifrele native (٠١٢٣٤) și formatarea universală (0-9).",
+    "native_label": "Cifre native (٠١٢٣٤)",
+    "universal_label": "Universal (0-9)",
+    "plain_label": "Automat"
+  },
+  "template_macros": {
+    "title": "Macro-uri șablon",
+    "description": "Macro-uri pentru obținerea valorilor brute fără marcare HTML.",
+    "raw_value": "Valoare brută fără marcare",
+    "current_year": "Anul curent este {{year}}"
+  },
+  "datetime": {
+    "title": "Dată și oră",
+    "description": "Format combinat de dată și oră.",
+    "iso": "Standard ISO",
+    "eve": "Ajun de Crăciun"
+  },
+  "unit": {
+    "title": "Format unități"
+  },
+  "native_digits": {
+    "title": "Cifre native",
+    "description": "Textul cu cifre ASCII este afișat în cifre native când localizarea le activează. Se actualizează live la comutarea limbii."
+  },
+  "inflection": {
+    "title": "Flexiune engleză",
+    "description": "Pluralizare și singularizare în engleză. Se actualizează live la comutarea limbii."
+  },
+  "live_label": "Live",
+  "pricing_details": {
+    "title": "Detalii preț",
+    "description": "Pipeline complet: valoare brută, cod valută, format, reducere și conversie.",
+    "raw_value": "Valoare brută",
+    "raw_currency": "Cod valută",
+    "formatted": "Formatat",
+    "discounted": "20% reducere",
+    "converted_usd": "Convertit în USD"
+  },
+  "live_update": {
+    "note": "Observă că toate numerele, datele și prețurile se schimbă instantaneu când comuți limba — fără reîncărcarea paginii."
+  },
+  "section_modes": {
+    "title": "Moduri de Numere",
+    "description": "Compară cifrele native, formatul universal și modul automat pentru localizarea activă."
+  },
+  "section_systems": {
+    "title": "Sisteme de Scriere",
+    "description": "Toate cele 7 sisteme algoritmice și 4 sisteme numerice suplimentare la nivel de sistem, cu încărcătoare de fonturi conectate."
+  },
+  "nav": {
+    "translations": "Traduceri",
+    "formatting": "Numere",
+    "pricing": "Prețuri",
+    "modes": "Moduri",
+    "systems": "Sisteme",
+    "switcher": "Schimbă Locale"
+  }
+}

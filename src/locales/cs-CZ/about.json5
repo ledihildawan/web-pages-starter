@@ -1,0 +1,75 @@
+{
+  "about": {
+    "badge": "O nás"
+  },
+  "hero": {
+    "badge": "O nás",
+    "title_part1": "Tvoříme ",
+    "title_highlight": "digitální budoucnost",
+    "description": "Založeno v roce 2024, Starter pomáhá vývojářům stavět lepší aplikace rychleji. Věříme v sílu čistého kódu, krásného designu a spolupráce open source."
+  },
+  "stats": {
+    "years": "Let zkušeností",
+    "years_val": "3+",
+    "clients": "Globálních klientů",
+    "clients_val": "120+",
+    "countries": "Zemí dosaženo",
+    "countries_val": "15",
+    "support": "Expertní podpora",
+    "support_val": "24/7"
+  },
+  "story": {
+    "tag": "Náš příběh",
+    "visual_label": "Ilustrace kreativního studia",
+    "title": "Poháněni vášní, <br>definováni dokonalostí.",
+    "para1": "Naše cesta začala jednoduchým nápadem: udělat webový vývoj přístupný a zábavný pro všechny. Měli jsme dost těžkých frameworků a komplikovaných nastavení.",
+    "para2": "Dnes jsme rozmanitý tým inženýrů, designérů a myslitelů, kteří spolupracují na řešení složitých problémů elegantními řešeními.",
+    "val1": "Filozofie designu zaměřená na uživatele",
+    "val2": "Architektura s důrazem na výkon",
+    "val3": "Transparentnost a otevřená komunikace"
+  },
+  "mission": {
+    "title": "Naše mise",
+    "description": "Poskytnout vývojářům a firmám elegantní, rychlé a snadno použitelné nástroje pro vytváření výjimečných digitálních produktů."
+  },
+  "vision": {
+    "title": "Naše vize",
+    "description": "Stát se preferovanou platformou pro moderní vývojáře, kteří si cení krásy, výkonu a uživatelské zkušenosti v každém řádku kódu."
+  },
+  "values": {
+    "title": "Naše hodnoty",
+    "subtitle": "Principy, které vedou každé naše rozhodnutí."
+  },
+  "passion": {
+    "title": "Vášeň",
+    "description": "Milujeme to, co děláme, a je to vidět v každém detailu našich produktů."
+  },
+  "collaboration": {
+    "title": "Spolupráce",
+    "description": "Společná práce přináší nejlepší výsledky. Věříme v sílu silného týmu."
+  },
+  "innovation": {
+    "title": "Innova",
+    "description": "Vždy hledáme lepší způsoby, jak řešit problémy a vytvářet hodnotu."
+  },
+  "integrity": {
+    "title": "Integrita",
+    "description": "Čestnost a transparentnost jsou základem každého vztahu, který budujeme."
+  },
+  "excellence": {
+    "title": "Dokonalost",
+    "description": "Nespokojíme se s „dost dobrým\". Vždy usilujeme o to nejlepší."
+  },
+  "quality": {
+    "title": "Kvalita",
+    "description": "Čistý kód, krásný design a bezproblémový zážitek jsou naším standardem."
+  },
+  "team": {
+    "title": "Seznamte se s týmem",
+    "subtitle": "Bystré mysli za každým řádkem kódu, který píšeme.",
+    "alex_desc": "Vizionářský lídr s více než 10 lety zkušeností s vývojem ekosystémů SaaS.",
+    "sarah_desc": "Fullstack mága specializující se na budování rozsáhlé systémové architektury.",
+    "mike_desc": "Posedlý detaily pixelů, hladkými UX toky a standardy přístupnosti.",
+    "jessica_desc": "Kreativní vypravěčka, která pomáhá značkám najít jejich jedinečný hlas v digitálním světě."
+  }
+}

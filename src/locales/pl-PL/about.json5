@@ -1,0 +1,75 @@
+{
+  "about": {
+    "badge": "O nas"
+  },
+  "hero": {
+    "badge": "O nas",
+    "title_part1": "Tworzymy ",
+    "title_highlight": "cyfrową przyszłość",
+    "description": "Założony w 2024 roku, Starter pomaga deweloperom budować lepsze aplikacje szybciej. Wierzymy w siłę czystego kodu, pięknego designu i współpracy open source."
+  },
+  "stats": {
+    "years": "Lat doświadczenia",
+    "years_val": "3+",
+    "clients": "Globalnych klientów",
+    "clients_val": "120+",
+    "countries": "Krajów zasięgu",
+    "countries_val": "15",
+    "support": "Wsparcie ekspertów",
+    "support_val": "24/7"
+  },
+  "story": {
+    "tag": "Nasza historia",
+    "visual_label": "Ilustracja kreatywnego studia",
+    "title": "Napędzani pasją, <br>zdefiniowani doskonałością.",
+    "para1": "Nasza podróż zaczęła się od prostego pomysłu: uczynić rozwój web dostępnym i przyjemnym dla wszystkich. Mieliśmy dość ciężkich frameworków i skomplikowanych konfiguracji.",
+    "para2": "Dziś jesteśmy zróżnicowanym zespołem inżynierów, designerów i myślicieli, którzy współpracują nad rozwiązywaniem złożonych problemów eleganckimi rozwiązaniami.",
+    "val1": "Filozofia designu skoncentrowana na użytkowniku",
+    "val2": "Architektura z naciskiem na wydajność",
+    "val3": "Przejrzystość i otwarta komunikacja"
+  },
+  "mission": {
+    "title": "Nasza misja",
+    "description": "Wyposażyć deweloperów i firmy w eleganckie, szybkie i łatwe w użyciu narzędzia do budowania wyjątkowych produktów cyfrowych."
+  },
+  "vision": {
+    "title": "Nasza wizja",
+    "description": "Stać się preferowaną platformą dla nowoczesnych deweloperów, którzy cenią piękno, wydajność i doświadczenie użytkownika w każdej linii kodu."
+  },
+  "values": {
+    "title": "Nasze wartości",
+    "subtitle": "Zasady, które kierują każdą naszą decyzją."
+  },
+  "passion": {
+    "title": "Pasja",
+    "description": "Kochamy to, co robimy, i widać to w każdym szczególe naszych produktów."
+  },
+  "collaboration": {
+    "title": "Współpraca",
+    "description": "Wspólna praca przynosi najlepsze rezultaty. Wierzymy w siłę silnego zespołu."
+  },
+  "innovation": {
+    "title": "Innowacja",
+    "description": "Zawsze szukamy lepszych sposobów rozwiązywania problemów i tworzenia wartości."
+  },
+  "integrity": {
+    "title": "Uczciwość",
+    "description": "Uczciwość i przejrzystość są fundamentem każdej budowanej przez nas relacji."
+  },
+  "excellence": {
+    "title": "Doskonałość",
+    "description": "Nie zadowalamy się 'wystarczająco dobrym'. Zawsze dążymy do najlepszego."
+  },
+  "quality": {
+    "title": "Jakość",
+    "description": "Czysty kod, piękny design i bezproblemowe doświadczenie są naszym standardem."
+  },
+  "team": {
+    "title": "Poznaj zespół",
+    "subtitle": "Błyskotliwe umysły stojące za każdą linią kodu, którą piszemy.",
+    "alex_desc": "Wizjonerski lider z ponad 10-letnim doświadczeniem w budowaniu ekosystemów SaaS.",
+    "sarah_desc": "Fullstackowa magik specjalizująca się w budowaniu architektur systemów na dużą skalę.",
+    "mike_desc": "Obsesyjnie dba o szczegóły pikseli, płynne przepływy UX i standardy dostępności.",
+    "jessica_desc": "Kreatywna storytellerka, która pomaga markom znaleźć ich unikalny głos w cyfrowym świecie."
+  }
+}

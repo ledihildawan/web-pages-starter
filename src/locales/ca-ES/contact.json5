@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "title": "Contacta'ns | Starter App",
+    "description": "Poseu-vos en contacte amb nosaltres per a preguntes i assistència."
+  },
+  "contact": {
+    "badge": "Llestos per ajudar",
+    "title_part1": "Connectem",
+    "title_highlight": "junts",
+    "description": "Teniu alguna pregunta o voleu col·laborar? Ens encantaria saber de vostè. Envieu un missatge i respondrem aviat.",
+    "form_title": "Enviar un missatge",
+    "form_subtitle": "Ompliu el formulari següent i respondrem aviat.",
+    "social_title": "Seguiu-nos",
+    "social_subtitle": "Obteniu les últimes actualitzacions a través de les nostres xarxes socials",
+    "info": {
+      "response_time": {
+        "title": "Resposta ràpida",
+        "description": "Ens esforcem per respondre cada missatge en un termini de 24 hores en dies laborables."
+      },
+      "working_hours": {
+        "title": "Horari d'atenció",
+        "description": "Dilluns - divendres: 09:00 - 18:00. Caps de setmana: amb prioritat."
+      },
+      "support": {
+        "title": "Suport continu",
+        "description": "El nostre equip de suport sempre està preparat per resoldre els vostres problemes tècnics."
+      }
+    },
+    "form": {
+      "name": "Nom",
+      "name_placeholder": "Introduïu el vostre nom",
+      "email": "Correu electrònic",
+      "email_placeholder": "nom@correu.com",
+      "subject": "Assumpte",
+      "subject_placeholder": "Què voleu discutir?",
+      "message": "Missatge",
+      "message_placeholder": "Expliqueu-nos més sobre la vostra pregunta...",
+      "submit": "Enviar missatge"
+    }
+  },
+  "email_label": "Correu electrònic",
+  "email_value": "hello@starter.app",
+  "phone_label": "Telèfon",
+  "phone_value": "+34 931 234 567",
+  "location_label": "Ubicació",
+  "location_value": "Barcelona, Catalunya"
+}

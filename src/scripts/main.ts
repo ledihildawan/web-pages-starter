@@ -26,17 +26,14 @@ const loadVendors = async () => {
 };
 
 const loadAppModules = async () => {
-  const [{ initIntl }, { registerI18nStore }, { registerNavbarComponent }] =
-    await Promise.all([
-      import("./lib/i18n/runtime"),
-      import("./lib/i18n/store"),
-      import("./components/navbar"),
-    ]);
+  const [{ initIntl }, { registerI18nStore }] = await Promise.all([
+    import("./lib/i18n/runtime"),
+    import("./lib/i18n/store"),
+  ]);
 
   return {
     initIntl,
     registerI18nStore,
-    registerNavbarComponent,
   };
 };
 
@@ -48,10 +45,8 @@ const setupAlpine = ({ Alpine, collapse, focus }: VendorModules): void => {
 
 const registerAppModules = ({
   registerI18nStore,
-  registerNavbarComponent,
 }: AppModules): void => {
   registerI18nStore();
-  registerNavbarComponent();
 };
 
 const clearStartupLocks = (): void => {

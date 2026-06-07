@@ -7,16 +7,13 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       // Cache critical HTML files with error handling
-      return cache.addAll([
-        '/',
-        '/home.html',
-        '/404.html',
-        '/manifest.json',
-      ].catch((error) => {
-        console.warn('Cache add failed:', error);
-        // Continue even if some resources fail to cache
-        return Promise.resolve();
-      }));
+      return cache
+        .addAll(['/', '/home.html', '/404.html', '/manifest.json'])
+        .catch((error) => {
+          console.warn('Cache add failed:', error);
+          // Continue even if some resources fail to cache
+          return Promise.resolve();
+        });
     }),
   );
   self.skipWaiting();
@@ -40,28 +37,34 @@ self.addEventListener('fetch', (event) => {
         return cachedResponse;
       }
 
-      return fetch(event.request).then((response) => {
-        // Don't cache if not successful or opaque response
-        if (!response || response.status !== 200 || response.type === 'opaque') {
-          return response;
-        }
+      return fetch(event.request)
+        .then((response) => {
+          // Don't cache if not successful or opaque response
+          if (
+            !response ||
+            response.status !== 200 ||
+            response.type === 'opaque'
+          ) {
+            return response;
+          }
 
-        // Clone the response before caching
-        const responseToCache = response.clone();
+          // Clone the response before caching
+          const responseToCache = response.clone();
 
-        caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, responseToCache).catch((error) => {
-            console.warn('Cache put failed:', error);
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseToCache).catch((error) => {
+              console.warn('Cache put failed:', error);
+            });
           });
-        });
 
-        return response;
-      }).catch(() => {
-        // Network failed, return offline page for navigation requests
-        if (event.request.mode === 'navigate') {
-          return caches.match('/404.html');
-        }
-      });
+          return response;
+        })
+        .catch(() => {
+          // Network failed, return offline page for navigation requests
+          if (event.request.mode === 'navigate') {
+            return caches.match('/404.html');
+          }
+        });
     }),
   );
 });
@@ -72,9 +75,10 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME) {
-            return caches.delete(cacheName);
+          if (cacheName === CACHE_NAME) {
+            return null;
           }
+          return caches.delete(cacheName);
         }),
       );
     }),

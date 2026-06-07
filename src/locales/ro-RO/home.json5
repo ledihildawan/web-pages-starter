@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "title": "Acasă | Starter App",
+    "description": "Constructor modern de aplicații web."
+  },
+  "hero": {
+    "badge": "Nou: versiunea 2.0 este aici",
+    "title_start": "Construiește ceva",
+    "title_highlight": "minunat astăzi",
+    "description": "Modul modern de a construi aplicații web. Rapid, flexibil și conceput pentru dezvoltatorii care pun preț pe calitate.",
+    "image_alt": "Previzualizare dashboard",
+    "primary_btn": {
+      "label": "Începe să construiești",
+      "url": "/start"
+    },
+    "secondary_btn": {
+      "label": "Vezi demo",
+      "url": "/demo"
+    },
+    "note": "Nu este necesar card de credit",
+  },
+  "features": {
+    "heading": "Tot ce ai nevoie",
+    "subheading": "Funcționalități avansate pentru a te ajuta să construiești mai rapid.",
+    "list": {
+      "speed": {
+        "title": "Extrem de rapid",
+        "description": "Optimizat pentru performanță maximă. Aplicația ta se încarcă instantaneu."
+      },
+      "design": {
+        "title": "Design elegant",
+        "description": "Făcut cu grijă. Fiecare pixel are scop și semnificație."
+      },
+      "security": {
+        "title": "Securitate garantată",
+        "description": "Securitate de nivel enterprise. Datele tale sunt protejate la fiecare nivel."
+      }
+    }
+  },
+  "stats": {
+    "community": "Comunitate de dezvoltatori",
+    "community_val": "10K+",
+    "projects": "Proiecte construite",
+    "projects_val": "50K+",
+    "uptime": "Disponibilitate 24/7",
+    "uptime_val": "99,9%",
+    "rating": "Evaluare utilizatori",
+    "rating_val": "4,9/5"
+  }
+}

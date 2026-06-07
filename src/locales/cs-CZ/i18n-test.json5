@@ -1,0 +1,202 @@
+{
+  "meta": {
+    "title": "i18n test | Demo",
+    "description": "Komplexní testovací stránka pro funkce internacionalizace"
+  },
+  "hero": {
+    "badge": "i18n funkce",
+    "title": "Komplexní <span class='text-violet-400'>test</span> internacionalizace",
+    "description": "Otestujte všechny i18n funkce: překlad, množné číslo, formátování čísel, měny a převod měn."
+  },
+  "language_info": {
+    "title": "Informace o aktuálním jazyce",
+    "code": "Kód jazyka",
+    "currency": "Měna",
+    "direction": "Směr textu",
+    "digits": "Nativní číslice",
+    "enabled": "Povoleno",
+    "disabled": "Zakázáno",
+    "languages": "Jazyky",
+    "switching": "Přepínání bez obnovení",
+    "current_code": "cs",
+    "current_currency": "CZK",
+    "current_direction": "LTR (zleva doprava)"
+  },
+  "numbers": {
+    "title": "Formátování čísel",
+    "description": "Čísla jsou formátována podle aktivní lokalizace.",
+    "large": "Velké číslo",
+    "decimal": "Desetinné",
+    "million": "Milion",
+    "percent": "Procento",
+    "raw": "Surové"
+  },
+  "currency": {
+    "title": "Převod měn",
+    "description": "Ceny v CZK převedené na měnu aktivního jazyka.",
+    "currencies": "Měny",
+    "small": "Malý",
+    "medium": "Střední",
+    "large": "Velký",
+    "enterprise": "Enterprise"
+  },
+  "currency_comparison": {
+    "title": "Srovnání měn",
+    "description": "Stejná cena v různých podporovaných měnách.",
+    "base_price": "Základní cena (USD)",
+    "aed": "SAE dirham",
+    "aud": "Australský dolar",
+    "brl": "Brazilský real",
+    "cad": "Kanadský dolar",
+    "chf": "Švýcarský frank",
+    "cny": "Čínský juan",
+    "eur": "Euro",
+    "gbp": "Britská libra",
+    "idr": "Rupie",
+    "inr": "Indická rupie",
+    "jpy": "Japonský jen",
+    "krw": "Korejský won",
+    "mxn": "Mexické peso",
+    "sar": "Saúdský rijál",
+    "sgd": "Singapurský dolar",
+    "usd": "Americký dolar",
+    "zar": "Jihoafrický rand"
+  },
+  "core": {
+    "title": "Hlavní funkce",
+    "description": "Překlad, množné číslo a HTML obsah."
+  },
+  "pluralization": {
+    "title": "Množné číslo",
+    "description": "Různé tvary množného čísla pro každý jazyk.",
+    "item_title": "Item (položka)",
+    "user_title": "User (uživatel)",
+    "product_title": "Product (produkt)"
+  },
+  "form": {
+    "title": "Formulář s přeloženými placeholdery",
+    "description": "Placeholdery a popisky jsou získávány z jazykových souborů.",
+    "name_label": "Jméno",
+    "name_placeholder": "Zadejte své celé jméno",
+    "email_label": "E-mail",
+    "email_placeholder": "priklad@email.cz",
+    "message_label": "Zpráva",
+    "message_placeholder": "Napište svou zprávu sem...",
+    "submit": "Odeslat"
+  },
+  "missing_keys": {
+    "title": "Zpracování chybějících klíčů",
+    "description": "Chybějící překladové klíče se zobrazují v hranatých závorkách."
+  },
+  "html_content": {
+    "title": "HTML obsah",
+    "description": "Překlady mohou obsahovat HTML tagy pro formátování.",
+    "example": "Toto je ukázkový text s <span class='text-emerald-400'>barevným zvýrazněním</span> a <strong>tučným textem</strong>.",
+    "note": "Poznámka: HTML tagy v překladech musí být uvnitř obalovacího elementu."
+  },
+  "switcher": {
+    "title": "Přepnout jazyk",
+    "description": "Klikněte na tlačítko níže pro přepnutí jazyka a uvidíte všechny i18n funkce v akci."
+  },
+  "advanced": {
+    "title": "Pokročilé formátování",
+    "description": "Pokročilé formátovací funkce pro procenta, jednotky, bajty, seznamy a řadové číslovky.",
+    "percentages": "Procenta",
+    "units": "Jednotky",
+    "bytes": "Bajty",
+    "bytes_unit": "bajt",
+    "lists": "Seznamy",
+    "ordinals": "Řadové číslovky",
+    "cardinals": "Kardinální číslovky",
+    "scientific": "Vědecký zápis",
+    "abbreviated": "Zkrácený",
+    "date_formats": "Formáty data",
+    "time_formats": "Formáty času",
+    "datetime": "Datum + čas",
+    "durations": "Doby trvání",
+    "relative_time": "Relativní čas",
+    "regional_pricing": "Regionální ceny",
+    "fifty_percent": "Padesát procent",
+    "small_percent": "Malé procento",
+    "ninety_nine": "Devadesát devět",
+    "hundred": "Sto",
+    "kilobyte": "Kilobajt",
+    "distance": "Vzdálenost",
+    "temperature": "Teplota",
+    "weight": "Hmotnost",
+    "half_kb": "Půl KB",
+    "one_and_half_kb": "Jeden a půl KB",
+    "one_mb": "Jeden MB",
+    "one_gb": "Jeden GB",
+    "two_items": "Dvě položky",
+    "three_items": "Tři položky",
+    "four_items": "Čtyři položky",
+    "date_short": "Krátké datum",
+    "date_long": "Dlouhé datum",
+    "time_short": "Krátký čas",
+    "time_long": "Dlouhý čas",
+    "day_ago": "Dnů zpět",
+    "months_ago": "Měsíců zpět",
+    "hour_in": "Za 1 hodinu",
+    "starter_plan": "Plán Starter",
+    "pro_plan": "Plán Pro",
+    "discount_20": "20% sleva",
+    "number_modes": "Režimy čísel",
+    "number_modes_desc": "Srovnání mezi nativními číslicemi (٠١٢٣٤) a univerzálním (0-9) formátováním.",
+    "native_label": "Nativní číslice (٠١٢٣٤)",
+    "universal_label": "Univerzální (0-9)",
+    "plain_label": "Automaticky"
+  },
+  "template_macros": {
+    "title": "Šablonové makra",
+    "description": "Makra pro získání surových hodnot bez HTML markupu.",
+    "raw_value": "Surová hodnota bez markupu",
+    "current_year": "Aktuální rok je {{year}}"
+  },
+  "datetime": {
+    "title": "Datum a čas",
+    "description": "Kombinovaný formát data a času.",
+    "iso": "ISO standard",
+    "eve": "Štědrý den"
+  },
+  "unit": {
+    "title": "Formát jednotek"
+  },
+  "native_digits": {
+    "title": "Nativní číslice",
+    "description": "Text s ASCII číslicemi se zobrazuje v nativních číslicích, když to lokalizace povolí. Aktualizuje se živě při přepínání jazyka."
+  },
+  "inflection": {
+    "title": "Anglická flexe",
+    "description": "Anglické množné a jednotné číslo. Aktualizuje se živě při přepínání jazyka."
+  },
+  "live_label": "Živě",
+  "pricing_details": {
+    "title": "Detaily ceny",
+    "description": "Kompletní pipeline: surová hodnota, kód měny, formát, sleva a konverze.",
+    "raw_value": "Surová hodnota",
+    "raw_currency": "Kód měny",
+    "formatted": "Formátováno",
+    "discounted": "20% sleva",
+    "converted_usd": "Převedeno na USD"
+  },
+  "live_update": {
+    "note": "Všimněte si, že se všechna čísla, data a ceny okamžitě mění při přepnutí jazyka — bez obnovení stránky."
+  },
+  "section_modes": {
+    "title": "Režimy Čísel",
+    "description": "Porovnejte nativní číslice, univerzální formát a automatický režim pro aktivní lokalitu."
+  },
+  "section_systems": {
+    "title": "Písemné Systémy",
+    "description": "Všech 7 algoritmických a 4 dalších numerických systémů na úrovni systému, s připojenými zavaděči písem."
+  },
+  "nav": {
+    "translations": "Překlady",
+    "formatting": "Čísla",
+    "pricing": "Ceny",
+    "modes": "Režimy",
+    "systems": "Systémy",
+    "switcher": "Změnit Lokalitu"
+  }
+}

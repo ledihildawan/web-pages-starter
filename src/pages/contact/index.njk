@@ -41,11 +41,20 @@
             <div class="absolute -inset-be-24 -inset-e-24 inline-48 block-48 bg-violet-600/5 blur-3xl rounded-full"></div>
             <div class="absolute inset-0 opacity-30 bg-[radial-gradient(#8b5cf6_1px,transparent_1px)] bg-[length:32px_32px]"></div>
 
-            <form class="space-y-6 relative" method="post" action="/contact" novalidate>
+            <form
+              class="space-y-6 relative"
+              method="post"
+              action="/contact"
+              novalidate
+              x-data="contactForm()"
+              @submit.prevent="validate()"
+            >
               {{ form.form_input('text', 'page.contact.form.name', 'page.contact.form.name_placeholder', 'name', i18n=i18n) }}
               {{ form.form_input('email', 'page.contact.form.email', 'page.contact.form.email_placeholder', 'email', i18n=i18n) }}
               {{ form.form_input('text', 'page.contact.form.subject', 'page.contact.form.subject_placeholder', 'subject', i18n=i18n) }}
               {{ form.form_input('textarea', 'page.contact.form.message', 'page.contact.form.message_placeholder', 'message', rows=4, i18n=i18n) }}
+
+              <div class="sr-only" role="status" aria-live="polite" x-text="statusMessage"></div>
 
               <button
                 type="submit"

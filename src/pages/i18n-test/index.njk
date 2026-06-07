@@ -1,6 +1,9 @@
 {% extends "main.njk" %}
+{% import "section-header.njk" as sh with context %}
+{% import "icons.njk" as ico with context %}
 
 {% block content %}
+
   <section class="relative pt-24 pb-16 lg:pt-32 lg:pb-20 px-6 text-center overflow-hidden">
     <div class="absolute inset-0 -z-10">
       <div class="absolute top-0 left-1/2 -translate-x-1/2 w-200 h-100 bg-violet-500/10 rounded-full blur-[120px]"></div>
@@ -10,41 +13,41 @@
     <div class="max-w-4xl mx-auto relative">
       <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-xs font-bold uppercase tracking-wider mb-8">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        {{ i18n.t('page.' + page.hero.t_key + '.badge') }}
+        <span data-i18n="page.hero.badge">Fitur i18n</span>
       </div>
 
       <h1 class="text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 leading-[1.1]">
         <span class="bg-linear-to-br from-white via-white to-slate-400 bg-clip-text text-transparent">
-          {{ i18n.html('page.' + page.hero.t_key + '.title') }}
+          <span data-i18n-html="i18n-test:hero.title">Tes <span class="text-violet-400">Lengkap</span> Internasionalisasi</span>
         </span>
       </h1>
 
       <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-12 leading-relaxed">
-        {{ i18n.t('page.' + page.hero.t_key + '.description') }}
+        <span data-i18n="i18n-test:hero.description">Coba semua fitur i18n: translasi, pluralisasi, format angka, mata uang, dan konversi mata uang.</span>
       </p>
 
       <div class="flex items-center justify-center gap-6 md:gap-10 text-sm">
         <div class="flex items-center gap-3">
-          <span class="text-2xl">🌍</span>
+          <span class="text-2xl" aria-hidden="true">🌍</span>
           <div class="text-left">
             <div class="text-2xl font-black text-white leading-none tabular-nums">42</div>
-            <div class="text-xs text-slate-400">{{ i18n.t('page.language_info.languages') }}</div>
+            <div class="text-xs text-slate-400"><span data-i18n="i18n-test:language_info.languages">Bahasa</span></div>
           </div>
         </div>
         <div class="w-px h-12 bg-white/10"></div>
         <div class="flex items-center gap-3">
-          <span class="text-2xl">💱</span>
+          <span class="text-2xl" aria-hidden="true">💱</span>
           <div class="text-left">
             <div class="text-2xl font-black text-white leading-none tabular-nums">16</div>
-            <div class="text-xs text-slate-400">{{ i18n.t('page.currency.currencies') }}</div>
+            <div class="text-xs text-slate-400"><span data-i18n="i18n-test:currency.currencies">Mata Uang</span></div>
           </div>
         </div>
         <div class="w-px h-12 bg-white/10"></div>
         <div class="flex items-center gap-3">
-          <span class="text-2xl">🔄</span>
+          <span class="text-2xl" aria-hidden="true">🔄</span>
           <div class="text-left">
             <div class="text-2xl font-black text-white leading-none">Live</div>
-            <div class="text-xs text-slate-400">{{ i18n.t('page.language_info.switching') }}</div>
+            <div class="text-xs text-slate-400"><span data-i18n="i18n-test:language_info.switching">Beralih Tanpa Reload</span></div>
           </div>
         </div>
       </div>
@@ -55,61 +58,100 @@
     <div class="max-w-5xl mx-auto">
       <div class="flex items-center justify-center gap-4 md:gap-8 flex-wrap">
         <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/50 border border-white/5">
-          <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.language_info.code') }}</span>
+          <span class="text-xs text-slate-400 uppercase tracking-wider"><span data-i18n="i18n-test:language_info.code">Kode Bahasa</span></span>
           <span class="text-sm font-bold text-white tabular-nums">{{ localeConfig.code }}</span>
         </div>
         <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
-          <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.language_info.currency') }}</span>
+          <span class="text-xs text-slate-400 uppercase tracking-wider"><span data-i18n="i18n-test:language_info.currency">Mata Uang</span></span>
           <span class="text-sm font-bold text-emerald-400 tabular-nums">{{ localeConfig.currency }}</span>
         </div>
         <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/50 border border-white/5">
-          <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.language_info.direction') }}</span>
+          <span class="text-xs text-slate-400 uppercase tracking-wider"><span data-i18n="i18n-test:language_info.direction">Arah Teks</span></span>
           <span class="text-sm font-bold text-white">{{ localeConfig.dir }}</span>
         </div>
         <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/50 border border-white/5">
-          <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.language_info.digits') }}</span>
+          <span class="text-xs text-slate-400 uppercase tracking-wider"><span data-i18n="i18n-test:language_info.digits">Digit Asli</span></span>
           <span class="text-sm font-bold text-white">
-            {% if localeConfig.nativeDigits %}{{ i18n.t('page.language_info.enabled') }}{% else %}{{ i18n.t('page.language_info.disabled') }}{% endif %}
+            {% if localeConfig.nativeDigits %}<span data-i18n="i18n-test:language_info.enabled">Aktif</span>{% else %}<span data-i18n="i18n-test:language_info.disabled">Nonaktif</span>{% endif %}
           </span>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="py-24 px-6">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-black text-white mb-4">{{ i18n.t('page.core.title') }}</h2>
-        <p class="text-slate-400 text-lg">{{ i18n.t('page.core.description') }}</p>
+  <nav
+    x-data="{ activeId: '' }"
+    x-init="const observer = new IntersectionObserver((entries) => { entries.forEach((e) => { if (e.isIntersecting) activeId = e.target.id; }); }, { rootMargin: '-30% 0px -50% 0px' }); document.querySelectorAll('section[id]').forEach((s) => observer.observe(s));"
+    class="sticky top-0 z-30 bg-slate-950/80 backdrop-blur-xl border-b border-white/5"
+  >
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex items-center gap-1 py-2 overflow-x-auto scrollbar-none">
+        <a
+          href="#translations"
+          :class="activeId === 'translations' ? 'bg-violet-500/20 text-white border-violet-500/40' : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'"
+          class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors"
+        >
+          <span data-i18n="i18n-test:nav.translations">Terjemahan</span>
+        </a>
+        <a
+          href="#formatting"
+          :class="activeId === 'formatting' ? 'bg-emerald-500/20 text-white border-emerald-500/40' : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'"
+          class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors"
+        >
+          <span data-i18n="i18n-test:nav.formatting">Angka</span>
+        </a>
+        <a
+          href="#pricing"
+          :class="activeId === 'pricing' ? 'bg-amber-500/20 text-white border-amber-500/40' : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'"
+          class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors"
+        >
+          <span data-i18n="i18n-test:nav.pricing">Harga</span>
+        </a>
+        <a
+          href="#modes"
+          :class="activeId === 'modes' ? 'bg-cyan-500/20 text-white border-cyan-500/40' : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'"
+          class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors"
+        >
+          <span data-i18n="i18n-test:nav.modes">Mode</span>
+        </a>
+        <a
+          href="#systems"
+          :class="activeId === 'systems' ? 'bg-sky-500/20 text-white border-sky-500/40' : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'"
+          class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors"
+        >
+          <span data-i18n="i18n-test:nav.systems">Sistem</span>
+        </a>
+        <a
+          href="#switcher"
+          :class="activeId === 'switcher' ? 'bg-fuchsia-500/20 text-white border-fuchsia-500/40' : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'"
+          class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors"
+        >
+          <span data-i18n="i18n-test:nav.switcher">Pilih Locale</span>
+        </a>
       </div>
+    </div>
+  </nav>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="group p-6 rounded-3xl bg-linear-to-br from-violet-500/8 to-transparent border border-violet-500/10 hover:border-violet-500/30 hover:shadow-xl hover:shadow-violet-500/10 transition-all duration-300">
-          <div class="flex items-center gap-4 mb-6">
-            <div class="w-14 h-14 rounded-2xl bg-violet-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🔢</div>
-            <h3 class="text-lg font-bold text-white">{{ i18n.t('page.numbers.title') }}</h3>
-          </div>
-          <div class="space-y-3">
-            {% for num in page.numbers %}
-              {% if loop.index <= page.display.max_numbers %}
-                <div class="flex items-center justify-between py-3 border-b border-white/5 last:border-0">
-                  <span class="text-sm text-slate-400">{{ i18n.t('page.' + num.label) }}</span>
-                  <span class="text-xl font-black text-violet-400 tabular-nums">{{ i18n.formatNumber(num.val) }}</span>
-                </div>
-              {% endif %}
-            {% endfor %}
-          </div>
-        </div>
+  <section id="translations" class="px-6 py-24 scroll-mt-16">
+    <div class="max-w-6xl mx-auto">
+      {{ sh.section_header(
+        'page.core.title',
+        'page.core.title',
+        'page.core.description',
+        ico.icon('book', 'inline-5 block-5'),
+        i18n=i18n
+      ) }}
 
-        <div class="group p-6 rounded-3xl bg-linear-to-br from-fuchsia-500/8 to-transparent border border-fuchsia-500/10 hover:border-fuchsia-500/30 hover:shadow-xl hover:shadow-fuchsia-500/10 transition-all duration-300">
+      <div class="grid lg:grid-cols-2 gap-6">
+        <div class="group p-6 rounded-3xl bg-linear-to-br from-fuchsia-500/8 to-transparent border border-fuchsia-500/10 hover:border-fuchsia-500/30 transition-all">
           <div class="flex items-center gap-4 mb-6">
             <div class="w-14 h-14 rounded-2xl bg-fuchsia-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">a</div>
-            <h3 class="text-lg font-bold text-white">{{ i18n.t('page.pluralization.title') }}</h3>
+            <h3 class="text-lg font-bold text-white"><span data-i18n="i18n-test:pluralization.title">Pluralisasi</span></h3>
           </div>
           <div class="space-y-4">
             {% for plural in page.plurals %}
               <div class="border-b border-white/5 last:border-0 pb-3 last:pb-0">
-                <div class="text-xs uppercase tracking-wider text-fuchsia-300/70 mb-2">{{ i18n.t('page.pluralization.' + plural.key + '_title') }}</div>
+                <div class="text-xs uppercase tracking-wider text-fuchsia-300/70 mb-2"><span data-i18n="i18n-test:pluralization.{{ plural.key }}_title">{{ plural.key }}</span></div>
                 <div class="space-y-1.5">
                   {% for count in plural.counts %}
                     <div class="flex items-center justify-between text-sm">
@@ -123,39 +165,46 @@
           </div>
         </div>
 
-        <div class="group p-6 rounded-3xl bg-linear-to-br from-emerald-500/8 to-transparent border border-emerald-500/10 hover:border-emerald-500/30 hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300">
+        <div class="group p-6 rounded-3xl bg-linear-to-br from-emerald-500/8 to-transparent border border-emerald-500/10 hover:border-emerald-500/30 transition-all">
           <div class="flex items-center gap-4 mb-6">
             <div class="w-14 h-14 rounded-2xl bg-emerald-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">&lt;/&gt;</div>
-            <h3 class="text-lg font-bold text-white">{{ i18n.t('page.html_content.title') }}</h3>
+            <h3 class="text-lg font-bold text-white"><span data-i18n="i18n-test:html_content.title">Konten HTML</span></h3>
           </div>
           <div class="text-center py-4 px-3 rounded-2xl bg-emerald-500/5">
-            <div class="text-base text-white mb-2">{{ i18n.html('page.html_content.example') }}</div>
+            <div class="text-base text-white mb-2"><span data-i18n-html="i18n-test:html_content.example">Ini adalah contoh teks dengan <span class='text-emerald-400'>highlight warna</span> dan <strong>teks tebal</strong>.</span></div>
           </div>
         </div>
+      </div>
 
-        <div class="group p-6 rounded-3xl bg-linear-to-br from-amber-500/8 to-transparent border border-amber-500/10 hover:border-amber-500/30 hover:shadow-xl hover:shadow-amber-500/10 transition-all duration-300 lg:col-span-2">
+      <div class="grid lg:grid-cols-2 gap-6 mt-6">
+        <div class="group p-6 rounded-3xl bg-linear-to-br from-amber-500/8 to-transparent border border-amber-500/10 hover:border-amber-500/30 transition-all">
           <div class="flex items-center gap-4 mb-6">
-            <div class="w-14 h-14 rounded-2xl bg-amber-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">📝</div>
-            <h3 class="text-lg font-bold text-white">{{ i18n.t('page.form.title') }}</h3>
+            <div class="w-14 h-14 rounded-2xl bg-amber-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform" aria-hidden="true">📝</div>
+            <h3 class="text-lg font-bold text-white"><span data-i18n="i18n-test:form.title">Formulir</span></h3>
           </div>
-          <form class="grid md:grid-cols-3 gap-4">
-            {% for field in page.form_fields %}
-              {% if loop.index <= page.display.max_form_fields %}
-                <input type="{{ field.type }}" {{ i18n.attr('page.form.' + field.key + '_placeholder', 'placeholder') }} class="w-full px-4 py-3 bg-slate-900/50 border border-white/10 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-500/30 focus:ring-2 focus:ring-amber-500/10 transition-all">
-              {% endif %}
-            {% endfor %}
-            <button type="submit" class="px-6 py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-xl font-bold text-sm transition-all hover:shadow-lg hover:shadow-amber-500/20">
-              {{ i18n.t('page.form.submit') }}
+          <form class="grid md:grid-cols-2 gap-3">
+              {% for field in page.form_fields %}
+                {% if loop.index <= page.display.max_form_fields %}
+                  <input
+                    type="{{ field.type }}"
+                    {{ i18n.attr('page.form.' + field.key + '_placeholder', 'placeholder', {}, {raw: true}) }}
+                    {{ i18n.attr('page.form.' + field.key + '_label', 'aria-label', {}, {raw: true}) }}
+                    class="w-full px-4 py-3 bg-slate-900/50 border border-white/10 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-500/30 focus:ring-2 focus:ring-amber-500/10 transition-all"
+                  >
+                {% endif %}
+              {% endfor %}
+            <button type="submit" class="md:col-span-2 px-6 py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-xl font-bold text-sm transition-all hover:shadow-lg hover:shadow-amber-500/20">
+              <span data-i18n="i18n-test:form.submit">Kirim</span>
             </button>
           </form>
         </div>
 
-        <div class="group p-6 rounded-3xl bg-linear-to-br from-red-500/8 to-transparent border border-red-500/10 hover:border-red-500/30 hover:shadow-xl hover:shadow-red-500/10 transition-all duration-300">
+        <div class="group p-6 rounded-3xl bg-linear-to-br from-red-500/8 to-transparent border border-red-500/10 hover:border-red-500/30 transition-all">
           <div class="flex items-center gap-4 mb-6">
             <div class="w-14 h-14 rounded-2xl bg-red-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">⚠️</div>
-            <h3 class="text-lg font-bold text-white">{{ i18n.t('page.missing_keys.title') }}</h3>
+            <h3 class="text-lg font-bold text-white"><span data-i18n="i18n-test:missing_keys.title">Kunci Hilang</span></h3>
           </div>
-          <p class="text-xs text-slate-500 mb-3">{{ i18n.t('page.missing_keys.description') }}</p>
+          <p class="text-xs text-slate-500 mb-3"><span data-i18n="i18n-test:missing_keys.description">Kunci terjemahan yang tidak ditemukan ditampilkan dalam kurung siku.</span></p>
           <div class="space-y-2">
             {% for key in page.missing_keys %}
               {% if loop.index <= page.display.max_missing_keys %}
@@ -167,285 +216,14 @@
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section class="py-24 px-6 bg-linear-to-b from-slate-900/30 to-transparent">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-black text-white mb-4">{{ i18n.t('page.currency.title') }}</h2>
-        <p class="text-slate-400 text-lg">{{ i18n.t('page.currency.description') }}</p>
-      </div>
-
-      <div class="max-w-3xl mx-auto">
-        <div class="p-8 rounded-3xl bg-slate-900/40 border border-white/5 hover:border-white/10 transition-all">
-          <div class="flex items-center gap-3 mb-8">
-            <div class="w-12 h-12 rounded-xl bg-violet-500/20 flex items-center justify-center">
-              <span class="text-xl">🌐</span>
-            </div>
-            <div>
-              <h3 class="text-lg font-bold text-white">{{ i18n.t('page.currency_comparison.title') }}</h3>
-              <p class="text-sm text-slate-400">{{ i18n.text('page.currency_comparison.description') }}</p>
-            </div>
-          </div>
-          <div class="text-center mb-8 p-6 rounded-2xl bg-violet-500/5">
-            <div class="text-4xl font-black text-white mb-2">{{ i18n.formatCurrency(page.display.currency_comparison_base, 'USD', {raw: true}) }}</div>
-            <div class="text-sm text-slate-400">{{ i18n.t('page.currency_comparison.base_price') }}</div>
-          </div>
-          <div class="grid grid-cols-2 gap-3">
-            {% for curr in page.display.currency_comparison_currencies %}
-              <div class="p-4 rounded-xl bg-slate-800/30 border border-white/5 hover:border-white/10 transition-all text-center">
-                <div class="text-xs text-slate-400 mb-2">{{ i18n.t('page.currency_comparison.' + curr | lower) }}</div>
-                <div class="text-lg font-black tabular-nums {% if curr == 'USD' %}text-emerald-400{% elif curr == 'JPY' %}text-fuchsia-400{% elif curr == 'CNY' %}text-amber-400{% else %}text-rose-400{% endif %}">{{ i18n.convertCurrency(page.display.currency_comparison_base, curr) }}</div>
-              </div>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="py-24 px-6">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-black text-white mb-4">{{ i18n.t('page.advanced.title') }}</h2>
-        <p class="text-slate-400 text-lg">{{ i18n.t('page.advanced.description') }}</p>
-      </div>
-
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-emerald-500/20 hover:shadow-lg hover:shadow-emerald-500/5 transition-all">
-          <div class="flex items-center gap-2 mb-4">
-            <span class="text-lg">%</span>
-            <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.advanced.percentages') }}</span>
-          </div>
-          <div class="space-y-3">
-            {% for pct in page.percentages %}
-              {% if loop.index <= page.display.max_percentages %}
-                <div class="flex justify-between items-baseline">
-                  <span class="text-xs text-slate-400">{{ i18n.t('page.' + pct.label) }}</span>
-                  <span class="text-lg font-black text-emerald-400 tabular-nums">{{ i18n.formatPercent(pct.val) }}</span>
-                </div>
-              {% endif %}
-            {% endfor %}
-          </div>
-        </div>
-
-        <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-violet-500/20 hover:shadow-lg hover:shadow-violet-500/5 transition-all">
-          <div class="flex items-center gap-2 mb-4">
-            <span class="text-lg">💾</span>
-            <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.advanced.bytes') }}</span>
-          </div>
-          <div class="space-y-3">
-            {% for byte in page.bytes %}
-              {% if loop.index <= page.display.max_bytes %}
-                <div class="flex justify-between items-baseline">
-                  <span class="text-xs text-slate-400">{{ i18n.t('page.' + byte.label) }}</span>
-                  <span class="text-lg font-black text-violet-400 tabular-nums">{{ i18n.formatBytes(byte.val) }}</span>
-                </div>
-              {% endif %}
-            {% endfor %}
-          </div>
-        </div>
-
-        <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-rose-500/20 hover:shadow-lg hover:shadow-rose-500/5 transition-all">
-          <div class="flex items-center gap-2 mb-4">
-            <span class="text-lg">🥇</span>
-            <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.advanced.ordinals') }}</span>
-          </div>
-          <div class="space-y-3">
-            {% for ord in page.ordinals %}
-              {% if loop.index <= page.display.max_ordinals %}
-                <div class="flex justify-between items-baseline">
-                  <span class="text-xs font-mono text-slate-400">{{ ord }}</span>
-                  <span class="text-sm font-black text-rose-400">{{ i18n.formatOrdinal(ord) }}</span>
-                </div>
-              {% endif %}
-            {% endfor %}
-          </div>
-        </div>
-
-        <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-orange-500/20 hover:shadow-lg hover:shadow-orange-500/5 transition-all">
-          <div class="flex items-center gap-2 mb-4">
-            <span class="text-lg">🔢</span>
-            <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.advanced.cardinals') }}</span>
-          </div>
-          <div class="space-y-3">
-            {% for card in page.cardinals %}
-              {% if loop.index <= page.display.max_cardinals %}
-                <div class="flex justify-between items-baseline">
-                  <span class="text-xs font-mono text-slate-400">{{ card }}</span>
-                  <span class="text-sm font-black text-orange-400">{{ i18n.formatCardinal(card) }}</span>
-                </div>
-              {% endif %}
-            {% endfor %}
-          </div>
-        </div>
-
-        <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-cyan-500/20 hover:shadow-lg hover:shadow-cyan-500/5 transition-all">
-          <div class="flex items-center gap-2 mb-4">
-            <span class="text-lg">🔬</span>
-            <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.advanced.scientific') }}</span>
-          </div>
-          <div class="space-y-3">
-            {% for sci in page.scientific %}
-              {% if loop.index <= page.display.max_scientific %}
-                <div class="flex justify-between items-baseline">
-                  <span class="text-xs font-mono text-slate-400">{{ sci }}</span>
-                  <span class="text-sm font-black text-cyan-400 tabular-nums">{{ i18n.formatScientific(sci) }}</span>
-                </div>
-              {% endif %}
-            {% endfor %}
-          </div>
-        </div>
-
-        <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-lime-500/20 hover:shadow-lg hover:shadow-lime-500/5 transition-all">
-          <div class="flex items-center gap-2 mb-4">
-            <span class="text-lg">📊</span>
-            <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.advanced.abbreviated') }}</span>
-          </div>
-          <div class="space-y-3">
-            {% for abb in page.abbreviated %}
-              {% if loop.index <= page.display.max_abbreviated %}
-                <div class="flex justify-between items-baseline">
-                  <span class="text-xs font-mono text-slate-400">{{ abb }}</span>
-                  <span class="text-sm font-black text-lime-400 tabular-nums">{{ i18n.formatAbbreviated(abb) }}</span>
-                </div>
-              {% endif %}
-            {% endfor %}
-          </div>
-        </div>
-
-        <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-indigo-500/20 hover:shadow-lg hover:shadow-indigo-500/5 transition-all">
-          <div class="flex items-center gap-2 mb-4">
-            <span class="text-lg">📅</span>
-            <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.advanced.date_formats') }}</span>
-          </div>
-          <div class="space-y-3">
-            {% for dateFmt in page.date_formats %}
-              <div class="flex justify-between items-baseline">
-                <span class="text-xs text-slate-400">{{ i18n.t('page.' + dateFmt.label) }}</span>
-                <span class="text-sm font-black text-indigo-400">{{ i18n.formatDate(dateFmt.val) }}</span>
-              </div>
-            {% endfor %}
-          </div>
-        </div>
-
-        <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-purple-500/20 hover:shadow-lg hover:shadow-purple-500/5 transition-all">
-          <div class="flex items-center gap-2 mb-4">
-            <span class="text-lg">🕐</span>
-            <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.advanced.time_formats') }}</span>
-          </div>
-          <div class="space-y-3">
-            {% for timeFmt in page.time_formats %}
-              <div class="flex justify-between items-baseline">
-                <span class="text-xs text-slate-400">{{ i18n.t('page.' + timeFmt.label) }}</span>
-                <span class="text-sm font-black text-purple-400">{{ i18n.formatTime(timeFmt.val) }}</span>
-              </div>
-            {% endfor %}
-          </div>
-        </div>
-
-        <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-fuchsia-500/20 hover:shadow-lg hover:shadow-fuchsia-500/5 transition-all">
-          <div class="flex items-center gap-2 mb-4">
-            <span class="text-lg">🕓</span>
-            <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.advanced.datetime') }}</span>
-          </div>
-          <div class="space-y-3">
-            {% for dt in page.datetime %}
-              {% if loop.index <= page.display.max_datetime %}
-                <div class="flex justify-between items-baseline">
-                  <span class="text-xs text-slate-400">{{ i18n.t('page.' + dt.label) }}</span>
-                  <span class="text-sm font-black text-fuchsia-400">{{ i18n.formatDateTime(dt.val) }}</span>
-                </div>
-              {% endif %}
-            {% endfor %}
-          </div>
-        </div>
-
-        <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-sky-500/20 hover:shadow-lg hover:shadow-sky-500/5 transition-all">
-          <div class="flex items-center gap-2 mb-4">
-            <span class="text-lg">📏</span>
-            <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.unit.title') }}</span>
-          </div>
-          <div class="space-y-3">
-            {% for u in page.units %}
-              <div class="flex justify-between items-baseline">
-                <span class="text-xs text-slate-400">{{ i18n.t('page.' + u.label) }}</span>
-                <span class="text-sm font-black text-sky-400">{{ i18n.formatUnit(u.val, u.unit) }}</span>
-              </div>
-            {% endfor %}
-          </div>
-        </div>
-
-        <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-teal-500/20 hover:shadow-lg hover:shadow-teal-500/5 transition-all">
-          <div class="flex items-center gap-2 mb-4">
-            <span class="text-lg">⏱️</span>
-            <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.advanced.durations') }}</span>
-          </div>
-          <div class="space-y-3">
-            {% for dur in page.durations %}
-              {% if loop.index <= page.display.max_durations %}
-                <div class="flex justify-between items-baseline">
-                  <span class="text-xs font-mono text-slate-400">{{ dur }}s</span>
-                  <span class="text-sm font-bold text-teal-400">{{ i18n.formatDuration(dur) }}</span>
-                </div>
-              {% endif %}
-            {% endfor %}
-          </div>
-        </div>
-
-        <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-pink-500/20 hover:shadow-lg hover:shadow-pink-500/5 transition-all">
-          <div class="flex items-center gap-2 mb-4">
-            <span class="text-lg">⏰</span>
-            <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.advanced.relative_time') }}</span>
-          </div>
-          <div class="space-y-3">
-            {% for rel in page.relative_time %}
-              <div class="flex justify-between items-baseline">
-                <span class="text-xs font-mono text-slate-400">{{ rel.val }}{{ rel.unit[0] }}</span>
-                <span class="text-sm font-bold text-pink-400">{{ i18n.formatRelativeTime(rel.val, { unit: rel.unit }) }}</span>
-              </div>
-            {% endfor %}
-          </div>
-        </div>
-
-        <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-amber-500/20 hover:shadow-lg hover:shadow-amber-500/5 transition-all">
-          <div class="flex items-center gap-2 mb-4">
-            <span class="text-lg">📝</span>
-            <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.advanced.lists') }}</span>
-          </div>
-          <div class="space-y-3">
-            {% for lst in page.lists %}
-              {% if loop.index <= page.display.max_lists %}
-                <div class="text-sm text-amber-400">{{ i18n.formatList(lst.items) }}</div>
-              {% endif %}
-            {% endfor %}
-          </div>
-        </div>
-
-        <div class="p-6 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-emerald-500/20 hover:shadow-lg hover:shadow-emerald-500/5 transition-all">
-          <div class="flex items-center gap-2 mb-4">
-            <span class="text-lg">💵</span>
-            <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.advanced.regional_pricing') }}</span>
-          </div>
-          <div class="space-y-3">
-            {% for plan in page.regional_pricing %}
-              <div class="flex justify-between items-baseline">
-                <span class="text-xs text-slate-400">{{ i18n.t('page.advanced.' + plan.id + '_plan') }}</span>
-                <span class="text-lg font-black text-emerald-400 tabular-nums">{{ i18n.formatLocalPrice(plan) }}</span>
-              </div>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-
-      <div class="mt-8 grid md:grid-cols-2 gap-4">
-        <div class="p-6 rounded-2xl bg-linear-to-br from-slate-900/40 to-slate-900/20 border border-white/5">
+      <div class="grid lg:grid-cols-2 gap-6 mt-6">
+        <div class="p-6 rounded-3xl bg-linear-to-br from-slate-900/40 to-slate-900/20 border border-white/5">
           <div class="flex items-center justify-between mb-4">
-            <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.native_digits.title') }}</span>
-            <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 uppercase tracking-wider">{{ i18n.t('page.live_label') }}</span>
+            <h3 class="text-lg font-bold text-white"><span data-i18n="i18n-test:native_digits.title">Digit Asli</span></h3>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 uppercase tracking-wider"><span data-i18n="i18n-test:live_label">Live</span></span>
           </div>
-          <p class="text-xs text-slate-500 mb-3">{{ i18n.t('page.native_digits.description') }}</p>
+          <p class="text-xs text-slate-500 mb-3"><span data-i18n="i18n-test:native_digits.description">Teks dengan digit ASCII ditampilkan dalam digit asli ketika lokal mengaktifkannya. Diperbarui langsung saat ganti bahasa.</span></p>
           <div class="space-y-2">
             {% for sample in page.native_digit_samples %}
               {% if loop.index <= page.display.max_native_samples %}
@@ -458,12 +236,12 @@
           </div>
         </div>
 
-        <div class="p-6 rounded-2xl bg-linear-to-br from-slate-900/40 to-slate-900/20 border border-white/5">
+        <div class="p-6 rounded-3xl bg-linear-to-br from-slate-900/40 to-slate-900/20 border border-white/5">
           <div class="flex items-center justify-between mb-4">
-            <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.inflection.title') }}</span>
-            <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 uppercase tracking-wider">{{ i18n.t('page.live_label') }}</span>
+            <h3 class="text-lg font-bold text-white"><span data-i18n="i18n-test:inflection.title">Infleksi</span></h3>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 uppercase tracking-wider"><span data-i18n="i18n-test:live_label">Live</span></span>
           </div>
-          <p class="text-xs text-slate-500 mb-3">{{ i18n.t('page.inflection.description') }}</p>
+          <p class="text-xs text-slate-500 mb-3"><span data-i18n="i18n-test:inflection.description">Pluralisasi dan singularisasi bahasa Inggris. Diperbarui langsung saat ganti bahasa.</span></p>
           <div class="space-y-2">
             {% for pair in page.inflection_pairs %}
               {% if loop.index <= page.display.max_inflection %}
@@ -477,69 +255,369 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="mt-8 p-6 rounded-2xl bg-linear-to-br from-slate-900/40 to-slate-900/20 border border-white/5">
-        <div class="flex items-center justify-between mb-4">
-          <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('page.pricing_details.title') }}</span>
+  <section id="formatting" class="px-6 py-24 bg-linear-to-b from-slate-900/30 to-transparent scroll-mt-16">
+    <div class="max-w-6xl mx-auto">
+      {{ sh.section_header(
+        'page.advanced.title',
+        'page.advanced.title',
+        'page.advanced.description',
+        ico.icon('chart', 'inline-5 block-5'),
+        i18n=i18n
+      ) }}
+
+      <div class="grid lg:grid-cols-2 gap-6">
+        <div class="group p-6 rounded-3xl bg-linear-to-br from-violet-500/8 to-transparent border border-violet-500/10 hover:border-violet-500/30 transition-all">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-14 h-14 rounded-2xl bg-violet-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform" aria-hidden="true">🔢</div>
+            <h3 class="text-lg font-bold text-white"><span data-i18n="i18n-test:numbers.title">Format Angka</span></h3>
+          </div>
+          <div class="space-y-3">
+            {% for num in page.numbers %}
+              {% if loop.index <= page.display.max_numbers %}
+                <div class="flex items-center justify-between py-3 border-b border-white/5 last:border-0">
+                  <span class="text-sm text-slate-400"><span data-i18n="i18n-test:{{ num.label }}">{{ num.label }}</span></span>
+                  <span class="text-xl font-black text-violet-400 tabular-nums">{{ i18n.formatNumber(num.val) }}</span>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
         </div>
-        <p class="text-xs text-slate-500 mb-4">{{ i18n.t('page.pricing_details.description') }}</p>
-        <div class="grid md:grid-cols-2 gap-4">
-          {% for plan in page.regional_pricing %}
-            <div class="p-5 rounded-xl bg-slate-800/30 border border-white/5">
-              <div class="text-sm font-bold text-white mb-3">{{ i18n.t('page.advanced.' + plan.id + '_plan') }}</div>
-              <div class="space-y-2 text-xs">
-                <div class="flex justify-between">
-                  <span class="text-slate-500">{{ i18n.t('page.pricing_details.raw_value') }}</span>
-                  <code class="text-slate-300 tabular-nums">{{ i18n.localPrice(plan) }}</code>
-                </div>
-                <div class="flex justify-between">
-                  <span class="text-slate-500">{{ i18n.t('page.pricing_details.raw_currency') }}</span>
-                  <code class="text-slate-300">{{ i18n.localPriceCurrency(plan) }}</code>
-                </div>
-                <div class="flex justify-between">
-                  <span class="text-slate-500">{{ i18n.t('page.pricing_details.formatted') }}</span>
-                  <span class="text-emerald-400 tabular-nums">{{ i18n.formatLocalPrice(plan) }}</span>
-                </div>
-                <div class="flex justify-between">
-                  <span class="text-slate-500">{{ i18n.t('page.pricing_details.discounted') }}</span>
-                  <span class="text-rose-400 tabular-nums">{{ i18n.formatLocalPriceDiscounted(plan, page.display.discount_multiplier) }}</span>
-                </div>
-                <div class="flex justify-between">
-                  <span class="text-slate-500">{{ i18n.t('page.pricing_details.converted_usd') }}</span>
-                  <span class="text-violet-400 tabular-nums">{{ i18n.convertLocalPrice(plan, 'USD') }}</span>
-                </div>
-              </div>
+
+        <div class="p-6 rounded-3xl bg-slate-900/40 border border-white/5 hover:border-white/10 transition-all">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 rounded-xl bg-violet-500/20 flex items-center justify-center">
+              <span class="text-xl">🌐</span>
             </div>
-          {% endfor %}
+            <div>
+              <h3 class="text-lg font-bold text-white"><span data-i18n="i18n-test:currency_comparison.title">Perbandingan Mata Uang</span></h3>
+              <p class="text-sm text-slate-400"><span data-i18n="i18n-test:currency_comparison.description">Harga yang sama dalam berbagai mata uang yang didukung.</span></p>
+            </div>
+          </div>
+          <div class="text-center mb-6 p-4 rounded-2xl bg-violet-500/5">
+            <div class="text-3xl font-black text-white mb-1">{{ i18n.formatCurrency(page.display.currency_comparison_base, 'USD', {raw: true}) }}</div>
+            <div class="text-xs text-slate-400"><span data-i18n="i18n-test:currency_comparison.base_price">Harga Dasar (USD)</span></div>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
+            {% for curr in page.display.currency_comparison_currencies %}
+              <div class="p-3 rounded-lg bg-slate-800/30 border border-white/5 hover:border-white/10 transition-all text-center">
+                <div class="text-[10px] text-slate-400 mb-1"><span data-i18n="i18n-test:currency_comparison.{{ curr | lower }}">{{ curr }}</span></div>
+                <div class="text-sm font-black tabular-nums {% if curr == 'USD' %}text-emerald-400{% elif curr == 'JPY' %}text-fuchsia-400{% elif curr == 'CNY' %}text-amber-400{% else %}text-rose-400{% endif %}">{{ i18n.convertCurrency(page.display.currency_comparison_base, curr) }}</div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-emerald-500/20 transition-all">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-base">%</span>
+            <span class="text-[10px] text-slate-400 uppercase tracking-wider"><span data-i18n="i18n-test:advanced.percentages">Persentase</span></span>
+          </div>
+          <div class="space-y-2">
+            {% for pct in page.percentages %}
+              {% if loop.index <= page.display.max_percentages %}
+                <div class="flex justify-between items-baseline">
+                  <span class="text-[11px] text-slate-400"><span data-i18n="i18n-test:{{ pct.label }}">{{ pct.label }}</span></span>
+                  <span class="text-sm font-black text-emerald-400 tabular-nums">{{ i18n.formatPercent(pct.val) }}</span>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-violet-500/20 transition-all">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-base" aria-hidden="true">💾</span>
+            <span class="text-[10px] text-slate-400 uppercase tracking-wider"><span data-i18n="i18n-test:advanced.bytes">Byte</span></span>
+          </div>
+          <div class="space-y-2">
+            {% for byte in page.bytes %}
+              {% if loop.index <= page.display.max_bytes %}
+                <div class="flex justify-between items-baseline">
+                  <span class="text-[11px] text-slate-400"><span data-i18n="i18n-test:{{ byte.label }}">{{ byte.label }}</span></span>
+                  <span class="text-sm font-black text-violet-400 tabular-nums">{{ i18n.formatBytes(byte.val) }}</span>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-cyan-500/20 transition-all">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-base" aria-hidden="true">🔬</span>
+            <span class="text-[10px] text-slate-400 uppercase tracking-wider"><span data-i18n="i18n-test:advanced.scientific">Notasi Ilmiah</span></span>
+          </div>
+          <div class="space-y-2">
+            {% for sci in page.scientific %}
+              {% if loop.index <= page.display.max_scientific %}
+                <div class="flex justify-between items-baseline">
+                  <span class="text-[11px] font-mono text-slate-400">{{ sci }}</span>
+                  <span class="text-sm font-black text-cyan-400 tabular-nums">{{ i18n.formatScientific(sci) }}</span>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-lime-500/20 transition-all">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-base" aria-hidden="true">📊</span>
+            <span class="text-[10px] text-slate-400 uppercase tracking-wider"><span data-i18n="i18n-test:advanced.abbreviated">Singkat</span></span>
+          </div>
+          <div class="space-y-2">
+            {% for abb in page.abbreviated %}
+              {% if loop.index <= page.display.max_abbreviated %}
+                <div class="flex justify-between items-baseline">
+                  <span class="text-[11px] font-mono text-slate-400">{{ abb }}</span>
+                  <span class="text-sm font-black text-lime-400 tabular-nums">{{ i18n.formatAbbreviated(abb) }}</span>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-rose-500/20 transition-all">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-base" aria-hidden="true">🥇</span>
+            <span class="text-[10px] text-slate-400 uppercase tracking-wider"><span data-i18n="i18n-test:advanced.ordinals">Ordinal</span></span>
+          </div>
+          <div class="space-y-1.5">
+            {% for ord in page.ordinals %}
+              {% if loop.index <= page.display.max_ordinals %}
+                <div class="flex justify-between items-baseline">
+                  <span class="text-[11px] font-mono text-slate-400">{{ ord }}</span>
+                  <span class="text-sm font-black text-rose-400">{{ i18n.formatOrdinal(ord) }}</span>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-orange-500/20 transition-all">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-base" aria-hidden="true">🔢</span>
+            <span class="text-[10px] text-slate-400 uppercase tracking-wider"><span data-i18n="i18n-test:advanced.cardinals">Kardinal</span></span>
+          </div>
+          <div class="space-y-1.5">
+            {% for card in page.cardinals %}
+              {% if loop.index <= page.display.max_cardinals %}
+                <div class="flex justify-between items-baseline">
+                  <span class="text-[11px] font-mono text-slate-400">{{ card }}</span>
+                  <span class="text-sm font-black text-orange-400">{{ i18n.formatCardinal(card) }}</span>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-teal-500/20 transition-all">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-base" aria-hidden="true">⏱️</span>
+            <span class="text-[10px] text-slate-400 uppercase tracking-wider"><span data-i18n="i18n-test:advanced.durations">Durasi</span></span>
+          </div>
+          <div class="space-y-1.5">
+            {% for dur in page.durations %}
+              {% if loop.index <= page.display.max_durations %}
+                <div class="flex justify-between items-baseline">
+                  <span class="text-[11px] font-mono text-slate-400">{{ dur }}s</span>
+                  <span class="text-xs font-bold text-teal-400">{{ i18n.formatDuration(dur) }}</span>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-pink-500/20 transition-all">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-base" aria-hidden="true">⏰</span>
+            <span class="text-[10px] text-slate-400 uppercase tracking-wider"><span data-i18n="i18n-test:advanced.relative_time">Waktu Relatif</span></span>
+          </div>
+          <div class="space-y-1.5">
+            {% for rel in page.relative_time %}
+              <div class="flex justify-between items-baseline">
+                <span class="text-[11px] font-mono text-slate-400">{{ rel.val }}{{ rel.unit[0] }}</span>
+                <span class="text-xs font-bold text-pink-400">{{ i18n.formatRelativeTime(rel.val, { unit: rel.unit }) }}</span>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-indigo-500/20 transition-all">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-base" aria-hidden="true">📅</span>
+            <span class="text-[10px] text-slate-400 uppercase tracking-wider"><span data-i18n="i18n-test:advanced.date_formats">Format Tanggal</span></span>
+          </div>
+          <div class="space-y-1.5">
+            {% for dateFmt in page.date_formats %}
+              <div class="flex justify-between items-baseline">
+                <span class="text-[11px] text-slate-400"><span data-i18n="i18n-test:{{ dateFmt.label }}">{{ dateFmt.label }}</span></span>
+                <span class="text-xs font-black text-indigo-400">{{ i18n.formatDate(dateFmt.val) }}</span>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-purple-500/20 transition-all">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-base" aria-hidden="true">🕐</span>
+            <span class="text-[10px] text-slate-400 uppercase tracking-wider"><span data-i18n="i18n-test:advanced.time_formats">Format Waktu</span></span>
+          </div>
+          <div class="space-y-1.5">
+            {% for timeFmt in page.time_formats %}
+              <div class="flex justify-between items-baseline">
+                <span class="text-[11px] text-slate-400"><span data-i18n="i18n-test:{{ timeFmt.label }}">{{ timeFmt.label }}</span></span>
+                <span class="text-xs font-black text-purple-400">{{ i18n.formatTime(timeFmt.val) }}</span>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-fuchsia-500/20 transition-all">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-base" aria-hidden="true">🕓</span>
+            <span class="text-[10px] text-slate-400 uppercase tracking-wider"><span data-i18n="i18n-test:advanced.datetime">Tgl + Waktu</span></span>
+          </div>
+          <div class="space-y-1.5">
+            {% for dt in page.datetime %}
+              {% if loop.index <= page.display.max_datetime %}
+                <div class="flex justify-between items-baseline">
+                  <span class="text-[11px] text-slate-400"><span data-i18n="i18n-test:{{ dt.label }}">{{ dt.label }}</span></span>
+                  <span class="text-xs font-black text-fuchsia-400">{{ i18n.formatDateTime(dt.val) }}</span>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-4 mt-4">
+        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-sky-500/20 transition-all">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-base" aria-hidden="true">📏</span>
+            <span class="text-[10px] text-slate-400 uppercase tracking-wider"><span data-i18n="i18n-test:unit.title">Format Satuan</span></span>
+          </div>
+          <div class="space-y-1.5">
+            {% for u in page.units %}
+              <div class="flex justify-between items-baseline">
+                <span class="text-[11px] text-slate-400"><span data-i18n="i18n-test:{{ u.label }}">{{ u.label }}</span></span>
+                <span class="text-xs font-black text-sky-400">{{ i18n.formatUnit(u.val, u.unit) }}</span>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-amber-500/20 transition-all">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-base" aria-hidden="true">📝</span>
+            <span class="text-[10px] text-slate-400 uppercase tracking-wider"><span data-i18n="i18n-test:advanced.lists">Daftar</span></span>
+          </div>
+          <div class="space-y-2">
+            {% for lst in page.lists %}
+              {% if loop.index <= page.display.max_lists %}
+                <div class="text-xs text-amber-400">{{ i18n.formatList(lst.items) }}</div>
+              {% endif %}
+            {% endfor %}
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="py-24 px-6 bg-linear-to-b from-slate-900/30 to-transparent">
-    <div class="max-w-4xl mx-auto">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-black text-white mb-4">{{ i18n.t('page.advanced.number_modes') }}</h2>
-        <p class="text-slate-400 text-lg">{{ i18n.t('page.advanced.number_modes_desc') }}</p>
+  <section id="pricing" class="px-6 py-24 scroll-mt-16">
+    <div class="max-w-6xl mx-auto">
+      {{ sh.section_header(
+        'page.currency.title',
+        'page.currency.title',
+        'page.currency.description',
+        ico.icon('lightning', 'inline-5 block-5'),
+        i18n=i18n
+      ) }}
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="p-6 rounded-3xl bg-slate-900/40 border border-white/5">
+          <h3 class="text-lg font-bold text-white mb-4"><span data-i18n="i18n-test:advanced.regional_pricing">Harga Regional</span></h3>
+          <div class="space-y-3">
+            {% for plan in page.regional_pricing %}
+              <div class="flex justify-between items-baseline py-2 border-b border-white/5 last:border-0">
+                <span class="text-sm text-slate-400"><span data-i18n="i18n-test:advanced.{{ plan.id }}_plan">{{ plan.id }}</span></span>
+                <span class="text-lg font-black text-emerald-400 tabular-nums">{{ i18n.formatLocalPrice(plan) }}</span>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="p-6 rounded-3xl bg-slate-900/40 border border-white/5">
+          <h3 class="text-lg font-bold text-white mb-1"><span data-i18n="i18n-test:pricing_details.title">Detail Harga</span></h3>
+          <p class="text-xs text-slate-500 mb-4"><span data-i18n="i18n-test:pricing_details.description">Pipeline lengkap: nilai mentah, kode mata uang, format, diskon, dan konversi.</span></p>
+          <div class="space-y-4">
+            {% for plan in page.regional_pricing %}
+              <div class="p-4 rounded-xl bg-slate-800/30 border border-white/5">
+                <div class="text-sm font-bold text-white mb-3"><span data-i18n="i18n-test:advanced.{{ plan.id }}_plan">{{ plan.id }}</span></div>
+                <div class="space-y-1.5 text-xs">
+                  <div class="flex justify-between">
+                    <span class="text-slate-500"><span data-i18n="i18n-test:pricing_details.raw_value">Nilai Mentah</span></span>
+                    <code class="text-slate-300 tabular-nums">{{ i18n.localPrice(plan) }}</code>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-slate-500"><span data-i18n="i18n-test:pricing_details.raw_currency">Kode Mata Uang</span></span>
+                    <code class="text-slate-300">{{ i18n.localPriceCurrency(plan) }}</code>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-slate-500"><span data-i18n="i18n-test:pricing_details.formatted">Terformat</span></span>
+                    <span class="text-emerald-400 tabular-nums">{{ i18n.formatLocalPrice(plan) }}</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-slate-500"><span data-i18n="i18n-test:pricing_details.discounted">Diskon 20%</span></span>
+                    <span class="text-rose-400 tabular-nums">{{ i18n.formatLocalPriceDiscounted(plan, page.display.discount_multiplier, 'USD') }}</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-slate-500"><span data-i18n="i18n-test:pricing_details.converted_usd">Konversi ke USD</span></span>
+                    <span class="text-violet-400 tabular-nums">{{ i18n.convertLocalPrice(plan, 'USD') }}</span>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
       </div>
+    </div>
+  </section>
+
+  <section id="modes" class="px-6 py-24 bg-linear-to-b from-slate-900/30 to-transparent scroll-mt-16">
+    <div class="max-w-4xl mx-auto">
+      {{ sh.section_header(
+        'page.section_modes.title',
+        'page.section_modes.title',
+        'page.section_modes.description',
+        ico.icon('light', 'inline-5 block-5'),
+        i18n=i18n
+      ) }}
 
       <div class="p-10 rounded-3xl bg-slate-900/40 border border-white/5">
-        <div class="text-center mb-12">
-          <div class="text-6xl md:text-7xl font-black text-white tabular-nums mb-4">{{ i18n.formatNumber(page.display.number_modes_example) }}</div>
+        <div class="text-center mb-10">
+          <div class="text-6xl md:text-7xl font-black text-white tabular-nums mb-3">{{ i18n.formatNumber(page.display.number_modes_example) }}</div>
           <div class="text-sm text-slate-400">Example: {{ page.display.number_modes_example }}</div>
         </div>
 
         <div class="grid md:grid-cols-3 gap-4">
           <div class="p-6 rounded-2xl bg-slate-800/30 text-center">
-            <div class="text-xs text-slate-400 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.plain_label') }}</div>
+            <div class="text-xs text-slate-400 uppercase tracking-wider mb-3"><span data-i18n="i18n-test:advanced.plain_label">Otomatis</span></div>
             <div class="text-2xl font-black text-white tabular-nums">{{ i18n.formatNumber(page.display.number_modes_example) }}</div>
           </div>
           <div class="p-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 text-center">
-            <div class="text-xs text-slate-400 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.native_label') }}</div>
+            <div class="text-xs text-slate-400 uppercase tracking-wider mb-3"><span data-i18n="i18n-test:advanced.native_label">Digit Asli</span></div>
             <div class="text-2xl font-black text-violet-400 tabular-nums">{{ i18n.formatNumber(page.display.number_modes_example, {nativeDigits: true}) }}</div>
           </div>
           <div class="p-6 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-center">
-            <div class="text-xs text-slate-400 uppercase tracking-wider mb-4">{{ i18n.t('page.advanced.universal_label') }}</div>
+            <div class="text-xs text-slate-400 uppercase tracking-wider mb-3"><span data-i18n="i18n-test:advanced.universal_label">Universal (0-9)</span></div>
             <div class="text-2xl font-black text-emerald-400 tabular-nums">{{ page.display.number_modes_example }}</div>
           </div>
         </div>
@@ -547,31 +625,170 @@
     </div>
   </section>
 
-  <section class="py-12 px-6">
-    <div class="max-w-3xl mx-auto">
-      <div class="p-6 rounded-2xl bg-emerald-500/5 border border-emerald-500/20 text-center">
-        <div class="flex items-center justify-center gap-3 text-emerald-300 text-sm">
-          <span class="text-2xl">ⓘ</span>
-          <p>{{ i18n.t('page.live_update.note') }}</p>
+  <section id="systems" class="px-6 py-24 scroll-mt-16">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 text-[10px] font-bold uppercase tracking-wider mb-4">
+          <span data-i18n="i18n-test:advanced.number_modes">System-level</span>
+        </div>
+        <h2 class="text-3xl md:text-4xl font-black text-white mb-4"><span data-i18n="i18n-test:section_systems.title">Writing Systems</span></h2>
+        <p class="text-slate-400 text-sm max-w-2xl mx-auto"><span data-i18n="i18n-test:section_systems.description">Semua 7 sistem algoritmik dan 4 sistem numerik tambahan di level sistem.</span></p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs text-slate-400 uppercase tracking-wider">Greek (grek)</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 uppercase tracking-wider">algorithmic</span>
+          </div>
+          <div class="flex items-baseline justify-between gap-3">
+            <code class="text-xs text-slate-500 font-mono">2024</code>
+            <span class="text-2xl font-black text-cyan-400 tabular-nums" data-format-number="2024" data-numbering-system="grek">2024</span>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs text-slate-400 uppercase tracking-wider">Hebrew (hebr)</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 uppercase tracking-wider">algorithmic</span>
+          </div>
+          <div class="flex items-baseline justify-between gap-3">
+            <code class="text-xs text-slate-500 font-mono">2024</code>
+            <span class="text-2xl font-black text-cyan-400 tabular-nums" data-format-number="2024" data-numbering-system="hebr">2024</span>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs text-slate-400 uppercase tracking-wider">Armenian (armn)</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 uppercase tracking-wider">algorithmic</span>
+          </div>
+          <div class="flex items-baseline justify-between gap-3">
+            <code class="text-xs text-slate-500 font-mono">2024</code>
+            <span class="text-2xl font-black text-cyan-400 tabular-nums" data-format-number="2024" data-numbering-system="armn">2024</span>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs text-slate-400 uppercase tracking-wider">Ethiopic (ethi)</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 uppercase tracking-wider">algorithmic</span>
+          </div>
+          <div class="flex items-baseline justify-between gap-3">
+            <code class="text-xs text-slate-500 font-mono">2024</code>
+            <span class="text-2xl font-black text-cyan-400 tabular-nums" data-format-number="2024" data-numbering-system="ethi">2024</span>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs text-slate-400 uppercase tracking-wider">Tamil (taml)</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 uppercase tracking-wider">algorithmic</span>
+          </div>
+          <div class="flex items-baseline justify-between gap-3">
+            <code class="text-xs text-slate-500 font-mono">2024</code>
+            <span class="text-2xl font-black text-cyan-400 tabular-nums" data-format-number="2024" data-numbering-system="taml">2024</span>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs text-slate-400 uppercase tracking-wider">Georgian (geor)</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 uppercase tracking-wider">algorithmic</span>
+          </div>
+          <div class="flex items-baseline justify-between gap-3">
+            <code class="text-xs text-slate-500 font-mono">2024</code>
+            <span class="text-2xl font-black text-cyan-400 tabular-nums" data-format-number="2024" data-numbering-system="geor">2024</span>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs text-slate-400 uppercase tracking-wider">Roman (roman)</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 uppercase tracking-wider">algorithmic</span>
+          </div>
+          <div class="flex items-baseline justify-between gap-3">
+            <code class="text-xs text-slate-500 font-mono">2024</code>
+            <span class="text-2xl font-black text-cyan-400 tabular-nums" data-format-number="2024" data-numbering-system="roman">2024</span>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs text-slate-400 uppercase tracking-wider">Odia (orya)</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 uppercase tracking-wider">numeric</span>
+          </div>
+          <div class="flex items-baseline justify-between gap-3">
+            <code class="text-xs text-slate-500 font-mono">2024</code>
+            <span class="text-2xl font-black text-emerald-400 tabular-nums" data-format-number="2024" data-numbering-system="orya">2024</span>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs text-slate-400 uppercase tracking-wider">Tibetan (tibt)</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 uppercase tracking-wider">numeric</span>
+          </div>
+          <div class="flex items-baseline justify-between gap-3">
+            <code class="text-xs text-slate-500 font-mono">2024</code>
+            <span class="text-2xl font-black text-emerald-400 tabular-nums" data-format-number="2024" data-numbering-system="tibt">2024</span>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs text-slate-400 uppercase tracking-wider">N'Ko (nkoo)</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 uppercase tracking-wider">numeric</span>
+          </div>
+          <div class="flex items-baseline justify-between gap-3">
+            <code class="text-xs text-slate-500 font-mono">2024</code>
+            <span class="text-2xl font-black text-emerald-400 tabular-nums" data-format-number="2024" data-numbering-system="nkoo">2024</span>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs text-slate-400 uppercase tracking-wider">Adlam (adlm)</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 uppercase tracking-wider">numeric</span>
+          </div>
+          <div class="flex items-baseline justify-between gap-3">
+            <code class="text-xs text-slate-500 font-mono">2024</code>
+            <span class="text-2xl font-black text-emerald-400 tabular-nums" data-format-number="2024" data-numbering-system="adlm">2024</span>
+          </div>
         </div>
       </div>
+
+      <p class="text-[11px] text-slate-500 text-center mt-6 max-w-2xl mx-auto">
+        Note: Browsers with full ICU data render the algorithmic systems (Greek/Hebrew/Armenian/Ethiopic/Tamil/Georgian/Roman) as spellout. The numeric systems (Odia/Tibetan/N'Ko/Adlam) rely on the loaded font to display their unique digit glyphs. Older runtimes or limited ICU builds fall back to Latin digits while the font, loader, and metadata remain valid for when a locale binds to one of these systems.
+      </p>
     </div>
   </section>
 
-  <section class="py-24 px-6">
+  <section id="switcher" class="px-6 py-24 bg-linear-to-b from-slate-900/30 to-transparent scroll-mt-16">
     <div class="max-w-4xl mx-auto">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-black text-white mb-4">{{ i18n.t('page.switcher.title') }}</h2>
-        <p class="text-slate-400 text-lg">{{ i18n.t('page.switcher.description') }}</p>
+      {{ sh.section_header(
+        'page.switcher.title',
+        'page.switcher.title',
+        'page.switcher.description',
+        ico.icon('rocket', 'inline-5 block-5'),
+        i18n=i18n
+      ) }}
+
+      <div class="p-6 rounded-3xl bg-slate-900/40 border border-white/5 mb-6">
+        <div class="flex items-center justify-center gap-3 text-emerald-300 text-sm">
+          <span class="text-2xl" aria-hidden="true">ⓘ</span>
+          <p><span data-i18n="i18n-test:live_update.note">Perhatikan semua angka, tanggal, dan harga berubah seketika saat Anda mengganti bahasa — tanpa memuat ulang halaman.</span></p>
+        </div>
       </div>
 
-      <div class="flex flex-wrap justify-center gap-3">
+      <div x-data class="flex flex-wrap justify-center gap-3">
         {% for locale in locales %}
           <button
             type="button"
             @click="$store.i18n.change('{{ locale.code }}')"
             :aria-pressed="$store.i18n.current === '{{ locale.code }}'"
-            class="flex items-center gap-3 px-5 py-3 rounded-xl border transition-all text-sm font-medium {% if locale.code == lang %}bg-violet-500/20 border-violet-500/50 text-white shadow-lg shadow-violet-500/10{% else %}bg-slate-900/30 border-white/5 text-slate-300 hover:bg-violet-500/10 hover:border-violet-500/30 hover:text-white{% endif %}"
+            :class="$store.i18n.current === '{{ locale.code }}' ? 'bg-violet-500/20 border-violet-500/50 text-white shadow-lg shadow-violet-500/10' : 'bg-slate-900/30 border-white/5 text-slate-300 hover:bg-violet-500/10 hover:border-violet-500/30 hover:text-white'"
+            class="flex items-center gap-3 px-5 py-3 rounded-xl border transition-all text-sm font-medium"
           >
             <img src="https://flagcdn.com/w40/{{ locale.flag }}.png" alt="{{ locale.label }}" class="w-6 h-4 rounded shadow-sm object-cover" loading="lazy">
             <span>{{ locale.label }}</span>

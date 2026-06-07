@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "title": "Hjem | Starter App",
+    "description": "Moderne nettapplikasjonsbygger."
+  },
+  "hero": {
+    "badge": "Nytt: versjon 2.0 er her",
+    "title_start": "Bygg noe",
+    "title_highlight": "fantastisk i dag",
+    "description": "Den moderne måten å bygge nettapplikasjoner på. Rask, fleksibel og designet for utviklere som bryr seg om kvalitet.",
+    "image_alt": "Forhåndsvisning av dashbordet",
+    "primary_btn": {
+      "label": "Begynn å bygge",
+      "url": "/start"
+    },
+    "secondary_btn": {
+      "label": "Se demo",
+      "url": "/demo"
+    },
+    "note": "Ingen kredittkort kreves",
+  },
+  "features": {
+    "heading": "Alt du trenger",
+    "subheading": "Avanserte funksjoner for å hjelpe deg å bygge raskere.",
+    "list": {
+      "speed": {
+        "title": "Lynrask",
+        "description": "Optimalisert for maksimal ytelse. Appen din lastes inn umiddelbart."
+      },
+      "design": {
+        "title": "Elegant design",
+        "description": "Laget med omhu. Hver piksel har mening og formål."
+      },
+      "security": {
+        "title": "Sikkerhet garantert",
+        "description": "Sikkerhet på bedriftsnivå. Dataene dine er beskyttet i hvert lag."
+      }
+    }
+  },
+  "stats": {
+    "community": "Utviklerfellesskap",
+    "community_val": "10K+",
+    "projects": "Prosjekter bygget",
+    "projects_val": "50K+",
+    "uptime": "Oppetid 24/7",
+    "uptime_val": "99,9%",
+    "rating": "Brukervurdering",
+    "rating_val": "4,9/5"
+  }
+}

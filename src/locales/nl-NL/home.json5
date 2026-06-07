@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "title": "Home | Starter App",
+    "description": "Moderne webapplicatiebouwer."
+  },
+  "hero": {
+    "badge": "Nieuw: versie 2.0 is uit",
+    "title_start": "Bouw iets",
+    "title_highlight": "moois vandaag",
+    "description": "De moderne manier om webapplicaties te bouwen. Snel, flexibel en ontworpen voor ontwikkelaars die om kwaliteit geven.",
+    "image_alt": "Dashboardvoorbeeld",
+    "primary_btn": {
+      "label": "Begin met bouwen",
+      "url": "/start"
+    },
+    "secondary_btn": {
+      "label": "Bekijk demo",
+      "url": "/demo"
+    },
+    "note": "Geen creditcard nodig",
+  },
+  "features": {
+    "heading": "Alles wat u nodig heeft",
+    "subheading": "Geavanceerde functies om u sneller te laten bouwen.",
+    "list": {
+      "speed": {
+        "title": "Supersnel",
+        "description": "Geoptimaliseerd voor maximale prestaties. Uw applicatie laadt direct."
+      },
+      "design": {
+        "title": "Elegant ontwerp",
+        "description": "Zorgvuldig gemaakt. Elke pixel heeft betekenis en doel."
+      },
+      "security": {
+        "title": "Gegarandeerde beveiliging",
+        "description": "Enterprise-grade beveiliging. Uw gegevens zijn in elke laag beschermd."
+      }
+    }
+  },
+  "stats": {
+    "community": "Ontwikkelaarscommunity",
+    "community_val": "10K+",
+    "projects": "Gebouwde projecten",
+    "projects_val": "50K+",
+    "uptime": "24/7 uptime",
+    "uptime_val": "99,9%",
+    "rating": "Gebruikersbeoordeling",
+    "rating_val": "4,9/5"
+  }
+}

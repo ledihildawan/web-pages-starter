@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "title": "Domů | Starter App",
+    "description": "Moderní tvůrce webových aplikací."
+  },
+  "hero": {
+    "badge": "Novinka: verze 2.0 je tady",
+    "title_start": "Postavte něco",
+    "title_highlight": "úžasného dnes",
+    "description": "Moderní způsob, jak vytvářet webové aplikace. Rychlý, flexibilní a navržený pro vývojáře, kterým záleží na kvalitě.",
+    "image_alt": "Náhled dashboardu",
+    "primary_btn": {
+      "label": "Začít stavět",
+      "url": "/start"
+    },
+    "secondary_btn": {
+      "label": "Zobrazit demo",
+      "url": "/demo"
+    },
+    "note": "Není vyžadována kreditní karta",
+  },
+  "features": {
+    "heading": "Vše, co potřebujete",
+    "subheading": "Pokročilé funkce, které vám pomohou stavět rychleji.",
+    "list": {
+      "speed": {
+        "title": "Bleskově rychlý",
+        "description": "Optimalizováno pro maximální výkon. Vaše aplikace se načte okamžitě."
+      },
+      "design": {
+        "title": "Elegantní design",
+        "description": "Vyrobeno s péčí. Každý pixel má smysl a účel."
+      },
+      "security": {
+        "title": "Bezpečnost zaručena",
+        "description": "Bezpečnost na podnikové úrovni. Vaše data jsou chráněna v každé vrstvě."
+      }
+    }
+  },
+  "stats": {
+    "community": "Komunita vývojářů",
+    "community_val": "10K+",
+    "projects": "Postavených projektů",
+    "projects_val": "50K+",
+    "uptime": "Dostupnost 24/7",
+    "uptime_val": "99,9%",
+    "rating": "Hodnocení uživatelů",
+    "rating_val": "4,9/5"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "about": {
+    "badge": "Over ons"
+  },
+  "hero": {
+    "badge": "Over ons",
+    "title_part1": "Wij creëren de ",
+    "title_highlight": "digitale toekomst",
+    "description": "Opgericht in 2024, is Starter er om ontwikkelaars te helpen betere applicaties sneller te bouwen. Wij geloven in de kracht van schone code, mooi ontwerp en open source-samenwerking."
+  },
+  "stats": {
+    "years": "Jaren ervaring",
+    "years_val": "3+",
+    "clients": "Wereldwijde klanten",
+    "clients_val": "120+",
+    "countries": "Bereikte landen",
+    "countries_val": "15",
+    "support": "Expert support",
+    "support_val": "24/7"
+  },
+  "story": {
+    "tag": "Ons verhaal",
+    "visual_label": "Creatieve studio illustratie",
+    "title": "Gedreven door passie, <br>gedefinieerd door uitmuntendheid.",
+    "para1": "Onze reis begon met een eenvoudig idee: webontwikkeling toegankelijk en leuk maken voor iedereen. We waren de zware frameworks en ingewikkelde configuraties beu.",
+    "para2": "Vandaag zijn wij een divers team van engineers, ontwerpers en denkers die samenwerken om complexe problemen op te lossen met elegante oplossingen.",
+    "val1": "User-centric ontwerpfilosofie",
+    "val2": "Performance-first architectuur",
+    "val3": "Transparantie en open communicatie"
+  },
+  "mission": {
+    "title": "Onze missie",
+    "description": "Ontwikkelaars en bedrijven versterken met elegante, snelle en gebruiksvriendelijke tools om uitzonderlijke digitale producten te bouwen."
+  },
+  "vision": {
+    "title": "Onze visie",
+    "description": "Het platform bij uitstek worden voor moderne ontwikkelaars die schoonheid, prestaties en gebruikerservaring waarderen in elke regel code."
+  },
+  "values": {
+    "title": "Onze waarden",
+    "subtitle": "De principes die elke beslissing die wij nemen leiden."
+  },
+  "passion": {
+    "title": "Passie",
+    "description": "Wij houden van wat wij doen, en dat is zichtbaar in elk detail van onze producten."
+  },
+  "collaboration": {
+    "title": "Samenwerking",
+    "description": "Samenwerken levert de beste resultaten op. Wij geloven in de kracht van een solide team."
+  },
+  "innovation": {
+    "title": "Innovatie",
+    "description": "Altijd op zoek naar betere manieren om problemen op te lossen en waarde te creëren."
+  },
+  "integrity": {
+    "title": "Integriteit",
+    "description": "Eerlijkheid en transparantie vormen de basis van elke relatie die wij opbouwen."
+  },
+  "excellence": {
+    "title": "Uitmuntendheid",
+    "description": "Wij zijn niet tevreden met 'goed genoeg'. Wij streven altijd naar het beste."
+  },
+  "quality": {
+    "title": "Kwaliteit",
+    "description": "Schone code, mooi ontwerp en naadloze ervaring zijn onze standaard."
+  },
+  "team": {
+    "title": "Ontmoet het team",
+    "subtitle": "De briljante geesten achter elke regel code die wij schrijven.",
+    "alex_desc": "Visie leider met meer dan 10 jaar ervaring in de ontwikkeling van SaaS-ecosystemen.",
+    "sarah_desc": "Full-stack wizard die gespecialiseerd is in het bouwen van grootschalige systeemarchitecturen.",
+    "mike_desc": "Bezeten van pixeldetails, vloeiende UX-flows en toegankelijkheidsstandaarden.",
+    "jessica_desc": "Creatieve verhalenverteller die merken helpt hun unieke stem in de digitale wereld te vinden."
+  }
+}

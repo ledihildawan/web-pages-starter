@@ -27,6 +27,15 @@ const MANAGED_EXTS = [
 
 const resolveRoot = (...args: string[]): string => path.resolve(ROOT, ...args);
 
+const EXCLUDED_PAGES = new Set<string>([]);
+const EXCLUDED_PAGES_ENV = (process.env.EXCLUDED_PAGES ?? '')
+  .split(',')
+  .map((s) => s.trim())
+  .filter(Boolean);
+for (const name of EXCLUDED_PAGES_ENV) {
+  EXCLUDED_PAGES.add(name);
+}
+
 const getEntries = (): Record<string, string | string[]> => {
   const dir = resolveRoot(PATHS.SRC, 'pages');
   const entries: Record<string, string | string[]> = {};
@@ -34,6 +43,10 @@ const getEntries = (): Record<string, string | string[]> => {
   if (!fs.existsSync(dir)) return entries;
 
   for (const folder of fs.readdirSync(dir)) {
+    if (EXCLUDED_PAGES.has(folder)) {
+      continue;
+    }
+
     const tsFile = path.join(dir, folder, 'index.ts');
     const cssFile = path.join(dir, folder, 'index.css');
 
@@ -58,7 +71,10 @@ export default defineConfig({
     historyApiFallback: {
       rewrites: [
         { from: /^\/$/, to: '/home.html' },
-        { from: /./, to: '/404.html' },
+        {
+          from: /^\/(?!locales\/|assets\/|fonts\/|images\/|favicon\.svg$|favicon\.ico$|manifest\.json$|sw\.js$|robots\.txt$|sitemap\.xml$|.*\.[a-z0-9]+$)/,
+          to: '/404.html',
+        },
       ],
       disableDotRule: true,
     },
@@ -78,24 +94,13 @@ export default defineConfig({
   },
   performance: {
     chunkSplit: {
-      strategy: 'split-by-size',
-      minSize: 20000,
-      maxSize: 50000,
+      strategy: 'split-by-experience',
       override: {
-        chunks: 'all',
-        minSize: 20000,
-        maxSize: 50000,
         cacheGroups: {
           vendor: {
-            test: /[\\/]node_modules[\\/]/,
+            test: /[\\/]node_modules[\\/](?!@fontsource)/,
             name: 'vendors',
             priority: 10,
-            reuseExistingChunk: true,
-          },
-          styles: {
-            name: 'styles',
-            test: /\.(?:css|less|sass|scss|styl)$/,
-            priority: 30,
             reuseExistingChunk: true,
           },
         },
@@ -125,7 +130,7 @@ export default defineConfig({
     assetPrefix: '/',
     cleanDistPath: true,
     minify: shouldMinify,
-    inlineStyles: ({ size }) => size < 20 * 1_024,
+    inlineStyles: ({ size }) => size < 10 * 1_024,
     inlineScripts: ({ size }) => size < 8 * 1_024,
     sourceMap: !shouldMinify
       ? { js: 'cheap-module-source-map', css: true }
@@ -153,6 +158,26 @@ export default defineConfig({
         to: 'sw.js',
         noErrorOnMissing: true,
       },
+      {
+        from: resolveRoot('public', 'robots.txt'),
+        to: 'robots.txt',
+        noErrorOnMissing: true,
+      },
+      {
+        from: resolveRoot('public', 'sitemap.xml'),
+        to: 'sitemap.xml',
+        noErrorOnMissing: true,
+      },
+      {
+        from: resolveRoot('public', 'favicon.svg'),
+        to: 'favicon.svg',
+        noErrorOnMissing: true,
+      },
+      {
+        from: resolveRoot('public', 'locales'),
+        to: 'locales',
+        noErrorOnMissing: true,
+      },
     ],
   },
   plugins: [pluginImageCompress({ use: 'avif', quality: 75 })],
@@ -162,33 +187,36 @@ export default defineConfig({
         !shouldMinifyHTML
           ? html
           : minify(html, {
-            collapseWhitespace: true,
-            removeComments: true,
-            decodeEntities: true,
-            minifyCSS: true,
-            minifyJS: true,
-            minifyURLs: true,
-            removeRedundantAttributes: true,
-            removeScriptTypeAttributes: true,
-            removeStyleLinkTypeAttributes: true,
-            useShortDoctype: true,
-            continueOnParseError: true,
-            customEventAttributes: [/^on[a-z]{3,}$/],
-            removeAttributeQuotes: false,
-            keepClosingSlash: true,
-            ignoreCustomFragments: [
-              /\{\{[\s\S]*?\}\}/,
-              /\{%[\s\S]*?%\}/,
-              /\{#[\s\S]*?#\}/,
-            ],
-            conservativeCollapse: true,
-            collapseInlineTagWhitespace: false,
-            removeEmptyAttributes: false,
-          });
+              collapseWhitespace: true,
+              removeComments: true,
+              decodeEntities: true,
+              minifyCSS: true,
+              minifyJS: true,
+              minifyURLs: true,
+              removeRedundantAttributes: true,
+              removeScriptTypeAttributes: true,
+              removeStyleLinkTypeAttributes: true,
+              useShortDoctype: true,
+              continueOnParseError: true,
+              customEventAttributes: [/^on[a-z]{3,}$/],
+              removeAttributeQuotes: false,
+              keepClosingSlash: true,
+              ignoreCustomFragments: [
+                /\{\{[\s\S]*?\}\}/,
+                /\{%[\s\S]*?%\}/,
+                /\{#[\s\S]*?#\}/,
+              ],
+              conservativeCollapse: true,
+              collapseInlineTagWhitespace: false,
+              removeEmptyAttributes: false,
+            });
 
       return config;
     },
     rspack: {
+      optimization: {
+        runtimeChunk: 'single',
+      },
       module: {
         rules: [
           {
@@ -206,6 +234,12 @@ export default defineConfig({
               },
             ],
           },
+        ],
+      },
+      snapshot: {
+        managedPaths: [
+          resolveRoot(PATHS.GENERATED),
+          resolveRoot('node_modules'),
         ],
       },
     },

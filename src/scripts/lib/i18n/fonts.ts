@@ -7,8 +7,6 @@ import {
 import type { FontConfig } from './types';
 import { WRITING_SYSTEM_CODE, type WritingSystemCode } from './writing-systems';
 
-import '@fontsource-variable/noto-sans';
-
 type FontLoader = () => Promise<unknown>;
 type FontWeightList = readonly number[];
 
@@ -148,6 +146,26 @@ const NOTO_SANS: Partial<
     css: '@fontsource-variable/noto-sans-armenian/index.css',
     loader: () => import('@fontsource-variable/noto-sans-armenian/index.css'),
   },
+  hebr: {
+    css: '@fontsource-variable/noto-sans-hebrew/index.css',
+    loader: () => import('@fontsource-variable/noto-sans-hebrew/index.css'),
+  },
+  orya: {
+    css: '@fontsource/noto-sans-oriya/400.css',
+    loader: () => import('@fontsource/noto-sans-oriya/400.css'),
+  },
+  tibt: {
+    css: '@fontsource-variable/noto-serif-tibetan/index.css',
+    loader: () => import('@fontsource-variable/noto-serif-tibetan/index.css'),
+  },
+  nkoo: {
+    css: '@fontsource/noto-sans-nko/400.css',
+    loader: () => import('@fontsource/noto-sans-nko/400.css'),
+  },
+  adlm: {
+    css: '@fontsource-variable/noto-sans-adlam/index.css',
+    loader: () => import('@fontsource-variable/noto-sans-adlam/index.css'),
+  },
 };
 
 const SCRIPT_FONT_LOADERS: Partial<Record<NumberingSystemCode, FontLoader>> =
@@ -168,7 +186,6 @@ const SCRIPT_FONT_CSS: Partial<Record<NumberingSystemCode, string>> =
 
 Object.assign(SCRIPT_FONT_LOADERS, {
   cyrl: createPrimaryLoader(WRITING_SYSTEM_CODE.CYRILLIC),
-  hebr: createPrimaryLoader(WRITING_SYSTEM_CODE.HEBREW),
   grek: createPrimaryLoader(WRITING_SYSTEM_CODE.GREEK),
 });
 

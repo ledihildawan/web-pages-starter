@@ -3,6 +3,7 @@
 
 {% set seo_config = global.seo or {} %}
 {% set theme_color = seo_config.theme_color or "#020617" %}
+{% set theme_color_light = seo_config.theme_color_light or "#f8fafc" %}
 {% set manifest_path = seo_config.manifest_path or "/manifest.json" %}
 {% set favicon_path = seo_config.favicon_path or "/favicon.ico" %}
 {% set apple_icon_path = seo_config.apple_touch_icon_path or "/favicon.ico" %}
@@ -23,6 +24,9 @@
 {% set referrer = compat.referrer %}
 
 {% set dns_prefetch = global.dns_prefetch or[] %}
+{% set preconnect = global.preconnect or [
+  { href: 'https://flagcdn.com', crossorigin: false }
+] %}
 
 <!DOCTYPE html>
 <html lang="{{ lang }}" dir="{{ localeConfig.dir or 'ltr' }}" class="scroll-smooth selection:bg-violet-500/30 selection:text-violet-200">
@@ -38,10 +42,11 @@
       <meta name="apple-mobile-web-app-status-bar-style" content="{{ apple_status_style }}">
     {% endif %}
 
-    <meta name="theme-color" content="{{ theme_color }}">
-    <meta name="theme-color" content="{{ theme_color }}" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="{{ theme_color_light }}" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="{{ theme_color }}" media="(prefers-color-scheme: dark)">
     <meta name="msapplication-TileColor" content="{{ ms_tile_color }}">
+
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://flagcdn.com https://images.unsplash.com; font-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'self'">
 
     <link rel="manifest" href="{{ manifest_path }}">
     <link rel="icon" href="{{ favicon_path }}">
@@ -68,13 +73,20 @@
       <link rel="dns-prefetch" href="{{ href }}">
     {% endfor %}
 
+    {% for host in preconnect %}
+      <link rel="preconnect" href="{{ host.href }}"{% if host.crossorigin %} crossorigin{% endif %}>
+    {% endfor %}
+
     {% block extra_head %}
-      {{ page_meta.render(page, global) }}
+      {{ page_meta.render(page, global, LOCALE_CODES) }}
     {% endblock %}
 
     {% block resource_hints %}
       <style>
-        {{critical_css}}
+        :root{--font-primary:'Inter',system-ui,-apple-system,sans-serif;color-scheme:dark}
+        html,body{margin:0;padding:0;background:#020617;color:#e2e8f0;font-family:var(--font-primary);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+        body{min-block-size:100vh}
+        [x-cloak]{display:none!important}
       </style>
       {{ clientI18nScript }}
     {% endblock %}

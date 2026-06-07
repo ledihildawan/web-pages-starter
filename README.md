@@ -130,7 +130,7 @@ The same translation key (`i18n.t('page.hero.title')`) renders the initial HTML 
 
 ## Locales
 
-42 locales are configured in [`src/scripts/lib/i18n/data.ts`](src/scripts/lib/i18n/data.ts). The default locale is set in [`src/configs/i18n.ts`](src/configs/i18n.ts) (`i18nConfig.defaultLocale`, currently `id-ID`). Add a new locale by adding an entry to `data.ts` and running `bun run sync:locales`.
+54 locales are configured in [`src/scripts/lib/i18n/data.ts`](src/scripts/lib/i18n/data.ts). The default locale is set in [`src/configs/i18n.ts`](src/configs/i18n.ts) (`i18nConfig.defaultLocale`, currently `id-ID`). Add a new locale by adding an entry to `data.ts` and running `bun run sync:locales`.
 
 Highlights:
 
@@ -142,6 +142,7 @@ Highlights:
 | Arabic | `ar-SA`, `ar-AE`, `ar-EG`, `ar-MA`, `ar-TN` | RTL, native digits, six-form plurals |
 | Japanese, Korean, Thai, Hindi, Russian | `ja-JP`, `ko-KR`, `ko-KP`, `th-TH`, `hi-IN`, `hi-NP`, `ru-RU` | Native digits where applicable |
 | Spanish, Portuguese, French, German | regional variants | Latin script, two-form plurals |
+| European Latin | `nl-NL`, `ca-ES`, `it-IT`, `no-NO`, `fi-FI`, `sv-SE`, `da-DK`, `cs-CZ`, `hu-HU`, `ro-RO`, `pl-PL`, `el-GR` | Region-specific currencies (EUR, NOK, SEK, DKK, CZK, HUF, RON, PLN) |
 
 ## Tech Stack
 

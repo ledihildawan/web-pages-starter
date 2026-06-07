@@ -182,5 +182,21 @@
   "core": {
     "title": "Fonctionnalités Principales",
     "description": "Traduction, pluralisation et contenu HTML."
+  },
+  "section_modes": {
+    "title": "Modes de Nombre",
+    "description": "Comparez les chiffres natifs, le format universel et le mode automatique pour la locale active."
+  },
+  "section_systems": {
+    "title": "Systèmes d'Écriture",
+    "description": "Les 7 systèmes algorithmiques et 4 systèmes numériques supplémentaires au niveau système, avec les chargeurs de polices connectés."
+  },
+  "nav": {
+    "translations": "Traductions",
+    "formatting": "Nombres",
+    "pricing": "Tarifs",
+    "modes": "Modes",
+    "systems": "Systèmes",
+    "switcher": "Changer de Locale"
   }
 }

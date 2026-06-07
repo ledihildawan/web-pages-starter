@@ -182,5 +182,21 @@
   "core": {
     "title": "コア機能",
     "description": "翻訳、複数形、HTMLコンテンツ。"
+  },
+  "section_modes": {
+    "title": "数字モード",
+    "description": "アクティブなロケールのネイティブ数字、ユニバーサル形式、自動モードを比較します。"
+  },
+  "section_systems": {
+    "title": "文字体系",
+    "description": "システムレベルでの7つのアルゴリズム的システムと4つの追加数値システムすべてにフォントローダーが接続されています。"
+  },
+  "nav": {
+    "translations": "翻訳",
+    "formatting": "数字",
+    "pricing": "価格",
+    "modes": "モード",
+    "systems": "システム",
+    "switcher": "ロケール切替"
   }
 }

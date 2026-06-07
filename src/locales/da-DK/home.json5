@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "title": "Hjem | Starter App",
+    "description": "Moderne webapplikationsbygger."
+  },
+  "hero": {
+    "badge": "Nyt: version 2.0 er her",
+    "title_start": "Byg noget",
+    "title_highlight": "fantastisk i dag",
+    "description": "Den moderne måde at bygge webapplikationer på. Hurtig, fleksibel og designet til udviklere, der bekymrer sig om kvalitet.",
+    "image_alt": "Forhåndsvisning af dashboard",
+    "primary_btn": {
+      "label": "Begynd at bygge",
+      "url": "/start"
+    },
+    "secondary_btn": {
+      "label": "Se demo",
+      "url": "/demo"
+    },
+    "note": "Intet kreditkort kræves",
+  },
+  "features": {
+    "heading": "Alt hvad du behøver",
+    "subheading": "Avancerede funktioner til at hjælpe dig med at bygge hurtigere.",
+    "list": {
+      "speed": {
+        "title": "Lynhurtig",
+        "description": "Optimeret til maksimal ydeevne. Din app indlæses øjeblikkeligt."
+      },
+      "design": {
+        "title": "Elegant design",
+        "description": "Lavet med omhu. Hver pixel har formål og betydning."
+      },
+      "security": {
+        "title": "Sikkerhed garanteret",
+        "description": "Sikkerhed på virksomhedsniveau. Dine data er beskyttet i hvert lag."
+      }
+    }
+  },
+  "stats": {
+    "community": "Udviklerfællesskab",
+    "community_val": "10K+",
+    "projects": "Projekter bygget",
+    "projects_val": "50K+",
+    "uptime": "Oppetid 24/7",
+    "uptime_val": "99,9%",
+    "rating": "Brugervurdering",
+    "rating_val": "4,9/5"
+  }
+}

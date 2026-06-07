@@ -1,5 +1,10 @@
 {% extends "main.njk" %}
 
+{% block extra_head %}
+  {{ super() }}
+  <link rel="preconnect" href="https://images.unsplash.com">
+{% endblock %}
+
 {% block content %}
 <section class="relative min-block-screen overflow-hidden">
   <div class="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
@@ -24,14 +29,22 @@
             <img
               src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80"
               data-splide-lazy="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80"
-              alt="{{ i18n.text('page.hero.slide_1.alt') }}"
+              alt="{{ i18n.text('page.hero.slide_1.alt', {}, {raw: true}) }}"
+              width="1600"
+              height="1067"
+              loading="lazy"
+              decoding="async"
             >
           </li>
           <li class="splide__slide">
             <img
               src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1600&q=80"
               data-splide-lazy="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1600&q=80"
-              alt="{{ i18n.text('page.hero.slide_2.alt') }}"
+              alt="{{ i18n.text('page.hero.slide_2.alt', {}, {raw: true}) }}"
+              width="1600"
+              height="1067"
+              loading="lazy"
+              decoding="async"
             >
           </li>
         </ul>

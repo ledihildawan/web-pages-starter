@@ -182,5 +182,21 @@
   "core": {
     "title": "Kernfunktionen",
     "description": "Übersetzung, Pluralisierung und HTML-Inhalt."
+  },
+  "section_modes": {
+    "title": "Zahlenmodi",
+    "description": "Vergleichen Sie native Ziffern, universelles Format und Auto-Modus für das aktive Gebietsschema."
+  },
+  "section_systems": {
+    "title": "Schriftsysteme",
+    "description": "Alle 7 algorithmischen und 4 zusätzlichen numerischen Systeme auf Systemebene, mit verbundenen Schriftladern."
+  },
+  "nav": {
+    "translations": "Übersetzungen",
+    "formatting": "Zahlen",
+    "pricing": "Preise",
+    "modes": "Modi",
+    "systems": "Systeme",
+    "switcher": "Locale Wechseln"
   }
 }

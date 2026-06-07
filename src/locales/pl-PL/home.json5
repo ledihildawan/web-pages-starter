@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "title": "Strona główna | Starter App",
+    "description": "Nowoczesny kreator aplikacji webowych."
+  },
+  "hero": {
+    "badge": "Nowość: wersja 2.0 jest tutaj",
+    "title_start": "Stwórz coś",
+    "title_highlight": "wspaniałego dziś",
+    "description": "Nowoczesny sposób budowania aplikacji webowych. Szybki, elastyczny i zaprojektowany dla deweloperów, którym zależy na jakości.",
+    "image_alt": "Podgląd dashboardu",
+    "primary_btn": {
+      "label": "Zacznij budować",
+      "url": "/start"
+    },
+    "secondary_btn": {
+      "label": "Zobacz demo",
+      "url": "/demo"
+    },
+    "note": "Karta kredytowa nie jest wymagana",
+  },
+  "features": {
+    "heading": "Wszystko, czego potrzebujesz",
+    "subheading": "Zaawansowane funkcje, które pomogą Ci budować szybciej.",
+    "list": {
+      "speed": {
+        "title": "Błyskawicznie szybki",
+        "description": "Zoptymalizowany pod kątem maksymalnej wydajności. Twoja aplikacja ładuje się natychmiast."
+      },
+      "design": {
+        "title": "Elegancki design",
+        "description": "Stworzony z dbałością. Każdy piksel ma cel i znaczenie."
+      },
+      "security": {
+        "title": "Bezpieczeństwo gwarantowane",
+        "description": "Bezpieczeństwo klasy enterprise. Twoje dane są chronione na każdej warstwie."
+      }
+    }
+  },
+  "stats": {
+    "community": "Społeczność deweloperów",
+    "community_val": "10K+",
+    "projects": "Zbudowanych projektów",
+    "projects_val": "50K+",
+    "uptime": "Dostępność 24/7",
+    "uptime_val": "99,9%",
+    "rating": "Ocena użytkowników",
+    "rating_val": "4,9/5"
+  }
+}

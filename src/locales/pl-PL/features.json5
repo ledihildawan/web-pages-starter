@@ -1,0 +1,57 @@
+{
+  "hero": {
+    "badge": "Wyróżnione funkcje",
+    "title_part1": "Wszystko, czego potrzebujesz, aby",
+    "title_highlight": "skalować szybciej",
+    "description": "Od potężnej analityki po bezproblemowe integracje, dajemy Ci zestaw narzędzi potrzebnych do budowania światowej klasy aplikacji bez komplikacji."
+  },
+  "sections": {
+    "sync": {
+      "title": "Synchronizacja w czasie rzeczywistym",
+      "description": "Zmiany rozprzestrzeniają się natychmiast na wszystkie urządzenia. Niezależnie od tego, czy Twoi użytkownicy korzystają z telefonu, komputera czy tabletu, widzą te same dane w tym samym czasie.",
+      "check_0": "Opóźnienie poniżej milisekundy",
+      "check_1": "Wbudowane wsparcie offline",
+      "check_2": "Zarządzanie rozwiązywaniem konfliktów"
+    },
+    "analytics": {
+      "title": "Analityka do działania",
+      "description": "Przestań zgadywać. Uzyskaj szczegółowe informacje o zachowaniach użytkowników, wydajności systemu i wskaźnikach przychodów. Wizualizuj swoje dane za pomocą interaktywnych wykresów.",
+      "check_0": "Konfigurowalne dashboardy",
+      "check_1": "Eksport do PDF, CSV lub Excela",
+      "check_2": "Zautomatyzowane raporty tygodniowe"
+    }
+  },
+  "more_title": "I wiele więcej...",
+  "more_subtitle": "Zaawansowane funkcje zaprojektowane, aby pomóc Ci budować szybciej i bardziej skalowalnie.",
+  "more": {
+    "dark_mode": {
+      "title": "Tryb ciemny",
+      "desc": "Wbudowane wsparcie dla jasnych i ciemnych motywów z automatycznym wykrywaniem."
+    },
+    "api_first": {
+      "title": "API na pierwszym miejscu",
+      "desc": "API REST i GraphQL dostępne dla pełnej kontroli programowej."
+    },
+    "sso": {
+      "title": "Logowanie SSO",
+      "desc": "Enterprise Single Sign-On dla Google, GitHub i Okta."
+    },
+    "audit": {
+      "title": "Log audytu",
+      "desc": "Śledź każdą zmianę w swoich projektach ze szczegółowymi znacznikami czasu."
+    },
+    "rbac": {
+      "title": "Dostęp oparty na rolach",
+      "desc": "Szczegółowa kontrola uprawnień dla administratorów, edytorów i przeglądających."
+    },
+    "uptime": {
+      "title": "99,99% dostępności",
+      "desc": "Gwarantowana dostępność dzięki naszemu globalnie rozproszonemu CDN."
+    }
+  },
+  "cta": {
+    "heading": "Gotowy do startu?",
+    "btn_create": "Utwórz konto",
+    "btn_docs": "Przeczytaj dokumentację"
+  }
+}

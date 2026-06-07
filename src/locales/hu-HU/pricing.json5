@@ -1,0 +1,56 @@
+{
+  "period_monthly": "hónap",
+  "period_yearly": "év",
+  "hero": {
+    "badge": "Válaszd ki a csomagod",
+    "title_part1": "Egyszerű és ",
+    "title_highlight": "átlátható árazás",
+    "description": "Nincsenek rejtett költségek. Nincsenek meglepetésdíjak. Válaszd azt a csomagot, amelyik a legjobban megfelel az igényeidnek."
+  },
+  "toggle": {
+    "monthly": "Havi",
+    "yearly": "Éves",
+    "yearly_hint": "évente számlázva",
+    "discount": "SPÓROLJ 20%-OT",
+    "aria_label": "Árazási csomag váltása"
+  },
+  "plans": {
+    "hobby": {
+      "name": "Hobbi",
+      "desc": "Tökéletes mellékprojektekhez és tanuláshoz.",
+      "btn": "Kezdj ingyen",
+      "feature_0": "1 projekt",
+      "feature_1": "Közösségi támogatás",
+      "feature_2": "5 GB tárhely"
+    },
+    "pro": {
+      "name": "Pro",
+      "badge": "Legnépszerűbb",
+      "desc": "Professzionális fejlesztőknek és kis csapatoknak.",
+      "btn": "Pro csomag választása",
+      "feature_0": "Korlátlan projekt",
+      "feature_1": "Prioritásos e-mail támogatás",
+      "feature_2": "100 GB tárhely",
+      "feature_3": "Fejlett analitika"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "desc": "Nagy léptékű alkalmazásokhoz és szervezetekhez.",
+      "btn": "Kapcsolat az értékesítéssel",
+      "feature_0": "Minden Pro funkció",
+      "feature_1": "Dedikált fiókkezelő",
+      "feature_2": "SSO és naplózás",
+      "feature_3": "Korlátlan tárhely"
+    }
+  },
+  "faq": {
+    "title": "Gyakran ismételt kérdések",
+    "subtitle": "Találd meg a válaszokat a leggyakoribb kérdésekre a csomagjainkkal és szolgáltatásainkkal kapcsolatban.",
+    "q_0": "Bármikor lemondhatom?",
+    "a_0": "Igen, bármikor lemondhatod az előfizetésed. A hozzáférésed a számlázási időszak végéig aktív marad.",
+    "q_1": "Van ingyenes próba?",
+    "a_1": "14 napos ingyenes próbát kínálunk a Pro csomagra. Nincs szükség hitelkártyára az induláshoz.",
+    "q_2": "Milyen fizetési módok állnak rendelkezésre?",
+    "a_2": "Elfogadunk minden főbb hitelkártyát és a PayPal-t. Az Enterprise csomaghoz banki átutalást is támogatunk."
+  }
+}

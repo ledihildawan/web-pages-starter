@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "title": "Etusivu | Starter App",
+    "description": "Moderni verkkosovellusten rakentaja."
+  },
+  "hero": {
+    "badge": "Uutta: versio 2.0 on täällä",
+    "title_start": "Rakenna jotain",
+    "title_highlight": "ihanaa tänään",
+    "description": "Moderni tapa rakentaa verkkosovelluksia. Nopea, joustava ja suunniteltu kehittäjille, jotka välittävät laadusta.",
+    "image_alt": "Hallintapaneelin esikatselu",
+    "primary_btn": {
+      "label": "Aloita rakentaminen",
+      "url": "/start"
+    },
+    "secondary_btn": {
+      "label": "Katso demo",
+      "url": "/demo"
+    },
+    "note": "Ei luottokorttia tarvita",
+  },
+  "features": {
+    "heading": "Kaikki mitä tarvitset",
+    "subheading": "Edistyneitä ominaisuuksia, jotka auttavat sinua rakentamaan nopeammin.",
+    "list": {
+      "speed": {
+        "title": " salamannopea",
+        "description": "Optimoitu maksimaaliseen suorituskykyyn. Sovelluksesi latautuu välittömästi."
+      },
+      "design": {
+        "title": "Elegantti muotoilu",
+        "description": "Tehty huolella. Jokaisella pikselillä on tarkoitus ja merkitys."
+      },
+      "security": {
+        "title": "Taattu turvallisuus",
+        "description": "Yritystason turvallisuus. Tietosi ovat suojattuja joka kerroksessa."
+      }
+    }
+  },
+  "stats": {
+    "community": "Kehittäjäyhteisö",
+    "community_val": "10K+",
+    "projects": "Rakennettuja projekteja",
+    "projects_val": "50K+",
+    "uptime": "Käytettävyys 24/7",
+    "uptime_val": "99,9%",
+    "rating": "Käyttäjäarvio",
+    "rating_val": "4,9/5"
+  }
+}

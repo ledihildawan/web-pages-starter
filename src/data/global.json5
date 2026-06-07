@@ -1,16 +1,18 @@
 {
   "site_name": "Starter App",
   "site_description": "Build lightning-fast, beautiful web applications with Starter.",
-  "site_url": "",
-  "site_image": "/assets/images/og-default.jpg",
+  "site_url": "https://example.com",
+  "site_image": "/assets/images/og-image.svg",
+  "default_locale": "en-US",
 
   "seo": {
     "theme_color": "#020617",
+    "theme_color_light": "#f8fafc",
     "og_type": "website",
     "twitter_card": "summary_large_image",
     "manifest_path": "/manifest.json",
-    "favicon_path": "/favicon.ico",
-    "apple_touch_icon_path": "/favicon.ico"
+    "favicon_path": "/favicon.svg",
+    "apple_touch_icon_path": "/favicon.svg"
   },
 
   "pwa": {
@@ -31,7 +33,16 @@
     "referrer": "strict-origin-when-cross-origin"
   },
 
+  "preconnect": [
+    { "href": "https://flagcdn.com" }
+  ],
+
   "dns_prefetch": [
     "//flagcdn.com"
-  ]
+  ],
+
+  "social": {
+    "github": "",
+    "twitter": ""
+  }
 }

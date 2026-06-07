@@ -182,5 +182,21 @@
   },
   "live_update": {
     "note": "Notice all numbers, dates, and prices update instantly when you change language — no page reload."
+  },
+  "section_modes": {
+    "title": "Number Modes",
+    "description": "Compare native digits, universal format, and auto mode for the active locale."
+  },
+  "section_systems": {
+    "title": "Writing Systems",
+    "description": "All 7 algorithmic and 4 additional numeric systems at the system level, with font loaders connected."
+  },
+  "nav": {
+    "translations": "Translations",
+    "formatting": "Numbers",
+    "pricing": "Pricing",
+    "modes": "Modes",
+    "systems": "Systems",
+    "switcher": "Switch Locale"
   }
 }

@@ -1,0 +1,202 @@
+{
+  "meta": {
+    "title": "i18n-test | Demo",
+    "description": "Omfattende testside for internationaliseringsfunktioner"
+  },
+  "hero": {
+    "badge": "i18n-funktioner",
+    "title": "Omfattende <span class='text-violet-400'>test</span> af internationalisering",
+    "description": "Test alle i18n-funktioner: oversættelse, pluralisering, talformatering, valutaer og valutakonvertering."
+  },
+  "language_info": {
+    "title": "Information om aktuelt sprog",
+    "code": "Sprogkode",
+    "currency": "Valuta",
+    "direction": "Tekstretning",
+    "digits": "Indfødte cifre",
+    "enabled": "Aktiveret",
+    "disabled": "Deaktiveret",
+    "languages": "Sprog",
+    "switching": "Skift uden genindlæsning",
+    "current_code": "da",
+    "current_currency": "DKK",
+    "current_direction": "LTR (venstre til højre)"
+  },
+  "numbers": {
+    "title": "Talformatering",
+    "description": "Tal formateres i henhold til den aktive lokalisering.",
+    "large": "Stort tal",
+    "decimal": "Decimal",
+    "million": "Million",
+    "percent": "Procent",
+    "raw": "Rå"
+  },
+  "currency": {
+    "title": "Valutakonvertering",
+    "description": "Priser i DKK omregnet til det aktive sprogs valuta.",
+    "currencies": "Valutaer",
+    "small": "Lille",
+    "medium": "Mellem",
+    "large": "Stor",
+    "enterprise": "Enterprise"
+  },
+  "currency_comparison": {
+    "title": "Valutasammenligning",
+    "description": "Samme pris i forskellige understøttede valutaer.",
+    "base_price": "Grundpris (USD)",
+    "aed": "De Forenede Arabiske Emiraters dirham",
+    "aud": " Australsk dollar",
+    "brl": "Brasiliansk real",
+    "cad": "Canadisk dollar",
+    "chf": "Schweizisk franc",
+    "cny": "Kinesisk yuan",
+    "eur": "Euro",
+    "gbp": "Britisk pund",
+    "idr": "Rupia",
+    "inr": "Indisk rupee",
+    "jpy": "Japansk yen",
+    "krw": "Koreansk won",
+    "mxn": "Mexicansk peso",
+    "sar": "Saudiarabisk riyal",
+    "sgd": "Singaporeansk dollar",
+    "usd": "Amerikansk dollar",
+    "zar": "Sydafrikansk rand"
+  },
+  "core": {
+    "title": "Kernefunktioner",
+    "description": "Oversættelse, pluralisering og HTML-indhold."
+  },
+  "pluralization": {
+    "title": "Pluralisering",
+    "description": "Forskellige flertalsformer for hvert sprog.",
+    "item_title": "Item (element)",
+    "user_title": "User (bruger)",
+    "product_title": "Product (produkt)"
+  },
+  "form": {
+    "title": "Formular med oversatte pladsholdere",
+    "description": "Pladsholdere og etiketter hentes fra sprogfilerne.",
+    "name_label": "Navn",
+    "name_placeholder": "Indtast dit fulde navn",
+    "email_label": "E-mail",
+    "email_placeholder": "eksempel@email.dk",
+    "message_label": "Besked",
+    "message_placeholder": "Skriv din besked her...",
+    "submit": "Send"
+  },
+  "missing_keys": {
+    "title": "Håndtering af manglende nøgler",
+    "description": "Manglende oversættelsesnøgler vises i firkantede parenteser."
+  },
+  "html_content": {
+    "title": "HTML-indhold",
+    "description": "Oversættelser kan inkludere HTML-tags til formatering.",
+    "example": "Dette er eksempeltekst med <span class='text-emerald-400'>farvemarkering</span> og <strong>fed tekst</strong>.",
+    "note": "Bemærk: HTML-tags i oversættelser skal være inde i et omsluttende element."
+  },
+  "switcher": {
+    "title": "Skift sprog",
+    "description": "Klik på knappen nedenfor for at skifte sprog og se alle i18n-funktioner i aktion."
+  },
+  "advanced": {
+    "title": "Avanceret formatering",
+    "description": "Avancerede formateringsfunktioner for procenter, enheder, bytes, lister og ordenstal.",
+    "percentages": "Procenter",
+    "units": "Enheder",
+    "bytes": "Bytes",
+    "bytes_unit": "byte",
+    "lists": "Lister",
+    "ordinals": "Ordenstal",
+    "cardinals": "Kardinaltal",
+    "scientific": "Videnskabelig notation",
+    "abbreviated": "Forkortet",
+    "date_formats": "Datoformater",
+    "time_formats": "Tidsformater",
+    "datetime": "Dato + tid",
+    "durations": "Varigheder",
+    "relative_time": "Relativ tid",
+    "regional_pricing": "Regionale priser",
+    "fifty_percent": "Halvtreds procent",
+    "small_percent": "Lille procent",
+    "ninety_nine": "Nioghalvfems",
+    "hundred": "Hundrede",
+    "kilobyte": "Kilobyte",
+    "distance": "Afstand",
+    "temperature": "Temperatur",
+    "weight": "Vægt",
+    "half_kb": "Halv KB",
+    "one_and_half_kb": "Halvanden KB",
+    "one_mb": "Én MB",
+    "one_gb": "Én GB",
+    "two_items": "To elementer",
+    "three_items": "Tre elementer",
+    "four_items": "Fire elementer",
+    "date_short": "Kort dato",
+    "date_long": "Lang dato",
+    "time_short": "Kort tid",
+    "time_long": "Lang tid",
+    "day_ago": "Dage siden",
+    "months_ago": "Måneder siden",
+    "hour_in": "Om 1 time",
+    "starter_plan": "Starter-plan",
+    "pro_plan": "Pro-plan",
+    "discount_20": "20% rabat",
+    "number_modes": "Taltilstande",
+    "number_modes_desc": "Sammenligning mellem indfødte cifre (٠١٢٣٤) og universel (0-9) formatering.",
+    "native_label": "Indfødte cifre (٠١٢٣٤)",
+    "universal_label": "Universel (0-9)",
+    "plain_label": "Automatisk"
+  },
+  "template_macros": {
+    "title": "Skabelon-makroer",
+    "description": "Makroer til at hente rå værdier uden HTML-markering.",
+    "raw_value": "Rå værdi uden markering",
+    "current_year": "Aktuelt år er {{year}}"
+  },
+  "datetime": {
+    "title": "Dato og tid",
+    "description": "Kombineret format for dato og tid.",
+    "iso": "ISO-standard",
+    "eve": "Juleaften"
+  },
+  "unit": {
+    "title": "Enhedsformat"
+  },
+  "native_digits": {
+    "title": "Indfødte cifre",
+    "description": "Tekst med ASCII-cifre vises i indfødte cifre, når lokaliseringen aktiverer dem. Opdateres live, når du skifter sprog."
+  },
+  "inflection": {
+    "title": "Engelsk bøjning",
+    "description": "Engelsk pluralisering og singularisering. Opdateres live, når du skifter sprog."
+  },
+  "live_label": "Live",
+  "pricing_details": {
+    "title": "Prisoplysninger",
+    "description": "Komplet pipeline: rå værdi, valutakode, format, rabat og konvertering.",
+    "raw_value": "Rå værdi",
+    "raw_currency": "Valutakode",
+    "formatted": "Formateret",
+    "discounted": "20% rabat",
+    "converted_usd": "Konverteret til USD"
+  },
+  "live_update": {
+    "note": "Bemærk, at alle tal, datoer og priser ændres øjeblikkeligt, når du skifter sprog — uden at genindlæse siden."
+  },
+  "section_modes": {
+    "title": "Nummer Tilstande",
+    "description": "Sammenlign native cifre, universelt format og auto-tilstand for den aktive landestandard."
+  },
+  "section_systems": {
+    "title": "Skriftsystemer",
+    "description": "Alle 7 algoritmiske og 4 ekstra numeriske systemer på systemniveau, med tilsluttede skrifttypeindlæsere."
+  },
+  "nav": {
+    "translations": "Oversættelser",
+    "formatting": "Tal",
+    "pricing": "Priser",
+    "modes": "Tilstande",
+    "systems": "Systemer",
+    "switcher": "Skift Landestandard"
+  }
+}

@@ -35,6 +35,20 @@ export const CURRENCIES = [
     decimals: 2,
     region: 'CA',
   },
+  {
+    code: 'CNY',
+    name: 'Chinese Yuan',
+    symbol: '¥',
+    decimals: 2,
+    region: 'CN',
+  },
+  {
+    code: 'CZK',
+    name: 'Czech Koruna',
+    symbol: 'Kč',
+    decimals: 2,
+    region: 'CZ',
+  },
   { code: 'CHF', name: 'Swiss Franc', symbol: 'Fr', decimals: 2, region: 'CH' },
   { code: 'CNY', name: 'Chinese Yuan', symbol: '¥', decimals: 2, region: 'CN' },
   {
@@ -126,6 +140,27 @@ export const CURRENCIES = [
     region: 'NP',
   },
   {
+    code: 'DKK',
+    name: 'Danish Krone',
+    symbol: 'kr',
+    decimals: 2,
+    region: 'DK',
+  },
+  {
+    code: 'HUF',
+    name: 'Hungarian Forint',
+    symbol: 'Ft',
+    decimals: 2,
+    region: 'HU',
+  },
+  {
+    code: 'NOK',
+    name: 'Norwegian Krone',
+    symbol: 'kr',
+    decimals: 2,
+    region: 'NO',
+  },
+  {
     code: 'NZD',
     name: 'New Zealand Dollar',
     symbol: '$',
@@ -140,6 +175,20 @@ export const CURRENCIES = [
     region: 'PE',
   },
   {
+    code: 'PLN',
+    name: 'Polish Zloty',
+    symbol: 'zł',
+    decimals: 2,
+    region: 'PL',
+  },
+  {
+    code: 'RON',
+    name: 'Romanian Leu',
+    symbol: 'lei',
+    decimals: 2,
+    region: 'RO',
+  },
+  {
     code: 'RUB',
     name: 'Russian Ruble',
     symbol: '₽',
@@ -152,6 +201,13 @@ export const CURRENCIES = [
     symbol: 'ر.س',
     decimals: 2,
     region: 'SA',
+  },
+  {
+    code: 'SEK',
+    name: 'Swedish Krona',
+    symbol: 'kr',
+    decimals: 2,
+    region: 'SE',
   },
   {
     code: 'SGD',

@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /404.html
+Disallow: /assets/sw.js
+
+Sitemap: https://example.com/sitemap.xml

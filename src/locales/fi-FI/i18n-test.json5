@@ -1,0 +1,202 @@
+{
+  "meta": {
+    "title": "i18n-testi | Demo",
+    "description": "Kattava testisivu kansainvälistymisominaisuuksille"
+  },
+  "hero": {
+    "badge": "i18n-ominaisuudet",
+    "title": "Kattava <span class='text-violet-400'>testi</span> kansainvälistymisestä",
+    "description": "Testaa kaikki i18n-ominaisuudet: käännös, monikkomuotoilu, numeroiden muotoilu, valuutat ja valuutan muunto."
+  },
+  "language_info": {
+    "title": "Nykyisen kielen tiedot",
+    "code": "Kielikoodi",
+    "currency": "Valuutta",
+    "direction": "Tekstin suunta",
+    "digits": "Alkuperäiset numerot",
+    "enabled": "Käytössä",
+    "disabled": "Ei käytössä",
+    "languages": "Kielet",
+    "switching": "Vaihto ilman uudelleenlatausta",
+    "current_code": "fi",
+    "current_currency": "EUR",
+    "current_direction": "LTR (vasemmalta oikealle)"
+  },
+  "numbers": {
+    "title": "Numeroiden muotoilu",
+    "description": "Numerot muotoillaan aktiivisen lokalisoinnin mukaan.",
+    "large": "Suuri numero",
+    "decimal": "Desimaali",
+    "million": "Miljoona",
+    "percent": "Prosentti",
+    "raw": "Raaka"
+  },
+  "currency": {
+    "title": "Valuutan muunto",
+    "description": "Hinnat EUR-muunnettuna aktiivisen kielen valuuttaan.",
+    "currencies": "Valuutat",
+    "small": "Pieni",
+    "medium": "Keskikokoinen",
+    "large": "Suuri",
+    "enterprise": "Yritys"
+  },
+  "currency_comparison": {
+    "title": "Valuuttojen vertailu",
+    "description": "Sama hinta eri tuetuissa valuutoissa.",
+    "base_price": "Perushinta (USD)",
+    "aed": "Arabiemiirikuntien dirhami",
+    "aud": "Australian dollari",
+    "brl": "Brasilian real",
+    "cad": "Kanadan dollari",
+    "chf": "Sveitsin frangi",
+    "cny": "Kiinan juan",
+    "eur": "Euro",
+    "gbp": "Englannin punta",
+    "idr": "Rupia",
+    "inr": "Intian rupia",
+    "jpy": "Japanin jeni",
+    "krw": "Korean won",
+    "mxn": "Meksikon peso",
+    "sar": "Saudi-Arabian rial",
+    "sgd": "Singaporen dollari",
+    "usd": "Yhdysvaltain dollari",
+    "zar": "Etelä-Afrikan randi"
+  },
+  "core": {
+    "title": "Ydinosaamisalueet",
+    "description": "Käännös, monikkomuotoilu ja HTML-sisältö."
+  },
+  "pluralization": {
+    "title": "Monikkomuotoilu",
+    "description": "Eri monikkomuodot kullekin kielelle.",
+    "item_title": "Item (kohde)",
+    "user_title": "User (käyttäjä)",
+    "product_title": "Product (tuote)"
+  },
+  "form": {
+    "title": "Lomake käännetyillä paikanpitimillä",
+    "description": "Paikanpitimet ja tunnisteet haetaan kielitiedostoista.",
+    "name_label": "Nimi",
+    "name_placeholder": "Anna koko nimesi",
+    "email_label": "Sähköposti",
+    "email_placeholder": "esimerkki@sahkoposti.fi",
+    "message_label": "Viesti",
+    "message_placeholder": "Kirjoita viestisi tähän...",
+    "submit": "Lähetä"
+  },
+  "missing_keys": {
+    "title": "Puuttuvien avainten käsittely",
+    "description": "Löytymättömiä käännösavaimia näytetään hakasulkeissa."
+  },
+  "html_content": {
+    "title": "HTML-sisältö",
+    "description": "Käännökset voivat sisältää HTML-tageja muotoilua varten.",
+    "example": "Tämä on esimerkkiteksti, jossa on <span class='text-emerald-400'>väri-korostus</span> ja <strong>lihavoitu teksti</strong>.",
+    "note": "Huomaa: HTML-tagit käännöksissä täytyy olla käärevän elementin sisällä."
+  },
+  "switcher": {
+    "title": "Vaihda kieli",
+    "description": "Napsauta alla olevaa painiketta vaihtaaksesi kieltä ja nähdäksesi kaikki i18n-ominaisuudet toiminnassa."
+  },
+  "advanced": {
+    "title": "Edistynyt muotoilu",
+    "description": "Edistyneitä muotoiluominaisuuksia prosenteille, yksiköille, tavuilla, listoille ja järjestysluvuille.",
+    "percentages": "Prosentit",
+    "units": "Yksiköt",
+    "bytes": "Tavut",
+    "bytes_unit": "tavu",
+    "lists": "Listat",
+    "ordinals": "Järjestysluvut",
+    "cardinals": "Kardinaalit",
+    "scientific": "Tieteellinen merkintä",
+    "abbreviated": "Lyhennetty",
+    "date_formats": "Päivämäärämuodot",
+    "time_formats": "Aikamuodot",
+    "datetime": "Päivämäärä + aika",
+    "durations": "Kestot",
+    "relative_time": "Suhteellinen aika",
+    "regional_pricing": "Alueelliset hinnat",
+    "fifty_percent": "Viisikymmentä prosenttia",
+    "small_percent": "Pieni prosentti",
+    "ninety_nine": "Yhdeksänkymmentäyhdeksän",
+    "hundred": "Sata",
+    "kilobyte": "Kilotavu",
+    "distance": "Etäisyys",
+    "temperature": "Lämpötila",
+    "weight": "Paino",
+    "half_kb": "Puoli KB",
+    "one_and_half_kb": "Puolitoista KB",
+    "one_mb": "Yksi MB",
+    "one_gb": "Yksi GB",
+    "two_items": "Kaksi kohdetta",
+    "three_items": "Kolme kohdetta",
+    "four_items": "Neljä kohdetta",
+    "date_short": "Lyhyt päivämäärä",
+    "date_long": "Pitkä päivämäärä",
+    "time_short": "Lyhyt aika",
+    "time_long": "Pitkä aika",
+    "day_ago": "Päivää sitten",
+    "months_ago": "Kuukautta sitten",
+    "hour_in": "1 tunnin päästä",
+    "starter_plan": "Starter-tilaus",
+    "pro_plan": "Pro-tilaus",
+    "discount_20": "20% alennus",
+    "number_modes": "Numerotilat",
+    "number_modes_desc": "Vertailu alkuperäisten numeroiden (٠١٢٣٤) ja yleisen (0-9) muotoilun välillä.",
+    "native_label": "Alkuperäiset numerot (٠١٢٣٤)",
+    "universal_label": "Yleinen (0-9)",
+    "plain_label": "Automaattinen"
+  },
+  "template_macros": {
+    "title": "Mallimakrot",
+    "description": "Makrot raaka-arvojen hakemiseen ilman HTML-merkintää.",
+    "raw_value": "Raaka-arvo ilman merkintää",
+    "current_year": "Nykyinen vuosi on {{year}}"
+  },
+  "datetime": {
+    "title": "Päivämäärä ja aika",
+    "description": "Yhdistetty päivämäärän ja ajan muoto.",
+    "iso": "ISO-standardi",
+    "eve": "Jouluaatto"
+  },
+  "unit": {
+    "title": "Yksikkömuoto"
+  },
+  "native_digits": {
+    "title": "Alkuperäiset numerot",
+    "description": "ASCII-numeroita sisältävä teksti näytetään alkuperäisinä numeroina, kun lokalisointi ne ottaa käyttöön. Päivittyy live-tilassa kieltä vaihdettaessa."
+  },
+  "inflection": {
+    "title": "Englannin taivutus",
+    "description": "Englannin monikko- ja yksikkömuotoilu. Päivittyy live-tilassa kieltä vaihdettaessa."
+  },
+  "live_label": "Live",
+  "pricing_details": {
+    "title": "Hinnan tiedot",
+    "description": "Täydellinen putki: raaka-arvo, valuuttakoodi, muoto, alennus ja muunto.",
+    "raw_value": "Raaka-arvo",
+    "raw_currency": "Valuuttakoodi",
+    "formatted": "Muotoiltu",
+    "discounted": "20% alennus",
+    "converted_usd": "Muunnettu USD:ksi"
+  },
+  "live_update": {
+    "note": "Huomaa, että kaikki numerot, päivämäärät ja hinnat muuttuvat välittömästi, kun vaihdat kieltä — ilman sivun uudelleenlatausta."
+  },
+  "section_modes": {
+    "title": "Numerotilat",
+    "description": "Vertaa natiiveja numeroita, yleismaailmallista muotoa ja automaattitilaa aktiiviselle kielialueelle."
+  },
+  "section_systems": {
+    "title": "Kirjoitusjärjestelmät",
+    "description": "Kaikki 7 algoritmista ja 4 lisänumeerista järjestelmää järjestelmätasolla, fonttien latausyhteydellä."
+  },
+  "nav": {
+    "translations": "Käännökset",
+    "formatting": "Numerot",
+    "pricing": "Hinnat",
+    "modes": "Tilat",
+    "systems": "Järjestelmät",
+    "switcher": "Vaihda Kielialue"
+  }
+}

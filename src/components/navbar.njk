@@ -1,4 +1,179 @@
-<nav aria-label="Main navigation" x-cloak="x-cloak" x-data="navbar" @keydown.escape.window="activeMobileSub !== null ? activeMobileSub = null : langOpen = false" @resize.window="if(window.innerWidth >= 1024 && mobileMenuOpen) toggleMobile()" class="fixed inset-bs-0 inset-s-0 inline-full z-100 transition-all duration-500 ease-emphasized border-be bg-transparent border-transparent translate-y-0" :class="{
+<script>
+  document.addEventListener('alpine:init', () => {
+    Alpine.data('navbar', () => ({
+      mobileMenuOpen: false,
+      menuChildrenVisible: false,
+      langOpen: false,
+      scrolled: false,
+      navHidden: false,
+      lastScroll: 0,
+      activeMobileSub: null,
+      scrollY: 0,
+      currentPath: window.location.pathname,
+      isNavigating: false,
+      touchStartY: 0,
+      touchCurrentY: 0,
+      isDragging: false,
+      focusedElement: null,
+      _ticking: false,
+
+      isActive(path) {
+        const current = this.currentPath.replace(/\/$/, '') || '/';
+        const target = path.replace(/\/$/, '') || '/';
+        return current === target;
+      },
+
+      hapticFeedback() {
+        if (navigator.vibrate) {
+          navigator.vibrate(10);
+        }
+      },
+
+      init() {
+        this.lastScroll = window.scrollY;
+        this.scrolled = this.lastScroll > 20;
+
+        if (window.location.hash) {
+          this.navHidden = true;
+        }
+      },
+
+      onScroll() {
+        if (this.mobileMenuOpen || this._ticking) return;
+        this._ticking = true;
+        requestAnimationFrame(() => {
+          const currentScroll = window.scrollY;
+          this.scrolled = currentScroll > 20;
+          if (currentScroll > this.lastScroll && currentScroll > 150) {
+            this.navHidden = true;
+          } else if (currentScroll < this.lastScroll) {
+            this.navHidden = false;
+          }
+          this.lastScroll = currentScroll;
+          this._ticking = false;
+        });
+      },
+
+      handleTouchStart(e) {
+        this.touchStartY = e.touches[0].clientY;
+        this.isDragging = true;
+      },
+
+      handleTouchMove(e) {
+        if (!this.isDragging) return;
+        this.touchCurrentY = e.touches[0].clientY;
+        const diff = this.touchCurrentY - this.touchStartY;
+        if (diff > 0) {
+          this.$refs.mobileMenu.style.transform = `translateY(${Math.min(diff, 300)}px)`;
+        }
+      },
+
+      handleTouchEnd() {
+        if (!this.isDragging) return;
+        this.isDragging = false;
+        const diff = this.touchCurrentY - this.touchStartY;
+        this.$refs.mobileMenu.style.transform = '';
+        if (diff > 100) {
+          this.hapticFeedback();
+          this.closeMobileMenu();
+        }
+      },
+
+      closeMobileMenu(url = null) {
+        if (this.isNavigating) return;
+        this.isNavigating = true;
+
+        this.hapticFeedback();
+
+        this.mobileMenuOpen = false;
+
+        const menuButton = document.querySelector('[aria-controls="mobile-menu"]');
+        if (menuButton) {
+          setTimeout(() => menuButton.focus(), 550);
+        }
+
+        const targetUrl = typeof url === 'string' ? url : null;
+        const isAnchorLink = targetUrl?.includes('#');
+
+        if (targetUrl && !isAnchorLink) {
+          setTimeout(() => {
+            window.location.href = targetUrl;
+          }, 200);
+        }
+
+        setTimeout(() => {
+          this.menuChildrenVisible = false;
+          this.activeMobileSub = null;
+
+          document.body.classList.remove('no-scroll');
+          document.body.style.insetBlockStart = '';
+          document.documentElement.style.setProperty('--scrollbar-width', '0px');
+
+          this.isNavigating = false;
+
+          if (isAnchorLink) {
+            this.navHidden = true;
+            window.location.href = targetUrl;
+            setTimeout(() => {
+              this.lastScroll = window.scrollY;
+            }, 50);
+          } else {
+            this.navHidden = this.scrollY > 150;
+            this.lastScroll = this.scrollY;
+
+            const htmlStyle = document.documentElement.style;
+            const bodyStyle = document.body.style;
+            const originalScrollBehavior = htmlStyle.scrollBehavior || '';
+
+            htmlStyle.scrollBehavior = 'auto';
+            bodyStyle.scrollBehavior = 'auto';
+            window.scrollTo(0, this.scrollY);
+
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                htmlStyle.scrollBehavior = originalScrollBehavior;
+                bodyStyle.scrollBehavior = '';
+              });
+            });
+          }
+        }, 500);
+
+        return true;
+      },
+
+      toggleMobile() {
+        if (!this.mobileMenuOpen) {
+          this.focusedElement = document.activeElement;
+
+          this.scrollY = window.scrollY;
+          const sbWidth = window.innerWidth - document.documentElement.clientWidth;
+
+          document.body.style.insetBlockStart = `-${this.scrollY}px`;
+          document.body.classList.add('no-scroll');
+          document.documentElement.style.setProperty('--scrollbar-width', `${sbWidth}px`);
+
+          this.mobileMenuOpen = true;
+          this.navHidden = false;
+
+          this.hapticFeedback();
+
+          setTimeout(() => {
+            const firstLink = this.$refs.mobileMenu.querySelector('a[href]');
+            if (firstLink) firstLink.focus();
+          }, 750);
+
+          setTimeout(() => {
+            this.menuChildrenVisible = true;
+          }, 50);
+        } else {
+          this.closeMobileMenu();
+        }
+      },
+    }));
+  });
+</script>
+
+<nav aria-label="Main navigation" x-cloak x-data="navbar" @keydown.escape.window="activeMobileSub !== null ? activeMobileSub = null : langOpen = false" @resize.window="if(window.innerWidth >= 1024 && mobileMenuOpen) toggleMobile()" @scroll.window="onScroll" class="fixed inset-bs-0 inset-s-0 inline-full z-100 transition-all duration-500 ease-emphasized border-be bg-transparent border-transparent translate-y-0" :class="{
     'bg-slate-950/90 backdrop-blur-2xl shadow-xl border-white/10': scrolled && !mobileMenuOpen,
     'bg-transparent border-transparent': !scrolled && !mobileMenuOpen,
     'bg-slate-950 border-transparent shadow-none': mobileMenuOpen,
@@ -18,7 +193,7 @@
       <ul class="hidden lg:flex items-center gap-2 me-4" role="menubar" aria-label="Main menu">
         {% for item in global.menu.header %}
           <li class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
-            <a href="{{ item.url }}" class="text-[13px] font-bold px-4 pbs-2.5 pbe-2.5 radius-icon transition-all duration-300 flex items-center gap-1.5 relative" :class="isActive('{{ item.url }}') ? 'text-white bg-white/5' : 'text-slate-400 hover:text-white hover:bg-white/5'" :aria-current="isActive('{{ item.url }}') ? 'page' : 'false'" {% if item.children %} :aria-expanded="open.toString()" aria-haspopup="true" {% endif %}>
+            <a href="{{ item.url }}" class="text-[13px] font-bold px-4 pbs-2.5 pbe-2.5 radius-icon transition-all duration-300 flex items-center gap-1.5 relative" :class="isActive('{{ item.url }}') ? 'text-white bg-white/5' : 'text-slate-400 hover:text-white hover:bg-white/5'" :aria-current="isActive('{{ item.url }}') ? 'page' : null" {% if item.children %} :aria-expanded="open" aria-haspopup="true" {% endif %}>
               {{ i18n.t(item.label) }}
               {% if item.children %}
                 {{ icon.icon('chevron-down', 'inline-3 block-3 transition-transform duration-200 opacity-20', size='md') }}
@@ -26,7 +201,7 @@
               <span x-show="isActive('{{ item.url }}')" class="absolute inset-bs-0 inset-s-1/2 ltr:-translate-x-1/2 rtl:translate-x-1/2 inline-8 block-0.5 bg-linear-to-r from-violet-500 to-fuchsia-500 rounded-full"></span>
             </a>
             {% if item.children %}
-              <div x-show="open" x-cloak="x-cloak" x-transition:enter="transition ease-emphasized duration-300" x-transition:enter-start="opacity-0 translate-y-2 scale-95" x-transition:enter-end="opacity-100 translate-y-0 scale-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 scale-100 translate-y-0" x-transition:leave-end="opacity-0 scale-95 translate-y-2" class="absolute inset-bs-full inset-s-0 inline-64 pbs-2 z-140" role="menu" aria-label="submenu">
+              <div x-show="open" x-cloak x-transition:enter="transition ease-emphasized duration-300" x-transition:enter-start="opacity-0 translate-y-2 scale-95" x-transition:enter-end="opacity-100 translate-y-0 scale-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 scale-100 translate-y-0" x-transition:leave-end="opacity-0 scale-95 translate-y-2" class="absolute inset-bs-full inset-s-0 inline-64 pbs-2 z-140" role="menu" aria-label="submenu">
                 <div class="p-2 bg-slate-950 border border-white/10 radius-btn shadow-[0_25px_60px_rgba(0,0,0,0.5)]">
                   {% for child in item.children %}
                     <a href="{{ child.url }}" class="block px-4 pbs-3 pbe-3 text-[13px] font-bold text-slate-400 hover:text-white hover:bg-white/10 radius-icon transition-all duration-300" role="menuitem">{{ i18n.t(child.label) }}</a>
@@ -38,7 +213,7 @@
         {% endfor %}
       </ul>
       <div class="relative hidden lg:block">
-        <button @click="langOpen = !langOpen" @click.outside="langOpen = false" :aria-expanded="langOpen.toString()" aria-haspopup="listbox" aria-label="Select language" class="flex items-center gap-2.5 px-3.5 py-2.5 block-11 bg-white/5 border border-white/10 radius-icon text-slate-400 hover:text-white hover:bg-white/8 hover:border-white/15 transition-all duration-200 font-black text-[10px] group icon-squash">
+        <button @click="langOpen = !langOpen" @click.outside="langOpen = false" :aria-expanded="langOpen" aria-haspopup="listbox" aria-label="Select language" class="flex items-center gap-2.5 px-3.5 py-2.5 block-11 bg-white/5 border border-white/10 radius-icon text-slate-400 hover:text-white hover:bg-white/8 hover:border-white/15 transition-all duration-200 font-black text-[10px] group icon-squash">
           <span class="inline-5 block-3.5 shrink-0 flex items-center justify-center overflow-hidden rounded-xs opacity-70 group-hover:opacity-100 transition-opacity duration-300 bg-white/5 aspect-4/3">
             <template x-if="$store.i18n.languages.find(l => l.code === $store.i18n.current)">
               <img :src="`https://flagcdn.com/w20/${$store.i18n.languages.find(l => l.code === $store.i18n.current).flag.toLowerCase()}.png`" width="20" height="15" class="inline-full block-full object-cover" loading="lazy" :alt="`${$store.i18n.languages.find(l => l.code === $store.i18n.current)?.label || 'Language'} flag - ${$store.i18n.languages.find(l => l.code === $store.i18n.current).flag.toUpperCase()}`">
@@ -47,16 +222,16 @@
           <span x-text="$store.i18n.languages.find(l => l.code === $store.i18n.current)?.label || $store.i18n.current.toUpperCase()" class="tracking-[0.15em]"></span>
           {{ icon.icon('chevron-down', 'inline-3 block-3 opacity-20 transition-transform duration-200 group-hover:opacity-100 shrink-0', size='md') }}
         </button>
-        <div x-show="langOpen" x-cloak="x-cloak" x-transition:enter="transition ease-emphasized duration-300" x-transition:enter-start="opacity-0 scale-95 translate-y-2" x-transition:enter-end="opacity-100 scale-100 translate-y-0" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 scale-100 translate-y-0" x-transition:leave-end="opacity-0 scale-95 translate-y-2" class="absolute inset-bs-full inset-e-0 mbs-3 min-inline-56 bg-slate-950 border border-white/10 radius-btn shadow-[0_25px_60px_rgba(0,0,0,0.5)] z-140 overflow-hidden" role="listbox" aria-label="Select language">
+        <div x-show="langOpen" x-cloak x-transition:enter="transition ease-emphasized duration-300" x-transition:enter-start="opacity-0 scale-95 translate-y-2" x-transition:enter-end="opacity-100 scale-100 translate-y-0" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 scale-100 translate-y-0" x-transition:leave-end="opacity-0 scale-95 translate-y-2" class="absolute inset-bs-full inset-e-0 mbs-3 min-inline-56 bg-slate-950 border border-white/10 radius-btn shadow-[0_25px_60px_rgba(0,0,0,0.5)] z-140 overflow-hidden" role="listbox" aria-label="Select language" :data-current-lang="$store.i18n.current" @click="if ($event.target.closest('[data-lang-option]')) { $store.i18n.change($event.target.closest('[data-lang-option]').dataset.langOption); langOpen = false; }">
           <div class="p-2 max-block-80 overflow-y-auto scrollbar-none">
-            <template x-for="lang in $store.i18n.languages" :key="lang.code">
-              <button @click="$store.i18n.change(lang.code); langOpen = false" class="inline-full px-3 py-2.5 block-10 flex items-center gap-3 text-start radius-icon text-[12px] font-bold transition-all duration-300 group" :class="$store.i18n.current === lang.code ? 'bg-linear-to-r from-violet-500/20 to-fuchsia-500/20 text-white border border-violet-500/30' : 'text-slate-400 hover:text-white hover:bg-white/5'" role="option" :aria-selected="$store.i18n.current === lang.code.toString()">
+            {% for lang in locales %}
+              <button data-lang-option="{{ lang.code }}" class="lang-option inline-full px-3 py-2.5 block-10 flex items-center gap-3 text-start radius-icon text-[12px] font-bold transition-all duration-300 group" role="option">
                 <span class="inline-5 block-3.5 shrink-0 overflow-hidden rounded-xs bg-white/5 flex items-center justify-center aspect-4/3">
-                  <img :src="`https://flagcdn.com/w20/${lang.flag.toLowerCase()}.png`" width="20" height="15" class="inline-full block-full object-cover transition-all duration-300" :class="$store.i18n.current === lang.code ? 'opacity-100 grayscale-0' : 'opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-100'" loading="lazy" :alt="`${lang.label} flag - ${lang.flag.toUpperCase()}`">
+                  <img src="https://flagcdn.com/w20/{{ lang.flag }}.png" width="20" height="15" class="inline-full block-full object-cover transition-all duration-300 lang-flag" loading="lazy" alt="{{ lang.label }} flag - {{ lang.flag | upper }}">
                 </span>
-                <span class="truncate" x-text="lang.label"></span>
+                <span class="truncate">{{ lang.label }}</span>
               </button>
-            </template>
+            {% endfor %}
           </div>
         </div>
       </div>
@@ -78,7 +253,28 @@
       </button>
     </div>
   </div>
-  <div id="mobile-menu" x-show="mobileMenuOpen" x-cloak="x-cloak" x-transition:enter="transition ease-emphasized duration-700" x-transition:enter-start="-translate-y-full" x-transition:enter-end="translate-y-0" x-transition:leave="transition ease-in duration-500" x-transition:leave-start="translate-y-0" x-transition:leave-end="-translate-y-full" @keydown.escape="activeMobileSub !== null ? activeMobileSub = null : closeMobileMenu()" @click.self="closeMobileMenu()" @touchstart.passive="touchStartY = $event.touches[0].clientY; isDragging = true" @touchmove.passive="touchCurrentY = $event.touches[0].clientY" @touchend="isDragging = false; if (touchCurrentY - touchStartY > 100) { hapticFeedback(); closeMobileMenu(); }" class="fixed inset-0 bg-slate-950 z-110 lg:hidden flex flex-col h-dvh" role="dialog" aria-modal="true" aria-label="Mobile menu">
+  <div
+    id="mobile-menu"
+    x-ref="mobileMenu"
+    x-show="mobileMenuOpen"
+    x-cloak
+    x-trap.noscroll="mobileMenuOpen"
+    x-transition:enter="transition ease-emphasized duration-700"
+    x-transition:enter-start="-translate-y-full"
+    x-transition:enter-end="translate-y-0"
+    x-transition:leave="transition ease-in duration-500"
+    x-transition:leave-start="translate-y-0"
+    x-transition:leave-end="-translate-y-full"
+    @keydown.escape.window="activeMobileSub !== null ? activeMobileSub = null : closeMobileMenu()"
+    @click.self="closeMobileMenu()"
+    @touchstart.passive="handleTouchStart($event)"
+    @touchmove.passive="handleTouchMove($event)"
+    @touchend="handleTouchEnd()"
+    class="fixed inset-0 bg-slate-950 z-110 lg:hidden flex flex-col h-dvh"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Mobile menu"
+  >
     <div class="absolute inset-x-0 top-0 flex justify-center pt-3 opacity-30">
       <div class="inline-12 block-1.5 rounded-full bg-slate-400"></div>
     </div>
@@ -93,7 +289,7 @@
                 <span class="text-4xl sm:text-5xl font-black tracking-tighter transition-all duration-300 text-white">
                   {{ i18n.t(item.label) }}
                 </span>
-                <button @click="activeMobileSub = (activeMobileSub === {{ loop.index0 }} ? null : {{ loop.index0 }}); hapticFeedback()" :aria-expanded="activeMobileSub === {{ loop.index0 }}" aria-controls="sub-menu-{{ loop.index0 }}" aria-label="{{ i18n.text(item.label + '_submenu') }}" class="inline-11 block-11 flex items-center justify-center bg-white/5 radius-btn border border-white/10 active:scale-90 transition-all duration-200 icon-squash hover:bg-white/10">
+                <button @click="activeMobileSub = (activeMobileSub === {{ loop.index0 }} ? null : {{ loop.index0 }}); hapticFeedback()" :aria-expanded="activeMobileSub === {{ loop.index0 }}" aria-controls="sub-menu-{{ loop.index0 }}" aria-label="{{ i18n.t(item.label + '_submenu', {}, {raw: true}) }}" class="inline-11 block-11 flex items-center justify-center bg-white/5 radius-btn border border-white/10 active:scale-90 transition-all duration-200 icon-squash hover:bg-white/10">
                   <svg class="inline-6 block-6 transition-transform duration-500 ease-emphasized" :class="activeMobileSub === {{ loop.index0 }} ? 'rotate-180 text-violet-400' : 'text-slate-600'" fill="none" viewbox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
                   </svg>
@@ -106,7 +302,7 @@
               {% endif %}
             </div>
             {% if item.children %}
-              <div id="sub-menu-{{ loop.index0 }}" x-show="activeMobileSub === {{ loop.index0 }}" x-cloak="x-cloak" x-collapse="x-collapse" class="mbe-6 ms-2 ps-6 border-s-2 border-violet-500/20 space-y-4 pbs-4 pbe-4">
+              <div id="sub-menu-{{ loop.index0 }}" x-show="activeMobileSub === {{ loop.index0 }}" x-cloak x-collapse="x-collapse" class="mbe-6 ms-2 ps-6 border-s-2 border-violet-500/20 space-y-4 pbs-4 pbe-4">
                 {% for child in item.children %}
                   <a href="{{ child.url }}" @click.prevent="closeMobileMenu('{{ child.url }}')" @touchstart.passive="hapticFeedback()" class="block text-2xl font-black transition-colors duration-300 relative py-2 -mx-2 px-2 rounded-lg" :class="isActive('{{ child.url }}') ? 'text-white bg-white/5' : 'text-slate-400 hover:text-white hover:bg-white/5 active:bg-white/10'">{{ i18n.t(child.label) }}</a>
                 {% endfor %}
@@ -115,20 +311,20 @@
           </li>
         {% endfor %}
       </ul>
-      <div class="mbs-12 pbs-8 border-bs border-white/10" x-show="menuChildrenVisible" x-transition:enter="transition ease-emphasized duration-700" x-transition:enter-start="opacity-0 translate-y-8" role="group" aria-label="{{ i18n.t('select_language') }}">
+      <div class="mbs-12 pbs-8 border-bs border-white/10" x-show="menuChildrenVisible" x-transition:enter="transition ease-emphasized duration-700" x-transition:enter-start="opacity-0 translate-y-8" role="group" aria-label="{{ i18n.t('select_language', {}, {raw: true}) }}">
         <p class="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase mbe-5 ps-1">{{ i18n.t('select_language') }}</p>
-        <div class="grid grid-cols-2 gap-2" role="listbox" aria-label="Select language">
-          <template x-for="lang in $store.i18n.languages" :key="lang.code">
-            <button @click="$store.i18n.change(lang.code); closeMobileMenu(); hapticFeedback()" @touchstart.passive="$store.i18n.current !== lang.code && hapticFeedback()" class="group relative flex items-center gap-3 px-4 pbs-4 pbe-4 radius-btn transition-all duration-300 border text-start active:scale-95" :class="$store.i18n.current === lang.code ? 'bg-linear-to-r from-violet-500/20 to-fuchsia-500/20 border-violet-500/30 text-white' : 'bg-white/3 border-transparent text-slate-400 hover:text-slate-300 hover:bg-white/6 active:bg-white/8'" role="option" :aria-selected="$store.i18n.current === lang.code.toString()" :aria-label="lang.label + ' (' + lang.flag.toUpperCase() + ')'">
+        <div class="grid grid-cols-2 gap-2" role="listbox" aria-label="Select language" :data-current-lang="$store.i18n.current" @click="const opt = $event.target.closest('[data-lang-option]'); if (opt) { $store.i18n.change(opt.dataset.langOption); closeMobileMenu(); hapticFeedback(); }">
+          {% for lang in locales %}
+            <button data-lang-option="{{ lang.code }}" class="lang-option group relative flex items-center gap-3 px-4 pbs-4 pbe-4 radius-btn transition-all duration-300 border text-start active:scale-95" role="option" aria-label="{{ lang.label }} ({{ lang.flag | upper }})">
               <div class="relative shrink-0 inline-5 block-3.5 overflow-hidden rounded-xs bg-white/5 aspect-4/3">
-                <img :src="`https://flagcdn.com/w40/${lang.flag.toLowerCase()}.png`" width="40" height="30" class="inline-full block-full object-cover transition-all duration-200" :class="$store.i18n.current === lang.code ? 'opacity-100 grayscale-0' : 'opacity-30 grayscale group-hover:opacity-60 group-hover:grayscale-0'" loading="lazy" :alt="`${lang.label} flag - ${lang.flag.toUpperCase()}`">
+                <img src="https://flagcdn.com/w40/{{ lang.flag }}.png" width="40" height="30" class="inline-full block-full object-cover transition-all duration-200 lang-flag" loading="lazy" alt="{{ lang.label }} flag - {{ lang.flag | upper }}">
               </div>
               <div class="flex flex-col min-inline-0">
-                <span class="text-[13px] font-bold truncate leading-none" x-text="lang.label"></span>
-                <span class="text-[9px] font-black opacity-20 tracking-widest mbs-1.5" x-text="lang.flag.toUpperCase()"></span>
+                <span class="text-[13px] font-bold truncate leading-none">{{ lang.label }}</span>
+                <span class="text-[9px] font-black opacity-20 tracking-widest mbs-1.5">{{ lang.flag | upper }}</span>
               </div>
             </button>
-          </template>
+          {% endfor %}
         </div>
       </div>
       <div class="mbs-8" x-show="menuChildrenVisible" x-transition:enter="transition ease-emphasized duration-700" x-transition:enter-start="opacity-0 translate-y-10">

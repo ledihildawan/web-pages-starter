@@ -2,47 +2,118 @@
   Page Meta Tags Renderer (Per-Page Dynamic SEO)
 
   Renders page-specific meta tags with proper fallbacks:
-  - Title, Description, Canonical URL
+  - Title, Description, Canonical URL, Keywords
   - Open Graph (og:*), Twitter Cards
+  - hreflang alternates for multi-locale SEO
+  - JSON-LD structured data (Organization + WebSite)
 
-  Fixed tags (PWA, theme-color, favicon) are in main.njk
+  Per-page overrides (set in src/pages/<name>/index.json5):
+  - page.meta.title        → <title>, og:title, twitter:title
+  - page.meta.description  → meta[name=description], og:description, twitter:description
+  - page.meta.canonical    → <link rel=canonical>, og:url, hreflang targets
+  - page.meta.image        → og:image, twitter:image (absolute URL)
+  - page.meta.image_alt    → og:image:alt, twitter:image:alt
+  - page.meta.h1           → optional H1 override used by hero-section macro
+  - page.meta.keywords     → meta[name=keywords]
+  - page.meta.og_type      → og:type
 
-  Usage: {{ page_meta.render(page, global) }}
+  Fixed tags (PWA, theme-color, favicon, CSP) are in main.njk
+
+  Usage: {{ page_meta.render(page, global, LOCALE_CODES) }}
 #}
-{% macro render(page, global) %}
+{% macro render(page, global, locale_codes) %}
 
   {% set title = page.meta.title or page.title or global.site_name or "Starter App" %}
 
   {% set description = page.meta.description or global.site_description or "Default description for the site." %}
 
-  {% set canonical_url = page.meta.canonical or global.site_url or "" %}
+  {% set site_url = global.site_url or "" %}
+  {% set page_path = "" if (page.page_id == "home") else ("/" + (page.page_id or "")) %}
+  {% set canonical_url = page.meta.canonical or (site_url + page_path) or "" %}
 
   {% set image = page.meta.image or global.site_image or "" %}
   {% set image_alt = page.meta.image_alt or page.meta.title or title %}
+  {% set absolute_image = image %}
+  {% if image and image.indexOf("http://") != 0 and image.indexOf("https://") != 0 %}
+    {% set absolute_image = site_url + image %}
+  {% endif %}
 
   {% set seo_config = global.seo or {} %}
   {% set og_type = page.meta.og_type or seo_config.og_type or "website" %}
   {% set twitter_card = seo_config.twitter_card or "summary_large_image" %}
 
+  {% set default_locale = global.default_locale or (locale_codes and locale_codes[0]) or "en" %}
+  {% set hreflang_locales = locale_codes or [] %}
+
   <title>{{ title }}</title>
   <meta name="description" content="{{ description }}">
+  {% if page.meta.keywords %}
+    <meta name="keywords" content="{{ page.meta.keywords }}">
+  {% endif %}
+  {% if page.page_id == "404" %}
+    <meta name="robots" content="noindex, nofollow">
+  {% endif %}
 
   {% if canonical_url %}
     <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="alternate" hreflang="x-default" href="{{ canonical_url }}">
+    {% for code in hreflang_locales %}
+      <link rel="alternate" hreflang="{{ code }}" href="{{ canonical_url }}">
+    {% endfor %}
   {% endif %}
 
   <meta property="og:title" content="{{ title }}">
   <meta property="og:description" content="{{ description }}">
   <meta property="og:type" content="{{ og_type }}">
+  <meta property="og:site_name" content="{{ global.site_name or title }}">
   {% if canonical_url %}
     <meta property="og:url" content="{{ canonical_url }}">
   {% endif %}
+  {% if absolute_image %}
+    <meta property="og:image" content="{{ absolute_image }}">
+  {% endif %}
+  {% if image_alt %}
+    <meta property="og:image:alt" content="{{ image_alt }}">
+  {% endif %}
+  <meta property="og:locale" content="{{ default_locale | replace('-', '_') }}">
 
   <meta name="twitter:card" content="{{ twitter_card }}">
   <meta name="twitter:title" content="{{ title }}">
   <meta name="twitter:description" content="{{ description }}">
-  {% if image %}
-    <meta name="twitter:image" content="{{ image }}">
+  {% if absolute_image %}
+    <meta name="twitter:image" content="{{ absolute_image }}">
+  {% endif %}
+  {% if image_alt %}
+    <meta name="twitter:image:alt" content="{{ image_alt }}">
+  {% endif %}
+
+  {% if page.page_id != "404" %}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "{{ site_url }}/#website",
+          "url": "{{ site_url }}/",
+          "name": "{{ global.site_name or title }}",
+          "description": "{{ description }}",
+          "inLanguage": "{{ default_locale }}"
+        },
+        {
+          "@type": "Organization",
+          "@id": "{{ site_url }}/#organization",
+          "name": "{{ global.site_name or title }}",
+          "url": "{{ site_url }}/",
+          {% if global.social and global.social.github %}"sameAs": ["https://github.com/{{ global.social.github }}"],{% endif %}
+          "logo": {
+            "@type": "ImageObject",
+            "url": "{{ absolute_image }}"
+          }
+        }
+      ]
+    }
+  </script>
   {% endif %}
 
 {% endmacro %}

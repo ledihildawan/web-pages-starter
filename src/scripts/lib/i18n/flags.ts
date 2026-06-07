@@ -45,6 +45,17 @@ export const FLAGS = [
   { code: 'AT', emoji: '🇦🇹', name: 'Austria', region: REGION_CODE.AT },
   { code: 'RU', emoji: '🇷🇺', name: 'Russia', region: REGION_CODE.RU },
   { code: 'TH', emoji: '🇹🇭', name: 'Thailand', region: REGION_CODE.TH },
+  { code: 'NL', emoji: '🇳🇱', name: 'Netherlands', region: REGION_CODE.NL },
+  { code: 'IT', emoji: '🇮🇹', name: 'Italy', region: REGION_CODE.IT },
+  { code: 'NO', emoji: '🇳🇴', name: 'Norway', region: REGION_CODE.NO },
+  { code: 'FI', emoji: '🇫🇮', name: 'Finland', region: REGION_CODE.FI },
+  { code: 'SE', emoji: '🇸🇪', name: 'Sweden', region: REGION_CODE.SE },
+  { code: 'DK', emoji: '🇩🇰', name: 'Denmark', region: REGION_CODE.DK },
+  { code: 'CZ', emoji: '🇨🇿', name: 'Czech Republic', region: REGION_CODE.CZ },
+  { code: 'HU', emoji: '🇭🇺', name: 'Hungary', region: REGION_CODE.HU },
+  { code: 'RO', emoji: '🇷🇴', name: 'Romania', region: REGION_CODE.RO },
+  { code: 'PL', emoji: '🇵🇱', name: 'Poland', region: REGION_CODE.PL },
+  { code: 'GR', emoji: '🇬🇷', name: 'Greece', region: REGION_CODE.GR },
 ] as const;
 
 export const FLAG_CODES = FLAGS.map((f) => f.code) as FlagCode[];

@@ -1,0 +1,56 @@
+{
+  "period_monthly": "månad",
+  "period_yearly": "år",
+  "hero": {
+    "badge": "Välj din plan",
+    "title_part1": "Enkel och ",
+    "title_highlight": "transparent prissättning",
+    "description": "Inga dolda avgifter. Inga överraskningsavgifter. Välj den plan som passar dina behov bäst."
+  },
+  "toggle": {
+    "monthly": "Månadsvis",
+    "yearly": "Årsvis",
+    "yearly_hint": "faktureras årligen",
+    "discount": "SPARA 20%",
+    "aria_label": "Växla prisplan"
+  },
+  "plans": {
+    "hobby": {
+      "name": "Hobby",
+      "desc": "Perfekt för sidoprojekt och lärande.",
+      "btn": "Börja gratis",
+      "feature_0": "1 projekt",
+      "feature_1": "Community-support",
+      "feature_2": "5 GB lagring"
+    },
+    "pro": {
+      "name": "Pro",
+      "badge": "Mest populär",
+      "desc": "För professionella utvecklare och små team.",
+      "btn": "Välj Pro-plan",
+      "feature_0": "Obegränsade projekt",
+      "feature_1": "Prioriterad e-postsupport",
+      "feature_2": "100 GB lagring",
+      "feature_3": "Avancerad analys"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "desc": "För storskaliga applikationer och organisationer.",
+      "btn": "Kontakta sälj",
+      "feature_0": "Alla Pro-funktioner",
+      "feature_1": "Dedikerad kontoshante",
+      "feature_2": "SSO och granskningslogg",
+      "feature_3": "Obegränsad lagring"
+    }
+  },
+  "faq": {
+    "title": "Vanliga frågor",
+    "subtitle": "Hitta svar på de vanligaste frågorna om våra planer och tjänster.",
+    "q_0": "Kan jag avbryta när som helst?",
+    "a_0": "Ja, du kan avbryta din prenumeration när som helst. Din åtkomst förblir aktiv till slutet av faktureringsperioden.",
+    "q_1": "Finns det en gratis provperiod?",
+    "a_1": "Vi erbjuder en 14-dagars gratis provperiod för Pro-planen. Inget kreditkort krävs för att komma igång.",
+    "q_2": "Vilka betalningsmetoder är tillgängliga?",
+    "a_2": "Vi accepterar de viktigaste kreditkorten och PayPal. För Enterprise stödjer vi banköverföringar."
+  }
+}

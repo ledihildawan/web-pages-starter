@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "title": "Hem | Starter App",
+    "description": "Modern webbapplikationsbyggare."
+  },
+  "hero": {
+    "badge": "Nytt: version 2.0 är här",
+    "title_start": "Bygg något",
+    "title_highlight": "underbart idag",
+    "description": "Det moderna sättet att bygga webbapplikationer. Snabb, flexibel och designad för utvecklare som bryr sig om kvalitet.",
+    "image_alt": "Förhandsvisning av dashboard",
+    "primary_btn": {
+      "label": "Börja bygga",
+      "url": "/start"
+    },
+    "secondary_btn": {
+      "label": "Se demo",
+      "url": "/demo"
+    },
+    "note": "Inget kreditkort krävs",
+  },
+  "features": {
+    "heading": "Allt du behöver",
+    "subheading": "Avancerade funktioner för att hjälpa dig bygga snabbare.",
+    "list": {
+      "speed": {
+        "title": "Blixtsnabb",
+        "description": "Optimerad för maximal prestanda. Din app laddas direkt."
+      },
+      "design": {
+        "title": "Elegant design",
+        "description": "Gjord med omsorg. Varje pixel har syfte och mening."
+      },
+      "security": {
+        "title": "Säkerhet garanterad",
+        "description": "Säkerhet på företagsnivå. Din data är skyddad i varje lager."
+      }
+    }
+  },
+  "stats": {
+    "community": "Utvecklarcommunity",
+    "community_val": "10K+",
+    "projects": "Projekt byggda",
+    "projects_val": "50K+",
+    "uptime": "Drifttid 24/7",
+    "uptime_val": "99,9%",
+    "rating": "Användarbetyg",
+    "rating_val": "4,9/5"
+  }
+}
