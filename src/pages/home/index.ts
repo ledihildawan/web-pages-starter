@@ -1,10 +1,20 @@
 import './components/features.css';
-import { i18next, t } from '@/scripts/lib/i18n/runtime';
 
-const onLanguageChanged = (lng: string) => {
-  console.log('[i18n] locale changed:', lng);
-  console.log('[i18n] home:hero.primary_btn.label =', t('home:hero.primary_btn.label'));
-};
+(async () => {
+  try {
+    const { i18next, initIntl, t } = await import('@/scripts/lib/i18n/runtime');
 
-i18next.on('languageChanged', onLanguageChanged);
-onLanguageChanged(i18next.language);
+    const log = (lng: string) => {
+      console.log('[i18n] locale:', lng);
+      console.log('[i18n] home:hero.primary_btn.label =', t('home:hero.primary_btn.label'));
+    };
+
+    if (!i18next.isInitialized) {
+      const locale = window.__SAVED_LOCALE__ || window.__SERVER_LOCALE__;
+      await initIntl(locale);
+    }
+    log(i18next.language);
+    i18next.on('languageChanged', log);
+  } catch { }
+})();
+

@@ -21,15 +21,49 @@ const refreshFonts = async (): Promise<void> => {
   fonts.loadFallbackFonts();
 };
 
+const ensureLocaleData = async (
+  code: string,
+  pageID: string,
+  m: typeof import('./runtime'),
+): Promise<void> => {
+  if (m.i18next.hasResourceBundle(code, 'common')) return;
+
+  try {
+    const response = await fetch(`/assets/i18n/${pageID}/${code}.json`);
+    const data = await response.json();
+    const compData = data.comp
+      ? Object.fromEntries(
+        Object.entries(data.comp).map(([name, content]) => [
+          `components/${name}`,
+          content,
+        ]),
+      )
+      : {};
+    m.i18next.addResourceBundle(code, 'common', data.common);
+    m.i18next.addResourceBundle(code, pageID, data.page);
+    for (const [ns, bundle] of Object.entries(compData)) {
+      m.i18next.addResourceBundle(code, ns, bundle as Record<string, string>);
+    }
+  } catch {
+    console.warn(`[i18n] Failed to load locale: ${code}`);
+  }
+};
+
 const changeLanguage = async (code: string): Promise<void> => {
   const m = await import('./runtime');
-  if (!m.i18next.isInitialized) return;
 
-  await m.i18next.changeLanguage(code);
+  if (!m.i18next.isInitialized) {
+    await m.initIntl(code);
+  } else {
+    const pageID = (window.__PAGE_ID__ ?? 'home') as string;
+    await ensureLocaleData(code, pageID, m);
+    await m.i18next.changeLanguage(code);
+    m.translatePage();
+    m.updateFormattedElements();
+    m.updateI18nStoreLabels?.();
+  }
+
   updateDocumentAttributes(code);
-  m.translatePage();
-  m.updateFormattedElements();
-  m.updateI18nStoreLabels?.();
   await refreshFonts();
 };
 

@@ -327,11 +327,6 @@
 }
 
 @layer components {
-  *,
-  *::before,
-  *::after {
-    transition-duration: 0.15s;
-  }
 
   .gpu-accelerated,
   .gpu-boost,

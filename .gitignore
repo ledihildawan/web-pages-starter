@@ -21,3 +21,4 @@ coverage
 
 .unlighthouse
 public/locales
+public/assets/i18n

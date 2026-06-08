@@ -8,8 +8,9 @@
     "bun": ">=1.0.0"
   },
   "scripts": {
-    "dev": "bun run fetch:rates && concurrently \"bun run watch:i18n\" \"rsbuild dev\"",
-    "build": "bun run fetch:rates && bun run gen:i18n && bun run ./tools/build.ts",
+    "dev": "bun run clean:cache && bun run fetch:rates && concurrently \"bun run watch:i18n\" \"rsbuild dev\"",
+    "build": "bun run clean:cache && bun run fetch:rates && bun run gen:i18n && bun run ./tools/build.ts",
+    "clean:cache": "rm -rf node_modules/.cache .cache dist",
     "preview": "cross-env NODE_ENV=production bun ./tools/preview.ts",
     "gen:page": "bun run ./tools/generate-page.ts",
     "gen:i18n": "bun ./tools/generate-i18n.ts",
@@ -89,6 +90,7 @@
     "nunjucks": "^3.2.4",
     "postcss": "^8.5.15",
     "postcss-loader": "^8.2.1",
+    "purgecss": "^8.0.0",
     "simple-nunjucks-loader": "^3.2.0",
     "tailwindcss": "^4.3.0",
     "typescript": "^6.0.3",

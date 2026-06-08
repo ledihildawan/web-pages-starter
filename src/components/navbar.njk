@@ -16,6 +16,12 @@
       isDragging: false,
       focusedElement: null,
       _ticking: false,
+      _pluginPromise: null,
+      _pluginsReady: false,
+
+      get pluginsReady() {
+        return this._pluginsReady;
+      },
 
       isActive(path) {
         const current = this.currentPath.replace(/\/$/, '') || '/';
@@ -29,6 +35,20 @@
         }
       },
 
+      async _loadPlugins() {
+        try {
+          const [collapse, focus] = await Promise.all([
+            import('@alpinejs/collapse'),
+            import('@alpinejs/focus'),
+          ]);
+          Alpine.plugin(collapse.default);
+          Alpine.plugin(focus.default);
+        } catch (e) {
+          console.warn('Failed to load Alpine plugins:', e);
+        }
+        this._pluginsReady = true;
+      },
+
       init() {
         this.lastScroll = window.scrollY;
         this.scrolled = this.lastScroll > 20;
@@ -36,6 +56,8 @@
         if (window.location.hash) {
           this.navHidden = true;
         }
+
+        this._pluginPromise = this._loadPlugins();
       },
 
       onScroll() {
@@ -141,7 +163,11 @@
         return true;
       },
 
-      toggleMobile() {
+      async toggleMobile() {
+        if (!this._pluginsReady) {
+          await this._pluginPromise;
+        }
+
         if (!this.mobileMenuOpen) {
           this.focusedElement = document.activeElement;
 
@@ -253,90 +279,92 @@
       </button>
     </div>
   </div>
-  <div
-    id="mobile-menu"
-    x-ref="mobileMenu"
-    x-show="mobileMenuOpen"
-    x-cloak
-    x-trap.noscroll="mobileMenuOpen"
-    x-transition:enter="transition ease-emphasized duration-700"
-    x-transition:enter-start="-translate-y-full"
-    x-transition:enter-end="translate-y-0"
-    x-transition:leave="transition ease-in duration-500"
-    x-transition:leave-start="translate-y-0"
-    x-transition:leave-end="-translate-y-full"
-    @keydown.escape.window="activeMobileSub !== null ? activeMobileSub = null : closeMobileMenu()"
-    @click.self="closeMobileMenu()"
-    @touchstart.passive="handleTouchStart($event)"
-    @touchmove.passive="handleTouchMove($event)"
-    @touchend="handleTouchEnd()"
-    class="fixed inset-0 bg-slate-950 z-110 lg:hidden flex flex-col h-dvh"
-    role="dialog"
-    aria-modal="true"
-    aria-label="Mobile menu"
-  >
-    <div class="absolute inset-x-0 top-0 flex justify-center pt-3 opacity-30">
-      <div class="inline-12 block-1.5 rounded-full bg-slate-400"></div>
-    </div>
-    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,var(--tw-gradient-stops))] from-violet-600/15 via-transparent to-transparent pointer-events-none"></div>
-    <div class="absolute inset-be-0 inset-e-0 inline-64 block-64 bg-fuchsia-600/10 rounded-full blur-[100px] pointer-events-none"></div>
-    <div class="flex-1 overflow-y-auto pbs-24 pbe-12 px-6 scrollbar-none relative z-10 text-start">
-      <ul class="space-y-2 mbs-6">
-        {% for item in global.menu.header %}
-          <li x-show="menuChildrenVisible" x-transition:enter="transition ease-emphasized duration-700" x-transition:enter-start="opacity-0 translate-y-8 scale-95" :style="`transition-delay: {{ loop.index0 * 100 }}ms`" class="gpu-boost">
-            <div class="flex items-center justify-between pbs-4 pbe-4 group">
+  <template x-if="pluginsReady">
+    <div
+      id="mobile-menu"
+      x-ref="mobileMenu"
+      x-show="mobileMenuOpen"
+      x-cloak
+      x-trap.noscroll="mobileMenuOpen"
+      x-transition:enter="transition ease-emphasized duration-700"
+      x-transition:enter-start="-translate-y-full"
+      x-transition:enter-end="translate-y-0"
+      x-transition:leave="transition ease-in duration-500"
+      x-transition:leave-start="translate-y-0"
+      x-transition:leave-end="-translate-y-full"
+      @keydown.escape.window="activeMobileSub !== null ? activeMobileSub = null : closeMobileMenu()"
+      @click.self="closeMobileMenu()"
+      @touchstart.passive="handleTouchStart($event)"
+      @touchmove.passive="handleTouchMove($event)"
+      @touchend="handleTouchEnd()"
+      class="fixed inset-0 bg-slate-950 z-110 lg:hidden flex flex-col h-dvh"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Mobile menu"
+    >
+      <div class="absolute inset-x-0 top-0 flex justify-center pt-3 opacity-30">
+        <div class="inline-12 block-1.5 rounded-full bg-slate-400"></div>
+      </div>
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,var(--tw-gradient-stops))] from-violet-600/15 via-transparent to-transparent pointer-events-none"></div>
+      <div class="absolute inset-be-0 inset-e-0 inline-64 block-64 bg-fuchsia-600/10 rounded-full blur-[100px] pointer-events-none"></div>
+      <div class="flex-1 overflow-y-auto pbs-24 pbe-12 px-6 scrollbar-none relative z-10 text-start">
+        <ul class="space-y-2 mbs-6">
+          {% for item in global.menu.header %}
+            <li x-show="menuChildrenVisible" x-transition:enter="transition ease-emphasized duration-700" x-transition:enter-start="opacity-0 translate-y-8 scale-95" :style="`transition-delay: {{ loop.index0 * 100 }}ms`" class="gpu-boost">
+              <div class="flex items-center justify-between pbs-4 pbe-4 group">
+                {% if item.children %}
+                  <span class="text-4xl sm:text-5xl font-black tracking-tighter transition-all duration-300 text-white">
+                    {{ i18n.t(item.label) }}
+                  </span>
+                  <button @click="activeMobileSub = (activeMobileSub === {{ loop.index0 }} ? null : {{ loop.index0 }}); hapticFeedback()" :aria-expanded="activeMobileSub === {{ loop.index0 }}" aria-controls="sub-menu-{{ loop.index0 }}" aria-label="{{ i18n.t(item.label + '_submenu', {}, {raw: true}) }}" class="inline-11 block-11 flex items-center justify-center bg-white/5 radius-btn border border-white/10 active:scale-90 transition-all duration-200 icon-squash hover:bg-white/10">
+                    <svg class="inline-6 block-6 transition-transform duration-500 ease-emphasized" :class="activeMobileSub === {{ loop.index0 }} ? 'rotate-180 text-violet-400' : 'text-slate-600'" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                  </button>
+                {% else %}
+                  <a href="{{ item.url }}" @click.prevent="closeMobileMenu('{{ item.url }}')" @touchstart.passive="hapticFeedback()" class="text-4xl sm:text-5xl font-black tracking-tighter transition-all duration-300 w-full relative" :class="isActive('{{ item.url }}') ? 'text-gradient-violet-fuchsia' : 'text-white active:text-violet-400'">
+                    {{ i18n.t(item.label) }}
+                    <span class="absolute inset-0 bg-white/5 rounded-lg scale-0 group-active:scale-100 transition-transform duration-150"></span>
+                  </a>
+                {% endif %}
+              </div>
               {% if item.children %}
-                <span class="text-4xl sm:text-5xl font-black tracking-tighter transition-all duration-300 text-white">
-                  {{ i18n.t(item.label) }}
-                </span>
-                <button @click="activeMobileSub = (activeMobileSub === {{ loop.index0 }} ? null : {{ loop.index0 }}); hapticFeedback()" :aria-expanded="activeMobileSub === {{ loop.index0 }}" aria-controls="sub-menu-{{ loop.index0 }}" aria-label="{{ i18n.t(item.label + '_submenu', {}, {raw: true}) }}" class="inline-11 block-11 flex items-center justify-center bg-white/5 radius-btn border border-white/10 active:scale-90 transition-all duration-200 icon-squash hover:bg-white/10">
-                  <svg class="inline-6 block-6 transition-transform duration-500 ease-emphasized" :class="activeMobileSub === {{ loop.index0 }} ? 'rotate-180 text-violet-400' : 'text-slate-600'" fill="none" viewbox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
-                  </svg>
-                </button>
-              {% else %}
-                <a href="{{ item.url }}" @click.prevent="closeMobileMenu('{{ item.url }}')" @touchstart.passive="hapticFeedback()" class="text-4xl sm:text-5xl font-black tracking-tighter transition-all duration-300 w-full relative" :class="isActive('{{ item.url }}') ? 'text-gradient-violet-fuchsia' : 'text-white active:text-violet-400'">
-                  {{ i18n.t(item.label) }}
-                  <span class="absolute inset-0 bg-white/5 rounded-lg scale-0 group-active:scale-100 transition-transform duration-150"></span>
-                </a>
+                <div id="sub-menu-{{ loop.index0 }}" x-show="activeMobileSub === {{ loop.index0 }}" x-cloak x-collapse="x-collapse" class="mbe-6 ms-2 ps-6 border-s-2 border-violet-500/20 space-y-4 pbs-4 pbe-4">
+                  {% for child in item.children %}
+                    <a href="{{ child.url }}" @click.prevent="closeMobileMenu('{{ child.url }}')" @touchstart.passive="hapticFeedback()" class="block text-2xl font-black transition-colors duration-300 relative py-2 -mx-2 px-2 rounded-lg" :class="isActive('{{ child.url }}') ? 'text-white bg-white/5' : 'text-slate-400 hover:text-white hover:bg-white/5 active:bg-white/10'">{{ i18n.t(child.label) }}</a>
+                  {% endfor %}
+                </div>
               {% endif %}
-            </div>
-            {% if item.children %}
-              <div id="sub-menu-{{ loop.index0 }}" x-show="activeMobileSub === {{ loop.index0 }}" x-cloak x-collapse="x-collapse" class="mbe-6 ms-2 ps-6 border-s-2 border-violet-500/20 space-y-4 pbs-4 pbe-4">
-                {% for child in item.children %}
-                  <a href="{{ child.url }}" @click.prevent="closeMobileMenu('{{ child.url }}')" @touchstart.passive="hapticFeedback()" class="block text-2xl font-black transition-colors duration-300 relative py-2 -mx-2 px-2 rounded-lg" :class="isActive('{{ child.url }}') ? 'text-white bg-white/5' : 'text-slate-400 hover:text-white hover:bg-white/5 active:bg-white/10'">{{ i18n.t(child.label) }}</a>
-                {% endfor %}
-              </div>
-            {% endif %}
-          </li>
-        {% endfor %}
-      </ul>
-      <div class="mbs-12 pbs-8 border-bs border-white/10" x-show="menuChildrenVisible" x-transition:enter="transition ease-emphasized duration-700" x-transition:enter-start="opacity-0 translate-y-8" role="group" aria-label="{{ i18n.t('select_language', {}, {raw: true}) }}">
-        <p class="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase mbe-5 ps-1">{{ i18n.t('select_language') }}</p>
-        <div class="grid grid-cols-2 gap-2" role="listbox" aria-label="Select language" :data-current-lang="$store.i18n.current" @click="const opt = $event.target.closest('[data-lang-option]'); if (opt) { $store.i18n.change(opt.dataset.langOption); closeMobileMenu(); hapticFeedback(); }">
-          {% for lang in locales %}
-            <button data-lang-option="{{ lang.code }}" class="lang-option group relative flex items-center gap-3 px-4 pbs-4 pbe-4 radius-btn transition-all duration-300 border text-start active:scale-95" role="option" aria-label="{{ lang.label }} ({{ lang.flag | upper }})">
-              <div class="relative shrink-0 inline-5 block-3.5 overflow-hidden rounded-xs bg-white/5 aspect-4/3">
-                <img src="https://flagcdn.com/w40/{{ lang.flag }}.png" width="40" height="30" class="inline-full block-full object-cover transition-all duration-200 lang-flag" loading="lazy" alt="{{ lang.label }} flag - {{ lang.flag | upper }}">
-              </div>
-              <div class="flex flex-col min-inline-0">
-                <span class="text-[13px] font-bold truncate leading-none">{{ lang.label }}</span>
-                <span class="text-[9px] font-black opacity-20 tracking-widest mbs-1.5">{{ lang.flag | upper }}</span>
-              </div>
-            </button>
+            </li>
           {% endfor %}
+        </ul>
+        <div class="mbs-12 pbs-8 border-bs border-white/10" x-show="menuChildrenVisible" x-transition:enter="transition ease-emphasized duration-700" x-transition:enter-start="opacity-0 translate-y-8" role="group" aria-label="{{ i18n.t('select_language', {}, {raw: true}) }}">
+          <p class="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase mbe-5 ps-1">{{ i18n.t('select_language') }}</p>
+          <div class="grid grid-cols-2 gap-2" role="listbox" aria-label="Select language" :data-current-lang="$store.i18n.current" @click="const opt = $event.target.closest('[data-lang-option]'); if (opt) { $store.i18n.change(opt.dataset.langOption); closeMobileMenu(); hapticFeedback(); }">
+            {% for lang in locales %}
+              <button data-lang-option="{{ lang.code }}" class="lang-option group relative flex items-center gap-3 px-4 pbs-4 pbe-4 radius-btn transition-all duration-300 border text-start active:scale-95" role="option" aria-label="{{ lang.label }} ({{ lang.flag | upper }})">
+                <div class="relative shrink-0 inline-5 block-3.5 overflow-hidden rounded-xs bg-white/5 aspect-4/3">
+                  <img src="https://flagcdn.com/w40/{{ lang.flag }}.png" width="40" height="30" class="inline-full block-full object-cover transition-all duration-200 lang-flag" loading="lazy" alt="{{ lang.label }} flag - {{ lang.flag | upper }}">
+                </div>
+                <div class="flex flex-col min-inline-0">
+                  <span class="text-[13px] font-bold truncate leading-none">{{ lang.label }}</span>
+                  <span class="text-[9px] font-black opacity-20 tracking-widest mbs-1.5">{{ lang.flag | upper }}</span>
+                </div>
+              </button>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="mbs-8" x-show="menuChildrenVisible" x-transition:enter="transition ease-emphasized duration-700" x-transition:enter-start="opacity-0 translate-y-10">
+          <a href="/pricing" @click.prevent="closeMobileMenu('/pricing')" @touchstart.passive="hapticFeedback()" class="group block inline-full pbs-5 pbe-5 bg-linear-to-r from-violet-600 via-fuchsia-600 to-pink-600 text-white radius-card-md text-center font-black text-xl shadow-2xl btn-squash anticipate-press ripple-click sparkle-hover overflow-hidden hover-lift active:scale-95 relative">
+            <span class="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
+            <span class="relative flex items-center justify-center gap-3">
+              {{ i18n.t('get_started') }}
+              {{ icon.icon('arrow-right', 'inline-5 block-5', size='lg') }}
+            </span>
+          </a>
         </div>
       </div>
-      <div class="mbs-8" x-show="menuChildrenVisible" x-transition:enter="transition ease-emphasized duration-700" x-transition:enter-start="opacity-0 translate-y-10">
-        <a href="/pricing" @click.prevent="closeMobileMenu('/pricing')" @touchstart.passive="hapticFeedback()" class="group block inline-full pbs-5 pbe-5 bg-linear-to-r from-violet-600 via-fuchsia-600 to-pink-600 text-white radius-card-md text-center font-black text-xl shadow-2xl btn-squash anticipate-press ripple-click sparkle-hover overflow-hidden hover-lift active:scale-95 relative">
-          <span class="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
-          <span class="relative flex items-center justify-center gap-3">
-            {{ i18n.t('get_started') }}
-            {{ icon.icon('arrow-right', 'inline-5 block-5', size='lg') }}
-          </span>
-        </a>
-      </div>
+      <div class="block-2 bg-linear-to-r from-violet-600 via-fuchsia-500 to-pink-500 inline-full shrink-0"></div>
     </div>
-    <div class="block-2 bg-linear-to-r from-violet-600 via-fuchsia-500 to-pink-500 inline-full shrink-0"></div>
-  </div>
+  </template>
 </nav>

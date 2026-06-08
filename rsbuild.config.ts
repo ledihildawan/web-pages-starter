@@ -95,16 +95,6 @@ export default defineConfig({
   performance: {
     chunkSplit: {
       strategy: 'split-by-experience',
-      override: {
-        cacheGroups: {
-          vendor: {
-            test: /[\\/]node_modules[\\/](?!@fontsource)/,
-            name: 'vendors',
-            priority: 10,
-            reuseExistingChunk: true,
-          },
-        },
-      },
     },
   },
   resolve: {
@@ -130,8 +120,8 @@ export default defineConfig({
     assetPrefix: '/',
     cleanDistPath: true,
     minify: shouldMinify,
-    inlineStyles: ({ size }) => size < 10 * 1_024,
-    inlineScripts: ({ size }) => size < 8 * 1_024,
+    inlineStyles: true,
+    inlineScripts: ({ size }) => size < 2 * 1_024,
     sourceMap: !shouldMinify
       ? { js: 'cheap-module-source-map', css: true }
       : false,
@@ -187,35 +177,38 @@ export default defineConfig({
         !shouldMinifyHTML
           ? html
           : minify(html, {
-              collapseWhitespace: true,
-              removeComments: true,
-              decodeEntities: true,
-              minifyCSS: true,
-              minifyJS: true,
-              minifyURLs: true,
-              removeRedundantAttributes: true,
-              removeScriptTypeAttributes: true,
-              removeStyleLinkTypeAttributes: true,
-              useShortDoctype: true,
-              continueOnParseError: true,
-              customEventAttributes: [/^on[a-z]{3,}$/],
-              removeAttributeQuotes: false,
-              keepClosingSlash: true,
-              ignoreCustomFragments: [
-                /\{\{[\s\S]*?\}\}/,
-                /\{%[\s\S]*?%\}/,
-                /\{#[\s\S]*?#\}/,
-              ],
-              conservativeCollapse: true,
-              collapseInlineTagWhitespace: false,
-              removeEmptyAttributes: false,
-            });
+            collapseWhitespace: true,
+            removeComments: true,
+            decodeEntities: true,
+            minifyCSS: true,
+            minifyJS: true,
+            minifyURLs: true,
+            removeRedundantAttributes: true,
+            removeScriptTypeAttributes: true,
+            removeStyleLinkTypeAttributes: true,
+            useShortDoctype: true,
+            continueOnParseError: true,
+            customEventAttributes: [/^on[a-z]{3,}$/],
+            removeAttributeQuotes: false,
+            keepClosingSlash: true,
+            ignoreCustomFragments: [
+              /\{\{[\s\S]*?\}\}/,
+              /\{%[\s\S]*?%\}/,
+              /\{#[\s\S]*?#\}/,
+            ],
+            conservativeCollapse: true,
+            collapseInlineTagWhitespace: false,
+            removeEmptyAttributes: false,
+          });
 
       return config;
     },
     rspack: {
       optimization: {
         runtimeChunk: 'single',
+        splitChunks: {
+          minSize: 2_000,
+        },
       },
       module: {
         rules: [

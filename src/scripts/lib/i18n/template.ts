@@ -104,6 +104,22 @@ const generateClientI18nScript = (
     ]),
   ) as Record<string, JsonData>;
 
+  const dirs = [
+    resolveRoot('public', 'assets', 'i18n', name),
+    resolveRoot('dist', 'assets', 'i18n', name),
+  ];
+  for (const dir of dirs) {
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+  }
+  for (const [localeCode, data] of Object.entries(allI18nData)) {
+    const json = JSON.stringify(data);
+    for (const dir of dirs) {
+      fs.writeFileSync(path.join(dir, `${localeCode}.json`), json, 'utf-8');
+    }
+  }
+
   const numberingSystemFonts = Object.fromEntries(
     NUMBERING_SYSTEMS.map((ns) => [ns.code, ns.fontFamily]),
   );
@@ -121,21 +137,23 @@ const generateClientI18nScript = (
 
   window.__PAGE_ID__ = ${JSON.stringify(name)};
   window.__USED_COMPONENTS__ = ${JSON.stringify(usedComponents)};
-  window.__I18N_DATA__ = ${JSON.stringify(allI18nData)};
   window.__SAVED_LOCALE__ = savedLocale;
+  window.__SERVER_LOCALE__ = defaultLocale;
 
   const htmlEl = document.documentElement;
-  const localeConfig = locales.find(l => l.code === savedLocale);
-  const dir = localeConfig?.dir ?? 'ltr';
-  const ns = localeConfig?.nativeNumberingSystem || 'latn';
-  const ws = localeConfig?.writingSystem || 'latin';
-  const font = numberingSystemFonts[ns] || 'Inter, system-ui';
+  if (savedLocale !== htmlEl.getAttribute('lang')) {
+    const localeConfig = locales.find(l => l.code === savedLocale);
+    const dir = localeConfig?.dir ?? 'ltr';
+    const ws = localeConfig?.writingSystem ?? 'latin';
+    const ns = localeConfig?.nativeNumberingSystem || 'latn';
+    const font = numberingSystemFonts[ns] || 'Inter, system-ui';
 
-  htmlEl.setAttribute('dir', dir);
-  htmlEl.setAttribute('lang', savedLocale);
-  htmlEl.setAttribute('data-script', ws);
-  htmlEl.style.setProperty('--font-primary', font);
-  htmlEl.classList.toggle('is-rtl', dir === 'rtl');
+    htmlEl.setAttribute('lang', savedLocale);
+    htmlEl.setAttribute('dir', dir);
+    htmlEl.setAttribute('data-script', ws);
+    htmlEl.style.setProperty('--font-primary', font);
+    htmlEl.classList.toggle('is-rtl', dir === 'rtl');
+  }
 })();
 </script>`;
 };

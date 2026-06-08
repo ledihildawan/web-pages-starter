@@ -284,25 +284,22 @@ const FORMATTERS = [
   },
 ] as const;
 
-export async function initIntl(): Promise<void> {
+export async function initIntl(localeOverride?: string): Promise<void> {
   const pageID = (window.__PAGE_ID__ ?? 'home') as string;
-  const rawData = window.__I18N_DATA__;
 
-  const savedLocale = localStorage.getItem(
-    LOCALE_STORAGE_KEY,
+  const savedLocale = (
+    localeOverride ||
+    localStorage.getItem(LOCALE_STORAGE_KEY) ||
+    document.documentElement.getAttribute('lang')
   ) as LocaleCode | null;
-  const htmlLang = document.documentElement.getAttribute(
-    'lang',
-  ) as LocaleCode | null;
-  const initialLocale = savedLocale || htmlLang;
-  if (initialLocale) {
-    setLocale(getLocale(initialLocale));
-  }
+  if (!savedLocale) return;
 
-  if (!rawData) return;
+  setLocale(getLocale(savedLocale));
 
-  const resources: Resource = {};
-  for (const [lngKey, data] of Object.entries(rawData)) {
+  try {
+    const response = await fetch(`/assets/i18n/${pageID}/${savedLocale}.json`);
+    const data = await response.json();
+
     const compData = data.comp
       ? Object.fromEntries(
         Object.entries(data.comp).map(([name, content]) => [
@@ -312,15 +309,16 @@ export async function initIntl(): Promise<void> {
       )
       : {};
 
-    resources[lngKey] = {
-      common: data.common,
-      [pageID]: data.page,
-      ...compData,
+    const resources: Resource = {
+      [savedLocale]: {
+        common: data.common,
+        [pageID]: data.page,
+        ...compData,
+      },
     };
-  }
 
-  try {
     await i18next.use(LanguageDetector).init({
+      lng: savedLocale,
       resources,
       fallbackLng: getFallbackForLocale,
       supportedLngs: LOCALE_CODES,
@@ -346,10 +344,7 @@ export async function initIntl(): Promise<void> {
 
     translatePage();
     updateFormattedElements();
-
-    setTimeout(() => {
-      updateI18nStoreLabels();
-    }, 100);
+    updateI18nStoreLabels();
   } catch { }
 }
 

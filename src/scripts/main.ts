@@ -1,64 +1,22 @@
-import {
-  loadFallbackFonts,
-  loadLanguageFonts,
-  preloadActiveFont,
-  setupFontStackCSS,
-  watchScriptAndLoadFont,
-} from "./lib/i18n/fonts";
-
-type VendorModules = Awaited<ReturnType<typeof loadVendors>>;
-type AppModules = Awaited<ReturnType<typeof loadAppModules>>;
-
 const isProd = process.env.NODE_ENV === "production";
 
-const loadVendors = async () => {
-  const [AlpineModule, collapse, focus] = await Promise.all([
-    import("alpinejs"),
-    import("@alpinejs/collapse"),
-    import("@alpinejs/focus"),
-  ]);
-
-  return {
-    Alpine: AlpineModule.default,
-    collapse: collapse.default,
-    focus: focus.default,
-  };
+const deferTask = (fn: () => void, timeout = 2000): void => {
+  if ("requestIdleCallback" in window) {
+    requestIdleCallback(fn, { timeout });
+  } else {
+    setTimeout(fn, 0);
+  }
 };
 
-const loadAppModules = async () => {
-  const [{ initIntl }, { registerI18nStore }] = await Promise.all([
-    import("./lib/i18n/runtime"),
-    import("./lib/i18n/store"),
-  ]);
-
-  return {
-    initIntl,
-    registerI18nStore,
-  };
-};
-
-const setupAlpine = ({ Alpine, collapse, focus }: VendorModules): void => {
-  globalThis.Alpine = Alpine;
-  Alpine.plugin(collapse);
-  Alpine.plugin(focus);
-};
-
-const registerAppModules = ({
-  registerI18nStore,
-}: AppModules): void => {
-  registerI18nStore();
-};
-
-const clearStartupLocks = (): void => {
-  document.body.classList.remove("no-scroll");
-  document.body.style.insetBlockStart = "";
-  document.documentElement.style.removeProperty("--scrollbar-width");
-};
-
-const loadFonts = (): void => {
-  setupFontStackCSS();
-  loadLanguageFonts();
-  loadFallbackFonts();
+const deferred = (): void => {
+  import("./lib/i18n/fonts")
+    .then((fonts) => {
+      fonts.setupFontStackCSS();
+      fonts.loadLanguageFonts();
+      fonts.loadFallbackFonts();
+      fonts.watchScriptAndLoadFont();
+    })
+    .catch(() => { });
 };
 
 const registerServiceWorker = (): void => {
@@ -72,31 +30,27 @@ const registerServiceWorker = (): void => {
 
 async function bootstrap() {
   try {
-    const [vendors, appModules] = await Promise.all([
-      loadVendors(),
-      loadAppModules(),
+    const [{ registerI18nStore }, Alpine] = await Promise.all([
+      import("./lib/i18n/store"),
+      import("alpinejs").then((m) => m.default),
     ]);
 
-    setupAlpine(vendors);
-    registerAppModules(appModules);
-    await appModules.initIntl();
+    globalThis.Alpine = Alpine;
+    registerI18nStore();
 
-    clearStartupLocks();
+    Alpine.start();
 
-    vendors.Alpine.start();
+    deferTask(deferred);
 
-    preloadActiveFont();
-    loadFonts();
-    watchScriptAndLoadFont();
+    import("./lib/i18n/fonts").then(({ preloadActiveFont }) =>
+      preloadActiveFont(),
+    );
     registerServiceWorker();
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : String(error);
-    console.error("Bootstrap failed:", message);
+    console.warn("Bootstrap failed:", message);
   }
 }
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", bootstrap, { once: true });
-} else {
-  void bootstrap();
-}
+
+void bootstrap();
