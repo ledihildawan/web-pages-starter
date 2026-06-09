@@ -1,17 +1,17 @@
 {
   "meta": {
-    "page_title": "Demo Lazy Load Splide | Starter"
+    "page_title": "عرض شرائح التحميل الكسول | Starter"
   },
   "hero": {
     "slide_1": {
-      "title": "Lazy Load Alam",
-      "subtitle": "Gambar dimuat secara cerdas untuk menghemat kuota.",
-      "alt": "Pemandangan Gunung yang Indah"
+      "title": "تحميل كسول للطبيعة",
+      "subtitle": "الصور كتتحمل بذكاء باش توفر فالميجو.",
+      "alt": "منظر جبلي زوين"
     },
     "slide_2": {
-      "title": "Performa Utama",
-      "subtitle": "Hanya memuat apa yang Anda butuhkan.",
-      "alt": "Pemandangan Pegunungan Salju"
+      "title": "الأداء أول",
+      "subtitle": "حمل غير اللي كتحتاج.",
+      "alt": "منظر جبال تلج"
     }
   }
 }

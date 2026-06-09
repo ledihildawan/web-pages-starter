@@ -1,7 +1,7 @@
 {
   "heading": "404",
-  "subheading": "Houston, abbiamo un problema.",
-  "description": "La pagina che stai cercando potrebbe essere stata spostata, eliminata o inghiottita da un buco nero nello spazio.",
-  "button_text": "Torna sulla Terra (Home)",
-  "or_try": "oppure prova"
+  "subheading": "Halaman Tidak Ditemukan",
+  "description": "Sepertinya halaman yang Anda cari tidak ada atau telah dipindahkan.",
+  "button_text": "Kembali ke Beranda",
+  "or_try": "Atau coba:"
 }

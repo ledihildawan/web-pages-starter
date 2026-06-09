@@ -1,75 +1,72 @@
 {
-  "about": {
-    "badge": "हमारे बारे में"
-  },
   "hero": {
-    "badge": "हमारे बारे में",
-    "title_part1": "हम बना रहे हैं ",
-    "title_highlight": "डिजिटल भविष्य",
-    "description": "2024 में स्थापित, Starter डेवलपर्स को बेहतर एप्लिकेशन जल्दी बनाने में मदद करने के लिए है। हम साफ कोड, सुंदर डिज़ाइन और ओपन सोर्स सहयोग की शक्ति में विश्वास करते हैं।"
-  },
-  "stats": {
-    "years": "अनुभव के वर्ष",
-    "years_val": "3+",
-    "clients": "वैश्विक ग्राहक",
-    "clients_val": "120+",
-    "countries": "देशों तक पहुंच",
-    "countries_val": "15",
-    "support": "विशेषज्ञ सहायता",
-    "support_val": "24/7"
-  },
-  "story": {
-    "tag": "हमारी कहानी",
-    "visual_label": "क्रिएटिव स्टूडियो इलस्ट्रेशन",
-    "title": "जुनून से संचालित, <br>उत्कृष्टता द्वारा परिभाषित।",
-    "para1": "हमारी यात्रा एक सरल विचार से शुरू हुई: वेब डेवलपमेंट को सभी के लिए सुलभ और मजेदार बनाना। हम भारी फ्रेमवर्क और जटिल कॉन्फ़िगरेशन से थक गए थे।",
-    "para2": "आज, हम इंजीनियरों, डिज़ाइनरों और विचारकों की एक विविध टीम हैं जो जटिल समस्याओं को चिकनी समाधानों से हल करने के लिए मिलकर काम करते हैं।",
-    "val1": "उपयोगकर्ता-केंद्रित डिज़ाइन दर्शन",
-    "val2": "प्रदर्शन-पहले आर्किटेक्चर",
-    "val3": "पारदर्शिता और खुला संचार"
+    "badge": "Tentang Kami",
+    "title_part1": "Digerakkan oleh ",
+    "title_highlight": "passion",
+    "description": "Perjalanan kami dimulai dengan ide sederhana."
   },
   "mission": {
-    "title": "हमारा मिशन",
-    "description": "डेवलपर्स और व्यवसायों को असाधारण डिजिटल उत्पाद बनाने के लिए सुंदर, तेज़ और उपयोग में आसान टूल से सशक्त बनाना।"
+    "title": "Misi Kami",
+    "description": "Memberdayakan pengembang dan bisnis dengan alat yang elegan, cepat, dan mudah digunakan untuk membangun produk digital yang luar biasa."
   },
   "vision": {
-    "title": "हमारी दृष्टि",
-    "description": "आधुनिक डेवलपर्स के लिए पसंदीदा प्लेटफॉर्म बनना जो हर कोड लाइन में सुंदरता, प्रदर्शन और उपयोगकर्ता अनुभव को महत्व देते हैं।"
+    "title": "Visi Kami",
+    "description": "Menjadi platform pilihan untuk pengembang modern yang menghargai keindahan, performa, dan pengalaman pengguna di setiap baris kode."
+  },
+  "story": {
+    "tag": "Cerita Kami",
+    "visual_label": "Ilustrasi Studio Kreatif",
+    "title": "Digerakkan oleh passion, <br>didefinisikan oleh keunggulan.",
+    "para1": "Perjalanan kami dimulai dengan ide sederhana: membuat pengembangan web dapat diakses dan menyenangkan untuk semua orang. Kami sudah lelah dengan framework yang berat dan konfigurasi yang rumit.",
+    "para2": "Hari ini, kami adalah tim yang beragam dari engineer, desainer, dan pemikir yang bekerja sama untuk memecahkan masalah kompleks dengan solusi yang elegan.",
+    "val1": "Filosofi desain user-centric",
+    "val2": "Arsitektur performance-first",
+    "val3": "Transparansi dan komunikasi terbuka"
   },
   "values": {
-    "title": "हमारे मूल्य",
-    "subtitle": "सिद्धांत जो हर निर्णय को मार्गदर्शन करते हैं।"
+    "title": "Nilai-Nilai Kami",
+    "subtitle": "Prinsip yang memandu setiap keputusan yang kami buat."
   },
   "passion": {
-    "title": "जुनून",
-    "description": "हम जो करते हैं उससे प्यार करते हैं, और यह हमारे उत्पादों के हर विवरण में दिखता है।"
+    "title": "Passion",
+    "description": "Kami mencintai apa yang kami lakukan, dan itu terlihat di setiap detail produk kami."
   },
   "collaboration": {
-    "title": "सहयोग",
-    "description": "एक साथ काम करने से सबसे अच्छे परिणाम मिलते हैं। हम मजबूत टीमों की शक्ति में विश्वास करते हैं।"
+    "title": "Kolaborasi",
+    "description": "Bekerja sama menghasilkan hasil terbaik. Kami percaya pada kekuatan tim yang solid."
   },
   "innovation": {
-    "title": "नवाचार",
-    "description": "हम हमेशा समस्याओं को हल करने और मूल्य बनाने के बेहतर तरीके खोज रहे हैं।"
+    "title": "Inovasi",
+    "description": "Selalu mencari cara yang lebih baik untuk memecahkan masalah dan menciptakan nilai."
   },
   "integrity": {
-    "title": "अखंडता",
-    "description": "ईमानदारी और पारदर्शिता हर रिश्ते की नींव है जो हम बनाते हैं।"
+    "title": "Integritas",
+    "description": "Kejujuran dan transparansi adalah fondasi setiap hubungan yang kami bangun."
   },
   "excellence": {
-    "title": "उत्कृष्टता",
-    "description": "हम कभी पर्याप्त अच्छे से संतुष्ट नहीं होते। हम हमेशा सर्वश्रेष्ठ के लिए प्रयास करते हैं।"
+    "title": "Keunggulan",
+    "description": "Kami tidak puas dengan cukup baik. Kami selalu berusaha untuk yang terbaik."
   },
   "quality": {
-    "title": "गुणवत्ता",
-    "description": "साफ कोड, सुंदर डिज़ाइन और सहज अनुभव हमारे मानक हैं।"
+    "title": "Kualitas",
+    "description": "Kode yang bersih, desain yang indah, dan pengalaman yang seamless adalah standar kami."
   },
   "team": {
-    "title": "टीम से मिलें",
-    "subtitle": "हर कोड लाइन के पीछे चमकदार दिमाग।",
-    "alex_desc": "SaaS पारिस्थितिकी तंत्र विकास में 10+ वर्षों के अनुभव के साथ दूरदर्शी नेता।",
-    "sarah_desc": "बड़े पैमाने की सिस्टम आर्किटेक्चर बनाने में विशेषज्ञ फुल-स्टैक विज़ार्ड।",
-    "mike_desc": "पिक्सेल विवरण, सहज UX फ्लो और एक्सेसिबिलिटी स्टैंडर्ड के लिए गहराई से मोहित।",
-    "jessica_desc": "क्रिएटिव स्टोरीटेलर जो ब्रांड्स को डिजिटल दुनिया में अपनी अनूठी आवाज़ खोजने में मदद करती हैं।"
+    "title": "Kenali Tim",
+    "subtitle": "Pikiran cemerlang di balik setiap baris kode yang kami tulis.",
+    "alex_desc": "Pemimpin visioner dengan pengalaman 10+ tahun dalam pengembangan ekosistem SaaS.",
+    "sarah_desc": "Full-stack wizard yang mengkhususkan diri dalam membangun arsitektur sistem berskala besar.",
+    "mike_desc": "Terobsesi dengan detail pixel, alur UX yang halus, dan standar aksesibilitas.",
+    "jessica_desc": "Pencerita kreatif yang membantu merek menemukan suara unik mereka di dunia digital."
+  },
+  "stats": {
+    "years": "Tahun Pengalaman",
+    "years_val": "3+",
+    "clients": "Klien Global",
+    "clients_val": "120+",
+    "countries": "Negara yang Dijangkau",
+    "countries_val": "15",
+    "support": "Support Ahli",
+    "support_val": "24/7"
   }
 }

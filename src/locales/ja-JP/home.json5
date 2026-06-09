@@ -1,50 +1,102 @@
 {
-  "meta": {
-    "title": "ホーム | Starter App",
-    "description": "モダンなWebアプリビルダー。"
+  "about": {
+    "badge": "私たちについて"
   },
   "hero": {
-    "badge": "NEW: バージョン 2.0 がリリース",
-    "title_start": "今すぐ",
-    "title_highlight": "美しいものを作ろう",
-    "description": "ウェブアプリケーション構築のモダンな手法。高速で柔軟、そして品質にこだわる開発者のために設計されています。",
-    "image_alt": "ダッシュボードプレビュー",
+    "badge": "私たちについて",
+    "title_part1": "私たちは",
+    "title_highlight": "デジタルの未来",
+    "description": "2024年設立、Starterは開発者がより良いアプリケーションをより速く構築できるように存在します。私たちは、クリーンなコード、美しいデザイン、オープンソースのコラボレーションの力を信じています。",
     "primary_btn": {
-      "label": "構築を始める",
-      "url": "/start"
+      "label": "Get Started Free",
+      "url": "#pricing"
     },
     "secondary_btn": {
-      "label": "デモを見る",
-      "url": "/demo"
+      "label": "View Demo",
+      "url": "#features"
     },
-    "note": "クレジットカードは不要です"
-  },
-  "features": {
-    "heading": "必要な機能がすべて揃いました",
-    "subheading": "開発スピードを加速させる強力な機能を搭載。",
-    "list": {
-      "speed": {
-        "title": "超高速",
-        "description": "パフォーマンス最適化済み。アプリが瞬時に起動します。"
-      },
-      "design": {
-        "title": "美しいデザイン",
-        "description": "細部まで丁寧に作り込み。すべてのピクセルに意味と目的があります。"
-      },
-      "security": {
-        "title": "デフォルトでセキュア",
-        "description": "エンタープライズ級セキュリティ。すべてのレイヤーでデータを保護します。"
-      }
-    }
+    "note": "No credit card required"
   },
   "stats": {
-    "community": "開発者コミュニティ",
-    "community_val": "1万+",
-    "projects": "構築済みプロジェクト",
-    "projects_val": "5万+",
-    "uptime": "24/7稼働率",
-    "uptime_val": "99.9%",
-    "rating": "ユーザー評価",
+    "community": "Global Community",
+    "community_val": "50K+",
+    "projects": "Projects Completed",
+    "projects_val": "120+",
+    "uptime": "Uptime",
+    "uptime_val": "99.99%",
+    "rating": "Rating",
     "rating_val": "4.9/5"
+  },
+  "story": {
+    "tag": "私たちのストーリー",
+    "visual_label": "クリエイティブスタジオのイラスト",
+    "title": "情熱に駆られ、<br>卓越さで定義される。",
+    "para1": "私たちの旅はシンプルなアイデアから始まりました：Web開発をすべての人にとってアクセスしやすく楽しいものにすること。私たちは肥大化したフレームワークと複雑な設定にうんざりしていました。",
+    "para2": "今日、私たちはエレガントなソリューションで複雑な問題を解決するために一緒に働く多様なエンジニア、デザイナー、思考者のチームです。",
+    "val1": "ユーザー中心のデザイン哲学",
+    "val2": "パフォーマンスファーストのアーキテクチャ",
+    "val3": "透明性とオープンなコミュニケーション"
+  },
+  "mission": {
+    "title": "私たちのミッション",
+    "description": "エレガントで高速、使いやすいツールで開発者と企業を支援し、例外のデジタル製品を構築します。"
+  },
+  "vision": {
+    "title": "私たちのビジョン",
+    "description": "美しさ、パフォーマンス、ユーザー体験をすべてのコード行で重視する現代の開発者にとって選択されるプラットフォームになること。"
+  },
+  "values": {
+    "title": "私たちの価値観",
+    "subtitle": "すべての決定を導く原則。"
+  },
+  "passion": {
+    "title": "情熱",
+    "description": "私たちは自分たちの仕事を愛しており、それは製品のすべての詳細に現れています。"
+  },
+  "collaboration": {
+    "title": "コラボレーション",
+    "description": "一緒に働くことで最高の結果が生まれます。私たちは強力なチームの力を信じています。"
+  },
+  "innovation": {
+    "title": "イノベーション",
+    "description": "問題を解決し価値を創造するためのより良い方法を常に探しています。"
+  },
+  "integrity": {
+    "title": "誠実さ",
+    "description": "誠実さと透明性は、私たちが築くすべての関係の基盤です。"
+  },
+  "excellence": {
+    "title": "卓越性",
+    "description": "私たちは「十分良い」では満足しません。常に最高を目指します。"
+  },
+  "quality": {
+    "title": "品質",
+    "description": "クリーンなコード、美しいデザイン、シームレスな体験が私たちの基準です。"
+  },
+  "team": {
+    "title": "チームを知る",
+    "subtitle": "私たちが書くすべてのコード行の背後にある brillant マインド。",
+    "alex_desc": "SaaSエコシステム開発で10年以上の経験を持つビジョナリーリーダー。",
+    "sarah_desc": "大規模システムアーキテクチャの構築を専門とするフルスタックウィザード。",
+    "mike_desc": "ピクセル詳細、スムーズなUXフロー、アクセシビリティ標準に深くこだわっています。",
+    "jessica_desc": "ブランドがデジタル世界で独自の声を見つけるのを助けるクリエイティブストーリーテラー。"
+  },
+  "features": {
+    "list": {
+      "speed": {
+        "title": "Lightning Fast",
+        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+      },
+      "design": {
+        "title": "Modern Design",
+        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+      },
+      "security": {
+        "title": "High Security",
+        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+      }
+    },
+    "heading": "Key Features",
+    "subheading": "Everything you need to build and scale."
   }
 }

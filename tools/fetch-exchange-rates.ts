@@ -65,8 +65,6 @@ function isRatesFresh(data: { lastUpdated: Date }): boolean {
 }
 
 async function generateExchangeRates(forceRefresh = false): Promise<void> {
-  console.log('Exchange rates generator starting...');
-
   const existing = await loadExistingRates();
 
   if (!forceRefresh && existing && isRatesFresh(existing)) {
@@ -77,8 +75,7 @@ async function generateExchangeRates(forceRefresh = false): Promise<void> {
     return;
   }
 
-  console.log('Fetching exchange rates from Frankfurter API');
-  console.log(`Currencies: ${LOCALE_CURRENCIES.join(', ')}`);
+  console.log(`Fetching ${LOCALE_CURRENCIES.length} currencies: ${LOCALE_CURRENCIES.join(', ')}`);
 
   try {
     const rates = await fetchExchangeRates();
@@ -128,7 +125,7 @@ export function convertCurrency(
 
     fs.writeFileSync(EXCHANGE_RATES_FILE, content);
 
-    console.log('Exchange rates saved to', EXCHANGE_RATES_FILE);
+    console.log(`Exchange rates saved to ${EXCHANGE_RATES_FILE.replace(process.cwd(), '.')}`);
     console.log('Last updated:', new Date().toISOString());
   } catch (error) {
     console.error('Failed to generate exchange rates:', error);
@@ -145,7 +142,6 @@ const forceRefresh = args.includes('--force') || args.includes('-f');
 
 generateExchangeRates(forceRefresh)
   .then(() => {
-    console.log('Exchange rates generation completed');
     process.exit(0);
   })
   .catch((error) => {

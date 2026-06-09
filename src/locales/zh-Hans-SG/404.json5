@@ -1,7 +1,7 @@
 {
-    "heading": "404",
-    "subheading": "休斯顿，我们遇到麻烦了。",
-    "description": "您正在寻找的页面可能已被移动、删除，或者被深空中的黑洞吞噬了。",
-    "button_text": "返回地球（主页）",
-    "or_try": "或尝试"
+  "heading": "404",
+  "subheading": "Halaman Tidak Ditemukan",
+  "description": "Sepertinya halaman yang Anda cari tidak ada atau telah dipindahkan.",
+  "button_text": "Kembali ke Beranda",
+  "or_try": "Atau coba:"
 }

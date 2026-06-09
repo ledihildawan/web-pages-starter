@@ -1,75 +1,72 @@
 {
-  "about": {
-    "badge": "Nosotros"
-  },
   "hero": {
-    "badge": "Nosotros",
-    "title_part1": "Estamos creando el ",
-    "title_highlight": "futuro digital",
-    "description": "Fundado en 2024, Starter existe para ayudar a los desarrolladores a construir mejores aplicaciones más rápido. Creemos en el poder del código limpio, el diseño hermoso y la colaboración de código abierto."
-  },
-  "stats": {
-    "years": "Años de Experiencia",
-    "years_val": "3+",
-    "clients": "Clientes Globales",
-    "clients_val": "120+",
-    "countries": "Países Alcanzados",
-    "countries_val": "15",
-    "support": "Soporte Experto",
-    "support_val": "24/7"
-  },
-  "story": {
-    "tag": "Nuestra Historia",
-    "visual_label": "Ilustración de Estudio Creativo",
-    "title": "Impulsados por la pasión, <br>definidos por la excelencia.",
-    "para1": "Nuestro viaje comenzó con una idea simple: hacer el desarrollo web accesible y divertido para todos. Estábamos cansados de frameworks hinchados y configuraciones complejas.",
-    "para2": "Hoy, somos un equipo diverso de ingenieros, diseñadores y pensadores trabajando juntos para resolver problemas complejos con soluciones elegantes.",
-    "val1": "Filosofía de diseño centrada en el usuario",
-    "val2": "Arquitectura de rendimiento primero",
-    "val3": "Transparencia y comunicación abierta"
+    "badge": "Tentang Kami",
+    "title_part1": "Digerakkan oleh ",
+    "title_highlight": "passion",
+    "description": "Perjalanan kami dimulai dengan ide sederhana."
   },
   "mission": {
-    "title": "Nuestra Misión",
-    "description": "Empoderar a desarrolladores y empresas con herramientas elegantes, rápidas y fáciles de usar para construir productos digitales excepcionales."
+    "title": "Misi Kami",
+    "description": "Memberdayakan pengembang dan bisnis dengan alat yang elegan, cepat, dan mudah digunakan untuk membangun produk digital yang luar biasa."
   },
   "vision": {
-    "title": "Nuestra Visión",
-    "description": "Ser la plataforma de elección para desarrolladores modernos que valoran la belleza, el rendimiento y la experiencia del usuario en cada línea de código."
+    "title": "Visi Kami",
+    "description": "Menjadi platform pilihan untuk pengembang modern yang menghargai keindahan, performa, dan pengalaman pengguna di setiap baris kode."
+  },
+  "story": {
+    "tag": "Cerita Kami",
+    "visual_label": "Ilustrasi Studio Kreatif",
+    "title": "Digerakkan oleh passion, <br>didefinisikan oleh keunggulan.",
+    "para1": "Perjalanan kami dimulai dengan ide sederhana: membuat pengembangan web dapat diakses dan menyenangkan untuk semua orang. Kami sudah lelah dengan framework yang berat dan konfigurasi yang rumit.",
+    "para2": "Hari ini, kami adalah tim yang beragam dari engineer, desainer, dan pemikir yang bekerja sama untuk memecahkan masalah kompleks dengan solusi yang elegan.",
+    "val1": "Filosofi desain user-centric",
+    "val2": "Arsitektur performance-first",
+    "val3": "Transparansi dan komunikasi terbuka"
   },
   "values": {
-    "title": "Nuestros Valores",
-    "subtitle": "Principios que guían cada decisión que tomamos."
+    "title": "Nilai-Nilai Kami",
+    "subtitle": "Prinsip yang memandu setiap keputusan yang kami buat."
   },
   "passion": {
-    "title": "Pasión",
-    "description": "Amamos lo que hacemos, y se nota en cada detalle de nuestros productos."
+    "title": "Passion",
+    "description": "Kami mencintai apa yang kami lakukan, dan itu terlihat di setiap detail produk kami."
   },
   "collaboration": {
-    "title": "Colaboración",
-    "description": "Trabajar juntos produce los mejores resultados. Creemos en el poder de equipos sólidos."
+    "title": "Kolaborasi",
+    "description": "Bekerja sama menghasilkan hasil terbaik. Kami percaya pada kekuatan tim yang solid."
   },
   "innovation": {
-    "title": "Innovación",
-    "description": "Siempre buscando mejores formas de resolver problemas y crear valor."
+    "title": "Inovasi",
+    "description": "Selalu mencari cara yang lebih baik untuk memecahkan masalah dan menciptakan nilai."
   },
   "integrity": {
-    "title": "Integridad",
-    "description": "La honestidad y la transparencia son la base de cada relación que construimos."
+    "title": "Integritas",
+    "description": "Kejujuran dan transparansi adalah fondasi setiap hubungan yang kami bangun."
   },
   "excellence": {
-    "title": "Excelencia",
-    "description": "No nos conformamos con lo suficientemente bueno. Siempre nos esforzamos por lo mejor."
+    "title": "Keunggulan",
+    "description": "Kami tidak puas dengan cukup baik. Kami selalu berusaha untuk yang terbaik."
   },
   "quality": {
-    "title": "Calidad",
-    "description": "Código limpio, diseño hermoso y experiencias fluidas son nuestros estándares."
+    "title": "Kualitas",
+    "description": "Kode yang bersih, desain yang indah, dan pengalaman yang seamless adalah standar kami."
   },
   "team": {
-    "title": "Conoce al Equipo",
-    "subtitle": "Las mentes brillantes detrás de cada línea de código que escribimos.",
-    "alex_desc": "Líder visionario con 10+ años de experiencia en desarrollo de ecosistema SaaS.",
-    "sarah_desc": "Full-stack wizard especializada en construir arquitecturas de sistemas a gran escala.",
-    "mike_desc": "Profundamente obsesionado con detalles de píxel, flujos UX suaves y estándares de accesibilidad.",
-    "jessica_desc": "Narradora creativa ayudando a las marcas a encontrar su voz única en el mundo digital."
+    "title": "Kenali Tim",
+    "subtitle": "Pikiran cemerlang di balik setiap baris kode yang kami tulis.",
+    "alex_desc": "Pemimpin visioner dengan pengalaman 10+ tahun dalam pengembangan ekosistem SaaS.",
+    "sarah_desc": "Full-stack wizard yang mengkhususkan diri dalam membangun arsitektur sistem berskala besar.",
+    "mike_desc": "Terobsesi dengan detail pixel, alur UX yang halus, dan standar aksesibilitas.",
+    "jessica_desc": "Pencerita kreatif yang membantu merek menemukan suara unik mereka di dunia digital."
+  },
+  "stats": {
+    "years": "Tahun Pengalaman",
+    "years_val": "3+",
+    "clients": "Klien Global",
+    "clients_val": "120+",
+    "countries": "Negara yang Dijangkau",
+    "countries_val": "15",
+    "support": "Support Ahli",
+    "support_val": "24/7"
   }
 }

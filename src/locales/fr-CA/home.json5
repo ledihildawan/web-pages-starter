@@ -1,50 +1,102 @@
 {
-  "meta": {
-    "title": "Accueil | Starter App",
-    "description": "Constructeur d'applications web modernes."
+  "about": {
+    "badge": "À Propos"
   },
   "hero": {
-    "badge": "Nouveau: La version 2.0 est arrivée",
-    "title_start": "Créez quelque chose",
-    "title_highlight": "de beau aujourd'hui",
-    "description": "La façon moderne de construire des applications web. Rapide, flexible et conçu pour les développeurs qui se soucient de leur travail.",
-    "image_alt": "Aperçu du Tableau de Bord",
+    "badge": "À Propos",
+    "title_part1": "Nous créons l'",
+    "title_highlight": "avenir numérique",
+    "description": "Fondé en 2024, Starter existe pour aider les développeurs à construire de meilleures applications plus rapidement. Nous croyons au pouvoir du code propre, du design beau et de la collaboration open source.",
     "primary_btn": {
-      "label": "Commencer",
-      "url": "/start"
+      "label": "Get Started Free",
+      "url": "#pricing"
     },
     "secondary_btn": {
-      "label": "Voir la Démo",
-      "url": "/demo"
+      "label": "View Demo",
+      "url": "#features"
     },
-    "note": "Aucune carte de crédit requise"
-  },
-  "features": {
-    "heading": "Tout Ce Dont Vous Besoin",
-    "subheading": "Fonctionnalités puissantes pour vous aider à construire plus rapidement.",
-    "list": {
-      "speed": {
-        "title": "Rapide comme l'Éclair",
-        "description": "Optimisé pour la performance. Vos applications se chargent instantanément."
-      },
-      "design": {
-        "title": "Design Élégant",
-        "description": "Créé avec soin. Chaque pixel a une signification et un but."
-      },
-      "security": {
-        "title": "Sécurisé par Défaut",
-        "description": "Sécurité de niveau entreprise. Vos données sont protégées à chaque couche."
-      }
-    }
+    "note": "No credit card required"
   },
   "stats": {
-    "community": "Communauté de Développeurs",
-    "community_val": "10K+",
-    "projects": "Projets Construits",
-    "projects_val": "50K+",
-    "uptime": "Disponibilité 24/7",
-    "uptime_val": "99.9%",
-    "rating": "Note des Utilisateurs",
+    "community": "Global Community",
+    "community_val": "50K+",
+    "projects": "Projects Completed",
+    "projects_val": "120+",
+    "uptime": "Uptime",
+    "uptime_val": "99.99%",
+    "rating": "Rating",
     "rating_val": "4.9/5"
+  },
+  "story": {
+    "tag": "Notre Histoire",
+    "visual_label": "Illustration de Studio Créatif",
+    "title": "Guidés par la passion, <br>définis par l'excellence.",
+    "para1": "Notre voyage a commencé avec une idée simple: rendre le développement web accessible et amusant pour tous. Nous étions fatigués des frameworks gonflés et des configurations complexes.",
+    "para2": "Aujourd'hui, nous sommes une équipe diversifiée d'ingénieurs, de concepteurs et de penseurs travaillant ensemble pour résoudre des problèmes complexes avec des solutions élégantes.",
+    "val1": "Philosophie de design centrée sur l'utilisateur",
+    "val2": "Architecture performance d'abord",
+    "val3": "Transparence et communication ouverte"
+  },
+  "mission": {
+    "title": "Notre Mission",
+    "description": "Autonomiser les développeurs et les entreprises avec des outils élégants, rapides et faciles à utiliser pour construire des produits numériques exceptionnels."
+  },
+  "vision": {
+    "title": "Notre Vision",
+    "description": "Être la plateforme de choix pour les développeurs modernes qui valorisent la beauté, la performance et l'expérience utilisateur dans chaque ligne de code."
+  },
+  "values": {
+    "title": "Nos Valeurs",
+    "subtitle": "Principes qui guident chaque décision que nous prenons."
+  },
+  "passion": {
+    "title": "Passion",
+    "description": "Nous aimons ce que nous faisons, et cela se voit dans chaque détail de nos produits."
+  },
+  "collaboration": {
+    "title": "Collaboration",
+    "description": "Travailler ensemble donne les meilleurs résultats. Nous croyons au pouvoir d'équipes solides."
+  },
+  "innovation": {
+    "title": "Innovation",
+    "description": "Toujours chercher de meilleures façons de résoudre les problèmes et de créer de la valeur."
+  },
+  "integrity": {
+    "title": "Intégrité",
+    "description": "L'honnêteté et la transparence sont la fondation de chaque relation que nous construisons."
+  },
+  "excellence": {
+    "title": "Excellence",
+    "description": "Nous ne nous contentons pas de assez bon. Nous nous efforçons toujours du meilleur."
+  },
+  "quality": {
+    "title": "Qualité",
+    "description": "Code propre, design beau et expériences fluides sont nos standards."
+  },
+  "team": {
+    "title": "Rencontrez l'Équipe",
+    "subtitle": "Les esprits brillants derrière chaque ligne de code que nous écrivons.",
+    "alex_desc": "Leader visionnaire avec 10+ ans d'expérience dans le développement d'écosystème SaaS.",
+    "sarah_desc": "Full-stack wizard spécialisée dans la construction d'architectures de systèmes à grande échelle.",
+    "mike_desc": "Profondément obsédé par les détails de pixels, flux UX fluides et standards d'accessibilité.",
+    "jessica_desc": "Narratrice créative aidant les marques à trouver leur voix unique dans le monde numérique."
+  },
+  "features": {
+    "list": {
+      "speed": {
+        "title": "Lightning Fast",
+        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+      },
+      "design": {
+        "title": "Modern Design",
+        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+      },
+      "security": {
+        "title": "High Security",
+        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+      }
+    },
+    "heading": "Key Features",
+    "subheading": "Everything you need to build and scale."
   }
 }

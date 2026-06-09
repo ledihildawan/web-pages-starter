@@ -1,75 +1,72 @@
 {
-  "about": {
-    "badge": "關於我們"
-  },
   "hero": {
-    "badge": "關於我們",
-    "title_part1": "我們正在打造 ",
-    "title_highlight": "數碼未來",
-    "description": "Starter 成立於 2024 年，旨在幫助開發者更快地構建更好的應用程式。我們相信簡潔的代碼、美觀的設計以及開源協作的力量。"
-  },
-  "stats": {
-    "years": "多年經驗",
-    "years_val": "3+",
-    "clients": "全球客戶",
-    "clients_val": "120+",
-    "countries": "覆蓋國家",
-    "countries_val": "15",
-    "support": "專家支持",
-    "support_val": "24/7"
-  },
-  "story": {
-    "tag": "我們的故事",
-    "visual_label": "創意工作室插圖",
-    "title": "激情驅動，<br>卓越定義。",
-    "para1": "我們的旅程始於一個簡單的想法：讓每個人都能輕鬆愉快地進行 Web 開發。我們厭倦了臃腫的框架和複雜的配置。",
-    "para2": "今天，我們是一個由工程師、設計師和思想家組成的多元化團隊，共同努力用優雅的方案解決複雜的問題。",
-    "val1": "以用戶為中心的設計理念",
-    "val2": "性能優先的架構",
-    "val3": "透明度和公開溝通"
+    "badge": "Tentang Kami",
+    "title_part1": "Digerakkan oleh ",
+    "title_highlight": "passion",
+    "description": "Perjalanan kami dimulai dengan ide sederhana."
   },
   "mission": {
-    "title": "我們的使命",
-    "description": "通過優雅、快速且易於使用的工具，賦能開發者與企業打造卓越的數碼產品。"
+    "title": "Misi Kami",
+    "description": "Memberdayakan pengembang dan bisnis dengan alat yang elegan, cepat, dan mudah digunakan untuk membangun produk digital yang luar biasa."
   },
   "vision": {
-    "title": "我們的願景",
-    "description": "成為重視美感、性能和用戶體驗的現代開發者的首選平台。"
+    "title": "Visi Kami",
+    "description": "Menjadi platform pilihan untuk pengembang modern yang menghargai keindahan, performa, dan pengalaman pengguna di setiap baris kode."
+  },
+  "story": {
+    "tag": "Cerita Kami",
+    "visual_label": "Ilustrasi Studio Kreatif",
+    "title": "Digerakkan oleh passion, <br>didefinisikan oleh keunggulan.",
+    "para1": "Perjalanan kami dimulai dengan ide sederhana: membuat pengembangan web dapat diakses dan menyenangkan untuk semua orang. Kami sudah lelah dengan framework yang berat dan konfigurasi yang rumit.",
+    "para2": "Hari ini, kami adalah tim yang beragam dari engineer, desainer, dan pemikir yang bekerja sama untuk memecahkan masalah kompleks dengan solusi yang elegan.",
+    "val1": "Filosofi desain user-centric",
+    "val2": "Arsitektur performance-first",
+    "val3": "Transparansi dan komunikasi terbuka"
   },
   "values": {
-    "title": "我們的價值觀",
-    "subtitle": "指導我們每一個決策的原則。"
+    "title": "Nilai-Nilai Kami",
+    "subtitle": "Prinsip yang memandu setiap keputusan yang kami buat."
   },
   "passion": {
-    "title": "激情",
-    "description": "我們熱愛自己的工作，這份熱愛體現在我們產品的每一個細節中。"
+    "title": "Passion",
+    "description": "Kami mencintai apa yang kami lakukan, dan itu terlihat di setiap detail produk kami."
   },
   "collaboration": {
-    "title": "協作",
-    "description": "團隊合作能夠創造最佳成果。我們相信團隊的強大力量。"
+    "title": "Kolaborasi",
+    "description": "Bekerja sama menghasilkan hasil terbaik. Kami percaya pada kekuatan tim yang solid."
   },
   "innovation": {
-    "title": "創新",
-    "description": "始終尋求更好的方式來解決問題和創造價值。"
+    "title": "Inovasi",
+    "description": "Selalu mencari cara yang lebih baik untuk memecahkan masalah dan menciptakan nilai."
   },
   "integrity": {
-    "title": "誠信",
-    "description": "誠實和透明是我們建立的所有關係的基石。"
+    "title": "Integritas",
+    "description": "Kejujuran dan transparansi adalah fondasi setiap hubungan yang kami bangun."
   },
   "excellence": {
-    "title": "卓越",
-    "description": "我們從不滿足於\"足夠好\"，始終追求最好的結果。"
+    "title": "Keunggulan",
+    "description": "Kami tidak puas dengan cukup baik. Kami selalu berusaha untuk yang terbaik."
   },
   "quality": {
-    "title": "品質",
-    "description": "簡潔的代碼、美觀的設計和無縫的體驗是我們的標準。"
+    "title": "Kualitas",
+    "description": "Kode yang bersih, desain yang indah, dan pengalaman yang seamless adalah standar kami."
   },
   "team": {
-    "title": "團隊介紹",
-    "subtitle": "每一行代碼背後的才華橫溢的頭腦。",
-    "alex_desc": "在 SaaS 生態系統開發方面擁有 10 多年經驗的遠見卓識的領導者。",
-    "sarah_desc": "擅長構建大規模系統架構的全棧高手。",
-    "mike_desc": "痴迷於像素細節、流暢的 UX 流程和無障礙標準。",
-    "jessica_desc": "通過創意敘事幫助品牌在數字世界中找到獨特聲音的專家。"
+    "title": "Kenali Tim",
+    "subtitle": "Pikiran cemerlang di balik setiap baris kode yang kami tulis.",
+    "alex_desc": "Pemimpin visioner dengan pengalaman 10+ tahun dalam pengembangan ekosistem SaaS.",
+    "sarah_desc": "Full-stack wizard yang mengkhususkan diri dalam membangun arsitektur sistem berskala besar.",
+    "mike_desc": "Terobsesi dengan detail pixel, alur UX yang halus, dan standar aksesibilitas.",
+    "jessica_desc": "Pencerita kreatif yang membantu merek menemukan suara unik mereka di dunia digital."
+  },
+  "stats": {
+    "years": "Tahun Pengalaman",
+    "years_val": "3+",
+    "clients": "Klien Global",
+    "clients_val": "120+",
+    "countries": "Negara yang Dijangkau",
+    "countries_val": "15",
+    "support": "Support Ahli",
+    "support_val": "24/7"
   }
 }

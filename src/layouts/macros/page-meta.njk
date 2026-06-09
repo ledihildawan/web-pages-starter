@@ -5,7 +5,7 @@
   {% set description = page.meta.description or global.site_description or "Default description for the site." %}
 
   {% set site_url = global.site_url or "" %}
-  {% set page_path = "" if (page.page_id == "home") else ("/" + (page.page_id or "")) %}
+  {% set page_path = "" if (page.page_id == global.root_page) else ("/" + (page.page_id or "")) %}
   {% set canonical_url = page.meta.canonical or (site_url + page_path) or "" %}
 
   {% set image = page.meta.image or global.site_image or "" %}

@@ -1,50 +1,102 @@
 {
-  "meta": {
-    "title": "首頁 | Starter 應用",
-    "description": "現代 Web 應用構建器。"
+  "about": {
+    "badge": "關於我們"
   },
   "hero": {
-    "badge": "新發布：版本 2.0 已上線",
-    "title_start": "立即打造 ",
-    "title_highlight": "精美之作",
-    "description": "構建 Web 應用程式的現代方式。快速、靈活，專為追求卓越的開發者而設計。",
-    "image_alt": "儀表板預覽",
+    "badge": "關於我們",
+    "title_part1": "我們正在打造 ",
+    "title_highlight": "數碼未來",
+    "description": "Starter 成立於 2024 年，旨在幫助開發者更快地構建更好的應用程式。我們相信簡潔的代碼、美觀的設計以及開源協作的力量。",
     "primary_btn": {
-      "label": "開始構建 →",
-      "url": "/start"
+      "label": "Get Started Free",
+      "url": "#pricing"
     },
     "secondary_btn": {
-      "label": "查看演示",
-      "url": "/demo"
+      "label": "View Demo",
+      "url": "#features"
     },
-    "note": "無需信用卡"
-  },
-  "features": {
-    "heading": "所需功能，一應俱全",
-    "subheading": "強大的功能助您提升構建速度。",
-    "list": {
-      "speed": {
-        "title": "極速響應",
-        "description": "性能優化。您的應用可實現秒開。"
-      },
-      "design": {
-        "title": "精美設計",
-        "description": "精心打造。每一個像素都蘊含意義與目的。"
-      },
-      "security": {
-        "title": "默認安全",
-        "description": "企業級安全保障。在每一層級保護您的數據。"
-      }
-    }
+    "note": "No credit card required"
   },
   "stats": {
-    "community": "開發者社區",
-    "community_val": "1萬+",
-    "projects": "已構建項目",
-    "projects_val": "5萬+",
-    "uptime": "服務在線率",
-    "uptime_val": "99.9%",
-    "rating": "用戶評分",
+    "community": "Global Community",
+    "community_val": "50K+",
+    "projects": "Projects Completed",
+    "projects_val": "120+",
+    "uptime": "Uptime",
+    "uptime_val": "99.99%",
+    "rating": "Rating",
     "rating_val": "4.9/5"
+  },
+  "story": {
+    "tag": "我們的故事",
+    "visual_label": "創意工作室插圖",
+    "title": "激情驅動，<br>卓越定義。",
+    "para1": "我們的旅程始於一個簡單的想法：讓每個人都能輕鬆愉快地進行 Web 開發。我們厭倦了臃腫的框架和複雜的配置。",
+    "para2": "今天，我們是一個由工程師、設計師和思想家組成的多元化團隊，共同努力用優雅的方案解決複雜的問題。",
+    "val1": "以用戶為中心的設計理念",
+    "val2": "性能優先的架構",
+    "val3": "透明度和公開溝通"
+  },
+  "mission": {
+    "title": "我們的使命",
+    "description": "通過優雅、快速且易於使用的工具，賦能開發者與企業打造卓越的數碼產品。"
+  },
+  "vision": {
+    "title": "我們的願景",
+    "description": "成為重視美感、性能和用戶體驗的現代開發者的首選平台。"
+  },
+  "values": {
+    "title": "我們的價值觀",
+    "subtitle": "指導我們每一個決策的原則。"
+  },
+  "passion": {
+    "title": "激情",
+    "description": "我們熱愛自己的工作，這份熱愛體現在我們產品的每一個細節中。"
+  },
+  "collaboration": {
+    "title": "協作",
+    "description": "團隊合作能夠創造最佳成果。我們相信團隊的強大力量。"
+  },
+  "innovation": {
+    "title": "創新",
+    "description": "始終尋求更好的方式來解決問題和創造價值。"
+  },
+  "integrity": {
+    "title": "誠信",
+    "description": "誠實和透明是我們建立的所有關係的基石。"
+  },
+  "excellence": {
+    "title": "卓越",
+    "description": "我們從不滿足於\"足夠好\"，始終追求最好的結果。"
+  },
+  "quality": {
+    "title": "品質",
+    "description": "簡潔的代碼、美觀的設計和無縫的體驗是我們的標準。"
+  },
+  "team": {
+    "title": "團隊介紹",
+    "subtitle": "每一行代碼背後的才華橫溢的頭腦。",
+    "alex_desc": "在 SaaS 生態系統開發方面擁有 10 多年經驗的遠見卓識的領導者。",
+    "sarah_desc": "擅長構建大規模系統架構的全棧高手。",
+    "mike_desc": "痴迷於像素細節、流暢的 UX 流程和無障礙標準。",
+    "jessica_desc": "通過創意敘事幫助品牌在數字世界中找到獨特聲音的專家。"
+  },
+  "features": {
+    "list": {
+      "speed": {
+        "title": "Lightning Fast",
+        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+      },
+      "design": {
+        "title": "Modern Design",
+        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+      },
+      "security": {
+        "title": "High Security",
+        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+      }
+    },
+    "heading": "Key Features",
+    "subheading": "Everything you need to build and scale."
   }
 }

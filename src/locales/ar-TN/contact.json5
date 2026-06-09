@@ -1,47 +1,47 @@
 {
   "meta": {
-    "title": "تواصل معنا | Starter App",
-    "description": "تواصل معنا للأسئلة والدعم."
+    "title": "اتصل بينا | Starter App",
+    "description": "اتصل بينا للأسئلة والدعم."
   },
   "contact": {
-    "badge": "تواصل معنا",
-    "title_part1": "لنتواصل",
-    "title_highlight": "معاً",
-    "description": "هل لديك أسئلة أو تريد التعاون؟ سنكون سعداء لسماع رأيك. أرسل لنا رسالة وسنرد في أقرب وقت ممكن.",
-    "form_title": "أرسل رسالة",
-    "form_subtitle": "املأ النموذج أدناه وسنرد عليك قريباً.",
+    "badge": "اتصل بينا",
+    "title_part1": "يلا نهضرو",
+    "title_highlight": "مع بعض",
+    "description": "عندك سؤال أو حاب تتعاون معانا؟ فرحانين نسمعو منك. أبعثلنا رسالة ونردولك في أقرب وقت.",
+    "form_title": "أبعث رسالة",
+    "form_subtitle": "عمّر الفورم هادا ونردولك قريب.",
     "social_title": "تابعنا",
-    "social_subtitle": "ابق على اطلاع بآخر أخبارنا على وسائل التواصل الاجتماعي",
+    "social_subtitle": "خليك متابع آخر الأخبار متاعنا على السوشيال ميديا",
     "info": {
       "response_time": {
         "title": "رد سريع",
-        "description": "نسعى للرد على كل رسالة خلال 24 ساعة في أيام العمل."
+        "description": "نسعو نردو على كل رسالة خلال ٢٤ ساعة في أيام الخدمة."
       },
       "working_hours": {
-        "title": "ساعات العمل",
-        "description": "الإثنين - الجمعة: 09:00 - 18:00. عطلات نهاية الأسبوع: حسب الأولوية."
+        "title": "ساعات الخدمة",
+        "description": "الإثنين - الجمعة: ٠٩:٠٠ - ١٨:٠٠. نهاية الأسبوع: حسب الأولوية."
       },
       "support": {
         "title": "دعم مستمر",
-        "description": "فريق الدعم لدينا مستعد دائماً لمساعدتك في حل مشاكلك التقنية."
+        "description": "فريق الدعم متاعنا جاهز دائما يعاونك يحل المشاكل التقنية."
       }
     },
     "form": {
       "name": "الاسم",
-      "name_placeholder": "أدخل اسمك",
-      "email": "البريد الإلكتروني",
+      "name_placeholder": "أكتب اسمك",
+      "email": "الإيميل",
       "email_placeholder": "اسم@مثال.com",
       "subject": "الموضوع",
-      "subject_placeholder": "ما الذي تود مناقشته؟",
+      "subject_placeholder": "أش حاب تناقش؟",
       "message": "الرسالة",
-      "message_placeholder": "أخبرنا المزيد عن استفسارك...",
-      "submit": "إرسال الرسالة"
+      "message_placeholder": "قولنا أكثر على الاستفسار متاعك...",
+      "submit": "أبعث الرسالة"
     }
   },
-  "email_label": "البريد الإلكتروني",
+  "email_label": "الإيميل",
   "email_value": "hello@starter.app",
-  "phone_label": "الهاتف",
-  "phone_value": "+216 5 000 00000",
-  "location_label": "الموقع",
-  "location_value": "تونس, تونس"
+  "phone_label": "التيليفون",
+  "phone_value": "+٢١٦ ٥٠ ٠٠٠ ٠٠٠",
+  "location_label": "المكان",
+  "location_value": "تونس، تونس"
 }

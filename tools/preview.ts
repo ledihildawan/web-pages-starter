@@ -1,3 +1,4 @@
+import fs from 'node:fs';
 import { existsSync, statSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -7,6 +8,7 @@ import { serve } from '@hono/node-server';
 import { serveStatic } from '@hono/node-server/serve-static';
 import { Hono } from 'hono';
 import { compress } from 'hono/compress';
+import { ROOT_PAGE } from '../src/configs/site';
 
 const args = process.argv.slice(2);
 const isProd = process.env.NODE_ENV === 'production';
@@ -98,7 +100,7 @@ app.get('*', (c) => {
   }
 
   if (reqPath === '/') {
-    const home = htmlCache.get('home');
+    const home = htmlCache.get(ROOT_PAGE);
     if (home) return c.html(home);
     return c.notFound();
   }

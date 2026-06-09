@@ -1,5 +1,6 @@
 import { EXCHANGE_RATES, convertCurrency as convertCurrencyRaw } from '@generated/exchange-rates';
 import type { I18nTranslationKeys } from '@generated/i18n';
+import { ROOT_PAGE } from '../../../configs/site';
 import { i18nConfig } from '../../../configs/i18n';
 import i18next, { type Resource } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
@@ -31,6 +32,7 @@ import {
   singular,
   toNativeDigits,
 } from './index';
+import { scheduleTask } from '../utils/microtask-queue';
 
 export { i18next };
 
@@ -283,7 +285,7 @@ const FORMATTERS = [
 ] as const;
 
 export async function initIntl(localeOverride?: string): Promise<void> {
-  const pageID = (window.__PAGE_ID__ ?? 'home') as string;
+  const pageID = (window.__PAGE_ID__ ?? ROOT_PAGE) as string;
 
   const savedLocale = (
     localeOverride ||
@@ -369,6 +371,7 @@ export const updateI18nStoreLabels = (): void => {
 
   const store = globalThis.Alpine.store('i18n') as {
     languages: Array<{ code: string; label: string; flag: string }>;
+    current: string;
   };
   if (!store) {
     return;
@@ -388,6 +391,8 @@ export const updateI18nStoreLabels = (): void => {
   updatedLanguages.forEach((lang) => {
     store.languages.push(lang);
   });
+
+  store.current = localStorage.getItem(LOCALE_STORAGE_KEY) || i18nConfig.defaultLocale;
 };
 
 export const t = (
@@ -402,47 +407,53 @@ export const t = (
 };
 
 export const translatePage = (): void => {
-  processElements('[data-i18n-html]', 'data-i18n-html', (el, key) => {
-    const translated = i18next.t(key, getVars(el));
-    el.innerHTML = toNativeDigits(translated, getNativeDigitSetting(el));
-  });
-
-  processElements('[data-i18n]', 'data-i18n', (el, key) => {
-    const translated = t(key as I18nTranslationKeys, getVars(el));
-    el.innerHTML = toNativeDigits(translated, getNativeDigitSetting(el));
-  });
-
-  processElements('[data-i18n-attr]', 'data-i18n-attr', (el, raw) => {
-    if (!raw.includes(':')) return;
-    const colonIdx = raw.indexOf(':');
-    const attrName = raw.slice(0, colonIdx);
-    const translationKey = raw.slice(colonIdx + 1);
-    const translated = t(translationKey as I18nTranslationKeys, getVars(el));
-    el.setAttribute(attrName, toNativeDigits(translated));
-  });
-
-  processElements('[data-i18n-plural]', 'data-i18n-plural', (el, key) => {
-    const countStr = el.getAttribute('data-i18n-count');
-    if (!countStr) return;
-    const pluralKey = key.includes(':') ? key : `common:${key}`;
-    const translated = t(pluralKey as I18nTranslationKeys, {
-      ...getVars(el),
-      count: parseInt(countStr, 10),
+  scheduleTask(() => {
+    processElements('[data-i18n-html]', 'data-i18n-html', (el, key) => {
+      const translated = i18next.t(key, getVars(el));
+      el.innerHTML = toNativeDigits(translated, getNativeDigitSetting(el));
     });
-    el.textContent = toNativeDigits(translated);
+
+    processElements('[data-i18n]', 'data-i18n', (el, key) => {
+      const translated = t(key as I18nTranslationKeys, getVars(el));
+      el.innerHTML = toNativeDigits(translated, getNativeDigitSetting(el));
+    });
+
+    processElements('[data-i18n-attr]', 'data-i18n-attr', (el, raw) => {
+      if (!raw.includes(':')) return;
+      const colonIdx = raw.indexOf(':');
+      const attrName = raw.slice(0, colonIdx);
+      const translationKey = raw.slice(colonIdx + 1);
+      const translated = t(translationKey as I18nTranslationKeys, getVars(el));
+      el.setAttribute(attrName, toNativeDigits(translated));
+    });
+
+    processElements('[data-i18n-plural]', 'data-i18n-plural', (el, key) => {
+      const countStr = el.getAttribute('data-i18n-count');
+      if (!countStr) return;
+      const pluralKey = key.includes(':') ? key : `common:${key}`;
+      const translated = t(pluralKey as I18nTranslationKeys, {
+        ...getVars(el),
+        count: parseInt(countStr, 10),
+      });
+      el.textContent = toNativeDigits(translated);
+    });
   });
 
-  updateFormattedElements();
+  scheduleTask(() => {
+    updateFormattedElements();
+  });
 };
 
 export const updateFormattedElements = (): void => {
-  const locale = getLocale(i18next.language as LocaleCode);
-  setLocale(locale);
-  const defaultCurrency = getCurrency(locale);
+  scheduleTask(() => {
+    const locale = getLocale(i18next.language as LocaleCode);
+    setLocale(locale);
+    const defaultCurrency = getCurrency(locale);
 
-  FORMATTERS.forEach(({ attr, format }) => {
-    processElements(`[${attr}]`, attr, (el, v) => {
-      el.textContent = format(v, el, defaultCurrency);
+    FORMATTERS.forEach(({ attr, format }) => {
+      processElements(`[${attr}]`, attr, (el, v) => {
+        el.textContent = format(v, el, defaultCurrency);
+      });
     });
   });
 };

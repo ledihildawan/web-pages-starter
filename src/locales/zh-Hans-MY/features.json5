@@ -53,5 +53,23 @@
     "heading": "准备好开始了吗？",
     "btn_create": "创建账户",
     "btn_docs": "查阅文档"
+  },
+  "features": {
+    "list": {
+      "speed": {
+        "title": "Lightning Fast",
+        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+      },
+      "design": {
+        "title": "Modern Design",
+        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+      },
+      "security": {
+        "title": "High Security",
+        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+      }
+    },
+    "heading": "Key Features",
+    "subheading": "Everything you need to build and scale."
   }
 }

@@ -8,218 +8,266 @@ import { collectKeys, readJSON5 } from '../src/scripts/utils/json5';
 const LOCALES_DIR = path.resolve(PATHS.LOCALES);
 const BASE_LOCALE = i18nConfig.defaultLocale;
 
-const collectKeySet = (obj: unknown): Set<string> => new Set(collectKeys(obj));
+interface LocaleDiff {
+  locale: string;
+  missing: string[];
+  extra: string[];
+  dupKeys?: Record<string, number>;
+}
 
-const readLocaleFile = (locale: string, filename: string) =>
-  readJSON5(path.join(LOCALES_DIR, locale, filename));
-
-interface ParityReport {
+interface FileReport {
   file: string;
   totalKeys: number;
-  missingKeys: { locale: string; keys: string[] }[];
-  extraKeys: { locale: string; keys: string[] }[];
+  diffs: LocaleDiff[];
+}
+
+function levenshtein(a: string, b: string): number {
+  const m = a.length, n = b.length;
+  const dp: number[] = Array(n + 1);
+  for (let j = 0; j <= n; j++) dp[j] = j;
+  for (let i = 1; i <= m; i++) {
+    let prev = dp[0];
+    dp[0] = i;
+    for (let j = 1; j <= n; j++) {
+      const tmp = dp[j];
+      dp[j] = a[i - 1] === b[j - 1] ? prev : 1 + Math.min(prev, dp[j], dp[j - 1]);
+      prev = tmp;
+    }
+  }
+  return dp[n];
+}
+
+function findDuplicateKeys(content: string): Record<string, number> {
+  const scopeStack: Map<string, number>[] = [];
+  const dupes: Record<string, number> = {};
+
+  for (let i = 0; i < content.length; i++) {
+    const ch = content[i];
+    if (ch === '{') {
+      scopeStack.push(new Map());
+    } else if (ch === '}' && scopeStack.length > 0) {
+      scopeStack.pop();
+    } else if (scopeStack.length > 0 && (ch === '"' || ch === "'")) {
+      const quote = ch;
+      let j = i + 1;
+      while (j < content.length && content[j] !== quote) {
+        if (content[j] === '\\') j++;
+        j++;
+      }
+      const key = content.slice(i + 1, j);
+      let k = j + 1;
+      while (k < content.length && /\s/.test(content[k])) k++;
+      if (content[k] === ':') {
+        const scope = scopeStack[scopeStack.length - 1];
+        const count = (scope.get(key) || 0) + 1;
+        scope.set(key, count);
+        if (count > 1) dupes[key] = (dupes[key] || 1) + 1;
+      }
+      i = j;
+    }
+  }
+  return dupes;
+}
+
+function tryDetectDuplicates(locale: string, filePath: string): Record<string, number> | null {
+  const full = path.join(LOCALES_DIR, locale, filePath);
+  if (!fs.existsSync(full)) return null;
+  try {
+    const content = fs.readFileSync(full, 'utf8');
+    const dupes = findDuplicateKeys(content);
+    return Object.keys(dupes).length > 0 ? dupes : null;
+  } catch {
+    return null;
+  }
 }
 
 function getSetDifference(setA: Set<string>, setB: Set<string>): string[] {
   return [...setA].filter((x) => !setB.has(x));
 }
 
-const getStatusColor = (missing: number, extra: number) => {
-  if (missing === 0 && extra === 0) return '\x1b[32m';
-  if (missing > 0) return '\x1b[31m';
-  return '\x1b[33m';
-};
+function tryReadKeys(locale: string, filePath: string): Set<string> | null {
+  const full = path.join(LOCALES_DIR, locale, filePath);
+  if (!fs.existsSync(full)) return null;
+  try {
+    return new Set(collectKeys(readJSON5(full)));
+  } catch (err) {
+    console.error(`  ⚠️  Error reading ${locale}/${filePath}: ${err}`);
+    return null;
+  }
+}
 
-function checkFileParity(
-  filePath: string,
-  localeStats: Map<string, { missing: number; extra: number }>,
-): ParityReport {
-  const baseKeys = collectKeySet(readLocaleFile(BASE_LOCALE, filePath));
-  const report: ParityReport = {
-    file: filePath,
-    totalKeys: baseKeys.size,
-    missingKeys: [],
-    extraKeys: [],
-  };
+function checkFileParity(filePath: string): FileReport | null {
+  const baseKeys = tryReadKeys(BASE_LOCALE, filePath);
+  if (!baseKeys) {
+    console.error(`  ⚠️  Base file missing: ${BASE_LOCALE}/${filePath}`);
+    return null;
+  }
+
+  const diffs: LocaleDiff[] = [];
 
   for (const locale of LOCALE_CODES) {
     if (locale === BASE_LOCALE) continue;
-
-    const localeKeys = collectKeySet(readLocaleFile(locale, filePath));
+    const localeKeys = tryReadKeys(locale, filePath);
+    if (!localeKeys) {
+      diffs.push({ locale, missing: [...baseKeys], extra: [] });
+      continue;
+    }
     const missing = getSetDifference(baseKeys, localeKeys);
     const extra = getSetDifference(localeKeys, baseKeys);
-
-    if (missing.length > 0) report.missingKeys.push({ locale, keys: missing });
-    if (extra.length > 0) report.extraKeys.push({ locale, keys: extra });
-
-    const stats = localeStats.get(locale) ?? { missing: 0, extra: 0 };
-    localeStats.set(locale, stats);
-    stats.missing += missing.length;
-    stats.extra += extra.length;
+    const dupKeys = tryDetectDuplicates(locale, filePath) ?? undefined;
+    if (missing.length > 0 || extra.length > 0 || dupKeys) {
+      diffs.push({ locale, missing, extra, dupKeys });
+    }
   }
 
-  return report;
+  if (diffs.length === 0) return null;
+
+  return { file: filePath, totalKeys: baseKeys.size, diffs };
 }
 
 function checkParity() {
-  const pages = new Map<string, ParityReport>();
-  const components = new Map<string, ParityReport>();
-  const localeStats = new Map<string, { missing: number; extra: number }>();
+  const allReports: FileReport[] = [];
+  const fileBaseSizes = new Map<string, number>();
 
-  for (const locale of LOCALE_CODES) {
-    localeStats.set(locale, { missing: 0, extra: 0 });
+  function checkAndTrack(filePath: string): void {
+    const report = checkFileParity(filePath);
+    const keys = tryReadKeys(BASE_LOCALE, filePath);
+    if (keys) fileBaseSizes.set(filePath, keys.size);
+    if (report) allReports.push(report);
   }
 
   console.log('\n📋 Checking common.json5...');
-  const commonReport = checkFileParity('common.json5', localeStats);
+  checkAndTrack('common.json5');
 
-  const baseLocaleDir = path.join(LOCALES_DIR, BASE_LOCALE);
-  if (fs.existsSync(baseLocaleDir)) {
+  const baseDir = path.join(LOCALES_DIR, BASE_LOCALE);
+  if (fs.existsSync(baseDir)) {
     const pageFiles = fs
-      .readdirSync(baseLocaleDir)
+      .readdirSync(baseDir)
       .filter((f) => f.endsWith('.json5') && f !== 'common.json5');
 
-    for (const pageFile of pageFiles) {
-      console.log(`📄 Checking ${pageFile}...`);
-      const report = checkFileParity(pageFile, localeStats);
-      if (report.missingKeys.length > 0 || report.extraKeys.length > 0) {
-        pages.set(pageFile.replace(/\.(json5|json)$/, ''), report);
+    for (const file of pageFiles) {
+      console.log(`📄 Checking ${file}...`);
+      checkAndTrack(file);
+    }
+
+    const compDir = path.join(baseDir, 'components');
+    if (fs.existsSync(compDir)) {
+      for (const file of fs.readdirSync(compDir).filter((f) => f.endsWith('.json5'))) {
+        console.log(`🧩 Checking components/${file}...`);
+        checkAndTrack(`components/${file}`);
       }
     }
   }
 
-  const componentsDir = path.join(LOCALES_DIR, BASE_LOCALE, 'components');
-  if (fs.existsSync(componentsDir)) {
-    const componentFiles = fs
-      .readdirSync(componentsDir)
-      .filter((f) => f.endsWith('.json5'));
+  const baseTotal = [...fileBaseSizes.values()].reduce((s, v) => s + v, 0);
 
-    for (const compFile of componentFiles) {
-      console.log(`🧩 Checking component: ${compFile}...`);
-      const report = checkFileParity(`components/${compFile}`, localeStats);
-      if (report.missingKeys.length > 0 || report.extraKeys.length > 0) {
-        components.set(compFile.replace(/\.json5$/, ''), report);
-      }
+  const localeTotals = new Map<string, { missing: number; extra: number; dupeCount: number; totalKeys: number }>();
+  for (const locale of LOCALE_CODES) {
+    localeTotals.set(locale, { missing: 0, extra: 0, dupeCount: 0, totalKeys: baseTotal });
+  }
+  for (const r of allReports) {
+    for (const d of r.diffs) {
+      const t = localeTotals.get(d.locale)!;
+      t.missing += d.missing.length;
+      t.extra += d.extra.length;
+      t.totalKeys += d.extra.length - d.missing.length;
+      if (d.dupKeys) t.dupeCount += Object.keys(d.dupKeys).length;
     }
   }
 
-  const summary = [...localeStats.entries()].map(([locale, stats]) => ({
+  const summary = [...localeTotals.entries()].map(([locale, stats]) => ({
     locale,
     ...stats,
   }));
 
-  return { common: commonReport, pages, components, summary };
-}
-
-function printKeysList(
-  type: 'missing' | 'extra',
-  items: { locale: string; keys: string[] }[],
-  verbose: boolean,
-  indent: string = '  ',
-) {
-  const icon = type === 'missing' ? '❌' : '⚠️ ';
-  const sign = type === 'missing' ? '-' : '+';
-
-  for (const { locale, keys } of items) {
-    const message =
-      type === 'missing'
-        ? `missing ${keys.length} keys`
-        : `${keys.length} extra keys`;
-    console.log(`${indent}${icon} ${locale}: ${message}`);
-
-    if (verbose) {
-      for (const key of keys.slice(0, 10)) {
-        console.log(`${indent}  ${sign} ${key}`);
-      }
-      if (keys.length > 10) {
-        console.log(`${indent}  ... and ${keys.length - 10} more`);
-      }
-    }
-  }
-}
-
-function printReportSection(
-  title: string,
-  reports: ParityReport[],
-  verbose: boolean,
-) {
-  if (reports.length === 0) return;
-
-  console.log(`\n${title}`);
-  for (const data of reports) {
-    console.log(`  ${data.file} (${data.totalKeys} keys):`);
-    printKeysList('missing', data.missingKeys, verbose, '    ');
-    printKeysList('extra', data.extraKeys, verbose, '    ');
-  }
+  return { reports: allReports, summary };
 }
 
 function printReport(
   report: ReturnType<typeof checkParity>,
-  verbose = false,
 ): void {
   console.log(`\n${'='.repeat(60)}`);
   console.log('🌍 LOCALE PARITY CHECK REPORT');
   console.log('='.repeat(60));
 
-  console.log('\n📊 Summary by Locale:');
-  console.log('┌──────────────┬─────────┬───────┬────────┐');
-  console.log('│ Locale       │ Missing │ Extra │ Status │');
-  console.log('├──────────────┼─────────┼───────┼────────┤');
+  const baseTotal = report.summary.find((s) => s.locale === BASE_LOCALE)?.totalKeys ?? 0;
 
-  for (const { locale, missing, extra } of report.summary) {
-    const color = getStatusColor(missing, extra);
-    const status = missing === 0 && extra === 0 ? 'OK' : 'Issues';
+  console.log('\n📊 Summary by Locale:');
+  console.log('┌──────────────┬────────┬─────────┬───────┬──────────┬────────┐');
+  console.log('│ Locale       │ Keys   │ Missing │ Extra │ Duplicate │ Status │');
+  console.log('├──────────────┼────────┼─────────┼───────┼──────────┼────────┤');
+
+  for (const { locale, totalKeys, missing, extra, dupeCount } of report.summary) {
+    const hasIssue = missing > 0 || extra > 0 || dupeCount > 0 || totalKeys !== baseTotal;
+    const color = hasIssue ? '\x1b[31m' : '\x1b[32m';
+    const status = hasIssue ? 'Issues' : 'OK';
+    const keysStr = totalKeys !== baseTotal ? `${color}${String(totalKeys).padStart(6)}\x1b[0m` : String(totalKeys).padStart(6);
     console.log(
-      `│ ${locale.padEnd(12)} │ ${color}${String(missing).padStart(7)}\x1b[0m │ ${String(extra).padStart(5)} │ ${color}${status.padEnd(6)}\x1b[0m │`,
+      `│ ${locale.padEnd(12)} │ ${keysStr} │ ${color}${String(missing).padStart(7)}\x1b[0m │ ${String(extra).padStart(5)} │ ${String(dupeCount).padStart(8)} │ ${color}${status.padEnd(6)}\x1b[0m │`,
     );
   }
-  console.log('└──────────────┴─────────┴───────┴────────┘');
+  console.log('└──────────────┴────────┴─────────┴───────┴──────────┴────────┘');
 
-  const hasCommonIssues =
-    report.common.missingKeys.length > 0 || report.common.extraKeys.length > 0;
-  if (hasCommonIssues) {
-    console.log(`\n📋 common.json5 (${report.common.totalKeys} keys):`);
-    printKeysList('missing', report.common.missingKeys, verbose, '  ');
-    printKeysList('extra', report.common.extraKeys, verbose, '  ');
+  const hasIssues = report.reports.length > 0;
+
+  if (hasIssues) {
+    console.log(`\n📄 Fix these locales to match ${BASE_LOCALE}:`);
+    for (const data of report.reports) {
+      for (const diff of data.diffs) {
+        console.log(`\n  ${diff.locale}  ✗  ${data.file}`);
+        if (diff.dupKeys) {
+          for (const [key, count] of Object.entries(diff.dupKeys)) {
+            console.log(`    ⚠️  duplicate key "${key}" (${count}x)`);
+          }
+        }
+        const usedExtra = new Set<number>();
+        const pairs: [string, string][] = [];
+
+        for (let mi = 0; mi < diff.missing.length; mi++) {
+          let bestDist = 4;
+          let bestEi = -1;
+          for (let ei = 0; ei < diff.extra.length; ei++) {
+            if (usedExtra.has(ei)) continue;
+            const dist = levenshtein(diff.missing[mi], diff.extra[ei]);
+            if (dist < bestDist) {
+              bestDist = dist;
+              bestEi = ei;
+            }
+          }
+          if (bestEi !== -1) {
+            usedExtra.add(bestEi);
+            pairs.push([diff.extra[bestEi], diff.missing[mi]]);
+          } else {
+            console.log(`    → add key "${diff.missing[mi]}"`);
+          }
+        }
+
+        for (const [extra, miss] of pairs) {
+          console.log(`    → rename "${extra}" → "${miss}"`);
+        }
+        for (let ei = 0; ei < diff.extra.length; ei++) {
+          if (!usedExtra.has(ei)) console.log(`    → remove key "${diff.extra[ei]}"`);
+        }
+      }
+    }
   }
 
-  printReportSection(
-    '📄 Pages with parity issues:',
-    [...report.pages.values()],
-    verbose,
-  );
-  printReportSection(
-    '🧩 Components with parity issues:',
-    [...report.components.values()],
-    verbose,
-  );
-
-  const totalIssues = report.summary.reduce(
-    (acc, { missing, extra }) => acc + missing + extra,
-    0,
-  );
+  const localeCount = report.summary.filter((s) => s.missing > 0 || s.extra > 0 || s.dupeCount > 0).length;
 
   console.log(`\n${'═'.repeat(60)}`);
-  if (totalIssues === 0) {
+  if (localeCount === 0) {
     console.log('\x1b[32m✅ All locales have perfect parity!\x1b[0m');
   } else {
-    console.log(`\x1b[31m❌ Found ${totalIssues} parity issues across all locales.\x1b[0m`);
-    console.log('   Run with --verbose to see all missing/extra keys.');
+    const lbl = localeCount === 1 ? 'locale needs' : 'locales need';
+    console.log(`\x1b[31m❌ ${localeCount} ${lbl} attention.\x1b[0m`);
   }
   console.log(`${'═'.repeat(60)}\n`);
 }
 
-const args = process.argv.slice(2);
-const verbose = args.includes('--verbose') || args.includes('-v');
-
 const report = checkParity();
-printReport(report, verbose);
+printReport(report);
 
-const totalIssues = report.summary.reduce(
-  (acc, { missing, extra }) => acc + missing + extra,
-  0,
-);
-
-if (totalIssues > 0) {
+const hasIssues = report.summary.some((s) => s.missing > 0 || s.extra > 0);
+if (hasIssues) {
   process.exit(1);
 }

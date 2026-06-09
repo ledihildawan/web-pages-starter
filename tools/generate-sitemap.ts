@@ -4,6 +4,7 @@ import path from 'node:path';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 import { config } from 'dotenv';
+import { ROOT_PAGE } from '../src/configs/site';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -40,8 +41,8 @@ const generateSitemap = () => {
   const pages = getPages();
   const baseUrl = SITE_URL.endsWith('/') ? SITE_URL.slice(0, -1) : SITE_URL;
 
-  const homePage = pages.includes('home') ? 'home' : null;
-  const otherPages = pages.filter((p) => p !== 'home');
+  const homePage = pages.includes(ROOT_PAGE) ? ROOT_PAGE : null;
+  const otherPages = pages.filter((p) => p !== ROOT_PAGE);
 
   const urls: string[] = [];
 

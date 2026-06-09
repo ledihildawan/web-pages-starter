@@ -1,50 +1,102 @@
 {
-  "meta": {
-    "title": "होम | Starter App",
-    "description": "आधुनिक वेब एप्लिकेशन बिल्डर।"
+  "about": {
+    "badge": "हमारे बारे में"
   },
   "hero": {
-    "badge": "नया: संस्करण 2.0 यहां है",
-    "title_start": "आज कुछ",
-    "title_highlight": "सुंदर बनाएं",
-    "description": "वेब एप्लिकेशन बनाने का आधुनिक तरीका। तेज, लचीला, और उन डेवलपर्स के लिए डिज़ाइन किया गया जो अपने शिल्प की परवाह करते हैं।",
-    "image_alt": "Dashboard Preview",
+    "badge": "हमारे बारे में",
+    "title_part1": "हम तराश रहे हैं ",
+    "title_highlight": "डिजिटल भविष्य",
+    "description": "2024 में स्थापित, Starter डेवलपर्स को बेहतर एप्लिकेशन तेजी से बनाने में मदद करने के लिए मौजूद है। हम साफ कोड, सुंदर डिज़ाइन और ओपन सोर्स सहयोग की शक्ति में विश्वास करते हैं।",
     "primary_btn": {
-      "label": "बिल्डिंग शुरू करें",
-      "url": "/start"
+      "label": "Get Started Free",
+      "url": "#pricing"
     },
     "secondary_btn": {
-      "label": "डेमो देखें",
-      "url": "/demo"
+      "label": "View Demo",
+      "url": "#features"
     },
-    "note": "क्रेडिट कार्ड की आवश्यकता नहीं"
-  },
-  "features": {
-    "heading": "आपको जो चाहिए वह सब कुछ",
-    "subheading": "तेजी से बनाने में मदद करने के लिए शक्तिशाली सुविधाएं।",
-    "list": {
-      "speed": {
-        "title": "बिजली की गति",
-        "description": "प्रदर्शन के लिए अनुकूलित। आपके ऐप तुरंत लोड होते हैं।"
-      },
-      "design": {
-        "title": "सुंदर डिज़ाइन",
-        "description": "सावधानी से बनाया गया। हर पिक्सेल का अर्थ और उद्देश्य है।"
-      },
-      "security": {
-        "title": "डिफ़ॉल्ट रूप से सुरक्षित",
-        "description": "एंटरप्राइज़-ग्रेड सुरक्षा। आपका डेटा हर स्तर पर सुरक्षित है।"
-      }
-    }
+    "note": "No credit card required"
   },
   "stats": {
-    "community": "डेवलपर समुदाय",
-    "community_val": "10हजार+",
-    "projects": "बनाए गए प्रोजेक्ट",
-    "projects_val": "50हजार+",
-    "uptime": "24/7 उपलब्धता",
-    "uptime_val": "99.9%",
-    "rating": "उपयोगकर्ता रेटिंग",
+    "community": "Global Community",
+    "community_val": "50K+",
+    "projects": "Projects Completed",
+    "projects_val": "120+",
+    "uptime": "Uptime",
+    "uptime_val": "99.99%",
+    "rating": "Rating",
     "rating_val": "4.9/5"
+  },
+  "story": {
+    "tag": "हमारी कहानी",
+    "visual_label": "रचनात्मक स्टूडियो चित्रण",
+    "title": "उत्कृष्टता से <br>प्रेरित।",
+    "para1": "हमारी यात्रा एक सरल विचार के साथ शुरू हुई: वेब विकास को सभी के लिए सुलभ और सुखद बनाना।",
+    "para2": "आज, हम इंजीनियर्स, डिज़ाइनर्स और विचारकों की एक विविध टीम हैं जो जटिल समस्याओं को हल करने के लिए एक साथ काम करती है।",
+    "val1": "उपयोगकर्ता-केंद्रित डिज़ाइन दर्शन",
+    "val2": "प्रदर्शन-प्रथम वास्तुकला",
+    "val3": "पारदर्शिता और खुला संचार"
+  },
+  "mission": {
+    "title": "हमारा मिशन",
+    "description": "डेवलपर्स और व्यवसायों को आश्चर्यजनक डिजिटल उत्पाद बनाने के लिए उत्तम, तेज और उपयोग में आसान टूल के साथ सशक्त बनाना।"
+  },
+  "vision": {
+    "title": "हमारा दृष्टिकोण",
+    "description": "आधुनिक डेवलपर्स के लिए पसंदीदा प्लेटफॉर्म बनना जो हर कोड लाइन में सुंदरता, प्रदर्शन और उपयोगकर्ता अनुभव को महत्व देते हैं।"
+  },
+  "values": {
+    "title": "हमारे मूल्य",
+    "subtitle": "सिद्धांत जो हर निर्णय का मार्गदर्शन करते हैं。"
+  },
+  "passion": {
+    "title": "जुनून",
+    "description": "हम वह करते हैं जो हम प्यार करते हैं, और यह हमारे उत्पादों की हर डिटेल में दिखाई देता है।"
+  },
+  "collaboration": {
+    "title": "सहयोग",
+    "description": "एक साथ काम करने से सर्वोत्तम परिणाम मिलते हैं। हम बेहतरीन टीमों की शक्ति में विश्वास करते हैं।"
+  },
+  "innovation": {
+    "title": "नवाचार",
+    "description": "समस्याओं को हल करने और मूल्य बनाने के बेहतर तरीकों की तलाश में हमेशा।"
+  },
+  "integrity": {
+    "title": "ईमानदारी",
+    "description": "ईमानदारी और पारदर्शिता हमारे द्वारा बनाए गए हर रिश्ते की नींव हैं।"
+  },
+  "excellence": {
+    "title": "उत्कृष्टता",
+    "description": "हम साधारण से संतुष्ट नहीं होते। हम हमेशा सर्वोत्तम के लिए प्रयास करते हैं।"
+  },
+  "quality": {
+    "title": "गुणवत्ता",
+    "description": "साफ कोड, सुंदर डिज़ाइन और निर्बाध अनुभव हमारे मानक हैं।"
+  },
+  "team": {
+    "title": "टीम से मिलें",
+    "subtitle": "हमारे द्वारा लिखी गई हर कोड लाइन के पीछे की प्रतिभाशाली दिमाग।",
+    "alex_desc": "SaaS इकोसिस्टम विकास में 10+ वर्षों के अनुभव के साथ दूरदर्शी नेता।",
+    "sarah_desc": "बड़े पैमाने पर सिस्टम वास्तुकला बनाने में विशेषज्ञ फुल-स्टैक जादूगर।",
+    "mike_desc": "पिक्सेल विवरण, चिकनी UX प्रवाह और पहुंच मानकों के लिए गहराई से जुनूनी।",
+    "jessica_desc": "रचनात्मक कहानीकार जो ब्रांडों को डिजिटल दुनिया में उनकी अनूठी आवाज खोजने में मदद करती है।"
+  },
+  "features": {
+    "list": {
+      "speed": {
+        "title": "Lightning Fast",
+        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+      },
+      "design": {
+        "title": "Modern Design",
+        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+      },
+      "security": {
+        "title": "High Security",
+        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+      }
+    },
+    "heading": "Key Features",
+    "subheading": "Everything you need to build and scale."
   }
 }

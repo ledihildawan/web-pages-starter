@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import type { I18nTranslationKeys } from '../../../../generated/i18n';
 import { i18nConfig } from '../../../configs/i18n';
+import { ROOT_PAGE } from '../../../configs/site';
 import { PATHS } from '../../../configs/paths';
 import { getValueByPath } from '../../utils/common';
 import {
@@ -648,7 +649,7 @@ export const createTemplateParams = (
   LOCALE_STORAGE_KEY: string,
   LOCALE_CODES: readonly string[],
 ) => {
-  const name = String(params.entryName || 'home');
+  const name = String(params.entryName || ROOT_PAGE);
   const lang = i18nConfig.defaultLocale;
 
   const templatePath = resolveRoot(`${PATHS.SRC}/pages/${name}/index.njk`);

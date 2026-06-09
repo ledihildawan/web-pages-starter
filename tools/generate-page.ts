@@ -3,7 +3,7 @@ import path from 'node:path';
 import { PATHS } from '../src/configs/paths';
 import { LOCALE_CODES } from '../src/scripts/lib/i18n/data';
 
-const slugify = (str) => {
+const slugify = (str: string) => {
   return str
     .toLowerCase()
     .normalize('NFC')

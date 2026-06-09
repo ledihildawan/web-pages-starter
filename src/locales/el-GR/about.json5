@@ -1,75 +1,72 @@
 {
-  "about": {
-    "badge": "Σχετικά με εμάς"
-  },
   "hero": {
-    "badge": "Σχετικά με εμάς",
-    "title_part1": "Δημιουργούμε το ",
-    "title_highlight": "ψηφιακό μέλλον",
-    "description": "Ιδρύθηκε το 2024, το Starter βοηθά τους προγραμματιστές να χτίσουν καλύτερες εφαρμογές πιο γρήγορα. Πιστεύουμε στη δύναμη του καθαρού κώδικα, του όμορφου σχεδιασμού και της συνεργασίας ανοιχτού κώδικα."
-  },
-  "stats": {
-    "years": "Χρόνια εμπειρίας",
-    "years_val": "3+",
-    "clients": "Παγκόσμιοι πελάτες",
-    "clients_val": "120+",
-    "countries": "Χώρες που φτάσαμε",
-    "countries_val": "15",
-    "support": "Εξειδικευμένη υποστήριξη",
-    "support_val": "24/7"
-  },
-  "story": {
-    "tag": "Η ιστορία μας",
-    "visual_label": "Εικονογράφηση δημιουργικού στούντιο",
-    "title": "Καθοδηγούμενοι από πάθος, <br>οριζόμενοι από αριστεία.",
-    "para1": "Το ταξίδι μας ξεκίνησε με μια απλή ιδέα: να κάνουμε την ανάπτυξη web προσβάσιμη και διασκεδαστική για όλους. Είχαμε βαρεθεί τα βαριά frameworks και τις περίπλοκες ρυθμίσεις.",
-    "para2": "Σήμερα, είμαστε μια ποικιλόμορφη ομάδα μηχανικών, σχεδιαστών και στοχαστών που εργάζονται μαζί για να λύσουν σύνθετα προβλήματα με κομψές λύσεις.",
-    "val1": "Φιλοσοφία σχεδιασμού με επίκεντρο τον χρήστη",
-    "val2": "Αρχιτεκτονική με προτεραιότητα στην απόδοση",
-    "val3": "Διαφάνεια και ανοιχτή επικοινωνία"
+    "badge": "Tentang Kami",
+    "title_part1": "Digerakkan oleh ",
+    "title_highlight": "passion",
+    "description": "Perjalanan kami dimulai dengan ide sederhana."
   },
   "mission": {
-    "title": "Η αποστολή μας",
-    "description": "Να ενδυναμώσουμε προγραμματιστές και επιχειρήσεις με κομψά, γρήγορα και εύχρηστα εργαλεία για τη δημιουργία εξαιρετικών ψηφιακών προϊόντων."
+    "title": "Misi Kami",
+    "description": "Memberdayakan pengembang dan bisnis dengan alat yang elegan, cepat, dan mudah digunakan untuk membangun produk digital yang luar biasa."
   },
   "vision": {
-    "title": "Το όραμά μας",
-    "description": "Να γίνουμε η προτιμώμενη πλατφόρμα για σύγχρονους προγραμματιστές που εκτιμούν την ομορφιά, την απόδοση και την εμπειρία χρήστη σε κάθε γραμμή κώδικα."
+    "title": "Visi Kami",
+    "description": "Menjadi platform pilihan untuk pengembang modern yang menghargai keindahan, performa, dan pengalaman pengguna di setiap baris kode."
+  },
+  "story": {
+    "tag": "Cerita Kami",
+    "visual_label": "Ilustrasi Studio Kreatif",
+    "title": "Digerakkan oleh passion, <br>didefinisikan oleh keunggulan.",
+    "para1": "Perjalanan kami dimulai dengan ide sederhana: membuat pengembangan web dapat diakses dan menyenangkan untuk semua orang. Kami sudah lelah dengan framework yang berat dan konfigurasi yang rumit.",
+    "para2": "Hari ini, kami adalah tim yang beragam dari engineer, desainer, dan pemikir yang bekerja sama untuk memecahkan masalah kompleks dengan solusi yang elegan.",
+    "val1": "Filosofi desain user-centric",
+    "val2": "Arsitektur performance-first",
+    "val3": "Transparansi dan komunikasi terbuka"
   },
   "values": {
-    "title": "Οι αξίες μας",
-    "subtitle": "Οι αρχές που καθοδηγούν κάθε απόφασή μας."
+    "title": "Nilai-Nilai Kami",
+    "subtitle": "Prinsip yang memandu setiap keputusan yang kami buat."
   },
   "passion": {
-    "title": "Πάθος",
-    "description": "Αγαπάμε αυτό που κάνουμε, και φαίνεται σε κάθε λεπτομέρεια των προϊόντων μας."
+    "title": "Passion",
+    "description": "Kami mencintai apa yang kami lakukan, dan itu terlihat di setiap detail produk kami."
   },
   "collaboration": {
-    "title": "Συνεργασία",
-    "description": "Η συνεργασία αποδίδει τα καλύτερα αποτελέσματα. Πιστεύουμε στη δύναμη μιας ισχυρής ομάδας."
+    "title": "Kolaborasi",
+    "description": "Bekerja sama menghasilkan hasil terbaik. Kami percaya pada kekuatan tim yang solid."
   },
   "innovation": {
-    "title": "Καινοτομία",
-    "description": "Πάντα ψάχνουμε καλύτερους τρόπους για να λύσουμε προβλήματα και να δημιουργήσουμε αξία."
+    "title": "Inovasi",
+    "description": "Selalu mencari cara yang lebih baik untuk memecahkan masalah dan menciptakan nilai."
   },
   "integrity": {
-    "title": "Ακεραιότητα",
-    "description": "Η ειλικρίνεια και η διαφάνεια είναι το θεμέλιο κάθε σχέσης που χτίζουμε."
+    "title": "Integritas",
+    "description": "Kejujuran dan transparansi adalah fondasi setiap hubungan yang kami bangun."
   },
   "excellence": {
-    "title": "Αριστεία",
-    "description": "Δεν ικανοποιούμαστε με το «αρκετά καλό». Πάντα στοχεύουμε στο καλύτερο."
+    "title": "Keunggulan",
+    "description": "Kami tidak puas dengan cukup baik. Kami selalu berusaha untuk yang terbaik."
   },
   "quality": {
-    "title": "Ποιότητα",
-    "description": "Καθαρός κώδικας, όμορφος σχεδιασμός και απρόσκοπτη εμπειρία είναι το πρότυπό μας."
+    "title": "Kualitas",
+    "description": "Kode yang bersih, desain yang indah, dan pengalaman yang seamless adalah standar kami."
   },
   "team": {
-    "title": "Γνωρίστε την ομάδα",
-    "subtitle": "Τα λαμπρά μυαλά πίσω από κάθε γραμμή κώδικα που γράφουμε.",
-    "alex_desc": "Οραματικός ηγέτης με πάνω από 10 χρόνια εμπειρίας στην ανάπτυξη οικοσυστημάτων SaaS.",
-    "sarah_desc": "Μαγεία fullstack που ειδικεύεται στην κατασκευή αρχιτεκτονικών συστημάτων μεγάλης κλίμακας.",
-    "mike_desc": "Εμμονή με τις λεπτομέρειες pixel, τις ομαλές ροές UX και τα πρότυπα προσβασιμότητας.",
-    "jessica_desc": "Δημιουργική αφηγήτρια που βοηθά τις μάρκες να βρουν τη μοναδική τους φωνή στον ψηφιακό κόσμο."
+    "title": "Kenali Tim",
+    "subtitle": "Pikiran cemerlang di balik setiap baris kode yang kami tulis.",
+    "alex_desc": "Pemimpin visioner dengan pengalaman 10+ tahun dalam pengembangan ekosistem SaaS.",
+    "sarah_desc": "Full-stack wizard yang mengkhususkan diri dalam membangun arsitektur sistem berskala besar.",
+    "mike_desc": "Terobsesi dengan detail pixel, alur UX yang halus, dan standar aksesibilitas.",
+    "jessica_desc": "Pencerita kreatif yang membantu merek menemukan suara unik mereka di dunia digital."
+  },
+  "stats": {
+    "years": "Tahun Pengalaman",
+    "years_val": "3+",
+    "clients": "Klien Global",
+    "clients_val": "120+",
+    "countries": "Negara yang Dijangkau",
+    "countries_val": "15",
+    "support": "Support Ahli",
+    "support_val": "24/7"
   }
 }

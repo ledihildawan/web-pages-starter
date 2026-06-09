@@ -1,7 +1,7 @@
 {
   "heading": "404",
-  "subheading": "Houston, baj van.",
-  "description": "A keresett oldal áthelyezésre, törlésre került, vagy elnyelte egy fekete lyuk az űrben.",
-  "button_text": "Vissza a Földre (Főoldal)",
-  "or_try": "vagy próbáld"
+  "subheading": "Halaman Tidak Ditemukan",
+  "description": "Sepertinya halaman yang Anda cari tidak ada atau telah dipindahkan.",
+  "button_text": "Kembali ke Beranda",
+  "or_try": "Atau coba:"
 }

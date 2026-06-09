@@ -1,7 +1,7 @@
 {
-    "heading": "404",
-    "subheading": "Houston, tenemos un problema.",
-    "description": "La página que buscas puede haber sido movida, eliminada o absorbida por un Agujero Negro en el espacio profundo.",
-    "button_text": "Volver a la Tierra (Inicio)",
-    "or_try": "o prueba"
+  "heading": "404",
+  "subheading": "Halaman Tidak Ditemukan",
+  "description": "Sepertinya halaman yang Anda cari tidak ada atau telah dipindahkan.",
+  "button_text": "Kembali ke Beranda",
+  "or_try": "Atau coba:"
 }

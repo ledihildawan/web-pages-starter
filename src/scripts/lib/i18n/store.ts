@@ -1,7 +1,9 @@
+import { ROOT_PAGE } from '../../../configs/site';
 import { i18nConfig } from '../../../configs/i18n';
 import { LOCALE_CODES, LOCALES } from './data';
 import { DIRECTION_CODE } from './directions';
 import { getLocaleLabelCountry, LOCALE_STORAGE_KEY } from './index';
+import { scheduleTask } from '../utils/microtask-queue';
 
 const updateDocumentAttributes = (code: string): void => {
   const locale = LOCALES.find((l) => l.code === code);
@@ -54,12 +56,12 @@ const changeLanguage = async (code: string): Promise<void> => {
   if (!m.i18next.isInitialized) {
     await m.initIntl(code);
   } else {
-    const pageID = (window.__PAGE_ID__ ?? 'home') as string;
+    const pageID = (window.__PAGE_ID__ ?? ROOT_PAGE) as string;
     await ensureLocaleData(code, pageID, m);
     await m.i18next.changeLanguage(code);
-    m.translatePage();
-    m.updateFormattedElements();
-    m.updateI18nStoreLabels?.();
+    scheduleTask(() => m.translatePage());
+    scheduleTask(() => m.updateFormattedElements());
+    scheduleTask(() => m.updateI18nStoreLabels?.());
   }
 
   updateDocumentAttributes(code);
@@ -78,14 +80,11 @@ export function registerI18nStore(): void {
       }),
     ),
 
-    get current(): string {
-      return (
-        localStorage.getItem(LOCALE_STORAGE_KEY) || i18nConfig.defaultLocale
-      );
-    },
+    current: localStorage.getItem(LOCALE_STORAGE_KEY) || i18nConfig.defaultLocale,
 
     change(code: string): void {
       localStorage.setItem(LOCALE_STORAGE_KEY, code);
+      this.current = code;
       void changeLanguage(code).catch((err: unknown) => {
         const message = err instanceof Error ? err.message : String(err);
         console.error('[i18n change] failed:', message);

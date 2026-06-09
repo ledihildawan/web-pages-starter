@@ -1,50 +1,102 @@
 {
-  "meta": {
-    "title": "Etusivu | Starter App",
-    "description": "Moderni verkkosovellusten rakentaja."
+  "about": {
+    "badge": "Tietoa meistä"
   },
   "hero": {
-    "badge": "Uutta: versio 2.0 on täällä",
-    "title_start": "Rakenna jotain",
-    "title_highlight": "ihanaa tänään",
-    "description": "Moderni tapa rakentaa verkkosovelluksia. Nopea, joustava ja suunniteltu kehittäjille, jotka välittävät laadusta.",
-    "image_alt": "Hallintapaneelin esikatselu",
+    "badge": "Tietoa meistä",
+    "title_part1": "Luomme ",
+    "title_highlight": "digitaalista tulevaisuutta",
+    "description": "Vuonna 2024 perustettu Starter auttaa kehittäjiä rakentamaan parempia sovelluksia nopeammin. Uskomme puhtaan koodin, kauniin muotoilun ja avoimen lähdekoodin yhteistyön voimaan.",
     "primary_btn": {
-      "label": "Aloita rakentaminen",
-      "url": "/start"
+      "label": "Get Started Free",
+      "url": "#pricing"
     },
     "secondary_btn": {
-      "label": "Katso demo",
-      "url": "/demo"
+      "label": "View Demo",
+      "url": "#features"
     },
-    "note": "Ei luottokorttia tarvita",
-  },
-  "features": {
-    "heading": "Kaikki mitä tarvitset",
-    "subheading": "Edistyneitä ominaisuuksia, jotka auttavat sinua rakentamaan nopeammin.",
-    "list": {
-      "speed": {
-        "title": " salamannopea",
-        "description": "Optimoitu maksimaaliseen suorituskykyyn. Sovelluksesi latautuu välittömästi."
-      },
-      "design": {
-        "title": "Elegantti muotoilu",
-        "description": "Tehty huolella. Jokaisella pikselillä on tarkoitus ja merkitys."
-      },
-      "security": {
-        "title": "Taattu turvallisuus",
-        "description": "Yritystason turvallisuus. Tietosi ovat suojattuja joka kerroksessa."
-      }
-    }
+    "note": "No credit card required"
   },
   "stats": {
-    "community": "Kehittäjäyhteisö",
-    "community_val": "10K+",
-    "projects": "Rakennettuja projekteja",
-    "projects_val": "50K+",
-    "uptime": "Käytettävyys 24/7",
-    "uptime_val": "99,9%",
-    "rating": "Käyttäjäarvio",
-    "rating_val": "4,9/5"
+    "community": "Global Community",
+    "community_val": "50K+",
+    "projects": "Projects Completed",
+    "projects_val": "120+",
+    "uptime": "Uptime",
+    "uptime_val": "99.99%",
+    "rating": "Rating",
+    "rating_val": "4.9/5"
+  },
+  "story": {
+    "tag": "Tarinamme",
+    "visual_label": "Luovan studion kuva",
+    "title": "Intohimon ajamia, <br>laadun määrittelemiä.",
+    "para1": "Matkamme alkoi yksinkertaisella idealla: tehdä web-kehityksestä saavutettavaa ja hauskaa kaikille. Olimme kyllästyneitä raskaisiin kehyksiin ja monimutkaisiin asetuksiin.",
+    "para2": "Nykyään olemme monimuotoinen tiimi insinöörejä, suunnittelijoita ja ajattelijoita, jotka työskentelevät yhdessä ratkaistakseen monimutkaisia ongelmia eleganteilla ratkaisuilla.",
+    "val1": "Käyttäjäkeskeinen muotoilufilosofia",
+    "val2": "Suorituskyky edellä -arkkitehtuuri",
+    "val3": "Avoimuus ja avoin viestintä"
+  },
+  "mission": {
+    "title": "Tehtävämme",
+    "description": "Valtuuttaa kehittäjiä ja yrityksiä eleganteilla, nopeilla ja helppokäyttöisillä työkaluilla poikkeuksellisten digitaalisten tuotteiden rakentamiseen."
+  },
+  "vision": {
+    "title": "Visioomme",
+    "description": "Tulla modernien kehittäjien valitsemaksi alustaksi, jotka arvostavat kauneutta, suorituskykyä ja käyttäjäkokemusta jokaisella koodirivillä."
+  },
+  "values": {
+    "title": "Arvomme",
+    "subtitle": "Periaatteet, jotka ohjaavat jokaista päätöstämme."
+  },
+  "passion": {
+    "title": "Intohimo",
+    "description": "Rakastamme sitä, mitä teemme, ja se näkyy tuotteidemme jokaisessa yksityiskohdassa."
+  },
+  "collaboration": {
+    "title": "Yhteistyö",
+    "description": "Yhdessä työskentely tuottaa parhaat tulokset. Uskomme vahvan tiimin voimaan."
+  },
+  "innovation": {
+    "title": "Innovaatio",
+    "description": "Etsimme aina parempia tapoja ratkaista ongelmia ja luoda arvoa."
+  },
+  "integrity": {
+    "title": "Rehellisyys",
+    "description": "Rehellisyys ja avoimuus ovat jokaisen rakentamamme suhteen perusta."
+  },
+  "excellence": {
+    "title": "Erinomaisuus",
+    "description": "Emme tyydy 'riittävän hyvään'. Pyrimme aina parhaaseen."
+  },
+  "quality": {
+    "title": "Laatu",
+    "description": "Puhdas koodi, kaunis muotoilu ja saumaton kokemus ovat standardimme."
+  },
+  "team": {
+    "title": "Tapaa tiimi",
+    "subtitle": "Loistavat mielet jokaisen kirjoittamamme koodirivin takana.",
+    "alex_desc": "Visionäärinen johtaja, jolla on yli 10 vuoden kokemus SaaS-ekosysteemien kehittämisestä.",
+    "sarah_desc": "Fullstack-taikuutta erikoistuen suuren mittakaavan järjestelmäarkkitehtuurien rakentamiseen.",
+    "mike_desc": "Pakkomielteinen pikselien yksityiskohdista, sujuvista UX-virroista ja saavutettavuusstandardeista.",
+    "jessica_desc": "Luova tarinankertoja, joka auttaa brändejä löytämään ainutlaatuisen äänensä digitaalisessa maailmassa."
+  },
+  "features": {
+    "list": {
+      "speed": {
+        "title": "Lightning Fast",
+        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+      },
+      "design": {
+        "title": "Modern Design",
+        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+      },
+      "security": {
+        "title": "High Security",
+        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+      }
+    },
+    "heading": "Key Features",
+    "subheading": "Everything you need to build and scale."
   }
 }

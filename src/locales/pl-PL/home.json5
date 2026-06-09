@@ -1,50 +1,102 @@
 {
-  "meta": {
-    "title": "Strona Główna | Starter App",
-    "description": "Kreator nowoczesnych aplikacji internetowych."
+  "about": {
+    "badge": "O nas"
   },
   "hero": {
-    "badge": "Nowość: Wersja 2.0 jest dostępna",
-    "title_start": "Zbuduj coś",
-    "title_highlight": "pięknego dzisiaj",
-    "description": "Nowoczesny sposób budowania aplikacji internetowych. Szybki, elastyczny i zaprojektowany dla programistów, którym zależy na jakości pracy.",
-    "image_alt": "Podgląd Dashboard",
+    "badge": "O nas",
+    "title_part1": "Tworzymy ",
+    "title_highlight": "przyszłość cyfrową",
+    "description": "Założony w 2024 roku, Starter istnieje, aby pomóc programistom budować lepsze aplikacje szybciej. Wierzymy w moc czystego kodu, pięknego designu i współpracy open source.",
     "primary_btn": {
-      "label": "Zacznij",
-      "url": "/start"
+      "label": "Get Started Free",
+      "url": "#pricing"
     },
     "secondary_btn": {
-      "label": "Zobacz Demo",
-      "url": "/demo"
+      "label": "View Demo",
+      "url": "#features"
     },
-    "note": "Nie wymagamy karty kredytowej"
-  },
-  "features": {
-    "heading": "Wszystko Czego Potrzebujesz",
-    "subheading": "Zaawansowane funkcje pomagające budować szybciej.",
-    "list": {
-      "speed": {
-        "title": "Błyskawicznie Szybki",
-        "description": "Zoptymalizowany pod kątem wydajności. Twoje aplikacje ładują się natychmiast."
-      },
-      "design": {
-        "title": "Piękny Design",
-        "description": "Stworzony z dbałością. Każdy piksel ma znaczenie i cel."
-      },
-      "security": {
-        "title": "Bezpieczny domyślnie",
-        "description": "Bezpieczeństwo na poziomie korporacyjnym. Twoje dane są chronione na każdej warstwie."
-      }
-    }
+    "note": "No credit card required"
   },
   "stats": {
-    "community": "Społeczność Developerów",
-    "community_val": "10K+",
-    "projects": "Zbudowanych Projektów",
-    "projects_val": "50K+",
-    "uptime": "Dostępność 24/7",
-    "uptime_val": "99.9%",
-    "rating": "Ocena Użytkowników",
+    "community": "Global Community",
+    "community_val": "50K+",
+    "projects": "Projects Completed",
+    "projects_val": "120+",
+    "uptime": "Uptime",
+    "uptime_val": "99.99%",
+    "rating": "Rating",
     "rating_val": "4.9/5"
+  },
+  "story": {
+    "tag": "Nasza Historia",
+    "visual_label": "Ilustracja Studia Kreatywnego",
+    "title": "Napędzani pasją, <br>określani przez doskonałość.",
+    "para1": "Nasza podróż rozpoczęła się od prostej idei: uczynienie tworzenia stron internetowych dostępnym i przyjemnym dla wszystkich. Byliśmy zmęczeni rozdętymi frameworkami i skomplikowanymi konfiguracjami.",
+    "para2": "Dziś jesteśmy zróżnicowanym zespołem inżynierów, projektantów i myślicieli pracujących razem nad rozwiązywaniem złożonych problemów eleganckimi rozwiązaniami.",
+    "val1": "Filozofia projektowania zorientowanego na użytkownika",
+    "val2": "Architektura z 우선性能和 pierwszeństwem",
+    "val3": "Przejrzystość i otwarta komunikacja"
+  },
+  "mission": {
+    "title": "Nasza Misja",
+    "description": "Umożliwianie programistom i firmom korzystanie z eleganckich, szybkich i łatwych w użyciu narzędzi do budowania wyjątkowych produktów cyfrowych."
+  },
+  "vision": {
+    "title": "Nasza Wizja",
+    "description": "Być platformą wyboru dla nowoczesnych programistów, którzy cenią piękno, wydajność i doświadczenie użytkownika w każdej linii kodu."
+  },
+  "values": {
+    "title": "Nasze Wartości",
+    "subtitle": "Zasady kierujące każdą decyzją, którą podejmujemy."
+  },
+  "passion": {
+    "title": "Pasja",
+    "description": "Kochamy to, co robimy, i widać to w każdym szczególe naszych produktów."
+  },
+  "collaboration": {
+    "title": "Współpraca",
+    "description": "Praca razem przynosi najlepsze rezultaty. Wierzymy w moc silnych zespołów."
+  },
+  "innovation": {
+    "title": "Innowacja",
+    "description": "Zawsze szukamy lepszych sposobów rozwiązywania problemów i tworzenia wartości."
+  },
+  "integrity": {
+    "title": "Uczciwość",
+    "description": "Szczerość i przejrzystość są podstawą każdej relacji, którą budujemy."
+  },
+  "excellence": {
+    "title": "Doskonałość",
+    "description": "Nie zadowalamy się tym, co wystarczy. Zawsze dążymy do najlepszego."
+  },
+  "quality": {
+    "title": "Jakość",
+    "description": "Czysty kod, piękny design i płynne doświadczenia to nasze standardy."
+  },
+  "team": {
+    "title": "Poznaj Zespół",
+    "subtitle": "Błyskotliwe umysły stojące za każdą linią kodu, którą piszemy.",
+    "alex_desc": "Wizjonerski lider z 10+ latami doświadczenia w rozwoju ekosystemu SaaS.",
+    "sarah_desc": "Full-stack wizard specjalizująca się w budowaniu architektur systemów na dużą skalę.",
+    "mike_desc": "Głęboko obsesyjny na punkcie szczegółów pikseli, płynnych przepływów UX i standardów dostępności.",
+    "jessica_desc": "Kreatywna narratorka pomagająca markom znaleźć ich unikalny głos w świecie cyfrowym."
+  },
+  "features": {
+    "list": {
+      "speed": {
+        "title": "Lightning Fast",
+        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+      },
+      "design": {
+        "title": "Modern Design",
+        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+      },
+      "security": {
+        "title": "High Security",
+        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+      }
+    },
+    "heading": "Key Features",
+    "subheading": "Everything you need to build and scale."
   }
 }

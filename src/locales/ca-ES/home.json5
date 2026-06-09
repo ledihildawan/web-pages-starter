@@ -1,50 +1,102 @@
 {
-  "meta": {
-    "title": "Inici | Starter App",
-    "description": "Constructor d'aplicacions web modernes."
+  "about": {
+    "badge": "Sobre nosaltres"
   },
   "hero": {
-    "badge": "Nou: la versió 2.0 ja és aquí",
-    "title_start": "Creeu quelcom",
-    "title_highlight": "meravellós avui",
-    "description": "La manera moderna de construir aplicacions web. Ràpida, flexible i dissenyada per a desenvolupadors que es preocupen per la qualitat.",
-    "image_alt": "Vista prèvia del tauler",
+    "badge": "Sobre nosaltres",
+    "title_part1": "Creem el ",
+    "title_highlight": "futur digital",
+    "description": "Fundat el 2024, Starter ajuda els desenvolupadors a construir aplicacions millors més ràpidament. Creiem en el poder del codi net, el disseny bonic i la col·laboració de codi obert.",
     "primary_btn": {
-      "label": "Comença a construir",
-      "url": "/start"
+      "label": "Get Started Free",
+      "url": "#pricing"
     },
     "secondary_btn": {
-      "label": "Veure demo",
-      "url": "/demo"
+      "label": "View Demo",
+      "url": "#features"
     },
-    "note": "No cal targeta de crèdit",
-  },
-  "features": {
-    "heading": "Tot el que necessiteu",
-    "subheading": "Característiques avançades per ajudar-vos a construir més ràpid.",
-    "list": {
-      "speed": {
-        "title": "Molt ràpid",
-        "description": "Optimitzat per al màxim rendiment. La vostra aplicació es carrega a l'instant."
-      },
-      "design": {
-        "title": "Disseny elegant",
-        "description": "Fet amb cura. Cada píxel té significat i propòsit."
-      },
-      "security": {
-        "title": "Seguretat garantida",
-        "description": "Seguretat de classe empresarial. Les vostres dades estan protegides a cada capa."
-      }
-    }
+    "note": "No credit card required"
   },
   "stats": {
-    "community": "Comunitat de desenvolupadors",
-    "community_val": "10K+",
-    "projects": "Projectes construïts",
-    "projects_val": "50K+",
-    "uptime": "Temps d'activitat 24/7",
-    "uptime_val": "99,9%",
-    "rating": "Valoració dels usuaris",
-    "rating_val": "4,9/5"
+    "community": "Global Community",
+    "community_val": "50K+",
+    "projects": "Projects Completed",
+    "projects_val": "120+",
+    "uptime": "Uptime",
+    "uptime_val": "99.99%",
+    "rating": "Rating",
+    "rating_val": "4.9/5"
+  },
+  "story": {
+    "tag": "La nostra història",
+    "visual_label": "Il·lustració d'estudi creatiu",
+    "title": "Impulsats per la passió, <br>definits per l'excel·lència.",
+    "para1": "El nostre viatge va començar amb una idea simple: fer que el desenvolupament web sigui accessible i divertit per a tothom. Estàvem farts dels frameworks pesats i les configuracions complicades.",
+    "para2": "Avui, som un equip divers d'enginyers, dissenyadors i pensadors que treballen junts per resoldre problemes complexos amb solucions elegants.",
+    "val1": "Filosofia de disseny centrat en l'usuari",
+    "val2": "Arquitectura performance-first",
+    "val3": "Transparència i comunicació oberta"
+  },
+  "mission": {
+    "title": "La nostra missió",
+    "description": "Capacitar desenvolupadors i empreses amb eines elegants, ràpides i fàcils d'utilitzar per construir productes digitals excepcionals."
+  },
+  "vision": {
+    "title": "La nostra visió",
+    "description": "Convertir-nos en la plataforma d'elecció per a desenvolupadors moderns que valoren la bellesa, el rendiment i l'experiència d'usuari en cada línia de codi."
+  },
+  "values": {
+    "title": "Els nostres valors",
+    "subtitle": "Els principis que guien cada decisió que prenem."
+  },
+  "passion": {
+    "title": "Passió",
+    "description": "Estimem el que fem, i es nota en cada detall dels nostres productes."
+  },
+  "collaboration": {
+    "title": "Col·laboració",
+    "description": "Treballar junts produeix els millors resultats. Creiem en el poder d'un equip sòlid."
+  },
+  "innovation": {
+    "title": "Innovació",
+    "description": "Sempre buscant maneres millors de resoldre problemes i crear valor."
+  },
+  "integrity": {
+    "title": "Integritat",
+    "description": "L'honestedat i la transparència són la base de cada relació que construïm."
+  },
+  "excellence": {
+    "title": "Excel·lència",
+    "description": "No estem satisfets amb 'prou bo'. Sempre busquem el millor."
+  },
+  "quality": {
+    "title": "Qualitat",
+    "description": "Codi net, disseny bonic i experiència perfecta són el nostre estàndard."
+  },
+  "team": {
+    "title": "Conegueu l'equip",
+    "subtitle": "Les ments brillants darrere de cada línia de codi que escrivim.",
+    "alex_desc": "Líder visionari amb més de 10 anys d'experiència en el desenvolupament d'ecosistemes SaaS.",
+    "sarah_desc": "Màgia full-stack especialitzada en la construcció d'arquitectures de sistemes a gran escala.",
+    "mike_desc": "Obsessionat amb els detalls de píxels, els fluxos d'experiència d'usuari suaus i els estàndards d'accessibilitat.",
+    "jessica_desc": "Contadora d'històries creatives que ajuda les marques a trobar la seva veu única al món digital."
+  },
+  "features": {
+    "list": {
+      "speed": {
+        "title": "Lightning Fast",
+        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+      },
+      "design": {
+        "title": "Modern Design",
+        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+      },
+      "security": {
+        "title": "High Security",
+        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+      }
+    },
+    "heading": "Key Features",
+    "subheading": "Everything you need to build and scale."
   }
 }

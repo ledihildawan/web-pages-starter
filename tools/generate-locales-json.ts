@@ -57,6 +57,7 @@ const main = async (): Promise<void> => {
   console.log("└────────────────────────────────────────┘\n");
 
   for (const locale of locales) {
+    console.log(`  Processing ${locale}...`);
     const localeDir = path.join(LOCALES_DIR, locale);
     const outLocaleDir = path.join(OUT_DIR, locale);
 
@@ -120,6 +121,8 @@ const main = async (): Promise<void> => {
   console.log("┌────────────────────────────────────────┐");
   console.log(`│  ✅ Wrote ${String(totalFiles).padEnd(18)}files          │`);
   console.log(`│     ${String((totalBytes / 1024).toFixed(1) + " KiB").padEnd(28)}│`);
+  console.log("├────────────────────────────────────────┤");
+  console.log("│  📁 Generated files in public/locales/  │");
   console.log("└────────────────────────────────────────┘\n");
 };
 

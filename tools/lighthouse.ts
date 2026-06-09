@@ -18,7 +18,7 @@ const getTimestamp = () => {
   return now.toISOString().replace(/[:.]/g, '-').slice(0, 19);
 };
 
-const fetchSitemap = async (url) => {
+const fetchSitemap = async (url: string) => {
   const sitemapUrl = url.endsWith('/') ? `${url}sitemap.xml` : `${url}/sitemap.xml`;
 
   const res = await fetch(sitemapUrl);
@@ -28,14 +28,14 @@ const fetchSitemap = async (url) => {
   return res.text();
 };
 
-const parseSitemap = (xml) => {
+const parseSitemap = (xml: string) => {
   const parser = new DOMParser();
   const doc = parser.parseFromString(xml, 'text/xml');
   const urls = doc.querySelectorAll('url loc');
-  return Array.from(urls).map((el) => el.textContent.trim());
+  return Array.from(urls).map((el: Element) => (el.textContent ?? '').trim());
 };
 
-const runLighthouse = (url, args, label) => {
+const runLighthouse = (url: string, args: string[], label: string) => {
   return new Promise((resolve) => {
     console.log(`\n${label} Running lighthouse for ${url}...`);
     const proc = spawn('bunx', ['lighthouse', url, ...args], {
@@ -49,7 +49,7 @@ const runLighthouse = (url, args, label) => {
   });
 };
 
-const buildArgs = (formFactor, categories, outputTypes, outputPath, view) => {
+const buildArgs = (formFactor: string, categories: string[], outputTypes: string[], outputPath: string, view: boolean) => {
   const args = [`--output=${outputTypes.join(',')}`, '--quiet', '--quiet-throttle'];
 
   if (EXTRA_HEADERS) {
@@ -75,7 +75,7 @@ const buildArgs = (formFactor, categories, outputTypes, outputPath, view) => {
   return args;
 };
 
-const slugify = (url) => {
+const slugify = (url: string) => {
   try {
     const u = new URL(url);
     const pathname = u.pathname.replace(/\/$/, '').replace(/^\//, '');
@@ -85,13 +85,13 @@ const slugify = (url) => {
   }
 };
 
-const getScoreColor = (score) => {
+const getScoreColor = (score: number) => {
   if (score >= 90) return '\x1b[32m';
   if (score >= 50) return '\x1b[33m';
   return '\x1b[31m';
 };
 
-const parseScores = (reportDir) => {
+const parseScores = (reportDir: string) => {
   const scores: Record<string, Record<string, number>> = {};
 
   if (!fs.existsSync(reportDir)) return scores;
@@ -258,7 +258,7 @@ Options:
       const sitemapXml = await fetchSitemap(BASE_URL);
       urls = parseSitemap(sitemapXml);
     } catch (err) {
-      console.warn(`Could not fetch sitemap: ${err.message}`);
+      console.warn(`Could not fetch sitemap: ${(err as Error).message}`);
       urls = [BASE_URL];
     }
   }

@@ -1,7 +1,7 @@
 {
-    "heading": "404",
-    "subheading": "ह्यूस्टन, हमारे पास एक समस्या है।",
-    "description": "आप जिस पृष्ठ की तलाश कर रहे हैं, वाह स्थानांतरित, हटाया गया हो सकता है या गहरे अंतरिक्ष में एक ब्लैक होल में खींच लिया गया हो सकता है।",
-    "button_text": "पृथ्वी पर वापस (होम)",
-    "or_try": "या प्रयास करें"
+  "heading": "404",
+  "subheading": "Halaman Tidak Ditemukan",
+  "description": "Sepertinya halaman yang Anda cari tidak ada atau telah dipindahkan.",
+  "button_text": "Kembali ke Beranda",
+  "or_try": "Atau coba:"
 }

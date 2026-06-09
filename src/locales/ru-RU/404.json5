@@ -1,7 +1,7 @@
 {
-    "heading": "404",
-    "subheading": "Хьюстон, у нас проблема.",
-    "description": "Страница, которую вы ищете, могла быть перемещена, удалена или засосана в Чёрную Дыру в глубоком космосе.",
-    "button_text": "Обратно на Землю (Главная)",
-    "or_try": "или попробуйте"
+  "heading": "404",
+  "subheading": "Halaman Tidak Ditemukan",
+  "description": "Sepertinya halaman yang Anda cari tidak ada atau telah dipindahkan.",
+  "button_text": "Kembali ke Beranda",
+  "or_try": "Atau coba:"
 }

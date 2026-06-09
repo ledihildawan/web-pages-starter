@@ -1,50 +1,102 @@
 {
-  "meta": {
-    "title": "Hjem | Starter App",
-    "description": "Moderne webapplikationsbygger."
+  "about": {
+    "badge": "Om os"
   },
   "hero": {
-    "badge": "Nyt: version 2.0 er her",
-    "title_start": "Byg noget",
-    "title_highlight": "fantastisk i dag",
-    "description": "Den moderne måde at bygge webapplikationer på. Hurtig, fleksibel og designet til udviklere, der bekymrer sig om kvalitet.",
-    "image_alt": "Forhåndsvisning af dashboard",
+    "badge": "Om os",
+    "title_part1": "Vi skaber den ",
+    "title_highlight": "digitale fremtid",
+    "description": "Grundlagt i 2024 hjælper Starter udviklere med at bygge bedre applikationer hurtigere. Vi tror på kraften i ren kode, smukt design og open source-samarbejde.",
     "primary_btn": {
-      "label": "Begynd at bygge",
-      "url": "/start"
+      "label": "Get Started Free",
+      "url": "#pricing"
     },
     "secondary_btn": {
-      "label": "Se demo",
-      "url": "/demo"
+      "label": "View Demo",
+      "url": "#features"
     },
-    "note": "Intet kreditkort kræves",
-  },
-  "features": {
-    "heading": "Alt hvad du behøver",
-    "subheading": "Avancerede funktioner til at hjælpe dig med at bygge hurtigere.",
-    "list": {
-      "speed": {
-        "title": "Lynhurtig",
-        "description": "Optimeret til maksimal ydeevne. Din app indlæses øjeblikkeligt."
-      },
-      "design": {
-        "title": "Elegant design",
-        "description": "Lavet med omhu. Hver pixel har formål og betydning."
-      },
-      "security": {
-        "title": "Sikkerhed garanteret",
-        "description": "Sikkerhed på virksomhedsniveau. Dine data er beskyttet i hvert lag."
-      }
-    }
+    "note": "No credit card required"
   },
   "stats": {
-    "community": "Udviklerfællesskab",
-    "community_val": "10K+",
-    "projects": "Projekter bygget",
-    "projects_val": "50K+",
-    "uptime": "Oppetid 24/7",
-    "uptime_val": "99,9%",
-    "rating": "Brugervurdering",
-    "rating_val": "4,9/5"
+    "community": "Global Community",
+    "community_val": "50K+",
+    "projects": "Projects Completed",
+    "projects_val": "120+",
+    "uptime": "Uptime",
+    "uptime_val": "99.99%",
+    "rating": "Rating",
+    "rating_val": "4.9/5"
+  },
+  "story": {
+    "tag": "Vores historie",
+    "visual_label": "Kreativ studio-illustration",
+    "title": "Drevet af passion, <br>defineret af kvalitet.",
+    "para1": "Vores rejse startede med en simpel idé: at gøre webudvikling tilgængelig og sjov for alle. Vi var trætte af tunge frameworks og komplicerede opsætninger.",
+    "para2": "I dag er vi et mangfoldigt team af ingeniører, designere og tænkere, der arbejder sammen om at løse komplekse problemer med elegante løsninger.",
+    "val1": "Brugercentreret designfilosofi",
+    "val2": "Performance-first-arkitektur",
+    "val3": "Gennemsigtighed og åben kommunikation"
+  },
+  "mission": {
+    "title": "Vores mission",
+    "description": "Give udviklere og virksomheder elegante, hurtige og brugervenlige værktøjer til at bygge exceptionelle digitale produkter."
+  },
+  "vision": {
+    "title": "Vores vision",
+    "description": "Bli den foretrukne platform for moderne udviklere, der værdsætter skønhed, ydeevne og brugeroplevelse i hver kodelinje."
+  },
+  "values": {
+    "title": "Vores værdier",
+    "subtitle": "De principper, der vejleder hver beslutning, vi træffer."
+  },
+  "passion": {
+    "title": "Passion",
+    "description": "Vi elsker det, vi laver, og det ses i hver eneste detalje i vores produkter."
+  },
+  "collaboration": {
+    "title": "Samarbejde",
+    "description": "At arbejde sammen giver de bedste resultater. Vi tror på kraften i et stærkt team."
+  },
+  "innovation": {
+    "title": "Innovation",
+    "description": "Vi leder altid efter bedre måder at løse problemer og skabe værdi."
+  },
+  "integrity": {
+    "title": "Integritet",
+    "description": "Ærlighed og gennemsigtighed er grundlaget for hver relation, vi bygger."
+  },
+  "excellence": {
+    "title": "Kvalitet",
+    "description": "Vi nøjes ikke med 'godt nok'. Vi stræber altid efter det bedste."
+  },
+  "quality": {
+    "title": "Kvalitet",
+    "description": "Ren kode, smukt design og problemfri oplevelse er vores standard."
+  },
+  "team": {
+    "title": "Mød teamet",
+    "subtitle": "De skarpe hjerner bag hver kodelinje, vi skriver.",
+    "alex_desc": "Visionær leder med over 10 års erfaring i udvikling af SaaS-økosystemer.",
+    "sarah_desc": "Fullstack-magi specialiseret i at bygge storskalasystemarkitekturer.",
+    "mike_desc": "Besat af pixeldetaljer, glidende UX-flows og tilgængelighedsstandarder.",
+    "jessica_desc": "Kreativ historiefortæller, der hjælper brands med at finde deres unikke stemme i den digitale verden."
+  },
+  "features": {
+    "list": {
+      "speed": {
+        "title": "Lightning Fast",
+        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+      },
+      "design": {
+        "title": "Modern Design",
+        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+      },
+      "security": {
+        "title": "High Security",
+        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+      }
+    },
+    "heading": "Key Features",
+    "subheading": "Everything you need to build and scale."
   }
 }

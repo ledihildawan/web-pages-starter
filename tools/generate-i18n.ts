@@ -133,7 +133,12 @@ function compareLocaleParity(
 }
 
 try {
-  console.log('Generating i18n definitions...');
+  console.log('┌────────────────────────────────────────┐');
+  console.log('│         ⚙️ Generate i18n Types           │');
+  console.log('├────────────────────────────────────────┤');
+  console.log(`│  Default locale: ${i18nConfig.defaultLocale.padEnd(20)}│`);
+  console.log(`│  Output:         i18n.d.ts${' '.repeat(16)}│`);
+  console.log('└────────────────────────────────────────┘\n');
 
   const defaultNamespaces = readLocaleTree(DEFAULT_LOCALE_DIR);
   const commonData = defaultNamespaces.common;
@@ -161,8 +166,9 @@ try {
     // a single locale is out of date. Use `bun run check:parity` for the
     // authoritative, hard-failing parity report.
     console.warn(
-      `[i18n] ${parityErrors.length} parity issue(s) detected. Run \`bun run check:parity\` for details.`,
+      `\n⚠️  [i18n] ${parityErrors.length} parity issue(s) detected.`,
     );
+    console.warn('   Run `bun run check:parity` for a detailed report.\n');
   }
 
   const commonKeys = collectKeys(commonData).map((k) => `'common:${k}'`);
@@ -173,6 +179,7 @@ try {
     collectKeys(data).map((k) => `'components/${comp}:${k}'`),
   );
 
+  const allKeyCount = commonKeys.length + pageKeys.length + compKeys.length;
   const allKeys = [...commonKeys, ...pageKeys, ...compKeys]
     .map((k) => `  | ${k}`)
     .join('\n');
@@ -198,7 +205,9 @@ export interface I18nComponents ${toTsInterface(componentsData)}
   fs.mkdirSync(path.dirname(OUTPUT_FILE), { recursive: true });
   fs.writeFileSync(OUTPUT_FILE, output);
 
-  console.log('i18n types generated successfully.');
+  console.log(`  ✓ ${allKeyCount} translation keys typed`);
+  console.log(`  📁 ${OUTPUT_FILE.replace(ROOT, '.')}`);
+  console.log('\ni18n types generated successfully.');
 } catch (error) {
   console.error('Generation failed:', error);
   process.exit(1);

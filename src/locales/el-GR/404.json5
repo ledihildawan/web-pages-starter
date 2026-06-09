@@ -1,7 +1,7 @@
 {
   "heading": "404",
-  "subheading": "Χιούστον, έχουμε πρόβλημα.",
-  "description": "Η σελίδα που ψάχνετε μπορεί να μετακινήθηκε, να διαγράφηκε ή να καταπόθηκε από μια μαύρη τρύπα στο διάστημα.",
-  "button_text": "Πίσω στη Γη (Αρχική)",
-  "or_try": "ή δοκιμάστε"
+  "subheading": "Halaman Tidak Ditemukan",
+  "description": "Sepertinya halaman yang Anda cari tidak ada atau telah dipindahkan.",
+  "button_text": "Kembali ke Beranda",
+  "or_try": "Atau coba:"
 }

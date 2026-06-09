@@ -33,7 +33,7 @@
   },
   "currency": {
     "title": "تنسيق العملة",
-    "description": "الأسعار بالروبية الإندونيسية تحول إلى عملة اللغة النشطة.",
+    "description": "الأسعار بالدرهم الإماراتي (AED) تظهر حسب اللغة النشطة.",
     "small": "صغير",
     "medium": "متوسط",
     "large": "كبير",
@@ -136,7 +136,7 @@
     "hour_in": "خلال ساعة واحدة",
     "starter_plan": "خطة المبتدئين",
     "pro_plan": "خطة المحترفين",
-    "discount_20": "خصم 20٪",
+    "discount_20": "خصم ٢٠٪",
     "number_modes": "أوضاع الأرقام",
     "number_modes_desc": "عرض توضيحي لـ tNative (أرقام أصلية) و tUniversal (رقم 0-9 الشامل).",
     "native_label": "أصلي (٠١٢٣٤)",
@@ -166,14 +166,14 @@
     "title": "تصريف الإنجليزية",
     "description": "الجمع والتفرد للغة الإنجليزية. يتم تحديثه مباشرة عند تغيير اللغة."
   },
-  "live_label": "Live",
+  "live_label": "مباشر",
   "pricing_details": {
     "title": "تفاصيل الأسعار",
     "description": "خط أنابيب كامل: قيمة خام، رمز العملة، منسق، مع خصم، ومحول.",
     "raw_value": "قيمة خام",
     "raw_currency": "رمز العملة",
     "formatted": "منسّق",
-    "discounted": "خصم 20٪",
+    "discounted": "خصم ٢٠٪",
     "converted_usd": "محول إلى USD"
   },
   "live_update": {

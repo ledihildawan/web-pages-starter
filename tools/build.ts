@@ -29,11 +29,13 @@ if (args.includes('--no-html-minify')) {
 }
 
 console.log('└────────────────────────────────────────┘');
-console.log('Cleaning previous build...\n');
+
 const distPath = path.resolve(process.cwd(), 'dist');
 if (fs.existsSync(distPath)) {
+  console.log('Cleaning previous build...');
   fs.rmSync(distPath, { recursive: true, force: true });
 }
+console.log();
 
 const siteUrl = process.env.TUNNEL_URL || process.env.SITE_URL || 'https://example.com';
 
@@ -88,4 +90,6 @@ if (result.status !== 0) {
 
 console.log('\n┌────────────────────────────────────────┐');
 console.log('│       ✅ Build completed successfully    │');
+console.log('├────────────────────────────────────────┤');
+console.log('│  Run `bun run preview` to preview.      │');
 console.log('└────────────────────────────────────────┘\n');

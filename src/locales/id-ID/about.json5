@@ -1,22 +1,17 @@
 {
-  "about": {
-    "badge": "Tentang Kami"
-  },
   "hero": {
     "badge": "Tentang Kami",
-    "title_part1": "Kami menciptakan ",
-    "title_highlight": "masa depan digital",
-    "description": "Didirikan pada 2024, Starter hadir untuk membantu pengembang membangun aplikasi yang lebih baik dengan lebih cepat. Kami percaya pada kekuatan kode yang bersih, desain yang indah, dan kolaborasi open source."
+    "title_part1": "Digerakkan oleh ",
+    "title_highlight": "passion",
+    "description": "Perjalanan kami dimulai dengan ide sederhana."
   },
-  "stats": {
-    "years": "Tahun Pengalaman",
-    "years_val": "3+",
-    "clients": "Klien Global",
-    "clients_val": "120+",
-    "countries": "Negara yang Dijangkau",
-    "countries_val": "15",
-    "support": "Support Ahli",
-    "support_val": "24/7"
+  "mission": {
+    "title": "Misi Kami",
+    "description": "Memberdayakan pengembang dan bisnis dengan alat yang elegan, cepat, dan mudah digunakan untuk membangun produk digital yang luar biasa."
+  },
+  "vision": {
+    "title": "Visi Kami",
+    "description": "Menjadi platform pilihan untuk pengembang modern yang menghargai keindahan, performa, dan pengalaman pengguna di setiap baris kode."
   },
   "story": {
     "tag": "Cerita Kami",
@@ -27,14 +22,6 @@
     "val1": "Filosofi desain user-centric",
     "val2": "Arsitektur performance-first",
     "val3": "Transparansi dan komunikasi terbuka"
-  },
-  "mission": {
-    "title": "Misi Kami",
-    "description": "Memberdayakan pengembang dan bisnis dengan alat yang elegan, cepat, dan mudah digunakan untuk membangun produk digital yang luar biasa."
-  },
-  "vision": {
-    "title": "Visi Kami",
-    "description": "Menjadi platform pilihan untuk pengembang modern yang menghargai keindahan, performa, dan pengalaman pengguna di setiap baris kode."
   },
   "values": {
     "title": "Nilai-Nilai Kami",
@@ -71,5 +58,15 @@
     "sarah_desc": "Full-stack wizard yang mengkhususkan diri dalam membangun arsitektur sistem berskala besar.",
     "mike_desc": "Terobsesi dengan detail pixel, alur UX yang halus, dan standar aksesibilitas.",
     "jessica_desc": "Pencerita kreatif yang membantu merek menemukan suara unik mereka di dunia digital."
+  },
+  "stats": {
+    "years": "Tahun Pengalaman",
+    "years_val": "3+",
+    "clients": "Klien Global",
+    "clients_val": "120+",
+    "countries": "Negara yang Dijangkau",
+    "countries_val": "15",
+    "support": "Support Ahli",
+    "support_val": "24/7"
   }
 }

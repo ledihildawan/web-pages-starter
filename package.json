@@ -8,14 +8,15 @@
     "bun": ">=1.0.0"
   },
   "scripts": {
-    "dev": "bun run clean:cache && bun run fetch:rates && concurrently \"bun run watch:i18n\" \"rsbuild dev\"",
-    "build": "NODE_ENV=production bun run clean:cache && bun run fetch:rates && bun run gen:i18n && bun run ./tools/generate-sitemap.ts && bun run ./tools/build.ts",
-    "build:preview": "NODE_ENV=production BUILD_PREVIEW=true bun run clean:cache && bun run fetch:rates && bun run gen:i18n && bun run ./tools/generate-sitemap.ts && bun run ./tools/build.ts && bun run preview",
+    "dev": "bun run sync:root-page && bun run clean:cache && bun run fetch:rates && concurrently \"bun run watch:i18n\" \"rsbuild dev\"",
+    "build": "NODE_ENV=production bun run sync:root-page && bun run clean:cache && bun run fetch:rates && bun run gen:i18n && bun run ./tools/generate-sitemap.ts && bun run ./tools/build.ts",
+    "build:preview": "NODE_ENV=production BUILD_PREVIEW=true bun run sync:root-page && bun run clean:cache && bun run fetch:rates && bun run gen:i18n && bun run ./tools/generate-sitemap.ts && bun run ./tools/build.ts && bun run preview",
     "preview": "NODE_ENV=production bun ./tools/preview.ts",
     "fetch:rates": "bun ./tools/fetch-exchange-rates.ts",
     "watch:i18n": "bun ./tools/watch-i18n.ts",
     "gen:i18n": "bun ./tools/generate-i18n.ts",
     "gen:sitemap": "bun ./tools/generate-sitemap.ts",
+    "sync:root-page": "bun ./tools/sync-root-page.ts",
     "clean": "bun run clean:cache && rm -rf bun.lock node_modules",
     "clean:cache": "rm -rf node_modules/.cache .cache dist",
     "install:all": "bun install",

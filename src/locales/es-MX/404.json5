@@ -1,7 +1,7 @@
 {
-    "heading": "404",
-    "subheading": "Houston, kita punya masalah.",
-    "description": "Halaman yang Anda cari mungkin telah dipindahkan, dihapus, atau tersedot ke dalam Black Hole di ruang hampa.",
-    "button_text": "Kembali ke Bumi (Beranda)",
-    "or_try": "atau coba"
+  "heading": "404",
+  "subheading": "Halaman Tidak Ditemukan",
+  "description": "Sepertinya halaman yang Anda cari tidak ada atau telah dipindahkan.",
+  "button_text": "Kembali ke Beranda",
+  "or_try": "Atau coba:"
 }

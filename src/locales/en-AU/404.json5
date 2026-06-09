@@ -1,7 +1,7 @@
 {
-    "heading": "404",
-    "subheading": "Strewth, we've got a problem.",
-    "description": "The page you're looking for might have been moved, deleted, or sucked into a Black Hole in deep space.",
-    "button_text": "Back to Earth (Home)",
-    "or_try": "or give this a go"
+  "heading": "404",
+  "subheading": "Halaman Tidak Ditemukan",
+  "description": "Sepertinya halaman yang Anda cari tidak ada atau telah dipindahkan.",
+  "button_text": "Kembali ke Beranda",
+  "or_try": "Atau coba:"
 }

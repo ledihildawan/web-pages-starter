@@ -5,6 +5,24 @@
     "title_highlight": "skala lebih cepat",
     "description": "Dari analitik yang kuat hingga integrasi yang mulus, kami menyediakan toolkit yang Anda butuhkan untuk membangun aplikasi kelas dunia tanpa pusing."
   },
+  "features": {
+    "heading": "Key Features",
+    "subheading": "Everything you need to build and scale.",
+    "list": {
+      "speed": {
+        "title": "Lightning Fast",
+        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+      },
+      "design": {
+        "title": "Modern Design",
+        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+      },
+      "security": {
+        "title": "High Security",
+        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+      }
+    }
+  },
   "sections": {
     "sync": {
       "title": "Sinkronisasi Real-time",

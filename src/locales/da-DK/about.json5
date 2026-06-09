@@ -1,75 +1,72 @@
 {
-  "about": {
-    "badge": "Om os"
-  },
   "hero": {
-    "badge": "Om os",
-    "title_part1": "Vi skaber den ",
-    "title_highlight": "digitale fremtid",
-    "description": "Grundlagt i 2024 hjælper Starter udviklere med at bygge bedre applikationer hurtigere. Vi tror på kraften i ren kode, smukt design og open source-samarbejde."
-  },
-  "stats": {
-    "years": "Års erfaring",
-    "years_val": "3+",
-    "clients": "Globale kunder",
-    "clients_val": "120+",
-    "countries": "Lande nået",
-    "countries_val": "15",
-    "support": "Ekspertsupport",
-    "support_val": "24/7"
-  },
-  "story": {
-    "tag": "Vores historie",
-    "visual_label": "Kreativ studio-illustration",
-    "title": "Drevet af passion, <br>defineret af kvalitet.",
-    "para1": "Vores rejse startede med en simpel idé: at gøre webudvikling tilgængelig og sjov for alle. Vi var trætte af tunge frameworks og komplicerede opsætninger.",
-    "para2": "I dag er vi et mangfoldigt team af ingeniører, designere og tænkere, der arbejder sammen om at løse komplekse problemer med elegante løsninger.",
-    "val1": "Brugercentreret designfilosofi",
-    "val2": "Performance-first-arkitektur",
-    "val3": "Gennemsigtighed og åben kommunikation"
+    "badge": "Tentang Kami",
+    "title_part1": "Digerakkan oleh ",
+    "title_highlight": "passion",
+    "description": "Perjalanan kami dimulai dengan ide sederhana."
   },
   "mission": {
-    "title": "Vores mission",
-    "description": "Give udviklere og virksomheder elegante, hurtige og brugervenlige værktøjer til at bygge exceptionelle digitale produkter."
+    "title": "Misi Kami",
+    "description": "Memberdayakan pengembang dan bisnis dengan alat yang elegan, cepat, dan mudah digunakan untuk membangun produk digital yang luar biasa."
   },
   "vision": {
-    "title": "Vores vision",
-    "description": "Bli den foretrukne platform for moderne udviklere, der værdsætter skønhed, ydeevne og brugeroplevelse i hver kodelinje."
+    "title": "Visi Kami",
+    "description": "Menjadi platform pilihan untuk pengembang modern yang menghargai keindahan, performa, dan pengalaman pengguna di setiap baris kode."
+  },
+  "story": {
+    "tag": "Cerita Kami",
+    "visual_label": "Ilustrasi Studio Kreatif",
+    "title": "Digerakkan oleh passion, <br>didefinisikan oleh keunggulan.",
+    "para1": "Perjalanan kami dimulai dengan ide sederhana: membuat pengembangan web dapat diakses dan menyenangkan untuk semua orang. Kami sudah lelah dengan framework yang berat dan konfigurasi yang rumit.",
+    "para2": "Hari ini, kami adalah tim yang beragam dari engineer, desainer, dan pemikir yang bekerja sama untuk memecahkan masalah kompleks dengan solusi yang elegan.",
+    "val1": "Filosofi desain user-centric",
+    "val2": "Arsitektur performance-first",
+    "val3": "Transparansi dan komunikasi terbuka"
   },
   "values": {
-    "title": "Vores værdier",
-    "subtitle": "De principper, der vejleder hver beslutning, vi træffer."
+    "title": "Nilai-Nilai Kami",
+    "subtitle": "Prinsip yang memandu setiap keputusan yang kami buat."
   },
   "passion": {
     "title": "Passion",
-    "description": "Vi elsker det, vi laver, og det ses i hver eneste detalje i vores produkter."
+    "description": "Kami mencintai apa yang kami lakukan, dan itu terlihat di setiap detail produk kami."
   },
   "collaboration": {
-    "title": "Samarbejde",
-    "description": "At arbejde sammen giver de bedste resultater. Vi tror på kraften i et stærkt team."
+    "title": "Kolaborasi",
+    "description": "Bekerja sama menghasilkan hasil terbaik. Kami percaya pada kekuatan tim yang solid."
   },
   "innovation": {
-    "title": "Innovation",
-    "description": "Vi leder altid efter bedre måder at løse problemer og skabe værdi."
+    "title": "Inovasi",
+    "description": "Selalu mencari cara yang lebih baik untuk memecahkan masalah dan menciptakan nilai."
   },
   "integrity": {
-    "title": "Integritet",
-    "description": "Ærlighed og gennemsigtighed er grundlaget for hver relation, vi bygger."
+    "title": "Integritas",
+    "description": "Kejujuran dan transparansi adalah fondasi setiap hubungan yang kami bangun."
   },
   "excellence": {
-    "title": "Kvalitet",
-    "description": "Vi nøjes ikke med 'godt nok'. Vi stræber altid efter det bedste."
+    "title": "Keunggulan",
+    "description": "Kami tidak puas dengan cukup baik. Kami selalu berusaha untuk yang terbaik."
   },
   "quality": {
-    "title": "Kvalitet",
-    "description": "Ren kode, smukt design og problemfri oplevelse er vores standard."
+    "title": "Kualitas",
+    "description": "Kode yang bersih, desain yang indah, dan pengalaman yang seamless adalah standar kami."
   },
   "team": {
-    "title": "Mød teamet",
-    "subtitle": "De skarpe hjerner bag hver kodelinje, vi skriver.",
-    "alex_desc": "Visionær leder med over 10 års erfaring i udvikling af SaaS-økosystemer.",
-    "sarah_desc": "Fullstack-magi specialiseret i at bygge storskalasystemarkitekturer.",
-    "mike_desc": "Besat af pixeldetaljer, glidende UX-flows og tilgængelighedsstandarder.",
-    "jessica_desc": "Kreativ historiefortæller, der hjælper brands med at finde deres unikke stemme i den digitale verden."
+    "title": "Kenali Tim",
+    "subtitle": "Pikiran cemerlang di balik setiap baris kode yang kami tulis.",
+    "alex_desc": "Pemimpin visioner dengan pengalaman 10+ tahun dalam pengembangan ekosistem SaaS.",
+    "sarah_desc": "Full-stack wizard yang mengkhususkan diri dalam membangun arsitektur sistem berskala besar.",
+    "mike_desc": "Terobsesi dengan detail pixel, alur UX yang halus, dan standar aksesibilitas.",
+    "jessica_desc": "Pencerita kreatif yang membantu merek menemukan suara unik mereka di dunia digital."
+  },
+  "stats": {
+    "years": "Tahun Pengalaman",
+    "years_val": "3+",
+    "clients": "Klien Global",
+    "clients_val": "120+",
+    "countries": "Negara yang Dijangkau",
+    "countries_val": "15",
+    "support": "Support Ahli",
+    "support_val": "24/7"
   }
 }
