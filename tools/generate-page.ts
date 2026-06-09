@@ -3,6 +3,15 @@ import path from 'node:path';
 import { PATHS } from '../src/configs/paths';
 import { LOCALE_CODES } from '../src/scripts/lib/i18n/data';
 
+const slugify = (str) => {
+  return str
+    .toLowerCase()
+    .normalize('NFC')
+    .replace(/[^\w\s-]/g, '')
+    .replace(/[-\s]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+};
+
 const args = process.argv.slice(2);
 const pageName = args[0];
 
@@ -12,7 +21,13 @@ if (!pageName) {
   process.exit(1);
 }
 
-const formattedName = pageName.toLowerCase().replace(/\s+/g, '-');
+const formattedName = slugify(pageName);
+
+if (!formattedName) {
+  console.error('Error: Page name must contain valid characters.');
+  process.exit(1);
+}
+
 const titleCase = pageName
   .replace(/-/g, ' ')
   .replace(/\b\w/g, (l) => l.toUpperCase());

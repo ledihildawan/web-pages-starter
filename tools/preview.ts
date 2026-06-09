@@ -2,6 +2,7 @@ import { existsSync, statSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
+import { config } from 'dotenv';
 import { serve } from '@hono/node-server';
 import { serveStatic } from '@hono/node-server/serve-static';
 import { Hono } from 'hono';
@@ -9,6 +10,8 @@ import { compress } from 'hono/compress';
 
 const args = process.argv.slice(2);
 const isProd = process.env.NODE_ENV === 'production';
+
+config({ path: '.env.development' });
 
 const portArg = args.find((a) => a.startsWith('--port='))?.split('=')[1];
 const PORT = Number.parseInt(portArg ?? process.env.PORT ?? '8888', 10);
@@ -20,6 +23,8 @@ if (!existsSync(DIST)) {
   console.error('  Run \x1b[1mbun run build\x1b[0m first.\n');
   process.exit(1);
 }
+
+const displayUrl = process.env.TUNNEL_URL || `http://localhost:${PORT}`;
 
 const STATIC_ASSET_RE =
   /^\/(?:locales\/|assets\/|fonts\/|images\/|favicon\.svg$|favicon\.ico$|manifest\.json$|sw\.js$|robots\.txt$|sitemap\.xml$|.*\.[a-z0-9]+$)/;
@@ -41,16 +46,10 @@ const getCacheControl = (urlPath: string): string => {
   return 'public, max-age=0, must-revalidate';
 };
 
-const PAGE_NAMES = [
-  'home',
-  'about',
-  'pricing',
-  'features',
-  'contact',
-  'i18n-test',
-  'carousel-demo',
-  '404',
-];
+const PAGE_NAMES = fs
+  .readdirSync(DIST)
+  .filter((f) => f.endsWith('.html'))
+  .map((f) => f.replace(/\.html$/, ''));
 
 const tryReadFile = async (relPath: string): Promise<string | null> => {
   const fullPath = path.join(DIST, relPath);
@@ -117,7 +116,7 @@ app.get('*', (c) => {
 
 serve({ fetch: app.fetch, port: PORT, hostname: HOST }, (info) => {
   console.log(
-    `\n  \x1b[32m✓\x1b[0m Hono static server ready at \x1b[1mhttp://localhost:${info.port}\x1b[0m\n`,
+    `\n  \x1b[32m✓\x1b[0m Hono static server ready at \x1b[1m${displayUrl}\x1b[0m\n`,
   );
   console.log(`  Serving from: ${DIST}`);
   console.log(`  Mode: ${isProd ? 'production' : 'development'}`);

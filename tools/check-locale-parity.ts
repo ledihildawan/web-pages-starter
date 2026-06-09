@@ -24,6 +24,12 @@ function getSetDifference(setA: Set<string>, setB: Set<string>): string[] {
   return [...setA].filter((x) => !setB.has(x));
 }
 
+const getStatusColor = (missing: number, extra: number) => {
+  if (missing === 0 && extra === 0) return '\x1b[32m';
+  if (missing > 0) return '\x1b[31m';
+  return '\x1b[33m';
+};
+
 function checkFileParity(
   filePath: string,
   localeStats: Map<string, { missing: number; extra: number }>,
@@ -156,15 +162,18 @@ function printReport(
   console.log('='.repeat(60));
 
   console.log('\n📊 Summary by Locale:');
-  console.log('| Locale       | Missing | Extra | Status |');
-  console.log('|--------------|---------|-------|--------|');
+  console.log('┌──────────────┬─────────┬───────┬────────┐');
+  console.log('│ Locale       │ Missing │ Extra │ Status │');
+  console.log('├──────────────┼─────────┼───────┼────────┤');
 
   for (const { locale, missing, extra } of report.summary) {
-    const status = missing === 0 && extra === 0 ? '✅ OK' : '❌ Issues';
+    const color = getStatusColor(missing, extra);
+    const status = missing === 0 && extra === 0 ? 'OK' : 'Issues';
     console.log(
-      `| ${locale.padEnd(12)} | ${String(missing).padStart(7)} | ${String(extra).padStart(5)} | ${status.padEnd(6)} |`,
+      `│ ${locale.padEnd(12)} │ ${color}${String(missing).padStart(7)}\x1b[0m │ ${String(extra).padStart(5)} │ ${color}${status.padEnd(6)}\x1b[0m │`,
     );
   }
+  console.log('└──────────────┴─────────┴───────┴────────┘');
 
   const hasCommonIssues =
     report.common.missingKeys.length > 0 || report.common.extraKeys.length > 0;
@@ -190,14 +199,14 @@ function printReport(
     0,
   );
 
-  console.log(`\n${'='.repeat(60)}`);
+  console.log(`\n${'═'.repeat(60)}`);
   if (totalIssues === 0) {
-    console.log('✅ All locales have perfect parity!');
+    console.log('\x1b[32m✅ All locales have perfect parity!\x1b[0m');
   } else {
-    console.log(`❌ Found ${totalIssues} parity issues across all locales.`);
+    console.log(`\x1b[31m❌ Found ${totalIssues} parity issues across all locales.\x1b[0m`);
     console.log('   Run with --verbose to see all missing/extra keys.');
   }
-  console.log(`${'='.repeat(60)}\n`);
+  console.log(`${'═'.repeat(60)}\n`);
 }
 
 const args = process.argv.slice(2);

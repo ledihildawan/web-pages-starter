@@ -1,6 +1,5 @@
 # Local
 .DS_Store
-*.local
 *.log*
 
 # Dist
@@ -19,6 +18,9 @@ generated/
 .rsbuild
 coverage
 
-.unlighthouse
+# Reports
+report/
+
+# Public
 public/locales
 public/assets/i18n

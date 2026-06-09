@@ -2,27 +2,48 @@ import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
+import { config } from 'dotenv';
 
 const args = process.argv.slice(2);
 
+if (process.env.BUILD_PREVIEW === 'true') {
+  config({ path: '.env.development' });
+} else {
+  config({ path: '.env.production' });
+}
+
 const env: NodeJS.ProcessEnv = { ...process.env };
 
-console.log('Starting build process...\n');
+console.log('┌────────────────────────────────────────┐');
+console.log('│           🏗️ Build Process              │');
+console.log('├────────────────────────────────────────┤');
 
 if (args.includes('--debug')) {
-  console.log('Debug mode enabled: Setting MINIFY=false');
+  console.log('│  Debug mode:     enabled (no minify)   │');
   env.MINIFY = 'false';
 }
 
 if (args.includes('--no-html-minify')) {
-  console.log('HTML Minify disabled: Setting MINIFY_HTML=false');
+  console.log('│  HTML minify:    disabled              │');
   env.MINIFY_HTML = 'false';
 }
 
-console.log('Cleaning previous build...');
+console.log('└────────────────────────────────────────┘');
+console.log('Cleaning previous build...\n');
 const distPath = path.resolve(process.cwd(), 'dist');
 if (fs.existsSync(distPath)) {
   fs.rmSync(distPath, { recursive: true, force: true });
+}
+
+const siteUrl = process.env.TUNNEL_URL || process.env.SITE_URL || 'https://example.com';
+
+// Update global.json5 site_url
+const globalJson5Path = path.resolve(process.cwd(), 'src', 'data', 'global.json5');
+if (fs.existsSync(globalJson5Path)) {
+  let content = fs.readFileSync(globalJson5Path, 'utf-8');
+  content = content.replace(/"site_url":\s*"[^"]*"/, `"site_url": "${siteUrl}"`);
+  fs.writeFileSync(globalJson5Path, content, 'utf-8');
+  console.log(`Updated site_url to: ${siteUrl}`);
 }
 
 console.log('Bundling with Rsbuild...\n');
@@ -61,8 +82,10 @@ if (result.error) {
 }
 
 if (result.status !== 0) {
-  console.error(`\nBuild failed with exit code ${result.status}`);
+  console.error(`\n❌ Build failed with exit code ${result.status}`);
   process.exit(result.status || 1);
 }
 
-console.log('\nBuild completed successfully.');
+console.log('\n┌────────────────────────────────────────┐');
+console.log('│       ✅ Build completed successfully    │');
+console.log('└────────────────────────────────────────┘\n');

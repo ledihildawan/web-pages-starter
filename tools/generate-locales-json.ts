@@ -5,22 +5,26 @@ import JSON5 from "json5";
 const LOCALES_DIR = path.resolve(process.cwd(), "src/locales");
 const OUT_DIR = path.resolve(process.cwd(), "public/locales");
 
-const PAGES = [
-  "home",
-  "about",
-  "pricing",
-  "contact",
-  "features",
-  "i18n-test",
-  "404",
-  "carousel-demo",
-];
-
 const COMPONENTS = ["cta"];
 
 const readJson5OrNull = (filePath: string): unknown | null => {
   if (!fs.existsSync(filePath)) return null;
   return JSON5.parse(fs.readFileSync(filePath, "utf-8"));
+};
+
+const getLocales = (): string[] => {
+  if (!fs.existsSync(LOCALES_DIR)) return [];
+  return fs
+    .readdirSync(LOCALES_DIR)
+    .filter((name) => fs.statSync(path.join(LOCALES_DIR, name)).isDirectory());
+};
+
+const getPagesFromLocale = (localeDir: string): string[] => {
+  if (!fs.existsSync(localeDir)) return [];
+  return fs
+    .readdirSync(localeDir)
+    .filter((f) => f.endsWith(".json5") && f !== "common.json5")
+    .map((f) => f.replace(/\.json5$/, ""));
 };
 
 const main = async (): Promise<void> => {
@@ -29,15 +33,28 @@ const main = async (): Promise<void> => {
     return;
   }
 
+  const locales = getLocales();
+  if (locales.length === 0) {
+    console.warn("[locales-json] No locales found");
+    return;
+  }
+
+  const sampleLocaleDir = path.join(LOCALES_DIR, locales[0]);
+  const PAGES = getPagesFromLocale(sampleLocaleDir);
+
   fs.rmSync(OUT_DIR, { recursive: true, force: true });
   fs.mkdirSync(OUT_DIR, { recursive: true });
 
-  const locales = fs
-    .readdirSync(LOCALES_DIR)
-    .filter((name) => fs.statSync(path.join(LOCALES_DIR, name)).isDirectory());
-
   let totalFiles = 0;
   let totalBytes = 0;
+
+  console.log("┌────────────────────────────────────────┐");
+  console.log("│       📄 Generate Locales JSON          │");
+  console.log("├────────────────────────────────────────┤");
+  console.log(`│  Locales:   ${String(locales.length).padEnd(24)}│`);
+  console.log(`│  Pages:     ${String(PAGES.length).padEnd(24)}│`);
+  console.log(`│  Output:    ${OUT_DIR.replace(process.cwd(), ".").slice(0, 24).padEnd(24)}│`);
+  console.log("└────────────────────────────────────────┘\n");
 
   for (const locale of locales) {
     const localeDir = path.join(LOCALES_DIR, locale);
@@ -79,7 +96,7 @@ const main = async (): Promise<void> => {
     }
   }
 
-  const { LOCALES, LOCALE_CODES } = await import(
+  const { LOCALES } = await import(
     "../src/scripts/lib/i18n/data"
   );
   const allLocalesCompact = LOCALES.map((l) => ({
@@ -100,12 +117,13 @@ const main = async (): Promise<void> => {
   totalBytes += allLocalesJson.length;
   totalFiles += 1;
 
-  console.log(
-    `[locales-json] Wrote ${totalFiles} files (${(totalBytes / 1024).toFixed(1)} KiB) for ${locales.length} locales -> ${path.relative(process.cwd(), OUT_DIR)}`,
-  );
+  console.log("┌────────────────────────────────────────┐");
+  console.log(`│  ✅ Wrote ${String(totalFiles).padEnd(18)}files          │`);
+  console.log(`│     ${String((totalBytes / 1024).toFixed(1) + " KiB").padEnd(28)}│`);
+  console.log("└────────────────────────────────────────┘\n");
 };
 
 main().catch((err) => {
-  console.error(err);
+  console.error("❌ Error:", err);
   process.exit(1);
 });

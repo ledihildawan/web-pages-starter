@@ -1,26 +1,3 @@
-{#
-  Page Meta Tags Renderer (Per-Page Dynamic SEO)
-
-  Renders page-specific meta tags with proper fallbacks:
-  - Title, Description, Canonical URL, Keywords
-  - Open Graph (og:*), Twitter Cards
-  - hreflang alternates for multi-locale SEO
-  - JSON-LD structured data (Organization + WebSite)
-
-  Per-page overrides (set in src/pages/<name>/index.json5):
-  - page.meta.title        → <title>, og:title, twitter:title
-  - page.meta.description  → meta[name=description], og:description, twitter:description
-  - page.meta.canonical    → <link rel=canonical>, og:url, hreflang targets
-  - page.meta.image        → og:image, twitter:image (absolute URL)
-  - page.meta.image_alt    → og:image:alt, twitter:image:alt
-  - page.meta.h1           → optional H1 override used by hero-section macro
-  - page.meta.keywords     → meta[name=keywords]
-  - page.meta.og_type      → og:type
-
-  Fixed tags (PWA, theme-color, favicon, CSP) are in main.njk
-
-  Usage: {{ page_meta.render(page, global, LOCALE_CODES) }}
-#}
 {% macro render(page, global, locale_codes) %}
 
   {% set title = page.meta.title or page.title or global.site_name or "Starter App" %}
