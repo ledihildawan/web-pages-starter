@@ -162,8 +162,8 @@ export default defineConfig({
         noErrorOnMissing: true,
       },
       {
-        from: resolveRoot('public', 'locales'),
-        to: 'locales',
+        from: resolveRoot('public/assets/i18n'),
+        to: 'assets/i18n',
         noErrorOnMissing: true,
       },
     ],
