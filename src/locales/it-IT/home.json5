@@ -4,47 +4,47 @@
     "description": "Costruttore di applicazioni web moderne."
   },
   "hero": {
-    "badge": "Nuovo: la versione 2.0 è qui",
-    "title_start": "Costruisci qualcosa di",
-    "title_highlight": "meraviglioso oggi",
-    "description": "Il modo moderno di costruire applicazioni web. Veloce, flessibile e pensato per sviluppatori che tengono alla qualità.",
-    "image_alt": "Anteprima della dashboard",
+    "badge": "Nuovo: La versione 2.0 è qui",
+    "title_start": "Crea qualcosa",
+    "title_highlight": "di bello oggi",
+    "description": "Il modo moderno per costruire applicazioni web. Veloce, flessibile e progettato per sviluppatori che tengono al loro mestiere.",
+    "image_alt": "Anteprima Dashboard",
     "primary_btn": {
-      "label": "Inizia a costruire",
+      "label": "Inizia Ora",
       "url": "/start"
     },
     "secondary_btn": {
-      "label": "Vedi demo",
+      "label": "Vedi Demo",
       "url": "/demo"
     },
-    "note": "Nessuna carta di credito richiesta",
+    "note": "Nessuna carta di credito richiesta"
   },
   "features": {
-    "heading": "Tutto ciò che ti serve",
-    "subheading": "Funzionalità avanzate per aiutarti a costruire più velocemente.",
+    "heading": "Tutto Quello Che Ti Serve",
+    "subheading": "Funzionalità potenti per aiutarti a costruire più velocemente.",
     "list": {
       "speed": {
-        "title": "Velocissimo",
-        "description": "Ottimizzato per le massime prestazioni. La tua app si carica istantaneamente."
+        "title": "Veloce come un Fulmine",
+        "description": "Ottimizzato per le prestazioni. Le tue applicazioni si caricano all'istante."
       },
       "design": {
-        "title": "Design elegante",
-        "description": "Realizzato con cura. Ogni pixel ha uno scopo e un significato."
+        "title": "Design Elegante",
+        "description": "Creato con cura. Ogni pixel ha significato e scopo."
       },
       "security": {
-        "title": "Sicurezza garantita",
-        "description": "Sicurezza di livello enterprise. I tuoi dati sono protetti a ogni livello."
+        "title": "Sicuro di Default",
+        "description": "Sicurezza di livello aziendale. I tuoi dati sono protetti in ogni layer."
       }
     }
   },
   "stats": {
-    "community": "Community di sviluppatori",
+    "community": "Comunità di Sviluppatori",
     "community_val": "10K+",
-    "projects": "Progetti costruiti",
+    "projects": "Progetti Costruiti",
     "projects_val": "50K+",
-    "uptime": "Uptime 24/7",
-    "uptime_val": "99,9%",
-    "rating": "Valutazione utenti",
-    "rating_val": "4,9/5"
+    "uptime": "Disponibilità 24/7",
+    "uptime_val": "99.9%",
+    "rating": "Valutazione Utenti",
+    "rating_val": "4.9/5"
   }
 }

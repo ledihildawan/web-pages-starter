@@ -189,7 +189,7 @@
   },
   "section_systems": {
     "title": "Sistemi di Scrittura",
-    "description": "Tutti i 7 sistemi algoritmici e 4 sistemi numerici aggiuntivi a livello di sistema, con caricatori di font collegati."
+    "description": "Tutti i sistemi numerici (algoritmici e numerici) visualizzano cifre native corrette con fallback ICU."
   },
   "nav": {
     "translations": "Traduzioni",

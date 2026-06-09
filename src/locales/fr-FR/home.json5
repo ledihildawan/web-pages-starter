@@ -5,12 +5,12 @@
   },
   "hero": {
     "badge": "Nouveau: La version 2.0 est arrivée",
-    "title_start": "Construisez quelque chose",
+    "title_start": "Créez quelque chose",
     "title_highlight": "de beau aujourd'hui",
-    "description": "La façon moderne de construire des applications web. Rapide, flexible et conçu pour les développeurs qui se soucient de leur art.",
-    "image_alt": "Dashboard Preview",
+    "description": "La façon moderne de construire des applications web. Rapide, flexible et conçu pour les développeurs qui se soucient de leur travail.",
+    "image_alt": "Aperçu du Tableau de Bord",
     "primary_btn": {
-      "label": "Commencer à Construire",
+      "label": "Commencer à Créer",
       "url": "/start"
     },
     "secondary_btn": {
@@ -20,16 +20,16 @@
     "note": "Aucune carte de crédit requise"
   },
   "features": {
-    "heading": "Tout Ce Dont Vous Avez Besoin",
-    "subheading": "Fonctionnalités puissantes pour vous aider à construire plus vite.",
+    "heading": "Tout Ce Dont Vous Besoin",
+    "subheading": "Fonctionnalités puissantes pour vous aider à construire plus rapidement.",
     "list": {
       "speed": {
         "title": "Rapide comme l'Éclair",
-        "description": "Optimisé pour les performances. Vos applications se chargent instantanément."
+        "description": "Optimisé pour la performance. Vos applications se chargent instantanément."
       },
       "design": {
-        "title": "Design Magnifique",
-        "description": "Conçu avec soin. Chaque pixel a du sens et un but."
+        "title": "Design Élégant",
+        "description": "Créé avec soin. Chaque pixel a une signification et un but."
       },
       "security": {
         "title": "Sécurisé par Défaut",
@@ -38,13 +38,13 @@
     }
   },
   "stats": {
-    "community": "Communauté de Dév",
+    "community": "Communauté de Développeurs",
     "community_val": "10K+",
     "projects": "Projets Construits",
     "projects_val": "50K+",
     "uptime": "Disponibilité 24/7",
-    "uptime_val": "99,9%",
-    "rating": "Note Utilisateurs",
+    "uptime_val": "99.9%",
+    "rating": "Note des Utilisateurs",
     "rating_val": "4.9/5"
   }
 }

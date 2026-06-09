@@ -2,10 +2,10 @@
   "period_monthly": "kuukausi",
   "period_yearly": "vuosi",
   "hero": {
-    "badge": "Valitse tilauksesi",
+    "badge": "Valitse suunnitelma",
     "title_part1": "Yksinkertainen ja ",
     "title_highlight": "läpinäkyvä hinnoittelu",
-    "description": "Ei piilotettuja maksuja. Ei yllätysmaksuja. Valitse tarpeisiisi parhaiten sopiva tilaus."
+    "description": "Ei piilokuluja. Ei yllätysmaksuja. Valitse tarpeisiisi parhaiten sopiva suunnitelma."
   },
   "toggle": {
     "monthly": "Kuukausittain",

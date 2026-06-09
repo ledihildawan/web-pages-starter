@@ -189,7 +189,7 @@
   },
   "section_systems": {
     "title": "Writing Systems",
-    "description": "All 7 algorithmic and 4 additional numeric systems at the system level, with font loaders connected."
+    "description": "All number systems (algorithmic and numeric) display correct native digits with ICU fallback."
   },
   "nav": {
     "translations": "Translations",

@@ -2,10 +2,10 @@
   "period_monthly": "måned",
   "period_yearly": "år",
   "hero": {
-    "badge": "Velg din plan",
+    "badge": "Velg en plan",
     "title_part1": "Enkle og ",
     "title_highlight": "transparente priser",
-    "description": "Ingen skjulte gebyrer. Ingen overraskelsesgebyrer. Velg planen som passer best for dine behov."
+    "description": "Ingen skjulte avgifter. Ingen overraskelsesgebyrer. Velg en plan som passer best for dine behov."
   },
   "toggle": {
     "monthly": "Månedlig",

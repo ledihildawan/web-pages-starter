@@ -6,12 +6,12 @@
     "badge": "Über Uns",
     "title_part1": "Wir gestalten die ",
     "title_highlight": "digitale Zukunft",
-    "description": "Gegründet 2024, existiert Starter um Entwicklern zu helfen, bessere Anwendungen schneller zu构建. Wir glauben an die Kraft von sauberem Code, schönem Design und Open-Source-Zusammenarbeit."
+    "description": "Gegründet 2024, existiert Starter um Entwicklern zu helfen, bessere Anwendungen schneller zu bauen. Wir glauben an die Kraft von sauberem Code, schönem Design und Open-Source-Zusammenarbeit."
   },
   "stats": {
     "years": "Jahre Erfahrung",
     "years_val": "3+",
-    "clients": "_globale Kunden",
+    "clients": "Globale Kunden",
     "clients_val": "120+",
     "countries": "Erreichte Länder",
     "countries_val": "15",
@@ -65,7 +65,7 @@
     "description": "Sauberer Code, schönes Design und nahtlose Erfahrungen sind unsere Standards."
   },
   "team": {
-    "title": "Lernen Sie das Team Kennen",
+    "title": "Lerne das Team kennen",
     "subtitle": "Die brillanten Köpfe hinter jeder Codezeile, die wir schreiben.",
     "alex_desc": "Visionärer Führung mit 10+ Jahren Erfahrung in SaaS-Ökosystem-Entwicklung.",
     "sarah_desc": "Full-Stack-Assistentin, spezialisiert auf den Bau von großangelegten Systemarchitekturen.",

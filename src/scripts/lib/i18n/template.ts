@@ -41,7 +41,7 @@ import {
   singular,
   toNativeDigits,
 } from './index';
-import { NUMBERING_SYSTEMS } from './numbering-systems';
+
 import type { FormatOptions, I18nItem, TemplateParams } from './types';
 
 interface TemplateFormatOptions extends FormatOptions {
@@ -120,10 +120,6 @@ const generateClientI18nScript = (
     }
   }
 
-  const numberingSystemFonts = Object.fromEntries(
-    NUMBERING_SYSTEMS.map((ns) => [ns.code, ns.fontFamily]),
-  );
-
   return `<script>
 (() => {
   const defaultLocale = ${JSON.stringify(lang)};
@@ -133,7 +129,6 @@ const generateClientI18nScript = (
 
   const savedLocale = localStorage.getItem('${LOCALE_STORAGE_KEY}') ?? pathLocale ?? defaultLocale;
   const locales = ${JSON.stringify(locales)};
-  const numberingSystemFonts = ${JSON.stringify(numberingSystemFonts)};
 
   window.__PAGE_ID__ = ${JSON.stringify(name)};
   window.__USED_COMPONENTS__ = ${JSON.stringify(usedComponents)};
@@ -145,13 +140,10 @@ const generateClientI18nScript = (
     const localeConfig = locales.find(l => l.code === savedLocale);
     const dir = localeConfig?.dir ?? 'ltr';
     const ws = localeConfig?.writingSystem ?? 'latin';
-    const ns = localeConfig?.nativeNumberingSystem || 'latn';
-    const font = numberingSystemFonts[ns] || 'Inter, system-ui';
 
     htmlEl.setAttribute('lang', savedLocale);
     htmlEl.setAttribute('dir', dir);
     htmlEl.setAttribute('data-script', ws);
-    htmlEl.style.setProperty('--font-primary', font);
     htmlEl.classList.toggle('is-rtl', dir === 'rtl');
   }
 })();
@@ -288,15 +280,16 @@ const createI18nObject = (
     formatNumber: (value: number | string, options?: TemplateFormatOptions) => {
       const formatted = formatNumber(value, options);
       if (options?.raw) return formatted;
-      return renderHtml(
-        formatted,
-        buildAttrs(
-          { 'format-number': value },
-          undefined,
-          options?.nativeDigits,
-        ),
-        options?.className,
-      );
+      const attrs: Record<string, string | number | boolean> = {
+        'format-number': value,
+      };
+      if (options?.numberingSystem) {
+        attrs['numbering-system'] = options.numberingSystem;
+      }
+      if (options?.nativeDigits) {
+        attrs['use-native'] = 'true';
+      }
+      return renderHtml(formatted, attrs, options?.className);
     },
 
     formatCurrency: (

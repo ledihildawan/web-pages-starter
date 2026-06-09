@@ -5,40 +5,40 @@
   "hero": {
     "badge": "O nas",
     "title_part1": "Tworzymy ",
-    "title_highlight": "cyfrową przyszłość",
-    "description": "Założony w 2024 roku, Starter pomaga deweloperom budować lepsze aplikacje szybciej. Wierzymy w siłę czystego kodu, pięknego designu i współpracy open source."
+    "title_highlight": "przyszłość cyfrową",
+    "description": "Założony w 2024 roku, Starter istnieje, aby pomóc programistom budować lepsze aplikacje szybciej. Wierzymy w moc czystego kodu, pięknego designu i współpracy open source."
   },
   "stats": {
-    "years": "Lat doświadczenia",
+    "years": "Lat Doświadczenia",
     "years_val": "3+",
-    "clients": "Globalnych klientów",
+    "clients": "Klientów Globalnych",
     "clients_val": "120+",
-    "countries": "Krajów zasięgu",
+    "countries": "Krajów Osiągniętych",
     "countries_val": "15",
-    "support": "Wsparcie ekspertów",
+    "support": "Wsparcie Eksperckie",
     "support_val": "24/7"
   },
   "story": {
-    "tag": "Nasza historia",
-    "visual_label": "Ilustracja kreatywnego studia",
-    "title": "Napędzani pasją, <br>zdefiniowani doskonałością.",
-    "para1": "Nasza podróż zaczęła się od prostego pomysłu: uczynić rozwój web dostępnym i przyjemnym dla wszystkich. Mieliśmy dość ciężkich frameworków i skomplikowanych konfiguracji.",
-    "para2": "Dziś jesteśmy zróżnicowanym zespołem inżynierów, designerów i myślicieli, którzy współpracują nad rozwiązywaniem złożonych problemów eleganckimi rozwiązaniami.",
-    "val1": "Filozofia designu skoncentrowana na użytkowniku",
-    "val2": "Architektura z naciskiem na wydajność",
+    "tag": "Nasza Historia",
+    "visual_label": "Ilustracja Studia Kreatywnego",
+    "title": "Napędzani pasją, <br>określani przez doskonałość.",
+    "para1": "Nasza podróż rozpoczęła się od prostej idei: uczynienie tworzenia stron internetowych dostępnym i przyjemnym dla wszystkich. Byliśmy zmęczeni rozdętymi frameworkami i skomplikowanymi konfiguracjami.",
+    "para2": "Dziś jesteśmy zróżnicowanym zespołem inżynierów, projektantów i myślicieli pracujących razem nad rozwiązywaniem złożonych problemów eleganckimi rozwiązaniami.",
+    "val1": "Filozofia projektowania zorientowanego na użytkownika",
+    "val2": "Architektura z 우선性能和 pierwszeństwem",
     "val3": "Przejrzystość i otwarta komunikacja"
   },
   "mission": {
-    "title": "Nasza misja",
-    "description": "Wyposażyć deweloperów i firmy w eleganckie, szybkie i łatwe w użyciu narzędzia do budowania wyjątkowych produktów cyfrowych."
+    "title": "Nasza Misja",
+    "description": "Umożliwianie programistom i firmom korzystanie z eleganckich, szybkich i łatwych w użyciu narzędzi do budowania wyjątkowych produktów cyfrowych."
   },
   "vision": {
-    "title": "Nasza wizja",
-    "description": "Stać się preferowaną platformą dla nowoczesnych deweloperów, którzy cenią piękno, wydajność i doświadczenie użytkownika w każdej linii kodu."
+    "title": "Nasza Wizja",
+    "description": "Być platformą wyboru dla nowoczesnych programistów, którzy cenią piękno, wydajność i doświadczenie użytkownika w każdej linii kodu."
   },
   "values": {
-    "title": "Nasze wartości",
-    "subtitle": "Zasady, które kierują każdą naszą decyzją."
+    "title": "Nasze Wartości",
+    "subtitle": "Zasady kierujące każdą decyzją, którą podejmujemy."
   },
   "passion": {
     "title": "Pasja",
@@ -46,7 +46,7 @@
   },
   "collaboration": {
     "title": "Współpraca",
-    "description": "Wspólna praca przynosi najlepsze rezultaty. Wierzymy w siłę silnego zespołu."
+    "description": "Praca razem przynosi najlepsze rezultaty. Wierzymy w moc silnych zespołów."
   },
   "innovation": {
     "title": "Innowacja",
@@ -54,22 +54,22 @@
   },
   "integrity": {
     "title": "Uczciwość",
-    "description": "Uczciwość i przejrzystość są fundamentem każdej budowanej przez nas relacji."
+    "description": "Szczerość i przejrzystość są podstawą każdej relacji, którą budujemy."
   },
   "excellence": {
     "title": "Doskonałość",
-    "description": "Nie zadowalamy się 'wystarczająco dobrym'. Zawsze dążymy do najlepszego."
+    "description": "Nie zadowalamy się tym, co wystarczy. Zawsze dążymy do najlepszego."
   },
   "quality": {
     "title": "Jakość",
-    "description": "Czysty kod, piękny design i bezproblemowe doświadczenie są naszym standardem."
+    "description": "Czysty kod, piękny design i płynne doświadczenia to nasze standardy."
   },
   "team": {
-    "title": "Poznaj zespół",
+    "title": "Poznaj Zespół",
     "subtitle": "Błyskotliwe umysły stojące za każdą linią kodu, którą piszemy.",
-    "alex_desc": "Wizjonerski lider z ponad 10-letnim doświadczeniem w budowaniu ekosystemów SaaS.",
-    "sarah_desc": "Fullstackowa magik specjalizująca się w budowaniu architektur systemów na dużą skalę.",
-    "mike_desc": "Obsesyjnie dba o szczegóły pikseli, płynne przepływy UX i standardy dostępności.",
-    "jessica_desc": "Kreatywna storytellerka, która pomaga markom znaleźć ich unikalny głos w cyfrowym świecie."
+    "alex_desc": "Wizjonerski lider z 10+ latami doświadczenia w rozwoju ekosystemu SaaS.",
+    "sarah_desc": "Full-stack wizard specjalizująca się w budowaniu architektur systemów na dużą skalę.",
+    "mike_desc": "Głęboko obsesyjny na punkcie szczegółów pikseli, płynnych przepływów UX i standardów dostępności.",
+    "jessica_desc": "Kreatywna narratorka pomagająca markom znaleźć ich unikalny głos w świecie cyfrowym."
   }
 }

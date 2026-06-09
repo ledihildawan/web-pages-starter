@@ -1,50 +1,50 @@
 {
   "meta": {
-    "title": "Beranda | Starter App",
-    "description": "Pembangun aplikasi web modern."
+    "title": "الصفحة الرئيسية | Starter App",
+    "description": "منشئ تطبيقات ويب حديث."
   },
   "hero": {
-    "badge": "Baru: Versi 2.0 Telah Hadir",
-    "title_start": "Buat Sesuatu",
-    "title_highlight": "Indah Hari Ini",
-    "description": "Cara modern dalam membangun aplikasi web. Cepat, fleksibel, dan dirancang untuk developer yang peduli terhadap kualitas karya.",
-    "image_alt": "Pratinjau Dasbor",
+    "badge": "جديد: الإصدار 2.0 متاح الآن",
+    "title_start": "ابنِ شيئاً ",
+    "title_highlight": "جميلاً اليوم",
+    "description": "الطريقة الحديثة لبناء تطبيقات الويب. سريعة، مرنة، ومصممة للمطورين المهتمين بدقة عملهم.",
+    "image_alt": "معاينة لوحة التحكم",
     "primary_btn": {
-      "label": "Mulai Membangun",
+      "label": "← ابدأ البناء",
       "url": "/start"
     },
     "secondary_btn": {
-      "label": "Lihat Demo",
+      "label": "عرض التجربة",
       "url": "/demo"
     },
-    "note": "Tidak perlu kartu kredit",
+    "note": "لا يتطلب بطاقة ائتمان"
   },
   "features": {
-    "heading": "Semua yang Anda Butuhkan",
-    "subheading": "Fitur canggih untuk membantu Anda membangun lebih cepat.",
+    "heading": "كل ما تحتاجه",
+    "subheading": "ميزات قوية لمساعدتك على البناء بشكل أسرع.",
     "list": {
       "speed": {
-        "title": "Super Cepat",
-        "description": "Dioptimalkan untuk performa maksimal. Aplikasi Anda dimuat instan."
+        "title": "سرعة فائقة",
+        "description": "محسن للأداء. تطبيقاتك تفتح فوراً."
       },
       "design": {
-        "title": "Desain Elegan",
-        "description": "Dibuat dengan teliti. Setiap piksel memiliki makna dan tujuan."
+        "title": "تصميم جميل",
+        "description": "صُنع بعناية. كل بكسل له معنى وغرض."
       },
       "security": {
-        "title": "Keamanan Terjamin",
-        "description": "Keamanan kelas enterprise. Data Anda dilindungi di setiap lapisan."
+        "title": "آمن افتراضياً",
+        "description": "أمن بمستوى المؤسسات. بياناتك محمية في كل طبقة."
       }
     }
   },
   "stats": {
-    "community": "Komunitas Developer",
-    "community_val": "10Rb+",
-    "projects": "Proyek Terbangun",
-    "projects_val": "50Rb+",
-    "uptime": "Uptime 24/7",
+    "community": "مجتمع المطورين",
+    "community_val": "10 آلاف+",
+    "projects": "مشاريع منجزة",
+    "projects_val": "50 ألف+",
+    "uptime": "وقت التشغيل",
     "uptime_val": "99.9%",
-    "rating": "Rating Pengguna",
+    "rating": "تقييم المستخدمين",
     "rating_val": "4.9/5"
   }
 }

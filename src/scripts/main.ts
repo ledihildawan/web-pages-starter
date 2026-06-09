@@ -13,7 +13,6 @@ const deferred = (): void => {
     .then((fonts) => {
       fonts.setupFontStackCSS();
       fonts.loadLanguageFonts();
-      fonts.loadFallbackFonts();
       fonts.watchScriptAndLoadFont();
     })
     .catch(() => { });
@@ -39,6 +38,12 @@ async function bootstrap() {
     registerI18nStore();
 
     Alpine.start();
+
+    const { i18next, initIntl } = await import("./lib/i18n/runtime");
+    if (!i18next.isInitialized) {
+      const locale = window.__SAVED_LOCALE__ || window.__SERVER_LOCALE__;
+      await initIntl(locale);
+    }
 
     deferTask(deferred);
 

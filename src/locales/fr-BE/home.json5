@@ -1,50 +1,50 @@
 {
   "meta": {
-    "title": "Beranda | Starter App",
-    "description": "Pembangun aplikasi web modern."
+    "title": "Accueil | Starter App",
+    "description": "Constructeur d'applications web modernes."
   },
   "hero": {
-    "badge": "Baru: Versi 2.0 Telah Hadir",
-    "title_start": "Buat Sesuatu",
-    "title_highlight": "Indah Hari Ini",
-    "description": "Cara modern dalam membangun aplikasi web. Cepat, fleksibel, dan dirancang untuk developer yang peduli terhadap kualitas karya.",
-    "image_alt": "Pratinjau Dasbor",
+    "badge": "Nouveau: La version 2.0 est arrivée",
+    "title_start": "Créez quelque chose",
+    "title_highlight": "de beau aujourd'hui",
+    "description": "La façon moderne de construire des applications web. Rapide, flexible et conçu pour les développeurs qui se soucient de leur travail.",
+    "image_alt": "Aperçu du Tableau de Bord",
     "primary_btn": {
-      "label": "Mulai Membangun",
+      "label": "Commencer",
       "url": "/start"
     },
     "secondary_btn": {
-      "label": "Lihat Demo",
+      "label": "Voir la Démo",
       "url": "/demo"
     },
-    "note": "Tidak perlu kartu kredit",
+    "note": "Aucune carte de crédit requise"
   },
   "features": {
-    "heading": "Semua yang Anda Butuhkan",
-    "subheading": "Fitur canggih untuk membantu Anda membangun lebih cepat.",
+    "heading": "Tout Ce Dont Vous Besoin",
+    "subheading": "Fonctionnalités puissantes pour vous aider à construire plus rapidement.",
     "list": {
       "speed": {
-        "title": "Super Cepat",
-        "description": "Dioptimalkan untuk performa maksimal. Aplikasi Anda dimuat instan."
+        "title": "Rapide comme l'Éclair",
+        "description": "Optimisé pour la performance. Vos applications se chargent instantanément."
       },
       "design": {
-        "title": "Desain Elegan",
-        "description": "Dibuat dengan teliti. Setiap piksel memiliki makna dan tujuan."
+        "title": "Design Élégant",
+        "description": "Créé avec soin. Chaque pixel a une signification et un but."
       },
       "security": {
-        "title": "Keamanan Terjamin",
-        "description": "Keamanan kelas enterprise. Data Anda dilindungi di setiap lapisan."
+        "title": "Sécurisé par Défaut",
+        "description": "Sécurité de niveau entreprise. Vos données sont protégées à chaque couche."
       }
     }
   },
   "stats": {
-    "community": "Komunitas Developer",
-    "community_val": "10Rb+",
-    "projects": "Proyek Terbangun",
-    "projects_val": "50Rb+",
-    "uptime": "Uptime 24/7",
+    "community": "Communauté de Développeurs",
+    "community_val": "10K+",
+    "projects": "Projets Construits",
+    "projects_val": "50K+",
+    "uptime": "Disponibilité 24/7",
     "uptime_val": "99.9%",
-    "rating": "Rating Pengguna",
+    "rating": "Note des Utilisateurs",
     "rating_val": "4.9/5"
   }
 }

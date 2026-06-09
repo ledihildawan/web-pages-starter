@@ -2,10 +2,10 @@
   "period_monthly": "hónap",
   "period_yearly": "év",
   "hero": {
-    "badge": "Válaszd ki a csomagod",
+    "badge": "Válassz tervet",
     "title_part1": "Egyszerű és ",
     "title_highlight": "átlátható árazás",
-    "description": "Nincsenek rejtett költségek. Nincsenek meglepetésdíjak. Válaszd azt a csomagot, amelyik a legjobban megfelel az igényeidnek."
+    "description": "Nincs rejtett díj. Nincsenek meglepetésdíjak. Válaszd azt a tervet, amelyik a legjobban megfelel az igényeidnek."
   },
   "toggle": {
     "monthly": "Havi",

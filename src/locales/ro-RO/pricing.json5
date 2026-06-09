@@ -2,10 +2,10 @@
   "period_monthly": "lună",
   "period_yearly": "an",
   "hero": {
-    "badge": "Alege planul tău",
+    "badge": "Alegeți un plan",
     "title_part1": "Prețuri simple și ",
     "title_highlight": "transparente",
-    "description": "Fără taxe ascunse. Fără taxe surpriză. Alege planul care se potrivește cel mai bine nevoilor tale."
+    "description": "Fără taxe ascunse. Fără taxe surpriză. Alegeți un plan care se potrivește cel mai bine nevoilor tale."
   },
   "toggle": {
     "monthly": "Lunar",

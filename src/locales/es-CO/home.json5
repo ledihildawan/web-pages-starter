@@ -1,50 +1,50 @@
 {
   "meta": {
-    "title": "Beranda | Starter App",
-    "description": "Pembangun aplikasi web modern."
+    "title": "Inicio | Starter App",
+    "description": "Constructor de aplicaciones web modernas."
   },
   "hero": {
-    "badge": "Baru: Versi 2.0 Telah Hadir",
-    "title_start": "Buat Sesuatu",
-    "title_highlight": "Indah Hari Ini",
-    "description": "Cara modern dalam membangun aplikasi web. Cepat, fleksibel, dan dirancang untuk developer yang peduli terhadap kualitas karya.",
-    "image_alt": "Pratinjau Dasbor",
+    "badge": "Nuevo: Versión 2.0 disponible",
+    "title_start": "Construya algo",
+    "title_highlight": "hermoso hoy",
+    "description": "La forma moderna de construir aplicaciones web. Rápido, flexible y diseñado para desarrolladores que se preocupan por su oficio.",
+    "image_alt": "Vista Previa del Dashboard",
     "primary_btn": {
-      "label": "Mulai Membangun",
+      "label": "Comenzar",
       "url": "/start"
     },
     "secondary_btn": {
-      "label": "Lihat Demo",
+      "label": "Ver Demo",
       "url": "/demo"
     },
-    "note": "Tidak perlu kartu kredit",
+    "note": "No se requiere tarjeta de crédito"
   },
   "features": {
-    "heading": "Semua yang Anda Butuhkan",
-    "subheading": "Fitur canggih untuk membantu Anda membangun lebih cepat.",
+    "heading": "Todo Lo Que Necesita",
+    "subheading": "Características poderosas para ayudarle a construir más rápido.",
     "list": {
       "speed": {
-        "title": "Super Cepat",
-        "description": "Dioptimalkan untuk performa maksimal. Aplikasi Anda dimuat instan."
+        "title": "Rápido como el Rayo",
+        "description": "Optimizado para el rendimiento. Sus aplicaciones se cargan al instante."
       },
       "design": {
-        "title": "Desain Elegan",
-        "description": "Dibuat dengan teliti. Setiap piksel memiliki makna dan tujuan."
+        "title": "Diseño Hermoso",
+        "description": "Creado con cuidado. Cada píxel tiene significado y propósito."
       },
       "security": {
-        "title": "Keamanan Terjamin",
-        "description": "Keamanan kelas enterprise. Data Anda dilindungi di setiap lapisan."
+        "title": "Seguro por Defecto",
+        "description": "Seguridad de nivel empresarial. Sus datos están protegidos en cada capa."
       }
     }
   },
   "stats": {
-    "community": "Komunitas Developer",
-    "community_val": "10Rb+",
-    "projects": "Proyek Terbangun",
-    "projects_val": "50Rb+",
-    "uptime": "Uptime 24/7",
+    "community": "Comunidad de Desarrolladores",
+    "community_val": "10K+",
+    "projects": "Proyectos Construidos",
+    "projects_val": "50K+",
+    "uptime": "Disponibilidad 24/7",
     "uptime_val": "99.9%",
-    "rating": "Rating Pengguna",
+    "rating": "Calificación de Usuarios",
     "rating_val": "4.9/5"
   }
 }

@@ -1,17 +1,17 @@
 {
   "meta": {
-    "title": "Kontaktieren Sie uns | Starter App",
-    "description": "Kontaktieren Sie uns für Fragen und Unterstützung."
+    "title": "Kontakt | Starter App",
+    "description": "Kontaktieren Sie uns für Fragen und Support."
   },
   "contact": {
-    "badge": "Kontakt Aufnehmen",
-    "title_part1": "Lassen Sie uns",
+    "badge": "Kontakt aufnehmen",
+    "title_part1": "Lass uns",
     "title_highlight": "verbinden",
-    "description": "Haben Sie Fragen oder möchten zusammenarbeiten? Wir würden gerne von Ihnen hören. Senden Sie uns eine Nachricht und wir werden so schnell wie möglich antworten.",
-    "form_title": "Eine Nachricht Senden",
-    "form_subtitle": "Füllen Sie das untenstehende Formular aus und wir werden uns in Kürze bei Ihnen melden.",
+    "description": "Haben Sie Fragen oder möchten Sie zusammenarbeiten? Wir würden uns freuen, von Ihnen zu hören. Senden Sie uns eine Nachricht und wir werden so schnell wie möglich antworten.",
+    "form_title": "Nachricht senden",
+    "form_subtitle": "Füllen Sie das Formular unten aus und wir werden Ihnen in Kürze antworten.",
     "social_title": "Folgen Sie uns",
-    "social_subtitle": "Bleiben Sie mit unseren neuesten Nachrichten auf Social Media auf dem Laufenden",
+    "social_subtitle": "Bleiben Sie auf dem Laufenden mit unseren neuesten Nachrichten in den sozialen Medien",
     "info": {
       "response_time": {
         "title": "Schnelle Antwort",
@@ -22,26 +22,26 @@
         "description": "Montag - Freitag: 09:00 - 18:00. Wochenenden: Nach Priorität."
       },
       "support": {
-        "title": "Laufende Unterstützung",
-        "description": "Unser Unterstützungs-Team ist immer bereit, Ihnen bei der Lösung technischer Probleme zu helfen."
+        "title": "Laufender Support",
+        "description": "Unser Support-Team ist immer bereit, bei der Lösung Ihrer technischen Probleme zu helfen."
       }
     },
     "form": {
       "name": "Name",
       "name_placeholder": "Geben Sie Ihren Namen ein",
       "email": "E-Mail",
-      "email_placeholder": "name@beispiel.de",
+      "email_placeholder": "name@beispiel.com",
       "subject": "Betreff",
-      "subject_placeholder": "Was würden Sie gerne besprechen?",
+      "subject_placeholder": "Was möchten Sie besprechen?",
       "message": "Nachricht",
       "message_placeholder": "Erzählen Sie uns mehr über Ihre Anfrage...",
-      "submit": "Nachricht Senden"
+      "submit": "Nachricht senden"
     }
   },
   "email_label": "E-Mail",
   "email_value": "hello@starter.app",
   "phone_label": "Telefon",
-  "phone_value": "+49 30 12345678",
+  "phone_value": "+49 500 000 000",
   "location_label": "Standort",
   "location_value": "Berlin, Deutschland"
 }

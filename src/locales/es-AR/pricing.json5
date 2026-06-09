@@ -1,56 +1,56 @@
 {
-  "period_monthly": "bln",
-  "period_yearly": "thn",
+  "period_monthly": "mes",
+  "period_yearly": "año",
   "hero": {
-    "title_part1": "Harga Sederhana & ",
-    "title_highlight": "Transparan",
-    "description": "Tanpa biaya tersembunyi. Tanpa biaya kejutan. Pilih paket yang paling sesuai dengan kebutuhan Anda.",
-    "badge": "Elige tu plan"
+    "title_part1": "Precios simples, ",
+    "title_highlight": "transparentes",
+    "description": "Sin tarifas ocultas. Sin cargos sorpresa. Elegí el plan que se ajuste perfectamente a tus necesidades.",
+    "badge": "Elegí tu plan"
   },
   "toggle": {
-    "monthly": "Bulanan",
-    "yearly": "Tahunan",
-    "yearly_hint": "tagihan per tahun",
-    "discount": "HEMAT 20%",
+    "monthly": "Mensual",
+    "yearly": "Anual",
+    "yearly_hint": "facturado anualmente",
+    "discount": "AHORRA 20%",
     "aria_label": "Toggle Pricing Plan"
   },
   "plans": {
     "hobby": {
       "name": "Hobby",
-      "desc": "Sangat cocok untuk proyek sampingan dan pembelajaran.",
-      "btn": "Mulai Gratis",
-      "feature_0": "1 Proyek",
-      "feature_1": "Dukungan Komunitas",
-      "feature_2": "Penyimpanan 5GB"
+      "desc": "Perfecto para proyectos personales y aprendizaje.",
+      "btn": "Empezar",
+      "feature_0": "1 Proyecto",
+      "feature_1": "Soporte de Comunidad",
+      "feature_2": "5GB de Almacenamiento"
     },
     "pro": {
       "name": "Pro",
-      "badge": "Paling Populer",
-      "desc": "Untuk developer profesional dan tim kecil.",
-      "btn": "Pilih Paket Pro",
-      "feature_0": "Proyek Tak Terbatas",
-      "feature_1": "Dukungan Email Prioritas",
-      "feature_2": "Penyimpanan 100GB",
-      "feature_3": "Analitik Lanjutan"
+      "badge": "Más Popular",
+      "desc": "Para desarrolladores profesionales y equipos pequeños.",
+      "btn": "Obtener Pro Ahora",
+      "feature_0": "Proyectos Ilimitados",
+      "feature_1": "Soporte por Correo Prioritario",
+      "feature_2": "100GB de Almacenamiento",
+      "feature_3": "Análisis Avanzados"
     },
     "enterprise": {
       "name": "Enterprise",
-      "desc": "Untuk aplikasi skala besar dan organisasi.",
-      "btn": "Hubungi Sales",
-      "feature_0": "Semua fitur di paket Pro",
-      "feature_1": "Manajer Akun Khusus",
-      "feature_2": "SSO & Log Audit",
-      "feature_3": "Penyimpanan Tak Terbatas"
+      "desc": "Para aplicaciones a gran escala y organizaciones.",
+      "btn": "Contactar Ventas",
+      "feature_0": "Todo en Pro",
+      "feature_1": "Gerente Dedicado",
+      "feature_2": "SSO y Registros de Auditoría",
+      "feature_3": "Almacenamiento Ilimitado"
     }
   },
   "faq": {
-    "title": "Pertanyaan Umum",
-    "subtitle": "Temukan jawaban atas pertanyaan yang paling sering diajukan tentang paket dan layanan kami.",
-    "q_0": "Apakah saya bisa membatalkan kapan saja?",
-    "a_0": "Ya, Anda dapat membatalkan langganan kapan saja. Akses Anda tetap aktif hingga akhir periode penagihan.",
-    "q_1": "Apakah ada uji coba gratis?",
-    "a_1": "Kami menawarkan uji coba gratis 14 hari untuk paket Pro. Tidak perlu kartu kredit untuk memulai.",
-    "q_2": "Metode pembayaran apa yang tersedia?",
-    "a_2": "Kami menerima kartu kredit utama dan PayPal. Untuk Enterprise, kami mendukung transfer bank."
+    "title": "Preguntas Frecuentes",
+    "subtitle": "Encontrá respuestas a las preguntas más frecuentes sobre nuestros planes y servicios.",
+    "q_0": "¿Puedo cancelar en cualquier momento?",
+    "a_0": "Sí, podés cancelar tu suscripción en cualquier momento. Tu acceso continuará hasta el final de tu período de facturación.",
+    "q_1": "¿Ofrecen prueba gratuita?",
+    "a_1": "Ofrecemos una prueba gratuita de 14 días para el plan Pro. No se requiere tarjeta de crédito para comenzar.",
+    "q_2": "¿Qué métodos de pago aceptan?",
+    "a_2": "Aceptamos todas las tarjetas de crédito principales (Visa, Mastercard, Amex) y PayPal. Para planes Enterprise, admitimos transferencias bancarias."
   }
 }

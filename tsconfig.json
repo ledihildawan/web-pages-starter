@@ -30,7 +30,6 @@
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
 
-    /* ALIAS PATHS - Harus Sinkron dengan rsbuild.config.ts */
     "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {

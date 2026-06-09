@@ -189,7 +189,7 @@
   },
   "section_systems": {
     "title": "Schriftsysteme",
-    "description": "Alle 7 algorithmischen und 4 zusätzlichen numerischen Systeme auf Systemebene, mit verbundenen Schriftladern."
+    "description": "Alle Zahlensysteme (algorithmisch und numerisch) zeigen korrekte native Ziffern mit ICU-Fallback."
   },
   "nav": {
     "translations": "Übersetzungen",

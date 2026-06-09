@@ -1,57 +1,57 @@
 {
   "hero": {
-    "badge": "Fitur Unggulan",
-    "title_part1": "Semua yang Anda butuhkan untuk",
-    "title_highlight": "skala lebih cepat",
-    "description": "Dari analitik yang kuat hingga integrasi yang mulus, kami menyediakan toolkit yang Anda butuhkan untuk membangun aplikasi kelas dunia tanpa pusing."
+    "badge": "Power unter der Haube",
+    "title_part1": "Alles, was Sie brauchen, um",
+    "title_highlight": "schneller zu skalieren",
+    "description": "Von leistungsstarken Analysen bis nahtlosen Integrationen bieten wir das Toolkit, das Sie für den Bau von erstklassigen Anwendungen ohne Kopfschmerzen benötigen."
   },
   "sections": {
     "sync": {
-      "title": "Sinkronisasi Real-time",
-      "description": "Perubahan tersebar secara instan di semua perangkat. Baik pengguna Anda menggunakan ponsel, desktop, atau tablet, mereka melihat data yang sama di waktu yang sama.",
-      "check_0": "Latensi di bawah milidetik",
-      "check_1": "Dukungan offline bawaan",
-      "check_2": "Penanganan resolusi konflik"
+      "title": "Echtzeit-Synchronisation",
+      "description": "Änderungen breiten sich sofort auf alle Geräte aus. Ob Ihre Nutzer auf Mobilgerät, Desktop oder Tablet sind, sie sehen dieselben Daten genau zur gleichen Zeit.",
+      "check_0": "Sub-Millisekunden-Latenz",
+      "check_1": "Offline-Unterstützung von Haus aus",
+      "check_2": "Konfliktlösungs-Handling"
     },
     "analytics": {
-      "title": "Analitik yang Dapat Ditindaklanjuti",
-      "description": "Jangan menebak-nebak. Dapatkan wawasan mendalam tentang perilaku pengguna, kinerja sistem, dan metrik pendapatan. Visualisasikan data Anda dengan grafik interaktif.",
-      "check_0": "Dashboard yang dapat disesuaikan",
-      "check_1": "Ekspor ke PDF, CSV, atau Excel",
-      "check_2": "Laporan mingguan otomatis"
+      "title": "Handlungsorientierte Analysen",
+      "description": "Fliegen Sie nicht blind. Erhalten Sie tiefgreifende Einblicke in das Nutzerverhalten, Systemleistung und Umsatzkennzahlen. Visualisieren Sie Ihre Daten mit schönen, interaktiven Diagrammen.",
+      "check_0": "Anpassbare Dashboards",
+      "check_1": "Exportieren nach PDF, CSV oder Excel",
+      "check_2": "Automatisierte wöchentliche Berichte"
     }
   },
-  "more_title": "Dan masih banyak lagi...",
+  "more_title": "Und vieles mehr...",
   "more_subtitle": "Erkunden Sie zusätzliche Funktionen, die Ihre Anwendung hervorheben.",
   "more": {
     "dark_mode": {
-      "title": "Mode Gelap",
-      "desc": "Dukungan bawaan untuk tema terang dan gelap dengan deteksi otomatis."
+      "title": "Dunkler Modus",
+      "desc": "Integrierte Unterstützung für helle und dunkle Themen mit automatischer Systemerkennung."
     },
     "api_first": {
-      "title": "API First",
-      "desc": "API REST dan GraphQL tersedia untuk kontrol terprogram penuh."
+      "title": "API Zuerst",
+      "desc": "REST- und GraphQL-APIs verfügbar für vollständige programmierte Steuerung."
     },
     "sso": {
-      "title": "Login SSO",
-      "desc": "Single Sign-On kelas enterprise untuk Google, GitHub, dan Okta."
+      "title": "SSO-Login",
+      "desc": "Single Sign-On der Unternehmensklasse für Google, GitHub und Okta."
     },
     "audit": {
-      "title": "Log Audit",
-      "desc": "Lacak setiap perubahan pada proyek Anda dengan stempel waktu terperinci."
+      "title": "Audit-Logs",
+      "desc": "Verfolgen Sie jede Änderung an Ihrem Projekt mit detaillierten Zeitstempeln."
     },
     "rbac": {
-      "title": "Akses Berbasis Peran",
-      "desc": "Kontrol izin granular untuk admin, editor, dan viewer."
+      "title": "Rollenbasierte Zugriff",
+      "desc": "Granulare Berechtigungssteuerungen für Administratoren, Editoren und Betrachter."
     },
     "uptime": {
-      "title": "Uptime 99.99%",
-      "desc": "Ketersediaan terjamin dengan CDN kami yang terdistribusi secara global."
+      "title": "99,99% Uptime",
+      "desc": "Garantierte Verfügbarkeit mit unserem weltweit verteilten CDN."
     }
   },
   "cta": {
-    "heading": "Siap untuk memulai?",
-    "btn_create": "Buat Akun",
-    "btn_docs": "Baca Dokumentasi"
+    "heading": "Bereit anzufangen?",
+    "btn_create": "Konto Erstellen",
+    "btn_docs": "Dokumentation Lesen"
   }
 }

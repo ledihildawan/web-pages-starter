@@ -1152,7 +1152,6 @@
     }
   }
 
-  /* Language option: CSS-only active state via parent data attribute */
   [data-current-lang] .lang-option {
     color: rgb(148 163 184);
     border: 1px solid transparent;

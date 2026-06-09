@@ -1,57 +1,57 @@
 {
   "hero": {
-    "badge": "Fitur Unggulan",
-    "title_part1": "Semua yang Anda butuhkan untuk",
-    "title_highlight": "skala lebih cepat",
-    "description": "Dari analitik yang kuat hingga integrasi yang mulus, kami menyediakan toolkit yang Anda butuhkan untuk membangun aplikasi kelas dunia tanpa pusing."
+    "badge": "قوة حقيقية تحت الغطاء",
+    "title_part1": "كل ما تحتاجه لـ",
+    "title_highlight": "التوسع بشكل أسرع",
+    "description": "من التحليلات القوية إلى التكامل السلس، نوفر لك الأدوات التي تحتاجها لبناء تطبيقات عالمية المستوى دون عناء."
   },
   "sections": {
     "sync": {
-      "title": "Sinkronisasi Real-time",
-      "description": "Perubahan tersebar secara instan di semua perangkat. Baik pengguna Anda menggunakan ponsel, desktop, atau tablet, mereka melihat data yang sama di waktu yang sama.",
-      "check_0": "Latensi di bawah milidetik",
-      "check_1": "Dukungan offline bawaan",
-      "check_2": "Penanganan resolusi konflik"
+      "title": "المزامنة في الوقت الفعلي",
+      "description": "تنتشر التغييرات فوراً عبر جميع الأجهزة. سواء كان مستخدموك على الهاتف المحمول أو سطح المكتب أو الجهاز اللوحي، فإنهم يرون نفس البيانات في نفس الوقت تماماً.",
+      "check_0": "زمن انتقال أقل من مللي ثانية",
+      "check_1": "دعم العمل بدون اتصال بالإنترنت",
+      "check_2": "معالجة حل النزاعات"
     },
     "analytics": {
-      "title": "Analitik yang Dapat Ditindaklanjuti",
-      "description": "Jangan menebak-nebak. Dapatkan wawasan mendalam tentang perilaku pengguna, kinerja sistem, dan metrik pendapatan. Visualisasikan data Anda dengan grafik interaktif.",
-      "check_0": "Dashboard yang dapat disesuaikan",
-      "check_1": "Ekspor ke PDF, CSV, atau Excel",
-      "check_2": "Laporan mingguan otomatis"
+      "title": "تحليلات قابلة للتنفيذ",
+      "description": "لا تعمل بشكل عشوائي. احصل على رؤى عميقة حول سلوك المستخدمين، وأداء النظام، ومقاييس الإيرادات. قم بتصور بياناتك من خلال رسوم بيانية تفاعلية وجميلة.",
+      "check_0": "لوحات تحكم قابلة للتخصيص",
+      "check_1": "تصدير إلى PDF أو CSV أو Excel",
+      "check_2": "تقارير أسبوعية مؤتمتة"
     }
   },
-  "more_title": "Dan masih banyak lagi...",
-  "more_subtitle": "استكشفcapabilities الإضافية التي تجعل تطبيقك متميزاً.",
+  "more_title": "وأكثر من ذلك بكثير...",
+  "more_subtitle": "استكشف القدرات الإضافية التي تجعل تطبيقك متميزاً.",
   "more": {
     "dark_mode": {
-      "title": "Mode Gelap",
-      "desc": "Dukungan bawaan untuk tema terang dan gelap dengan deteksi otomatis."
+      "title": "الوضع الداكن",
+      "desc": "دعم مدمج للسمات الفاتحة والداكنة مع اكتشاف تلقائي للنظام."
     },
     "api_first": {
-      "title": "API First",
-      "desc": "API REST dan GraphQL tersedia untuk kontrol terprogram penuh."
+      "title": "واجهة برمجة التطبيقات أولاً",
+      "desc": "تتوفر واجهات برمجة تطبيقات REST و GraphQL للتحكم البرمجي الكامل."
     },
     "sso": {
-      "title": "Login SSO",
-      "desc": "Single Sign-On kelas enterprise untuk Google, GitHub, dan Okta."
+      "title": "تسجيل الدخول الموحد (SSO)",
+      "desc": "دعم تسجيل الدخول الموحد للمؤسسات عبر Google و GitHub و Okta."
     },
     "audit": {
-      "title": "Log Audit",
-      "desc": "Lacak setiap perubahan pada proyek Anda dengan stempel waktu terperinci."
+      "title": "سجلات التدقيق",
+      "desc": "تتبع كل تغيير يتم إجراؤه على مشروعك بطوابع زمنية مفصلة."
     },
     "rbac": {
-      "title": "Akses Berbasis Peran",
-      "desc": "Kontrol izin granular untuk admin, editor, dan viewer."
+      "title": "الوصول القائم على الأدوار",
+      "desc": "تحكم دقيق في الأذونات للمسؤولين والمحررين والمشاهدين."
     },
     "uptime": {
-      "title": "Uptime 99.99%",
-      "desc": "Ketersediaan terjamin dengan CDN kami yang terdistribusi secara global."
+      "title": "99.99% وقت التشغيل",
+      "desc": "توافر مضمون مع شبكة توصيل المحتوى (CDN) الموزعة عالمياً."
     }
   },
   "cta": {
-    "heading": "Siap untuk memulai?",
-    "btn_create": "Buat Akun",
-    "btn_docs": "Baca Dokumentasi"
+    "heading": "هل أنت مستعد للبدء؟",
+    "btn_create": "إنشاء حساب",
+    "btn_docs": "قراءة الوثائق"
   }
 }

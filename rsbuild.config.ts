@@ -92,10 +92,8 @@ export default defineConfig({
       type: 'reload-page',
     },
   },
-  performance: {
-    chunkSplit: {
-      strategy: 'split-by-experience',
-    },
+  splitChunks: {
+    preset: 'default',
   },
   resolve: {
     alias: {
@@ -206,9 +204,6 @@ export default defineConfig({
     rspack: {
       optimization: {
         runtimeChunk: 'single',
-        splitChunks: {
-          minSize: 2_000,
-        },
       },
       module: {
         rules: [
@@ -227,12 +222,6 @@ export default defineConfig({
               },
             ],
           },
-        ],
-      },
-      snapshot: {
-        managedPaths: [
-          resolveRoot(PATHS.GENERATED),
-          resolveRoot('node_modules'),
         ],
       },
     },

@@ -1,47 +1,47 @@
 {
   "meta": {
-    "title": "Hubungi Kami | Starter App",
-    "description": "Hubungi kami untuk pertanyaan dan dukungan."
+    "title": "सम्पर्क गर्नुहोस् | Starter App",
+    "description": "प्रश्न र समर्थनको लागि हामीलाई सम्पर्क गर्नुहोस्।"
   },
   "contact": {
-    "badge": "Siap Membantu",
-    "title_part1": "Mari",
-    "title_highlight": "terhubung",
-    "description": "Punya pertanyaan atau ingin berkolaborasi? Kami senang mendengar dari Anda. Kirim pesan dan kami akan segera merespons.",
-    "form_title": "Kirim Pesan",
-    "form_subtitle": "Isi form di bawah dan kami akan segera merespons.",
-    "social_title": "Ikuti Kami",
-    "social_subtitle": "Dapatkan update terbaru melalui media sosial kami",
+    "badge": "सम्पर्क गर्नुहोस्",
+    "title_part1": "जोडौं",
+    "title_highlight": "सँगै",
+    "description": "तपाईंसँग प्रश्न छन् वा सहकार्य गर्न चाहानुहुन्छ? हामी तपाईंबाट सुन्न पाउँदा खुशी हुनेछौं। हामीलाई सन्देश पठाउनुहोस् र हामी चाँडै जवाफ दिनेछौं।",
+    "form_title": "सन्देश पठाउनुहोस्",
+    "form_subtitle": "तलको फारम भर्नुहोस् र हामी छिट्टै जवाफ दिनेछौं।",
+    "social_title": "हामीलाई पछ्याउनुहोस्",
+    "social_subtitle": "सामाजिक सञ्जालमा हाम्रो नवीनतम समाचारबाट अद्यावधिक रहनुहोस्",
     "info": {
       "response_time": {
-        "title": "Respon Cepat",
-        "description": "Kami berusaha merespons setiap pesan dalam waktu 24 jam pada hari kerja."
+        "title": "छिटो जवाफ",
+        "description": "हामी कामको दिनमा 24 घण्टामा प्रत्येक सन्देशको जवाफ दिन प्रयास गर्छौं।"
       },
       "working_hours": {
-        "title": "Jam Operasional",
-        "description": "Senin - Jumat: 09:00 - 18:00 WIB. Akhir pekan: Dengan prioritas."
+        "title": "कार्य समय",
+        "description": "सोमबार - शुक्रबार: 09:00 - 18:00। शनिबार - आइतबार: प्राथमिकतामा।"
       },
       "support": {
-        "title": "Dukungan Berkelanjutan",
-        "description": "Tim support kami selalu siap membantu menyelesaikan masalah teknis Anda."
+        "title": "निरन्तर समर्थन",
+        "description": "हाम्रो समर्थन टोली सदैव तपाईंको प्राविधिक समस्याहरू समाधान गर्न मद्दत गर्न готов छ।"
       }
     },
     "form": {
-      "name": "Nama",
-      "name_placeholder": "Masukkan nama Anda",
-      "email": "Email",
-      "email_placeholder": "nama@email.com",
-      "subject": "Subjek",
-      "subject_placeholder": "Apa yang ingin Anda diskusikan?",
-      "message": "Pesan",
-      "message_placeholder": "Ceritakan lebih lanjut tentang pertanyaan Anda...",
-      "submit": "Kirim Pesan"
+      "name": "नाम",
+      "name_placeholder": "आफ्नो नाम प्रविष्ट गर्नुहोस्",
+      "email": "इमेल",
+      "email_placeholder": "name@example.com",
+      "subject": "विषय",
+      "subject_placeholder": "तपाईं के छलफल गर्न चाहानुहुन्छ?",
+      "message": "सन्देश",
+      "message_placeholder": "हामीलाई आफ्नो प्रश्नको बारेमा बढी भन्नुहोस्...",
+      "submit": "सन्देश पठाउनुहोस्"
     }
   },
-  "email_label": "Email",
+  "email_label": "इमेल",
   "email_value": "hello@starter.app",
-  "phone_label": "Telepon",
-  "phone_value": "+62 812 3456 7890",
-  "location_label": "Lokasi",
-  "location_value": "Jakarta, Indonesia"
+  "phone_label": "फोन",
+  "phone_value": "+977 5 000 0000",
+  "location_label": "स्थान",
+  "location_value": "काठमाण्डौ, नेपाल"
 }

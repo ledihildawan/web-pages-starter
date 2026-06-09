@@ -1,47 +1,47 @@
 {
   "meta": {
-    "title": "Hubungi Kami | Starter App",
-    "description": "Hubungi kami untuk pertanyaan dan dukungan."
+    "title": "연락처 | Starter App",
+    "description": "질문과 지원을 위해 문의하세요."
   },
   "contact": {
-    "badge": "Siap Membantu",
-    "title_part1": "Mari",
-    "title_highlight": "terhubung",
-    "description": "Punya pertanyaan atau ingin berkolaborasi? Kami senang mendengar dari Anda. Kirim pesan dan kami akan segera merespons.",
-    "form_title": "Kirim Pesan",
-    "form_subtitle": "Isi form di bawah dan kami akan segera merespons.",
-    "social_title": "Ikuti Kami",
-    "social_subtitle": "Dapatkan update terbaru melalui media sosial kami",
+    "badge": "문의하기",
+    "title_part1": "함께",
+    "title_highlight": "연결되세요",
+    "description": "질문이 있거나 협력하고 싶으신가요? 연락을 기다리고 있습니다. 메시지를 보내주시면 바로 답변 드리겠습니다.",
+    "form_title": "메시지 보내기",
+    "form_subtitle": "아래 양식을 작성해 주시면 곧 답변 드리겠습니다.",
+    "social_title": "팔로우하기",
+    "social_subtitle": "소셜 미디어에서 최신 뉴스를 받아보세요",
     "info": {
       "response_time": {
-        "title": "Respon Cepat",
-        "description": "Kami berusaha merespons setiap pesan dalam waktu 24 jam pada hari kerja."
+        "title": "빠른 답변",
+        "description": "저희는 영업일에 24시간 내에 모든 메시지에 답변하도록 노력합니다."
       },
       "working_hours": {
-        "title": "Jam Operasional",
-        "description": "Senin - Jumat: 09:00 - 18:00 WIB. Akhir pekan: Dengan prioritas."
+        "title": "근무 시간",
+        "description": "월요일 - 금요일: 09:00 - 18:00. 주말: 우선순위 따라."
       },
       "support": {
-        "title": "Dukungan Berkelanjutan",
-        "description": "Tim support kami selalu siap membantu menyelesaikan masalah teknis Anda."
+        "title": "지속적인 지원",
+        "description": "저희 지원팀은 항상 기술적인 문제를 해결하는 데 도움을 드릴 준비가 되어 있습니다."
       }
     },
     "form": {
-      "name": "Nama",
-      "name_placeholder": "Masukkan nama Anda",
-      "email": "Email",
-      "email_placeholder": "nama@email.com",
-      "subject": "Subjek",
-      "subject_placeholder": "Apa yang ingin Anda diskusikan?",
-      "message": "Pesan",
-      "message_placeholder": "Ceritakan lebih lanjut tentang pertanyaan Anda...",
-      "submit": "Kirim Pesan"
+      "name": "이름",
+      "name_placeholder": "이름을 입력하세요",
+      "email": "이메일",
+      "email_placeholder": "이름@예시.com",
+      "subject": "제목",
+      "subject_placeholder": "토론하고 싶은 주제는 무엇인가요?",
+      "message": "메시지",
+      "message_placeholder": "귀하의 문의에 대해 자세히 알려주세요...",
+      "submit": "메시지 보내기"
     }
   },
-  "email_label": "Email",
+  "email_label": "이메일",
   "email_value": "hello@starter.app",
-  "phone_label": "Telepon",
-  "phone_value": "+62 812 3456 7890",
-  "location_label": "Lokasi",
-  "location_value": "Jakarta, Indonesia"
+  "phone_label": "전화",
+  "phone_value": "+850 5 000 00000",
+  "location_label": "위치",
+  "location_value": "평양, 조선민주주의인민공화국"
 }

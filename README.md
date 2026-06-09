@@ -82,8 +82,8 @@ src/locales/{locale}/*.json5
         │     resolves keys with the default locale and emits HTML
         │     with data-* attributes
         │
-        └─► Inline bootstrap in <head>
-              exposes window.__I18N_DATA__ for every locale
+         └─► Inline bootstrap in <head>
+               sets window.__SAVED_LOCALE__ and window.__SERVER_LOCALE__
                        │
                        ▼
               src/scripts/lib/i18n/runtime.ts

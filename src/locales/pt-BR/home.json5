@@ -1,35 +1,35 @@
 {
   "meta": {
     "title": "Início | Starter App",
-    "description": "Construtor de aplicações web modernas."
+    "description": "Construtor de aplicativos web modernos."
   },
   "hero": {
-    "badge": "Novo: Versão 2.0 está aqui",
+    "badge": "Novo: Versão 2.0 chegou",
     "title_start": "Construa algo",
     "title_highlight": "bonito hoje",
-    "description": "A forma moderna de construir aplicações web. Rápido, flexível e projetado para desenvolvedores que se importam com seu ofício.",
-    "image_alt": "Dashboard Preview",
+    "description": "A forma moderna de construir aplicativos web. Rápido, flexível e projetado para desenvolvedores que se importam com a qualidade do seu trabalho.",
+    "image_alt": "Prévia do Dashboard",
     "primary_btn": {
-      "label": "Começar a Construir",
+      "label": "Começar Agora",
       "url": "/start"
     },
     "secondary_btn": {
-      "label": "Ver Demo",
+      "label": "Ver Demonstração",
       "url": "/demo"
     },
-    "note": "Não é necessário cartão de crédito"
+    "note": "Não precisa de cartão de crédito"
   },
   "features": {
-    "heading": "Tudo Que Você Precisa",
-    "subheading": "Recursos poderosos para ajudá-lo a construir mais rápido.",
+    "heading": "Tudo o Que Você Precisa",
+    "subheading": "Funcionalidades poderosas para te ajudar a construir mais rápido.",
     "list": {
       "speed": {
         "title": "Rápido como um Raio",
-        "description": "Otimizado para performance. Suas aplicações carregam instantaneamente."
+        "description": "Otimizado para performance. Seus aplicativos carregam instantaneamente."
       },
       "design": {
         "title": "Design Bonito",
-        "description": "Criado com cuidado. Cada pixel tem significado e propósito."
+        "description": "Criado com cuidado. Cada píxel tem significado e propósito."
       },
       "security": {
         "title": "Seguro por Padrão",
@@ -43,8 +43,8 @@
     "projects": "Projetos Construídos",
     "projects_val": "50K+",
     "uptime": "Disponibilidade 24/7",
-    "uptime_val": "99,9%",
-    "rating": "Avaliação dos Usuários",
+    "uptime_val": "99.9%",
+    "rating": "Avaliação de Usuários",
     "rating_val": "4.9/5"
   }
 }

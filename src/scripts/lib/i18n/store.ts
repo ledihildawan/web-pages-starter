@@ -18,7 +18,6 @@ const refreshFonts = async (): Promise<void> => {
   const fonts = await import('./fonts');
   fonts.setupFontStackCSS();
   fonts.loadLanguageFonts();
-  fonts.loadFallbackFonts();
 };
 
 const ensureLocaleData = async (

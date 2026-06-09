@@ -18,7 +18,7 @@ export const WRITING_SYSTEMS = [
     ],
     numberingSystems: ['latn'],
     direction: DIRECTION_CODE.LTR,
-    defaultFont: 'Inter, system-ui',
+    defaultFont: 'Inter Variable, system-ui',
   },
   {
     code: 'cjk',
@@ -29,7 +29,7 @@ export const WRITING_SYSTEMS = [
     languages: [LANGUAGE_CODE.ZH, LANGUAGE_CODE.JA, LANGUAGE_CODE.KO],
     numberingSystems: ['jpan', 'hans', 'hant', 'kore', 'hanidec', 'fullwide'],
     direction: DIRECTION_CODE.LTR,
-    defaultFont: 'Noto Sans CJK',
+    defaultFont: 'Noto Sans JP Variable, Noto Sans SC Variable, Noto Sans TC Variable, Noto Sans KR Variable',
   },
   {
     code: 'arabic',
@@ -40,7 +40,7 @@ export const WRITING_SYSTEMS = [
     languages: [LANGUAGE_CODE.AR],
     numberingSystems: ['arab'],
     direction: 'rtl' as const,
-    defaultFont: 'Noto Sans Arabic, Noto Naskh Arabic',
+    defaultFont: 'Noto Sans Arabic Variable',
   },
   {
     code: 'devanagari',
@@ -60,7 +60,7 @@ export const WRITING_SYSTEMS = [
     languages: [LANGUAGE_CODE.RU],
     numberingSystems: ['cyrl'],
     direction: DIRECTION_CODE.LTR,
-    defaultFont: 'Inter Cyrillic',
+    defaultFont: 'Inter Variable',
   },
   {
     code: 'thai',
@@ -70,7 +70,7 @@ export const WRITING_SYSTEMS = [
     languages: [LANGUAGE_CODE.TH],
     numberingSystems: ['thai'],
     direction: DIRECTION_CODE.LTR,
-    defaultFont: 'Noto Sans Thai',
+    defaultFont: 'Noto Sans Thai Variable',
   },
   {
     code: 'bengali',
@@ -80,7 +80,7 @@ export const WRITING_SYSTEMS = [
     languages: [] as LanguageCode[],
     numberingSystems: ['beng'],
     direction: DIRECTION_CODE.LTR,
-    defaultFont: 'Noto Sans Bengali',
+    defaultFont: 'Noto Sans Bengali Variable',
   },
   {
     code: 'tamil',
@@ -90,7 +90,7 @@ export const WRITING_SYSTEMS = [
     languages: [] as LanguageCode[],
     numberingSystems: ['tamldec', 'taml'],
     direction: DIRECTION_CODE.LTR,
-    defaultFont: 'Noto Sans Tamil',
+    defaultFont: 'Noto Sans Tamil Variable',
   },
   {
     code: 'telugu',
@@ -100,7 +100,7 @@ export const WRITING_SYSTEMS = [
     languages: [] as LanguageCode[],
     numberingSystems: ['telu'],
     direction: DIRECTION_CODE.LTR,
-    defaultFont: 'Noto Sans Telugu',
+    defaultFont: 'Noto Sans Telugu Variable',
   },
   {
     code: 'kannada',
@@ -110,7 +110,7 @@ export const WRITING_SYSTEMS = [
     languages: [] as LanguageCode[],
     numberingSystems: ['knda'],
     direction: DIRECTION_CODE.LTR,
-    defaultFont: 'Noto Sans Kannada',
+    defaultFont: 'Noto Sans Kannada Variable',
   },
   {
     code: 'malayalam',
@@ -120,7 +120,7 @@ export const WRITING_SYSTEMS = [
     languages: [] as LanguageCode[],
     numberingSystems: ['mlym'],
     direction: DIRECTION_CODE.LTR,
-    defaultFont: 'Noto Sans Malayalam',
+    defaultFont: 'Noto Sans Malayalam Variable',
   },
   {
     code: 'gujarati',
@@ -130,7 +130,7 @@ export const WRITING_SYSTEMS = [
     languages: [] as LanguageCode[],
     numberingSystems: ['gujr'],
     direction: DIRECTION_CODE.LTR,
-    defaultFont: 'Noto Sans Gujarati',
+    defaultFont: 'Noto Sans Gujarati Variable',
   },
   {
     code: 'gurmukhi',
@@ -140,7 +140,7 @@ export const WRITING_SYSTEMS = [
     languages: [] as LanguageCode[],
     numberingSystems: ['guru'],
     direction: DIRECTION_CODE.LTR,
-    defaultFont: 'Noto Sans Gurmukhi',
+    defaultFont: 'Noto Sans Gurmukhi Variable',
   },
   {
     code: 'sinhala',
@@ -150,7 +150,7 @@ export const WRITING_SYSTEMS = [
     languages: [] as LanguageCode[],
     numberingSystems: ['sinh'],
     direction: DIRECTION_CODE.LTR,
-    defaultFont: 'Noto Sans Sinhala',
+    defaultFont: 'Noto Sans Sinhala Variable',
   },
   {
     code: 'georgian',
@@ -160,7 +160,7 @@ export const WRITING_SYSTEMS = [
     languages: [] as LanguageCode[],
     numberingSystems: ['geor'],
     direction: DIRECTION_CODE.LTR,
-    defaultFont: 'Noto Sans Georgian',
+    defaultFont: 'Noto Sans Georgian Variable',
   },
   {
     code: 'armenian',
@@ -170,7 +170,7 @@ export const WRITING_SYSTEMS = [
     languages: [] as LanguageCode[],
     numberingSystems: ['armn'],
     direction: DIRECTION_CODE.LTR,
-    defaultFont: 'Noto Sans Armenian',
+    defaultFont: 'Noto Sans Armenian Variable',
   },
   {
     code: 'ethiopic',
@@ -181,7 +181,7 @@ export const WRITING_SYSTEMS = [
     languages: [] as LanguageCode[],
     numberingSystems: ['ethi'],
     direction: DIRECTION_CODE.LTR,
-    defaultFont: 'Noto Sans Ethiopic',
+    defaultFont: 'Noto Sans Ethiopic Variable',
   },
   {
     code: 'khmer',
@@ -191,7 +191,7 @@ export const WRITING_SYSTEMS = [
     languages: [] as LanguageCode[],
     numberingSystems: ['khmr'],
     direction: DIRECTION_CODE.LTR,
-    defaultFont: 'Noto Sans Khmer',
+    defaultFont: 'Noto Sans Khmer Variable',
   },
   {
     code: 'lao',
@@ -201,7 +201,7 @@ export const WRITING_SYSTEMS = [
     languages: [] as LanguageCode[],
     numberingSystems: ['laoo'],
     direction: DIRECTION_CODE.LTR,
-    defaultFont: 'Noto Sans Lao',
+    defaultFont: 'Noto Sans Lao Variable',
   },
   {
     code: 'myanmar',
@@ -211,7 +211,7 @@ export const WRITING_SYSTEMS = [
     languages: [] as LanguageCode[],
     numberingSystems: ['mymr'],
     direction: DIRECTION_CODE.LTR,
-    defaultFont: 'Noto Sans Myanmar',
+    defaultFont: 'Noto Sans Myanmar Variable',
   },
   {
     code: 'greek',
@@ -221,7 +221,7 @@ export const WRITING_SYSTEMS = [
     languages: [] as LanguageCode[],
     numberingSystems: ['grek'],
     direction: DIRECTION_CODE.LTR,
-    defaultFont: 'Inter (includes Greek)',
+    defaultFont: 'Inter Variable',
   },
   {
     code: 'hebrew',
@@ -232,7 +232,7 @@ export const WRITING_SYSTEMS = [
     languages: [] as LanguageCode[],
     numberingSystems: ['hebr'],
     direction: 'rtl' as const,
-    defaultFont: 'Inter (includes Hebrew)',
+    defaultFont: 'Noto Sans Hebrew Variable',
   },
   {
     code: 'odia',
@@ -252,7 +252,7 @@ export const WRITING_SYSTEMS = [
     languages: [] as LanguageCode[],
     numberingSystems: ['tibt'],
     direction: DIRECTION_CODE.LTR,
-    defaultFont: 'Noto Serif Tibetan',
+    defaultFont: 'Noto Serif Tibetan Variable',
   },
   {
     code: 'nko',
@@ -272,7 +272,7 @@ export const WRITING_SYSTEMS = [
     languages: [] as LanguageCode[],
     numberingSystems: ['adlm'],
     direction: 'rtl' as const,
-    defaultFont: 'Noto Sans Adlam',
+    defaultFont: 'Noto Sans Adlam Variable',
   },
 ] as const;
 

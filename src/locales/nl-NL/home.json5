@@ -1,50 +1,50 @@
 {
   "meta": {
     "title": "Home | Starter App",
-    "description": "Moderne webapplicatiebouwer."
+    "description": "Bouwer van moderne webapplicaties."
   },
   "hero": {
-    "badge": "Nieuw: versie 2.0 is uit",
+    "badge": "Nieuw: Versie 2.0 is uit",
     "title_start": "Bouw iets",
     "title_highlight": "moois vandaag",
-    "description": "De moderne manier om webapplicaties te bouwen. Snel, flexibel en ontworpen voor ontwikkelaars die om kwaliteit geven.",
-    "image_alt": "Dashboardvoorbeeld",
+    "description": "De moderne manier om webapplicaties te bouwen. Snel, flexibel en ontworpen voor ontwikkelaars die om hun vakmanschap geven.",
+    "image_alt": "Dashboard Preview",
     "primary_btn": {
-      "label": "Begin met bouwen",
+      "label": "Aan de slag",
       "url": "/start"
     },
     "secondary_btn": {
-      "label": "Bekijk demo",
+      "label": "Bekijk Demo",
       "url": "/demo"
     },
-    "note": "Geen creditcard nodig",
+    "note": "Geen creditcard vereist"
   },
   "features": {
-    "heading": "Alles wat u nodig heeft",
-    "subheading": "Geavanceerde functies om u sneller te laten bouwen.",
+    "heading": "Alles Wat Je Nodig Hebt",
+    "subheading": "Krachtige functies om je te helpen sneller bouwen.",
     "list": {
       "speed": {
-        "title": "Supersnel",
-        "description": "Geoptimaliseerd voor maximale prestaties. Uw applicatie laadt direct."
+        "title": "Bliksemsnel",
+        "description": "Geoptimaliseerd voor prestaties. Je applicaties laden instant."
       },
       "design": {
-        "title": "Elegant ontwerp",
-        "description": "Zorgvuldig gemaakt. Elke pixel heeft betekenis en doel."
+        "title": "Mooie Formgeving",
+        "description": "Met zorg gemaakt. Elke pixel heeft betekenis en doel."
       },
       "security": {
-        "title": "Gegarandeerde beveiliging",
-        "description": "Enterprise-grade beveiliging. Uw gegevens zijn in elke laag beschermd."
+        "title": "Veilig by Default",
+        "description": "Beveiliging op ondernemingsniveau. Je data is beschermd in elke laag."
       }
     }
   },
   "stats": {
-    "community": "Ontwikkelaarscommunity",
+    "community": "Ontwikkelaarsgemeenschap",
     "community_val": "10K+",
-    "projects": "Gebouwde projecten",
+    "projects": "Gebouwde Projecten",
     "projects_val": "50K+",
-    "uptime": "24/7 uptime",
-    "uptime_val": "99,9%",
+    "uptime": "Beschikbaarheid 24/7",
+    "uptime_val": "99.9%",
     "rating": "Gebruikersbeoordeling",
-    "rating_val": "4,9/5"
+    "rating_val": "4.9/5"
   }
 }

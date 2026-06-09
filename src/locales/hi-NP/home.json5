@@ -1,50 +1,50 @@
 {
   "meta": {
-    "title": "Beranda | Starter App",
-    "description": "Pembangun aplikasi web modern."
+    "title": "होमपेज | Starter App",
+    "description": "आधुनिक वेब ऐप्स का निर्माता।"
   },
   "hero": {
-    "badge": "Baru: Versi 2.0 Telah Hadir",
-    "title_start": "Buat Sesuatu",
-    "title_highlight": "Indah Hari Ini",
-    "description": "Cara modern dalam membangun aplikasi web. Cepat, fleksibel, dan dirancang untuk developer yang peduli terhadap kualitas karya.",
-    "image_alt": "Pratinjau Dasbor",
+    "badge": "नया: संस्करण 2.0 यहाँ है",
+    "title_start": "कुछ बनाएं",
+    "title_highlight": "आज सुंदर",
+    "description": "वेब ऐप्स बनाने का आधुनिक तरीका। तेज़, लचीला और डेवलपर्स के लिए डिज़ाइन किया गया जो अपने काम की परवाह करते हैं।",
+    "image_alt": "डैशबोर्ड पूर्वावलोकन",
     "primary_btn": {
-      "label": "Mulai Membangun",
+      "label": "शुरू करें",
       "url": "/start"
     },
     "secondary_btn": {
-      "label": "Lihat Demo",
+      "label": "डेमो देखें",
       "url": "/demo"
     },
-    "note": "Tidak perlu kartu kredit",
+    "note": "कोई क्रेडिट कार्ड आवश्यक नहीं"
   },
   "features": {
-    "heading": "Semua yang Anda Butuhkan",
-    "subheading": "Fitur canggih untuk membantu Anda membangun lebih cepat.",
+    "heading": "आपको जो चाहिए",
+    "subheading": "शक्तिशाली सुविधाएं जो आपको तेज़ी से बनाने में मदद करें।",
     "list": {
       "speed": {
-        "title": "Super Cepat",
-        "description": "Dioptimalkan untuk performa maksimal. Aplikasi Anda dimuat instan."
+        "title": "बिजली की गति",
+        "description": "प्रदर्शन के लिए अनुकूलित। आपके ऐप्स तुरंत लोड होते हैं।"
       },
       "design": {
-        "title": "Desain Elegan",
-        "description": "Dibuat dengan teliti. Setiap piksel memiliki makna dan tujuan."
+        "title": "सुंदर डिज़ाइन",
+        "description": "सावधानी से बनाया गया। हर पिक्सेल का अर्थ और उद्देश्य है।"
       },
       "security": {
-        "title": "Keamanan Terjamin",
-        "description": "Keamanan kelas enterprise. Data Anda dilindungi di setiap lapisan."
+        "title": "डिफ़ॉल्ट रूप से सुरक्षित",
+        "description": "एंटरप्राइज़-स्तरीय सुरक्षा। आपका डेटा हर परत में सुरक्षित है।"
       }
     }
   },
   "stats": {
-    "community": "Komunitas Developer",
-    "community_val": "10Rb+",
-    "projects": "Proyek Terbangun",
-    "projects_val": "50Rb+",
-    "uptime": "Uptime 24/7",
+    "community": "डेवलपर समुदाय",
+    "community_val": "10K+",
+    "projects": "निर्मित परियोजनाएं",
+    "projects_val": "50K+",
+    "uptime": "उपलब्धता 24/7",
     "uptime_val": "99.9%",
-    "rating": "Rating Pengguna",
+    "rating": "उपयोगकर्ता रेटिंग",
     "rating_val": "4.9/5"
   }
 }

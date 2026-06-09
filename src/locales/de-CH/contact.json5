@@ -1,47 +1,47 @@
 {
   "meta": {
-    "title": "Hubungi Kami | Starter App",
-    "description": "Hubungi kami untuk pertanyaan dan dukungan."
+    "title": "Kontakt | Starter App",
+    "description": "Kontaktieren Sie uns für Fragen und Support."
   },
   "contact": {
-    "badge": "Siap Membantu",
-    "title_part1": "Mari",
-    "title_highlight": "terhubung",
-    "description": "Punya pertanyaan atau ingin berkolaborasi? Kami senang mendengar dari Anda. Kirim pesan dan kami akan segera merespons.",
-    "form_title": "Kirim Pesan",
-    "form_subtitle": "Isi form di bawah dan kami akan segera merespons.",
-    "social_title": "Ikuti Kami",
-    "social_subtitle": "Dapatkan update terbaru melalui media sosial kami",
+    "badge": "Kontakt aufnehmen",
+    "title_part1": "Lass uns",
+    "title_highlight": "verbinden",
+    "description": "Haben Sie Fragen oder möchten Sie zusammenarbeiten? Wir würden uns freuen, von Ihnen zu hören. Senden Sie uns eine Nachricht und wir werden so schnell wie möglich antworten.",
+    "form_title": "Nachricht senden",
+    "form_subtitle": "Füllen Sie das Formular unten aus und wir werden Ihnen in Kürze antworten.",
+    "social_title": "Folgen Sie uns",
+    "social_subtitle": "Bleiben Sie auf dem Laufenden mit unseren neuesten Nachrichten in den sozialen Medien",
     "info": {
       "response_time": {
-        "title": "Respon Cepat",
-        "description": "Kami berusaha merespons setiap pesan dalam waktu 24 jam pada hari kerja."
+        "title": "Schnelle Antwort",
+        "description": "Wir bemühen uns, jede Nachricht innerhalb von 24 Stunden an Werktagen zu beantworten."
       },
       "working_hours": {
-        "title": "Jam Operasional",
-        "description": "Senin - Jumat: 09:00 - 18:00 WIB. Akhir pekan: Dengan prioritas."
+        "title": "Arbeitszeiten",
+        "description": "Montag - Freitag: 09:00 - 18:00. Wochenenden: Nach Priorität."
       },
       "support": {
-        "title": "Dukungan Berkelanjutan",
-        "description": "Tim support kami selalu siap membantu menyelesaikan masalah teknis Anda."
+        "title": "Laufender Support",
+        "description": "Unser Support-Team ist immer bereit, bei der Lösung Ihrer technischen Probleme zu helfen."
       }
     },
     "form": {
-      "name": "Nama",
-      "name_placeholder": "Masukkan nama Anda",
-      "email": "Email",
-      "email_placeholder": "nama@email.com",
-      "subject": "Subjek",
-      "subject_placeholder": "Apa yang ingin Anda diskusikan?",
-      "message": "Pesan",
-      "message_placeholder": "Ceritakan lebih lanjut tentang pertanyaan Anda...",
-      "submit": "Kirim Pesan"
+      "name": "Name",
+      "name_placeholder": "Geben Sie Ihren Namen ein",
+      "email": "E-Mail",
+      "email_placeholder": "name@beispiel.com",
+      "subject": "Betreff",
+      "subject_placeholder": "Was möchten Sie besprechen?",
+      "message": "Nachricht",
+      "message_placeholder": "Erzählen Sie uns mehr über Ihre Anfrage...",
+      "submit": "Nachricht senden"
     }
   },
-  "email_label": "Email",
+  "email_label": "E-Mail",
   "email_value": "hello@starter.app",
-  "phone_label": "Telepon",
-  "phone_value": "+62 812 3456 7890",
-  "location_label": "Lokasi",
-  "location_value": "Jakarta, Indonesia"
+  "phone_label": "Telefon",
+  "phone_value": "+41 500 000 000",
+  "location_label": "Standort",
+  "location_value": "Zürich, Schweiz"
 }

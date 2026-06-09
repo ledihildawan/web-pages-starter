@@ -1,14 +1,14 @@
 {
   "hero": {
     "badge": "Power unter der Haube",
-    "title_part1": "Alles, was Sie brauchen, um",
+    "title_part1": "Alles, was du brauchst, um",
     "title_highlight": "schneller zu skalieren",
-    "description": "Von leistungsstarken Analysen bis nahtlosen Integrationen bieten wir das Toolkit, das Sie für den Bau von erstklassigen Anwendungen ohne Kopfschmerzen benötigen."
+    "description": "Von leistungsstarken Analysen bis nahtlosen Integrationen bieten wir das Toolkit, das du für den Bau von erstklassigen Anwendungen ohne Kopfschmerzen benötigst."
   },
   "sections": {
     "sync": {
       "title": "Echtzeit-Synchronisation",
-      "description": "Änderungen breiten sich sofort auf alle Geräte aus. Ob Ihre Nutzer auf Mobilgerät, Desktop oder Tablet sind, sie sehen dieselben Daten genau zur gleichen Zeit.",
+      "description": "Änderungen breiten sich sofort auf alle Geräte aus. Ob deine Nutzer auf Mobilgerät, Desktop oder Tablet sind, sie sehen dieselben Daten genau zur gleichen Zeit.",
       "check_0": "Sub-Millisekunden-Latenz",
       "check_1": "Offline-Unterstützung von Haus aus",
       "check_2": "Konfliktlösungs-Handling"

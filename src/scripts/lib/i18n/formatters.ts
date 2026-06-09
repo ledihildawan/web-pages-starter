@@ -50,13 +50,19 @@ const NATIVE_DIGITS_MAP = LOCALES.reduce(
   {} as Record<string, (num: number | string) => string>,
 );
 
-const getNumberingSystem = (options: FormatOptions = {}) =>
-  options.nativeDigits
-    ? getLanguageConfig(getLocale())?.nativeNumberingSystem ||
-    NUMBERING_SYSTEM_CODE.LATN
-    : options.numberingSystem ||
+const getNumberingSystem = (options: FormatOptions = {}) => {
+  if (options.numberingSystem) return options.numberingSystem;
+  if (options.nativeDigits) {
+    return (
+      getLanguageConfig(getLocale())?.nativeNumberingSystem ||
+      NUMBERING_SYSTEM_CODE.LATN
+    );
+  }
+  return (
     getLanguageConfig(getLocale())?.numberingSystem ||
-    NUMBERING_SYSTEM_CODE.LATN;
+    NUMBERING_SYSTEM_CODE.LATN
+  );
+};
 
 export const getNativeNumberingSystem = () =>
   getLanguageConfig(getLocale())?.nativeNumberingSystem ||
@@ -81,7 +87,7 @@ export const toNativeDigits = (text: string, force?: boolean) => {
     if (formatted !== '0') {
       return text.replace(/\d/g, (d) => formatter.format(Number(d)));
     }
-  } catch { }
+  } catch {}
 
   const languageSubtag = getLanguageSubtag(getLocale());
   const converter = NATIVE_DIGITS_MAP[languageSubtag];
@@ -98,6 +104,47 @@ const safeIntlFormat = (
   } catch {
     return fallback;
   }
+};
+
+const ALGORITHMIC_SYSTEMS = [
+  'jpan',
+  'hans',
+  'hant',
+  'kore',
+  'cyrl',
+  'taml',
+  'geor',
+  'armn',
+  'ethi',
+  'grek',
+  'hebr',
+  'roman',
+] as const;
+
+const convertLatinDigits = (text: string, targetDigits: readonly string[]) =>
+  text.replace(/\d/g, (d) => targetDigits[Number(d)]);
+
+const applyDigitsFallback = (
+  result: string,
+  numberingSystem: string,
+  num?: number,
+) => {
+  if (
+    !ALGORITHMIC_SYSTEMS.includes(
+      numberingSystem as (typeof ALGORITHMIC_SYSTEMS)[number],
+    )
+  ) {
+    return result;
+  }
+  const nsConfig = NUMBERING_SYSTEMS.find((ns) => ns.code === numberingSystem);
+  if (!nsConfig?.digits) return result;
+  if (/\d/.test(result)) {
+    return convertLatinDigits(result, nsConfig.digits);
+  }
+  if (num !== undefined) {
+    return convertLatinDigits(String(num), nsConfig.digits);
+  }
+  return result;
 };
 
 type CardinalRule = {
@@ -175,17 +222,17 @@ const indonesianCardinal = buildCardinal('nol', (s) => `minus ${s}`, [
       r
         ? `${['', '', 'dua puluh', 'tiga puluh', 'empat puluh', 'lima puluh', 'enam puluh', 'tujuh puluh', 'delapan puluh', 'sembilan puluh'][q]} ${rec(r)}`
         : [
-          '',
-          '',
-          'dua puluh',
-          'tiga puluh',
-          'empat puluh',
-          'lima puluh',
-          'enam puluh',
-          'tujuh puluh',
-          'delapan puluh',
-          'sembilan puluh',
-        ][q],
+            '',
+            '',
+            'dua puluh',
+            'tiga puluh',
+            'empat puluh',
+            'lima puluh',
+            'enam puluh',
+            'tujuh puluh',
+            'delapan puluh',
+            'sembilan puluh',
+          ][q],
   },
   {
     limit: 1_000,
@@ -300,22 +347,77 @@ const arabicCardinal = (
   gender: 'masculine' | 'feminine' = 'masculine',
 ) => {
   const units = {
-    masculine: ['', 'واحِد', 'اِثنان', 'ثَلاثة', 'أرْبَعَة', 'خَمْسة', 'سِتَّة', 'سَبْعَة', 'ثَمانِية', 'تِسْعة'],
-    feminine: ['', 'واحِدَة', 'اِثنتان', 'ثَلاث', 'أرْبَع', 'خَمس', 'سِتّ', 'سَبع', 'ثَمان', 'تِسع'],
+    masculine: [
+      '',
+      'واحِد',
+      'اِثنان',
+      'ثَلاثة',
+      'أرْبَعَة',
+      'خَمْسة',
+      'سِتَّة',
+      'سَبْعَة',
+      'ثَمانِية',
+      'تِسْعة',
+    ],
+    feminine: [
+      '',
+      'واحِدَة',
+      'اِثنتان',
+      'ثَلالث',
+      'أرْبَع',
+      'خَمس',
+      'سِتّ',
+      'سَبع',
+      'ثَمان',
+      'تِسع',
+    ],
   }[gender];
 
   const tenWord = gender === 'feminine' ? 'عَشر' : 'عَشرة';
   const teens = {
-    masculine: ['', 'أحدَ عشر', 'اِثنا عشر', 'ثَلاثة عشر', 'أربَعة عشر', 'خَمسة عشر', 'سِتَّة عشر', 'سَبعَة عشر', 'ثَمانية عشر', 'تِسعة عشر'],
-    feminine: ['', 'إحدى عَشرة', 'اِثنتا عَشرة', 'ثَلاثَ عَشرة', 'أربَعَ عَشرة', 'خَمسَ عَشرة', 'سِتَّ عَشرة', 'سَبعَ عَشرة', 'ثَمانَ عَشرة', 'تِسعَ عَشرة'],
+    masculine: [
+      '',
+      'أحدَ عشر',
+      'اِثنا عشر',
+      'ثَلاثة عشر',
+      'أربَعة عشر',
+      'خَمسة عشر',
+      'سِتَّة عشر',
+      'سَبعَة عشر',
+      'ثَمانية عشر',
+      'تِسعة عشر',
+    ],
+    feminine: [
+      '',
+      'إحدى عَشرة',
+      'اِثنتا عَشرة',
+      'ثَلالثَ عَشرة',
+      'أربَعَ عَشرة',
+      'خَمسَ عَشرة',
+      'سِتَّ عَشرة',
+      'سَبعَ عَشرة',
+      'ثَمانَ عَشرة',
+      'تِسعَ عَشرة',
+    ],
   }[gender];
 
-  const tens = ['', 'عشرون', 'ثَلاثون', 'أربَعون', 'خَمسون', 'سِتّون', 'سَبعون', 'ثَمانون', 'تِسْعون', 'تِسْعون'];
+  const tens = [
+    '',
+    'عشرون',
+    'ثَلالثون',
+    'أربَعون',
+    'خَمسون',
+    'سِتّون',
+    'سَبعون',
+    'ثَمانون',
+    'تِسْعون',
+    'تِسْعون',
+  ];
 
   return buildCardinal('صِفْر', (s) => `سالب ${s}`, [
     {
       limit: 11,
-      format: (n) => n === 10 ? tenWord : units[n],
+      format: (n) => (n === 10 ? tenWord : units[n]),
     },
     {
       limit: 20,
@@ -333,7 +435,18 @@ const arabicCardinal = (
       limit: 1_000,
       div: 100,
       format: (_, q, r, rec) => {
-        const hundreds = ['', 'مِئة', 'مِئتان', 'ثَلاث مِئة', 'أربَع مِئة', 'خَمس مِئة', 'سِتّ مِئة', 'سَبع مِئة', 'ثَمان مِئة', 'تِسع مِئة'];
+        const hundreds = [
+          '',
+          'مِئة',
+          'مِئتان',
+          'ثَلالث مِئة',
+          'أربَع مِئة',
+          'خَمس مِئة',
+          'سِتّ مِئة',
+          'سَبع مِئة',
+          'ثَمان مِئة',
+          'تِسع مِئة',
+        ];
         const prefix = hundreds[q];
         return r ? `${prefix} و${rec(r)}` : prefix;
       },
@@ -396,18 +509,18 @@ const ORDINAL_STRATEGY: Record<string, (num: number) => string> = {
   id: (num) =>
     num < 11
       ? [
-        'ke-',
-        'kesatu',
-        'kedua',
-        'ketiga',
-        'keempat',
-        'kelima',
-        'keenam',
-        'ketujuh',
-        'kedelapan',
-        'kesembilan',
-        'kesepuluh',
-      ][num]
+          'ke-',
+          'kesatu',
+          'kedua',
+          'ketiga',
+          'keempat',
+          'kelima',
+          'keenam',
+          'ketujuh',
+          'kedelapan',
+          'kesembilan',
+          'kesepuluh',
+        ][num]
       : `ke-${num}`,
   ja: (num) => `第${num < 1 ? num : japaneseCardinal(num)}`,
   ar: (num) => {
@@ -524,33 +637,31 @@ const processNumeric = (
       converter: (num: number | string) => string;
       fallback: (num: number) => string;
     }[] = [
-        {
-          languages: WRITING_SYSTEM.ARABIC_LANGUAGES as readonly string[],
-          converter: NATIVE_DIGITS_MAP[LANGUAGE_CODE.AR],
-          fallback: config.arabicFallback,
-        },
-        {
-          languages: WRITING_SYSTEM.DEVANAGARI_LANGUAGES as readonly string[],
-          converter: NATIVE_DIGITS_MAP[LANGUAGE_CODE.HI],
-          fallback: config.devanagariFallback,
-        },
-        {
-          languages: WRITING_SYSTEM.CYRILLIC_LANGUAGES as readonly string[],
-          converter: NATIVE_DIGITS_MAP[LANGUAGE_CODE.RU],
-          fallback: config.cyrillicFallback,
-        },
-      ];
+      {
+        languages: WRITING_SYSTEM.ARABIC_LANGUAGES as readonly string[],
+        converter: NATIVE_DIGITS_MAP[LANGUAGE_CODE.AR],
+        fallback: config.arabicFallback,
+      },
+      {
+        languages: WRITING_SYSTEM.DEVANAGARI_LANGUAGES as readonly string[],
+        converter: NATIVE_DIGITS_MAP[LANGUAGE_CODE.HI],
+        fallback: config.devanagariFallback,
+      },
+      {
+        languages: WRITING_SYSTEM.CYRILLIC_LANGUAGES as readonly string[],
+        converter: NATIVE_DIGITS_MAP[LANGUAGE_CODE.RU],
+        fallback: config.cyrillicFallback,
+      },
+    ];
 
     const matchedRule = digitRules.find((rule) =>
       rule.languages.includes(languageSubtag),
     );
 
     if (matchedRule) {
-      const intlResult = safeIntlFormat(
-        { ...intlOptions, ...options },
-        num,
-        '',
-      );
+      const intlOpts = { ...intlOptions, ...options };
+      delete intlOpts.nativeDigits;
+      const intlResult = safeIntlFormat(intlOpts, num, '');
 
       return intlResult
         ? matchedRule.converter(intlResult)
@@ -558,15 +669,18 @@ const processNumeric = (
     }
   }
 
-  return safeIntlFormat(
+  const numberingSystem =
+    options.numberingSystem ?? getNumberingSystem(options);
+  const result = safeIntlFormat(
     {
       ...intlOptions,
-      numberingSystem: options.numberingSystem ?? getNumberingSystem(options),
+      numberingSystem,
       ...options,
     },
     num,
     config.intlFallback(num),
   );
+  return applyDigitsFallback(result, numberingSystem, num);
 };
 
 export const formatNumber = (
@@ -662,11 +776,22 @@ export const formatScientific = (
   options: FormatOptions = {},
 ) => {
   const num = typeof value === 'number' ? value : parseFloat(value);
-  const numberingSystem = getNumberingSystem(options);
+  const numberingSystem =
+    options.numberingSystem ?? getNumberingSystem(options);
 
   if (num === 0) {
     if (numberingSystem === NUMBERING_SYSTEM_CODE.ARAB) return '٠';
     if (numberingSystem === NUMBERING_SYSTEM_CODE.DEVA) return '०';
+    if (
+      ALGORITHMIC_SYSTEMS.includes(
+        numberingSystem as (typeof ALGORITHMIC_SYSTEMS)[number],
+      )
+    ) {
+      const nsConfig = NUMBERING_SYSTEMS.find(
+        (ns) => ns.code === numberingSystem,
+      );
+      if (nsConfig?.digits) return nsConfig.digits[0];
+    }
     return '0';
   }
 
@@ -897,7 +1022,7 @@ export const convertCurrency = (
 };
 
 export const convertLocalPrice = (
-  plan: { pricing: { base: number;[locale: string]: number } },
+  plan: { pricing: { base: number; [locale: string]: number } },
   targetCurrency?: CurrencyCode,
   options?: FormatOptions,
 ) => {
@@ -921,7 +1046,7 @@ export const convertLocalPrice = (
 
 export const formatLocalPrice = (
   plan: {
-    pricing: { base: number;[locale: string]: number };
+    pricing: { base: number; [locale: string]: number };
   },
   options?: FormatOptions,
 ) => {
@@ -932,7 +1057,7 @@ export const formatLocalPrice = (
 };
 
 export const formatLocalPriceDiscounted = (
-  plan: { pricing: { base: number;[locale: string]: number } },
+  plan: { pricing: { base: number; [locale: string]: number } },
   discountMultiplier: number,
   targetCurrency?: CurrencyCode,
   options?: FormatOptions,

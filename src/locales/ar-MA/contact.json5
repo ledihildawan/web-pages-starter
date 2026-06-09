@@ -1,47 +1,47 @@
 {
   "meta": {
-    "title": "Hubungi Kami | Starter App",
-    "description": "Hubungi kami untuk pertanyaan dan dukungan."
+    "title": "تواصل معنا | Starter App",
+    "description": "تواصل معنا للأسئلة والدعم."
   },
   "contact": {
-    "badge": "Siap Membantu",
-    "title_part1": "Mari",
-    "title_highlight": "terhubung",
-    "description": "Punya pertanyaan atau ingin berkolaborasi? Kami senang mendengar dari Anda. Kirim pesan dan kami akan segera merespons.",
-    "form_title": "Kirim Pesan",
-    "form_subtitle": "Isi form di bawah dan kami akan segera merespons.",
-    "social_title": "Ikuti Kami",
-    "social_subtitle": "Dapatkan update terbaru melalui media sosial kami",
+    "badge": "تواصل معنا",
+    "title_part1": "لنتواصل",
+    "title_highlight": "معاً",
+    "description": "هل لديك أسئلة أو تريد التعاون؟ سنكون سعداء لسماع رأيك. أرسل لنا رسالة وسنرد في أقرب وقت ممكن.",
+    "form_title": "أرسل رسالة",
+    "form_subtitle": "املأ النموذج أدناه وسنرد عليك قريباً.",
+    "social_title": "تابعنا",
+    "social_subtitle": "ابق على اطلاع بآخر أخبارنا على وسائل التواصل الاجتماعي",
     "info": {
       "response_time": {
-        "title": "Respon Cepat",
-        "description": "Kami berusaha merespons setiap pesan dalam waktu 24 jam pada hari kerja."
+        "title": "رد سريع",
+        "description": "نسعى للرد على كل رسالة خلال 24 ساعة في أيام العمل."
       },
       "working_hours": {
-        "title": "Jam Operasional",
-        "description": "Senin - Jumat: 09:00 - 18:00 WIB. Akhir pekan: Dengan prioritas."
+        "title": "ساعات العمل",
+        "description": "الإثنين - الجمعة: 09:00 - 18:00. عطلات نهاية الأسبوع: حسب الأولوية."
       },
       "support": {
-        "title": "Dukungan Berkelanjutan",
-        "description": "Tim support kami selalu siap membantu menyelesaikan masalah teknis Anda."
+        "title": "دعم مستمر",
+        "description": "فريق الدعم لدينا مستعد دائماً لمساعدتك في حل مشاكلك التقنية."
       }
     },
     "form": {
-      "name": "Nama",
-      "name_placeholder": "Masukkan nama Anda",
-      "email": "Email",
-      "email_placeholder": "nama@email.com",
-      "subject": "Subjek",
-      "subject_placeholder": "Apa yang ingin Anda diskusikan?",
-      "message": "Pesan",
-      "message_placeholder": "Ceritakan lebih lanjut tentang pertanyaan Anda...",
-      "submit": "Kirim Pesan"
+      "name": "الاسم",
+      "name_placeholder": "أدخل اسمك",
+      "email": "البريد الإلكتروني",
+      "email_placeholder": "اسم@مثال.com",
+      "subject": "الموضوع",
+      "subject_placeholder": "ما الذي تود مناقشته؟",
+      "message": "الرسالة",
+      "message_placeholder": "أخبرنا المزيد عن استفسارك...",
+      "submit": "إرسال الرسالة"
     }
   },
-  "email_label": "Email",
+  "email_label": "البريد الإلكتروني",
   "email_value": "hello@starter.app",
-  "phone_label": "Telepon",
-  "phone_value": "+62 812 3456 7890",
-  "location_label": "Lokasi",
-  "location_value": "Jakarta, Indonesia"
+  "phone_label": "الهاتف",
+  "phone_value": "+212 5 000 00000",
+  "location_label": "الموقع",
+  "location_value": "الرباط, المغرب"
 }

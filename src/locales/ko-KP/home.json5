@@ -1,50 +1,50 @@
 {
   "meta": {
-    "title": "Beranda | Starter App",
-    "description": "Pembangun aplikasi web modern."
+    "title": "홈페이지 | Starter App",
+    "description": "현대적 웹 앱 빌더."
   },
   "hero": {
-    "badge": "Baru: Versi 2.0 Telah Hadir",
-    "title_start": "Buat Sesuatu",
-    "title_highlight": "Indah Hari Ini",
-    "description": "Cara modern dalam membangun aplikasi web. Cepat, fleksibel, dan dirancang untuk developer yang peduli terhadap kualitas karya.",
-    "image_alt": "Pratinjau Dasbor",
+    "badge": "신규: 버전 2.0 출시",
+    "title_start": "무언가를 만들어보세요",
+    "title_highlight": "오늘 아름다운",
+    "description": "웹 앱을 만드는 현대적인 방법. 빠르고 유연하며 자신의 작품에 자부심을 가진 개발자를 위해 설계되었습니다.",
+    "image_alt": "대시보드 미리보기",
     "primary_btn": {
-      "label": "Mulai Membangun",
+      "label": "시작하기",
       "url": "/start"
     },
     "secondary_btn": {
-      "label": "Lihat Demo",
+      "label": "데모 보기",
       "url": "/demo"
     },
-    "note": "Tidak perlu kartu kredit",
+    "note": "신용 카드 필요 없음"
   },
   "features": {
-    "heading": "Semua yang Anda Butuhkan",
-    "subheading": "Fitur canggih untuk membantu Anda membangun lebih cepat.",
+    "heading": "필요한 모든 것",
+    "subheading": "더 빠르게 구축할 수 있도록 도와주는 강력한 기능.",
     "list": {
       "speed": {
-        "title": "Super Cepat",
-        "description": "Dioptimalkan untuk performa maksimal. Aplikasi Anda dimuat instan."
+        "title": "번개처럼 빠른",
+        "description": "성능에 최적화. 앱이 즉시 로드됩니다."
       },
       "design": {
-        "title": "Desain Elegan",
-        "description": "Dibuat dengan teliti. Setiap piksel memiliki makna dan tujuan."
+        "title": "아름다운 디자인",
+        "description": "세심하게 제작. 모든 픽셀이 의미와 목적을 갖습니다."
       },
       "security": {
-        "title": "Keamanan Terjamin",
-        "description": "Keamanan kelas enterprise. Data Anda dilindungi di setiap lapisan."
+        "title": "기본적으로 안전",
+        "description": "엔터프라이즈급 보안. 데이터가 모든 계층에서 보호됩니다."
       }
     }
   },
   "stats": {
-    "community": "Komunitas Developer",
-    "community_val": "10Rb+",
-    "projects": "Proyek Terbangun",
-    "projects_val": "50Rb+",
-    "uptime": "Uptime 24/7",
+    "community": "개발자 커뮤니티",
+    "community_val": "10K+",
+    "projects": "구축된 프로젝트",
+    "projects_val": "50K+",
+    "uptime": "가동률 24/7",
     "uptime_val": "99.9%",
-    "rating": "Rating Pengguna",
+    "rating": "사용자 평점",
     "rating_val": "4.9/5"
   }
 }

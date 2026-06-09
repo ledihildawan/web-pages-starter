@@ -2,10 +2,10 @@
   "period_monthly": "månad",
   "period_yearly": "år",
   "hero": {
-    "badge": "Välj din plan",
+    "badge": "Välj en plan",
     "title_part1": "Enkel och ",
     "title_highlight": "transparent prissättning",
-    "description": "Inga dolda avgifter. Inga överraskningsavgifter. Välj den plan som passar dina behov bäst."
+    "description": "Inga dolda avgifter. Inga överraskningsavgifter. Välj en plan som passar dina behov bäst."
   },
   "toggle": {
     "monthly": "Månadsvis",

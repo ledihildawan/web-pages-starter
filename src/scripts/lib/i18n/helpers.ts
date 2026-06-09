@@ -8,19 +8,12 @@ import {
   type LocaleConfig,
 } from './data';
 import { DIRECTION_CODE, type DirectionCode } from './directions';
-import { LOCALE_FALLBACKS } from './fallbacks';
 import type { LanguageCode } from './languages';
 import { NUMBERING_SYSTEM_CODE } from './numbering-systems';
 
 export const getFallbackChain = (locale: string): LocaleCode[] => {
   if (LOCALE_CODES.includes(locale as LocaleCode)) {
     return [];
-  }
-
-  const explicitFallback =
-    LOCALE_FALLBACKS[locale as keyof typeof LOCALE_FALLBACKS];
-  if (explicitFallback) {
-    return [explicitFallback, i18nConfig.defaultLocale];
   }
 
   const languageSubtag = locale.split('-')[0];

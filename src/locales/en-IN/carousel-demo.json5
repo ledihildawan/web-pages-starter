@@ -1,36 +1,17 @@
 {
   "meta": {
-    "page_title": "Lazy Load Splide Demo | Starter",
-    "title": "Carousel Demo | Starter App"
+    "page_title": "Splide Lazy Load Demo | Starter"
   },
   "hero": {
-    "badge": "Interactive Demo",
-    "title_part1": "Explore Our ",
-    "title_highlight": "Features",
-    "description": "Please see our platform in action with this interactive demonstration.",
     "slide_1": {
       "title": "Lazy Load Nature",
-      "subtitle": "Images load intelligently to save bandwidth.",
-      "alt": "Beautiful Mountain Landscape"
+      "subtitle": "Images are loaded intelligently to save bandwidth.",
+      "alt": "Beautiful Mountain View"
     },
     "slide_2": {
       "title": "Performance First",
-      "subtitle": "Only loads what you need.",
-      "alt": "Snowy Mountain Landscape"
-    }
-  },
-  "slides": {
-    "performance": {
-      "title": "Blazing Performance",
-      "description": "Optimised for speed with cutting-edge technology."
-    },
-    "security": {
-      "title": "Enterprise Security",
-      "description": "Your data is protected with industry-leading security measures."
-    },
-    "ux": {
-      "title": "Beautiful UX",
-      "description": "Designed with users in mind, offering a delightful experience."
+      "subtitle": "Only load what you need.",
+      "alt": "Snowy Mountains View"
     }
   }
 }

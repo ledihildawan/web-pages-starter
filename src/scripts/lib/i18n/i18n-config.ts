@@ -9,9 +9,6 @@ const validateFont = (font: FontConfig): void => {
   if (!font.family.trim()) {
     throw new Error(`[i18n] font.family is required`);
   }
-  if (font.weights.length === 0) {
-    throw new Error(`[i18n] font.weights must have at least one weight`);
-  }
 };
 
 export const defineFont = (config: FontConfig): FontConfig => {

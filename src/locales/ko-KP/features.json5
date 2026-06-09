@@ -1,57 +1,57 @@
 {
   "hero": {
-    "badge": "Fitur Unggulan",
-    "title_part1": "Semua yang Anda butuhkan untuk",
-    "title_highlight": "skala lebih cepat",
-    "description": "Dari analitik yang kuat hingga integrasi yang mulus, kami menyediakan toolkit yang Anda butuhkan untuk membangun aplikasi kelas dunia tanpa pusing."
+    "badge": "후드 아래의 파워",
+    "title_part1": "더 빠르게 확장하는 데",
+    "title_highlight": "필요한 모든 것",
+    "description": "강력한 분석부터 원활한 통합까지, 우리는 고품질 애플리케이션을 헤드리스로 구축하는 데 필요한 도구 키트를 제공합니다."
   },
   "sections": {
     "sync": {
-      "title": "Sinkronisasi Real-time",
-      "description": "Perubahan tersebar secara instan di semua perangkat. Baik pengguna Anda menggunakan ponsel, desktop, atau tablet, mereka melihat data yang sama di waktu yang sama.",
-      "check_0": "Latensi di bawah milidetik",
-      "check_1": "Dukungan offline bawaan",
-      "check_2": "Penanganan resolusi konflik"
+      "title": "실시간 동기화",
+      "description": "변경 사항이 모든 장치에 즉시 전파됩니다. 사용자가 모바일, 데스크톱 또는 태블릿에 있든 관계없이 정확히 동일한 시간에 동일한 데이터를 봅니다.",
+      "check_0": "1밀리초 미만의 지연 시간",
+      "check_1": "기본 제공 오프라인 지원",
+      "check_2": "충돌 해결 처리"
     },
     "analytics": {
-      "title": "Analitik yang Dapat Ditindaklanjuti",
-      "description": "Jangan menebak-nebak. Dapatkan wawasan mendalam tentang perilaku pengguna, kinerja sistem, dan metrik pendapatan. Visualisasikan data Anda dengan grafik interaktif.",
-      "check_0": "Dashboard yang dapat disesuaikan",
-      "check_1": "Ekspor ke PDF, CSV, atau Excel",
-      "check_2": "Laporan mingguan otomatis"
+      "title": "실행 가능한 분석",
+      "description": "눈 감고 비행하지 마세요. 사용자 행동, 시스템 성능 및 수익 지표에 대한 깊은 통찰을 얻으세요. 아름다운 대화형 차트로 데이터를 시각화하세요.",
+      "check_0": "사용자 정의 가능한 대시보드",
+      "check_1": "PDF, CSV 또는 Excel로 내보내기",
+      "check_2": "자동화된 주간 보고서"
     }
   },
-  "more_title": "Dan masih banyak lagi...",
+  "more_title": "그리고 훨씬 더 많은 것...",
   "more_subtitle": "애플리케이션을 돋보이게 만드는 추가 기능을 살펴보세요.",
   "more": {
     "dark_mode": {
-      "title": "Mode Gelap",
-      "desc": "Dukungan bawaan untuk tema terang dan gelap dengan deteksi otomatis."
+      "title": "다크 모드",
+      "desc": "자동 시스템 감지가 포함된 밝은 및 어두운 테마에 대한 기본 제공 지원."
     },
     "api_first": {
-      "title": "API First",
-      "desc": "API REST dan GraphQL tersedia untuk kontrol terprogram penuh."
+      "title": "API 우선",
+      "desc": "REST 및 GraphQL API를 사용하여 완전한 프로그래밍 방식 제어가 가능합니다."
     },
     "sso": {
-      "title": "Login SSO",
-      "desc": "Single Sign-On kelas enterprise untuk Google, GitHub, dan Okta."
+      "title": "SSO 로그인",
+      "desc": "Google, GitHub 및 Okta에 대한 엔터프라이즈급 단일 로그인 지원."
     },
     "audit": {
-      "title": "Log Audit",
-      "desc": "Lacak setiap perubahan pada proyek Anda dengan stempel waktu terperinci."
+      "title": "감사 로그",
+      "desc": "자세한 타임스탬프로 프로젝트에 대한 모든 변경 사항을 추적합니다."
     },
     "rbac": {
-      "title": "Akses Berbasis Peran",
-      "desc": "Kontrol izin granular untuk admin, editor, dan viewer."
+      "title": "역할 기반 액세스",
+      "desc": "관리자, 편집자 및 뷰어를 위한 세분화된 권한 제어."
     },
     "uptime": {
-      "title": "Uptime 99.99%",
-      "desc": "Ketersediaan terjamin dengan CDN kami yang terdistribusi secara global."
+      "title": "99.99% 가동 시간",
+      "desc": "글로벌 분산 CDN으로 보장되는 가용성."
     }
   },
   "cta": {
-    "heading": "Siap untuk memulai?",
-    "btn_create": "Buat Akun",
-    "btn_docs": "Baca Dokumentasi"
+    "heading": "시작할 준비되셨나요?",
+    "btn_create": "계정 만들기",
+    "btn_docs": "문서 읽기"
   }
 }

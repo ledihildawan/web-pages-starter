@@ -1,6 +1,6 @@
 {
-  "period_monthly": "pm",
-  "period_yearly": "pa",
+  "period_monthly": "mo",
+  "period_yearly": "yr",
   "hero": {
     "title_part1": "Simple, transparent ",
     "title_highlight": "pricing",

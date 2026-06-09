@@ -1,56 +1,56 @@
 {
-  "period_monthly": "bln",
-  "period_yearly": "thn",
+  "period_monthly": "mois",
+  "period_yearly": "an",
   "hero": {
-    "title_part1": "Harga Sederhana & ",
-    "title_highlight": "Transparan",
-    "description": "Tanpa biaya tersembunyi. Tanpa biaya kejutan. Pilih paket yang paling sesuai dengan kebutuhan Anda.",
-    "badge": "Choisissez votre forfait"
+    "title_part1": "Tarifs simples, ",
+    "title_highlight": "transparents",
+    "description": "Aucuns frais cachés. Aucunes charges surprise. Choisissez le plan qui correspond parfaitement à vos besoins.",
+    "badge": "Choisissez un forfait"
   },
   "toggle": {
-    "monthly": "Bulanan",
-    "yearly": "Tahunan",
-    "yearly_hint": "tagihan per tahun",
-    "discount": "HEMAT 20%",
+    "monthly": "Mensuel",
+    "yearly": "Annuel",
+    "yearly_hint": "facturé annuellement",
+    "discount": "ÉCONOMISEZ 20%",
     "aria_label": "Toggle Pricing Plan"
   },
   "plans": {
     "hobby": {
       "name": "Hobby",
-      "desc": "Sangat cocok untuk proyek sampingan dan pembelajaran.",
-      "btn": "Mulai Gratis",
-      "feature_0": "1 Proyek",
-      "feature_1": "Dukungan Komunitas",
-      "feature_2": "Penyimpanan 5GB"
+      "desc": "Parfait pour les projets personnels et l'apprentissage.",
+      "btn": "Commencer",
+      "feature_0": "1 Projet",
+      "feature_1": "Support Communautaire",
+      "feature_2": "5GB de Stockage"
     },
     "pro": {
       "name": "Pro",
-      "badge": "Paling Populer",
-      "desc": "Untuk developer profesional dan tim kecil.",
-      "btn": "Pilih Paket Pro",
-      "feature_0": "Proyek Tak Terbatas",
-      "feature_1": "Dukungan Email Prioritas",
-      "feature_2": "Penyimpanan 100GB",
-      "feature_3": "Analitik Lanjutan"
+      "badge": "Plus Populaire",
+      "desc": "Pour les développeurs professionnels et les petites équipes.",
+      "btn": "Obtenir Pro Maintenant",
+      "feature_0": "Projets Illimités",
+      "feature_1": "Support E-mail Prioritaire",
+      "feature_2": "100GB de Stockage",
+      "feature_3": "Analyses Avancées"
     },
     "enterprise": {
       "name": "Enterprise",
-      "desc": "Untuk aplikasi skala besar dan organisasi.",
-      "btn": "Hubungi Sales",
-      "feature_0": "Semua fitur di paket Pro",
-      "feature_1": "Manajer Akun Khusus",
-      "feature_2": "SSO & Log Audit",
-      "feature_3": "Penyimpanan Tak Terbatas"
+      "desc": "Pour les applications à grande échelle et les organisations.",
+      "btn": "Contacter les Ventes",
+      "feature_0": "Tout dans Pro",
+      "feature_1": "Manager Dédié",
+      "feature_2": "SSO et Journaux d'Audit",
+      "feature_3": "Stockage Illimité"
     }
   },
   "faq": {
-    "title": "Pertanyaan Umum",
-    "subtitle": "Temukan jawaban atas pertanyaan yang paling sering diajukan tentang paket dan layanan kami.",
-    "q_0": "Apakah saya bisa membatalkan kapan saja?",
-    "a_0": "Ya, Anda dapat membatalkan langganan kapan saja. Akses Anda tetap aktif hingga akhir periode penagihan.",
-    "q_1": "Apakah ada uji coba gratis?",
-    "a_1": "Kami menawarkan uji coba gratis 14 hari untuk paket Pro. Tidak perlu kartu kredit untuk memulai.",
-    "q_2": "Metode pembayaran apa yang tersedia?",
-    "a_2": "Kami menerima kartu kredit utama dan PayPal. Untuk Enterprise, kami mendukung transfer bank."
+    "title": "Questions Fréquentes",
+    "subtitle": "Trouvez des réponses aux questions les plus fréquentes sur nos plans et services.",
+    "q_0": "Puis-je annuler à tout moment?",
+    "a_0": "Oui, vous pouvez annuler votre abonnement à tout moment. Votre accès continuera jusqu'à la fin de votre période de facturation.",
+    "q_1": "Offrez-vous un essai gratuit?",
+    "a_1": "Nous offrons un essai gratuit de 14 jours pour le plan Pro. Aucune carte de crédit requise pour commencer.",
+    "q_2": "Quelles méthodes de paiement acceptez-vous?",
+    "a_2": "Nous acceptons toutes les cartes de crédit principales (Visa, Mastercard, Amex) et PayPal. Pour les plans Enterprise, nous supportons les virements bancaires."
   }
 }

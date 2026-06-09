@@ -1,57 +1,57 @@
 {
   "hero": {
-    "badge": "Fitur Unggulan",
-    "title_part1": "Semua yang Anda butuhkan untuk",
-    "title_highlight": "skala lebih cepat",
-    "description": "Dari analitik yang kuat hingga integrasi yang mulus, kami menyediakan toolkit yang Anda butuhkan untuk membangun aplikasi kelas dunia tanpa pusing."
+    "badge": "हुड के नीचे शक्ति",
+    "title_part1": "तेजी से स्केल करने के लिए",
+    "title_highlight": "आपको जो चाहिए वह सब कुछ",
+    "description": "शक्तिशाली विश्लेषण से लेकर निर्बाध एकीकरण तक, हम विश्व स्तरीय एप्लिकेशन बनाने के लिए आवश्यक टूलकिट प्रदान करते हैं बिना सिरदर्द के।"
   },
   "sections": {
     "sync": {
-      "title": "Sinkronisasi Real-time",
-      "description": "Perubahan tersebar secara instan di semua perangkat. Baik pengguna Anda menggunakan ponsel, desktop, atau tablet, mereka melihat data yang sama di waktu yang sama.",
-      "check_0": "Latensi di bawah milidetik",
-      "check_1": "Dukungan offline bawaan",
-      "check_2": "Penanganan resolusi konflik"
+      "title": "वास्तविक समय सिंक्रनाइज़ेशन",
+      "description": "परिवर्तन सभी उपकरणों पर तुरंत प्रसारित होते हैं। चाहे आपके उपयोगकर्ता मोबाइल, डेस्कटॉप या टैबलेट पर हों, वे बिल्कुल उसी समय वही डेटा देखते हैं।",
+      "check_0": "उप-मिलीसेकंड विलंब",
+      "check_1": "आउट-ऑफ-द-बॉक्स ऑफ़लाइन समर्थन",
+      "check_2": "संघर्ष समाधान हैंडलिंग"
     },
     "analytics": {
-      "title": "Analitik yang Dapat Ditindaklanjuti",
-      "description": "Jangan menebak-nebak. Dapatkan wawasan mendalam tentang perilaku pengguna, kinerja sistem, dan metrik pendapatan. Visualisasikan data Anda dengan grafik interaktif.",
-      "check_0": "Dashboard yang dapat disesuaikan",
-      "check_1": "Ekspor ke PDF, CSV, atau Excel",
-      "check_2": "Laporan mingguan otomatis"
+      "title": "कार्यवाहक विश्लेषण",
+      "description": "अंधे उड़ें नहीं। उपयोगकर्ता व्यवहार, सिस्टम प्रदर्शन और राजस्व मेट्रिक्स में गहरी अंतर्दृष्टि प्राप्त करें। सुंदर, इंटरैक्टिव चार्ट के साथ अपने डेटा को विज़ुअलाइज़ करें।",
+      "check_0": "अनुकूलन योग्य डैशबोर्ड",
+      "check_1": "पीडीएफ, सीएसवी या एक्सेल में निर्यात करें",
+      "check_2": "स्वचालित साप्ताहिक रिपोर्ट"
     }
   },
-  "more_title": "Dan masih banyak lagi...",
+  "more_title": "और भी बहुत कुछ...",
   "more_subtitle": "ऐसी अतिरिक्त क्षमताओं का अन्वेषण करें जो आपके एप्लिकेशन को अलग पहचान देती हैं।",
   "more": {
     "dark_mode": {
-      "title": "Mode Gelap",
-      "desc": "Dukungan bawaan untuk tema terang dan gelap dengan deteksi otomatis."
+      "title": "डार्क मोड",
+      "desc": "स्वचालित सिस्टम पहचान के साथ हल्के और अंधेरे विषयों के लिए अंतर्निहित समर्थन।"
     },
     "api_first": {
-      "title": "API First",
-      "desc": "API REST dan GraphQL tersedia untuk kontrol terprogram penuh."
+      "title": "एपीआई पहले",
+      "desc": "पूर्ण प्रोग्रामेटिक नियंत्रण के लिए आरईएसटी और ग्राफक्यूएल एपीआई उपलब्ध हैं।"
     },
     "sso": {
-      "title": "Login SSO",
-      "desc": "Single Sign-On kelas enterprise untuk Google, GitHub, dan Okta."
+      "title": "एसएसओ लॉगिन",
+      "desc": "गूगल, गिटहब और ओक्टा के लिए एंटरप्राइज़-ग्रेड सिंगल साइन-ऑन समर्थन।"
     },
     "audit": {
-      "title": "Log Audit",
-      "desc": "Lacak setiap perubahan pada proyek Anda dengan stempel waktu terperinci."
+      "title": "ऑडिट लॉग",
+      "desc": "विस्तृत टाइमस्टैंप के साथ अपनी परियोजना में किए गए हर बदलाव को ट्रैक करें।"
     },
     "rbac": {
-      "title": "Akses Berbasis Peran",
-      "desc": "Kontrol izin granular untuk admin, editor, dan viewer."
+      "title": "भूमिका-आधारित पहुंच",
+      "desc": "व्यवस्थापकों, संपादकों और दर्शकों के लिए सूक्ष्म अनुमति नियंत्रण।"
     },
     "uptime": {
-      "title": "Uptime 99.99%",
-      "desc": "Ketersediaan terjamin dengan CDN kami yang terdistribusi secara global."
+      "title": "99.99% अपटाइम",
+      "desc": "हमारे वैश्विक रूप से वितरित सीडीएन के साथ गारंटीकृत उपलब्धता।"
     }
   },
   "cta": {
-    "heading": "Siap untuk memulai?",
-    "btn_create": "Buat Akun",
-    "btn_docs": "Baca Dokumentasi"
+    "heading": "शुरू करने के लिए तैयार?",
+    "btn_create": "खाता बनाएं",
+    "btn_docs": "दस्तावेज़ पढ़ें"
   }
 }

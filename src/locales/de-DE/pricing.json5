@@ -4,8 +4,8 @@
   "hero": {
     "title_part1": "Einfache, transparente ",
     "title_highlight": "Preise",
-    "description": "Keine versteckten Gebühren. Keine Überraschungskosten. Wählen Sie den Plan, der perfekt zu Ihren Bedürfnissen passt.",
-    "badge": "Wählen Sie Ihren Plan"
+    "description": "Keine versteckten Kosten. Keine Überraschungskosten. Wähle den Plan, der perfekt zu deinen Bedürfnissen passt.",
+    "badge": "Wähle deinen Plan"
   },
   "toggle": {
     "monthly": "Monatlich",
@@ -47,7 +47,7 @@
     "title": "Häufig Gestellte Fragen",
     "subtitle": "Finden Sie Antworten auf die am häufigsten gestellten Fragen zu unseren Plänen und Diensten.",
     "q_0": "Kann ich jederzeit kündigen?",
-    "a_0": "Ja, Sie können Ihr Abonnement jederzeit kündigen. Ihr Zugang bleibt bis zum Ende Ihres Abrechnungszeitraums bestehen.",
+    "a_0": "Ja, du kannst dein Abonnement jederzeit kündigen. Dein Zugang bleibt bis zum Ende deines Abrechnungszeitraums bestehen.",
     "q_1": "Bieten Sie eine kostenlose Testversion an?",
     "a_1": "Wir bieten eine 14-tägige kostenlose Testversion für den Pro-Plan an. Keine Kreditkarte erforderlich, um zu starten.",
     "q_2": "Welche Zahlungsmethoden akzeptieren Sie?",

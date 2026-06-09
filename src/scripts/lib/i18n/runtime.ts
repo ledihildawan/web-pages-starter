@@ -1,5 +1,6 @@
 import { EXCHANGE_RATES, convertCurrency as convertCurrencyRaw } from '@generated/exchange-rates';
 import type { I18nTranslationKeys } from '@generated/i18n';
+import { i18nConfig } from '../../../configs/i18n';
 import i18next, { type Resource } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import type { DateTimePreset } from '../../utils/types';
@@ -24,7 +25,6 @@ import {
   getCurrency,
   getLocale,
   getLocaleLabelCountry,
-  LOCALE_FALLBACKS,
   LOCALE_STORAGE_KEY,
   plural,
   setLocale,
@@ -40,9 +40,6 @@ const missingKeys = new Set<string>();
 const getFallbackForLocale = (locale: string): string[] => {
   const localeCode = locale as LocaleCode;
   if (LOCALE_CODES.includes(localeCode)) return [localeCode];
-
-  const explicit = LOCALE_FALLBACKS[localeCode];
-  if (explicit) return [explicit, 'en-US'];
 
   const parts = locale.split('-');
   const languageSubtag =
@@ -88,6 +85,7 @@ const FORMATTERS = [
     attr: 'data-format-number',
     format: (v: string, el: HTMLElement) =>
       formatNumber(parseFloat(v), {
+        numberingSystem: el.getAttribute('data-numbering-system') || undefined,
         nativeDigits: el.getAttribute('data-use-native') === 'true',
       }),
   },
@@ -292,6 +290,7 @@ export async function initIntl(localeOverride?: string): Promise<void> {
     localStorage.getItem(LOCALE_STORAGE_KEY) ||
     document.documentElement.getAttribute('lang')
   ) as LocaleCode | null;
+
   if (!savedLocale) return;
 
   setLocale(getLocale(savedLocale));
@@ -317,21 +316,23 @@ export async function initIntl(localeOverride?: string): Promise<void> {
       },
     };
 
-    await i18next.use(LanguageDetector).init({
+    const initOptions = {
       lng: savedLocale,
       resources,
       fallbackLng: getFallbackForLocale,
       supportedLngs: LOCALE_CODES,
       ns: ['common', pageID],
       defaultNS: 'common',
-      detection: {
-        order: ['localStorage', 'navigator'],
-        caches: ['localStorage'],
-        lookupLocalStorage: LOCALE_STORAGE_KEY,
-      },
+      detection: localeOverride
+        ? undefined
+        : {
+          order: ['localStorage', 'navigator'],
+          caches: ['localStorage'],
+          lookupLocalStorage: LOCALE_STORAGE_KEY,
+        },
       interpolation: { escapeValue: false },
       saveMissing: false,
-      parseMissingKeyHandler: (key) => {
+      parseMissingKeyHandler: (key: string) => {
         if (isDev && !missingKeys.has(key)) {
           missingKeys.add(key);
           console.warn(
@@ -340,7 +341,20 @@ export async function initIntl(localeOverride?: string): Promise<void> {
         }
         return `[${key}]`;
       },
-    });
+    };
+
+    if (localeOverride) {
+      await i18next.init(initOptions);
+    } else {
+      await i18next.use(LanguageDetector).init(initOptions);
+    }
+
+    const isDefaultLocale = savedLocale === i18nConfig.defaultLocale;
+
+    if (isDefaultLocale) {
+      updateI18nStoreLabels();
+      return;
+    }
 
     translatePage();
     updateFormattedElements();

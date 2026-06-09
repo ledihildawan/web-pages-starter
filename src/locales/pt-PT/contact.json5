@@ -1,47 +1,47 @@
 {
   "meta": {
-    "title": "Hubungi Kami | Starter App",
-    "description": "Hubungi kami untuk pertanyaan dan dukungan."
+    "title": "Contacte-nos | Starter App",
+    "description": "Entre em contacto connosco para perguntas e suporte."
   },
   "contact": {
-    "badge": "Siap Membantu",
-    "title_part1": "Mari",
-    "title_highlight": "terhubung",
-    "description": "Punya pertanyaan atau ingin berkolaborasi? Kami senang mendengar dari Anda. Kirim pesan dan kami akan segera merespons.",
-    "form_title": "Kirim Pesan",
-    "form_subtitle": "Isi form di bawah dan kami akan segera merespons.",
-    "social_title": "Ikuti Kami",
-    "social_subtitle": "Dapatkan update terbaru melalui media sosial kami",
+    "badge": "Entre em Contacto",
+    "title_part1": "Vamos",
+    "title_highlight": "conectar",
+    "description": "Tens perguntas ou queres colaborar? Adoraríamos saber de ti. Envia-nos uma mensagem e responderemos o mais breve possível.",
+    "form_title": "Envia uma Mensagem",
+    "form_subtitle": "Preenche o formulário abaixo e responderemos em breve.",
+    "social_title": "Segue-nos",
+    "social_subtitle": "Mantém-te atualizado com as nossas últimas notícias nas redes sociais",
     "info": {
       "response_time": {
-        "title": "Respon Cepat",
-        "description": "Kami berusaha merespons setiap pesan dalam waktu 24 jam pada hari kerja."
+        "title": "Resposta Rápida",
+        "description": "Esforçamo-nos por responder a cada mensagem dentro de 24 horas em dias úteis."
       },
       "working_hours": {
-        "title": "Jam Operasional",
-        "description": "Senin - Jumat: 09:00 - 18:00 WIB. Akhir pekan: Dengan prioritas."
+        "title": "Horário de Trabalho",
+        "description": "Segunda - Sexta: 09:00 - 18:00. Fins de semana: Por prioridade."
       },
       "support": {
-        "title": "Dukungan Berkelanjutan",
-        "description": "Tim support kami selalu siap membantu menyelesaikan masalah teknis Anda."
+        "title": "Suporte Contínuo",
+        "description": "A nossa equipa de suporte está sempre pronta para ajudar a resolver os seus problemas técnicos."
       }
     },
     "form": {
-      "name": "Nama",
-      "name_placeholder": "Masukkan nama Anda",
-      "email": "Email",
-      "email_placeholder": "nama@email.com",
-      "subject": "Subjek",
-      "subject_placeholder": "Apa yang ingin Anda diskusikan?",
-      "message": "Pesan",
-      "message_placeholder": "Ceritakan lebih lanjut tentang pertanyaan Anda...",
-      "submit": "Kirim Pesan"
+      "name": "Nome",
+      "name_placeholder": "Insere o teu nome",
+      "email": "Correio Eletrónico",
+      "email_placeholder": "nome@exemplo.com",
+      "subject": "Assunto",
+      "subject_placeholder": "O que gostarias de discutir?",
+      "message": "Mensagem",
+      "message_placeholder": "Conta-nos mais sobre a tua consulta...",
+      "submit": "Enviar Mensagem"
     }
   },
-  "email_label": "Email",
+  "email_label": "Correio Eletrónico",
   "email_value": "hello@starter.app",
-  "phone_label": "Telepon",
-  "phone_value": "+62 812 3456 7890",
-  "location_label": "Lokasi",
-  "location_value": "Jakarta, Indonesia"
+  "phone_label": "Telefone",
+  "phone_value": "+351 900 000 000",
+  "location_label": "Localização",
+  "location_value": "Lisboa, Portugal"
 }

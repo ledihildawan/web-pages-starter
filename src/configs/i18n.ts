@@ -6,8 +6,7 @@ export const i18nConfig: I18nConfig = defineI18n({
   fonts: {
     primary: defineFont({
       name: 'inter',
-      family: 'Inter',
-      weights: [400, 500, 600, 700, 800, 900],
+      family: 'Inter Variable',
     }),
   },
 });

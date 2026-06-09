@@ -1,75 +1,75 @@
 {
   "about": {
-    "badge": "Tentang Kami"
+    "badge": "Acerca de"
   },
   "hero": {
-    "badge": "Tentang Kami",
-    "title_part1": "Kami Mewujudkan ",
-    "title_highlight": "Masa Depan Digital",
-    "description": "Didirikan pada tahun 2024, Starter hadir untuk membantu developer membangun aplikasi lebih baik dan lebih cepat. Kami percaya pada kekuatan kode yang bersih dan desain yang indah."
+    "badge": "Acerca de",
+    "title_part1": "Estamos creando el ",
+    "title_highlight": "futuro digital",
+    "description": "Fundado en 2024, Starter existe para ayudar a los desarrolladores a construir mejores aplicaciones más rápido. Creemos en el poder del código limpio, el diseño hermoso y la colaboración de código abierto."
   },
   "stats": {
-    "years": "Tahun Pengalaman",
+    "years": "Años de Experiencia",
     "years_val": "3+",
-    "clients": "Klien Global",
+    "clients": "Clientes Globales",
     "clients_val": "120+",
-    "countries": "Negara",
+    "countries": "Países Alcanzados",
     "countries_val": "15",
-    "support": "Dukungan Teknis",
+    "support": "Soporte Experto",
     "support_val": "24/7"
   },
   "story": {
-    "tag": "Cerita Kami",
-    "visual_label": "Ilustrasi Studio Kreatif",
-    "title": "Digerakkan oleh <br>Keunggulan.",
-    "para1": "Perjalanan kami dimulai dengan ide sederhana: membuat pengembangan web dapat diakses dan menyenangkan untuk semua.",
-    "para2": "Hari ini, kami adalah tim beragam yang terdiri dari engineer, desainer, dan thinker yang bekerja sama memecahkan masalah kompleks.",
-    "val1": "Filosofi desain berpusat pada pengguna",
-    "val2": "Arsitektur berbasis performa",
-    "val3": "Transparansi dan komunikasi terbuka"
+    "tag": "Nuestra Historia",
+    "visual_label": "Ilustración de Estudio Creativo",
+    "title": "Impulsados por la pasión, <br>definidos por la excelencia.",
+    "para1": "Nuestro viaje comenzó con una idea simple: hacer el desarrollo web accesible y divertido para todos. Estábamos cansados de frameworks hinchados y configuraciones complejas.",
+    "para2": "Hoy, somos un equipo diverso de ingenieros, diseñadores y pensadores trabajando juntos para resolver problemas complejos con soluciones elegantes.",
+    "val1": "Filosofía de diseño centrada en el usuario",
+    "val2": "Arquitectura de rendimiento primero",
+    "val3": "Transparencia y comunicación abierta"
   },
   "mission": {
-    "title": "Misi Kami",
-    "description": "Memberdayakan pengembang dan bisnis dengan tools yang elegan, cepat, dan mudah digunakan untuk membangun produk digital yang luar biasa."
+    "title": "Nuestra Misión",
+    "description": "Empoderar a desarrolladores y empresas con herramientas elegantes, rápidas y fáciles de usar para construir productos digitales excepcionales."
   },
   "vision": {
-    "title": "Visi Kami",
-    "description": "Menjadi platform pilihan utama bagi pengembang modern yang menghargai keindahan, performa, dan pengalaman pengguna dalam setiap baris kode."
+    "title": "Nuestra Visión",
+    "description": "Ser la plataforma de elección para desarrolladores modernos que valoran la belleza, el rendimiento y la experiencia del usuario en cada línea de código."
   },
   "values": {
-    "title": "Nilai-Nilai Kami",
-    "subtitle": "Prinsip yang membimbing setiap keputusan yang kami buat."
+    "title": "Nuestros Valores",
+    "subtitle": "Principios que guían cada decisión que tomamos."
   },
   "passion": {
-    "title": "Semangat",
-    "description": "Kami mencintai apa yang kami lakukan, dan itu terlihat dalam setiap detail produk kami."
+    "title": "Pasión",
+    "description": "Amamos lo que hacemos, y se nota en cada detalle de nuestros productos."
   },
   "collaboration": {
-    "title": "Kolaborasi",
-    "description": "Bekerja sama menghasilkan hasil terbaik. Kami percaya pada kekuatan tim yang solid."
+    "title": "Colaboración",
+    "description": "Trabajar juntos produce los mejores resultados. Creemos en el poder de equipos sólidos."
   },
   "innovation": {
-    "title": "Inovasi",
-    "description": "Selalu mencari cara yang lebih baik untuk menyelesaikan masalah dan menciptakan nilai."
+    "title": "Innovación",
+    "description": "Siempre buscando mejores formas de resolver problemas y crear valor."
   },
   "integrity": {
-    "title": "Integritas",
-    "description": "Kejujuran dan transparansi adalah fondasi dari setiap hubungan yang kami bangun."
+    "title": "Integridad",
+    "description": "La honestidad y la transparencia son la base de cada relación que construimos."
   },
   "excellence": {
-    "title": "Keunggulan",
-    "description": "Kami tidak puas dengan yang cukup baik. Kami selalu berusaha untuk yang terbaik."
+    "title": "Excelencia",
+    "description": "No nos conformamos con lo suficientemente bueno. Siempre nos esforzamos por lo mejor."
   },
   "quality": {
-    "title": "Kualitas",
-    "description": "Kode yang bersih, desain yang indah, dan pengalaman yang mulus adalah standar kami."
+    "title": "Calidad",
+    "description": "Código limpio, diseño hermoso y experiencias fluidas son nuestros estándares."
   },
   "team": {
-    "title": "Kenali Tim Kami",
-    "subtitle": "Pikiran brilian di balik setiap baris kode yang kami buat.",
-    "alex_desc": "Pemimpin visioner dengan 10+ tahun pengalaman dalam pengembangan ekosistem SaaS.",
-    "sarah_desc": "Ahli full-stack yang spesialis dalam membangun arsitektur sistem berskala besar.",
-    "mike_desc": "Sangat terobsesi dengan detail pixel, alur UX yang mulus, dan standar aksesibilitas.",
-    "jessica_desc": "Creative storyteller yang membantu brand menemukan suara unik mereka di dunia digital."
+    "title": "Conozca al Equipo",
+    "subtitle": "Las mentes brillantes detrás de cada línea de código que escribimos.",
+    "alex_desc": "Líder visionario con 10+ años de experiencia en desarrollo de ecosistema SaaS.",
+    "sarah_desc": "Full-stack wizard especializada en construir arquitecturas de sistemas a gran escala.",
+    "mike_desc": "Profundamente obsesionado con detalles de píxel, flujos UX suaves y estándares de accesibilidad.",
+    "jessica_desc": "Narradora creativa ayudando a las marcas a encontrar su voz única en el mundo digital."
   }
 }

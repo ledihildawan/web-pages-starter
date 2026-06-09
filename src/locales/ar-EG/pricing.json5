@@ -1,56 +1,56 @@
 {
-  "period_monthly": "bln",
-  "period_yearly": "thn",
+  "period_monthly": "شهرياً",
+  "period_yearly": "سنوياً",
   "hero": {
-    "title_part1": "Harga Sederhana & ",
-    "title_highlight": "Transparan",
-    "description": "Tanpa biaya tersembunyi. Tanpa biaya kejutan. Pilih paket yang paling sesuai dengan kebutuhan Anda.",
-    "badge": "اختر خطتك"
+    "title_part1": "أسعار بسيطة و",
+    "title_highlight": "شفافة",
+    "description": "بدون رسوم خفية. بدون مفاجآت. اختر الباقة التي تناسب احتياجاتك تماماً.",
+    "badge": "اختر الباقة"
   },
   "toggle": {
-    "monthly": "Bulanan",
-    "yearly": "Tahunan",
-    "yearly_hint": "tagihan per tahun",
-    "discount": "HEMAT 20%",
+    "monthly": "شهري",
+    "yearly": "سنوي",
+    "yearly_hint": "يتم الفوترة سنوياً",
+    "discount": "وفر 20%",
     "aria_label": "Toggle Pricing Plan"
   },
   "plans": {
     "hobby": {
-      "name": "Hobby",
-      "desc": "Sangat cocok untuk proyek sampingan dan pembelajaran.",
-      "btn": "Mulai Gratis",
-      "feature_0": "1 Proyek",
-      "feature_1": "Dukungan Komunitas",
-      "feature_2": "Penyimpanan 5GB"
+      "name": "هواية",
+      "desc": "مثالي للمشاريع الشخصية والتعلم.",
+      "btn": "ابدأ مجاناً",
+      "feature_0": "مشروع واحد",
+      "feature_1": "دعم المجتمع",
+      "feature_2": "تخزين 5 جيجابايت"
     },
     "pro": {
-      "name": "Pro",
-      "badge": "Paling Populer",
-      "desc": "Untuk developer profesional dan tim kecil.",
-      "btn": "Pilih Paket Pro",
-      "feature_0": "Proyek Tak Terbatas",
-      "feature_1": "Dukungan Email Prioritas",
-      "feature_2": "Penyimpanan 100GB",
-      "feature_3": "Analitik Lanjutan"
+      "name": "احترافي",
+      "badge": "الأكثر شعبية",
+      "desc": "للمطورين المحترفين والفرق الصغيرة.",
+      "btn": "اختر الباقة الاحترافية",
+      "feature_0": "مشاريع غير محدودة",
+      "feature_1": "دعم البريد الإلكتروني ذي الأولوية",
+      "feature_2": "تخزين 100 جيجابايت",
+      "feature_3": "تحليلات متقدمة"
     },
     "enterprise": {
-      "name": "Enterprise",
-      "desc": "Untuk aplikasi skala besar dan organisasi.",
-      "btn": "Hubungi Sales",
-      "feature_0": "Semua fitur di paket Pro",
-      "feature_1": "Manajer Akun Khusus",
-      "feature_2": "SSO & Log Audit",
-      "feature_3": "Penyimpanan Tak Terbatas"
+      "name": "المؤسسات",
+      "desc": "للتطبيقات واسعة النطاق والمنظمات.",
+      "btn": "تواصل مع المبيعات",
+      "feature_0": "كل ميزات الاحترافية",
+      "feature_1": "مدير حساب مخصص",
+      "feature_2": "SSO وسجلات التدقيق",
+      "feature_3": "تخزين غير محدود"
     }
   },
   "faq": {
-    "title": "Pertanyaan Umum",
-    "subtitle": "Temukan jawaban atas pertanyaan yang paling sering diajukan tentang paket dan layanan kami.",
-    "q_0": "Apakah saya bisa membatalkan kapan saja?",
-    "a_0": "Ya, Anda dapat membatalkan langganan kapan saja. Akses Anda tetap aktif hingga akhir periode penagihan.",
-    "q_1": "Apakah ada uji coba gratis?",
-    "a_1": "Kami menawarkan uji coba gratis 14 hari untuk paket Pro. Tidak perlu kartu kredit untuk memulai.",
-    "q_2": "Metode pembayaran apa yang tersedia?",
-    "a_2": "Kami menerima kartu kredit utama dan PayPal. Untuk Enterprise, kami mendukung transfer bank."
+    "title": "الأسئلة الشائعة",
+    "subtitle": "ابحث عن إجابات لأكثر الأسئلة شيوعاً حول باقاتنا وخدماتنا.",
+    "q_0": "هل يمكنني الإلغاء في أي وقت؟",
+    "a_0": "نعم، يمكنك إلغاء اشتراكك في أي وقت. سيظل وصولك نشطاً حتى نهاية فترة الفوترة.",
+    "q_1": "هل تقدمون تجربة مجانية؟",
+    "a_1": "نقدم تجربة مجانية لمدة 14 يوماً للباقة الاحترافية. لا تتطلب بطاقة ائتمان للبدء.",
+    "q_2": "ما طرق الدفع المتاحة؟",
+    "a_2": "نقبل بطاقات الائتمان الرئيسية (Visa، Mastercard، Amex) و PayPal. للباقات المؤسسية، ندعم التحويلات البنكية."
   }
 }

@@ -1,49 +1,49 @@
 {
   "meta": {
     "title": "Startseite | Starter App",
-    "description": "Moderne Webanwendungsentwicklung."
+    "description": "Baukasten für moderne Webanwendungen."
   },
   "hero": {
     "badge": "Neu: Version 2.0 ist da",
-    "title_start": "Bauen Sie etwas",
+    "title_start": "Bau etwas",
     "title_highlight": "Schönes heute",
-    "description": "Die moderne Art, Webanwendungen zu entwickeln. Schnell, flexibel und für Entwickler konzipiert, die ihr Handwerk achten.",
-    "image_alt": "Dashboard Preview",
+    "description": "Der moderne Weg, Webanwendungen zu bauen. Schnell, flexibel und entworfen für Entwickler, die stolz auf ihre Arbeit sind.",
+    "image_alt": "Dashboard-Vorschau",
     "primary_btn": {
-      "label": "Jetzt Loslegen",
+      "label": "Loslegen",
       "url": "/start"
     },
     "secondary_btn": {
-      "label": "Demo Ansehen",
+      "label": "Demo ansehen",
       "url": "/demo"
     },
     "note": "Keine Kreditkarte erforderlich"
   },
   "features": {
-    "heading": "Alles Was Sie Brauchen",
-    "subheading": "Leistungsstarke Funktionen, die Ihnen helfen, schneller zu entwickeln.",
+    "heading": "Alles Was Du Brauchst",
+    "subheading": "Leistungsstarke Funktionen, die dir helfen, schneller zu bauen.",
     "list": {
       "speed": {
         "title": "Blitzschnell",
-        "description": "Optimiert für Leistung. Ihre Anwendungen laden sofort."
+        "description": "Optimiert für Leistung. Deine Anwendungen laden sofort."
       },
       "design": {
         "title": "Schönes Design",
-        "description": "Mit Sorgfalt erstellt. Jedes Pixel hat Bedeutung und Zweck."
+        "description": "Mit Sorgfalt gestaltet. Jedes Pixel hat Bedeutung und Zweck."
       },
       "security": {
-        "title": "Sicher von Haus aus",
-        "description": "Sicherheit auf Enterprise-Niveau. Ihre Daten sind auf jeder Ebene geschützt."
+        "title": "Sicher Standard",
+        "description": "Sicherheit auf Unternehmensebene. Deine Daten sind in jeder Schicht geschützt."
       }
     }
   },
   "stats": {
     "community": "Entwickler-Community",
     "community_val": "10K+",
-    "projects": "Erstellte Projekte",
+    "projects": "Gebaute Projekte",
     "projects_val": "50K+",
-    "uptime": "24/7 Verfügbarkeit",
-    "uptime_val": "99,9%",
+    "uptime": "Verfügbarkeit 24/7",
+    "uptime_val": "99.9%",
     "rating": "Benutzerbewertung",
     "rating_val": "4.9/5"
   }

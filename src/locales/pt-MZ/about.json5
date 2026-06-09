@@ -1,75 +1,75 @@
 {
   "about": {
-    "badge": "Tentang Kami"
+    "badge": "Sobre Nós"
   },
   "hero": {
-    "badge": "Tentang Kami",
-    "title_part1": "Kami Mewujudkan ",
-    "title_highlight": "Masa Depan Digital",
-    "description": "Didirikan pada tahun 2024, Starter hadir untuk membantu developer membangun aplikasi lebih baik dan lebih cepat. Kami percaya pada kekuatan kode yang bersih dan desain yang indah."
+    "badge": "Sobre Nós",
+    "title_part1": "Estamos a criar o ",
+    "title_highlight": "Futuro Digital",
+    "description": "Fundado em 2024, o Starter existe para ajudar os developers a construir melhores aplicações mais rapidamente. Acreditamos no poder do código limpo, design bonito e colaboração open source."
   },
   "stats": {
-    "years": "Tahun Pengalaman",
+    "years": "Anos de Experiência",
     "years_val": "3+",
-    "clients": "Klien Global",
+    "clients": "Clientes Globais",
     "clients_val": "120+",
-    "countries": "Negara",
+    "countries": "Países Alcançados",
     "countries_val": "15",
-    "support": "Dukungan Teknis",
+    "support": "Suporte Especialista",
     "support_val": "24/7"
   },
   "story": {
-    "tag": "Cerita Kami",
-    "visual_label": "Ilustrasi Studio Kreatif",
-    "title": "Digerakkan oleh <br>Keunggulan.",
-    "para1": "Perjalanan kami dimulai dengan ide sederhana: membuat pengembangan web dapat diakses dan menyenangkan untuk semua.",
-    "para2": "Hari ini, kami adalah tim beragam yang terdiri dari engineer, desainer, dan thinker yang bekerja sama memecahkan masalah kompleks.",
-    "val1": "Filosofi desain berpusat pada pengguna",
-    "val2": "Arsitektur berbasis performa",
-    "val3": "Transparansi dan komunikasi terbuka"
+    "tag": "A Nossa História",
+    "visual_label": "Ilustração de Estúdio Criativo",
+    "title": "Movidos pela paixão, <br>definidos pela excelência.",
+    "para1": "A nossa jornada começou com uma ideia simples: tornar o desenvolvimento web acessível e divertido para todos. Estávamos cansados de frameworks inchados e configurações complexas.",
+    "para2": "Hoje, somos uma equipa diversificada de engenheiros, designers e pensadores a trabalhar juntos para resolver problemas complexos com soluções elegantes.",
+    "val1": "Filosofia de design centrada no utilizador",
+    "val2": "Arquitetura performance-first",
+    "val3": "Transparência e comunicação aberta"
   },
   "mission": {
-    "title": "Misi Kami",
-    "description": "Memberdayakan pengembang dan bisnis dengan tools yang elegan, cepat, dan mudah digunakan untuk membangun produk digital yang luar biasa."
+    "title": "A Nossa Missão",
+    "description": "Capacitar developers e empresas com ferramentas elegantes, rápidas e fáceis de usar para construir produtos digitais excecionais."
   },
   "vision": {
-    "title": "Visi Kami",
-    "description": "Menjadi platform pilihan utama bagi pengembang modern yang menghargai keindahan, performa, dan pengalaman pengguna dalam setiap baris kode."
+    "title": "A Nossa Visão",
+    "description": "Ser a plataforma de escolha para developers modernos que valorizam beleza, performance e experiência do utilizador em cada linha de código."
   },
   "values": {
-    "title": "Nilai-Nilai Kami",
-    "subtitle": "Prinsip yang membimbing setiap keputusan yang kami buat."
+    "title": "Os Nossos Valores",
+    "subtitle": "Princípios que guiam cada decisão que tomamos."
   },
   "passion": {
-    "title": "Semangat",
-    "description": "Kami mencintai apa yang kami lakukan, dan itu terlihat dalam setiap detail produk kami."
+    "title": "Paixão",
+    "description": "Amamos o que fazemos, e isso nota-se em cada detalhe dos nossos produtos."
   },
   "collaboration": {
-    "title": "Kolaborasi",
-    "description": "Bekerja sama menghasilkan hasil terbaik. Kami percaya pada kekuatan tim yang solid."
+    "title": "Colaboração",
+    "description": "Trabalhar juntos produz os melhores resultados. Acreditamos no poder de equipas sólidas."
   },
   "innovation": {
-    "title": "Inovasi",
-    "description": "Selalu mencari cara yang lebih baik untuk menyelesaikan masalah dan menciptakan nilai."
+    "title": "Inovação",
+    "description": "Sempre a procurar melhores formas de resolver problemas e criar valor."
   },
   "integrity": {
-    "title": "Integritas",
-    "description": "Kejujuran dan transparansi adalah fondasi dari setiap hubungan yang kami bangun."
+    "title": "Integridade",
+    "description": "Honestidade e transparência são a base de cada relação que construímos."
   },
   "excellence": {
-    "title": "Keunggulan",
-    "description": "Kami tidak puas dengan yang cukup baik. Kami selalu berusaha untuk yang terbaik."
+    "title": "Excelência",
+    "description": "Não nos contentamos com o suficientemente bom. Sempre nos esforçamos pelo melhor."
   },
   "quality": {
-    "title": "Kualitas",
-    "description": "Kode yang bersih, desain yang indah, dan pengalaman yang mulus adalah standar kami."
+    "title": "Qualidade",
+    "description": "Código limpo, design bonito e experiências fluidas são os nossos padrões."
   },
   "team": {
-    "title": "Kenali Tim Kami",
-    "subtitle": "Pikiran brilian di balik setiap baris kode yang kami buat.",
-    "alex_desc": "Pemimpin visioner dengan 10+ tahun pengalaman dalam pengembangan ekosistem SaaS.",
-    "sarah_desc": "Ahli full-stack yang spesialis dalam membangun arsitektur sistem berskala besar.",
-    "mike_desc": "Sangat terobsesi dengan detail pixel, alur UX yang mulus, dan standar aksesibilitas.",
-    "jessica_desc": "Creative storyteller yang membantu brand menemukan suara unik mereka di dunia digital."
+    "title": "Conhece a Equipa",
+    "subtitle": "As mentes brilhantes por trás de cada linha de código que escrevemos.",
+    "alex_desc": "Líder visionário com 10+ anos de experiência em desenvolvimento de ecossistema SaaS.",
+    "sarah_desc": "Especialista full-stack especializada em construir arquiteturas de sistemas em grande escala.",
+    "mike_desc": "Profundamente obcecado com detalhes de pixel, fluxos UX suaves e padrões de acessibilidade.",
+    "jessica_desc": "Narradora criativa a ajudar marcas a encontrar a sua voz única no mundo digital."
   }
 }

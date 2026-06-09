@@ -5,7 +5,6 @@ export const NUMBERING_SYSTEMS = [
     type: 'numeric' as const,
     writingSystem: 'latin',
     digits: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
-    fontFamily: 'Inter, "Noto Sans Variable", system-ui, sans-serif',
   },
   {
     code: 'arab',
@@ -13,7 +12,6 @@ export const NUMBERING_SYSTEMS = [
     type: 'numeric' as const,
     writingSystem: 'arabic',
     digits: ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'],
-    fontFamily: '"Noto Sans Arabic Variable", sans-serif',
   },
   {
     code: 'deva',
@@ -21,7 +19,6 @@ export const NUMBERING_SYSTEMS = [
     type: 'numeric' as const,
     writingSystem: 'devanagari',
     digits: ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'],
-    fontFamily: '"Noto Sans Devanagari", sans-serif',
   },
   {
     code: 'thai',
@@ -29,7 +26,6 @@ export const NUMBERING_SYSTEMS = [
     type: 'numeric' as const,
     writingSystem: 'thai',
     digits: ['๐', '๑', '๒', '๓', '๔', '๕', '๖', '๗', '๘', '๙'],
-    fontFamily: '"Noto Sans Thai Variable", sans-serif',
   },
   {
     code: 'beng',
@@ -37,7 +33,6 @@ export const NUMBERING_SYSTEMS = [
     type: 'numeric' as const,
     writingSystem: 'bengali',
     digits: ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'],
-    fontFamily: '"Noto Sans Bengali Variable", sans-serif',
   },
   {
     code: 'tamldec',
@@ -45,7 +40,6 @@ export const NUMBERING_SYSTEMS = [
     type: 'numeric' as const,
     writingSystem: 'tamil',
     digits: ['௦', '௧', '௨', '௩', '௪', '௫', '௬', '௭', '௮', '௯'],
-    fontFamily: '"Noto Sans Tamil Variable", sans-serif',
   },
   {
     code: 'telu',
@@ -53,7 +47,6 @@ export const NUMBERING_SYSTEMS = [
     type: 'numeric' as const,
     writingSystem: 'telugu',
     digits: ['౦', '౧', '౨', '౩', '౪', '౫', '౬', '౭', '౮', '౯'],
-    fontFamily: '"Noto Sans Telugu Variable", sans-serif',
   },
   {
     code: 'knda',
@@ -61,7 +54,6 @@ export const NUMBERING_SYSTEMS = [
     type: 'numeric' as const,
     writingSystem: 'kannada',
     digits: ['೦', '೧', '೨', '೩', '೪', '೫', '೬', '೭', '೮', '೯'],
-    fontFamily: '"Noto Sans Kannada Variable", sans-serif',
   },
   {
     code: 'mlym',
@@ -69,7 +61,6 @@ export const NUMBERING_SYSTEMS = [
     type: 'numeric' as const,
     writingSystem: 'malayalam',
     digits: ['൦', '൧', '൨', '൩', '൪', '൫', '൬', '൭', '൮', '൯'],
-    fontFamily: '"Noto Sans Malayalam Variable", sans-serif',
   },
   {
     code: 'gujr',
@@ -77,7 +68,6 @@ export const NUMBERING_SYSTEMS = [
     type: 'numeric' as const,
     writingSystem: 'gujarati',
     digits: ['૦', '૧', '૨', '૩', '૪', '૫', '૬', '૭', '૮', '૯'],
-    fontFamily: '"Noto Sans Gujarati Variable", sans-serif',
   },
   {
     code: 'guru',
@@ -85,15 +75,13 @@ export const NUMBERING_SYSTEMS = [
     type: 'numeric' as const,
     writingSystem: 'gurmukhi',
     digits: ['੦', '੧', '੨', '੩', '੪', '੫', '੬', '੭', '੮', '੯'],
-    fontFamily: '"Noto Sans Gurmukhi Variable", sans-serif',
   },
   {
     code: 'sinh',
     label: 'Sinhala',
     type: 'numeric' as const,
     writingSystem: 'sinhala',
-    digits: ['෦', '෧', '෨', '෩', '෪', '෫', '෬', '෭', '෮', '෯'],
-    fontFamily: '"Noto Sans Sinhala Variable", sans-serif',
+    digits: ['෦', '෧', 'ྼ', '෩', '෪', '෫', '෬', '෭', '෮', '෯'],
   },
   {
     code: 'khmr',
@@ -101,7 +89,6 @@ export const NUMBERING_SYSTEMS = [
     type: 'numeric' as const,
     writingSystem: 'khmer',
     digits: ['០', '១', '២', '៣', '៤', '៥', '៦', '៧', '៨', '៩'],
-    fontFamily: '"Noto Sans Khmer Variable", sans-serif',
   },
   {
     code: 'laoo',
@@ -109,7 +96,6 @@ export const NUMBERING_SYSTEMS = [
     type: 'numeric' as const,
     writingSystem: 'lao',
     digits: ['໐', '໑', '໒', '໓', '໔', '໕', '໖', '໗', '໘', '໙'],
-    fontFamily: '"Noto Sans Lao Variable", sans-serif',
   },
   {
     code: 'mymr',
@@ -117,7 +103,6 @@ export const NUMBERING_SYSTEMS = [
     type: 'numeric' as const,
     writingSystem: 'myanmar',
     digits: ['၀', '၁', '၂', '၃', '၄', '၅', '၆', '၇', '၈', '၉'],
-    fontFamily: '"Noto Sans Myanmar Variable", sans-serif',
   },
   {
     code: 'orya',
@@ -125,7 +110,6 @@ export const NUMBERING_SYSTEMS = [
     type: 'numeric' as const,
     writingSystem: 'odia',
     digits: ['୦', '୧', '୨', '୩', '୪', '୫', '୬', '୭', '୮', '୯'],
-    fontFamily: '"Noto Sans Oriya", sans-serif',
   },
   {
     code: 'tibt',
@@ -133,7 +117,6 @@ export const NUMBERING_SYSTEMS = [
     type: 'numeric' as const,
     writingSystem: 'tibetan',
     digits: ['༠', '༡', '༢', '༣', '༤', '༥', '༦', '༧', '༨', '༩'],
-    fontFamily: '"Noto Serif Tibetan Variable", serif',
   },
   {
     code: 'nkoo',
@@ -141,7 +124,6 @@ export const NUMBERING_SYSTEMS = [
     type: 'numeric' as const,
     writingSystem: 'nko',
     digits: ['߀', '߁', '߂', '߃', '߄', '߅', '߆', '߇', '߈', '߉'],
-    fontFamily: '"Noto Sans NKo", sans-serif',
   },
   {
     code: 'adlm',
@@ -149,7 +131,6 @@ export const NUMBERING_SYSTEMS = [
     type: 'numeric' as const,
     writingSystem: 'adlam',
     digits: ['𞥐', '𞥑', '𞥒', '𞥓', '𞥔', '𞥕', '𞥖', '𞥗', '𞥘', '𞥙'],
-    fontFamily: '"Noto Sans Adlam Variable", sans-serif',
   },
   {
     code: 'hanidec',
@@ -157,7 +138,6 @@ export const NUMBERING_SYSTEMS = [
     type: 'numeric' as const,
     writingSystem: 'cjk',
     digits: ['〇', '一', '二', '三', '四', '五', '六', '七', '八', '九'],
-    fontFamily: '"Noto Sans SC Variable", "Noto Sans CJK SC", sans-serif',
   },
   {
     code: 'fullwide',
@@ -165,7 +145,6 @@ export const NUMBERING_SYSTEMS = [
     type: 'numeric' as const,
     writingSystem: 'cjk',
     digits: ['０', '１', '２', '３', '４', '５', '６', '７', '８', '９'],
-    fontFamily: '"Noto Sans JP Variable", "Noto Sans CJK JP", sans-serif',
   },
   {
     code: 'jpan',
@@ -174,7 +153,6 @@ export const NUMBERING_SYSTEMS = [
     rules: 'ja/SpelloutRules/spellout-cardinal',
     writingSystem: 'cjk',
     digits: ['〇', '一', '二', '三', '四', '五', '六', '七', '八', '九'],
-    fontFamily: '"Noto Sans JP Variable", "Noto Sans CJK JP", sans-serif',
   },
   {
     code: 'hans',
@@ -183,7 +161,6 @@ export const NUMBERING_SYSTEMS = [
     rules: 'zh/SpelloutRules/spellout-cardinal',
     writingSystem: 'cjk',
     digits: ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'],
-    fontFamily: '"Noto Sans SC Variable", "Noto Sans CJK SC", sans-serif',
   },
   {
     code: 'hant',
@@ -192,7 +169,6 @@ export const NUMBERING_SYSTEMS = [
     rules: 'zh_Hant/SpelloutRules/spellout-cardinal',
     writingSystem: 'cjk',
     digits: ['零', '壹', '貳', '參', '肆', '伍', '陸', '柒', '捌', '玖'],
-    fontFamily: '"Noto Sans TC Variable", "Noto Sans CJK TC", sans-serif',
   },
   {
     code: 'kore',
@@ -201,7 +177,6 @@ export const NUMBERING_SYSTEMS = [
     rules: 'ko/SpelloutRules/spellout-cardinal',
     writingSystem: 'cjk',
     digits: ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'],
-    fontFamily: '"Noto Sans KR Variable", "Noto Sans CJK KR", sans-serif',
   },
   {
     code: 'cyrl',
@@ -210,7 +185,6 @@ export const NUMBERING_SYSTEMS = [
     rules: 'cyrillic-lower',
     writingSystem: 'cyrillic',
     digits: ['о', 'а', 'в', 'г', 'д', 'е', 'ѕ', 'з', 'и', 'ѳ'],
-    fontFamily: 'Inter, "Noto Sans Variable", system-ui, sans-serif',
   },
   {
     code: 'taml',
@@ -219,7 +193,6 @@ export const NUMBERING_SYSTEMS = [
     rules: 'tamil',
     writingSystem: 'tamil',
     digits: ['௦', '௧', '௨', '௩', '௪', '௫', '௬', '௭', '௮', '௯'],
-    fontFamily: '"Noto Sans Tamil Variable", sans-serif',
   },
   {
     code: 'geor',
@@ -228,7 +201,6 @@ export const NUMBERING_SYSTEMS = [
     rules: 'georgian',
     writingSystem: 'georgian',
     digits: ['ა', 'ბ', 'გ', 'დ', 'ე', 'ვ', 'ზ', 'თ', 'ი', 'კ'],
-    fontFamily: '"Noto Sans Georgian Variable", sans-serif',
   },
   {
     code: 'armn',
@@ -237,7 +209,6 @@ export const NUMBERING_SYSTEMS = [
     rules: 'armenian-upper',
     writingSystem: 'armenian',
     digits: ['Ա', 'Բ', 'Գ', 'Դ', 'Ե', 'Զ', 'Է', 'Ը', 'Թ', 'Ժ'],
-    fontFamily: '"Noto Sans Armenian Variable", sans-serif',
   },
   {
     code: 'ethi',
@@ -246,7 +217,6 @@ export const NUMBERING_SYSTEMS = [
     rules: 'ethiopic',
     writingSystem: 'ethiopic',
     digits: ['፩', '፪', '፫', '፬', '፭', '፮', '፯', '፰', '፱', '፲'],
-    fontFamily: '"Noto Sans Ethiopic Variable", sans-serif',
   },
   {
     code: 'grek',
@@ -255,7 +225,6 @@ export const NUMBERING_SYSTEMS = [
     rules: 'greek-upper',
     writingSystem: 'greek',
     digits: ['Α', 'Β', 'Γ', 'Δ', 'Ε', 'Ϛ', 'Ζ', 'Η', 'Θ', 'Ι'],
-    fontFamily: 'Inter, "Noto Sans Variable", system-ui, sans-serif',
   },
   {
     code: 'hebr',
@@ -264,7 +233,6 @@ export const NUMBERING_SYSTEMS = [
     rules: 'hebrew',
     writingSystem: 'hebrew',
     digits: ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ז', 'ח', 'ט', 'י'],
-    fontFamily: 'Inter, "Noto Sans Variable", system-ui, sans-serif',
   },
   {
     code: 'roman',
@@ -273,7 +241,6 @@ export const NUMBERING_SYSTEMS = [
     rules: 'roman-upper',
     writingSystem: 'latin',
     digits: null,
-    fontFamily: 'Inter, "Noto Sans Variable", system-ui, sans-serif',
   },
 ] as const;
 
@@ -288,10 +255,3 @@ export const NUMBERING_SYSTEM_CODE = Object.fromEntries(
 ) as {
   [K in NumberingSystemCode as Uppercase<K>]: K;
 };
-
-export const NUMBERING_SYSTEM_TO_WRITING_SYSTEM = Object.fromEntries(
-  NUMBERING_SYSTEMS.map((ns) => [ns.code, ns.writingSystem]),
-) as Record<
-  NumberingSystemCode,
-  (typeof NUMBERING_SYSTEMS)[number]['writingSystem']
->;

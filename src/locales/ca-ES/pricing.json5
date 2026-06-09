@@ -2,10 +2,10 @@
   "period_monthly": "mes",
   "period_yearly": "any",
   "hero": {
-    "badge": "Trieu el vostre pla",
+    "badge": "Trieu un pla",
     "title_part1": "Preus simples i ",
     "title_highlight": "transparents",
-    "description": "Sense càrrecs ocults. Sense càrrecs sorpresa. Trieu el pla que millor s'adapti a les vostres necessitats."
+    "description": "Sense despeses ocults. Sense càrrecs sorpresa. Trieu un pla que millor s'adapti a les vostres necessitats."
   },
   "toggle": {
     "monthly": "Mensual",

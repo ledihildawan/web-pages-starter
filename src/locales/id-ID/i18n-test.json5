@@ -189,7 +189,7 @@
   },
   "section_systems": {
     "title": "Writing Systems",
-    "description": "Semua 7 sistem algoritmik dan 4 sistem numerik tambahan di level sistem, dengan loader font terhubung."
+    "description": "Semua sistem angka (algoritmik dan numerik) menampilkan digit native yang benar dengan fallback ICU."
   },
   "nav": {
     "translations": "Terjemahan",

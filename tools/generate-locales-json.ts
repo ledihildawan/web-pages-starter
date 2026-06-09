@@ -82,9 +82,6 @@ const main = async (): Promise<void> => {
   const { LOCALES, LOCALE_CODES } = await import(
     "../src/scripts/lib/i18n/data"
   );
-  const { NUMBERING_SYSTEMS } = await import(
-    "../src/scripts/lib/i18n/numbering-systems"
-  );
   const allLocalesCompact = LOCALES.map((l) => ({
     code: l.code,
     language: l.language,
@@ -96,12 +93,8 @@ const main = async (): Promise<void> => {
     writingSystem: l.writingSystem,
     timezone: l.timezone,
   }));
-  const fontsByNs = Object.fromEntries(
-    NUMBERING_SYSTEMS.map((ns) => [ns.code, ns.fontFamily]),
-  );
   const allLocalesJson = JSON.stringify({
     locales: allLocalesCompact,
-    numberingSystemFonts: fontsByNs,
   });
   fs.writeFileSync(path.join(OUT_DIR, "locales.json"), allLocalesJson);
   totalBytes += allLocalesJson.length;

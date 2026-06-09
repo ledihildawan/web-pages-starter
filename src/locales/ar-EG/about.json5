@@ -1,75 +1,75 @@
 {
   "about": {
-    "badge": "Tentang Kami"
+    "badge": "من نحن"
   },
   "hero": {
-    "badge": "Tentang Kami",
-    "title_part1": "Kami Mewujudkan ",
-    "title_highlight": "Masa Depan Digital",
-    "description": "Didirikan pada tahun 2024, Starter hadir untuk membantu developer membangun aplikasi lebih baik dan lebih cepat. Kami percaya pada kekuatan kode yang bersih dan desain yang indah."
+    "badge": "من نحن",
+    "title_part1": "نحن نصنع ",
+    "title_highlight": "المستقبل الرقمي",
+    "description": "تأسست في عام 2024، exist Starter لمساعدة المطورين على بناء تطبيقات أفضل وأسرع. نؤمن بقوة الكود النظيف والتصميم الجميل والتعاون مفتوح المصدر."
   },
   "stats": {
-    "years": "Tahun Pengalaman",
+    "years": "سنوات الخبرة",
     "years_val": "3+",
-    "clients": "Klien Global",
+    "clients": "عملاء عالميون",
     "clients_val": "120+",
-    "countries": "Negara",
+    "countries": "دولة",
     "countries_val": "15",
-    "support": "Dukungan Teknis",
+    "support": "دعم متخصص",
     "support_val": "24/7"
   },
   "story": {
-    "tag": "Cerita Kami",
-    "visual_label": "Ilustrasi Studio Kreatif",
-    "title": "Digerakkan oleh <br>Keunggulan.",
-    "para1": "Perjalanan kami dimulai dengan ide sederhana: membuat pengembangan web dapat diakses dan menyenangkan untuk semua.",
-    "para2": "Hari ini, kami adalah tim beragam yang terdiri dari engineer, desainer, dan thinker yang bekerja sama memecahkan masalah kompleks.",
-    "val1": "Filosofi desain berpusat pada pengguna",
-    "val2": "Arsitektur berbasis performa",
-    "val3": "Transparansi dan komunikasi terbuka"
+    "tag": "قصتنا",
+    "visual_label": "رسم توضيحي لاستوديو إبداعي",
+    "title": "مدفوعون بالحماس، <br>معرّفون بالتميز.",
+    "para1": "بدأت رحلتنا بفكرة بسيطة: جعل تطوير الويب متاحاً وممتعاً للجميع.",
+    "para2": "اليوم، نحن فريق متنوع من المهندسين والمصممين والفلاسفة نعمل معاً لحل المشكلات المعقدة بحلول أنيقة.",
+    "val1": "فلسفة تصميم متمحورة حول المستخدم",
+    "val2": "بنية تحتية للأداء أولاً",
+    "val3": "الشفافية والتواصل المفتوح"
   },
   "mission": {
-    "title": "Misi Kami",
-    "description": "Memberdayakan pengembang dan bisnis dengan tools yang elegan, cepat, dan mudah digunakan untuk membangun produk digital yang luar biasa."
+    "title": "مهمتنا",
+    "description": "تمكين المطورين والشركات من خلال أدوات أنيقة وسريعة وسهلة الاستخدام لبناء منتجات رقمية استثنائية."
   },
   "vision": {
-    "title": "Visi Kami",
-    "description": "Menjadi platform pilihan utama bagi pengembang modern yang menghargai keindahan, performa, dan pengalaman pengguna dalam setiap baris kode."
+    "title": "رؤيتنا",
+    "description": "أن نكون المنصة المفضلة للمطورين المعاصرين الذين يقدرون الجمال والأداء وتجربة المستخدم في كل سطر من الكود."
   },
   "values": {
-    "title": "Nilai-Nilai Kami",
-    "subtitle": "Prinsip yang membimbing setiap keputusan yang kami buat."
+    "title": "قيمنا",
+    "subtitle": "المبادئ التي توجه كل قرار نتخذه."
   },
   "passion": {
-    "title": "Semangat",
-    "description": "Kami mencintai apa yang kami lakukan, dan itu terlihat dalam setiap detail produk kami."
+    "title": "الشغف",
+    "description": "نحب ما نقوم به، وهذا يظهر في كل تفصيل من منتجاتنا."
   },
   "collaboration": {
-    "title": "Kolaborasi",
-    "description": "Bekerja sama menghasilkan hasil terbaik. Kami percaya pada kekuatan tim yang solid."
+    "title": "التعاون",
+    "description": "العمل معاً ينتج أفضل النتائج. نؤمن بقوة الفرق المتماسكة."
   },
   "innovation": {
-    "title": "Inovasi",
-    "description": "Selalu mencari cara yang lebih baik untuk menyelesaikan masalah dan menciptakan nilai."
+    "title": "الابتكار",
+    "description": "نبحث دائماً عن طرق أفضل لحل المشكلات وخلق القيمة."
   },
   "integrity": {
-    "title": "Integritas",
-    "description": "Kejujuran dan transparansi adalah fondasi dari setiap hubungan yang kami bangun."
+    "title": "النزاهة",
+    "description": "الصدق والشفافية هما أساس كل علاقة نبنيها."
   },
   "excellence": {
-    "title": "Keunggulan",
-    "description": "Kami tidak puas dengan yang cukup baik. Kami selalu berusaha untuk yang terbaik."
+    "title": "التميز",
+    "description": "لا نقبل بأقل من الأفضل. نسعى دائماً إلى الأفضل."
   },
   "quality": {
-    "title": "Kualitas",
-    "description": "Kode yang bersih, desain yang indah, dan pengalaman yang mulus adalah standar kami."
+    "title": "الجودة",
+    "description": "الكود النظيف والتصميم الجميل والتجارب السلسة هي معاييرنا."
   },
   "team": {
-    "title": "Kenali Tim Kami",
-    "subtitle": "Pikiran brilian di balik setiap baris kode yang kami buat.",
-    "alex_desc": "Pemimpin visioner dengan 10+ tahun pengalaman dalam pengembangan ekosistem SaaS.",
-    "sarah_desc": "Ahli full-stack yang spesialis dalam membangun arsitektur sistem berskala besar.",
-    "mike_desc": "Sangat terobsesi dengan detail pixel, alur UX yang mulus, dan standar aksesibilitas.",
-    "jessica_desc": "Creative storyteller yang membantu brand menemukan suara unik mereka di dunia digital."
+    "title": "تعرف على الفريق",
+    "subtitle": "العقول المبدعة وراء كل سطر كود نكتبه.",
+    "alex_desc": "قائد ذو رؤية مع أكثر من 10 سنوات من الخبرة في تطوير نظام SaaS البيئي.",
+    "sarah_desc": "ساحرة full-stack متخصصة في بناء أنظمة معمارية واسعة النطاق.",
+    "mike_desc": "مهووس بتفاصيل البكسل وتدفقات UX السلسة ومعايير إمكانية الوصول.",
+    "jessica_desc": "روائية إبداعية تساعد العلامات التجارية على العثور على صوتها الفريد في العالم الرقمي."
   }
 }
