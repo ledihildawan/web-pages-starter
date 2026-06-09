@@ -189,7 +189,8 @@
   },
   "section_systems": {
     "title": "Systemy Pisma",
-    "description": "Wszystkie 7 algorytmiczne i 4 dodatkowe systemy numeryczne na poziomie systemu, z podłączonymi ładowarkami czcionek."
+    "description": "Wszystkie 7 algorytmiczne i 4 dodatkowe systemy numeryczne na poziomie systemu, z podłączonymi ładowarkami czcionek.",
+    "note": "Wszystkie systemy liczbowe (algorytmiczne i numeryczne) wyświetlają poprawne natywne cyfry z fallbackiem ICU."
   },
   "nav": {
     "translations": "Tłumaczenia",

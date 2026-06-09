@@ -189,7 +189,8 @@
   },
   "section_systems": {
     "title": "Písemné Systémy",
-    "description": "Všech 7 algoritmických a 4 dalších numerických systémů na úrovni systému, s připojenými zavaděči písem."
+    "description": "Všech 7 algoritmických a 4 dalších numerických systémů na úrovni systému, s připojenými zavaděči písem.",
+    "note": "Všechny číselné systémy (algoritmické a numerické) zobrazují správné nativní číslice s ICU fallback."
   },
   "nav": {
     "translations": "Překlady",

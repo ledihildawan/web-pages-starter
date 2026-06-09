@@ -189,7 +189,8 @@
   },
   "section_systems": {
     "title": "Kirjoitusjärjestelmät",
-    "description": "Kaikki 7 algoritmista ja 4 lisänumeerista järjestelmää järjestelmätasolla, fonttien latausyhteydellä."
+    "description": "Kaikki 7 algoritmista ja 4 lisänumeerista järjestelmää järjestelmätasolla, fonttien latausyhteydellä.",
+    "note": "Kaikki lukujärjestelmät (algoritmiset ja numeeriset) näyttävät oikeita natiiveja numeroita ICU-fallbackilla."
   },
   "nav": {
     "translations": "Käännökset",

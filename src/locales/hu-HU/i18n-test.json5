@@ -189,7 +189,8 @@
   },
   "section_systems": {
     "title": "Írásrendszerek",
-    "description": "Mind a 7 algoritmikus és 4 további numerikus rendszer rendszerszinten, csatlakoztatott betöltőkkel."
+    "description": "Mind a 7 algoritmikus és 4 további numerikus rendszer rendszerszinten, csatlakoztatott betöltőkkel.",
+    "note": "Minden számrendszer (algoritmikus és numerikus) helyes natív számjegyeket jelenít meg ICU fallbackkel."
   },
   "nav": {
     "translations": "Fordítások",

@@ -189,7 +189,8 @@
   },
   "section_systems": {
     "title": "Systèmes d'Écriture",
-    "description": "Les 7 systèmes algorithmiques et 4 systèmes numériques supplémentaires au niveau système, avec les chargeurs de polices connectés."
+    "description": "Les 7 systèmes algorithmiques et 4 systèmes numériques supplémentaires au niveau système, avec les chargeurs de polices connectés.",
+    "note": "Tous les systèmes numériques (algorithmes et numériques) affichent les chiffres natifs corrects avec le fallback ICU."
   },
   "nav": {
     "translations": "Traductions",

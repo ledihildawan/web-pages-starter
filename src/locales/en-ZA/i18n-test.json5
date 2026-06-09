@@ -189,7 +189,8 @@
   },
   "section_systems": {
     "title": "Writing Systems",
-    "description": "All number systems (algorithmic and numeric) display correct native digits with ICU fallback."
+    "description": "All number systems (algorithmic and numeric) display correct native digits with ICU fallback.",
+    "note": "All number systems (algorithmic and numeric) display correct native digits. Algorithmic systems use digit fallback from NUMBERING_SYSTEMS. Roman numerals are converted directly via algorithm. Numeric systems use digits from loaded fonts."
   },
   "nav": {
     "translations": "Translations",

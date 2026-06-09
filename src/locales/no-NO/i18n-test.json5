@@ -189,7 +189,8 @@
   },
   "section_systems": {
     "title": "Skriftsystemer",
-    "description": "Alle 7 algoritmiske og 4 ekstra numeriske systemer på systemnivå, med tilkoblede skriftlastere."
+    "description": "Alle 7 algoritmiske og 4 ekstra numeriske systemer på systemnivå, med tilkoblede skriftlastere.",
+    "note": "Alle tallsystemer (algoritmiske og numeriske) viser korrekte native siffer med ICU-fallback."
   },
   "nav": {
     "translations": "Oversettelser",

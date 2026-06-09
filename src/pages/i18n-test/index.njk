@@ -18,7 +18,9 @@
 
       <h1 class="text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 leading-[1.1]">
         <span class="bg-linear-to-br from-white via-white to-slate-400 bg-clip-text text-transparent">
-          <span data-i18n-html="i18n-test:hero.title">Tes <span class="text-violet-400">Lengkap</span> Internasionalisasi</span>
+          <span data-i18n-html="i18n-test:hero.title">Tes
+            <span class="text-violet-400">Lengkap</span>
+            Internasionalisasi</span>
         </span>
       </h1>
 
@@ -30,16 +32,18 @@
         <div class="flex items-center gap-3">
           <span class="text-2xl" aria-hidden="true">🌍</span>
           <div class="text-left">
-            <div class="text-2xl font-black text-white leading-none tabular-nums">42</div>
-            <div class="text-xs text-slate-400"><span data-i18n="i18n-test:language_info.languages">Bahasa</span></div>
+            <div class="text-2xl font-black text-white leading-none tabular-nums">{{ locales | length }}</div>
+            <div class="text-xs text-slate-400">
+              <span data-i18n="i18n-test:language_info.languages">Bahasa</span></div>
           </div>
         </div>
         <div class="w-px h-12 bg-white/10"></div>
         <div class="flex items-center gap-3">
           <span class="text-2xl" aria-hidden="true">💱</span>
           <div class="text-left">
-            <div class="text-2xl font-black text-white leading-none tabular-nums">16</div>
-            <div class="text-xs text-slate-400"><span data-i18n="i18n-test:currency.currencies">Mata Uang</span></div>
+            <div class="text-2xl font-black text-white leading-none tabular-nums">{{ page.display.currency_comparison_currencies | length }}</div>
+            <div class="text-xs text-slate-400">
+              <span data-i18n="i18n-test:currency.currencies">Mata Uang</span></div>
           </div>
         </div>
         <div class="w-px h-12 bg-white/10"></div>
@@ -47,7 +51,8 @@
           <span class="text-2xl" aria-hidden="true">🔄</span>
           <div class="text-left">
             <div class="text-2xl font-black text-white leading-none">Live</div>
-            <div class="text-xs text-slate-400"><span data-i18n="i18n-test:language_info.switching">Beralih Tanpa Reload</span></div>
+            <div class="text-xs text-slate-400">
+              <span data-i18n="i18n-test:language_info.switching">Beralih Tanpa Reload</span></div>
           </div>
         </div>
       </div>
@@ -72,60 +77,35 @@
         <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/50 border border-white/5">
           <span class="text-xs text-slate-400 uppercase tracking-wider"><span data-i18n="i18n-test:language_info.digits">Digit Asli</span></span>
           <span class="text-sm font-bold text-white">
-            {% if localeConfig.nativeDigits %}<span data-i18n="i18n-test:language_info.enabled">Aktif</span>{% else %}<span data-i18n="i18n-test:language_info.disabled">Nonaktif</span>{% endif %}
+            {% if localeConfig.nativeDigits %}
+              <span data-i18n="i18n-test:language_info.enabled">Aktif</span>
+            {% else %}
+              <span data-i18n="i18n-test:language_info.disabled">Nonaktif</span>{% endif %}
           </span>
         </div>
       </div>
     </div>
   </section>
 
-  <nav
-    x-data="{ activeId: '' }"
-    x-init="const observer = new IntersectionObserver((entries) => { entries.forEach((e) => { if (e.isIntersecting) activeId = e.target.id; }); }, { rootMargin: '-30% 0px -50% 0px' }); document.querySelectorAll('section[id]').forEach((s) => observer.observe(s));"
-    class="sticky top-0 z-30 bg-slate-950/80 backdrop-blur-xl border-b border-white/5"
-  >
+  <nav x-data="{ activeId: '' }" x-init="const observer = new IntersectionObserver((entries) => { entries.forEach((e) => { if (e.isIntersecting) activeId = e.target.id; }); }, { rootMargin: '-30% 0px -50% 0px' }); document.querySelectorAll('section[id]').forEach((s) => observer.observe(s));" class="sticky top-0 z-30 bg-slate-950/80 backdrop-blur-xl border-b border-white/5">
     <div class="max-w-6xl mx-auto px-6">
       <div class="flex items-center gap-1 py-2 overflow-x-auto scrollbar-none">
-        <a
-          href="#translations"
-          :class="activeId === 'translations' ? 'bg-violet-500/20 text-white border-violet-500/40' : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'"
-          class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors"
-        >
+        <a href="#translations" :class="activeId === 'translations' ? 'bg-violet-500/20 text-white border-violet-500/40' : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors">
           <span data-i18n="i18n-test:nav.translations">Terjemahan</span>
         </a>
-        <a
-          href="#formatting"
-          :class="activeId === 'formatting' ? 'bg-emerald-500/20 text-white border-emerald-500/40' : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'"
-          class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors"
-        >
+        <a href="#formatting" :class="activeId === 'formatting' ? 'bg-emerald-500/20 text-white border-emerald-500/40' : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors">
           <span data-i18n="i18n-test:nav.formatting">Angka</span>
         </a>
-        <a
-          href="#pricing"
-          :class="activeId === 'pricing' ? 'bg-amber-500/20 text-white border-amber-500/40' : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'"
-          class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors"
-        >
+        <a href="#pricing" :class="activeId === 'pricing' ? 'bg-amber-500/20 text-white border-amber-500/40' : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors">
           <span data-i18n="i18n-test:nav.pricing">Harga</span>
         </a>
-        <a
-          href="#modes"
-          :class="activeId === 'modes' ? 'bg-cyan-500/20 text-white border-cyan-500/40' : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'"
-          class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors"
-        >
+        <a href="#modes" :class="activeId === 'modes' ? 'bg-cyan-500/20 text-white border-cyan-500/40' : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors">
           <span data-i18n="i18n-test:nav.modes">Mode</span>
         </a>
-        <a
-          href="#systems"
-          :class="activeId === 'systems' ? 'bg-sky-500/20 text-white border-sky-500/40' : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'"
-          class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors"
-        >
+        <a href="#systems" :class="activeId === 'systems' ? 'bg-sky-500/20 text-white border-sky-500/40' : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors">
           <span data-i18n="i18n-test:nav.systems">Sistem</span>
         </a>
-        <a
-          href="#switcher"
-          :class="activeId === 'switcher' ? 'bg-fuchsia-500/20 text-white border-fuchsia-500/40' : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'"
-          class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors"
-        >
+        <a href="#switcher" :class="activeId === 'switcher' ? 'bg-fuchsia-500/20 text-white border-fuchsia-500/40' : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors">
           <span data-i18n="i18n-test:nav.switcher">Pilih Locale</span>
         </a>
       </div>
@@ -146,12 +126,14 @@
         <div class="group p-6 rounded-3xl bg-linear-to-br from-fuchsia-500/8 to-transparent border border-fuchsia-500/10 hover:border-fuchsia-500/30 transition-all">
           <div class="flex items-center gap-4 mb-6">
             <div class="w-14 h-14 rounded-2xl bg-fuchsia-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">a</div>
-            <h3 class="text-lg font-bold text-white"><span data-i18n="i18n-test:pluralization.title">Pluralisasi</span></h3>
+            <h3 class="text-lg font-bold text-white">
+              <span data-i18n="i18n-test:pluralization.title">Pluralisasi</span></h3>
           </div>
           <div class="space-y-4">
             {% for plural in page.plurals %}
               <div class="border-b border-white/5 last:border-0 pb-3 last:pb-0">
-                <div class="text-xs uppercase tracking-wider text-fuchsia-300/70 mb-2"><span data-i18n="i18n-test:pluralization.{{ plural.key }}_title">{{ plural.key }}</span></div>
+                <div class="text-xs uppercase tracking-wider text-fuchsia-300/70 mb-2">
+                  <span data-i18n="i18n-test:pluralization.{{ plural.key }}_title">{{ plural.key }}</span></div>
                 <div class="space-y-1.5">
                   {% for count in plural.counts %}
                     <div class="flex items-center justify-between text-sm">
@@ -168,10 +150,15 @@
         <div class="group p-6 rounded-3xl bg-linear-to-br from-emerald-500/8 to-transparent border border-emerald-500/10 hover:border-emerald-500/30 transition-all">
           <div class="flex items-center gap-4 mb-6">
             <div class="w-14 h-14 rounded-2xl bg-emerald-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">&lt;/&gt;</div>
-            <h3 class="text-lg font-bold text-white"><span data-i18n="i18n-test:html_content.title">Konten HTML</span></h3>
+            <h3 class="text-lg font-bold text-white">
+              <span data-i18n="i18n-test:html_content.title">Konten HTML</span></h3>
           </div>
           <div class="text-center py-4 px-3 rounded-2xl bg-emerald-500/5">
-            <div class="text-base text-white mb-2"><span data-i18n-html="i18n-test:html_content.example">Ini adalah contoh teks dengan <span class='text-emerald-400'>highlight warna</span> dan <strong>teks tebal</strong>.</span></div>
+            <div class="text-base text-white mb-2">
+              <span data-i18n-html="i18n-test:html_content.example">Ini adalah contoh teks dengan
+                <span class='text-emerald-400'>highlight warna</span>
+                dan
+                <strong>teks tebal</strong>.</span></div>
           </div>
         </div>
       </div>
@@ -180,19 +167,15 @@
         <div class="group p-6 rounded-3xl bg-linear-to-br from-amber-500/8 to-transparent border border-amber-500/10 hover:border-amber-500/30 transition-all">
           <div class="flex items-center gap-4 mb-6">
             <div class="w-14 h-14 rounded-2xl bg-amber-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform" aria-hidden="true">📝</div>
-            <h3 class="text-lg font-bold text-white"><span data-i18n="i18n-test:form.title">Formulir</span></h3>
+            <h3 class="text-lg font-bold text-white">
+              <span data-i18n="i18n-test:form.title">Formulir</span></h3>
           </div>
           <form class="grid md:grid-cols-2 gap-3">
-              {% for field in page.form_fields %}
-                {% if loop.index <= page.display.max_form_fields %}
-                  <input
-                    type="{{ field.type }}"
-                    {{ i18n.attr('page.form.' + field.key + '_placeholder', 'placeholder', {}, {raw: true}) }}
-                    {{ i18n.attr('page.form.' + field.key + '_label', 'aria-label', {}, {raw: true}) }}
-                    class="w-full px-4 py-3 bg-slate-900/50 border border-white/10 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-500/30 focus:ring-2 focus:ring-amber-500/10 transition-all"
-                  >
-                {% endif %}
-              {% endfor %}
+            {% for field in page.form_fields %}
+              {% if loop.index <= page.display.max_form_fields %}
+                <input type="{{ field.type }}" {{ i18n.attr('page.form.' + field.key + '_placeholder', 'placeholder', {}, {raw: true}) }} {{ i18n.attr('page.form.' + field.key + '_label', 'aria-label', {}, {raw: true}) }} class="w-full px-4 py-3 bg-slate-900/50 border border-white/10 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-500/30 focus:ring-2 focus:ring-amber-500/10 transition-all">
+              {% endif %}
+            {% endfor %}
             <button type="submit" class="md:col-span-2 px-6 py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-xl font-bold text-sm transition-all hover:shadow-lg hover:shadow-amber-500/20">
               <span data-i18n="i18n-test:form.submit">Kirim</span>
             </button>
@@ -202,9 +185,11 @@
         <div class="group p-6 rounded-3xl bg-linear-to-br from-red-500/8 to-transparent border border-red-500/10 hover:border-red-500/30 transition-all">
           <div class="flex items-center gap-4 mb-6">
             <div class="w-14 h-14 rounded-2xl bg-red-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">⚠️</div>
-            <h3 class="text-lg font-bold text-white"><span data-i18n="i18n-test:missing_keys.title">Kunci Hilang</span></h3>
+            <h3 class="text-lg font-bold text-white">
+              <span data-i18n="i18n-test:missing_keys.title">Kunci Hilang</span></h3>
           </div>
-          <p class="text-xs text-slate-500 mb-3"><span data-i18n="i18n-test:missing_keys.description">Kunci terjemahan yang tidak ditemukan ditampilkan dalam kurung siku.</span></p>
+          <p class="text-xs text-slate-500 mb-3">
+            <span data-i18n="i18n-test:missing_keys.description">Kunci terjemahan yang tidak ditemukan ditampilkan dalam kurung siku.</span></p>
           <div class="space-y-2">
             {% for key in page.missing_keys %}
               {% if loop.index <= page.display.max_missing_keys %}
@@ -220,10 +205,12 @@
       <div class="grid lg:grid-cols-2 gap-6 mt-6">
         <div class="p-6 rounded-3xl bg-linear-to-br from-slate-900/40 to-slate-900/20 border border-white/5">
           <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-bold text-white"><span data-i18n="i18n-test:native_digits.title">Digit Asli</span></h3>
+            <h3 class="text-lg font-bold text-white">
+              <span data-i18n="i18n-test:native_digits.title">Digit Asli</span></h3>
             <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 uppercase tracking-wider"><span data-i18n="i18n-test:live_label">Live</span></span>
           </div>
-          <p class="text-xs text-slate-500 mb-3"><span data-i18n="i18n-test:native_digits.description">Teks dengan digit ASCII ditampilkan dalam digit asli ketika lokal mengaktifkannya. Diperbarui langsung saat ganti bahasa.</span></p>
+          <p class="text-xs text-slate-500 mb-3">
+            <span data-i18n="i18n-test:native_digits.description">Teks dengan digit ASCII ditampilkan dalam digit asli ketika lokal mengaktifkannya. Diperbarui langsung saat ganti bahasa.</span></p>
           <div class="space-y-2">
             {% for sample in page.native_digit_samples %}
               {% if loop.index <= page.display.max_native_samples %}
@@ -238,17 +225,21 @@
 
         <div class="p-6 rounded-3xl bg-linear-to-br from-slate-900/40 to-slate-900/20 border border-white/5">
           <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-bold text-white"><span data-i18n="i18n-test:inflection.title">Infleksi</span></h3>
+            <h3 class="text-lg font-bold text-white">
+              <span data-i18n="i18n-test:inflection.title">Infleksi</span></h3>
             <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 uppercase tracking-wider"><span data-i18n="i18n-test:live_label">Live</span></span>
           </div>
-          <p class="text-xs text-slate-500 mb-3"><span data-i18n="i18n-test:inflection.description">Pluralisasi dan singularisasi bahasa Inggris. Diperbarui langsung saat ganti bahasa.</span></p>
+          <p class="text-xs text-slate-500 mb-3">
+            <span data-i18n="i18n-test:inflection.description">Pluralisasi dan singularisasi bahasa Inggris. Diperbarui langsung saat ganti bahasa.</span></p>
           <div class="space-y-2">
             {% for pair in page.inflection_pairs %}
               {% if loop.index <= page.display.max_inflection %}
                 <div class="grid grid-cols-3 gap-2 px-4 py-2.5 rounded-xl bg-slate-800/40 border border-white/5 text-sm">
                   <code class="text-slate-500 font-mono">{{ pair.singular }}</code>
                   <span class="text-emerald-400 text-center">{{ i18n.pluralize(pair.singular) }}</span>
-                  <code class="text-slate-500 font-mono text-right">{{ pair.plural }} → {{ i18n.singularize(pair.plural) }}</code>
+                  <code class="text-slate-500 font-mono text-right">{{ pair.plural }}
+                    →
+                    {{ i18n.singularize(pair.plural) }}</code>
                 </div>
               {% endif %}
             {% endfor %}
@@ -272,7 +263,8 @@
         <div class="group p-6 rounded-3xl bg-linear-to-br from-violet-500/8 to-transparent border border-violet-500/10 hover:border-violet-500/30 transition-all">
           <div class="flex items-center gap-4 mb-6">
             <div class="w-14 h-14 rounded-2xl bg-violet-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform" aria-hidden="true">🔢</div>
-            <h3 class="text-lg font-bold text-white"><span data-i18n="i18n-test:numbers.title">Format Angka</span></h3>
+            <h3 class="text-lg font-bold text-white">
+              <span data-i18n="i18n-test:numbers.title">Format Angka</span></h3>
           </div>
           <div class="space-y-3">
             {% for num in page.numbers %}
@@ -292,18 +284,22 @@
               <span class="text-xl">🌐</span>
             </div>
             <div>
-              <h3 class="text-lg font-bold text-white"><span data-i18n="i18n-test:currency_comparison.title">Perbandingan Mata Uang</span></h3>
-              <p class="text-sm text-slate-400"><span data-i18n="i18n-test:currency_comparison.description">Harga yang sama dalam berbagai mata uang yang didukung.</span></p>
+              <h3 class="text-lg font-bold text-white">
+                <span data-i18n="i18n-test:currency_comparison.title">Perbandingan Mata Uang</span></h3>
+              <p class="text-sm text-slate-400">
+                <span data-i18n="i18n-test:currency_comparison.description">Harga yang sama dalam berbagai mata uang yang didukung.</span></p>
             </div>
           </div>
           <div class="text-center mb-6 p-4 rounded-2xl bg-violet-500/5">
             <div class="text-3xl font-black text-white mb-1">{{ i18n.formatCurrency(page.display.currency_comparison_base, 'USD', {raw: true}) }}</div>
-            <div class="text-xs text-slate-400"><span data-i18n="i18n-test:currency_comparison.base_price">Harga Dasar (USD)</span></div>
+            <div class="text-xs text-slate-400">
+              <span data-i18n="i18n-test:currency_comparison.base_price">Harga Dasar (USD)</span></div>
           </div>
           <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
             {% for curr in page.display.currency_comparison_currencies %}
               <div class="p-3 rounded-lg bg-slate-800/30 border border-white/5 hover:border-white/10 transition-all text-center">
-                <div class="text-[10px] text-slate-400 mb-1"><span data-i18n="i18n-test:currency_comparison.{{ curr | lower }}">{{ curr }}</span></div>
+                <div class="text-[10px] text-slate-400 mb-1">
+                  <span data-i18n="i18n-test:currency_comparison.{{ curr | lower }}">{{ curr }}</span></div>
                 <div class="text-sm font-black tabular-nums {% if curr == 'USD' %}text-emerald-400{% elif curr == 'JPY' %}text-fuchsia-400{% elif curr == 'CNY' %}text-amber-400{% else %}text-rose-400{% endif %}">{{ i18n.convertCurrency(page.display.currency_comparison_base, curr) }}</div>
               </div>
             {% endfor %}
@@ -543,7 +539,8 @@
 
       <div class="grid md:grid-cols-2 gap-6">
         <div class="p-6 rounded-3xl bg-slate-900/40 border border-white/5">
-          <h3 class="text-lg font-bold text-white mb-4"><span data-i18n="i18n-test:advanced.regional_pricing">Harga Regional</span></h3>
+          <h3 class="text-lg font-bold text-white mb-4">
+            <span data-i18n="i18n-test:advanced.regional_pricing">Harga Regional</span></h3>
           <div class="space-y-3">
             {% for plan in page.regional_pricing %}
               <div class="flex justify-between items-baseline py-2 border-b border-white/5 last:border-0">
@@ -555,12 +552,15 @@
         </div>
 
         <div class="p-6 rounded-3xl bg-slate-900/40 border border-white/5">
-          <h3 class="text-lg font-bold text-white mb-1"><span data-i18n="i18n-test:pricing_details.title">Detail Harga</span></h3>
-          <p class="text-xs text-slate-500 mb-4"><span data-i18n="i18n-test:pricing_details.description">Pipeline lengkap: nilai mentah, kode mata uang, format, diskon, dan konversi.</span></p>
+          <h3 class="text-lg font-bold text-white mb-1">
+            <span data-i18n="i18n-test:pricing_details.title">Detail Harga</span></h3>
+          <p class="text-xs text-slate-500 mb-4">
+            <span data-i18n="i18n-test:pricing_details.description">Pipeline lengkap: nilai mentah, kode mata uang, format, diskon, dan konversi.</span></p>
           <div class="space-y-4">
             {% for plan in page.regional_pricing %}
               <div class="p-4 rounded-xl bg-slate-800/30 border border-white/5">
-                <div class="text-sm font-bold text-white mb-3"><span data-i18n="i18n-test:advanced.{{ plan.id }}_plan">{{ plan.id }}</span></div>
+                <div class="text-sm font-bold text-white mb-3">
+                  <span data-i18n="i18n-test:advanced.{{ plan.id }}_plan">{{ plan.id }}</span></div>
                 <div class="space-y-1.5 text-xs">
                   <div class="flex justify-between">
                     <span class="text-slate-500"><span data-i18n="i18n-test:pricing_details.raw_value">Nilai Mentah</span></span>
@@ -604,20 +604,24 @@
       <div class="p-10 rounded-3xl bg-slate-900/40 border border-white/5">
         <div class="text-center mb-10">
           <div class="text-6xl md:text-7xl font-black text-white tabular-nums mb-3">{{ i18n.formatNumber(page.display.number_modes_example) }}</div>
-          <div class="text-sm text-slate-400">Example: {{ page.display.number_modes_example }}</div>
+          <div class="text-sm text-slate-400">Example:
+            {{ page.display.number_modes_example }}</div>
         </div>
 
         <div class="grid md:grid-cols-3 gap-4">
           <div class="p-6 rounded-2xl bg-slate-800/30 text-center">
-            <div class="text-xs text-slate-400 uppercase tracking-wider mb-3"><span data-i18n="i18n-test:advanced.plain_label">Otomatis</span></div>
+            <div class="text-xs text-slate-400 uppercase tracking-wider mb-3">
+              <span data-i18n="i18n-test:advanced.plain_label">Otomatis</span></div>
             <div class="text-2xl font-black text-white tabular-nums">{{ i18n.formatNumber(page.display.number_modes_example) }}</div>
           </div>
           <div class="p-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 text-center">
-            <div class="text-xs text-slate-400 uppercase tracking-wider mb-3"><span data-i18n="i18n-test:advanced.native_label">Digit Asli</span></div>
+            <div class="text-xs text-slate-400 uppercase tracking-wider mb-3">
+              <span data-i18n="i18n-test:advanced.native_label">Digit Asli</span></div>
             <div class="text-2xl font-black text-violet-400 tabular-nums">{{ i18n.formatNumber(page.display.number_modes_example, {nativeDigits: true}) }}</div>
           </div>
           <div class="p-6 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-center">
-            <div class="text-xs text-slate-400 uppercase tracking-wider mb-3"><span data-i18n="i18n-test:advanced.universal_label">Universal (0-9)</span></div>
+            <div class="text-xs text-slate-400 uppercase tracking-wider mb-3">
+              <span data-i18n="i18n-test:advanced.universal_label">Universal (0-9)</span></div>
             <div class="text-2xl font-black text-emerald-400 tabular-nums">{{ page.display.number_modes_example }}</div>
           </div>
         </div>
@@ -631,8 +635,10 @@
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 text-[10px] font-bold uppercase tracking-wider mb-4">
           <span data-i18n="i18n-test:advanced.number_modes">System-level</span>
         </div>
-        <h2 class="text-3xl md:text-4xl font-black text-white mb-4"><span data-i18n="i18n-test:section_systems.title">Writing Systems</span></h2>
-        <p class="text-slate-400 text-sm max-w-2xl mx-auto"><span data-i18n="i18n-test:section_systems.description">Semua 7 sistem algoritmik dan 4 sistem numerik tambahan di level sistem.</span></p>
+        <h2 class="text-3xl md:text-4xl font-black text-white mb-4">
+          <span data-i18n="i18n-test:section_systems.title">Writing Systems</span></h2>
+        <p class="text-slate-400 text-sm max-w-2xl mx-auto">
+          <span data-i18n="i18n-test:section_systems.description">Semua 7 sistem algoritmik dan 4 sistem numerik tambahan di level sistem.</span></p>
       </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -758,9 +764,7 @@
         </div>
       </div>
 
-      <p class="text-[11px] text-slate-500 text-center mt-6 max-w-2xl mx-auto">
-        Note: Semua sistem angka (algoritmik dan numerik) sekarang menampilkan digit native yang benar. Sistem algoritmik (Greek/Hebrew/Armenian/Ethiopic/Tamil/Georgian/Roman) menggunakan fallback digit dari NUMBERING_SYSTEMS ketika ICU tidak mendukung spellout. Sistem numerik (Odia/Tibetan/N'Ko/Adlam) menggunakan digit dari font yang dimuat.
-</p>
+      <p class="text-[11px] text-slate-500 text-center mt-6 max-w-2xl mx-auto">{{ i18n.t('page.section_systems.note') }}</p>
     </div>
   </section>
 
@@ -777,19 +781,14 @@
       <div class="p-6 rounded-3xl bg-slate-900/40 border border-white/5 mb-6">
         <div class="flex items-center justify-center gap-3 text-emerald-300 text-sm">
           <span class="text-2xl" aria-hidden="true">ⓘ</span>
-          <p><span data-i18n="i18n-test:live_update.note">Perhatikan semua angka, tanggal, dan harga berubah seketika saat Anda mengganti bahasa — tanpa memuat ulang halaman.</span></p>
+          <p>
+            <span data-i18n="i18n-test:live_update.note">Perhatikan semua angka, tanggal, dan harga berubah seketika saat Anda mengganti bahasa — tanpa memuat ulang halaman.</span></p>
         </div>
       </div>
 
-      <div x-data class="flex flex-wrap justify-center gap-3">
+      <div x-data="x-data" class="flex flex-wrap justify-center gap-3">
         {% for locale in locales %}
-          <button
-            type="button"
-            @click="$store.i18n.change('{{ locale.code }}')"
-            :aria-pressed="$store.i18n.current === '{{ locale.code }}'"
-            :class="$store.i18n.current === '{{ locale.code }}' ? 'bg-violet-500/20 border-violet-500/50 text-white shadow-lg shadow-violet-500/10' : 'bg-slate-900/30 border-white/5 text-slate-300 hover:bg-violet-500/10 hover:border-violet-500/30 hover:text-white'"
-            class="flex items-center gap-3 px-5 py-3 rounded-xl border transition-all text-sm font-medium"
-          >
+          <button type="button" @click="$store.i18n.change('{{ locale.code }}')" :aria-pressed="$store.i18n.current === '{{ locale.code }}'" :class="$store.i18n.current === '{{ locale.code }}' ? 'bg-violet-500/20 border-violet-500/50 text-white shadow-lg shadow-violet-500/10' : 'bg-slate-900/30 border-white/5 text-slate-300 hover:bg-violet-500/10 hover:border-violet-500/30 hover:text-white'" class="flex items-center gap-3 px-5 py-3 rounded-xl border transition-all text-sm font-medium">
             <img src="https://flagcdn.com/w40/{{ locale.flag }}.png" alt="{{ locale.label }}" class="w-6 h-4 rounded shadow-sm object-cover" loading="lazy">
             <span>{{ locale.label }}</span>
           </button>

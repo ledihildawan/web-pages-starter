@@ -189,7 +189,8 @@
   },
   "section_systems": {
     "title": "Sistemes d'Escriptura",
-    "description": "Els 7 sistemes algorítmics i 4 sistemes numèrics addicionals a nivell de sistema, amb carregadors de fonts connectats."
+    "description": "Els 7 sistemes algorítmics i 4 sistemes numèrics addicionals a nivell de sistema, amb carregadors de fonts connectats.",
+    "note": "Tots els sistemes numèrics (algorítmics i numèrics) mostren els dígits natius correctes amb fallback ICU."
   },
   "nav": {
     "translations": "Traduccions",

@@ -189,7 +189,8 @@
   },
   "section_systems": {
     "title": "Skriftsystemer",
-    "description": "Alle 7 algoritmiske og 4 ekstra numeriske systemer på systemniveau, med tilsluttede skrifttypeindlæsere."
+    "description": "Alle 7 algoritmiske og 4 ekstra numeriske systemer på systemniveau, med tilsluttede skrifttypeindlæsere.",
+    "note": "Alle talsystemer (algoritmiske og numeriske) viser korrekte native cifre med ICU-fallback."
   },
   "nav": {
     "translations": "Oversættelser",

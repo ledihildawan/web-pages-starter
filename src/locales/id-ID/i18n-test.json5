@@ -189,7 +189,8 @@
   },
   "section_systems": {
     "title": "Writing Systems",
-    "description": "Semua sistem angka (algoritmik dan numerik) menampilkan digit native yang benar dengan fallback ICU."
+    "description": "Semua sistem angka (algoritmik dan numerik) menampilkan digit native yang benar dengan fallback ICU.",
+    "note": "Semua sistem angka (algoritmik dan numerik) menampilkan digit native yang benar. Sistem algoritmik menggunakan fallback digit dari NUMBERING_SYSTEMS. Roman numerals dikonversi langsung via algoritma. Sistem numerik menggunakan digit dari font yang dimuat."
   },
   "nav": {
     "translations": "Terjemahan",

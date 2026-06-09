@@ -189,7 +189,8 @@
   },
   "section_systems": {
     "title": "Sistemi di Scrittura",
-    "description": "Tutti i sistemi numerici (algoritmici e numerici) visualizzano cifre native corrette con fallback ICU."
+    "description": "Tutti i sistemi numerici (algoritmici e numerici) visualizzano cifre native corrette con fallback ICU.",
+    "note": "Tutti i sistemi numerici (algoritmici e numerici) mostrano cifre native corrette con fallback ICU."
   },
   "nav": {
     "translations": "Traduzioni",

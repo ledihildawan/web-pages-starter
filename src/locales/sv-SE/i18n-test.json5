@@ -189,7 +189,8 @@
   },
   "section_systems": {
     "title": "Skriftsystem",
-    "description": "Alla 7 algoritmiska och 4 ytterligare numeriska system på systemnivå, med anslutna typsnittsladdare."
+    "description": "Alla 7 algoritmiska och 4 ytterligare numeriska system på systemnivå, med anslutna typsnittsladdare.",
+    "note": "Alla talsystem (algoritmiska och numeriska) visar korrekta nativa siffror med ICU-fallback."
   },
   "nav": {
     "translations": "Översättningar",

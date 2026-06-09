@@ -189,7 +189,8 @@
   },
   "section_systems": {
     "title": "Schriftsystemen",
-    "description": "Alle 7 algoritmische en 4 extra numerieke systemen op systeemniveau, met aangesloten lettertype-laders."
+    "description": "Alle 7 algoritmische en 4 extra numerieke systemen op systeemniveau, met aangesloten lettertype-laders.",
+    "note": "Alle getalsystemen (algoritmisch en numeriek) tonen correcte native cijfers met ICU-fallback."
   },
   "nav": {
     "translations": "Vertalingen",

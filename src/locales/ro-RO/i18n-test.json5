@@ -189,7 +189,8 @@
   },
   "section_systems": {
     "title": "Sisteme de Scriere",
-    "description": "Toate cele 7 sisteme algoritmice și 4 sisteme numerice suplimentare la nivel de sistem, cu încărcătoare de fonturi conectate."
+    "description": "Toate cele 7 sisteme algoritmice și 4 sisteme numerice suplimentare la nivel de sistem, cu încărcătoare de fonturi conectate.",
+    "note": "Toate sistemele numerice (algoritmice și numerice) afișează cifre native corecte cu fallback ICU."
   },
   "nav": {
     "translations": "Traduceri",

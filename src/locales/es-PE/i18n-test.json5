@@ -189,7 +189,8 @@
   },
   "section_systems": {
     "title": "Sistemas de Escritura",
-    "description": "Los 7 sistemas algorítmicos y 4 sistemas numéricos adicionales a nivel de sistema, con cargadores de fuentes conectados."
+    "description": "Los 7 sistemas algorítmicos y 4 sistemas numéricos adicionales a nivel de sistema, con cargadores de fuentes conectados.",
+    "note": "Todos los sistemas numéricos (algorítmicos y numéricos) muestran los dígitos nativos correctos con respaldo ICU."
   },
   "nav": {
     "translations": "Traducciones",

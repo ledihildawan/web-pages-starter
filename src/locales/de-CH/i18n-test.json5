@@ -189,7 +189,8 @@
   },
   "section_systems": {
     "title": "Schriftsysteme",
-    "description": "Alle Zahlensysteme (algorithmisch und numerisch) zeigen korrekte native Ziffern mit ICU-Fallback."
+    "description": "Alle Zahlensysteme (algorithmisch und numerisch) zeigen korrekte native Ziffern mit ICU-Fallback.",
+    "note": "Alle Zahlensysteme (algorithmisch und numerisch) zeigen korrekte native Ziffern mit ICU-Fallback."
   },
   "nav": {
     "translations": "Übersetzungen",
