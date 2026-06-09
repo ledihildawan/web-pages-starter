@@ -1,6 +1,7 @@
 # Local
 .DS_Store
 *.log*
+.env*
 
 # Dist
 node_modules
@@ -22,5 +23,5 @@ coverage
 report/
 
 # Public
-public/locales
-public/assets/i18n
+public/locales/
+public/assets/i18n/
