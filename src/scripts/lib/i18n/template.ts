@@ -735,7 +735,6 @@ export const createTemplateParams = (
     global: (() => {
       const globalData = loadGlobalData(resolveRoot(`${PATHS.SRC}/data`));
       if (process.env.SITE_NAME) globalData.site_name = process.env.SITE_NAME;
-      if (process.env.SITE_DESCRIPTION) globalData.site_description = process.env.SITE_DESCRIPTION;
       return globalData;
     })(),
     page: readJSON5(resolveRoot(`${PATHS.SRC}/pages/${name}/index.json5`)),
