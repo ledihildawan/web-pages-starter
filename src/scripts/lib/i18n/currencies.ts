@@ -50,7 +50,6 @@ export const CURRENCIES = [
     region: 'CZ',
   },
   { code: 'CHF', name: 'Swiss Franc', symbol: 'Fr', decimals: 2, region: 'CH' },
-  { code: 'CNY', name: 'Chinese Yuan', symbol: '¥', decimals: 2, region: 'CN' },
   {
     code: 'COP',
     name: 'Colombian Peso',

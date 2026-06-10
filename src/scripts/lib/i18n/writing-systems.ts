@@ -241,7 +241,7 @@ export const WRITING_SYSTEMS = [
       'Hebrew script used in Hebrew language (included in Inter font)',
     languages: [LANGUAGE_CODE.HE],
     numberingSystems: ['hebr'],
-    direction: 'rtl' as const,
+    direction: DIRECTION_CODE.RTL,
     defaultFont: 'Noto Sans Hebrew Variable',
   },
   {
@@ -271,7 +271,7 @@ export const WRITING_SYSTEMS = [
     description: 'N\u2019Ko script used in West Africa (Mali, Guinea, Ivory Coast)',
     languages: [] as LanguageCode[],
     numberingSystems: ['nkoo'],
-    direction: 'rtl' as const,
+    direction: DIRECTION_CODE.RTL,
     defaultFont: 'Noto Sans NKo',
   },
   {
@@ -281,7 +281,7 @@ export const WRITING_SYSTEMS = [
     description: 'Adlam script used in Guinea and surrounding West Africa',
     languages: [] as LanguageCode[],
     numberingSystems: ['adlm'],
-    direction: 'rtl' as const,
+    direction: DIRECTION_CODE.RTL,
     defaultFont: 'Noto Sans Adlam Variable',
   },
 ] as const;

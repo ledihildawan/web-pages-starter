@@ -116,7 +116,7 @@ app.get('*', (c) => {
   return c.notFound();
 });
 
-serve({ fetch: app.fetch, port: PORT, hostname: HOST }, (info) => {
+serve({ fetch: app.fetch, port: PORT, hostname: HOST }, (_info) => {
   console.log(
     `\n  \x1b[32m✓\x1b[0m Hono static server ready at \x1b[1m${displayUrl}\x1b[0m\n`,
   );

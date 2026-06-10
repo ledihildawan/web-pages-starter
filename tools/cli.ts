@@ -8,7 +8,7 @@ import fs from 'node:fs';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 
-const runTool = (script, args = []) => {
+const runTool = (script: string, args: string[] = []) => {
   return new Promise((resolve, reject) => {
     const proc = spawn('bun', [path.join(__dirname, `${script}.ts`), ...args], {
       stdio: 'inherit',
@@ -20,7 +20,7 @@ const runTool = (script, args = []) => {
   });
 };
 
-const runBunScript = (script) => {
+const runBunScript = (script: string) => {
   return new Promise((resolve, reject) => {
     const proc = spawn('bun', ['run', script], {
       stdio: 'inherit',

@@ -347,14 +347,10 @@ All tools live in `tools/`. Available via `bun ./tools/<name>.ts` or `bun run cl
 | `generate-i18n.ts` | Regenerate `generated/i18n.d.ts` type definitions |
 | `watch-i18n.ts` | Watch JSON5 files, auto-rerun `generate-i18n` |
 | `generate-sitemap.ts` | Generate `public/sitemap.xml` |
-| `generate-locales-json.ts` | Convert JSON5 → JSON for i18next HTTP backend |
 | `fetch-exchange-rates.ts` | Fetch exchange rates with 24h cache |
 | `sync-locales.ts` | Create missing locale folders from default |
 | `sync-root-page.ts` | Sync root page folder name with `ROOT_PAGE` config |
 | `check-locale-parity.ts` | Diff translation keys across all locales |
-| `add-missing-locale-files.ts` | Add missing translation files to locale folders |
-| `add-missing-locale-keys.ts` | Add missing translation keys to locale files |
-| `fix-stats-keys.ts` | Fix stats-related translation keys |
 | `lighthouse.ts` | Run Lighthouse performance audits |
 | `cli.ts` | Interactive menu for all tools |
 
