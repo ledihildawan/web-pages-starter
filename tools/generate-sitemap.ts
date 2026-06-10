@@ -20,8 +20,8 @@ const SITE_URL = process.env.TUNNEL_URL || process.env.SITE_URL || 'http://local
 const PAGES_DIR = path.join(ROOT, 'src', 'pages');
 const OUTPUT_FILE = path.join(ROOT, 'public', 'sitemap.xml');
 
-const DEFAULT_PRIORITY = '0.7';
-const DEFAULT_CHANGEFREQ = 'weekly';
+const DEFAULT_PRIORITY = process.env.SITEMAP_DEFAULT_PRIORITY || '0.7';
+const DEFAULT_CHANGEFREQ = process.env.SITEMAP_DEFAULT_CHANGEFREQ || 'weekly';
 
 const getPages = () => {
   if (!fs.existsSync(PAGES_DIR)) {

@@ -6,12 +6,12 @@ import { config } from 'dotenv';
 import { DOMParser } from 'linkedom';
 import inquirer from 'inquirer';
 
-config({ path: '.env.development' });
+config({ path: process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development' });
 
 const BASE_URL = process.env.TUNNEL_URL || process.env.SITE_URL || 'http://localhost:8888';
 const IS_NGROK = BASE_URL.includes('ngrok');
 const EXTRA_HEADERS = IS_NGROK ? JSON.stringify({ 'ngrok-skip-browser-warning': '1' }) : null;
-const OUTPUT_DIR = './report';
+const OUTPUT_DIR = process.env.LIGHTHOUSE_OUTPUT_DIR || './report';
 
 const getTimestamp = () => {
   const now = new Date();

@@ -9,7 +9,7 @@ import { LOCALE_STORAGE_KEY } from './src/scripts/lib/i18n/index';
 import { createTemplateParams } from './src/scripts/lib/i18n/template';
 
 const ROOT = process.cwd();
-const PORT = 8888;
+const PORT = Number(process.env.PORT) || 8888;
 const isProd = process.env.NODE_ENV === 'production';
 const shouldMinify = isProd && process.env.MINIFY !== 'false';
 const shouldMinifyHTML = shouldMinify && process.env.MINIFY_HTML !== 'false';

@@ -4,7 +4,7 @@ import { PATHS } from '../src/configs/paths';
 import { CURRENCY_CODE } from '../src/scripts/lib/i18n/currencies';
 import { LOCALES } from '../src/scripts/lib/i18n/data';
 
-const EXCHANGE_RATES_URL = 'https://api.frankfurter.dev/v2/rates';
+const EXCHANGE_RATES_URL = process.env.EXCHANGE_RATES_URL || 'https://api.frankfurter.dev/v2/rates';
 const GENERATED_DIR = path.resolve(process.cwd(), PATHS.GENERATED);
 const EXCHANGE_RATES_FILE = path.resolve(GENERATED_DIR, 'exchange-rates.ts');
 const BASE_CURRENCY = CURRENCY_CODE.USD;

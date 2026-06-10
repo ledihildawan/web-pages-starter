@@ -732,7 +732,17 @@ export const createTemplateParams = (
     })),
     clientI18nScript,
     page_id: name,
-    global: loadGlobalData(resolveRoot(`${PATHS.SRC}/data`)),
+    global: (() => {
+      const globalData = loadGlobalData(resolveRoot(`${PATHS.SRC}/data`));
+      if (process.env.SITE_NAME) globalData.site_name = process.env.SITE_NAME;
+      if (process.env.SITE_DESCRIPTION) globalData.site_description = process.env.SITE_DESCRIPTION;
+      if (process.env.SOCIAL_GITHUB || process.env.SOCIAL_TWITTER) {
+        globalData.social = { ...globalData.social as Record<string, string> };
+        if (process.env.SOCIAL_GITHUB) globalData.social.github = process.env.SOCIAL_GITHUB;
+        if (process.env.SOCIAL_TWITTER) globalData.social.twitter = process.env.SOCIAL_TWITTER;
+      }
+      return globalData;
+    })(),
     page: readJSON5(resolveRoot(`${PATHS.SRC}/pages/${name}/index.json5`)),
     i18n,
   };
