@@ -1,0 +1,75 @@
+{
+  "hero": {
+    "badge": "Ključne funkcije",
+    "title_part1": "Vse, kar potrebujete za",
+    "title_highlight": "hitrejše skaliranje",
+    "description": "Od zmogljive analitike do brezhibne integracije — zagotavljamo orodja, ki jih potrebujete za gradnjo aplikacij svetovnega razreda brez skrbi."
+  },
+  "features": {
+    "heading": "Ključne funkcije",
+    "subheading": "Vse, kar potrebujete za gradnjo in rast.",
+    "list": {
+      "speed": {
+        "title": "Izjemno hitro",
+        "description": "Optimalne performanse s časom nalaganja pod 100ms. Zasnovano za globalno skaliranje z edge infrastrukturo."
+      },
+      "design": {
+        "title": "Moderno oblikovanje",
+        "description": "Odziven in čist UI, ki izgleda profesionalno na vseh napravah. Popolnoma prilagodljive komponente."
+      },
+      "security": {
+        "title": "Visoka raven varnosti",
+        "description": "End-to-end šifriranje, večfaktorska avtentikacija in SOC2 skladnost za zaščito vaših podatkov."
+      }
+    }
+  },
+  "sections": {
+    "sync": {
+      "title": "Sinhronizacija v realnem času",
+      "description": "Spremembe se takoj razširijo na vse naprave. Ne glede na to, ali vaši uporabniki uporabljajo telefon, računalnik ali tablico, bodo videli enake podatke ob istem času.",
+      "check_0": "Latenca pod milisekundo",
+      "check_1": "Vgrajena podpora za delo brez povezave",
+      "check_2": "Razreševanje sporov"
+    },
+    "analytics": {
+      "title": "Analitika za ukrepanje",
+      "description": "Ne ugibajte. Pridobite poglobljene vpoglede v vedenje uporabnikov, delovanje sistema in metrike prihodkov. Vizualizirajte podatke z interaktivnimi grafikoni.",
+      "check_0": "Prilagodljive nadzorne plošče",
+      "check_1": "Izvoz v PDF, CSV ali Excel",
+      "check_2": "Samodejna tedenska poročila"
+    }
+  },
+  "more_title": "In še veliko več...",
+  "more_subtitle": "Napredne funkcije, zasnovane za hitrejšo in bolj skalabilno gradnjo.",
+  "more": {
+    "dark_mode": {
+      "title": "Temni način",
+      "desc": "Vgrajena podpora za svetlo in temno temo s samodejnim zaznavanjem."
+    },
+    "api_first": {
+      "title": "API First",
+      "desc": "REST in GraphQL API na voljo za popoln programski nadzor."
+    },
+    "sso": {
+      "title": "SSO prijava",
+      "desc": "Enterprise Single Sign-On za Google, GitHub in Okta."
+    },
+    "audit": {
+      "title": "Revizijski dnevniki",
+      "desc": "Sledite vsaki spremembi na svojem projektu s podrobnimi časovnimi žigi."
+    },
+    "rbac": {
+      "title": "Dostop na podlagi vlog",
+      "desc": "Granularni nadzor dovoljenj za skrbnike, urejevalce in pregledovalce."
+    },
+    "uptime": {
+      "title": "Razpoložljivost 99.99%",
+      "desc": "Garantirana razpoložljivost z našim globalno porazdeljenim CDN-om."
+    }
+  },
+  "cta": {
+    "heading": "Pripravljeni na začetek?",
+    "btn_create": "Ustvarite račun",
+    "btn_docs": "Preberite dokumentacijo"
+  }
+}

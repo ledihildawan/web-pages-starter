@@ -1,0 +1,203 @@
+{
+  "meta": {
+    "title": "בדיקת i18n | דמו",
+    "description": "דף בדיקות מלא לתכונות בינלאומיות"
+  },
+  "hero": {
+    "badge": "תכונות i18n",
+    "title": "בדיקת <span class='text-violet-400'>מלאה</span> לבינלאומיות",
+    "description": "נסו את כל תכונות ה-i18n: תרגום, צורות רבים, עיצוב מספרים, מטבע והמרת מטבעות."
+  },
+  "language_info": {
+    "title": "מידע על השפה הנוכחית",
+    "code": "קוד שפה",
+    "currency": "מטבע",
+    "direction": "כיוון טקסט",
+    "digits": "ספרות מקומיות",
+    "enabled": "פעיל",
+    "disabled": "לא פעיל",
+    "languages": "שפות",
+    "switching": "החלפה ללא רענון",
+    "current_code": "he",
+    "current_currency": "ILS",
+    "current_direction": "RTL (ימין לשמאל)"
+  },
+  "numbers": {
+    "title": "עיצוב מספרים",
+    "description": "מספרים מעוצבים בהתאם לשפה הפעילה.",
+    "large": "מספר גדול",
+    "decimal": "עשרוני",
+    "million": "מיליון",
+    "percent": "אחוז",
+    "raw": "גולמי"
+  },
+  "currency": {
+    "title": "המרת מטבעות",
+    "description": "מחירים ב-IDR מומרים למטבע של השפה הפעילה.",
+    "currencies": "מטבעות",
+    "small": "קטן",
+    "medium": "בינוני",
+    "large": "גדול",
+    "enterprise": "Enterprise"
+  },
+  "currency_comparison": {
+    "title": "השוואת מטבעות",
+    "description": "אותו מחיר במגוון מטבעות נתמכים.",
+    "base_price": "מחיר בסיס (USD)",
+    "aed": "דירהם אמירתי",
+    "aud": "דולר אוסטרלי",
+    "brl": "ריאל ברזילאי",
+    "cad": "דולר קנדי",
+    "chf": "פרנק שוויצרי",
+    "cny": "יואן סיני",
+    "eur": "אירו",
+    "gbp": "לירה שטרלינג",
+    "idr": "רופיה",
+    "inr": "רופי הודי",
+    "jpy": "ין יפני",
+    "krw": "וון קוריאני",
+    "mxn": "פסו מקסיקני",
+    "sar": "ריאל סעודי",
+    "sgd": "דולר סינגפורי",
+    "usd": "דולר אמריקאי",
+    "zar": "ראנד דרום אפריקאי"
+  },
+  "core": {
+    "title": "תכונות ליבה",
+    "description": "תרגום, צורות רבים ותוכן HTML."
+  },
+  "pluralization": {
+    "title": "צורות רבים",
+    "description": "צורות רבים שונות לכל שפה.",
+    "item_title": "פריט (שם עצם)",
+    "user_title": "משתמש",
+    "product_title": "מוצר"
+  },
+  "form": {
+    "title": "טופס עם placeholder מתורגם",
+    "description": "Placeholder ותוויות נלקחים מקבצי השפה.",
+    "name_label": "שם",
+    "name_placeholder": "הכנס את השם המלא שלך",
+    "email_label": "אימייל",
+    "email_placeholder": "example@email.com",
+    "message_label": "הודעה",
+    "message_placeholder": "כתוב את ההודעה שלך כאן...",
+    "submit": "שלח"
+  },
+  "missing_keys": {
+    "title": "טיפול במפתחות חסרים",
+    "description": "מפתחות תרגום שלא נמצאו יוצגו בסוגריים מרובעים."
+  },
+  "html_content": {
+    "title": "תוכן HTML",
+    "description": "תרגומים יכולים לכלול תגיות HTML לעיצוב.",
+    "example": "זהו טקסט לדוגמה עם <span class='text-emerald-400'>הדגשה בצבע</span> וטקסט <strong>מודגש</strong>.",
+    "note": "הערה: תגיות HTML בתרגום צריכות להיות בתוך אלמנט עוטף יחיד."
+  },
+  "switcher": {
+    "title": "החלף שפה",
+    "description": "לחצו על הכפתור למטה כדי להחליף שפה ולראות את כל תכונות ה-i18n בפעולה."
+  },
+  "advanced": {
+    "title": "עיצוב מתקדם",
+    "description": "תכונות עיצוב מתקדמות לאחוזים, יחידות, בתים, רשימות וסדרות.",
+    "percentages": "אחוזים",
+    "units": "יחידות",
+    "bytes": "בתים",
+    "bytes_unit": "בית",
+    "lists": "רשימות",
+    "ordinals": "סודר",
+    "cardinals": "יסודי",
+    "scientific": "סימון מדעי",
+    "abbreviated": "מקוצר",
+    "date_formats": "תבניות תאריך",
+    "time_formats": "תבניות שעה",
+    "datetime": "תאריך + שעה",
+    "durations": "משכים",
+    "relative_time": "זמן יחסי",
+    "regional_pricing": "תמחור אזורי",
+    "fifty_percent": "חמישים אחוז",
+    "small_percent": "אחוז קטן",
+    "ninety_nine": "תשעים ותשע",
+    "hundred": "מאה",
+    "kilobyte": "קילובייט",
+    "distance": "מרחק",
+    "temperature": "טמפרטורה",
+    "weight": "משקל",
+    "half_kb": "חצי KB",
+    "one_and_half_kb": "KB וחצי",
+    "one_mb": "MB אחד",
+    "one_gb": "GB אחד",
+    "two_items": "שני פריטים",
+    "three_items": "שלושה פריטים",
+    "four_items": "ארבעה פריטים",
+    "date_short": "תאריך קצר",
+    "date_long": "תאריך ארוך",
+    "time_short": "שעה קצרה",
+    "time_long": "שעה ארוכה",
+    "day_ago": "לפני יום",
+    "months_ago": "לפני חודשים",
+    "hour_in": "בעוד שעה",
+    "starter_plan": "תוכנית Starter",
+    "pro_plan": "תוכנית Pro",
+    "discount_20": "הנחה 20%",
+    "number_modes": "מצבי מספרים",
+    "number_modes_desc": "השוואה בין עיצוב ספרות מקומיות (٠١٢٣٤) ועיצוב אוניברסלי (0-9).",
+    "native_label": "ספרות מקומיות (٠١٢٣٤)",
+    "universal_label": "אוניברסלי (0-9)",
+    "plain_label": "אוטומטי"
+  },
+  "template_macros": {
+    "title": "Template Macros",
+    "description": "מאקרו לקבלת ערכים גולמיים ללא תגיות HTML.",
+    "raw_value": "ערך גולמי ללא תגיות",
+    "current_year": "השנה הנוכחית היא {{year}}"
+  },
+  "datetime": {
+    "title": "תאריך ושעה",
+    "description": "תבנית משולבת של תאריך ושעה.",
+    "iso": "תקן ISO",
+    "eve": "ערב חג המולד"
+  },
+  "unit": {
+    "title": "עיצוב יחידות"
+  },
+  "native_digits": {
+    "title": "ספרות מקומיות",
+    "description": "טקסט עם ספרות ASCII מוצג בספרות מקומיות כשהשפה מאפשרת זאת. מתעדכן בזמן אמת בהחלפת שפה."
+  },
+  "inflection": {
+    "title": "הטיית אנגלית",
+    "description": "צורות רבים ויחיד באנגלית. מתעדכן בזמן אמת בהחלפת שפה."
+  },
+  "live_label": "Live",
+  "pricing_details": {
+    "title": "פרטי תמחור",
+    "description": "pipeline מלא: ערך גולמי, קוד מטבע, עיצוב, הנחה והמרה.",
+    "raw_value": "ערך גולמי",
+    "raw_currency": "קוד מטבע",
+    "formatted": "מעוצב",
+    "discounted": "הנחה 20%",
+    "converted_usd": "המרה ל-USD"
+  },
+  "live_update": {
+    "note": "שימו לב שכל המספרים, התאריכים והמחירים משתנים מיידית בהחלפת שפה — בלי לרענן את הדף."
+  },
+  "section_modes": {
+    "title": "מצבי מספרים",
+    "description": "השוו בין עיצוב ספרות מקומיות, עיצוב אוניברסלי ומצב אוטומטי בשפה הפעילה."
+  },
+  "section_systems": {
+    "title": "Writing Systems",
+    "description": "כל מערכות המספרים (אלגוריתמיות ונומריות) מציגות את הספרות המקומיות הנכונות עם fallback ICU.",
+    "note": "כל מערכות המספרים (אלגוריתמיות ונומריות) מציגות את הספרות המקומיות הנכונות. מערכות אלגוריתמיות משתמשות ב-fallback ספרות מ-NUMBERING_SYSTEMS. ספרות רומיות מומרות ישירות דרך אלגוריתם. מערכות נומריות משתמשות בספרות מהפונטים הטעונים."
+  },
+  "nav": {
+    "translations": "תרגומים",
+    "formatting": "מספרים",
+    "pricing": "תמחור",
+    "modes": "מצבים",
+    "systems": "מערכות",
+    "switcher": "בחר שפה"
+  }
+}

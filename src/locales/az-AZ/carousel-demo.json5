@@ -1,0 +1,17 @@
+{
+  "meta": {
+    "page_title": "Splide Lazy Load Demo | Starter"
+  },
+  "hero": {
+    "slide_1": {
+      "title": "Təbiət Lazy Load",
+      "subtitle": "Şəkillər trafik qənaət etmək üçün ağıllı şəkildə yüklənir.",
+      "alt": "Gözəl Dağ Mənzərəsi"
+    },
+    "slide_2": {
+      "title": "Yüksək Performans",
+      "subtitle": "Yalnız lazım olanı yükləyir.",
+      "alt": "Qarlı Dağlar Mənzərəsi"
+    }
+  }
+}

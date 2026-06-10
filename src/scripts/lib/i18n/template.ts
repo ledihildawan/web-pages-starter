@@ -253,7 +253,11 @@ const createI18nObject = (
       key: string | undefined,
       attrName: string,
       vars: Record<string, unknown> = {},
-    ) => `${attrName}="${createItem(key, vars).v}"`,
+    ) => {
+      const item = createItem(key, vars);
+      return `${attrName}="${item.v}"` +
+        (key ? ` data-i18n-attr="${attrName}:${item.k}"` : '');
+    },
 
     plural: (
       key: string | undefined,

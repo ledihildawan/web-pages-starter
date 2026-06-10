@@ -7,6 +7,13 @@ export const REGIONS = [
     callingCode: '+971',
   },
   {
+    code: 'AF',
+    name: 'Afghanistan',
+    nameId: 'Afganistan',
+    continent: 'AS',
+    callingCode: '+93',
+  },
+  {
     code: 'AM',
     name: 'Armenia',
     nameId: 'Armenia',
@@ -56,11 +63,25 @@ export const REGIONS = [
     callingCode: '+994',
   },
   {
+    code: 'BD',
+    name: 'Bangladesh',
+    nameId: 'Bangladesh',
+    continent: 'AS',
+    callingCode: '+880',
+  },
+  {
     code: 'BE',
     name: 'Belgium',
     nameId: 'Belgia',
     continent: 'EU',
     callingCode: '+32',
+  },
+  {
+    code: 'BG',
+    name: 'Bulgaria',
+    nameId: 'Bulgaria',
+    continent: 'EU',
+    callingCode: '+359',
   },
   {
     code: 'BH',
@@ -203,6 +224,13 @@ export const REGIONS = [
     callingCode: '+593',
   },
   {
+    code: 'EE',
+    name: 'Estonia',
+    nameId: 'Estonia',
+    continent: 'EU',
+    callingCode: '+372',
+  },
+  {
     code: 'EG',
     name: 'Egypt',
     nameId: 'Mesir',
@@ -308,6 +336,13 @@ export const REGIONS = [
     callingCode: '+504',
   },
   {
+    code: 'HR',
+    name: 'Croatia',
+    nameId: 'Kroasia',
+    continent: 'EU',
+    callingCode: '+385',
+  },
+  {
     code: 'ID',
     name: 'Indonesia',
     nameId: 'Indonesia',
@@ -320,6 +355,13 @@ export const REGIONS = [
     nameId: 'Irlandia',
     continent: 'EU',
     callingCode: '+353',
+  },
+  {
+    code: 'IL',
+    name: 'Israel',
+    nameId: 'Israel',
+    continent: 'AS',
+    callingCode: '+972',
   },
   {
     code: 'IN',
@@ -427,6 +469,13 @@ export const REGIONS = [
     callingCode: '+423',
   },
   {
+    code: 'LK',
+    name: 'Sri Lanka',
+    nameId: 'Sri Lanka',
+    continent: 'AS',
+    callingCode: '+94',
+  },
+  {
     code: 'LS',
     name: 'Lesotho',
     nameId: 'Lesotho',
@@ -502,6 +551,13 @@ export const REGIONS = [
     nameId: 'Myanmar',
     continent: 'AS',
     callingCode: '+95',
+  },
+  {
+    code: 'MN',
+    name: 'Mongolia',
+    nameId: 'Mongolia',
+    continent: 'AS',
+    callingCode: '+976',
   },
   {
     code: 'MO',
@@ -616,6 +672,13 @@ export const REGIONS = [
     callingCode: '+63',
   },
   {
+    code: 'PK',
+    name: 'Pakistan',
+    nameId: 'Pakistan',
+    continent: 'AS',
+    callingCode: '+92',
+  },
+  {
     code: 'PL',
     name: 'Poland',
     nameId: 'Polandia',
@@ -665,6 +728,13 @@ export const REGIONS = [
     callingCode: '+40',
   },
   {
+    code: 'RS',
+    name: 'Serbia',
+    nameId: 'Serbia',
+    continent: 'EU',
+    callingCode: '+381',
+  },
+  {
     code: 'RU',
     name: 'Russia',
     nameId: 'Rusia',
@@ -698,6 +768,20 @@ export const REGIONS = [
     nameId: 'Singapura',
     continent: 'AS',
     callingCode: '+65',
+  },
+  {
+    code: 'SI',
+    name: 'Slovenia',
+    nameId: 'Slovenia',
+    continent: 'EU',
+    callingCode: '+386',
+  },
+  {
+    code: 'SK',
+    name: 'Slovakia',
+    nameId: 'Slovakia',
+    continent: 'EU',
+    callingCode: '+421',
   },
   {
     code: 'ST',
@@ -777,6 +861,13 @@ export const REGIONS = [
     callingCode: '+676',
   },
   {
+    code: 'TR',
+    name: 'Turkey',
+    nameId: 'Turki',
+    continent: 'AS',
+    callingCode: '+90',
+  },
+  {
     code: 'TW',
     name: 'Taiwan',
     nameId: 'Taiwan',
@@ -824,6 +915,13 @@ export const REGIONS = [
     nameId: 'Kepulauan Virgin (AS)',
     continent: 'NA',
     callingCode: '+1',
+  },
+  {
+    code: 'VN',
+    name: 'Vietnam',
+    nameId: 'Vietnam',
+    continent: 'AS',
+    callingCode: '+84',
   },
   {
     code: 'WS',

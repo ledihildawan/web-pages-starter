@@ -1,0 +1,102 @@
+{
+  "about": {
+    "badge": "Biz haqimizda"
+  },
+  "hero": {
+    "badge": "Biz haqimizda",
+    "title_part1": "Biz ",
+    "title_highlight": "raqamli kelajakni",
+    "description": "2024-yilda tashkil etilgan Starter — dasturchilarga tezroq va yaxshiroq ilovalar yaratishga yordam berish uchun yaratildi. Biz toza kod, chiroyli dizayn va ochiq manba hamkorlik kuchiga ishonamiz.",
+    "primary_btn": {
+      "label": "Bepul boshlash",
+      "url": "#pricing"
+    },
+    "secondary_btn": {
+      "label": "Demoni ko'rish",
+      "url": "#features"
+    },
+    "note": "Kredit karta kerak emas"
+  },
+  "stats": {
+    "community": "Global jamiyat",
+    "community_val": "50K+",
+    "projects": "Tugallangan loyihalar",
+    "projects_val": "120+",
+    "uptime": "Ishlash vaqti",
+    "uptime_val": "99.99%",
+    "rating": "Reyting",
+    "rating_val": "4.9/5"
+  },
+  "story": {
+    "tag": "Bizning hikoya",
+    "visual_label": "Ijodiy studiya illyustratsiyasi",
+    "title": "Ishq bilan boshqariladigan, <br>mukammallik bilan belgilangan.",
+    "para1": "Bizning sayohat oddiy g'oyadan boshlandi: veb-taraqqiyotni hamma uchun qulay va qiziqarli qilish. Biz og'ir freymvorklar va murakkab sozlamalardan charchagan edik.",
+    "para2": "Bugun biz — murakkab muammolarni nafis yechimlar bilan hal qilish uchun birga ishlaydigan turli xil muhandislar, dizaynerlar va mutafakkirlar jamoasi.",
+    "val1": "Foydalanuvchiga yo'naltirilgan dizayn falsafasi",
+    "val2": "Unumdorlik-birinchi arxitektura",
+    "val3": "Shaffoflik va ochiq muloqot"
+  },
+  "mission": {
+    "title": "Bizning missiyamiz",
+    "description": "Dasturchilarni va biznesni ajoyib raqamli mahsulotlarni yaratish uchun nafis, tezkor va oson ishlatiladigan vositalar bilan ta'minlash."
+  },
+  "vision": {
+    "title": "Bizning viziyamiz",
+    "description": "Har bir kod satrida go'zallik, unumdorlik va foydalanuvchi tajribasini qadrlaydigan zamonaviy dasturchilar uchun tanlangan platforma bo'lish."
+  },
+  "values": {
+    "title": "Bizning qadriyatlar",
+    "subtitle": "Har bir qarorimizga yo'l ko'rsatadigan tamoyillar."
+  },
+  "passion": {
+    "title": "Ishq",
+    "description": "Biz nima qilsak, uni yaxshi ko'ramiz va bu mahsulotimizning har bir tafsilotida ko'rinadi."
+  },
+  "collaboration": {
+    "title": "Hamkorlik",
+    "description": "Birgalikda ishlash eng yaxshi natijalarga olib keladi. Biz mustahkam jamoa kuchiga ishonamiz."
+  },
+  "innovation": {
+    "title": "Innovatsiya",
+    "description": "Muammolarni hal qilish va qadriyat yaratishning yaxshi yo'llarini doimo qidiramiz."
+  },
+  "integrity": {
+    "title": "Halollik",
+    "description": "Rostgo'ylik va shaffoflik — biz quradigan har bir munosabatning asosi."
+  },
+  "excellence": {
+    "title": "Mukammallik",
+    "description": "Biz yetarlicha yaxshi bilan to'xtamaymiz. Doimo eng yaxshisiga intilamiz."
+  },
+  "quality": {
+    "title": "Sifat",
+    "description": "Toza kod, chiroyli dizayn va uzluksiz tajriba — bizning standartimiz."
+  },
+  "team": {
+    "title": "Jamoa bilan tanishing",
+    "subtitle": "Yozgan har bir kod satrimiz ortidagi yorqin zehlar.",
+    "alex_desc": "SaaS ekotizimini rivojlantirishda 10+ yillik tajribaga bo'lgan vizioner yetakchi.",
+    "sarah_desc": "Katta masshtabli tizim arxitekturasini qurishga ixtisoslashgan full-stack mutaxassis.",
+    "mike_desc": "Piksel tafsilotlari, silliq UX oqimlari va kirish imkoniyati standartlari bilan shug'ullanadi.",
+    "jessica_desc": "Brendlarga raqamli dunyoda o'z ovozlarini topishga yordam beruvchi ijodiy hikoyachi."
+  },
+  "features": {
+    "list": {
+      "speed": {
+        "title": "Juda tez",
+        "description": "100ms dan kam yuklanish vaqti bilan optimal unumdorlik. Edge infratuzilmasi bilan global masshtabga mo'ljallangan."
+      },
+      "design": {
+        "title": "Zamonaviy dizayn",
+        "description": "Barcha qurilmalarda professional ko'rinishga ega responsiv va toza UI. To'liq sozlanishi mumkin bo'lgan komponentlar."
+      },
+      "security": {
+        "title": "Yuqori xavfsizlik",
+        "description": "Uchidan-uchigacha shifrlash, ko'p faktorli autentifikatsiya va ma'lumotlaringizni himoyalash uchun SOC2 mosligi."
+      }
+    },
+    "heading": "Ajralmas imkoniyatlar",
+    "subheading": "Qurish va o'sish uchun kerak bo'lgan hamma narsa."
+  }
+}

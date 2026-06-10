@@ -1,0 +1,56 @@
+{
+  "period_monthly": "mēn.",
+  "period_yearly": "gad.",
+  "hero": {
+    "badge": "Izvēlieties plānu",
+    "title_part1": "Vienkāršas un ",
+    "title_highlight": "caurspīdīgas cenas",
+    "description": "Nav slēptu maksu. Nav pārsteigumu. Izvēlieties plānu, kas vislabāk atbilst Jūsu vajadzībām."
+  },
+  "toggle": {
+    "monthly": "Ik mēnesi",
+    "yearly": "Ik gadu",
+    "yearly_hint": "apmaksāts ik gadu",
+    "discount": "IETAUPIET 20%",
+    "aria_label": "Pārslēgt cenu plānu"
+  },
+  "plans": {
+    "hobby": {
+      "name": "Hobby",
+      "desc": "Perfekti piemērots blakus projektiem un mācīšanai.",
+      "btn": "Sākt bez maksas",
+      "feature_0": "1 projekts",
+      "feature_1": "Kopienu atbalsts",
+      "feature_2": "5 GB krātuve"
+    },
+    "pro": {
+      "name": "Pro",
+      "badge": "Populārākais",
+      "desc": "Profesionāliem izstrādātājiem un mazām komandām.",
+      "btn": "Izvēlēties Pro plānu",
+      "feature_0": "Neierobežoti projekti",
+      "feature_1": "Prioritārais e-pasta atbalsts",
+      "feature_2": "100 GB krātuve",
+      "feature_3": "Papildu analītika"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "desc": "Lielapjoma lietotnēm un organizācijām.",
+      "btn": "Sazināties ar pārdošanu",
+      "feature_0": "Visas Pro plāna funkcijas",
+      "feature_1": "Atvēlēts konta menedžeris",
+      "feature_2": "SSO un audita žurnāls",
+      "feature_3": "Neierobežota krātuve"
+    }
+  },
+  "faq": {
+    "title": "Biežāk uzdotie jautājumi",
+    "subtitle": "Atrodiet atbildes uz visbiežāk uzdotajiem jautājumiem par mūsu plāniem un pakalpojumiem.",
+    "q_0": "Vai es varu atteikties jebkurā laikā?",
+    "a_0": "Jā, Jūs varat atteikties no abonementa jebkurā laikā. Jūsu piekļuve paliek aktīva līdz norēķinu perioda beigām.",
+    "q_1": "Vai ir bezmaksas izmēģinājuma periods?",
+    "a_1": "Mēs piedāvājam 14 dienu bezmaksas izmēģinājuma periodu Pro plānam. Sākšanai nav nepieciešama kredītkarte.",
+    "q_2": "Kādas maksājumu metodes ir pieejamas?",
+    "a_2": "Mēs pieņemam galvenās kredītkartes un PayPal. Enterprise plānam atbalstām bankas pārskaitījumus."
+  }
+}

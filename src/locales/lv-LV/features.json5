@@ -1,0 +1,75 @@
+{
+  "hero": {
+    "badge": "Izcilās funkcijas",
+    "title_part1": "Viss, kas Jums nepieciešams, lai",
+    "title_highlight": "auga ātrāk",
+    "description": "No jaudīgas analītikas līdz plūstošām integrācijām – mēs nodrošinām rīku komplektu, kas nepieciešams, lai veidotu pasaules klases lietotnes bez galvassāpēm."
+  },
+  "features": {
+    "heading": "Izcilās funkcijas",
+    "subheading": "Viss, kas Jums nepieciešams veidošanai un izaugsmei.",
+    "list": {
+      "speed": {
+        "title": "Īpaši ātri",
+        "description": "Optimāla veiktspēja ar ielādes laiku zem 100 ms. Veidota globālai mērogstelšanai ar malas infrastruktūru."
+      },
+      "design": {
+        "title": "Moderns dizains",
+        "description": "Atsaucīga un tīra lietotāja saskarne, kas izskatās profesionāli visās ierīcēs. Pilnībā pielāgojami komponenti."
+      },
+      "security": {
+        "title": "Augsta drošība",
+        "description": "Gala šifrēšana, vairākfaktoru autentifikācija un SOC2 atbilstība, lai aizsargātu Jūsu datus."
+      }
+    }
+  },
+  "sections": {
+    "sync": {
+      "title": "Reāllaika sinhronizācija",
+      "description": "Izmaiņas momentāni izplatās visās ierīcēs. Neatkarīgi no tā, vai Jūsu lietotāji izmanto tālruni, datoru vai planšeti – tie redz vienus un tos pašus datus vienā un tajā pašā laikā.",
+      "check_0": "Latence zem milisekundes",
+      "check_1": "Iebūvēts bezsaistes atbalsts",
+      "check_2": "Konfliktu atrisināšana"
+    },
+    "analytics": {
+      "title": "Rīcībspējīga analītika",
+      "description": "Neminieties. Iegūstiet dziļas atziņas par lietotāju uzvedību, sistēmas veiktspēju un ieņēmumu rādītājiem. Vizualizējiet datus ar interaktīvām diagrammām.",
+      "check_0": "Pielāgojami vadības paneļi",
+      "check_1": "Eksportēt uz PDF, CSV vai Excel",
+      "check_2": "Automātiskas iknedēļas atskaites"
+    }
+  },
+  "more_title": "Un vēl vairāk...",
+  "more_subtitle": "Uzlabotas funkcijas, izstrādātas, lai palīdzētu Jums veidot ātrāk un mērogotāk.",
+  "more": {
+    "dark_mode": {
+      "title": "Tumšais režīms",
+      "desc": "Iebūvēts atbalsts gaišajai un tumšajai tēmai ar automātisku noteikšanu."
+    },
+    "api_first": {
+      "title": "API pirmajā vietā",
+      "desc": "REST un GraphQL API pieejams pilnīgai programmatiskai kontrolei."
+    },
+    "sso": {
+      "title": "SSO pieteikšanās",
+      "desc": "Enterprise līmeņa vienotā pieteikšanās ar Google, GitHub un Okta."
+    },
+    "audit": {
+      "title": "Audita žurnāls",
+      "desc": "Izsekojiet katru Jūsu projekta izmaiņu ar detalizētiem laika zīmogiem."
+    },
+    "rbac": {
+      "title": "Lomām balstīta piekļuve",
+      "desc": "Granulēta atļauju pārvaldība administratoriem, redaktoriem un skatītājiem."
+    },
+    "uptime": {
+      "title": "99,99 % darbības laiks",
+      "desc": "Garantēta pieejamība ar mūsu globāli izplatīto CDN."
+    }
+  },
+  "cta": {
+    "heading": "Gatavi sākt?",
+    "btn_create": "Izveidot kontu",
+    "btn_docs": "Lasīt dokumentāciju"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "title": "Sazināties ar mums | Starter App",
+    "description": "Sazināties ar mums jautājumu un atbalsta jautājumos."
+  },
+  "contact": {
+    "badge": "Gatavi palīdzēt",
+    "title_part1": "Ļaujiet ",
+    "title_highlight": "sazināties",
+    "description": "Vai Jums ir jautājumi vai vēlaties sadarboties? Mēs priecāsimies dzirdēt no Jums. Nosūtiet ziņojumu un mēs drīz atbildēsim.",
+    "form_title": "Nosūtīt ziņojumu",
+    "form_subtitle": "Aizpildiet zemāk redzamo formu un mēs drīz atbildēsim.",
+    "social_title": "Sekojiet mums",
+    "social_subtitle": "Saņemiet jaunākos atjauninājumus caur mūsu sociālajiem tīkliem",
+    "info": {
+      "response_time": {
+        "title": "Ātra atbilde",
+        "description": "Mēs centīsimies atbildēt uz katru ziņojumu 24 stundu laikā darba dienās."
+      },
+      "working_hours": {
+        "title": "Darba laiks",
+        "description": "Pirmdiena – Piektdiena: 09:00 – 18:00. Brīvdienās: pēc prioritātes."
+      },
+      "support": {
+        "title": "Pastāvīgs atbalsts",
+        "description": "Mūsu atbalsta komanda vienmēr ir gatava palīdzēt atrisināt Jūsu tehniskās problēmas."
+      }
+    },
+    "form": {
+      "name": "Vārds",
+      "name_placeholder": "Ievadiet savu vārdu",
+      "email": "E-pasts",
+      "email_placeholder": "vards@epasts.lv",
+      "subject": "Tēma",
+      "subject_placeholder": "Par ko vēlaties runāt?",
+      "message": "Ziņojums",
+      "message_placeholder": "Pastāstiet vairāk par Jūsu jautājumu...",
+      "submit": "Nosūtīt ziņojumu"
+    }
+  },
+  "email_label": "E-pasts",
+  "email_value": "hello@starter.app",
+  "phone_label": "Tālrunis",
+  "phone_value": "+371 612 34567",
+  "location_label": "Vieta",
+  "location_value": "Rīga, Latvija"
+}

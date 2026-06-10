@@ -1,6 +1,6 @@
 # Web Pages Starter
 
-A multi-page starter for content sites built with **Rsbuild + Nunjucks + Alpine.js + Tailwind CSS + i18next**. Ships 54 locales out of the box with SSG rendering, runtime language switching, locale-aware formatting, RTL support, and regional pricing.
+A multi-page starter for content sites built with **Rsbuild + Nunjucks + Alpine.js + Tailwind CSS + i18next**. Ships 87 locales out of the box with SSG rendering, runtime language switching, locale-aware formatting, RTL support, and regional pricing.
 
 ## Quick Start
 
@@ -33,7 +33,7 @@ src/
 │       └── components/    #   page-local partials (optional)
 ├── components/            # 10 shared Nunjucks partials + macros
 ├── layouts/               # base templates (main.njk) + macros (page-meta.njk)
-├── locales/               # translation source of truth (54 locales)
+├── locales/               # translation source of truth (87 locales)
 │   └── {locale}/
 │       ├── common.json5   #   shared copy (nav, footer, labels, plurals)
 │       ├── {page}.json5   #   page-specific copy
@@ -77,7 +77,7 @@ File-system based, zero-config routing. Drop a folder under `src/pages/` and it 
 bun run gen:page pricing
 ```
 
-Creates the page folder, Nunjucks template, entry files, and 54 locale files. Available at `/pricing` immediately.
+Creates the page folder, Nunjucks template, entry files, and 87 locale files. Available at `/pricing` immediately.
 
 ### Page data
 
@@ -166,7 +166,7 @@ RTL locales: Arabic (`ar-*`), Hebrew, N'Ko, Adlam.
 
 The i18n system is the most complex subsystem. Full reference: **[`docs/i18n.md`](docs/i18n.md)**.
 
-54 BCP 47 locales spanning 25 languages. Default locale: `id-ID`.
+87 BCP 47 locales spanning 54 languages. Default locale: `id-ID`.
 
 ### Data flow
 
@@ -329,7 +329,7 @@ Tests live in `tests/`. The setup extends `expect` with `@testing-library/jest-d
 | `bun run build` | Sync root page, fetch rates, regenerate i18n types, generate sitemap, production build |
 | `bun run build:preview` | Same as `build` with `BUILD_PREVIEW=true`, then runs preview server |
 | `bun run preview` | Serve the production build |
-| `bun run gen:page <name>` | Scaffold a new page and 54 translation files |
+| `bun run gen:page <name>` | Scaffold a new page and 87 translation files |
 | `bun run gen:i18n` | Regenerate `generated/i18n.d.ts` |
 | `bun run watch:i18n` | Watch JSON5 files and rerun `gen:i18n` |
 | `bun run fetch:rates` | Update exchange rates (24h cache) |
@@ -343,7 +343,7 @@ All tools live in `tools/`. Available via `bun ./tools/<name>.ts` or `bun run cl
 | --- | --- |
 | `build.ts` | Production build wrapper (Rsbuild + HTML minification) |
 | `preview.ts` | Hono-based static preview server |
-| `generate-page.ts` | Scaffold a new page with 54 locale files |
+| `generate-page.ts` | Scaffold a new page with 87 locale files |
 | `generate-i18n.ts` | Regenerate `generated/i18n.d.ts` type definitions |
 | `watch-i18n.ts` | Watch JSON5 files, auto-rerun `generate-i18n` |
 | `generate-sitemap.ts` | Generate `public/sitemap.xml` |

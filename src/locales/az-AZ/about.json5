@@ -1,0 +1,72 @@
+{
+  "hero": {
+    "badge": "Haqqımızda",
+    "title_part1": "Həvəslə ",
+    "title_highlight": "hərəkətə gələn",
+    "description": "Səfərimiz sadə bir ideya ilə başladı."
+  },
+  "mission": {
+    "title": "Missiyamız",
+    "description": "Tərtibatçıları və biznesləri möhtəşəm rəqəmsal məhsullar qurmaq üçün zərif, sürətli və istifadəsi asan alətlərlə gücləndirmək."
+  },
+  "vision": {
+    "title": "Vizyonumuz",
+    "description": "Hər bir kod sətirində gözəlliyi, performansı və istifadəçi təcrübəsini qiymətləndirən müasir tərtibatçılar üçün seçim platforması olmaq."
+  },
+  "story": {
+    "tag": "Hekayəmiz",
+    "visual_label": "Kreativ Studiya İllüstrasiyası",
+    "title": "Həvəslə hərəkətə gələn, <br>mükəmməlliklə müəyyən edilən.",
+    "para1": "Səfərimiz sadə bir ideya ilə başladı: veb inkişafını hər kəs üçün əlçatan və əyləncəli etmək. Biz ağır freymvorklardan və mürəkkəb konfiqurasiyalardan yorulmuşduq.",
+    "para2": "Bu gün biz mürəkkəb problemləri zərif həllərlə həll etmək üçün birlikdə çalışan mühəndislərdən, dizaynerlərdən və düşünənlərdən ibarət müxtəlif bir komandayıq.",
+    "val1": "İstifadəçi mərkəzli dizayn fəlsəfəsi",
+    "val2": "Performans birinci arxitekturası",
+    "val3": "Şəffaflıq və açıq kommunikasiya"
+  },
+  "values": {
+    "title": "Dəyərlərimiz",
+    "subtitle": "Qəbul etdiyimiz hər qərarı istiqamətləndirən prinsiplər."
+  },
+  "passion": {
+    "title": "Həvəs",
+    "description": "Biz etdiklərimizi sevirik və bu, məhsulumuzun hər detalında görünür."
+  },
+  "collaboration": {
+    "title": "Əməkdaşlıq",
+    "description": "Birlikdə işləmək ən yaxşı nəticələr verir. Biz möhkəm komandanın gücünə inanırıq."
+  },
+  "innovation": {
+    "title": "İnnovasiya",
+    "description": "Problemləri həll etmək və dəyər yaratmaq üçün həmişə daha yaxşı yollar axtarırıq."
+  },
+  "integrity": {
+    "title": "Dürüstlük",
+    "description": "Ədalət və şəffaflıq qurduğumuz hər bir əlaqənin əsasını təşkil edir."
+  },
+  "excellence": {
+    "title": "Mükəmməllik",
+    "description": "Biz kifayət qədər yaxşı ilə razılaşmırıq. Biz həmişə ən yaxşısına can atırıq."
+  },
+  "quality": {
+    "title": "Keyfiyyət",
+    "description": "Təmiz kod, gözəl dizayn və fasiləsiz təcrübə bizim standartımızdır."
+  },
+  "team": {
+    "title": "Komandamızla Tanış Olun",
+    "subtitle": "Yazdığımız hər kod sətrinin arxasındakı parlaq beyinlər.",
+    "alex_desc": "SaaS ekosisteminin inkişafında 10+ il təcrübəsi olan vizyonar lider.",
+    "sarah_desc": "Miqyaslı sistem arxitekturası qurmağa ixtisaslaşmış Full-stack sehrbaz.",
+    "mike_desc": "Piksel detalları, hamar UX axınları və əlçatanlıq standartları ilə obsesiv.",
+    "jessica_desc": "Brendlərə rəqəmsal dünyada özünəməxsus səs tapmağa kömək edən kreativ nağılçı."
+  },
+  "stats": {
+    "years": "İl Təcrübə",
+    "years_val": "3+",
+    "clients": "Qlobal Müştərilər",
+    "clients_val": "120+",
+    "countries": "Ölkələr",
+    "countries_val": "15",
+    "support": "Ekspert Dəstəyi",
+    "support_val": "24/7"
+  }
+}

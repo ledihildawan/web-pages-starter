@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "title": "ساڈے نال رابطہ کرو | Starter App",
+    "description": "سوالاں تے مدد لئی ساڈے نال رابطہ کرو۔"
+  },
+  "contact": {
+    "badge": "مدد لئی تیار",
+    "title_part1": "آؤ",
+    "title_highlight": "جوڑیئے",
+    "description": "کوئی سوال اے یا تعاون کرنا چاہندے او؟ اسین تہاڈی گل سنن لئی اُتساہت آں۔ سنیہا بھیجو تے اسین جلدی جواب دیواگے۔",
+    "form_title": "سنیہا بھیجو",
+    "form_subtitle": "ہیٹھاں دتا فارم بھرو تے اسین جلدی جواب دیواگے۔",
+    "social_title": "ساڈے نال جڑو",
+    "social_subtitle": "ساڈے سوشل میڈیا راہیں تازہ ترین اپڈیٹ حاصل کرو",
+    "info": {
+      "response_time": {
+        "title": "تیز جواب",
+        "description": "اسین کم والے دناں تے ہر سنیہے دا 24 گھنٹیاں وچ جواب دین دی کوشش کردے آں۔"
+      },
+      "working_hours": {
+        "title": "کم دے گھنٹے",
+        "description": "سوموار - جمعہ: 09:00 - 18:00 PKT۔ ہفتے دے انت: ترجیح مطابق۔"
+      },
+      "support": {
+        "title": "مسلسل مدد",
+        "description": "ساڈی مدد ٹیم ہمیشہ تہاڈیاں تکنیکی مسئلیاں حل کرن لئی تیار اے۔"
+      }
+    },
+    "form": {
+      "name": "ناں",
+      "name_placeholder": "اپنا ناں درج کرو",
+      "email": "ایمیل",
+      "email_placeholder": "ناں@ایمیل.com",
+      "subject": "موضوع",
+      "subject_placeholder": "تسیں کی وچار وٹاندرا کرنا چاہندے او؟",
+      "message": "سنیہا",
+      "message_placeholder": "اپنے سوال بارے ہور دسو...",
+      "submit": "سنیہا بھیجو"
+    }
+  },
+  "email_label": "ایمیل",
+  "email_value": "hello@starter.app",
+  "phone_label": "فون",
+  "phone_value": "+92 300 1234567",
+  "location_label": "ٹکانا",
+  "location_value": "لاہور، پاکستان"
+}

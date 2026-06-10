@@ -1,0 +1,75 @@
+{
+  "hero": {
+    "badge": "Ajralmas imkoniyatlar",
+    "title_part1": "Sizga kerak bo'lgan hamma narsa",
+    "title_highlight": "tezkor masshtablash uchun",
+    "description": "Kuchli analitikadan tortib silliq integratsiyalargacha, biz jahon darajasidagi ilovalarni tashvishsiz yaratish uchun kerak bo'lgan vositalar to'plamini taqdim etamiz."
+  },
+  "features": {
+    "heading": "Ajralmas imkoniyatlar",
+    "subheading": "Qurish va o'sish uchun kerak bo'lgan hamma narsa.",
+    "list": {
+      "speed": {
+        "title": "Juda tez",
+        "description": "100ms dan kam yuklanish vaqti bilan optimal unumdorlik. Edge infratuzilmasi bilan global masshtabga mo'ljallangan."
+      },
+      "design": {
+        "title": "Zamonaviy dizayn",
+        "description": "Barcha qurilmalarda professional ko'rinishga ega responsiv va toza UI. To'liq sozlanishi mumkin bo'lgan komponentlar."
+      },
+      "security": {
+        "title": "Yuqori xavfsizlik",
+        "description": "Uchidan-uchigacha shifrlash, ko'p faktorli autentifikatsiya va ma'lumotlaringizni himoyalash uchun SOC2 mosligi."
+      }
+    }
+  },
+  "sections": {
+    "sync": {
+      "title": "Haqiqiy vaqtda sinxronizatsiya",
+      "description": "O'zgarishlar barcha qurilmalarda bir zumda tarqaladi. Foydalanuvchilaringiz telefonda, kompyuterda yoki planshetda bo'lsin, bir vaqtda bir xil ma'lumotlarni ko'radi.",
+      "check_0": "Millisekunddan kam kechikish",
+      "check_1": "O'rnatilgan oflayn qo'llab-quvvatlash",
+      "check_2": "Konflikt hal qilish"
+    },
+    "analytics": {
+      "title": "Harakatlanadigan analitika",
+      "description": "Taxmin qilmang. Foydalanuvchi xulqi, tizim unumdorligi va daromad metrikalari haqida chuqur tushunchalar oling. Ma'lumotlaringizni interaktiv grafiklar bilan vizualizatsiya qiling.",
+      "check_0": "Moslashtirilishi mumkin bo'lgan boshqaruv paneli",
+      "check_1": "PDF, CSV yoki Excel formatida eksport",
+      "check_2": "Avtomatik haftalik hisobotlar"
+    }
+  },
+  "more_title": "Va yana ko'p narsalar...",
+  "more_subtitle": "Tezkor va masshtablanuvchi qurish uchun mo'ljallangan kuchli imkoniyatlar.",
+  "more": {
+    "dark_mode": {
+      "title": "Qorong'i rejim",
+      "desc": "Avtomatik aniqlash bilan ochiq va qorong'i mavzular uchun o'rnatilgan qo'llab-quvvatlash."
+    },
+    "api_first": {
+      "title": "API First",
+      "desc": "To'liq dasturiy boshqaruv uchun REST va GraphQL API mavjud."
+    },
+    "sso": {
+      "title": "SSO kirish",
+      "desc": "Google, GitHub va Okta uchun korporativ darajadagi Single Sign-On."
+    },
+    "audit": {
+      "title": "Audit jurnali",
+      "desc": "Loyihalaringizdagi har bir o'zgarishni batafsil vaqt belgilari bilan kuzating."
+    },
+    "rbac": {
+      "title": "Rol asosidagi kirish",
+      "desc": "Administratorlar, muharrirlar va ko'ruvchilar uchun donador ruxsat nazorati."
+    },
+    "uptime": {
+      "title": "99.99% ishlash vaqti",
+      "desc": "Global tarqatilgan CDN bilan kafolatlangan mavjudlik."
+    }
+  },
+  "cta": {
+    "heading": "Boshlashga tayyormisiz?",
+    "btn_create": "Hisob yaratish",
+    "btn_docs": "Hujjatlarni o'qish"
+  }
+}

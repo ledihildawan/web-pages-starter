@@ -1,0 +1,17 @@
+{
+  "meta": {
+    "page_title": "Lazy Load Splide Demo | Starter"
+  },
+  "hero": {
+    "slide_1": {
+      "title": "Doğal Tembel Yükleme",
+      "subtitle": "Kota tasarrufu için görseller akıllıca yüklenir.",
+      "alt": "Güzel Dağ Manzarası"
+    },
+    "slide_2": {
+      "title": "Üstün Performans",
+      "subtitle": "Sadece ihtiyacınız olanı yükler.",
+      "alt": "Karlı Dağ Manzarası"
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "period_monthly": "oy",
+  "period_yearly": "yil",
+  "hero": {
+    "badge": "Rejangizni tanlang",
+    "title_part1": "Oddiy va ",
+    "title_highlight": "shaffof narxlar",
+    "description": "Yashirin to'lovlar yo'q. Kutilmagan xarajatlar yo'q. Ehtiyojlaringizga mos rejaning birini tanlang."
+  },
+  "toggle": {
+    "monthly": "Oylik",
+    "yearly": "Yillik",
+    "yearly_hint": "yillik hisob-faktura",
+    "discount": "20% TEJASH",
+    "aria_label": "Narx rejasini almashtirish"
+  },
+  "plans": {
+    "hobby": {
+      "name": "Hobby",
+      "desc": "Yon loyihalar va o'rganish uchun juda mos.",
+      "btn": "Bepul boshlash",
+      "feature_0": "1 loyiha",
+      "feature_1": "Jamiyat qo'llab-quvvatlash",
+      "feature_2": "5GB saqlash joyi"
+    },
+    "pro": {
+      "name": "Pro",
+      "badge": "Eng mashhur",
+      "desc": "Professional dasturchilar va kichik jamoalar uchun.",
+      "btn": "Pro rejasini tanlash",
+      "feature_0": "Cheksiz loyihalar",
+      "feature_1": "Elektron pochta orqali ustuvor yordam",
+      "feature_2": "100GB saqlash joyi",
+      "feature_3": "Kengaytirilgan analitika"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "desc": "Katta masshtabli ilovalar va tashkilotlar uchun.",
+      "btn": "Sotuv bo'limiga murojaat",
+      "feature_0": "Pro rejasidagi barcha imkoniyatlar",
+      "feature_1": "Shaxsiy akkaunt menejeri",
+      "feature_2": "SSO va Audit jurnali",
+      "feature_3": "Cheksiz saqlash joyi"
+    }
+  },
+  "faq": {
+    "title": "Tez-tez beriladigan savollar",
+    "subtitle": "Rejalarimiz va xizmatlarimiz haqida eng ko'p beriladigan savollarga javoblar toping.",
+    "q_0": "Istalgan vaqtda bekor qila olamanmi?",
+    "a_0": "Ha, obunani istalgan vaqtda bekor qilishingiz mumkin. Sizning kirishingiz hisob-kitob davri oxirigacha faol qoladi.",
+    "q_1": "Bepul sinov mavjudmi?",
+    "a_1": "Pro rejasi uchun 14 kunlik bepul sinov taklif etamiz. Boshlash uchun kredit karta kerak emas.",
+    "q_2": "Qanday to'lov usullari mavjud?",
+    "a_2": "Asosiy kredit kartalar va PayPal ni qabul qilamiz. Enterprise uchun bank o'tkazmasini qo'llab-quvvatlaymiz."
+  }
+}

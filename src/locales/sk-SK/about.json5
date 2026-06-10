@@ -1,0 +1,72 @@
+{
+  "hero": {
+    "badge": "O nás",
+    "title_part1": "Vedení ",
+    "title_highlight": "vášňou",
+    "description": "Naša cesta začala jednoduchou myšlienkou."
+  },
+  "mission": {
+    "title": "Naša misia",
+    "description": "Posilniť vývojárov a firmy elegantnými, rýchlymi a jednoduchými nástrojmi na budovanie výnimočných digitálnych produktov."
+  },
+  "vision": {
+    "title": "Naša vízia",
+    "description": "Stať sa platformou voľby pre moderných vývojárov, ktorí si vážia krásu, výkon a používateľský zážitok v každom riadku kódu."
+  },
+  "story": {
+    "tag": "Náš príbeh",
+    "visual_label": "Ilustrácia kreatívneho štúdia",
+    "title": "Vedení vášňou, <br>definovaní excelentnosťou.",
+    "para1": "Naša cesta začala jednoduchou myšlienkou: spraviť web development prístupný a zábavný pre všetkých. Boli sme unavení z ťažkých frameworkov a zložitých konfigurácií.",
+    "para2": "Dnes sme rozmanitý tím inžinierov, dizajnérov a mysliteľov, ktorí spolupracujú na riešení komplexných problémov elegantnými riešeniami.",
+    "val1": "Dizajnová filozofia zameraná na používateľa",
+    "val2": "Architektúra s výkonom na prvom mieste",
+    "val3": "Transparentnosť a otvorená komunikácia"
+  },
+  "values": {
+    "title": "Naše hodnoty",
+    "subtitle": "Princípy, ktoré vedú každé rozhodnutie, ktoré urobíme."
+  },
+  "passion": {
+    "title": "Vášeň",
+    "description": "Milujeme to, čo robíme, a to je vidieť v každom detaile našich produktov."
+  },
+  "collaboration": {
+    "title": "Spolupráca",
+    "description": "Spoločná práca prináša najlepšie výsledky. Veríme v silu silného tímu."
+  },
+  "innovation": {
+    "title": "Inovácie",
+    "description": "Vždy hľadáme lepšie spôsoby, ako riešiť problémy a vytvárať hodnotu."
+  },
+  "integrity": {
+    "title": "Integrita",
+    "description": "Čestnosť a transparentnosť sú základom každého vzťahu, ktorý budujeme."
+  },
+  "excellence": {
+    "title": "Excelentnosť",
+    "description": "Nespokojíme sa s dobrým. Vždy sa snažíme o to najlepšie."
+  },
+  "quality": {
+    "title": "Kvalita",
+    "description": "Čistý kód, krásny dizajn a bezproblémový zážitok sú naše štandardy."
+  },
+  "team": {
+    "title": "Spoznajte tím",
+    "subtitle": "Brilantné mysle za každým riadkom kódu, ktorý píšeme.",
+    "alex_desc": "Vizionársky líder s 10+ rokmi skúseností vo vývoji SaaS ekosystémov.",
+    "sarah_desc": "Full-stack čarodejník špecializujúci sa na budovanie škálovateľných systémových architektúr.",
+    "mike_desc": "Posadnutý pixelovými detailmi, plynulými UX tokmi a štandardmi prístupnosti.",
+    "jessica_desc": "Kreatívny rozprávač, ktorý značkám pomáha nájsť ich jedinečný hlas v digitálnom svete."
+  },
+  "stats": {
+    "years": "Rokov skúseností",
+    "years_val": "3+",
+    "clients": "Globálnych klientov",
+    "clients_val": "120+",
+    "countries": "Pokrytých krajín",
+    "countries_val": "15",
+    "support": "Odborná podpora",
+    "support_val": "24/7"
+  }
+}

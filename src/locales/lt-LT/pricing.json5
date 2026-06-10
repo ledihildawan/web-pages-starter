@@ -1,0 +1,56 @@
+{
+  "period_monthly": "mėn.",
+  "period_yearly": "met.",
+  "hero": {
+    "badge": "Pasirinkite planą",
+    "title_part1": "Paprastos ir ",
+    "title_highlight": "skaidrios kainos",
+    "description": "Jokių paslėptų mokesčių. Jokių netikėtų išlaidų. Pasirinkite planą, geriausiai atitinkantį Jūsų poreikius."
+  },
+  "toggle": {
+    "monthly": "Kas mėnesį",
+    "yearly": "Kas metus",
+    "yearly_hint": "apmokama kas metus",
+    "discount": "SUTAUPYKITE 20%",
+    "aria_label": "Perjungti kainodaros planą"
+  },
+  "plans": {
+    "hobby": {
+      "name": "Hobby",
+      "desc": "Puikiai tinka šalutiniams projektams ir mokymuisi.",
+      "btn": "Nemokamai pradėti",
+      "feature_0": "1 projektas",
+      "feature_1": "Bendruomenės pagalba",
+      "feature_2": "5 GB saugykla"
+    },
+    "pro": {
+      "name": "Pro",
+      "badge": "Populiariausias",
+      "desc": "Profesionaliems kūrėjams ir mažoms komandoms.",
+      "btn": "Pasirinkti Pro planą",
+      "feature_0": "Neriboti projektai",
+      "feature_1": "Prioritetinis el. pašto palaikymas",
+      "feature_2": "100 GB saugykla",
+      "feature_3": "Išsami analizė"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "desc": "Didelio masto programoms ir organizacijoms.",
+      "btn": "Susisiekti su pardavimais",
+      "feature_0": "Visos Pro plano funkcijos",
+      "feature_1": "Skirtas paskyros vadovas",
+      "feature_2": "SSO ir audito žurnalas",
+      "feature_3": "Neribota saugykla"
+    }
+  },
+  "faq": {
+    "title": "Dažnai užduodami klausimai",
+    "subtitle": "Raskite atsakymus į dažniausiai užduodamus klausimus apie mūsų planus ir paslaugas.",
+    "q_0": "Ar galiu atšaukti bet kada?",
+    "a_0": "Taip, galite atšaukti prenumeratą bet kada. Jūsų prieiga išliks aktyvi iki atsiskaitymo laikotarpio pabaigos.",
+    "q_1": "Ar yra nemokama bandomoji versija?",
+    "a_1": "Siūlome 14 dienų nemokamą bandomąją versiją Pro planui. Pradėti nereikia kredito kortelės.",
+    "q_2": "Kokios mokėjimo priemonės yra prieinamos?",
+    "a_2": "Priimame pagrindines kredito korteles ir PayPal. Enterprise planui palaikome banko pavedimus."
+  }
+}
