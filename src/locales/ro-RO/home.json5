@@ -8,23 +8,23 @@
     "title_highlight": "viitorul digital",
     "description": "Fondat în 2024, Starter ajută dezvoltatorii să construiască aplicații mai bune mai rapid. Credem în puterea codului curat, designului frumos și colaborării open source.",
     "primary_btn": {
-      "label": "Get Started Free",
+      "label": "Începe Gratuit",
       "url": "#pricing"
     },
     "secondary_btn": {
-      "label": "View Demo",
+      "label": "Vezi Demo",
       "url": "#features"
     },
-    "note": "No credit card required"
+    "note": "Nu necesită card de credit"
   },
   "stats": {
-    "community": "Global Community",
+    "community": "Comunitate Globală",
     "community_val": "50K+",
-    "projects": "Projects Completed",
+    "projects": "Proiecte Finalizate",
     "projects_val": "120+",
-    "uptime": "Uptime",
+    "uptime": "Disponibilitate",
     "uptime_val": "99.99%",
-    "rating": "Rating",
+    "rating": "Evaluare",
     "rating_val": "4.9/5"
   },
   "story": {
@@ -84,19 +84,19 @@
   "features": {
     "list": {
       "speed": {
-        "title": "Lightning Fast",
-        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+        "title": "Fulgerător",
+        "description": "Performanță optimizată cu timpi de încărcare sub 100ms. Construit pentru scară globală cu infrastructură edge."
       },
       "design": {
-        "title": "Modern Design",
-        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+        "title": "Design Modern",
+        "description": "Interfață curată și responsivă cu aspect profesional pe orice dispozitiv. Componente complet personalizabile."
       },
       "security": {
-        "title": "High Security",
-        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+        "title": "Securitate Ridicată",
+        "description": "Criptare end-to-end, autentificare multifactor și conformitate SOC2 pentru a-ți proteja datele."
       }
     },
-    "heading": "Key Features",
-    "subheading": "Everything you need to build and scale."
+    "heading": "Funcționalități Cheie",
+    "subheading": "Tot ce ai nevoie pentru a construi și scala."
   }
 }

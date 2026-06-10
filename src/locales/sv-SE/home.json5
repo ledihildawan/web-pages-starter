@@ -8,23 +8,23 @@
     "title_highlight": "digitala framtiden",
     "description": "Grundat 2024 hjälper Starter utvecklare att bygga bättre applikationer snabbare. Vi tror på kraften i ren kod, vacker design och öppen källkod-samarbete.",
     "primary_btn": {
-      "label": "Get Started Free",
+      "label": "Kom igång gratis",
       "url": "#pricing"
     },
     "secondary_btn": {
-      "label": "View Demo",
+      "label": "Se demo",
       "url": "#features"
     },
-    "note": "No credit card required"
+    "note": "Inget kreditkort krävs"
   },
   "stats": {
-    "community": "Global Community",
+    "community": "Global gemenskap",
     "community_val": "50K+",
-    "projects": "Projects Completed",
+    "projects": "Genomförda projekt",
     "projects_val": "120+",
-    "uptime": "Uptime",
+    "uptime": "Drifttid",
     "uptime_val": "99.99%",
-    "rating": "Rating",
+    "rating": "Betyg",
     "rating_val": "4.9/5"
   },
   "story": {
@@ -84,19 +84,19 @@
   "features": {
     "list": {
       "speed": {
-        "title": "Lightning Fast",
-        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+        "title": "Blixtsnabbt",
+        "description": "Optimerad prestanda med laddtider under 100 ms. Byggd för global skalning med edge-infrastruktur."
       },
       "design": {
-        "title": "Modern Design",
-        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+        "title": "Modern design",
+        "description": "Ren, responsiv UI som ser professionell ut på alla enheter. Fullt anpassningsbara komponenter."
       },
       "security": {
-        "title": "High Security",
-        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+        "title": "Hög säkerhet",
+        "description": "End-to-end-kryptering, multifaktorautentisering och SOC2-efterlevnad för att skydda dina data."
       }
     },
-    "heading": "Key Features",
-    "subheading": "Everything you need to build and scale."
+    "heading": "Huvudfunktioner",
+    "subheading": "Allt du behöver för att bygga och skala."
   }
 }

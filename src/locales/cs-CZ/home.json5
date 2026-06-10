@@ -8,23 +8,23 @@
     "title_highlight": "digitální budoucnost",
     "description": "Založeno v roce 2024, Starter pomáhá vývojářům stavět lepší aplikace rychleji. Věříme v sílu čistého kódu, krásného designu a spolupráce open source.",
     "primary_btn": {
-      "label": "Get Started Free",
+      "label": "Začněte zdarma",
       "url": "#pricing"
     },
     "secondary_btn": {
-      "label": "View Demo",
+      "label": "Zobrazit demo",
       "url": "#features"
     },
-    "note": "No credit card required"
+    "note": "Nevyžaduje kreditní kartu"
   },
   "stats": {
-    "community": "Global Community",
+    "community": "Globální komunita",
     "community_val": "50K+",
-    "projects": "Projects Completed",
+    "projects": "Dokončených projektů",
     "projects_val": "120+",
-    "uptime": "Uptime",
+    "uptime": "Dostupnost",
     "uptime_val": "99.99%",
-    "rating": "Rating",
+    "rating": "Hodnocení",
     "rating_val": "4.9/5"
   },
   "story": {
@@ -84,19 +84,19 @@
   "features": {
     "list": {
       "speed": {
-        "title": "Lightning Fast",
-        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+        "title": "Bleskově rychlý",
+        "description": "Optimalizovaný výkon s dobou načítání pod 100 ms. Postaveno pro globální škálování s edge infrastrukturou."
       },
       "design": {
-        "title": "Modern Design",
-        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+        "title": "Moderní design",
+        "description": "Čisté, responzivní rozhraní, které vypadá profesionálně na každém zařízení. Plně přizpůsobitelné komponenty."
       },
       "security": {
-        "title": "High Security",
-        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+        "title": "Vysoká bezpečnost",
+        "description": "Komplexní šifrování, vícefaktorová autentizace a soulad se SOC2 pro ochranu vašich dat."
       }
     },
-    "heading": "Key Features",
-    "subheading": "Everything you need to build and scale."
+    "heading": "Klíčové funkce",
+    "subheading": "Vše, co potřebujete pro stavbu a škálování."
   }
 }

@@ -57,19 +57,19 @@
   "features": {
     "list": {
       "speed": {
-        "title": "Lightning Fast",
-        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+        "title": "Fulgerător",
+        "description": "Performanță optimizată cu timpi de încărcare sub 100ms. Construit pentru scară globală cu infrastructură edge."
       },
       "design": {
-        "title": "Modern Design",
-        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+        "title": "Design Modern",
+        "description": "Interfață curată și responsivă cu aspect profesional pe orice dispozitiv. Componente complet personalizabile."
       },
       "security": {
-        "title": "High Security",
-        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+        "title": "Securitate Ridicată",
+        "description": "Criptare end-to-end, autentificare multifactor și conformitate SOC2 pentru a-ți proteja datele."
       }
     },
-    "heading": "Key Features",
-    "subheading": "Everything you need to build and scale."
+    "heading": "Funcționalități Cheie",
+    "subheading": "Tot ce ai nevoie pentru a construi și scala."
   }
 }

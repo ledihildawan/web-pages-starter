@@ -57,19 +57,19 @@
   "features": {
     "list": {
       "speed": {
-        "title": "Lightning Fast",
-        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+        "title": "极速响应",
+        "description": "优化性能，加载时间低于 100 毫秒。基于边缘基础设施构建，面向全球规模。"
       },
       "design": {
-        "title": "Modern Design",
-        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+        "title": "现代设计",
+        "description": "简洁、响应式的 UI，在任何设备上都呈现专业外观。组件完全可定制。"
       },
       "security": {
-        "title": "High Security",
-        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+        "title": "高安全性",
+        "description": "端到端加密、多因素认证和 SOC2 合规，全面保护您的数据。"
       }
     },
-    "heading": "Key Features",
-    "subheading": "Everything you need to build and scale."
+    "heading": "核心功能",
+    "subheading": "构建与扩展所需的一切。"
   }
 }

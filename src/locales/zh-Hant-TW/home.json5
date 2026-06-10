@@ -8,23 +8,23 @@
     "title_highlight": "數字未來",
     "description": "Starter 成立於 2024 年，旨在幫助開發者更快地構建更好的應用程式。我們相信簡潔的代碼、美觀的設計以及開源協作的力量。",
     "primary_btn": {
-      "label": "Get Started Free",
+      "label": "免費開始使用",
       "url": "#pricing"
     },
     "secondary_btn": {
-      "label": "View Demo",
+      "label": "觀看示範",
       "url": "#features"
     },
-    "note": "No credit card required"
+    "note": "免綁信用卡"
   },
   "stats": {
-    "community": "Global Community",
+    "community": "全球社群",
     "community_val": "50K+",
-    "projects": "Projects Completed",
+    "projects": "已完成專案",
     "projects_val": "120+",
-    "uptime": "Uptime",
+    "uptime": "正常運作時間",
     "uptime_val": "99.99%",
-    "rating": "Rating",
+    "rating": "評價",
     "rating_val": "4.9/5"
   },
   "story": {
@@ -84,19 +84,19 @@
   "features": {
     "list": {
       "speed": {
-        "title": "Lightning Fast",
-        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+        "title": "極速飛快",
+        "description": "最佳化效能，載入時間低於 100 毫秒。搭配邊緣基礎設施，為全球規模而打造。"
       },
       "design": {
-        "title": "Modern Design",
-        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+        "title": "現代設計",
+        "description": "簡潔且響應式的 UI，在任何裝置上都呈現專業外觀。元件可完全自訂。"
       },
       "security": {
-        "title": "High Security",
-        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+        "title": "高安全性",
+        "description": "端對端加密、多因素驗證及 SOC2 合規，全面保護您的資料。"
       }
     },
-    "heading": "Key Features",
-    "subheading": "Everything you need to build and scale."
+    "heading": "核心功能",
+    "subheading": "您建構與擴展所需的一切。"
   }
 }

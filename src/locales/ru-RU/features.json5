@@ -57,19 +57,19 @@
   "features": {
     "list": {
       "speed": {
-        "title": "Lightning Fast",
-        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+        "title": "Молниеносная скорость",
+        "description": "Оптимизированная производительность с временем загрузки менее 100 мс. Создано для глобального масштабирования на периферийной инфраструктуре."
       },
       "design": {
-        "title": "Modern Design",
-        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+        "title": "Современный дизайн",
+        "description": "Чистый, адаптивный интерфейс, который выглядит профессионально на любом устройстве. Полностью настраиваемые компоненты."
       },
       "security": {
-        "title": "High Security",
-        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+        "title": "Высокая безопасность",
+        "description": "Сквозное шифрование, многофакторная аутентификация и соответствие SOC2 для защиты ваших данных."
       }
     },
-    "heading": "Key Features",
-    "subheading": "Everything you need to build and scale."
+    "heading": "Ключевые возможности",
+    "subheading": "Всё необходимое для создания и масштабирования."
   }
 }

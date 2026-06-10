@@ -57,19 +57,19 @@
   "features": {
     "list": {
       "speed": {
-        "title": "Lightning Fast",
-        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+        "title": "번개처럼 빠른 속도",
+        "description": "100ms 미만의 로딩 시간으로 최적화된 성능. 엣지 인프라로 글로벌 규모에 대응합니다."
       },
       "design": {
-        "title": "Modern Design",
-        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+        "title": "모던 디자인",
+        "description": "모든 기기에서 전문적으로 보이는 깔끔하고 반응형인 UI. 완전히 커스터마이징 가능한 컴포넌트."
       },
       "security": {
-        "title": "High Security",
-        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+        "title": "강력한 보안",
+        "description": "데이터를 보호하기 위한 종단 간 암호화, 다중 인증 및 SOC2 준수."
       }
     },
-    "heading": "Key Features",
-    "subheading": "Everything you need to build and scale."
+    "heading": "핵심 기능",
+    "subheading": "구축과 확장에 필요한 모든 것."
   }
 }

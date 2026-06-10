@@ -8,23 +8,23 @@
     "title_highlight": "futur digital",
     "description": "Fundat el 2024, Starter ajuda els desenvolupadors a construir aplicacions millors més ràpidament. Creiem en el poder del codi net, el disseny bonic i la col·laboració de codi obert.",
     "primary_btn": {
-      "label": "Get Started Free",
+      "label": "Comença Gratis",
       "url": "#pricing"
     },
     "secondary_btn": {
-      "label": "View Demo",
+      "label": "Veure Demo",
       "url": "#features"
     },
-    "note": "No credit card required"
+    "note": "No cal targeta de crèdit"
   },
   "stats": {
-    "community": "Global Community",
+    "community": "Comunitat Global",
     "community_val": "50K+",
-    "projects": "Projects Completed",
+    "projects": "Projectes Completats",
     "projects_val": "120+",
-    "uptime": "Uptime",
+    "uptime": "Disponibilitat",
     "uptime_val": "99.99%",
-    "rating": "Rating",
+    "rating": "Valoració",
     "rating_val": "4.9/5"
   },
   "story": {
@@ -84,19 +84,19 @@
   "features": {
     "list": {
       "speed": {
-        "title": "Lightning Fast",
-        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+        "title": "Ultraràpid",
+        "description": "Rendiment optimitzat amb temps de càrrega inferiors a 100ms. Construït per a escala global amb infraestructura edge."
       },
       "design": {
-        "title": "Modern Design",
-        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+        "title": "Disseny Modern",
+        "description": "Interfície neta i responsiva amb aspecte professional en qualsevol dispositiu. Components totalment personalitzables."
       },
       "security": {
-        "title": "High Security",
-        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+        "title": "Alta Seguretat",
+        "description": "Xifratge d'extrem a extrem, autenticació multifactor i conformitat SOC2 per protegir les vostres dades."
       }
     },
-    "heading": "Key Features",
-    "subheading": "Everything you need to build and scale."
+    "heading": "Característiques Clau",
+    "subheading": "Tot el que necessiteu per construir i escalar."
   }
 }

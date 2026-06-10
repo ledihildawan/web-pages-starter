@@ -57,19 +57,19 @@
   "features": {
     "list": {
       "speed": {
-        "title": "Lightning Fast",
-        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+        "title": "Lynrask",
+        "description": "Optimalisert ytelse med lastetider under 100 ms. Bygget for global skalering med edge-infrastruktur."
       },
       "design": {
-        "title": "Modern Design",
-        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+        "title": "Moderne design",
+        "description": "Ren, responsiv UI som ser profesjonell ut på alle enheter. Fullt tilpassbare komponenter."
       },
       "security": {
-        "title": "High Security",
-        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+        "title": "Høy sikkerhet",
+        "description": "Ende-til-ende-kryptering, multifaktorautentisering og SOC2-samsvar for å beskytte dataene dine."
       }
     },
-    "heading": "Key Features",
-    "subheading": "Everything you need to build and scale."
+    "heading": "Hovedfunksjoner",
+    "subheading": "Alt du trenger for å bygge og skalere."
   }
 }

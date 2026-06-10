@@ -8,23 +8,23 @@
     "title_highlight": "digitale fremtiden",
     "description": "Grunnlagt i 2024 hjelper Starter utviklere med å bygge bedre applikasjoner raskere. Vi tror på kraften i ren kode, vakkert design og åpen kildekode-samarbeid.",
     "primary_btn": {
-      "label": "Get Started Free",
+      "label": "Kom i gang gratis",
       "url": "#pricing"
     },
     "secondary_btn": {
-      "label": "View Demo",
+      "label": "Se demo",
       "url": "#features"
     },
-    "note": "No credit card required"
+    "note": "Ingen kredittkort påkrevd"
   },
   "stats": {
-    "community": "Global Community",
+    "community": "Globalt fellesskap",
     "community_val": "50K+",
-    "projects": "Projects Completed",
+    "projects": "Gjennomførte prosjekter",
     "projects_val": "120+",
-    "uptime": "Uptime",
+    "uptime": "Oppetid",
     "uptime_val": "99.99%",
-    "rating": "Rating",
+    "rating": "Vurdering",
     "rating_val": "4.9/5"
   },
   "story": {
@@ -84,19 +84,19 @@
   "features": {
     "list": {
       "speed": {
-        "title": "Lightning Fast",
-        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+        "title": "Lynrask",
+        "description": "Optimalisert ytelse med lastetider under 100 ms. Bygget for global skalering med edge-infrastruktur."
       },
       "design": {
-        "title": "Modern Design",
-        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+        "title": "Moderne design",
+        "description": "Ren, responsiv UI som ser profesjonell ut på alle enheter. Fullt tilpassbare komponenter."
       },
       "security": {
-        "title": "High Security",
-        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+        "title": "Høy sikkerhet",
+        "description": "Ende-til-ende-kryptering, multifaktorautentisering og SOC2-samsvar for å beskytte dataene dine."
       }
     },
-    "heading": "Key Features",
-    "subheading": "Everything you need to build and scale."
+    "heading": "Hovedfunksjoner",
+    "subheading": "Alt du trenger for å bygge og skalere."
   }
 }

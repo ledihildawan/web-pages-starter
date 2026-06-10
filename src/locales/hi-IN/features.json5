@@ -57,19 +57,19 @@
   "features": {
     "list": {
       "speed": {
-        "title": "Lightning Fast",
-        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+        "title": "बिजली की तेज़ी",
+        "description": "100ms से कम लोड समय के साथ अनुकूलित प्रदर्शन। Edge इंफ्रास्ट्रक्चर के साथ वैश्विक स्केल के लिए बनाया गया।"
       },
       "design": {
-        "title": "Modern Design",
-        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+        "title": "आधुनिक डिज़ाइन",
+        "description": "साफ़, responsive UI जो हर डिवाइस पर प्रोफेशनल दिखता है। पूरी तरह customizable कंपोनेंट्स।"
       },
       "security": {
-        "title": "High Security",
-        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+        "title": "उच्च सुरक्षा",
+        "description": "End-to-end एन्क्रिप्शन, multi-factor authentication और SOC2 अनुपालन आपके डेटा की सुरक्षा के लिए।"
       }
     },
-    "heading": "Key Features",
-    "subheading": "Everything you need to build and scale."
+    "heading": "मुख्य विशेषताएं",
+    "subheading": "बनाने और स्केल करने के लिए आपको जो कुछ भी चाहिए।"
   }
 }

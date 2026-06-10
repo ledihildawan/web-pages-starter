@@ -57,19 +57,19 @@
   "features": {
     "list": {
       "speed": {
-        "title": "Lightning Fast",
-        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+        "title": "Αστραπιαία ταχύτητα",
+        "description": "Βελτιστοποιημένη απόδοση με χρόνο φόρτωσης κάτω από 100 ms. Κατασκευασμένο για παγκόσμια κλιμάκωση με edge υποδομή."
       },
       "design": {
-        "title": "Modern Design",
-        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+        "title": "Σύγχρονος σχεδιασμός",
+        "description": "Καθαρό, responsive περιβάλλον που φαίνεται επαγγελματικό σε κάθε συσκευή. Πλήρως προσαρμόσιμα στοιχεία."
       },
       "security": {
-        "title": "High Security",
-        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+        "title": "Υψηλή ασφάλεια",
+        "description": "Κρυπτογράφηση end-to-end, πολυπαραγοντική αυθεντικοποίηση και συμμόρφωση SOC2 για την προστασία των δεδομένων σας."
       }
     },
-    "heading": "Key Features",
-    "subheading": "Everything you need to build and scale."
+    "heading": "Βασικά χαρακτηριστικά",
+    "subheading": "Όλα όσα χρειάζεστε για δημιουργία και κλιμάκωση."
   }
 }

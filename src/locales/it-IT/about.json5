@@ -1,72 +1,72 @@
 {
   "hero": {
-    "badge": "Tentang Kami",
-    "title_part1": "Digerakkan oleh ",
-    "title_highlight": "passion",
-    "description": "Perjalanan kami dimulai dengan ide sederhana."
+    "badge": "Chi siamo",
+    "title_part1": "Spinti dalla ",
+    "title_highlight": "passione",
+    "description": "Il nostro viaggio è iniziato con un'idea semplice."
   },
   "mission": {
-    "title": "Misi Kami",
-    "description": "Memberdayakan pengembang dan bisnis dengan alat yang elegan, cepat, dan mudah digunakan untuk membangun produk digital yang luar biasa."
+    "title": "La nostra missione",
+    "description": "Fornire a sviluppatori e aziende strumenti eleganti, veloci e facili da usare per costruire prodotti digitali eccezionali."
   },
   "vision": {
-    "title": "Visi Kami",
-    "description": "Menjadi platform pilihan untuk pengembang modern yang menghargai keindahan, performa, dan pengalaman pengguna di setiap baris kode."
+    "title": "La nostra visione",
+    "description": "Diventare la piattaforma preferita dagli sviluppatori moderni che apprezzano la bellezza, le prestazioni e l'esperienza utente in ogni riga di codice."
   },
   "story": {
-    "tag": "Cerita Kami",
-    "visual_label": "Ilustrasi Studio Kreatif",
-    "title": "Digerakkan oleh passion, <br>didefinisikan oleh keunggulan.",
-    "para1": "Perjalanan kami dimulai dengan ide sederhana: membuat pengembangan web dapat diakses dan menyenangkan untuk semua orang. Kami sudah lelah dengan framework yang berat dan konfigurasi yang rumit.",
-    "para2": "Hari ini, kami adalah tim yang beragam dari engineer, desainer, dan pemikir yang bekerja sama untuk memecahkan masalah kompleks dengan solusi yang elegan.",
-    "val1": "Filosofi desain user-centric",
-    "val2": "Arsitektur performance-first",
-    "val3": "Transparansi dan komunikasi terbuka"
+    "tag": "La nostra storia",
+    "visual_label": "Illustrazione di studio creativo",
+    "title": "Spinti dalla passione, <br>definiti dall'eccellenza.",
+    "para1": "Il nostro viaggio è iniziato con un'idea semplice: rendere lo sviluppo web accessibile e divertente per tutti. Eravamo stufi dei framework pesanti e delle configurazioni complicate.",
+    "para2": "Oggi, siamo un team diversificato di ingegneri, designer e pensatori che lavorano insieme per risolvere problemi complessi con soluzioni eleganti.",
+    "val1": "Filosofia di design incentrata sull'utente",
+    "val2": "Architettura performance-first",
+    "val3": "Trasparenza e comunicazione aperta"
   },
   "values": {
-    "title": "Nilai-Nilai Kami",
-    "subtitle": "Prinsip yang memandu setiap keputusan yang kami buat."
+    "title": "I nostri valori",
+    "subtitle": "I principi che guidano ogni decisione che prendiamo."
   },
   "passion": {
-    "title": "Passion",
-    "description": "Kami mencintai apa yang kami lakukan, dan itu terlihat di setiap detail produk kami."
+    "title": "Passione",
+    "description": "Amiamo ciò che facciamo, e si vede in ogni dettaglio dei nostri prodotti."
   },
   "collaboration": {
-    "title": "Kolaborasi",
-    "description": "Bekerja sama menghasilkan hasil terbaik. Kami percaya pada kekuatan tim yang solid."
+    "title": "Collaborazione",
+    "description": "Lavorare insieme produce i migliori risultati. Crediamo nel potere di un team coeso."
   },
   "innovation": {
-    "title": "Inovasi",
-    "description": "Selalu mencari cara yang lebih baik untuk memecahkan masalah dan menciptakan nilai."
+    "title": "Innovazione",
+    "description": "Cerchiamo sempre modi migliori per risolvere i problemi e creare valore."
   },
   "integrity": {
-    "title": "Integritas",
-    "description": "Kejujuran dan transparansi adalah fondasi setiap hubungan yang kami bangun."
+    "title": "Integrità",
+    "description": "L'onestà e la trasparenza sono il fondamento di ogni relazione che costruiamo."
   },
   "excellence": {
-    "title": "Keunggulan",
-    "description": "Kami tidak puas dengan cukup baik. Kami selalu berusaha untuk yang terbaik."
+    "title": "Eccellenza",
+    "description": "Non ci accontentiamo del 'sufficiente'. Puntiamo sempre al meglio."
   },
   "quality": {
-    "title": "Kualitas",
-    "description": "Kode yang bersih, desain yang indah, dan pengalaman yang seamless adalah standar kami."
+    "title": "Qualità",
+    "description": "Codice pulito, design elegante ed esperienza perfetta sono il nostro standard."
   },
   "team": {
-    "title": "Kenali Tim",
-    "subtitle": "Pikiran cemerlang di balik setiap baris kode yang kami tulis.",
-    "alex_desc": "Pemimpin visioner dengan pengalaman 10+ tahun dalam pengembangan ekosistem SaaS.",
-    "sarah_desc": "Full-stack wizard yang mengkhususkan diri dalam membangun arsitektur sistem berskala besar.",
-    "mike_desc": "Terobsesi dengan detail pixel, alur UX yang halus, dan standar aksesibilitas.",
-    "jessica_desc": "Pencerita kreatif yang membantu merek menemukan suara unik mereka di dunia digital."
+    "title": "Conosci il team",
+    "subtitle": "Le menti brillanti dietro ogni riga di codice che scriviamo.",
+    "alex_desc": "Leader visionario con oltre 10 anni di esperienza nello sviluppo di ecosistemi SaaS.",
+    "sarah_desc": "Magia full-stack specializzata nella costruzione di architetture di sistemi su larga scala.",
+    "mike_desc": "Ossessionato dai dettagli dei pixel, dai flussi UX fluidi e dagli standard di accessibilità.",
+    "jessica_desc": "Cantastorie creativa che aiuta i brand a trovare la loro voce unica nel mondo digitale."
   },
   "stats": {
-    "years": "Tahun Pengalaman",
+    "years": "Anni di Esperienza",
     "years_val": "3+",
-    "clients": "Klien Global",
+    "clients": "Clienti Globali",
     "clients_val": "120+",
-    "countries": "Negara yang Dijangkau",
+    "countries": "Paesi Raggiunti",
     "countries_val": "15",
-    "support": "Support Ahli",
+    "support": "Supporto Esperto",
     "support_val": "24/7"
   }
 }

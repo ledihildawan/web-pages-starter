@@ -1,72 +1,72 @@
 {
   "hero": {
-    "badge": "Tentang Kami",
-    "title_part1": "Digerakkan oleh ",
-    "title_highlight": "passion",
-    "description": "Perjalanan kami dimulai dengan ide sederhana."
+    "badge": "Tietoa meistä",
+    "title_part1": "Voimamme on ",
+    "title_highlight": "intohimo",
+    "description": "Matkamme alkoi yksinkertaisella idealla."
   },
   "mission": {
-    "title": "Misi Kami",
-    "description": "Memberdayakan pengembang dan bisnis dengan alat yang elegan, cepat, dan mudah digunakan untuk membangun produk digital yang luar biasa."
+    "title": "Tehtävämme",
+    "description": "Valtuuttaa kehittäjiä ja yrityksiä eleganteilla, nopeilla ja helppokäyttöisillä työkaluilla poikkeuksellisten digitaalisten tuotteiden rakentamiseen."
   },
   "vision": {
-    "title": "Visi Kami",
-    "description": "Menjadi platform pilihan untuk pengembang modern yang menghargai keindahan, performa, dan pengalaman pengguna di setiap baris kode."
+    "title": "Visiomme",
+    "description": "Tulla modernien kehittäjien valitsemaksi alustaksi, jotka arvostavat kauneutta, suorituskykyä ja käyttäjäkokemusta jokaisella koodirivillä."
   },
   "story": {
-    "tag": "Cerita Kami",
-    "visual_label": "Ilustrasi Studio Kreatif",
-    "title": "Digerakkan oleh passion, <br>didefinisikan oleh keunggulan.",
-    "para1": "Perjalanan kami dimulai dengan ide sederhana: membuat pengembangan web dapat diakses dan menyenangkan untuk semua orang. Kami sudah lelah dengan framework yang berat dan konfigurasi yang rumit.",
-    "para2": "Hari ini, kami adalah tim yang beragam dari engineer, desainer, dan pemikir yang bekerja sama untuk memecahkan masalah kompleks dengan solusi yang elegan.",
-    "val1": "Filosofi desain user-centric",
-    "val2": "Arsitektur performance-first",
-    "val3": "Transparansi dan komunikasi terbuka"
+    "tag": "Tarinamme",
+    "visual_label": "Luovan studion kuva",
+    "title": "Intohimon ajamia, <br>erinomaisuuden määrittelemiä.",
+    "para1": "Matkamme alkoi yksinkertaisella idealla: tehdä web-kehityksestä saavutettavaa ja hauskaa kaikille. Olimme kyllästyneitä raskaisiin kehyksiin ja monimutkaisiin asetuksiin.",
+    "para2": "Nykyään olemme monimuotoinen tiimi insinöörejä, suunnittelijoita ja ajattelijoita, jotka työskentelevät yhdessä ratkaistakseen monimutkaisia ongelmia eleganteilla ratkaisuilla.",
+    "val1": "Käyttäjäkeskeinen muotoilufilosofia",
+    "val2": "Suorituskyky edellä -arkkitehtuuri",
+    "val3": "Avoimuus ja avoin viestintä"
   },
   "values": {
-    "title": "Nilai-Nilai Kami",
-    "subtitle": "Prinsip yang memandu setiap keputusan yang kami buat."
+    "title": "Arvomme",
+    "subtitle": "Periaatteet, jotka ohjaavat jokaista päätöstämme."
   },
   "passion": {
-    "title": "Passion",
-    "description": "Kami mencintai apa yang kami lakukan, dan itu terlihat di setiap detail produk kami."
+    "title": "Intohimo",
+    "description": "Rakastamme sitä, mitä teemme, ja se näkyy tuotteidemme jokaisessa yksityiskohdassa."
   },
   "collaboration": {
-    "title": "Kolaborasi",
-    "description": "Bekerja sama menghasilkan hasil terbaik. Kami percaya pada kekuatan tim yang solid."
+    "title": "Yhteistyö",
+    "description": "Yhdessä työskentely tuottaa parhaat tulokset. Uskomme vahvan tiimin voimaan."
   },
   "innovation": {
-    "title": "Inovasi",
-    "description": "Selalu mencari cara yang lebih baik untuk memecahkan masalah dan menciptakan nilai."
+    "title": "Innovaatio",
+    "description": "Etsimme aina parempia tapoja ratkaista ongelmia ja luoda arvoa."
   },
   "integrity": {
-    "title": "Integritas",
-    "description": "Kejujuran dan transparansi adalah fondasi setiap hubungan yang kami bangun."
+    "title": "Rehellisyys",
+    "description": "Rehellisyys ja avoimuus ovat jokaisen rakentamamme suhteen perusta."
   },
   "excellence": {
-    "title": "Keunggulan",
-    "description": "Kami tidak puas dengan cukup baik. Kami selalu berusaha untuk yang terbaik."
+    "title": "Erinomaisuus",
+    "description": "Emme tyydy 'riittävän hyvään'. Pyrimme aina parhaaseen."
   },
   "quality": {
-    "title": "Kualitas",
-    "description": "Kode yang bersih, desain yang indah, dan pengalaman yang seamless adalah standar kami."
+    "title": "Laatu",
+    "description": "Puhdas koodi, kaunis muotoilu ja saumaton kokemus ovat standardimme."
   },
   "team": {
-    "title": "Kenali Tim",
-    "subtitle": "Pikiran cemerlang di balik setiap baris kode yang kami tulis.",
-    "alex_desc": "Pemimpin visioner dengan pengalaman 10+ tahun dalam pengembangan ekosistem SaaS.",
-    "sarah_desc": "Full-stack wizard yang mengkhususkan diri dalam membangun arsitektur sistem berskala besar.",
-    "mike_desc": "Terobsesi dengan detail pixel, alur UX yang halus, dan standar aksesibilitas.",
-    "jessica_desc": "Pencerita kreatif yang membantu merek menemukan suara unik mereka di dunia digital."
+    "title": "Tapaa tiimi",
+    "subtitle": "Loistavat mielet jokaisen kirjoittamamme koodirivin takana.",
+    "alex_desc": "Visionäärinen johtaja, jolla on yli 10 vuoden kokemus SaaS-ekosysteemien kehittämisestä.",
+    "sarah_desc": "Fullstack-taikuutta erikoistuen suuren mittakaavan järjestelmäarkkitehtuurien rakentamiseen.",
+    "mike_desc": "Pakkomielteinen pikselien yksityiskohdista, sujuvista UX-virroista ja saavutettavuusstandardeista.",
+    "jessica_desc": "Luova tarinankertoja, joka auttaa brändejä löytämään ainutlaatuisen äänensä digitaalisessa maailmassa."
   },
   "stats": {
-    "years": "Tahun Pengalaman",
+    "years": "Vuoden kokemus",
     "years_val": "3+",
-    "clients": "Klien Global",
+    "clients": "Globaalit asiakkaat",
     "clients_val": "120+",
-    "countries": "Negara yang Dijangkau",
+    "countries": "Tavoitetut maat",
     "countries_val": "15",
-    "support": "Support Ahli",
+    "support": "Asiantuntijatuki",
     "support_val": "24/7"
   }
 }

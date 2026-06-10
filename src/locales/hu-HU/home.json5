@@ -8,23 +8,23 @@
     "title_highlight": "digitális jövőt építjük",
     "description": "A 2024-ben alapított Starter segít a fejlesztőknek jobb alkalmazásokat gyorsabban építeni. Hiszünk a tiszta kód, a gyönyörű dizájn és a nyílt forráskódú együttműködés erejében.",
     "primary_btn": {
-      "label": "Get Started Free",
+      "label": "Kezdd ingyen",
       "url": "#pricing"
     },
     "secondary_btn": {
-      "label": "View Demo",
+      "label": "Demó megtekintése",
       "url": "#features"
     },
-    "note": "No credit card required"
+    "note": "Nem szükséges hitelkártya"
   },
   "stats": {
-    "community": "Global Community",
+    "community": "Globális közösség",
     "community_val": "50K+",
-    "projects": "Projects Completed",
+    "projects": "Befejezett projektek",
     "projects_val": "120+",
-    "uptime": "Uptime",
+    "uptime": "Rendelkezésre állás",
     "uptime_val": "99.99%",
-    "rating": "Rating",
+    "rating": "Értékelés",
     "rating_val": "4.9/5"
   },
   "story": {
@@ -84,19 +84,19 @@
   "features": {
     "list": {
       "speed": {
-        "title": "Lightning Fast",
-        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+        "title": "Villámgyors",
+        "description": "Optimalizált teljesítmény 100 ms alatti betöltési idővel. Globális skálázásra építve edge infrastruktúrával."
       },
       "design": {
-        "title": "Modern Design",
-        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+        "title": "Modern dizájn",
+        "description": "Tiszta, reszponzív felület, amely professzionálisan néz ki minden eszközön. Teljesen testreszabható komponensek."
       },
       "security": {
-        "title": "High Security",
-        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+        "title": "Magas biztonság",
+        "description": "Végpontok közötti titkosítás, többfaktoros hitelesítés és SOC2 megfelelőség az adataid védelmében."
       }
     },
-    "heading": "Key Features",
-    "subheading": "Everything you need to build and scale."
+    "heading": "Kiemelt funkciók",
+    "subheading": "Minden, amire az építéshez és skálázáshoz szükséged van."
   }
 }

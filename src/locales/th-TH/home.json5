@@ -8,23 +8,23 @@
     "title_highlight": "อนาคตดิจิทัล",
     "description": "ก่อตั้งในปี 2024 Starter มีจุดมุ่งหมายเพื่อช่วยนักพัฒนาสร้างแอปที่ดีขึ้นได้เร็วขึ้น เราเชื่อในพลังของโค้ดที่สะอาด การออกแบบที่สวยงาม และการทำงานร่วมกันแบบ open source",
     "primary_btn": {
-      "label": "Get Started Free",
+      "label": "เริ่มใช้งานฟรี",
       "url": "#pricing"
     },
     "secondary_btn": {
-      "label": "View Demo",
+      "label": "ดูตัวอย่าง",
       "url": "#features"
     },
-    "note": "No credit card required"
+    "note": "ไม่ต้องใช้บัตรเครดิต"
   },
   "stats": {
-    "community": "Global Community",
+    "community": "ชุมชนทั่วโลก",
     "community_val": "50K+",
-    "projects": "Projects Completed",
+    "projects": "โปรเจกต์ที่เสร็จสมบูรณ์",
     "projects_val": "120+",
-    "uptime": "Uptime",
+    "uptime": "เวลาทำงาน",
     "uptime_val": "99.99%",
-    "rating": "Rating",
+    "rating": "คะแนน",
     "rating_val": "4.9/5"
   },
   "story": {
@@ -84,19 +84,19 @@
   "features": {
     "list": {
       "speed": {
-        "title": "Lightning Fast",
-        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+        "title": "รวดเร็วปานสายฟ้า",
+        "description": "ประสิทธิภาพที่เหมาะสมด้วยเวลาโหลดต่ำกว่า 100ms สร้างขึ้นเพื่อขยายขนาดทั่วโลกด้วยโครงสร้างพื้นฐานแบบ Edge"
       },
       "design": {
-        "title": "Modern Design",
-        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+        "title": "การออกแบบสมัยใหม่",
+        "description": "UI ที่สะอาดตาและตอบสนอง ดูเป็นมืออาชีพบนทุกอุปกรณ์ คอมโพเนนต์ที่ปรับแต่งได้เต็มรูปแบบ"
       },
       "security": {
-        "title": "High Security",
-        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+        "title": "ความปลอดภัยระดับสูง",
+        "description": "การเข้ารหัสแบบ End-to-end, การยืนยันตัวตนหลายชั้น และการปฏิบัติตาม SOC2 เพื่อปกป้องข้อมูลของคุณ"
       }
     },
-    "heading": "Key Features",
-    "subheading": "Everything you need to build and scale."
+    "heading": "ฟีเจอร์หลัก",
+    "subheading": "ทุกอย่างที่คุณต้องการเพื่อสร้างและขยายธุรกิจ"
   }
 }

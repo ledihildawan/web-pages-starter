@@ -57,19 +57,19 @@
   "features": {
     "list": {
       "speed": {
-        "title": "Lightning Fast",
-        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+        "title": "Villámgyors",
+        "description": "Optimalizált teljesítmény 100 ms alatti betöltési idővel. Globális skálázásra építve edge infrastruktúrával."
       },
       "design": {
-        "title": "Modern Design",
-        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+        "title": "Modern dizájn",
+        "description": "Tiszta, reszponzív felület, amely professzionálisan néz ki minden eszközön. Teljesen testreszabható komponensek."
       },
       "security": {
-        "title": "High Security",
-        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+        "title": "Magas biztonság",
+        "description": "Végpontok közötti titkosítás, többfaktoros hitelesítés és SOC2 megfelelőség az adataid védelmében."
       }
     },
-    "heading": "Key Features",
-    "subheading": "Everything you need to build and scale."
+    "heading": "Kiemelt funkciók",
+    "subheading": "Minden, amire az építéshez és skálázáshoz szükséged van."
   }
 }

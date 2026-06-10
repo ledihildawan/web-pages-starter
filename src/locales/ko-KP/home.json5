@@ -8,23 +8,23 @@
     "title_highlight": "디지털 미래",
     "description": "2024년에 설립된 Starter는 개발자가 더 나은 애플리케이션을 더 빠르게 구축할 수 있도록 돕기 위해 존재합니다. 우리는 깔끔한 코드와 아름다운 디자인의 힘을 믿습니다.",
     "primary_btn": {
-      "label": "Get Started Free",
+      "label": "무료로 시작하기",
       "url": "#pricing"
     },
     "secondary_btn": {
-      "label": "View Demo",
+      "label": "실연 보기",
       "url": "#features"
     },
-    "note": "No credit card required"
+    "note": "신용카드 필요없음"
   },
   "stats": {
-    "community": "Global Community",
+    "community": "세계적 공동체",
     "community_val": "50K+",
-    "projects": "Projects Completed",
+    "projects": "완성된 과업",
     "projects_val": "120+",
-    "uptime": "Uptime",
+    "uptime": "가동률",
     "uptime_val": "99.99%",
-    "rating": "Rating",
+    "rating": "평점",
     "rating_val": "4.9/5"
   },
   "story": {
@@ -84,19 +84,19 @@
   "features": {
     "list": {
       "speed": {
-        "title": "Lightning Fast",
-        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+        "title": "번개같이 빠른 속도",
+        "description": "100ms 미만의 적재시간으로 최적화된 성능. 세계적 규모에 대응하는 에지 기반시설로 구축."
       },
       "design": {
-        "title": "Modern Design",
-        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+        "title": "현대적 설계",
+        "description": "모든 장치에서 전문적으로 보이는 깔끔하고 반응형인 UI. 완전히 정의할 수 있는 구성부품."
       },
       "security": {
-        "title": "High Security",
-        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+        "title": "강력한 보안",
+        "description": "자료를 보호하기 위한 종단간 암호화, 다중 인증 및 SOC2 준수."
       }
     },
-    "heading": "Key Features",
-    "subheading": "Everything you need to build and scale."
+    "heading": "핵심 기능",
+    "subheading": "구축과 확장에 필요한 모든 것."
   }
 }

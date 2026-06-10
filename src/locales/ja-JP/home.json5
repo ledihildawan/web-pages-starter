@@ -8,23 +8,23 @@
     "title_highlight": "デジタルの未来",
     "description": "2024年設立、Starterは開発者がより良いアプリケーションをより速く構築できるように存在します。私たちは、クリーンなコード、美しいデザイン、オープンソースのコラボレーションの力を信じています。",
     "primary_btn": {
-      "label": "Get Started Free",
+      "label": "無料で始める",
       "url": "#pricing"
     },
     "secondary_btn": {
-      "label": "View Demo",
+      "label": "デモを見る",
       "url": "#features"
     },
-    "note": "No credit card required"
+    "note": "クレジットカード不要"
   },
   "stats": {
-    "community": "Global Community",
+    "community": "グローバルコミュニティ",
     "community_val": "50K+",
-    "projects": "Projects Completed",
+    "projects": "完了プロジェクト",
     "projects_val": "120+",
-    "uptime": "Uptime",
+    "uptime": "稼働率",
     "uptime_val": "99.99%",
-    "rating": "Rating",
+    "rating": "評価",
     "rating_val": "4.9/5"
   },
   "story": {
@@ -84,19 +84,19 @@
   "features": {
     "list": {
       "speed": {
-        "title": "Lightning Fast",
-        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+        "title": "圧倒的なスピード",
+        "description": "100ミリ秒未満の読み込み時間を実現する最適化されたパフォーマンス。エッジインフラによるグローバルスケールに対応。"
       },
       "design": {
-        "title": "Modern Design",
-        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+        "title": "モダンなデザイン",
+        "description": "あらゆるデバイスでプロフェッショナルに見える、クリーンでレスポンシブなUI。完全にカスタマイズ可能なコンポーネント。"
       },
       "security": {
-        "title": "High Security",
-        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+        "title": "高いセキュリティ",
+        "description": "データを保護するためのエンドツーエンド暗号化、多要素認証、SOC2コンプライアンス。"
       }
     },
-    "heading": "Key Features",
-    "subheading": "Everything you need to build and scale."
+    "heading": "主な機能",
+    "subheading": "構築とスケールに必要なすべてが揃っています。"
   }
 }

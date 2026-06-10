@@ -57,19 +57,19 @@
   "features": {
     "list": {
       "speed": {
-        "title": "Lightning Fast",
-        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+        "title": "圧倒的なスピード",
+        "description": "100ミリ秒未満の読み込み時間を実現する最適化されたパフォーマンス。エッジインフラによるグローバルスケールに対応。"
       },
       "design": {
-        "title": "Modern Design",
-        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+        "title": "モダンなデザイン",
+        "description": "あらゆるデバイスでプロフェッショナルに見える、クリーンでレスポンシブなUI。完全にカスタマイズ可能なコンポーネント。"
       },
       "security": {
-        "title": "High Security",
-        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+        "title": "高いセキュリティ",
+        "description": "データを保護するためのエンドツーエンド暗号化、多要素認証、SOC2コンプライアンス。"
       }
     },
-    "heading": "Key Features",
-    "subheading": "Everything you need to build and scale."
+    "heading": "主な機能",
+    "subheading": "構築とスケールに必要なすべてが揃っています。"
   }
 }

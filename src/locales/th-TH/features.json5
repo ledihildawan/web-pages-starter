@@ -57,19 +57,19 @@
   "features": {
     "list": {
       "speed": {
-        "title": "Lightning Fast",
-        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+        "title": "รวดเร็วปานสายฟ้า",
+        "description": "ประสิทธิภาพที่เหมาะสมด้วยเวลาโหลดต่ำกว่า 100ms สร้างขึ้นเพื่อขยายขนาดทั่วโลกด้วยโครงสร้างพื้นฐานแบบ Edge"
       },
       "design": {
-        "title": "Modern Design",
-        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+        "title": "การออกแบบสมัยใหม่",
+        "description": "UI ที่สะอาดตาและตอบสนอง ดูเป็นมืออาชีพบนทุกอุปกรณ์ คอมโพเนนต์ที่ปรับแต่งได้เต็มรูปแบบ"
       },
       "security": {
-        "title": "High Security",
-        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+        "title": "ความปลอดภัยระดับสูง",
+        "description": "การเข้ารหัสแบบ End-to-end, การยืนยันตัวตนหลายชั้น และการปฏิบัติตาม SOC2 เพื่อปกป้องข้อมูลของคุณ"
       }
     },
-    "heading": "Key Features",
-    "subheading": "Everything you need to build and scale."
+    "heading": "ฟีเจอร์หลัก",
+    "subheading": "ทุกอย่างที่คุณต้องการเพื่อสร้างและขยายธุรกิจ"
   }
 }

@@ -1,72 +1,72 @@
 {
   "hero": {
-    "badge": "Tentang Kami",
-    "title_part1": "Digerakkan oleh ",
-    "title_highlight": "passion",
-    "description": "Perjalanan kami dimulai dengan ide sederhana."
+    "badge": "Despre noi",
+    "title_part1": "Ghidați de ",
+    "title_highlight": "pasiune",
+    "description": "Călătoria noastră a început cu o idee simplă."
   },
   "mission": {
-    "title": "Misi Kami",
-    "description": "Memberdayakan pengembang dan bisnis dengan alat yang elegan, cepat, dan mudah digunakan untuk membangun produk digital yang luar biasa."
+    "title": "Misiunea noastră",
+    "description": "Să oferim dezvoltatorilor și companiilor unelte elegante, rapide și ușor de folosit pentru a construi produse digitale excepționale."
   },
   "vision": {
-    "title": "Visi Kami",
-    "description": "Menjadi platform pilihan untuk pengembang modern yang menghargai keindahan, performa, dan pengalaman pengguna di setiap baris kode."
+    "title": "Viziunea noastră",
+    "description": "Să devenim platforma preferată pentru dezvoltatorii moderni care apreciază frumusețea, performanța și experiența utilizatorului în fiecare linie de cod."
   },
   "story": {
-    "tag": "Cerita Kami",
-    "visual_label": "Ilustrasi Studio Kreatif",
-    "title": "Digerakkan oleh passion, <br>didefinisikan oleh keunggulan.",
-    "para1": "Perjalanan kami dimulai dengan ide sederhana: membuat pengembangan web dapat diakses dan menyenangkan untuk semua orang. Kami sudah lelah dengan framework yang berat dan konfigurasi yang rumit.",
-    "para2": "Hari ini, kami adalah tim yang beragam dari engineer, desainer, dan pemikir yang bekerja sama untuk memecahkan masalah kompleks dengan solusi yang elegan.",
-    "val1": "Filosofi desain user-centric",
-    "val2": "Arsitektur performance-first",
-    "val3": "Transparansi dan komunikasi terbuka"
+    "tag": "Povestea noastră",
+    "visual_label": "Ilustrație de studio creativ",
+    "title": "Ghidați de pasiune, <br>definiți de excelență.",
+    "para1": "Călătoria noastră a început cu o idee simplă: să facem dezvoltarea web accesibilă și distractivă pentru toată lumea. Eram sătui de framework-uri grele și configurații complicate.",
+    "para2": "Astăzi, suntem o echipă diversificată de ingineri, designeri și gânditori care lucrează împreună pentru a rezolva probleme complexe cu soluții elegante.",
+    "val1": "Filosofie de design centrată pe utilizator",
+    "val2": "Arhitectură cu accent pe performanță",
+    "val3": "Transparență și comunicare deschisă"
   },
   "values": {
-    "title": "Nilai-Nilai Kami",
-    "subtitle": "Prinsip yang memandu setiap keputusan yang kami buat."
+    "title": "Valorile noastre",
+    "subtitle": "Principiile care ghidează fiecare decizie pe care o luăm."
   },
   "passion": {
-    "title": "Passion",
-    "description": "Kami mencintai apa yang kami lakukan, dan itu terlihat di setiap detail produk kami."
+    "title": "Pasiune",
+    "description": "Iubim ceea ce facem, și se vede în fiecare detaliu al produselor noastre."
   },
   "collaboration": {
-    "title": "Kolaborasi",
-    "description": "Bekerja sama menghasilkan hasil terbaik. Kami percaya pada kekuatan tim yang solid."
+    "title": "Colaborare",
+    "description": "Lucrul împreună produce cele mai bune rezultate. Credem în puterea unei echipe puternice."
   },
   "innovation": {
-    "title": "Inovasi",
-    "description": "Selalu mencari cara yang lebih baik untuk memecahkan masalah dan menciptakan nilai."
+    "title": "Inovație",
+    "description": "Căutăm mereu modalități mai bune de a rezolva probleme și de a crea valoare."
   },
   "integrity": {
-    "title": "Integritas",
-    "description": "Kejujuran dan transparansi adalah fondasi setiap hubungan yang kami bangun."
+    "title": "Integritate",
+    "description": "Onestitatea și transparența sunt fundamentul fiecărei relații pe care o construim."
   },
   "excellence": {
-    "title": "Keunggulan",
-    "description": "Kami tidak puas dengan cukup baik. Kami selalu berusaha untuk yang terbaik."
+    "title": "Excelență",
+    "description": "Nu ne mulțumim cu 'destul de bun'. Aspirăm mereu spre ce e mai bun."
   },
   "quality": {
-    "title": "Kualitas",
-    "description": "Kode yang bersih, desain yang indah, dan pengalaman yang seamless adalah standar kami."
+    "title": "Calitate",
+    "description": "Cod curat, design frumos și experiență fără cusur sunt standardul nostru."
   },
   "team": {
-    "title": "Kenali Tim",
-    "subtitle": "Pikiran cemerlang di balik setiap baris kode yang kami tulis.",
-    "alex_desc": "Pemimpin visioner dengan pengalaman 10+ tahun dalam pengembangan ekosistem SaaS.",
-    "sarah_desc": "Full-stack wizard yang mengkhususkan diri dalam membangun arsitektur sistem berskala besar.",
-    "mike_desc": "Terobsesi dengan detail pixel, alur UX yang halus, dan standar aksesibilitas.",
-    "jessica_desc": "Pencerita kreatif yang membantu merek menemukan suara unik mereka di dunia digital."
+    "title": "Cunoaște echipa",
+    "subtitle": "Mințile strălucite din spatele fiecărei linii de cod pe care o scriem.",
+    "alex_desc": "Lider vizionar cu peste 10 ani de experiență în dezvoltarea ecosistemelor SaaS.",
+    "sarah_desc": "Magie fullstack specializată în construirea de arhitecturi de sisteme la scară largă.",
+    "mike_desc": "Obsedat de detaliile pixelilor, fluxurile UX fluide și standardele de accesibilitate.",
+    "jessica_desc": "Povestitoare creativă care ajută brandurile să-și găsească vocea unică în lumea digitală."
   },
   "stats": {
-    "years": "Tahun Pengalaman",
+    "years": "Ani de Experiență",
     "years_val": "3+",
-    "clients": "Klien Global",
+    "clients": "Clienți Globali",
     "clients_val": "120+",
-    "countries": "Negara yang Dijangkau",
+    "countries": "Țări Atinse",
     "countries_val": "15",
-    "support": "Support Ahli",
+    "support": "Suport Expert",
     "support_val": "24/7"
   }
 }

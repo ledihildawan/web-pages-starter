@@ -1,72 +1,72 @@
 {
   "hero": {
-    "badge": "Tentang Kami",
-    "title_part1": "Digerakkan oleh ",
-    "title_highlight": "passion",
-    "description": "Perjalanan kami dimulai dengan ide sederhana."
+    "badge": "关于我们",
+    "title_part1": "源于 ",
+    "title_highlight": "热爱",
+    "description": "我们的旅程始于一个简单的想法。"
   },
   "mission": {
-    "title": "Misi Kami",
-    "description": "Memberdayakan pengembang dan bisnis dengan alat yang elegan, cepat, dan mudah digunakan untuk membangun produk digital yang luar biasa."
+    "title": "我们的使命",
+    "description": "通过优雅、快速且易于使用的工具，赋能开发者与企业打造卓越的数字产品。"
   },
   "vision": {
-    "title": "Visi Kami",
-    "description": "Menjadi platform pilihan untuk pengembang modern yang menghargai keindahan, performa, dan pengalaman pengguna di setiap baris kode."
+    "title": "我们的愿景",
+    "description": "成为重视美感、性能和用户体验的现代开发者的首选平台。"
   },
   "story": {
-    "tag": "Cerita Kami",
-    "visual_label": "Ilustrasi Studio Kreatif",
-    "title": "Digerakkan oleh passion, <br>didefinisikan oleh keunggulan.",
-    "para1": "Perjalanan kami dimulai dengan ide sederhana: membuat pengembangan web dapat diakses dan menyenangkan untuk semua orang. Kami sudah lelah dengan framework yang berat dan konfigurasi yang rumit.",
-    "para2": "Hari ini, kami adalah tim yang beragam dari engineer, desainer, dan pemikir yang bekerja sama untuk memecahkan masalah kompleks dengan solusi yang elegan.",
-    "val1": "Filosofi desain user-centric",
-    "val2": "Arsitektur performance-first",
-    "val3": "Transparansi dan komunikasi terbuka"
+    "tag": "我们的故事",
+    "visual_label": "创意工作室插图",
+    "title": "源于热爱，<br>成就卓越。",
+    "para1": "我们的旅程始于一个简单的想法：让每个人都能轻松愉快地进行 Web 开发。我们厌倦了臃肿的框架和复杂的配置。",
+    "para2": "今天，我们是一个由工程师、设计师和思想家组成的多元化团队，共同努力用优雅的方案解决复杂的问题。",
+    "val1": "以用户为中心的设计理念",
+    "val2": "性能优先的架构",
+    "val3": "透明度和公开沟通"
   },
   "values": {
-    "title": "Nilai-Nilai Kami",
-    "subtitle": "Prinsip yang memandu setiap keputusan yang kami buat."
+    "title": "我们的价值观",
+    "subtitle": "指导我们每一个决策的原则。"
   },
   "passion": {
-    "title": "Passion",
-    "description": "Kami mencintai apa yang kami lakukan, dan itu terlihat di setiap detail produk kami."
+    "title": "激情",
+    "description": "我们热爱自己的工作，这份热爱体现在我们产品的每一个细节中。"
   },
   "collaboration": {
-    "title": "Kolaborasi",
-    "description": "Bekerja sama menghasilkan hasil terbaik. Kami percaya pada kekuatan tim yang solid."
+    "title": "协作",
+    "description": "团队合作能够创造最佳成果。我们相信团队的强大力量。"
   },
   "innovation": {
-    "title": "Inovasi",
-    "description": "Selalu mencari cara yang lebih baik untuk memecahkan masalah dan menciptakan nilai."
+    "title": "创新",
+    "description": "始终寻求更好的方式来解决问题和创造价值。"
   },
   "integrity": {
-    "title": "Integritas",
-    "description": "Kejujuran dan transparansi adalah fondasi setiap hubungan yang kami bangun."
+    "title": "诚信",
+    "description": "诚实和透明是我们建立的所有关系的基石。"
   },
   "excellence": {
-    "title": "Keunggulan",
-    "description": "Kami tidak puas dengan cukup baik. Kami selalu berusaha untuk yang terbaik."
+    "title": "卓越",
+    "description": "我们从不满足于"足够好"，始终追求最好的结果。"
   },
   "quality": {
-    "title": "Kualitas",
-    "description": "Kode yang bersih, desain yang indah, dan pengalaman yang seamless adalah standar kami."
+    "title": "品质",
+    "description": "简洁的代码、美观的设计和无缝的体验是我们的标准。"
   },
   "team": {
-    "title": "Kenali Tim",
-    "subtitle": "Pikiran cemerlang di balik setiap baris kode yang kami tulis.",
-    "alex_desc": "Pemimpin visioner dengan pengalaman 10+ tahun dalam pengembangan ekosistem SaaS.",
-    "sarah_desc": "Full-stack wizard yang mengkhususkan diri dalam membangun arsitektur sistem berskala besar.",
-    "mike_desc": "Terobsesi dengan detail pixel, alur UX yang halus, dan standar aksesibilitas.",
-    "jessica_desc": "Pencerita kreatif yang membantu merek menemukan suara unik mereka di dunia digital."
+    "title": "团队介绍",
+    "subtitle": "每一行代码背后的才华横溢的头脑。",
+    "alex_desc": "在 SaaS 生态系统开发方面拥有 10 多年经验的远见卓识的领导者。",
+    "sarah_desc": "擅长构建大规模系统架构的全栈高手。",
+    "mike_desc": "痴迷于像素细节、流畅的 UX 流程和无障碍标准。",
+    "jessica_desc": "通过创意叙事帮助品牌在数字世界中找到独特声音的专家。"
   },
   "stats": {
-    "years": "Tahun Pengalaman",
+    "years": "年经验",
     "years_val": "3+",
-    "clients": "Klien Global",
+    "clients": "全球客户",
     "clients_val": "120+",
-    "countries": "Negara yang Dijangkau",
+    "countries": "覆盖国家",
     "countries_val": "15",
-    "support": "Support Ahli",
+    "support": "专家支持",
     "support_val": "24/7"
   }
 }

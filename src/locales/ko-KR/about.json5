@@ -1,72 +1,72 @@
 {
   "hero": {
-    "badge": "Tentang Kami",
-    "title_part1": "Digerakkan oleh ",
-    "title_highlight": "passion",
-    "description": "Perjalanan kami dimulai dengan ide sederhana."
+    "badge": "소개",
+    "title_part1": "열정으로 ",
+    "title_highlight": "움직이는",
+    "description": "우리의 여정은 하나의 간단한 아이디어에서 시작되었어요."
   },
   "mission": {
-    "title": "Misi Kami",
-    "description": "Memberdayakan pengembang dan bisnis dengan alat yang elegan, cepat, dan mudah digunakan untuk membangun produk digital yang luar biasa."
+    "title": "우리의 미션",
+    "description": "우아하고 빠르며 사용하기 쉬운 도구로 개발자와 비즈니스에 힘을 실어, 훌륭한 디지털 제품을 만들 수 있도록 돕습니다."
   },
   "vision": {
-    "title": "Visi Kami",
-    "description": "Menjadi platform pilihan untuk pengembang modern yang menghargai keindahan, performa, dan pengalaman pengguna di setiap baris kode."
+    "title": "우리의 비전",
+    "description": "모든 코드 한 줄마다 아름다움, 성능, 사용자 경험을 중시하는 현대 개발자들이 선택하는 플랫폼이 되는 것."
   },
   "story": {
-    "tag": "Cerita Kami",
-    "visual_label": "Ilustrasi Studio Kreatif",
-    "title": "Digerakkan oleh passion, <br>didefinisikan oleh keunggulan.",
-    "para1": "Perjalanan kami dimulai dengan ide sederhana: membuat pengembangan web dapat diakses dan menyenangkan untuk semua orang. Kami sudah lelah dengan framework yang berat dan konfigurasi yang rumit.",
-    "para2": "Hari ini, kami adalah tim yang beragam dari engineer, desainer, dan pemikir yang bekerja sama untuk memecahkan masalah kompleks dengan solusi yang elegan.",
-    "val1": "Filosofi desain user-centric",
-    "val2": "Arsitektur performance-first",
-    "val3": "Transparansi dan komunikasi terbuka"
+    "tag": "우리 이야기",
+    "visual_label": "크리에이티브 스튜디오 일러스트레이션",
+    "title": "열정으로 움직이고, <br>탁월함으로 정의됩니다.",
+    "para1": "우리의 여정은 간단한 아이디어에서 시작되었어요: 모든 사람이 웹 개발에 접근하고 즐길 수 있도록 만드는 것. 우리는 무거운 프레임워크와 복잡한 설정에 지쳐 있었거든요.",
+    "para2": "오늘날 우리는 복잡한 문제를 우아한 해결책으로 풀어내기 위해 함께 일하는 다양한 엔지니어, 디자이너, 사색가들의 팀입니다.",
+    "val1": "사용자 중심 디자인 철학",
+    "val2": "성능 우선 아키텍처",
+    "val3": "투명성과 열린 소통"
   },
   "values": {
-    "title": "Nilai-Nilai Kami",
-    "subtitle": "Prinsip yang memandu setiap keputusan yang kami buat."
+    "title": "우리의 가치",
+    "subtitle": "우리의 모든 결정을 이끄는 원칙이에요."
   },
   "passion": {
-    "title": "Passion",
-    "description": "Kami mencintai apa yang kami lakukan, dan itu terlihat di setiap detail produk kami."
+    "title": "열정",
+    "description": "우리는 우리가 하는 일을 사랑해요. 그래서 제품의 모든 디테일에 그 애정이 담겨 있어요."
   },
   "collaboration": {
-    "title": "Kolaborasi",
-    "description": "Bekerja sama menghasilkan hasil terbaik. Kami percaya pada kekuatan tim yang solid."
+    "title": "협업",
+    "description": "함께 일할 때 최고의 결과가 나와요. 우리는 튼튼한 팀의 힘을 믿습니다."
   },
   "innovation": {
-    "title": "Inovasi",
-    "description": "Selalu mencari cara yang lebih baik untuk memecahkan masalah dan menciptakan nilai."
+    "title": "혁신",
+    "description": "문제를 해결하고 가치를 만들어내는 더 나은 방법을 항상 찾고 있어요."
   },
   "integrity": {
-    "title": "Integritas",
-    "description": "Kejujuran dan transparansi adalah fondasi setiap hubungan yang kami bangun."
+    "title": "정직",
+    "description": "정직과 투명성은 우리가 맺는 모든 관계의 기반이에요."
   },
   "excellence": {
-    "title": "Keunggulan",
-    "description": "Kami tidak puas dengan cukup baik. Kami selalu berusaha untuk yang terbaik."
+    "title": "탁월함",
+    "description": "그저 괜찮은 것에 만족하지 않아요. 우리는 항상 최고를 추구합니다."
   },
   "quality": {
-    "title": "Kualitas",
-    "description": "Kode yang bersih, desain yang indah, dan pengalaman yang seamless adalah standar kami."
+    "title": "품질",
+    "description": "깔끔한 코드, 아름다운 디자인, 매끄러운 경험이 우리의 기준이에요."
   },
   "team": {
-    "title": "Kenali Tim",
-    "subtitle": "Pikiran cemerlang di balik setiap baris kode yang kami tulis.",
-    "alex_desc": "Pemimpin visioner dengan pengalaman 10+ tahun dalam pengembangan ekosistem SaaS.",
-    "sarah_desc": "Full-stack wizard yang mengkhususkan diri dalam membangun arsitektur sistem berskala besar.",
-    "mike_desc": "Terobsesi dengan detail pixel, alur UX yang halus, dan standar aksesibilitas.",
-    "jessica_desc": "Pencerita kreatif yang membantu merek menemukan suara unik mereka di dunia digital."
+    "title": "팀 소개",
+    "subtitle": "우리가 작성하는 모든 코드 뒤에 있는 뛰어난 사람들.",
+    "alex_desc": "SaaS 생태계 개발 10년 이상 경험의 비전 리더.",
+    "sarah_desc": "대규모 시스템 아키텍처 구축을 전문으로 하는 풀스택 전문가.",
+    "mike_desc": "픽셀 디테일, 매끄러운 UX 흐름, 접근성 표준에 집중합니다.",
+    "jessica_desc": "브랜드가 디지털 세계에서 고유한 목소리를 찾도록 돕는 크리에이티브 스토리텔러."
   },
   "stats": {
-    "years": "Tahun Pengalaman",
+    "years": "년 경험",
     "years_val": "3+",
-    "clients": "Klien Global",
+    "clients": "글로벌 고객",
     "clients_val": "120+",
-    "countries": "Negara yang Dijangkau",
+    "countries": "진출 국가",
     "countries_val": "15",
-    "support": "Support Ahli",
+    "support": "전문 지원",
     "support_val": "24/7"
   }
 }

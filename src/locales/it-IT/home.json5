@@ -8,23 +8,23 @@
     "title_highlight": "futuro digitale",
     "description": "Fondata nel 2024, Starter aiuta gli sviluppatori a costruire applicazioni migliori più velocemente. Crediamo nel potere del codice pulito, del design elegante e della collaborazione open source.",
     "primary_btn": {
-      "label": "Get Started Free",
+      "label": "Inizia Gratis",
       "url": "#pricing"
     },
     "secondary_btn": {
-      "label": "View Demo",
+      "label": "Vedi Demo",
       "url": "#features"
     },
-    "note": "No credit card required"
+    "note": "Nessuna carta di credito richiesta"
   },
   "stats": {
-    "community": "Global Community",
+    "community": "Comunità Globale",
     "community_val": "50K+",
-    "projects": "Projects Completed",
+    "projects": "Progetti Completati",
     "projects_val": "120+",
-    "uptime": "Uptime",
+    "uptime": "Disponibilità",
     "uptime_val": "99.99%",
-    "rating": "Rating",
+    "rating": "Valutazione",
     "rating_val": "4.9/5"
   },
   "story": {
@@ -84,19 +84,19 @@
   "features": {
     "list": {
       "speed": {
-        "title": "Lightning Fast",
-        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+        "title": "Fulmineo",
+        "description": "Prestazioni ottimizzate con tempi di caricamento inferiori a 100ms. Progettato per scala globale con infrastruttura edge."
       },
       "design": {
-        "title": "Modern Design",
-        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+        "title": "Design Moderno",
+        "description": "Interfaccia pulita e responsiva dall'aspetto professionale su qualsiasi dispositivo. Componenti completamente personalizzabili."
       },
       "security": {
-        "title": "High Security",
-        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+        "title": "Alta Sicurezza",
+        "description": "Crittografia end-to-end, autenticazione multifattore e conformità SOC2 per proteggere i tuoi dati."
       }
     },
-    "heading": "Key Features",
-    "subheading": "Everything you need to build and scale."
+    "heading": "Funzionalità Chiave",
+    "subheading": "Tutto ciò che ti serve per costruire e scalare."
   }
 }

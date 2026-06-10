@@ -57,19 +57,19 @@
   "features": {
     "list": {
       "speed": {
-        "title": "Lightning Fast",
-        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+        "title": "Ultraràpid",
+        "description": "Rendiment optimitzat amb temps de càrrega inferiors a 100ms. Construït per a escala global amb infraestructura edge."
       },
       "design": {
-        "title": "Modern Design",
-        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+        "title": "Disseny Modern",
+        "description": "Interfície neta i responsiva amb aspecte professional en qualsevol dispositiu. Components totalment personalitzables."
       },
       "security": {
-        "title": "High Security",
-        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+        "title": "Alta Seguretat",
+        "description": "Xifratge d'extrem a extrem, autenticació multifactor i conformitat SOC2 per protegir les vostres dades."
       }
     },
-    "heading": "Key Features",
-    "subheading": "Everything you need to build and scale."
+    "heading": "Característiques Clau",
+    "subheading": "Tot el que necessiteu per construir i escalar."
   }
 }

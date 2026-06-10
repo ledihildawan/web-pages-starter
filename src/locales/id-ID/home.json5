@@ -8,19 +8,19 @@
     "title_highlight": "masa depan digital",
     "description": "Didirikan pada 2024, Starter hadir untuk membantu pengembang membangun aplikasi yang lebih baik dengan lebih cepat. Kami percaya pada kekuatan kode yang bersih, desain yang indah, dan kolaborasi open source.",
     "primary_btn": {
-      "label": "Get Started Free",
+      "label": "Mulai Gratis",
       "url": "#pricing"
     },
     "secondary_btn": {
-      "label": "View Demo",
+      "label": "Lihat Demo",
       "url": "#features"
     },
-    "note": "No credit card required"
+    "note": "Tanpa perlu kartu kredit"
   },
   "stats": {
-    "community": "Global Community",
+    "community": "Komunitas Global",
     "community_val": "50K+",
-    "projects": "Projects Completed",
+    "projects": "Proyek Selesai",
     "projects_val": "120+",
     "uptime": "Uptime",
     "uptime_val": "99.99%",
@@ -84,19 +84,19 @@
   "features": {
     "list": {
       "speed": {
-        "title": "Lightning Fast",
-        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+        "title": "Sangat Cepat",
+        "description": "Performa optimal dengan waktu muat di bawah 100ms. Dirancang untuk skala global dengan infrastruktur edge."
       },
       "design": {
-        "title": "Modern Design",
-        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+        "title": "Desain Modern",
+        "description": "UI responsif dan bersih yang tampil profesional di semua perangkat. Komponen yang dapat dikustomisasi sepenuhnya."
       },
       "security": {
-        "title": "High Security",
-        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+        "title": "Keamanan Tinggi",
+        "description": "Enkripsi end-to-end, autentikasi multi-faktor, dan kepatuhan SOC2 untuk melindungi data Anda."
       }
     },
-    "heading": "Key Features",
-    "subheading": "Everything you need to build and scale."
+    "heading": "Fitur Unggulan",
+    "subheading": "Semua yang Anda butuhkan untuk membangun dan berkembang."
   }
 }

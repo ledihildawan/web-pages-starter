@@ -8,23 +8,23 @@
     "title_highlight": "цифровое будущее",
     "description": "Основанная в 2024 году, Starter существует, чтобы помочь разработчикам создавать лучшие приложения быстрее. Мы верим в силу чистого кода, красивого дизайна и сотрудничества с открытым исходным кодом.",
     "primary_btn": {
-      "label": "Get Started Free",
+      "label": "Начните бесплатно",
       "url": "#pricing"
     },
     "secondary_btn": {
-      "label": "View Demo",
+      "label": "Посмотреть демо",
       "url": "#features"
     },
-    "note": "No credit card required"
+    "note": "Кредитная карта не требуется"
   },
   "stats": {
-    "community": "Global Community",
+    "community": "Мировое сообщество",
     "community_val": "50K+",
-    "projects": "Projects Completed",
+    "projects": "Завершённых проектов",
     "projects_val": "120+",
-    "uptime": "Uptime",
+    "uptime": "Аптайм",
     "uptime_val": "99.99%",
-    "rating": "Rating",
+    "rating": "Рейтинг",
     "rating_val": "4.9/5"
   },
   "story": {
@@ -84,19 +84,19 @@
   "features": {
     "list": {
       "speed": {
-        "title": "Lightning Fast",
-        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+        "title": "Молниеносная скорость",
+        "description": "Оптимизированная производительность с временем загрузки менее 100 мс. Создано для глобального масштабирования на периферийной инфраструктуре."
       },
       "design": {
-        "title": "Modern Design",
-        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+        "title": "Современный дизайн",
+        "description": "Чистый, адаптивный интерфейс, который выглядит профессионально на любом устройстве. Полностью настраиваемые компоненты."
       },
       "security": {
-        "title": "High Security",
-        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+        "title": "Высокая безопасность",
+        "description": "Сквозное шифрование, многофакторная аутентификация и соответствие SOC2 для защиты ваших данных."
       }
     },
-    "heading": "Key Features",
-    "subheading": "Everything you need to build and scale."
+    "heading": "Ключевые возможности",
+    "subheading": "Всё необходимое для создания и масштабирования."
   }
 }

@@ -1,72 +1,72 @@
 {
   "hero": {
-    "badge": "Tentang Kami",
-    "title_part1": "Digerakkan oleh ",
-    "title_highlight": "passion",
-    "description": "Perjalanan kami dimulai dengan ide sederhana."
+    "badge": "हाम्रो बारेमा",
+    "title_part1": "जोशबाट ",
+    "title_highlight": "प्रेरित",
+    "description": "हाम्रो यात्रा एउटा साधारण विचारबाट सुरु भयो।"
   },
   "mission": {
-    "title": "Misi Kami",
-    "description": "Memberdayakan pengembang dan bisnis dengan alat yang elegan, cepat, dan mudah digunakan untuk membangun produk digital yang luar biasa."
+    "title": "हाम्रो मिशन",
+    "description": "विकासकर्ताहरू र व्यवसायहरूलाई अद्भुत डिजिटल उत्पादनहरू निर्माण गर्नका लागि सुरुचिपूर्ण, द्रुत र प्रयोगमा सजिलो उपकरणहरूद्वारा सशक्त बनाउनु।"
   },
   "vision": {
-    "title": "Visi Kami",
-    "description": "Menjadi platform pilihan untuk pengembang modern yang menghargai keindahan, performa, dan pengalaman pengguna di setiap baris kode."
+    "title": "हाम्रो दृष्टिविजन",
+    "description": "आधुनिक विकासकर्ताहरूका लागि रोजाइको प्लेटफर्म बन्नु जसले हरेक कोड लाइनमा सौन्दर्य, प्रदर्शन र प्रयोगकर्ता अनुभवलाई महत्व दिन्छ।"
   },
   "story": {
-    "tag": "Cerita Kami",
-    "visual_label": "Ilustrasi Studio Kreatif",
-    "title": "Digerakkan oleh passion, <br>didefinisikan oleh keunggulan.",
-    "para1": "Perjalanan kami dimulai dengan ide sederhana: membuat pengembangan web dapat diakses dan menyenangkan untuk semua orang. Kami sudah lelah dengan framework yang berat dan konfigurasi yang rumit.",
-    "para2": "Hari ini, kami adalah tim yang beragam dari engineer, desainer, dan pemikir yang bekerja sama untuk memecahkan masalah kompleks dengan solusi yang elegan.",
-    "val1": "Filosofi desain user-centric",
-    "val2": "Arsitektur performance-first",
-    "val3": "Transparansi dan komunikasi terbuka"
+    "tag": "हाम्रो कथा",
+    "visual_label": "सृजनात्मक स्टुडियो दृष्यांकन",
+    "title": "जोशबाट प्रेरित, <br>उत्कृष्टताद्वारा परिभाषित।",
+    "para1": "हाम्रो यात्रा एउटा साधारण विचारबाट सुरु भयो: वेब विकासलाई सबैका लागि सुलभ र आनन्ददायक बनाउनु। हामी भारी frameworks र जटिल configurations बाट थकित थियौं।",
+    "para2": "आज, हामी इन्जिनियरहरू, डिजाइनरहरू र विचारकहरूको विविध टोली हौं जसले जटिल समस्याहरूलाई सुरुचिपूर्ण समाधानहरूद्वारा समाधान गर्न सँगै काम गर्छौं।",
+    "val1": "प्रयोगकर्ता-केन्द्रित डिजाइन दर्शन",
+    "val2": "प्रदर्शन-प्राथमिक वास्तुकला",
+    "val3": "पारदर्शिता र खुला सञ्चार"
   },
   "values": {
-    "title": "Nilai-Nilai Kami",
-    "subtitle": "Prinsip yang memandu setiap keputusan yang kami buat."
+    "title": "हाम्रा मूल्यहरू",
+    "subtitle": "हामीले गर्ने हरेक निर्णयलाई मार्गदर्शन गर्ने सिद्धान्तहरू।"
   },
   "passion": {
-    "title": "Passion",
-    "description": "Kami mencintai apa yang kami lakukan, dan itu terlihat di setiap detail produk kami."
+    "title": "जोश",
+    "description": "हामी जे गर्छौं त्यसलाई माया गर्छौं, र यो हाम्रा उत्पादनहरूको हरेक विवरणमा देखिन्छ।"
   },
   "collaboration": {
-    "title": "Kolaborasi",
-    "description": "Bekerja sama menghasilkan hasil terbaik. Kami percaya pada kekuatan tim yang solid."
+    "title": "सहकार्य",
+    "description": "सँगै काम गर्दा उत्कृष्ट परिणाम आउँछ। हामी बलियो टोलीको शक्तिमा विश्वास गर्छौं।"
   },
   "innovation": {
-    "title": "Inovasi",
-    "description": "Selalu mencari cara yang lebih baik untuk memecahkan masalah dan menciptakan nilai."
+    "title": "नवप्रवर्तन",
+    "description": "समस्याहरू समाधान गर्न र मूल्य सिर्जना गर्न अझ राम्रा तरिकाहरू खोज्नमा सधैं लागिपर्नु।"
   },
   "integrity": {
-    "title": "Integritas",
-    "description": "Kejujuran dan transparansi adalah fondasi setiap hubungan yang kami bangun."
+    "title": "अखण्डता",
+    "description": "ईमानदारी र पारदर्शिता हामीले बनाएका हरेक सम्बन्धको आधार हुन्।"
   },
   "excellence": {
-    "title": "Keunggulan",
-    "description": "Kami tidak puas dengan cukup baik. Kami selalu berusaha untuk yang terbaik."
+    "title": "उत्कृष्टता",
+    "description": "हामी पर्याप्त राम्रोमा सन्तुष्ट हुँदैनौं। हामी सधैं उत्कृष्टको लागि प्रयास गर्छौं।"
   },
   "quality": {
-    "title": "Kualitas",
-    "description": "Kode yang bersih, desain yang indah, dan pengalaman yang seamless adalah standar kami."
+    "title": "गुणस्तर",
+    "description": "सफा कोड, सुन्दर डिजाइन र निरन्तर अनुभव हाम्रा मापदण्ड हुन्।"
   },
   "team": {
-    "title": "Kenali Tim",
-    "subtitle": "Pikiran cemerlang di balik setiap baris kode yang kami tulis.",
-    "alex_desc": "Pemimpin visioner dengan pengalaman 10+ tahun dalam pengembangan ekosistem SaaS.",
-    "sarah_desc": "Full-stack wizard yang mengkhususkan diri dalam membangun arsitektur sistem berskala besar.",
-    "mike_desc": "Terobsesi dengan detail pixel, alur UX yang halus, dan standar aksesibilitas.",
-    "jessica_desc": "Pencerita kreatif yang membantu merek menemukan suara unik mereka di dunia digital."
+    "title": "टोलीसँग भेट्नुहोस्",
+    "subtitle": "हामीले लेखेका हरेक कोड लाइनको पछाडिका उज्ज्वल प्रतिभाहरू।",
+    "alex_desc": "SaaS पारिस्थितिक प्रणाली विकासमा 10+ वर्षको अनुभव भएका दूरदर्शी नेता।",
+    "sarah_desc": "ठूलो मापमा प्रणाली वास्तुकला निर्माणमा विशेषज्ञ full-stack wizard।",
+    "mike_desc": "पिक्सेल विवरण, सहज UX प्रवाह र पहुँच मापदण्डप्रति गहिरो जोश।",
+    "jessica_desc": "सृजनात्मक कथाकार जसले ब्रान्डहरूलाई डिजिटल संसारमा उनीहरूको अनौठो आवाज खोज्न मद्दत गर्छिन्।"
   },
   "stats": {
-    "years": "Tahun Pengalaman",
+    "years": "वर्षको अनुभव",
     "years_val": "3+",
-    "clients": "Klien Global",
+    "clients": "विश्वव्यापी ग्राहक",
     "clients_val": "120+",
-    "countries": "Negara yang Dijangkau",
+    "countries": "पुगेका देशहरू",
     "countries_val": "15",
-    "support": "Support Ahli",
+    "support": "विशेषज्ञ समर्थन",
     "support_val": "24/7"
   }
 }

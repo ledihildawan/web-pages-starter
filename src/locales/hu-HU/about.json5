@@ -1,72 +1,72 @@
 {
   "hero": {
-    "badge": "Tentang Kami",
-    "title_part1": "Digerakkan oleh ",
-    "title_highlight": "passion",
-    "description": "Perjalanan kami dimulai dengan ide sederhana."
+    "badge": "Rólunk",
+    "title_part1": "Hajt a ",
+    "title_highlight": "szenvedély",
+    "description": "Utunk egy egyszerű ötlettel kezdődött."
   },
   "mission": {
-    "title": "Misi Kami",
-    "description": "Memberdayakan pengembang dan bisnis dengan alat yang elegan, cepat, dan mudah digunakan untuk membangun produk digital yang luar biasa."
+    "title": "Küldetésünk",
+    "description": "Felvértezni a fejlesztőket és vállalatokat elegáns, gyors és könnyen használható eszközökkel a kivételes digitális termékek építéséhez."
   },
   "vision": {
-    "title": "Visi Kami",
-    "description": "Menjadi platform pilihan untuk pengembang modern yang menghargai keindahan, performa, dan pengalaman pengguna di setiap baris kode."
+    "title": "Jövőképünk",
+    "description": "A modern fejlesztők preferált platformjává válni, akik értékelik a szépséget, a teljesítményt és a felhasználói élményt minden kódsorban."
   },
   "story": {
-    "tag": "Cerita Kami",
-    "visual_label": "Ilustrasi Studio Kreatif",
-    "title": "Digerakkan oleh passion, <br>didefinisikan oleh keunggulan.",
-    "para1": "Perjalanan kami dimulai dengan ide sederhana: membuat pengembangan web dapat diakses dan menyenangkan untuk semua orang. Kami sudah lelah dengan framework yang berat dan konfigurasi yang rumit.",
-    "para2": "Hari ini, kami adalah tim yang beragam dari engineer, desainer, dan pemikir yang bekerja sama untuk memecahkan masalah kompleks dengan solusi yang elegan.",
-    "val1": "Filosofi desain user-centric",
-    "val2": "Arsitektur performance-first",
-    "val3": "Transparansi dan komunikasi terbuka"
+    "tag": "Történetünk",
+    "visual_label": "Kreatív stúdió illusztráció",
+    "title": "Szenvedély hajt, <br>kiválóság definiál.",
+    "para1": "Utunk egy egyszerű ötlettel kezdődött: tegyük a webfejlesztést elérhetővé és szórakoztatóvá mindenki számára. Elegünk volt a nehéz keretrendszerekből és a bonyolult beállításokból.",
+    "para2": "Ma már sokszínű mérnökökből, dizájnerekből és gondolkodókból álló csapat vagyunk, akik együtt dolgoznak összetett problémák elegáns megoldásain.",
+    "val1": "Felhasználóközpontú dizájn filozófia",
+    "val2": "Teljesítmény-centrikus architektúra",
+    "val3": "Átláthatóság és nyílt kommunikáció"
   },
   "values": {
-    "title": "Nilai-Nilai Kami",
-    "subtitle": "Prinsip yang memandu setiap keputusan yang kami buat."
+    "title": "Értékeink",
+    "subtitle": "Az elvek, amelyek minden döntésünket vezérlik."
   },
   "passion": {
-    "title": "Passion",
-    "description": "Kami mencintai apa yang kami lakukan, dan itu terlihat di setiap detail produk kami."
+    "title": "Szenvedély",
+    "description": "Szeretjük, amit csinálunk, és ez látszik termékeink minden részletében."
   },
   "collaboration": {
-    "title": "Kolaborasi",
-    "description": "Bekerja sama menghasilkan hasil terbaik. Kami percaya pada kekuatan tim yang solid."
+    "title": "Együttműködés",
+    "description": "Az együtt dolgozás adja a legjobb eredményeket. Hiszünk az erős csapat erejében."
   },
   "innovation": {
-    "title": "Inovasi",
-    "description": "Selalu mencari cara yang lebih baik untuk memecahkan masalah dan menciptakan nilai."
+    "title": "Innováció",
+    "description": "Mindig jobb módjait keressük a problémamegoldásnak és az értékteremtésnek."
   },
   "integrity": {
-    "title": "Integritas",
-    "description": "Kejujuran dan transparansi adalah fondasi setiap hubungan yang kami bangun."
+    "title": "Integritás",
+    "description": "Az őszinteség és az átláthatóság minden általunk épített kapcsolat alapja."
   },
   "excellence": {
-    "title": "Keunggulan",
-    "description": "Kami tidak puas dengan cukup baik. Kami selalu berusaha untuk yang terbaik."
+    "title": "Kiválóság",
+    "description": "Nem elégszünk meg az „elég jóval\". Mindig a legjobb felé törekszünk."
   },
   "quality": {
-    "title": "Kualitas",
-    "description": "Kode yang bersih, desain yang indah, dan pengalaman yang seamless adalah standar kami."
+    "title": "Minőség",
+    "description": "A tiszta kód, a gyönyörű dizájn és a zökkenőmentes élmény a mi sztenderdünk."
   },
   "team": {
-    "title": "Kenali Tim",
-    "subtitle": "Pikiran cemerlang di balik setiap baris kode yang kami tulis.",
-    "alex_desc": "Pemimpin visioner dengan pengalaman 10+ tahun dalam pengembangan ekosistem SaaS.",
-    "sarah_desc": "Full-stack wizard yang mengkhususkan diri dalam membangun arsitektur sistem berskala besar.",
-    "mike_desc": "Terobsesi dengan detail pixel, alur UX yang halus, dan standar aksesibilitas.",
-    "jessica_desc": "Pencerita kreatif yang membantu merek menemukan suara unik mereka di dunia digital."
+    "title": "Ismerd meg a csapatot",
+    "subtitle": "Az éles elmék minden egyes kódsor mögött, amit írunk.",
+    "alex_desc": "Vízionárius vezető, több mint 10 év tapasztalattal a SaaS ökoszisztémák fejlesztésében.",
+    "sarah_desc": "Fullstack varázsló, aki nagyléptékű rendszerarchitektúrák építésére specializálódott.",
+    "mike_desc": "Megszállottja a pixeldetáloknak, a sima UX-folyamatoknak és az akadálymentességi szabványoknak.",
+    "jessica_desc": "Kreatív történetmesélő, aki segít a márkáknak megtalálni egyedi hangjukat a digitális világban."
   },
   "stats": {
-    "years": "Tahun Pengalaman",
+    "years": "Év tapasztalat",
     "years_val": "3+",
-    "clients": "Klien Global",
+    "clients": "Globális ügyfél",
     "clients_val": "120+",
-    "countries": "Negara yang Dijangkau",
+    "countries": "Ország lefedve",
     "countries_val": "15",
-    "support": "Support Ahli",
+    "support": "Szakértői támogatás",
     "support_val": "24/7"
   }
 }

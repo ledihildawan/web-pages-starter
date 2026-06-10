@@ -8,23 +8,23 @@
     "title_highlight": "digitaalista tulevaisuutta",
     "description": "Vuonna 2024 perustettu Starter auttaa kehittäjiä rakentamaan parempia sovelluksia nopeammin. Uskomme puhtaan koodin, kauniin muotoilun ja avoimen lähdekoodin yhteistyön voimaan.",
     "primary_btn": {
-      "label": "Get Started Free",
+      "label": "Aloita ilmaiseksi",
       "url": "#pricing"
     },
     "secondary_btn": {
-      "label": "View Demo",
+      "label": "Näytä demo",
       "url": "#features"
     },
-    "note": "No credit card required"
+    "note": "Ei luottokorttia tarvita"
   },
   "stats": {
-    "community": "Global Community",
+    "community": "Globaali yhteisö",
     "community_val": "50K+",
-    "projects": "Projects Completed",
+    "projects": "Valmiit projektit",
     "projects_val": "120+",
-    "uptime": "Uptime",
+    "uptime": "Käytettävyys",
     "uptime_val": "99.99%",
-    "rating": "Rating",
+    "rating": "Arvosana",
     "rating_val": "4.9/5"
   },
   "story": {
@@ -84,19 +84,19 @@
   "features": {
     "list": {
       "speed": {
-        "title": "Lightning Fast",
-        "description": "Optimized performance with sub-100ms load times. Built for global scale with edge infrastructure."
+        "title": "Salamannopea",
+        "description": "Optimoitu suorituskyky alle 100 ms latausajoilla. Rakennettu globaaliin skaalaukseen edge-infran avulla."
       },
       "design": {
-        "title": "Modern Design",
-        "description": "Clean, responsive UI that looks professional on any device. Fully customizable components."
+        "title": "Moderni muotoilu",
+        "description": "Puhdas, responsiivinen käyttöliittymä, joka näyttää ammattimaiselta kaikilla laitteilla. Täysin mukautettavat komponentit."
       },
       "security": {
-        "title": "High Security",
-        "description": "End-to-end encryption, multi-factor auth, and SOC2 compliance to protect your data."
+        "title": "Korkea tietoturva",
+        "description": "Päästä päähän -salaus, monivaiheinen tunnistautuminen ja SOC2-vaatimustenmukaisuus tietojesi suojaamiseksi."
       }
     },
-    "heading": "Key Features",
-    "subheading": "Everything you need to build and scale."
+    "heading": "Avainominaisuudet",
+    "subheading": "Kaikki mitä tarvitset rakentamiseen ja skaalaukseen."
   }
 }
