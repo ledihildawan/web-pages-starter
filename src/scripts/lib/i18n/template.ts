@@ -733,9 +733,7 @@ export const createTemplateParams = (
     clientI18nScript,
     page_id: name,
     global: (() => {
-      const globalData = loadGlobalData(resolveRoot(`${PATHS.SRC}/data`));
-      if (process.env.SITE_NAME) globalData.site_name = process.env.SITE_NAME;
-      return globalData;
+      return loadGlobalData(resolveRoot(`${PATHS.SRC}/data`));
     })(),
     page: readJSON5(resolveRoot(`${PATHS.SRC}/pages/${name}/index.json5`)),
     i18n,
