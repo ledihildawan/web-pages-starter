@@ -2,6 +2,7 @@
 .DS_Store
 *.log*
 .env*
+!.env.example
 
 # Dist
 node_modules
