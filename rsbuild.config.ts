@@ -243,9 +243,7 @@ export default defineConfig({
     scriptLoading: 'defer',
     template: ({ entryName }) =>
       path.join(PATHS.SRC, 'pages', entryName, 'index.njk'),
-    templateParameters: (params) => ({
-      ...createTemplateParams(params, LOCALE_STORAGE_KEY, LOCALE_CODES),
-      base_path: BASE_PATH,
-    }),
+    templateParameters: (params) =>
+      createTemplateParams(params, LOCALE_STORAGE_KEY, LOCALE_CODES),
   },
 });

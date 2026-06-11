@@ -10,6 +10,7 @@
       activeMobileSub: null,
       scrollY: 0,
       currentPath: window.location.pathname,
+      basePath: '{{ base_path }}',
       isNavigating: false,
       touchStartY: 0,
       touchCurrentY: 0,
@@ -24,8 +25,9 @@
       },
 
       isActive(path) {
+        const base = this.basePath.replace(/\/$/, '') || '';
         const current = this.currentPath.replace(/\/$/, '') || '/';
-        const target = path.replace(/\/$/, '') || '/';
+        const target = (base + path).replace(/\/$/, '') || '/';
         return current === target;
       },
 
@@ -207,7 +209,7 @@
     'translate-y-0': !navHidden || mobileMenuOpen
   }">
   <div class="max-inline-7xl mx-auto px-6 block-20 flex justify-between items-center relative z-130 transition-colors duration-200" :class="mobileMenuOpen ? 'bg-slate-950' : ''">
-    <a href="/" class="group flex flex-col transition-transform active:scale-[0.96] shrink-0" @click.prevent="mobileMenuOpen ? closeMobileMenu('/') : window.location.href='/'">
+    <a href="{{ url('/') }}" class="group flex flex-col transition-transform active:scale-[0.96] shrink-0" @click.prevent="mobileMenuOpen ? closeMobileMenu('{{ url('/') }}') : window.location.href='{{ url('/') }}'">
       <span class="text-2xl font-black text-gradient tracking-tighter leading-none group-hover:brightness-125 transition duration-200">
         Starter
       </span>
@@ -219,7 +221,7 @@
       <ul class="hidden lg:flex items-center gap-2 me-4" role="menubar" aria-label="Main menu">
         {% for item in global.menu.header %}
           <li class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
-            <a href="{{ item.url }}" class="text-[13px] font-bold px-4 pbs-2.5 pbe-2.5 radius-icon transition duration-300 flex items-center gap-1.5 relative" :class="isActive('{{ item.url }}') ? 'text-white bg-white/5' : 'text-slate-400 hover:text-white hover:bg-white/5'" :aria-current="isActive('{{ item.url }}') ? 'page' : null" {% if item.children %} :aria-expanded="open" aria-haspopup="true" {% endif %}>
+            <a href="{{ url(item.url) }}" class="text-[13px] font-bold px-4 pbs-2.5 pbe-2.5 radius-icon transition duration-300 flex items-center gap-1.5 relative" :class="isActive('{{ item.url }}') ? 'text-white bg-white/5' : 'text-slate-400 hover:text-white hover:bg-white/5'" :aria-current="isActive('{{ item.url }}') ? 'page' : null" {% if item.children %} :aria-expanded="open" aria-haspopup="true" {% endif %}>
               {{ i18n.t(item.label) }}
               {% if item.children %}
                 {{ icon.icon('chevron-down', 'inline-3 block-3 transition-transform duration-200 opacity-20', size='md') }}
@@ -230,7 +232,7 @@
               <div x-show="open" x-cloak x-transition:enter="transition ease-emphasized duration-300" x-transition:enter-start="opacity-0 translate-y-2 scale-95" x-transition:enter-end="opacity-100 translate-y-0 scale-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 scale-100 translate-y-0" x-transition:leave-end="opacity-0 scale-95 translate-y-2" class="absolute inset-bs-full inset-s-0 inline-64 pbs-2 z-140" role="menu" aria-label="submenu">
                 <div class="p-2 bg-slate-950 border border-white/10 radius-btn shadow-[0_25px_60px_rgba(0,0,0,0.5)]">
                   {% for child in item.children %}
-                    <a href="{{ child.url }}" class="block px-4 pbs-3 pbe-3 text-[13px] font-bold text-slate-400 hover:text-white hover:bg-white/10 radius-icon transition duration-300" role="menuitem">{{ i18n.t(child.label) }}</a>
+                    <a href="{{ url(child.url) }}" class="block px-4 pbs-3 pbe-3 text-[13px] font-bold text-slate-400 hover:text-white hover:bg-white/10 radius-icon transition duration-300" role="menuitem">{{ i18n.t(child.label) }}</a>
                   {% endfor %}
                 </div>
               </div>
@@ -262,7 +264,7 @@
         </div>
       </div>
       <div class="hidden lg:block ms-2 ps-5 border-s border-white/10">
-        <a href="/pricing" class="group relative px-6 block-11 flex items-center bg-linear-to-r from-violet-600 via-fuchsia-600 to-pink-600 text-white radius-icon text-[12px] font-black hover-lift btn-squash anticipate-press ripple-click sparkle-hover uppercase tracking-wider border border-white/10 overflow-hidden">
+        <a href="{{ url('/pricing') }}" class="group relative px-6 block-11 flex items-center bg-linear-to-r from-violet-600 via-fuchsia-600 to-pink-600 text-white radius-icon text-[12px] font-black hover-lift btn-squash anticipate-press ripple-click sparkle-hover uppercase tracking-wider border border-white/10 overflow-hidden">
           <span class="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></span>
           <span class="relative z-10 flex items-center gap-2">
             {{ i18n.t('get_started') }}
@@ -322,7 +324,7 @@
                     </svg>
                   </button>
                 {% else %}
-                  <a href="{{ item.url }}" @click.prevent="closeMobileMenu('{{ item.url }}')" @touchstart.passive="hapticFeedback()" class="text-4xl sm:text-5xl font-black tracking-tighter transition duration-300 w-full relative" :class="isActive('{{ item.url }}') ? 'text-gradient-violet-fuchsia' : 'text-white active:text-violet-400'">
+                  <a href="{{ url(item.url) }}" @click.prevent="closeMobileMenu('{{ url(item.url) }}')" @touchstart.passive="hapticFeedback()" class="text-4xl sm:text-5xl font-black tracking-tighter transition duration-300 w-full relative" :class="isActive('{{ item.url }}') ? 'text-gradient-violet-fuchsia' : 'text-white active:text-violet-400'">
                     {{ i18n.t(item.label) }}
                     <span class="absolute inset-0 bg-white/5 rounded-lg scale-0 group-active:scale-100 transition-transform duration-150"></span>
                   </a>
@@ -331,7 +333,7 @@
               {% if item.children %}
                 <div id="sub-menu-{{ loop.index0 }}" x-show="activeMobileSub === {{ loop.index0 }}" x-cloak x-collapse="x-collapse" class="mbe-6 ms-2 ps-6 border-s-2 border-violet-500/20 space-y-4 pbs-4 pbe-4">
                   {% for child in item.children %}
-                    <a href="{{ child.url }}" @click.prevent="closeMobileMenu('{{ child.url }}')" @touchstart.passive="hapticFeedback()" class="block text-2xl font-black transition-colors duration-300 relative py-2 -mx-2 px-2 rounded-lg" :class="isActive('{{ child.url }}') ? 'text-white bg-white/5' : 'text-slate-400 hover:text-white hover:bg-white/5 active:bg-white/10'">{{ i18n.t(child.label) }}</a>
+                    <a href="{{ url(child.url) }}" @click.prevent="closeMobileMenu('{{ url(child.url) }}')" @touchstart.passive="hapticFeedback()" class="block text-2xl font-black transition-colors duration-300 relative py-2 -mx-2 px-2 rounded-lg" :class="isActive('{{ child.url }}') ? 'text-white bg-white/5' : 'text-slate-400 hover:text-white hover:bg-white/5 active:bg-white/10'">{{ i18n.t(child.label) }}</a>
                   {% endfor %}
                 </div>
               {% endif %}
@@ -355,7 +357,7 @@
           </div>
         </div>
         <div class="mbs-8" x-show="menuChildrenVisible" x-transition:enter="transition ease-emphasized duration-700" x-transition:enter-start="opacity-0 translate-y-10">
-          <a href="/pricing" @click.prevent="closeMobileMenu('/pricing')" @touchstart.passive="hapticFeedback()" class="group block inline-full pbs-5 pbe-5 bg-linear-to-r from-violet-600 via-fuchsia-600 to-pink-600 text-white radius-card-md text-center font-black text-xl shadow-2xl btn-squash anticipate-press ripple-click sparkle-hover overflow-hidden hover-lift active:scale-[0.96] relative">
+          <a href="{{ url('/pricing') }}" @click.prevent="closeMobileMenu('{{ url('/pricing') }}')" @touchstart.passive="hapticFeedback()" class="group block inline-full pbs-5 pbe-5 bg-linear-to-r from-violet-600 via-fuchsia-600 to-pink-600 text-white radius-card-md text-center font-black text-xl shadow-2xl btn-squash anticipate-press ripple-click sparkle-hover overflow-hidden hover-lift active:scale-[0.96] relative">
             <span class="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
             <span class="relative flex items-center justify-center gap-3">
               {{ i18n.t('get_started') }}

@@ -722,6 +722,31 @@ export const createTemplateParams = (
     LOCALES,
   );
 
+  const basePath = process.env.BASE_PATH || '/';
+
+  const url = (path: string): string => {
+    if (
+      path.startsWith('http') ||
+      path.startsWith('//') ||
+      path.startsWith('#') ||
+      path.startsWith('mailto:') ||
+      path.startsWith('tel:')
+    )
+      return path;
+    const clean = path.replace(/\/+/g, '/').replace(/\/$/, '') || '';
+    const base = basePath.endsWith('/') ? basePath : `${basePath}/`;
+    if (clean === '' || clean === '/') return base;
+    const hasAnchor = clean.includes('#');
+    const [beforeHash, afterHash] = hasAnchor
+      ? clean.split('#', 2)
+      : [clean, ''];
+    const withExt = beforeHash.endsWith('.html')
+      ? beforeHash
+      : `${beforeHash}.html`;
+    const result = `${base}${withExt}`.replace(/\/+/g, '/');
+    return hasAnchor ? `${result}#${afterHash}` : result;
+  };
+
   return {
     ...params,
     lang,
@@ -741,5 +766,7 @@ export const createTemplateParams = (
     })(),
     page: readJSON5(resolveRoot(`${PATHS.SRC}/pages/${name}/index.json5`)),
     i18n,
+    url,
+    base_path: basePath,
   };
 };
