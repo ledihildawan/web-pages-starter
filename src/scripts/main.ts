@@ -21,10 +21,12 @@ const deferred = (): void => {
 const registerServiceWorker = (): void => {
   if (!isProd || !('serviceWorker' in navigator)) return;
 
-  navigator.serviceWorker.register('/sw.js').catch((error: unknown) => {
-    const message = error instanceof Error ? error.message : String(error);
-    console.warn('Warning: Service worker registration failed —', message);
-  });
+  navigator.serviceWorker
+    .register(`${import.meta.env.BASE_PATH}sw.js`)
+    .catch((error: unknown) => {
+      const message = error instanceof Error ? error.message : String(error);
+      console.warn('Warning: Service worker registration failed —', message);
+    });
 };
 
 async function bootstrap() {

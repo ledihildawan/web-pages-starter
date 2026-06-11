@@ -51,8 +51,8 @@ src/
 
 tools/                     #   build-time CLI scripts
   └── shared/              #   shared modules (logger, signal-handler)
-public/                    #   static assets served as-is
-  └── assets/i18n/         #   pre-compiled i18n JSON bundles
+public/                    #   static assets (favicon, sw.js)
+  └── assets/i18n/         #   pre-compiled i18n JSON bundles (generated)
 generated/                 #   auto-generated (i18n.d.ts, exchange-rates.ts)
 docs/                      #   documentation
 ```
@@ -92,6 +92,10 @@ Each page has an optional `index.json5` for structural/layout data (colors, icon
 | `page.*` | `src/pages/{page}/index.json5` | page-specific layout data |
 | `i18n.*` | `src/locales/{locale}/*.json5` | translated text (see [i18n](#i18n)) |
 | `lang` | `i18nConfig.defaultLocale` | current locale code |
+| `base_path` | `process.env.BASE_PATH` | subpath prefix for asset URLs (default `/`) |
+| `localeConfig` | `LOCALES` lookup | current locale's `dir`, `writingSystem`, etc. |
+| `clientI18nScript` | `template.ts` | inline `<script>` for i18n bootstrap |
+| `page_id` | `params.entryName` | current page identifier |
 
 ### Template inheritance
 
@@ -238,8 +242,9 @@ The i18n store provides reactive locale switching. Registered in `src/scripts/li
 1. Load Alpine + i18n store in parallel
 2. Register store, start Alpine
 3. Initialize i18next (load locale resources, translate page)
-4. Defer font loading via `requestIdleCallback`
-5. Register service worker (production only)
+4. Preload active font
+5. Defer font loading via `requestIdleCallback`
+6. Register service worker (production only)
 
 ## Build Pipeline
 
@@ -256,15 +261,17 @@ clean:cache → fetch:rates → [watch:i18n || rsbuild dev]
 ### Production
 
 ```
-sync-root-page → clean:cache → fetch:rates → generate-i18n → generate-sitemap → build
+sync-root-page → clean:cache → fetch:rates → generate-i18n → generate-sitemap → generate-manifest → generate-robots → build
 ```
 
 1. **sync-root-page** — ensures root page folder matches `ROOT_PAGE` config
 2. **clean-cache** — purges `node_modules/.cache`, `.cache`, `dist`
 3. **fetch-exchange-rates** — pulls live rates from Frankfurter API (24h cache)
 4. **generate-i18n** — walks default locale, writes `generated/i18n.d.ts`
-5. **generate-sitemap** — generates `public/sitemap.xml` (also writes to `dist/` but cleared by step 6's `cleanDistPath`; not in `output.copy` so `dist/sitemap.xml` absent after full build)
-6. **build** — Rsbuild production bundle with:
+5. **generate-sitemap** — generates `public/sitemap.xml` from pages and `SITE_URL`
+6. **generate-manifest** — generates `public/manifest.json` from `global.json5` + `i18nConfig`
+7. **generate-robots** — generates `public/robots.txt` from `SITE_URL`
+8. **build** — Rsbuild production bundle with:
    - JS + CSS minification
    - HTML minification (`html-minifier-terser`)
    - `home.html` → `index.html` rename (`pluginRootPageAsIndex`)
@@ -279,6 +286,9 @@ sync-root-page → clean:cache → fetch:rates → generate-i18n → generate-si
 | --- | --- |
 | Entry discovery | Auto-scans `src/pages/*/index.ts` |
 | Root page as index | `pluginRootPageAsIndex` renames `home.html` → `index.html` post-build; dev server uses `historyApiFallback` rewrite to `/home.html` instead |
+| `BASE_PATH` support | `source.define` injects `import.meta.env.BASE_PATH` for runtime JS; template param `base_path` for Nunjucks |
+| Output paths | `dist/assets/{scripts,styles,images,fonts}` — organized by asset type |
+| Static copy | `output.copy` moves `public/` static files (favicon, sw.js, manifest, robots, i18n bundles) to `dist/` |
 | Path aliases | `@/` → `src/`, `@components/`, `@assets/`, `@generated/`, `@configs/`, `@data/` |
 | Nunjucks loader | `simple-nunjucks-loader` with search paths: `pages/`, `layouts/`, `components/`, `src/` root; `assetsPaths: src/assets/` |
 | Pre-entries | `src/scripts/main.ts` + `src/styles/main.css` loaded before every page |
@@ -319,7 +329,7 @@ Ideal for Lighthouse audits, mobile testing, or sharing WIP via a public URL.
 | `src/data/menu.json5` | Navigation structure (header menu with children) |
 | `.env.development` | `NODE_ENV`, `SITE_URL`, `PORT`, `HOST` |
 | `.env.production` | `NODE_ENV`, `SITE_URL` (production domain) |
-| `biome.json` | Linting (Tailwind class sorting) + formatting (2-space indent, single quotes) |
+| `biome.json` | Linting (Tailwind class sorting, organize imports) + formatting (2-space indent, single quotes). Overrides: `main.css` disables `noDescendingSpecificity`/`noImportantStyles`; `common.ts` disables `noExplicitAny` |
 | `tsconfig.json` | Strict mode, ESNext, path aliases |
 
 ### Environment variables
@@ -333,13 +343,14 @@ Ideal for Lighthouse audits, mobile testing, or sharing WIP via a public URL.
 | `BUILD_PREVIEW` | Set automatically by preview tool |
 | `MINIFY` / `MINIFY_HTML` | Disable minification (`"false"`) |
 | `NODE_BINARY` / `RSBUILD_RUNTIME` | Runtime override for build process |
+| `NGROK_AUTHTOKEN` | Auth token for ngrok tunnel (preview tool) |
 
 ## PWA
 
-- `public/manifest.json` — web app manifest
-- `public/sw.js` — cache-first service worker with network fallback
-- Registered automatically in production builds
-- Offline fallback to `/404.html` for navigation requests
+- `public/manifest.json` — web app manifest (generated by `tools/generate-manifest.ts` from `global.json5` + `i18nConfig`)
+- `public/sw.js` — cache-first service worker with network fallback (derives `BASE_PATH` from `self.location`)
+- Registered automatically in production builds via `import.meta.env.BASE_PATH`
+- Offline fallback to `404.html` for navigation requests
 
 ## Pre-commit Hooks
 
@@ -358,9 +369,12 @@ GitHub Actions workflows in `.github/workflows/`:
 
 Runs on every push and PR to `main`:
 
-1. **biome ci** — lint + format check (no writes)
-2. **build** — `bun run build` with `BASE_PATH=/web-pages-starter/`
-3. **upload artifact** — uploads `dist/` for the deploy workflow
+1. **checkout** — `actions/checkout@v4`
+2. **setup bun** — `oven-sh/setup-bun@v2` (version 1.3.14)
+3. **install** — `bun install --frozen-lockfile`
+4. **biome ci** — lint + format check (no writes)
+5. **build** — `bun run build` with `BASE_PATH=/web-pages-starter/`, `SITE_URL=https://ledihildawan.github.io/web-pages-starter`
+6. **upload artifact** — uploads `dist/` for the deploy workflow
 
 ### Deploy (`deploy.yml`)
 
@@ -386,7 +400,7 @@ Tests live in `tests/`. The setup extends `expect` with `@testing-library/jest-d
 | Command | What it does |
 | --- | --- |
 | `bun run dev` | Clean cache, fetch rates, watch JSON5, start Rsbuild dev server |
-| `bun run build` | Sync root page, clean cache, fetch rates, generate i18n types, generate sitemap, production build |
+| `bun run build` | Sync root page, clean cache, fetch rates, generate i18n types, generate sitemap, manifest, robots, production build |
 | `bun run preview` | Tunnel orchestrator — build and serve via ngrok or cloudflared |
 | `bun run serve` | Serve the production build locally |
 | `bun run clean:cache` | Remove `node_modules/.cache`, `.cache`, `dist` |
@@ -399,6 +413,8 @@ Direct tool access:
 | --- | --- |
 | `bun ./tools/generate-page.ts <name>` | Scaffold a new page with 87 locale files |
 | `bun ./tools/generate-sitemap.ts` | Generate `public/sitemap.xml` from page directories |
+| `bun ./tools/generate-manifest.ts` | Generate `public/manifest.json` from `global.json5` + `i18nConfig` |
+| `bun ./tools/generate-robots.ts` | Generate `public/robots.txt` from `SITE_URL` |
 | `bun ./tools/sync-locales.ts` | Create missing locale folders from default |
 | `bun ./tools/check-locale-parity.ts` | Diff translation keys across all locales |
 | `bun ./tools/fetch-exchange-rates.ts` | Fetch exchange rates with 24h cache |
@@ -425,6 +441,8 @@ All tools live in `tools/`. They share two modules from `tools/shared/`:
 | `generate-page.ts` | log | Scaffold new page with locale files |
 | `generate-i18n.ts` | log | Generate i18n TypeScript type definitions |
 | `generate-sitemap.ts` | log | Generate sitemap.xml |
+| `generate-manifest.ts` | log | Generate manifest.json from global.json5 + i18nConfig |
+| `generate-robots.ts` | log | Generate robots.txt from SITE_URL |
 | `sync-root-page.ts` | log, wrapMainError | Sync root page folder with config |
 | `sync-locales.ts` | log | Create missing locale directories |
 | `check-locale-parity.ts` | log | Diff translation keys across locales |
@@ -437,7 +455,7 @@ All tools live in `tools/`. They share two modules from `tools/shared/`:
 | Layer | Technology | Version |
 | --- | --- | --- |
 | Runtime | Bun | `^1.3.14` |
-| Bundler | Rsbuild | `^2.0.11` |
+| Bundler | Rsbuild | `^2.0.12` |
 | Language | TypeScript | `^6.0.3` |
 | Templates | Nunjucks | `^3.2.4` |
 | Reactive UI | Alpine.js | `^3.15.12` |
@@ -446,7 +464,7 @@ All tools live in `tools/`. They share two modules from `tools/shared/`:
 | Server | Hono | `^4.12.25` |
 | Lint/Format | Biome | `^2.4.16` |
 | Testing | Rstest | `^0.10.3` |
-| HTML minifier | html-minifier-terser | `^7.0.2` |
+| HTML minifier | html-minifier-terser | `^7.2.0` |
 
 ## Browser Support
 
