@@ -18,6 +18,9 @@ generated/
 !.vscode/extensions.json
 .idea
 
+# AI tools
+.claude/
+
 .rsbuild
 coverage
 
