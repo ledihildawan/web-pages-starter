@@ -40,11 +40,7 @@ self.addEventListener('fetch', (event) => {
       return fetch(event.request)
         .then((response) => {
           // Don't cache if not successful or opaque response
-          if (
-            !response ||
-            response.status !== 200 ||
-            response.type === 'opaque'
-          ) {
+          if (response?.status !== 200 || response.type === 'opaque') {
             return response;
           }
 

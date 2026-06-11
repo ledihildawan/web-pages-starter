@@ -39,7 +39,8 @@ export const WRITING_SYSTEMS = [
     languages: [LANGUAGE_CODE.ZH, LANGUAGE_CODE.JA, LANGUAGE_CODE.KO],
     numberingSystems: ['jpan', 'hans', 'hant', 'kore', 'hanidec', 'fullwide'],
     direction: DIRECTION_CODE.LTR,
-    defaultFont: 'Noto Sans JP Variable, Noto Sans SC Variable, Noto Sans TC Variable, Noto Sans KR Variable',
+    defaultFont:
+      'Noto Sans JP Variable, Noto Sans SC Variable, Noto Sans TC Variable, Noto Sans KR Variable',
   },
   {
     code: 'arabic',
@@ -67,7 +68,16 @@ export const WRITING_SYSTEMS = [
     name: 'Cyrillic Script',
     nameId: 'Skrip Cyrillic',
     description: 'Cyrillic alphabet used in Russian and other Slavic languages',
-    languages: [LANGUAGE_CODE.RU, LANGUAGE_CODE.UK, LANGUAGE_CODE.KK, LANGUAGE_CODE.KY, LANGUAGE_CODE.TG, LANGUAGE_CODE.MN, LANGUAGE_CODE.SR, LANGUAGE_CODE.BG],
+    languages: [
+      LANGUAGE_CODE.RU,
+      LANGUAGE_CODE.UK,
+      LANGUAGE_CODE.KK,
+      LANGUAGE_CODE.KY,
+      LANGUAGE_CODE.TG,
+      LANGUAGE_CODE.MN,
+      LANGUAGE_CODE.SR,
+      LANGUAGE_CODE.BG,
+    ],
     numberingSystems: ['cyrl'],
     direction: DIRECTION_CODE.LTR,
     defaultFont: 'Inter Variable',
@@ -268,7 +278,8 @@ export const WRITING_SYSTEMS = [
     code: 'nko',
     name: 'N\u2019Ko Script',
     nameId: 'Skrip N\u2019Ko',
-    description: 'N\u2019Ko script used in West Africa (Mali, Guinea, Ivory Coast)',
+    description:
+      'N\u2019Ko script used in West Africa (Mali, Guinea, Ivory Coast)',
     languages: [] as LanguageCode[],
     numberingSystems: ['nkoo'],
     direction: DIRECTION_CODE.RTL,
@@ -302,10 +313,13 @@ export const WRITING_SYSTEM_CODE = Object.fromEntries(
 };
 
 export const WRITING_SYSTEM = Object.fromEntries(
-  WRITING_SYSTEMS.flatMap((ws) => [
-    [ws.code.toUpperCase(), ws.code],
-    [`${ws.code.toUpperCase()}_LANGUAGES`, ws.languages],
-  ] as const),
+  WRITING_SYSTEMS.flatMap(
+    (ws) =>
+      [
+        [ws.code.toUpperCase(), ws.code],
+        [`${ws.code.toUpperCase()}_LANGUAGES`, ws.languages],
+      ] as const,
+  ),
 ) as typeof WRITING_SYSTEM_CODE & {
   [K in WritingSystemCode as `${Uppercase<K>}_LANGUAGES`]: readonly LanguageCode[];
 };

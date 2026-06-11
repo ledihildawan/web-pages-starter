@@ -182,7 +182,7 @@ const FORMATTERS = [
           price = pricing.base;
           fromCurrency = CURRENCY_CODE.USD;
         }
-      } catch { }
+      } catch {}
 
       if (discountStr) {
         price = price * parseFloat(discountStr);
@@ -212,8 +212,8 @@ const FORMATTERS = [
       const unit = el.getAttribute('data-unit');
       return unit
         ? formatUnit(parseFloat(v), unit, {
-          nativeDigits: el.getAttribute('data-use-native') === 'true',
-        })
+            nativeDigits: el.getAttribute('data-use-native') === 'true',
+          })
         : v;
     },
   },
@@ -290,11 +290,11 @@ export async function initIntl(localeOverride?: string): Promise<void> {
 
     const compData = data.comp
       ? Object.fromEntries(
-        Object.entries(data.comp).map(([name, content]) => [
-          `components/${name}`,
-          content,
-        ]),
-      )
+          Object.entries(data.comp).map(([name, content]) => [
+            `components/${name}`,
+            content,
+          ]),
+        )
       : {};
 
     const resources: Resource = {
@@ -314,10 +314,10 @@ export async function initIntl(localeOverride?: string): Promise<void> {
       detection: localeOverride
         ? undefined
         : {
-          order: ['localStorage', 'navigator'],
-          caches: ['localStorage'],
-          lookupLocalStorage: LOCALE_STORAGE_KEY,
-        },
+            order: ['localStorage', 'navigator'],
+            caches: ['localStorage'],
+            lookupLocalStorage: LOCALE_STORAGE_KEY,
+          },
       interpolation: { escapeValue: false },
       saveMissing: false,
       parseMissingKeyHandler: (key: string) => {
@@ -347,7 +347,7 @@ export async function initIntl(localeOverride?: string): Promise<void> {
     translatePage();
     updateFormattedElements();
     updateI18nStoreLabels();
-  } catch { }
+  } catch {}
 }
 
 export const updateI18nStoreLabels = (): void => {

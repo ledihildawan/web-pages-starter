@@ -34,11 +34,11 @@ const ensureLocaleData = async (
     const data = await response.json();
     const compData = data.comp
       ? Object.fromEntries(
-        Object.entries(data.comp).map(([name, content]) => [
-          `components/${name}`,
-          content,
-        ]),
-      )
+          Object.entries(data.comp).map(([name, content]) => [
+            `components/${name}`,
+            content,
+          ]),
+        )
       : {};
     m.i18next.addResourceBundle(code, 'common', data.common);
     m.i18next.addResourceBundle(code, pageID, data.page);

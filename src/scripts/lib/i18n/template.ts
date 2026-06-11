@@ -503,7 +503,7 @@ const createI18nObject = (
     },
 
     localPrice: (
-      plan: { pricing: { base: number;[locale: string]: number } },
+      plan: { pricing: { base: number; [locale: string]: number } },
       options?: TemplateFormatOptions,
     ) => {
       const formatted = String(localPrice(plan));
@@ -512,7 +512,7 @@ const createI18nObject = (
     },
 
     localPriceCurrency: (
-      plan: { pricing: { base: number;[locale: string]: number } },
+      plan: { pricing: { base: number; [locale: string]: number } },
       options?: TemplateFormatOptions,
     ) => {
       const formatted = localPriceCurrency(plan);
@@ -521,7 +521,7 @@ const createI18nObject = (
     },
 
     convertLocalPrice: (
-      plan: { pricing: { base: number;[locale: string]: number } },
+      plan: { pricing: { base: number; [locale: string]: number } },
       targetCurrency: CurrencyCode,
       options?: TemplateFormatOptions,
     ) => {
@@ -542,7 +542,7 @@ const createI18nObject = (
     },
 
     formatLocalPrice: (
-      plan: { pricing: { base: number;[locale: string]: number } },
+      plan: { pricing: { base: number; [locale: string]: number } },
       options?: TemplateFormatOptions,
     ) => {
       const formatted = formatLocalPrice(plan, options);
@@ -559,7 +559,7 @@ const createI18nObject = (
     },
 
     formatLocalPriceDiscounted: (
-      plan: { pricing: { base: number;[locale: string]: number } },
+      plan: { pricing: { base: number; [locale: string]: number } },
       discountMultiplier: number,
       targetCurrency: CurrencyCode,
       options?: TemplateFormatOptions,
@@ -736,9 +736,7 @@ export const createTemplateParams = (
     page_id: name,
     global: (() => {
       const data = loadGlobalData(resolveRoot(`${PATHS.SRC}/data`));
-      data.site_url =
-        process.env.SITE_URL ||
-        'http://localhost:8888';
+      data.site_url = process.env.SITE_URL || 'http://localhost:8888';
       return data;
     })(),
     page: readJSON5(resolveRoot(`${PATHS.SRC}/pages/${name}/index.json5`)),

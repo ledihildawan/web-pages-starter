@@ -149,7 +149,7 @@ const FORMATTERS = [
           price = pricing.base;
           fromCurrency = CURRENCY_CODE.USD;
         }
-      } catch { }
+      } catch {}
 
       if (discountStr) {
         price = price * parseFloat(discountStr);
@@ -179,8 +179,8 @@ const FORMATTERS = [
       const unit = el.getAttribute('data-unit');
       return unit
         ? formatUnit(parseFloat(v), unit, {
-          nativeDigits: el.getAttribute('data-use-native') === 'true',
-        })
+            nativeDigits: el.getAttribute('data-use-native') === 'true',
+          })
         : v;
     },
   },
