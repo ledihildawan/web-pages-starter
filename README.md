@@ -33,25 +33,25 @@ src/
 │       ├── index.css      #   page styles (optional)
 │       └── components/    #   page-local partials (optional)
 ├── components/            # 10 shared Nunjucks partials + macros
-├── layouts/               # base templates (main.njk) + macros (page-meta.njk)
+├── layouts/               # base templates (main.njk) + macros/ (page-meta.njk)
 ├── locales/               # translation source of truth (87 locales)
 │   └── {locale}/
 │       ├── common.json5   #   shared copy (nav, footer, labels, plurals)
 │       ├── {page}.json5   #   page-specific copy
 │       └── components/{name}.json5
 ├── scripts/
-│   ├── lib/i18n/          #   i18n engine (21 files)
+│   ├── lib/i18n/          #   i18n engine (20 files)
 │   ├── lib/utils/         #   shared utilities (microtask queue)
-│   ├── utils/             #   build-time utilities (json5, common helpers)
+│   ├── utils/             #   build-time utilities (json5, common, types)
 │   └── main.ts            #   app bootstrap
 ├── styles/
 │   └── main.css           #   Tailwind v4 entry + design tokens + component classes
 ├── assets/                #   images, fonts, raw assets
-└── types/                 #   shared TS type declarations
+└── *.d.ts                 #   TS type declarations (env, global, globals, linkedom)
 
 tools/                     #   build-time CLI scripts
   └── shared/              #   shared modules (logger, signal-handler)
-public/                    #   static assets (favicon, sw.js)
+public/                    #   static assets (favicon, sw.js, generated manifest/robots/sitemap)
   └── assets/i18n/         #   pre-compiled i18n JSON bundles (generated)
 generated/                 #   auto-generated (i18n.d.ts, exchange-rates.ts)
 docs/                      #   documentation
