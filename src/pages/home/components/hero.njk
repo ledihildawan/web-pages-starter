@@ -33,10 +33,10 @@
     </p>
 
     <div class="flex flex-col sm:flex-row items-center justify-center gap-6 mbe-12 min-block-14">
-      <a href="{{ page.hero.primary_btn.url }}" class="group relative inline-full sm:inline-auto min-block-14 px-12 py-4 bg-white text-slate-950 rounded-2xl font-black text-lg flex items-center justify-center transition-all duration-300 ease-emphasized hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] active:scale-95 gpu-boost min-inline-45">
+      <a href="{{ page.hero.primary_btn.url }}" class="group relative inline-full sm:inline-auto min-block-14 px-12 py-4 bg-white text-slate-950 radius-btn font-black text-lg flex items-center justify-center transition duration-300 ease-emphasized hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] active:scale-[0.96] gpu-boost min-inline-45">
         {{ i18n.t('page.hero.primary_btn.label') }}
       </a>
-      <a href="{{ page.hero.secondary_btn.url }}" class="inline-full sm:inline-auto min-block-14 px-12 py-4 bg-slate-900/50 backdrop-blur-md text-white border border-white/10 rounded-2xl font-black text-lg flex items-center justify-center hover:bg-slate-800 transition-all duration-300 ease-emphasized hover:border-white/20 active:scale-95 gpu-boost min-inline-45">
+      <a href="{{ page.hero.secondary_btn.url }}" class="inline-full sm:inline-auto min-block-14 px-12 py-4 bg-slate-900/50 backdrop-blur-md text-white border border-white/10 radius-btn font-black text-lg flex items-center justify-center hover:bg-slate-800 transition duration-300 ease-emphasized hover:border-white/20 active:scale-[0.96] gpu-boost min-inline-45">
         {{ i18n.t('page.hero.secondary_btn.label') }}
       </a>
     </div>
@@ -48,7 +48,7 @@
     <div class="relative group max-inline-2xl mx-auto">
       <div class="absolute -inset-1 bg-linear-to-r from-violet-600 to-fuchsia-600 rounded-3xl blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-700 ease-emphasized"></div>
       <div class="relative bg-slate-900 rounded-2xl p-2 border border-white/10 shadow-2xl overflow-hidden gpu-boost">
-        <img width="1200" height="800" src="{{ hero_700 }}" srcset="{{ hero_400 }} 400w, {{ hero_500 }} 500w, {{ hero_700 }} 700w, {{ hero_800 }} 800w, {{ hero_900 }} 900w, {{ hero_1200 }} 1200w" sizes="(min-width: 720px) 654px, calc(100vw - 66px)" alt="Web Pages Starter dashboard preview showing the analytics view with sidebar navigation" class="inline-full block-auto rounded-xl transition-transform duration-700 ease-emphasized group-hover:scale-[1.02]" fetchpriority="high" loading="eager" decoding="async">
+        <img width="1200" height="800" src="{{ hero_700 }}" srcset="{{ hero_400 }} 400w, {{ hero_500 }} 500w, {{ hero_700 }} 700w, {{ hero_800 }} 800w, {{ hero_900 }} 900w, {{ hero_1200 }} 1200w" sizes="(min-width: 720px) 654px, calc(100vw - 66px)" alt="Web Pages Starter dashboard preview showing the analytics view with sidebar navigation" class="inline-full block-auto rounded-lg transition-transform duration-700 ease-emphasized group-hover:scale-[1.02]" fetchpriority="high" loading="eager" decoding="async">
       </div>
     </div>
 

@@ -1,6 +1,6 @@
 # Web Pages Starter
 
-A multi-page starter for content sites built with **Rsbuild + Nunjucks + Alpine.js + Tailwind CSS + i18next**. Ships 87 locales out of the box with SSG rendering, runtime language switching, locale-aware formatting, RTL support, and regional pricing.
+A multi-page starter for content sites built with **Rsbuild + Nunjucks + Alpine.js + Tailwind CSS v4 + i18next**. Ships 87 locales out of the box with SSG rendering, runtime language switching, locale-aware formatting, RTL support, and regional pricing.
 
 ## Quick Start
 
@@ -8,7 +8,7 @@ A multi-page starter for content sites built with **Rsbuild + Nunjucks + Alpine.
 bun install
 bun run dev          # http://localhost:8888
 bun run build        # production build to ./dist
-bun run preview      # build with dev settings (for tunnel-based testing)
+bun run preview      # build + tunnel for external testing
 ```
 
 Requires [Bun](https://bun.sh) `>= 1.0`.
@@ -18,9 +18,10 @@ Requires [Bun](https://bun.sh) `>= 1.0`.
 ```
 src/
 ├── configs/               # app configuration
+│   ├── env.ts             #   environment variable loading
 │   ├── i18n.ts            #   defaultLocale + fonts
-│   ├── site.ts            #   ROOT_PAGE
-│   └── paths.ts           #   filesystem path constants
+│   ├── paths.ts           #   filesystem path constants
+│   └── site.ts            #   ROOT_PAGE constant
 ├── data/                  # global site data
 │   ├── global.json5       #   site_name, seo, social, dns, preconnect
 │   └── menu.json5         #   navigation structure (header links + dropdowns)
@@ -28,7 +29,7 @@ src/
 │   └── {page}/
 │       ├── index.njk      #   Nunjucks template (required)
 │       ├── index.json5    #   page data — colors, icons, layout (optional)
-│       ├── index.ts       #   page entry (required, even if empty)
+│       ├── index.ts       #   page entry (auto-imported by Rsbuild)
 │       ├── index.css      #   page styles (optional)
 │       └── components/    #   page-local partials (optional)
 ├── components/            # 10 shared Nunjucks partials + macros
@@ -39,24 +40,26 @@ src/
 │       ├── {page}.json5   #   page-specific copy
 │       └── components/{name}.json5
 ├── scripts/
-│   ├── lib/i18n/          #   i18n engine (20 files)
+│   ├── lib/i18n/          #   i18n engine (21 files)
 │   ├── lib/utils/         #   shared utilities (microtask queue)
 │   ├── utils/             #   build-time utilities (json5, common helpers)
-│   ├── main.ts            #   app bootstrap
-│   └── components/        #   client-side components
+│   └── main.ts            #   app bootstrap
 ├── styles/
 │   └── main.css           #   Tailwind v4 entry + design tokens + component classes
 ├── assets/                #   images, fonts, raw assets
-└── types/                 #   shared TS types
+└── types/                 #   shared TS type declarations
 
-tools/                     #   build-time scripts
+tools/                     #   build-time CLI scripts
+  └── shared/              #   shared modules (logger, signal-handler)
+public/                    #   static assets served as-is
+  └── assets/i18n/         #   pre-compiled i18n JSON bundles
 generated/                 #   auto-generated (i18n.d.ts, exchange-rates.ts)
 docs/                      #   documentation
 ```
 
 ## Pages & Routing
 
-File-system based, zero-config routing. Drop a folder under `src/pages/` and it becomes a route.
+File-system based, zero-config routing. Drop a folder under `src/pages/` and it becomes a route. The root page (`home` by default) is output as `index.html` via the `pluginRootPageAsIndex` Rsbuild plugin.
 
 ### Pages
 
@@ -253,34 +256,57 @@ clean:cache → fetch:rates → [watch:i18n || rsbuild dev]
 ### Production
 
 ```
-clean:cache → fetch:rates → sync:root-page → generate-i18n.ts → build.ts → generate-sitemap.ts
+sync-root-page → clean:cache → fetch:rates → generate-i18n → generate-sitemap → build
 ```
 
-- HTML minification (via `html-minifier-terser`)
-- Image compression (AVIF via `@rsbuild/plugin-image-compress`)
-- CSS inlined into HTML; small JS inlined (<2KB)
-- Per-page code splitting with shared runtime chunk
+1. **sync-root-page** — ensures root page folder matches `ROOT_PAGE` config
+2. **clean-cache** — purges `node_modules/.cache`, `.cache`, `dist`
+3. **fetch-exchange-rates** — pulls live rates from Frankfurter API (24h cache)
+4. **generate-i18n** — walks default locale, writes `generated/i18n.d.ts`
+5. **generate-sitemap** — generates `public/sitemap.xml` (also writes to `dist/` but cleared by step 6's `cleanDistPath`; not in `output.copy` so `dist/sitemap.xml` absent after full build)
+6. **build** — Rsbuild production bundle with:
+   - JS + CSS minification
+   - HTML minification (`html-minifier-terser`)
+   - `home.html` → `index.html` rename (`pluginRootPageAsIndex`)
+   - Image compression (AVIF, quality 75)
+   - CSS inlined into HTML; small JS inlined (<2KB)
+   - Per-page code splitting with shared runtime chunk
+   - Content-hashed filenames for JS/CSS/images
 
-### Rsbuild highlights
+### Rsbuild configuration highlights
 
 | Feature | Detail |
 | --- | --- |
 | Entry discovery | Auto-scans `src/pages/*/index.ts` |
-| Path aliases | `@/` → `src/`, `@components/`, `@assets/`, `@generated/`, `@configs/` |
-| Nunjucks loader | `simple-nunjucks-loader` with search paths: `pages/`, `layouts/`, `components/` |
+| Root page as index | `pluginRootPageAsIndex` renames `home.html` → `index.html` post-build; dev server uses `historyApiFallback` rewrite to `/home.html` instead |
+| Path aliases | `@/` → `src/`, `@components/`, `@assets/`, `@generated/`, `@configs/`, `@data/` |
+| Nunjucks loader | `simple-nunjucks-loader` with search paths: `pages/`, `layouts/`, `components/`, `src/` root; `assetsPaths: src/assets/` |
 | Pre-entries | `src/scripts/main.ts` + `src/styles/main.css` loaded before every page |
-| Excluded pages | `EXCLUDED_PAGES=carousel-demo,i18n-test` env var |
+| Excluded pages | Hardcoded `EXCLUDED_PAGES` set in config (currently empty — all pages built) |
 
 ### Preview (`bun run preview`)
 
-Full preview flow — auto-starts ngrok, builds, and serves:
+Full preview flow — auto-starts tunnel, builds, and serves. Interactive mode prompts for tunnel provider. Use `--tunnel` flag for scripted use:
 
-1. Starts ngrok via `@ngrok/ngrok`
-2. Gets the public tunnel URL
-3. Builds with `SITE_URL` (set to ngrok tunnel) and `BUILD_PREVIEW=true`
-4. Serves the static build via Hono
+```bash
+bun run preview                                    # Interactive: select ngrok or cloudflared
+bun ./tools/preview.ts --tunnel ngrok              # Use ngrok (requires NGROK_AUTHTOKEN)
+bun ./tools/preview.ts --tunnel cloudflared        # Use cloudflared
+```
 
-Requires `NGROK_AUTHTOKEN` env var (set it in `.env` or `.ngrok` config). Ideal for Lighthouse audits, mobile testing, or sharing WIP via a public URL.
+**Tunnel providers:**
+
+| Provider | Requirement | Flow |
+| --- | --- | --- |
+| `ngrok` | `NGROK_AUTHTOKEN` env var | Tunnel → Build → Serve |
+| `cloudflared` | `cloudflared` installed | Build → Serve → Tunnel → Replace URLs |
+
+**Flow:**
+
+1. **ngrok**: Starts tunnel first (URL known immediately), builds with correct public URL, serves
+2. **cloudflared**: Builds first (uses `HOST:PORT`, default `127.0.0.1:8888`), serves, starts tunnel, **replaces placeholder URLs** in dist/ with tunnel URL
+
+Ideal for Lighthouse audits, mobile testing, or sharing WIP via a public URL.
 
 ## Configuration
 
@@ -301,9 +327,9 @@ Requires `NGROK_AUTHTOKEN` env var (set it in `.env` or `.ngrok` config). Ideal 
 | Variable | Purpose |
 | --- | --- |
 | `SITE_URL` | Base URL for sitemap and meta tags |
-| `PORT` | Preview server port (default 8888) |
-| `HOST` | Preview server bind address (default 0.0.0.0) |
-| `BUILD_PREVIEW` | Use dev settings in build (for tunnel testing) |
+| `PORT` | Server port (default 8888) |
+| `HOST` | Server bind address (serve: `0.0.0.0`, preview: `127.0.0.1`) |
+| `BUILD_PREVIEW` | Set automatically by preview tool |
 | `MINIFY` / `MINIFY_HTML` | Disable minification (`"false"`) |
 | `NODE_BINARY` / `RSBUILD_RUNTIME` | Runtime override for build process |
 
@@ -328,46 +354,67 @@ Tests live in `tests/`. The setup extends `expect` with `@testing-library/jest-d
 
 | Command | What it does |
 | --- | --- |
-| `bun run dev` | Fetch rates, watch JSON5, start Rsbuild dev server |
-| `bun run build` | Sync root page, fetch rates, generate i18n types, production build, generate sitemap |
-| `bun run preview` | Tunnel orchestrator — ngrok, build, and serve |
+| `bun run dev` | Clean cache, fetch rates, watch JSON5, start Rsbuild dev server |
+| `bun run build` | Sync root page, clean cache, fetch rates, generate i18n types, generate sitemap, production build |
+| `bun run preview` | Tunnel orchestrator — build and serve via ngrok or cloudflared |
 | `bun run serve` | Serve the production build locally |
-| `bun ./tools/generate-sitemap.ts` | Generate `public/sitemap.xml` from page directories |
-| `bun ./tools/generate-page.ts <name>` | Scaffold a new page and 87 translation files |
-| `bun ./tools/sync-locales.ts` | Create missing locale folders from default |
 | `bun run clean:cache` | Remove `node_modules/.cache`, `.cache`, `dist` |
 | `bun run cli` | Interactive menu for all tools |
 
-All tools live in `tools/`. Available via `bun ./tools/<name>.ts` or `bun run cli` (interactive menu).
+Direct tool access:
 
-| Tool | Purpose |
+| Command | What it does |
 | --- | --- |
-| `build.ts` | Production build wrapper (Rsbuild + HTML minification) |
-| `preview.ts` | Tunnel orchestrator — ngrok, build, and serve |
-| `serve.ts` | Serve the production build locally |
-| `generate-i18n.ts` | Regenerate `generated/i18n.d.ts` type definitions |
-| `generate-sitemap.ts` | Generate `public/sitemap.xml` from page directories |
-| `sync-root-page.ts` | Sync root page folder name with `ROOT_PAGE` config |
-| `generate-page.ts` | Scaffold a new page with 87 locale files |
-| `watch-i18n.ts` | Watch JSON5 files, log changes |
-| `fetch-exchange-rates.ts` | Fetch exchange rates with 24h cache |
-| `sync-locales.ts` | Create missing locale folders from default |
-| `check-locale-parity.ts` | Diff translation keys across all locales |
-| `lighthouse.ts` | Run Lighthouse audits (accessibility, SEO, best-practices, performance, agentic-browsing) |
-| `cli.ts` | Interactive menu for all tools |
+| `bun ./tools/generate-page.ts <name>` | Scaffold a new page with 87 locale files |
+| `bun ./tools/generate-sitemap.ts` | Generate `public/sitemap.xml` from page directories |
+| `bun ./tools/sync-locales.ts` | Create missing locale folders from default |
+| `bun ./tools/check-locale-parity.ts` | Diff translation keys across all locales |
+| `bun ./tools/fetch-exchange-rates.ts` | Fetch exchange rates with 24h cache |
+| `bun ./tools/fetch-exchange-rates.ts -- --force` | Force-refresh exchange rates |
+| `bun ./tools/generate-i18n.ts` | Regenerate `generated/i18n.d.ts` type definitions |
+| `bun ./tools/lighthouse.ts` | Run Lighthouse audits with interactive configuration |
+
+## Tools
+
+All tools live in `tools/`. They share two modules from `tools/shared/`:
+
+| Module | Purpose |
+| --- | --- |
+| `shared/logger.ts` | Centralized `log.*()` — info, error, warn, success, cancelled, header, toolStarted, toolFailed, toolSpawnFailed, serverReady, serverPortError, serverError, distNotFound |
+| `shared/signal-handler.ts` | SIGINT handling, `wrapMainError()`, `handleExitPromptError()`, `createServer()` with EADDRINUSE protection |
+
+| Tool | Shared imports | Purpose |
+| --- | --- | --- |
+| `cli.ts` | log, setupSigintHandler, wrapMainError | Interactive menu for all tools |
+| `build.ts` | log | Production build wrapper (Rsbuild + minification) |
+| `preview.ts` | log, createServer, setupSigintHandler, wrapMainError | Build + serve through public tunnel |
+| `serve.ts` | log, createServer, setupSigintHandler | Serve production build locally |
+| `lighthouse.ts` | log, setupSigintHandler, wrapMainError | Lighthouse audit runner |
+| `generate-page.ts` | log | Scaffold new page with locale files |
+| `generate-i18n.ts` | log | Generate i18n TypeScript type definitions |
+| `generate-sitemap.ts` | log | Generate sitemap.xml |
+| `sync-root-page.ts` | log, wrapMainError | Sync root page folder with config |
+| `sync-locales.ts` | log | Create missing locale directories |
+| `check-locale-parity.ts` | log | Diff translation keys across locales |
+| `fetch-exchange-rates.ts` | log | Fetch and cache exchange rates |
+| `watch-i18n.ts` | log, setupSigintHandler | Watch locale file changes |
+| `clean-cache.ts` | log | Remove cache directories |
 
 ## Tech Stack
 
-- **Build:** Rsbuild v2, Rspack, html-minifier-terser
-- **Templates:** Nunjucks (autoescape off), `simple-nunjucks-loader`
-- **Reactive UI:** Alpine.js v3 + `@alpinejs/collapse`, `@alpinejs/focus`
-- **Styling:** Tailwind CSS v4 (CSS-first, logical properties for RTL)
-- **i18n:** i18next + `i18next-browser-languagedetector`
-- **Carousel:** Splide.js
-- **Testing:** Rstest, happy-dom, Testing Library
-- **Linting:** Biome (Tailwind class sorting)
-- **Types:** TypeScript (strict)
-- **Runtime:** Bun
+| Layer | Technology | Version |
+| --- | --- | --- |
+| Runtime | Bun | `^1.3.14` |
+| Bundler | Rsbuild | `^2.0.11` |
+| Language | TypeScript | `^6.0.3` |
+| Templates | Nunjucks | `^3.2.4` |
+| Reactive UI | Alpine.js | `^3.15.12` |
+| CSS | Tailwind CSS v4 | `^4.3.0` |
+| i18n | i18next | `^26.3.1` |
+| Server | Hono | `^4.12.25` |
+| Lint/Format | Biome | `^2.4.16` |
+| Testing | Rstest | `^0.10.3` |
+| HTML minifier | html-minifier-terser | `^7.0.2` |
 
 ## Browser Support
 

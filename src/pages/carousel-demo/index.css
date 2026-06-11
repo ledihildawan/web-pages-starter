@@ -10,7 +10,9 @@
   inline-size: 10px;
   block-size: 10px;
   margin-inline: 0 6px;
-  transition: all 0.2s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .splide__pagination__page.is-active {

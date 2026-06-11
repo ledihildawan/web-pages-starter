@@ -5,9 +5,10 @@ import process from 'node:process';
 import inquirer from 'inquirer';
 import { DOMParser } from 'linkedom';
 import '../src/configs/env';
+import { log } from './shared/logger';
+import { setupSigintHandler, wrapMainError } from './shared/signal-handler';
 
-const BASE_URL =
-  process.env.SITE_URL || 'http://localhost:8888';
+const BASE_URL = process.env.SITE_URL || 'http://localhost:8888';
 const OUTPUT_DIR = process.env.LIGHTHOUSE_OUTPUT_DIR || './reports';
 
 const hasNgrokFlag = (args: string[]) => args.includes('--ngrok');
@@ -53,7 +54,7 @@ const runLighthouse = (
   outputTypes: string[],
 ) => {
   return new Promise<void>((resolve, reject) => {
-    console.log(`\n${label} Running lighthouse for ${url}...`);
+    log.info(`\n${label} Running Lighthouse for ${url}...`);
     const proc = spawn('bunx', ['lighthouse', url, ...args], {
       stdio: ['inherit', 'inherit', 'pipe'],
       shell: false,
@@ -100,10 +101,7 @@ const buildArgs = (
   url: string,
   cliArgs: string[],
 ) => {
-  const args = [
-    `--output=${outputTypes.join(',')}`,
-    '--quiet',
-  ];
+  const args = [`--output=${outputTypes.join(',')}`, '--quiet'];
 
   const headers = getExtraHeaders(url, cliArgs);
   if (headers) {
@@ -201,6 +199,7 @@ const parseScores = (reportDir: string) => {
   const jsonFiles = walkDir(reportDir);
 
   for (const filePath of jsonFiles) {
+    let pageName = 'unknown';
     try {
       const content = fs.readFileSync(filePath, 'utf-8');
       const data = JSON.parse(content) as {
@@ -211,7 +210,7 @@ const parseScores = (reportDir: string) => {
       const parts = relPath.replace(/\\/g, '/').split('/');
       const ff = parts[0];
       const slug = parts[1].replace(/\.report\.json$/, '');
-      const pageName = `${slug}-${ff}`;
+      pageName = `${slug}-${ff}`;
 
       scores[pageName] = {};
       if (data.categories) {
@@ -219,7 +218,9 @@ const parseScores = (reportDir: string) => {
           scores[pageName][key] = Math.round(cat.score * 100);
         }
       }
-    } catch { }
+    } catch {
+      log.warn(`Warning: Could not parse scores for ${pageName}`);
+    }
   }
 
   return scores;
@@ -231,7 +232,7 @@ const main = async () => {
   const help = cliArgs.includes('--help');
 
   if (help) {
-    console.log(`
+    log.info(`
 Lighthouse Audit Tool
 
 Audits accessibility, SEO, best practices, performance, and AI agent compatibility.
@@ -371,7 +372,7 @@ Examples:
     const urlIndex = cliArgs.indexOf('--url');
     const urlPath = cliArgs[urlIndex + 1];
     if (!urlPath) {
-      console.error('Error: --url requires a path argument');
+      log.error('Error: --url requires a path argument');
       process.exit(1);
     }
     const base = BASE_URL.endsWith('/') ? BASE_URL.slice(0, -1) : BASE_URL;
@@ -386,7 +387,7 @@ Examples:
       );
       urls = parseSitemap(sitemapXml);
     } catch (err) {
-      console.warn(`Could not fetch sitemap: ${(err as Error).message}`);
+      log.warn(`Warning: Could not fetch sitemap — ${(err as Error).message}`);
       urls = [BASE_URL];
     }
   }
@@ -420,7 +421,7 @@ Examples:
   }
 
   if (urls.length === 0) {
-    console.error('No URLs selected.');
+    log.error('Error: No URLs selected.');
     process.exit(1);
   }
 
@@ -430,18 +431,18 @@ Examples:
     categories.length === categoriesList.length ? 'All' : categories.join(', ');
   const reportDir = path.join(OUTPUT_DIR, 'lighthouse', timestamp);
 
-  console.log('\n┌────────────────────────────────────────┐');
-  console.log('│         Lighthouse Audit               │');
-  console.log('├────────────────────────────────────────┤');
-  console.log(`│  Form factor:  ${formFactorDisplay.padEnd(24)}│`);
-  console.log(`│  Categories:   ${categoriesLabel.padEnd(24)}│`);
-  console.log(`│  Output:       ${outputTypes.join(',').padEnd(24)}│`);
-  console.log(`│  URLs:         ${String(urls.length).padEnd(24)}│`);
+  log.info('\n┌────────────────────────────────────────┐');
+  log.info('│         Lighthouse Audit               │');
+  log.info('├────────────────────────────────────────┤');
+  log.info(`│  Form factor:  ${formFactorDisplay.padEnd(24)}│`);
+  log.info(`│  Categories:   ${categoriesLabel.padEnd(24)}│`);
+  log.info(`│  Output:       ${outputTypes.join(',').padEnd(24)}│`);
+  log.info(`│  URLs:         ${String(urls.length).padEnd(24)}│`);
   const maxLen = 36;
   const truncate = (s: string) =>
     s.length > maxLen ? `...${s.slice(-(maxLen - 3))}` : s;
-  console.log(`│  Report dir:   ${truncate(reportDir).padEnd(maxLen - 13)}│`);
-  console.log('└────────────────────────────────────────┘');
+  log.info(`│  Report dir:   ${truncate(reportDir).padEnd(maxLen - 13)}│`);
+  log.info('└────────────────────────────────────────┘');
 
   fs.mkdirSync(reportDir, { recursive: true });
 
@@ -504,9 +505,9 @@ Examples:
   const scores = parseScores(reportDir);
 
   if (Object.keys(scores).length > 0) {
-    console.log('\n┌────────────────────────────────────────┐');
-    console.log('│         Scores Summary                  │');
-    console.log('├────────────────────────────────────────┤');
+    log.info('\n┌────────────────────────────────────────┐');
+    log.info('│         Scores Summary                  │');
+    log.info('├────────────────────────────────────────┤');
 
     const pages = [
       ...new Set(
@@ -516,7 +517,7 @@ Examples:
     const formFactors = runBoth ? ['desktop', 'mobile'] : [formFactor];
 
     for (const page of pages) {
-      console.log(`│  ${page}`);
+      log.info(`│  ${page}`);
       for (const ff of formFactors) {
         const key = runBoth ? `${page}-${ff}` : page;
         const pageScore = scores[key];
@@ -525,17 +526,17 @@ Examples:
           for (const [cat, score] of Object.entries(pageScore)) {
             if (cat === 'formFactor') continue;
             const color = getScoreColor(score);
-            console.log(`│    ${ffLabel} ${color}${score}${'\x1b[0m'} ${cat}`);
+            log.info(`│    ${ffLabel} ${color}${score}${'\x1b[0m'} ${cat}`);
           }
         }
       }
     }
 
-    console.log('└────────────────────────────────────────┘');
+    log.info('└────────────────────────────────────────┘');
   }
 
-  console.log('\nLighthouse audit complete!');
-  console.log(`Reports: ${reportDir}/`);
+  log.success('\nDone: Lighthouse audit complete');
+  log.info(`Reports: ${reportDir}/`);
 
   const { openReport } = await inquirer.prompt([
     {
@@ -552,7 +553,5 @@ Examples:
   }
 };
 
-main().catch((err) => {
-  console.error('\nLighthouse error:', err);
-  process.exit(1);
-});
+setupSigintHandler();
+wrapMainError(main);

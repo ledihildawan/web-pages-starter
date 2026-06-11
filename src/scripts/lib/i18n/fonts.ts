@@ -31,8 +31,8 @@ const NOTO_SANS: Partial<
     loader: () => import('@fontsource-variable/noto-sans-arabic/index.css'),
   },
   deva: {
-    css: '@fontsource/noto-sans-devanagari/400.css',
-    loader: () => import('@fontsource/noto-sans-devanagari/400.css'),
+    css: '@fontsource-variable/noto-sans-devanagari/index.css',
+    loader: () => import('@fontsource-variable/noto-sans-devanagari/index.css'),
   },
   thai: {
     css: '@fontsource-variable/noto-sans-thai/index.css',

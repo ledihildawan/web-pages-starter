@@ -2,8 +2,13 @@ import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 import '../src/configs/env';
-import { ROOT_PAGE } from '../src/configs/site';
 import { PATHS } from '../src/configs/paths';
+import { ROOT_PAGE } from '../src/configs/site';
+import { log } from './shared/logger';
+
+const cliArgs = process.argv.slice(2);
+const distOnly = cliArgs.includes('--dist-only');
+const isPreviewRegen = process.env.FOR_PREVIEW === 'true';
 
 const SITE_URL = process.env.SITE_URL || 'http://localhost:8888';
 
@@ -23,7 +28,12 @@ const getPages = () => {
 
   const entries = fs.readdirSync(PAGES_DIR, { withFileTypes: true });
   return entries
-    .filter((entry) => entry.isDirectory() && !entry.name.startsWith('.') && !EXCLUDED.includes(entry.name))
+    .filter(
+      (entry) =>
+        entry.isDirectory() &&
+        !entry.name.startsWith('.') &&
+        !EXCLUDED.includes(entry.name),
+    )
     .map((entry) => entry.name)
     .sort();
 };
@@ -46,7 +56,8 @@ const generateSitemap = () => {
   }
 
   otherPages.forEach((page, index) => {
-    const priority = !homePage && index === 0 ? '1.0' : index === 0 ? '0.9' : DEFAULT_PRIORITY;
+    const priority =
+      !homePage && index === 0 ? '1.0' : index === 0 ? '0.9' : DEFAULT_PRIORITY;
     urls.push(`  <url>
     <loc>${baseUrl}/${page}</loc>
     <changefreq>${DEFAULT_CHANGEFREQ}</changefreq>
@@ -64,16 +75,27 @@ ${urls.join('\n')}
   if (!fs.existsSync(OUTPUT_DIST_DIR)) {
     fs.mkdirSync(OUTPUT_DIST_DIR, { recursive: true });
   }
-  fs.writeFileSync(OUTPUT_PUBLIC, xml, 'utf-8');
+  if (!distOnly && !isPreviewRegen) {
+    fs.writeFileSync(OUTPUT_PUBLIC, xml, 'utf-8');
+  }
   fs.writeFileSync(OUTPUT_DIST, xml, 'utf-8');
 
-  console.log('┌────────────────────────────────────────┐');
-  console.log('│         Generate Sitemap               │');
-  console.log('├────────────────────────────────────────┤');
-  console.log(`│  Pages:     ${String(urls.length).padEnd(24)}│`);
-  console.log(`│  Base URL:  ${baseUrl.slice(0, 24).padEnd(24)}│`);
-  console.log(`│  Output:    ${OUTPUT_PUBLIC.replace(PATHS.ROOT, '.').slice(0, 24).padEnd(24)}│`);
-  console.log('└────────────────────────────────────────┘');
+  if (!isPreviewRegen) {
+    log.info('┌────────────────────────────────────────┐');
+    log.info('│         Generate Sitemap               │');
+    log.info('├────────────────────────────────────────┤');
+    log.info(`│  Pages:     ${String(urls.length).padEnd(24)}│`);
+    log.info(`│  Base URL:  ${baseUrl.slice(0, 24).padEnd(24)}│`);
+    log.info(
+      `│  Output:    ${OUTPUT_PUBLIC.replace(PATHS.ROOT, '.').slice(0, 24).padEnd(24)}│`,
+    );
+    log.info('└────────────────────────────────────────┘');
+  }
 };
 
-generateSitemap();
+try {
+  generateSitemap();
+} catch (err) {
+  log.error(`Error: Failed to generate sitemap — ${err}`);
+  process.exit(1);
+}

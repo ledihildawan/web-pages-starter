@@ -1,13 +1,13 @@
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
-import { serve } from '@hono/node-server';
 import { serveStatic } from '@hono/node-server/serve-static';
 import { Hono } from 'hono';
 import { compress } from 'hono/compress';
 import '../src/configs/env';
 import { PATHS } from '../src/configs/paths';
-import { ROOT_PAGE } from '../src/configs/site';
+import { log } from './shared/logger';
+import { createServer, setupSigintHandler } from './shared/signal-handler';
 
 const PORT = Number.parseInt(process.env.PORT ?? '8888', 10);
 const HOST = process.env.HOST ?? '0.0.0.0';
@@ -15,7 +15,7 @@ const HOST = process.env.HOST ?? '0.0.0.0';
 const DIST = path.resolve(PATHS.ROOT, 'dist');
 
 if (!existsSync(DIST)) {
-  console.error('dist/ not found. Run `bun run build` first.');
+  log.distNotFound();
   process.exit(1);
 }
 
@@ -64,7 +64,7 @@ app.use('*', async (c, next) => {
     c.res.headers.set('Cache-Control', getCacheControl(c.req.path));
   }
   const ms = Date.now() - start;
-  console.log(
+  log.info(
     `\x1b[90m${ms.toString().padStart(4)}ms\x1b[0m ${c.req.method} ${c.req.path}`,
   );
 });
@@ -75,7 +75,7 @@ app.get('*', (c) => {
   const reqPath = c.req.path;
   if (STATIC_ASSET_RE.test(reqPath)) return c.notFound();
   if (reqPath === '/') {
-    const home = htmlCache.get(ROOT_PAGE);
+    const home = htmlCache.get('index');
     if (home) return c.html(home);
     return c.notFound();
   }
@@ -88,11 +88,11 @@ app.get('*', (c) => {
   return c.notFound();
 });
 
-serve({ fetch: app.fetch, port: PORT, hostname: HOST }, () => {
+createServer({ fetch: app.fetch, port: PORT, hostname: HOST }, () => {
   const localUrl = `http://${HOST === '0.0.0.0' ? 'localhost' : HOST}:${PORT}`;
-  console.log(
-    `\n  \x1b[32m✓\x1b[0m Server ready at \x1b[1m${localUrl}\x1b[0m\n`,
-  );
-  console.log(`  Mode: serve`);
-  console.log(`  Pages: ${PAGE_NAMES.filter((n) => n !== '404').join(', ')}\n`);
+  log.info(`\n  \x1b[32m✓\x1b[0m Server ready at \x1b[1m${localUrl}\x1b[0m\n`);
+  log.info(`  Mode: serve`);
+  log.info(`  Pages: ${PAGE_NAMES.filter((n) => n !== '404').join(', ')}\n`);
 });
+
+setupSigintHandler();

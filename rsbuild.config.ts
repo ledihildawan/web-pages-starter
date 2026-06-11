@@ -1,16 +1,18 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { defineConfig } from '@rsbuild/core';
+import { defineConfig, type RsbuildPlugin } from '@rsbuild/core';
 import { pluginImageCompress } from '@rsbuild/plugin-image-compress';
 import { minify } from 'html-minifier-terser';
 import { PATHS } from './src/configs/paths';
+import { ROOT_PAGE } from './src/configs/site';
 import { LOCALE_CODES } from './src/scripts/lib/i18n/data';
 import { LOCALE_STORAGE_KEY } from './src/scripts/lib/i18n/index';
 import { createTemplateParams } from './src/scripts/lib/i18n/template';
 
 const ROOT = process.cwd();
 const PORT = Number(process.env.PORT) || 8888;
-const isProd = process.env.NODE_ENV === 'production' || process.env.BUILD_PREVIEW === 'true';
+const isProd =
+  process.env.NODE_ENV === 'production' || process.env.BUILD_PREVIEW === 'true';
 const shouldMinify = isProd && process.env.MINIFY !== 'false';
 const shouldMinifyHTML = shouldMinify && process.env.MINIFY_HTML !== 'false';
 const MANAGED_EXTS = [
@@ -26,6 +28,20 @@ const MANAGED_EXTS = [
 ];
 
 const resolveRoot = (...args: string[]): string => path.resolve(ROOT, ...args);
+
+const pluginRootPageAsIndex = (): RsbuildPlugin => ({
+  name: 'plugin-root-page-as-index',
+  setup(api) {
+    api.onAfterBuild(() => {
+      const distDir = api.context.distPath;
+      const src = path.join(distDir, `${ROOT_PAGE}.html`);
+      const dest = path.join(distDir, 'index.html');
+      if (fs.existsSync(src)) {
+        fs.renameSync(src, dest);
+      }
+    });
+  },
+});
 
 const EXCLUDED_PAGES = new Set<string>([]);
 
@@ -157,36 +173,39 @@ export default defineConfig({
       },
     ],
   },
-  plugins: [pluginImageCompress({ use: 'avif', quality: 75 })],
+  plugins: [
+    pluginRootPageAsIndex(),
+    pluginImageCompress({ use: 'avif', quality: 75 }),
+  ],
   tools: {
     htmlPlugin: (config) => {
       config.minify = (html) =>
         !shouldMinifyHTML
           ? html
           : minify(html, {
-            collapseWhitespace: true,
-            removeComments: true,
-            decodeEntities: true,
-            minifyCSS: true,
-            minifyJS: true,
-            minifyURLs: true,
-            removeRedundantAttributes: true,
-            removeScriptTypeAttributes: true,
-            removeStyleLinkTypeAttributes: true,
-            useShortDoctype: true,
-            continueOnParseError: true,
-            customEventAttributes: [/^on[a-z]{3,}$/],
-            removeAttributeQuotes: false,
-            keepClosingSlash: true,
-            ignoreCustomFragments: [
-              /\{\{[\s\S]*?\}\}/,
-              /\{%[\s\S]*?%\}/,
-              /\{#[\s\S]*?#\}/,
-            ],
-            conservativeCollapse: true,
-            collapseInlineTagWhitespace: false,
-            removeEmptyAttributes: false,
-          });
+              collapseWhitespace: true,
+              removeComments: true,
+              decodeEntities: true,
+              minifyCSS: true,
+              minifyJS: true,
+              minifyURLs: true,
+              removeRedundantAttributes: true,
+              removeScriptTypeAttributes: true,
+              removeStyleLinkTypeAttributes: true,
+              useShortDoctype: true,
+              continueOnParseError: true,
+              customEventAttributes: [/^on[a-z]{3,}$/],
+              removeAttributeQuotes: false,
+              keepClosingSlash: true,
+              ignoreCustomFragments: [
+                /\{\{[\s\S]*?\}\}/,
+                /\{%[\s\S]*?%\}/,
+                /\{#[\s\S]*?#\}/,
+              ],
+              conservativeCollapse: true,
+              collapseInlineTagWhitespace: false,
+              removeEmptyAttributes: false,
+            });
 
       return config;
     },

@@ -23,9 +23,12 @@ export function contactFormData() {
     statusMessage: '',
 
     fields(): ContactFormField[] {
-      const form = (this as unknown as { $root: HTMLElement }).$root as HTMLFormElement;
+      const form = (this as unknown as { $root: HTMLElement })
+        .$root as HTMLFormElement;
       return Array.from(
-        form.querySelectorAll<ContactFormEl>('input[required], textarea[required]'),
+        form.querySelectorAll<ContactFormEl>(
+          'input[required], textarea[required]',
+        ),
       ).map((el) => {
         const id = el.id;
         const errorEl = form.querySelector<HTMLElement>(
@@ -64,7 +67,8 @@ export function contactFormData() {
     },
 
     validate() {
-      const form = (this as unknown as { $root: HTMLElement }).$root as HTMLFormElement;
+      const form = (this as unknown as { $root: HTMLElement })
+        .$root as HTMLFormElement;
       const fieldsList = this.fields();
       const invalid: ContactFormField[] = [];
 

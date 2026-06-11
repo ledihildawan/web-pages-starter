@@ -4,6 +4,7 @@ import { i18nConfig } from '../src/configs/i18n';
 import { PATHS } from '../src/configs/paths';
 import { LOCALE_CODES } from '../src/scripts/lib/i18n/data';
 import { collectKeys, readJSON5 } from '../src/scripts/utils/json5';
+import { log } from './shared/logger';
 
 const LOCALES_ROOT = path.join(PATHS.ROOT, PATHS.LOCALES);
 const DEFAULT_LOCALE_DIR = path.join(LOCALES_ROOT, i18nConfig.defaultLocale);
@@ -132,12 +133,12 @@ function compareLocaleParity(
 }
 
 try {
-  console.log('┌────────────────────────────────────────┐');
-  console.log('│       Generate i18n Type Definitions    │');
-  console.log('├────────────────────────────────────────┤');
-  console.log(`│  Default locale: ${i18nConfig.defaultLocale.padEnd(20)}│`);
-  console.log(`│  Output:         i18n.d.ts${' '.repeat(16)}│`);
-  console.log('└────────────────────────────────────────┘\n');
+  log.info('┌────────────────────────────────────────┐');
+  log.info('│       Generate i18n Type Definitions    │');
+  log.info('├────────────────────────────────────────┤');
+  log.info(`│  Default locale: ${i18nConfig.defaultLocale.padEnd(20)}│`);
+  log.info(`│  Output:         i18n.d.ts${' '.repeat(16)}│`);
+  log.info('└────────────────────────────────────────┘\n');
 
   const defaultNamespaces = readLocaleTree(DEFAULT_LOCALE_DIR);
   const commonData = defaultNamespaces.common;
@@ -161,10 +162,12 @@ try {
   });
 
   if (parityErrors.length > 0) {
-    console.warn(
+    log.warn(
       `\nWarning: [i18n] ${parityErrors.length} parity issue(s) detected.`,
     );
-    console.warn('   Run `bun ./tools/check-locale-parity.ts` for a detailed report.\n');
+    log.warn(
+      '   Run `bun ./tools/check-locale-parity.ts` for a detailed report.\n',
+    );
   }
 
   const commonKeys = collectKeys(commonData).map((k) => `'common:${k}'`);
@@ -201,10 +204,10 @@ export interface I18nComponents ${toTsInterface(componentsData)}
   fs.mkdirSync(path.dirname(OUTPUT_FILE), { recursive: true });
   fs.writeFileSync(OUTPUT_FILE, output);
 
-  console.log(`  ${allKeyCount} translation keys typed`);
-  console.log(`  ${OUTPUT_FILE.replace(PATHS.ROOT, '.')}`);
-  console.log('\nDone: i18n types generated');
+  log.info(`  ${allKeyCount} translation keys typed`);
+  log.info(`  ${OUTPUT_FILE.replace(PATHS.ROOT, '.')}`);
+  log.success('\nDone: i18n types generated');
 } catch (error) {
-  console.error('Error: Generation failed —', error);
+  log.error(`Error: Generation failed — ${error}`);
   process.exit(1);
 }

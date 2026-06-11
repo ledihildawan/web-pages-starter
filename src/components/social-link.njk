@@ -9,7 +9,7 @@
     'md': 'inline-6 lg:inline-7 block-6 lg:block-7',
     'lg': 'inline-7 lg:inline-8 block-7 lg:block-8'
   } %}
-  <a href="{{ url }}" class="btn-squash icon-squash anticipate-press hover-lift ripple-click group relative {{ size_classes[size] }} radius-btn bg-linear-to-br from-slate-900/60 to-slate-900/40 border border-white/10 hover:border-{{ color }}-500/50 hover:bg-slate-900/80 flex items-center justify-center transition-all duration-200 ease-emphasized hover:scale-110 hover:shadow-[0_15px_40px_rgba(139,92,246,0.3)] hover:-translate-y-1 overflow-hidden" aria-label="{{ name }}" target="_blank" rel="noopener noreferrer">
+  <a href="{{ url }}" class="btn-squash icon-squash anticipate-press hover-lift ripple-click group relative {{ size_classes[size] }} radius-btn bg-linear-to-br from-slate-900/60 to-slate-900/40 border border-white/10 hover:border-{{ color }}-500/50 hover:bg-slate-900/80 flex items-center justify-center transition duration-200 ease-emphasized hover:scale-110 hover:shadow-[0_15px_40px_rgba(139,92,246,0.3)] hover:-translate-y-1 overflow-hidden" aria-label="{{ name }}" target="_blank" rel="noopener noreferrer">
     <div class="absolute inset-0 bg-linear-to-br from-{{ color }}-500/20 to-transparent radius-btn blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
     <svg class="{{ icon_sizes[size] }} text-slate-400 group-hover:text-{{ color }}-400 transition-colors duration-200 relative z-10" aria-hidden="true" focusable="false" fill="currentColor" viewbox="0 0 24 24">
       {% if name == 'GitHub' %}

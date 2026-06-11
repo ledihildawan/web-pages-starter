@@ -3,6 +3,7 @@ import path from 'node:path';
 import { i18nConfig } from '../src/configs/i18n';
 import { PATHS } from '../src/configs/paths';
 import { LOCALE_CODES } from '../src/scripts/lib/i18n/data';
+import { log } from './shared/logger';
 
 const LOCALES_ROOT = path.join(PATHS.ROOT, PATHS.LOCALES);
 
@@ -15,7 +16,7 @@ function createLocale(
 
   if (!fs.existsSync(targetDir)) {
     fs.mkdirSync(targetDir, { recursive: true });
-    console.log(`  Created: ${targetLang}/`);
+    log.info(`  Created: ${targetLang}/`);
     created++;
   }
 
@@ -37,7 +38,7 @@ function createLocale(
         const targetPath = path.join(compTargetDir, compFile);
         if (!fs.existsSync(targetPath)) {
           fs.copyFileSync(path.join(sourcePath, compFile), targetPath);
-          console.log(`    components/${compFile}`);
+          log.info(`    components/${compFile}`);
           created++;
         }
       }
@@ -45,7 +46,7 @@ function createLocale(
       const targetPath = path.join(targetDir, file);
       if (!fs.existsSync(targetPath)) {
         fs.copyFileSync(sourcePath, targetPath);
-        console.log(`    ${file}`);
+        log.info(`    ${file}`);
         created++;
       }
     }
@@ -55,18 +56,18 @@ function createLocale(
 }
 
 try {
-console.log('┌────────────────────────────────────────┐');
-console.log('│         Sync Locale Files               │');
-console.log('├────────────────────────────────────────┤');
-console.log(`│  Configured:  ${String(LOCALE_CODES.length).padEnd(24)}│`);
-console.log(`│  Default:     ${i18nConfig.defaultLocale.padEnd(24)}│`);
-console.log('└────────────────────────────────────────┘\n');
+  log.info('┌────────────────────────────────────────┐');
+  log.info('│         Sync Locale Files               │');
+  log.info('├────────────────────────────────────────┤');
+  log.info(`│  Configured:  ${String(LOCALE_CODES.length).padEnd(24)}│`);
+  log.info(`│  Default:     ${i18nConfig.defaultLocale.padEnd(24)}│`);
+  log.info('└────────────────────────────────────────┘\n');
 
   const existingLocales = fs.existsSync(LOCALES_ROOT)
     ? fs.readdirSync(LOCALES_ROOT).filter((f) => {
-      const stat = fs.statSync(path.join(LOCALES_ROOT, f));
-      return stat.isDirectory() && !f.startsWith('.');
-    })
+        const stat = fs.statSync(path.join(LOCALES_ROOT, f));
+        return stat.isDirectory() && !f.startsWith('.');
+      })
     : [];
 
   const missingLocales = LOCALE_CODES.filter(
@@ -74,7 +75,7 @@ console.log('└─────────────────────�
   );
 
   if (missingLocales.length === 0) {
-    console.log('All configured locales exist.\n');
+    log.success('Done: All configured locales exist.\n');
     process.exit(0);
   }
 
@@ -83,26 +84,30 @@ console.log('└─────────────────────�
     throw new Error(`Default locale directory not found: ${sourceDir}`);
   }
 
-  console.log(`Creating ${missingLocales.length} missing locale(s) from ${i18nConfig.defaultLocale}:\n`);
+  log.info(
+    `Creating ${missingLocales.length} missing locale(s) from ${i18nConfig.defaultLocale}:\n`,
+  );
 
   let totalCreated = 0;
   for (const lang of missingLocales) {
-    console.log(`${lang}:`);
+    log.info(`${lang}:`);
     totalCreated += createLocale(
       lang,
       sourceDir,
       path.join(LOCALES_ROOT, lang),
     );
-    console.log('');
+    log.info('');
   }
 
-  console.log('┌────────────────────────────────────────┐');
-  console.log(`│       Done: Created ${String(totalCreated).padEnd(15)} file(s) │`);
-  console.log('└────────────────────────────────────────┘');
-  console.log('\nNext steps:');
-  console.log('  1. Translate the new locale files');
-  console.log('  2. Run `bun run build` to update types\n');
+  log.info('┌────────────────────────────────────────┐');
+  log.info(
+    `│       Done: Created ${String(totalCreated).padEnd(15)} file(s) │`,
+  );
+  log.info('└────────────────────────────────────────┘');
+  log.info('\nNext steps:');
+  log.info('  1. Translate the new locale files');
+  log.info('  2. Run `bun run build` to update types\n');
 } catch (error) {
-  console.error('Error: Sync failed —', error);
+  log.error(`Error: Sync failed — ${error}`);
   process.exit(1);
 }

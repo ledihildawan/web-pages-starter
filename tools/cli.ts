@@ -3,36 +3,56 @@ import fs from 'node:fs';
 import path from 'node:path';
 import inquirer from 'inquirer';
 import { PATHS } from '../src/configs/paths';
+import { log } from './shared/logger';
+import { setupSigintHandler, wrapMainError } from './shared/signal-handler';
 
-const runTool = (script: string, args: string[] = []): Promise<number> => {
+const runTool = (name: string, args: string[] = []): Promise<void> => {
   return new Promise((resolve, reject) => {
-    const proc = spawn('bun', [path.join(__dirname, `${script}.ts`), ...args], {
+    const proc = spawn('bun', [path.join(__dirname, `${name}.ts`), ...args], {
       stdio: 'inherit',
       shell: false,
       cwd: PATHS.ROOT,
       env: { ...process.env },
     });
-    proc.on('close', (code) => resolve(code ?? 1));
-    proc.on('error', reject);
+    proc.on('close', (code) => {
+      if (code !== 0) {
+        log.toolFailed(name, code ?? 1);
+        reject(new Error(`${name} failed`));
+      } else {
+        resolve();
+      }
+    });
+    proc.on('error', (err) => {
+      log.toolSpawnFailed(name, err);
+      reject(err);
+    });
   });
 };
 
-const runBunScript = (script: string, args: string[] = []): Promise<number> => {
+const runBunScript = (name: string, args: string[] = []): Promise<void> => {
   return new Promise((resolve, reject) => {
-    const proc = spawn('bun', ['run', script, ...args], {
+    const proc = spawn('bun', ['run', name, ...args], {
       stdio: 'inherit',
       shell: false,
       cwd: PATHS.ROOT,
       env: { ...process.env },
     });
-    proc.on('close', (code) => resolve(code ?? 1));
-    proc.on('error', reject);
+    proc.on('close', (code) => {
+      if (code !== 0) {
+        log.toolFailed(name, code ?? 1);
+        reject(new Error(`${name} failed`));
+      } else {
+        resolve();
+      }
+    });
+    proc.on('error', (err) => {
+      log.toolSpawnFailed(name, err);
+      reject(err);
+    });
   });
 };
 
-const cleanCache = (): Promise<number> => runTool('clean-cache');
-
-type ToolAction = () => void | Promise<void>;
+type ToolAction = () => undefined | Promise<unknown>;
 
 interface Tool {
   name: string;
@@ -75,7 +95,7 @@ const tools: Tool[] = [
     action: async () => {
       const distPath = path.join(PATHS.ROOT, 'dist');
       if (!fs.existsSync(distPath)) {
-        console.log('dist/ not found.');
+        log.distNotFound();
         const { choice } = await inquirer.prompt<{ choice: string }>([
           {
             type: 'select',
@@ -90,7 +110,7 @@ const tools: Tool[] = [
         if (choice === 'build') {
           await runBunScript('build');
         } else {
-          console.log('Cancelled.');
+          log.cancelled();
           return;
         }
       }
@@ -99,7 +119,8 @@ const tools: Tool[] = [
   },
   {
     name: 'Lighthouse',
-    description: 'Audit accessibility, SEO, best practices, performance, and AI agent compatibility',
+    description:
+      'Audit accessibility, SEO, best practices, performance, and AI agent compatibility',
     action: async () => {
       const { auditType } = await inquirer.prompt<{ auditType: string }>([
         {
@@ -108,8 +129,14 @@ const tools: Tool[] = [
           message: 'Select audit type:',
           choices: [
             { name: 'Quick Check (Accessibility, mobile)', value: 'quick' },
-            { name: 'Full Audit (All categories, desktop + mobile)', value: 'full' },
-            { name: 'Custom (Select categories and form factor)', value: 'custom' },
+            {
+              name: 'Full Audit (All categories, desktop + mobile)',
+              value: 'full',
+            },
+            {
+              name: 'Custom (Select categories and form factor)',
+              value: 'custom',
+            },
             { name: 'Specific URL (Audit single page)', value: 'url' },
           ],
         },
@@ -117,7 +144,12 @@ const tools: Tool[] = [
 
       switch (auditType) {
         case 'quick':
-          await runTool('lighthouse', ['--mobile', '--no-throttle', '--only-cats', 'accessibility']);
+          await runTool('lighthouse', [
+            '--mobile',
+            '--no-throttle',
+            '--only-cats',
+            'accessibility',
+          ]);
           break;
         case 'full':
           await runTool('lighthouse', ['--both', '--no-throttle']);
@@ -135,7 +167,12 @@ const tools: Tool[] = [
                 input.trim().length > 0 ? true : 'URL path is required',
             },
           ]);
-          await runTool('lighthouse', ['--no-sitemap', '--url', urlPath, '--no-throttle']);
+          await runTool('lighthouse', [
+            '--no-sitemap',
+            '--url',
+            urlPath,
+            '--no-throttle',
+          ]);
           break;
         }
       }
@@ -175,16 +212,16 @@ const tools: Tool[] = [
   {
     name: 'Clean Cache',
     description: 'Clear build cache and distribution files',
-    action: cleanCache,
+    action: () => runTool('clean-cache'),
   },
   {
     name: 'Full Reset',
     description: 'Remove dependencies and reinstall',
     action: async () => {
-      console.log('This will DELETE:');
-      console.log('   - node_modules/');
-      console.log('   - dist/');
-      console.log('   - bun.lock\n');
+      log.info('This will DELETE:');
+      log.info('   - node_modules/');
+      log.info('   - dist/');
+      log.info('   - bun.lock\n');
 
       const { confirm } = await inquirer.prompt<{ confirm: boolean }>([
         {
@@ -196,11 +233,13 @@ const tools: Tool[] = [
       ]);
 
       if (!confirm) {
-        console.log('Cancelled.');
+        log.info('Cancelled.');
         return;
       }
 
-      const { doubleConfirm } = await inquirer.prompt<{ doubleConfirm: string }>([
+      const { doubleConfirm } = await inquirer.prompt<{
+        doubleConfirm: string;
+      }>([
         {
           type: 'input',
           name: 'doubleConfirm',
@@ -210,18 +249,21 @@ const tools: Tool[] = [
       ]);
 
       if (doubleConfirm.toLowerCase() !== 'yes') {
-        console.log('Cancelled.');
+        log.info('Cancelled.');
         return;
       }
 
       const dirs = ['node_modules', 'dist', 'bun.lock'];
       for (const dir of dirs) {
         try {
-          fs.rmSync(path.join(PATHS.ROOT, dir), { recursive: true, force: true });
-          console.log(`Removed ${dir}`);
-        } catch { }
+          fs.rmSync(path.join(PATHS.ROOT, dir), {
+            recursive: true,
+            force: true,
+          });
+          log.info(`Removed ${dir}`);
+        } catch {}
       }
-      console.log('Running bun install...');
+      log.info('Running bun install...');
       const proc = spawn('bun', ['install'], {
         stdio: 'inherit',
         shell: false,
@@ -234,9 +276,7 @@ const tools: Tool[] = [
 
 const main = async (): Promise<void> => {
   console.clear();
-  console.log('┌─────────────────────────────────────────────┐');
-  console.log('│         Web Pages Starter CLI            │');
-  console.log('└─────────────────────────────────────────────┘\n');
+  log.header('Web Pages Starter CLI');
 
   const { action } = await inquirer.prompt<{ action: string }>([
     {
@@ -250,15 +290,9 @@ const main = async (): Promise<void> => {
   const tool = tools.find((t) => `${t.name} - ${t.description}` === action);
   if (!tool) return;
 
-  console.log(`\n${tool.name}\n`);
+  log.toolStarted(tool.name);
   await tool.action();
 };
 
-main().catch((err) => {
-  if (err.name === 'ExitPromptError' || err.message.includes('SIGINT')) {
-    console.log('\n\nCancelled.');
-    process.exit(0);
-  }
-  console.error('\nCLI error:', err);
-  process.exit(1);
-});
+setupSigintHandler();
+wrapMainError(main);

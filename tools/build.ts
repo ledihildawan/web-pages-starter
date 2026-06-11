@@ -3,42 +3,45 @@ import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 import '../src/configs/env';
+import { log } from './shared/logger';
 
 const args = process.argv.slice(2);
-const isPreview = process.env.BUILD_PREVIEW === 'true';
 
-const env: NodeJS.ProcessEnv = { ...process.env };
-if (!isPreview) {
-  env.NODE_ENV = 'production';
-}
+const env: NodeJS.ProcessEnv = { ...process.env, NODE_ENV: 'production' };
 
-console.log('┌────────────────────────────────────────┐');
-console.log('│           Build Process                │');
-console.log('├────────────────────────────────────────┤');
+log.info('┌────────────────────────────────────────┐');
+log.info('│           Build Process                │');
+log.info('├────────────────────────────────────────┤');
 
 if (args.includes('--debug')) {
-  console.log('│  Mode:          debug (no minify)       │');
+  log.info('│  Mode:          debug (no minify)       │');
   env.MINIFY = 'false';
 } else {
-  console.log('│  Mode:          production              │');
+  log.info('│  Mode:          production              │');
 }
 
 if (args.includes('--no-html-minify')) {
-  console.log('│  HTML minify:   disabled              │');
+  log.info('│  HTML minify:   disabled                │');
   env.MINIFY_HTML = 'false';
 }
 
-console.log('└────────────────────────────────────────┘');
+log.info('└────────────────────────────────────────┘');
 
 const distPath = path.resolve(process.cwd(), 'dist');
 if (fs.existsSync(distPath)) {
-  console.log('Cleaning previous build...');
+  log.info('Cleaning previous build...');
   fs.rmSync(distPath, { recursive: true, force: true });
 }
-console.log();
 
-console.log('Bundling with Rsbuild...\n');
-const rsbuildBin = path.resolve(process.cwd(), 'node_modules', '@rsbuild', 'core', 'bin', 'rsbuild.js');
+log.info('Bundling with Rsbuild...\n');
+const rsbuildBin = path.resolve(
+  process.cwd(),
+  'node_modules',
+  '@rsbuild',
+  'core',
+  'bin',
+  'rsbuild.js',
+);
 const runtimes = [
   process.env.RSBUILD_RUNTIME,
   process.env.NODE_BINARY,
@@ -56,6 +59,7 @@ for (const runtime of runtimes) {
       cwd: process.cwd(),
     });
   } catch {
+    log.warn(`Warning: Runtime "${runtime}" unavailable, trying next...`);
     continue;
   }
 
@@ -63,22 +67,22 @@ for (const runtime of runtimes) {
 }
 
 if (!result) {
-  console.error('\nError: Build process failed - no runtime available');
+  log.error('Error: Build process failed — no runtime available');
   process.exit(1);
 }
 
 if (result.error) {
-  console.error('\nError: Build process failed:', result.error);
+  log.error(`Error: Build process failed — ${result.error}`);
   process.exit(1);
 }
 
 if (result.status !== 0) {
-  console.error(`\nError: Build failed with exit code ${result.status}`);
+  log.error(`Error: Build failed — exit code ${result.status}`);
   process.exit(result.status || 1);
 }
 
-console.log('\n┌────────────────────────────────────────┐');
-console.log('│           Build completed               │');
-console.log('├────────────────────────────────────────┤');
-console.log('│  Run `bun run preview` to build with tunnel │');
-console.log('└────────────────────────────────────────┘\n');
+log.info('\n┌──────────────────────────────────────────┐');
+log.info('│           Build completed                │');
+log.info('├──────────────────────────────────────────┤');
+log.info('│  Run `bun run preview` for tunnel access │');
+log.info('└──────────────────────────────────────────┘\n');

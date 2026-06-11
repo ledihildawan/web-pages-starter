@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { PATHS } from '../src/configs/paths';
+import { log } from './shared/logger';
 
 const dirs = ['node_modules/.cache', '.cache', 'dist'];
 for (const dir of dirs) {
@@ -9,7 +10,9 @@ for (const dir of dirs) {
     if (fs.existsSync(fullPath)) {
       fs.rmSync(fullPath, { recursive: true, force: true });
     }
-  } catch { }
+  } catch {
+    log.warn(`Warning: Could not remove ${fullPath}`);
+  }
 }
 
-console.log('Cache cleaned');
+log.success('Done: Cache cleaned');

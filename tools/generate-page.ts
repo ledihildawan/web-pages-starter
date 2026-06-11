@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { PATHS } from '../src/configs/paths';
 import { LOCALE_CODES } from '../src/scripts/lib/i18n/data';
+import { log } from './shared/logger';
 
 const slugify = (str: string) => {
   return str
@@ -16,15 +17,15 @@ const args = process.argv.slice(2);
 const pageName = args[0];
 
 if (!pageName) {
-  console.error('Error: Please provide a page name.');
-  console.error('Usage: bun ./tools/generate-page.ts <page-name>');
+  log.error('Error: Please provide a page name.');
+  log.info('Usage: bun ./tools/generate-page.ts <page-name>');
   process.exit(1);
 }
 
 const formattedName = slugify(pageName);
 
 if (!formattedName) {
-  console.error('Error: Page name must contain valid characters.');
+  log.error('Error: Page name must contain valid characters.');
   process.exit(1);
 }
 
@@ -36,7 +37,7 @@ const targetDir = path.resolve(PATHS.ROOT, PATHS.SRC, 'pages', formattedName);
 const baseLocaleDir = path.resolve(PATHS.ROOT, PATHS.LOCALES);
 
 if (fs.existsSync(targetDir)) {
-  console.error(`Error: Page "${formattedName}" already exists!`);
+  log.error(`Error: Page "${formattedName}" already exists.`);
   process.exit(1);
 }
 
@@ -101,9 +102,8 @@ const localeContent = `{
 }
 `;
 
-const tsContent = `export {};
-`;
-const cssContent = `/* Styles for ${formattedName} */\n\n.${formattedName}-section {\n  @apply relative;\n}`;
+const tsContent = '';
+const cssContent = '';
 
 try {
   fs.writeFileSync(path.join(targetDir, 'index.njk'), njkContent);
@@ -118,17 +118,17 @@ try {
 
       if (!fs.existsSync(filePath)) {
         fs.writeFileSync(filePath, localeContent, 'utf-8');
-        console.log(
+        log.info(
           `Created locale [${lng}]: src/locales/${lng}/${formattedName}.json5`,
         );
       }
     }
   }
 
-  console.log(`\nDone: Page "${formattedName}" generated`);
-  console.log(`Path: src/pages/${formattedName}/`);
-  console.log('\nTip: Restart dev server if the new entry is not detected.');
+  log.success(`\nDone: Page "${formattedName}" generated`);
+  log.info(`Path: src/pages/${formattedName}/`);
+  log.info('\nTip: Restart dev server if the new entry is not detected.');
 } catch (error) {
-  console.error('Error: Generation failed —', error);
+  log.error(`Error: Generation failed — ${error}`);
   process.exit(1);
 }

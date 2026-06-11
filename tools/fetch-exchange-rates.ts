@@ -3,6 +3,7 @@ import path from 'node:path';
 import { PATHS } from '../src/configs/paths';
 import { CURRENCY_CODE } from '../src/scripts/lib/i18n/currencies';
 import { LOCALES } from '../src/scripts/lib/i18n/data';
+import { log } from './shared/logger';
 
 const EXCHANGE_RATES_URL = 'https://api.frankfurter.dev/v2/rates';
 const GENERATED_DIR = path.resolve(process.cwd(), PATHS.GENERATED);
@@ -14,7 +15,7 @@ async function fetchExchangeRates(): Promise<Record<string, number>> {
   const quotes = LOCALE_CURRENCIES.filter((c) => c !== BASE_CURRENCY).join(',');
   const url = `${EXCHANGE_RATES_URL}?base=${BASE_CURRENCY}${quotes ? `&quotes=${quotes}` : ''}`;
 
-  console.log(`Fetching from: ${url}`);
+  log.info(`Fetching from: ${url}`);
 
   const response = await fetch(url);
   if (!response.ok) {
@@ -51,6 +52,7 @@ async function loadExistingRates(): Promise<{ lastUpdated: Date } | null> {
       const stats = await fs.promises.stat(EXCHANGE_RATES_FILE);
       return { lastUpdated: stats.mtime };
     } catch {
+      log.warn('Warning: Could not read cached exchange rates');
       return null;
     }
   }
@@ -68,21 +70,22 @@ async function generateExchangeRates(forceRefresh = false): Promise<void> {
   const existing = await loadExistingRates();
 
   if (!forceRefresh && existing && isRatesFresh(existing)) {
-    console.log(
-      'Using cached exchange rates (last updated:',
-      `${existing.lastUpdated})`,
+    log.info(
+      `Using cached exchange rates (last updated: ${existing.lastUpdated})`,
     );
     return;
   }
 
-  console.log(`Fetching ${LOCALE_CURRENCIES.length} currencies: ${LOCALE_CURRENCIES.join(', ')}`);
+  log.info(
+    `Fetching ${LOCALE_CURRENCIES.length} currencies: ${LOCALE_CURRENCIES.join(', ')}`,
+  );
 
   try {
     const rates = await fetchExchangeRates();
 
-    console.log(`Fetched ${Object.keys(rates).length} exchange rates:`);
+    log.info(`Fetched ${Object.keys(rates).length} exchange rates:`);
     for (const [currency, rate] of Object.entries(rates)) {
-      console.log(`  1 ${BASE_CURRENCY} = ${rate.toFixed(4)} ${currency}`);
+      log.info(`  1 ${BASE_CURRENCY} = ${rate.toFixed(4)} ${currency}`);
     }
 
     if (!fs.existsSync(GENERATED_DIR)) {
@@ -125,15 +128,17 @@ export function convertCurrency(
 
     fs.writeFileSync(EXCHANGE_RATES_FILE, content);
 
-    console.log(`Exchange rates saved to ${EXCHANGE_RATES_FILE.replace(process.cwd(), '.')}`);
-    console.log('Last updated:', new Date().toISOString());
+    log.info(
+      `Exchange rates saved to ${EXCHANGE_RATES_FILE.replace(process.cwd(), '.')}`,
+    );
+    log.info(`Last updated: ${new Date().toISOString()}`);
   } catch (error) {
-    console.error('Error: Failed to generate exchange rates —', error);
+    log.error(`Error: Failed to generate exchange rates — ${error}`);
 
     if (!existing) {
       throw error;
     }
-    console.log('Using existing cached rates as fallback');
+    log.info('Using existing cached rates as fallback');
   }
 }
 
@@ -145,6 +150,6 @@ generateExchangeRates(forceRefresh)
     process.exit(0);
   })
   .catch((error) => {
-    console.error('Error: Exchange rates generation failed —', error);
+    log.error(`Error: Exchange rates generation failed — ${error}`);
     process.exit(1);
   });
