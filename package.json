@@ -14,6 +14,7 @@
     "serve": "bun ./tools/serve.ts",
     "clean:cache": "bun ./tools/clean-cache.ts",
     "cli": "bun ./tools/cli.ts",
+    "typecheck": "bunx tsc --noEmit",
     "prepare": "husky"
   },
   "dependencies": {
