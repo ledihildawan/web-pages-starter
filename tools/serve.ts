@@ -1,82 +1,23 @@
-import { spawn } from 'node:child_process';
-import fs, { existsSync, statSync } from 'node:fs';
-import { readFile } from 'node:fs/promises';
+import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 import { serve } from '@hono/node-server';
 import { serveStatic } from '@hono/node-server/serve-static';
-import ngrok from '@ngrok/ngrok';
 import { Hono } from 'hono';
 import { compress } from 'hono/compress';
 import '../src/configs/env';
-import { ROOT_PAGE } from '../src/configs/site';
 import { PATHS } from '../src/configs/paths';
+import { ROOT_PAGE } from '../src/configs/site';
 
 const PORT = Number.parseInt(process.env.PORT ?? '8888', 10);
 const HOST = process.env.HOST ?? '0.0.0.0';
 
-const runBuild = (): Promise<void> => {
-  return new Promise((resolve, reject) => {
-    const steps = [
-      'clean:cache',
-      './tools/fetch-exchange-rates.ts',
-      './tools/sync-root-page.ts',
-      './tools/generate-i18n.ts',
-      './tools/generate-sitemap.ts',
-      './tools/build.ts',
-    ];
-    const env: NodeJS.ProcessEnv = {
-      ...process.env,
-      BUILD_PREVIEW: 'true',
-    };
+const DIST = path.resolve(PATHS.ROOT, 'dist');
 
-    const run = async (i = 0) => {
-      if (i >= steps.length) return resolve();
-      const step = steps[i];
-      const isNpmScript = !step.startsWith('./');
-      const cmd = isNpmScript ? ['run', step] : [step];
-      console.log(`\n[${i + 1}/${steps.length}] ${step}`);
-      const proc = spawn('bun', cmd, {
-        stdio: 'inherit',
-        cwd: PATHS.ROOT,
-        env,
-        shell: !isNpmScript,
-      });
-      proc.on('close', (code) => {
-        if (code !== 0) return reject(new Error(`Step "${step}" failed`));
-        run(i + 1);
-      });
-      proc.on('error', reject);
-    };
-    run();
-  });
-};
-
-console.log('Starting ngrok...');
-const authtoken = process.env.NGROK_AUTHTOKEN;
-if (!authtoken) {
-  console.error('NGROK_AUTHTOKEN not set in .env.development');
+if (!existsSync(DIST)) {
+  console.error('dist/ not found. Run `bun run build` first.');
   process.exit(1);
 }
-const listener = await ngrok.connect({ addr: PORT, authtoken });
-const tunnelUrl = listener.url() ?? `http://localhost:${PORT}`;
-console.log(`\nTunnel URL: ${tunnelUrl}`);
-process.env.SITE_URL = tunnelUrl;
-
-process.on('SIGINT', async () => {
-  await listener.close();
-  process.exit(0);
-});
-process.on('SIGTERM', async () => {
-  await listener.close();
-  process.exit(0);
-});
-
-console.log('\nBuilding...');
-await runBuild();
-
-const DIST = path.resolve(PATHS.ROOT, 'dist');
-const displayUrl = tunnelUrl;
 
 const STATIC_ASSET_RE =
   /^\/(?:locales\/|assets\/|fonts\/|images\/|favicon\.svg$|favicon\.ico$|manifest\.json$|sw\.js$|robots\.txt$|sitemap\.xml$|.*\.[a-z0-9]+$)/;
@@ -97,21 +38,20 @@ const getCacheControl = (urlPath: string): string => {
   return 'public, max-age=0, must-revalidate';
 };
 
-const PAGE_NAMES = fs
-  .readdirSync(DIST)
+const PAGE_NAMES = readdirSync(DIST)
   .filter((f) => f.endsWith('.html'))
   .map((f) => f.replace(/\.html$/, ''));
 
-const tryReadFile = async (relPath: string): Promise<string | null> => {
+const tryReadFile = (relPath: string): string | null => {
   const fullPath = path.join(DIST, relPath);
   if (!existsSync(fullPath)) return null;
   if (!statSync(fullPath).isFile()) return null;
-  return readFile(fullPath, 'utf8');
+  return readFileSync(fullPath, 'utf8');
 };
 
 const htmlCache = new Map<string, string>();
 for (const name of PAGE_NAMES) {
-  const html = await tryReadFile(`${name}.html`);
+  const html = tryReadFile(`${name}.html`);
   if (html) htmlCache.set(name, html);
 }
 
@@ -149,9 +89,10 @@ app.get('*', (c) => {
 });
 
 serve({ fetch: app.fetch, port: PORT, hostname: HOST }, () => {
+  const localUrl = `http://${HOST === '0.0.0.0' ? 'localhost' : HOST}:${PORT}`;
   console.log(
-    `\n  \x1b[32m✓\x1b[0m Preview ready at \x1b[1m${displayUrl}\x1b[0m\n`,
+    `\n  \x1b[32m✓\x1b[0m Server ready at \x1b[1m${localUrl}\x1b[0m\n`,
   );
-  console.log(`  Mode: preview (tunnel)`);
+  console.log(`  Mode: serve`);
   console.log(`  Pages: ${PAGE_NAMES.filter((n) => n !== '404').join(', ')}\n`);
 });

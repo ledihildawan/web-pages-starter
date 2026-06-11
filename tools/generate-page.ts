@@ -17,7 +17,7 @@ const pageName = args[0];
 
 if (!pageName) {
   console.error('Error: Please provide a page name.');
-  console.error('Usage: bun run gen:page <page-name>');
+  console.error('Usage: bun ./tools/generate-page.ts <page-name>');
   process.exit(1);
 }
 
@@ -32,9 +32,8 @@ const titleCase = pageName
   .replace(/-/g, ' ')
   .replace(/\b\w/g, (l) => l.toUpperCase());
 
-const ROOT = process.cwd();
-const targetDir = path.resolve(ROOT, PATHS.SRC, 'pages', formattedName);
-const baseLocaleDir = path.resolve(ROOT, PATHS.LOCALES);
+const targetDir = path.resolve(PATHS.ROOT, PATHS.SRC, 'pages', formattedName);
+const baseLocaleDir = path.resolve(PATHS.ROOT, PATHS.LOCALES);
 
 if (fs.existsSync(targetDir)) {
   console.error(`Error: Page "${formattedName}" already exists!`);
@@ -126,10 +125,10 @@ try {
     }
   }
 
-  console.log(`\n✅ Page "${formattedName}" generated successfully.`);
-  console.log(`📁 Path: src/pages/${formattedName}/`);
-  console.log('\n💡 Tip: Restart dev server if the new entry is not detected.');
+  console.log(`\nDone: Page "${formattedName}" generated`);
+  console.log(`Path: src/pages/${formattedName}/`);
+  console.log('\nTip: Restart dev server if the new entry is not detected.');
 } catch (error) {
-  console.error('❌ Generation failed:', error);
+  console.error('Error: Generation failed —', error);
   process.exit(1);
 }

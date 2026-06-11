@@ -10,7 +10,7 @@ import { createTemplateParams } from './src/scripts/lib/i18n/template';
 
 const ROOT = process.cwd();
 const PORT = Number(process.env.PORT) || 8888;
-const isProd = process.env.NODE_ENV === 'production';
+const isProd = process.env.NODE_ENV === 'production' || process.env.BUILD_PREVIEW === 'true';
 const shouldMinify = isProd && process.env.MINIFY !== 'false';
 const shouldMinifyHTML = shouldMinify && process.env.MINIFY_HTML !== 'false';
 const MANAGED_EXTS = [
@@ -28,13 +28,6 @@ const MANAGED_EXTS = [
 const resolveRoot = (...args: string[]): string => path.resolve(ROOT, ...args);
 
 const EXCLUDED_PAGES = new Set<string>([]);
-const EXCLUDED_PAGES_ENV = (process.env.EXCLUDED_PAGES ?? '')
-  .split(',')
-  .map((s) => s.trim())
-  .filter(Boolean);
-for (const name of EXCLUDED_PAGES_ENV) {
-  EXCLUDED_PAGES.add(name);
-}
 
 const getEntries = (): Record<string, string | string[]> => {
   const dir = resolveRoot(PATHS.SRC, 'pages');
@@ -102,6 +95,7 @@ export default defineConfig({
       '@assets': resolveRoot(PATHS.SRC, 'assets'),
       '@generated': resolveRoot(PATHS.GENERATED),
       '@configs': resolveRoot(PATHS.SRC, 'configs'),
+      '@data': resolveRoot(PATHS.SRC, 'data'),
     },
   },
   source: {
@@ -117,7 +111,7 @@ export default defineConfig({
     },
     assetPrefix: '/',
     cleanDistPath: true,
-    minify: shouldMinify,
+    minify: shouldMinify ? { js: 'always', css: 'always' } : false,
     inlineStyles: true,
     inlineScripts: ({ size }) => size < 2 * 1_024,
     sourceMap: !shouldMinify
@@ -149,11 +143,6 @@ export default defineConfig({
       {
         from: resolveRoot('public', 'robots.txt'),
         to: 'robots.txt',
-        noErrorOnMissing: true,
-      },
-      {
-        from: resolveRoot('public', 'sitemap.xml'),
-        to: 'sitemap.xml',
         noErrorOnMissing: true,
       },
       {

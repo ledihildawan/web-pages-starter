@@ -1,128 +1,192 @@
-#!/usr/bin/env bun
-import inquirer from 'inquirer';
 import { spawn } from 'node:child_process';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import fs from 'node:fs';
+import path from 'node:path';
+import inquirer from 'inquirer';
+import { PATHS } from '../src/configs/paths';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const ROOT = path.resolve(__dirname, '..');
-
-const runTool = (script: string, args: string[] = []) => {
+const runTool = (script: string, args: string[] = []): Promise<number> => {
   return new Promise((resolve, reject) => {
     const proc = spawn('bun', [path.join(__dirname, `${script}.ts`), ...args], {
       stdio: 'inherit',
       shell: false,
-      cwd: ROOT,
+      cwd: PATHS.ROOT,
+      env: { ...process.env },
     });
-    proc.on('close', (code) => resolve(code));
+    proc.on('close', (code) => resolve(code ?? 1));
     proc.on('error', reject);
   });
 };
 
-const runBunScript = (script: string) => {
+const runBunScript = (script: string, args: string[] = []): Promise<number> => {
   return new Promise((resolve, reject) => {
-    const proc = spawn('bun', ['run', script], {
+    const proc = spawn('bun', ['run', script, ...args], {
       stdio: 'inherit',
       shell: false,
-      cwd: ROOT,
+      cwd: PATHS.ROOT,
+      env: { ...process.env },
     });
-    proc.on('close', (code) => resolve(code));
+    proc.on('close', (code) => resolve(code ?? 1));
     proc.on('error', reject);
   });
 };
 
-const cleanCache = () => {
-  const dirs = ['node_modules/.cache', '.cache', 'dist'];
-  for (const dir of dirs) {
-    try {
-      fs.rmSync(path.join(ROOT, dir), { recursive: true, force: true });
-    } catch {}
-  }
-  console.log('✅ Cache cleaned');
-};
+const cleanCache = (): Promise<number> => runTool('clean-cache');
 
-const tools = [
+type ToolAction = () => void | Promise<void>;
+
+interface Tool {
+  name: string;
+  description: string;
+  action: ToolAction;
+}
+
+const tools: Tool[] = [
   {
-    name: '🚀 Dev',
-    description: 'Start development server',
+    name: 'Dev',
+    description: 'Start development server with hot reload',
     action: () => runBunScript('dev'),
   },
   {
-    name: '🏗️ Build',
-    description: 'Build for production (deployment)',
-    action: () => runBunScript('build'),
+    name: 'Build',
+    description: 'Build production bundle with optimizations',
+    action: async () => {
+      const { buildType } = await inquirer.prompt<{ buildType: string }>([
+        {
+          type: 'select',
+          name: 'buildType',
+          message: 'Select build type:',
+          choices: [
+            { name: 'Production (minified)', value: 'build' },
+            { name: 'Debug (no minify)', value: 'build --debug' },
+          ],
+        },
+      ]);
+      await runBunScript(buildType);
+    },
   },
   {
-    name: '📦 Build & Preview',
-    description: 'Build with tunnel URL + preview (for Lighthouse)',
-    action: () => runBunScript('build:preview'),
-  },
-  {
-    name: '👁️ Preview',
-    description: 'Preview production build locally',
+    name: 'Preview',
+    description: 'Build and serve with ngrok tunnel for external access',
     action: () => runBunScript('preview'),
   },
   {
-    name: '📄 Generate Page',
-    description: 'Create a new page',
+    name: 'Serve',
+    description: 'Serve production build locally',
     action: async () => {
-      const { pageName } = await inquirer.prompt([
+      const distPath = path.join(PATHS.ROOT, 'dist');
+      if (!fs.existsSync(distPath)) {
+        console.log('dist/ not found.');
+        const { choice } = await inquirer.prompt<{ choice: string }>([
+          {
+            type: 'select',
+            name: 'choice',
+            message: 'Select action:',
+            choices: [
+              { name: 'Build first, then serve', value: 'build' },
+              { name: 'Cancel', value: 'cancel' },
+            ],
+          },
+        ]);
+        if (choice === 'build') {
+          await runBunScript('build');
+        } else {
+          console.log('Cancelled.');
+          return;
+        }
+      }
+      await runBunScript('serve');
+    },
+  },
+  {
+    name: 'Lighthouse',
+    description: 'Audit accessibility, SEO, best practices, performance, and AI agent compatibility',
+    action: async () => {
+      const { auditType } = await inquirer.prompt<{ auditType: string }>([
+        {
+          type: 'select',
+          name: 'auditType',
+          message: 'Select audit type:',
+          choices: [
+            { name: 'Quick Check (Accessibility, mobile)', value: 'quick' },
+            { name: 'Full Audit (All categories, desktop + mobile)', value: 'full' },
+            { name: 'Custom (Select categories and form factor)', value: 'custom' },
+            { name: 'Specific URL (Audit single page)', value: 'url' },
+          ],
+        },
+      ]);
+
+      switch (auditType) {
+        case 'quick':
+          await runTool('lighthouse', ['--mobile', '--no-throttle', '--only-cats', 'accessibility']);
+          break;
+        case 'full':
+          await runTool('lighthouse', ['--both', '--no-throttle']);
+          break;
+        case 'custom':
+          await runTool('lighthouse');
+          break;
+        case 'url': {
+          const { urlPath } = await inquirer.prompt<{ urlPath: string }>([
+            {
+              type: 'input',
+              name: 'urlPath',
+              message: 'Enter URL path (e.g., /about):',
+              validate: (input: string) =>
+                input.trim().length > 0 ? true : 'URL path is required',
+            },
+          ]);
+          await runTool('lighthouse', ['--no-sitemap', '--url', urlPath, '--no-throttle']);
+          break;
+        }
+      }
+    },
+  },
+  {
+    name: 'Check Parity',
+    description: 'Verify translation key parity across locales',
+    action: () => runTool('check-locale-parity'),
+  },
+  {
+    name: 'Fetch Rates',
+    description: 'Fetch and cache latest exchange rates',
+    action: () => runTool('fetch-exchange-rates'),
+  },
+  {
+    name: 'Generate Page',
+    description: 'Scaffold new page with translation files',
+    action: async () => {
+      const { pageName } = await inquirer.prompt<{ pageName: string }>([
         {
           type: 'input',
           name: 'pageName',
           message: 'Enter page name:',
-          validate: (input) => (input.trim().length > 0 ? true : 'Page name is required'),
+          validate: (input: string) =>
+            input.trim().length > 0 ? true : 'Page name is required',
         },
       ]);
       await runTool('generate-page', [pageName.trim()]);
     },
   },
   {
-    name: '🌐 Sync Locales',
-    description: 'Sync translations across all locales',
+    name: 'Sync Locales',
+    description: 'Synchronize locale files from default',
     action: () => runTool('sync-locales'),
   },
   {
-    name: '💱 Fetch Rates',
-    description: 'Fetch latest currency exchange rates',
-    action: () => runTool('fetch-exchange-rates'),
+    name: 'Clean Cache',
+    description: 'Clear build cache and distribution files',
+    action: cleanCache,
   },
   {
-    name: '🔍 Check Parity',
-    description: 'Verify all locales have same translation keys',
-    action: () => runTool('check-locale-parity'),
-  },
-  {
-    name: '📊 Lighthouse',
-    description: 'Run Lighthouse performance audit',
-    action: () => runTool('lighthouse'),
-  },
-  {
-    name: '⚙️ Generate i18n',
-    description: 'Generate TypeScript types for i18n',
-    action: () => runTool('generate-i18n'),
-  },
-  {
-    name: '🗺️ Generate Sitemap',
-    description: 'Generate sitemap.xml from pages',
-    action: () => runTool('generate-sitemap'),
-  },
-  {
-    name: '🧹 Clean Cache',
-    description: 'Clear build cache and dist',
-    action: () => cleanCache(),
-  },
-  {
-    name: '🗑️ Full Reset',
-    description: 'Remove node_modules, dist and reinstall',
+    name: 'Full Reset',
+    description: 'Remove dependencies and reinstall',
     action: async () => {
-      console.log('⚠️  This will DELETE:');
-      console.log('   • node_modules/');
-      console.log('   • dist/');
-      console.log('   • bun.lock\n');
+      console.log('This will DELETE:');
+      console.log('   - node_modules/');
+      console.log('   - dist/');
+      console.log('   - bun.lock\n');
 
-      const { confirm } = await inquirer.prompt([
+      const { confirm } = await inquirer.prompt<{ confirm: boolean }>([
         {
           type: 'confirm',
           name: 'confirm',
@@ -136,7 +200,7 @@ const tools = [
         return;
       }
 
-      const { doubleConfirm } = await inquirer.prompt([
+      const { doubleConfirm } = await inquirer.prompt<{ doubleConfirm: string }>([
         {
           type: 'input',
           name: 'doubleConfirm',
@@ -153,28 +217,28 @@ const tools = [
       const dirs = ['node_modules', 'dist', 'bun.lock'];
       for (const dir of dirs) {
         try {
-          fs.rmSync(path.join(ROOT, dir), { recursive: true, force: true });
+          fs.rmSync(path.join(PATHS.ROOT, dir), { recursive: true, force: true });
           console.log(`Removed ${dir}`);
-        } catch {}
+        } catch { }
       }
       console.log('Running bun install...');
       const proc = spawn('bun', ['install'], {
         stdio: 'inherit',
         shell: false,
-        cwd: ROOT,
+        cwd: PATHS.ROOT,
       });
-      return new Promise((resolve) => proc.on('close', resolve));
+      return new Promise<void>((resolve) => proc.on('close', () => resolve()));
     },
   },
 ];
 
-const main = async () => {
+const main = async (): Promise<void> => {
   console.clear();
   console.log('┌─────────────────────────────────────────────┐');
-  console.log('│         🔧 Web Pages Starter CLI            │');
+  console.log('│         Web Pages Starter CLI            │');
   console.log('└─────────────────────────────────────────────┘\n');
 
-  const { action } = await inquirer.prompt([
+  const { action } = await inquirer.prompt<{ action: string }>([
     {
       type: 'rawlist',
       name: 'action',
@@ -190,4 +254,11 @@ const main = async () => {
   await tool.action();
 };
 
-main();
+main().catch((err) => {
+  if (err.name === 'ExitPromptError' || err.message.includes('SIGINT')) {
+    console.log('\n\nCancelled.');
+    process.exit(0);
+  }
+  console.error('\nCLI error:', err);
+  process.exit(1);
+});

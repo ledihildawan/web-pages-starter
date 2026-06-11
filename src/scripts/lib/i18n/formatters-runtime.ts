@@ -1,4 +1,10 @@
+import {
+  convertCurrency as convertCurrencyRaw,
+  EXCHANGE_RATES,
+} from '../../../../generated/exchange-rates';
 import type { DateTimePreset } from '../../utils/types';
+import { CURRENCY_CODE } from './currencies';
+import type { LocaleCode } from './data';
 import {
   formatAbbreviated,
   formatBytes,
@@ -17,14 +23,11 @@ import {
   formatUnit,
   getCurrency,
   getLocale,
-  setLocale,
-  toNativeDigits,
   plural,
+  setLocale,
   singular,
+  toNativeDigits,
 } from './index';
-import { EXCHANGE_RATES, convertCurrency as convertCurrencyRaw } from '../../../../generated/exchange-rates';
-import { CURRENCY_CODE } from './currencies';
-import type { LocaleCode } from './data';
 
 const getNumberingSystemAttr = (el: HTMLElement): string | undefined => {
   const ns = el.getAttribute('data-numbering-system');

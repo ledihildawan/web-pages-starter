@@ -22,7 +22,7 @@ generated/
 coverage
 
 # Reports
-report/
+reports/
 
 # Public
 public/assets/i18n/

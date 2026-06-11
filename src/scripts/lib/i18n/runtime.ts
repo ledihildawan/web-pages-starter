@@ -1,10 +1,14 @@
-import { EXCHANGE_RATES, convertCurrency as convertCurrencyRaw } from '@generated/exchange-rates';
+import {
+  convertCurrency as convertCurrencyRaw,
+  EXCHANGE_RATES,
+} from '@generated/exchange-rates';
 import type { I18nTranslationKeys } from '@generated/i18n';
-import { ROOT_PAGE } from '../../../configs/site';
-import { i18nConfig } from '../../../configs/i18n';
 import i18next, { type Resource } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
+import { i18nConfig } from '../../../configs/i18n';
+import { ROOT_PAGE } from '../../../configs/site';
 import type { DateTimePreset } from '../../utils/types';
+import { scheduleTask } from '../utils/microtask-queue';
 import { CURRENCY_CODE } from './currencies';
 import { LOCALE_CODES, LOCALES, type LocaleCode } from './data';
 import {
@@ -32,26 +36,11 @@ import {
   singular,
   toNativeDigits,
 } from './index';
-import { scheduleTask } from '../utils/microtask-queue';
 
 export { i18next };
 
 const isDev = import.meta.env.DEV;
 const missingKeys = new Set<string>();
-
-const getFallbackForLocale = (locale: string): string[] => {
-  const localeCode = locale as LocaleCode;
-  if (LOCALE_CODES.includes(localeCode)) return [localeCode];
-
-  const parts = locale.split('-');
-  const languageSubtag =
-    parts.length > 1 && parts[1]?.length === 4 ? parts[0] : parts[0];
-
-  const matched = LOCALE_CODES.find((c) => c.startsWith(`${languageSubtag}-`));
-  if (matched) return [matched, 'en-US'];
-
-  return ['en-US'];
-};
 
 const getVars = (
   el: HTMLElement,
@@ -287,11 +276,9 @@ const FORMATTERS = [
 export async function initIntl(localeOverride?: string): Promise<void> {
   const pageID = (window.__PAGE_ID__ ?? ROOT_PAGE) as string;
 
-  const savedLocale = (
-    localeOverride ||
+  const savedLocale = (localeOverride ||
     localStorage.getItem(LOCALE_STORAGE_KEY) ||
-    document.documentElement.getAttribute('lang')
-  ) as LocaleCode | null;
+    document.documentElement.getAttribute('lang')) as LocaleCode | null;
 
   if (!savedLocale) return;
 
@@ -321,7 +308,6 @@ export async function initIntl(localeOverride?: string): Promise<void> {
     const initOptions = {
       lng: savedLocale,
       resources,
-      fallbackLng: getFallbackForLocale,
       supportedLngs: LOCALE_CODES,
       ns: ['common', pageID],
       defaultNS: 'common',
@@ -392,7 +378,8 @@ export const updateI18nStoreLabels = (): void => {
     store.languages.push(lang);
   });
 
-  store.current = localStorage.getItem(LOCALE_STORAGE_KEY) || i18nConfig.defaultLocale;
+  store.current =
+    localStorage.getItem(LOCALE_STORAGE_KEY) || i18nConfig.defaultLocale;
 };
 
 export const t = (

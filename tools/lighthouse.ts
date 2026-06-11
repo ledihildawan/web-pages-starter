@@ -1,27 +1,37 @@
 import { spawn } from 'node:child_process';
+import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
-import fs from 'node:fs';
-import { config } from 'dotenv';
-import { DOMParser } from 'linkedom';
 import inquirer from 'inquirer';
+import { DOMParser } from 'linkedom';
+import '../src/configs/env';
 
-config({ path: process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development' });
+const BASE_URL =
+  process.env.SITE_URL || 'http://localhost:8888';
+const OUTPUT_DIR = process.env.LIGHTHOUSE_OUTPUT_DIR || './reports';
 
-const BASE_URL = process.env.TUNNEL_URL || process.env.SITE_URL || 'http://localhost:8888';
-const IS_NGROK = BASE_URL.includes('ngrok');
-const EXTRA_HEADERS = IS_NGROK ? JSON.stringify({ 'ngrok-skip-browser-warning': '1' }) : null;
-const OUTPUT_DIR = process.env.LIGHTHOUSE_OUTPUT_DIR || './report';
+const hasNgrokFlag = (args: string[]) => args.includes('--ngrok');
+const isNgrokUrl = (url: string) => url.includes('ngrok');
+const getExtraHeaders = (url: string, args: string[]) =>
+  hasNgrokFlag(args) || isNgrokUrl(url)
+    ? JSON.stringify({ 'ngrok-skip-browser-warning': '1' })
+    : null;
 
 const getTimestamp = () => {
   const now = new Date();
   return now.toISOString().replace(/[:.]/g, '-').slice(0, 19);
 };
 
-const fetchSitemap = async (url: string) => {
-  const sitemapUrl = url.endsWith('/') ? `${url}sitemap.xml` : `${url}/sitemap.xml`;
+const fetchSitemap = async (url: string, extraHeaders: string | null) => {
+  const sitemapUrl = url.endsWith('/')
+    ? `${url}sitemap.xml`
+    : `${url}/sitemap.xml`;
 
-  const res = await fetch(sitemapUrl);
+  const headers: Record<string, string> = {};
+  if (extraHeaders) {
+    Object.assign(headers, JSON.parse(extraHeaders));
+  }
+  const res = await fetch(sitemapUrl, { headers });
   if (!res.ok) {
     throw new Error(`Failed to fetch sitemap: ${res.status}`);
   }
@@ -35,38 +45,113 @@ const parseSitemap = (xml: string) => {
   return Array.from(urls).map((el: Element) => (el.textContent ?? '').trim());
 };
 
-const runLighthouse = (url: string, args: string[], label: string) => {
-  return new Promise((resolve) => {
+const runLighthouse = (
+  url: string,
+  args: string[],
+  label: string,
+  outputPath: string,
+  outputTypes: string[],
+) => {
+  return new Promise<void>((resolve, reject) => {
     console.log(`\n${label} Running lighthouse for ${url}...`);
     const proc = spawn('bunx', ['lighthouse', url, ...args], {
-      stdio: 'inherit',
+      stdio: ['inherit', 'inherit', 'pipe'],
       shell: false,
     });
 
-    proc.on('close', (code) => {
-      resolve(code === 0 || code === 1 ? 0 : code);
+    let stderr = '';
+    proc.stderr?.on('data', (chunk) => {
+      stderr += chunk.toString();
     });
+
+    proc.on('close', (code) => {
+      if (code === 0 || code === 1) {
+        if (
+          code === 1 &&
+          stderr &&
+          !stderr.includes('EPERM') &&
+          !stderr.includes('Permission denied')
+        ) {
+          process.stderr.write(stderr);
+        }
+        if (outputTypes.includes('html')) {
+          const htmlPath = `${outputPath}.html`;
+          const reportHtmlPath = `${outputPath}.report.html`;
+          if (fs.existsSync(htmlPath)) {
+            fs.renameSync(htmlPath, reportHtmlPath);
+          }
+        }
+        resolve();
+      } else {
+        if (stderr) process.stderr.write(stderr);
+        reject(new Error(`Lighthouse exited with code ${code}`));
+      }
+    });
+    proc.on('error', reject);
   });
 };
 
-const buildArgs = (formFactor: string, categories: string[], outputTypes: string[], outputPath: string, view: boolean) => {
-  const args = [`--output=${outputTypes.join(',')}`, '--quiet', '--quiet-throttle'];
+const buildArgs = (
+  formFactor: string,
+  categories: string[],
+  outputTypes: string[],
+  outputPath: string,
+  view: boolean,
+  url: string,
+  cliArgs: string[],
+) => {
+  const args = [
+    `--output=${outputTypes.join(',')}`,
+    '--quiet',
+  ];
 
-  if (EXTRA_HEADERS) {
-    args.push('--extra-headers', EXTRA_HEADERS);
+  const headers = getExtraHeaders(url, cliArgs);
+  if (headers) {
+    args.push('--extra-headers', headers);
+  }
+
+  const noThrottle = cliArgs.includes('--no-throttle');
+  const chromeFlags = [
+    '--disable-dev-shm-usage',
+    '--no-sandbox',
+    '--disable-setuid-sandbox',
+    '--disable-gpu',
+  ];
+
+  if (noThrottle) {
+    args.push('--skip-throttling');
+    chromeFlags.push('--disable-gpu-sandbox');
+  } else {
+    args.push('--quiet-throttle');
+  }
+
+  for (const flag of chromeFlags) {
+    args.push('--chrome-flags', `"${flag}"`);
   }
 
   if (formFactor === 'desktop') {
     args.push('--preset=desktop');
   } else {
     args.push('--form-factor=mobile');
+    if (noThrottle) {
+      args.push('--screen-width=390', '--screen-height=844');
+    }
   }
 
   if (categories && categories.length > 0) {
     args.push('--only-categories', categories.join(','));
   }
 
-  args.push('--output-path', outputPath);
+  const extMap: Record<string, string> = {
+    html: '.report.html',
+    json: '.report.json',
+    csv: '.report.csv',
+  };
+  const finalPath =
+    outputTypes.length === 1
+      ? outputPath + (extMap[outputTypes[0]] || '')
+      : outputPath;
+  args.push('--output-path', finalPath);
 
   if (view) {
     args.push('--view');
@@ -81,7 +166,10 @@ const slugify = (url: string) => {
     const pathname = u.pathname.replace(/\/$/, '').replace(/^\//, '');
     return pathname.replace(/\//g, '-') || 'index';
   } catch {
-    return url.replace(/[^a-z0-9]/gi, '-').toLowerCase().replace(/^-/, '');
+    return url
+      .replace(/[^a-z0-9]/gi, '-')
+      .toLowerCase()
+      .replace(/^-/, '');
   }
 };
 
@@ -96,24 +184,42 @@ const parseScores = (reportDir: string) => {
 
   if (!fs.existsSync(reportDir)) return scores;
 
-  const jsonFiles = fs.readdirSync(reportDir).filter((f) => f.endsWith('.report.json'));
+  const walkDir = (dir: string) => {
+    let results: string[] = [];
+    const list = fs.readdirSync(dir);
+    for (const item of list) {
+      const fullPath = path.join(dir, item);
+      if (fs.statSync(fullPath).isDirectory()) {
+        results = results.concat(walkDir(fullPath));
+      } else if (item.endsWith('.report.json')) {
+        results.push(fullPath);
+      }
+    }
+    return results;
+  };
 
-  for (const file of jsonFiles) {
+  const jsonFiles = walkDir(reportDir);
+
+  for (const filePath of jsonFiles) {
     try {
-      const content = fs.readFileSync(path.join(reportDir, file), 'utf-8');
-      const data = JSON.parse(content);
-      const pageName = file.replace('.report.json', '');
+      const content = fs.readFileSync(filePath, 'utf-8');
+      const data = JSON.parse(content) as {
+        categories?: Record<string, { score: number }>;
+        formFactor?: string;
+      };
+      const relPath = path.relative(reportDir, filePath);
+      const parts = relPath.replace(/\\/g, '/').split('/');
+      const ff = parts[0];
+      const slug = parts[1].replace(/\.report\.json$/, '');
+      const pageName = `${slug}-${ff}`;
 
       scores[pageName] = {};
       if (data.categories) {
         for (const [key, cat] of Object.entries(data.categories)) {
-          scores[pageName][key] = Math.round((cat as any).score * 100);
+          scores[pageName][key] = Math.round(cat.score * 100);
         }
       }
-      if (data.formFactor) {
-        scores[pageName].formFactor = data.formFactor;
-      }
-    } catch {}
+    } catch { }
   }
 
   return scores;
@@ -126,22 +232,41 @@ const main = async () => {
 
   if (help) {
     console.log(`
-📊 Lighthouse Audit Tool
+Lighthouse Audit Tool
+
+Audits accessibility, SEO, best practices, performance, and AI agent compatibility.
+Helps identify runtime issues for accessibility, search visibility,
+security, page speed, and how well AI assistants can understand your site.
 
 Usage:
   bun run cli → Lighthouse (interactive)
-  bun run tools/lighthouse.ts [options]
+  bun ./tools/lighthouse.ts [options]
 
 Options:
   --mobile        Use mobile form factor
   --both          Run both desktop and mobile
   --all           Audit all categories
-  --only-cats     Specific categories (e.g., --only-cats performance,accessibility)
+  --only-cats     Specific categories (e.g., --only-cats accessibility,seo)
   --output        Output formats (e.g., --output html,json)
   --url <path>    Audit specific URL path (e.g., --url /about)
   --no-sitemap    Audit base URL only
+  --ngrok         Add ngrok-skip-browser-warning header
+  --no-throttle   Disable CPU/network throttling (real-world results)
   --view          Open report in browser after audit
   --help          Show this help message
+
+Categories:
+  accessibility     Usability for everyone, including screen readers
+  seo               Technical checks for search engine discoverability
+  best-practices    Modern web standards, security, console errors
+  performance       Page load and responsiveness metrics
+  agentic-browsing  How well AI assistants can understand your site
+
+Examples:
+  bun run cli                                    Interactive mode
+  bun ./tools/lighthouse.ts --mobile            Mobile accessibility audit
+  bun ./tools/lighthouse.ts --both --no-throttle Full audit real-world results
+  bun ./tools/lighthouse.ts --url /about        Audit specific page
 `);
     process.exit(0);
   }
@@ -154,7 +279,7 @@ Options:
     { name: 'Accessibility', value: 'accessibility', checked: true },
     { name: 'Best Practices', value: 'best-practices', checked: true },
     { name: 'SEO', value: 'seo', checked: true },
-    { name: 'PWA', value: 'pwa', checked: true },
+    { name: 'Agentic Browsing', value: 'agentic-browsing', checked: false },
   ];
 
   const outputFormats = [
@@ -250,12 +375,15 @@ Options:
       process.exit(1);
     }
     const base = BASE_URL.endsWith('/') ? BASE_URL.slice(0, -1) : BASE_URL;
-    urls = [`${base}${urlPath.startsWith('/') ? urlPath : '/' + urlPath}`];
+    urls = [`${base}${urlPath.startsWith('/') ? urlPath : `/${urlPath}`}`];
   } else if (cliArgs.includes('--no-sitemap')) {
     urls = [BASE_URL];
   } else {
     try {
-      const sitemapXml = await fetchSitemap(BASE_URL);
+      const sitemapXml = await fetchSitemap(
+        BASE_URL,
+        getExtraHeaders(BASE_URL, cliArgs),
+      );
       urls = parseSitemap(sitemapXml);
     } catch (err) {
       console.warn(`Could not fetch sitemap: ${(err as Error).message}`);
@@ -263,7 +391,11 @@ Options:
     }
   }
 
-  if (urls.length > 1 && !cliArgs.includes('--url') && !cliArgs.includes('--no-sitemap')) {
+  if (
+    urls.length > 1 &&
+    !cliArgs.includes('--url') &&
+    !cliArgs.includes('--no-sitemap')
+  ) {
     const { selectedUrls } = await inquirer.prompt([
       {
         type: 'checkbox',
@@ -294,45 +426,93 @@ Options:
 
   const timestamp = getTimestamp();
   const formFactorDisplay = runBoth ? 'All (Desktop + Mobile)' : formFactor;
-  const categoriesLabel = categories.length === categoriesList.length ? 'All' : categories.join(', ');
-  const label = categories.length === categoriesList.length ? `all-${runBoth ? 'both' : formFactor}` : (runBoth ? `both-${categories.length}cats` : `${formFactor}-${categories.length}cats`);
-  const reportDir = path.join(OUTPUT_DIR, `lighthouse-${timestamp}-${label}`);
+  const categoriesLabel =
+    categories.length === categoriesList.length ? 'All' : categories.join(', ');
+  const reportDir = path.join(OUTPUT_DIR, 'lighthouse', timestamp);
 
   console.log('\n┌────────────────────────────────────────┐');
-  console.log('│         📊 Lighthouse Audit            │');
+  console.log('│         Lighthouse Audit               │');
   console.log('├────────────────────────────────────────┤');
   console.log(`│  Form factor:  ${formFactorDisplay.padEnd(24)}│`);
   console.log(`│  Categories:   ${categoriesLabel.padEnd(24)}│`);
   console.log(`│  Output:       ${outputTypes.join(',').padEnd(24)}│`);
   console.log(`│  URLs:         ${String(urls.length).padEnd(24)}│`);
-  console.log(`│  Report dir:   ${reportDir.slice(-24).padEnd(24)}│`);
+  const maxLen = 36;
+  const truncate = (s: string) =>
+    s.length > maxLen ? `...${s.slice(-(maxLen - 3))}` : s;
+  console.log(`│  Report dir:   ${truncate(reportDir).padEnd(maxLen - 13)}│`);
   console.log('└────────────────────────────────────────┘');
 
   fs.mkdirSync(reportDir, { recursive: true });
 
   const formFactorsToRun = runBoth ? ['desktop', 'mobile'] : [formFactor];
-  let index = 0;
-  const totalRuns = urls.length * formFactorsToRun.length;
 
+  interface Task {
+    url: string;
+    ff: string;
+    outputPath: string;
+    args: string[];
+  }
+
+  const tasks: Task[] = [];
   for (const url of urls) {
     for (const ff of formFactorsToRun) {
-      index++;
       const urlSlug = slugify(url);
-      const outputPath = path.join(reportDir, `${urlSlug}-${ff}`).replace(/\\/g, '/');
-      const args = buildArgs(ff, categories, outputTypes, outputPath, view && ff === formFactorsToRun[formFactorsToRun.length - 1] && url === urls[urls.length - 1]);
-
-      await runLighthouse(url, args, `[${index}/${totalRuns}] ${ff}`);
+      const ffDir = path.join(reportDir, ff);
+      fs.mkdirSync(ffDir, { recursive: true });
+      const outputPath = path.join(ffDir, urlSlug).replace(/\\/g, '/');
+      const args = buildArgs(
+        ff,
+        categories,
+        outputTypes,
+        outputPath,
+        false,
+        url,
+        cliArgs,
+      );
+      tasks.push({ url, ff, outputPath, args });
     }
   }
+
+  if (view && tasks.length > 0) {
+    tasks[tasks.length - 1].args.push('--view');
+  }
+
+  const totalRuns = tasks.length;
+  const pool = async (concurrency: number) => {
+    let next = 0;
+    const run = async () => {
+      while (next < tasks.length) {
+        const i = next++;
+        const { url, ff, outputPath, args } = tasks[i];
+        await runLighthouse(
+          url,
+          args,
+          `[${i + 1}/${totalRuns}] ${ff}`,
+          outputPath,
+          outputTypes,
+        );
+      }
+    };
+    await Promise.all(
+      Array.from({ length: Math.min(concurrency, tasks.length) }, run),
+    );
+  };
+
+  await pool(1);
 
   const scores = parseScores(reportDir);
 
   if (Object.keys(scores).length > 0) {
     console.log('\n┌────────────────────────────────────────┐');
-    console.log('│            📈 Scores Summary            │');
+    console.log('│         Scores Summary                  │');
     console.log('├────────────────────────────────────────┤');
 
-    const pages = [...new Set(Object.keys(scores).map((k) => k.replace(/-desktop|-mobile$/, '')))];
+    const pages = [
+      ...new Set(
+        Object.keys(scores).map((k) => k.replace(/-desktop|-mobile$/, '')),
+      ),
+    ];
     const formFactors = runBoth ? ['desktop', 'mobile'] : [formFactor];
 
     for (const page of pages) {
@@ -354,24 +534,25 @@ Options:
     console.log('└────────────────────────────────────────┘');
   }
 
-  console.log('\n✅ Lighthouse audit complete!');
-  console.log(`📁 Reports: ${reportDir}/`);
+  console.log('\nLighthouse audit complete!');
+  console.log(`Reports: ${reportDir}/`);
 
-  if (Object.keys(scores).length > 0) {
-    const { openReport } = await inquirer.prompt([
-      {
-        type: 'confirm',
-        name: 'openReport',
-        message: 'Open report folder?',
-        default: false,
-      },
-    ]);
+  const { openReport } = await inquirer.prompt([
+    {
+      type: 'confirm',
+      name: 'openReport',
+      message: 'Open report folder?',
+      default: false,
+    },
+  ]);
 
-    if (openReport) {
-      const absolutePath = path.resolve(reportDir);
-      spawn('explorer', [absolutePath], { stdio: 'ignore' });
-    }
+  if (openReport) {
+    const absolutePath = path.resolve(reportDir);
+    spawn('explorer', [absolutePath], { stdio: 'ignore' });
   }
 };
 
-main();
+main().catch((err) => {
+  console.error('\nLighthouse error:', err);
+  process.exit(1);
+});

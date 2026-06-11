@@ -91,7 +91,7 @@ function tryReadKeys(locale: string, filePath: string): Set<string> | null {
   try {
     return new Set(collectKeys(readJSON5(full)));
   } catch (err) {
-    console.error(`  ⚠️  Error reading ${locale}/${filePath}: ${err}`);
+    console.warn(`  Warning: Error reading ${locale}/${filePath}: ${err}`);
     return null;
   }
 }
@@ -99,7 +99,7 @@ function tryReadKeys(locale: string, filePath: string): Set<string> | null {
 function checkFileParity(filePath: string): FileReport | null {
   const baseKeys = tryReadKeys(BASE_LOCALE, filePath);
   if (!baseKeys) {
-    console.error(`  ⚠️  Base file missing: ${BASE_LOCALE}/${filePath}`);
+    console.warn(`  Warning: Base file missing: ${BASE_LOCALE}/${filePath}`);
     return null;
   }
 
@@ -136,7 +136,7 @@ function checkParity() {
     if (report) allReports.push(report);
   }
 
-  console.log('\n📋 Checking common.json5...');
+  console.log('\nChecking common.json5...');
   checkAndTrack('common.json5');
 
   const baseDir = path.join(LOCALES_DIR, BASE_LOCALE);
@@ -146,14 +146,14 @@ function checkParity() {
       .filter((f) => f.endsWith('.json5') && f !== 'common.json5');
 
     for (const file of pageFiles) {
-      console.log(`📄 Checking ${file}...`);
+      console.log(`Checking ${file}...`);
       checkAndTrack(file);
     }
 
     const compDir = path.join(baseDir, 'components');
     if (fs.existsSync(compDir)) {
       for (const file of fs.readdirSync(compDir).filter((f) => f.endsWith('.json5'))) {
-        console.log(`🧩 Checking components/${file}...`);
+        console.log(`Checking components/${file}...`);
         checkAndTrack(`components/${file}`);
       }
     }
@@ -167,7 +167,8 @@ function checkParity() {
   }
   for (const r of allReports) {
     for (const d of r.diffs) {
-      const t = localeTotals.get(d.locale)!;
+      const t = localeTotals.get(d.locale);
+      if (!t) continue;
       t.missing += d.missing.length;
       t.extra += d.extra.length;
       t.totalKeys += d.extra.length - d.missing.length;
@@ -187,12 +188,12 @@ function printReport(
   report: ReturnType<typeof checkParity>,
 ): void {
   console.log(`\n${'='.repeat(60)}`);
-  console.log('🌍 LOCALE PARITY CHECK REPORT');
+  console.log('LOCALE PARITY CHECK REPORT');
   console.log('='.repeat(60));
 
   const baseTotal = report.summary.find((s) => s.locale === BASE_LOCALE)?.totalKeys ?? 0;
 
-  console.log('\n📊 Summary by Locale:');
+  console.log('\nSummary by Locale:');
   console.log('┌──────────────┬────────┬─────────┬───────┬──────────┬────────┐');
   console.log('│ Locale       │ Keys   │ Missing │ Extra │ Duplicate │ Status │');
   console.log('├──────────────┼────────┼─────────┼───────┼──────────┼────────┤');
@@ -211,13 +212,13 @@ function printReport(
   const hasIssues = report.reports.length > 0;
 
   if (hasIssues) {
-    console.log(`\n📄 Fix these locales to match ${BASE_LOCALE}:`);
+    console.log(`\nFix these locales to match ${BASE_LOCALE}:`);
     for (const data of report.reports) {
       for (const diff of data.diffs) {
-        console.log(`\n  ${diff.locale}  ✗  ${data.file}`);
+        console.log(`\n  ${diff.locale}  -  ${data.file}`);
         if (diff.dupKeys) {
           for (const [key, count] of Object.entries(diff.dupKeys)) {
-            console.log(`    ⚠️  duplicate key "${key}" (${count}x)`);
+            console.log(`    duplicate key "${key}" (${count}x)`);
           }
         }
         const usedExtra = new Set<number>();
@@ -238,15 +239,15 @@ function printReport(
             usedExtra.add(bestEi);
             pairs.push([diff.extra[bestEi], diff.missing[mi]]);
           } else {
-            console.log(`    → add key "${diff.missing[mi]}"`);
+            console.log(`    -> add key "${diff.missing[mi]}"`);
           }
         }
 
         for (const [extra, miss] of pairs) {
-          console.log(`    → rename "${extra}" → "${miss}"`);
+          console.log(`    -> rename "${extra}" to "${miss}"`);
         }
         for (let ei = 0; ei < diff.extra.length; ei++) {
-          if (!usedExtra.has(ei)) console.log(`    → remove key "${diff.extra[ei]}"`);
+          if (!usedExtra.has(ei)) console.log(`    -> remove key "${diff.extra[ei]}"`);
         }
       }
     }
@@ -256,10 +257,10 @@ function printReport(
 
   console.log(`\n${'═'.repeat(60)}`);
   if (localeCount === 0) {
-    console.log('\x1b[32m✅ All locales have perfect parity!\x1b[0m');
+    console.log('\x1b[32mDone: All locales have perfect parity\x1b[0m');
   } else {
     const lbl = localeCount === 1 ? 'locale needs' : 'locales need';
-    console.log(`\x1b[31m❌ ${localeCount} ${lbl} attention.\x1b[0m`);
+    console.log(`\x1b[31mError: ${localeCount} ${lbl} attention\x1b[0m`);
   }
   console.log(`${'═'.repeat(60)}\n`);
 }

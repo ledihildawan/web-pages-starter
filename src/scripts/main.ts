@@ -23,7 +23,7 @@ const registerServiceWorker = (): void => {
 
   navigator.serviceWorker.register("/sw.js").catch((error: unknown) => {
     const message = error instanceof Error ? error.message : String(error);
-    console.warn("Service worker registration failed:", message);
+    console.warn("Warning: Service worker registration failed —", message);
   });
 };
 
@@ -53,7 +53,7 @@ async function bootstrap() {
     registerServiceWorker();
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : String(error);
-    console.warn("Bootstrap failed:", message);
+    console.warn("Warning: Bootstrap failed —", message);
   }
 }
 

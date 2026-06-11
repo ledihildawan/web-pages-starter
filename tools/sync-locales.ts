@@ -4,8 +4,7 @@ import { i18nConfig } from '../src/configs/i18n';
 import { PATHS } from '../src/configs/paths';
 import { LOCALE_CODES } from '../src/scripts/lib/i18n/data';
 
-const ROOT = process.cwd();
-const LOCALES_ROOT = path.join(ROOT, PATHS.LOCALES);
+const LOCALES_ROOT = path.join(PATHS.ROOT, PATHS.LOCALES);
 
 function createLocale(
   targetLang: string,
@@ -56,12 +55,12 @@ function createLocale(
 }
 
 try {
-  console.log('┌────────────────────────────────────────┐');
-  console.log('│         🌐 Sync Locale Files           │');
-  console.log('├────────────────────────────────────────┤');
-  console.log(`│  Configured:  ${String(LOCALE_CODES.length).padEnd(24)}│`);
-  console.log(`│  Default:     ${i18nConfig.defaultLocale.padEnd(24)}│`);
-  console.log('└────────────────────────────────────────┘\n');
+console.log('┌────────────────────────────────────────┐');
+console.log('│         Sync Locale Files               │');
+console.log('├────────────────────────────────────────┤');
+console.log(`│  Configured:  ${String(LOCALE_CODES.length).padEnd(24)}│`);
+console.log(`│  Default:     ${i18nConfig.defaultLocale.padEnd(24)}│`);
+console.log('└────────────────────────────────────────┘\n');
 
   const existingLocales = fs.existsSync(LOCALES_ROOT)
     ? fs.readdirSync(LOCALES_ROOT).filter((f) => {
@@ -75,8 +74,7 @@ try {
   );
 
   if (missingLocales.length === 0) {
-    console.log('✅ All configured locales exist.');
-    console.log('   Run: bun run gen:i18n\n');
+    console.log('All configured locales exist.\n');
     process.exit(0);
   }
 
@@ -99,12 +97,12 @@ try {
   }
 
   console.log('┌────────────────────────────────────────┐');
-  console.log(`│       ✅ Done! Created ${String(totalCreated).padEnd(13)} file(s)  │`);
+  console.log(`│       Done: Created ${String(totalCreated).padEnd(15)} file(s) │`);
   console.log('└────────────────────────────────────────┘');
   console.log('\nNext steps:');
-  console.log('  1. bun run gen:i18n');
-  console.log('  2. Translate the locale files\n');
+  console.log('  1. Translate the new locale files');
+  console.log('  2. Run `bun run build` to update types\n');
 } catch (error) {
-  console.error('❌ Sync failed:', error);
+  console.error('Error: Sync failed —', error);
   process.exit(1);
 }

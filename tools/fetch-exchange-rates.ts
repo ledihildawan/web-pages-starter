@@ -96,7 +96,7 @@ async function generateExchangeRates(forceRefresh = false): Promise<void> {
  * Generated at: ${new Date().toISOString()}
  *
  * WARNING: DO NOT EDIT MANUALLY
- * This file is automatically updated. Run \`bun run fetch:rates\` to refresh.
+ * This file is automatically updated. Run \`bun ./tools/fetch-exchange-rates.ts\` to refresh.
  */
 
 export const EXCHANGE_RATES = ${formatRatesObject(rates)} as const;
@@ -128,7 +128,7 @@ export function convertCurrency(
     console.log(`Exchange rates saved to ${EXCHANGE_RATES_FILE.replace(process.cwd(), '.')}`);
     console.log('Last updated:', new Date().toISOString());
   } catch (error) {
-    console.error('Failed to generate exchange rates:', error);
+    console.error('Error: Failed to generate exchange rates —', error);
 
     if (!existing) {
       throw error;
@@ -145,6 +145,6 @@ generateExchangeRates(forceRefresh)
     process.exit(0);
   })
   .catch((error) => {
-    console.error('Exchange rates generation failed:', error);
+    console.error('Error: Exchange rates generation failed —', error);
     process.exit(1);
   });

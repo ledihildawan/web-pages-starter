@@ -8,7 +8,7 @@ A multi-page starter for content sites built with **Rsbuild + Nunjucks + Alpine.
 bun install
 bun run dev          # http://localhost:8888
 bun run build        # production build to ./dist
-bun run preview      # serve the production build
+bun run preview      # build with dev settings (for tunnel-based testing)
 ```
 
 Requires [Bun](https://bun.sh) `>= 1.0`.
@@ -74,7 +74,7 @@ File-system based, zero-config routing. Drop a folder under `src/pages/` and it 
 ### Scaffold a new page
 
 ```bash
-bun run gen:page pricing
+bun ./tools/generate-page.ts pricing
 ```
 
 Creates the page folder, Nunjucks template, entry files, and 87 locale files. Available at `/pricing` immediately.
@@ -243,7 +243,7 @@ The i18n store provides reactive locale switching. Registered in `src/scripts/li
 ### Development
 
 ```
-sync:root-page → clean:cache → fetch:rates → [watch:i18n || rsbuild dev]
+clean:cache → fetch:rates → [watch:i18n || rsbuild dev]
 ```
 
 - Rsbuild dev server on port 8888 with HMR
@@ -253,7 +253,7 @@ sync:root-page → clean:cache → fetch:rates → [watch:i18n || rsbuild dev]
 ### Production
 
 ```
-sync:root-page → clean:cache → fetch:rates → gen:i18n → gen:sitemap → build.ts (Rsbuild + HTML minification)
+clean:cache → fetch:rates → sync:root-page → generate-i18n.ts → build.ts → generate-sitemap.ts
 ```
 
 - HTML minification (via `html-minifier-terser`)
@@ -271,13 +271,16 @@ sync:root-page → clean:cache → fetch:rates → gen:i18n → gen:sitemap → 
 | Pre-entries | `src/scripts/main.ts` + `src/styles/main.css` loaded before every page |
 | Excluded pages | `EXCLUDED_PAGES=carousel-demo,i18n-test` env var |
 
-### Preview server (`tools/preview.ts`)
+### Preview (`bun run preview`)
 
-Hono-based static file server with:
-- gzip/deflate compression
-- Aggressive caching (1 year for fingerprinted assets, `no-cache` for HTML)
-- SPA-like routing (root → home page, unknown → 404)
-- HTML files pre-loaded into memory
+Full preview flow — auto-starts ngrok, builds, and serves:
+
+1. Starts ngrok via `@ngrok/ngrok`
+2. Gets the public tunnel URL
+3. Builds with `SITE_URL` (set to ngrok tunnel) and `BUILD_PREVIEW=true`
+4. Serves the static build via Hono
+
+Requires `NGROK_AUTHTOKEN` env var (set it in `.env` or `.ngrok` config). Ideal for Lighthouse audits, mobile testing, or sharing WIP via a public URL.
 
 ## Configuration
 
@@ -288,8 +291,8 @@ Hono-based static file server with:
 | `src/configs/paths.ts` | Filesystem path constants |
 | `src/data/global.json5` | Site name, SEO metadata, social links, DNS/prefetch |
 | `src/data/menu.json5` | Navigation structure (header menu with children) |
-| `.env.development` | `SITE_URL`, `TUNNEL_URL` (for ngrok/Lighthouse) |
-| `.env.production` | `SITE_URL` (production domain) |
+| `.env.development` | `NODE_ENV`, `SITE_URL`, `PORT`, `HOST` |
+| `.env.production` | `NODE_ENV`, `SITE_URL` (production domain) |
 | `biome.json` | Linting (Tailwind class sorting) + formatting (2-space indent, single quotes) |
 | `tsconfig.json` | Strict mode, ESNext, path aliases |
 
@@ -297,12 +300,12 @@ Hono-based static file server with:
 
 | Variable | Purpose |
 | --- | --- |
-| `SITE_URL` | Base URL for sitemap and global data |
-| `TUNNEL_URL` | Overrides `SITE_URL` for tunnel-based testing |
-| `BUILD_PREVIEW` | Use `.env.development` in build (for Lighthouse) |
-| `EXCLUDED_PAGES` | Comma-separated page names to skip in build |
-| `MINIFY` / `MINIFY_HTML` | Disable minification (`"false"`) |
+| `SITE_URL` | Base URL for sitemap and meta tags |
 | `PORT` | Preview server port (default 8888) |
+| `HOST` | Preview server bind address (default 0.0.0.0) |
+| `BUILD_PREVIEW` | Use dev settings in build (for tunnel testing) |
+| `MINIFY` / `MINIFY_HTML` | Disable minification (`"false"`) |
+| `NODE_BINARY` / `RSBUILD_RUNTIME` | Runtime override for build process |
 
 ## PWA
 
@@ -325,33 +328,32 @@ Tests live in `tests/`. The setup extends `expect` with `@testing-library/jest-d
 
 | Command | What it does |
 | --- | --- |
-| `bun run dev` | Sync root page, fetch rates, watch JSON5, start Rsbuild dev server |
-| `bun run build` | Sync root page, fetch rates, regenerate i18n types, generate sitemap, production build |
-| `bun run build:preview` | Same as `build` with `BUILD_PREVIEW=true`, then runs preview server |
-| `bun run preview` | Serve the production build |
-| `bun run gen:page <name>` | Scaffold a new page and 87 translation files |
-| `bun run gen:i18n` | Regenerate `generated/i18n.d.ts` |
-| `bun run watch:i18n` | Watch JSON5 files and rerun `gen:i18n` |
-| `bun run fetch:rates` | Update exchange rates (24h cache) |
-| `bun run sync:root-page` | Sync root page folder name with `ROOT_PAGE` config |
+| `bun run dev` | Fetch rates, watch JSON5, start Rsbuild dev server |
+| `bun run build` | Sync root page, fetch rates, generate i18n types, production build, generate sitemap |
+| `bun run preview` | Tunnel orchestrator — ngrok, build, and serve |
+| `bun run serve` | Serve the production build locally |
+| `bun ./tools/generate-sitemap.ts` | Generate `public/sitemap.xml` from page directories |
+| `bun ./tools/generate-page.ts <name>` | Scaffold a new page and 87 translation files |
+| `bun ./tools/sync-locales.ts` | Create missing locale folders from default |
 | `bun run clean:cache` | Remove `node_modules/.cache`, `.cache`, `dist` |
-| `bun run clean` | Remove `bun.lock`, `node_modules` (runs `clean:cache` first) |
+| `bun run cli` | Interactive menu for all tools |
 
 All tools live in `tools/`. Available via `bun ./tools/<name>.ts` or `bun run cli` (interactive menu).
 
 | Tool | Purpose |
 | --- | --- |
 | `build.ts` | Production build wrapper (Rsbuild + HTML minification) |
-| `preview.ts` | Hono-based static preview server |
-| `generate-page.ts` | Scaffold a new page with 87 locale files |
+| `preview.ts` | Tunnel orchestrator — ngrok, build, and serve |
+| `serve.ts` | Serve the production build locally |
 | `generate-i18n.ts` | Regenerate `generated/i18n.d.ts` type definitions |
-| `watch-i18n.ts` | Watch JSON5 files, auto-rerun `generate-i18n` |
-| `generate-sitemap.ts` | Generate `public/sitemap.xml` |
+| `generate-sitemap.ts` | Generate `public/sitemap.xml` from page directories |
+| `sync-root-page.ts` | Sync root page folder name with `ROOT_PAGE` config |
+| `generate-page.ts` | Scaffold a new page with 87 locale files |
+| `watch-i18n.ts` | Watch JSON5 files, log changes |
 | `fetch-exchange-rates.ts` | Fetch exchange rates with 24h cache |
 | `sync-locales.ts` | Create missing locale folders from default |
-| `sync-root-page.ts` | Sync root page folder name with `ROOT_PAGE` config |
 | `check-locale-parity.ts` | Diff translation keys across all locales |
-| `lighthouse.ts` | Run Lighthouse performance audits |
+| `lighthouse.ts` | Run Lighthouse audits (accessibility, SEO, best-practices, performance, agentic-browsing) |
 | `cli.ts` | Interactive menu for all tools |
 
 ## Tech Stack

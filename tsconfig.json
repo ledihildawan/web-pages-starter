@@ -1,27 +1,20 @@
 {
   "compilerOptions": {
-    /* Basic Options */
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "noEmit": true,
     "skipLibCheck": true,
     "useDefineForClassFields": true,
     "isolatedModules": true,
-
-    /* Modules */
     "module": "ESNext",
     "moduleDetection": "force",
     "moduleResolution": "bundler",
     "verbatimModuleSyntax": true,
-
-    /* JSON & Assets Support */
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "allowImportingTsExtensions": true,
     "noUncheckedSideEffectImports": true,
     "allowJs": true,
-
-    /* Strict Type Checking (Gold Standard) */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -29,7 +22,6 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
-
     "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
@@ -40,7 +32,6 @@
       "@components/*": ["./src/components/*"],
       "@generated/*": ["./generated/*"]
     },
-
     "types": ["bun-types", "node"]
   },
   "include": ["src/**/*.ts", "tools/**/*.ts", "rsbuild.config.ts"],

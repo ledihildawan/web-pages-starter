@@ -3,12 +3,11 @@ import path from 'node:path';
 import { i18nConfig } from '../src/configs/i18n';
 import { PATHS } from '../src/configs/paths';
 import { LOCALE_CODES } from '../src/scripts/lib/i18n/data';
-import { collectKeys, readJson5File } from '../src/scripts/utils/json5';
+import { collectKeys, readJSON5 } from '../src/scripts/utils/json5';
 
-const ROOT = process.cwd();
-const LOCALES_ROOT = path.join(ROOT, PATHS.LOCALES);
+const LOCALES_ROOT = path.join(PATHS.ROOT, PATHS.LOCALES);
 const DEFAULT_LOCALE_DIR = path.join(LOCALES_ROOT, i18nConfig.defaultLocale);
-const GENERATED_DIR = path.join(ROOT, PATHS.GENERATED);
+const GENERATED_DIR = path.join(PATHS.ROOT, PATHS.GENERATED);
 const OUTPUT_FILE = path.join(GENERATED_DIR, 'i18n.d.ts');
 
 const INDENT = '  ';
@@ -66,7 +65,7 @@ function readLocaleTree(dirPath: string): Record<string, unknown> {
         );
       }
 
-      namespaces[namespace] = readJson5File(entryPath);
+      namespaces[namespace] = readJSON5(entryPath) as Record<string, unknown>;
     }
   };
 
@@ -134,7 +133,7 @@ function compareLocaleParity(
 
 try {
   console.log('┌────────────────────────────────────────┐');
-  console.log('│         ⚙️ Generate i18n Types           │');
+  console.log('│       Generate i18n Type Definitions    │');
   console.log('├────────────────────────────────────────┤');
   console.log(`│  Default locale: ${i18nConfig.defaultLocale.padEnd(20)}│`);
   console.log(`│  Output:         i18n.d.ts${' '.repeat(16)}│`);
@@ -162,13 +161,10 @@ try {
   });
 
   if (parityErrors.length > 0) {
-    // Soft-fail by design: the throw here would block `bun run build` whenever
-    // a single locale is out of date. Use `bun run check:parity` for the
-    // authoritative, hard-failing parity report.
     console.warn(
-      `\n⚠️  [i18n] ${parityErrors.length} parity issue(s) detected.`,
+      `\nWarning: [i18n] ${parityErrors.length} parity issue(s) detected.`,
     );
-    console.warn('   Run `bun run check:parity` for a detailed report.\n');
+    console.warn('   Run `bun ./tools/check-locale-parity.ts` for a detailed report.\n');
   }
 
   const commonKeys = collectKeys(commonData).map((k) => `'common:${k}'`);
@@ -191,7 +187,7 @@ try {
  * Generated at: ${timestamp}
  *
  * WARNING: DO NOT EDIT MANUALLY
- * This file is automatically updated. Run \`bun run gen:i18n\` to refresh.
+ * This file is automatically updated. Run \`bun ./tools/generate-i18n.ts\` to refresh.
  */
 
 export type I18nTranslationKeys =
@@ -205,10 +201,10 @@ export interface I18nComponents ${toTsInterface(componentsData)}
   fs.mkdirSync(path.dirname(OUTPUT_FILE), { recursive: true });
   fs.writeFileSync(OUTPUT_FILE, output);
 
-  console.log(`  ✓ ${allKeyCount} translation keys typed`);
-  console.log(`  📁 ${OUTPUT_FILE.replace(ROOT, '.')}`);
-  console.log('\ni18n types generated successfully.');
+  console.log(`  ${allKeyCount} translation keys typed`);
+  console.log(`  ${OUTPUT_FILE.replace(PATHS.ROOT, '.')}`);
+  console.log('\nDone: i18n types generated');
 } catch (error) {
-  console.error('Generation failed:', error);
+  console.error('Error: Generation failed —', error);
   process.exit(1);
 }

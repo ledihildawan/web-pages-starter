@@ -19,7 +19,7 @@
   {% set og_type = page.meta.og_type or seo_config.og_type or "website" %}
   {% set twitter_card = seo_config.twitter_card or "summary_large_image" %}
 
-  {% set default_locale = global.default_locale or (locale_codes and locale_codes[0]) or "en" %}
+  {% set default_locale = lang or "id" %}
   {% set hreflang_locales = locale_codes or [] %}
 
   <title>{{ title }}</title>

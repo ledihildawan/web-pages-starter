@@ -1,24 +1,15 @@
-#!/usr/bin/env bun
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
-import { fileURLToPath } from 'node:url';
-import { config } from 'dotenv';
+import '../src/configs/env';
 import { ROOT_PAGE } from '../src/configs/site';
+import { PATHS } from '../src/configs/paths';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const ROOT = path.resolve(__dirname, '..');
+const SITE_URL = process.env.SITE_URL || 'http://localhost:8888';
 
-if (process.env.BUILD_PREVIEW === 'true') {
-  config({ path: path.resolve(ROOT, '.env.development') });
-} else {
-  config({ path: path.resolve(ROOT, '.env.production') });
-}
-
-const SITE_URL = process.env.TUNNEL_URL || process.env.SITE_URL || 'http://localhost:8888';
-
-const PAGES_DIR = path.join(ROOT, 'src', 'pages');
-const OUTPUT_FILE = path.join(ROOT, 'public', 'sitemap.xml');
+const PAGES_DIR = path.join(PATHS.ROOT, PATHS.SRC, 'pages');
+const OUTPUT_PUBLIC = path.join(PATHS.ROOT, 'public', 'sitemap.xml');
+const OUTPUT_DIST = path.join(PATHS.ROOT, 'dist', 'sitemap.xml');
 
 const DEFAULT_PRIORITY = process.env.SITEMAP_DEFAULT_PRIORITY || '0.7';
 const DEFAULT_CHANGEFREQ = process.env.SITEMAP_DEFAULT_CHANGEFREQ || 'weekly';
@@ -69,14 +60,19 @@ const generateSitemap = () => {
 ${urls.join('\n')}
 </urlset>`;
 
-  fs.writeFileSync(OUTPUT_FILE, xml, 'utf-8');
+  const OUTPUT_DIST_DIR = path.dirname(OUTPUT_DIST);
+  if (!fs.existsSync(OUTPUT_DIST_DIR)) {
+    fs.mkdirSync(OUTPUT_DIST_DIR, { recursive: true });
+  }
+  fs.writeFileSync(OUTPUT_PUBLIC, xml, 'utf-8');
+  fs.writeFileSync(OUTPUT_DIST, xml, 'utf-8');
 
   console.log('┌────────────────────────────────────────┐');
-  console.log('│         🗺️ Sitemap Generated            │');
+  console.log('│         Generate Sitemap               │');
   console.log('├────────────────────────────────────────┤');
   console.log(`│  Pages:     ${String(urls.length).padEnd(24)}│`);
   console.log(`│  Base URL:  ${baseUrl.slice(0, 24).padEnd(24)}│`);
-  console.log(`│  Output:    ${OUTPUT_FILE.replace(ROOT, '.').slice(0, 24).padEnd(24)}│`);
+  console.log(`│  Output:    ${OUTPUT_PUBLIC.replace(PATHS.ROOT, '.').slice(0, 24).padEnd(24)}│`);
   console.log('└────────────────────────────────────────┘');
 };
 

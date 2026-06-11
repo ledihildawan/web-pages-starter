@@ -1,12 +1,9 @@
-import "@fontsource-variable/inter/index.css";
+import '@fontsource-variable/inter/index.css';
 
-import { LOCALES, type LocaleConfig } from "./data";
-import { type NumberingSystemCode } from "./numbering-systems";
-import {
-  WRITING_SYSTEMS,
-  type WritingSystemCode,
-} from "./writing-systems";
-import { i18nConfig } from "../../../configs/i18n";
+import { i18nConfig } from '../../../configs/i18n';
+import { LOCALES, type LocaleConfig } from './data';
+import type { NumberingSystemCode } from './numbering-systems';
+import { WRITING_SYSTEMS, type WritingSystemCode } from './writing-systems';
 
 type FontLoader = () => Promise<unknown>;
 

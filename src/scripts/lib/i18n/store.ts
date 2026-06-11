@@ -1,9 +1,9 @@
-import { ROOT_PAGE } from '../../../configs/site';
 import { i18nConfig } from '../../../configs/i18n';
+import { ROOT_PAGE } from '../../../configs/site';
+import { scheduleTask } from '../utils/microtask-queue';
 import { LOCALE_CODES, LOCALES } from './data';
 import { DIRECTION_CODE } from './directions';
 import { getLocaleLabelCountry, LOCALE_STORAGE_KEY } from './index';
-import { scheduleTask } from '../utils/microtask-queue';
 
 const updateDocumentAttributes = (code: string): void => {
   const locale = LOCALES.find((l) => l.code === code);
@@ -80,14 +80,15 @@ export function registerI18nStore(): void {
       }),
     ),
 
-    current: localStorage.getItem(LOCALE_STORAGE_KEY) || i18nConfig.defaultLocale,
+    current:
+      localStorage.getItem(LOCALE_STORAGE_KEY) || i18nConfig.defaultLocale,
 
     change(code: string): void {
       localStorage.setItem(LOCALE_STORAGE_KEY, code);
       this.current = code;
       void changeLanguage(code).catch((err: unknown) => {
         const message = err instanceof Error ? err.message : String(err);
-        console.error('[i18n change] failed:', message);
+        console.error('Error: [i18n] change failed —', message);
       });
     },
   } satisfies {

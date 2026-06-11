@@ -2,8 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import type { I18nTranslationKeys } from '../../../../generated/i18n';
 import { i18nConfig } from '../../../configs/i18n';
-import { ROOT_PAGE } from '../../../configs/site';
 import { PATHS } from '../../../configs/paths';
+import { ROOT_PAGE } from '../../../configs/site';
 import { getValueByPath } from '../../utils/common';
 import {
   loadGlobalData,
@@ -255,8 +255,10 @@ const createI18nObject = (
       vars: Record<string, unknown> = {},
     ) => {
       const item = createItem(key, vars);
-      return `${attrName}="${item.v}"` +
-        (key ? ` data-i18n-attr="${attrName}:${item.k}"` : '');
+      return (
+        `${attrName}="${item.v}"` +
+        (key ? ` data-i18n-attr="${attrName}:${item.k}"` : '')
+      );
     },
 
     plural: (
@@ -733,7 +735,11 @@ export const createTemplateParams = (
     clientI18nScript,
     page_id: name,
     global: (() => {
-      return loadGlobalData(resolveRoot(`${PATHS.SRC}/data`));
+      const data = loadGlobalData(resolveRoot(`${PATHS.SRC}/data`));
+      data.site_url =
+        process.env.SITE_URL ||
+        'http://localhost:8888';
+      return data;
     })(),
     page: readJSON5(resolveRoot(`${PATHS.SRC}/pages/${name}/index.json5`)),
     i18n,
