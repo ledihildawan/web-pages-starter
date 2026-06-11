@@ -11,6 +11,7 @@ import { createTemplateParams } from './src/scripts/lib/i18n/template';
 
 const ROOT = process.cwd();
 const PORT = Number(process.env.PORT) || 8888;
+const BASE_PATH = process.env.BASE_PATH || '/';
 const isProd =
   process.env.NODE_ENV === 'production' || process.env.BUILD_PREVIEW === 'true';
 const shouldMinify = isProd && process.env.MINIFY !== 'false';
@@ -125,7 +126,7 @@ export default defineConfig({
       image: 'assets/images',
       font: 'assets/fonts',
     },
-    assetPrefix: '/',
+    assetPrefix: BASE_PATH,
     cleanDistPath: true,
     minify: shouldMinify ? { js: 'always', css: 'always' } : false,
     inlineStyles: true,

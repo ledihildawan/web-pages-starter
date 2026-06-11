@@ -21,15 +21,8 @@
         "useSortedClasses": {
           "level": "error",
           "options": {
-            "attributes": [
-              "classList"
-            ],
-            "functions": [
-              "clsx",
-              "cva",
-              "tw",
-              "tw.*"
-            ]
+            "attributes": ["classList"],
+            "functions": ["clsx", "cva", "tw", "tw.*"]
           }
         }
       }
@@ -53,6 +46,19 @@
         "rules": {
           "complexity": {
             "noImportantStyles": "off"
+          },
+          "style": {
+            "noDescendingSpecificity": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["src/scripts/utils/common.ts"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noExplicitAny": "off"
           }
         }
       }

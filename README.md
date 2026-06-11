@@ -11,7 +11,7 @@ bun run build        # production build to ./dist
 bun run preview      # build + tunnel for external testing
 ```
 
-Requires [Bun](https://bun.sh) `>= 1.0`.
+Requires [Bun](https://bun.sh) `>= 1.3.14`.
 
 ## Project Structure
 
@@ -327,6 +327,7 @@ Ideal for Lighthouse audits, mobile testing, or sharing WIP via a public URL.
 | Variable | Purpose |
 | --- | --- |
 | `SITE_URL` | Base URL for sitemap and meta tags |
+| `BASE_PATH` | Subpath for GitHub Pages deployment (e.g. `/web-pages-starter/`). Defaults to `/` |
 | `PORT` | Server port (default 8888) |
 | `HOST` | Server bind address (serve: `0.0.0.0`, preview: `127.0.0.1`) |
 | `BUILD_PREVIEW` | Set automatically by preview tool |
@@ -339,6 +340,36 @@ Ideal for Lighthouse audits, mobile testing, or sharing WIP via a public URL.
 - `public/sw.js` — cache-first service worker with network fallback
 - Registered automatically in production builds
 - Offline fallback to `/404.html` for navigation requests
+
+## Pre-commit Hooks
+
+[Husky](https://typicode.github.io/husky/) + [lint-staged](https://github.com/lintstage/lint-staged) run on every commit:
+
+1. **lint-staged** — runs `biome check --no-errors-on-unmatched --write` on staged files
+2. **typecheck** — runs `bunx tsc --noEmit`
+
+Config: `.husky/pre-commit`, `.lintstagedrc`.
+
+## CI/CD
+
+GitHub Actions workflows in `.github/workflows/`:
+
+### CI (`ci.yml`)
+
+Runs on every push and PR to `main`:
+
+1. **biome ci** — lint + format check (no writes)
+2. **build** — `bun run build` with `BASE_PATH=/web-pages-starter/`
+3. **upload artifact** — uploads `dist/` for the deploy workflow
+
+### Deploy (`deploy.yml`)
+
+Runs after CI succeeds on `main`:
+
+1. Downloads the build artifact
+2. Deploys to GitHub Pages
+
+**Setup:** repo Settings > Pages > Source must be set to **GitHub Actions** (not "Deploy from a branch").
 
 ## Testing
 
@@ -359,6 +390,7 @@ Tests live in `tests/`. The setup extends `expect` with `@testing-library/jest-d
 | `bun run preview` | Tunnel orchestrator — build and serve via ngrok or cloudflared |
 | `bun run serve` | Serve the production build locally |
 | `bun run clean:cache` | Remove `node_modules/.cache`, `.cache`, `dist` |
+| `bun run typecheck` | Run `tsc --noEmit` type checking |
 | `bun run cli` | Interactive menu for all tools |
 
 Direct tool access:

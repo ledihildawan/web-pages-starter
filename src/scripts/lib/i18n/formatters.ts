@@ -125,11 +125,21 @@ const convertLatinDigits = (text: string, targetDigits: readonly string[]) =>
   text.replace(/\d/g, (d) => targetDigits[Number(d)]);
 
 const toRoman = (num: number): string => {
-  const vals = [
-    1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1,
-  ];
+  const vals = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
   const syms = [
-    'M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I',
+    'M',
+    'CM',
+    'D',
+    'CD',
+    'C',
+    'XC',
+    'L',
+    'XL',
+    'X',
+    'IX',
+    'V',
+    'IV',
+    'I',
   ];
   let result = '';
   for (let i = 0; i < vals.length; i++) {
@@ -157,7 +167,7 @@ const applyDigitsFallback = (
     if (num !== undefined) return toRoman(num);
     if (!/\d/.test(result)) return result;
     const parsed = parseInt(result.replace(/\D/g, ''), 10);
-    return isNaN(parsed) ? result : toRoman(parsed);
+    return Number.isNaN(parsed) ? result : toRoman(parsed);
   }
   const nsConfig = NUMBERING_SYSTEMS.find((ns) => ns.code === numberingSystem);
   if (!nsConfig?.digits) return result;

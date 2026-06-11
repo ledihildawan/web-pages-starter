@@ -1100,18 +1100,29 @@
 
 @layer accessibility {
   @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
+    .sparkle-hover::before,
+    .float-gentle,
+    .entrance-blur,
+    .entrance-fade-scale,
+    .checkmark-success,
+    .sparkle::after {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
     }
 
-    .bg-linear-to-r,
-    .bg-linear-to-b {
-      background-attachment: scroll !important;
+    .hover-lift:hover,
+    .card-hover-lift:hover {
+      transition-duration: 100ms !important;
+    }
+
+    .icon-transition {
+      transition: opacity 150ms ease-out !important;
+      transform: none !important;
+    }
+
+    .icon-transition.fade-out {
+      transform: none !important;
     }
 
     .btn-squash:active:not(:disabled),
@@ -1131,29 +1142,18 @@
       transform: scale(0.97, 0.99) !important;
     }
 
-    .icon-transition {
-      transition: opacity 150ms ease-out !important;
-      transform: none !important;
+    .bg-linear-to-r,
+    .bg-linear-to-b {
+      background-attachment: scroll !important;
     }
 
-    .icon-transition.fade-out {
-      transform: none !important;
-    }
-
-    .sparkle-hover::before,
-    .float-gentle,
-    .entrance-blur,
-    .entrance-fade-scale,
-    .checkmark-success,
-    .sparkle::after {
-      animation: none !important;
-      opacity: 1 !important;
-      transform: none !important;
-    }
-
-    .hover-lift:hover,
-    .card-hover-lift:hover {
-      transition-duration: 100ms !important;
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
     }
   }
 
@@ -1181,13 +1181,13 @@
     color: rgb(255 255 255);
     background-color: rgb(255 255 255 / 0.05);
   }
-  [data-current-lang] .lang-option:hover .lang-flag {
-    opacity: 1;
-    filter: grayscale(0);
-  }
   [data-current-lang] .lang-option .lang-flag {
     opacity: 0.4;
     filter: grayscale(100%);
+  }
+  [data-current-lang] .lang-option:hover .lang-flag {
+    opacity: 1;
+    filter: grayscale(0);
   }
   [data-current-lang] .lang-option[aria-selected="true"] {
     color: rgb(255 255 255);

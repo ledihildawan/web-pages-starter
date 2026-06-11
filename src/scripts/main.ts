@@ -1,7 +1,7 @@
-const isProd = process.env.NODE_ENV === "production";
+const isProd = process.env.NODE_ENV === 'production';
 
 const deferTask = (fn: () => void, timeout = 2000): void => {
-  if ("requestIdleCallback" in window) {
+  if ('requestIdleCallback' in window) {
     requestIdleCallback(fn, { timeout });
   } else {
     setTimeout(fn, 0);
@@ -9,29 +9,29 @@ const deferTask = (fn: () => void, timeout = 2000): void => {
 };
 
 const deferred = (): void => {
-  import("./lib/i18n/fonts")
+  import('./lib/i18n/fonts')
     .then((fonts) => {
       fonts.setupFontStackCSS();
       fonts.loadLanguageFonts();
       fonts.watchScriptAndLoadFont();
     })
-    .catch(() => { });
+    .catch(() => {});
 };
 
 const registerServiceWorker = (): void => {
-  if (!isProd || !("serviceWorker" in navigator)) return;
+  if (!isProd || !('serviceWorker' in navigator)) return;
 
-  navigator.serviceWorker.register("/sw.js").catch((error: unknown) => {
+  navigator.serviceWorker.register('/sw.js').catch((error: unknown) => {
     const message = error instanceof Error ? error.message : String(error);
-    console.warn("Warning: Service worker registration failed —", message);
+    console.warn('Warning: Service worker registration failed —', message);
   });
 };
 
 async function bootstrap() {
   try {
     const [{ registerI18nStore }, Alpine] = await Promise.all([
-      import("./lib/i18n/store"),
-      import("alpinejs").then((m) => m.default),
+      import('./lib/i18n/store'),
+      import('alpinejs').then((m) => m.default),
     ]);
 
     globalThis.Alpine = Alpine;
@@ -39,7 +39,7 @@ async function bootstrap() {
 
     Alpine.start();
 
-    const { i18next, initIntl } = await import("./lib/i18n/runtime");
+    const { i18next, initIntl } = await import('./lib/i18n/runtime');
     if (!i18next.isInitialized) {
       const locale = window.__SAVED_LOCALE__ || window.__SERVER_LOCALE__;
       await initIntl(locale);
@@ -47,15 +47,14 @@ async function bootstrap() {
 
     deferTask(deferred);
 
-    import("./lib/i18n/fonts").then(({ preloadActiveFont }) =>
+    import('./lib/i18n/fonts').then(({ preloadActiveFont }) =>
       preloadActiveFont(),
     );
     registerServiceWorker();
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : String(error);
-    console.warn("Warning: Bootstrap failed —", message);
+    console.warn('Warning: Bootstrap failed —', message);
   }
 }
-
 
 void bootstrap();
