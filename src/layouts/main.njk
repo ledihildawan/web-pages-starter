@@ -5,8 +5,8 @@
 {% set theme_color = seo_config.theme_color or "#020617" %}
 {% set theme_color_light = seo_config.theme_color_light or "#f8fafc" %}
 {% set manifest_path = seo_config.manifest_path or (base_path + "manifest.json") %}
-{% set favicon_path = seo_config.favicon_path or (base_path + "favicon.ico") %}
-{% set apple_icon_path = seo_config.apple_touch_icon_path or (base_path + "favicon.ico") %}
+{% set favicon_path = seo_config.favicon_path or (base_path + "favicon.svg") %}
+{% set apple_icon_path = seo_config.apple_touch_icon_path or (base_path + "favicon.svg") %}
 
 {% set pwa = global.pwa or {} %}
 {% set mobile_capable = pwa.mobile_web_app_capable !== false %}
