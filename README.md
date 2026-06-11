@@ -11,7 +11,7 @@ bun run build        # production build to ./dist
 bun run preview      # build + tunnel for external testing
 ```
 
-Requires [Bun](https://bun.sh) `>= 1.0`.
+Requires [Bun](https://bun.sh) `>= 1.3.14`.
 
 ## Project Structure
 
