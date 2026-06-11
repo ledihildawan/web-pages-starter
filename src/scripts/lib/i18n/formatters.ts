@@ -660,7 +660,7 @@ const processNumeric = (
 
   const languageSubtag = getLanguageSubtag(getLocale());
 
-  if (options.nativeDigits) {
+  if (options.nativeDigits && !options.numberingSystem) {
     const cjkLanguages = WRITING_SYSTEM.CJK_LANGUAGES as readonly string[];
     if (config.cjk && cjkLanguages.includes(languageSubtag))
       return config.cjk(num, languageSubtag);
