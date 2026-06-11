@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "bun ./tools/clean-cache.ts && bun ./tools/fetch-exchange-rates.ts && concurrently \"bun ./tools/watch-i18n.ts\" \"rsbuild dev\"",
-    "build": "bun ./tools/sync-root-page.ts && bun ./tools/clean-cache.ts && bun ./tools/fetch-exchange-rates.ts && bun ./tools/generate-i18n.ts && bun ./tools/generate-sitemap.ts && bun ./tools/build.ts",
+    "build": "bun ./tools/sync-root-page.ts && bun ./tools/clean-cache.ts && bun ./tools/fetch-exchange-rates.ts && bun ./tools/generate-i18n.ts && bun ./tools/generate-sitemap.ts && bun ./tools/generate-manifest.ts && bun ./tools/generate-robots.ts && bun ./tools/build.ts",
     "preview": "bun ./tools/preview.ts",
     "serve": "bun ./tools/serve.ts",
     "clean:cache": "bun ./tools/clean-cache.ts",

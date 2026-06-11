@@ -10,15 +10,21 @@
 ## Conventions
 
 ### Writing Style
+
+#### Docs
+- Principle: One source of truth — each concept lives in exactly one place
 - Professional tone: concise, direct, to the point
-- No emojis in tool output
 - Imperative for user guidance, past tense for results
 
-### Messages
+#### Code
+- No comments unless explicitly requested
+- Let the code speak for itself — naming and structure over explanation
+
+#### Messages
+- No emojis in tool output
 - Prefix: `Error:`, `Done:`, `Warning:`
 - Detail separator: ` — ` (em dash)
 - Example: `Error: Please provide a page name` | `Done: Page generated`
 
 ### Generated Files
-- JSDoc header: tool name, timestamp, `WARNING: DO NOT EDIT MANUALLY`
-- Principle: One source of truth — each concept lives in exactly one place
+- File header: tool name, timestamp, `WARNING: DO NOT EDIT MANUALLY` — applies to `tools/generate-*.ts` output files that support comments (e.g. `generated/*.ts`, `generated/*.js`, `generated/*.css`, `generated/*.html`)

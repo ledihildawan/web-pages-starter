@@ -118,6 +118,9 @@ export default defineConfig({
   source: {
     preEntry: getGlobalEntries(),
     entry: getEntries(),
+    define: {
+      'import.meta.env.BASE_PATH': JSON.stringify(BASE_PATH),
+    },
   },
   output: {
     distPath: {
@@ -240,7 +243,9 @@ export default defineConfig({
     scriptLoading: 'defer',
     template: ({ entryName }) =>
       path.join(PATHS.SRC, 'pages', entryName, 'index.njk'),
-    templateParameters: (params) =>
-      createTemplateParams(params, LOCALE_STORAGE_KEY, LOCALE_CODES),
+    templateParameters: (params) => ({
+      ...createTemplateParams(params, LOCALE_STORAGE_KEY, LOCALE_CODES),
+      base_path: BASE_PATH,
+    }),
   },
 });

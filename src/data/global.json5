@@ -9,9 +9,6 @@
     "theme_color_light": "#f8fafc",
     "og_type": "website",
     "twitter_card": "summary_large_image",
-    "manifest_path": "/manifest.json",
-    "favicon_path": "/favicon.svg",
-    "apple_touch_icon_path": "/favicon.svg"
   },
 
   "pwa": {

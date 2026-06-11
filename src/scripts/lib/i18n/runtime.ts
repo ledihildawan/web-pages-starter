@@ -285,7 +285,9 @@ export async function initIntl(localeOverride?: string): Promise<void> {
   setLocale(getLocale(savedLocale));
 
   try {
-    const response = await fetch(`/assets/i18n/${pageID}/${savedLocale}.json`);
+    const response = await fetch(
+      `${import.meta.env.BASE_PATH}assets/i18n/${pageID}/${savedLocale}.json`,
+    );
     const data = await response.json();
 
     const compData = data.comp

@@ -30,7 +30,9 @@ const ensureLocaleData = async (
   if (m.i18next.hasResourceBundle(code, 'common')) return;
 
   try {
-    const response = await fetch(`/assets/i18n/${pageID}/${code}.json`);
+    const response = await fetch(
+      `${import.meta.env.BASE_PATH}assets/i18n/${pageID}/${code}.json`,
+    );
     const data = await response.json();
     const compData = data.comp
       ? Object.fromEntries(
