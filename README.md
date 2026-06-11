@@ -32,8 +32,8 @@ src/
 │       ├── index.ts       #   page entry (auto-imported by Rsbuild)
 │       ├── index.css      #   page styles (optional)
 │       └── components/    #   page-local partials (optional)
-├── components/            # 10 shared Nunjucks partials + macros
-├── layouts/               # base templates (main.njk) + macros/ (page-meta.njk)
+├── components/            # 10 shared Nunjucks partials
+├── layouts/               # base template (main.njk) + macros/ (page-meta.njk)
 ├── locales/               # translation source of truth (87 locales)
 │   └── {locale}/
 │       ├── common.json5   #   shared copy (nav, footer, labels, plurals)
@@ -276,7 +276,7 @@ sync-root-page → clean:cache → fetch:rates → generate-i18n → generate-si
    - HTML minification (`html-minifier-terser`)
    - `home.html` → `index.html` rename (`pluginRootPageAsIndex`)
    - Image compression (AVIF, quality 75)
-   - CSS inlined into HTML; small JS inlined (<2KB)
+   - CSS inlined into HTML; small JS inlined (<2048 bytes)
    - Per-page code splitting with shared runtime chunk
    - Content-hashed filenames for JS/CSS/images
 
@@ -331,7 +331,7 @@ Ideal for Lighthouse audits, mobile testing, or sharing WIP via a public URL.
 | `.env.production` | `NODE_ENV`, `SITE_URL` (production domain) |
 | `biome.json` | Linting (Tailwind class sorting, organize imports) + formatting (2-space indent, single quotes). Overrides: `main.css` disables `noDescendingSpecificity`/`noImportantStyles`; `common.ts` disables `noExplicitAny` |
 | `.vscode/settings.json` | Editor config: Biome formatter, Tailwind IntelliSense, i18n-ally, Peacock color |
-| `.vscode/extensions.json` | Workspace extension recommendations (11 extensions) |
+| `.vscode/extensions.json` | Workspace extension recommendations (12 extensions) |
 | `tsconfig.json` | Strict mode, ESNext, path aliases |
 
 ### Environment variables

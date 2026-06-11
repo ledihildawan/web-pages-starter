@@ -28,7 +28,7 @@
       </p>
 
       <div class="flex flex-col sm:flex-row items-center justify-center gap-5 mbe-14">
-        <a href="/" class="magnetic-btn btn-press btn-squash anticipate-press hover-lift ripple-click sparkle-hover group relative inline-full sm:inline-auto min-block-14 px-14 py-4 bg-white text-slate-950 radius-btn font-black text-lg flex items-center justify-center transition duration-200 ease-emphasized hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:scale-105 overflow-hidden">
+        <a href="{{ url('/') }}" class="magnetic-btn btn-press btn-squash anticipate-press hover-lift ripple-click sparkle-hover group relative inline-full sm:inline-auto min-block-14 px-14 py-4 bg-white text-slate-950 radius-btn font-black text-lg flex items-center justify-center transition duration-200 ease-emphasized hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:scale-105 overflow-hidden">
           <span class="absolute inset-0 bg-linear-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-400 ease-in-out"></span>
           <span class="relative flex items-center gap-3">
             {{ icon.icon('arrow-left', 'inline-5 block-5 icon-transition ltr:group-hover:-translate-x-1 rtl:group-hover:translate-x-1', size='lg') }}
@@ -39,11 +39,11 @@
 
       <div class="flex flex-wrap items-center justify-center gap-6 text-sm text-slate-400">
         <span class="font-medium">{{ i18n.t('page.or_try') }}</span>
-        <a href="/" class="color-shift text-slate-400 hover:text-white transition-colors duration-300 font-medium hover:underline decoration-violet-500 underline-offset-4">{{ i18n.t('home') }}</a>
+        <a href="{{ url('/') }}" class="color-shift text-slate-400 hover:text-white transition-colors duration-300 font-medium hover:underline decoration-violet-500 underline-offset-4">{{ i18n.t('home') }}</a>
         <span class="text-slate-700">•</span>
-        <a href="/features" class="color-shift text-slate-400 hover:text-white transition-colors duration-300 font-medium hover:underline decoration-violet-500 underline-offset-4">{{ i18n.t('features') }}</a>
+        <a href="{{ url('/features') }}" class="color-shift text-slate-400 hover:text-white transition-colors duration-300 font-medium hover:underline decoration-violet-500 underline-offset-4">{{ i18n.t('features') }}</a>
         <span class="text-slate-700">•</span>
-        <a href="/pricing" class="color-shift text-slate-400 hover:text-white transition-colors duration-300 font-medium hover:underline decoration-violet-500 underline-offset-4">{{ i18n.t('pricing') }}</a>
+        <a href="{{ url('/pricing') }}" class="color-shift text-slate-400 hover:text-white transition-colors duration-300 font-medium hover:underline decoration-violet-500 underline-offset-4">{{ i18n.t('pricing') }}</a>
       </div>
     </div>
   </section>
