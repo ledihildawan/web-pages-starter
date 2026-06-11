@@ -1,0 +1,75 @@
+{
+  "hero": {
+    "badge": "Öne Çıkan Özellikler",
+    "title_part1": "Daha hızlı ölçeklenmek için ihtiyacınız olan",
+    "title_highlight": "her şey",
+    "description": "Güçlü analizlerden kusursuz entegrasyonlara kadar, dünyaca standartta uygulamalar oluşturmak için ihtiyacınız olan tüm araç setini sunuyoruz."
+  },
+  "features": {
+    "heading": "Öne Çıkan Özellikler",
+    "subheading": "Oluşturmak ve büyümek için ihtiyacınız olan her şey.",
+    "list": {
+      "speed": {
+        "title": "Son Derece Hızlı",
+        "description": "100ms altında yükleme süresiyle optimum performans. Edge altyapısıyla küresel ölçek için tasarlandı."
+      },
+      "design": {
+        "title": "Modern Tasarım",
+        "description": "Tüm cihazlarda profesyonel görünen responsive ve temiz arayüz. Tamamen özelleştirilebilir bileşenler."
+      },
+      "security": {
+        "title": "Yüksek Güvenlik",
+        "description": "Verilerinizi korumak için uçtan uca şifreleme, çok faktörlü kimlik doğrulama ve SOC2 uyumluluğu."
+      }
+    }
+  },
+  "sections": {
+    "sync": {
+      "title": "Gerçek Zamanlı Senkronizasyon",
+      "description": "Değişiklikler tüm cihazlara anında yayılır. Kullanıcılarınız mobil, masaüstü veya tablet kullansın, aynı anda aynı veriyi görürler.",
+      "check_0": "Milisaniyenin altında gecikme",
+      "check_1": "Yerleşik çevrimdışı destek",
+      "check_2": "Çakışma çözümü yönetimi"
+    },
+    "analytics": {
+      "title": "Eyleme Dönüştürülebilir Analitik",
+      "description": "Tahmin etmeyin. Kullanıcı davranışı, sistem performansı ve gelir metrikleri hakkında derin içgörüler edinin. Verilerinizi interaktif grafiklerle görselleştirin.",
+      "check_0": "Özelleştirilebilir gösterge paneli",
+      "check_1": "PDF, CSV veya Excel'e aktarma",
+      "check_2": "Otomatik haftalık raporlar"
+    }
+  },
+  "more_title": "Ve daha fazlası...",
+  "more_subtitle": "Daha hızlı ve daha ölçeklenebilir oluşturmanıza yardımcı olmak için tasarlanmış güçlü özellikler.",
+  "more": {
+    "dark_mode": {
+      "title": "Karanlık Mod",
+      "desc": "Otomatik algılama ile açık ve koyu tema desteği."
+    },
+    "api_first": {
+      "title": "API Öncelikli",
+      "desc": "Tam programlı kontrol için REST ve GraphQL API'leri."
+    },
+    "sso": {
+      "title": "SSO Girişi",
+      "desc": "Google, GitHub ve Okta için kurumsal düzeyde Single Sign-On."
+    },
+    "audit": {
+      "title": "Denetim Günlükleri",
+      "desc": "Projenizdeki her değişikliği ayrıntılı zaman damgalarıyla izleyin."
+    },
+    "rbac": {
+      "title": "Rol Tabanlı Erişim",
+      "desc": "Admin, editör ve görüntüleyici için ayrıntılı izin kontrolü."
+    },
+    "uptime": {
+      "title": "%99.99 Çalışma Süresi",
+      "desc": "Küresel olarak dağıtılmış CDN'imizle garanti edilen kullanılabilirlik."
+    }
+  },
+  "cta": {
+    "heading": "Başlamaya hazır mısınız?",
+    "btn_create": "Hesap Oluştur",
+    "btn_docs": "Belgeleri Okuyun"
+  }
+}

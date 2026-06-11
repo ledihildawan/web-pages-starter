@@ -1,24 +1,20 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { defineConfig } from '@rsbuild/core';
+import { defineConfig, type RsbuildPlugin } from '@rsbuild/core';
 import { pluginImageCompress } from '@rsbuild/plugin-image-compress';
-import {
-  type Compilation,
-  type Compiler,
-  CopyRspackPlugin,
-} from '@rspack/core';
-import tailwindcss from '@tailwindcss/postcss';
 import { minify } from 'html-minifier-terser';
+import { PATHS } from './src/configs/paths';
+import { ROOT_PAGE } from './src/configs/site';
+import { LOCALE_CODES } from './src/scripts/lib/i18n/data';
+import { LOCALE_STORAGE_KEY } from './src/scripts/lib/i18n/index';
+import { createTemplateParams } from './src/scripts/lib/i18n/template';
 
-/**
- * CONFIG & UTILS
- */
-const isProd = process.env.NODE_ENV === 'production';
+const ROOT = process.cwd();
+const PORT = Number(process.env.PORT) || 8888;
+const isProd =
+  process.env.NODE_ENV === 'production' || process.env.BUILD_PREVIEW === 'true';
 const shouldMinify = isProd && process.env.MINIFY !== 'false';
 const shouldMinifyHTML = shouldMinify && process.env.MINIFY_HTML !== 'false';
-const ROOT = process.cwd();
-const resolveRoot = (...args: string[]) => path.resolve(ROOT, ...args);
-
 const MANAGED_EXTS = [
   'ts',
   'css',
@@ -31,176 +27,156 @@ const MANAGED_EXTS = [
   'gif',
 ];
 
-const readJSON = (filePath: string): Record<string, unknown> => {
-  try {
-    return fs.existsSync(filePath)
-      ? (JSON.parse(fs.readFileSync(filePath, 'utf-8')) as Record<
-          string,
-          unknown
-        >)
-      : {};
-  } catch {
-    return {};
-  }
-};
+const resolveRoot = (...args: string[]): string => path.resolve(ROOT, ...args);
 
-/**
- * CORE LOGIC
- */
-const loadGlobalData = () => {
-  const dir = resolveRoot('src/data');
-  const globalData: Record<string, unknown> = {};
-
-  if (!fs.existsSync(dir)) return globalData;
-
-  const files = fs.readdirSync(dir);
-  for (const file of files) {
-    if (file.endsWith('.json')) {
-      const name = path.basename(file, '.json');
-      const data = readJSON(path.join(dir, file));
-      if (name === 'global') {
-        Object.assign(globalData, data);
-      } else {
-        globalData[name] = data;
+const pluginRootPageAsIndex = (): RsbuildPlugin => ({
+  name: 'plugin-root-page-as-index',
+  setup(api) {
+    api.onAfterBuild(() => {
+      const distDir = api.context.distPath;
+      const src = path.join(distDir, `${ROOT_PAGE}.html`);
+      const dest = path.join(distDir, 'index.html');
+      if (fs.existsSync(src)) {
+        fs.renameSync(src, dest);
       }
-    }
-  }
-  return globalData;
-};
+    });
+  },
+});
 
-const getEntries = () => {
-  const dir = resolveRoot('src/pages');
-  const entries: Record<string, string> = {};
+const EXCLUDED_PAGES = new Set<string>([]);
+
+const getEntries = (): Record<string, string | string[]> => {
+  const dir = resolveRoot(PATHS.SRC, 'pages');
+  const entries: Record<string, string | string[]> = {};
 
   if (!fs.existsSync(dir)) return entries;
 
-  const folders = fs.readdirSync(dir);
-  for (const folder of folders) {
-    const file = path.join(dir, folder, `${folder}.ts`);
-    if (fs.existsSync(file)) {
-      entries[folder] = file;
+  for (const folder of fs.readdirSync(dir)) {
+    if (EXCLUDED_PAGES.has(folder)) {
+      continue;
+    }
+
+    const tsFile = path.join(dir, folder, 'index.ts');
+    const cssFile = path.join(dir, folder, 'index.css');
+
+    if (fs.existsSync(tsFile)) {
+      entries[folder] = fs.existsSync(cssFile) ? [tsFile, cssFile] : tsFile;
     }
   }
   return entries;
 };
 
-/**
- * CUSTOM PLUGINS
- */
-const WatchJsonPlugin = {
-  apply(compiler: Compiler) {
-    compiler.hooks.afterCompile.tap(
-      'WatchJsonPlugin',
-      (compilation: Compilation) => {
-        const watchDirs = ['data', 'pages'];
-        for (const d of watchDirs) {
-          const full = resolveRoot('src', d);
-          if (fs.existsSync(full)) {
-            const files = fs.readdirSync(full, { recursive: true }) as string[];
-            for (const f of files) {
-              if (f.endsWith('.json')) {
-                compilation.fileDependencies.add(path.join(full, f));
-              }
-            }
-          }
-        }
-      },
-    );
-  },
+const getGlobalEntries = (): string[] => {
+  return [
+    resolveRoot(PATHS.SRC, 'scripts/main.ts'),
+    resolveRoot(PATHS.SRC, 'styles/main.css'),
+  ].filter((p) => fs.existsSync(p));
 };
 
-/**
- * RSBUILD CONFIGURATION
- */
 export default defineConfig({
   server: {
-    open: true,
+    port: PORT,
     strictPort: true,
     historyApiFallback: {
-      index: '/404.html',
+      rewrites: [
+        { from: /^\/$/, to: '/home.html' },
+        {
+          from: /^\/(?!locales\/|assets\/|fonts\/|images\/|favicon\.svg$|favicon\.ico$|manifest\.json$|sw\.js$|robots\.txt$|sitemap\.xml$|.*\.[a-z0-9]+$)/,
+          to: '/404.html',
+        },
+      ],
       disableDotRule: true,
     },
   },
-  performance: {
-    chunkSplit: { strategy: 'split-by-experience' },
-    removeConsole: shouldMinify,
-  },
-
-  plugins: [
-    pluginImageCompress(
-      { use: 'jpeg', quality: 60 },
-      { use: 'png' },
-      { use: 'webp', quality: 60 },
-    ),
-  ],
-
   dev: {
-    client: {
-      overlay: true,
-      reconnect: 5,
-    },
+    client: { overlay: true, reconnect: 5 },
     watchFiles: {
       paths: [
         'src/**/*.njk',
-        'src/data/**/*.json',
-        'src/pages/**/*.json',
+        'src/**/*.json',
+        'src/**/*.json5',
         'src/**/*.css',
       ],
-      options: { usePolling: true, interval: 100, binaryInterval: 300 },
+      options: { usePolling: true, interval: 100 },
       type: 'reload-page',
     },
   },
-
-  resolve: {
-    alias: (() => {
-      const aliases: Record<string, string> = { '@': resolveRoot('src') };
-      const dirs = ['data', 'pages', 'assets', 'partials', 'layouts'];
-      for (const dir of dirs) {
-        aliases[`@${dir}`] = resolveRoot('src', dir);
-      }
-      return aliases;
-    })(),
+  splitChunks: {
+    preset: 'default',
   },
-
+  resolve: {
+    alias: {
+      '@': resolveRoot(PATHS.SRC),
+      '@components': resolveRoot(PATHS.SRC, 'components'),
+      '@assets': resolveRoot(PATHS.SRC, 'assets'),
+      '@generated': resolveRoot(PATHS.GENERATED),
+      '@configs': resolveRoot(PATHS.SRC, 'configs'),
+      '@data': resolveRoot(PATHS.SRC, 'data'),
+    },
+  },
   source: {
-    preEntry: [resolveRoot('src/assets/scripts/global.ts')],
+    preEntry: getGlobalEntries(),
     entry: getEntries(),
   },
-
   output: {
     distPath: {
       js: 'assets/scripts',
       css: 'assets/styles',
       image: 'assets/images',
+      font: 'assets/fonts',
     },
-    assetPrefix: './',
+    assetPrefix: '/',
     cleanDistPath: true,
-    minify: shouldMinify,
+    minify: shouldMinify ? { js: 'always', css: 'always' } : false,
+    inlineStyles: true,
+    inlineScripts: ({ size }) => size < 2 * 1_024,
     sourceMap: !shouldMinify
       ? { js: 'cheap-module-source-map', css: true }
       : false,
     filename: {
       js: '[name].[contenthash:8].js',
       css: '[name].[contenthash:8].css',
+      font: '[name][ext]',
       image: '[name].[hash:8][ext]',
     },
+    copy: [
+      {
+        from: resolveRoot(PATHS.SRC, 'assets'),
+        to: 'assets',
+        globOptions: { ignore: MANAGED_EXTS.map((ext) => `**/*.${ext}`) },
+        noErrorOnMissing: true,
+      },
+      {
+        from: resolveRoot('public', 'manifest.json'),
+        to: 'manifest.json',
+        noErrorOnMissing: true,
+      },
+      {
+        from: resolveRoot('public', 'sw.js'),
+        to: 'sw.js',
+        noErrorOnMissing: true,
+      },
+      {
+        from: resolveRoot('public', 'robots.txt'),
+        to: 'robots.txt',
+        noErrorOnMissing: true,
+      },
+      {
+        from: resolveRoot('public', 'favicon.svg'),
+        to: 'favicon.svg',
+        noErrorOnMissing: true,
+      },
+      {
+        from: resolveRoot('public/assets/i18n'),
+        to: 'assets/i18n',
+        noErrorOnMissing: true,
+      },
+    ],
   },
-
-  html: {
-    template: ({ entryName }) =>
-      path.join('src/pages', entryName, `${entryName}.njk`),
-    templateParameters: (params) => {
-      const name = String(params.entryName || '');
-      const data = {
-        ...params,
-        ...loadGlobalData(),
-        ...readJSON(resolveRoot('src/pages', name, `${name}.json`)),
-      };
-      return data;
-    },
-    meta: { viewport: 'width=device-width, initial-scale=1.0' },
-  },
-
+  plugins: [
+    pluginRootPageAsIndex(),
+    pluginImageCompress({ use: 'avif', quality: 75 }),
+  ],
   tools: {
     htmlPlugin: (config) => {
       config.minify = (html) =>
@@ -209,32 +185,34 @@ export default defineConfig({
           : minify(html, {
               collapseWhitespace: true,
               removeComments: true,
+              decodeEntities: true,
               minifyCSS: true,
               minifyJS: true,
               minifyURLs: true,
+              removeRedundantAttributes: true,
+              removeScriptTypeAttributes: true,
+              removeStyleLinkTypeAttributes: true,
+              useShortDoctype: true,
+              continueOnParseError: true,
+              customEventAttributes: [/^on[a-z]{3,}$/],
+              removeAttributeQuotes: false,
+              keepClosingSlash: true,
+              ignoreCustomFragments: [
+                /\{\{[\s\S]*?\}\}/,
+                /\{%[\s\S]*?%\}/,
+                /\{#[\s\S]*?#\}/,
+              ],
+              conservativeCollapse: true,
+              collapseInlineTagWhitespace: false,
+              removeEmptyAttributes: false,
             });
+
       return config;
     },
-    postcss: (config) => {
-      config.postcssOptions ??= {};
-      const opts = config.postcssOptions as { plugins?: unknown[] };
-      opts.plugins ??= [];
-      opts.plugins.push(tailwindcss());
-    },
     rspack: {
-      plugins: [
-        new CopyRspackPlugin({
-          patterns: [
-            {
-              from: resolveRoot('src/assets'),
-              to: 'assets',
-              globOptions: { ignore: MANAGED_EXTS.map((ext) => `**/*.${ext}`) },
-              noErrorOnMissing: true,
-            },
-          ],
-        }),
-        WatchJsonPlugin,
-      ],
+      optimization: {
+        runtimeChunk: 'single',
+      },
       module: {
         rules: [
           {
@@ -243,10 +221,11 @@ export default defineConfig({
               {
                 loader: 'simple-nunjucks-loader',
                 options: {
-                  searchPaths: ['pages', 'layouts', 'partials', ''].map((d) =>
-                    resolveRoot('src', d),
+                  autoescape: false,
+                  searchPaths: ['pages', 'layouts', 'components', ''].map((d) =>
+                    resolveRoot(PATHS.SRC, d),
                   ),
-                  assetsPaths: [resolveRoot('src/assets')],
+                  assetsPaths: [resolveRoot(PATHS.SRC, 'assets')],
                 },
               },
             ],
@@ -254,5 +233,13 @@ export default defineConfig({
         ],
       },
     },
+  },
+  html: {
+    inject: 'head',
+    scriptLoading: 'defer',
+    template: ({ entryName }) =>
+      path.join(PATHS.SRC, 'pages', entryName, 'index.njk'),
+    templateParameters: (params) =>
+      createTemplateParams(params, LOCALE_STORAGE_KEY, LOCALE_CODES),
   },
 });

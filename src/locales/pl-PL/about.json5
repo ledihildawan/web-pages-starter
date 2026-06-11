@@ -1,0 +1,72 @@
+{
+  "hero": {
+    "badge": "O nas",
+    "title_part1": "Napędzani ",
+    "title_highlight": "pasją",
+    "description": "Nasza podróż rozpoczęła się od prostego pomysłu."
+  },
+  "mission": {
+    "title": "Nasza misja",
+    "description": "Umożliwiać programistom i firmom korzystanie z eleganckich, szybkich i łatwych w użyciu narzędzi do budowania niezwykłych produktów cyfrowych."
+  },
+  "vision": {
+    "title": "Nasza wizja",
+    "description": "Być platformą wyboru dla nowoczesnych programistów, którzy cenią piękno, wydajność i doświadczenie użytkownika w każdej linii kodu."
+  },
+  "story": {
+    "tag": "Nasza historia",
+    "visual_label": "Ilustracja studia kreatywnego",
+    "title": "Napędzani pasją, <br>definiowani przez doskonałość.",
+    "para1": "Nasza podróż rozpoczęła się od prostej idei: uczynienie tworzenia stron internetowych dostępnym i przyjemnym dla wszystkich. Mieliśmy dość ciężkich frameworków i skomplikowanych konfiguracji.",
+    "para2": "Dziś jesteśmy zróżnicowanym zespołem inżynierów, projektantów i myślicieli pracujących razem nad rozwiązywaniem złożonych problemów eleganckimi rozwiązaniami.",
+    "val1": "Filozofia projektowania zorientowanego na użytkownika",
+    "val2": "Architektura z pierwszeństwem wydajności",
+    "val3": "Przejrzystość i otwarta komunikacja"
+  },
+  "values": {
+    "title": "Nasze wartości",
+    "subtitle": "Zasady kierujące każdą decyzją, którą podejmujemy."
+  },
+  "passion": {
+    "title": "Pasja",
+    "description": "Kochamy to, co robimy, i widać to w każdym szczególe naszych produktów."
+  },
+  "collaboration": {
+    "title": "Współpraca",
+    "description": "Praca razem przynosi najlepsze rezultaty. Wierzymy w moc silnych zespołów."
+  },
+  "innovation": {
+    "title": "Innowacja",
+    "description": "Zawsze szukamy lepszych sposobów rozwiązywania problemów i tworzenia wartości."
+  },
+  "integrity": {
+    "title": "Uczciwość",
+    "description": "Szczerość i przejrzystość są podstawą każdej relacji, którą budujemy."
+  },
+  "excellence": {
+    "title": "Doskonałość",
+    "description": "Nie zadowalamy się wystarczająco dobrym. Zawsze dążymy do najlepszego."
+  },
+  "quality": {
+    "title": "Jakość",
+    "description": "Czysty kod, piękny design i płynne doświadczenia to nasze standardy."
+  },
+  "team": {
+    "title": "Poznaj zespół",
+    "subtitle": "Błyskotliwe umysły stojące za każdą linią kodu, którą piszemy.",
+    "alex_desc": "Wizjonerski lider z ponad 10-letnim doświadczeniem w tworzeniu ekosystemów SaaS.",
+    "sarah_desc": "Full-stack czarodziejka specjalizująca się w budowaniu architektur systemów na dużą skalę.",
+    "mike_desc": "Zafascynowany szczegółami pikseli, płynnymi przepływami UX i standardami dostępności.",
+    "jessica_desc": "Kreatywna narratorka pomagająca markom znaleźć ich unikalny głos w świecie cyfrowym."
+  },
+  "stats": {
+    "years": "Lat doświadczenia",
+    "years_val": "3+",
+    "clients": "Klientów globalnych",
+    "clients_val": "120+",
+    "countries": "Krajów zasięgu",
+    "countries_val": "15",
+    "support": "Wsparcie eksperckie",
+    "support_val": "24/7"
+  }
+}

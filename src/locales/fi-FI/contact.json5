@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "title": "Ota yhteyttä | Starter App",
+    "description": "Ota meihin yhteyttä kysymyksissä ja tuessa."
+  },
+  "contact": {
+    "badge": "Valmiina auttamaan",
+    "title_part1": "Otetaan ",
+    "title_highlight": "yhteyttä",
+    "description": "Onko sinulla kysymys tai haluatko tehdä yhteistyötä? Haluaisimme kuulla sinusta. Lähetä viesti, niin vastaamme pian.",
+    "form_title": "Lähetä viesti",
+    "form_subtitle": "Täytä alla oleva lomake, niin vastaamme sinulle pian.",
+    "social_title": "Seuraa meitä",
+    "social_subtitle": "Saa uusimmat päivitykset sosiaalisten kanaviemme kautta",
+    "info": {
+      "response_time": {
+        "title": "Nopea vastaus",
+        "description": "Pyrimme vastaamaan jokaiseen viestiin 24 tunnin sisällä arkipäivinä."
+      },
+      "working_hours": {
+        "title": "Työajat",
+        "description": "Maanantai - perjantai: 09:00 - 18:00. Viikonloput: prioriteetilla."
+      },
+      "support": {
+        "title": "Jatkuva tuki",
+        "description": "Tukitiimimme on aina valmis ratkaisemaan teknisiä ongelmiasi."
+      }
+    },
+    "form": {
+      "name": "Nimi",
+      "name_placeholder": "Anna nimesi",
+      "email": "Sähköposti",
+      "email_placeholder": "nimi@sahkoposti.fi",
+      "subject": "Aihe",
+      "subject_placeholder": "Mistä haluaisit keskustella?",
+      "message": "Viesti",
+      "message_placeholder": "Kerro meille lisää kysymyksestäsi...",
+      "submit": "Lähetä viesti"
+    }
+  },
+  "email_label": "Sähköposti",
+  "email_value": "hello@starter.app",
+  "phone_label": "Puhelin",
+  "phone_value": "+358 9 1234 567",
+  "location_label": "Sijainti",
+  "location_value": "Helsinki, Suomi"
+}

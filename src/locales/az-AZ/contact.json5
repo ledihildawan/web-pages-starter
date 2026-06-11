@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "title": "Bizimlə Əlaqə | Starter App",
+    "description": "Suallarınız və dəstək üçün bizimlə əlaqə saxlayın."
+  },
+  "contact": {
+    "badge": "Köməyə Hazırıq",
+    "title_part1": "Gəlin",
+    "title_highlight": "əlaqə saxlayaq",
+    "description": "Sualınız var və ya əməkdaşlıq etmək istəyirsiniz? Sizdən eşitməyə sevinərik. Mesaj göndərin və biz tezliklə cavab verəcəyik.",
+    "form_title": "Mesaj Göndər",
+    "form_subtitle": "Aşağıdakı formanı doldurun və biz tezliklə cavab verəcəyik.",
+    "social_title": "Bizi İzləyin",
+    "social_subtitle": "Sosial mediya hesablarımızdan ən son yenilikləri əldə edin",
+    "info": {
+      "response_time": {
+        "title": "Sürətli Cavab",
+        "description": "İş günlərində hər bir mesaja 24 saat ərzində cavab verməyə çalışırıq."
+      },
+      "working_hours": {
+        "title": "İş Saatları",
+        "description": "Bazar ertəsi - Cümə: 09:00 - 18:00. Həftə sonu: Prioritetə görə."
+      },
+      "support": {
+        "title": "Davamlı Dəstək",
+        "description": "Dəstək komandamız texniki problemlərinizi həll etməyə həmişə hazırdır."
+      }
+    },
+    "form": {
+      "name": "Ad",
+      "name_placeholder": "Adınızı daxil edin",
+      "email": "E-poçt",
+      "email_placeholder": "ad@email.com",
+      "subject": "Mövzu",
+      "subject_placeholder": "Nə haqqında danışmaq istəyirsiniz?",
+      "message": "Mesaj",
+      "message_placeholder": "Sualınız haqqında ətraflı məlumat verin...",
+      "submit": "Mesaj Göndər"
+    }
+  },
+  "email_label": "E-poçt",
+  "email_value": "hello@starter.app",
+  "phone_label": "Telefon",
+  "phone_value": "+994 12 345 67 89",
+  "location_label": "Ünvan",
+  "location_value": "Bakı, Azərbaycan"
+}

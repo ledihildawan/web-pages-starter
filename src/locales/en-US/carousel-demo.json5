@@ -1,0 +1,17 @@
+{
+  "meta": {
+    "page_title": "Splide Lazy Load Demo | Starter"
+  },
+  "hero": {
+    "slide_1": {
+      "title": "Lazy Load Nature",
+      "subtitle": "Images are loaded intelligently to save bandwidth.",
+      "alt": "Beautiful Mountain View"
+    },
+    "slide_2": {
+      "title": "Performance First",
+      "subtitle": "Only load what you need.",
+      "alt": "Snowy Mountains View"
+    }
+  }
+}

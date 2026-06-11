@@ -1,0 +1,203 @@
+{
+  "meta": {
+    "title": "i18n 測試 | 演示",
+    "description": "完整的國際化功能測試頁面"
+  },
+  "hero": {
+    "badge": "i18n 功能",
+    "title": "完整的 <span class='text-violet-400'>i18n</span> 測試",
+    "description": "嘗試所有 i18n 功能：翻譯、複數、數字格式、貨幣和貨幣轉換。"
+  },
+  "language_info": {
+    "title": "當前語言信息",
+    "code": "語言代碼",
+    "currency": "貨幣",
+    "direction": "文本方向",
+    "digits": "原生數字",
+    "enabled": "已啟用",
+    "disabled": "已停用",
+    "languages": "語言",
+    "switching": "無重載切換",
+    "current_code": "zh-Hant-TW",
+    "current_currency": "TWD",
+    "current_direction": "LTR (從左到右)"
+  },
+  "numbers": {
+    "title": "數字格式",
+    "description": "根據活動語言環境格式化的數字。",
+    "large": "大數字",
+    "decimal": "小數",
+    "million": "百萬",
+    "percent": "百分比",
+    "raw": "原始"
+  },
+  "currency": {
+    "title": "貨幣格式",
+    "description": "美元價格轉換為活動語言貨幣。",
+    "small": "小型",
+    "medium": "中型",
+    "large": "大型",
+    "enterprise": "企業",
+    "currencies": "貨幣"
+  },
+  "currency_comparison": {
+    "title": "貨幣比較",
+    "description": "所有支持貨幣中的相同價格 ($99 USD)。",
+    "base_price": "基礎價格",
+    "aed": "阿聯酋迪爾汗",
+    "aud": "澳元",
+    "brl": "巴西雷亞爾",
+    "cad": "加拿大元",
+    "chf": "瑞士法郎",
+    "cny": "人民幣",
+    "eur": "歐元",
+    "gbp": "英鎊",
+    "idr": "印尼盾",
+    "inr": "印度盧比",
+    "jpy": "日元",
+    "krw": "韓元",
+    "mxn": "墨西哥比索",
+    "sar": "沙特里亞爾",
+    "sgd": "新加坡元",
+    "usd": "美元",
+    "zar": "南非蘭特"
+  },
+  "pluralization": {
+    "title": "複數形式",
+    "description": "複數形式因語言而異。",
+    "item_title": "項目（名詞）",
+    "user_title": "用戶（人）",
+    "product_title": "產品（商品）"
+  },
+  "form": {
+    "title": "帶有翻譯佔位符的表單",
+    "description": "佔位符和標籤從本地文件加載。",
+    "name_label": "姓名",
+    "name_placeholder": "請輸入您的全名",
+    "email_label": "電子郵件",
+    "email_placeholder": "example@email.com",
+    "message_label": "消息",
+    "message_placeholder": "在此輸入您的消息...",
+    "submit": "提交"
+  },
+  "missing_keys": {
+    "title": "缺失密鑰處理程序",
+    "description": "缺失的密鑰將顯示在方括號中。"
+  },
+  "html_content": {
+    "title": "HTML 內容",
+    "description": "翻譯可以包含用於樣式的 HTML 標籤。",
+    "example": "這是一個帶有<span class='text-emerald-400'>彩色高亮</span>和<strong>粗體文本</strong>的示例。",
+    "note": "注意：翻譯中的 HTML 必須具有單個根元素。"
+  },
+  "switcher": {
+    "title": "切換語言",
+    "description": "點擊下面的按鈕更改語言並查看 i18n 的實際效果。"
+  },
+  "advanced": {
+    "title": "高級格式",
+    "description": "百分比、單位、字節、列表和序數的高級格式功能。",
+    "percentages": "百分比",
+    "units": "單位",
+    "bytes": "字節",
+    "bytes_unit": "字節",
+    "lists": "列表",
+    "ordinals": "序數",
+    "cardinals": "基數",
+    "scientific": "科學記數",
+    "abbreviated": "縮寫",
+    "date_formats": "日期格式",
+    "time_formats": "時間格式",
+    "datetime": "日期 + 時間",
+    "durations": "持續時間",
+    "relative_time": "相對時間",
+    "regional_pricing": "區域定價",
+    "fifty_percent": "百分之五十",
+    "small_percent": "小百分比",
+    "ninety_nine": "九十九",
+    "hundred": "一百",
+    "kilobyte": "千字節",
+    "distance": "距離",
+    "temperature": "溫度",
+    "weight": "重量",
+    "half_kb": "半 KB",
+    "one_and_half_kb": "1.5 KB",
+    "one_mb": "1 MB",
+    "one_gb": "1 GB",
+    "two_items": "兩項",
+    "three_items": "三項",
+    "four_items": "四項",
+    "date_short": "短日期",
+    "date_long": "長日期",
+    "time_short": "短時間",
+    "time_long": "長時間",
+    "day_ago": "1天前",
+    "months_ago": "2個月前",
+    "hour_in": "1小時內",
+    "starter_plan": "入門計劃",
+    "pro_plan": "專業計劃",
+    "discount_20": "20%折扣",
+    "number_modes": "數字模式",
+    "number_modes_desc": "tNative（本地數字）和tUniversal（通用0-9）的演示。",
+    "native_label": "本地 (٠١٢٣٤)",
+    "universal_label": "通用 (0-9)",
+    "plain_label": "普通 (auto)"
+  },
+  "template_macros": {
+    "title": "模板宏",
+    "description": "用於獲取無HTML標記原始值的宏。",
+    "raw_value": "無標記的原始值",
+    "current_year": "當前年份是{{year}}"
+  },
+  "datetime": {
+    "title": "日期和時間",
+    "description": "組合日期和時間格式。",
+    "iso": "ISO 標準",
+    "eve": "聖誕夜"
+  },
+  "unit": {
+    "title": "單位格式"
+  },
+  "native_digits": {
+    "title": "原生數字",
+    "description": "帶有 ASCII 數字的文字以活動語言環境的原生數字呈現。切換語言時實時更新。"
+  },
+  "inflection": {
+    "title": "英語屈折",
+    "description": "英語的複數和單數形式。切換語言時實時更新。"
+  },
+  "live_label": "實時",
+  "pricing_details": {
+    "title": "價格詳情",
+    "description": "完整流程：原始值、貨幣代碼、格式化、折扣和轉換。",
+    "raw_value": "原始值",
+    "raw_currency": "貨幣代碼",
+    "formatted": "已格式化",
+    "discounted": "20% 折扣",
+    "converted_usd": "轉換為 USD"
+  },
+  "live_update": {
+    "note": "請注意，當您更改語言時，所有數字、日期和價格都會立即更新 — 無需重新載入頁面。"
+  },
+  "core": {
+    "title": "核心功能",
+    "description": "翻譯、複數和 HTML 內容。"
+  },
+  "section_modes": {
+    "title": "數字模式",
+    "description": "比較目前區域設定的原生數字、通用格式和自動模式。"
+  },
+  "section_systems": {
+    "title": "書寫系統",
+    "description": "系統層級的全部 7 套演算法系統和 4 套附加數字系統,字型載入器已連接。",
+    "note": "所有數字系統（演算法和數字）通過ICU回退顯示正確的原生數字。"
+  },
+  "nav": {
+    "translations": "翻譯",
+    "formatting": "數字",
+    "pricing": "價格",
+    "modes": "模式",
+    "systems": "系統",
+    "switcher": "切換區域"
+  }
+}

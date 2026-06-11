@@ -1,0 +1,72 @@
+{
+  "hero": {
+    "badge": "Om os",
+    "title_part1": "Drevet af ",
+    "title_highlight": "passion",
+    "description": "Vores rejse startede med en simpel idé."
+  },
+  "mission": {
+    "title": "Vores mission",
+    "description": "At give udviklere og virksomheder elegante, hurtige og brugervenlige værktøjer til at bygge exceptionelle digitale produkter."
+  },
+  "vision": {
+    "title": "Vores vision",
+    "description": "At bli den foretrukne platform for moderne udviklere, der værdsætter skønhed, ydeevne og brugeroplevelse i hver kodelinje."
+  },
+  "story": {
+    "tag": "Vores historie",
+    "visual_label": "Kreativ studio-illustration",
+    "title": "Drevet af passion, <br>defineret af excellence.",
+    "para1": "Vores rejse startede med en simpel idé: at gøre webudvikling tilgængelig og sjov for alle. Vi var trætte af tunge frameworks og komplicerede opsætninger.",
+    "para2": "I dag er vi et mangfoldigt team af ingeniører, designere og tænkere, der arbejder sammen om at løse komplekse problemer med elegante løsninger.",
+    "val1": "Brugercentreret designfilosofi",
+    "val2": "Performance-first-arkitektur",
+    "val3": "Gennemsigtighed og åben kommunikation"
+  },
+  "values": {
+    "title": "Vores værdier",
+    "subtitle": "De principper, der vejleder hver beslutning, vi træffer."
+  },
+  "passion": {
+    "title": "Passion",
+    "description": "Vi elsker det, vi laver, og det ses i hver eneste detalje i vores produkter."
+  },
+  "collaboration": {
+    "title": "Samarbejde",
+    "description": "At arbejde sammen giver de bedste resultater. Vi tror på kraften i et stærkt team."
+  },
+  "innovation": {
+    "title": "Innovation",
+    "description": "Vi leder altid efter bedre måder at løse problemer og skabe værdi."
+  },
+  "integrity": {
+    "title": "Integritet",
+    "description": "Ærlighed og gennemsigtighed er grundlaget for hver relation, vi bygger."
+  },
+  "excellence": {
+    "title": "Kvalitet",
+    "description": "Vi nøjes ikke med 'godt nok'. Vi stræber altid efter det bedste."
+  },
+  "quality": {
+    "title": "Kvalitet",
+    "description": "Ren kode, smukt design og problemfri oplevelse er vores standard."
+  },
+  "team": {
+    "title": "Mød teamet",
+    "subtitle": "De skarpe hjerner bag hver kodelinje, vi skriver.",
+    "alex_desc": "Visionær leder med over 10 års erfaring i udvikling af SaaS-økosystemer.",
+    "sarah_desc": "Fullstack-magi specialiseret i at bygge storskalasystemarkitekturer.",
+    "mike_desc": "Besat af pixeldetaljer, glidende UX-flows og tilgængelighedsstandarder.",
+    "jessica_desc": "Kreativ historiefortæller, der hjælper brands med at finde deres unikke stemme i den digitale verden."
+  },
+  "stats": {
+    "years": "Års erfaring",
+    "years_val": "3+",
+    "clients": "Globale kunder",
+    "clients_val": "120+",
+    "countries": "Lande",
+    "countries_val": "15",
+    "support": "Ekspert-support",
+    "support_val": "24/7"
+  }
+}

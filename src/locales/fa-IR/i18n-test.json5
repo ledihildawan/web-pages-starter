@@ -1,0 +1,203 @@
+{
+  "meta": {
+    "title": "تست i18n | دمو",
+    "description": "صفحه تست کامل برای ویژگی‌های بین‌المللی‌سازی"
+  },
+  "hero": {
+    "badge": "ویژگی‌های i18n",
+    "title": "تست <span class='text-violet-400'>کامل</span> بین‌المللی‌سازی",
+    "description": "تمام ویژگی‌های i18n را امتحان کنید: ترجمه، جمع‌بستن، قالب‌بندی اعداد، ارز و تبدیل ارز."
+  },
+  "language_info": {
+    "title": "اطلاعات زبان فعلی",
+    "code": "کد زبان",
+    "currency": "واحد پول",
+    "direction": "جهت متن",
+    "digits": "ارقام بومی",
+    "enabled": "فعال",
+    "disabled": "غیرفعال",
+    "languages": "زبان‌ها",
+    "switching": "تغییر بدون بارگذاری مجدد",
+    "current_code": "fa",
+    "current_currency": "IRR",
+    "current_direction": "RTL (راست به چپ)"
+  },
+  "numbers": {
+    "title": "قالب‌بندی اعداد",
+    "description": "اعداد بر اساس زبان فعال قالب‌بندی می‌شوند.",
+    "large": "عدد بزرگ",
+    "decimal": "اعشاری",
+    "million": "میلیون",
+    "percent": "درصد",
+    "raw": "خام"
+  },
+  "currency": {
+    "title": "تبدیل ارز",
+    "description": "قیمت‌ها به IDR به واحد پول زبان فعال تبدیل می‌شوند.",
+    "currencies": "واحدهای پول",
+    "small": "کوچک",
+    "medium": "متوسط",
+    "large": "بزرگ",
+    "enterprise": "Enterprise"
+  },
+  "currency_comparison": {
+    "title": "مقایسه ارزها",
+    "description": "قیمت یکسان در واحدهای پولی مختلف پشتیبانی‌شده.",
+    "base_price": "قیمت پایه (USD)",
+    "aed": "درهم امارات",
+    "aud": "دلار استرالیا",
+    "brl": "رئال برزیل",
+    "cad": "دلار کانادا",
+    "chf": "فرانک سوئیس",
+    "cny": "یوان چین",
+    "eur": "یورو",
+    "gbp": "پوند استرلینگ",
+    "idr": "روپیه",
+    "inr": "روپی هند",
+    "jpy": "ین ژاپن",
+    "krw": "وون کره",
+    "mxn": "پزو مکزیک",
+    "sar": "ریال عربستان",
+    "sgd": "دلار سنگاپور",
+    "usd": "دلار آمریکا",
+    "zar": "راند آفریقای جنوبی"
+  },
+  "core": {
+    "title": "ویژگی‌های اصلی",
+    "description": "ترجمه، جمع‌بستن و محتوای HTML."
+  },
+  "pluralization": {
+    "title": "جمع‌بستن",
+    "description": "اشکال جمع متفاوت برای هر زبان.",
+    "item_title": "مورد (اسم)",
+    "user_title": "کاربر",
+    "product_title": "محصول"
+  },
+  "form": {
+    "title": "فرم با placeholder ترجمه‌شده",
+    "description": "placeholder و برچسب‌ها از فایل‌های زبان دریافت می‌شوند.",
+    "name_label": "نام",
+    "name_placeholder": "نام کامل خود را وارد کنید",
+    "email_label": "ایمیل",
+    "email_placeholder": "example@email.com",
+    "message_label": "پیام",
+    "message_placeholder": "پیام خود را اینجا بنویسید...",
+    "submit": "ارسال"
+  },
+  "missing_keys": {
+    "title": "مدیریت کلیدهای گمشده",
+    "description": "کلیدهای ترجمه‌ای که یافت نشوند در براکت نمایش داده می‌شوند."
+  },
+  "html_content": {
+    "title": "محتوای HTML",
+    "description": "ترجمه‌ها می‌توانند شامل تگ‌های HTML برای قالب‌بندی باشند.",
+    "example": "این یک نمونه متن با <span class='text-emerald-400'>رنگ برجسته</span> و <strong>متن پررنگ</strong> است.",
+    "note": "توجه: تگ‌های HTML در ترجمه باید در یک عنصر والdershir قرار گیرند."
+  },
+  "switcher": {
+    "title": "تغییر زبان",
+    "description": "روی دکمه زیر کلیک کنید تا زبان تغییر کند و تمام ویژگی‌های i18n را در عمل ببینید."
+  },
+  "advanced": {
+    "title": "قالب‌بندی پیشرفته",
+    "description": "ویژگی‌های قالب‌بندی پیشرفته برای درصدها، واحدها، بایت‌ها، لیست‌ها و ترتیبی‌ها.",
+    "percentages": "درصدها",
+    "units": "واحدها",
+    "bytes": "بایت‌ها",
+    "bytes_unit": "بایت",
+    "lists": "لیست‌ها",
+    "ordinals": "ترتیبی",
+    "cardinals": "اصلی",
+    "scientific": "نماد علمی",
+    "abbreviated": "مخفف",
+    "date_formats": "فرمت‌های تاریخ",
+    "time_formats": "فرمت‌های زمان",
+    "datetime": "تاریخ + زمان",
+    "durations": "مدت‌ها",
+    "relative_time": "زمان نسبی",
+    "regional_pricing": "قیمت‌گذاری منطقه‌ای",
+    "fifty_percent": "پنجاه درصد",
+    "small_percent": "درصد کوچک",
+    "ninety_nine": "نود و نه",
+    "hundred": "صد",
+    "kilobyte": "کیلوبایت",
+    "distance": "مسافت",
+    "temperature": "دما",
+    "weight": "وزن",
+    "half_kb": "نیم KB",
+    "one_and_half_kb": "یک و نیم KB",
+    "one_mb": "یک MB",
+    "one_gb": "یک GB",
+    "two_items": "دو مورد",
+    "three_items": "سه مورد",
+    "four_items": "چهار مورد",
+    "date_short": "تاریخ کوتاه",
+    "date_long": "تاریخ بلند",
+    "time_short": "زمان کوتاه",
+    "time_long": "زمان بلند",
+    "day_ago": "روز پیش",
+    "months_ago": "ماه پیش",
+    "hour_in": "در یک ساعت آینده",
+    "starter_plan": "طرح Starter",
+    "pro_plan": "طرح Pro",
+    "discount_20": "۲۰٪ تخفیف",
+    "number_modes": "حالت‌های عدد",
+    "number_modes_desc": "مقایسه قالب‌بندی ارقام بومی (٠١٢٣٤) و قالب‌بندی جهانی (۰-۹).",
+    "native_label": "ارقام بومی (٠١٢٣٤)",
+    "universal_label": "جهانی (۰-۹)",
+    "plain_label": "خودکار"
+  },
+  "template_macros": {
+    "title": "Template Macros",
+    "description": "ماکرو برای دریافت مقادیر خام بدون نشانه‌گذاری HTML.",
+    "raw_value": "مقداد خام بدون نشانه‌گذاری",
+    "current_year": "سال جاری {{year}} است"
+  },
+  "datetime": {
+    "title": "تاریخ و زمان",
+    "description": "فرمت ترکیبی تاریخ و زمان.",
+    "iso": "استاندارد ISO",
+    "eve": "شب کریسمس"
+  },
+  "unit": {
+    "title": "قالب‌بندی واحدها"
+  },
+  "native_digits": {
+    "title": "ارقام بومی",
+    "description": "متن با ارقام ASCII به ارقام بومی نمایش داده می‌شود وقتی زبان آن را فعال کند. به‌صورت زنده هنگام تغییر زبان به‌روزرسانی می‌شود."
+  },
+  "inflection": {
+    "title": "صرف انگلیسی",
+    "description": "جمع و مفرد انگلیسی. به‌صورت زنده هنگام تغییر زبان به‌روزرسانی می‌شود."
+  },
+  "live_label": "زنده",
+  "pricing_details": {
+    "title": "جزئیات قیمت‌گذاری",
+    "description": "خط لوله کامل: مقدار خام، کد ارز، قالب‌بندی، تخفیف و تبدیل.",
+    "raw_value": "مقدار خام",
+    "raw_currency": "کد ارز",
+    "formatted": "قالب‌بندی‌شده",
+    "discounted": "۲۰٪ تخفیف",
+    "converted_usd": "تبدیل به USD"
+  },
+  "live_update": {
+    "note": "توجه داشته باشید که تمام اعداد، تاریخ‌ها و قیمت‌ها با تغییر زبان فوراً تغییر می‌کنند — بدون بارگذاری مجدد صفحه."
+  },
+  "section_modes": {
+    "title": "حالت‌های عدد",
+    "description": "قالب‌بندی ارقام بومی، قالب‌بندی جهانی و حالت خودکار را در زبان فعال مقایسه کنید."
+  },
+  "section_systems": {
+    "title": "Writing Systems",
+    "description": "تمام سیستم‌های عددی (الگوریتمی و عددی) ارقام بومی صحیح را با fallback ICU نمایش می‌دهند.",
+    "note": "تمام سیستم‌های عددی (الگوریتمی و عددی) ارقام بومی صحیح را نمایش می‌دهند. سیستم‌های الگوریتمی از fallback ارقام NUMBERING_SYSTEMS استفاده می‌کنند. اعداد رومی مستقیماً از طریق الگوریتم تبدیل می‌شوند. سیستم‌های عددی از ارقام فونت‌های بارگذاری‌شده استفاده می‌کنند."
+  },
+  "nav": {
+    "translations": "ترجمه‌ها",
+    "formatting": "اعداد",
+    "pricing": "قیمت‌گذاری",
+    "modes": "حالت‌ها",
+    "systems": "سیستم‌ها",
+    "switcher": "انتخاب زبان"
+  }
+}

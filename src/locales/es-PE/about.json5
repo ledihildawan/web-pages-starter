@@ -1,0 +1,72 @@
+{
+  "hero": {
+    "badge": "Nosotros",
+    "title_part1": "Impulsados por la ",
+    "title_highlight": "pasión",
+    "description": "Nuestro viaje comenzó con una idea sencilla."
+  },
+  "mission": {
+    "title": "Nuestra Misión",
+    "description": "Empoderar a desarrolladores y empresas con herramientas elegantes, rápidas y fáciles de usar para construir productos digitales excepcionales."
+  },
+  "vision": {
+    "title": "Nuestra Visión",
+    "description": "Ser la plataforma de elección para desarrolladores modernos que valoran la belleza, el rendimiento y la experiencia del usuario en cada línea de código."
+  },
+  "story": {
+    "tag": "Nuestra Historia",
+    "visual_label": "Ilustración de Estudio Creativo",
+    "title": "Impulsados por la pasión, <br>definidos por la excelencia.",
+    "para1": "Nuestro viaje comenzó con una idea sencilla: hacer que el desarrollo web sea accesible y divertido para todos. Estábamos cansados de frameworks pesados y configuraciones complejas.",
+    "para2": "Hoy somos un equipo diverso de ingenieros, diseñadores y pensadores que trabajan juntos para resolver problemas complejos con soluciones elegantes.",
+    "val1": "Filosofía de diseño centrada en el usuario",
+    "val2": "Arquitectura de rendimiento primero",
+    "val3": "Transparencia y comunicación abierta"
+  },
+  "values": {
+    "title": "Nuestros Valores",
+    "subtitle": "Principios que guían cada decisión que tomamos."
+  },
+  "passion": {
+    "title": "Pasión",
+    "description": "Amamos lo que hacemos, y se nota en cada detalle de nuestros productos."
+  },
+  "collaboration": {
+    "title": "Colaboración",
+    "description": "Trabajar juntos produce los mejores resultados. Creemos en el poder de equipos sólidos."
+  },
+  "innovation": {
+    "title": "Innovación",
+    "description": "Siempre buscando mejores formas de resolver problemas y crear valor."
+  },
+  "integrity": {
+    "title": "Integridad",
+    "description": "La honestidad y la transparencia son la base de cada relación que construimos."
+  },
+  "excellence": {
+    "title": "Excelencia",
+    "description": "No nos conformamos con lo suficientemente bueno. Siempre nos esforzamos por lo mejor."
+  },
+  "quality": {
+    "title": "Calidad",
+    "description": "Código limpio, diseño hermoso y experiencias fluidas son nuestros estándares."
+  },
+  "team": {
+    "title": "Conoce al Equipo",
+    "subtitle": "Las mentes brillantes detrás de cada línea de código que escribimos.",
+    "alex_desc": "Líder visionario con más de 10 años de experiencia en el desarrollo de ecosistemas SaaS.",
+    "sarah_desc": "Experta full-stack especializada en construir arquitecturas de sistemas a gran escala.",
+    "mike_desc": "Apasionado de los detalles al píxel, flujos de UX fluidos y estándares de accesibilidad.",
+    "jessica_desc": "Narradora creativa que ayuda a las marcas a encontrar su voz única en el mundo digital."
+  },
+  "stats": {
+    "years": "Años de Experiencia",
+    "years_val": "3+",
+    "clients": "Clientes Globales",
+    "clients_val": "120+",
+    "countries": "Países Alcanzados",
+    "countries_val": "15",
+    "support": "Soporte Experto",
+    "support_val": "24/7"
+  }
+}

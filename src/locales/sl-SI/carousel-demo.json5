@@ -1,0 +1,17 @@
+{
+  "meta": {
+    "page_title": "Splide Lazy Load demo | Starter"
+  },
+  "hero": {
+    "slide_1": {
+      "title": "Leno nalaganje narave",
+      "subtitle": "Slike se pametno nalagajo za varčevanje s prometom.",
+      "alt": "Čudovita gorska pokrajina"
+    },
+    "slide_2": {
+      "title": "Performanse na prvem mestu",
+      "subtitle": "Naložite samo tisto, kar potrebujete.",
+      "alt": "Pokrajina zasneženih gora"
+    }
+  }
+}

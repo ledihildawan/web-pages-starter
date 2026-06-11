@@ -1,0 +1,56 @@
+{
+  "period_monthly": "mj",
+  "period_yearly": "god",
+  "hero": {
+    "badge": "Odaberite svoj plan",
+    "title_part1": "Jednostavne i ",
+    "title_highlight": "transparentne cijene",
+    "description": "Bez skrivenih troškova. Bez iznenađenja. Odaberite plan koji najviše odgovara vašim potrebama."
+  },
+  "toggle": {
+    "monthly": "Mjesečno",
+    "yearly": "Godišnje",
+    "yearly_hint": "godšnje fakturiranje",
+    "discount": "UŠTEDA 20%",
+    "aria_label": "Prebacivanje cjenovnog plana"
+  },
+  "plans": {
+    "hobby": {
+      "name": "Hobby",
+      "desc": "Savršeno za sporedne projekte i učenje.",
+      "btn": "Započnite besplatno",
+      "feature_0": "1 projekt",
+      "feature_1": "Podrška zajednice",
+      "feature_2": "5GB pohrane"
+    },
+    "pro": {
+      "name": "Pro",
+      "badge": "Najpopularniji",
+      "desc": "Za profesionalne programere i male timove.",
+      "btn": "Odaberite Pro plan",
+      "feature_0": "Neograničeni projekti",
+      "feature_1": "Prioritetna email podrška",
+      "feature_2": "100GB pohrane",
+      "feature_3": "Napredna analitika"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "desc": "Za aplikacije velikog opsega i organizacije.",
+      "btn": "Kontaktirajte prodaju",
+      "feature_0": "Sve značajke iz Pro plana",
+      "feature_1": "Posvećeni menadžer računa",
+      "feature_2": "SSO i auditni zapisi",
+      "feature_3": "Neograničena pohrana"
+    }
+  },
+  "faq": {
+    "title": "Česta pitanja",
+    "subtitle": "Pronađite odgovore na najčešće postavljana pitanja o našim planovima i uslugama.",
+    "q_0": "Mogu li otkazati u bilo kojem trenutku?",
+    "a_0": "Da, možete otkazati pretplatu u bilo kojem trenutku. Vaš pristup ostaje aktivan do kraja obračunskog razdoblja.",
+    "q_1": "Postoji li besplatno probno razdoblje?",
+    "a_1": "Nudimo 14-dnevno besplatno probno razdoblje za Pro plan. Kreditna kartica nije potrebna za početak.",
+    "q_2": "Koje su metode plaćanja dostupne?",
+    "a_2": "Prihvaćamo sve glavne kreditne kartice i PayPal. Za Enterprise podržavamo bankovne transfere."
+  }
+}

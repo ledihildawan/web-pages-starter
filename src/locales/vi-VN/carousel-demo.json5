@@ -1,0 +1,17 @@
+{
+  "meta": {
+    "page_title": "Demo Lazy Load Splide | Starter"
+  },
+  "hero": {
+    "slide_1": {
+      "title": "Lazy Load Tự nhiên",
+      "subtitle": "Hình ảnh được tải thông minh để tiết kiệm băng thông.",
+      "alt": "Cảnh Núi Đẹp"
+    },
+    "slide_2": {
+      "title": "Hiệu suất Tối ưu",
+      "subtitle": "Chỉ tải những gì bạn cần.",
+      "alt": "Cảnh Núi Tuyết"
+    }
+  }
+}

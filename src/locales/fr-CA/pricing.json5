@@ -1,0 +1,56 @@
+{
+  "period_monthly": "mois",
+  "period_yearly": "an",
+  "hero": {
+    "title_part1": "Tarifs simples, ",
+    "title_highlight": "transparents",
+    "description": "Aucuns frais cachés. Aucunes charges surprise. Choisissez le plan qui correspond parfaitement à vos besoins.",
+    "badge": "Choisissez un forfait"
+  },
+  "toggle": {
+    "monthly": "Mensuel",
+    "yearly": "Annuel",
+    "yearly_hint": "facturé annuellement",
+    "discount": "ÉCONOMISEZ 20%",
+    "aria_label": "Toggle Pricing Plan"
+  },
+  "plans": {
+    "hobby": {
+      "name": "Hobby",
+      "desc": "Parfait pour les projets personnels et l'apprentissage.",
+      "btn": "Commencer",
+      "feature_0": "1 Projet",
+      "feature_1": "Support Communautaire",
+      "feature_2": "5GB de Stockage"
+    },
+    "pro": {
+      "name": "Pro",
+      "badge": "Plus Populaire",
+      "desc": "Pour les développeurs professionnels et les petites équipes.",
+      "btn": "Obtenir Pro Maintenant",
+      "feature_0": "Projets Illimités",
+      "feature_1": "Support Courriel Prioritaire",
+      "feature_2": "100GB de Stockage",
+      "feature_3": "Analyses Avancées"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "desc": "Pour les applications à grande échelle et les organisations.",
+      "btn": "Contacter les Ventes",
+      "feature_0": "Tout dans Pro",
+      "feature_1": "Manager Dédié",
+      "feature_2": "SSO et Journaux d'Audit",
+      "feature_3": "Stockage Illimité"
+    }
+  },
+  "faq": {
+    "title": "Questions Fréquentes",
+    "subtitle": "Trouvez des réponses aux questions les plus fréquentes sur nos plans et services.",
+    "q_0": "Puis-je annuler à tout moment?",
+    "a_0": "Oui, vous pouvez annuler votre abonnement à tout moment. Votre accès continuera jusqu'à la fin de votre période de facturation.",
+    "q_1": "Offrez-vous un essai gratuit?",
+    "a_1": "Nous offrons un essai gratuit de 14 jours pour le plan Pro. Aucune carte de crédit requise pour commencer.",
+    "q_2": "Quelles méthodes de paiement acceptez-vous?",
+    "a_2": "Nous acceptons toutes les cartes de crédit principales (Visa, Mastercard, Amex) et PayPal. Pour les plans Enterprise, nous supportons les virements bancaires."
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "about": {
+    "badge": "O nas"
+  },
+  "hero": {
+    "badge": "O nas",
+    "title_part1": "Tworzymy ",
+    "title_highlight": "przyszłość cyfrową",
+    "description": "Założony w 2024 roku, Starter istnieje, aby pomóc programistom budować lepsze aplikacje szybciej. Wierzymy w moc czystego kodu, pięknego designu i współpracy open source.",
+    "primary_btn": {
+      "label": "Zacznij za darmo",
+      "url": "#pricing"
+    },
+    "secondary_btn": {
+      "label": "Zobacz demo",
+      "url": "#features"
+    },
+    "note": "Nie wymaga karty kredytowej"
+  },
+  "stats": {
+    "community": "Globalna społeczność",
+    "community_val": "50K+",
+    "projects": "Ukończonych projektów",
+    "projects_val": "120+",
+    "uptime": "Czas działania",
+    "uptime_val": "99.99%",
+    "rating": "Ocena",
+    "rating_val": "4.9/5"
+  },
+  "story": {
+    "tag": "Nasza Historia",
+    "visual_label": "Ilustracja Studia Kreatywnego",
+    "title": "Napędzani pasją, <br>określani przez doskonałość.",
+    "para1": "Nasza podróż rozpoczęła się od prostej idei: uczynienie tworzenia stron internetowych dostępnym i przyjemnym dla wszystkich. Byliśmy zmęczeni rozdętymi frameworkami i skomplikowanymi konfiguracjami.",
+    "para2": "Dziś jesteśmy zróżnicowanym zespołem inżynierów, projektantów i myślicieli pracujących razem nad rozwiązywaniem złożonych problemów eleganckimi rozwiązaniami.",
+    "val1": "Filozofia projektowania zorientowanego na użytkownika",
+    "val2": "Architektura z 우선性能和 pierwszeństwem",
+    "val3": "Przejrzystość i otwarta komunikacja"
+  },
+  "mission": {
+    "title": "Nasza Misja",
+    "description": "Umożliwianie programistom i firmom korzystanie z eleganckich, szybkich i łatwych w użyciu narzędzi do budowania wyjątkowych produktów cyfrowych."
+  },
+  "vision": {
+    "title": "Nasza Wizja",
+    "description": "Być platformą wyboru dla nowoczesnych programistów, którzy cenią piękno, wydajność i doświadczenie użytkownika w każdej linii kodu."
+  },
+  "values": {
+    "title": "Nasze Wartości",
+    "subtitle": "Zasady kierujące każdą decyzją, którą podejmujemy."
+  },
+  "passion": {
+    "title": "Pasja",
+    "description": "Kochamy to, co robimy, i widać to w każdym szczególe naszych produktów."
+  },
+  "collaboration": {
+    "title": "Współpraca",
+    "description": "Praca razem przynosi najlepsze rezultaty. Wierzymy w moc silnych zespołów."
+  },
+  "innovation": {
+    "title": "Innowacja",
+    "description": "Zawsze szukamy lepszych sposobów rozwiązywania problemów i tworzenia wartości."
+  },
+  "integrity": {
+    "title": "Uczciwość",
+    "description": "Szczerość i przejrzystość są podstawą każdej relacji, którą budujemy."
+  },
+  "excellence": {
+    "title": "Doskonałość",
+    "description": "Nie zadowalamy się tym, co wystarczy. Zawsze dążymy do najlepszego."
+  },
+  "quality": {
+    "title": "Jakość",
+    "description": "Czysty kod, piękny design i płynne doświadczenia to nasze standardy."
+  },
+  "team": {
+    "title": "Poznaj Zespół",
+    "subtitle": "Błyskotliwe umysły stojące za każdą linią kodu, którą piszemy.",
+    "alex_desc": "Wizjonerski lider z 10+ latami doświadczenia w rozwoju ekosystemu SaaS.",
+    "sarah_desc": "Full-stack wizard specjalizująca się w budowaniu architektur systemów na dużą skalę.",
+    "mike_desc": "Głęboko obsesyjny na punkcie szczegółów pikseli, płynnych przepływów UX i standardów dostępności.",
+    "jessica_desc": "Kreatywna narratorka pomagająca markom znaleźć ich unikalny głos w świecie cyfrowym."
+  },
+  "features": {
+    "list": {
+      "speed": {
+        "title": "Błyskawicznie szybki",
+        "description": "Zoptymalizowana wydajność z czasem ładowania poniżej 100 ms. Zbudowany do globalnego skalowania z infrastrukturą edge."
+      },
+      "design": {
+        "title": "Nowoczesny design",
+        "description": "Czysty, responsywny interfejs, który wygląda profesjonalnie na każdym urządzeniu. W pełni konfigurowalne komponenty."
+      },
+      "security": {
+        "title": "Wysokie bezpieczeństwo",
+        "description": "Szyfrowanie end-to-end, uwierzytelnianie wieloskładnikowe i zgodność SOC2 w celu ochrony Twoich danych."
+      }
+    },
+    "heading": "Kluczowe funkcje",
+    "subheading": "Wszystko, czego potrzebujesz do budowania i skalowania."
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "title": "Contactez-nous | Starter App",
+    "description": "Contactez-nous pour des questions et du support."
+  },
+  "contact": {
+    "badge": "Entrer en Contact",
+    "title_part1": "Connectons-",
+    "title_highlight": "nous",
+    "description": "Vous avez des questions ou souhaitez collaborer? Nous aimerions avoir de vos nouvelles. Envoyez-nous un message et nous répondrons dès que possible.",
+    "form_title": "Envoyer un Message",
+    "form_subtitle": "Remplissez le formulaire ci-dessous et nous vous répondrons sous peu.",
+    "social_title": "Suivez-nous",
+    "social_subtitle": "Restez informé de nos dernières actualités sur les réseaux sociaux",
+    "info": {
+      "response_time": {
+        "title": "Réponse Rapide",
+        "description": "Nous nous efforçons de répondre à chaque message dans les 24 heures les jours ouvrés."
+      },
+      "working_hours": {
+        "title": "Heures de Travail",
+        "description": "Lundi - Vendredi: 09:00 - 18:00. Week-ends: Par priorité."
+      },
+      "support": {
+        "title": "Support Continu",
+        "description": "Notre équipe de support est toujours prête à aider à résoudre vos problèmes techniques."
+      }
+    },
+    "form": {
+      "name": "Nom",
+      "name_placeholder": "Entrez votre nom",
+      "email": "E-mail",
+      "email_placeholder": "nom@exemple.com",
+      "subject": "Sujet",
+      "subject_placeholder": "Que souhaitez-vous discuter?",
+      "message": "Message",
+      "message_placeholder": "Dites-nous en plus sur votre demande...",
+      "submit": "Envoyer le Message"
+    }
+  },
+  "email_label": "E-mail",
+  "email_value": "hello@starter.app",
+  "phone_label": "Téléphone",
+  "phone_value": "+32 500 000 000",
+  "location_label": "Emplacement",
+  "location_value": "Bruxelles, Belgique"
+}

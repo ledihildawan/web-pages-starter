@@ -1,0 +1,203 @@
+{
+  "meta": {
+    "title": "i18n testas | Demo",
+    "description": "Visapusiškas tarptautinimo funkcijų testavimo puslapis"
+  },
+  "hero": {
+    "badge": "i18n funkcijos",
+    "title": "Visapusiškas <span class='text-violet-400'>tarptautinimo</span> testas",
+    "description": "Išbandykite visas i18n funkcijas: vertimą, daugiskaitą, skaičių formatavimą, valiutą ir valiutų konvertavimą."
+  },
+  "language_info": {
+    "title": "Dabartinės kalbos informacija",
+    "code": "Kalbos kodas",
+    "currency": "Valiuta",
+    "direction": "Teksto kryptis",
+    "digits": "Gimtieji skaitmenys",
+    "enabled": "Įjungta",
+    "disabled": "Išjungta",
+    "languages": "Kalbos",
+    "switching": "Perjungimas be perkrovimo",
+    "current_code": "lt",
+    "current_currency": "EUR",
+    "current_direction": "LTR (iš kairės į dešinę)"
+  },
+  "numbers": {
+    "title": "Skaičių formatavimas",
+    "description": "Skaičiai formatuojami pagal aktyvios kalbos lokalę.",
+    "large": "Dideli skaičiai",
+    "decimal": "Dešimtainis",
+    "million": "Milijonas",
+    "percent": "Procentas",
+    "raw": "Neapdorotas"
+  },
+  "currency": {
+    "title": "Valiutų konvertavimas",
+    "description": "Kainos EUR konvertuojamos į aktyvios kalbos valiutą.",
+    "currencies": "Valiutos",
+    "small": "Maža",
+    "medium": "Vidutinė",
+    "large": "Didelė",
+    "enterprise": "Enterprise"
+  },
+  "currency_comparison": {
+    "title": "Valiutų palyginimas",
+    "description": "Ta pati kaina įvairiomis palaikomomis valiutomis.",
+    "base_price": "Bazinė kaina (USD)",
+    "aed": "JAE dirhamas",
+    "aud": "Australijos doleris",
+    "brl": "Brazilijos realas",
+    "cad": "Kanados doleris",
+    "chf": "Šveicarijos frankas",
+    "cny": "Kinijos juanis",
+    "eur": "Euras",
+    "gbp": "Svaras sterlingų",
+    "idr": "Rupija",
+    "inr": "Indijos rupija",
+    "jpy": "Japonijos jena",
+    "krw": "Pietų Korėjos vonas",
+    "mxn": "Meksikos pesas",
+    "sar": "Saudo rijalas",
+    "sgd": "Singapūro doleris",
+    "usd": "JAV doleris",
+    "zar": "PAR randas"
+  },
+  "core": {
+    "title": "Pagrindinės funkcijos",
+    "description": "Vertimas, daugiskaita ir HTML turinys."
+  },
+  "pluralization": {
+    "title": "Daugiskaita",
+    "description": "Skirtingos daugiskaitos formos kiekvienai kalbai.",
+    "item_title": "Elementas (daiktavardis)",
+    "user_title": "Vartotojas",
+    "product_title": "Produktas"
+  },
+  "form": {
+    "title": "Forma su išverstomis vietos rezervavimo žymomis",
+    "description": "Vietos rezervavimo žymos ir etiketės gaunamos iš lokalės failų.",
+    "name_label": "Vardas",
+    "name_placeholder": "Įveskite savo vardą",
+    "email_label": "El. paštas",
+    "email_placeholder": "pavyzdys@el.pastas.lt",
+    "message_label": "Žinutė",
+    "message_placeholder": "Rašykite savo žinutę čia...",
+    "submit": "Siųsti"
+  },
+  "missing_keys": {
+    "title": "Trūkstamų raktų apdorojimas",
+    "description": "Nerasti vertimo raktai bus rodomi laužtiniuose skliaustuose."
+  },
+  "html_content": {
+    "title": "HTML turinys",
+    "description": "Vertimuose gali būti naudojamos HTML žymos formatavimui.",
+    "example": "Tai pavyzdinis tekstas su <span class='text-emerald-400'>paryškinta spalva</span> ir <strong>paryškintu tekstu</strong>.",
+    "note": "Pastaba: HTML žymos vertime turi būti viename apgaubiančiame elemente."
+  },
+  "switcher": {
+    "title": "Keisti kalbą",
+    "description": "Spustelėkite mygtuką žemiau, kad pakeistumėte kalbą ir matytumėte visas i18n funkcijas veiksmie."
+  },
+  "advanced": {
+    "title": "Pažangus formatavimas",
+    "description": "Pažangaus formatavimo funkcijos procentams, vienetams, baitams, sąrašams ir ordinalams.",
+    "percentages": "Procentai",
+    "units": "Vienetai",
+    "bytes": "Baitai",
+    "bytes_unit": "baitas",
+    "lists": "Sąrašai",
+    "ordinals": "Ordinalai",
+    "cardinals": "Kardinalai",
+    "scientific": "Mokslinis žymėjimas",
+    "abbreviated": "Sutrumpintas",
+    "date_formats": "Datos formatai",
+    "time_formats": "Laiko formatai",
+    "datetime": "Data + Laikas",
+    "durations": "Trukmės",
+    "relative_time": "Santykinis laikas",
+    "regional_pricing": "Regioninės kainos",
+    "fifty_percent": "Penkiasdešimt procentų",
+    "small_percent": "Mažas procentas",
+    "ninety_nine": "Devyniasdešimt devyni",
+    "hundred": "Vienu šimtu",
+    "kilobyte": "Kilobaitas",
+    "distance": "Atstumas",
+    "temperature": "Temperatūra",
+    "weight": "Svoris",
+    "half_kb": "Pusė KB",
+    "one_and_half_kb": "Vienas su puse KB",
+    "one_mb": "Vienas MB",
+    "one_gb": "Vienas GB",
+    "two_items": "Du elementai",
+    "three_items": "Trys elementai",
+    "four_items": "Keturi elementai",
+    "date_short": "Trumpa data",
+    "date_long": "Ilga data",
+    "time_short": "Trumpas laikas",
+    "time_long": "Ilgas laikas",
+    "day_ago": "Diena prieš",
+    "months_ago": "Mėnesiai prieš",
+    "hour_in": "Per 1 valandą",
+    "starter_plan": "Starter planas",
+    "pro_plan": "Pro planas",
+    "discount_20": "20% nuolaida",
+    "number_modes": "Skaičių režimai",
+    "number_modes_desc": "Gimtųjų skaitmenų (٠١٢٣٤) ir universalaus (0-9) formato palyginimas.",
+    "native_label": "Gimtieji skaitmenys (٠١٢٣٤)",
+    "universal_label": "Universalus (0-9)",
+    "plain_label": "Automatinis"
+  },
+  "template_macros": {
+    "title": "Šablono makrokomandos",
+    "description": "Makrokomandos, skirtos gauti neapdorotas reikšmes be HTML žymėjimo.",
+    "raw_value": "Neapdorota reikšmė be žymėjimo",
+    "current_year": "Dabartiniai metai yra {{year}}"
+  },
+  "datetime": {
+    "title": "Data ir laikas",
+    "description": "Jungtinis datos ir laiko formatas.",
+    "iso": "ISO standartas",
+    "eve": "Kūčių vakaras"
+  },
+  "unit": {
+    "title": "Vienetų formatavimas"
+  },
+  "native_digits": {
+    "title": "Gimtieji skaitmenys",
+    "description": "Tekstas su ASCII skaitmenimis rodomas gimtaisiais skaitmenimis, kai lokalė tai įjungia. Atnaujinama tiesiogiai keičiant kalbą."
+  },
+  "inflection": {
+    "title": "Anglų kalinos infliacija",
+    "description": "Anglų kalbos daugiskaita ir vienaskaita. Atnaujinama tiesiogiai keičiant kalbą."
+  },
+  "live_label": "Tiesiogiai",
+  "pricing_details": {
+    "title": "Kainų informacija",
+    "description": "Visapusiškas konvejeris: neapdorota reikšmė, valiutos kodas, formatavimas, nuolaida ir konvertavimas.",
+    "raw_value": "Neapdorota reikšmė",
+    "raw_currency": "Valiutos kodas",
+    "formatted": "Suformatuota",
+    "discounted": "20% nuolaida",
+    "converted_usd": "Konvertuota į USD"
+  },
+  "live_update": {
+    "note": "Pastebėkite, kaip visi skaičiai, datos ir kainos keičiasi akimirksniu keičiant kalbą — neperkraunant puslapio."
+  },
+  "section_modes": {
+    "title": "Skaičių režimai",
+    "description": "Palyginkite gimtųjų skaitmenų, universalaus formato ir automatinio režimo formatus aktyvioje lokalėje."
+  },
+  "section_systems": {
+    "title": "Rašto sistemos",
+    "description": "Visos skaičių sistemos (algoritminės ir skaitmeninės) rodo teisingus gimtuosius skaitmenis su ICU atsarginiu variantu.",
+    "note": "Visos skaičių sistemos (algoritminės ir skaitmeninės) rodo teisingus gimtuosius skaitmenis. Algoritminės sistemos naudoja atsarginius skaitmenis iš NUMBERING_SYSTEMS. Romėniški skaitmenys konvertuojami tiesiogiai per algoritmą. Skaitmeninės sistemos naudoja skaitmenis iš įkeltų šriftų."
+  },
+  "nav": {
+    "translations": "Vertimai",
+    "formatting": "Skaičiai",
+    "pricing": "Kainos",
+    "modes": "Režimai",
+    "systems": "Sistemos",
+    "switcher": "Pasirinkti lokalę"
+  }
+}

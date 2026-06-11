@@ -1,0 +1,160 @@
+{% extends "main.njk" %}
+{% import "hero-section.njk" as hero with context %}
+{% import "section-header.njk" as section with context %}
+
+{% block content %}
+  {{ hero.hero_section('hero', badge=true, i18n=i18n) }}
+
+  <section class="pbs-40 pbe-40 px-6 space-y-32 lg:space-y-40">
+    {% for feature in page.main_features %}
+      <div class="max-inline-7xl mx-auto grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div class="{{ 'order-2' if feature.reverse else 'order-2 md:order-1' }} space-y-8">
+          <div class="inline-flex items-center justify-center inline-16 lg:inline-20 block-16 lg:block-20 radius-card-md bg-linear-to-br from-{{ feature.accent }}-500/20 to-{{ feature.accent }}-500/5 flex items-center justify-center text-{{ feature.accent }}-400 border border-{{ feature.accent }}-500/30 group-hover:scale-110 transition duration-200 shadow-lg group-hover:shadow-[0_0_50px_rgba(139,92,246,0.3)]">
+            {% if feature.icon == 'lightning' %}
+              {{ icon.icon('lightning', 'inline-8 block-8 lg:inline-10 lg:block-10', size='xl') }}
+            {% elseif feature.icon == 'chart' %}
+              {{ icon.icon('chart', 'inline-8 block-8 lg:inline-10 lg:block-10', size='xl') }}
+            {% endif %}
+          </div>
+
+          <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.1]">
+            {{ i18n.t('page.' + feature.t_key + '.title') }}
+          </h2>
+
+          <p class="text-slate-400 text-lg md:text-xl leading-relaxed font-medium">
+            {{ i18n.t('page.' + feature.t_key + '.description') }}
+          </p>
+
+          <ul class="grid grid-cols-1 gap-5 pbs-4">
+            {% for i in range(0, feature.checklist_count) %}
+              <li class="flex items-center gap-5 text-slate-300 group cursor-default">
+                <div class="flex-none inline-7 block-7 radius-icon bg-linear-to-br from-{{ feature.accent }}-500/20 to-{{ feature.accent }}-500/5 border border-{{ feature.accent }}-500/30 flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] transition duration-200">
+                  {{ icon.icon('check', 'inline-4 block-4 text-' + feature.accent + '-400', size='md') }}
+                </div>
+                <span class="text-sm md:text-base font-medium group-hover:text-white transition-colors duration-300">{{ i18n.t('page.' + feature.t_key + '.check_' + i) }}</span>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <div class="{{ 'order-1' if feature.reverse else 'order-1 md:order-2' }} relative group tilt-card" style="--tilt-x: 0deg; --tilt-y: 0deg;">
+          <div class="absolute -inset-4 bg-linear-to-r from-{{ feature.accent }}-500/40 via-fuchsia-500/20 to-pink-500/40 radius-card-lg blur-2xl opacity-40 group-hover:opacity-70 transition-opacity duration-1000 ease-emphasized"></div>
+
+          <div class="relative spotlight-card radius-card-lg bg-linear-to-br from-slate-900 to-slate-950 border border-white/10 p-4 aspect-4/3 shadow-2xl overflow-hidden backdrop-blur-3xl">
+            <div class="absolute inset-0 opacity-30 bg-[radial-gradient(#8b5cf6_1px,transparent_1px)] bg-[length:32px_32px]"></div>
+            <div class="absolute inset-0 bg-linear-to-br from-{{ feature.accent }}-600/10 via-transparent to-fuchsia-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
+
+            <div class="inline-full block-full bg-slate-950/60 radius-card-md flex items-center justify-center relative overflow-hidden border border-white/5">
+              {% if feature.id == 'sync' %}
+                <div class="inline-4/5 space-y-5">
+                  <div class="flex items-center justify-between p-4 bg-white/5 radius-icon border border-white/10 hover:bg-white/8 transition-colors duration-300">
+                    <div class="flex items-center gap-4">
+                      <div class="inline-10 block-10 radius-icon bg-linear-to-br from-violet-500/30 to-violet-500/10 flex items-center justify-center">
+                        {{ icon.icon('arrow-right', 'inline-5 block-5 text-violet-400', size='md') }}
+                      </div>
+                      <div class="space-y-2">
+                        <div class="block-2.5 inline-20 bg-slate-700 rounded"></div>
+                        <div class="block-2 inline-14 bg-slate-600/50 rounded"></div>
+                      </div>
+                    </div>
+                    <div class="inline-5 block-5 rounded-full bg-emerald-500/50 shadow-[0_0_20px_rgba(16,185,129,0.5)]"></div>
+                  </div>
+                  <div class="flex items-center justify-between p-4 bg-white/5 radius-icon border border-white/10 hover:bg-white/8 transition-colors duration-300">
+                    <div class="flex items-center gap-4">
+                      <div class="inline-10 block-10 radius-icon bg-linear-to-br from-blue-500/30 to-blue-500/10 flex items-center justify-center">
+                        {{ icon.icon('cloud', 'inline-5 block-5 text-blue-400', size='md') }}
+                      </div>
+                      <div class="space-y-2">
+                        <div class="block-2.5 inline-28 bg-slate-700 rounded"></div>
+                        <div class="block-2 inline-16 bg-slate-600/50 rounded"></div>
+                      </div>
+                    </div>
+                    <div class="inline-5 block-5 rounded-full bg-amber-500/50 shadow-[0_0_20px_rgba(245,158,11,0.5)]"></div>
+                  </div>
+                  <div class="flex items-center justify-between p-4 bg-white/5 radius-icon border border-white/10 hover:bg-white/8 transition-colors duration-300">
+                    <div class="flex items-center gap-4">
+                      <div class="inline-10 block-10 radius-icon bg-linear-to-br from-fuchsia-500/30 to-fuchsia-500/10 flex items-center justify-center">
+                        {{ icon.icon('lightning', 'inline-5 block-5 text-fuchsia-400', size='md') }}
+                      </div>
+                      <div class="space-y-2">
+                        <div class="block-2.5 inline-24 bg-slate-700 rounded"></div>
+                        <div class="block-2 inline-12 bg-slate-600/50 rounded"></div>
+                      </div>
+                    </div>
+                    <div class="inline-5 block-5 rounded-full bg-violet-500/50 shadow-[0_0_20px_rgba(139,92,246,0.5)]"></div>
+                  </div>
+                </div>
+              {% elseif feature.id == 'analytics' %}
+                <div class="inline-4/5 space-y-5">
+                  <div class="flex items-center justify-between p-4 bg-linear-to-r from-white/5 to-transparent radius-icon border border-white/10 hover:border-{{ feature.accent }}-500/30 transition duration-200">
+                    <div class="flex items-center gap-4">
+                      <div class="inline-10 block-10 radius-icon bg-linear-to-br from-{{ feature.accent }}-500/30 to-{{ feature.accent }}-500/10 flex items-center justify-center">
+                        <div class="block-3 block-3 rounded-full bg-{{ feature.accent }}-400"></div>
+                      </div>
+                      <div class="space-y-2">
+                        <div class="block-2.5 inline-20 bg-slate-700 rounded"></div>
+                        <div class="block-3 inline-28 bg-white/10 rounded"></div>
+                      </div>
+                    </div>
+                    <div class="inline-6 block-6 rounded-full bg-emerald-500/20"></div>
+                  </div>
+                  <div class="p-5 bg-linear-to-br from-white/5 to-transparent radius-icon border border-white/10 hover:border-{{ feature.accent }}-500/30 transition duration-200 space-y-5">
+                    <div class="block-2.5 inline-28 bg-slate-700 rounded"></div>
+                    <div class="inline-full block-28 flex items-end justify-between gap-4 px-2">
+                      {% for h in[
+                        40,
+                        70,
+                        50,
+                        90,
+                        60,
+                        85
+                      ] %}
+                        <div class="inline-full bg-gradient-to-t from-{{ feature.accent }}-500/60 to-{{ feature.accent }}-400 rounded-ts-lg rounded-te-lg transition duration-1000 hover:brightness-125 hover:from-{{ feature.accent }}-500/80 hover:to-{{ feature.accent }}-400" style="block-size: {{ h }}%">
+                          <div class="inline-full block-full rounded-ts-lg rounded-te-lg bg-gradient-to-t from-white/10 to-transparent"></div>
+                        </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </section>
+
+  <section class="pbs-40 pbe-40 px-6 relative bg-linear-to-b from-white/[0.02] to-transparent border-bs border-be border-white/5">
+    <div class="max-inline-7xl mx-auto">
+      {{ section.section_header(
+        'more',
+        'page.more_title',
+        'page.more_subtitle',
+        icon.icon('plus', 'inline-4 block-4'),
+        i18n=i18n
+      ) }}
+
+      <div class="grid md:grid-cols-3 gap-8">
+        {% for item in page.additional_features %}
+          <div class="spotlight-card card-border-glow card-squash group relative p-10 lg:p-12 radius-card-lg bg-linear-to-br from-slate-900/60 to-slate-900/40 border border-white/5 hover:shadow-[0_20px_50px_rgba(139,92,246,0.2)] hover:-translate-y-2 transition duration-250 ease-emphasized overflow-hidden backdrop-blur-xl hover-lift">
+            <div class="absolute inset-be-0 inset-e-0 inline-40 block-40 bg-linear-to-br from-violet-500/15 to-transparent rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
+
+            <div class="relative">
+              <div class="inline-14 block-14 radius-nested-lg bg-linear-to-br from-violet-500/20 to-violet-500/5 flex items-center justify-center mbe-8 group-hover:rotate-6 group-hover:scale-110 transition duration-200 border border-violet-500/30 group-hover:border-violet-500/50 shadow-lg group-hover:shadow-[0_0-40px_rgba(139,92,246,0.3)] icon-squash">
+                {{ icon.icon('plus', 'inline-7 block-7 text-violet-400', size='lg') }}
+              </div>
+              <h3 class="text-xl font-black text-white mbe-4 tracking-tight group-hover:text-violet-200 transition-colors duration-200">
+                {{ i18n.t('page.' + item.t_key + '.title') }}
+              </h3>
+              <p class="text-slate-400 text-base leading-relaxed font-medium group-hover:text-slate-300 transition-colors duration-200">
+                {{ i18n.t('page.' + item.t_key + '.desc') }}
+              </p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  {% include "cta.njk" %}
+{% endblock %}

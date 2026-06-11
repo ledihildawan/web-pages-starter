@@ -1,0 +1,56 @@
+{
+  "period_monthly": "měsíc",
+  "period_yearly": "rok",
+  "hero": {
+    "badge": "Vyberte si plán",
+    "title_part1": "Jednoduché a ",
+    "title_highlight": "transparentní ceny",
+    "description": "Žádné skryté poplatky. Žádná překvapení. Vyberte si plán, který nejlépe vyhovuje vašim potřebám."
+  },
+  "toggle": {
+    "monthly": "Měsíčně",
+    "yearly": "Ročně",
+    "yearly_hint": "fakturováno ročně",
+    "discount": "UŠETŘETE 20%",
+    "aria_label": "Přepnout cenový plán"
+  },
+  "plans": {
+    "hobby": {
+      "name": "Hobby",
+      "desc": "Ideální pro vedlejší projekty a učení.",
+      "btn": "Začít zdarma",
+      "feature_0": "1 projekt",
+      "feature_1": "Komunitní podpora",
+      "feature_2": "5 GB úložiště"
+    },
+    "pro": {
+      "name": "Pro",
+      "badge": "Nejoblíbenější",
+      "desc": "Pro profesionální vývojáře a malé týmy.",
+      "btn": "Vybrat Pro plán",
+      "feature_0": "Neomezené projekty",
+      "feature_1": "Prioritní e-mailová podpora",
+      "feature_2": "100 GB úložiště",
+      "feature_3": "Pokročilá analytika"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "desc": "Pro rozsáhlé aplikace a organizace.",
+      "btn": "Kontaktovat obchod",
+      "feature_0": "Všechny Pro funkce",
+      "feature_1": "Dedikovaný správce účtu",
+      "feature_2": "SSO a auditní log",
+      "feature_3": "Neomezené úložiště"
+    }
+  },
+  "faq": {
+    "title": "Často kladené otázky",
+    "subtitle": "Najděte odpovědi na nejčastější dotazy ohledně našich plánů a služeb.",
+    "q_0": "Mohu kdykoli zrušit?",
+    "a_0": "Ano, předplatné můžete kdykoli zrušit. Váš přístup zůstane aktivní do konce zúčtovacího období.",
+    "q_1": "Je k dispozici bezplatná zkouška?",
+    "a_1": "Nabízíme 14denní bezplatnou zkoušku Pro plánu. K začátku není potřeba kreditní karta.",
+    "q_2": "Jaké platební metody jsou k dispozici?",
+    "a_2": "Přijímáme hlavní kreditní karty a PayPal. Pro Enterprise podporujeme bankovní převody."
+  }
+}

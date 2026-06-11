@@ -1,0 +1,56 @@
+{
+  "period_monthly": "måned",
+  "period_yearly": "år",
+  "hero": {
+    "badge": "Velg en plan",
+    "title_part1": "Enkle og ",
+    "title_highlight": "transparente priser",
+    "description": "Ingen skjulte avgifter. Ingen overraskelsesgebyrer. Velg en plan som passer best for dine behov."
+  },
+  "toggle": {
+    "monthly": "Månedlig",
+    "yearly": "Årlig",
+    "yearly_hint": "faktureres årlig",
+    "discount": "SPARE 20%",
+    "aria_label": "Veksle prisplan"
+  },
+  "plans": {
+    "hobby": {
+      "name": "Hobby",
+      "desc": "Perfekt for sideprosjekter og læring.",
+      "btn": "Start gratis",
+      "feature_0": "1 prosjekt",
+      "feature_1": "Fellesskapsstøtte",
+      "feature_2": "5 GB lagring"
+    },
+    "pro": {
+      "name": "Pro",
+      "badge": "Mest populær",
+      "desc": "For profesjonelle utviklere og små team.",
+      "btn": "Velg Pro-plan",
+      "feature_0": "Ubegrensede prosjekter",
+      "feature_1": "Prioritert e-poststøtte",
+      "feature_2": "100 GB lagring",
+      "feature_3": "Avansert analyse"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "desc": "For storskala applikasjoner og organisasjoner.",
+      "btn": "Kontakt salg",
+      "feature_0": "Alle Pro-funksjoner",
+      "feature_1": "Dedikert kontoansvarlig",
+      "feature_2": "SSO og revisjonslogg",
+      "feature_3": "Ubegrenset lagring"
+    }
+  },
+  "faq": {
+    "title": "Ofte stilte spørsmål",
+    "subtitle": "Finn svar på de vanligste spørsmålene om planene og tjenestene våre.",
+    "q_0": "Kan jeg kansellere når som helst?",
+    "a_0": "Ja, du kan kansellere abonnementet ditt når som helst. Tilgangen din forblir aktiv til slutten av faktureringsperioden.",
+    "q_1": "Er det en gratis prøveperiode?",
+    "a_1": "Vi tilbyr en 14-dagers gratis prøveperiode for Pro-planen. Ingen kredittkort kreves for å starte.",
+    "q_2": "Hvilke betalingsmetoder er tilgjengelige?",
+    "a_2": "Vi aksepterer de viktigste kredittkortene og PayPal. For Enterprise støtter vi bankoverføringer."
+  }
+}

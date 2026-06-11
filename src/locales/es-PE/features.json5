@@ -1,0 +1,75 @@
+{
+  "hero": {
+    "badge": "Potencia bajo el capó",
+    "title_part1": "Todo lo que necesitas para",
+    "title_highlight": "escalar más rápido",
+    "description": "Desde análisis potentes hasta integraciones perfectas, te proporcionamos el toolkit que necesitas para construir aplicaciones de clase mundial sin dolores de cabeza."
+  },
+  "sections": {
+    "sync": {
+      "title": "Sincronización en Tiempo Real",
+      "description": "Los cambios se propagan instantáneamente en todos los dispositivos. Ya sea que tus usuarios estén en móvil, escritorio o tablet, ven los mismos datos exactamente al mismo tiempo.",
+      "check_0": "Latencia de sub-milisegundo",
+      "check_1": "Soporte offline de serie",
+      "check_2": "Manejo de resolución de conflictos"
+    },
+    "analytics": {
+      "title": "Análisis Accionables",
+      "description": "No vueles a ciegas. Obtén insights profundos sobre el comportamiento del usuario, rendimiento del sistema y métricas de ingresos. Visualiza tus datos con gráficos interactivos hermosos.",
+      "check_0": "Dashboards personalizables",
+      "check_1": "Exportar a PDF, CSV o Excel",
+      "check_2": "Reportes semanales automatizados"
+    }
+  },
+  "more_title": "Y mucho más...",
+  "more_subtitle": "Explora capacidades adicionales que hacen que tu aplicación se destaque.",
+  "more": {
+    "dark_mode": {
+      "title": "Modo Oscuro",
+      "desc": "Soporte integrado para temas claros y oscuros con detección automática del sistema."
+    },
+    "api_first": {
+      "title": "API Primero",
+      "desc": "APIs REST y GraphQL disponibles para control programático completo."
+    },
+    "sso": {
+      "title": "Inicio de Sesión SSO",
+      "desc": "Soporte de inicio de sesión único de nivel empresarial para Google, GitHub y Okta."
+    },
+    "audit": {
+      "title": "Registros de Auditoría",
+      "desc": "Rastrea cada cambio realizado en tu proyecto con marcas de tiempo detalladas."
+    },
+    "rbac": {
+      "title": "Acceso Basado en Roles",
+      "desc": "Controles de permisos granulares para administradores, editores y espectadores."
+    },
+    "uptime": {
+      "title": "99.99% de Tiempo Activo",
+      "desc": "Disponibilidad garantizada con nuestra CDN distribuida globalmente."
+    }
+  },
+  "cta": {
+    "heading": "¿Listo para comenzar?",
+    "btn_create": "Crear Cuenta",
+    "btn_docs": "Leer Documentación"
+  },
+  "features": {
+    "list": {
+      "speed": {
+        "title": "Velocidad Relámpago",
+        "description": "Rendimiento optimizado con tiempos de carga inferiores a 100ms. Diseñado para escala global con infraestructura edge."
+      },
+      "design": {
+        "title": "Diseño Moderno",
+        "description": "Interfaz limpia y responsive con aspecto profesional en cualquier dispositivo. Componentes totalmente personalizables."
+      },
+      "security": {
+        "title": "Alta Seguridad",
+        "description": "Cifrado de extremo a extremo, autenticación multifactor y cumplimiento SOC2 para proteger tus datos."
+      }
+    },
+    "heading": "Características Clave",
+    "subheading": "Todo lo que necesitas para construir y escalar."
+  }
+}

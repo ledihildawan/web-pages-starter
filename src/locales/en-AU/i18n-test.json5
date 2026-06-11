@@ -1,0 +1,203 @@
+{
+  "meta": {
+    "title": "i18n Test | Demo",
+    "description": "Complete internationalization feature test page"
+  },
+  "hero": {
+    "badge": "i18n Features",
+    "title": "Complete <span class='text-violet-400'>i18n</span> Testing",
+    "description": "Try all i18n features: translation, pluralization, number formatting, currency, and currency conversion."
+  },
+  "language_info": {
+    "title": "Current Language Info",
+    "code": "Language Code",
+    "currency": "Currency",
+    "direction": "Text Direction",
+    "digits": "Native Digits",
+    "enabled": "Enabled",
+    "disabled": "Disabled",
+    "languages": "Languages",
+    "switching": "No-Reload Switching",
+    "current_code": "en",
+    "current_currency": "AUD",
+    "current_direction": "LTR (Left to Right)"
+  },
+  "numbers": {
+    "title": "Number Formatting",
+    "description": "Numbers formatted according to active language locale.",
+    "large": "Large Number",
+    "decimal": "Decimal",
+    "million": "Million",
+    "percent": "Percent",
+    "raw": "Raw"
+  },
+  "currency": {
+    "title": "Currency Conversion",
+    "description": "Prices in IDR converted to active language currency.",
+    "currencies": "Currencies",
+    "small": "Small",
+    "medium": "Medium",
+    "large": "Large",
+    "enterprise": "Enterprise"
+  },
+  "currency_comparison": {
+    "title": "Currency Comparison",
+    "description": "Same price in different supported currencies.",
+    "base_price": "Base Price (IDR)",
+    "aed": "UAE Dirham",
+    "aud": "Australian Dollar",
+    "brl": "Brazilian Real",
+    "cad": "Canadian Dollar",
+    "chf": "Swiss Franc",
+    "cny": "Chinese Yuan",
+    "eur": "Euro",
+    "gbp": "British Pound",
+    "idr": "Indonesian Rupiah",
+    "inr": "Indian Rupee",
+    "jpy": "Japanese Yen",
+    "krw": "Korean Won",
+    "mxn": "Mexican Peso",
+    "sar": "Saudi Riyal",
+    "sgd": "Singapore Dollar",
+    "usd": "US Dollar",
+    "zar": "South African Rand"
+  },
+  "pluralization": {
+    "title": "Pluralization",
+    "description": "Plural forms vary by language.",
+    "item_title": "Item (Noun)",
+    "user_title": "User (Person)",
+    "product_title": "Product (Goods)"
+  },
+  "form": {
+    "title": "Form with Translated Placeholders",
+    "description": "Placeholders and labels loaded from locale files.",
+    "name_label": "Name",
+    "name_placeholder": "Enter your full name",
+    "email_label": "Email",
+    "email_placeholder": "example@email.com",
+    "message_label": "Message",
+    "message_placeholder": "Type your message here...",
+    "submit": "Submit"
+  },
+  "missing_keys": {
+    "title": "Missing Key Handler",
+    "description": "Missing keys are displayed in square brackets."
+  },
+  "html_content": {
+    "title": "HTML Content",
+    "description": "Translations can include HTML tags for formatting.",
+    "example": "This is an example with <span class='text-emerald-400'>colored highlight</span> and <strong>bold text</strong>.",
+    "note": "Note: HTML tags in translations must be wrapped in a single container element."
+  },
+  "switcher": {
+    "title": "Switch Language",
+    "description": "Click buttons below to change language and see i18n in action."
+  },
+  "advanced": {
+    "title": "Advanced Formatting",
+    "description": "Advanced formatting features for percentages, units, bytes, lists, and ordinals.",
+    "percentages": "Percentages",
+    "units": "Units",
+    "bytes": "Bytes",
+    "bytes_unit": "bytes",
+    "lists": "Lists",
+    "ordinals": "Ordinals",
+    "cardinals": "Cardinals",
+    "scientific": "Scientific Notation",
+    "abbreviated": "Abbreviated",
+    "date_formats": "Date Formats",
+    "time_formats": "Time Formats",
+    "datetime": "Date + Time",
+    "durations": "Durations",
+    "relative_time": "Relative Time",
+    "regional_pricing": "Regional Pricing",
+    "fifty_percent": "Fifty Percent",
+    "small_percent": "Small Percent",
+    "ninety_nine": "Ninety Nine",
+    "hundred": "One Hundred",
+    "kilobyte": "Kilobyte",
+    "distance": "Distance",
+    "temperature": "Temperature",
+    "weight": "Weight",
+    "half_kb": "Half KB",
+    "one_and_half_kb": "One and Half KB",
+    "one_mb": "One MB",
+    "one_gb": "One GB",
+    "two_items": "Two Items",
+    "three_items": "Three Items",
+    "four_items": "Four Items",
+    "date_short": "Short Date",
+    "date_long": "Long Date",
+    "time_short": "Short Time",
+    "time_long": "Long Time",
+    "day_ago": "1 day ago",
+    "months_ago": "2 months ago",
+    "hour_in": "In 1 hour",
+    "starter_plan": "Starter Plan",
+    "pro_plan": "Pro Plan",
+    "discount_20": "20% Discount",
+    "number_modes": "Number Modes",
+    "number_modes_desc": "Comparison of native digit format (٠١٢٣٤) and universal format (0-9).",
+    "native_label": "Native Digits (٠١٢٣٤)",
+    "universal_label": "Universal (0-9)",
+    "plain_label": "Auto"
+  },
+  "template_macros": {
+    "title": "Template Macros",
+    "description": "Macros for getting raw values without HTML markup.",
+    "raw_value": "Raw value without markup",
+    "current_year": "The current year is {{year}}"
+  },
+  "datetime": {
+    "title": "Date & Time",
+    "description": "Combined date and time formatting.",
+    "iso": "ISO Standard",
+    "eve": "Christmas Eve"
+  },
+  "unit": {
+    "title": "Unit Formatting"
+  },
+  "native_digits": {
+    "title": "Native Digits",
+    "description": "Text with ASCII digits is rendered in the active locale's native digits. Refreshed live on language switch."
+  },
+  "inflection": {
+    "title": "English Inflection",
+    "description": "English pluralisation and singularisation. Refreshed live on language switch."
+  },
+  "live_label": "Live",
+  "pricing_details": {
+    "title": "Pricing Details",
+    "description": "Full pipeline: raw value, currency code, formatted, discounted, and converted.",
+    "raw_value": "Raw Value",
+    "raw_currency": "Currency Code",
+    "formatted": "Formatted",
+    "discounted": "20% Discount",
+    "converted_usd": "Converted to USD"
+  },
+  "live_update": {
+    "note": "Notice all numbers, dates, and prices update instantly when you change language — no page reload."
+  },
+  "core": {
+    "title": "Core Features",
+    "description": "Translation, pluralisation, and HTML content."
+  },
+  "section_modes": {
+    "title": "Number Modes",
+    "description": "Compare native digits, universal format, and auto mode for the active locale."
+  },
+  "section_systems": {
+    "title": "Writing Systems",
+    "description": "All number systems (algorithmic and numeric) display correct native digits with ICU fallback.",
+    "note": "All number systems (algorithmic and numeric) display correct native digits. Algorithmic systems use digit fallback from NUMBERING_SYSTEMS. Roman numerals are converted directly via algorithm. Numeric systems use digits from loaded fonts."
+  },
+  "nav": {
+    "translations": "Translations",
+    "formatting": "Numbers",
+    "pricing": "Pricing",
+    "modes": "Modes",
+    "systems": "Systems",
+    "switcher": "Switch Locale"
+  }
+}

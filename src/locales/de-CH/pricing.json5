@@ -1,0 +1,56 @@
+{
+  "period_monthly": "Monat",
+  "period_yearly": "Jahr",
+  "hero": {
+    "title_part1": "Einfache, transparente ",
+    "title_highlight": "Preise",
+    "description": "Keine versteckten Kosten. Keine Überraschungskosten. Wählen Sie den Plan, der perfekt zu Ihren Bedürfnissen passt.",
+    "badge": "Wählen Sie Ihren Plan"
+  },
+  "toggle": {
+    "monthly": "Monatlich",
+    "yearly": "Jährlich",
+    "yearly_hint": "jährlich abgerechnet",
+    "discount": "20% SPAREN",
+    "aria_label": "Toggle Pricing Plan"
+  },
+  "plans": {
+    "hobby": {
+      "name": "Hobby",
+      "desc": "Perfekt für Nebenprojekte und zum Lernen.",
+      "btn": "Loslegen",
+      "feature_0": "1 Projekt",
+      "feature_1": "Community-Unterstützung",
+      "feature_2": "5GB Speicher"
+    },
+    "pro": {
+      "name": "Pro",
+      "badge": "Am Beliebtesten",
+      "desc": "Für professionelle Entwickler und kleine Teams.",
+      "btn": "Pro Jetzt Holen",
+      "feature_0": "Unbegrenzte Projekte",
+      "feature_1": "Prioritäts-E-Mail-Unterstützung",
+      "feature_2": "100GB Speicher",
+      "feature_3": "Erweiterte Analysen"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "desc": "Für Large-Scale-Anwendungen und Organisationen.",
+      "btn": "Vertrieb Kontaktieren",
+      "feature_0": "Alles in Pro",
+      "feature_1": "Dedicated Manager",
+      "feature_2": "SSO & Audit-Logs",
+      "feature_3": "Unbegrenzter Speicher"
+    }
+  },
+  "faq": {
+    "title": "Häufig Gestellte Fragen",
+    "subtitle": "Finden Sie Antworten auf die am häufigsten gestellten Fragen zu unseren Plänen und Diensten.",
+    "q_0": "Kann ich jederzeit kündigen?",
+    "a_0": "Ja, Sie können Ihr Abonnement jederzeit kündigen. Ihr Zugang bleibt bis zum Ende Ihres Abrechnungszeitraums bestehen.",
+    "q_1": "Bieten Sie eine kostenlose Testversion an?",
+    "a_1": "Wir bieten eine 14-tägige kostenlose Testversion für den Pro-Plan an. Keine Kreditkarte erforderlich, um zu starten.",
+    "q_2": "Welche Zahlungsmethoden akzeptieren Sie?",
+    "a_2": "Wir akzeptieren alle gängigen Kreditkarten (Visa, Mastercard, Amex) und PayPal. Für Enterprise-Pläne unterstützen wir Banküberweisungen."
+  }
+}

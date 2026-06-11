@@ -1,0 +1,203 @@
+{
+  "meta": {
+    "title": "i18n testi | Demo",
+    "description": "Xalqaralashtirish imkoniyatlari uchun to'liq test sahifasi"
+  },
+  "hero": {
+    "badge": "i18n imkoniyatlari",
+    "title": "Xalqaralashtirishning <span class='text-violet-400'>to'liq</span> testi",
+    "description": "Barcha i18n imkoniyatlarini sinab ko'ring: tarjima, ko'plik shakllari, son formatlari, valyuta va valyuta konversiyasi."
+  },
+  "language_info": {
+    "title": "Joriy til ma'lumotlari",
+    "code": "Til kodi",
+    "currency": "Valyuta",
+    "direction": "Matn yo'nalishi",
+    "digits": "Mahalliy raqamlar",
+    "enabled": "Yoqilgan",
+    "disabled": "O'chirilgan",
+    "languages": "Tillar",
+    "switching": "Qayta yuklamasdan almashtirish",
+    "current_code": "uz",
+    "current_currency": "UZS",
+    "current_direction": "LTR (Chapdan o'ngga)"
+  },
+  "numbers": {
+    "title": "Son formatlari",
+    "description": "Sonlar faol lokalga mos ravishda formatlanadi.",
+    "large": "Katta sonlar",
+    "decimal": "O'nlik",
+    "million": "Million",
+    "percent": "Foiz",
+    "raw": "Xom"
+  },
+  "currency": {
+    "title": "Valyuta konversiyasi",
+    "description": "IDR dagi narxlar faol til valyutasiga o'giriladi.",
+    "currencies": "Valyutalar",
+    "small": "Kichik",
+    "medium": "O'rtacha",
+    "large": "Katta",
+    "enterprise": "Enterprise"
+  },
+  "currency_comparison": {
+    "title": "Valyuta taqqoslash",
+    "description": "Bir xil narx qo'llab-quvvatlanadigan turli valyutalarda.",
+    "base_price": "Asosiy narx (USD)",
+    "aed": "BAE dirhami",
+    "aud": "Avstraliya dollari",
+    "brl": "Braziliya reali",
+    "cad": "Kanada dollari",
+    "chf": "Shveytsariya franki",
+    "cny": "Xitoy yuani",
+    "eur": "Yevro",
+    "gbp": "Funt sterling",
+    "idr": "Rupiya",
+    "inr": "Hindiston rupiyasi",
+    "jpy": "Yaponiya iyenasi",
+    "krw": "Koreya vonasi",
+    "mxn": "Meksika pesosi",
+    "sar": "Saudiya riyoli",
+    "sgd": "Singapur dollari",
+    "usd": "AQSh dollari",
+    "zar": "Janubiy Afrika randi"
+  },
+  "core": {
+    "title": "Asosiy imkoniyatlar",
+    "description": "Tarjima, ko'plik shakllari va HTML kontent."
+  },
+  "pluralization": {
+    "title": "Ko'plik shakllari",
+    "description": "Har bir til uchun turli ko'plik shakllari.",
+    "item_title": "Element (ot)",
+    "user_title": "Foydalanuvchi",
+    "product_title": "Mahsulot"
+  },
+  "form": {
+    "title": "Tarjimali placeholderlari bo'lgan shakl",
+    "description": "Placeholder va yorliqlar lokal fayllaridan olinadi.",
+    "name_label": "Ism",
+    "name_placeholder": "To'liq ismingizni kiriting",
+    "email_label": "Elektron pochta",
+    "email_placeholder": "misol@email.com",
+    "message_label": "Xabar",
+    "message_placeholder": "Xabaringizni shu yerga yozing...",
+    "submit": "Yuborish"
+  },
+  "missing_keys": {
+    "title": "Mavjud bo'lmagan kalitlarni boshqarish",
+    "description": "Topilmagan tarjima kalitlari qavslarda ko'rsatiladi."
+  },
+  "html_content": {
+    "title": "HTML kontent",
+    "description": "Tarjimalar formatlash uchun HTML teglarini o'z ichiga olishi mumkin.",
+    "example": "Bu <span class='text-emerald-400'>rangli belgilash</span> va <strong>qalin matn</strong> bo'lgan namuna matn.",
+    "note": "Eslatma: Tarjimadagi HTML teglari bitta o'rash elementi ichida bo'lishi kerak."
+  },
+  "switcher": {
+    "title": "Tilni almashtirish",
+    "description": "Quyidagi tugmalarni bosib tilni o'zgartiring va barcha i18n imkoniyatlarini amalda ko'ring."
+  },
+  "advanced": {
+    "title": "Kengaytirilgan formatlash",
+    "description": "Foizlar, birliklar, baytlar, ro'yxatlar va tartib sonlari uchun kengaytirilgan formatlash imkoniyatlari.",
+    "percentages": "Foizlar",
+    "units": "Birliklar",
+    "bytes": "Bayt",
+    "bytes_unit": "bayt",
+    "lists": "Ro'yxatlar",
+    "ordinals": "Tartib",
+    "cardinals": "Asosiy",
+    "scientific": "Ilmiy yozuv",
+    "abbreviated": "Qisqartirilgan",
+    "date_formats": "Sana formatlari",
+    "time_formats": "Vaqt formatlari",
+    "datetime": "Sana + Vaqt",
+    "durations": "Davomiyligi",
+    "relative_time": "Nisbiy vaqt",
+    "regional_pricing": "Mintaqaviy narxlar",
+    "fifty_percent": "Ellik foiz",
+    "small_percent": "Kichik foiz",
+    "ninety_nine": "To'qson to'qqiz",
+    "hundred": "Yuz",
+    "kilobyte": "Kilobayt",
+    "distance": "Masofa",
+    "temperature": "Harorat",
+    "weight": "Og'irlik",
+    "half_kb": "Yarim KB",
+    "one_and_half_kb": "Bir yarim KB",
+    "one_mb": "Bir MB",
+    "one_gb": "Bir GB",
+    "two_items": "Ikki element",
+    "three_items": "Uch element",
+    "four_items": "To'rt element",
+    "date_short": "Qisqa sana",
+    "date_long": "To'liq sana",
+    "time_short": "Qisqa vaqt",
+    "time_long": "To'liq vaqt",
+    "day_ago": "Kun oldin",
+    "months_ago": "Oy oldin",
+    "hour_in": "1 soat ichida",
+    "starter_plan": "Starter rejasi",
+    "pro_plan": "Pro rejasi",
+    "discount_20": "20% chegirma",
+    "number_modes": "Son rejimlari",
+    "number_modes_desc": "Mahalliy raqamlar (٠١٢٣٤) va universal (0-9) formatlarini taqqoslash.",
+    "native_label": "Mahalliy raqamlar (٠١٢٣٤)",
+    "universal_label": "Universal (0-9)",
+    "plain_label": "Avtomatik"
+  },
+  "template_macros": {
+    "title": "Shablon makroslari",
+    "description": "HTML belgilashsis xom qiymatlarni olish uchun makroslar.",
+    "raw_value": "Belgilashsis xom qiymat",
+    "current_year": "Joriy yil: {{year}}"
+  },
+  "datetime": {
+    "title": "Sana va vaqt",
+    "description": "Sana va vaqtni birlashtirilgan format.",
+    "iso": "ISO standarti",
+    "eve": "Rojdestvo arafasi"
+  },
+  "unit": {
+    "title": "Birlik formati"
+  },
+  "native_digits": {
+    "title": "Mahalliy raqamlar",
+    "description": "ASCII raqamlari bo'lgan matn lokal yoqilganda mahalliy raqamlarga aylanadi. Til o'zgarganda zamonaviy yangilanadi."
+  },
+  "inflection": {
+    "title": "Inglizcha inflektsiya",
+    "description": "Inglizcha ko'plik va birlik shakllari. Til o'zgarganda zamonaviy yangilanadi."
+  },
+  "live_label": "Jonli",
+  "pricing_details": {
+    "title": "Narx tafsilotlari",
+    "description": "To'liq konveyer: xom qiymat, valyuta kodi, format, chegirma va konversiya.",
+    "raw_value": "Xom qiymat",
+    "raw_currency": "Valyuta kodi",
+    "formatted": "Formatlangan",
+    "discounted": "20% chegirma",
+    "converted_usd": "USD ga konversiya"
+  },
+  "live_update": {
+    "note": "Tilni o'zgartirganda barcha sonlar, sanalar va narxlarning sahifani qayta yuklamasdan bir zumda o'zgarishini payqang."
+  },
+  "section_modes": {
+    "title": "Son rejimlari",
+    "description": "Faol lokaldagi mahalliy, universal va avtomatik rejimlarni taqqoslang."
+  },
+  "section_systems": {
+    "title": "Yozuv tizimlari",
+    "description": "Barcha sanoq tizimlari (algoritmik va raqamli) ICU zaxirasi bilan to'g'ri mahalliy raqamlarni ko'rsatadi.",
+    "note": "Barcha sanoq tizimlari (algoritmik va raqamli) to'g'ri mahalliy raqamlarni ko'rsatadi. Algoritmik tizimlar NUMBERING_SYSTEMS zaxira raqamlaridan foydalanadi. Rim raqamlari to'g'ridan-to'g'ri algoritm orqali konvertatsiya qilinadi. Raqamli tizimlar yuklangan shriftlardan raqamlarni ishlatadi."
+  },
+  "nav": {
+    "translations": "Tarjimalar",
+    "formatting": "Sonlar",
+    "pricing": "Narxlar",
+    "modes": "Rejimlar",
+    "systems": "Tizimlar",
+    "switcher": "Lokal tanlash"
+  }
+}

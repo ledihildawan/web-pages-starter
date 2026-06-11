@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+  "name": "Web Pages Starter",
+  "short_name": "Starter",
+  "description": "A modern web pages starter template with i18n support and optimized performance",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#020617",
+  "orientation": "any",
+  "scope": "/",
+  "dir": "ltr",
+  "lang": "en-US",
+  "categories": ["productivity", "utilities", "developer"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Home",
+      "short_name": "Home",
+      "description": "Go to home page",
+      "url": "/home.html",
+      "icons": [
+        {
+          "src": "/favicon.svg",
+          "sizes": "any"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_frame_size": {
+      "width": 400,
+      "height": 600
+    }
+  }
+}

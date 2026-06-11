@@ -1,0 +1,75 @@
+{
+  "hero": {
+    "badge": "Išskirtinės funkcijos",
+    "title_part1": "Viskas, ko Jums reikia, kad",
+    "title_highlight": "auga greičiau",
+    "description": "Nuo galingos analizės iki sklandžios integracijos – suteikiame įrankių rinkinį, reikalingą kurti pasaulinio lygio programas be rūpesčių."
+  },
+  "features": {
+    "heading": "Išskirtinės funkcijos",
+    "subheading": "Viskas, ko Jums reikia kūrimui ir augimui.",
+    "list": {
+      "speed": {
+        "title": "Labai greita",
+        "description": "Optimalus našumas su įkėlimo laiku žemiau 100 ms. Sukurta pasaulinei sklaidai su krašto infrastruktūra."
+      },
+      "design": {
+        "title": "Modernus dizainas",
+        "description": "Reaguojanti ir švari vartotojo sąsaja, kuri atrodo profesionaliai visuose įrenginiuose. Visiškai pritaikomi komponentai."
+      },
+      "security": {
+        "title": "Aukštas saugumas",
+        "description": "Galinis šifravimas, kelių veiksnių tapatybės nustatymas ir SOC2 atitiktis, apsaugantys Jūsų duomenis."
+      }
+    }
+  },
+  "sections": {
+    "sync": {
+      "title": "Sinchronizavimas realiuoju laiku",
+      "description": "Pakeitimai akimirksniu plinta visuose įrenginiuose. Nesvarbu, ar Jūsų vartotojai naudoja telefoną, kompiuterį ar planšetę – jie mato tuos pačius duomenis tuo pačiu metu.",
+      "check_0": "Latencija žemiau milisekundės",
+      "check_1": "Integruotas autonominis režimas",
+      "check_2": "Konfliktų sprendimas"
+    },
+    "analytics": {
+      "title": "Veiksminga analizė",
+      "description": "Neatspekuliuokite. Gaukite gilių įžvalgų apie vartotojų elgseną, sistemos našumą ir pajamų rodiklius. Vizualizuokite duomenis interaktyviais grafikais.",
+      "check_0": "Pritaikomi valdymo skydeliai",
+      "check_1": "Eksportavimas į PDF, CSV arba Excel",
+      "check_2": "Automatinės savaitinės ataskaitos"
+    }
+  },
+  "more_title": "Ir dar daugiau...",
+  "more_subtitle": "Pažangios funkcijos, sukurtos padėti Jums kurti greičiau ir didesniu mastu.",
+  "more": {
+    "dark_mode": {
+      "title": "Tamsioji tema",
+      "desc": "Integruotas šviesios ir tamsios temų palaikymas su automatiniu aptikimu."
+    },
+    "api_first": {
+      "title": "API pirmiausia",
+      "desc": "REST ir GraphQL API pasiekiamas visiškam programiniam valdymui."
+    },
+    "sso": {
+      "title": "SSO prisijungimas",
+      "desc": "Enterprise lygio vienkartinis prisijungimas su Google, GitHub ir Okta."
+    },
+    "audit": {
+      "title": "Audito žurnalas",
+      "desc": "Sekite kiekvieną Jūsų projekto pakeitimą su išsamiomis laiko žymomis."
+    },
+    "rbac": {
+      "title": "Vaidmenimis pagrįsta prieiga",
+      "desc": "Granuliuotas teisių valdymas administratoriams, redaktoriams ir peržiūrėtojams."
+    },
+    "uptime": {
+      "title": "99,99 % veikimo laiko",
+      "desc": "Garantuojamas pasiekiamumas su mūsų globaliai paskirstytu CDN."
+    }
+  },
+  "cta": {
+    "heading": "Pasirengę pradėti?",
+    "btn_create": "Sukurti paskyrą",
+    "btn_docs": "Skaityti dokumentaciją"
+  }
+}

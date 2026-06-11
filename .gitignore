@@ -1,11 +1,14 @@
 # Local
 .DS_Store
-*.local
 *.log*
+.env*
+!.env.example
+!.env.*.example
 
 # Dist
 node_modules
 dist/
+generated/
 
 # Profile
 .rspack-profile-*/
@@ -17,3 +20,9 @@ dist/
 
 .rsbuild
 coverage
+
+# Reports
+reports/
+
+# Public
+public/assets/i18n/

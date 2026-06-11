@@ -1,0 +1,56 @@
+{
+  "period_monthly": "måned",
+  "period_yearly": "år",
+  "hero": {
+    "badge": "Vælg en plan",
+    "title_part1": "Enkel og ",
+    "title_highlight": "gennemsigtig prissætning",
+    "description": "Ingen skjulte gebyrer. Ingen overraskelsesgebyrer. Vælg en plan, der passer bedst til dine behov."
+  },
+  "toggle": {
+    "monthly": "Månedligt",
+    "yearly": "Årligt",
+    "yearly_hint": "faktureres årligt",
+    "discount": "SPAR 20%",
+    "aria_label": "Skift prisplan"
+  },
+  "plans": {
+    "hobby": {
+      "name": "Hobby",
+      "desc": "Perfekt til sideprojekter og læring.",
+      "btn": "Start gratis",
+      "feature_0": "1 projekt",
+      "feature_1": "Fællesskabssupport",
+      "feature_2": "5 GB lagerplads"
+    },
+    "pro": {
+      "name": "Pro",
+      "badge": "Mest populær",
+      "desc": "For professionelle udviklere og små teams.",
+      "btn": "Vælg Pro-plan",
+      "feature_0": "Ubegrænsede projekter",
+      "feature_1": "Prioriteret e-mail-support",
+      "feature_2": "100 GB lagerplads",
+      "feature_3": "Avanceret analyse"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "desc": "For storskala applikationer og organisationer.",
+      "btn": "Kontakt salg",
+      "feature_0": "Alle Pro-funktioner",
+      "feature_1": "Dedikeret kontomanager",
+      "feature_2": "SSO og revisionslog",
+      "feature_3": "Ubegrænset lagerplads"
+    }
+  },
+  "faq": {
+    "title": "Ofte stillede spørgsmål",
+    "subtitle": "Find svar på de mest almindelige spørgsmål om vores planer og tjenester.",
+    "q_0": "Kan jeg opsige når som helst?",
+    "a_0": "Ja, du kan opsige dit abonnement når som helst. Din adgang forbliver aktiv til slutningen af faktureringsperioden.",
+    "q_1": "Er der en gratis prøveperiode?",
+    "a_1": "Vi tilbyder en 14-dages gratis prøveperiode for Pro-planen. Intet kreditkort kræves for at komme i gang.",
+    "q_2": "Hvilke betalingsmetoder er tilgængelige?",
+    "a_2": "Vi accepterer de største kreditkort og PayPal. For Enterprise understøtter vi bankoverførsler."
+  }
+}

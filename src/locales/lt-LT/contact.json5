@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "title": "Susisiekite su mumis | Starter App",
+    "description": "Susisiekite su mumis dėl klausimų ir pagalbos."
+  },
+  "contact": {
+    "badge": "Pasirengę padėti",
+    "title_part1": "Leiskite ",
+    "title_highlight": "bendrauti",
+    "description": "Turite klausimų ar norite bendradarbiauti? Džiaugiamės išgirsdami iš Jūsų. Atsiųskite žinutę ir mes greitai atsakysime.",
+    "form_title": "Siųsti žinutę",
+    "form_subtitle": "Užpildykite žemiau esančią formą ir mes greitai atsakysime.",
+    "social_title": "Sekite mus",
+    "social_subtitle": "Gaukite naujausius atnaujinimus per mūsų socialinius tinklus",
+    "info": {
+      "response_time": {
+        "title": "Greitas atsakas",
+        "description": "Stengiamės atsakyti į kiekvieną žinutę per 24 valandas darbo dienomis."
+      },
+      "working_hours": {
+        "title": "Darbo valandos",
+        "description": "Pirmadienis – Penktadienis: 09:00 – 18:00. Savaitgaliais: pagal prioritetą."
+      },
+      "support": {
+        "title": "Nuolatinis palaikymas",
+        "description": "Mūsų palaikymo komanda visada pasirengusi padėti išspręsti Jūsų technines problemas."
+      }
+    },
+    "form": {
+      "name": "Vardas",
+      "name_placeholder": "Įveskite savo vardą",
+      "email": "El. paštas",
+      "email_placeholder": "vardas@el.pastas.lt",
+      "subject": "Tema",
+      "subject_placeholder": "Apie ką norite pasikalbėti?",
+      "message": "Žinutė",
+      "message_placeholder": "Papasakokite daugiau apie Jūsų klausimą...",
+      "submit": "Siųsti žinutę"
+    }
+  },
+  "email_label": "El. paštas",
+  "email_value": "hello@starter.app",
+  "phone_label": "Telefonas",
+  "phone_value": "+370 612 34567",
+  "location_label": "Vieta",
+  "location_value": "Vilnius, Lietuva"
+}

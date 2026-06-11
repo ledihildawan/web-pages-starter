@@ -1,0 +1,75 @@
+{
+  "hero": {
+    "badge": "Funzionalità in evidenza",
+    "title_part1": "Tutto ciò che ti serve per",
+    "title_highlight": "scalare più velocemente",
+    "description": "Da analisi potenti a integrazioni fluide, ti forniamo il set di strumenti necessario per creare applicazioni di livello mondiale senza complicazioni."
+  },
+  "sections": {
+    "sync": {
+      "title": "Sincronizzazione in tempo reale",
+      "description": "Le modifiche si propagano istantaneamente su tutti i dispositivi. Sia che i tuoi utenti usino mobile, desktop o tablet, vedranno gli stessi dati nello stesso momento.",
+      "check_0": "Latenza inferiore al millisecondo",
+      "check_1": "Supporto offline integrato",
+      "check_2": "Gestione della risoluzione dei conflitti"
+    },
+    "analytics": {
+      "title": "Analisi actionable",
+      "description": "Smetti di indovinare. Ottieni approfondimenti dettagliati sul comportamento degli utenti, le prestazioni del sistema e le metriche di guadagno. Visualizza i tuoi dati con grafici interattivi.",
+      "check_0": "Dashboard personalizzabili",
+      "check_1": "Esportazione in PDF, CSV o Excel",
+      "check_2": "Report settimanali automatizzati"
+    }
+  },
+  "more_title": "E molto altro...",
+  "more_subtitle": "Funzionalità avanzate pensate per aiutarti a costruire più velocemente e in modo più scalabile.",
+  "more": {
+    "dark_mode": {
+      "title": "Dark mode",
+      "desc": "Supporto integrato per temi chiari e scuri con rilevamento automatico."
+    },
+    "api_first": {
+      "title": "API first",
+      "desc": "API REST e GraphQL disponibili per il controllo programmatico completo."
+    },
+    "sso": {
+      "title": "Accesso SSO",
+      "desc": "Single Sign-On di livello enterprise per Google, GitHub e Okta."
+    },
+    "audit": {
+      "title": "Log di audit",
+      "desc": "Traccia ogni modifica ai tuoi progetti con timestamp dettagliati."
+    },
+    "rbac": {
+      "title": "Accesso basato sui ruoli",
+      "desc": "Controllo granulare dei permessi per amministratori, editor e visualizzatori."
+    },
+    "uptime": {
+      "title": "99,99% di uptime",
+      "desc": "Disponibilità garantita con la nostra CDN distribuita globalmente."
+    }
+  },
+  "cta": {
+    "heading": "Pronti a iniziare?",
+    "btn_create": "Crea account",
+    "btn_docs": "Leggi la documentazione"
+  },
+  "features": {
+    "list": {
+      "speed": {
+        "title": "Fulmineo",
+        "description": "Prestazioni ottimizzate con tempi di caricamento inferiori a 100ms. Progettato per scala globale con infrastruttura edge."
+      },
+      "design": {
+        "title": "Design Moderno",
+        "description": "Interfaccia pulita e responsiva dall'aspetto professionale su qualsiasi dispositivo. Componenti completamente personalizzabili."
+      },
+      "security": {
+        "title": "Alta Sicurezza",
+        "description": "Crittografia end-to-end, autenticazione multifattore e conformità SOC2 per proteggere i tuoi dati."
+      }
+    },
+    "heading": "Funzionalità Chiave",
+    "subheading": "Tutto ciò che ti serve per costruire e scalare."
+  }
+}

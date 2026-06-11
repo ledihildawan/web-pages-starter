@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "title": "Contact Us | Starter App",
+    "description": "Get in touch with us for questions and support."
+  },
+  "contact": {
+    "badge": "Get in Touch",
+    "title_part1": "Let's get",
+    "title_highlight": "connected",
+    "description": "Have questions or want to collaborate? We'd love to hear from you. Send us a message and we'll respond as soon as possible.",
+    "form_title": "Send a Message",
+    "form_subtitle": "Fill out the form below and we'll get back to you shortly.",
+    "social_title": "Follow Us",
+    "social_subtitle": "Stay updated with our latest news on social media",
+    "info": {
+      "response_time": {
+        "title": "Quick Response",
+        "description": "We strive to respond to every message within 24 hours on working days."
+      },
+      "working_hours": {
+        "title": "Working Hours",
+        "description": "Monday - Friday: 09:00 - 18:00 GMT. Weekends: By priority."
+      },
+      "support": {
+        "title": "Ongoing Support",
+        "description": "Our support team is always ready to help resolve your technical issues."
+      }
+    },
+    "form": {
+      "name": "Name",
+      "name_placeholder": "Enter your name",
+      "email": "Email",
+      "email_placeholder": "name@example.com",
+      "subject": "Subject",
+      "subject_placeholder": "What would you like to discuss?",
+      "message": "Message",
+      "message_placeholder": "Tell us more about your enquiry...",
+      "submit": "Send Message"
+    }
+  },
+  "email_label": "Email",
+  "email_value": "hello@starter.app",
+  "phone_label": "Phone",
+  "phone_value": "+44 20 7123 4567",
+  "location_label": "Location",
+  "location_value": "London, United Kingdom"
+}

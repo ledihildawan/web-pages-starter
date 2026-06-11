@@ -1,0 +1,40 @@
+.splide__pagination {
+  inset-block-end: 2.5rem;
+  justify-content: flex-start;
+  padding-inline-start: 2.5rem;
+}
+
+.splide__pagination__page {
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  inline-size: 10px;
+  block-size: 10px;
+  margin-inline: 0 6px;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.splide__pagination__page.is-active {
+  background: #fff;
+  transform: scale(1.4);
+}
+
+.splide__arrow svg {
+  fill: none;
+  block-size: auto;
+  inline-size: auto;
+}
+
+.splide__spinner {
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-inline-start-color: #fff;
+  inline-size: 40px;
+  block-size: 40px;
+}
+
+.splide__slide img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}

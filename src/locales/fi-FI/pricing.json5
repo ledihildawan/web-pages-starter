@@ -1,0 +1,56 @@
+{
+  "period_monthly": "kuukausi",
+  "period_yearly": "vuosi",
+  "hero": {
+    "badge": "Valitse suunnitelma",
+    "title_part1": "Yksinkertainen ja ",
+    "title_highlight": "läpinäkyvä hinnoittelu",
+    "description": "Ei piilokuluja. Ei yllätysmaksuja. Valitse tarpeisiisi parhaiten sopiva suunnitelma."
+  },
+  "toggle": {
+    "monthly": "Kuukausittain",
+    "yearly": "Vuosittain",
+    "yearly_hint": "laskutetaan vuosittain",
+    "discount": "SÄÄSTÄ 20%",
+    "aria_label": "Vaihda hinnoittelutilausta"
+  },
+  "plans": {
+    "hobby": {
+      "name": "Harrastaja",
+      "desc": "Täydellinen sivuprojekteihin ja oppimiseen.",
+      "btn": "Aloita ilmaiseksi",
+      "feature_0": "1 projekti",
+      "feature_1": "Yhteisön tuki",
+      "feature_2": "5 Gt tallennustilaa"
+    },
+    "pro": {
+      "name": "Pro",
+      "badge": "Suosituin",
+      "desc": "Ammattilaiskehittäjille ja pienille tiimeille.",
+      "btn": "Valitse Pro-tilaus",
+      "feature_0": "Rajattomat projektit",
+      "feature_1": "Ensisijainen sähköpostituki",
+      "feature_2": "100 Gt tallennustilaa",
+      "feature_3": "Edistynyt analytiikka"
+    },
+    "enterprise": {
+      "name": "Yritys",
+      "desc": "Suuren mittakaavan sovelluksiin ja organisaatioille.",
+      "btn": "Ota yhteyttä myyntiin",
+      "feature_0": "Kaikki Pro-ominaisuudet",
+      "feature_1": "Omistettu tilipäällikkö",
+      "feature_2": "SSO ja tarkastusloki",
+      "feature_3": "Rajoittamaton tallennustila"
+    }
+  },
+  "faq": {
+    "title": "Usein kysytyt kysymykset",
+    "subtitle": "Löydä vastauksia yleisimpiin kysymyksiin tilauksistamme ja palveluistamme.",
+    "q_0": "Voinko peruuttaa milloin tahansa?",
+    "a_0": "Kyllä, voit peruuttaa tilauksesi milloin tahansa. Käyttöoikeutesi pysyy aktiivisena laskutuskauden loppuun asti.",
+    "q_1": "Onko ilmaista kokeilua?",
+    "a_1": "Tarjoamme 14 päivän ilmaisen kokeilun Pro-tilaukselle. Luottokorttia ei tarvita aloittamiseen.",
+    "q_2": "Mitä maksutapoja on saatavilla?",
+    "a_2": "Hyväksymme tärkeimmät luottokortit ja PayPalin. Yrityksille tuemme pankkisiirtoja."
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "title": "અમારો સંપર્ક કરો | Starter App",
+    "description": "પ્રશ્નો અને સહાય માટે અમારો સંપર્ક કરો."
+  },
+  "contact": {
+    "badge": "મદદ માટે તૈયાર",
+    "title_part1": "ચાલો",
+    "title_highlight": "જોડાઈએ",
+    "description": "કોઈ પ્રશ્ન છે અથવા સહયોગ કરવા માંગો છો? અમે તમારી વાત સાંભળવા ઉત્સાહિત છીએ. સંદેશ મોકલો અને અમે ઝડપથી જવાબ આપીશું.",
+    "form_title": "સંદેશ મોકલો",
+    "form_subtitle": "નીચેનું ફોર્મ ભરો અને અમે ઝડપથી જવાબ આપીશું.",
+    "social_title": "અમને ફોલો કરો",
+    "social_subtitle": "અમારા સોશિયલ મીડિયા દ્વારા નવીનતમ અપડેટ મેળવો",
+    "info": {
+      "response_time": {
+        "title": "ઝડપી પ્રતિસાદ",
+        "description": "અમે કાર્યકારી દિવસોમાં દરેક સંદેશનો 24 કલાકમાં જવાબ આપવાનો પ્રયત્ન કરીએ છીએ."
+      },
+      "working_hours": {
+        "title": "કામના કલાકો",
+        "description": "સોમવાર - શુક્રવાર: 09:00 - 18:00 IST। સપ્તાહાંત: પ્રાધાન્ય મુજબ."
+      },
+      "support": {
+        "title": "સતત સહાય",
+        "description": "અમારી સહાય ટીમ હંમેશા તમારી તકનીકી સમસ્યાઓ ઉકેલવા તૈયાર છે."
+      }
+    },
+    "form": {
+      "name": "નામ",
+      "name_placeholder": "તમારું નામ દાખલ કરો",
+      "email": "ઈમેલ",
+      "email_placeholder": "નામ@ઈમેલ.com",
+      "subject": "વિષય",
+      "subject_placeholder": "તમે શું ચર્ચા કરવા માંગો છો?",
+      "message": "સંદેશ",
+      "message_placeholder": "તમારા પ્રશ્ન વિશે વધુ જણાવો...",
+      "submit": "સંદેશ મોકલો"
+    }
+  },
+  "email_label": "ઈમેલ",
+  "email_value": "hello@starter.app",
+  "phone_label": "ફોન",
+  "phone_value": "+91 98765 43210",
+  "location_label": "સ્થાન",
+  "location_value": "અમદાવાદ, ભારત"
+}

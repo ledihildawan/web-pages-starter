@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "title": "Contact Us | Starter App",
+    "description": "Get in touch with us for questions and support."
+  },
+  "contact": {
+    "badge": "Get in Touch",
+    "title_part1": "Let's get",
+    "title_highlight": "connected",
+    "description": "Have questions or wish to collaborate? Please do write to us. We shall revert at the earliest.",
+    "form_title": "Send a Message",
+    "form_subtitle": "Kindly fill out the form below and we shall get back to you shortly.",
+    "social_title": "Follow Us",
+    "social_subtitle": "Stay updated with our latest news on social media",
+    "info": {
+      "response_time": {
+        "title": "Quick Response",
+        "description": "We strive to respond to every message within 24 hours on working days."
+      },
+      "working_hours": {
+        "title": "Working Hours",
+        "description": "Monday - Friday: 09:00 - 18:00 IST. Weekends: By priority."
+      },
+      "support": {
+        "title": "Ongoing Support",
+        "description": "Our support team is always ready to assist you with your technical queries."
+      }
+    },
+    "form": {
+      "name": "Name",
+      "name_placeholder": "Please enter your name",
+      "email": "Email",
+      "email_placeholder": "name@example.com",
+      "subject": "Subject",
+      "subject_placeholder": "What would you like to discuss?",
+      "message": "Message",
+      "message_placeholder": "Please tell us more about your enquiry...",
+      "submit": "Send Message"
+    }
+  },
+  "email_label": "Email",
+  "email_value": "hello@starter.app",
+  "phone_label": "Phone",
+  "phone_value": "+91 22 1234 5678",
+  "location_label": "Location",
+  "location_value": "Mumbai, Maharashtra, India"
+}

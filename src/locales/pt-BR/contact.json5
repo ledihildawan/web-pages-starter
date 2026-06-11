@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "title": "Entre em Contato | Starter App",
+    "description": "Entre em contato conosco para perguntas e suporte."
+  },
+  "contact": {
+    "badge": "Entre em Contato",
+    "title_part1": "Vamos nos",
+    "title_highlight": "conectar",
+    "description": "Tem perguntas ou quer colaborar? Gostaríamos de saber de você. Envie-nos uma mensagem e responderemos o mais rápido possível.",
+    "form_title": "Envie uma Mensagem",
+    "form_subtitle": "Preencha o formulário abaixo e responderemos em breve.",
+    "social_title": "Siga-nos",
+    "social_subtitle": "Fique atualizado com nossas últimas notícias nas redes sociais",
+    "info": {
+      "response_time": {
+        "title": "Resposta Rápida",
+        "description": "Nos esforçamos para responder a cada mensagem dentro de 24 horas em dias úteis."
+      },
+      "working_hours": {
+        "title": "Horário de Trabalho",
+        "description": "Segunda - Sexta: 09:00 - 18:00. Fins de semana: Por prioridade."
+      },
+      "support": {
+        "title": "Suporte Contínuo",
+        "description": "Nossa equipe de suporte está sempre pronta para ajudar a resolver seus problemas técnicos."
+      }
+    },
+    "form": {
+      "name": "Nome",
+      "name_placeholder": "Digite seu nome",
+      "email": "E-mail",
+      "email_placeholder": "nome@exemplo.com",
+      "subject": "Assunto",
+      "subject_placeholder": "O que você gostaria de discutir?",
+      "message": "Mensagem",
+      "message_placeholder": "Conte-nos mais sobre sua dúvida...",
+      "submit": "Enviar Mensagem"
+    }
+  },
+  "email_label": "E-mail",
+  "email_value": "hello@starter.app",
+  "phone_label": "Telefone",
+  "phone_value": "+55 11 99999 9999",
+  "location_label": "Localização",
+  "location_value": "São Paulo, Brasil"
+}

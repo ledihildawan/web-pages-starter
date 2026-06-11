@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "title": "اتصل بينا | Starter App",
+    "description": "اتصل بينا للأسئلة والدعم."
+  },
+  "contact": {
+    "badge": "اتصل بينا",
+    "title_part1": "يلا نتكلمو",
+    "title_highlight": "مع بعض",
+    "description": "عندك سؤال أو بغيتي تتعاون معانا؟ فرحانين نسمعو منك. صيفطلنا رسالة وغنردو عليك فأقرب وقت.",
+    "form_title": "صيفط رسالة",
+    "form_subtitle": "عمّر الفورم هاد وغنردو عليك قريب.",
+    "social_title": "تابعنا",
+    "social_subtitle": "خليك متابع آخر الأخبار ديالنا على السوشيال ميديا",
+    "info": {
+      "response_time": {
+        "title": "رد سريع",
+        "description": "كنسعاو نردو على كل رسالة خلال ٢٤ ساعة فأيام الخدمة."
+      },
+      "working_hours": {
+        "title": "ساعات الخدمة",
+        "description": "الإثنين - الجمعة: ٠٩:٠٠ - ١٨:٠٠. نهاية الأسبوع: حسب الأولوية."
+      },
+      "support": {
+        "title": "دعم مستمر",
+        "description": "فريق الدعم ديالنا جاهز دائما يعاونك يحل المشاكل التقنية."
+      }
+    },
+    "form": {
+      "name": "الاسم",
+      "name_placeholder": "كتب اسمك",
+      "email": "الإيميل",
+      "email_placeholder": "اسم@مثال.com",
+      "subject": "الموضوع",
+      "subject_placeholder": "شنو بغيتي تناقش؟",
+      "message": "الرسالة",
+      "message_placeholder": "قولنا المزيد على الاستفسار ديالك...",
+      "submit": "صيفط الرسالة"
+    }
+  },
+  "email_label": "الإيميل",
+  "email_value": "hello@starter.app",
+  "phone_label": "التيليفون",
+  "phone_value": "+٢١٢ ٥٠ ٠٠٠٠ ٠٠٠٠",
+  "location_label": "البلاصة",
+  "location_value": "الدار البيضاء، المغرب"
+}

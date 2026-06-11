@@ -1,0 +1,203 @@
+{
+  "meta": {
+    "title": "i18n परीक्षण | डेमो",
+    "description": "पूर्ण अंतर्राष्ट्रीयकरण सुविधा परीक्षण पृष्ठ"
+  },
+  "hero": {
+    "badge": "i18n सुविधाएं",
+    "title": "पूर्ण <span class='text-violet-400'>i18n</span> परीक्षण",
+    "description": "सभी i18n सुविधाओं का प्रयास करें: अनुवाद, बहुवचन, संख्या स्वरूपण, मुद्रा और मुद्रा रूपांतरण।"
+  },
+  "language_info": {
+    "title": "वर्तमान भाषा जानकारी",
+    "code": "भाषा कोड",
+    "currency": "मुद्रा",
+    "direction": "पाठ दिशा",
+    "digits": "मूल अंक",
+    "enabled": "सक्षम",
+    "disabled": "अक्षम",
+    "languages": "भाषाएं",
+    "switching": "पुनः लोड किए बिना स्विचिंग",
+    "current_code": "hi-IN",
+    "current_currency": "INR",
+    "current_direction": "LTR (बाएं से दाएं)"
+  },
+  "numbers": {
+    "title": "संख्या स्वरूपण",
+    "description": "संख्याएं सक्रिय भाषा लोकेल के अनुसार स्वरूपित।",
+    "large": "बड़ी संख्या",
+    "decimal": "दशमलव",
+    "million": "मिलियन",
+    "percent": "प्रतिशत",
+    "raw": "रॉ"
+  },
+  "currency": {
+    "title": "मुद्रा स्वरूपण",
+    "description": "सक्रिय भाषा मुद्रा में बदली गई IDR कीमतें।",
+    "small": "छोटा",
+    "medium": "मध्यम",
+    "large": "बड़ा",
+    "enterprise": "एंटरप्राइज़",
+    "currencies": "मुद्राएं"
+  },
+  "currency_comparison": {
+    "title": "मुद्रा तुलना",
+    "description": "सभी समर्थित मुद्राओं में समान कीमत।",
+    "base_price": "आधार कीमत",
+    "aed": "संयुक्त अरब अमीरात दिरहम",
+    "aud": "ऑस्ट्रेलियाई डॉलर",
+    "brl": "ब्राज़ीलियाई रियाल",
+    "cad": "कनाडाई डॉलर",
+    "chf": "स्विस फ़्रैंक",
+    "cny": "CNY",
+    "eur": "यूरो",
+    "gbp": "ब्रिटिश पाउंड",
+    "idr": "IDR",
+    "inr": "भारतीय रुपया",
+    "jpy": "JPY",
+    "krw": "दक्षिण कोरियाई वॉन",
+    "mxn": "मैक्सिकन पेसो",
+    "sar": "SAR",
+    "sgd": "सिंगापुर डॉलर",
+    "usd": "USD",
+    "zar": "दक्षिण अफ़्रीकी रैंड"
+  },
+  "pluralization": {
+    "title": "बहुवचन",
+    "description": "बहुवचन रूप भाषा के अनुसार भिन्न होते हैं।",
+    "item_title": "आइटम (संज्ञा)",
+    "user_title": "उपयोगकर्ता (व्यक्ति)",
+    "product_title": "उत्पाद (सामान)"
+  },
+  "form": {
+    "title": "अनुवादित प्लेसहोल्डर के साथ फॉर्म",
+    "description": "लोकेल फाइलों से लोड किए गए प्लेसहोल्डर और लेबल।",
+    "name_label": "नाम",
+    "name_placeholder": "अपना पूरा नाम दर्ज करें",
+    "email_label": "ईमेल",
+    "email_placeholder": "name@example.com",
+    "message_label": "संदेश",
+    "message_placeholder": "यहां अपना संदेश टाइप करें...",
+    "submit": "जमा करें"
+  },
+  "missing_keys": {
+    "title": "अनुपलब्ध कुंजी हैंडलर",
+    "description": "अनुपलब्ध कुंजियां वर्गाकार कोष्ठक में प्रदर्शित होती हैं।"
+  },
+  "html_content": {
+    "title": "HTML सामग्री",
+    "description": "अनुवाद स्टाइलिंग के लिए HTML टैग शामिल कर सकते हैं।",
+    "example": "यह एक उदाहरण है <span class='text-emerald-400'>रंगीन हाइलाइट</span> और <strong>बोल्ड टेक्स्ट</strong> के साथ।",
+    "note": "नोट: अनुवाद में HTML का एक एकल रूट तत्व होना चाहिए।"
+  },
+  "switcher": {
+    "title": "भाषा बदलें",
+    "description": "i18n को कार्य में देखने के लिए नीचे दिए गए बटन पर क्लिक करें।"
+  },
+  "advanced": {
+    "title": "उन्नत स्वरूपण",
+    "description": "प्रतिशत, इकाइयों, बाइट्स, सूचियों और क्रमसूचक के लिए उन्नत स्वरूपण सुविधाएं।",
+    "percentages": "प्रतिशत",
+    "units": "इकाइयां",
+    "bytes": "बाइट्स",
+    "bytes_unit": "बाइट्स",
+    "lists": "सूचियां",
+    "ordinals": "क्रमसूचक",
+    "cardinals": "कार्डिनल",
+    "scientific": "वैज्ञानिक संकेतन",
+    "abbreviated": "संक्षिप्त",
+    "date_formats": "दिनांक प्रारूप",
+    "time_formats": "समय प्रारूप",
+    "datetime": "दिनांक + समय",
+    "durations": "अवधि",
+    "relative_time": "सापेक्ष समय",
+    "regional_pricing": "क्षेत्रीय मूल्य",
+    "fifty_percent": "पचास प्रतिशत",
+    "small_percent": "छोटा प्रतिशत",
+    "ninety_nine": "इक्यानवे",
+    "hundred": "सौ",
+    "kilobyte": "किलोबाइट",
+    "distance": "दूरी",
+    "temperature": "तापमान",
+    "weight": "वजन",
+    "half_kb": "आधा KB",
+    "one_and_half_kb": "डेढ़ KB",
+    "one_mb": "एक MB",
+    "one_gb": "एक GB",
+    "two_items": "दो आइटम",
+    "three_items": "तीन आइटम",
+    "four_items": "चार आइटम",
+    "date_short": "छोटी तारीख",
+    "date_long": "लंबी तारीख",
+    "time_short": "छोटा समय",
+    "time_long": "लंबा समय",
+    "day_ago": "1 दिन पहले",
+    "months_ago": "2 महीने पहले",
+    "hour_in": "1 घंटे में",
+    "starter_plan": "स्टार्टर प्लान",
+    "pro_plan": "प्रो प्लान",
+    "discount_20": "20% छूट",
+    "number_modes": "संख्या मोड",
+    "number_modes_desc": "tNative (मूल अंक) और tUniversal (सार्वभौमिक 0-9) का प्रदर्शन।",
+    "native_label": "मूल (٠١٢٣٤)",
+    "universal_label": "सार्वभौमिक (0-9)",
+    "plain_label": "सामान्य (auto)"
+  },
+  "template_macros": {
+    "title": "टेम्पलेट मैक्रोज़",
+    "description": "HTML मार्कअप के बिना कच्चे मान प्राप्त करने के लिए मैक्रोज़।",
+    "raw_value": "बिना मार्कअप कच्चा मान",
+    "current_year": "वर्तमान वर्ष {{year}} है"
+  },
+  "datetime": {
+    "title": "दिनांक और समय",
+    "description": "संयुक्त दिनांक और समय प्रारूप।",
+    "iso": "ISO मानक",
+    "eve": "क्रिसमस की पूर्व संध्या"
+  },
+  "unit": {
+    "title": "इकाई प्रारूप"
+  },
+  "native_digits": {
+    "title": "मूल अंक",
+    "description": "ASCII अंकों वाला टेक्स्ट सक्रिय लोकेल के मूल अंकों में प्रस्तुत किया जाता है। भाषा बदलने पर लाइव अपडेट होता है।"
+  },
+  "inflection": {
+    "title": "अंग्रेजी व्याकरण",
+    "description": "अंग्रेजी बहुवचन और एकवचन। भाषा बदलने पर लाइव अपडेट होता है।"
+  },
+  "live_label": "लाइव",
+  "pricing_details": {
+    "title": "मूल्य विवरण",
+    "description": "पूर्ण पाइपलाइन: कच्चा मान, मुद्रा कोड, स्वरूपित, छूट और परिवर्तित।",
+    "raw_value": "कच्चा मान",
+    "raw_currency": "मुद्रा कोड",
+    "formatted": "स्वरूपित",
+    "discounted": "20% छूट",
+    "converted_usd": "USD में परिवर्तित"
+  },
+  "live_update": {
+    "note": "ध्यान दें कि जब आप भाषा बदलते हैं तो सभी संख्याएं, तिथियां और कीमतें तुरंत अपडेट होती हैं — बिना पेज रीलोड के।"
+  },
+  "core": {
+    "title": "मुख्य सुविधाएं",
+    "description": "अनुवाद, बहुवचन और HTML सामग्री।"
+  },
+  "section_modes": {
+    "title": "अंक मोड",
+    "description": "सक्रिय लोकल के लिए मूल अंक, सार्वभौमिक प्रारूप और स्वचालित मोड की तुलना करें।"
+  },
+  "section_systems": {
+    "title": "लेखन प्रणाली",
+    "description": "सिस्टम स्तर पर सभी 7 एल्गोरिदमिक और 4 अतिरिक्त संख्यात्मक प्रणालियाँ, कनेक्टेड फ़ॉन्ट लोडर के साथ।",
+    "note": "सभी संख्या प्रणालियाँ (एल्गोरिथमिक और संख्यात्मक) ICU फॉलबैक के साथ सही मूल अंक प्रदर्शित करती हैं।"
+  },
+  "nav": {
+    "translations": "अनुवाद",
+    "formatting": "अंक",
+    "pricing": "मूल्य",
+    "modes": "मोड",
+    "systems": "प्रणाली",
+    "switcher": "लोकल बदलें"
+  }
+}

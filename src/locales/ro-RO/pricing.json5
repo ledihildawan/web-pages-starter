@@ -1,0 +1,56 @@
+{
+  "period_monthly": "lună",
+  "period_yearly": "an",
+  "hero": {
+    "badge": "Alegeți un plan",
+    "title_part1": "Prețuri simple și ",
+    "title_highlight": "transparente",
+    "description": "Fără taxe ascunse. Fără taxe surpriză. Alegeți un plan care se potrivește cel mai bine nevoilor tale."
+  },
+  "toggle": {
+    "monthly": "Lunar",
+    "yearly": "Anual",
+    "yearly_hint": "facturat anual",
+    "discount": "ECONOMISEȘTI 20%",
+    "aria_label": "Comută planul de prețuri"
+  },
+  "plans": {
+    "hobby": {
+      "name": "Hobby",
+      "desc": "Perfect pentru proiecte secundare și învățare.",
+      "btn": "Începe gratuit",
+      "feature_0": "1 proiect",
+      "feature_1": "Suport din comunitate",
+      "feature_2": "5 GB stocare"
+    },
+    "pro": {
+      "name": "Pro",
+      "badge": "Cel mai popular",
+      "desc": "Pentru dezvoltatori profesioniști și echipe mici.",
+      "btn": "Alege planul Pro",
+      "feature_0": "Proiecte nelimitate",
+      "feature_1": "Suport prioritar prin e-mail",
+      "feature_2": "100 GB stocare",
+      "feature_3": "Analize avansate"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "desc": "Pentru aplicații la scară largă și organizații.",
+      "btn": "Contactează vânzările",
+      "feature_0": "Toate funcționalitățile Pro",
+      "feature_1": "Manager de cont dedicat",
+      "feature_2": "SSO și jurnal de audit",
+      "feature_3": "Stocare nelimitată"
+    }
+  },
+  "faq": {
+    "title": "Întrebări frecvente",
+    "subtitle": "Găsește răspunsuri la cele mai frecvente întrebări despre planurile și serviciile noastre.",
+    "q_0": "Pot anula oricând?",
+    "a_0": "Da, poți anula abonamentul oricând. Accesul tău rămâne activ până la sfârșitul perioadei de facturare.",
+    "q_1": "Există o perioadă de probă gratuită?",
+    "a_1": "Oferim o perioadă de probă gratuită de 14 zile pentru planul Pro. Nu este necesar card de credit pentru a începe.",
+    "q_2": "Ce metode de plată sunt disponibile?",
+    "a_2": "Acceptăm principalele carduri de credit și PayPal. Pentru Enterprise, suportăm transferuri bancare."
+  }
+}

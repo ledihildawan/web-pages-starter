@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "title": "تواصل معنا | Starter App",
+    "description": "تواصل معنا للأسئلة والدعم."
+  },
+  "contact": {
+    "badge": "تواصل معنا",
+    "title_part1": "لنتواصل",
+    "title_highlight": "معاً",
+    "description": "هل لديك أسئلة أو تود التعاون؟ يسعدنا سماعك. أرسل لنا رسالة وسنرد عليك في أقرب وقت ممكن.",
+    "form_title": "أرسل رسالة",
+    "form_subtitle": "املأ النموذج أدناه وسنرد عليك قريباً.",
+    "social_title": "تابعنا",
+    "social_subtitle": "ابقَ على اطلاع بآخر أخبارنا على وسائل التواصل الاجتماعي",
+    "info": {
+      "response_time": {
+        "title": "رد سريع",
+        "description": "نسعى للرد على كل رسالة خلال ٢٤ ساعة في أيام العمل."
+      },
+      "working_hours": {
+        "title": "ساعات العمل",
+        "description": "الإثنين - الجمعة: ٠٩:٠٠ - ١٨:٠٠. عطلات نهاية الأسبوع: حسب الأولوية."
+      },
+      "support": {
+        "title": "دعم مستمر",
+        "description": "فريق الدعم لدينا مستعد دائماً لمساعدتك في حل مشاكلك التقنية."
+      }
+    },
+    "form": {
+      "name": "الاسم",
+      "name_placeholder": "أدخل اسمك",
+      "email": "البريد الإلكتروني",
+      "email_placeholder": "اسم@مثال.com",
+      "subject": "الموضوع",
+      "subject_placeholder": "ما الذي تود مناقشته؟",
+      "message": "الرسالة",
+      "message_placeholder": "أخبرنا المزيد عن استفسارك...",
+      "submit": "إرسال الرسالة"
+    }
+  },
+  "email_label": "البريد الإلكتروني",
+  "email_value": "hello@starter.app",
+  "phone_label": "الهاتف",
+  "phone_value": "+٩٧١ ٥٠ ٠٠٠ ٠٠٠٠",
+  "location_label": "الموقع",
+  "location_value": "دبي، الإمارات العربية المتحدة"
+}

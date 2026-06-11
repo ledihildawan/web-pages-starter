@@ -1,0 +1,75 @@
+{
+  "hero": {
+    "badge": "強勁核心，動力十足",
+    "title_part1": "助您",
+    "title_highlight": "快速擴展",
+    "description": "從強大的分析功能到無縫集成，我們為您提供構建世界級應用所需的所有工具集，讓您徹底告別繁瑣的開發過程。"
+  },
+  "sections": {
+    "sync": {
+      "title": "即時資料同步",
+      "description": "變更會立即傳播到所有裝置。無論您的使用者是在行動裝置、桌面還是平板電腦上，他們都能在同一時間看到完全一致的資料。",
+      "check_0": "亞毫秒級延遲",
+      "check_1": "隨附的離線支援",
+      "check_2": "衝突解決處理機制"
+    },
+    "analytics": {
+      "title": "可操作的資料分析",
+      "description": "不再盲目決策。深入了解使用者行為、系統效能和營收指標。透過精美且互動的圖表將您的資料視覺化。",
+      "check_0": "可自訂的資料面板",
+      "check_1": "匯出為 PDF、CSV 或 Excel",
+      "check_2": "每週自動化報告"
+    }
+  },
+  "more_title": "以及更多精彩功能...",
+  "more_subtitle": "以及更多強大的功能，助您建構卓越應用。",
+  "more": {
+    "dark_mode": {
+      "title": "深色模式",
+      "desc": "內建淺色和深色主題支援，並具備自動系統偵測功能。"
+    },
+    "api_first": {
+      "title": "API 優先",
+      "desc": "提供 REST 和 GraphQL API，實現完全的程序化控制。"
+    },
+    "sso": {
+      "title": "SSO 單一登入",
+      "desc": "支援 Google、GitHub 和 Okta 等企業級單一登入。"
+    },
+    "audit": {
+      "title": "稽核日誌",
+      "desc": "透過詳細的時間戳記錄專案中的每一次變更。"
+    },
+    "rbac": {
+      "title": "角色型存取控制",
+      "desc": "針對管理員、編輯者和檢視者的細微權限控制。"
+    },
+    "uptime": {
+      "title": "99.99% 正常運作時間",
+      "desc": "透過我們的全球分散式 CDN 保證服務的高可用性。"
+    }
+  },
+  "cta": {
+    "heading": "準備開始了嗎？",
+    "btn_create": "建立帳戶",
+    "btn_docs": "查閱文件"
+  },
+  "features": {
+    "list": {
+      "speed": {
+        "title": "極速飛快",
+        "description": "最佳化效能，載入時間低於 100 毫秒。搭配邊緣基礎設施，為全球規模而打造。"
+      },
+      "design": {
+        "title": "現代設計",
+        "description": "簡潔且響應式的 UI，在任何裝置上都呈現專業外觀。元件可完全自訂。"
+      },
+      "security": {
+        "title": "高安全性",
+        "description": "端對端加密、多因素驗證及 SOC2 合規，全面保護您的資料。"
+      }
+    },
+    "heading": "核心功能",
+    "subheading": "您建構與擴展所需的一切。"
+  }
+}

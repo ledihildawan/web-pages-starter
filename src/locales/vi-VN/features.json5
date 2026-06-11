@@ -1,0 +1,75 @@
+{
+  "hero": {
+    "badge": "Tính năng Nổi bật",
+    "title_part1": "Mọi thứ bạn cần để",
+    "title_highlight": "mở rộng nhanh hơn",
+    "description": "Từ phân tích mạnh mẽ đến tích hợp liền mạch, chúng tôi cung cấp bộ công cụ bạn cần để xây dựng ứng dụng đẳng cấp thế giới."
+  },
+  "features": {
+    "heading": "Tính năng Nổi bật",
+    "subheading": "Mọi thứ bạn cần để xây dựng và phát triển.",
+    "list": {
+      "speed": {
+        "title": "Cực kỳ Nhanh",
+        "description": "Hiệu suất tối ưu với thời gian tải dưới 100ms. Được thiết kế cho quy mô toàn cầu với hạ tầng edge."
+      },
+      "design": {
+        "title": "Thiết kế Hiện đại",
+        "description": "Giao diện responsive và sạch sẽ, hiển thị chuyên nghiệp trên mọi thiết bị. Các thành phần có thể tùy chỉnh hoàn toàn."
+      },
+      "security": {
+        "title": "Bảo mật Cao",
+        "description": "Mã hóa end-to-end, xác thực đa yếu tố và tuân thủ SOC2 để bảo vệ dữ liệu của bạn."
+      }
+    }
+  },
+  "sections": {
+    "sync": {
+      "title": "Đồng bộ Thời gian thực",
+      "description": "Các thay đổi được lan truyền tức thì trên mọi thiết bị. Dù người dùng của bạn sử dụng điện thoại, máy tính hay máy tính bảng, họ đều thấy cùng một dữ liệu vào cùng một thời điểm.",
+      "check_0": "Độ trễ dưới một mili-giây",
+      "check_1": "Hỗ trợ ngoại tuyến tích hợp sẵn",
+      "check_2": "Xử lý giải quyết xung đột"
+    },
+    "analytics": {
+      "title": "Phân tích Khả thi",
+      "description": "Đừng đoán mò. Hãy có được những thông tin chuyên sâu về hành vi người dùng, hiệu suất hệ thống và chỉ số doanh thu. Trực quan hóa dữ liệu của bạn với biểu đồ tương tác.",
+      "check_0": "Bảng điều khiển có thể tùy chỉnh",
+      "check_1": "Xuất ra PDF, CSV hoặc Excel",
+      "check_2": "Báo cáo hàng tuần tự động"
+    }
+  },
+  "more_title": "Và nhiều hơn nữa...",
+  "more_subtitle": "Các tính năng mạnh mẽ được thiết kế để giúp bạn xây dựng nhanh hơn và có khả năng mở rộng hơn.",
+  "more": {
+    "dark_mode": {
+      "title": "Chế độ Tối",
+      "desc": "Hỗ trợ tích hợp sẵn cho giao diện sáng và tối với tự động phát hiện."
+    },
+    "api_first": {
+      "title": "API First",
+      "desc": "API REST và GraphQL sẵn có để kiểm soát lập trình đầy đủ."
+    },
+    "sso": {
+      "title": "Đăng nhập SSO",
+      "desc": "Single Sign-On cấp doanh nghiệp cho Google, GitHub và Okta."
+    },
+    "audit": {
+      "title": "Nhật ký Kiểm tra",
+      "desc": "Theo dõi mọi thay đổi trong dự án của bạn với dấu thời gian chi tiết."
+    },
+    "rbac": {
+      "title": "Quyền truy cập theo Vai trò",
+      "desc": "Kiểm soát quyền chi tiết cho quản trị viên, biên tập viên và người xem."
+    },
+    "uptime": {
+      "title": "99.99% Thời gian hoạt động",
+      "desc": "Khả dụng được đảm bảo với CDN phân phối toàn cầu của chúng tôi."
+    }
+  },
+  "cta": {
+    "heading": "Sẵn sàng bắt đầu chưa?",
+    "btn_create": "Tạo Tài khoản",
+    "btn_docs": "Đọc Tài liệu"
+  }
+}

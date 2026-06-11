@@ -1,0 +1,75 @@
+{
+  "hero": {
+    "badge": "Udvalgte funktioner",
+    "title_part1": "Alt hvad du behøver for at",
+    "title_highlight": "skalere hurtigere",
+    "description": "Fra kraftfuld analyse til problemfri integrationer giver vi dig den værktøjskasse, du har brug for til at bygge applikationer i verdensklasse uden komplikationer."
+  },
+  "sections": {
+    "sync": {
+      "title": "Realtidssynkronisering",
+      "description": "Ændringer spredes øjeblikkeligt til alle enheder. Uanset om dine brugere er på mobil, desktop eller tablet, ser de de samme data på samme tid.",
+      "check_0": "Latens under millisekundet",
+      "check_1": "Indbygget offline-understøttelse",
+      "check_2": "Håndtering af konfliktløsning"
+    },
+    "analytics": {
+      "title": "Handlingsorienteret analyse",
+      "description": "Stop med at gætte. Få detaljerede indsigter om brugeradfærd, systemets ydeevne og indtægtsmålinger. Visualiser dine data med interaktive diagrammer.",
+      "check_0": "Tilpasselige dashboards",
+      "check_1": "Eksportér til PDF, CSV eller Excel",
+      "check_2": "Automatiserede ugentlige rapporter"
+    }
+  },
+  "more_title": "Og meget mere...",
+  "more_subtitle": "Avancerede funktioner designet til at hjælpe dig med at bygge hurtigere og mere skalerbart.",
+  "more": {
+    "dark_mode": {
+      "title": "Mørk tilstand",
+      "desc": "Indbygget understøttelse af lyse og mørke temaer med automatisk registrering."
+    },
+    "api_first": {
+      "title": "API-først",
+      "desc": "REST- og GraphQL-API'er tilgængelige for fuld programmatisk kontrol."
+    },
+    "sso": {
+      "title": "SSO-login",
+      "desc": "Enterprise Single Sign-On for Google, GitHub og Okta."
+    },
+    "audit": {
+      "title": "Revisionslog",
+      "desc": "Spor hver ændring i dine projekter med detaljerede tidsstempler."
+    },
+    "rbac": {
+      "title": "Rollebaseret adgang",
+      "desc": "Granulær tilladelseskontrol for administratorer, redaktører og seere."
+    },
+    "uptime": {
+      "title": "99,99% oppetid",
+      "desc": "Garanteret tilgængelighed med vores globalt distribuerede CDN."
+    }
+  },
+  "cta": {
+    "heading": "Klar til at starte?",
+    "btn_create": "Opret konto",
+    "btn_docs": "Læs dokumentationen"
+  },
+  "features": {
+    "list": {
+      "speed": {
+        "title": "Lynhurtig",
+        "description": "Optimeret ydeevne med lastetider under 100 ms. Bygget til global skalering med edge-infrastruktur."
+      },
+      "design": {
+        "title": "Moderne design",
+        "description": "Ren, responsiv UI, der ser professionel ud på alle enheder. Fuldt tilpasselige komponenter."
+      },
+      "security": {
+        "title": "Høj sikkerhed",
+        "description": "End-to-end-kryptering, multifaktorautentificering og SOC2-compliance for at beskytte dine data."
+      }
+    },
+    "heading": "Nøglefunktioner",
+    "subheading": "Alt hvad du behøver for at bygge og skalere."
+  }
+}

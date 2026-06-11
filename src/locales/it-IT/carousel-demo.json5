@@ -1,0 +1,17 @@
+{
+  "meta": {
+    "page_title": "Demo lazy loading Splide | Starter"
+  },
+  "hero": {
+    "slide_1": {
+      "title": "Lazy loading della natura",
+      "subtitle": "Le immagini si caricano in modo intelligente per risparmiare dati.",
+      "alt": "Splendido paesaggio montano"
+    },
+    "slide_2": {
+      "title": "Prestazioni elevate",
+      "subtitle": "Carica solo ciò che ti serve.",
+      "alt": "Paesaggio di montagne innevate"
+    }
+  }
+}

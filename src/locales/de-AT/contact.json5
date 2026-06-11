@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "title": "Kontakt | Starter App",
+    "description": "Kontaktieren Sie uns für Fragen und Support."
+  },
+  "contact": {
+    "badge": "Kontakt aufnehmen",
+    "title_part1": "Lass uns",
+    "title_highlight": "verbinden",
+    "description": "Haben Sie Fragen oder möchten Sie zusammenarbeiten? Wir würden uns freuen, von Ihnen zu hören. Senden Sie uns eine Nachricht und wir werden so schnell wie möglich antworten.",
+    "form_title": "Nachricht senden",
+    "form_subtitle": "Füllen Sie das Formular unten aus und wir werden Ihnen in Kürze antworten.",
+    "social_title": "Folgen Sie uns",
+    "social_subtitle": "Bleiben Sie auf dem Laufenden mit unseren neuesten Nachrichten in den sozialen Medien",
+    "info": {
+      "response_time": {
+        "title": "Schnelle Antwort",
+        "description": "Wir bemühen uns, jede Nachricht innerhalb von 24 Stunden an Werktagen zu beantworten."
+      },
+      "working_hours": {
+        "title": "Arbeitszeiten",
+        "description": "Montag - Freitag: 09:00 - 18:00. Wochenenden: Nach Priorität."
+      },
+      "support": {
+        "title": "Laufender Support",
+        "description": "Unser Support-Team ist immer bereit, bei der Lösung Ihrer technischen Probleme zu helfen."
+      }
+    },
+    "form": {
+      "name": "Name",
+      "name_placeholder": "Geben Sie Ihren Namen ein",
+      "email": "E-Mail",
+      "email_placeholder": "name@beispiel.com",
+      "subject": "Betreff",
+      "subject_placeholder": "Was möchten Sie besprechen?",
+      "message": "Nachricht",
+      "message_placeholder": "Erzählen Sie uns mehr über Ihre Anfrage...",
+      "submit": "Nachricht senden"
+    }
+  },
+  "email_label": "E-Mail",
+  "email_value": "hello@starter.app",
+  "phone_label": "Telefon",
+  "phone_value": "+43 500 000 000",
+  "location_label": "Standort",
+  "location_value": "Wien, Österreich"
+}

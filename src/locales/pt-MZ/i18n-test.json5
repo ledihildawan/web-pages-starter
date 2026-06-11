@@ -1,0 +1,203 @@
+{
+  "meta": {
+    "title": "Teste i18n | Demo",
+    "description": "Página de teste completa de recursos de internacionalização"
+  },
+  "hero": {
+    "badge": "Recursos i18n",
+    "title": "Teste completo de <span class='text-violet-400'>i18n</span>",
+    "description": "Experimente todos os recursos i18n: tradução, pluralização, formatação de números, moeda e conversão de moeda."
+  },
+  "language_info": {
+    "title": "Informações de Idioma Atual",
+    "code": "Código de Idioma",
+    "currency": "Moeda",
+    "direction": "Direção do Texto",
+    "current_code": "pt",
+    "current_currency": "MZN",
+    "current_direction": "LTR (Esquerda para Direita)",
+    "digits": "Dígitos Nativos",
+    "enabled": "Habilitado",
+    "disabled": "Desabilitado",
+    "languages": "Idiomas",
+    "switching": "Troca Sem Recarga"
+  },
+  "numbers": {
+    "title": "Formatação de Números",
+    "description": "Números formatados de acordo com o idioma ativo.",
+    "large": "Número Grande",
+    "decimal": "Decimal",
+    "million": "Milhão",
+    "percent": "Porcentagem",
+    "raw": "Raw"
+  },
+  "currency": {
+    "title": "Formatação de Moeda",
+    "description": "Preços em IDR convertidos para a moeda do idioma ativo.",
+    "small": "Pequeno",
+    "medium": "Médio",
+    "large": "Grande",
+    "enterprise": "Empresarial",
+    "currencies": "Moedas"
+  },
+  "currency_comparison": {
+    "title": "Comparação de Moedas",
+    "description": "Mesmo preço em todas as moedas suportadas.",
+    "base_price": "Preço Base",
+    "aed": "Dirham dos EAU",
+    "aud": "Dólar Australiano",
+    "brl": "Real Brasileiro",
+    "cad": "Dólar Canadense",
+    "chf": "Franco Suíço",
+    "cny": "CNY",
+    "eur": "Euro",
+    "gbp": "Libra Esterlina",
+    "idr": "IDR",
+    "inr": "Rúpia Indiana",
+    "jpy": "JPY",
+    "krw": "Won sul-coreano",
+    "mxn": "Peso Mexicano",
+    "sar": "SAR",
+    "sgd": "Dólar de Singapura",
+    "usd": "USD",
+    "zar": "Rand Sul-Africano"
+  },
+  "pluralization": {
+    "title": "Pluralização",
+    "description": "As formas plurais variam de acordo com o idioma.",
+    "item_title": "Item (Substantivo)",
+    "user_title": "Usuário (Pessoa)",
+    "product_title": "Produto (Bens)"
+  },
+  "form": {
+    "title": "Formulário com Placeholders Traduzidos",
+    "description": "Placeholders e rótulos carregados de arquivos de localização.",
+    "name_label": "Nome",
+    "name_placeholder": "Digite seu nome completo",
+    "email_label": "E-mail",
+    "email_placeholder": "exemplo@email.com",
+    "message_label": "Mensagem",
+    "message_placeholder": "Digite sua mensagem aqui...",
+    "submit": "Enviar"
+  },
+  "missing_keys": {
+    "title": "Manipulador de Chaves Ausentes",
+    "description": "Chaves ausentes são exibidas entre colchetes."
+  },
+  "html_content": {
+    "title": "Conteúdo HTML",
+    "description": "As traduções podem incluir tags HTML para estilo.",
+    "example": "Este é um exemplo com <span class='text-emerald-400'>destaque colorido</span> e <strong>texto em negrito</strong>.",
+    "note": "Nota: HTML nas traduções deve ter um único elemento raiz."
+  },
+  "switcher": {
+    "title": "Trocar Idioma",
+    "description": "Clique nos botões abaixo para mudar o idioma e ver i18n em ação."
+  },
+  "advanced": {
+    "title": "Formatação Avançada",
+    "description": "Recursos avançados de formatação para porcentagens, unidades, bytes, listas e ordinais.",
+    "percentages": "Porcentagens",
+    "units": "Unidades",
+    "bytes": "Bytes",
+    "bytes_unit": "bytes",
+    "lists": "Listas",
+    "ordinals": "Ordinais",
+    "cardinals": "Cardinais",
+    "scientific": "Notação Científica",
+    "abbreviated": "Abreviado",
+    "date_formats": "Formatos de Data",
+    "time_formats": "Formatos de Hora",
+    "datetime": "Data + Hora",
+    "durations": "Durações",
+    "relative_time": "Tempo Relativo",
+    "regional_pricing": "Preços Regionais",
+    "fifty_percent": "Cinquenta Por Cento",
+    "small_percent": "Pequena Porcentagem",
+    "ninety_nine": "Noventa e Nove",
+    "hundred": "Cem",
+    "kilobyte": "Kilobyte",
+    "distance": "Distância",
+    "temperature": "Temperatura",
+    "weight": "Peso",
+    "half_kb": "Meio KB",
+    "one_and_half_kb": "Um KB e Meio",
+    "one_mb": "Um MB",
+    "one_gb": "Um GB",
+    "two_items": "Dois Itens",
+    "three_items": "Três Itens",
+    "four_items": "Quatro Itens",
+    "date_short": "Data Curta",
+    "date_long": "Data Longa",
+    "time_short": "Hora Curta",
+    "time_long": "Hora Longa",
+    "day_ago": "há 1 dia",
+    "months_ago": "há 2 meses",
+    "hour_in": "em 1 hora",
+    "starter_plan": "Plano Inicial",
+    "pro_plan": "Plano Pro",
+    "discount_20": "20% Desconto",
+    "number_modes": "Modos de Número",
+    "number_modes_desc": "Demonstração de tNative (dígitos nativos) e tUniversal (universal 0-9).",
+    "native_label": "Nativo (٠١٢٣٤)",
+    "universal_label": "Universal (0-9)",
+    "plain_label": "Simples (auto)"
+  },
+  "template_macros": {
+    "title": "Macros de Template",
+    "description": "Macros para obter valores brutos sem marcação HTML.",
+    "raw_value": "Valor bruto sem formatação",
+    "current_year": "O ano atual é {{year}}"
+  },
+  "datetime": {
+    "title": "Data e Hora",
+    "description": "Formato combinado de data e hora.",
+    "iso": "Padrão ISO",
+    "eve": "Véspera de Natal"
+  },
+  "unit": {
+    "title": "Formato de Unidades"
+  },
+  "native_digits": {
+    "title": "Dígitos Nativos",
+    "description": "Texto com dígitos ASCII é renderizado nos dígitos nativos da locale ativa. Atualizado em tempo real ao mudar de idioma."
+  },
+  "inflection": {
+    "title": "Inflexão do Inglês",
+    "description": "Pluralização e singularização do inglês. Atualizado em tempo real ao mudar de idioma."
+  },
+  "live_label": "Ao vivo",
+  "pricing_details": {
+    "title": "Detalhes de Preços",
+    "description": "Pipeline completo: valor raw, código de moeda, formatado, desconto e convertido.",
+    "raw_value": "Valor Raw",
+    "raw_currency": "Código de Moeda",
+    "formatted": "Formatado",
+    "discounted": "20% Desconto",
+    "converted_usd": "Convertido para USD"
+  },
+  "live_update": {
+    "note": "Observe como todos os números, datas e preços são atualizados instantaneamente quando você muda o idioma — sem recarregar a página."
+  },
+  "core": {
+    "title": "Características Principais",
+    "description": "Tradução, pluralização e conteúdo HTML."
+  },
+  "section_modes": {
+    "title": "Modos de Número",
+    "description": "Compare dígitos nativos, formato universal e modo automático para a localidade ativa."
+  },
+  "section_systems": {
+    "title": "Sistemas de Escrita",
+    "description": "Todos os 7 sistemas algorítmicos e 4 sistemas numéricos adicionais no nível de sistema, com carregadores de fonte conectados.",
+    "note": "Todos os sistemas numéricos (algorítmicos e numéricos) exibem dígitos nativos corretos com fallback ICU."
+  },
+  "nav": {
+    "translations": "Traduções",
+    "formatting": "Números",
+    "pricing": "Preços",
+    "modes": "Modos",
+    "systems": "Sistemas",
+    "switcher": "Mudar Locale"
+  }
+}
