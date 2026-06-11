@@ -3,7 +3,7 @@ import path from 'node:path';
 import { i18nConfig } from '../src/configs/i18n';
 import { PATHS } from '../src/configs/paths';
 import { LOCALE_CODES } from '../src/scripts/lib/i18n/data';
-import { log } from './shared/logger';
+import { log, logBox } from './shared/logger';
 
 const LOCALES_ROOT = path.join(PATHS.ROOT, PATHS.LOCALES);
 
@@ -56,12 +56,10 @@ function createLocale(
 }
 
 try {
-  log.info('┌────────────────────────────────────────┐');
-  log.info('│         Sync Locale Files               │');
-  log.info('├────────────────────────────────────────┤');
-  log.info(`│  Configured:  ${String(LOCALE_CODES.length).padEnd(24)}│`);
-  log.info(`│  Default:     ${i18nConfig.defaultLocale.padEnd(24)}│`);
-  log.info('└────────────────────────────────────────┘\n');
+  logBox('Sync Locale Files', {
+    Configured: LOCALE_CODES.length,
+    Default: i18nConfig.defaultLocale,
+  });
 
   const existingLocales = fs.existsSync(LOCALES_ROOT)
     ? fs.readdirSync(LOCALES_ROOT).filter((f) => {
@@ -99,11 +97,7 @@ try {
     log.info('');
   }
 
-  log.info('┌────────────────────────────────────────┐');
-  log.info(
-    `│       Done: Created ${String(totalCreated).padEnd(15)} file(s) │`,
-  );
-  log.info('└────────────────────────────────────────┘');
+  logBox('Done', { Created: `${totalCreated} file(s)` });
   log.info('\nNext steps:');
   log.info('  1. Translate the new locale files');
   log.info('  2. Run `bun run build` to update types\n');

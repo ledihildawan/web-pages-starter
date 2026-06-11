@@ -4,13 +4,13 @@ import process from 'node:process';
 import '../src/configs/env';
 import { PATHS } from '../src/configs/paths';
 import { ROOT_PAGE } from '../src/configs/site';
-import { log } from './shared/logger';
+import { log, logBox } from './shared/logger';
+import { SITE_URL } from './shared/site-url';
+import { writeFilePath } from './shared/write-file';
 
 const cliArgs = process.argv.slice(2);
 const distOnly = cliArgs.includes('--dist-only');
 const isPreviewRegen = process.env.FOR_PREVIEW === 'true';
-
-const SITE_URL = process.env.SITE_URL || 'http://localhost:8888';
 
 const PAGES_DIR = path.join(PATHS.ROOT, PATHS.SRC, 'pages');
 const OUTPUT_PUBLIC = path.join(PATHS.ROOT, 'public', 'sitemap.xml');
@@ -71,25 +71,17 @@ const generateSitemap = () => {
 ${urls.join('\n')}
 </urlset>`;
 
-  const OUTPUT_DIST_DIR = path.dirname(OUTPUT_DIST);
-  if (!fs.existsSync(OUTPUT_DIST_DIR)) {
-    fs.mkdirSync(OUTPUT_DIST_DIR, { recursive: true });
-  }
   if (!distOnly && !isPreviewRegen) {
-    fs.writeFileSync(OUTPUT_PUBLIC, xml, 'utf-8');
+    writeFilePath(OUTPUT_PUBLIC, xml);
   }
-  fs.writeFileSync(OUTPUT_DIST, xml, 'utf-8');
+  writeFilePath(OUTPUT_DIST, xml);
 
   if (!isPreviewRegen) {
-    log.info('┌────────────────────────────────────────┐');
-    log.info('│         Generate Sitemap               │');
-    log.info('├────────────────────────────────────────┤');
-    log.info(`│  Pages:     ${String(urls.length).padEnd(24)}│`);
-    log.info(`│  Base URL:  ${baseUrl.slice(0, 24).padEnd(24)}│`);
-    log.info(
-      `│  Output:    ${OUTPUT_PUBLIC.replace(PATHS.ROOT, '.').slice(0, 24).padEnd(24)}│`,
-    );
-    log.info('└────────────────────────────────────────┘');
+    logBox('Generate Sitemap', {
+      Pages: urls.length,
+      'Base URL': baseUrl.slice(0, 24),
+      Output: OUTPUT_PUBLIC.replace(PATHS.ROOT, '.').slice(0, 24),
+    });
   }
 };
 

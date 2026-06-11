@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '../src/configs/i18n';
 import { PATHS } from '../src/configs/paths';
-import { log } from './shared/logger';
+import { log, logBox } from './shared/logger';
 import { wrapMainError } from './shared/signal-handler';
 
 const SITE_TS_PATH = path.join(PATHS.ROOT, PATHS.SRC, 'configs', 'site.ts');
@@ -56,12 +56,10 @@ async function main() {
   const currentRootPage = getCurrentRootPage();
   const currentFolder = getCurrentRootFolder();
 
-  log.info('┌────────────────────────────────────────┐');
-  log.info('│         Sync Root Page                 │');
-  log.info('├────────────────────────────────────────┤');
-  log.info(`│  ROOT_PAGE in config: ${currentRootPage.padEnd(18)}│`);
-  log.info(`│  Current folder:      ${currentFolder.padEnd(18)}│`);
-  log.info('└────────────────────────────────────────┘\n');
+  logBox('Sync Root Page', {
+    'ROOT_PAGE in config': currentRootPage,
+    'Current folder': currentFolder,
+  });
 
   if (currentFolder === currentRootPage) {
     log.info('Already synced — ROOT_PAGE matches current folder');
@@ -117,13 +115,11 @@ async function main() {
   );
   fs.writeFileSync(GLOBAL_JSON5_PATH, globalContent);
 
-  log.info('\n┌────────────────────────────────────────┐');
-  log.info('│         Sync Complete                    │');
-  log.info('├────────────────────────────────────────┤');
-  log.info(`│  Folder:    ${currentFolder.padEnd(24)}│`);
-  log.info(`│  Locale:    ${newName}.json5 (all locales)     │`);
-  log.info(`│  global.json5: Updated root_page       │`);
-  log.info('└────────────────────────────────────────┘\n');
+  logBox('Sync Complete', {
+    Folder: currentFolder,
+    Locale: `${newName}.json5 (all locales)`,
+    'global.json5': 'Updated root_page',
+  });
 }
 
 function getAllNjkFiles(dir: string): string[] {

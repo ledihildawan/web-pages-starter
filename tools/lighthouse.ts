@@ -5,10 +5,10 @@ import process from 'node:process';
 import inquirer from 'inquirer';
 import { DOMParser } from 'linkedom';
 import '../src/configs/env';
-import { log } from './shared/logger';
+import { log, logBox } from './shared/logger';
 import { setupSigintHandler, wrapMainError } from './shared/signal-handler';
+import { SITE_URL } from './shared/site-url';
 
-const BASE_URL = process.env.SITE_URL || 'http://localhost:8888';
 const OUTPUT_DIR = process.env.LIGHTHOUSE_OUTPUT_DIR || './reports';
 
 const hasNgrokFlag = (args: string[]) => args.includes('--ngrok');
@@ -375,20 +375,20 @@ Examples:
       log.error('Error: --url requires a path argument');
       process.exit(1);
     }
-    const base = BASE_URL.endsWith('/') ? BASE_URL.slice(0, -1) : BASE_URL;
+    const base = SITE_URL.endsWith('/') ? SITE_URL.slice(0, -1) : SITE_URL;
     urls = [`${base}${urlPath.startsWith('/') ? urlPath : `/${urlPath}`}`];
   } else if (cliArgs.includes('--no-sitemap')) {
-    urls = [BASE_URL];
+    urls = [SITE_URL];
   } else {
     try {
       const sitemapXml = await fetchSitemap(
-        BASE_URL,
-        getExtraHeaders(BASE_URL, cliArgs),
+        SITE_URL,
+        getExtraHeaders(SITE_URL, cliArgs),
       );
       urls = parseSitemap(sitemapXml);
     } catch (err) {
       log.warn(`Warning: Could not fetch sitemap — ${(err as Error).message}`);
-      urls = [BASE_URL];
+      urls = [SITE_URL];
     }
   }
 
@@ -430,19 +430,17 @@ Examples:
   const categoriesLabel =
     categories.length === categoriesList.length ? 'All' : categories.join(', ');
   const reportDir = path.join(OUTPUT_DIR, 'lighthouse', timestamp);
-
-  log.info('\n┌────────────────────────────────────────┐');
-  log.info('│         Lighthouse Audit               │');
-  log.info('├────────────────────────────────────────┤');
-  log.info(`│  Form factor:  ${formFactorDisplay.padEnd(24)}│`);
-  log.info(`│  Categories:   ${categoriesLabel.padEnd(24)}│`);
-  log.info(`│  Output:       ${outputTypes.join(',').padEnd(24)}│`);
-  log.info(`│  URLs:         ${String(urls.length).padEnd(24)}│`);
   const maxLen = 36;
   const truncate = (s: string) =>
     s.length > maxLen ? `...${s.slice(-(maxLen - 3))}` : s;
-  log.info(`│  Report dir:   ${truncate(reportDir).padEnd(maxLen - 13)}│`);
-  log.info('└────────────────────────────────────────┘');
+
+  logBox('Lighthouse Audit', {
+    'Form factor': formFactorDisplay,
+    Categories: categoriesLabel,
+    Output: outputTypes.join(','),
+    URLs: urls.length,
+    'Report dir': truncate(reportDir),
+  });
 
   fs.mkdirSync(reportDir, { recursive: true });
 

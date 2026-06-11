@@ -1,10 +1,10 @@
-import fs from 'node:fs';
 import path from 'node:path';
 import '../src/configs/env';
 import { i18nConfig } from '../src/configs/i18n';
 import { PATHS } from '../src/configs/paths';
 import { loadGlobalData } from '../src/scripts/utils/json5';
-import { log } from './shared/logger';
+import { logBox } from './shared/logger';
+import { writeFilePath } from './shared/write-file';
 
 const OUTPUT_PUBLIC = path.join(PATHS.ROOT, 'public', 'manifest.json');
 
@@ -59,15 +59,11 @@ const manifest = {
   prefer_related_applications: false,
 };
 
-const json = `${JSON.stringify(manifest, null, 2)}\n`;
+writeFilePath(OUTPUT_PUBLIC, `${JSON.stringify(manifest, null, 2)}\n`);
 
-fs.writeFileSync(OUTPUT_PUBLIC, json, 'utf-8');
-
-log.info('┌────────────────────────────────────────┐');
-log.info('│         Generate Manifest              │');
-log.info('├────────────────────────────────────────┤');
-log.info(`│  Name:      ${(siteName as string).padEnd(26)}│`);
-log.info(`│  Lang:      ${defaultLocale.padEnd(26)}│`);
-log.info(`│  Theme:     ${themeColor.padEnd(26)}│`);
-log.info(`│  Output:    public/manifest.json       │`);
-log.info('└────────────────────────────────────────┘');
+logBox('Generate Manifest', {
+  Name: siteName,
+  Lang: defaultLocale,
+  Theme: themeColor,
+  Output: 'public/manifest.json',
+});

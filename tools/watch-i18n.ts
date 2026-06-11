@@ -3,7 +3,7 @@ import path from 'node:path';
 import process from 'node:process';
 import chokidar from 'chokidar';
 import { PATHS } from '../src/configs/paths';
-import { log } from './shared/logger';
+import { log, logBox } from './shared/logger';
 import { setupSigintHandler } from './shared/signal-handler';
 
 const LOCALE_DIR = path.resolve(process.cwd(), PATHS.LOCALES);
@@ -13,13 +13,9 @@ if (!fs.existsSync(LOCALE_DIR)) {
   process.exit(1);
 }
 
-log.info('┌────────────────────────────────────────┐');
-log.info('│         Watch i18n Changes             │');
-log.info('├────────────────────────────────────────┤');
-log.info(
-  `│  Watching: ${LOCALE_DIR.replace(process.cwd(), '.').slice(0, 24).padEnd(24)}│`,
-);
-log.info('└────────────────────────────────────────┘\n');
+logBox('Watch i18n Changes', {
+  Watching: LOCALE_DIR.replace(process.cwd(), '.').slice(0, 24),
+});
 
 const watcher = chokidar.watch(LOCALE_DIR, {
   persistent: true,

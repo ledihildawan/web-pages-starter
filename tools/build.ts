@@ -3,29 +3,21 @@ import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 import '../src/configs/env';
-import { log } from './shared/logger';
+import { log, logBox } from './shared/logger';
 
 const args = process.argv.slice(2);
 
 const env: NodeJS.ProcessEnv = { ...process.env, NODE_ENV: 'production' };
 
-log.info('┌────────────────────────────────────────┐');
-log.info('│           Build Process                │');
-log.info('├────────────────────────────────────────┤');
-
+const mode = args.includes('--debug') ? 'debug (no minify)' : 'production';
 if (args.includes('--debug')) {
-  log.info('│  Mode:          debug (no minify)       │');
   env.MINIFY = 'false';
-} else {
-  log.info('│  Mode:          production              │');
 }
-
 if (args.includes('--no-html-minify')) {
-  log.info('│  HTML minify:   disabled                │');
   env.MINIFY_HTML = 'false';
 }
 
-log.info('└────────────────────────────────────────┘');
+logBox('Build Process', { Mode: mode });
 
 const distPath = path.resolve(process.cwd(), 'dist');
 if (fs.existsSync(distPath)) {

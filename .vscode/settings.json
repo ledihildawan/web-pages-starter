@@ -1,0 +1,76 @@
+{
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#9b69f1",
+    "activityBar.background": "#9b69f1",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#f4b18a",
+    "activityBarBadge.foreground": "#15202b",
+    "commandCenter.border": "#e7e7e799",
+    "sash.hoverBorder": "#9b69f1",
+    "statusBar.background": "#7c3aed",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#9b69f1",
+    "statusBarItem.remoteBackground": "#7c3aed",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "titleBar.activeBackground": "#7c3aed",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#7c3aed99",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+  "peacock.color": "#7c3aed",
+
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports.biome": "explicit",
+    "source.fixAll.biome": "explicit"
+  },
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+
+  "files.associations": {
+    "*.njk": "njk",
+    "*.css": "tailwindcss"
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "node_modules": true
+  },
+  "files.watcherExclude": {
+    "**/node_modules/**": true
+  },
+  "search.exclude": {
+    "node_modules": true
+  },
+
+  "html.suggest.html5": true,
+
+  "emmet.includeLanguages": {
+    "njk": "html"
+  },
+
+  "tailwindCSS.includeLanguages": {
+    "njk": "html"
+  },
+
+  "[njk]": {
+    "editor.defaultFormatter": "douglaszaltron.nunjucks-vscode-extensionpack"
+  },
+
+  "i18n-ally.localesPaths": "src/locales",
+  "i18n-ally.sourceLanguage": "id-ID",
+  "i18n-ally.displayLanguage": "id-ID",
+  "i18n-ally.keystyle": "nested",
+  "i18n-ally.enabledFrameworks": ["i18next"],
+  "i18n-ally.namespace": true,
+  "i18n-ally.pathMatcher": "{locale}/{namespaces}.json5",
+  "i18n-ally.annotations": true,
+  "i18n-ally.extract.keygenStrategy": "slug",
+  "i18n-ally.theme.annotation": "rgba(139, 92, 246, 0.7)",
+  "i18n-ally.theme.annotationBorder": "rgba(139, 92, 246, 0.3)",
+  "i18n-ally.theme.annotationMissing": "#ef4444",
+  "i18n-ally.theme.annotationMissingBorder": "#ef444466"
+}

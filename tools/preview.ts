@@ -1,22 +1,18 @@
 import { spawn } from 'node:child_process';
-import fs, { existsSync, statSync } from 'node:fs';
-import { readFile } from 'node:fs/promises';
+import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 import type { serve } from '@hono/node-server';
-import { serveStatic } from '@hono/node-server/serve-static';
 import ngrok from '@ngrok/ngrok';
-import { Hono } from 'hono';
-import { compress } from 'hono/compress';
 import inquirer from 'inquirer';
+import { PATHS } from '../src/configs/paths';
+import { createStaticApp } from './shared/hono-server';
 import { log } from './shared/logger';
 import {
   createServer,
   setupSigintHandler,
   wrapMainError,
 } from './shared/signal-handler';
-import '../src/configs/env';
-import { PATHS } from '../src/configs/paths';
 
 const PORT = Number.parseInt(process.env.PORT ?? '8888', 10);
 const HOST = process.env.HOST ?? '127.0.0.1';
@@ -124,81 +120,6 @@ const main = async () => {
     provider = selected;
   }
 
-  const STATIC_ASSET_RE =
-    /^\/(?:locales\/|assets\/|fonts\/|images\/|favicon\.svg$|favicon\.ico$|manifest\.json$|sw\.js$|robots\.txt$|sitemap\.xml$|.*\.[a-z0-9]+$)/;
-  const FINGERPRINTED_ASSET_RE = /^\/(?:locales|assets|fonts|images)\//;
-  const HTML_RE = /\.html?$/;
-  const SW_RE = /\/sw\.js$/;
-  const ONE_YEAR = 31_536_000;
-  const ONE_HOUR = 3_600;
-
-  const getCacheControl = (urlPath: string): string => {
-    if (SW_RE.test(urlPath))
-      return 'no-store, no-cache, must-revalidate, max-age=0';
-    if (HTML_RE.test(urlPath)) return 'no-cache, must-revalidate, max-age=0';
-    if (FINGERPRINTED_ASSET_RE.test(urlPath))
-      return `public, max-age=${ONE_YEAR}, immutable`;
-    if (/\.(?:json|xml|txt|svg|ico)$/.test(urlPath))
-      return `public, max-age=${ONE_HOUR}`;
-    return 'public, max-age=0, must-revalidate';
-  };
-
-  const getPageNames = () => {
-    return fs
-      .readdirSync(DIST)
-      .filter((f) => f.endsWith('.html'))
-      .map((f) => f.replace(/\.html$/, ''));
-  };
-
-  const tryReadFile = async (relPath: string): Promise<string | null> => {
-    const fullPath = path.join(DIST, relPath);
-    if (!existsSync(fullPath)) return null;
-    if (!statSync(fullPath).isFile()) return null;
-    return readFile(fullPath, 'utf8');
-  };
-
-  const createApp = () => {
-    const app = new Hono();
-    app.use('*', compress());
-    app.use('*', async (c, next) => {
-      const start = Date.now();
-      await next();
-      if (!c.res.headers.has('Cache-Control')) {
-        c.res.headers.set('Cache-Control', getCacheControl(c.req.path));
-      }
-      const ms = Date.now() - start;
-      log.info(
-        `\x1b[90m${ms.toString().padStart(4)}ms\x1b[0m ${c.req.method} ${c.req.path}`,
-      );
-    });
-
-    app.use(
-      '/*',
-      serveStatic({ root: './dist', rewriteRequestPath: (p) => p }),
-    );
-
-    app.get('*', async (c) => {
-      const reqPath = c.req.path;
-      if (STATIC_ASSET_RE.test(reqPath)) return c.notFound();
-      if (reqPath === '/') {
-        const home = await tryReadFile('index.html');
-        if (home) return c.html(home);
-        return c.notFound();
-      }
-      const segments = reqPath.replace(/^\/+|\/+$/g, '').split('/');
-      const first = segments[0];
-      if (first) {
-        const content = await tryReadFile(`${first}.html`);
-        if (content) return c.html(content);
-      }
-      const notFound = await tryReadFile('404.html');
-      if (notFound) return c.html(notFound, 404);
-      return c.notFound();
-    });
-
-    return app;
-  };
-
   let tunnelUrl = '';
   let tunnelClose: (() => void) | null = null;
   let serverInstance: ReturnType<typeof serve> | null = null;
@@ -230,7 +151,7 @@ const main = async () => {
 
     await runBuild();
 
-    const app = createApp();
+    const app = createStaticApp(DIST);
 
     log.info('Starting server...');
     serverInstance = createServer({
@@ -246,11 +167,11 @@ const main = async () => {
 
     await runBuild();
 
-    const app1 = createApp();
+    const app = createStaticApp(DIST);
 
     log.info('Starting server...');
     serverInstance = createServer({
-      fetch: app1.fetch,
+      fetch: app.fetch,
       port: PORT,
       hostname: HOST,
     });
@@ -311,10 +232,11 @@ const main = async () => {
     process.on('SIGINT', shutdown);
     process.on('SIGTERM', shutdown);
 
+    const { getPageNames } = await import('./shared/hono-server');
     log.info(`\n  Preview ready at ${tunnelUrl || `http://${HOST}:${PORT}`}\n`);
     log.info(`  Mode: preview (${provider})`);
     log.info(
-      `  Pages: ${getPageNames()
+      `  Pages: ${getPageNames(DIST)
         .filter((n) => n !== '404')
         .join(', ')}\n`,
     );

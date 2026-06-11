@@ -1,16 +1,11 @@
-const CACHE_NAME = 'starter-v2';
+const CACHE_NAME = 'starter-v3';
 const BASE = new URL('.', self.location.href).pathname;
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache
-        .addAll([
-          BASE,
-          `${BASE}home.html`,
-          `${BASE}404.html`,
-          `${BASE}manifest.json`,
-        ])
+        .addAll([BASE, `${BASE}404.html`, `${BASE}manifest.json`])
         .catch(() => Promise.resolve());
     }),
   );

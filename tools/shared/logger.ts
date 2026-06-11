@@ -35,3 +35,23 @@ export const log = {
   distNotFound: () =>
     console.log('dist/ not found — run `bun run build` first.'),
 };
+
+const BOX_WIDTH = 40;
+
+export function logBox(
+  title: string,
+  entries: Record<string, string | number>,
+): void {
+  const inner = BOX_WIDTH;
+  log.info(`┌${'─'.repeat(inner + 2)}┐`);
+  log.info(
+    `│ ${title.padStart(Math.floor((inner + title.length) / 2)).padEnd(inner)} │`,
+  );
+  log.info(`├${'─'.repeat(inner + 2)}┤`);
+  for (const [label, value] of Object.entries(entries)) {
+    const str = String(value);
+    const row = `${label}: ${str}`;
+    log.info(`│ ${row.padEnd(inner)} │`);
+  }
+  log.info(`└${'─'.repeat(inner + 2)}┘`);
+}

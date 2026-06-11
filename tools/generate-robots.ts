@@ -1,11 +1,10 @@
-import fs from 'node:fs';
 import path from 'node:path';
-import process from 'node:process';
 import '../src/configs/env';
 import { PATHS } from '../src/configs/paths';
-import { log } from './shared/logger';
+import { logBox } from './shared/logger';
+import { SITE_URL } from './shared/site-url';
+import { writeFilePath } from './shared/write-file';
 
-const SITE_URL = process.env.SITE_URL || 'http://localhost:8888';
 const OUTPUT_PUBLIC = path.join(PATHS.ROOT, 'public', 'robots.txt');
 
 const baseUrl = SITE_URL.endsWith('/') ? SITE_URL : `${SITE_URL}/`;
@@ -18,11 +17,9 @@ Disallow: /assets/sw.js
 Sitemap: ${baseUrl}sitemap.xml
 `;
 
-fs.writeFileSync(OUTPUT_PUBLIC, robots, 'utf-8');
+writeFilePath(OUTPUT_PUBLIC, robots);
 
-log.info('┌────────────────────────────────────────┐');
-log.info('│         Generate Robots.txt            │');
-log.info('├────────────────────────────────────────┤');
-log.info(`│  Sitemap:   ${baseUrl.slice(0, 28).padEnd(28)}│`);
-log.info(`│  Output:    public/robots.txt          │`);
-log.info('└────────────────────────────────────────┘');
+logBox('Generate Robots.txt', {
+  Sitemap: baseUrl.slice(0, 28),
+  Output: 'public/robots.txt',
+});
