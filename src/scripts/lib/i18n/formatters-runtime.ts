@@ -179,6 +179,7 @@ const FORMATTERS = [
       const unit = el.getAttribute('data-unit');
       return unit
         ? formatUnit(parseFloat(v), unit, {
+            numberingSystem: getNumberingSystemAttr(el),
             nativeDigits: el.getAttribute('data-use-native') === 'true',
           })
         : v;

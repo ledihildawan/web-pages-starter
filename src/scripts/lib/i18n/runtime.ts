@@ -71,12 +71,17 @@ const getNativeDigitSetting = (el: HTMLElement): boolean | undefined => {
   return undefined;
 };
 
+const getNs = (el: HTMLElement): string | undefined => {
+  const ns = el.getAttribute('data-numbering-system');
+  return ns && ns.length > 0 ? ns : undefined;
+};
+
 const FORMATTERS = [
   {
     attr: 'data-format-number',
     format: (v: string, el: HTMLElement) =>
       formatNumber(parseFloat(v), {
-        numberingSystem: el.getAttribute('data-numbering-system') || undefined,
+        numberingSystem: getNs(el),
         nativeDigits: el.getAttribute('data-use-native') === 'true',
       }),
   },
@@ -84,6 +89,7 @@ const FORMATTERS = [
     attr: 'data-format-percent',
     format: (v: string, el: HTMLElement) =>
       formatPercent(parseFloat(v), {
+        numberingSystem: getNs(el),
         nativeDigits: el.getAttribute('data-use-native') === 'true',
       }),
   },
@@ -103,6 +109,7 @@ const FORMATTERS = [
     attr: 'data-format-scientific',
     format: (v: string, el: HTMLElement) =>
       formatScientific(parseFloat(v), {
+        numberingSystem: getNs(el),
         nativeDigits: el.getAttribute('data-use-native') === 'true',
       }),
   },
@@ -141,6 +148,7 @@ const FORMATTERS = [
         parseFloat(v),
         el.getAttribute('data-target-currency') ?? dc,
         {
+          numberingSystem: getNs(el),
           nativeDigits: el.getAttribute('data-use-native') === 'true',
         },
       ),
@@ -151,6 +159,7 @@ const FORMATTERS = [
       const currency = el.getAttribute('data-target-currency') ?? dc;
       const rate = EXCHANGE_RATES[currency as keyof typeof EXCHANGE_RATES] ?? 1;
       return formatCurrency(parseFloat(v) * rate, currency, {
+        numberingSystem: getNs(el),
         nativeDigits: el.getAttribute('data-use-native') === 'true',
       });
     },
@@ -212,6 +221,7 @@ const FORMATTERS = [
       const unit = el.getAttribute('data-unit');
       return unit
         ? formatUnit(parseFloat(v), unit, {
+            numberingSystem: getNs(el),
             nativeDigits: el.getAttribute('data-use-native') === 'true',
           })
         : v;

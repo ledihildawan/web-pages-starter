@@ -184,6 +184,7 @@ const createI18nObject = (
     base: Record<string, string | number | boolean | undefined>,
     vars?: string | null,
     nativeDigits?: boolean,
+    numberingSystem?: string,
   ): Record<string, string | number | boolean> => {
     const result: Record<string, string | number | boolean> = {};
     for (const [key, value] of Object.entries(base)) {
@@ -191,6 +192,7 @@ const createI18nObject = (
     }
     if (vars) result['i18n-vars'] = vars;
     if (nativeDigits) result['use-native'] = 'true';
+    if (numberingSystem) result['numbering-system'] = numberingSystem;
     return result;
   };
 
@@ -312,6 +314,7 @@ const createI18nObject = (
           { 'format-currency': value, 'currency-code': currency },
           undefined,
           options?.nativeDigits,
+          options?.numberingSystem,
         ),
         options?.className,
       );
@@ -329,6 +332,7 @@ const createI18nObject = (
           { 'format-percent': value },
           undefined,
           options?.nativeDigits,
+          options?.numberingSystem,
         ),
         options?.className,
       );
@@ -438,6 +442,7 @@ const createI18nObject = (
           { 'format-scientific': value },
           undefined,
           options?.nativeDigits,
+          options?.numberingSystem,
         ),
         options?.className,
       );
@@ -479,6 +484,7 @@ const createI18nObject = (
           { 'format-unit': value, unit },
           undefined,
           options?.nativeDigits,
+          options?.numberingSystem,
         ),
         options?.className,
       );
@@ -497,6 +503,7 @@ const createI18nObject = (
           { 'convert-currency': value, 'target-currency': targetCurrency },
           undefined,
           options?.nativeDigits,
+          options?.numberingSystem,
         ),
         options?.className,
       );
@@ -536,6 +543,7 @@ const createI18nObject = (
           },
           undefined,
           options?.nativeDigits,
+          options?.numberingSystem,
         ),
         options?.className,
       );
@@ -553,6 +561,7 @@ const createI18nObject = (
           { 'local-price': escapeHtmlAttr(JSON.stringify(plan.pricing)) },
           undefined,
           options?.nativeDigits,
+          options?.numberingSystem,
         ),
         options?.className,
       );
@@ -581,6 +590,7 @@ const createI18nObject = (
           },
           undefined,
           options?.nativeDigits,
+          options?.numberingSystem,
         ),
         options?.className,
       );
