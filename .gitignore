@@ -10,8 +10,9 @@ node_modules
 dist/
 .rsbuild
 
-# Generated
-generated/
+# Generated (stub files are tracked)
+generated/i18n.d.ts
+generated/exchange-rates.ts
 coverage
 reports/
 
