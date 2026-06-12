@@ -53,7 +53,7 @@ tools/                     #   build-time CLI scripts
   └── shared/              #   shared modules (logger, signal-handler, hono-server, site-url, write-file)
 public/                    #   static assets (favicon, sw.js, generated manifest/robots/sitemap)
   └── assets/i18n/         #   pre-compiled i18n JSON bundles (generated)
-generated/                 #   auto-generated (gitignored at file level; stubs tracked for typecheck)
+generated/                 #   auto-generated types + exchange rates (gitignored at file level; stubs committed for fresh-clone typecheck; overwritten at build time)
 docs/                      #   documentation
 ```
 
@@ -112,6 +112,14 @@ The `url()` helper generates `BASE_PATH`-aware internal links at build time:
 
 Use `url()` for all internal links instead of hardcoded paths.
 
+### Template conventions
+
+- `url()` for all internal links, `isActive()` for navbar active state (runtime `basePath`)
+- Macros receive resolved text, not keys (except `form-input.njk` which takes keys and receives `i18n`)
+- String concatenation: `~` everywhere in Nunjucks (never `+`)
+- `currentYear` from `new Date().getFullYear()` in template params
+- No `i18n.text()` — use `i18n.t(key, vars, { raw: true })` for plain strings
+
 ## Components
 
 Shared Nunjucks partials live in `src/components/`. Two usage patterns:
@@ -153,6 +161,7 @@ CSS custom properties on `:root` in `src/styles/main.css`:
 | --- | --- |
 | `--gradient-primary` / `--gradient-primary-subtle` / `--gradient-hero` / `--gradient-violet` | Gradient presets |
 | `--elevation-1` / `--elevation-2` / `--elevation-3` | Shadow depth |
+| `--shadow-border` / `--shadow-border-hover` | Shadow-as-border for cards (replaces `border` for depth) |
 | `--radius-card-*` / `--radius-btn` / `--radius-icon` | Border radii |
 | `--font-primary` | Dynamic font (set by i18n writing system) |
 | `--dir` | `1` (LTR) / `-1` (RTL) for JS transforms |
@@ -162,10 +171,13 @@ CSS custom properties on `:root` in `src/styles/main.css`:
 Reusable interaction patterns defined in `@layer components`:
 
 - **Animations:** `.entrance-blur`, `.entrance-fade-scale`, `.float-gentle`
-- **Press effects:** `.btn-squash`, `.card-squash`, `.anticipate-press`
-- **Hover effects:** `.hover-lift`, `.card-hover-lift`, `.icon-bounce`
-- **Cards:** `.card-border-glow`, `.spotlight-card`, `.ripple-click`
-- **Utilities:** `.text-gradient-primary`, `.no-scroll`, `.gpu-accelerated`
+- **Press effects:** `.btn-squash`, `.card-squash`, `.icon-squash`, `.anticipate-press`, `.btn-press`, `.input-active`
+- **Hover effects:** `.hover-lift`, `.card-hover-lift`
+- **Cards:** `.card-border-glow`, `.spotlight-card`, `.ripple-click`, `.sparkle-hover`
+- **Toggles:** `.toggle-btn`, `.toggle-knob`
+- **Decorative:** `.grid-pattern`, `.noise-texture`
+- **Borders:** `.card-border`, `.card-border-hover`
+- **Color shift:** `.color-shift`
 
 ### RTL strategy
 
@@ -178,6 +190,21 @@ Five layers of RTL support:
 5. **`.is-rtl` class** — toggled on `<html>` by the Alpine i18n store
 
 RTL locales: Arabic (`ar-*`), Hebrew, N'Ko, Adlam.
+
+## UI Polish
+
+Ten principles enforced across all pages:
+
+1. **Transition specificity** — Never use bare `transition` (maps to `all`). Specify exact properties: `transition-[color,background-color]`, `transition-[scale,box-shadow]`.
+2. **Scale on press** — Always `scale(0.96)` for press feedback. Never below 0.95.
+3. **Optical alignment** — Icon+text buttons get ~2px less padding on the icon side for visual balance.
+4. **Shadows over borders** — Cards use `.card-border` / `.card-border-hover` (backed by `--shadow-border` / `--shadow-border-hover`) instead of `border` for depth. Form inputs keep borders for accessibility.
+5. **Entrance animations** — Combine `blur(4px)` + `translateY(12px)`. Never `blur(8px)` + `scale`.
+6. **Tabular numbers** — Only on dynamically changing numbers (e.g. pricing toggle). Not on static decorative stats.
+7. **Font smoothing** — `-webkit-font-smoothing: antialiased` at root.
+8. **Text wrapping** — `text-wrap: balance` on headings, `text-wrap: pretty` on body text.
+9. **Image outlines** — `rgba(0,0,0,0.1)` light / `rgba(255,255,255,0.1)` dark. Never tinted.
+10. **Concentric border radius** — Outer radius = inner radius + padding.
 
 ## i18n
 
@@ -284,7 +311,7 @@ sync-root-page → clean:cache → fetch:rates → generate-i18n → generate-si
 1. **sync-root-page** — ensures root page folder matches `ROOT_PAGE` config
 2. **clean-cache** — purges `node_modules/.cache`, `.cache`, `dist`
 3. **fetch-exchange-rates** — pulls live rates from Frankfurter API (24h cache)
-4. **generate-i18n** — generates `generated/i18n.d.ts` type definitions, checks locale parity (errors fail the build), syncs `i18n-ally.sourceLanguage`/`displayLanguage` from `i18nConfig.defaultLocale`
+4. **generate-i18n** — generates `generated/i18n.d.ts` type definitions (overwrites stub), checks locale parity (errors fail the build), syncs `i18n-ally.sourceLanguage`/`displayLanguage` from `i18nConfig.defaultLocale`
 5. **generate-sitemap** — generates `public/sitemap.xml` from pages and `SITE_URL`
 6. **generate-manifest** — generates `public/manifest.json` from `global.json5` + `i18nConfig`, uses `BASE_PATH` for `start_url` and `scope`
 7. **generate-robots** — generates `public/robots.txt` from `SITE_URL`
@@ -306,7 +333,7 @@ sync-root-page → clean:cache → fetch:rates → generate-i18n → generate-si
 | `BASE_PATH` support | `source.define` injects `import.meta.env.BASE_PATH` for runtime JS; template param `base_path` for Nunjucks |
 | Output paths | `dist/assets/{scripts,styles,images,fonts}` — organized by asset type |
 | Static copy | `output.copy` moves `public/` static files (favicon, sw.js, manifest, robots, i18n bundles) to `dist/` |
-| Path aliases | `@/` → `src/`, `@components/`, `@assets/`, `@generated/`, `@configs/`, `@data/` |
+| Path aliases | `@/` → `src/`, `@components/`, `@assets/`, `@generated/`, `@configs/`, `@data/` — `@generated/` resolves at bundle time; source files use relative paths (`../../../../generated/*`) for jiti compatibility |
 | Nunjucks loader | `simple-nunjucks-loader` with search paths: `pages/`, `layouts/`, `components/`, `src/` root; `assetsPaths: src/assets/` |
 | Pre-entries | `src/scripts/main.ts` + `src/styles/main.css` loaded before every page |
 | Excluded pages | Hardcoded `EXCLUDED_PAGES` set in config (currently empty — all pages built) |
@@ -379,6 +406,14 @@ Ideal for Lighthouse audits, mobile testing, or sharing WIP via a public URL.
 2. **typecheck** — runs `bunx tsc --noEmit`
 
 Config: `.husky/pre-commit`, `.lintstagedrc`.
+
+## Code Conventions
+
+- No comments unless explicitly requested
+- No deprecated or backward-compat code — remove entirely
+- Import paths: relative `../../../../generated/*` in source (jiti compatibility); `@generated/*` in `tsconfig.json` paths and `rsbuild.resolve.alias` for bundling
+- Biome for lint + format (not Prettier) — config in `biome.json`
+- Pre-commit chain: Husky + lint-staged (Biome) + typecheck (`&&`)
 
 ## CI/CD
 
