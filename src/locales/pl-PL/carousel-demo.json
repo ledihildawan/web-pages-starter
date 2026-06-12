@@ -1,0 +1,17 @@
+{
+    "meta":  {
+                 "page_title":  "Demo leniwego Å‚adowania Splide | Starter"
+             },
+    "hero":  {
+                 "slide_1":  {
+                                 "title":  "Leniwe Å‚adowanie natury",
+                                 "subtitle":  "Obrazy Å‚adujÄ… siÄ™ inteligentnie, oszczÄ™dzajÄ…c dane.",
+                                 "alt":  "PiÄ™kny krajobraz gÃ³rski"
+                             },
+                 "slide_2":  {
+                                 "title":  "NajwyÅ¼sza wydajnoÅ›Ä‡",
+                                 "subtitle":  "Åaduj tylko to, czego potrzebujesz.",
+                                 "alt":  "OÅ›nieÅ¼ony krajobraz gÃ³rski"
+                             }
+             }
+}

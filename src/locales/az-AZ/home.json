@@ -1,0 +1,102 @@
+{
+    "about":  {
+                  "badge":  "HaqqÄ±mÄ±zda"
+              },
+    "hero":  {
+                 "badge":  "HaqqÄ±mÄ±zda",
+                 "title_part1":  "Biz yaradÄ±rÄ±q ",
+                 "title_highlight":  "rÉ™qÉ™msal gÉ™lÉ™cÉ™yi",
+                 "description":  "2024-cÃ¼ ildÉ™ yaradÄ±lan Starter, tÉ™rtibatÃ§Ä±lara daha sÃ¼rÉ™tli ÅŸÉ™kildÉ™ daha yaxÅŸÄ± tÉ™tbiqlÉ™r qurmaÄŸa kÃ¶mÉ™k etmÉ™k Ã¼Ã§Ã¼n yaradÄ±lmÄ±ÅŸdÄ±r. Biz tÉ™miz kodun, gÃ¶zÉ™l dizaynÄ±n vÉ™ aÃ§Ä±q mÉ™nbÉ™li É™mÉ™kdaÅŸlÄ±ÄŸÄ±n gÃ¼cÃ¼nÉ™ inanÄ±rÄ±q.",
+                 "primary_btn":  {
+                                     "label":  "Pulsuz BaÅŸla",
+                                     "url":  "#pricing"
+                                 },
+                 "secondary_btn":  {
+                                       "label":  "Demonyu GÃ¶r",
+                                       "url":  "#features"
+                                   },
+                 "note":  "Kredit kartÄ± tÉ™lÉ™b olunmur"
+             },
+    "stats":  {
+                  "community":  "Qlobal Ä°cma",
+                  "community_val":  "50K+",
+                  "projects":  "TamamlanmÄ±ÅŸ LayihÉ™lÉ™r",
+                  "projects_val":  "120+",
+                  "uptime":  "Ä°ÅŸlÉ™klik",
+                  "uptime_val":  "99.99%",
+                  "rating":  "Reytinq",
+                  "rating_val":  "4.9/5"
+              },
+    "story":  {
+                  "tag":  "HekayÉ™miz",
+                  "visual_label":  "Kreativ Studiya Ä°llÃ¼strasiyasÄ±",
+                  "title":  "HÉ™vÉ™slÉ™ hÉ™rÉ™kÉ™tÉ™ gÉ™lÉ™n, \u003cbr\u003emÃ¼kÉ™mmÉ™lliklÉ™ mÃ¼É™yyÉ™n edilÉ™n.",
+                  "para1":  "SÉ™fÉ™rimiz sadÉ™ bir ideya ilÉ™ baÅŸladÄ±: veb inkiÅŸafÄ±nÄ± hÉ™r kÉ™s Ã¼Ã§Ã¼n É™lÃ§atan vÉ™ É™ylÉ™ncÉ™li etmÉ™k. Biz aÄŸÄ±r freymvorklardan vÉ™ mÃ¼rÉ™kkÉ™b konfiqurasiyalardan yorulmuÅŸduq.",
+                  "para2":  "Bu gÃ¼n biz mÃ¼rÉ™kkÉ™b problemlÉ™ri zÉ™rif hÉ™llÉ™rlÉ™ hÉ™ll etmÉ™k Ã¼Ã§Ã¼n birlikdÉ™ Ã§alÄ±ÅŸan mÃ¼hÉ™ndislÉ™rdÉ™n, dizaynerlÉ™rdÉ™n vÉ™ dÃ¼ÅŸÃ¼nÉ™nlÉ™rdÉ™n ibarÉ™t mÃ¼xtÉ™lif bir komandayÄ±q.",
+                  "val1":  "Ä°stifadÉ™Ã§i mÉ™rkÉ™zli dizayn fÉ™lsÉ™fÉ™si",
+                  "val2":  "Performans birinci arxitekturasÄ±",
+                  "val3":  "ÅžÉ™ffaflÄ±q vÉ™ aÃ§Ä±q kommunikasiya"
+              },
+    "mission":  {
+                    "title":  "MissiyamÄ±z",
+                    "description":  "TÉ™rtibatÃ§Ä±larÄ± vÉ™ bizneslÉ™ri mÃ¶htÉ™ÅŸÉ™m rÉ™qÉ™msal mÉ™hsullar qurmaq Ã¼Ã§Ã¼n zÉ™rif, sÃ¼rÉ™tli vÉ™ istifadÉ™si asan alÉ™tlÉ™rlÉ™ gÃ¼clÉ™ndirmÉ™k."
+                },
+    "vision":  {
+                   "title":  "Vizyonumuz",
+                   "description":  "HÉ™r bir kod sÉ™tirindÉ™ gÃ¶zÉ™lliyi, performansÄ± vÉ™ istifadÉ™Ã§i tÉ™crÃ¼bÉ™sini qiymÉ™tlÉ™ndirÉ™n mÃ¼asir tÉ™rtibatÃ§Ä±lar Ã¼Ã§Ã¼n seÃ§im platformasÄ± olmaq."
+               },
+    "values":  {
+                   "title":  "DÉ™yÉ™rlÉ™rimiz",
+                   "subtitle":  "QÉ™bul etdiyimiz hÉ™r qÉ™rarÄ± istiqamÉ™tlÉ™ndirÉ™n prinsiplÉ™r."
+               },
+    "passion":  {
+                    "title":  "HÉ™vÉ™s",
+                    "description":  "Biz etdiklÉ™rimizi sevirik vÉ™ bu, mÉ™hsulumuzun hÉ™r detalÄ±nda gÃ¶rÃ¼nÃ¼r."
+                },
+    "collaboration":  {
+                          "title":  "ÆmÉ™kdaÅŸlÄ±q",
+                          "description":  "BirlikdÉ™ iÅŸlÉ™mÉ™k É™n yaxÅŸÄ± nÉ™ticÉ™lÉ™r verir. Biz mÃ¶hkÉ™m komandanÄ±n gÃ¼cÃ¼nÉ™ inanÄ±rÄ±q."
+                      },
+    "innovation":  {
+                       "title":  "Ä°nnovasiya",
+                       "description":  "ProblemlÉ™ri hÉ™ll etmÉ™k vÉ™ dÉ™yÉ™r yaratmaq Ã¼Ã§Ã¼n hÉ™miÅŸÉ™ daha yaxÅŸÄ± yollar axtarÄ±rÄ±q."
+                   },
+    "integrity":  {
+                      "title":  "DÃ¼rÃ¼stlÃ¼k",
+                      "description":  "ÆdalÉ™t vÉ™ ÅŸÉ™ffaflÄ±q qurduÄŸumuz hÉ™r bir É™laqÉ™nin É™sasÄ±nÄ± tÉ™ÅŸkil edir."
+                  },
+    "excellence":  {
+                       "title":  "MÃ¼kÉ™mmÉ™llik",
+                       "description":  "Biz kifayÉ™t qÉ™dÉ™r yaxÅŸÄ± ilÉ™ razÄ±laÅŸmÄ±rÄ±q. Biz hÉ™miÅŸÉ™ É™n yaxÅŸÄ±sÄ±na can atÄ±rÄ±q."
+                   },
+    "quality":  {
+                    "title":  "KeyfiyyÉ™t",
+                    "description":  "TÉ™miz kod, gÃ¶zÉ™l dizayn vÉ™ fasilÉ™siz tÉ™crÃ¼bÉ™ bizim standartÄ±mÄ±zdÄ±r."
+                },
+    "team":  {
+                 "title":  "KomandamÄ±zla TanÄ±ÅŸ Olun",
+                 "subtitle":  "YazdÄ±ÄŸÄ±mÄ±z hÉ™r kod sÉ™trinin arxasÄ±ndakÄ± parlaq beyinlÉ™r.",
+                 "alex_desc":  "SaaS ekosisteminin inkiÅŸafÄ±nda 10+ il tÉ™crÃ¼bÉ™si olan vizyonar lider.",
+                 "sarah_desc":  "MiqyaslÄ± sistem arxitekturasÄ± qurmaÄŸa ixtisaslaÅŸmÄ±ÅŸ Full-stack sehrbaz.",
+                 "mike_desc":  "Piksel detallarÄ±, hamar UX axÄ±nlarÄ± vÉ™ É™lÃ§atanlÄ±q standartlarÄ± ilÉ™ obsesiv.",
+                 "jessica_desc":  "BrendlÉ™rÉ™ rÉ™qÉ™msal dÃ¼nyada Ã¶zÃ¼nÉ™mÉ™xsus sÉ™s tapmaÄŸa kÃ¶mÉ™k edÉ™n kreativ naÄŸÄ±lÃ§Ä±."
+             },
+    "features":  {
+                     "list":  {
+                                  "speed":  {
+                                                "title":  "Ultra SÃ¼rÉ™tli",
+                                                "description":  "100ms-dÉ™n az yÃ¼klÉ™nmÉ™ vaxtÄ± ilÉ™ optimal performans. Edge infrastrukturu ilÉ™ qlobal miqyas Ã¼Ã§Ã¼n nÉ™zÉ™rdÉ™ tutulub."
+                                            },
+                                  "design":  {
+                                                 "title":  "MÃ¼asir Dizayn",
+                                                 "description":  "BÃ¼tÃ¼n cihazlarda peÅŸÉ™kar gÃ¶rÃ¼nÉ™n responsiv vÉ™ tÉ™miz UI. TamamilÉ™ fÉ™rdilÉ™ÅŸdirilÉ™ bilÉ™n komponentlÉ™r."
+                                             },
+                                  "security":  {
+                                                   "title":  "YÃ¼ksÉ™k TÉ™hlÃ¼kÉ™sizlik",
+                                                   "description":  "MÉ™lumatlarÄ±nÄ±zÄ± qorumaq Ã¼Ã§Ã¼n end-to-end ÅŸifrÉ™lÉ™mÉ™, Ã§oxfaktorlu autentifikasiya vÉ™ SOC2 uyÄŸunluÄŸu."
+                                               }
+                              },
+                     "heading":  "Æsas XÃ¼susiyyÉ™tlÉ™r",
+                     "subheading":  "Qurmaq vÉ™ bÃ¶yÃ¼mÉ™k Ã¼Ã§Ã¼n lazÄ±m olan hÉ™r ÅŸey."
+                 }
+}

@@ -1,0 +1,75 @@
+{
+    "hero":  {
+                 "badge":  "TÃ­nh nÄƒng Ná»•i báº­t",
+                 "title_part1":  "Má»i thá»© báº¡n cáº§n Ä‘á»ƒ",
+                 "title_highlight":  "má»Ÿ rá»™ng nhanh hÆ¡n",
+                 "description":  "Tá»« phÃ¢n tÃ­ch máº¡nh máº½ Ä‘áº¿n tÃ­ch há»£p liá»n máº¡ch, chÃºng tÃ´i cung cáº¥p bá»™ cÃ´ng cá»¥ báº¡n cáº§n Ä‘á»ƒ xÃ¢y dá»±ng á»©ng dá»¥ng Ä‘áº³ng cáº¥p tháº¿ giá»›i."
+             },
+    "features":  {
+                     "heading":  "TÃ­nh nÄƒng Ná»•i báº­t",
+                     "subheading":  "Má»i thá»© báº¡n cáº§n Ä‘á»ƒ xÃ¢y dá»±ng vÃ  phÃ¡t triá»ƒn.",
+                     "list":  {
+                                  "speed":  {
+                                                "title":  "Cá»±c ká»³ Nhanh",
+                                                "description":  "Hiá»‡u suáº¥t tá»‘i Æ°u vá»›i thá»i gian táº£i dÆ°á»›i 100ms. ÄÆ°á»£c thiáº¿t káº¿ cho quy mÃ´ toÃ n cáº§u vá»›i háº¡ táº§ng edge."
+                                            },
+                                  "design":  {
+                                                 "title":  "Thiáº¿t káº¿ Hiá»‡n Ä‘áº¡i",
+                                                 "description":  "Giao diá»‡n responsive vÃ  sáº¡ch sáº½, hiá»ƒn thá»‹ chuyÃªn nghiá»‡p trÃªn má»i thiáº¿t bá»‹. CÃ¡c thÃ nh pháº§n cÃ³ thá»ƒ tÃ¹y chá»‰nh hoÃ n toÃ n."
+                                             },
+                                  "security":  {
+                                                   "title":  "Báº£o máº­t Cao",
+                                                   "description":  "MÃ£ hÃ³a end-to-end, xÃ¡c thá»±c Ä‘a yáº¿u tá»‘ vÃ  tuÃ¢n thá»§ SOC2 Ä‘á»ƒ báº£o vá»‡ dá»¯ liá»‡u cá»§a báº¡n."
+                                               }
+                              }
+                 },
+    "sections":  {
+                     "sync":  {
+                                  "title":  "Äá»“ng bá»™ Thá»i gian thá»±c",
+                                  "description":  "CÃ¡c thay Ä‘á»•i Ä‘Æ°á»£c lan truyá»n tá»©c thÃ¬ trÃªn má»i thiáº¿t bá»‹. DÃ¹ ngÆ°á»i dÃ¹ng cá»§a báº¡n sá»­ dá»¥ng Ä‘iá»‡n thoáº¡i, mÃ¡y tÃ­nh hay mÃ¡y tÃ­nh báº£ng, há» Ä‘á»u tháº¥y cÃ¹ng má»™t dá»¯ liá»‡u vÃ o cÃ¹ng má»™t thá»i Ä‘iá»ƒm.",
+                                  "check_0":  "Äá»™ trá»… dÆ°á»›i má»™t mili-giÃ¢y",
+                                  "check_1":  "Há»— trá»£ ngoáº¡i tuyáº¿n tÃ­ch há»£p sáºµn",
+                                  "check_2":  "Xá»­ lÃ½ giáº£i quyáº¿t xung Ä‘á»™t"
+                              },
+                     "analytics":  {
+                                       "title":  "PhÃ¢n tÃ­ch Kháº£ thi",
+                                       "description":  "Äá»«ng Ä‘oÃ¡n mÃ². HÃ£y cÃ³ Ä‘Æ°á»£c nhá»¯ng thÃ´ng tin chuyÃªn sÃ¢u vá» hÃ nh vi ngÆ°á»i dÃ¹ng, hiá»‡u suáº¥t há»‡ thá»‘ng vÃ  chá»‰ sá»‘ doanh thu. Trá»±c quan hÃ³a dá»¯ liá»‡u cá»§a báº¡n vá»›i biá»ƒu Ä‘á»“ tÆ°Æ¡ng tÃ¡c.",
+                                       "check_0":  "Báº£ng Ä‘iá»u khiá»ƒn cÃ³ thá»ƒ tÃ¹y chá»‰nh",
+                                       "check_1":  "Xuáº¥t ra PDF, CSV hoáº·c Excel",
+                                       "check_2":  "BÃ¡o cÃ¡o hÃ ng tuáº§n tá»± Ä‘á»™ng"
+                                   }
+                 },
+    "more_title":  "VÃ  nhiá»u hÆ¡n ná»¯a...",
+    "more_subtitle":  "CÃ¡c tÃ­nh nÄƒng máº¡nh máº½ Ä‘Æ°á»£c thiáº¿t káº¿ Ä‘á»ƒ giÃºp báº¡n xÃ¢y dá»±ng nhanh hÆ¡n vÃ  cÃ³ kháº£ nÄƒng má»Ÿ rá»™ng hÆ¡n.",
+    "more":  {
+                 "dark_mode":  {
+                                   "title":  "Cháº¿ Ä‘á»™ Tá»‘i",
+                                   "desc":  "Há»— trá»£ tÃ­ch há»£p sáºµn cho giao diá»‡n sÃ¡ng vÃ  tá»‘i vá»›i tá»± Ä‘á»™ng phÃ¡t hiá»‡n."
+                               },
+                 "api_first":  {
+                                   "title":  "API First",
+                                   "desc":  "API REST vÃ  GraphQL sáºµn cÃ³ Ä‘á»ƒ kiá»ƒm soÃ¡t láº­p trÃ¬nh Ä‘áº§y Ä‘á»§."
+                               },
+                 "sso":  {
+                             "title":  "ÄÄƒng nháº­p SSO",
+                             "desc":  "Single Sign-On cáº¥p doanh nghiá»‡p cho Google, GitHub vÃ  Okta."
+                         },
+                 "audit":  {
+                               "title":  "Nháº­t kÃ½ Kiá»ƒm tra",
+                               "desc":  "Theo dÃµi má»i thay Ä‘á»•i trong dá»± Ã¡n cá»§a báº¡n vá»›i dáº¥u thá»i gian chi tiáº¿t."
+                           },
+                 "rbac":  {
+                              "title":  "Quyá»n truy cáº­p theo Vai trÃ²",
+                              "desc":  "Kiá»ƒm soÃ¡t quyá»n chi tiáº¿t cho quáº£n trá»‹ viÃªn, biÃªn táº­p viÃªn vÃ  ngÆ°á»i xem."
+                          },
+                 "uptime":  {
+                                "title":  "99.99% Thá»i gian hoáº¡t Ä‘á»™ng",
+                                "desc":  "Kháº£ dá»¥ng Ä‘Æ°á»£c Ä‘áº£m báº£o vá»›i CDN phÃ¢n phá»‘i toÃ n cáº§u cá»§a chÃºng tÃ´i."
+                            }
+             },
+    "cta":  {
+                "heading":  "Sáºµn sÃ ng báº¯t Ä‘áº§u chÆ°a?",
+                "btn_create":  "Táº¡o TÃ i khoáº£n",
+                "btn_docs":  "Äá»c TÃ i liá»‡u"
+            }
+}

@@ -1,0 +1,56 @@
+{
+    "period_monthly":  "ay",
+    "period_yearly":  "il",
+    "hero":  {
+                 "badge":  "PlanÄ±nÄ±zÄ± SeÃ§in",
+                 "title_part1":  "SadÉ™ vÉ™ ",
+                 "title_highlight":  "ÅžÉ™ffaf",
+                 "description":  "Gizli Ã¶dÉ™niÅŸlÉ™r yoxdur. GÃ¶zlÉ™nilmÉ™z xÉ™rclÉ™r yoxdur. EhtiyaclarÄ±nÄ±za É™n uyÄŸun planÄ± seÃ§in."
+             },
+    "toggle":  {
+                   "monthly":  "AylÄ±q",
+                   "yearly":  "Ä°llik",
+                   "yearly_hint":  "illik faktura",
+                   "discount":  "20% QÆNAÆT",
+                   "aria_label":  "QiymÉ™t PlanÄ±nÄ± DÉ™yiÅŸ"
+               },
+    "plans":  {
+                  "hobby":  {
+                                "name":  "Hobby",
+                                "desc":  "Yan layihÉ™lÉ™r vÉ™ Ã¶yrÉ™nmÉ™k Ã¼Ã§Ã¼n idealdÄ±r.",
+                                "btn":  "Pulsuz BaÅŸla",
+                                "feature_0":  "1 LayihÉ™",
+                                "feature_1":  "Ä°cma DÉ™stÉ™yi",
+                                "feature_2":  "5GB Saxlama"
+                            },
+                  "pro":  {
+                              "name":  "Pro",
+                              "badge":  "Æn Populyar",
+                              "desc":  "PeÅŸÉ™kar tÉ™rtibatÃ§Ä±lar vÉ™ kiÃ§ik komandalar Ã¼Ã§Ã¼n.",
+                              "btn":  "Pro PlanÄ± SeÃ§",
+                              "feature_0":  "Limitsiz LayihÉ™lÉ™r",
+                              "feature_1":  "Prioritet E-poÃ§t DÉ™stÉ™yi",
+                              "feature_2":  "100GB Saxlama",
+                              "feature_3":  "GeniÅŸlÉ™ndirilmiÅŸ Analitika"
+                          },
+                  "enterprise":  {
+                                     "name":  "Enterprise",
+                                     "desc":  "BÃ¶yÃ¼k miqyaslÄ± tÉ™tbiqlÉ™r vÉ™ tÉ™ÅŸkilatlar Ã¼Ã§Ã¼n.",
+                                     "btn":  "SatÄ±ÅŸla ÆlaqÉ™",
+                                     "feature_0":  "Pro plandakÄ± bÃ¼tÃ¼n xÃ¼susiyyÉ™tlÉ™r",
+                                     "feature_1":  "ÅžÉ™xsi Hesab Meneceri",
+                                     "feature_2":  "SSO vÉ™ Audit JurnalÄ±",
+                                     "feature_3":  "Limitsiz Saxlama"
+                                 }
+              },
+    "faq":  {
+                "title":  "Tez-tez VerilÉ™n Suallar",
+                "subtitle":  "PlanlarÄ±mÄ±z vÉ™ xidmÉ™tlÉ™rimiz haqqÄ±nda É™n Ã§ox verilÉ™n suallara cavablar tapÄ±n.",
+                "q_0":  "Ä°stÉ™nilÉ™n vaxt lÉ™ÄŸv edÉ™ bilÉ™rÉ™mmi?",
+                "a_0":  "BÉ™li, abunÉ™liyi istÉ™nilÉ™n vaxt lÉ™ÄŸv edÉ™ bilÉ™rsiniz. GiriÅŸiniz faktura dÃ¶vrÃ¼nÃ¼n sonuna qÉ™dÉ™r aktiv qalÄ±r.",
+                "q_1":  "Pulsuz sÄ±naq mÃ¶vcuddurmu?",
+                "a_1":  "Pro plan Ã¼Ã§Ã¼n 14 gÃ¼nlÃ¼k pulsuz sÄ±naq tÉ™klif edirik. BaÅŸlamaq Ã¼Ã§Ã¼n kredit kartÄ± tÉ™lÉ™b olunmur.",
+                "q_2":  "HansÄ± Ã¶dÉ™niÅŸ metodlarÄ± mÃ¶vcuddur?",
+                "a_2":  "Æsas kredit kartlarÄ±nÄ± vÉ™ PayPal-Ä± qÉ™bul edirik. Enterprise Ã¼Ã§Ã¼n bank kÃ¶Ã§Ã¼rmÉ™sini dÉ™stÉ™klÉ™yirik."
+            }
+}

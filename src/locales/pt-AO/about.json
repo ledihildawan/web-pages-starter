@@ -1,0 +1,72 @@
+{
+    "hero":  {
+                 "badge":  "Sobre NÃ³s",
+                 "title_part1":  "Movidos pela ",
+                 "title_highlight":  "paixÃ£o",
+                 "description":  "A nossa jornada comeÃ§ou com uma ideia simples."
+             },
+    "mission":  {
+                    "title":  "A Nossa MissÃ£o",
+                    "description":  "Capacitar developers e empresas com ferramentas elegantes, rÃ¡pidas e fÃ¡ceis de usar para construir produtos digitais excecionais."
+                },
+    "vision":  {
+                   "title":  "A Nossa VisÃ£o",
+                   "description":  "Ser a plataforma de escolha para developers modernos que valorizam beleza, performance e experiÃªncia do utilizador em cada linha de cÃ³digo."
+               },
+    "story":  {
+                  "tag":  "A Nossa HistÃ³ria",
+                  "visual_label":  "IlustraÃ§Ã£o de EstÃºdio Criativo",
+                  "title":  "Movidos pela paixÃ£o, \u003cbr\u003edefinidos pela excelÃªncia.",
+                  "para1":  "A nossa jornada comeÃ§ou com uma ideia simples: tornar o desenvolvimento web acessÃ­vel e divertido para todos. EstÃ¡vamos cansados de frameworks inchados e configuraÃ§Ãµes complexas.",
+                  "para2":  "Hoje, somos uma equipa diversificada de engenheiros, designers e pensadores a trabalhar juntos para resolver problemas complexos com soluÃ§Ãµes elegantes.",
+                  "val1":  "Filosofia de design centrada no utilizador",
+                  "val2":  "Arquitetura performance-first",
+                  "val3":  "TransparÃªncia e comunicaÃ§Ã£o aberta"
+              },
+    "values":  {
+                   "title":  "Os Nossos Valores",
+                   "subtitle":  "PrincÃ­pios que guiam cada decisÃ£o que tomamos."
+               },
+    "passion":  {
+                    "title":  "PaixÃ£o",
+                    "description":  "Amamos o que fazemos, e isso nota-se em cada detalhe dos nossos produtos."
+                },
+    "collaboration":  {
+                          "title":  "ColaboraÃ§Ã£o",
+                          "description":  "Trabalhar juntos produz os melhores resultados. Acreditamos no poder de equipas sÃ³lidas."
+                      },
+    "innovation":  {
+                       "title":  "InovaÃ§Ã£o",
+                       "description":  "Sempre a procurar melhores formas de resolver problemas e criar valor."
+                   },
+    "integrity":  {
+                      "title":  "Integridade",
+                      "description":  "Honestidade e transparÃªncia sÃ£o a base de cada relaÃ§Ã£o que construÃ­mos."
+                  },
+    "excellence":  {
+                       "title":  "ExcelÃªncia",
+                       "description":  "NÃ£o nos contentamos com o suficientemente bom. Sempre nos esforÃ§amos pelo melhor."
+                   },
+    "quality":  {
+                    "title":  "Qualidade",
+                    "description":  "CÃ³digo limpo, design bonito e experiÃªncias fluidas sÃ£o os nossos padrÃµes."
+                },
+    "team":  {
+                 "title":  "Conhece a Equipa",
+                 "subtitle":  "As mentes brilhantes por trÃ¡s de cada linha de cÃ³digo que escrevemos.",
+                 "alex_desc":  "LÃ­der visionÃ¡rio com 10+ anos de experiÃªncia em desenvolvimento de ecossistema SaaS.",
+                 "sarah_desc":  "Especialista full-stack especializada em construir arquiteturas de sistemas em grande escala.",
+                 "mike_desc":  "Profundamente obcecado com detalhes de pixel, fluxos UX suaves e padrÃµes de acessibilidade.",
+                 "jessica_desc":  "Narradora criativa a ajudar marcas a encontrar a sua voz Ãºnica no mundo digital."
+             },
+    "stats":  {
+                  "years":  "Anos de ExperiÃªncia",
+                  "years_val":  "3+",
+                  "clients":  "Clientes Globais",
+                  "clients_val":  "120+",
+                  "countries":  "PaÃ­ses AlcanÃ§ados",
+                  "countries_val":  "15",
+                  "support":  "Suporte Especializado",
+                  "support_val":  "24/7"
+              }
+}

@@ -1,0 +1,56 @@
+{
+    "period_monthly":  "kuu",
+    "period_yearly":  "aasta",
+    "hero":  {
+                 "badge":  "Valige plaan",
+                 "title_part1":  "Lihtsad ja ",
+                 "title_highlight":  "lÃ¤bipaistvad hinnad",
+                 "description":  "Varjatud tasusid pole. Ãœllatusi pole. Valige plaan, mis kÃµige paremini vastab Teie vajadustele."
+             },
+    "toggle":  {
+                   "monthly":  "Igakuine",
+                   "yearly":  "Aastane",
+                   "yearly_hint":  "arvestus aasta kaupa",
+                   "discount":  "SÃ„Ã„STA 20%",
+                   "aria_label":  "LÃ¼lita hinnaplaani"
+               },
+    "plans":  {
+                  "hobby":  {
+                                "name":  "Hobby",
+                                "desc":  "TÃ¤iuslik kÃµrvalprojektide ja Ãµppimise jaoks.",
+                                "btn":  "Alusta tasuta",
+                                "feature_0":  "1 projekt",
+                                "feature_1":  "Kogukonna tugi",
+                                "feature_2":  "5 GB salvestusruum"
+                            },
+                  "pro":  {
+                              "name":  "Pro",
+                              "badge":  "KÃµige populaarsem",
+                              "desc":  "Professionaalsetele arendajatele ja vÃ¤ikestele meeskondadele.",
+                              "btn":  "Vali Pro plaan",
+                              "feature_0":  "Piiramatud projektid",
+                              "feature_1":  "Prioriteetne e-posti tugi",
+                              "feature_2":  "100 GB salvestusruum",
+                              "feature_3":  "TÃ¤iustatud analÃ¼Ã¼tika"
+                          },
+                  "enterprise":  {
+                                     "name":  "Enterprise",
+                                     "desc":  "Suuremahuliste rakenduste ja organisatsioonide jaoks.",
+                                     "btn":  "VÃµtke Ã¼hendust mÃ¼Ã¼giga",
+                                     "feature_0":  "KÃµik Pro plaani funktsioonid",
+                                     "feature_1":  "PÃ¼hendatud kontohaldur",
+                                     "feature_2":  "SSO ja auditilogi",
+                                     "feature_3":  "Piiramatu salvestusruum"
+                                 }
+              },
+    "faq":  {
+                "title":  "Korduma kippuvad kÃ¼simused",
+                "subtitle":  "Leidke vastused kÃµige sagedamini esitatud kÃ¼simustele meie plaanide ja teenuste kohta.",
+                "q_0":  "Kas ma saan igal ajal tÃ¼histada?",
+                "a_0":  "Jah, Te saate tellimuse igal ajal tÃ¼histada. Teie juurdepÃ¤Ã¤s jÃ¤Ã¤b aktiivseks kuni arveldusperioodi lÃµpuni.",
+                "q_1":  "Kas on olemas tasuta prooviperiood?",
+                "a_1":  "Pakume 14-pÃ¤evast tasuta prooviperioodi Pro plaani jaoks. Alustamiseks pole krediitkaarti vaja.",
+                "q_2":  "Millised makseviisid on saadaval?",
+                "a_2":  "Aktsepteerime peamisi krediitkaarte ja PayPali. Enterprise plaani puhul toetame pangamakseid."
+            }
+}

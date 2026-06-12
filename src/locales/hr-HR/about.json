@@ -1,0 +1,72 @@
+{
+    "hero":  {
+                 "badge":  "O nama",
+                 "title_part1":  "VoÄ‘eni ",
+                 "title_highlight":  "straÅ¡Ä‡u",
+                 "description":  "NaÅ¡e putovanje zapoÄelo je jednostavnom idejom."
+             },
+    "mission":  {
+                    "title":  "NaÅ¡a misija",
+                    "description":  "OsvnaÅ¾ivanje programera i tvrtki elegantnim, brzim i jednostavnim alatima za izgradnju izvanrednih digitalnih proizvoda."
+                },
+    "vision":  {
+                   "title":  "NaÅ¡a vizija",
+                   "description":  "Postati platforma izbora za moderne programere koji cijene ljepotu, performanse i korisniÄko iskustvo u svakom retku koda."
+               },
+    "story":  {
+                  "tag":  "NaÅ¡a priÄa",
+                  "visual_label":  "Ilustracija kreativnog studija",
+                  "title":  "VoÄ‘eni straÅ¡Ä‡u, \u003cbr\u003edefinirani izvrsnoÅ¡Ä‡u.",
+                  "para1":  "NaÅ¡e putovanje zapoÄelo je jednostavnom idejom: uÄiniti web razvoj pristupaÄnim i zabavnim za sve. Bili smo umorni od teÅ¡kih frameworkova i kompliciranih konfiguracija.",
+                  "para2":  "Danas smo raznoliki tim inÅ¾enjera, dizajnera i mislioca koji zajedno rade na rjeÅ¡avanju sloÅ¾enih problema elegantnim rjeÅ¡enjima.",
+                  "val1":  "Filozofija dizajna usmjerena na korisnika",
+                  "val2":  "Performanse na prvom mjestu",
+                  "val3":  "Transparentnost i otvorena komunikacija"
+              },
+    "values":  {
+                   "title":  "NaÅ¡e vrijednosti",
+                   "subtitle":  "NaÄela koja vode svaku odluku koju donesemo."
+               },
+    "passion":  {
+                    "title":  "Strast",
+                    "description":  "Volimo ono Å¡to radimo i to je vidljivo u svakom detalju naÅ¡ih proizvoda."
+                },
+    "collaboration":  {
+                          "title":  "Suradnja",
+                          "description":  "ZajedniÄki rad donosi najbolje rezultate. Vjerujemo u moÄ‡ Ävrstog tima."
+                      },
+    "innovation":  {
+                       "title":  "Inovacije",
+                       "description":  "Uvijek traÅ¾imo bolje naÄine za rjeÅ¡avanje problema i stvaranje vrijednosti."
+                   },
+    "integrity":  {
+                      "title":  "Integritet",
+                      "description":  "Iskrenost i transparentnost temelj su svakog odnosa koji gradimo."
+                  },
+    "excellence":  {
+                       "title":  "Izvrsnost",
+                       "description":  "Ne zadovoljavamo se dobrom. Uvijek teÅ¾imo najboljem."
+                   },
+    "quality":  {
+                    "title":  "Kvaliteta",
+                    "description":  "ÄŒist kod, prekrasan dizajn i besprijekorno iskustvo naÅ¡i su standardi."
+                },
+    "team":  {
+                 "title":  "Upoznajte tim",
+                 "subtitle":  "Briljantni umovi iza svakog retka koda koji piÅ¡emo.",
+                 "alex_desc":  "Vizionarski lider s 10+ godina iskustva u razvoju SaaS ekosustava.",
+                 "sarah_desc":  "Full-stack Äarobnjak specijaliziran za izgradnju skalabilnih sustavnih arhitektura.",
+                 "mike_desc":  "Opsjednut piksel detaljima, glatkim UX tokovima i standardima pristupaÄnosti.",
+                 "jessica_desc":  "Kreativni pripovjedaÄ koji pomaÅ¾e brendovima pronaÄ‡i svoj jedinstveni glas u digitalnom svijetu."
+             },
+    "stats":  {
+                  "years":  "Godina iskustva",
+                  "years_val":  "3+",
+                  "clients":  "Globalnih klijenata",
+                  "clients_val":  "120+",
+                  "countries":  "Pokrivenih zemalja",
+                  "countries_val":  "15",
+                  "support":  "StruÄna podrÅ¡ka",
+                  "support_val":  "24/7"
+              }
+}

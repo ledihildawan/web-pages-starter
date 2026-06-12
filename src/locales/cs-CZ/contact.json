@@ -1,0 +1,47 @@
+{
+    "meta":  {
+                 "title":  "Kontaktujte nÃ¡s | Starter App",
+                 "description":  "Spojte se s nÃ¡mi pro dotazy a podporu."
+             },
+    "contact":  {
+                    "badge":  "PÅ™ipraveni pomoci",
+                    "title_part1":  "Spojme",
+                    "title_highlight":  "se",
+                    "description":  "MÃ¡te otÃ¡zku nebo chcete spolupracovat? RÃ¡di vÃ¡s uslyÅ¡Ã­me. PoÅ¡lete zprÃ¡vu a brzy odpovÃ­me.",
+                    "form_title":  "Poslat zprÃ¡vu",
+                    "form_subtitle":  "VyplÅˆte formulÃ¡Å™ nÃ­Å¾e a brzy se vÃ¡m ozveme.",
+                    "social_title":  "Sledujte nÃ¡s",
+                    "social_subtitle":  "ZÃ­skejte nejnovÄ›jÅ¡Ã­ aktualizace prostÅ™ednictvÃ­m naÅ¡ich sociÃ¡lnÃ­ch sÃ­tÃ­",
+                    "info":  {
+                                 "response_time":  {
+                                                       "title":  "RychlÃ¡ odpovÄ›Ä",
+                                                       "description":  "SnaÅ¾Ã­me se odpovÄ›dÄ›t na kaÅ¾dou zprÃ¡vu do 24 hodin v pracovnÃ­ dny."
+                                                   },
+                                 "working_hours":  {
+                                                       "title":  "PracovnÃ­ doba",
+                                                       "description":  "PondÄ›lÃ­ - pÃ¡tek: 09:00 - 18:00. VÃ­kendy: s prioritou."
+                                                   },
+                                 "support":  {
+                                                 "title":  "NepÅ™etrÅ¾itÃ¡ podpora",
+                                                 "description":  "NÃ¡Å¡ tÃ½m podpory je vÅ¾dy pÅ™ipraven vyÅ™eÅ¡it vaÅ¡e technickÃ© problÃ©my."
+                                             }
+                             },
+                    "form":  {
+                                 "name":  "JmÃ©no",
+                                 "name_placeholder":  "Zadejte svÃ© jmÃ©no",
+                                 "email":  "E-mail",
+                                 "email_placeholder":  "jmeno@email.cz",
+                                 "subject":  "PÅ™edmÄ›t",
+                                 "subject_placeholder":  "Co chcete probrat?",
+                                 "message":  "ZprÃ¡va",
+                                 "message_placeholder":  "Å˜eknÄ›te nÃ¡m vÃ­ce o vaÅ¡em dotazu...",
+                                 "submit":  "Odeslat zprÃ¡vu"
+                             }
+                },
+    "email_label":  "E-mail",
+    "email_value":  "hello@starter.app",
+    "phone_label":  "Telefon",
+    "phone_value":  "+420 222 123 456",
+    "location_label":  "Poloha",
+    "location_value":  "Praha, ÄŒesko"
+}

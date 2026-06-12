@@ -1,0 +1,102 @@
+{
+    "about":  {
+                  "badge":  "Par mums"
+              },
+    "hero":  {
+                 "badge":  "Par mums",
+                 "title_part1":  "MÄ“s veidojam ",
+                 "title_highlight":  "digitÄlo nÄkotni",
+                 "description":  "DibinÄts 2024. gadÄ, Starter ir izveidots, lai palÄ«dzÄ“tu izstrÄdÄtÄjiem ÄtrÄk veidot labÄkas lietotnes. MÄ“s ticam tÄ«ra koda, skaista dizaina un atklÄtÄ pirmkoda sadarbÄ«bas spÄ“kam.",
+                 "primary_btn":  {
+                                     "label":  "SÄkt bez maksas",
+                                     "url":  "#pricing"
+                                 },
+                 "secondary_btn":  {
+                                       "label":  "SkatÄ«t demo",
+                                       "url":  "#features"
+                                   },
+                 "note":  "Nav nepiecieÅ¡ama kredÄ«tkarte"
+             },
+    "stats":  {
+                  "community":  "GlobÄlÄ kopiena",
+                  "community_val":  "50K+",
+                  "projects":  "Pabeigti projekti",
+                  "projects_val":  "120+",
+                  "uptime":  "DarbÄ«bas laiks",
+                  "uptime_val":  "99.99%",
+                  "rating":  "VÄ“rtÄ“jums",
+                  "rating_val":  "4.9/5"
+              },
+    "story":  {
+                  "tag":  "MÅ«su stÄsts",
+                  "visual_label":  "RadoÅ¡Äs studijas ilustrÄcija",
+                  "title":  "VadÄ«ti ar kaislÄ«bu, \u003cbr\u003enoteikti ar izcilÄ«bu.",
+                  "para1":  "MÅ«su ceÄ¼ojums sÄkÄs ar vienkÄrÅ¡u ideju: padarÄ«t tÄ«mekÄ¼a izstrÄdi pieejamu un patÄ«kamu visiem. MÄ“s bijÄm noguruÅ¡i no smagajiem ietvariem un sareÅ¾Ä£Ä«tajÄm konfigurÄcijÄm.",
+                  "para2":  "Å odien mÄ“s esam daudzveidÄ«ga inÅ¾enieru, dizaineru un domÄtÄju komanda, kas kopÄ risina sareÅ¾Ä£Ä«tas problÄ“mas ar elegantiem risinÄjumiem.",
+                  "val1":  "Uz lietotÄju vÄ“rsta dizaina filozofija",
+                  "val2":  "Vispirms veiktspÄ“jas arhitektÅ«ra",
+                  "val3":  "CaurskatÄ«guma un atklÄta komunikÄcija"
+              },
+    "mission":  {
+                    "title":  "MÅ«su misija",
+                    "description":  "Dot iespÄ“ju izstrÄdÄtÄjiem un uzÅ†Ä“mumiem izmantot eleganti, Ätri un viegli lietojami rÄ«ki, lai veidotu izcilus digitÄlos produktus."
+                },
+    "vision":  {
+                   "title":  "MÅ«su redzÄ“jums",
+                   "description":  "KÄ¼Å«t par vÄ“lamo platformu mÅ«sdienu izstrÄdÄtÄjiem, kas novÄ“rtÄ“ skaistumu, veiktspÄ“ju un lietotÄju pieredzi katrÄ koda rindÄ."
+               },
+    "values":  {
+                   "title":  "MÅ«su vÄ“rtÄ«bas",
+                   "subtitle":  "Principi, kas vadÄ katru mÅ«su pieÅ†emto lÄ“mumu."
+               },
+    "passion":  {
+                    "title":  "KaislÄ«ba",
+                    "description":  "MÄ“s mÄ«lam to, ko darÄm, un tas redzams katrÄ mÅ«su produkta detaÄ¼Ä."
+                },
+    "collaboration":  {
+                          "title":  "SadarbÄ«ba",
+                          "description":  "KopÄ«gs darbs rada labÄkos rezultÄtus. MÄ“s ticam stipras komandas spÄ“kam."
+                      },
+    "innovation":  {
+                       "title":  "InovÄcijas",
+                       "description":  "VienmÄ“r meklÄ“jam labÄkus veidus, kÄ risinÄt problÄ“mas un radÄ«t vÄ“rtÄ«bu."
+                   },
+    "integrity":  {
+                      "title":  "GodprÄtÄ«ba",
+                      "description":  "GodÄ«gums un caurskatÄ«gums ir katru mÅ«su attiecÄ«bu pamats."
+                  },
+    "excellence":  {
+                       "title":  "IzcilÄ«ba",
+                       "description":  "MÄ“s neapmierinÄmies ar pietiekami labu. VienmÄ“r tiecamies pÄ“c labÄkÄ."
+                   },
+    "quality":  {
+                    "title":  "KvalitÄte",
+                    "description":  "TÄ«rs kods, skaists dizains un nevainojama pieredze â€“ tas ir mÅ«su standarts."
+                },
+    "team":  {
+                 "title":  "IepazÄ«stieties ar komandu",
+                 "subtitle":  "Izcili prÄti aiz katras mÅ«su uzrakstÄ«tÄs koda rindas.",
+                 "alex_desc":  "VizionÄrs lÄ«deris ar vairÄk nekÄ 10 gadu pieredzi SaaS ekosistÄ“mu izstrÄdÄ“.",
+                 "sarah_desc":  "Pilna steka speciÄliste, kas specializÄ“jas liela mÄ“roga sistÄ“mu arhitektÅ«ras veidoÅ¡anÄ.",
+                 "mike_desc":  "AizrÄvies ar pikseÄ¼u detaÄ¼Äm, plÅ«stoÅ¡Äm UX plÅ«smÄm un pieejamÄ«bas standartiem.",
+                 "jessica_desc":  "RadoÅ¡a stÄstniece, kas palÄ«dz zÄ«moliem atrast unikÄlu balsi digitÄlajÄ pasaulÄ“."
+             },
+    "features":  {
+                     "list":  {
+                                  "speed":  {
+                                                "title":  "ÄªpaÅ¡i Ätri",
+                                                "description":  "OptimÄla veiktspÄ“ja ar ielÄdes laiku zem 100 ms. Veidota globÄlai mÄ“rogstelÅ¡anai ar malas infrastruktÅ«ru."
+                                            },
+                                  "design":  {
+                                                 "title":  "Moderns dizains",
+                                                 "description":  "AtsaucÄ«ga un tÄ«ra lietotÄja saskarne, kas izskatÄs profesionÄli visÄs ierÄ«cÄ“s. PilnÄ«bÄ pielÄgojami komponenti."
+                                             },
+                                  "security":  {
+                                                   "title":  "Augsta droÅ¡Ä«ba",
+                                                   "description":  "Gala Å¡ifrÄ“Å¡ana, vairÄkfaktoru autentifikÄcija un SOC2 atbilstÄ«ba, lai aizsargÄtu JÅ«su datus."
+                                               }
+                              },
+                     "heading":  "IzcilÄs funkcijas",
+                     "subheading":  "Viss, kas Jums nepiecieÅ¡ams veidoÅ¡anai un izaugsmei."
+                 }
+}

@@ -1,0 +1,47 @@
+{
+    "meta":  {
+                 "title":  "Kapcsolat | Starter App",
+                 "description":  "Vedd fel velÃ¼nk a kapcsolatot kÃ©rdÃ©sekÃ©rt Ã©s tÃ¡mogatÃ¡sÃ©rt."
+             },
+    "contact":  {
+                    "badge":  "KÃ©szen Ã¡llunk segÃ­teni",
+                    "title_part1":  "KapcsolÃ³djunk",
+                    "title_highlight":  "Ã¶ssze",
+                    "description":  "KÃ©rdÃ©sed van vagy egyÃ¼tt szeretnÃ©l mÅ±kÃ¶dni? SzÃ­vesen hallanÃ¡nk rÃ³lad. KÃ¼ldj egy Ã¼zenetet, Ã©s hamarosan vÃ¡laszolunk.",
+                    "form_title":  "Ãœzenet kÃ¼ldÃ©se",
+                    "form_subtitle":  "TÃ¶ltsd ki az alÃ¡bbi Å±rlapot, Ã©s hamarosan jelentkezÃ¼nk.",
+                    "social_title":  "KÃ¶vess minket",
+                    "social_subtitle":  "Kapd meg a legÃºjabb frissÃ­tÃ©seket kÃ¶zÃ¶ssÃ©gi csatornÃ¡inkon",
+                    "info":  {
+                                 "response_time":  {
+                                                       "title":  "Gyors vÃ¡lasz",
+                                                       "description":  "Minden Ã¼zenetre 24 Ã³rÃ¡n belÃ¼l vÃ¡laszolunk munkanapokon."
+                                                   },
+                                 "working_hours":  {
+                                                       "title":  "MunkaidÅ‘",
+                                                       "description":  "HÃ©tfÅ‘ - pÃ©ntek: 09:00 - 18:00. HÃ©tvÃ©gÃ©k: prioritÃ¡ssal."
+                                                   },
+                                 "support":  {
+                                                 "title":  "Folyamatos tÃ¡mogatÃ¡s",
+                                                 "description":  "TÃ¡mogatÃ³ csapatunk mindig kÃ©szen Ã¡ll a technikai problÃ©mÃ¡id megoldÃ¡sÃ¡ra."
+                                             }
+                             },
+                    "form":  {
+                                 "name":  "NÃ©v",
+                                 "name_placeholder":  "Add meg a neved",
+                                 "email":  "E-mail",
+                                 "email_placeholder":  "nev@email.hu",
+                                 "subject":  "TÃ¡rgy",
+                                 "subject_placeholder":  "MirÅ‘l szeretnÃ©l beszÃ©lni?",
+                                 "message":  "Ãœzenet",
+                                 "message_placeholder":  "MesÃ©lj tÃ¶bbet a kÃ©rdÃ©sedrÅ‘l...",
+                                 "submit":  "Ãœzenet kÃ¼ldÃ©se"
+                             }
+                },
+    "email_label":  "E-mail",
+    "email_value":  "hello@starter.app",
+    "phone_label":  "Telefon",
+    "phone_value":  "+36 1 234 5678",
+    "location_label":  "HelyszÃ­n",
+    "location_value":  "Budapest, MagyarorszÃ¡g"
+}

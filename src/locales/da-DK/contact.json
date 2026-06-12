@@ -1,0 +1,47 @@
+{
+    "meta":  {
+                 "title":  "Kontakt os | Starter App",
+                 "description":  "Kom i kontakt med os for spÃ¸rgsmÃ¥l og support."
+             },
+    "contact":  {
+                    "badge":  "Klar til at hjÃ¦lpe",
+                    "title_part1":  "Lad os forbinde",
+                    "title_highlight":  "hinanden",
+                    "description":  "Har du et spÃ¸rgsmÃ¥l eller vil du samarbejde? Vi vil elske at hÃ¸re fra dig. Send en besked, sÃ¥ svarer vi snart.",
+                    "form_title":  "Send en besked",
+                    "form_subtitle":  "Udfyld formularen nedenfor, sÃ¥ vender vi tilbage til dig snart.",
+                    "social_title":  "FÃ¸lg os",
+                    "social_subtitle":  "FÃ¥ de seneste opdateringer via vores sociale kanaler",
+                    "info":  {
+                                 "response_time":  {
+                                                       "title":  "Hurtigt svar",
+                                                       "description":  "Vi bestrÃ¦ber os pÃ¥ at svare pÃ¥ hver besked inden for 24 timer pÃ¥ hverdage."
+                                                   },
+                                 "working_hours":  {
+                                                       "title":  "Arbejdstider",
+                                                       "description":  "Mandag - fredag: 09:00 - 18:00. Weekender: med prioritet."
+                                                   },
+                                 "support":  {
+                                                 "title":  "LÃ¸bende support",
+                                                 "description":  "Vores supportteam er altid klar til at lÃ¸se dine tekniske problemer."
+                                             }
+                             },
+                    "form":  {
+                                 "name":  "Navn",
+                                 "name_placeholder":  "Indtast dit navn",
+                                 "email":  "E-mail",
+                                 "email_placeholder":  "navn@email.dk",
+                                 "subject":  "Emne",
+                                 "subject_placeholder":  "Hvad vil du diskutere?",
+                                 "message":  "Besked",
+                                 "message_placeholder":  "FortÃ¦l os mere om dit spÃ¸rgsmÃ¥l...",
+                                 "submit":  "Send besked"
+                             }
+                },
+    "email_label":  "E-mail",
+    "email_value":  "hello@starter.app",
+    "phone_label":  "Telefon",
+    "phone_value":  "+45 33 12 34 56",
+    "location_label":  "Placering",
+    "location_value":  "KÃ¸benhavn, Danmark"
+}

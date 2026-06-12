@@ -1,0 +1,102 @@
+{
+    "about":  {
+                  "badge":  "O nas"
+              },
+    "hero":  {
+                 "badge":  "O nas",
+                 "title_part1":  "Tworzymy ",
+                 "title_highlight":  "przyszÅ‚oÅ›Ä‡ cyfrowÄ…",
+                 "description":  "ZaÅ‚oÅ¼ony w 2024 roku, Starter istnieje, aby pomÃ³c programistom budowaÄ‡ lepsze aplikacje szybciej. Wierzymy w moc czystego kodu, piÄ™knego designu i wspÃ³Å‚pracy open source.",
+                 "primary_btn":  {
+                                     "label":  "Zacznij za darmo",
+                                     "url":  "#pricing"
+                                 },
+                 "secondary_btn":  {
+                                       "label":  "Zobacz demo",
+                                       "url":  "#features"
+                                   },
+                 "note":  "Nie wymaga karty kredytowej"
+             },
+    "stats":  {
+                  "community":  "Globalna spoÅ‚ecznoÅ›Ä‡",
+                  "community_val":  "50K+",
+                  "projects":  "UkoÅ„czonych projektÃ³w",
+                  "projects_val":  "120+",
+                  "uptime":  "Czas dziaÅ‚ania",
+                  "uptime_val":  "99.99%",
+                  "rating":  "Ocena",
+                  "rating_val":  "4.9/5"
+              },
+    "story":  {
+                  "tag":  "Nasza Historia",
+                  "visual_label":  "Ilustracja Studia Kreatywnego",
+                  "title":  "NapÄ™dzani pasjÄ…, \u003cbr\u003eokreÅ›lani przez doskonaÅ‚oÅ›Ä‡.",
+                  "para1":  "Nasza podrÃ³Å¼ rozpoczÄ™Å‚a siÄ™ od prostej idei: uczynienie tworzenia stron internetowych dostÄ™pnym i przyjemnym dla wszystkich. ByliÅ›my zmÄ™czeni rozdÄ™tymi frameworkami i skomplikowanymi konfiguracjami.",
+                  "para2":  "DziÅ› jesteÅ›my zrÃ³Å¼nicowanym zespoÅ‚em inÅ¼ynierÃ³w, projektantÃ³w i myÅ›licieli pracujÄ…cych razem nad rozwiÄ…zywaniem zÅ‚oÅ¼onych problemÃ³w eleganckimi rozwiÄ…zaniami.",
+                  "val1":  "Filozofia projektowania zorientowanego na uÅ¼ytkownika",
+                  "val2":  "Architektura z ìš°ì„ æ€§èƒ½å’Œ pierwszeÅ„stwem",
+                  "val3":  "PrzejrzystoÅ›Ä‡ i otwarta komunikacja"
+              },
+    "mission":  {
+                    "title":  "Nasza Misja",
+                    "description":  "UmoÅ¼liwianie programistom i firmom korzystanie z eleganckich, szybkich i Å‚atwych w uÅ¼yciu narzÄ™dzi do budowania wyjÄ…tkowych produktÃ³w cyfrowych."
+                },
+    "vision":  {
+                   "title":  "Nasza Wizja",
+                   "description":  "ByÄ‡ platformÄ… wyboru dla nowoczesnych programistÃ³w, ktÃ³rzy ceniÄ… piÄ™kno, wydajnoÅ›Ä‡ i doÅ›wiadczenie uÅ¼ytkownika w kaÅ¼dej linii kodu."
+               },
+    "values":  {
+                   "title":  "Nasze WartoÅ›ci",
+                   "subtitle":  "Zasady kierujÄ…ce kaÅ¼dÄ… decyzjÄ…, ktÃ³rÄ… podejmujemy."
+               },
+    "passion":  {
+                    "title":  "Pasja",
+                    "description":  "Kochamy to, co robimy, i widaÄ‡ to w kaÅ¼dym szczegÃ³le naszych produktÃ³w."
+                },
+    "collaboration":  {
+                          "title":  "WspÃ³Å‚praca",
+                          "description":  "Praca razem przynosi najlepsze rezultaty. Wierzymy w moc silnych zespoÅ‚Ã³w."
+                      },
+    "innovation":  {
+                       "title":  "Innowacja",
+                       "description":  "Zawsze szukamy lepszych sposobÃ³w rozwiÄ…zywania problemÃ³w i tworzenia wartoÅ›ci."
+                   },
+    "integrity":  {
+                      "title":  "UczciwoÅ›Ä‡",
+                      "description":  "SzczeroÅ›Ä‡ i przejrzystoÅ›Ä‡ sÄ… podstawÄ… kaÅ¼dej relacji, ktÃ³rÄ… budujemy."
+                  },
+    "excellence":  {
+                       "title":  "DoskonaÅ‚oÅ›Ä‡",
+                       "description":  "Nie zadowalamy siÄ™ tym, co wystarczy. Zawsze dÄ…Å¼ymy do najlepszego."
+                   },
+    "quality":  {
+                    "title":  "JakoÅ›Ä‡",
+                    "description":  "Czysty kod, piÄ™kny design i pÅ‚ynne doÅ›wiadczenia to nasze standardy."
+                },
+    "team":  {
+                 "title":  "Poznaj ZespÃ³Å‚",
+                 "subtitle":  "BÅ‚yskotliwe umysÅ‚y stojÄ…ce za kaÅ¼dÄ… liniÄ… kodu, ktÃ³rÄ… piszemy.",
+                 "alex_desc":  "Wizjonerski lider z 10+ latami doÅ›wiadczenia w rozwoju ekosystemu SaaS.",
+                 "sarah_desc":  "Full-stack wizard specjalizujÄ…ca siÄ™ w budowaniu architektur systemÃ³w na duÅ¼Ä… skalÄ™.",
+                 "mike_desc":  "GÅ‚Ä™boko obsesyjny na punkcie szczegÃ³Å‚Ã³w pikseli, pÅ‚ynnych przepÅ‚ywÃ³w UX i standardÃ³w dostÄ™pnoÅ›ci.",
+                 "jessica_desc":  "Kreatywna narratorka pomagajÄ…ca markom znaleÅºÄ‡ ich unikalny gÅ‚os w Å›wiecie cyfrowym."
+             },
+    "features":  {
+                     "list":  {
+                                  "speed":  {
+                                                "title":  "BÅ‚yskawicznie szybki",
+                                                "description":  "Zoptymalizowana wydajnoÅ›Ä‡ z czasem Å‚adowania poniÅ¼ej 100 ms. Zbudowany do globalnego skalowania z infrastrukturÄ… edge."
+                                            },
+                                  "design":  {
+                                                 "title":  "Nowoczesny design",
+                                                 "description":  "Czysty, responsywny interfejs, ktÃ³ry wyglÄ…da profesjonalnie na kaÅ¼dym urzÄ…dzeniu. W peÅ‚ni konfigurowalne komponenty."
+                                             },
+                                  "security":  {
+                                                   "title":  "Wysokie bezpieczeÅ„stwo",
+                                                   "description":  "Szyfrowanie end-to-end, uwierzytelnianie wieloskÅ‚adnikowe i zgodnoÅ›Ä‡ SOC2 w celu ochrony Twoich danych."
+                                               }
+                              },
+                     "heading":  "Kluczowe funkcje",
+                     "subheading":  "Wszystko, czego potrzebujesz do budowania i skalowania."
+                 }
+}

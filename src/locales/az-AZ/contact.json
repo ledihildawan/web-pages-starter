@@ -1,0 +1,47 @@
+{
+    "meta":  {
+                 "title":  "BizimlÉ™ ÆlaqÉ™ | Starter App",
+                 "description":  "SuallarÄ±nÄ±z vÉ™ dÉ™stÉ™k Ã¼Ã§Ã¼n bizimlÉ™ É™laqÉ™ saxlayÄ±n."
+             },
+    "contact":  {
+                    "badge":  "KÃ¶mÉ™yÉ™ HazÄ±rÄ±q",
+                    "title_part1":  "GÉ™lin",
+                    "title_highlight":  "É™laqÉ™ saxlayaq",
+                    "description":  "SualÄ±nÄ±z var vÉ™ ya É™mÉ™kdaÅŸlÄ±q etmÉ™k istÉ™yirsiniz? SizdÉ™n eÅŸitmÉ™yÉ™ sevinÉ™rik. Mesaj gÃ¶ndÉ™rin vÉ™ biz tezliklÉ™ cavab verÉ™cÉ™yik.",
+                    "form_title":  "Mesaj GÃ¶ndÉ™r",
+                    "form_subtitle":  "AÅŸaÄŸÄ±dakÄ± formanÄ± doldurun vÉ™ biz tezliklÉ™ cavab verÉ™cÉ™yik.",
+                    "social_title":  "Bizi Ä°zlÉ™yin",
+                    "social_subtitle":  "Sosial mediya hesablarÄ±mÄ±zdan É™n son yeniliklÉ™ri É™ldÉ™ edin",
+                    "info":  {
+                                 "response_time":  {
+                                                       "title":  "SÃ¼rÉ™tli Cavab",
+                                                       "description":  "Ä°ÅŸ gÃ¼nlÉ™rindÉ™ hÉ™r bir mesaja 24 saat É™rzindÉ™ cavab vermÉ™yÉ™ Ã§alÄ±ÅŸÄ±rÄ±q."
+                                                   },
+                                 "working_hours":  {
+                                                       "title":  "Ä°ÅŸ SaatlarÄ±",
+                                                       "description":  "Bazar ertÉ™si - CÃ¼mÉ™: 09:00 - 18:00. HÉ™ftÉ™ sonu: PrioritetÉ™ gÃ¶rÉ™."
+                                                   },
+                                 "support":  {
+                                                 "title":  "DavamlÄ± DÉ™stÉ™k",
+                                                 "description":  "DÉ™stÉ™k komandamÄ±z texniki problemlÉ™rinizi hÉ™ll etmÉ™yÉ™ hÉ™miÅŸÉ™ hazÄ±rdÄ±r."
+                                             }
+                             },
+                    "form":  {
+                                 "name":  "Ad",
+                                 "name_placeholder":  "AdÄ±nÄ±zÄ± daxil edin",
+                                 "email":  "E-poÃ§t",
+                                 "email_placeholder":  "ad@email.com",
+                                 "subject":  "MÃ¶vzu",
+                                 "subject_placeholder":  "NÉ™ haqqÄ±nda danÄ±ÅŸmaq istÉ™yirsiniz?",
+                                 "message":  "Mesaj",
+                                 "message_placeholder":  "SualÄ±nÄ±z haqqÄ±nda É™traflÄ± mÉ™lumat verin...",
+                                 "submit":  "Mesaj GÃ¶ndÉ™r"
+                             }
+                },
+    "email_label":  "E-poÃ§t",
+    "email_value":  "hello@starter.app",
+    "phone_label":  "Telefon",
+    "phone_value":  "+994 12 345 67 89",
+    "location_label":  "Ãœnvan",
+    "location_value":  "BakÄ±, AzÉ™rbaycan"
+}

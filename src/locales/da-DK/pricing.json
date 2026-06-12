@@ -1,0 +1,56 @@
+{
+    "period_monthly":  "mÃ¥ned",
+    "period_yearly":  "Ã¥r",
+    "hero":  {
+                 "badge":  "VÃ¦lg en plan",
+                 "title_part1":  "Enkel og ",
+                 "title_highlight":  "gennemsigtig prissÃ¦tning",
+                 "description":  "Ingen skjulte gebyrer. Ingen overraskelsesgebyrer. VÃ¦lg en plan, der passer bedst til dine behov."
+             },
+    "toggle":  {
+                   "monthly":  "MÃ¥nedligt",
+                   "yearly":  "Ã…rligt",
+                   "yearly_hint":  "faktureres Ã¥rligt",
+                   "discount":  "SPAR 20%",
+                   "aria_label":  "Skift prisplan"
+               },
+    "plans":  {
+                  "hobby":  {
+                                "name":  "Hobby",
+                                "desc":  "Perfekt til sideprojekter og lÃ¦ring.",
+                                "btn":  "Start gratis",
+                                "feature_0":  "1 projekt",
+                                "feature_1":  "FÃ¦llesskabssupport",
+                                "feature_2":  "5 GB lagerplads"
+                            },
+                  "pro":  {
+                              "name":  "Pro",
+                              "badge":  "Mest populÃ¦r",
+                              "desc":  "For professionelle udviklere og smÃ¥ teams.",
+                              "btn":  "VÃ¦lg Pro-plan",
+                              "feature_0":  "UbegrÃ¦nsede projekter",
+                              "feature_1":  "Prioriteret e-mail-support",
+                              "feature_2":  "100 GB lagerplads",
+                              "feature_3":  "Avanceret analyse"
+                          },
+                  "enterprise":  {
+                                     "name":  "Enterprise",
+                                     "desc":  "For storskala applikationer og organisationer.",
+                                     "btn":  "Kontakt salg",
+                                     "feature_0":  "Alle Pro-funktioner",
+                                     "feature_1":  "Dedikeret kontomanager",
+                                     "feature_2":  "SSO og revisionslog",
+                                     "feature_3":  "UbegrÃ¦nset lagerplads"
+                                 }
+              },
+    "faq":  {
+                "title":  "Ofte stillede spÃ¸rgsmÃ¥l",
+                "subtitle":  "Find svar pÃ¥ de mest almindelige spÃ¸rgsmÃ¥l om vores planer og tjenester.",
+                "q_0":  "Kan jeg opsige nÃ¥r som helst?",
+                "a_0":  "Ja, du kan opsige dit abonnement nÃ¥r som helst. Din adgang forbliver aktiv til slutningen af faktureringsperioden.",
+                "q_1":  "Er der en gratis prÃ¸veperiode?",
+                "a_1":  "Vi tilbyder en 14-dages gratis prÃ¸veperiode for Pro-planen. Intet kreditkort krÃ¦ves for at komme i gang.",
+                "q_2":  "Hvilke betalingsmetoder er tilgÃ¦ngelige?",
+                "a_2":  "Vi accepterer de stÃ¸rste kreditkort og PayPal. For Enterprise understÃ¸tter vi bankoverfÃ¸rsler."
+            }
+}

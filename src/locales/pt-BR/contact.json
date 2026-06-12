@@ -1,0 +1,47 @@
+{
+    "meta":  {
+                 "title":  "Entre em Contato | Starter App",
+                 "description":  "Entre em contato conosco para perguntas e suporte."
+             },
+    "contact":  {
+                    "badge":  "Entre em Contato",
+                    "title_part1":  "Vamos nos",
+                    "title_highlight":  "conectar",
+                    "description":  "Tem perguntas ou quer colaborar? GostarÃ­amos de saber de vocÃª. Envie-nos uma mensagem e responderemos o mais rÃ¡pido possÃ­vel.",
+                    "form_title":  "Envie uma Mensagem",
+                    "form_subtitle":  "Preencha o formulÃ¡rio abaixo e responderemos em breve.",
+                    "social_title":  "Siga-nos",
+                    "social_subtitle":  "Fique atualizado com nossas Ãºltimas notÃ­cias nas redes sociais",
+                    "info":  {
+                                 "response_time":  {
+                                                       "title":  "Resposta RÃ¡pida",
+                                                       "description":  "Nos esforÃ§amos para responder a cada mensagem dentro de 24 horas em dias Ãºteis."
+                                                   },
+                                 "working_hours":  {
+                                                       "title":  "HorÃ¡rio de Trabalho",
+                                                       "description":  "Segunda - Sexta: 09:00 - 18:00. Fins de semana: Por prioridade."
+                                                   },
+                                 "support":  {
+                                                 "title":  "Suporte ContÃ­nuo",
+                                                 "description":  "Nossa equipe de suporte estÃ¡ sempre pronta para ajudar a resolver seus problemas tÃ©cnicos."
+                                             }
+                             },
+                    "form":  {
+                                 "name":  "Nome",
+                                 "name_placeholder":  "Digite seu nome",
+                                 "email":  "E-mail",
+                                 "email_placeholder":  "nome@exemplo.com",
+                                 "subject":  "Assunto",
+                                 "subject_placeholder":  "O que vocÃª gostaria de discutir?",
+                                 "message":  "Mensagem",
+                                 "message_placeholder":  "Conte-nos mais sobre sua dÃºvida...",
+                                 "submit":  "Enviar Mensagem"
+                             }
+                },
+    "email_label":  "E-mail",
+    "email_value":  "hello@starter.app",
+    "phone_label":  "Telefone",
+    "phone_value":  "+55 11 99999 9999",
+    "location_label":  "LocalizaÃ§Ã£o",
+    "location_value":  "SÃ£o Paulo, Brasil"
+}

@@ -94,13 +94,13 @@ const generateClientI18nScript = (
     supportedLangs.map((l) => [
       l,
       {
-        common: readJSON5(resolveRoot(`${PATHS.LOCALES}/${l}/common.json5`)),
+        common: readJSON5(resolveRoot(`${PATHS.LOCALES}/${l}/common.json`)),
         comp: loadSelectedComponentLocales(
           l,
           usedComponents,
           resolveRoot(PATHS.LOCALES),
         ),
-        page: readJSON5(resolveRoot(`${PATHS.LOCALES}/${l}/${name}.json5`)),
+        page: readJSON5(resolveRoot(`${PATHS.LOCALES}/${l}/${name}.json`)),
       },
     ]),
   ) as Record<string, JsonData>;
@@ -662,8 +662,8 @@ export const createTemplateParams = (
   const usedComponents = getUsedComponents(templatePath);
 
   const mergedLocales: JsonData = {
-    ...readJSON5(resolveRoot(`${PATHS.LOCALES}/${lang}/common.json5`)),
-    page: readJSON5(resolveRoot(`${PATHS.LOCALES}/${lang}/${name}.json5`)),
+    ...readJSON5(resolveRoot(`${PATHS.LOCALES}/${lang}/common.json`)),
+    page: readJSON5(resolveRoot(`${PATHS.LOCALES}/${lang}/${name}.json`)),
     comp: loadSelectedComponentLocales(
       lang,
       usedComponents,

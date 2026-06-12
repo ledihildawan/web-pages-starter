@@ -1,0 +1,75 @@
+{
+    "hero":  {
+                 "badge":  "Kiemelt funkciÃ³k",
+                 "title_part1":  "Minden, amire szÃ¼ksÃ©ged van a",
+                 "title_highlight":  "gyorsabb skÃ¡lÃ¡zÃ¡shoz",
+                 "description":  "A hatÃ©kony elemzÃ©sektÅ‘l a zÃ¶kkenÅ‘mentes integrÃ¡ciÃ³kig megadjuk azt az eszkÃ¶zkÃ©szletet, amire szÃ¼ksÃ©ged van vilÃ¡gszÃ­nvonalÃº alkalmazÃ¡sok Ã©pÃ­tÃ©sÃ©hez bonyodalmak nÃ©lkÃ¼l."
+             },
+    "sections":  {
+                     "sync":  {
+                                  "title":  "ValÃ³s idejÅ± szinkronizÃ¡lÃ¡s",
+                                  "description":  "A vÃ¡ltozÃ¡sok azonnal terjednek minden eszkÃ¶zre. AkÃ¡r mobilon, asztali gÃ©pen vagy tÃ¡blagÃ©pen hasznÃ¡ljÃ¡k, ugyanazt az adatot ugyanabban az idÅ‘ben lÃ¡tjÃ¡k.",
+                                  "check_0":  "Milliszekundum alatti kÃ©sleltetÃ©s",
+                                  "check_1":  "BeÃ©pÃ­tett offline tÃ¡mogatÃ¡s",
+                                  "check_2":  "KonfliktuskezelÃ©s"
+                              },
+                     "analytics":  {
+                                       "title":  "CselekvÃ©sre Ã¶sztÃ¶nzÅ‘ analitika",
+                                       "description":  "Hagyd a talÃ¡lgatÃ¡st. Szerezz rÃ©szletes betekintÃ©st a felhasznÃ¡lÃ³i viselkedÃ©sbe, a rendszer teljesÃ­tmÃ©nyÃ©be Ã©s a bevÃ©teli mutatÃ³kba. VizualizÃ¡ld az adataidat interaktÃ­v diagramokkal.",
+                                       "check_0":  "TestreszabhatÃ³ mÅ±szerfalak",
+                                       "check_1":  "ExportÃ¡lÃ¡s PDF-be, CSV-be vagy Excelbe",
+                                       "check_2":  "AutomatizÃ¡lt heti jelentÃ©sek"
+                                   }
+                 },
+    "more_title":  "Ã‰s mÃ©g sok mÃ¡s...",
+    "more_subtitle":  "Fejlett funkciÃ³k, amelyek segÃ­tenek gyorsabban Ã©s skÃ¡lÃ¡zhatÃ³bban Ã©pÃ­teni.",
+    "more":  {
+                 "dark_mode":  {
+                                   "title":  "SÃ¶tÃ©t mÃ³d",
+                                   "desc":  "BeÃ©pÃ­tett tÃ¡mogatÃ¡s vilÃ¡gos Ã©s sÃ¶tÃ©t tÃ©mÃ¡khoz automatikus Ã©rzÃ©kelÃ©ssel."
+                               },
+                 "api_first":  {
+                                   "title":  "API-kÃ¶zpontÃº",
+                                   "desc":  "REST Ã©s GraphQL API-k elÃ©rhetÅ‘k a teljes programozott vezÃ©rlÃ©shez."
+                               },
+                 "sso":  {
+                             "title":  "SSO bejelentkezÃ©s",
+                             "desc":  "VÃ¡llalati szintÅ± Single Sign-On a Google, GitHub Ã©s Okta szolgÃ¡ltatÃ¡sokhoz."
+                         },
+                 "audit":  {
+                               "title":  "NaplÃ³zÃ¡s",
+                               "desc":  "KÃ¶vesd nyomon projektjeid minden vÃ¡ltozÃ¡sÃ¡t rÃ©szletes idÅ‘bÃ©lyegekkel."
+                           },
+                 "rbac":  {
+                              "title":  "Szerep alapÃº hozzÃ¡fÃ©rÃ©s",
+                              "desc":  "RÃ©szletes jogosultsÃ¡gkezelÃ©s adminok, szerkesztÅ‘k Ã©s megtekintÅ‘k szÃ¡mÃ¡ra."
+                          },
+                 "uptime":  {
+                                "title":  "99,99% rendelkezÃ©sre Ã¡llÃ¡s",
+                                "desc":  "GarantÃ¡lt elÃ©rhetÅ‘sÃ©g globÃ¡lisan elosztott CDN-Ã¼nkkel."
+                            }
+             },
+    "cta":  {
+                "heading":  "KÃ©szen Ã¡llsz az indulÃ¡sra?",
+                "btn_create":  "FiÃ³k lÃ©trehozÃ¡sa",
+                "btn_docs":  "DokumentÃ¡ciÃ³ olvasÃ¡sa"
+            },
+    "features":  {
+                     "list":  {
+                                  "speed":  {
+                                                "title":  "VillÃ¡mgyors",
+                                                "description":  "OptimalizÃ¡lt teljesÃ­tmÃ©ny 100 ms alatti betÃ¶ltÃ©si idÅ‘vel. GlobÃ¡lis skÃ¡lÃ¡zÃ¡sra Ã©pÃ­tve edge infrastruktÃºrÃ¡val."
+                                            },
+                                  "design":  {
+                                                 "title":  "Modern dizÃ¡jn",
+                                                 "description":  "Tiszta, reszponzÃ­v felÃ¼let, amely professzionÃ¡lisan nÃ©z ki minden eszkÃ¶zÃ¶n. Teljesen testreszabhatÃ³ komponensek."
+                                             },
+                                  "security":  {
+                                                   "title":  "Magas biztonsÃ¡g",
+                                                   "description":  "VÃ©gpontok kÃ¶zÃ¶tti titkosÃ­tÃ¡s, tÃ¶bbfaktoros hitelesÃ­tÃ©s Ã©s SOC2 megfelelÅ‘sÃ©g az adataid vÃ©delmÃ©ben."
+                                               }
+                              },
+                     "heading":  "Kiemelt funkciÃ³k",
+                     "subheading":  "Minden, amire az Ã©pÃ­tÃ©shez Ã©s skÃ¡lÃ¡zÃ¡shoz szÃ¼ksÃ©ged van."
+                 }
+}

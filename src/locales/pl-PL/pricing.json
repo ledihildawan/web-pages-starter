@@ -1,0 +1,56 @@
+{
+    "period_monthly":  "miesiÄ…c",
+    "period_yearly":  "rok",
+    "hero":  {
+                 "badge":  "Wybierz swÃ³j plan",
+                 "title_part1":  "Proste i ",
+                 "title_highlight":  "przejrzyste ceny",
+                 "description":  "Bez ukrytych opÅ‚at. Bez niespodzianek. Wybierz plan, ktÃ³ry najlepiej odpowiada Twoim potrzebom."
+             },
+    "toggle":  {
+                   "monthly":  "MiesiÄ™cznie",
+                   "yearly":  "Rocznie",
+                   "yearly_hint":  "fakturowane rocznie",
+                   "discount":  "OSZCZÄ˜DÅ¹ 20%",
+                   "aria_label":  "PrzeÅ‚Ä…cz plan cenowy"
+               },
+    "plans":  {
+                  "hobby":  {
+                                "name":  "Hobby",
+                                "desc":  "Idealny do projektÃ³w pobocznych i nauki.",
+                                "btn":  "Zacznij za darmo",
+                                "feature_0":  "1 projekt",
+                                "feature_1":  "Wsparcie spoÅ‚ecznoÅ›ci",
+                                "feature_2":  "5 GB przestrzeni"
+                            },
+                  "pro":  {
+                              "name":  "Pro",
+                              "badge":  "Najpopularniejszy",
+                              "desc":  "Dla profesjonalnych deweloperÃ³w i maÅ‚ych zespoÅ‚Ã³w.",
+                              "btn":  "Wybierz plan Pro",
+                              "feature_0":  "Nieograniczone projekty",
+                              "feature_1":  "Priorytetowe wsparcie e-mail",
+                              "feature_2":  "100 GB przestrzeni",
+                              "feature_3":  "Zaawansowana analityka"
+                          },
+                  "enterprise":  {
+                                     "name":  "Enterprise",
+                                     "desc":  "Dla aplikacji na duÅ¼Ä… skalÄ™ i organizacji.",
+                                     "btn":  "Skontaktuj siÄ™ ze sprzedaÅ¼Ä…",
+                                     "feature_0":  "Wszystkie funkcje Pro",
+                                     "feature_1":  "Dedykowany opiekun konta",
+                                     "feature_2":  "SSO i log audytu",
+                                     "feature_3":  "Nieograniczona przestrzeÅ„"
+                                 }
+              },
+    "faq":  {
+                "title":  "CzÄ™sto zadawane pytania",
+                "subtitle":  "ZnajdÅº odpowiedzi na najczÄ™Å›ciej zadawane pytania dotyczÄ…ce naszych planÃ³w i usÅ‚ug.",
+                "q_0":  "Czy mogÄ™ anulowaÄ‡ w dowolnym momencie?",
+                "a_0":  "Tak, moÅ¼esz anulowaÄ‡ subskrypcjÄ™ w dowolnym momencie. TwÃ³j dostÄ™p pozostaje aktywny do koÅ„ca okresu rozliczeniowego.",
+                "q_1":  "Czy jest darmowy okres prÃ³bny?",
+                "a_1":  "Oferujemy 14-dniowy darmowy okres prÃ³bny dla planu Pro. Karta kredytowa nie jest wymagana, aby zaczÄ…Ä‡.",
+                "q_2":  "Jakie metody pÅ‚atnoÅ›ci sÄ… dostÄ™pne?",
+                "a_2":  "Akceptujemy gÅ‚Ã³wne karty kredytowe i PayPal. Dla Enterprise obsÅ‚ugujemy przelewy bankowe."
+            }
+}

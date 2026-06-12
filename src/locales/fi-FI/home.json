@@ -1,0 +1,102 @@
+{
+    "about":  {
+                  "badge":  "Tietoa meistÃ¤"
+              },
+    "hero":  {
+                 "badge":  "Tietoa meistÃ¤",
+                 "title_part1":  "Luomme ",
+                 "title_highlight":  "digitaalista tulevaisuutta",
+                 "description":  "Vuonna 2024 perustettu Starter auttaa kehittÃ¤jiÃ¤ rakentamaan parempia sovelluksia nopeammin. Uskomme puhtaan koodin, kauniin muotoilun ja avoimen lÃ¤hdekoodin yhteistyÃ¶n voimaan.",
+                 "primary_btn":  {
+                                     "label":  "Aloita ilmaiseksi",
+                                     "url":  "#pricing"
+                                 },
+                 "secondary_btn":  {
+                                       "label":  "NÃ¤ytÃ¤ demo",
+                                       "url":  "#features"
+                                   },
+                 "note":  "Ei luottokorttia tarvita"
+             },
+    "stats":  {
+                  "community":  "Globaali yhteisÃ¶",
+                  "community_val":  "50K+",
+                  "projects":  "Valmiit projektit",
+                  "projects_val":  "120+",
+                  "uptime":  "KÃ¤ytettÃ¤vyys",
+                  "uptime_val":  "99.99%",
+                  "rating":  "Arvosana",
+                  "rating_val":  "4.9/5"
+              },
+    "story":  {
+                  "tag":  "Tarinamme",
+                  "visual_label":  "Luovan studion kuva",
+                  "title":  "Intohimon ajamia, \u003cbr\u003elaadun mÃ¤Ã¤rittelemiÃ¤.",
+                  "para1":  "Matkamme alkoi yksinkertaisella idealla: tehdÃ¤ web-kehityksestÃ¤ saavutettavaa ja hauskaa kaikille. Olimme kyllÃ¤styneitÃ¤ raskaisiin kehyksiin ja monimutkaisiin asetuksiin.",
+                  "para2":  "NykyÃ¤Ã¤n olemme monimuotoinen tiimi insinÃ¶Ã¶rejÃ¤, suunnittelijoita ja ajattelijoita, jotka tyÃ¶skentelevÃ¤t yhdessÃ¤ ratkaistakseen monimutkaisia ongelmia eleganteilla ratkaisuilla.",
+                  "val1":  "KÃ¤yttÃ¤jÃ¤keskeinen muotoilufilosofia",
+                  "val2":  "Suorituskyky edellÃ¤ -arkkitehtuuri",
+                  "val3":  "Avoimuus ja avoin viestintÃ¤"
+              },
+    "mission":  {
+                    "title":  "TehtÃ¤vÃ¤mme",
+                    "description":  "Valtuuttaa kehittÃ¤jiÃ¤ ja yrityksiÃ¤ eleganteilla, nopeilla ja helppokÃ¤yttÃ¶isillÃ¤ tyÃ¶kaluilla poikkeuksellisten digitaalisten tuotteiden rakentamiseen."
+                },
+    "vision":  {
+                   "title":  "Visioomme",
+                   "description":  "Tulla modernien kehittÃ¤jien valitsemaksi alustaksi, jotka arvostavat kauneutta, suorituskykyÃ¤ ja kÃ¤yttÃ¤jÃ¤kokemusta jokaisella koodirivillÃ¤."
+               },
+    "values":  {
+                   "title":  "Arvomme",
+                   "subtitle":  "Periaatteet, jotka ohjaavat jokaista pÃ¤Ã¤tÃ¶stÃ¤mme."
+               },
+    "passion":  {
+                    "title":  "Intohimo",
+                    "description":  "Rakastamme sitÃ¤, mitÃ¤ teemme, ja se nÃ¤kyy tuotteidemme jokaisessa yksityiskohdassa."
+                },
+    "collaboration":  {
+                          "title":  "YhteistyÃ¶",
+                          "description":  "YhdessÃ¤ tyÃ¶skentely tuottaa parhaat tulokset. Uskomme vahvan tiimin voimaan."
+                      },
+    "innovation":  {
+                       "title":  "Innovaatio",
+                       "description":  "Etsimme aina parempia tapoja ratkaista ongelmia ja luoda arvoa."
+                   },
+    "integrity":  {
+                      "title":  "Rehellisyys",
+                      "description":  "Rehellisyys ja avoimuus ovat jokaisen rakentamamme suhteen perusta."
+                  },
+    "excellence":  {
+                       "title":  "Erinomaisuus",
+                       "description":  "Emme tyydy \u0027riittÃ¤vÃ¤n hyvÃ¤Ã¤n\u0027. Pyrimme aina parhaaseen."
+                   },
+    "quality":  {
+                    "title":  "Laatu",
+                    "description":  "Puhdas koodi, kaunis muotoilu ja saumaton kokemus ovat standardimme."
+                },
+    "team":  {
+                 "title":  "Tapaa tiimi",
+                 "subtitle":  "Loistavat mielet jokaisen kirjoittamamme koodirivin takana.",
+                 "alex_desc":  "VisionÃ¤Ã¤rinen johtaja, jolla on yli 10 vuoden kokemus SaaS-ekosysteemien kehittÃ¤misestÃ¤.",
+                 "sarah_desc":  "Fullstack-taikuutta erikoistuen suuren mittakaavan jÃ¤rjestelmÃ¤arkkitehtuurien rakentamiseen.",
+                 "mike_desc":  "Pakkomielteinen pikselien yksityiskohdista, sujuvista UX-virroista ja saavutettavuusstandardeista.",
+                 "jessica_desc":  "Luova tarinankertoja, joka auttaa brÃ¤ndejÃ¤ lÃ¶ytÃ¤mÃ¤Ã¤n ainutlaatuisen Ã¤Ã¤nensÃ¤ digitaalisessa maailmassa."
+             },
+    "features":  {
+                     "list":  {
+                                  "speed":  {
+                                                "title":  "Salamannopea",
+                                                "description":  "Optimoitu suorituskyky alle 100 ms latausajoilla. Rakennettu globaaliin skaalaukseen edge-infran avulla."
+                                            },
+                                  "design":  {
+                                                 "title":  "Moderni muotoilu",
+                                                 "description":  "Puhdas, responsiivinen kÃ¤yttÃ¶liittymÃ¤, joka nÃ¤yttÃ¤Ã¤ ammattimaiselta kaikilla laitteilla. TÃ¤ysin mukautettavat komponentit."
+                                             },
+                                  "security":  {
+                                                   "title":  "Korkea tietoturva",
+                                                   "description":  "PÃ¤Ã¤stÃ¤ pÃ¤Ã¤hÃ¤n -salaus, monivaiheinen tunnistautuminen ja SOC2-vaatimustenmukaisuus tietojesi suojaamiseksi."
+                                               }
+                              },
+                     "heading":  "Avainominaisuudet",
+                     "subheading":  "Kaikki mitÃ¤ tarvitset rakentamiseen ja skaalaukseen."
+                 }
+}

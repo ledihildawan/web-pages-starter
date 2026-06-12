@@ -1,0 +1,102 @@
+{
+    "about":  {
+                  "badge":  "Sobre"
+              },
+    "hero":  {
+                 "badge":  "Sobre",
+                 "title_part1":  "Estamos criando o ",
+                 "title_highlight":  "futuro digital",
+                 "description":  "Fundado em 2024, o Starter existe para ajudar desenvolvedores a construir melhores aplicaÃ§Ãµes mais rapidamente. Acreditamos no poder de cÃ³digo limpo, design bonito e colaboraÃ§Ã£o open source.",
+                 "primary_btn":  {
+                                     "label":  "Comece GrÃ¡tis",
+                                     "url":  "#pricing"
+                                 },
+                 "secondary_btn":  {
+                                       "label":  "Ver Demo",
+                                       "url":  "#features"
+                                   },
+                 "note":  "Sem necessidade de cartÃ£o de crÃ©dito"
+             },
+    "stats":  {
+                  "community":  "Comunidade Global",
+                  "community_val":  "50K+",
+                  "projects":  "Projetos ConcluÃ­dos",
+                  "projects_val":  "120+",
+                  "uptime":  "Disponibilidade",
+                  "uptime_val":  "99.99%",
+                  "rating":  "AvaliaÃ§Ã£o",
+                  "rating_val":  "4.9/5"
+              },
+    "story":  {
+                  "tag":  "Nossa HistÃ³ria",
+                  "visual_label":  "IlustraÃ§Ã£o de EstÃºdio Criativo",
+                  "title":  "Movidos pela paixÃ£o, \u003cbr\u003edefinidos pela excelÃªncia.",
+                  "para1":  "Nossa jornada comeÃ§ou com uma ideia simples: tornar o desenvolvimento web acessÃ­vel e divertido para todos. EstÃ¡vamos cansados de frameworks inchados e configuraÃ§Ãµes complexas.",
+                  "para2":  "Hoje, somos uma equipe diversificada de engenheiros, designers e pensadores trabalhando juntos para resolver problemas complexos com soluÃ§Ãµes elegantes.",
+                  "val1":  "Filosofia de design centrada no usuÃ¡rio",
+                  "val2":  "Arquitetura performance-first",
+                  "val3":  "TransparÃªncia e comunicaÃ§Ã£o aberta"
+              },
+    "mission":  {
+                    "title":  "Nossa MissÃ£o",
+                    "description":  "Capacitar desenvolvedores e empresas com ferramentas elegantes, rÃ¡pidas e fÃ¡ceis de usar para construir produtos digitais excepcionais."
+                },
+    "vision":  {
+                   "title":  "Nossa VisÃ£o",
+                   "description":  "Ser a plataforma de escolha para desenvolvedores modernos que valorizam beleza, performance e experiÃªncia do usuÃ¡rio em cada linha de cÃ³digo."
+               },
+    "values":  {
+                   "title":  "Nossos Valores",
+                   "subtitle":  "PrincÃ­pios que guiam cada decisÃ£o que tomamos."
+               },
+    "passion":  {
+                    "title":  "PaixÃ£o",
+                    "description":  "Amamos o que fazemos, e isso se mostra em cada detalhe dos nossos produtos."
+                },
+    "collaboration":  {
+                          "title":  "ColaboraÃ§Ã£o",
+                          "description":  "Trabalhar juntos produz os melhores resultados. Acreditamos no poder de equipes sÃ³lidas."
+                      },
+    "innovation":  {
+                       "title":  "InovaÃ§Ã£o",
+                       "description":  "Sempre buscando melhores formas de resolver problemas e criar valor."
+                   },
+    "integrity":  {
+                      "title":  "Integridade",
+                      "description":  "Honestidade e transparÃªncia sÃ£o a fundaÃ§Ã£o de cada relacionamento que construÃ­mos."
+                  },
+    "excellence":  {
+                       "title":  "ExcelÃªncia",
+                       "description":  "NÃ£o nos contentamos com bom o suficiente. Sempre nos esforÃ§amos pelo melhor."
+                   },
+    "quality":  {
+                    "title":  "Qualidade",
+                    "description":  "CÃ³digo limpo, design bonito e experiÃªncias fluidas sÃ£o nossos padrÃµes."
+                },
+    "team":  {
+                 "title":  "ConheÃ§a a Equipe",
+                 "subtitle":  "As mentes brilhantes por trÃ¡s de cada linha de cÃ³digo que escrevemos.",
+                 "alex_desc":  "LÃ­der visionÃ¡rio com 10+ anos de experiÃªncia em desenvolvimento de ecossistema SaaS.",
+                 "sarah_desc":  "Full-stack wizard especializada em construir arquiteturas de sistemas em grande escala.",
+                 "mike_desc":  "Profundamente obcecado com detalhes de pixel, fluxos UX suaves e padrÃµes de acessibilidade.",
+                 "jessica_desc":  "Narradora criativa ajudando marcas a encontrar sua voz Ãºnica no mundo digital."
+             },
+    "features":  {
+                     "list":  {
+                                  "speed":  {
+                                                "title":  "Ultra RÃ¡pido",
+                                                "description":  "Performance otimizada com tempos de carregamento inferiores a 100ms. ConstruÃ­do para escala global com infraestrutura edge."
+                                            },
+                                  "design":  {
+                                                 "title":  "Design Moderno",
+                                                 "description":  "Interface limpa e responsiva com aparÃªncia profissional em qualquer dispositivo. Componentes totalmente personalizÃ¡veis."
+                                             },
+                                  "security":  {
+                                                   "title":  "Alta SeguranÃ§a",
+                                                   "description":  "Criptografia de ponta a ponta, autenticaÃ§Ã£o multifator e conformidade SOC2 para proteger seus dados."
+                                               }
+                              },
+                     "heading":  "Funcionalidades Principais",
+                     "subheading":  "Tudo o que vocÃª precisa para construir e escalar."
+                 }
+}

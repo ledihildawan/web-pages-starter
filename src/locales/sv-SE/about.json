@@ -1,0 +1,72 @@
+{
+    "hero":  {
+                 "badge":  "Om oss",
+                 "title_part1":  "Drivna av ",
+                 "title_highlight":  "passion",
+                 "description":  "VÃ¥r resa bÃ¶rjade med en enkel idÃ©."
+             },
+    "mission":  {
+                    "title":  "VÃ¥rt uppdrag",
+                    "description":  "Att ge utvecklare och fÃ¶retag eleganta, snabba och lÃ¤ttanvÃ¤nda verktyg fÃ¶r att bygga exceptionella digitala produkter."
+                },
+    "vision":  {
+                   "title":  "VÃ¥r vision",
+                   "description":  "Att bli den fÃ¶redragna plattformen fÃ¶r moderna utvecklare som vÃ¤rderar skÃ¶nhet, prestanda och anvÃ¤ndarupplevelse i varje kodrad."
+               },
+    "story":  {
+                  "tag":  "VÃ¥r historia",
+                  "visual_label":  "Kreativ studioillustration",
+                  "title":  "Drivna av passion, \u003cbr\u003edefinierade av excellens.",
+                  "para1":  "VÃ¥r resa bÃ¶rjade med en enkel idÃ©: gÃ¶ra webbutveckling tillgÃ¤nglig och rolig fÃ¶r alla. Vi var trÃ¶tta pÃ¥ tunga ramverk och komplicerade instÃ¤llningar.",
+                  "para2":  "Idag Ã¤r vi ett mÃ¥ngsidigt team av ingenjÃ¶rer, designers och tÃ¤nkare som arbetar tillsammans fÃ¶r att lÃ¶sa komplexa problem med eleganta lÃ¶sningar.",
+                  "val1":  "AnvÃ¤ndarcentrerad designfilosofi",
+                  "val2":  "Performance-first-arkitektur",
+                  "val3":  "Transparens och Ã¶ppen kommunikation"
+              },
+    "values":  {
+                   "title":  "VÃ¥ra vÃ¤rderingar",
+                   "subtitle":  "Principerna som vÃ¤gleder varje beslut vi tar."
+               },
+    "passion":  {
+                    "title":  "Passion",
+                    "description":  "Vi Ã¤lskar det vi gÃ¶r, och det syns i varje detalj i vÃ¥ra produkter."
+                },
+    "collaboration":  {
+                          "title":  "Samarbete",
+                          "description":  "Att arbeta tillsammans ger de bÃ¤sta resultaten. Vi tror pÃ¥ kraften i ett starkt team."
+                      },
+    "innovation":  {
+                       "title":  "Innovation",
+                       "description":  "Vi letar alltid efter bÃ¤ttre sÃ¤tt att lÃ¶sa problem och skapa vÃ¤rde."
+                   },
+    "integrity":  {
+                      "title":  "Integritet",
+                      "description":  "Ã„rlighet och transparens Ã¤r grunden fÃ¶r varje relation vi bygger."
+                  },
+    "excellence":  {
+                       "title":  "Kvalitet",
+                       "description":  "Vi nÃ¶jer oss inte med \u0027tillrÃ¤ckligt bra\u0027. Vi strÃ¤var alltid efter det bÃ¤sta."
+                   },
+    "quality":  {
+                    "title":  "Kvalitet",
+                    "description":  "Ren kod, vacker design och sÃ¶mlÃ¶s upplevelse Ã¤r vÃ¥r standard."
+                },
+    "team":  {
+                 "title":  "MÃ¶t teamet",
+                 "subtitle":  "De skarpa hjÃ¤rnorna bakom varje kodrad vi skriver.",
+                 "alex_desc":  "VisionÃ¤r ledare med Ã¶ver 10 Ã¥rs erfarenhet av att utveckla SaaS-ekosystem.",
+                 "sarah_desc":  "Fullstack-magi specialiserad pÃ¥ att bygga storskalig systemarkitektur.",
+                 "mike_desc":  "Besatt av pixeldetaljer, smidiga UX-flÃ¶den och tillgÃ¤nglighetsstandarder.",
+                 "jessica_desc":  "Kreativ berÃ¤ttare som hjÃ¤lper varumÃ¤rken att hitta sin unika rÃ¶st i den digitala vÃ¤rlden."
+             },
+    "stats":  {
+                  "years":  "Ã…rs erfarenhet",
+                  "years_val":  "3+",
+                  "clients":  "Globala kunder",
+                  "clients_val":  "120+",
+                  "countries":  "LÃ¤nder",
+                  "countries_val":  "15",
+                  "support":  "Expertsupport",
+                  "support_val":  "24/7"
+              }
+}

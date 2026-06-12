@@ -1,0 +1,17 @@
+{
+    "meta":  {
+                 "page_title":  "Demo lazy loading Splide | Starter"
+             },
+    "hero":  {
+                 "slide_1":  {
+                                 "title":  "LÃ­nÃ© naÄÃ­tÃ¡nÃ­ pÅ™Ã­rody",
+                                 "subtitle":  "ObrÃ¡zky se naÄÃ­tajÃ­ chytÅ™e, aby Å¡etÅ™ily data.",
+                                 "alt":  "KrÃ¡snÃ¡ horskÃ¡ krajina"
+                             },
+                 "slide_2":  {
+                                 "title":  "Å piÄkovÃ½ vÃ½kon",
+                                 "subtitle":  "NaÄtÄ›te si jen to, co potÅ™ebujete.",
+                                 "alt":  "ZasnÄ›Å¾enÃ¡ horskÃ¡ krajina"
+                             }
+             }
+}

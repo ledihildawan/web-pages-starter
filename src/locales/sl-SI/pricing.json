@@ -1,0 +1,56 @@
+{
+    "period_monthly":  "mes",
+    "period_yearly":  "let",
+    "hero":  {
+                 "badge":  "Izberite svoj paket",
+                 "title_part1":  "Preproste in ",
+                 "title_highlight":  "transparentne cene",
+                 "description":  "Brez skritih stroÅ¡kov. Brez preseneÄenj. Izberite paket, ki najbolj ustreza vaÅ¡im potrebam."
+             },
+    "toggle":  {
+                   "monthly":  "MeseÄno",
+                   "yearly":  "Letno",
+                   "yearly_hint":  "letno obraÄunavanje",
+                   "discount":  "PRIHRANEK 20%",
+                   "aria_label":  "Preklop cenovnega paketa"
+               },
+    "plans":  {
+                  "hobby":  {
+                                "name":  "Hobby",
+                                "desc":  "Popolno za stranske projekte in uÄenje.",
+                                "btn":  "ZaÄnite brezplaÄno",
+                                "feature_0":  "1 projekt",
+                                "feature_1":  "Podpora skupnosti",
+                                "feature_2":  "5GB shrambe"
+                            },
+                  "pro":  {
+                              "name":  "Pro",
+                              "badge":  "Najbolj priljubljen",
+                              "desc":  "Za profesionalne razvijalce in majhne ekipe.",
+                              "btn":  "Izberite Pro paket",
+                              "feature_0":  "Neomejeni projekti",
+                              "feature_1":  "Prednostna e-poÅ¡tna podpora",
+                              "feature_2":  "100GB shrambe",
+                              "feature_3":  "Napredna analitika"
+                          },
+                  "enterprise":  {
+                                     "name":  "Enterprise",
+                                     "desc":  "Za aplikacije v velikem obsegu in organizacije.",
+                                     "btn":  "Kontaktirajte prodajo",
+                                     "feature_0":  "Vse funkcije iz Pro paketa",
+                                     "feature_1":  "PosveÄen upravitelj raÄuna",
+                                     "feature_2":  "SSO in revizijski dnevniki",
+                                     "feature_3":  "Neomejena shramba"
+                                 }
+              },
+    "faq":  {
+                "title":  "Pogosta vpraÅ¡anja",
+                "subtitle":  "PoiÅ¡Äite odgovore na najpogosteje zastavljena vpraÅ¡anja o naÅ¡ih paketih in storitvah.",
+                "q_0":  "Ali lahko kadarkoli odpovem?",
+                "a_0":  "Da, naroÄnino lahko odpovete kadarkoli. VaÅ¡ dostop ostane aktiven do konca obraÄunskega obdobja.",
+                "q_1":  "Ali obstaja brezplaÄno preizkusno obdobje?",
+                "a_1":  "Ponujamo 14-dnevno brezplaÄno preizkusno obdobje za Pro paket. Kreditna kartica ni potrebna za zaÄetek.",
+                "q_2":  "Kateri naÄini plaÄila so na voljo?",
+                "a_2":  "Sprejemamo vse glavne kreditne kartice in PayPal. Za Enterprise podpiramo banÄne transfers."
+            }
+}

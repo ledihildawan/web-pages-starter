@@ -1,0 +1,56 @@
+{
+    "period_monthly":  "lunÄƒ",
+    "period_yearly":  "an",
+    "hero":  {
+                 "badge":  "AlegeÈ›i un plan",
+                 "title_part1":  "PreÈ›uri simple È™i ",
+                 "title_highlight":  "transparente",
+                 "description":  "FÄƒrÄƒ taxe ascunse. FÄƒrÄƒ taxe surprizÄƒ. AlegeÈ›i un plan care se potriveÈ™te cel mai bine nevoilor tale."
+             },
+    "toggle":  {
+                   "monthly":  "Lunar",
+                   "yearly":  "Anual",
+                   "yearly_hint":  "facturat anual",
+                   "discount":  "ECONOMISEÈ˜TI 20%",
+                   "aria_label":  "ComutÄƒ planul de preÈ›uri"
+               },
+    "plans":  {
+                  "hobby":  {
+                                "name":  "Hobby",
+                                "desc":  "Perfect pentru proiecte secundare È™i Ã®nvÄƒÈ›are.",
+                                "btn":  "ÃŽncepe gratuit",
+                                "feature_0":  "1 proiect",
+                                "feature_1":  "Suport din comunitate",
+                                "feature_2":  "5 GB stocare"
+                            },
+                  "pro":  {
+                              "name":  "Pro",
+                              "badge":  "Cel mai popular",
+                              "desc":  "Pentru dezvoltatori profesioniÈ™ti È™i echipe mici.",
+                              "btn":  "Alege planul Pro",
+                              "feature_0":  "Proiecte nelimitate",
+                              "feature_1":  "Suport prioritar prin e-mail",
+                              "feature_2":  "100 GB stocare",
+                              "feature_3":  "Analize avansate"
+                          },
+                  "enterprise":  {
+                                     "name":  "Enterprise",
+                                     "desc":  "Pentru aplicaÈ›ii la scarÄƒ largÄƒ È™i organizaÈ›ii.",
+                                     "btn":  "ContacteazÄƒ vÃ¢nzÄƒrile",
+                                     "feature_0":  "Toate funcÈ›ionalitÄƒÈ›ile Pro",
+                                     "feature_1":  "Manager de cont dedicat",
+                                     "feature_2":  "SSO È™i jurnal de audit",
+                                     "feature_3":  "Stocare nelimitatÄƒ"
+                                 }
+              },
+    "faq":  {
+                "title":  "ÃŽntrebÄƒri frecvente",
+                "subtitle":  "GÄƒseÈ™te rÄƒspunsuri la cele mai frecvente Ã®ntrebÄƒri despre planurile È™i serviciile noastre.",
+                "q_0":  "Pot anula oricÃ¢nd?",
+                "a_0":  "Da, poÈ›i anula abonamentul oricÃ¢nd. Accesul tÄƒu rÄƒmÃ¢ne activ pÃ¢nÄƒ la sfÃ¢rÈ™itul perioadei de facturare.",
+                "q_1":  "ExistÄƒ o perioadÄƒ de probÄƒ gratuitÄƒ?",
+                "a_1":  "Oferim o perioadÄƒ de probÄƒ gratuitÄƒ de 14 zile pentru planul Pro. Nu este necesar card de credit pentru a Ã®ncepe.",
+                "q_2":  "Ce metode de platÄƒ sunt disponibile?",
+                "a_2":  "AcceptÄƒm principalele carduri de credit È™i PayPal. Pentru Enterprise, suportÄƒm transferuri bancare."
+            }
+}

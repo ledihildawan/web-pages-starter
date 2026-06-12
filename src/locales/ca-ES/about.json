@@ -1,0 +1,72 @@
+{
+    "hero":  {
+                 "badge":  "Sobre nosaltres",
+                 "title_part1":  "Impulsats per la ",
+                 "title_highlight":  "passiÃ³",
+                 "description":  "El nostre viatge va comenÃ§ar amb una idea simple."
+             },
+    "mission":  {
+                    "title":  "La nostra missiÃ³",
+                    "description":  "Capacitar desenvolupadors i empreses amb eines elegants, rÃ pides i fÃ cils d\u0027utilitzar per construir productes digitals excepcionals."
+                },
+    "vision":  {
+                   "title":  "La nostra visiÃ³",
+                   "description":  "Convertir-nos en la plataforma d\u0027elecciÃ³ per a desenvolupadors moderns que valoren la bellesa, el rendiment i l\u0027experiÃ¨ncia d\u0027usuari en cada lÃ­nia de codi."
+               },
+    "story":  {
+                  "tag":  "La nostra histÃ²ria",
+                  "visual_label":  "IlÂ·lustraciÃ³ d\u0027estudi creatiu",
+                  "title":  "Impulsats per la passiÃ³, \u003cbr\u003edefinits per l\u0027excelÂ·lÃ¨ncia.",
+                  "para1":  "El nostre viatge va comenÃ§ar amb una idea simple: fer que el desenvolupament web sigui accessible i divertit per a tothom. EstÃ vem farts dels frameworks pesats i les configuracions complicades.",
+                  "para2":  "Avui, som un equip divers d\u0027enginyers, dissenyadors i pensadors que treballen junts per resoldre problemes complexos amb solucions elegants.",
+                  "val1":  "Filosofia de disseny centrat en l\u0027usuari",
+                  "val2":  "Arquitectura performance-first",
+                  "val3":  "TransparÃ¨ncia i comunicaciÃ³ oberta"
+              },
+    "values":  {
+                   "title":  "Els nostres valors",
+                   "subtitle":  "Els principis que guien cada decisiÃ³ que prenem."
+               },
+    "passion":  {
+                    "title":  "PassiÃ³",
+                    "description":  "Estimem el que fem, i es nota en cada detall dels nostres productes."
+                },
+    "collaboration":  {
+                          "title":  "ColÂ·laboraciÃ³",
+                          "description":  "Treballar junts produeix els millors resultats. Creiem en el poder d\u0027un equip sÃ²lid."
+                      },
+    "innovation":  {
+                       "title":  "InnovaciÃ³",
+                       "description":  "Sempre buscant maneres millors de resoldre problemes i crear valor."
+                   },
+    "integrity":  {
+                      "title":  "Integritat",
+                      "description":  "L\u0027honestedat i la transparÃ¨ncia sÃ³n la base de cada relaciÃ³ que construÃ¯m."
+                  },
+    "excellence":  {
+                       "title":  "ExcelÂ·lÃ¨ncia",
+                       "description":  "No estem satisfets amb \u0027prou bo\u0027. Sempre busquem el millor."
+                   },
+    "quality":  {
+                    "title":  "Qualitat",
+                    "description":  "Codi net, disseny bonic i experiÃ¨ncia perfecta sÃ³n el nostre estÃ ndard."
+                },
+    "team":  {
+                 "title":  "Conegueu l\u0027equip",
+                 "subtitle":  "Les ments brillants darrere de cada lÃ­nia de codi que escrivim.",
+                 "alex_desc":  "LÃ­der visionari amb mÃ©s de 10 anys d\u0027experiÃ¨ncia en el desenvolupament d\u0027ecosistemes SaaS.",
+                 "sarah_desc":  "MÃ gia full-stack especialitzada en la construcciÃ³ d\u0027arquitectures de sistemes a gran escala.",
+                 "mike_desc":  "Obsessionat amb els detalls de pÃ­xels, els fluxos d\u0027experiÃ¨ncia d\u0027usuari suaus i els estÃ ndards d\u0027accessibilitat.",
+                 "jessica_desc":  "Contadora d\u0027histÃ²ries creatives que ajuda les marques a trobar la seva veu Ãºnica al mÃ³n digital."
+             },
+    "stats":  {
+                  "years":  "Anys d\u0027ExperiÃ¨ncia",
+                  "years_val":  "3+",
+                  "clients":  "Clients Globals",
+                  "clients_val":  "120+",
+                  "countries":  "PaÃ¯sos Aconseguits",
+                  "countries_val":  "15",
+                  "support":  "Suport Expert",
+                  "support_val":  "24/7"
+              }
+}

@@ -1,0 +1,75 @@
+{
+    "hero":  {
+                 "badge":  "Ajralmas imkoniyatlar",
+                 "title_part1":  "Sizga kerak bo\u0027lgan hamma narsa",
+                 "title_highlight":  "tezkor masshtablash uchun",
+                 "description":  "Kuchli analitikadan tortib silliq integratsiyalargacha, biz jahon darajasidagi ilovalarni tashvishsiz yaratish uchun kerak bo\u0027lgan vositalar to\u0027plamini taqdim etamiz."
+             },
+    "features":  {
+                     "heading":  "Ajralmas imkoniyatlar",
+                     "subheading":  "Qurish va o\u0027sish uchun kerak bo\u0027lgan hamma narsa.",
+                     "list":  {
+                                  "speed":  {
+                                                "title":  "Juda tez",
+                                                "description":  "100ms dan kam yuklanish vaqti bilan optimal unumdorlik. Edge infratuzilmasi bilan global masshtabga mo\u0027ljallangan."
+                                            },
+                                  "design":  {
+                                                 "title":  "Zamonaviy dizayn",
+                                                 "description":  "Barcha qurilmalarda professional ko\u0027rinishga ega responsiv va toza UI. To\u0027liq sozlanishi mumkin bo\u0027lgan komponentlar."
+                                             },
+                                  "security":  {
+                                                   "title":  "Yuqori xavfsizlik",
+                                                   "description":  "Uchidan-uchigacha shifrlash, ko\u0027p faktorli autentifikatsiya va ma\u0027lumotlaringizni himoyalash uchun SOC2 mosligi."
+                                               }
+                              }
+                 },
+    "sections":  {
+                     "sync":  {
+                                  "title":  "Haqiqiy vaqtda sinxronizatsiya",
+                                  "description":  "O\u0027zgarishlar barcha qurilmalarda bir zumda tarqaladi. Foydalanuvchilaringiz telefonda, kompyuterda yoki planshetda bo\u0027lsin, bir vaqtda bir xil ma\u0027lumotlarni ko\u0027radi.",
+                                  "check_0":  "Millisekunddan kam kechikish",
+                                  "check_1":  "O\u0027rnatilgan oflayn qo\u0027llab-quvvatlash",
+                                  "check_2":  "Konflikt hal qilish"
+                              },
+                     "analytics":  {
+                                       "title":  "Harakatlanadigan analitika",
+                                       "description":  "Taxmin qilmang. Foydalanuvchi xulqi, tizim unumdorligi va daromad metrikalari haqida chuqur tushunchalar oling. Ma\u0027lumotlaringizni interaktiv grafiklar bilan vizualizatsiya qiling.",
+                                       "check_0":  "Moslashtirilishi mumkin bo\u0027lgan boshqaruv paneli",
+                                       "check_1":  "PDF, CSV yoki Excel formatida eksport",
+                                       "check_2":  "Avtomatik haftalik hisobotlar"
+                                   }
+                 },
+    "more_title":  "Va yana ko\u0027p narsalar...",
+    "more_subtitle":  "Tezkor va masshtablanuvchi qurish uchun mo\u0027ljallangan kuchli imkoniyatlar.",
+    "more":  {
+                 "dark_mode":  {
+                                   "title":  "Qorong\u0027i rejim",
+                                   "desc":  "Avtomatik aniqlash bilan ochiq va qorong\u0027i mavzular uchun o\u0027rnatilgan qo\u0027llab-quvvatlash."
+                               },
+                 "api_first":  {
+                                   "title":  "API First",
+                                   "desc":  "To\u0027liq dasturiy boshqaruv uchun REST va GraphQL API mavjud."
+                               },
+                 "sso":  {
+                             "title":  "SSO kirish",
+                             "desc":  "Google, GitHub va Okta uchun korporativ darajadagi Single Sign-On."
+                         },
+                 "audit":  {
+                               "title":  "Audit jurnali",
+                               "desc":  "Loyihalaringizdagi har bir o\u0027zgarishni batafsil vaqt belgilari bilan kuzating."
+                           },
+                 "rbac":  {
+                              "title":  "Rol asosidagi kirish",
+                              "desc":  "Administratorlar, muharrirlar va ko\u0027ruvchilar uchun donador ruxsat nazorati."
+                          },
+                 "uptime":  {
+                                "title":  "99.99% ishlash vaqti",
+                                "desc":  "Global tarqatilgan CDN bilan kafolatlangan mavjudlik."
+                            }
+             },
+    "cta":  {
+                "heading":  "Boshlashga tayyormisiz?",
+                "btn_create":  "Hisob yaratish",
+                "btn_docs":  "Hujjatlarni o\u0027qish"
+            }
+}

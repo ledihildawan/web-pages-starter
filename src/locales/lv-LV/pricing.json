@@ -1,0 +1,56 @@
+{
+    "period_monthly":  "mÄ“n.",
+    "period_yearly":  "gad.",
+    "hero":  {
+                 "badge":  "IzvÄ“lieties plÄnu",
+                 "title_part1":  "VienkÄrÅ¡as un ",
+                 "title_highlight":  "caurspÄ«dÄ«gas cenas",
+                 "description":  "Nav slÄ“ptu maksu. Nav pÄrsteigumu. IzvÄ“lieties plÄnu, kas vislabÄk atbilst JÅ«su vajadzÄ«bÄm."
+             },
+    "toggle":  {
+                   "monthly":  "Ik mÄ“nesi",
+                   "yearly":  "Ik gadu",
+                   "yearly_hint":  "apmaksÄts ik gadu",
+                   "discount":  "IETAUPIET 20%",
+                   "aria_label":  "PÄrslÄ“gt cenu plÄnu"
+               },
+    "plans":  {
+                  "hobby":  {
+                                "name":  "Hobby",
+                                "desc":  "Perfekti piemÄ“rots blakus projektiem un mÄcÄ«Å¡anai.",
+                                "btn":  "SÄkt bez maksas",
+                                "feature_0":  "1 projekts",
+                                "feature_1":  "Kopienu atbalsts",
+                                "feature_2":  "5 GB krÄtuve"
+                            },
+                  "pro":  {
+                              "name":  "Pro",
+                              "badge":  "PopulÄrÄkais",
+                              "desc":  "ProfesionÄliem izstrÄdÄtÄjiem un mazÄm komandÄm.",
+                              "btn":  "IzvÄ“lÄ“ties Pro plÄnu",
+                              "feature_0":  "NeierobeÅ¾oti projekti",
+                              "feature_1":  "PrioritÄrais e-pasta atbalsts",
+                              "feature_2":  "100 GB krÄtuve",
+                              "feature_3":  "Papildu analÄ«tika"
+                          },
+                  "enterprise":  {
+                                     "name":  "Enterprise",
+                                     "desc":  "Lielapjoma lietotnÄ“m un organizÄcijÄm.",
+                                     "btn":  "SazinÄties ar pÄrdoÅ¡anu",
+                                     "feature_0":  "Visas Pro plÄna funkcijas",
+                                     "feature_1":  "AtvÄ“lÄ“ts konta menedÅ¾eris",
+                                     "feature_2":  "SSO un audita Å¾urnÄls",
+                                     "feature_3":  "NeierobeÅ¾ota krÄtuve"
+                                 }
+              },
+    "faq":  {
+                "title":  "BieÅ¾Äk uzdotie jautÄjumi",
+                "subtitle":  "Atrodiet atbildes uz visbieÅ¾Äk uzdotajiem jautÄjumiem par mÅ«su plÄniem un pakalpojumiem.",
+                "q_0":  "Vai es varu atteikties jebkurÄ laikÄ?",
+                "a_0":  "JÄ, JÅ«s varat atteikties no abonementa jebkurÄ laikÄ. JÅ«su piekÄ¼uve paliek aktÄ«va lÄ«dz norÄ“Ä·inu perioda beigÄm.",
+                "q_1":  "Vai ir bezmaksas izmÄ“Ä£inÄjuma periods?",
+                "a_1":  "MÄ“s piedÄvÄjam 14 dienu bezmaksas izmÄ“Ä£inÄjuma periodu Pro plÄnam. SÄkÅ¡anai nav nepiecieÅ¡ama kredÄ«tkarte.",
+                "q_2":  "KÄdas maksÄjumu metodes ir pieejamas?",
+                "a_2":  "MÄ“s pieÅ†emam galvenÄs kredÄ«tkartes un PayPal. Enterprise plÄnam atbalstÄm bankas pÄrskaitÄ«jumus."
+            }
+}

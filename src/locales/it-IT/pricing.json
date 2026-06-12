@@ -1,0 +1,56 @@
+{
+    "period_monthly":  "mese",
+    "period_yearly":  "anno",
+    "hero":  {
+                 "badge":  "Scegli il tuo piano",
+                 "title_part1":  "Prezzi semplici e ",
+                 "title_highlight":  "trasparenti",
+                 "description":  "Nessun costo nascosto. Nessun addebito a sorpresa. Scegli il piano piÃ¹ adatto alle tue esigenze."
+             },
+    "toggle":  {
+                   "monthly":  "Mensile",
+                   "yearly":  "Annuale",
+                   "yearly_hint":  "fatturato annualmente",
+                   "discount":  "RISPARMIA 20%",
+                   "aria_label":  "Commuta piano prezzi"
+               },
+    "plans":  {
+                  "hobby":  {
+                                "name":  "Hobby",
+                                "desc":  "Perfetto per progetti secondari e apprendimento.",
+                                "btn":  "Inizia gratis",
+                                "feature_0":  "1 progetto",
+                                "feature_1":  "Supporto della community",
+                                "feature_2":  "5 GB di archiviazione"
+                            },
+                  "pro":  {
+                              "name":  "Pro",
+                              "badge":  "PiÃ¹ popolare",
+                              "desc":  "Per sviluppatori professionisti e piccoli team.",
+                              "btn":  "Scegli il piano Pro",
+                              "feature_0":  "Progetti illimitati",
+                              "feature_1":  "Supporto email prioritario",
+                              "feature_2":  "100 GB di archiviazione",
+                              "feature_3":  "Analisi avanzate"
+                          },
+                  "enterprise":  {
+                                     "name":  "Enterprise",
+                                     "desc":  "Per applicazioni su larga scala e organizzazioni.",
+                                     "btn":  "Contatta il reparto vendite",
+                                     "feature_0":  "Tutte le funzionalitÃ  del piano Pro",
+                                     "feature_1":  "Account manager dedicato",
+                                     "feature_2":  "SSO e log di audit",
+                                     "feature_3":  "Archiviazione illimitata"
+                                 }
+              },
+    "faq":  {
+                "title":  "Domande frequenti",
+                "subtitle":  "Trova le risposte alle domande piÃ¹ comuni sui nostri piani e servizi.",
+                "q_0":  "Posso cancellare in qualsiasi momento?",
+                "a_0":  "SÃ¬, puoi cancellare l\u0027abbonamento in qualsiasi momento. Il tuo accesso rimane attivo fino alla fine del periodo di fatturazione.",
+                "q_1":  "C\u0027Ã¨ una prova gratuita?",
+                "a_1":  "Offriamo una prova gratuita di 14 giorni per il piano Pro. Non serve la carta di credito per iniziare.",
+                "q_2":  "Quali metodi di pagamento sono accettati?",
+                "a_2":  "Accettiamo le principali carte di credito e PayPal. Per Enterprise, supportiamo anche bonifici bancari."
+            }
+}

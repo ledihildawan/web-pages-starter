@@ -1,0 +1,102 @@
+{
+    "about":  {
+                  "badge":  "O nama"
+              },
+    "hero":  {
+                 "badge":  "O nama",
+                 "title_part1":  "Stvaramo ",
+                 "title_highlight":  "digitalnu buduÄ‡nost",
+                 "description":  "Osnovan 2024. godine, Starter postoji kako bi pomogao programerima da grade bolje aplikacije brÅ¾e. Vjerujemo u moÄ‡ Äistog koda, prekrasnog dizajna i otvorene suradnje.",
+                 "primary_btn":  {
+                                     "label":  "ZapoÄnite besplatno",
+                                     "url":  "#pricing"
+                                 },
+                 "secondary_btn":  {
+                                       "label":  "Pogledajte demo",
+                                       "url":  "#features"
+                                   },
+                 "note":  "Bez potrebe za kreditnom karticom"
+             },
+    "stats":  {
+                  "community":  "Globalna zajednica",
+                  "community_val":  "50K+",
+                  "projects":  "ZavrÅ¡enih projekata",
+                  "projects_val":  "120+",
+                  "uptime":  "Vrijeme rada",
+                  "uptime_val":  "99.99%",
+                  "rating":  "Ocjena",
+                  "rating_val":  "4.9/5"
+              },
+    "story":  {
+                  "tag":  "NaÅ¡a priÄa",
+                  "visual_label":  "Ilustracija kreativnog studija",
+                  "title":  "VoÄ‘eni straÅ¡Ä‡u, \u003cbr\u003edefinirani izvrsnoÅ¡Ä‡u.",
+                  "para1":  "NaÅ¡e putovanje zapoÄelo je jednostavnom idejom: uÄiniti web razvoj pristupaÄnim i zabavnim za sve. Bili smo umorni od teÅ¡kih frameworkova i kompliciranih konfiguracija.",
+                  "para2":  "Danas smo raznoliki tim inÅ¾enjera, dizajnera i mislioca koji zajedno rade na rjeÅ¡avanju sloÅ¾enih problema elegantnim rjeÅ¡enjima.",
+                  "val1":  "Filozofija dizajna usmjerena na korisnika",
+                  "val2":  "Performanse na prvom mjestu",
+                  "val3":  "Transparentnost i otvorena komunikacija"
+              },
+    "mission":  {
+                    "title":  "NaÅ¡a misija",
+                    "description":  "OsvnaÅ¾ivanje programera i tvrtki elegantnim, brzim i jednostavnim alatima za izgradnju izvanrednih digitalnih proizvoda."
+                },
+    "vision":  {
+                   "title":  "NaÅ¡a vizija",
+                   "description":  "Postati platforma izbora za moderne programere koji cijene ljepotu, performanse i korisniÄko iskustvo u svakom retku koda."
+               },
+    "values":  {
+                   "title":  "NaÅ¡e vrijednosti",
+                   "subtitle":  "NaÄela koja vode svaku odluku koju donesemo."
+               },
+    "passion":  {
+                    "title":  "Strast",
+                    "description":  "Volimo ono Å¡to radimo i to je vidljivo u svakom detalju naÅ¡ih proizvoda."
+                },
+    "collaboration":  {
+                          "title":  "Suradnja",
+                          "description":  "ZajedniÄki rad donosi najbolje rezultate. Vjerujemo u moÄ‡ Ävrstog tima."
+                      },
+    "innovation":  {
+                       "title":  "Inovacije",
+                       "description":  "Uvijek traÅ¾imo bolje naÄine za rjeÅ¡avanje problema i stvaranje vrijednosti."
+                   },
+    "integrity":  {
+                      "title":  "Integritet",
+                      "description":  "Iskrenost i transparentnost temelj su svakog odnosa koji gradimo."
+                  },
+    "excellence":  {
+                       "title":  "Izvrsnost",
+                       "description":  "Ne zadovoljavamo se dobrom. Uvijek teÅ¾imo najboljem."
+                   },
+    "quality":  {
+                    "title":  "Kvaliteta",
+                    "description":  "ÄŒist kod, prekrasan dizajn i besprijekorno iskustvo naÅ¡i su standardi."
+                },
+    "team":  {
+                 "title":  "Upoznajte tim",
+                 "subtitle":  "Briljantni umovi iza svakog retka koda koji piÅ¡emo.",
+                 "alex_desc":  "Vizionarski lider s 10+ godina iskustva u razvoju SaaS ekosustava.",
+                 "sarah_desc":  "Full-stack Äarobnjak specijaliziran za izgradnju skalabilnih sustavnih arhitektura.",
+                 "mike_desc":  "Opsjednut piksel detaljima, glatkim UX tokovima i standardima pristupaÄnosti.",
+                 "jessica_desc":  "Kreativni pripovjedaÄ koji pomaÅ¾e brendovima pronaÄ‡i svoj jedinstveni glas u digitalnom svijetu."
+             },
+    "features":  {
+                     "list":  {
+                                  "speed":  {
+                                                "title":  "Izuzetno brzo",
+                                                "description":  "Optimalne performanse s vremenom uÄitavanja ispod 100ms. Dizajnirano za globalno skaliranje s edge infrastrukturom."
+                                            },
+                                  "design":  {
+                                                 "title":  "Moderan dizajn",
+                                                 "description":  "Responzivan i Äist UI koji izgleda profesionalno na svim ureÄ‘ajima. Potpuno prilagodljive komponente."
+                                             },
+                                  "security":  {
+                                                   "title":  "Visoka razina sigurnosti",
+                                                   "description":  "End-to-end enkripcija, viÅ¡efaktorska autentikacija i SOC2 usklaÄ‘enost za zaÅ¡titu vaÅ¡ih podataka."
+                                               }
+                              },
+                     "heading":  "KljuÄne znaÄajke",
+                     "subheading":  "Sve Å¡to vam je potrebno za izgradnju i rast."
+                 }
+}

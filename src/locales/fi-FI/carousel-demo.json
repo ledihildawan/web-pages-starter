@@ -1,0 +1,17 @@
+{
+    "meta":  {
+                 "page_title":  "Splide-laiska lataus -demo | Starter"
+             },
+    "hero":  {
+                 "slide_1":  {
+                                 "title":  "Luonnon laiska lataus",
+                                 "subtitle":  "Kuvat ladataan Ã¤lykkÃ¤Ã¤sti sÃ¤Ã¤stÃ¤Ã¤kseen dataa.",
+                                 "alt":  "Kaunis vuoristomaisema"
+                             },
+                 "slide_2":  {
+                                 "title":  "Ylivoimainen suorituskyky",
+                                 "subtitle":  "Lataa vain mitÃ¤ tarvitset.",
+                                 "alt":  "Luminen vuoristomaisema"
+                             }
+             }
+}

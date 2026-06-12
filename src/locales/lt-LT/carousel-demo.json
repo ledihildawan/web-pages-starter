@@ -1,0 +1,17 @@
+{
+    "meta":  {
+                 "page_title":  "Splide tinginio Ä¯kÄ—limo demo | Starter"
+             },
+    "hero":  {
+                 "slide_1":  {
+                                 "title":  "NatÅ«ralus tinginio Ä¯kÄ—limas",
+                                 "subtitle":  "Vaizdai Ä¯keliami iÅ¡maniai siekiant taupyti duomenÅ³ srautÄ….",
+                                 "alt":  "GraÅ¾us kalnÅ³ vaizdas"
+                             },
+                 "slide_2":  {
+                                 "title":  "AukÅ¡Äiausias naÅ¡umas",
+                                 "subtitle":  "Ä®keliama tik tai, ko Jums reikia.",
+                                 "alt":  "SnieguotÅ³ kalnÅ³ vaizdas"
+                             }
+             }
+}

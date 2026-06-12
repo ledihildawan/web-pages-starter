@@ -1,0 +1,72 @@
+{
+    "hero":  {
+                 "badge":  "HaqqÄ±mÄ±zda",
+                 "title_part1":  "HÉ™vÉ™slÉ™ ",
+                 "title_highlight":  "hÉ™rÉ™kÉ™tÉ™ gÉ™lÉ™n",
+                 "description":  "SÉ™fÉ™rimiz sadÉ™ bir ideya ilÉ™ baÅŸladÄ±."
+             },
+    "mission":  {
+                    "title":  "MissiyamÄ±z",
+                    "description":  "TÉ™rtibatÃ§Ä±larÄ± vÉ™ bizneslÉ™ri mÃ¶htÉ™ÅŸÉ™m rÉ™qÉ™msal mÉ™hsullar qurmaq Ã¼Ã§Ã¼n zÉ™rif, sÃ¼rÉ™tli vÉ™ istifadÉ™si asan alÉ™tlÉ™rlÉ™ gÃ¼clÉ™ndirmÉ™k."
+                },
+    "vision":  {
+                   "title":  "Vizyonumuz",
+                   "description":  "HÉ™r bir kod sÉ™tirindÉ™ gÃ¶zÉ™lliyi, performansÄ± vÉ™ istifadÉ™Ã§i tÉ™crÃ¼bÉ™sini qiymÉ™tlÉ™ndirÉ™n mÃ¼asir tÉ™rtibatÃ§Ä±lar Ã¼Ã§Ã¼n seÃ§im platformasÄ± olmaq."
+               },
+    "story":  {
+                  "tag":  "HekayÉ™miz",
+                  "visual_label":  "Kreativ Studiya Ä°llÃ¼strasiyasÄ±",
+                  "title":  "HÉ™vÉ™slÉ™ hÉ™rÉ™kÉ™tÉ™ gÉ™lÉ™n, \u003cbr\u003emÃ¼kÉ™mmÉ™lliklÉ™ mÃ¼É™yyÉ™n edilÉ™n.",
+                  "para1":  "SÉ™fÉ™rimiz sadÉ™ bir ideya ilÉ™ baÅŸladÄ±: veb inkiÅŸafÄ±nÄ± hÉ™r kÉ™s Ã¼Ã§Ã¼n É™lÃ§atan vÉ™ É™ylÉ™ncÉ™li etmÉ™k. Biz aÄŸÄ±r freymvorklardan vÉ™ mÃ¼rÉ™kkÉ™b konfiqurasiyalardan yorulmuÅŸduq.",
+                  "para2":  "Bu gÃ¼n biz mÃ¼rÉ™kkÉ™b problemlÉ™ri zÉ™rif hÉ™llÉ™rlÉ™ hÉ™ll etmÉ™k Ã¼Ã§Ã¼n birlikdÉ™ Ã§alÄ±ÅŸan mÃ¼hÉ™ndislÉ™rdÉ™n, dizaynerlÉ™rdÉ™n vÉ™ dÃ¼ÅŸÃ¼nÉ™nlÉ™rdÉ™n ibarÉ™t mÃ¼xtÉ™lif bir komandayÄ±q.",
+                  "val1":  "Ä°stifadÉ™Ã§i mÉ™rkÉ™zli dizayn fÉ™lsÉ™fÉ™si",
+                  "val2":  "Performans birinci arxitekturasÄ±",
+                  "val3":  "ÅžÉ™ffaflÄ±q vÉ™ aÃ§Ä±q kommunikasiya"
+              },
+    "values":  {
+                   "title":  "DÉ™yÉ™rlÉ™rimiz",
+                   "subtitle":  "QÉ™bul etdiyimiz hÉ™r qÉ™rarÄ± istiqamÉ™tlÉ™ndirÉ™n prinsiplÉ™r."
+               },
+    "passion":  {
+                    "title":  "HÉ™vÉ™s",
+                    "description":  "Biz etdiklÉ™rimizi sevirik vÉ™ bu, mÉ™hsulumuzun hÉ™r detalÄ±nda gÃ¶rÃ¼nÃ¼r."
+                },
+    "collaboration":  {
+                          "title":  "ÆmÉ™kdaÅŸlÄ±q",
+                          "description":  "BirlikdÉ™ iÅŸlÉ™mÉ™k É™n yaxÅŸÄ± nÉ™ticÉ™lÉ™r verir. Biz mÃ¶hkÉ™m komandanÄ±n gÃ¼cÃ¼nÉ™ inanÄ±rÄ±q."
+                      },
+    "innovation":  {
+                       "title":  "Ä°nnovasiya",
+                       "description":  "ProblemlÉ™ri hÉ™ll etmÉ™k vÉ™ dÉ™yÉ™r yaratmaq Ã¼Ã§Ã¼n hÉ™miÅŸÉ™ daha yaxÅŸÄ± yollar axtarÄ±rÄ±q."
+                   },
+    "integrity":  {
+                      "title":  "DÃ¼rÃ¼stlÃ¼k",
+                      "description":  "ÆdalÉ™t vÉ™ ÅŸÉ™ffaflÄ±q qurduÄŸumuz hÉ™r bir É™laqÉ™nin É™sasÄ±nÄ± tÉ™ÅŸkil edir."
+                  },
+    "excellence":  {
+                       "title":  "MÃ¼kÉ™mmÉ™llik",
+                       "description":  "Biz kifayÉ™t qÉ™dÉ™r yaxÅŸÄ± ilÉ™ razÄ±laÅŸmÄ±rÄ±q. Biz hÉ™miÅŸÉ™ É™n yaxÅŸÄ±sÄ±na can atÄ±rÄ±q."
+                   },
+    "quality":  {
+                    "title":  "KeyfiyyÉ™t",
+                    "description":  "TÉ™miz kod, gÃ¶zÉ™l dizayn vÉ™ fasilÉ™siz tÉ™crÃ¼bÉ™ bizim standartÄ±mÄ±zdÄ±r."
+                },
+    "team":  {
+                 "title":  "KomandamÄ±zla TanÄ±ÅŸ Olun",
+                 "subtitle":  "YazdÄ±ÄŸÄ±mÄ±z hÉ™r kod sÉ™trinin arxasÄ±ndakÄ± parlaq beyinlÉ™r.",
+                 "alex_desc":  "SaaS ekosisteminin inkiÅŸafÄ±nda 10+ il tÉ™crÃ¼bÉ™si olan vizyonar lider.",
+                 "sarah_desc":  "MiqyaslÄ± sistem arxitekturasÄ± qurmaÄŸa ixtisaslaÅŸmÄ±ÅŸ Full-stack sehrbaz.",
+                 "mike_desc":  "Piksel detallarÄ±, hamar UX axÄ±nlarÄ± vÉ™ É™lÃ§atanlÄ±q standartlarÄ± ilÉ™ obsesiv.",
+                 "jessica_desc":  "BrendlÉ™rÉ™ rÉ™qÉ™msal dÃ¼nyada Ã¶zÃ¼nÉ™mÉ™xsus sÉ™s tapmaÄŸa kÃ¶mÉ™k edÉ™n kreativ naÄŸÄ±lÃ§Ä±."
+             },
+    "stats":  {
+                  "years":  "Ä°l TÉ™crÃ¼bÉ™",
+                  "years_val":  "3+",
+                  "clients":  "Qlobal MÃ¼ÅŸtÉ™rilÉ™r",
+                  "clients_val":  "120+",
+                  "countries":  "Ã–lkÉ™lÉ™r",
+                  "countries_val":  "15",
+                  "support":  "Ekspert DÉ™stÉ™yi",
+                  "support_val":  "24/7"
+              }
+}

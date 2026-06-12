@@ -1,0 +1,203 @@
+{
+    "meta":  {
+                 "title":  "i18n tests | Demo",
+                 "description":  "VispusÄ«ga starptautiskÄs funkcijas testÄ“Å¡anas lapa"
+             },
+    "hero":  {
+                 "badge":  "i18n funkcijas",
+                 "title":  "VispusÄ«gs \u003cspan class=\u0027text-violet-400\u0027\u003estarptautiskÄs\u003c/span\u003e tests",
+                 "description":  "IzmÄ“Ä£iniet visas i18n funkcijas: tulkojumu, daudzskaitli, skaitÄ¼u formatÄ“Å¡anu, valÅ«tu un valÅ«tas konvertÄ“Å¡anu."
+             },
+    "language_info":  {
+                          "title":  "PaÅ¡reizÄ“jÄs valodas informÄcija",
+                          "code":  "Valodas kods",
+                          "currency":  "ValÅ«ta",
+                          "direction":  "Teksta virziens",
+                          "digits":  "Dzimtie cipari",
+                          "enabled":  "IeslÄ“gts",
+                          "disabled":  "IzslÄ“gts",
+                          "languages":  "Valodas",
+                          "switching":  "PÄrslÄ“gÅ¡ana bez pÄrlÄdÄ“Å¡anas",
+                          "current_code":  "lv",
+                          "current_currency":  "EUR",
+                          "current_direction":  "LTR (no kreisÄs uz labo)"
+                      },
+    "numbers":  {
+                    "title":  "SkaitÄ¼u formatÄ“Å¡ana",
+                    "description":  "SkaitÄ¼i ir formatÄ“ti atbilstoÅ¡i aktÄ«vÄs valodas lokÄlei.",
+                    "large":  "Lieli skaitÄ¼i",
+                    "decimal":  "DecimÄls",
+                    "million":  "Miljons",
+                    "percent":  "Procents",
+                    "raw":  "NeapstrÄdÄts"
+                },
+    "currency":  {
+                     "title":  "ValÅ«tas konvertÄ“Å¡ana",
+                     "description":  "Cenas EUR tiek konvertÄ“tas uz aktÄ«vÄs valodas valÅ«tu.",
+                     "currencies":  "ValÅ«tas",
+                     "small":  "Maza",
+                     "medium":  "VidÄ“ja",
+                     "large":  "Liela",
+                     "enterprise":  "Enterprise"
+                 },
+    "currency_comparison":  {
+                                "title":  "ValÅ«tu salÄ«dzinÄjums",
+                                "description":  "Viena cena daÅ¾ÄdÄs atbalstÄ«tajÄs valÅ«tÄs.",
+                                "base_price":  "BÄzes cena (USD)",
+                                "aed":  "UAÃ‰ dirhÄ“ms",
+                                "aud":  "AustrÄlijas dolÄrs",
+                                "brl":  "BrazÄ«lijas reÄls",
+                                "cad":  "KanÄdas dolÄrs",
+                                "chf":  "Å veices franks",
+                                "cny":  "Ä¶Ä«nas juans",
+                                "eur":  "Eiro",
+                                "gbp":  "Sterlingu mÄrciÅ†a",
+                                "idr":  "Rupija",
+                                "inr":  "Indijas rupija",
+                                "jpy":  "JapÄnas jena",
+                                "krw":  "Dienvidkorejas vona",
+                                "mxn":  "Meksikas peso",
+                                "sar":  "SaÅ«da riÄls",
+                                "sgd":  "SingapÅ«ras dolÄrs",
+                                "usd":  "ASV dolÄrs",
+                                "zar":  "DÄ€R rands"
+                            },
+    "core":  {
+                 "title":  "GalvenÄs funkcijas",
+                 "description":  "Tulkojums, daudzskaitlis un HTML saturs."
+             },
+    "pluralization":  {
+                          "title":  "Daudzskaitlis",
+                          "description":  "AtÅ¡Ä·irÄ«gas daudzskaitÄ¼a formas katrai valodai.",
+                          "item_title":  "Elements (lietvÄrds)",
+                          "user_title":  "LietotÄjs",
+                          "product_title":  "Produkts"
+                      },
+    "form":  {
+                 "title":  "Forma ar tulkotiem vietturaÅ¾iem",
+                 "description":  "Vietturai un etiÄ·etes tiek Å†emti no lokÄles failiem.",
+                 "name_label":  "VÄrds",
+                 "name_placeholder":  "Ievadiet savu vÄrdu",
+                 "email_label":  "E-pasts",
+                 "email_placeholder":  "piemers@epasts.lv",
+                 "message_label":  "ZiÅ†ojums",
+                 "message_placeholder":  "Rakstiet savu ziÅ†ojumu Å¡eit...",
+                 "submit":  "NosÅ«tÄ«t"
+             },
+    "missing_keys":  {
+                         "title":  "TrÅ«kstoÅ¡o atslÄ“gu apstrÄde",
+                         "description":  "NetrÄpÄ«tÄs tulkoÅ¡anas atslÄ“gas tiks parÄdÄ«tas kvadrÄtiekavÄs."
+                     },
+    "html_content":  {
+                         "title":  "HTML saturs",
+                         "description":  "Tulkojumos var iekÄ¼aut HTML tagus formatÄ“Å¡anai.",
+                         "example":  "Å is ir parauga teksts ar \u003cspan class=\u0027text-emerald-400\u0027\u003eizceltu krÄsu\u003c/span\u003e un \u003cstrong\u003etreknrakstu tekstu\u003c/strong\u003e.",
+                         "note":  "PiezÄ«me: HTML tagi tulkojumÄ jÄietver vienÄ apvijoÅ¡ajÄ elementÄ."
+                     },
+    "switcher":  {
+                     "title":  "MainÄ«t valodu",
+                     "description":  "NoklikÅ¡Ä·iniet uz pogas zemÄk, lai mainÄ«tu valodu un redzÄ“tu visas i18n funkcijas darbÄ«bÄ."
+                 },
+    "advanced":  {
+                     "title":  "Papildu formatÄ“Å¡ana",
+                     "description":  "Papildu formatÄ“Å¡anas funkcijas procentiem, vienÄ«bÄm, baitiem, sarakstiem un ordinÄÄ¼iem.",
+                     "percentages":  "Procenti",
+                     "units":  "VienÄ«bas",
+                     "bytes":  "Baiti",
+                     "bytes_unit":  "baits",
+                     "lists":  "Saraksti",
+                     "ordinals":  "KÄrtas skaitÄ¼i",
+                     "cardinals":  "PamatskaitÄ¼i",
+                     "scientific":  "ZinÄtniskais apzÄ«mÄ“jums",
+                     "abbreviated":  "SaÄ«sinÄts",
+                     "date_formats":  "Datuma formÄti",
+                     "time_formats":  "Laika formÄti",
+                     "datetime":  "Datums + Laiks",
+                     "durations":  "Ilgumi",
+                     "relative_time":  "RelatÄ«vs laiks",
+                     "regional_pricing":  "ReÄ£ionÄlÄs cenas",
+                     "fifty_percent":  "Piecdesmit procenti",
+                     "small_percent":  "Mazs procents",
+                     "ninety_nine":  "DevÄ«desmit deviÅ†i",
+                     "hundred":  "Simts",
+                     "kilobyte":  "Kilobaits",
+                     "distance":  "AttÄlums",
+                     "temperature":  "TemperatÅ«ra",
+                     "weight":  "Svars",
+                     "half_kb":  "Puse KB",
+                     "one_and_half_kb":  "Viena ar pusi KB",
+                     "one_mb":  "Viens MB",
+                     "one_gb":  "Viens GB",
+                     "two_items":  "Divi elementi",
+                     "three_items":  "TrÄ«s elementi",
+                     "four_items":  "ÄŒetri elementi",
+                     "date_short":  "Äªss datums",
+                     "date_long":  "GarÅ¡ datums",
+                     "time_short":  "Äªss laiks",
+                     "time_long":  "GarÅ¡ laiks",
+                     "day_ago":  "Diena atpakaÄ¼",
+                     "months_ago":  "MÄ“neÅ¡i atpakaÄ¼",
+                     "hour_in":  "PÄ“c 1 stundas",
+                     "starter_plan":  "Starter plÄns",
+                     "pro_plan":  "Pro plÄns",
+                     "discount_20":  "20% atlaide",
+                     "number_modes":  "SkaitÄ¼u reÅ¾Ä«mi",
+                     "number_modes_desc":  "Dzimto ciparu (Ù Ù¡Ù¢Ù£Ù¤) un universÄlÄ (0-9) formÄta salÄ«dzinÄjums.",
+                     "native_label":  "Dzimtie cipari (Ù Ù¡Ù¢Ù£Ù¤)",
+                     "universal_label":  "UniversÄls (0-9)",
+                     "plain_label":  "AutomÄtisks"
+                 },
+    "template_macros":  {
+                            "title":  "Veidnes makrokomandas",
+                            "description":  "Makrokomandas, lai iegÅ«tu neapstrÄdÄtas vÄ“rtÄ«bas bez HTML iezÄ«mÄ“juma.",
+                            "raw_value":  "NeapstrÄdÄta vÄ“rtÄ«ba bez iezÄ«mÄ“juma",
+                            "current_year":  "PaÅ¡reizÄ“jais gads ir {{year}}"
+                        },
+    "datetime":  {
+                     "title":  "Datums un laiks",
+                     "description":  "Apvienotais datuma un laika formÄts.",
+                     "iso":  "ISO standarts",
+                     "eve":  "ZiemassvÄ“tku vakars"
+                 },
+    "unit":  {
+                 "title":  "VienÄ«bu formatÄ“Å¡ana"
+             },
+    "native_digits":  {
+                          "title":  "Dzimtie cipari",
+                          "description":  "Teksts ar ASCII cipariem tiek rÄdÄ«ts dzimtajos ciparos, kad lokÄle to iespÄ“jo. AtjauninÄts tieÅ¡saistÄ“ mainot valodu."
+                      },
+    "inflection":  {
+                       "title":  "AngÄ¼u valodas inflekss",
+                       "description":  "AngÄ¼u valodas daudzskaitlis un vienskaitlis. AtjauninÄts tieÅ¡saistÄ“ mainot valodu."
+                   },
+    "live_label":  "TieÅ¡raide",
+    "pricing_details":  {
+                            "title":  "Cenu informÄcija",
+                            "description":  "PilnÄ«gs konveijers: neapstrÄdÄta vÄ“rtÄ«ba, valÅ«tas kods, formatÄ“Å¡ana, atlaide un konvertÄ“Å¡ana.",
+                            "raw_value":  "NeapstrÄdÄta vÄ“rtÄ«ba",
+                            "raw_currency":  "ValÅ«tas kods",
+                            "formatted":  "FormatÄ“ta",
+                            "discounted":  "20% atlaide",
+                            "converted_usd":  "KonvertÄ“ts uz USD"
+                        },
+    "live_update":  {
+                        "note":  "IevÄ“rojiet, kÄ visi skaitÄ¼i, datumi un cenas mainÄs uzreiz, mainot valodu â€” bez lapas pÄrlÄdÄ“Å¡anas."
+                    },
+    "section_modes":  {
+                          "title":  "SkaitÄ¼u reÅ¾Ä«mi",
+                          "description":  "SalÄ«dziniet dzimto ciparu, universÄlÄ formÄta un automÄtiskÄ reÅ¾Ä«ma formÄtus aktÄ«vajÄ lokÄlÄ“."
+                      },
+    "section_systems":  {
+                            "title":  "RakstÄ«bas sistÄ“mas",
+                            "description":  "Visas skaitÄ¼u sistÄ“mas (algoritmiskÄs un ciparu) parÄda pareizos dzimtos ciparus ar ICU rezerves variantu.",
+                            "note":  "Visas skaitÄ¼u sistÄ“mas (algoritmiskÄs un ciparu) parÄda pareizos dzimtos ciparus. AlgoritmiskÄs sistÄ“mas izmanto rezerves ciparus no NUMBERING_SYSTEMS. RomieÅ¡u cipari tiek konvertÄ“ti tieÅ¡i, izmantojot algoritmu. Ciparu sistÄ“mas izmanto ciparus no ielÄdÄ“tajiem fontiem."
+                        },
+    "nav":  {
+                "translations":  "Tulkojumi",
+                "formatting":  "SkaitÄ¼i",
+                "pricing":  "Cenas",
+                "modes":  "ReÅ¾Ä«mi",
+                "systems":  "SistÄ“mas",
+                "switcher":  "IzvÄ“lÄ“ties lokÄli"
+            }
+}

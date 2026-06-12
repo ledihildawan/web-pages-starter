@@ -1,0 +1,47 @@
+{
+    "meta":  {
+                 "title":  "Contactez-nous | Starter App",
+                 "description":  "Contactez-nous pour des questions et du support."
+             },
+    "contact":  {
+                    "badge":  "Entrer en Contact",
+                    "title_part1":  "Connectons-",
+                    "title_highlight":  "nous",
+                    "description":  "Vous avez des questions ou souhaitez collaborer? Nous aimerions avoir de vos nouvelles. Envoyez-nous un message et nous rÃ©pondrons dÃ¨s que possible.",
+                    "form_title":  "Envoyer un Message",
+                    "form_subtitle":  "Remplissez le formulaire ci-dessous et nous vous rÃ©pondrons sous peu.",
+                    "social_title":  "Suivez-nous",
+                    "social_subtitle":  "Restez informÃ© de nos derniÃ¨res actualitÃ©s sur les rÃ©seaux sociaux",
+                    "info":  {
+                                 "response_time":  {
+                                                       "title":  "RÃ©ponse Rapide",
+                                                       "description":  "Nous nous efforÃ§ons de rÃ©pondre Ã  chaque message dans les 24 heures les jours ouvrÃ©s."
+                                                   },
+                                 "working_hours":  {
+                                                       "title":  "Heures de Travail",
+                                                       "description":  "Lundi - Vendredi: 09:00 - 18:00. Week-ends: Par prioritÃ©."
+                                                   },
+                                 "support":  {
+                                                 "title":  "Support Continu",
+                                                 "description":  "Notre Ã©quipe de support est toujours prÃªte Ã  aider Ã  rÃ©soudre vos problÃ¨mes techniques."
+                                             }
+                             },
+                    "form":  {
+                                 "name":  "Nom",
+                                 "name_placeholder":  "Entrez votre nom",
+                                 "email":  "Courriel",
+                                 "email_placeholder":  "nom@exemple.com",
+                                 "subject":  "Sujet",
+                                 "subject_placeholder":  "Que souhaitez-vous discuter?",
+                                 "message":  "Message",
+                                 "message_placeholder":  "Dites-nous en plus sur votre demande...",
+                                 "submit":  "Envoyer le Message"
+                             }
+                },
+    "email_label":  "Courriel",
+    "email_value":  "hello@starter.app",
+    "phone_label":  "TÃ©lÃ©phone",
+    "phone_value":  "+1 500 000 000",
+    "location_label":  "Emplacement",
+    "location_value":  "QuÃ©bec, Canada"
+}

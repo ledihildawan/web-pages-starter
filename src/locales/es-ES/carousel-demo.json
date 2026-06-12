@@ -1,0 +1,17 @@
+{
+    "meta":  {
+                 "page_title":  "Demo de Carga Diferida Splide | Starter"
+             },
+    "hero":  {
+                 "slide_1":  {
+                                 "title":  "Carga Diferida Natural",
+                                 "subtitle":  "Las imÃ¡genes se cargan de manera inteligente para ahorrar ancho de banda.",
+                                 "alt":  "Vista Hermosa de MontaÃ±a"
+                             },
+                 "slide_2":  {
+                                 "title":  "Rendimiento Primero",
+                                 "subtitle":  "Carga solo lo que necesitas.",
+                                 "alt":  "Vista de MontaÃ±as Nevadas"
+                             }
+             }
+}

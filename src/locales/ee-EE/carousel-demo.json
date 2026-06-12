@@ -1,0 +1,17 @@
+{
+    "meta":  {
+                 "page_title":  "Splide laiska laadimise demo | Starter"
+             },
+    "hero":  {
+                 "slide_1":  {
+                                 "title":  "Looduslik laisk laadimine",
+                                 "subtitle":  "Pildid laaditakse nutikalt andumahtu sÃ¤Ã¤stes.",
+                                 "alt":  "Kaunis mÃ¤estikuvaade"
+                             },
+                 "slide_2":  {
+                                 "title":  "TippjÃµudlus",
+                                 "subtitle":  "Laaditakse ainult see, mida Te vajate.",
+                                 "alt":  "Lumiste mÃ¤gede vaade"
+                             }
+             }
+}

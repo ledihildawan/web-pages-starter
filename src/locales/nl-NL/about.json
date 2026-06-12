@@ -1,0 +1,72 @@
+{
+    "hero":  {
+                 "badge":  "Over ons",
+                 "title_part1":  "Aangedreven door ",
+                 "title_highlight":  "passie",
+                 "description":  "Onze reis begon met een eenvoudig idee."
+             },
+    "mission":  {
+                    "title":  "Onze missie",
+                    "description":  "Ontwikkelaars en bedrijven versterken met elegante, snelle en gebruiksvriendelijke tools om uitzonderlijke digitale producten te bouwen."
+                },
+    "vision":  {
+                   "title":  "Onze visie",
+                   "description":  "Het platform bij uitstek worden voor moderne ontwikkelaars die schoonheid, prestaties en gebruikerservaring waarderen in elke regel code."
+               },
+    "story":  {
+                  "tag":  "Ons verhaal",
+                  "visual_label":  "Creatieve studio illustratie",
+                  "title":  "Gedreven door passie, \u003cbr\u003egedefinieerd door uitmuntendheid.",
+                  "para1":  "Onze reis begon met een eenvoudig idee: webontwikkeling toegankelijk en leuk maken voor iedereen. We waren de zware frameworks en ingewikkelde configuraties beu.",
+                  "para2":  "Vandaag zijn wij een divers team van engineers, ontwerpers en denkers die samenwerken om complexe problemen op te lossen met elegante oplossingen.",
+                  "val1":  "User-centric ontwerpfilosofie",
+                  "val2":  "Performance-first architectuur",
+                  "val3":  "Transparantie en open communicatie"
+              },
+    "values":  {
+                   "title":  "Onze waarden",
+                   "subtitle":  "De principes die elke beslissing die wij nemen leiden."
+               },
+    "passion":  {
+                    "title":  "Passie",
+                    "description":  "Wij houden van wat wij doen, en dat is zichtbaar in elk detail van onze producten."
+                },
+    "collaboration":  {
+                          "title":  "Samenwerking",
+                          "description":  "Samenwerken levert de beste resultaten op. Wij geloven in de kracht van een solide team."
+                      },
+    "innovation":  {
+                       "title":  "Innovatie",
+                       "description":  "Altijd op zoek naar betere manieren om problemen op te lossen en waarde te creÃ«ren."
+                   },
+    "integrity":  {
+                      "title":  "Integriteit",
+                      "description":  "Eerlijkheid en transparantie vormen de basis van elke relatie die wij opbouwen."
+                  },
+    "excellence":  {
+                       "title":  "Uitmuntendheid",
+                       "description":  "Wij zijn niet tevreden met \u0027goed genoeg\u0027. Wij streven altijd naar het beste."
+                   },
+    "quality":  {
+                    "title":  "Kwaliteit",
+                    "description":  "Schone code, mooi ontwerp en naadloze ervaringen zijn onze standaard."
+                },
+    "team":  {
+                 "title":  "Ontmoet het team",
+                 "subtitle":  "De briljante geesten achter elke regel code die wij schrijven.",
+                 "alex_desc":  "Visionair leider met 10+ jaar ervaring in SaaS-ecosysteemontwikkeling.",
+                 "sarah_desc":  "Full-stack wizard, gespecialiseerd in het bouwen van grootschalige systeemarchitecturen.",
+                 "mike_desc":  "Geobsedeerd door pixeldetails, vloeiende UX-flows en toegankelijkheidsstandaarden.",
+                 "jessica_desc":  "Creatieve verhalenverteller die merken helpt hun unieke stem te vinden in de digitale wereld."
+             },
+    "stats":  {
+                  "years":  "Jaar ervaring",
+                  "years_val":  "3+",
+                  "clients":  "Wereldwijde klanten",
+                  "clients_val":  "120+",
+                  "countries":  "Bereikte landen",
+                  "countries_val":  "15",
+                  "support":  "Expertsupport",
+                  "support_val":  "24/7"
+              }
+}

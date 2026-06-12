@@ -1,0 +1,47 @@
+{
+    "meta":  {
+                 "title":  "Kontakt oss | Starter App",
+                 "description":  "Ta kontakt med oss for spÃ¸rsmÃ¥l og assistanse."
+             },
+    "contact":  {
+                    "badge":  "Klar til Ã¥ hjelpe",
+                    "title_part1":  "La oss koble",
+                    "title_highlight":  "sammen",
+                    "description":  "Har du et spÃ¸rsmÃ¥l eller Ã¸nsker du Ã¥ samarbeide? Vi vil gjerne hÃ¸re fra deg. Send en melding, sÃ¥ svarer vi snart.",
+                    "form_title":  "Send en melding",
+                    "form_subtitle":  "Fyll ut skjemaet nedenfor, sÃ¥ svarer vi deg snart.",
+                    "social_title":  "FÃ¸lg oss",
+                    "social_subtitle":  "FÃ¥ de siste oppdateringene via vÃ¥re sosiale kanaler",
+                    "info":  {
+                                 "response_time":  {
+                                                       "title":  "Rask respons",
+                                                       "description":  "Vi streber etter Ã¥ svare pÃ¥ hver melding innen 24 timer pÃ¥ hverdager."
+                                                   },
+                                 "working_hours":  {
+                                                       "title":  "Arbeidstider",
+                                                       "description":  "Mandag - fredag: 09:00 - 18:00. Helger: med prioritet."
+                                                   },
+                                 "support":  {
+                                                 "title":  "Kontinuerlig stÃ¸tte",
+                                                 "description":  "StÃ¸tteteamet vÃ¥rt er alltid klart til Ã¥ lÃ¸se dine tekniske problemer."
+                                             }
+                             },
+                    "form":  {
+                                 "name":  "Navn",
+                                 "name_placeholder":  "Skriv inn navnet ditt",
+                                 "email":  "E-post",
+                                 "email_placeholder":  "navn@epost.no",
+                                 "subject":  "Emne",
+                                 "subject_placeholder":  "Hva vil du diskutere?",
+                                 "message":  "Melding",
+                                 "message_placeholder":  "Fortell oss mer om spÃ¸rsmÃ¥let ditt...",
+                                 "submit":  "Send melding"
+                             }
+                },
+    "email_label":  "E-post",
+    "email_value":  "hello@starter.app",
+    "phone_label":  "Telefon",
+    "phone_value":  "+47 21 23 45 67",
+    "location_label":  "Sted",
+    "location_value":  "Oslo, Norge"
+}

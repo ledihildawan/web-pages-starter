@@ -1,0 +1,56 @@
+{
+    "period_monthly":  "mes",
+    "period_yearly":  "any",
+    "hero":  {
+                 "badge":  "Trieu un pla",
+                 "title_part1":  "Preus simples i ",
+                 "title_highlight":  "transparents",
+                 "description":  "Sense despeses ocults. Sense cÃ rrecs sorpresa. Trieu un pla que millor s\u0027adapti a les vostres necessitats."
+             },
+    "toggle":  {
+                   "monthly":  "Mensual",
+                   "yearly":  "Anual",
+                   "yearly_hint":  "facturat anualment",
+                   "discount":  "ESTALVIA 20%",
+                   "aria_label":  "Commuta el pla de preus"
+               },
+    "plans":  {
+                  "hobby":  {
+                                "name":  "Hobby",
+                                "desc":  "Perfecte per a projectes secundaris i aprenentatge.",
+                                "btn":  "ComenÃ§a gratuÃ¯tament",
+                                "feature_0":  "1 projecte",
+                                "feature_1":  "Suport de la comunitat",
+                                "feature_2":  "5 GB d\u0027emmagatzematge"
+                            },
+                  "pro":  {
+                              "name":  "Pro",
+                              "badge":  "MÃ©s popular",
+                              "desc":  "Per a desenvolupadors professionals i equips petits.",
+                              "btn":  "Trieu el pla Pro",
+                              "feature_0":  "Projectes ilÂ·limitats",
+                              "feature_1":  "Suport prioritari per correu",
+                              "feature_2":  "100 GB d\u0027emmagatzematge",
+                              "feature_3":  "AnÃ lisis avanÃ§ades"
+                          },
+                  "enterprise":  {
+                                     "name":  "Enterprise",
+                                     "desc":  "Per a aplicacions a gran escala i organitzacions.",
+                                     "btn":  "Contacteu amb vendes",
+                                     "feature_0":  "Totes les funcions del pla Pro",
+                                     "feature_1":  "Gestor de compte dedicat",
+                                     "feature_2":  "SSO i registre d\u0027auditoria",
+                                     "feature_3":  "Emmagatzematge ilÂ·limitat"
+                                 }
+              },
+    "faq":  {
+                "title":  "Preguntes freqÃ¼ents",
+                "subtitle":  "Trobeu respostes a les preguntes mÃ©s freqÃ¼ents sobre els nostres plans i serveis.",
+                "q_0":  "Puc cancelÂ·lar en qualsevol moment?",
+                "a_0":  "SÃ­, podeu cancelÂ·lar la subscripciÃ³ en qualsevol moment. El vostre accÃ©s roman actiu fins al final del perÃ­ode de facturaciÃ³.",
+                "q_1":  "Hi ha una prova gratuÃ¯ta?",
+                "a_1":  "Oferim una prova gratuÃ¯ta de 14 dies per al pla Pro. No cal targeta de crÃ¨dit per comenÃ§ar.",
+                "q_2":  "Quins mÃ¨todes de pagament hi ha disponibles?",
+                "a_2":  "Acceptem les principals targetes de crÃ¨dit i PayPal. Per a Enterprise, admetem transferÃ¨ncies bancÃ ries."
+            }
+}

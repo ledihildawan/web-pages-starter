@@ -1,0 +1,75 @@
+{
+    "hero":  {
+                 "badge":  "Æsas XÃ¼susiyyÉ™tlÉ™r",
+                 "title_part1":  "SizÉ™ lazÄ±m olan hÉ™r ÅŸey",
+                 "title_highlight":  "daha sÃ¼rÉ™tli miqyaslamaq Ã¼Ã§Ã¼n",
+                 "description":  "GÃ¼clÃ¼ analitikadan sÉ™mÉ™rÉ™li inteqrasiyaya qÉ™dÉ™r, biz dÃ¼nya sinfli tÉ™tbiqlÉ™ri problemsiz qurmaq Ã¼Ã§Ã¼n lazÄ±m olan alÉ™tlÉ™r dÉ™stini tÉ™qdim edirik."
+             },
+    "features":  {
+                     "heading":  "Æsas XÃ¼susiyyÉ™tlÉ™r",
+                     "subheading":  "Qurmaq vÉ™ bÃ¶yÃ¼mÉ™k Ã¼Ã§Ã¼n lazÄ±m olan hÉ™r ÅŸey.",
+                     "list":  {
+                                  "speed":  {
+                                                "title":  "Ultra SÃ¼rÉ™tli",
+                                                "description":  "100ms-dÉ™n az yÃ¼klÉ™nmÉ™ vaxtÄ± ilÉ™ optimal performans. Edge infrastrukturu ilÉ™ qlobal miqyas Ã¼Ã§Ã¼n nÉ™zÉ™rdÉ™ tutulub."
+                                            },
+                                  "design":  {
+                                                 "title":  "MÃ¼asir Dizayn",
+                                                 "description":  "BÃ¼tÃ¼n cihazlarda peÅŸÉ™kar gÃ¶rÃ¼nÉ™n responsiv vÉ™ tÉ™miz UI. TamamilÉ™ fÉ™rdilÉ™ÅŸdirilÉ™ bilÉ™n komponentlÉ™r."
+                                             },
+                                  "security":  {
+                                                   "title":  "YÃ¼ksÉ™k TÉ™hlÃ¼kÉ™sizlik",
+                                                   "description":  "MÉ™lumatlarÄ±nÄ±zÄ± qorumaq Ã¼Ã§Ã¼n end-to-end ÅŸifrÉ™lÉ™mÉ™, Ã§oxfaktorlu autentifikasiya vÉ™ SOC2 uyÄŸunluÄŸu."
+                                               }
+                              }
+                 },
+    "sections":  {
+                     "sync":  {
+                                  "title":  "Real vaxt SinxronizasiyasÄ±",
+                                  "description":  "DÉ™yiÅŸikliklÉ™r bÃ¼tÃ¼n cihazlara ani olaraq yayÄ±lÄ±r. Ä°stifadÉ™Ã§ilÉ™riniz telefon, desktop vÉ™ ya planÅŸetdÉ™n istifadÉ™ etsÉ™lÉ™r belÉ™, eyni vaxtda eyni mÉ™lumatlarÄ± gÃ¶rÃ¼rlÉ™r.",
+                                  "check_0":  "MillisaniyÉ™dÉ™n az gecikmÉ™",
+                                  "check_1":  "Daxili offline dÉ™stÉ™k",
+                                  "check_2":  "Konflikt hÉ™lli emalÄ±"
+                              },
+                     "analytics":  {
+                                       "title":  "FÉ™aliyyÉ™tli Analitika",
+                                       "description":  "TÉ™xmin etmÉ™yin. Ä°stifadÉ™Ã§i davranÄ±ÅŸÄ±, sistem performansÄ± vÉ™ gÉ™lir metrikalarÄ± haqqÄ±nda dÉ™rindÉ™n mÉ™lumat É™ldÉ™ edin. MÉ™lumatlarÄ±nÄ±zÄ± interaktiv qrafiklÉ™rlÉ™ vizuallaÅŸdÄ±rÄ±n.",
+                                       "check_0":  "FÉ™rdilÉ™ÅŸdirilÉ™ bilÉ™n panel",
+                                       "check_1":  "PDF, CSV vÉ™ ya Excel-É™ ixrac",
+                                       "check_2":  "Avtomatik hÉ™ftÉ™lik hesabatlar"
+                                   }
+                 },
+    "more_title":  "VÉ™ daha Ã§ox...",
+    "more_subtitle":  "SizÉ™ daha sÃ¼rÉ™tli vÉ™ miqyaslÄ± qurmaÄŸa kÃ¶mÉ™k etmÉ™k Ã¼Ã§Ã¼n nÉ™zÉ™rdÉ™ tutulmuÅŸ gÃ¼clÃ¼ xÃ¼susiyyÉ™tlÉ™r.",
+    "more":  {
+                 "dark_mode":  {
+                                   "title":  "QaranlÄ±q Rejim",
+                                   "desc":  "Avtomatik aÅŸkarlama ilÉ™ aÃ§Ä±q vÉ™ qaranlÄ±q temalar Ã¼Ã§Ã¼n daxili dÉ™stÉ™k."
+                               },
+                 "api_first":  {
+                                   "title":  "API First",
+                                   "desc":  "Tam proqram nÉ™zarÉ™ti Ã¼Ã§Ã¼n REST vÉ™ GraphQL API-lÉ™ri mÃ¶vcuddur."
+                               },
+                 "sso":  {
+                             "title":  "SSO GiriÅŸi",
+                             "desc":  "Google, GitHub vÉ™ Okta Ã¼Ã§Ã¼n Enterprise sinif Single Sign-On."
+                         },
+                 "audit":  {
+                               "title":  "Audit JurnalÄ±",
+                               "desc":  "LayihÉ™nizdÉ™ki hÉ™r dÉ™yiÅŸikliyi É™traflÄ± vaxt mÃ¶hÃ¼rÃ¼ ilÉ™ izlÉ™yin."
+                           },
+                 "rbac":  {
+                              "title":  "Rol ÆsaslÄ± GiriÅŸ",
+                              "desc":  "Administratorlar, redaktorlar vÉ™ baxanlar Ã¼Ã§Ã¼n dÉ™qiq icazÉ™ nÉ™zarÉ™ti."
+                          },
+                 "uptime":  {
+                                "title":  "99.99% Ä°ÅŸlÉ™klik",
+                                "desc":  "Qlobal paylanmÄ±ÅŸ CDN-imizlÉ™ zÉ™manÉ™tli É™lÃ§atanlÄ±q."
+                            }
+             },
+    "cta":  {
+                "heading":  "BaÅŸlamaÄŸa hazÄ±rsÄ±nÄ±z?",
+                "btn_create":  "Hesab Yarat",
+                "btn_docs":  "SÉ™nÉ™dlÉ™ri Oxu"
+            }
+}

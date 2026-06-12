@@ -1,0 +1,56 @@
+{
+    "period_monthly":  "mes",
+    "period_yearly":  "rok",
+    "hero":  {
+                 "badge":  "Vyberte si plÃ¡n",
+                 "title_part1":  "JednoduchÃ© a ",
+                 "title_highlight":  "transparentnÃ© ceny",
+                 "description":  "Å½iadne skrytÃ© poplatky. Å½iadne prekvapenia. Vyberte si plÃ¡n, ktorÃ½ najviac vyhovuje vaÅ¡im potrebÃ¡m."
+             },
+    "toggle":  {
+                   "monthly":  "MesaÄne",
+                   "yearly":  "RoÄne",
+                   "yearly_hint":  "roÄnÃ© fakturovanie",
+                   "discount":  "UÅ ETRITE 20%",
+                   "aria_label":  "PrepnÃºÅ¥ cenovÃ½ plÃ¡n"
+               },
+    "plans":  {
+                  "hobby":  {
+                                "name":  "Hobby",
+                                "desc":  "PerfektnÃ© pre vedÄ¾ajÅ¡ie projekty a uÄenie.",
+                                "btn":  "ZaÄnite zdarma",
+                                "feature_0":  "1 projekt",
+                                "feature_1":  "KomunitnÃ¡ podpora",
+                                "feature_2":  "5GB ÃºloÅ¾iska"
+                            },
+                  "pro":  {
+                              "name":  "Pro",
+                              "badge":  "NajobÄ¾ÃºbenejÅ¡Ã­",
+                              "desc":  "Pre profesionÃ¡lnych vÃ½vojÃ¡rov a malÃ© tÃ­my.",
+                              "btn":  "VybraÅ¥ Pro plÃ¡n",
+                              "feature_0":  "NeobmedzenÃ© projekty",
+                              "feature_1":  "PrioritnÃ¡ emailovÃ¡ podpora",
+                              "feature_2":  "100GB ÃºloÅ¾iska",
+                              "feature_3":  "PokroÄilÃ¡ analytika"
+                          },
+                  "enterprise":  {
+                                     "name":  "Enterprise",
+                                     "desc":  "Pre aplikÃ¡cie vo veÄ¾kom meradle a organizÃ¡cie.",
+                                     "btn":  "KontaktovaÅ¥ predaj",
+                                     "feature_0":  "VÅ¡etky funkcie z Pro plÃ¡nu",
+                                     "feature_1":  "VyhradenÃ½ sprÃ¡vca ÃºÄtu",
+                                     "feature_2":  "SSO a audÃ­torskÃ© zÃ¡znamy",
+                                     "feature_3":  "NeobmedzenÃ© ÃºloÅ¾isko"
+                                 }
+              },
+    "faq":  {
+                "title":  "ÄŒastÃ© otÃ¡zky",
+                "subtitle":  "NÃ¡jdite odpovede na najÄastejÅ¡ie kladenÃ© otÃ¡zky o naÅ¡ich plÃ¡noch a sluÅ¾bÃ¡ch.",
+                "q_0":  "MÃ´Å¾em kedykoÄ¾vek zruÅ¡iÅ¥ predplatnÃ©?",
+                "a_0":  "Ãno, predplatnÃ© mÃ´Å¾ete zruÅ¡iÅ¥ kedykoÄ¾vek. VÃ¡Å¡ prÃ­stup zostane aktÃ­vny do konca fakturaÄnÃ©ho obdobia.",
+                "q_1":  "Je k dispozÃ­cii bezplatnÃ¡ skÃºÅ¡obnÃ¡ doba?",
+                "a_1":  "PonÃºkame 14-dÅˆovÃº bezplatnÃº skÃºÅ¡obnÃº dobu pre Pro plÃ¡n. KreditnÃ¡ karta nie je potrebnÃ¡ na zaÄiatok.",
+                "q_2":  "AkÃ© platobnÃ© metÃ³dy sÃº k dispozÃ­cii?",
+                "a_2":  "Akceptujeme vÅ¡etky hlavnÃ© kreditnÃ© karty a PayPal. Pre Enterprise podporujeme bankovÃ© prevody."
+            }
+}

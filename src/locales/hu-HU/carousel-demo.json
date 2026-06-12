@@ -1,0 +1,17 @@
+{
+    "meta":  {
+                 "page_title":  "Splide lusta betÃ¶ltÃ©s demo | Starter"
+             },
+    "hero":  {
+                 "slide_1":  {
+                                 "title":  "A termÃ©szet lusta betÃ¶ltÃ©se",
+                                 "subtitle":  "A kÃ©pek intelligensen tÃ¶ltÅ‘dnek be az adatmegtakarÃ­tÃ¡s Ã©rdekÃ©ben.",
+                                 "alt":  "GyÃ¶nyÃ¶rÅ± hegyi tÃ¡j"
+                             },
+                 "slide_2":  {
+                                 "title":  "KiemelkedÅ‘ teljesÃ­tmÃ©ny",
+                                 "subtitle":  "Csak azt tÃ¶ltsd be, amire szÃ¼ksÃ©ged van.",
+                                 "alt":  "HÃ³val borÃ­tott hegyi tÃ¡j"
+                             }
+             }
+}

@@ -1,0 +1,47 @@
+{
+    "meta":  {
+                 "title":  "Biz bilan bog\u0027laning | Starter App",
+                 "description":  "Savollar va yordam uchun biz bilan bog\u0027laning."
+             },
+    "contact":  {
+                    "badge":  "Yordam berishga tayyormiz",
+                    "title_part1":  "Bog\u0027lanaylik",
+                    "title_highlight":  "biz bilan",
+                    "description":  "Savollaringiz bormi yoki hamkorlik qilmoqchimisiz? Sizdan xabar eshitishdan xursandmiz. Xabar yuboring, biz tez orada javob beramiz.",
+                    "form_title":  "Xabar yuborish",
+                    "form_subtitle":  "Quyidagi shaklni to\u0027ldiring, biz tez orada javob beramiz.",
+                    "social_title":  "Bizga ergashing",
+                    "social_subtitle":  "Ijtimoiy tarmoqlarimiz orqali so\u0027nggi yangilanishlarni oling",
+                    "info":  {
+                                 "response_time":  {
+                                                       "title":  "Tezkor javob",
+                                                       "description":  "Ish kunlarida har bir xabarga 24 soat ichida javob berishga harakat qilamiz."
+                                                   },
+                                 "working_hours":  {
+                                                       "title":  "Ish vaqti",
+                                                       "description":  "Dushanba - Juma: 09:00 - 18:00. Dam olish kunlari: ustuvorlik bilan."
+                                                   },
+                                 "support":  {
+                                                 "title":  "Uzluksiz yordam",
+                                                 "description":  "Yordam jamoamiz texnik muammolaringizni hal qilishga doimo tayyor."
+                                             }
+                             },
+                    "form":  {
+                                 "name":  "Ism",
+                                 "name_placeholder":  "Ismingizni kiriting",
+                                 "email":  "Elektron pochta",
+                                 "email_placeholder":  "ism@email.com",
+                                 "subject":  "Mavzu",
+                                 "subject_placeholder":  "Nimani muhokama qilmoqchisiz?",
+                                 "message":  "Xabar",
+                                 "message_placeholder":  "Savolingiz haqida batafsil yozing...",
+                                 "submit":  "Xabar yuborish"
+                             }
+                },
+    "email_label":  "Elektron pochta",
+    "email_value":  "hello@starter.app",
+    "phone_label":  "Telefon",
+    "phone_value":  "+998 90 123 4567",
+    "location_label":  "Manzil",
+    "location_value":  "Toshkent, O\u0027zbekiston"
+}

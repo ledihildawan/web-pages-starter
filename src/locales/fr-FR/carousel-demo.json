@@ -1,0 +1,17 @@
+{
+    "meta":  {
+                 "page_title":  "DÃ©mo de Chargement DiffÃ©rÃ© Splide | Starter"
+             },
+    "hero":  {
+                 "slide_1":  {
+                                 "title":  "Nature du Chargement DiffÃ©rÃ©",
+                                 "subtitle":  "Les images sont chargÃ©es intelligemment pour Ã©conomiser la bande passante.",
+                                 "alt":  "Vue Magnifique de Montagne"
+                             },
+                 "slide_2":  {
+                                 "title":  "Performance d\u0027Abord",
+                                 "subtitle":  "Ne chargez que ce dont vous avez besoin.",
+                                 "alt":  "Vue de Montagnes EnneigÃ©es"
+                             }
+             }
+}

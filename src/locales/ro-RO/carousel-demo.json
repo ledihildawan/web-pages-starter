@@ -1,0 +1,17 @@
+{
+    "meta":  {
+                 "page_title":  "Demo Ã®ncÄƒrcare leneÈ™Äƒ Splide | Starter"
+             },
+    "hero":  {
+                 "slide_1":  {
+                                 "title":  "ÃŽncÄƒrcare leneÈ™Äƒ a naturii",
+                                 "subtitle":  "Imaginile se Ã®ncarcÄƒ inteligent pentru a economisi date.",
+                                 "alt":  "Peisaj montan frumos"
+                             },
+                 "slide_2":  {
+                                 "title":  "PerformanÈ›Äƒ superioarÄƒ",
+                                 "subtitle":  "ÃŽncarcÄƒ doar ce ai nevoie.",
+                                 "alt":  "Peisaj muntos acoperit de zÄƒpadÄƒ"
+                             }
+             }
+}

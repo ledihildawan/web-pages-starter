@@ -1,0 +1,17 @@
+{
+    "meta":  {
+                 "page_title":  "Lazy Load Splide Demo | Starter"
+             },
+    "hero":  {
+                 "slide_1":  {
+                                 "title":  "DoÄŸal Tembel YÃ¼kleme",
+                                 "subtitle":  "Kota tasarrufu iÃ§in gÃ¶rseller akÄ±llÄ±ca yÃ¼klenir.",
+                                 "alt":  "GÃ¼zel DaÄŸ ManzarasÄ±"
+                             },
+                 "slide_2":  {
+                                 "title":  "ÃœstÃ¼n Performans",
+                                 "subtitle":  "Sadece ihtiyacÄ±nÄ±z olanÄ± yÃ¼kler.",
+                                 "alt":  "KarlÄ± DaÄŸ ManzarasÄ±"
+                             }
+             }
+}

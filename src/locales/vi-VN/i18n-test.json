@@ -1,0 +1,203 @@
+{
+    "meta":  {
+                 "title":  "Kiá»ƒm tra i18n | Demo",
+                 "description":  "Trang kiá»ƒm tra toÃ n diá»‡n cho cÃ¡c tÃ­nh nÄƒng quá»‘c táº¿ hÃ³a"
+             },
+    "hero":  {
+                 "badge":  "TÃ­nh nÄƒng i18n",
+                 "title":  "Kiá»ƒm tra \u003cspan class=\u0027text-violet-400\u0027\u003eToÃ n diá»‡n\u003c/span\u003e Quá»‘c táº¿ hÃ³a",
+                 "description":  "Tráº£i nghiá»‡m táº¥t cáº£ cÃ¡c tÃ­nh nÄƒng i18n: dá»‹ch thuáº­t, sá»‘ nhiá»u, Ä‘á»‹nh dáº¡ng sá»‘, tiá»n tá»‡ vÃ  chuyá»ƒn Ä‘á»•i tiá»n tá»‡."
+             },
+    "language_info":  {
+                          "title":  "ThÃ´ng tin NgÃ´n ngá»¯ Hiá»‡n táº¡i",
+                          "code":  "MÃ£ NgÃ´n ngá»¯",
+                          "currency":  "Tiá»n tá»‡",
+                          "direction":  "HÆ°á»›ng VÄƒn báº£n",
+                          "digits":  "Chá»¯ sá»‘ Báº£n Ä‘á»‹a",
+                          "enabled":  "Báº­t",
+                          "disabled":  "Táº¯t",
+                          "languages":  "NgÃ´n ngá»¯",
+                          "switching":  "Chuyá»ƒn Ä‘á»•i KhÃ´ng cáº§n Táº£i láº¡i",
+                          "current_code":  "vi",
+                          "current_currency":  "VND",
+                          "current_direction":  "LTR (TrÃ¡i sang Pháº£i)"
+                      },
+    "numbers":  {
+                    "title":  "Äá»‹nh dáº¡ng Sá»‘",
+                    "description":  "Sá»‘ Ä‘Æ°á»£c Ä‘á»‹nh dáº¡ng theo ngÃ´n ngá»¯ Ä‘á»‹a phÆ°Æ¡ng Ä‘ang hoáº¡t Ä‘á»™ng.",
+                    "large":  "Sá»‘ Lá»›n",
+                    "decimal":  "Tháº­p phÃ¢n",
+                    "million":  "Triá»‡u",
+                    "percent":  "Pháº§n trÄƒm",
+                    "raw":  "Gá»‘c"
+                },
+    "currency":  {
+                     "title":  "Chuyá»ƒn Ä‘á»•i Tiá»n tá»‡",
+                     "description":  "GiÃ¡ báº±ng VND Ä‘Æ°á»£c chuyá»ƒn Ä‘á»•i sang tiá»n tá»‡ cá»§a ngÃ´n ngá»¯ Ä‘ang hoáº¡t Ä‘á»™ng.",
+                     "currencies":  "Tiá»n tá»‡",
+                     "small":  "Nhá»",
+                     "medium":  "Vá»«a",
+                     "large":  "Lá»›n",
+                     "enterprise":  "Enterprise"
+                 },
+    "currency_comparison":  {
+                                "title":  "So sÃ¡nh Tiá»n tá»‡",
+                                "description":  "CÃ¹ng má»™t má»©c giÃ¡ trong cÃ¡c loáº¡i tiá»n tá»‡ Ä‘Æ°á»£c há»— trá»£.",
+                                "base_price":  "GiÃ¡ CÆ¡ báº£n (USD)",
+                                "aed":  "Dirham UAE",
+                                "aud":  "ÄÃ´ la Ãšc",
+                                "brl":  "Real Brazil",
+                                "cad":  "ÄÃ´ la Canada",
+                                "chf":  "Franc Thá»¥y SÄ©",
+                                "cny":  "NhÃ¢n dÃ¢n tá»‡",
+                                "eur":  "Euro",
+                                "gbp":  "Báº£ng Anh",
+                                "idr":  "Rupiah",
+                                "inr":  "Rupee áº¤n Äá»™",
+                                "jpy":  "YÃªn Nháº­t",
+                                "krw":  "Won HÃ n Quá»‘c",
+                                "mxn":  "Peso Mexico",
+                                "sar":  "Riyal áº¢ Ráº­p XÃª Ãšt",
+                                "sgd":  "ÄÃ´ la Singapore",
+                                "usd":  "ÄÃ´ la Má»¹",
+                                "zar":  "Rand Nam Phi"
+                            },
+    "core":  {
+                 "title":  "TÃ­nh nÄƒng Cá»‘t lÃµi",
+                 "description":  "Dá»‹ch thuáº­t, sá»‘ nhiá»u vÃ  ná»™i dung HTML."
+             },
+    "pluralization":  {
+                          "title":  "Sá»‘ nhiá»u",
+                          "description":  "CÃ¡c hÃ¬nh thá»©c sá»‘ nhiá»u khÃ¡c nhau cho tá»«ng ngÃ´n ngá»¯.",
+                          "item_title":  "Má»¥c (Danh tá»«)",
+                          "user_title":  "NgÆ°á»i dÃ¹ng",
+                          "product_title":  "Sáº£n pháº©m"
+                      },
+    "form":  {
+                 "title":  "Biá»ƒu máº«u vá»›i Placeholder Dá»‹ch thuáº­t",
+                 "description":  "Placeholder vÃ  nhÃ£n Ä‘Æ°á»£c láº¥y tá»« tá»‡p ngÃ´n ngá»¯ Ä‘á»‹a phÆ°Æ¡ng.",
+                 "name_label":  "TÃªn",
+                 "name_placeholder":  "Nháº­p há» vÃ  tÃªn cá»§a báº¡n",
+                 "email_label":  "Email",
+                 "email_placeholder":  "vidu@email.com",
+                 "message_label":  "Tin nháº¯n",
+                 "message_placeholder":  "Viáº¿t tin nháº¯n cá»§a báº¡n táº¡i Ä‘Ã¢y...",
+                 "submit":  "Gá»­i"
+             },
+    "missing_keys":  {
+                         "title":  "Xá»­ lÃ½ KhÃ³a Thiáº¿u",
+                         "description":  "CÃ¡c khÃ³a dá»‹ch thuáº­t khÃ´ng tÃ¬m tháº¥y sáº½ Ä‘Æ°á»£c hiá»ƒn thá»‹ trong ngoáº·c vuÃ´ng."
+                     },
+    "html_content":  {
+                         "title":  "Ná»™i dung HTML",
+                         "description":  "Báº£n dá»‹ch cÃ³ thá»ƒ bao gá»“m cÃ¡c tháº» HTML Ä‘á»ƒ Ä‘á»‹nh dáº¡ng.",
+                         "example":  "ÄÃ¢y lÃ  vÄƒn báº£n máº«u vá»›i \u003cspan class=\u0027text-emerald-400\u0027\u003eÄ‘iá»ƒm nháº¥n mÃ u sáº¯c\u003c/span\u003e vÃ  \u003cstrong\u003evÄƒn báº£n in Ä‘áº­m\u003c/strong\u003e.",
+                         "note":  "LÆ°u Ã½: CÃ¡c tháº» HTML trong báº£n dá»‹ch pháº£i náº±m trong má»™t pháº§n tá»­ bao bá»c duy nháº¥t."
+                     },
+    "switcher":  {
+                     "title":  "Chuyá»ƒn Ä‘á»•i NgÃ´n ngá»¯",
+                     "description":  "Nháº¥p vÃ o nÃºt bÃªn dÆ°á»›i Ä‘á»ƒ chuyá»ƒn ngÃ´n ngá»¯ vÃ  xem táº¥t cáº£ cÃ¡c tÃ­nh nÄƒng i18n hoáº¡t Ä‘á»™ng."
+                 },
+    "advanced":  {
+                     "title":  "Äá»‹nh dáº¡ng NÃ¢ng cao",
+                     "description":  "CÃ¡c tÃ­nh nÄƒng Ä‘á»‹nh dáº¡ng nÃ¢ng cao cho pháº§n trÄƒm, Ä‘Æ¡n vá»‹, byte, danh sÃ¡ch vÃ  sá»‘ thá»© tá»±.",
+                     "percentages":  "Pháº§n trÄƒm",
+                     "units":  "ÄÆ¡n vá»‹",
+                     "bytes":  "Byte",
+                     "bytes_unit":  "byte",
+                     "lists":  "Danh sÃ¡ch",
+                     "ordinals":  "Sá»‘ thá»© tá»±",
+                     "cardinals":  "Sá»‘ Ä‘áº¿m",
+                     "scientific":  "KÃ½ hiá»‡u Khoa há»c",
+                     "abbreviated":  "Viáº¿t táº¯t",
+                     "date_formats":  "Äá»‹nh dáº¡ng NgÃ y",
+                     "time_formats":  "Äá»‹nh dáº¡ng Giá»",
+                     "datetime":  "NgÃ y + Giá»",
+                     "durations":  "Thá»i lÆ°á»£ng",
+                     "relative_time":  "Thá»i gian TÆ°Æ¡ng Ä‘á»‘i",
+                     "regional_pricing":  "GiÃ¡ theo Khu vá»±c",
+                     "fifty_percent":  "NÄƒm mÆ°Æ¡i Pháº§n trÄƒm",
+                     "small_percent":  "Pháº§n trÄƒm Nhá»",
+                     "ninety_nine":  "ChÃ­n mÆ°Æ¡i ChÃ­n",
+                     "hundred":  "Má»™t trÄƒm",
+                     "kilobyte":  "Kilobyte",
+                     "distance":  "Khoáº£ng cÃ¡ch",
+                     "temperature":  "Nhiá»‡t Ä‘á»™",
+                     "weight":  "Trá»ng lÆ°á»£ng",
+                     "half_kb":  "Ná»­a KB",
+                     "one_and_half_kb":  "Má»™t rÆ°á»¡i KB",
+                     "one_mb":  "Má»™t MB",
+                     "one_gb":  "Má»™t GB",
+                     "two_items":  "Hai Má»¥c",
+                     "three_items":  "Ba Má»¥c",
+                     "four_items":  "Bá»‘n Má»¥c",
+                     "date_short":  "NgÃ y Ngáº¯n",
+                     "date_long":  "NgÃ y DÃ i",
+                     "time_short":  "Giá» Ngáº¯n",
+                     "time_long":  "Giá» DÃ i",
+                     "day_ago":  "NgÃ y trÆ°á»›c",
+                     "months_ago":  "ThÃ¡ng trÆ°á»›c",
+                     "hour_in":  "Trong 1 giá»",
+                     "starter_plan":  "GÃ³i Starter",
+                     "pro_plan":  "GÃ³i Pro",
+                     "discount_20":  "Giáº£m giÃ¡ 20%",
+                     "number_modes":  "Cháº¿ Ä‘á»™ Sá»‘",
+                     "number_modes_desc":  "So sÃ¡nh Ä‘á»‹nh dáº¡ng chá»¯ sá»‘ báº£n Ä‘á»‹a (Ù Ù¡Ù¢Ù£Ù¤) vÃ  Ä‘á»‹nh dáº¡ng phá»• quÃ¡t (0-9).",
+                     "native_label":  "Chá»¯ sá»‘ Báº£n Ä‘á»‹a (Ù Ù¡Ù¢Ù£Ù¤)",
+                     "universal_label":  "Phá»• quÃ¡t (0-9)",
+                     "plain_label":  "Tá»± Ä‘á»™ng"
+                 },
+    "template_macros":  {
+                            "title":  "Macro Máº«u",
+                            "description":  "Macro Ä‘á»ƒ láº¥y giÃ¡ trá»‹ gá»‘c khÃ´ng cÃ³ Ä‘Ã¡nh dáº¥u HTML.",
+                            "raw_value":  "GiÃ¡ trá»‹ gá»‘c khÃ´ng cÃ³ Ä‘Ã¡nh dáº¥u",
+                            "current_year":  "NÄƒm hiá»‡n táº¡i lÃ  {{year}}"
+                        },
+    "datetime":  {
+                     "title":  "NgÃ y \u0026 Giá»",
+                     "description":  "Äá»‹nh dáº¡ng káº¿t há»£p ngÃ y vÃ  giá».",
+                     "iso":  "TiÃªu chuáº©n ISO",
+                     "eve":  "ÄÃªm GiÃ¡ng sinh"
+                 },
+    "unit":  {
+                 "title":  "Äá»‹nh dáº¡ng ÄÆ¡n vá»‹"
+             },
+    "native_digits":  {
+                          "title":  "Chá»¯ sá»‘ Báº£n Ä‘á»‹a",
+                          "description":  "VÄƒn báº£n cÃ³ chá»©a chá»¯ sá»‘ ASCII sáº½ Ä‘Æ°á»£c hiá»ƒn thá»‹ báº±ng chá»¯ sá»‘ báº£n Ä‘á»‹a khi ngÃ´n ngá»¯ báº­t tÃ­nh nÄƒng nÃ y. Cáº­p nháº­t ngay láº­p tá»©c khi chuyá»ƒn ngÃ´n ngá»¯."
+                      },
+    "inflection":  {
+                       "title":  "Biáº¿n tá»‘ Tiáº¿ng Anh",
+                       "description":  "Sá»‘ nhiá»u vÃ  sá»‘ Ã­t trong tiáº¿ng Anh. Cáº­p nháº­t ngay láº­p tá»©c khi chuyá»ƒn ngÃ´n ngá»¯."
+                   },
+    "live_label":  "Trá»±c tiáº¿p",
+    "pricing_details":  {
+                            "title":  "Chi tiáº¿t GiÃ¡",
+                            "description":  "Quy trÃ¬nh Ä‘áº§y Ä‘á»§: giÃ¡ trá»‹ gá»‘c, mÃ£ tiá»n tá»‡, Ä‘á»‹nh dáº¡ng, giáº£m giÃ¡ vÃ  chuyá»ƒn Ä‘á»•i.",
+                            "raw_value":  "GiÃ¡ trá»‹ Gá»‘c",
+                            "raw_currency":  "MÃ£ Tiá»n tá»‡",
+                            "formatted":  "ÄÃ£ Ä‘á»‹nh dáº¡ng",
+                            "discounted":  "Giáº£m giÃ¡ 20%",
+                            "converted_usd":  "Chuyá»ƒn Ä‘á»•i sang USD"
+                        },
+    "live_update":  {
+                        "note":  "HÃ£y quan sÃ¡t táº¥t cáº£ sá»‘, ngÃ y vÃ  giÃ¡ thay Ä‘á»•i ngay láº­p tá»©c khi báº¡n chuyá»ƒn ngÃ´n ngá»¯ â€” mÃ  khÃ´ng cáº§n táº£i láº¡i trang."
+                    },
+    "section_modes":  {
+                          "title":  "Cháº¿ Ä‘á»™ Sá»‘",
+                          "description":  "So sÃ¡nh Ä‘á»‹nh dáº¡ng chá»¯ sá»‘ báº£n Ä‘á»‹a, Ä‘á»‹nh dáº¡ng phá»• quÃ¡t vÃ  cháº¿ Ä‘á»™ tá»± Ä‘á»™ng trong ngÃ´n ngá»¯ Ä‘ang hoáº¡t Ä‘á»™ng."
+                      },
+    "section_systems":  {
+                            "title":  "Há»‡ thá»‘ng Viáº¿t",
+                            "description":  "Táº¥t cáº£ cÃ¡c há»‡ thá»‘ng sá»‘ (thuáº­t toÃ¡n vÃ  sá»‘ há»c) hiá»ƒn thá»‹ chá»¯ sá»‘ báº£n Ä‘á»‹a chÃ­nh xÃ¡c vá»›i fallback ICU.",
+                            "note":  "Táº¥t cáº£ cÃ¡c há»‡ thá»‘ng sá»‘ (thuáº­t toÃ¡n vÃ  sá»‘ há»c) hiá»ƒn thá»‹ chá»¯ sá»‘ báº£n Ä‘á»‹a chÃ­nh xÃ¡c. Há»‡ thá»‘ng thuáº­t toÃ¡n sá»­ dá»¥ng fallback chá»¯ sá»‘ tá»« NUMBERING_SYSTEMS. Sá»‘ La MÃ£ Ä‘Æ°á»£c chuyá»ƒn Ä‘á»•i trá»±c tiáº¿p qua thuáº­t toÃ¡n. Há»‡ thá»‘ng sá»‘ há»c sá»­ dá»¥ng chá»¯ sá»‘ tá»« font Ä‘Ã£ táº£i."
+                        },
+    "nav":  {
+                "translations":  "Dá»‹ch thuáº­t",
+                "formatting":  "Sá»‘",
+                "pricing":  "GiÃ¡",
+                "modes":  "Cháº¿ Ä‘á»™",
+                "systems":  "Há»‡ thá»‘ng",
+                "switcher":  "Chá»n NgÃ´n ngá»¯"
+            }
+}

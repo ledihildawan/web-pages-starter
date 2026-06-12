@@ -1,0 +1,72 @@
+{
+    "hero":  {
+                 "badge":  "Ã€ Propos",
+                 "title_part1":  "AnimÃ©s par la ",
+                 "title_highlight":  "passion",
+                 "description":  "Notre parcours a commencÃ© avec une idÃ©e simple."
+             },
+    "mission":  {
+                    "title":  "Notre Mission",
+                    "description":  "Donner aux dÃ©veloppeurs et aux entreprises les moyens de crÃ©er des produits numÃ©riques exceptionnels grÃ¢ce Ã  des outils Ã©lÃ©gants, rapides et faciles Ã  utiliser."
+                },
+    "vision":  {
+                   "title":  "Notre Vision",
+                   "description":  "Devenir la plateforme de rÃ©fÃ©rence pour les dÃ©veloppeurs modernes qui accordent de l\u0027importance Ã  l\u0027Ã©lÃ©gance, Ã  la performance et Ã  l\u0027expÃ©rience utilisateur dans chaque ligne de code."
+               },
+    "story":  {
+                  "tag":  "Notre Histoire",
+                  "visual_label":  "Illustration de Studio CrÃ©atif",
+                  "title":  "AnimÃ©s par la passion, \u003cbr\u003edÃ©finis par l\u0027excellence.",
+                  "para1":  "Notre parcours a commencÃ© avec une idÃ©e simple : rendre le dÃ©veloppement web accessible et plaisant pour tous. On Ã©tait tannÃ©s des frameworks lourds et des configurations complexes.",
+                  "para2":  "Aujourd\u0027hui, on est une Ã©quipe diversifiÃ©e d\u0027ingÃ©nieurs, de designers et de penseurs qui travaillent ensemble pour rÃ©soudre des problÃ¨mes complexes avec des solutions Ã©lÃ©gantes.",
+                  "val1":  "Philosophie de design centrÃ©e sur l\u0027utilisateur",
+                  "val2":  "Architecture orientÃ©e performance",
+                  "val3":  "Transparence et communication ouverte"
+              },
+    "values":  {
+                   "title":  "Nos Valeurs",
+                   "subtitle":  "Les principes qui guident chacune de nos dÃ©cisions."
+               },
+    "passion":  {
+                    "title":  "Passion",
+                    "description":  "On aime ce qu\u0027on fait, et Ã§a se voit dans chaque dÃ©tail de nos produits."
+                },
+    "collaboration":  {
+                          "title":  "Collaboration",
+                          "description":  "Travailler ensemble, Ã§a donne les meilleurs rÃ©sultats. On croit en la force d\u0027une Ã©quipe soudÃ©e."
+                      },
+    "innovation":  {
+                       "title":  "Innovation",
+                       "description":  "Toujours Ã  la recherche de meilleures faÃ§ons de rÃ©soudre les problÃ¨mes et de crÃ©er de la valeur."
+                   },
+    "integrity":  {
+                      "title":  "IntÃ©gritÃ©",
+                      "description":  "L\u0027honnÃªtetÃ© et la transparence sont le fondement de chaque relation qu\u0027on bÃ¢tit."
+                  },
+    "excellence":  {
+                       "title":  "Excellence",
+                       "description":  "On ne se contente pas de bien. On vise toujours l\u0027excellence."
+                   },
+    "quality":  {
+                    "title":  "QualitÃ©",
+                    "description":  "Du code propre, un design soignÃ© et des expÃ©riences fluides, c\u0027est notre standard."
+                },
+    "team":  {
+                 "title":  "Rencontrez l\u0027Ã‰quipe",
+                 "subtitle":  "Les esprits brillants derriÃ¨re chaque ligne de code qu\u0027on Ã©crit.",
+                 "alex_desc":  "Leader visionnaire avec plus de 10 ans d\u0027expÃ©rience dans le dÃ©veloppement d\u0027Ã©cosystÃ¨mes SaaS.",
+                 "sarah_desc":  "DÃ©veloppeuse full-stack spÃ©cialisÃ©e dans la conception d\u0027architectures systÃ¨me Ã  grande Ã©chelle.",
+                 "mike_desc":  "PassionnÃ© par les dÃ©tails au pixel prÃ¨s, les flux UX fluides et les standards d\u0027accessibilitÃ©.",
+                 "jessica_desc":  "Narratrice crÃ©ative qui aide les marques Ã  trouver leur voix unique dans le monde numÃ©rique."
+             },
+    "stats":  {
+                  "years":  "AnnÃ©es d\u0027ExpÃ©rience",
+                  "years_val":  "3+",
+                  "clients":  "Clients Internationaux",
+                  "clients_val":  "120+",
+                  "countries":  "Pays Desservis",
+                  "countries_val":  "15",
+                  "support":  "Support Expert",
+                  "support_val":  "24/7"
+              }
+}

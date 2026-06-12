@@ -1,0 +1,47 @@
+{
+    "meta":  {
+                 "title":  "Kontaktujte nÃ¡s | Starter App",
+                 "description":  "Kontaktujte nÃ¡s s otÃ¡zkami a podporou."
+             },
+    "contact":  {
+                    "badge":  "PripravenÃ­ pomÃ´cÅ¥",
+                    "title_part1":  "PoÄme sa ",
+                    "title_highlight":  "spojiÅ¥",
+                    "description":  "MÃ¡te otÃ¡zku alebo chcete spolupracovaÅ¥? Radi by sme od vÃ¡s poÄuli. PoÅ¡lite sprÃ¡vu a my vÃ¡m Äo najskÃ´r odpovieme.",
+                    "form_title":  "PoslaÅ¥ sprÃ¡vu",
+                    "form_subtitle":  "VyplÅˆte formulÃ¡r niÅ¾Å¡ie a my vÃ¡m Äo najskÃ´r odpovieme.",
+                    "social_title":  "Sledujte nÃ¡s",
+                    "social_subtitle":  "ZÃ­skajte najnovÅ¡ie aktualizÃ¡cie prostrednÃ­ctvom naÅ¡ich sociÃ¡lnych sietÃ­",
+                    "info":  {
+                                 "response_time":  {
+                                                       "title":  "RÃ½chla odozva",
+                                                       "description":  "SnaÅ¾Ã­me sa odpovedaÅ¥ na kaÅ¾dÃº sprÃ¡vu do 24 hodÃ­n v pracovnÃ© dni."
+                                                   },
+                                 "working_hours":  {
+                                                       "title":  "PracovnÃ½ Äas",
+                                                       "description":  "Pondelok - Piatok: 09:00 - 18:00. VÃ­kend: PodÄ¾a priority."
+                                                   },
+                                 "support":  {
+                                                 "title":  "PriebeÅ¾nÃ¡ podpora",
+                                                 "description":  "NÃ¡Å¡ tÃ­mpodpory je vÅ¾dy pripravenÃ½ pomÃ´cÅ¥ vyrieÅ¡iÅ¥ vaÅ¡e technickÃ© problÃ©my."
+                                             }
+                             },
+                    "form":  {
+                                 "name":  "Meno",
+                                 "name_placeholder":  "Zadajte svoje meno",
+                                 "email":  "Email",
+                                 "email_placeholder":  "meno@email.com",
+                                 "subject":  "Predmet",
+                                 "subject_placeholder":  "ÄŒo by ste chceli prediskutovaÅ¥?",
+                                 "message":  "SprÃ¡va",
+                                 "message_placeholder":  "Povedzte nÃ¡m viac o vaÅ¡ej otÃ¡zke...",
+                                 "submit":  "OdoslaÅ¥ sprÃ¡vu"
+                             }
+                },
+    "email_label":  "Email",
+    "email_value":  "hello@starter.app",
+    "phone_label":  "TelefÃ³n",
+    "phone_value":  "+421 2 1234 5678",
+    "location_label":  "Lokalita",
+    "location_value":  "Bratislava, Slovensko"
+}

@@ -1,0 +1,56 @@
+{
+    "period_monthly":  "Monat",
+    "period_yearly":  "Jahr",
+    "hero":  {
+                 "title_part1":  "Einfache, transparente ",
+                 "title_highlight":  "Preise",
+                 "description":  "Keine versteckten Kosten. Keine Ãœberraschungskosten. WÃ¤hlen Sie den Plan, der perfekt zu Ihren BedÃ¼rfnissen passt.",
+                 "badge":  "WÃ¤hlen Sie Ihren Plan"
+             },
+    "toggle":  {
+                   "monthly":  "Monatlich",
+                   "yearly":  "JÃ¤hrlich",
+                   "yearly_hint":  "jÃ¤hrlich abgerechnet",
+                   "discount":  "20% SPAREN",
+                   "aria_label":  "Toggle Pricing Plan"
+               },
+    "plans":  {
+                  "hobby":  {
+                                "name":  "Hobby",
+                                "desc":  "Perfekt fÃ¼r Nebenprojekte und zum Lernen.",
+                                "btn":  "Loslegen",
+                                "feature_0":  "1 Projekt",
+                                "feature_1":  "Community-UnterstÃ¼tzung",
+                                "feature_2":  "5GB Speicher"
+                            },
+                  "pro":  {
+                              "name":  "Pro",
+                              "badge":  "Am Beliebtesten",
+                              "desc":  "FÃ¼r professionelle Entwickler und kleine Teams.",
+                              "btn":  "Pro Jetzt Holen",
+                              "feature_0":  "Unbegrenzte Projekte",
+                              "feature_1":  "PrioritÃ¤ts-E-Mail-UnterstÃ¼tzung",
+                              "feature_2":  "100GB Speicher",
+                              "feature_3":  "Erweiterte Analysen"
+                          },
+                  "enterprise":  {
+                                     "name":  "Enterprise",
+                                     "desc":  "FÃ¼r Large-Scale-Anwendungen und Organisationen.",
+                                     "btn":  "Vertrieb Kontaktieren",
+                                     "feature_0":  "Alles in Pro",
+                                     "feature_1":  "Dedicated Manager",
+                                     "feature_2":  "SSO \u0026 Audit-Logs",
+                                     "feature_3":  "Unbegrenzter Speicher"
+                                 }
+              },
+    "faq":  {
+                "title":  "HÃ¤ufig Gestellte Fragen",
+                "subtitle":  "Finden Sie Antworten auf die am hÃ¤ufigsten gestellten Fragen zu unseren PlÃ¤nen und Diensten.",
+                "q_0":  "Kann ich jederzeit kÃ¼ndigen?",
+                "a_0":  "Ja, Sie kÃ¶nnen Ihr Abonnement jederzeit kÃ¼ndigen. Ihr Zugang bleibt bis zum Ende Ihres Abrechnungszeitraums bestehen.",
+                "q_1":  "Bieten Sie eine kostenlose Testversion an?",
+                "a_1":  "Wir bieten eine 14-tÃ¤gige kostenlose Testversion fÃ¼r den Pro-Plan an. Keine Kreditkarte erforderlich, um zu starten.",
+                "q_2":  "Welche Zahlungsmethoden akzeptieren Sie?",
+                "a_2":  "Wir akzeptieren alle gÃ¤ngigen Kreditkarten (Visa, Mastercard, Amex) und PayPal. FÃ¼r Enterprise-PlÃ¤ne unterstÃ¼tzen wir BankÃ¼berweisungen."
+            }
+}

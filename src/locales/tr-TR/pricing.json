@@ -1,0 +1,56 @@
+{
+    "period_monthly":  "ay",
+    "period_yearly":  "yÄ±l",
+    "hero":  {
+                 "badge":  "PlanÄ±nÄ±zÄ± SeÃ§in",
+                 "title_part1":  "Basit ve ",
+                 "title_highlight":  "Åžeffaf FiyatlandÄ±rma",
+                 "description":  "Gizli Ã¼cret yok. SÃ¼rpriz masraflar yok. Ä°htiyaÃ§larÄ±nÄ±za en uygun planÄ± seÃ§in."
+             },
+    "toggle":  {
+                   "monthly":  "AylÄ±k",
+                   "yearly":  "YÄ±llÄ±k",
+                   "yearly_hint":  "yÄ±llÄ±k faturalama",
+                   "discount":  "%20 TASARRUF",
+                   "aria_label":  "FiyatlandÄ±rma PlanÄ±nÄ± DeÄŸiÅŸtir"
+               },
+    "plans":  {
+                  "hobby":  {
+                                "name":  "Hobby",
+                                "desc":  "Yan projeler ve Ã¶ÄŸrenme iÃ§in ideal.",
+                                "btn":  "Ãœcretsiz BaÅŸlayÄ±n",
+                                "feature_0":  "1 Proje",
+                                "feature_1":  "Topluluk DesteÄŸi",
+                                "feature_2":  "5GB Depolama"
+                            },
+                  "pro":  {
+                              "name":  "Pro",
+                              "badge":  "En PopÃ¼ler",
+                              "desc":  "Profesyonel geliÅŸtiriciler ve kÃ¼Ã§Ã¼k ekipler iÃ§in.",
+                              "btn":  "Pro PlanÄ± SeÃ§",
+                              "feature_0":  "SÄ±nÄ±rsÄ±z Proje",
+                              "feature_1":  "Ã–ncelikli E-posta DesteÄŸi",
+                              "feature_2":  "100GB Depolama",
+                              "feature_3":  "GeliÅŸmiÅŸ Analitik"
+                          },
+                  "enterprise":  {
+                                     "name":  "Enterprise",
+                                     "desc":  "BÃ¼yÃ¼k Ã¶lÃ§ekli uygulamalar ve kuruluÅŸlar iÃ§in.",
+                                     "btn":  "SatÄ±ÅŸ Ekibine BaÅŸvurun",
+                                     "feature_0":  "Pro planÄ±ndaki tÃ¼m Ã¶zellikler",
+                                     "feature_1":  "Ã–zel Hesap YÃ¶neticisi",
+                                     "feature_2":  "SSO ve Denetim GÃ¼nlÃ¼kleri",
+                                     "feature_3":  "SÄ±nÄ±rsÄ±z Depolama"
+                                 }
+              },
+    "faq":  {
+                "title":  "SÄ±kÃ§a Sorulan Sorular",
+                "subtitle":  "PlanlarÄ±mÄ±z ve hizmetlerimiz hakkÄ±nda en sÄ±k sorulan sorularÄ±n yanÄ±tlarÄ±nÄ± bulun.",
+                "q_0":  "Ä°stediÄŸim zaman iptal edebilir miyim?",
+                "a_0":  "Evet, aboneliÄŸinizi istediÄŸiniz zaman iptal edebilirsiniz. EriÅŸiminiz faturalama dÃ¶neminin sonuna kadar aktif kalÄ±r.",
+                "q_1":  "Ãœcretsiz deneme sÃ¼resi var mÄ±?",
+                "a_1":  "Pro planÄ± iÃ§in 14 gÃ¼nlÃ¼k Ã¼cretsiz deneme sunuyoruz. BaÅŸlamak iÃ§in kredi kartÄ± gerekmez.",
+                "q_2":  "Hangi Ã¶deme yÃ¶ntemleri kabul ediliyor?",
+                "a_2":  "BaÅŸlÄ±ca kredi kartlarÄ±nÄ± ve PayPal\u0027Ä± kabul ediyoruz. Enterprise iÃ§in banka havalesi de desteklenmektedir."
+            }
+}

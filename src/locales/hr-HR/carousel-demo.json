@@ -1,0 +1,17 @@
+{
+    "meta":  {
+                 "page_title":  "Splide Lazy Load demo | Starter"
+             },
+    "hero":  {
+                 "slide_1":  {
+                                 "title":  "Lijeno uÄitavanje prirode",
+                                 "subtitle":  "Slike se pametno uÄitavaju radi Å¡tednje prometa.",
+                                 "alt":  "Prekrasan planinski krajolik"
+                             },
+                 "slide_2":  {
+                                 "title":  "Performanse na prvom mjestu",
+                                 "subtitle":  "UÄitavajte samo ono Å¡to vam je potrebno.",
+                                 "alt":  "Krajolik snjeÅ¾nih planina"
+                             }
+             }
+}

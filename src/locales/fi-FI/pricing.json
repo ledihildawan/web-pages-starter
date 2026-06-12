@@ -1,0 +1,56 @@
+{
+    "period_monthly":  "kuukausi",
+    "period_yearly":  "vuosi",
+    "hero":  {
+                 "badge":  "Valitse suunnitelma",
+                 "title_part1":  "Yksinkertainen ja ",
+                 "title_highlight":  "lÃ¤pinÃ¤kyvÃ¤ hinnoittelu",
+                 "description":  "Ei piilokuluja. Ei yllÃ¤tysmaksuja. Valitse tarpeisiisi parhaiten sopiva suunnitelma."
+             },
+    "toggle":  {
+                   "monthly":  "Kuukausittain",
+                   "yearly":  "Vuosittain",
+                   "yearly_hint":  "laskutetaan vuosittain",
+                   "discount":  "SÃ„Ã„STÃ„ 20%",
+                   "aria_label":  "Vaihda hinnoittelutilausta"
+               },
+    "plans":  {
+                  "hobby":  {
+                                "name":  "Harrastaja",
+                                "desc":  "TÃ¤ydellinen sivuprojekteihin ja oppimiseen.",
+                                "btn":  "Aloita ilmaiseksi",
+                                "feature_0":  "1 projekti",
+                                "feature_1":  "YhteisÃ¶n tuki",
+                                "feature_2":  "5 Gt tallennustilaa"
+                            },
+                  "pro":  {
+                              "name":  "Pro",
+                              "badge":  "Suosituin",
+                              "desc":  "AmmattilaiskehittÃ¤jille ja pienille tiimeille.",
+                              "btn":  "Valitse Pro-tilaus",
+                              "feature_0":  "Rajattomat projektit",
+                              "feature_1":  "Ensisijainen sÃ¤hkÃ¶postituki",
+                              "feature_2":  "100 Gt tallennustilaa",
+                              "feature_3":  "Edistynyt analytiikka"
+                          },
+                  "enterprise":  {
+                                     "name":  "Yritys",
+                                     "desc":  "Suuren mittakaavan sovelluksiin ja organisaatioille.",
+                                     "btn":  "Ota yhteyttÃ¤ myyntiin",
+                                     "feature_0":  "Kaikki Pro-ominaisuudet",
+                                     "feature_1":  "Omistettu tilipÃ¤Ã¤llikkÃ¶",
+                                     "feature_2":  "SSO ja tarkastusloki",
+                                     "feature_3":  "Rajoittamaton tallennustila"
+                                 }
+              },
+    "faq":  {
+                "title":  "Usein kysytyt kysymykset",
+                "subtitle":  "LÃ¶ydÃ¤ vastauksia yleisimpiin kysymyksiin tilauksistamme ja palveluistamme.",
+                "q_0":  "Voinko peruuttaa milloin tahansa?",
+                "a_0":  "KyllÃ¤, voit peruuttaa tilauksesi milloin tahansa. KÃ¤yttÃ¶oikeutesi pysyy aktiivisena laskutuskauden loppuun asti.",
+                "q_1":  "Onko ilmaista kokeilua?",
+                "a_1":  "Tarjoamme 14 pÃ¤ivÃ¤n ilmaisen kokeilun Pro-tilaukselle. Luottokorttia ei tarvita aloittamiseen.",
+                "q_2":  "MitÃ¤ maksutapoja on saatavilla?",
+                "a_2":  "HyvÃ¤ksymme tÃ¤rkeimmÃ¤t luottokortit ja PayPalin. Yrityksille tuemme pankkisiirtoja."
+            }
+}

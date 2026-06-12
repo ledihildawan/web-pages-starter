@@ -1,0 +1,17 @@
+{
+    "meta":  {
+                 "page_title":  "Demo Lazy Load Splide | Starter"
+             },
+    "hero":  {
+                 "slide_1":  {
+                                 "title":  "Lazy Load Tá»± nhiÃªn",
+                                 "subtitle":  "HÃ¬nh áº£nh Ä‘Æ°á»£c táº£i thÃ´ng minh Ä‘á»ƒ tiáº¿t kiá»‡m bÄƒng thÃ´ng.",
+                                 "alt":  "Cáº£nh NÃºi Äáº¹p"
+                             },
+                 "slide_2":  {
+                                 "title":  "Hiá»‡u suáº¥t Tá»‘i Æ°u",
+                                 "subtitle":  "Chá»‰ táº£i nhá»¯ng gÃ¬ báº¡n cáº§n.",
+                                 "alt":  "Cáº£nh NÃºi Tuyáº¿t"
+                             }
+             }
+}

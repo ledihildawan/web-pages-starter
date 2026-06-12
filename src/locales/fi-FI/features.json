@@ -1,0 +1,75 @@
+{
+    "hero":  {
+                 "badge":  "Esitellyt ominaisuudet",
+                 "title_part1":  "Kaikki mitÃ¤ tarvitset",
+                 "title_highlight":  "skaalataksesi nopeammin",
+                 "description":  "Tehokkaasta analytiikasta saumattomiin integraatioihin, annamme sinulle tyÃ¶kalut, joita tarvitset maailmanluokan sovellusten rakentamiseen ilman komplikaatioita."
+             },
+    "sections":  {
+                     "sync":  {
+                                  "title":  "Reaaliaikainen synkronointi",
+                                  "description":  "Muutokset leviÃ¤vÃ¤t vÃ¤littÃ¶mÃ¤sti kaikkiin laitteisiin. KÃ¤yttivÃ¤tpÃ¤ kÃ¤yttÃ¤jÃ¤si mobiilia, tyÃ¶pÃ¶ytÃ¤Ã¤ tai tablettia, he nÃ¤kevÃ¤t samat tiedot samaan aikaan.",
+                                  "check_0":  "Alle millisekunnin viive",
+                                  "check_1":  "SisÃ¤Ã¤nrakennettu offline-tuki",
+                                  "check_2":  "Konfliktien ratkaisun hallinta"
+                              },
+                     "analytics":  {
+                                       "title":  "Toiminnallinen analytiikka",
+                                       "description":  "Lopeta arvaaminen. Hanki yksityiskohtaisia nÃ¤kemyksiÃ¤ kÃ¤yttÃ¤jien kÃ¤yttÃ¤ytymisestÃ¤, jÃ¤rjestelmÃ¤n suorituskyvystÃ¤ ja tulomittareista. Visualisoi tietosi interaktiivisilla kaavioilla.",
+                                       "check_0":  "Mukautettavat hallintapaneelit",
+                                       "check_1":  "Vie PDF-, CSV- tai Excel-muotoon",
+                                       "check_2":  "Automaattiset viikkoraportit"
+                                   }
+                 },
+    "more_title":  "Ja paljon muuta...",
+    "more_subtitle":  "EdistyneitÃ¤ ominaisuuksia, jotka on suunniteltu auttamaan sinua rakentamaan nopeammin ja skaalautuvammin.",
+    "more":  {
+                 "dark_mode":  {
+                                   "title":  "Tumma tila",
+                                   "desc":  "SisÃ¤Ã¤nrakennettu tuki vaaleille ja tummille teemoille automaattisella tunnistuksella."
+                               },
+                 "api_first":  {
+                                   "title":  "API-ensin",
+                                   "desc":  "REST- ja GraphQL-API:t saatavilla tÃ¤ydelliseen ohjelmalliseen hallintaan."
+                               },
+                 "sso":  {
+                             "title":  "SSO-kirjautuminen",
+                             "desc":  "Yritystason Single Sign-On Googlelle, GitHubille ja OkTalle."
+                         },
+                 "audit":  {
+                               "title":  "Tarkastusloki",
+                               "desc":  "Seuraa jokaista muutosta projekteissasi yksityiskohtaisilla aikaleimoilla."
+                           },
+                 "rbac":  {
+                              "title":  "Roolipohjainen pÃ¤Ã¤sy",
+                              "desc":  "Hienojakoinen kÃ¤yttÃ¶oikeuksien hallinta yllÃ¤pitÃ¤jille, toimittajille ja katselijoille."
+                          },
+                 "uptime":  {
+                                "title":  "99,99% kÃ¤ytettÃ¤vyys",
+                                "desc":  "Taattu saatavuus globaalisti hajautetulla CDN:llÃ¤mme."
+                            }
+             },
+    "cta":  {
+                "heading":  "Valmiina aloittamaan?",
+                "btn_create":  "Luo tili",
+                "btn_docs":  "Lue dokumentaatio"
+            },
+    "features":  {
+                     "list":  {
+                                  "speed":  {
+                                                "title":  "Salamannopea",
+                                                "description":  "Optimoitu suorituskyky alle 100 ms latausajoilla. Rakennettu globaaliin skaalaukseen edge-infran avulla."
+                                            },
+                                  "design":  {
+                                                 "title":  "Moderni muotoilu",
+                                                 "description":  "Puhdas, responsiivinen kÃ¤yttÃ¶liittymÃ¤, joka nÃ¤yttÃ¤Ã¤ ammattimaiselta kaikilla laitteilla. TÃ¤ysin mukautettavat komponentit."
+                                             },
+                                  "security":  {
+                                                   "title":  "Korkea tietoturva",
+                                                   "description":  "PÃ¤Ã¤stÃ¤ pÃ¤Ã¤hÃ¤n -salaus, monivaiheinen tunnistautuminen ja SOC2-vaatimustenmukaisuus tietojesi suojaamiseksi."
+                                               }
+                              },
+                     "heading":  "Avainominaisuudet",
+                     "subheading":  "Kaikki mitÃ¤ tarvitset rakentamiseen ja skaalaukseen."
+                 }
+}

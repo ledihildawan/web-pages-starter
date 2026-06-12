@@ -1,0 +1,203 @@
+{
+    "meta":  {
+                 "title":  "i18n-test | Demo",
+                 "description":  "Omfattende testside for internationaliseringsfunktioner"
+             },
+    "hero":  {
+                 "badge":  "i18n-funktioner",
+                 "title":  "Omfattende \u003cspan class=\u0027text-violet-400\u0027\u003etest\u003c/span\u003e af internationalisering",
+                 "description":  "Test alle i18n-funktioner: oversÃ¦ttelse, pluralisering, talformatering, valutaer og valutakonvertering."
+             },
+    "language_info":  {
+                          "title":  "Information om aktuelt sprog",
+                          "code":  "Sprogkode",
+                          "currency":  "Valuta",
+                          "direction":  "Tekstretning",
+                          "digits":  "IndfÃ¸dte cifre",
+                          "enabled":  "Aktiveret",
+                          "disabled":  "Deaktiveret",
+                          "languages":  "Sprog",
+                          "switching":  "Skift uden genindlÃ¦sning",
+                          "current_code":  "da",
+                          "current_currency":  "DKK",
+                          "current_direction":  "LTR (venstre til hÃ¸jre)"
+                      },
+    "numbers":  {
+                    "title":  "Talformatering",
+                    "description":  "Tal formateres i henhold til den aktive lokalisering.",
+                    "large":  "Stort tal",
+                    "decimal":  "Decimal",
+                    "million":  "Million",
+                    "percent":  "Procent",
+                    "raw":  "RÃ¥"
+                },
+    "currency":  {
+                     "title":  "Valutakonvertering",
+                     "description":  "Priser i DKK omregnet til det aktive sprogs valuta.",
+                     "currencies":  "Valutaer",
+                     "small":  "Lille",
+                     "medium":  "Mellem",
+                     "large":  "Stor",
+                     "enterprise":  "Enterprise"
+                 },
+    "currency_comparison":  {
+                                "title":  "Valutasammenligning",
+                                "description":  "Samme pris i forskellige understÃ¸ttede valutaer.",
+                                "base_price":  "Grundpris (USD)",
+                                "aed":  "De Forenede Arabiske Emiraters dirham",
+                                "aud":  " Australsk dollar",
+                                "brl":  "Brasiliansk real",
+                                "cad":  "Canadisk dollar",
+                                "chf":  "Schweizisk franc",
+                                "cny":  "Kinesisk yuan",
+                                "eur":  "Euro",
+                                "gbp":  "Britisk pund",
+                                "idr":  "Rupia",
+                                "inr":  "Indisk rupee",
+                                "jpy":  "Japansk yen",
+                                "krw":  "Koreansk won",
+                                "mxn":  "Mexicansk peso",
+                                "sar":  "Saudiarabisk riyal",
+                                "sgd":  "Singaporeansk dollar",
+                                "usd":  "Amerikansk dollar",
+                                "zar":  "Sydafrikansk rand"
+                            },
+    "core":  {
+                 "title":  "Kernefunktioner",
+                 "description":  "OversÃ¦ttelse, pluralisering og HTML-indhold."
+             },
+    "pluralization":  {
+                          "title":  "Pluralisering",
+                          "description":  "Forskellige flertalsformer for hvert sprog.",
+                          "item_title":  "Item (element)",
+                          "user_title":  "User (bruger)",
+                          "product_title":  "Product (produkt)"
+                      },
+    "form":  {
+                 "title":  "Formular med oversatte pladsholdere",
+                 "description":  "Pladsholdere og etiketter hentes fra sprogfilerne.",
+                 "name_label":  "Navn",
+                 "name_placeholder":  "Indtast dit fulde navn",
+                 "email_label":  "E-mail",
+                 "email_placeholder":  "eksempel@email.dk",
+                 "message_label":  "Besked",
+                 "message_placeholder":  "Skriv din besked her...",
+                 "submit":  "Send"
+             },
+    "missing_keys":  {
+                         "title":  "HÃ¥ndtering af manglende nÃ¸gler",
+                         "description":  "Manglende oversÃ¦ttelsesnÃ¸gler vises i firkantede parenteser."
+                     },
+    "html_content":  {
+                         "title":  "HTML-indhold",
+                         "description":  "OversÃ¦ttelser kan inkludere HTML-tags til formatering.",
+                         "example":  "Dette er eksempeltekst med \u003cspan class=\u0027text-emerald-400\u0027\u003efarvemarkering\u003c/span\u003e og \u003cstrong\u003efed tekst\u003c/strong\u003e.",
+                         "note":  "BemÃ¦rk: HTML-tags i oversÃ¦ttelser skal vÃ¦re inde i et omsluttende element."
+                     },
+    "switcher":  {
+                     "title":  "Skift sprog",
+                     "description":  "Klik pÃ¥ knappen nedenfor for at skifte sprog og se alle i18n-funktioner i aktion."
+                 },
+    "advanced":  {
+                     "title":  "Avanceret formatering",
+                     "description":  "Avancerede formateringsfunktioner for procenter, enheder, bytes, lister og ordenstal.",
+                     "percentages":  "Procenter",
+                     "units":  "Enheder",
+                     "bytes":  "Bytes",
+                     "bytes_unit":  "byte",
+                     "lists":  "Lister",
+                     "ordinals":  "Ordenstal",
+                     "cardinals":  "Kardinaltal",
+                     "scientific":  "Videnskabelig notation",
+                     "abbreviated":  "Forkortet",
+                     "date_formats":  "Datoformater",
+                     "time_formats":  "Tidsformater",
+                     "datetime":  "Dato + tid",
+                     "durations":  "Varigheder",
+                     "relative_time":  "Relativ tid",
+                     "regional_pricing":  "Regionale priser",
+                     "fifty_percent":  "Halvtreds procent",
+                     "small_percent":  "Lille procent",
+                     "ninety_nine":  "Nioghalvfems",
+                     "hundred":  "Hundrede",
+                     "kilobyte":  "Kilobyte",
+                     "distance":  "Afstand",
+                     "temperature":  "Temperatur",
+                     "weight":  "VÃ¦gt",
+                     "half_kb":  "Halv KB",
+                     "one_and_half_kb":  "Halvanden KB",
+                     "one_mb":  "Ã‰n MB",
+                     "one_gb":  "Ã‰n GB",
+                     "two_items":  "To elementer",
+                     "three_items":  "Tre elementer",
+                     "four_items":  "Fire elementer",
+                     "date_short":  "Kort dato",
+                     "date_long":  "Lang dato",
+                     "time_short":  "Kort tid",
+                     "time_long":  "Lang tid",
+                     "day_ago":  "Dage siden",
+                     "months_ago":  "MÃ¥neder siden",
+                     "hour_in":  "Om 1 time",
+                     "starter_plan":  "Starter-plan",
+                     "pro_plan":  "Pro-plan",
+                     "discount_20":  "20% rabat",
+                     "number_modes":  "Taltilstande",
+                     "number_modes_desc":  "Sammenligning mellem indfÃ¸dte cifre (Ù Ù¡Ù¢Ù£Ù¤) og universel (0-9) formatering.",
+                     "native_label":  "IndfÃ¸dte cifre (Ù Ù¡Ù¢Ù£Ù¤)",
+                     "universal_label":  "Universel (0-9)",
+                     "plain_label":  "Automatisk"
+                 },
+    "template_macros":  {
+                            "title":  "Skabelon-makroer",
+                            "description":  "Makroer til at hente rÃ¥ vÃ¦rdier uden HTML-markering.",
+                            "raw_value":  "RÃ¥ vÃ¦rdi uden markering",
+                            "current_year":  "Aktuelt Ã¥r er {{year}}"
+                        },
+    "datetime":  {
+                     "title":  "Dato og tid",
+                     "description":  "Kombineret format for dato og tid.",
+                     "iso":  "ISO-standard",
+                     "eve":  "Juleaften"
+                 },
+    "unit":  {
+                 "title":  "Enhedsformat"
+             },
+    "native_digits":  {
+                          "title":  "IndfÃ¸dte cifre",
+                          "description":  "Tekst med ASCII-cifre vises i indfÃ¸dte cifre, nÃ¥r lokaliseringen aktiverer dem. Opdateres live, nÃ¥r du skifter sprog."
+                      },
+    "inflection":  {
+                       "title":  "Engelsk bÃ¸jning",
+                       "description":  "Engelsk pluralisering og singularisering. Opdateres live, nÃ¥r du skifter sprog."
+                   },
+    "live_label":  "Live",
+    "pricing_details":  {
+                            "title":  "Prisoplysninger",
+                            "description":  "Komplet pipeline: rÃ¥ vÃ¦rdi, valutakode, format, rabat og konvertering.",
+                            "raw_value":  "RÃ¥ vÃ¦rdi",
+                            "raw_currency":  "Valutakode",
+                            "formatted":  "Formateret",
+                            "discounted":  "20% rabat",
+                            "converted_usd":  "Konverteret til USD"
+                        },
+    "live_update":  {
+                        "note":  "BemÃ¦rk, at alle tal, datoer og priser Ã¦ndres Ã¸jeblikkeligt, nÃ¥r du skifter sprog â€” uden at genindlÃ¦se siden."
+                    },
+    "section_modes":  {
+                          "title":  "Nummer Tilstande",
+                          "description":  "Sammenlign native cifre, universelt format og auto-tilstand for den aktive landestandard."
+                      },
+    "section_systems":  {
+                            "title":  "Skriftsystemer",
+                            "description":  "Alle 7 algoritmiske og 4 ekstra numeriske systemer pÃ¥ systemniveau, med tilsluttede skrifttypeindlÃ¦sere.",
+                            "note":  "Alle talsystemer (algoritmiske og numeriske) viser korrekte native cifre med ICU-fallback."
+                        },
+    "nav":  {
+                "translations":  "OversÃ¦ttelser",
+                "formatting":  "Tal",
+                "pricing":  "Priser",
+                "modes":  "Tilstande",
+                "systems":  "Systemer",
+                "switcher":  "Skift Landestandard"
+            }
+}

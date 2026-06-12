@@ -1,0 +1,75 @@
+{
+    "hero":  {
+                 "badge":  "CaracterÃ­stiques destacades",
+                 "title_part1":  "Tot el que necessiteu per",
+                 "title_highlight":  "escalar mÃ©s rÃ pid",
+                 "description":  "Des d\u0027anÃ lisis potents fins a integracions perfectes, us proporcionem el conjunt d\u0027eines que necessiteu per crear aplicacions de classe mundial sense complicacions."
+             },
+    "sections":  {
+                     "sync":  {
+                                  "title":  "SincronitzaciÃ³ en temps real",
+                                  "description":  "Els canvis es propaguen a tots els dispositius a l\u0027instant. Tant si els vostres usuaris fan servir mÃ²bil, escriptori o tauleta, veuen les mateixes dades al mateix temps.",
+                                  "check_0":  "LatÃ¨ncia per sota del milÂ·lisegon",
+                                  "check_1":  "Suport fora de lÃ­nia integrat",
+                                  "check_2":  "GestiÃ³ de resoluciÃ³ de conflictes"
+                              },
+                     "analytics":  {
+                                       "title":  "AnÃ lisis accionables",
+                                       "description":  "Deixeu d\u0027endevinar. Obteniu informaciÃ³ detallada sobre el comportament dels usuaris, el rendiment del sistema i les mÃ¨triques d\u0027ingressos. Visualitzeu les vostres dades amb grÃ fics interactius.",
+                                       "check_0":  "Panells personalitzables",
+                                       "check_1":  "ExportaciÃ³ a PDF, CSV o Excel",
+                                       "check_2":  "Informes setmanals automatitzats"
+                                   }
+                 },
+    "more_title":  "I molt mÃ©s...",
+    "more_subtitle":  "CaracterÃ­stiques avanÃ§ades dissenyades per ajudar-vos a construir mÃ©s rÃ pid i de manera mÃ©s escalable.",
+    "more":  {
+                 "dark_mode":  {
+                                   "title":  "Mode fosc",
+                                   "desc":  "Suport integrat per a temes clars i foscos amb detecciÃ³ automÃ tica."
+                               },
+                 "api_first":  {
+                                   "title":  "API First",
+                                   "desc":  "API REST i GraphQL disponibles per al control programÃ tic complet."
+                               },
+                 "sso":  {
+                             "title":  "Inici de sessiÃ³ SSO",
+                             "desc":  "Single Sign-On de classe empresarial per a Google, GitHub i Okta."
+                         },
+                 "audit":  {
+                               "title":  "Registre d\u0027auditoria",
+                               "desc":  "Seguiment de cada canvi als vostres projectes amb marques de temps detallades."
+                           },
+                 "rbac":  {
+                              "title":  "AccÃ©s basat en rols",
+                              "desc":  "Control granular de permisos per a administradors, editors i visualitzadors."
+                          },
+                 "uptime":  {
+                                "title":  "99,99% de temps d\u0027activitat",
+                                "desc":  "Disponibilitat garantida amb la nostra CDN distribuÃ¯da globalment."
+                            }
+             },
+    "cta":  {
+                "heading":  "Llestos per comenÃ§ar?",
+                "btn_create":  "Crear compte",
+                "btn_docs":  "Llegir la documentaciÃ³"
+            },
+    "features":  {
+                     "list":  {
+                                  "speed":  {
+                                                "title":  "UltrarÃ pid",
+                                                "description":  "Rendiment optimitzat amb temps de cÃ rrega inferiors a 100ms. ConstruÃ¯t per a escala global amb infraestructura edge."
+                                            },
+                                  "design":  {
+                                                 "title":  "Disseny Modern",
+                                                 "description":  "InterfÃ­cie neta i responsiva amb aspecte professional en qualsevol dispositiu. Components totalment personalitzables."
+                                             },
+                                  "security":  {
+                                                   "title":  "Alta Seguretat",
+                                                   "description":  "Xifratge d\u0027extrem a extrem, autenticaciÃ³ multifactor i conformitat SOC2 per protegir les vostres dades."
+                                               }
+                              },
+                     "heading":  "CaracterÃ­stiques Clau",
+                     "subheading":  "Tot el que necessiteu per construir i escalar."
+                 }
+}

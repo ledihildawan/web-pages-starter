@@ -1,0 +1,56 @@
+{
+    "period_monthly":  "mÄ—n.",
+    "period_yearly":  "met.",
+    "hero":  {
+                 "badge":  "Pasirinkite planÄ…",
+                 "title_part1":  "Paprastos ir ",
+                 "title_highlight":  "skaidrios kainos",
+                 "description":  "JokiÅ³ paslÄ—ptÅ³ mokesÄiÅ³. JokiÅ³ netikÄ—tÅ³ iÅ¡laidÅ³. Pasirinkite planÄ…, geriausiai atitinkantÄ¯ JÅ«sÅ³ poreikius."
+             },
+    "toggle":  {
+                   "monthly":  "Kas mÄ—nesÄ¯",
+                   "yearly":  "Kas metus",
+                   "yearly_hint":  "apmokama kas metus",
+                   "discount":  "SUTAUPYKITE 20%",
+                   "aria_label":  "Perjungti kainodaros planÄ…"
+               },
+    "plans":  {
+                  "hobby":  {
+                                "name":  "Hobby",
+                                "desc":  "Puikiai tinka Å¡alutiniams projektams ir mokymuisi.",
+                                "btn":  "Nemokamai pradÄ—ti",
+                                "feature_0":  "1 projektas",
+                                "feature_1":  "BendruomenÄ—s pagalba",
+                                "feature_2":  "5 GB saugykla"
+                            },
+                  "pro":  {
+                              "name":  "Pro",
+                              "badge":  "Populiariausias",
+                              "desc":  "Profesionaliems kÅ«rÄ—jams ir maÅ¾oms komandoms.",
+                              "btn":  "Pasirinkti Pro planÄ…",
+                              "feature_0":  "Neriboti projektai",
+                              "feature_1":  "Prioritetinis el. paÅ¡to palaikymas",
+                              "feature_2":  "100 GB saugykla",
+                              "feature_3":  "IÅ¡sami analizÄ—"
+                          },
+                  "enterprise":  {
+                                     "name":  "Enterprise",
+                                     "desc":  "Didelio masto programoms ir organizacijoms.",
+                                     "btn":  "Susisiekti su pardavimais",
+                                     "feature_0":  "Visos Pro plano funkcijos",
+                                     "feature_1":  "Skirtas paskyros vadovas",
+                                     "feature_2":  "SSO ir audito Å¾urnalas",
+                                     "feature_3":  "Neribota saugykla"
+                                 }
+              },
+    "faq":  {
+                "title":  "DaÅ¾nai uÅ¾duodami klausimai",
+                "subtitle":  "Raskite atsakymus Ä¯ daÅ¾niausiai uÅ¾duodamus klausimus apie mÅ«sÅ³ planus ir paslaugas.",
+                "q_0":  "Ar galiu atÅ¡aukti bet kada?",
+                "a_0":  "Taip, galite atÅ¡aukti prenumeratÄ… bet kada. JÅ«sÅ³ prieiga iÅ¡liks aktyvi iki atsiskaitymo laikotarpio pabaigos.",
+                "q_1":  "Ar yra nemokama bandomoji versija?",
+                "a_1":  "SiÅ«lome 14 dienÅ³ nemokamÄ… bandomÄ…jÄ… versijÄ… Pro planui. PradÄ—ti nereikia kredito kortelÄ—s.",
+                "q_2":  "Kokios mokÄ—jimo priemonÄ—s yra prieinamos?",
+                "a_2":  "Priimame pagrindines kredito korteles ir PayPal. Enterprise planui palaikome banko pavedimus."
+            }
+}

@@ -1,0 +1,17 @@
+{
+    "meta":  {
+                 "page_title":  "Splide Lazy Load demo | Starter"
+             },
+    "hero":  {
+                 "slide_1":  {
+                                 "title":  "LenivÃ© naÄÃ­tanie prÃ­rody",
+                                 "subtitle":  "ObrÃ¡zky sa inteligentne naÄÃ­tavajÃº na Å¡etrenie dÃ¡t.",
+                                 "alt":  "KrÃ¡sna horskÃ¡ krajina"
+                             },
+                 "slide_2":  {
+                                 "title":  "VÃ½kon na prvom mieste",
+                                 "subtitle":  "NaÄÃ­tajte len to, Äo potrebujete.",
+                                 "alt":  "Krajina zasneÅ¾enÃ½ch hÃ´r"
+                             }
+             }
+}

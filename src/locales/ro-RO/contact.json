@@ -1,0 +1,47 @@
+{
+    "meta":  {
+                 "title":  "ContacteazÄƒ-ne | Starter App",
+                 "description":  "Ia legÄƒtura cu noi pentru Ã®ntrebÄƒri È™i suport."
+             },
+    "contact":  {
+                    "badge":  "Gata sÄƒ ajutÄƒm",
+                    "title_part1":  "SÄƒ ne conectÄƒm",
+                    "title_highlight":  "Ã®mpreunÄƒ",
+                    "description":  "Ai o Ã®ntrebare sau vrei sÄƒ colaborezi? Ne-ar face plÄƒcere sÄƒ auzim de la tine. Trimite un mesaj È™i vom rÄƒspunde Ã®n curÃ¢nd.",
+                    "form_title":  "Trimite un mesaj",
+                    "form_subtitle":  "CompleteazÄƒ formularul de mai jos È™i Ã®È›i vom rÄƒspunde Ã®n curÃ¢nd.",
+                    "social_title":  "UrmÄƒreÈ™te-ne",
+                    "social_subtitle":  "PrimeÈ™te cele mai recente actualizÄƒri prin canalele noastre sociale",
+                    "info":  {
+                                 "response_time":  {
+                                                       "title":  "RÄƒspuns rapid",
+                                                       "description":  "Ne strÄƒduim sÄƒ rÄƒspundem la fiecare mesaj Ã®n 24 de ore Ã®n zilele lucrÄƒtoare."
+                                                   },
+                                 "working_hours":  {
+                                                       "title":  "Ore de lucru",
+                                                       "description":  "Luni - vineri: 09:00 - 18:00. Weekenduri: cu prioritate."
+                                                   },
+                                 "support":  {
+                                                 "title":  "Suport continuu",
+                                                 "description":  "Echipa noastrÄƒ de suport este mereu pregÄƒtitÄƒ sÄƒ rezolve problemele tale tehnice."
+                                             }
+                             },
+                    "form":  {
+                                 "name":  "Nume",
+                                 "name_placeholder":  "Introdu numele tÄƒu",
+                                 "email":  "E-mail",
+                                 "email_placeholder":  "nume@email.ro",
+                                 "subject":  "Subiect",
+                                 "subject_placeholder":  "Ce ai vrea sÄƒ discuÈ›i?",
+                                 "message":  "Mesaj",
+                                 "message_placeholder":  "Spune-ne mai multe despre Ã®ntrebarea ta...",
+                                 "submit":  "Trimite mesaj"
+                             }
+                },
+    "email_label":  "E-mail",
+    "email_value":  "hello@starter.app",
+    "phone_label":  "Telefon",
+    "phone_value":  "+40 21 123 4567",
+    "location_label":  "LocaÈ›ie",
+    "location_value":  "BucureÈ™ti, RomÃ¢nia"
+}

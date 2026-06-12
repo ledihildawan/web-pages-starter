@@ -1,0 +1,72 @@
+{
+    "hero":  {
+                 "badge":  "Biz haqimizda",
+                 "title_part1":  "Ishq bilan ",
+                 "title_highlight":  "boshqariladigan",
+                 "description":  "Bizning sayohat oddiy g\u0027oyadan boshlandi."
+             },
+    "mission":  {
+                    "title":  "Bizning missiyamiz",
+                    "description":  "Dasturchilarni va biznesni ajoyib raqamli mahsulotlarni yaratish uchun nafis, tezkor va oson ishlatiladigan vositalar bilan ta\u0027minlash."
+                },
+    "vision":  {
+                   "title":  "Bizning viziyamiz",
+                   "description":  "Har bir kod satrida go\u0027zallik, unumdorlik va foydalanuvchi tajribasini qadrlaydigan zamonaviy dasturchilar uchun tanlangan platforma bo\u0027lish."
+               },
+    "story":  {
+                  "tag":  "Bizning hikoya",
+                  "visual_label":  "Ijodiy studiya illyustratsiyasi",
+                  "title":  "Ishq bilan boshqariladigan, \u003cbr\u003emukammallik bilan belgilangan.",
+                  "para1":  "Bizning sayohat oddiy g\u0027oyadan boshlandi: veb-taraqqiyotni hamma uchun qulay va qiziqarli qilish. Biz og\u0027ir freymvorklar va murakkab sozlamalardan charchagan edik.",
+                  "para2":  "Bugun biz â€” murakkab muammolarni nafis yechimlar bilan hal qilish uchun birga ishlaydigan turli xil muhandislar, dizaynerlar va mutafakkirlar jamoasi.",
+                  "val1":  "Foydalanuvchiga yo\u0027naltirilgan dizayn falsafasi",
+                  "val2":  "Unumdorlik-birinchi arxitektura",
+                  "val3":  "Shaffoflik va ochiq muloqot"
+              },
+    "values":  {
+                   "title":  "Bizning qadriyatlar",
+                   "subtitle":  "Har bir qarorimizga yo\u0027l ko\u0027rsatadigan tamoyillar."
+               },
+    "passion":  {
+                    "title":  "Ishq",
+                    "description":  "Biz nima qilsak, uni yaxshi ko\u0027ramiz va bu mahsulotimizning har bir tafsilotida ko\u0027rinadi."
+                },
+    "collaboration":  {
+                          "title":  "Hamkorlik",
+                          "description":  "Birgalikda ishlash eng yaxshi natijalarga olib keladi. Biz mustahkam jamoa kuchiga ishonamiz."
+                      },
+    "innovation":  {
+                       "title":  "Innovatsiya",
+                       "description":  "Muammolarni hal qilish va qadriyat yaratishning yaxshi yo\u0027llarini doimo qidiramiz."
+                   },
+    "integrity":  {
+                      "title":  "Halollik",
+                      "description":  "Rostgo\u0027ylik va shaffoflik â€” biz quradigan har bir munosabatning asosi."
+                  },
+    "excellence":  {
+                       "title":  "Mukammallik",
+                       "description":  "Biz yetarlicha yaxshi bilan to\u0027xtamaymiz. Doimo eng yaxshisiga intilamiz."
+                   },
+    "quality":  {
+                    "title":  "Sifat",
+                    "description":  "Toza kod, chiroyli dizayn va uzluksiz tajriba â€” bizning standartimiz."
+                },
+    "team":  {
+                 "title":  "Jamoa bilan tanishing",
+                 "subtitle":  "Yozgan har bir kod satrimiz ortidagi yorqin zehlar.",
+                 "alex_desc":  "SaaS ekotizimini rivojlantirishda 10+ yillik tajribaga bo\u0027lgan vizioner yetakchi.",
+                 "sarah_desc":  "Katta masshtabli tizim arxitekturasini qurishga ixtisoslashgan full-stack mutaxassis.",
+                 "mike_desc":  "Piksel tafsilotlari, silliq UX oqimlari va kirish imkoniyati standartlari bilan shug\u0027ullanadi.",
+                 "jessica_desc":  "Brendlarga raqamli dunyoda o\u0027z ovozlarini topishga yordam beruvchi ijodiy hikoyachi."
+             },
+    "stats":  {
+                  "years":  "Yillik tajriba",
+                  "years_val":  "3+",
+                  "clients":  "Global mijozlar",
+                  "clients_val":  "120+",
+                  "countries":  "Qamrab olingan davlatlar",
+                  "countries_val":  "15",
+                  "support":  "Mutaxassis yordam",
+                  "support_val":  "24/7"
+              }
+}

@@ -1,0 +1,203 @@
+{
+    "meta":  {
+                 "title":  "i18n teszt | Demo",
+                 "description":  "ÃtfogÃ³ tesztoldal a honosÃ­tÃ¡si funkciÃ³khoz"
+             },
+    "hero":  {
+                 "badge":  "i18n funkciÃ³k",
+                 "title":  "ÃtfogÃ³ \u003cspan class=\u0027text-violet-400\u0027\u003eteszt\u003c/span\u003e a honosÃ­tÃ¡srÃ³l",
+                 "description":  "Teszteljen minden i18n funkciÃ³t: fordÃ­tÃ¡s, tÃ¶bbes szÃ¡m, szÃ¡mformÃ¡zÃ¡s, pÃ©nznemek Ã©s pÃ©nznemvÃ¡ltÃ¡s."
+             },
+    "language_info":  {
+                          "title":  "AktuÃ¡lis nyelv informÃ¡ciÃ³i",
+                          "code":  "NyelvkÃ³d",
+                          "currency":  "PÃ©nznem",
+                          "direction":  "SzÃ¶vegirÃ¡ny",
+                          "digits":  "NatÃ­v szÃ¡mjegyek",
+                          "enabled":  "EngedÃ©lyezve",
+                          "disabled":  "Letiltva",
+                          "languages":  "Nyelvek",
+                          "switching":  "VÃ¡ltÃ¡s ÃºjratÃ¶ltÃ©s nÃ©lkÃ¼l",
+                          "current_code":  "hu",
+                          "current_currency":  "HUF",
+                          "current_direction":  "LTR (balrÃ³l jobbra)"
+                      },
+    "numbers":  {
+                    "title":  "SzÃ¡mformÃ¡zÃ¡s",
+                    "description":  "A szÃ¡mok az aktÃ­v lokalizÃ¡ciÃ³ szerint vannak formÃ¡zva.",
+                    "large":  "Nagy szÃ¡m",
+                    "decimal":  "Tizedes",
+                    "million":  "MilliÃ³",
+                    "percent":  "SzÃ¡zalÃ©k",
+                    "raw":  "Nyers"
+                },
+    "currency":  {
+                     "title":  "PÃ©nznemvÃ¡ltÃ¡s",
+                     "description":  "Ãrak HUF-ban az aktÃ­v nyelv pÃ©nznemÃ©re vÃ¡ltva.",
+                     "currencies":  "PÃ©nznemek",
+                     "small":  "Kicsi",
+                     "medium":  "KÃ¶zepes",
+                     "large":  "Nagy",
+                     "enterprise":  "Enterprise"
+                 },
+    "currency_comparison":  {
+                                "title":  "PÃ©nznemek Ã¶sszehasonlÃ­tÃ¡sa",
+                                "description":  "Ugyanaz az Ã¡r kÃ¼lÃ¶nbÃ¶zÅ‘ tÃ¡mogatott pÃ©nznemekben.",
+                                "base_price":  "AlapÃ¡r (USD)",
+                                "aed":  "EAE dirham",
+                                "aud":  "AusztrÃ¡l dollÃ¡r",
+                                "brl":  "Brazil real",
+                                "cad":  "Kanadai dollÃ¡r",
+                                "chf":  "SvÃ¡jci frank",
+                                "cny":  "KÃ­nai jÃ¼an",
+                                "eur":  "EurÃ³",
+                                "gbp":  "Brit font",
+                                "idr":  "RÃºpia",
+                                "inr":  "Indiai rÃºpia",
+                                "jpy":  "JapÃ¡n jen",
+                                "krw":  "Koreai won",
+                                "mxn":  "MexikÃ³i peso",
+                                "sar":  "SzaÃºdi riÃ¡l",
+                                "sgd":  "SzingapÃºri dollÃ¡r",
+                                "usd":  "Amerikai dollÃ¡r",
+                                "zar":  "DÃ©l-afrikai rand"
+                            },
+    "core":  {
+                 "title":  "AlapfunkciÃ³k",
+                 "description":  "FordÃ­tÃ¡s, tÃ¶bbes szÃ¡m Ã©s HTML tartalom."
+             },
+    "pluralization":  {
+                          "title":  "TÃ¶bbes szÃ¡m",
+                          "description":  "KÃ¼lÃ¶nbÃ¶zÅ‘ tÃ¶bbes szÃ¡mÃº alakok minden nyelvhez.",
+                          "item_title":  "Item (elem)",
+                          "user_title":  "User (felhasznÃ¡lÃ³)",
+                          "product_title":  "Product (termÃ©k)"
+                      },
+    "form":  {
+                 "title":  "Å°rlap lefordÃ­tott helyÅ‘rzÅ‘kkel",
+                 "description":  "A helyÅ‘rzÅ‘k Ã©s cÃ­mkÃ©k a nyelvi fÃ¡jlokbÃ³l szÃ¡rmaznak.",
+                 "name_label":  "NÃ©v",
+                 "name_placeholder":  "Add meg a teljes neved",
+                 "email_label":  "E-mail",
+                 "email_placeholder":  "pelda@email.hu",
+                 "message_label":  "Ãœzenet",
+                 "message_placeholder":  "Ãrd ide az Ã¼zeneted...",
+                 "submit":  "KÃ¼ldÃ©s"
+             },
+    "missing_keys":  {
+                         "title":  "HiÃ¡nyzÃ³ kulcsok kezelÃ©se",
+                         "description":  "A hiÃ¡nyzÃ³ fordÃ­tÃ¡si kulcsok szÃ¶gletes zÃ¡rÃ³jelben jelennek meg."
+                     },
+    "html_content":  {
+                         "title":  "HTML tartalom",
+                         "description":  "A fordÃ­tÃ¡sok tartalmazhatnak HTML cÃ­mkÃ©ket a formÃ¡zÃ¡shoz.",
+                         "example":  "Ez egy pÃ©lda szÃ¶veg \u003cspan class=\u0027text-emerald-400\u0027\u003eszÃ­nes kiemelÃ©ssel\u003c/span\u003e Ã©s \u003cstrong\u003efÃ©lkÃ¶vÃ©r szÃ¶veggel\u003c/strong\u003e.",
+                         "note":  "MegjegyzÃ©s: a HTML cÃ­mkÃ©knek a fordÃ­tÃ¡sokban egy tartalmazÃ³ elemen belÃ¼l kell lenniÃ¼k."
+                     },
+    "switcher":  {
+                     "title":  "Nyelv vÃ¡ltÃ¡sa",
+                     "description":  "Kattints az alÃ¡bbi gombra a nyelv vÃ¡ltÃ¡sÃ¡hoz, Ã©s nÃ©zd meg az Ã¶sszes i18n funkciÃ³t mÅ±kÃ¶dÃ©s kÃ¶zben."
+                 },
+    "advanced":  {
+                     "title":  "SpeciÃ¡lis formÃ¡zÃ¡s",
+                     "description":  "SpeciÃ¡lis formÃ¡zÃ¡si funkciÃ³k szÃ¡zalÃ©kokhoz, egysÃ©gekhez, bÃ¡jtokhoz, listÃ¡khoz Ã©s sorszÃ¡mokhoz.",
+                     "percentages":  "SzÃ¡zalÃ©kok",
+                     "units":  "EgysÃ©gek",
+                     "bytes":  "BÃ¡jtok",
+                     "bytes_unit":  "bÃ¡jt",
+                     "lists":  "ListÃ¡k",
+                     "ordinals":  "SorszÃ¡mok",
+                     "cardinals":  "TÅ‘szÃ¡mnevek",
+                     "scientific":  "TudomÃ¡nyos jelÃ¶lÃ©s",
+                     "abbreviated":  "RÃ¶vidÃ­tett",
+                     "date_formats":  "DÃ¡tumformÃ¡tumok",
+                     "time_formats":  "IdÅ‘formÃ¡tumok",
+                     "datetime":  "DÃ¡tum + idÅ‘",
+                     "durations":  "IdÅ‘tartamok",
+                     "relative_time":  "RelatÃ­v idÅ‘",
+                     "regional_pricing":  "RegionÃ¡lis Ã¡rak",
+                     "fifty_percent":  "Ã–tven szÃ¡zalÃ©k",
+                     "small_percent":  "Kis szÃ¡zalÃ©k",
+                     "ninety_nine":  "Kilencvenkilenc",
+                     "hundred":  "SzÃ¡z",
+                     "kilobyte":  "KilobÃ¡jt",
+                     "distance":  "TÃ¡volsÃ¡g",
+                     "temperature":  "HÅ‘mÃ©rsÃ©klet",
+                     "weight":  "SÃºly",
+                     "half_kb":  "FÃ©l KB",
+                     "one_and_half_kb":  "Egy Ã©s fÃ©l KB",
+                     "one_mb":  "Egy MB",
+                     "one_gb":  "Egy GB",
+                     "two_items":  "KÃ©t elem",
+                     "three_items":  "HÃ¡rom elem",
+                     "four_items":  "NÃ©gy elem",
+                     "date_short":  "RÃ¶vid dÃ¡tum",
+                     "date_long":  "HosszÃº dÃ¡tum",
+                     "time_short":  "RÃ¶vid idÅ‘",
+                     "time_long":  "HosszÃº idÅ‘",
+                     "day_ago":  "Napokkal ezelÅ‘tt",
+                     "months_ago":  "HÃ³napokkal ezelÅ‘tt",
+                     "hour_in":  "1 Ã³ra mÃºlva",
+                     "starter_plan":  "Starter csomag",
+                     "pro_plan":  "Pro csomag",
+                     "discount_20":  "20% kedvezmÃ©ny",
+                     "number_modes":  "SzÃ¡m mÃ³dok",
+                     "number_modes_desc":  "Ã–sszehasonlÃ­tÃ¡s a natÃ­v szÃ¡mjegyek (Ù Ù¡Ù¢Ù£Ù¤) Ã©s az univerzÃ¡lis (0-9) formÃ¡zÃ¡s kÃ¶zÃ¶tt.",
+                     "native_label":  "NatÃ­v szÃ¡mjegyek (Ù Ù¡Ù¢Ù£Ù¤)",
+                     "universal_label":  "UniverzÃ¡lis (0-9)",
+                     "plain_label":  "Automatikus"
+                 },
+    "template_macros":  {
+                            "title":  "Sablon makrÃ³k",
+                            "description":  "MakrÃ³k nyers Ã©rtÃ©kek lekÃ©rÃ©sÃ©hez HTML jelÃ¶lÃ©s nÃ©lkÃ¼l.",
+                            "raw_value":  "Nyers Ã©rtÃ©k jelÃ¶lÃ©s nÃ©lkÃ¼l",
+                            "current_year":  "Az aktuÃ¡lis Ã©v {{year}}"
+                        },
+    "datetime":  {
+                     "title":  "DÃ¡tum Ã©s idÅ‘",
+                     "description":  "KombinÃ¡lt dÃ¡tum Ã©s idÅ‘ formÃ¡tum.",
+                     "iso":  "ISO szabvÃ¡ny",
+                     "eve":  "Szenteste"
+                 },
+    "unit":  {
+                 "title":  "EgysÃ©g formÃ¡tum"
+             },
+    "native_digits":  {
+                          "title":  "NatÃ­v szÃ¡mjegyek",
+                          "description":  "Az ASCII szÃ¡mjegyeket tartalmazÃ³ szÃ¶veg natÃ­v szÃ¡mjegyekkÃ©nt jelenik meg, ha a lokalizÃ¡ciÃ³ engedÃ©lyezi. Ã‰lÅ‘ben frissÃ¼l nyelvvÃ¡ltÃ¡skor."
+                      },
+    "inflection":  {
+                       "title":  "Angol hajlÃ­tÃ¡s",
+                       "description":  "Angol tÃ¶bbes Ã©s egyes szÃ¡m. Ã‰lÅ‘ben frissÃ¼l nyelvvÃ¡ltÃ¡skor."
+                   },
+    "live_label":  "Ã‰lÅ‘",
+    "pricing_details":  {
+                            "title":  "Ãr rÃ©szletei",
+                            "description":  "Teljes folyamat: nyers Ã©rtÃ©k, pÃ©nznem kÃ³d, formÃ¡tum, kedvezmÃ©ny Ã©s Ã¡tvÃ¡ltÃ¡s.",
+                            "raw_value":  "Nyers Ã©rtÃ©k",
+                            "raw_currency":  "PÃ©nznem kÃ³d",
+                            "formatted":  "FormÃ¡zott",
+                            "discounted":  "20% kedvezmÃ©ny",
+                            "converted_usd":  "ÃtvÃ¡ltva USD-re"
+                        },
+    "live_update":  {
+                        "note":  "Figyeld meg, hogy minden szÃ¡m, dÃ¡tum Ã©s Ã¡r azonnal megvÃ¡ltozik, amikor nyelvet vÃ¡ltasz â€” az oldal ÃºjratÃ¶ltÃ©se nÃ©lkÃ¼l."
+                    },
+    "section_modes":  {
+                          "title":  "SzÃ¡m MÃ³dok",
+                          "description":  "HasonlÃ­tsa Ã¶ssze a natÃ­v szÃ¡mjegyeket, az univerzÃ¡lis formÃ¡tumot Ã©s az automatikus mÃ³dot az aktÃ­v lokalizÃ¡ciÃ³hoz."
+                      },
+    "section_systems":  {
+                            "title":  "ÃrÃ¡srendszerek",
+                            "description":  "Mind a 7 algoritmikus Ã©s 4 tovÃ¡bbi numerikus rendszer rendszerszinten, csatlakoztatott betÃ¶ltÅ‘kkel.",
+                            "note":  "Minden szÃ¡mrendszer (algoritmikus Ã©s numerikus) helyes natÃ­v szÃ¡mjegyeket jelenÃ­t meg ICU fallbackkel."
+                        },
+    "nav":  {
+                "translations":  "FordÃ­tÃ¡sok",
+                "formatting":  "SzÃ¡mok",
+                "pricing":  "Ãrak",
+                "modes":  "MÃ³dok",
+                "systems":  "Rendszerek",
+                "switcher":  "LokalitÃ¡s VÃ¡ltÃ¡sa"
+            }
+}

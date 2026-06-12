@@ -1,0 +1,17 @@
+{
+    "meta":  {
+                 "page_title":  "Demo de cÃ rrega diferida Splide | Starter"
+             },
+    "hero":  {
+                 "slide_1":  {
+                                 "title":  "CÃ rrega diferida de la natura",
+                                 "subtitle":  "Les imatges es carreguen de manera intelÂ·ligent per estalviar dades.",
+                                 "alt":  "Paisatge muntanyenc preciÃ³s"
+                             },
+                 "slide_2":  {
+                                 "title":  "Rendiment superior",
+                                 "subtitle":  "NomÃ©s carrega el que necessites.",
+                                 "alt":  "Paisatge de muntanyes nevades"
+                             }
+             }
+}

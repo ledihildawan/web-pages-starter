@@ -1,0 +1,17 @@
+{
+    "meta":  {
+                 "page_title":  "Splide Lazy Load Demosi | Starter"
+             },
+    "hero":  {
+                 "slide_1":  {
+                                 "title":  "Tabiat Lazy Load",
+                                 "subtitle":  "Rasmlar trafikni tejash uchun aqlli tarzda yuklanadi.",
+                                 "alt":  "Go\u0027zal tog\u0027 manzarasi"
+                             },
+                 "slide_2":  {
+                                 "title":  "Asosiy unumdorlik",
+                                 "subtitle":  "Faqat sizga kerak bo\u0027lgan narsani yuklaydi.",
+                                 "alt":  "Qorli tog\u0027 manzarasi"
+                             }
+             }
+}

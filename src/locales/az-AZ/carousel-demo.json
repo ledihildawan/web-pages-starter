@@ -1,0 +1,17 @@
+{
+    "meta":  {
+                 "page_title":  "Splide Lazy Load Demo | Starter"
+             },
+    "hero":  {
+                 "slide_1":  {
+                                 "title":  "TÉ™biÉ™t Lazy Load",
+                                 "subtitle":  "ÅžÉ™killÉ™r trafik qÉ™naÉ™t etmÉ™k Ã¼Ã§Ã¼n aÄŸÄ±llÄ± ÅŸÉ™kildÉ™ yÃ¼klÉ™nir.",
+                                 "alt":  "GÃ¶zÉ™l DaÄŸ MÉ™nzÉ™rÉ™si"
+                             },
+                 "slide_2":  {
+                                 "title":  "YÃ¼ksÉ™k Performans",
+                                 "subtitle":  "YalnÄ±z lazÄ±m olanÄ± yÃ¼klÉ™yir.",
+                                 "alt":  "QarlÄ± DaÄŸlar MÉ™nzÉ™rÉ™si"
+                             }
+             }
+}

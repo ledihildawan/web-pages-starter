@@ -1,0 +1,203 @@
+{
+    "meta":  {
+                 "title":  "i18n-test | Demo",
+                 "description":  "Uitgebreide testpagina voor internationalisatiefuncties"
+             },
+    "hero":  {
+                 "badge":  "i18n-functies",
+                 "title":  "Volledige \u003cspan class=\u0027text-violet-400\u0027\u003einternationalisatie\u003c/span\u003e-test",
+                 "description":  "Probeer alle i18n-functies: vertaling, meervoudsvormen, nummeropmaak, valuta en valutaconversie."
+             },
+    "language_info":  {
+                          "title":  "Huidige taalinformatie",
+                          "code":  "Taalcode",
+                          "currency":  "Valuta",
+                          "direction":  "Tekstrichting",
+                          "digits":  "Inheemse cijfers",
+                          "enabled":  "Ingeschakeld",
+                          "disabled":  "Uitgeschakeld",
+                          "languages":  "Talen",
+                          "switching":  "Wisselen zonder herladen",
+                          "current_code":  "nl",
+                          "current_currency":  "EUR",
+                          "current_direction":  "LTR (links naar rechts)"
+                      },
+    "numbers":  {
+                    "title":  "Nummeropmaak",
+                    "description":  "Nummers worden opgemaakt volgens de actieve taallocatie.",
+                    "large":  "Groot getal",
+                    "decimal":  "Decimaal",
+                    "million":  "Miljoen",
+                    "percent":  "Percentage",
+                    "raw":  "Onbewerkt"
+                },
+    "currency":  {
+                     "title":  "Valutaconversie",
+                     "description":  "Prijzen in EUR omgerekend naar de valuta van de actieve taal.",
+                     "currencies":  "Valuta\u0027s",
+                     "small":  "Klein",
+                     "medium":  "Middel",
+                     "large":  "Groot",
+                     "enterprise":  "Enterprise"
+                 },
+    "currency_comparison":  {
+                                "title":  "Valutavergelijking",
+                                "description":  "Dezelfde prijs in verschillende ondersteunde valuta\u0027s.",
+                                "base_price":  "Basisprijs (USD)",
+                                "aed":  "VAE-dirham",
+                                "aud":  "Australische dollar",
+                                "brl":  "Braziliaanse real",
+                                "cad":  "Canadese dollar",
+                                "chf":  "Zwitserse frank",
+                                "cny":  "Chinese yuan",
+                                "eur":  "Euro",
+                                "gbp":  "Pound sterling",
+                                "idr":  "Roepia",
+                                "inr":  "Indiase roepie",
+                                "jpy":  "Japanse yen",
+                                "krw":  "Koreaanse won",
+                                "mxn":  "Mexicaanse peso",
+                                "sar":  "Saoedi-riyal",
+                                "sgd":  "Singaporese dollar",
+                                "usd":  "Amerikaanse dollar",
+                                "zar":  "Zuid-Afrikaanse rand"
+                            },
+    "core":  {
+                 "title":  "Kernfuncties",
+                 "description":  "Vertaling, meervoudsvormen en HTML-inhoud."
+             },
+    "pluralization":  {
+                          "title":  "Meervoudsvormen",
+                          "description":  "Verschillende meervoudsvormen voor elke taal.",
+                          "item_title":  "Item (zelfstandig naamwoord)",
+                          "user_title":  "User (gebruiker)",
+                          "product_title":  "Product (product)"
+                      },
+    "form":  {
+                 "title":  "Formulier met vertaalde placeholders",
+                 "description":  "Placeholders en labels worden uit de taalbestanden gehaald.",
+                 "name_label":  "Naam",
+                 "name_placeholder":  "Voer uw volledige naam in",
+                 "email_label":  "E-mail",
+                 "email_placeholder":  "voorbeeld@email.com",
+                 "message_label":  "Bericht",
+                 "message_placeholder":  "Schrijf hier uw bericht...",
+                 "submit":  "Versturen"
+             },
+    "missing_keys":  {
+                         "title":  "Ontbrekende sleutels afhandeling",
+                         "description":  "Niet-gevonden vertaalsleutels worden tussen vierkante haken weergegeven."
+                     },
+    "html_content":  {
+                         "title":  "HTML-inhoud",
+                         "description":  "Vertalingen kunnen HTML-tags voor opmaak bevatten.",
+                         "example":  "Dit is een voorbeeldtekst met \u003cspan class=\u0027text-emerald-400\u0027\u003ekleurnadruk\u003c/span\u003e en \u003cstrong\u003evetgedrukte tekst\u003c/strong\u003e.",
+                         "note":  "Opmerking: HTML-tags in vertalingen moeten binnen Ã©Ã©n omhullend element staan."
+                     },
+    "switcher":  {
+                     "title":  "Taal wisselen",
+                     "description":  "Klik op de knop hieronder om de taal te wisselen en alle i18n-functies in actie te zien."
+                 },
+    "advanced":  {
+                     "title":  "Geavanceerde opmaak",
+                     "description":  "Geavanceerde opmaakfuncties voor percentages, eenheden, bytes, lijsten en rangtelwoorden.",
+                     "percentages":  "Percentages",
+                     "units":  "Eenheden",
+                     "bytes":  "Bytes",
+                     "bytes_unit":  "byte",
+                     "lists":  "Lijsten",
+                     "ordinals":  "Rangtelwoorden",
+                     "cardinals":  "Hoofdtelwoorden",
+                     "scientific":  "Wetenschappelijke notatie",
+                     "abbreviated":  "Afgekort",
+                     "date_formats":  "Datumopmaak",
+                     "time_formats":  "Tijdopmaak",
+                     "datetime":  "Datum + tijd",
+                     "durations":  "Durations",
+                     "relative_time":  "Relatieve tijd",
+                     "regional_pricing":  "Regionale prijzen",
+                     "fifty_percent":  "Vijftig procent",
+                     "small_percent":  "Klein percentage",
+                     "ninety_nine":  "Negenennegentig",
+                     "hundred":  "Honderd",
+                     "kilobyte":  "Kilobyte",
+                     "distance":  "Afstand",
+                     "temperature":  "Temperatuur",
+                     "weight":  "Gewicht",
+                     "half_kb":  "Halve KB",
+                     "one_and_half_kb":  "Anderhalve KB",
+                     "one_mb":  "EÃ©n MB",
+                     "one_gb":  "EÃ©n GB",
+                     "two_items":  "Twee items",
+                     "three_items":  "Drie items",
+                     "four_items":  "Vier items",
+                     "date_short":  "Korte datum",
+                     "date_long":  "Lange datum",
+                     "time_short":  "Korte tijd",
+                     "time_long":  "Lange tijd",
+                     "day_ago":  "Dagen geleden",
+                     "months_ago":  "Maanden geleden",
+                     "hour_in":  "Over 1 uur",
+                     "starter_plan":  "Starter-plan",
+                     "pro_plan":  "Pro-plan",
+                     "discount_20":  "20% korting",
+                     "number_modes":  "Nummerstanden",
+                     "number_modes_desc":  "Vergelijking van inheemse cijferopmaak (Ù Ù¡Ù¢Ù£Ù¤) en universele opmaak (0-9).",
+                     "native_label":  "Inheemse cijfers (Ù Ù¡Ù¢Ù£Ù¤)",
+                     "universal_label":  "Universeel (0-9)",
+                     "plain_label":  "Automatisch"
+                 },
+    "template_macros":  {
+                            "title":  "Sjabloonmacro\u0027s",
+                            "description":  "Macro\u0027s om onbewerkte waarden te krijgen zonder HTML-opmaak.",
+                            "raw_value":  "Onbewerkte waarde zonder opmaak",
+                            "current_year":  "Het huidige jaar is {{year}}"
+                        },
+    "datetime":  {
+                     "title":  "Datum \u0026 tijd",
+                     "description":  "Gecombineerde datum- en tijdopmaak.",
+                     "iso":  "ISO-standaard",
+                     "eve":  "Kerstavond"
+                 },
+    "unit":  {
+                 "title":  "Eenheidsopmaak"
+             },
+    "native_digits":  {
+                          "title":  "Inheemse cijfers",
+                          "description":  "Tekst met ASCII-cijfers wordt weergegeven in inheemse cijfers wanneer de taal dit activeert. Direct bijgewerkt bij taalwisseling."
+                      },
+    "inflection":  {
+                       "title":  "Engelse verbuigingen",
+                       "description":  "Engelse meervouds- en enkelvoudsvorming. Direct bijgewerkt bij taalwisseling."
+                   },
+    "live_label":  "Live",
+    "pricing_details":  {
+                            "title":  "Prijsdetails",
+                            "description":  "Volledige pijplijn: onbewerkte waarde, valutacode, opmaak, korting en conversie.",
+                            "raw_value":  "Onbewerkte waarde",
+                            "raw_currency":  "Valutacode",
+                            "formatted":  "Opgemaakt",
+                            "discounted":  "20% korting",
+                            "converted_usd":  "Conversie naar USD"
+                        },
+    "live_update":  {
+                        "note":  "Merk op dat alle cijfers, datums en prijzen onmiddellijk veranderen wanneer u van taal wisselt â€” zonder de pagina te herladen."
+                    },
+    "section_modes":  {
+                          "title":  "Nummer Modi",
+                          "description":  "Vergelijk native cijfers, universeel formaat en automatische modus voor de actieve landinstelling."
+                      },
+    "section_systems":  {
+                            "title":  "Schriftsystemen",
+                            "description":  "Alle 7 algoritmische en 4 extra numerieke systemen op systeemniveau, met aangesloten lettertype-laders.",
+                            "note":  "Alle getalsystemen (algoritmisch en numeriek) tonen correcte native cijfers met ICU-fallback."
+                        },
+    "nav":  {
+                "translations":  "Vertalingen",
+                "formatting":  "Cijfers",
+                "pricing":  "Prijzen",
+                "modes":  "Modi",
+                "systems":  "Systemen",
+                "switcher":  "Wijzig Landinstelling"
+            }
+}

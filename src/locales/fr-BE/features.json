@@ -1,0 +1,75 @@
+{
+    "hero":  {
+                 "badge":  "Puissance sous le capot",
+                 "title_part1":  "Tout ce dont vous avez besoin pour",
+                 "title_highlight":  "Ã©voluer plus vite",
+                 "description":  "Des analyses puissantes aux intÃ©grations transparentes, nous fournissons la boÃ®te Ã  outils dont vous avez besoin pour construire des applications de classe mondiale sans les maux de tÃªte."
+             },
+    "sections":  {
+                     "sync":  {
+                                  "title":  "Synchronisation en Temps RÃ©el",
+                                  "description":  "Les modifications se propagent instantanÃ©ment sur tous les appareils. Que vos utilisateurs soient sur mobile, ordinateur de bureau ou tablette, ils voient les mÃªmes donnÃ©es exactement au mÃªme moment.",
+                                  "check_0":  "Latence de sous-millisecondes",
+                                  "check_1":  "Support hors ligne prÃªt Ã  l\u0027emploi",
+                                  "check_2":  "Gestion de la rÃ©solution des conflits"
+                              },
+                     "analytics":  {
+                                       "title":  "Analyses Actionnables",
+                                       "description":  "Ne volez pas Ã  l\u0027aveugle. Obtenez des informations approfondies sur le comportement des utilisateurs, les performances du systÃ¨me et les mÃ©triques de revenus. Visualisez vos donnÃ©es avec des graphiques interactifs magnifiques.",
+                                       "check_0":  "Tableaux de bord personnalisables",
+                                       "check_1":  "Exporter en PDF, CSV ou Excel",
+                                       "check_2":  "Rapports hebdomadaires automatisÃ©s"
+                                   }
+                 },
+    "more_title":  "Et bien plus encore...",
+    "more_subtitle":  "Explorez les capacitÃ©s supplÃ©mentaires qui font ressortir votre application.",
+    "more":  {
+                 "dark_mode":  {
+                                   "title":  "Mode Sombre",
+                                   "desc":  "Support intÃ©grÃ© pour les thÃ¨mes clairs et sombres avec dÃ©tection automatique du systÃ¨me."
+                               },
+                 "api_first":  {
+                                   "title":  "API d\u0027Abord",
+                                   "desc":  "API REST et GraphQL disponibles pour un contrÃ´le programmatique complet."
+                               },
+                 "sso":  {
+                             "title":  "Connexion SSO",
+                             "desc":  "Support de connexion unique de niveau entreprise pour Google, GitHub et Okta."
+                         },
+                 "audit":  {
+                               "title":  "Journaux d\u0027Audit",
+                               "desc":  "Suivez chaque modification apportÃ©e Ã  votre projet avec des horodatages dÃ©taillÃ©s."
+                           },
+                 "rbac":  {
+                              "title":  "AccÃ¨s BasÃ© sur les RÃ´les",
+                              "desc":  "ContrÃ´les d\u0027autorisation granulaires pour les administrateurs, Ã©diteurs et spectateurs."
+                          },
+                 "uptime":  {
+                                "title":  "99.99% de DisponibilitÃ©",
+                                "desc":  "DisponibilitÃ© garantie avec notre CDN distribuÃ©e mondialement."
+                            }
+             },
+    "cta":  {
+                "heading":  "PrÃªt Ã  commencer?",
+                "btn_create":  "CrÃ©er un Compte",
+                "btn_docs":  "Lire la Documentation"
+            },
+    "features":  {
+                     "list":  {
+                                  "speed":  {
+                                                "title":  "Foudroyant",
+                                                "description":  "Performance optimisÃ©e avec des temps de chargement infÃ©rieurs Ã  100 ms. ConÃ§u pour une Ã©chelle mondiale avec une infrastructure edge."
+                                            },
+                                  "design":  {
+                                                 "title":  "Design Moderne",
+                                                 "description":  "Interface Ã©purÃ©e et rÃ©active d\u0027allure professionnelle sur tout appareil. Composants entiÃ¨rement personnalisables."
+                                             },
+                                  "security":  {
+                                                   "title":  "Haute SÃ©curitÃ©",
+                                                   "description":  "Chiffrement de bout en bout, authentification multi-facteurs et conformitÃ© SOC2 pour protÃ©ger vos donnÃ©es."
+                                               }
+                              },
+                     "heading":  "FonctionnalitÃ©s ClÃ©s",
+                     "subheading":  "Tout ce dont vous avez besoin pour construire et Ã©voluer."
+                 }
+}

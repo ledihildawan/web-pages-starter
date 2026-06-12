@@ -1,0 +1,102 @@
+{
+    "about":  {
+                  "badge":  "O nÃ¡s"
+              },
+    "hero":  {
+                 "badge":  "O nÃ¡s",
+                 "title_part1":  "TvoÅ™Ã­me ",
+                 "title_highlight":  "digitÃ¡lnÃ­ budoucnost",
+                 "description":  "ZaloÅ¾eno v roce 2024, Starter pomÃ¡hÃ¡ vÃ½vojÃ¡Å™Å¯m stavÄ›t lepÅ¡Ã­ aplikace rychleji. VÄ›Å™Ã­me v sÃ­lu ÄistÃ©ho kÃ³du, krÃ¡snÃ©ho designu a spoluprÃ¡ce open source.",
+                 "primary_btn":  {
+                                     "label":  "ZaÄnÄ›te zdarma",
+                                     "url":  "#pricing"
+                                 },
+                 "secondary_btn":  {
+                                       "label":  "Zobrazit demo",
+                                       "url":  "#features"
+                                   },
+                 "note":  "NevyÅ¾aduje kreditnÃ­ kartu"
+             },
+    "stats":  {
+                  "community":  "GlobÃ¡lnÃ­ komunita",
+                  "community_val":  "50K+",
+                  "projects":  "DokonÄenÃ½ch projektÅ¯",
+                  "projects_val":  "120+",
+                  "uptime":  "Dostupnost",
+                  "uptime_val":  "99.99%",
+                  "rating":  "HodnocenÃ­",
+                  "rating_val":  "4.9/5"
+              },
+    "story":  {
+                  "tag":  "NÃ¡Å¡ pÅ™Ã­bÄ›h",
+                  "visual_label":  "Ilustrace kreativnÃ­ho studia",
+                  "title":  "PohÃ¡nÄ›ni vÃ¡Å¡nÃ­, \u003cbr\u003edefinovÃ¡ni dokonalostÃ­.",
+                  "para1":  "NaÅ¡e cesta zaÄala jednoduchÃ½m nÃ¡padem: udÄ›lat webovÃ½ vÃ½voj pÅ™Ã­stupnÃ½ a zÃ¡bavnÃ½ pro vÅ¡echny. MÄ›li jsme dost tÄ›Å¾kÃ½ch frameworkÅ¯ a komplikovanÃ½ch nastavenÃ­.",
+                  "para2":  "Dnes jsme rozmanitÃ½ tÃ½m inÅ¾enÃ½rÅ¯, designÃ©rÅ¯ a myslitelÅ¯, kteÅ™Ã­ spolupracujÃ­ na Å™eÅ¡enÃ­ sloÅ¾itÃ½ch problÃ©mÅ¯ elegantnÃ­mi Å™eÅ¡enÃ­mi.",
+                  "val1":  "Filozofie designu zamÄ›Å™enÃ¡ na uÅ¾ivatele",
+                  "val2":  "Architektura s dÅ¯razem na vÃ½kon",
+                  "val3":  "Transparentnost a otevÅ™enÃ¡ komunikace"
+              },
+    "mission":  {
+                    "title":  "NaÅ¡e mise",
+                    "description":  "Poskytnout vÃ½vojÃ¡Å™Å¯m a firmÃ¡m elegantnÃ­, rychlÃ© a snadno pouÅ¾itelnÃ© nÃ¡stroje pro vytvÃ¡Å™enÃ­ vÃ½jimeÄnÃ½ch digitÃ¡lnÃ­ch produktÅ¯."
+                },
+    "vision":  {
+                   "title":  "NaÅ¡e vize",
+                   "description":  "StÃ¡t se preferovanou platformou pro modernÃ­ vÃ½vojÃ¡Å™e, kteÅ™Ã­ si cenÃ­ krÃ¡sy, vÃ½konu a uÅ¾ivatelskÃ© zkuÅ¡enosti v kaÅ¾dÃ©m Å™Ã¡dku kÃ³du."
+               },
+    "values":  {
+                   "title":  "NaÅ¡e hodnoty",
+                   "subtitle":  "Principy, kterÃ© vedou kaÅ¾dÃ© naÅ¡e rozhodnutÃ­."
+               },
+    "passion":  {
+                    "title":  "VÃ¡Å¡eÅˆ",
+                    "description":  "Milujeme to, co dÄ›lÃ¡me, a je to vidÄ›t v kaÅ¾dÃ©m detailu naÅ¡ich produktÅ¯."
+                },
+    "collaboration":  {
+                          "title":  "SpoluprÃ¡ce",
+                          "description":  "SpoleÄnÃ¡ prÃ¡ce pÅ™inÃ¡Å¡Ã­ nejlepÅ¡Ã­ vÃ½sledky. VÄ›Å™Ã­me v sÃ­lu silnÃ©ho tÃ½mu."
+                      },
+    "innovation":  {
+                       "title":  "Innova",
+                       "description":  "VÅ¾dy hledÃ¡me lepÅ¡Ã­ zpÅ¯soby, jak Å™eÅ¡it problÃ©my a vytvÃ¡Å™et hodnotu."
+                   },
+    "integrity":  {
+                      "title":  "Integrita",
+                      "description":  "ÄŒestnost a transparentnost jsou zÃ¡kladem kaÅ¾dÃ©ho vztahu, kterÃ½ budujeme."
+                  },
+    "excellence":  {
+                       "title":  "Dokonalost",
+                       "description":  "NespokojÃ­me se s â€ždost dobrÃ½m\". VÅ¾dy usilujeme o to nejlepÅ¡Ã­."
+                   },
+    "quality":  {
+                    "title":  "Kvalita",
+                    "description":  "ÄŒistÃ½ kÃ³d, krÃ¡snÃ½ design a bezproblÃ©movÃ½ zÃ¡Å¾itek jsou naÅ¡Ã­m standardem."
+                },
+    "team":  {
+                 "title":  "Seznamte se s tÃ½mem",
+                 "subtitle":  "BystrÃ© mysli za kaÅ¾dÃ½m Å™Ã¡dkem kÃ³du, kterÃ½ pÃ­Å¡eme.",
+                 "alex_desc":  "VizionÃ¡Å™skÃ½ lÃ­dr s vÃ­ce neÅ¾ 10 lety zkuÅ¡enostÃ­ s vÃ½vojem ekosystÃ©mÅ¯ SaaS.",
+                 "sarah_desc":  "Fullstack mÃ¡ga specializujÃ­cÃ­ se na budovÃ¡nÃ­ rozsÃ¡hlÃ© systÃ©movÃ© architektury.",
+                 "mike_desc":  "PosedlÃ½ detaily pixelÅ¯, hladkÃ½mi UX toky a standardy pÅ™Ã­stupnosti.",
+                 "jessica_desc":  "KreativnÃ­ vypravÄ›Äka, kterÃ¡ pomÃ¡hÃ¡ znaÄkÃ¡m najÃ­t jejich jedineÄnÃ½ hlas v digitÃ¡lnÃ­m svÄ›tÄ›."
+             },
+    "features":  {
+                     "list":  {
+                                  "speed":  {
+                                                "title":  "BleskovÄ› rychlÃ½",
+                                                "description":  "OptimalizovanÃ½ vÃ½kon s dobou naÄÃ­tÃ¡nÃ­ pod 100 ms. Postaveno pro globÃ¡lnÃ­ Å¡kÃ¡lovÃ¡nÃ­ s edge infrastrukturou."
+                                            },
+                                  "design":  {
+                                                 "title":  "ModernÃ­ design",
+                                                 "description":  "ÄŒistÃ©, responzivnÃ­ rozhranÃ­, kterÃ© vypadÃ¡ profesionÃ¡lnÄ› na kaÅ¾dÃ©m zaÅ™Ã­zenÃ­. PlnÄ› pÅ™izpÅ¯sobitelnÃ© komponenty."
+                                             },
+                                  "security":  {
+                                                   "title":  "VysokÃ¡ bezpeÄnost",
+                                                   "description":  "KomplexnÃ­ Å¡ifrovÃ¡nÃ­, vÃ­cefaktorovÃ¡ autentizace a soulad se SOC2 pro ochranu vaÅ¡ich dat."
+                                               }
+                              },
+                     "heading":  "KlÃ­ÄovÃ© funkce",
+                     "subheading":  "VÅ¡e, co potÅ™ebujete pro stavbu a Å¡kÃ¡lovÃ¡nÃ­."
+                 }
+}

@@ -1,0 +1,56 @@
+{
+    "period_monthly":  "mois",
+    "period_yearly":  "an",
+    "hero":  {
+                 "title_part1":  "Tarifs simples, ",
+                 "title_highlight":  "transparents",
+                 "description":  "Aucuns frais cachÃ©s. Aucunes charges surprise. Choisissez le plan qui correspond parfaitement Ã  vos besoins.",
+                 "badge":  "Choisissez un forfait"
+             },
+    "toggle":  {
+                   "monthly":  "Mensuel",
+                   "yearly":  "Annuel",
+                   "yearly_hint":  "facturÃ© annuellement",
+                   "discount":  "Ã‰CONOMISEZ 20%",
+                   "aria_label":  "Toggle Pricing Plan"
+               },
+    "plans":  {
+                  "hobby":  {
+                                "name":  "Hobby",
+                                "desc":  "Parfait pour les projets personnels et l\u0027apprentissage.",
+                                "btn":  "Commencer",
+                                "feature_0":  "1 Projet",
+                                "feature_1":  "Support Communautaire",
+                                "feature_2":  "5GB de Stockage"
+                            },
+                  "pro":  {
+                              "name":  "Pro",
+                              "badge":  "Plus Populaire",
+                              "desc":  "Pour les dÃ©veloppeurs professionnels et les petites Ã©quipes.",
+                              "btn":  "Obtenir Pro Maintenant",
+                              "feature_0":  "Projets IllimitÃ©s",
+                              "feature_1":  "Support Courriel Prioritaire",
+                              "feature_2":  "100GB de Stockage",
+                              "feature_3":  "Analyses AvancÃ©es"
+                          },
+                  "enterprise":  {
+                                     "name":  "Enterprise",
+                                     "desc":  "Pour les applications Ã  grande Ã©chelle et les organisations.",
+                                     "btn":  "Contacter les Ventes",
+                                     "feature_0":  "Tout dans Pro",
+                                     "feature_1":  "Manager DÃ©diÃ©",
+                                     "feature_2":  "SSO et Journaux d\u0027Audit",
+                                     "feature_3":  "Stockage IllimitÃ©"
+                                 }
+              },
+    "faq":  {
+                "title":  "Questions FrÃ©quentes",
+                "subtitle":  "Trouvez des rÃ©ponses aux questions les plus frÃ©quentes sur nos plans et services.",
+                "q_0":  "Puis-je annuler Ã  tout moment?",
+                "a_0":  "Oui, vous pouvez annuler votre abonnement Ã  tout moment. Votre accÃ¨s continuera jusqu\u0027Ã  la fin de votre pÃ©riode de facturation.",
+                "q_1":  "Offrez-vous un essai gratuit?",
+                "a_1":  "Nous offrons un essai gratuit de 14 jours pour le plan Pro. Aucune carte de crÃ©dit requise pour commencer.",
+                "q_2":  "Quelles mÃ©thodes de paiement acceptez-vous?",
+                "a_2":  "Nous acceptons toutes les cartes de crÃ©dit principales (Visa, Mastercard, Amex) et PayPal. Pour les plans Enterprise, nous supportons les virements bancaires."
+            }
+}

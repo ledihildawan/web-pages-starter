@@ -1,0 +1,47 @@
+{
+    "meta":  {
+                 "title":  "SazinÄties ar mums | Starter App",
+                 "description":  "SazinÄties ar mums jautÄjumu un atbalsta jautÄjumos."
+             },
+    "contact":  {
+                    "badge":  "Gatavi palÄ«dzÄ“t",
+                    "title_part1":  "Ä»aujiet ",
+                    "title_highlight":  "sazinÄties",
+                    "description":  "Vai Jums ir jautÄjumi vai vÄ“laties sadarboties? MÄ“s priecÄsimies dzirdÄ“t no Jums. NosÅ«tiet ziÅ†ojumu un mÄ“s drÄ«z atbildÄ“sim.",
+                    "form_title":  "NosÅ«tÄ«t ziÅ†ojumu",
+                    "form_subtitle":  "Aizpildiet zemÄk redzamo formu un mÄ“s drÄ«z atbildÄ“sim.",
+                    "social_title":  "Sekojiet mums",
+                    "social_subtitle":  "SaÅ†emiet jaunÄkos atjauninÄjumus caur mÅ«su sociÄlajiem tÄ«kliem",
+                    "info":  {
+                                 "response_time":  {
+                                                       "title":  "Ä€tra atbilde",
+                                                       "description":  "MÄ“s centÄ«simies atbildÄ“t uz katru ziÅ†ojumu 24 stundu laikÄ darba dienÄs."
+                                                   },
+                                 "working_hours":  {
+                                                       "title":  "Darba laiks",
+                                                       "description":  "Pirmdiena â€“ Piektdiena: 09:00 â€“ 18:00. BrÄ«vdienÄs: pÄ“c prioritÄtes."
+                                                   },
+                                 "support":  {
+                                                 "title":  "PastÄvÄ«gs atbalsts",
+                                                 "description":  "MÅ«su atbalsta komanda vienmÄ“r ir gatava palÄ«dzÄ“t atrisinÄt JÅ«su tehniskÄs problÄ“mas."
+                                             }
+                             },
+                    "form":  {
+                                 "name":  "VÄrds",
+                                 "name_placeholder":  "Ievadiet savu vÄrdu",
+                                 "email":  "E-pasts",
+                                 "email_placeholder":  "vards@epasts.lv",
+                                 "subject":  "TÄ“ma",
+                                 "subject_placeholder":  "Par ko vÄ“laties runÄt?",
+                                 "message":  "ZiÅ†ojums",
+                                 "message_placeholder":  "PastÄstiet vairÄk par JÅ«su jautÄjumu...",
+                                 "submit":  "NosÅ«tÄ«t ziÅ†ojumu"
+                             }
+                },
+    "email_label":  "E-pasts",
+    "email_value":  "hello@starter.app",
+    "phone_label":  "TÄlrunis",
+    "phone_value":  "+371 612 34567",
+    "location_label":  "Vieta",
+    "location_value":  "RÄ«ga, Latvija"
+}

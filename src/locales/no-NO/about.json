@@ -1,0 +1,72 @@
+{
+    "hero":  {
+                 "badge":  "Om oss",
+                 "title_part1":  "Drevet av ",
+                 "title_highlight":  "lidenskap",
+                 "description":  "Reisen vÃ¥r startet med en enkel idÃ©."
+             },
+    "mission":  {
+                    "title":  "VÃ¥r misjon",
+                    "description":  "Ã… gi utviklere og bedrifter elegante, raske og brukervennlige verktÃ¸y for Ã¥ bygge eksepsjonelle digitale produkter."
+                },
+    "vision":  {
+                   "title":  "VÃ¥r visjon",
+                   "description":  "Ã… bli den foretrukne plattformen for moderne utviklere som verdsetter skjÃ¸nnhet, ytelse og brukeropplevelse i hver kodelinje."
+               },
+    "story":  {
+                  "tag":  "VÃ¥r historie",
+                  "visual_label":  "Kreativ studioillustrasjon",
+                  "title":  "Drevet av lidenskap, \u003cbr\u003edefinert av fremragenhet.",
+                  "para1":  "Reisen vÃ¥r startet med en enkel idÃ©: gjÃ¸re webutvikling tilgjengelig og morsom for alle. Vi var lei av tunge rammeverk og kompliserte oppsett.",
+                  "para2":  "I dag er vi et mangfoldig team av ingeniÃ¸rer, designere og tenkere som jobber sammen for Ã¥ lÃ¸se komplekse problemer med elegante lÃ¸sninger.",
+                  "val1":  "Brukersentrert designfilosofi",
+                  "val2":  "Performance-first-arkitektur",
+                  "val3":  "Ã…penhet og Ã¥pen kommunikasjon"
+              },
+    "values":  {
+                   "title":  "VÃ¥re verdier",
+                   "subtitle":  "Prinsippene som veileder hver avgjÃ¸relse vi tar."
+               },
+    "passion":  {
+                    "title":  "Lidenskap",
+                    "description":  "Vi elsker det vi gjÃ¸r, og det viser seg i hver detalj i produktene vÃ¥re."
+                },
+    "collaboration":  {
+                          "title":  "Samarbeid",
+                          "description":  "Ã… jobbe sammen gir de beste resultatene. Vi tror pÃ¥ kraften i et sterkt team."
+                      },
+    "innovation":  {
+                       "title":  "Innovasjon",
+                       "description":  "Vi ser alltid etter bedre mÃ¥ter Ã¥ lÃ¸se problemer og skape verdi."
+                   },
+    "integrity":  {
+                      "title":  "Integritet",
+                      "description":  "Ã†rlighet og Ã¥penhet er grunnlaget for hver relasjon vi bygger."
+                  },
+    "excellence":  {
+                       "title":  "Kvalitet",
+                       "description":  "Vi nÃ¸yer oss ikke med \u0027godt nok\u0027. Vi streber alltid etter det beste."
+                   },
+    "quality":  {
+                    "title":  "Kvalitet",
+                    "description":  "Ren kode, vakkert design og sÃ¸mlÃ¸s opplevelse er vÃ¥r standard."
+                },
+    "team":  {
+                 "title":  "MÃ¸t teamet",
+                 "subtitle":  "De skarpe hodene bak hver kodelinje vi skriver.",
+                 "alex_desc":  "VisjonÃ¦r leder med over 10 Ã¥rs erfaring innen utvikling av SaaS-Ã¸kosystemer.",
+                 "sarah_desc":  "Fullstack-magi spesialisert i Ã¥ bygge storskala systemarkitektur.",
+                 "mike_desc":  "Besatt av pikseldetaljer, jevne UX-flyter og tilgjengelighetsstandarder.",
+                 "jessica_desc":  "Kreativ historieforteller som hjelper merkevarer Ã¥ finne sin unike stemme i den digitale verden."
+             },
+    "stats":  {
+                  "years":  "Ã…rs erfaring",
+                  "years_val":  "3+",
+                  "clients":  "Globale kunder",
+                  "clients_val":  "120+",
+                  "countries":  "Land",
+                  "countries_val":  "15",
+                  "support":  "EkspertstÃ¸tte",
+                  "support_val":  "24/7"
+              }
+}

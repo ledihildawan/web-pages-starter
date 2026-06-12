@@ -1,0 +1,102 @@
+{
+    "about":  {
+                  "badge":  "Om oss"
+              },
+    "hero":  {
+                 "badge":  "Om oss",
+                 "title_part1":  "Vi skapar den ",
+                 "title_highlight":  "digitala framtiden",
+                 "description":  "Grundat 2024 hjÃ¤lper Starter utvecklare att bygga bÃ¤ttre applikationer snabbare. Vi tror pÃ¥ kraften i ren kod, vacker design och Ã¶ppen kÃ¤llkod-samarbete.",
+                 "primary_btn":  {
+                                     "label":  "Kom igÃ¥ng gratis",
+                                     "url":  "#pricing"
+                                 },
+                 "secondary_btn":  {
+                                       "label":  "Se demo",
+                                       "url":  "#features"
+                                   },
+                 "note":  "Inget kreditkort krÃ¤vs"
+             },
+    "stats":  {
+                  "community":  "Global gemenskap",
+                  "community_val":  "50K+",
+                  "projects":  "GenomfÃ¶rda projekt",
+                  "projects_val":  "120+",
+                  "uptime":  "Drifttid",
+                  "uptime_val":  "99.99%",
+                  "rating":  "Betyg",
+                  "rating_val":  "4.9/5"
+              },
+    "story":  {
+                  "tag":  "VÃ¥r historia",
+                  "visual_label":  "Kreativ studioillustration",
+                  "title":  "Drivna av passion, \u003cbr\u003edefinierade av kvalitet.",
+                  "para1":  "VÃ¥r resa bÃ¶rjade med en enkel idÃ©: gÃ¶ra webbutveckling tillgÃ¤nglig och rolig fÃ¶r alla. Vi var trÃ¶tta pÃ¥ tunga ramverk och komplicerade instÃ¤llningar.",
+                  "para2":  "Idag Ã¤r vi ett mÃ¥ngsidigt team av ingenjÃ¶rer, designers och tÃ¤nkare som arbetar tillsammans fÃ¶r att lÃ¶sa komplexa problem med eleganta lÃ¶sningar.",
+                  "val1":  "AnvÃ¤ndarcentrerad designfilosofi",
+                  "val2":  "Performance-first-arkitektur",
+                  "val3":  "Transparens och Ã¶ppen kommunikation"
+              },
+    "mission":  {
+                    "title":  "VÃ¥rt uppdrag",
+                    "description":  "Ge utvecklare och fÃ¶retag eleganta, snabba och lÃ¤ttanvÃ¤nda verktyg fÃ¶r att bygga exceptionella digitala produkter."
+                },
+    "vision":  {
+                   "title":  "VÃ¥r vision",
+                   "description":  "Bli den fÃ¶redragna plattformen fÃ¶r moderna utvecklare som vÃ¤rderar skÃ¶nhet, prestanda och anvÃ¤ndarupplevelse i varje kodrad."
+               },
+    "values":  {
+                   "title":  "VÃ¥ra vÃ¤rderingar",
+                   "subtitle":  "Principerna som vÃ¤gleder varje beslut vi tar."
+               },
+    "passion":  {
+                    "title":  "Passion",
+                    "description":  "Vi Ã¤lskar det vi gÃ¶r, och det syns i varje detalj i vÃ¥ra produkter."
+                },
+    "collaboration":  {
+                          "title":  "Samarbete",
+                          "description":  "Att arbeta tillsammans ger de bÃ¤sta resultaten. Vi tror pÃ¥ kraften i ett starkt team."
+                      },
+    "innovation":  {
+                       "title":  "Innovation",
+                       "description":  "Vi letar alltid efter bÃ¤ttre sÃ¤tt att lÃ¶sa problem och skapa vÃ¤rde."
+                   },
+    "integrity":  {
+                      "title":  "Integritet",
+                      "description":  "Ã„rlighet och transparens Ã¤r grunden fÃ¶r varje relation vi bygger."
+                  },
+    "excellence":  {
+                       "title":  "Kvalitet",
+                       "description":  "Vi nÃ¶jer oss inte med \u0027tillrÃ¤ckligt bra\u0027. Vi strÃ¤var alltid efter det bÃ¤sta."
+                   },
+    "quality":  {
+                    "title":  "Kvalitet",
+                    "description":  "Ren kod, vacker design och sÃ¶mlÃ¶s upplevelse Ã¤r vÃ¥r standard."
+                },
+    "team":  {
+                 "title":  "MÃ¶t teamet",
+                 "subtitle":  "De skarpa hjÃ¤rnorna bakom varje kodrad vi skriver.",
+                 "alex_desc":  "VisionÃ¤r ledare med Ã¶ver 10 Ã¥rs erfarenhet av att utveckla SaaS-ekosystem.",
+                 "sarah_desc":  "Fullstack-magi specialiserad pÃ¥ att bygga storskalig systemarkitektur.",
+                 "mike_desc":  "Besatt av pixeldetaljer, smidiga UX-flÃ¶den och tillgÃ¤nglighetsstandarder.",
+                 "jessica_desc":  "Kreativ berÃ¤ttare som hjÃ¤lper varumÃ¤rken att hitta sin unika rÃ¶st i den digitala vÃ¤rlden."
+             },
+    "features":  {
+                     "list":  {
+                                  "speed":  {
+                                                "title":  "Blixtsnabbt",
+                                                "description":  "Optimerad prestanda med laddtider under 100 ms. Byggd fÃ¶r global skalning med edge-infrastruktur."
+                                            },
+                                  "design":  {
+                                                 "title":  "Modern design",
+                                                 "description":  "Ren, responsiv UI som ser professionell ut pÃ¥ alla enheter. Fullt anpassningsbara komponenter."
+                                             },
+                                  "security":  {
+                                                   "title":  "HÃ¶g sÃ¤kerhet",
+                                                   "description":  "End-to-end-kryptering, multifaktorautentisering och SOC2-efterlevnad fÃ¶r att skydda dina data."
+                                               }
+                              },
+                     "heading":  "Huvudfunktioner",
+                     "subheading":  "Allt du behÃ¶ver fÃ¶r att bygga och skala."
+                 }
+}

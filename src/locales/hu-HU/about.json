@@ -1,0 +1,72 @@
+{
+    "hero":  {
+                 "badge":  "RÃ³lunk",
+                 "title_part1":  "Hajt a ",
+                 "title_highlight":  "szenvedÃ©ly",
+                 "description":  "Utunk egy egyszerÅ± Ã¶tlettel kezdÅ‘dÃ¶tt."
+             },
+    "mission":  {
+                    "title":  "KÃ¼ldetÃ©sÃ¼nk",
+                    "description":  "FelvÃ©rtezni a fejlesztÅ‘ket Ã©s vÃ¡llalatokat elegÃ¡ns, gyors Ã©s kÃ¶nnyen hasznÃ¡lhatÃ³ eszkÃ¶zÃ¶kkel a kivÃ©teles digitÃ¡lis termÃ©kek Ã©pÃ­tÃ©sÃ©hez."
+                },
+    "vision":  {
+                   "title":  "JÃ¶vÅ‘kÃ©pÃ¼nk",
+                   "description":  "A modern fejlesztÅ‘k preferÃ¡lt platformjÃ¡vÃ¡ vÃ¡lni, akik Ã©rtÃ©kelik a szÃ©psÃ©get, a teljesÃ­tmÃ©nyt Ã©s a felhasznÃ¡lÃ³i Ã©lmÃ©nyt minden kÃ³dsorban."
+               },
+    "story":  {
+                  "tag":  "TÃ¶rtÃ©netÃ¼nk",
+                  "visual_label":  "KreatÃ­v stÃºdiÃ³ illusztrÃ¡ciÃ³",
+                  "title":  "SzenvedÃ©ly hajt, \u003cbr\u003ekivÃ¡lÃ³sÃ¡g definiÃ¡l.",
+                  "para1":  "Utunk egy egyszerÅ± Ã¶tlettel kezdÅ‘dÃ¶tt: tegyÃ¼k a webfejlesztÃ©st elÃ©rhetÅ‘vÃ© Ã©s szÃ³rakoztatÃ³vÃ¡ mindenki szÃ¡mÃ¡ra. ElegÃ¼nk volt a nehÃ©z keretrendszerekbÅ‘l Ã©s a bonyolult beÃ¡llÃ­tÃ¡sokbÃ³l.",
+                  "para2":  "Ma mÃ¡r sokszÃ­nÅ± mÃ©rnÃ¶kÃ¶kbÅ‘l, dizÃ¡jnerekbÅ‘l Ã©s gondolkodÃ³kbÃ³l Ã¡llÃ³ csapat vagyunk, akik egyÃ¼tt dolgoznak Ã¶sszetett problÃ©mÃ¡k elegÃ¡ns megoldÃ¡sain.",
+                  "val1":  "FelhasznÃ¡lÃ³kÃ¶zpontÃº dizÃ¡jn filozÃ³fia",
+                  "val2":  "TeljesÃ­tmÃ©ny-centrikus architektÃºra",
+                  "val3":  "ÃtlÃ¡thatÃ³sÃ¡g Ã©s nyÃ­lt kommunikÃ¡ciÃ³"
+              },
+    "values":  {
+                   "title":  "Ã‰rtÃ©keink",
+                   "subtitle":  "Az elvek, amelyek minden dÃ¶ntÃ©sÃ¼nket vezÃ©rlik."
+               },
+    "passion":  {
+                    "title":  "SzenvedÃ©ly",
+                    "description":  "SzeretjÃ¼k, amit csinÃ¡lunk, Ã©s ez lÃ¡tszik termÃ©keink minden rÃ©szletÃ©ben."
+                },
+    "collaboration":  {
+                          "title":  "EgyÃ¼ttmÅ±kÃ¶dÃ©s",
+                          "description":  "Az egyÃ¼tt dolgozÃ¡s adja a legjobb eredmÃ©nyeket. HiszÃ¼nk az erÅ‘s csapat erejÃ©ben."
+                      },
+    "innovation":  {
+                       "title":  "InnovÃ¡ciÃ³",
+                       "description":  "Mindig jobb mÃ³djait keressÃ¼k a problÃ©mamegoldÃ¡snak Ã©s az Ã©rtÃ©kteremtÃ©snek."
+                   },
+    "integrity":  {
+                      "title":  "IntegritÃ¡s",
+                      "description":  "Az Å‘szintesÃ©g Ã©s az Ã¡tlÃ¡thatÃ³sÃ¡g minden Ã¡ltalunk Ã©pÃ­tett kapcsolat alapja."
+                  },
+    "excellence":  {
+                       "title":  "KivÃ¡lÃ³sÃ¡g",
+                       "description":  "Nem elÃ©gszÃ¼nk meg az â€želÃ©g jÃ³val\". Mindig a legjobb felÃ© tÃ¶rekszÃ¼nk."
+                   },
+    "quality":  {
+                    "title":  "MinÅ‘sÃ©g",
+                    "description":  "A tiszta kÃ³d, a gyÃ¶nyÃ¶rÅ± dizÃ¡jn Ã©s a zÃ¶kkenÅ‘mentes Ã©lmÃ©ny a mi sztenderdÃ¼nk."
+                },
+    "team":  {
+                 "title":  "Ismerd meg a csapatot",
+                 "subtitle":  "Az Ã©les elmÃ©k minden egyes kÃ³dsor mÃ¶gÃ¶tt, amit Ã­runk.",
+                 "alex_desc":  "VÃ­zionÃ¡rius vezetÅ‘, tÃ¶bb mint 10 Ã©v tapasztalattal a SaaS Ã¶koszisztÃ©mÃ¡k fejlesztÃ©sÃ©ben.",
+                 "sarah_desc":  "Fullstack varÃ¡zslÃ³, aki nagylÃ©ptÃ©kÅ± rendszerarchitektÃºrÃ¡k Ã©pÃ­tÃ©sÃ©re specializÃ¡lÃ³dott.",
+                 "mike_desc":  "MegszÃ¡llottja a pixeldetÃ¡loknak, a sima UX-folyamatoknak Ã©s az akadÃ¡lymentessÃ©gi szabvÃ¡nyoknak.",
+                 "jessica_desc":  "KreatÃ­v tÃ¶rtÃ©netmesÃ©lÅ‘, aki segÃ­t a mÃ¡rkÃ¡knak megtalÃ¡lni egyedi hangjukat a digitÃ¡lis vilÃ¡gban."
+             },
+    "stats":  {
+                  "years":  "Ã‰v tapasztalat",
+                  "years_val":  "3+",
+                  "clients":  "GlobÃ¡lis Ã¼gyfÃ©l",
+                  "clients_val":  "120+",
+                  "countries":  "OrszÃ¡g lefedve",
+                  "countries_val":  "15",
+                  "support":  "SzakÃ©rtÅ‘i tÃ¡mogatÃ¡s",
+                  "support_val":  "24/7"
+              }
+}

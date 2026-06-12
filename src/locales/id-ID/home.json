@@ -1,0 +1,102 @@
+{
+    "about":  {
+                  "badge":  "Tentang Kami"
+              },
+    "hero":  {
+                 "badge":  "Tentang Kami",
+                 "title_part1":  "Kami menciptakan ",
+                 "title_highlight":  "masa depan digital",
+                 "description":  "Didirikan pada 2024, Starter hadir untuk membantu pengembang membangun aplikasi yang lebih baik dengan lebih cepat. Kami percaya pada kekuatan kode yang bersih, desain yang indah, dan kolaborasi open source.",
+                 "primary_btn":  {
+                                     "label":  "Mulai Gratis",
+                                     "url":  "#pricing"
+                                 },
+                 "secondary_btn":  {
+                                       "label":  "Lihat Demo",
+                                       "url":  "#features"
+                                   },
+                 "note":  "Tanpa perlu kartu kredit"
+             },
+    "stats":  {
+                  "community":  "Komunitas Global",
+                  "community_val":  "50K+",
+                  "projects":  "Proyek Selesai",
+                  "projects_val":  "120+",
+                  "uptime":  "Uptime",
+                  "uptime_val":  "99.99%",
+                  "rating":  "Rating",
+                  "rating_val":  "4.9/5"
+              },
+    "story":  {
+                  "tag":  "Cerita Kami",
+                  "visual_label":  "Ilustrasi Studio Kreatif",
+                  "title":  "Digerakkan oleh passion, \u003cbr\u003edidefinisikan oleh keunggulan.",
+                  "para1":  "Perjalanan kami dimulai dengan ide sederhana: membuat pengembangan web dapat diakses dan menyenangkan untuk semua orang. Kami sudah lelah dengan framework yang berat dan konfigurasi yang rumit.",
+                  "para2":  "Hari ini, kami adalah tim yang beragam dari engineer, desainer, dan pemikir yang bekerja sama untuk memecahkan masalah kompleks dengan solusi yang elegan.",
+                  "val1":  "Filosofi desain user-centric",
+                  "val2":  "Arsitektur performance-first",
+                  "val3":  "Transparansi dan komunikasi terbuka"
+              },
+    "mission":  {
+                    "title":  "Misi Kami",
+                    "description":  "Memberdayakan pengembang dan bisnis dengan alat yang elegan, cepat, dan mudah digunakan untuk membangun produk digital yang luar biasa."
+                },
+    "vision":  {
+                   "title":  "Visi Kami",
+                   "description":  "Menjadi platform pilihan untuk pengembang modern yang menghargai keindahan, performa, dan pengalaman pengguna di setiap baris kode."
+               },
+    "values":  {
+                   "title":  "Nilai-Nilai Kami",
+                   "subtitle":  "Prinsip yang memandu setiap keputusan yang kami buat."
+               },
+    "passion":  {
+                    "title":  "Passion",
+                    "description":  "Kami mencintai apa yang kami lakukan, dan itu terlihat di setiap detail produk kami."
+                },
+    "collaboration":  {
+                          "title":  "Kolaborasi",
+                          "description":  "Bekerja sama menghasilkan hasil terbaik. Kami percaya pada kekuatan tim yang solid."
+                      },
+    "innovation":  {
+                       "title":  "Inovasi",
+                       "description":  "Selalu mencari cara yang lebih baik untuk memecahkan masalah dan menciptakan nilai."
+                   },
+    "integrity":  {
+                      "title":  "Integritas",
+                      "description":  "Kejujuran dan transparansi adalah fondasi setiap hubungan yang kami bangun."
+                  },
+    "excellence":  {
+                       "title":  "Keunggulan",
+                       "description":  "Kami tidak puas dengan cukup baik. Kami selalu berusaha untuk yang terbaik."
+                   },
+    "quality":  {
+                    "title":  "Kualitas",
+                    "description":  "Kode yang bersih, desain yang indah, dan pengalaman yang seamless adalah standar kami."
+                },
+    "team":  {
+                 "title":  "Kenali Tim",
+                 "subtitle":  "Pikiran cemerlang di balik setiap baris kode yang kami tulis.",
+                 "alex_desc":  "Pemimpin visioner dengan pengalaman 10+ tahun dalam pengembangan ekosistem SaaS.",
+                 "sarah_desc":  "Full-stack wizard yang mengkhususkan diri dalam membangun arsitektur sistem berskala besar.",
+                 "mike_desc":  "Terobsesi dengan detail pixel, alur UX yang halus, dan standar aksesibilitas.",
+                 "jessica_desc":  "Pencerita kreatif yang membantu merek menemukan suara unik mereka di dunia digital."
+             },
+    "features":  {
+                     "list":  {
+                                  "speed":  {
+                                                "title":  "Sangat Cepat",
+                                                "description":  "Performa optimal dengan waktu muat di bawah 100ms. Dirancang untuk skala global dengan infrastruktur edge."
+                                            },
+                                  "design":  {
+                                                 "title":  "Desain Modern",
+                                                 "description":  "UI responsif dan bersih yang tampil profesional di semua perangkat. Komponen yang dapat dikustomisasi sepenuhnya."
+                                             },
+                                  "security":  {
+                                                   "title":  "Keamanan Tinggi",
+                                                   "description":  "Enkripsi end-to-end, autentikasi multi-faktor, dan kepatuhan SOC2 untuk melindungi data Anda."
+                                               }
+                              },
+                     "heading":  "Fitur Unggulan",
+                     "subheading":  "Semua yang Anda butuhkan untuk membangun dan berkembang."
+                 }
+}

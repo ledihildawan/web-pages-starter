@@ -1,0 +1,56 @@
+{
+    "period_monthly":  "mÃ¥nad",
+    "period_yearly":  "Ã¥r",
+    "hero":  {
+                 "badge":  "VÃ¤lj en plan",
+                 "title_part1":  "Enkel och ",
+                 "title_highlight":  "transparent prissÃ¤ttning",
+                 "description":  "Inga dolda avgifter. Inga Ã¶verraskningsavgifter. VÃ¤lj en plan som passar dina behov bÃ¤st."
+             },
+    "toggle":  {
+                   "monthly":  "MÃ¥nadsvis",
+                   "yearly":  "Ã…rsvis",
+                   "yearly_hint":  "faktureras Ã¥rligen",
+                   "discount":  "SPARA 20%",
+                   "aria_label":  "VÃ¤xla prisplan"
+               },
+    "plans":  {
+                  "hobby":  {
+                                "name":  "Hobby",
+                                "desc":  "Perfekt fÃ¶r sidoprojekt och lÃ¤rande.",
+                                "btn":  "BÃ¶rja gratis",
+                                "feature_0":  "1 projekt",
+                                "feature_1":  "Community-support",
+                                "feature_2":  "5 GB lagring"
+                            },
+                  "pro":  {
+                              "name":  "Pro",
+                              "badge":  "Mest populÃ¤r",
+                              "desc":  "FÃ¶r professionella utvecklare och smÃ¥ team.",
+                              "btn":  "VÃ¤lj Pro-plan",
+                              "feature_0":  "ObegrÃ¤nsade projekt",
+                              "feature_1":  "Prioriterad e-postsupport",
+                              "feature_2":  "100 GB lagring",
+                              "feature_3":  "Avancerad analys"
+                          },
+                  "enterprise":  {
+                                     "name":  "Enterprise",
+                                     "desc":  "FÃ¶r storskaliga applikationer och organisationer.",
+                                     "btn":  "Kontakta sÃ¤lj",
+                                     "feature_0":  "Alla Pro-funktioner",
+                                     "feature_1":  "Dedikerad kontoshante",
+                                     "feature_2":  "SSO och granskningslogg",
+                                     "feature_3":  "ObegrÃ¤nsad lagring"
+                                 }
+              },
+    "faq":  {
+                "title":  "Vanliga frÃ¥gor",
+                "subtitle":  "Hitta svar pÃ¥ de vanligaste frÃ¥gorna om vÃ¥ra planer och tjÃ¤nster.",
+                "q_0":  "Kan jag avbryta nÃ¤r som helst?",
+                "a_0":  "Ja, du kan avbryta din prenumeration nÃ¤r som helst. Din Ã¥tkomst fÃ¶rblir aktiv till slutet av faktureringsperioden.",
+                "q_1":  "Finns det en gratis provperiod?",
+                "a_1":  "Vi erbjuder en 14-dagars gratis provperiod fÃ¶r Pro-planen. Inget kreditkort krÃ¤vs fÃ¶r att komma igÃ¥ng.",
+                "q_2":  "Vilka betalningsmetoder Ã¤r tillgÃ¤ngliga?",
+                "a_2":  "Vi accepterar de viktigaste kreditkorten och PayPal. FÃ¶r Enterprise stÃ¶djer vi bankÃ¶verfÃ¶ringar."
+            }
+}

@@ -1,0 +1,72 @@
+{
+    "hero":  {
+                 "badge":  "Meist",
+                 "title_part1":  "Kire juhitud ",
+                 "title_highlight":  "kirg",
+                 "description":  "Meie teekond algas lihtsa ideega."
+             },
+    "mission":  {
+                    "title":  "Meie missioon",
+                    "description":  "VÃµimaldada arendajatel ja ettevÃµtetel kasutada elegantseid, kiireid ja hÃµlpsasti kasutatavaid tÃ¶Ã¶riistu erakordsete digitaalsete toodete loomiseks."
+                },
+    "vision":  {
+                   "title":  "Meie visioon",
+                   "description":  "Saanud eelistatud platvormiks kaasaegsetele arendajatele, kes hindavad ilu, jÃµudlust ja kasutajakogemust igas koodireas."
+               },
+    "story":  {
+                  "tag":  "Meie lugu",
+                  "visual_label":  "Loomestuudio illustratsioon",
+                  "title":  "Kire juhitud, \u003cbr\u003eedukusega mÃ¤Ã¤ratletud.",
+                  "para1":  "Meie teekond algas lihtsa ideega: muuta veebiarendus kÃµigile kÃ¤ttesaadavaks ja nauditavaks. Me olime vÃ¤sinud rasketest raamistikest ja keerulistest konfiguratsioonidest.",
+                  "para2":  "TÃ¤na oleme mitmekesine meeskond insenere, disainereid ja mÃµtlejaid, kes tÃ¶Ã¶tavad koos keerulisi probleeme elegantsete lahendustega.",
+                  "val1":  "Kasutajakeskne disainifilosoofia",
+                  "val2":  "JÃµudluse-esimene arhitektuur",
+                  "val3":  "LÃ¤bipaistvus ja avatud suhtlus"
+              },
+    "values":  {
+                   "title":  "Meie vÃ¤Ã¤rtused",
+                   "subtitle":  "PÃµhimÃµtted, mis juhivad iga meie tehtud otsust."
+               },
+    "passion":  {
+                    "title":  "Kirg",
+                    "description":  "Me armastame seda, mida teeme, ja see paistab iga meie toote detaili juures."
+                },
+    "collaboration":  {
+                          "title":  "KoostÃ¶Ã¶",
+                          "description":  "Koos tÃ¶Ã¶tades tekivad parimad tulemused. Me usume tugeva meeskonna jÃµusse."
+                      },
+    "innovation":  {
+                       "title":  "Innovatsioon",
+                       "description":  "Alati otsime paremaid viise probleemide lahendamiseks ja vÃ¤Ã¤rtuse loomiseks."
+                   },
+    "integrity":  {
+                      "title":  "Ausus",
+                      "description":  "Eetilisus ja lÃ¤bipaistvus on iga meie suhte alus."
+                  },
+    "excellence":  {
+                       "title":  "Edukus",
+                       "description":  "Me ei rahuldu piisavalt heaga. Alati pÃ¼Ã¼dleme parima poole."
+                   },
+    "quality":  {
+                    "title":  "Kvaliteet",
+                    "description":  "Puhas kood, ilus disain ja sujuv kogemus â€“ see on meie standard."
+                },
+    "team":  {
+                 "title":  "Tutvuge meeskonnaga",
+                 "subtitle":  "Briljantsed mÃµistjad iga meie kirjutatud koodirea taga.",
+                 "alex_desc":  "VisionÃ¤Ã¤rne juht rohkem kui 10 aasta kogemusega SaaS Ã¶kosÃ¼steemide arendamises.",
+                 "sarah_desc":  "TÃ¤istacki spetsialist, kes keskendub suuremahuliste sÃ¼steemide arhitektuuri ehitamisele.",
+                 "mike_desc":  "Huvitatud pikslite detailidest, sujuvatest UX voogudest ja juurdepÃ¤Ã¤setavuse standarditest.",
+                 "jessica_desc":  "Loov jutustaja, kes aitab kaubamÃ¤rkidel leida unikaalse hÃ¤Ã¤le digitaalses maailmas."
+             },
+    "stats":  {
+                  "years":  "Aastat kogemust",
+                  "years_val":  "3+",
+                  "clients":  "Globaalsed kliendid",
+                  "clients_val":  "120+",
+                  "countries":  "Kaetud riigid",
+                  "countries_val":  "15",
+                  "support":  "Eksperdiabi",
+                  "support_val":  "24/7"
+              }
+}

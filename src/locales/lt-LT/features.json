@@ -1,0 +1,75 @@
+{
+    "hero":  {
+                 "badge":  "IÅ¡skirtinÄ—s funkcijos",
+                 "title_part1":  "Viskas, ko Jums reikia, kad",
+                 "title_highlight":  "auga greiÄiau",
+                 "description":  "Nuo galingos analizÄ—s iki sklandÅ¾ios integracijos â€“ suteikiame Ä¯rankiÅ³ rinkinÄ¯, reikalingÄ… kurti pasaulinio lygio programas be rÅ«pesÄiÅ³."
+             },
+    "features":  {
+                     "heading":  "IÅ¡skirtinÄ—s funkcijos",
+                     "subheading":  "Viskas, ko Jums reikia kÅ«rimui ir augimui.",
+                     "list":  {
+                                  "speed":  {
+                                                "title":  "Labai greita",
+                                                "description":  "Optimalus naÅ¡umas su Ä¯kÄ—limo laiku Å¾emiau 100 ms. Sukurta pasaulinei sklaidai su kraÅ¡to infrastruktÅ«ra."
+                                            },
+                                  "design":  {
+                                                 "title":  "Modernus dizainas",
+                                                 "description":  "Reaguojanti ir Å¡vari vartotojo sÄ…saja, kuri atrodo profesionaliai visuose Ä¯renginiuose. VisiÅ¡kai pritaikomi komponentai."
+                                             },
+                                  "security":  {
+                                                   "title":  "AukÅ¡tas saugumas",
+                                                   "description":  "Galinis Å¡ifravimas, keliÅ³ veiksniÅ³ tapatybÄ—s nustatymas ir SOC2 atitiktis, apsaugantys JÅ«sÅ³ duomenis."
+                                               }
+                              }
+                 },
+    "sections":  {
+                     "sync":  {
+                                  "title":  "Sinchronizavimas realiuoju laiku",
+                                  "description":  "Pakeitimai akimirksniu plinta visuose Ä¯renginiuose. Nesvarbu, ar JÅ«sÅ³ vartotojai naudoja telefonÄ…, kompiuterÄ¯ ar planÅ¡etÄ™ â€“ jie mato tuos paÄius duomenis tuo paÄiu metu.",
+                                  "check_0":  "Latencija Å¾emiau milisekundÄ—s",
+                                  "check_1":  "Integruotas autonominis reÅ¾imas",
+                                  "check_2":  "KonfliktÅ³ sprendimas"
+                              },
+                     "analytics":  {
+                                       "title":  "Veiksminga analizÄ—",
+                                       "description":  "Neatspekuliuokite. Gaukite giliÅ³ Ä¯Å¾valgÅ³ apie vartotojÅ³ elgsenÄ…, sistemos naÅ¡umÄ… ir pajamÅ³ rodiklius. Vizualizuokite duomenis interaktyviais grafikais.",
+                                       "check_0":  "Pritaikomi valdymo skydeliai",
+                                       "check_1":  "Eksportavimas Ä¯ PDF, CSV arba Excel",
+                                       "check_2":  "AutomatinÄ—s savaitinÄ—s ataskaitos"
+                                   }
+                 },
+    "more_title":  "Ir dar daugiau...",
+    "more_subtitle":  "PaÅ¾angios funkcijos, sukurtos padÄ—ti Jums kurti greiÄiau ir didesniu mastu.",
+    "more":  {
+                 "dark_mode":  {
+                                   "title":  "Tamsioji tema",
+                                   "desc":  "Integruotas Å¡viesios ir tamsios temÅ³ palaikymas su automatiniu aptikimu."
+                               },
+                 "api_first":  {
+                                   "title":  "API pirmiausia",
+                                   "desc":  "REST ir GraphQL API pasiekiamas visiÅ¡kam programiniam valdymui."
+                               },
+                 "sso":  {
+                             "title":  "SSO prisijungimas",
+                             "desc":  "Enterprise lygio vienkartinis prisijungimas su Google, GitHub ir Okta."
+                         },
+                 "audit":  {
+                               "title":  "Audito Å¾urnalas",
+                               "desc":  "Sekite kiekvienÄ… JÅ«sÅ³ projekto pakeitimÄ… su iÅ¡samiomis laiko Å¾ymomis."
+                           },
+                 "rbac":  {
+                              "title":  "Vaidmenimis pagrÄ¯sta prieiga",
+                              "desc":  "Granuliuotas teisiÅ³ valdymas administratoriams, redaktoriams ir perÅ¾iÅ«rÄ—tojams."
+                          },
+                 "uptime":  {
+                                "title":  "99,99 % veikimo laiko",
+                                "desc":  "Garantuojamas pasiekiamumas su mÅ«sÅ³ globaliai paskirstytu CDN."
+                            }
+             },
+    "cta":  {
+                "heading":  "PasirengÄ™ pradÄ—ti?",
+                "btn_create":  "Sukurti paskyrÄ…",
+                "btn_docs":  "Skaityti dokumentacijÄ…"
+            }
+}

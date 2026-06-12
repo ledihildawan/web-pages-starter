@@ -1,0 +1,47 @@
+{
+    "meta":  {
+                 "title":  "Susisiekite su mumis | Starter App",
+                 "description":  "Susisiekite su mumis dÄ—l klausimÅ³ ir pagalbos."
+             },
+    "contact":  {
+                    "badge":  "PasirengÄ™ padÄ—ti",
+                    "title_part1":  "Leiskite ",
+                    "title_highlight":  "bendrauti",
+                    "description":  "Turite klausimÅ³ ar norite bendradarbiauti? DÅ¾iaugiamÄ—s iÅ¡girsdami iÅ¡ JÅ«sÅ³. AtsiÅ³skite Å¾inutÄ™ ir mes greitai atsakysime.",
+                    "form_title":  "SiÅ³sti Å¾inutÄ™",
+                    "form_subtitle":  "UÅ¾pildykite Å¾emiau esanÄiÄ… formÄ… ir mes greitai atsakysime.",
+                    "social_title":  "Sekite mus",
+                    "social_subtitle":  "Gaukite naujausius atnaujinimus per mÅ«sÅ³ socialinius tinklus",
+                    "info":  {
+                                 "response_time":  {
+                                                       "title":  "Greitas atsakas",
+                                                       "description":  "StengiamÄ—s atsakyti Ä¯ kiekvienÄ… Å¾inutÄ™ per 24 valandas darbo dienomis."
+                                                   },
+                                 "working_hours":  {
+                                                       "title":  "Darbo valandos",
+                                                       "description":  "Pirmadienis â€“ Penktadienis: 09:00 â€“ 18:00. Savaitgaliais: pagal prioritetÄ…."
+                                                   },
+                                 "support":  {
+                                                 "title":  "Nuolatinis palaikymas",
+                                                 "description":  "MÅ«sÅ³ palaikymo komanda visada pasirengusi padÄ—ti iÅ¡sprÄ™sti JÅ«sÅ³ technines problemas."
+                                             }
+                             },
+                    "form":  {
+                                 "name":  "Vardas",
+                                 "name_placeholder":  "Ä®veskite savo vardÄ…",
+                                 "email":  "El. paÅ¡tas",
+                                 "email_placeholder":  "vardas@el.pastas.lt",
+                                 "subject":  "Tema",
+                                 "subject_placeholder":  "Apie kÄ… norite pasikalbÄ—ti?",
+                                 "message":  "Å½inutÄ—",
+                                 "message_placeholder":  "Papasakokite daugiau apie JÅ«sÅ³ klausimÄ…...",
+                                 "submit":  "SiÅ³sti Å¾inutÄ™"
+                             }
+                },
+    "email_label":  "El. paÅ¡tas",
+    "email_value":  "hello@starter.app",
+    "phone_label":  "Telefonas",
+    "phone_value":  "+370 612 34567",
+    "location_label":  "Vieta",
+    "location_value":  "Vilnius, Lietuva"
+}

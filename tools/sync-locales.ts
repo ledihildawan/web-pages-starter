@@ -33,7 +33,7 @@ function createLocale(
 
       const compFiles = fs
         .readdirSync(sourcePath)
-        .filter((f) => f.endsWith('.json5'));
+        .filter((f) => f.endsWith('.json'));
       for (const compFile of compFiles) {
         const targetPath = path.join(compTargetDir, compFile);
         if (!fs.existsSync(targetPath)) {
@@ -42,7 +42,7 @@ function createLocale(
           created++;
         }
       }
-    } else if (file.endsWith('.json5')) {
+    } else if (file.endsWith('.json')) {
       const targetPath = path.join(targetDir, file);
       if (!fs.existsSync(targetPath)) {
         fs.copyFileSync(sourcePath, targetPath);

@@ -1,0 +1,203 @@
+{
+    "meta":  {
+                 "title":  "i18n Testi | Demo",
+                 "description":  "UluslararasÄ±laÅŸtÄ±rma Ã¶zellikleri iÃ§in kapsamlÄ± test sayfasÄ±"
+             },
+    "hero":  {
+                 "badge":  "i18n Ã–zellikleri",
+                 "title":  "KapsamlÄ± \u003cspan class=\u0027text-violet-400\u0027\u003eUluslararasÄ±laÅŸtÄ±rma\u003c/span\u003e Testi",
+                 "description":  "TÃ¼m i18n Ã¶zelliklerini deneyin: Ã§eviri, Ã§oÄŸullaÅŸtÄ±rma, sayÄ± biÃ§imlendirme, para birimi ve para birimi dÃ¶nÃ¼ÅŸÃ¼mÃ¼."
+             },
+    "language_info":  {
+                          "title":  "GeÃ§erli Dil Bilgileri",
+                          "code":  "Dil Kodu",
+                          "currency":  "Para Birimi",
+                          "direction":  "Metin YÃ¶nÃ¼",
+                          "digits":  "Yerel Rakamlar",
+                          "enabled":  "Etkin",
+                          "disabled":  "Devre DÄ±ÅŸÄ±",
+                          "languages":  "Diller",
+                          "switching":  "Yeniden YÃ¼klemeden GeÃ§iÅŸ",
+                          "current_code":  "tr",
+                          "current_currency":  "TRY",
+                          "current_direction":  "LTR (Soldan SaÄŸa)"
+                      },
+    "numbers":  {
+                    "title":  "SayÄ± BiÃ§imlendirme",
+                    "description":  "SayÄ±lar aktif yerel dile gÃ¶re biÃ§imlendirilir.",
+                    "large":  "BÃ¼yÃ¼k SayÄ±",
+                    "decimal":  "OndalÄ±k",
+                    "million":  "Milyon",
+                    "percent":  "YÃ¼zde",
+                    "raw":  "Ham"
+                },
+    "currency":  {
+                     "title":  "Para Birimi DÃ¶nÃ¼ÅŸÃ¼mÃ¼",
+                     "description":  "TRY cinsinden fiyatlar, aktif dilin para birimine dÃ¶nÃ¼ÅŸtÃ¼rÃ¼lÃ¼r.",
+                     "currencies":  "Para Birimleri",
+                     "small":  "KÃ¼Ã§Ã¼k",
+                     "medium":  "Orta",
+                     "large":  "BÃ¼yÃ¼k",
+                     "enterprise":  "Enterprise"
+                 },
+    "currency_comparison":  {
+                                "title":  "Para Birimi KarÅŸÄ±laÅŸtÄ±rmasÄ±",
+                                "description":  "AynÄ± fiyat, desteklenen Ã§eÅŸitli para birimlerinde.",
+                                "base_price":  "Temel Fiyat (USD)",
+                                "aed":  "BAE Dirhemi",
+                                "aud":  "Avustralya DolarÄ±",
+                                "brl":  "Brezilya Reali",
+                                "cad":  "Kanada DolarÄ±",
+                                "chf":  "Ä°sviÃ§re FrangÄ±",
+                                "cny":  "Ã‡in YuanÄ±",
+                                "eur":  "Euro",
+                                "gbp":  "Ä°ngiliz Sterlini",
+                                "idr":  "Endonezya Rupisi",
+                                "inr":  "Hint Rupisi",
+                                "jpy":  "Japon Yeni",
+                                "krw":  "Kore Wonu",
+                                "mxn":  "Meksika Pesosu",
+                                "sar":  "Suudi Riyali",
+                                "sgd":  "Singapur DolarÄ±",
+                                "usd":  "ABD DolarÄ±",
+                                "zar":  "GÃ¼ney Afrika RandÄ±"
+                            },
+    "core":  {
+                 "title":  "Temel Ã–zellikler",
+                 "description":  "Ã‡eviri, Ã§oÄŸullaÅŸtÄ±rma ve HTML iÃ§eriÄŸi."
+             },
+    "pluralization":  {
+                          "title":  "Ã‡oÄŸullaÅŸtÄ±rma",
+                          "description":  "Her dil iÃ§in farklÄ± Ã§oÄŸul biÃ§imler.",
+                          "item_title":  "Ã–ÄŸe (Ä°sim)",
+                          "user_title":  "KullanÄ±cÄ±",
+                          "product_title":  "ÃœrÃ¼n"
+                      },
+    "form":  {
+                 "title":  "Ã‡evirili Form",
+                 "description":  "Yer tutucular ve etiketler yerel dil dosyalarÄ±ndan alÄ±nÄ±r.",
+                 "name_label":  "AdÄ±nÄ±z",
+                 "name_placeholder":  "Tam adÄ±nÄ±zÄ± girin",
+                 "email_label":  "E-posta",
+                 "email_placeholder":  "ornek@email.com",
+                 "message_label":  "Mesaj",
+                 "message_placeholder":  "MesajÄ±nÄ±zÄ± buraya yazÄ±n...",
+                 "submit":  "GÃ¶nder"
+             },
+    "missing_keys":  {
+                         "title":  "Eksik Anahtar Ä°ÅŸleme",
+                         "description":  "Bulunamayan Ã§eviri anahtarlarÄ± kÃ¶ÅŸeli parantez iÃ§inde gÃ¶sterilir."
+                     },
+    "html_content":  {
+                         "title":  "HTML Ä°Ã§eriÄŸi",
+                         "description":  "Ã‡eviriler biÃ§imlendirme iÃ§in HTML etiketleri iÃ§erebilir.",
+                         "example":  "Bu, \u003cspan class=\u0027text-emerald-400\u0027\u003erenkli vurgulu\u003c/span\u003e ve \u003cstrong\u003ekalÄ±n metin\u003c/strong\u003e iÃ§eren Ã¶rnek bir metindir.",
+                         "note":  "Not: Ã‡evirilerdeki HTML etiketleri tek bir sarmalayÄ±cÄ± Ã¶ÄŸe iÃ§inde olmalÄ±dÄ±r."
+                     },
+    "switcher":  {
+                     "title":  "Dil DeÄŸiÅŸtir",
+                     "description":  "Dili deÄŸiÅŸtirmek ve tÃ¼m i18n Ã¶zelliklerini iÅŸlem halinde gÃ¶rmek iÃ§in aÅŸaÄŸÄ±daki dÃ¼ÄŸmeye tÄ±klayÄ±n."
+                 },
+    "advanced":  {
+                     "title":  "GeliÅŸmiÅŸ BiÃ§imlendirme",
+                     "description":  "YÃ¼zdeler, birimler, baytlar, listeler ve sÄ±ra sayÄ±larÄ± iÃ§in geliÅŸmiÅŸ biÃ§imlendirme Ã¶zellikleri.",
+                     "percentages":  "YÃ¼zdeler",
+                     "units":  "Birimler",
+                     "bytes":  "Bayt",
+                     "bytes_unit":  "bayt",
+                     "lists":  "Listeler",
+                     "ordinals":  "SÄ±ra",
+                     "cardinals":  "Asal",
+                     "scientific":  "Bilimsel GÃ¶sterim",
+                     "abbreviated":  "KÄ±saltÄ±lmÄ±ÅŸ",
+                     "date_formats":  "Tarih BiÃ§imleri",
+                     "time_formats":  "Saat BiÃ§imleri",
+                     "datetime":  "Tarih + Saat",
+                     "durations":  "SÃ¼reler",
+                     "relative_time":  "GÃ¶reli Zaman",
+                     "regional_pricing":  "BÃ¶lgesel FiyatlandÄ±rma",
+                     "fifty_percent":  "Elli YÃ¼zde",
+                     "small_percent":  "KÃ¼Ã§Ã¼k YÃ¼zde",
+                     "ninety_nine":  "Doksan Dokuz",
+                     "hundred":  "YÃ¼z",
+                     "kilobyte":  "Kilobayt",
+                     "distance":  "Mesafe",
+                     "temperature":  "SÄ±caklÄ±k",
+                     "weight":  "AÄŸÄ±rlÄ±k",
+                     "half_kb":  "YarÄ±m KB",
+                     "one_and_half_kb":  "Bir BuÃ§uk KB",
+                     "one_mb":  "Bir MB",
+                     "one_gb":  "Bir GB",
+                     "two_items":  "Ä°ki Ã–ÄŸe",
+                     "three_items":  "ÃœÃ§ Ã–ÄŸe",
+                     "four_items":  "DÃ¶rt Ã–ÄŸe",
+                     "date_short":  "KÄ±sa Tarih",
+                     "date_long":  "Uzun Tarih",
+                     "time_short":  "KÄ±sa Saat",
+                     "time_long":  "Uzun Saat",
+                     "day_ago":  "GÃ¼n Ã–nce",
+                     "months_ago":  "Ay Ã–nce",
+                     "hour_in":  "1 Saat Ä°Ã§inde",
+                     "starter_plan":  "Starter PlanÄ±",
+                     "pro_plan":  "Pro PlanÄ±",
+                     "discount_20":  "%20 Ä°ndirim",
+                     "number_modes":  "SayÄ± ModlarÄ±",
+                     "number_modes_desc":  "Yerel rakam biÃ§imi (Ù Ù¡Ù¢Ù£Ù¤) ve evrensel biÃ§im (0-9) karÅŸÄ±laÅŸtÄ±rmasÄ±.",
+                     "native_label":  "Yerel Rakamlar (Ù Ù¡Ù¢Ù£Ù¤)",
+                     "universal_label":  "Evrensel (0-9)",
+                     "plain_label":  "Otomatik"
+                 },
+    "template_macros":  {
+                            "title":  "Åžablon MakrolarÄ±",
+                            "description":  "HTML iÅŸaretleme olmadan ham deÄŸer almak iÃ§in makrolar.",
+                            "raw_value":  "Ä°ÅŸaretleme olmadan ham deÄŸer",
+                            "current_year":  "GeÃ§erli yÄ±l {{year}}"
+                        },
+    "datetime":  {
+                     "title":  "Tarih ve Saat",
+                     "description":  "BirleÅŸik tarih ve saat biÃ§imleri.",
+                     "iso":  "ISO StandardÄ±",
+                     "eve":  "Noel Arifesi"
+                 },
+    "unit":  {
+                 "title":  "Birim BiÃ§imlendirme"
+             },
+    "native_digits":  {
+                          "title":  "Yerel Rakamlar",
+                          "description":  "ASCII rakamlarÄ± iÃ§eren metin, yerel dil etkinleÅŸtirdiÄŸinde yerel rakamlarla gÃ¶sterilir. Dil deÄŸiÅŸtirildiÄŸinde anÄ±nda gÃ¼ncellenir."
+                      },
+    "inflection":  {
+                       "title":  "Ä°ngilizce Ã‡ekim",
+                       "description":  "Ä°ngilizce Ã§oÄŸullaÅŸtÄ±rma ve tekilleÅŸtirme. Dil deÄŸiÅŸtirildiÄŸinde anÄ±nda gÃ¼ncellenir."
+                   },
+    "live_label":  "CanlÄ±",
+    "pricing_details":  {
+                            "title":  "Fiyat DetaylarÄ±",
+                            "description":  "Tam iÅŸlem hattÄ±: ham deÄŸer, para birimi kodu, biÃ§imlendirme, indirim ve dÃ¶nÃ¼ÅŸÃ¼m.",
+                            "raw_value":  "Ham DeÄŸer",
+                            "raw_currency":  "Para Birimi Kodu",
+                            "formatted":  "BiÃ§imlendirilmiÅŸ",
+                            "discounted":  "%20 Ä°ndirim",
+                            "converted_usd":  "USD\u0027ye DÃ¶nÃ¼ÅŸtÃ¼rÃ¼len"
+                        },
+    "live_update":  {
+                        "note":  "Dil deÄŸiÅŸtirdiÄŸinizde tÃ¼m sayÄ±, tarih ve fiyatlarÄ±n anÄ±nda deÄŸiÅŸtiÄŸini gÃ¶zlemleyin â€” sayfayÄ± yeniden yÃ¼klemeden."
+                    },
+    "section_modes":  {
+                          "title":  "SayÄ± ModlarÄ±",
+                          "description":  "Aktif yerel dilde yerel rakam biÃ§imi, evrensel biÃ§im ve otomatik mod karÅŸÄ±laÅŸtÄ±rmasÄ±."
+                      },
+    "section_systems":  {
+                            "title":  "YazÄ± Sistemleri",
+                            "description":  "TÃ¼m sayÄ± sistemleri (algoritmik ve sayÄ±sal), ICU geri dÃ¶nÃ¼ÅŸÃ¼ ile doÄŸru yerel rakamlarÄ± gÃ¶sterir.",
+                            "note":  "TÃ¼m sayÄ± sistemleri (algoritmik ve sayÄ±sal), doÄŸru yerel rakamlarÄ± gÃ¶sterir. Algoritmik sistemler NUMBERING_SYSTEMS\u0027den rakam geri dÃ¶nÃ¼ÅŸÃ¼ kullanÄ±r. Roma rakamlarÄ± doÄŸrudan algoritma ile dÃ¶nÃ¼ÅŸtÃ¼rÃ¼lÃ¼r. SayÄ±sal sistemler yÃ¼klenen fonttaki rakamlarÄ± kullanÄ±r."
+                        },
+    "nav":  {
+                "translations":  "Ã‡eviriler",
+                "formatting":  "SayÄ±lar",
+                "pricing":  "Fiyatlar",
+                "modes":  "Modlar",
+                "systems":  "Sistemler",
+                "switcher":  "Yerel Dil SeÃ§"
+            }
+}

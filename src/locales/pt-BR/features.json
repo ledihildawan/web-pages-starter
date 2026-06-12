@@ -1,0 +1,75 @@
+{
+    "hero":  {
+                 "badge":  "PotÃªncia sob o capÃ´",
+                 "title_part1":  "Tudo o que vocÃª precisa para",
+                 "title_highlight":  "escalar mais rÃ¡pido",
+                 "description":  "De anÃ¡lises poderosas a integraÃ§Ãµes perfeitas, fornecemos o kit de ferramentas que vocÃª precisa para construir aplicaÃ§Ãµes de classe mundial sem dor de cabeÃ§a."
+             },
+    "sections":  {
+                     "sync":  {
+                                  "title":  "SincronizaÃ§Ã£o em Tempo Real",
+                                  "description":  "As alteraÃ§Ãµes se propagam instantaneamente em todos os dispositivos. Seus usuÃ¡rios estejam em celular, desktop ou tablet, eles veem os mesmos dados exatamente ao mesmo tempo.",
+                                  "check_0":  "LatÃªncia de sub-milissegundo",
+                                  "check_1":  "Suporte offline pronto",
+                                  "check_2":  "Tratamento de resoluÃ§Ã£o de conflitos"
+                              },
+                     "analytics":  {
+                                       "title":  "AnÃ¡lises AcionÃ¡veis",
+                                       "description":  "NÃ£o voe Ã s cegas. Obtenha insights profundos sobre comportamento do usuÃ¡rio, performance do sistema e mÃ©tricas de receita. Visualize seus dados com grÃ¡ficos interativos bonitos.",
+                                       "check_0":  "Dashboards personalizÃ¡veis",
+                                       "check_1":  "Exportar para PDF, CSV ou Excel",
+                                       "check_2":  "RelatÃ³rios semanais automatizados"
+                                   }
+                 },
+    "more_title":  "E muito mais...",
+    "more_subtitle":  "Explore recursos adicionais que tornam seu aplicativo Ãºnico.",
+    "more":  {
+                 "dark_mode":  {
+                                   "title":  "Modo Escuro",
+                                   "desc":  "Suporte integrado para temas claros e escuros com detecÃ§Ã£o automÃ¡tica do sistema."
+                               },
+                 "api_first":  {
+                                   "title":  "API Primeiro",
+                                   "desc":  "APIs REST e GraphQL disponÃ­veis para controle programÃ¡tico completo."
+                               },
+                 "sso":  {
+                             "title":  "Login SSO",
+                             "desc":  "Suporte de login Ãºnico de nÃ­vel empresarial para Google, GitHub e Okta."
+                         },
+                 "audit":  {
+                               "title":  "Logs de Auditoria",
+                               "desc":  "Rastreie cada alteraÃ§Ã£o feita no seu projeto com timestamps detalhados."
+                           },
+                 "rbac":  {
+                              "title":  "Acesso Baseado em FunÃ§Ã£o",
+                              "desc":  "Controles de permissÃ£o granulares para administradores, editores e visualizadores."
+                          },
+                 "uptime":  {
+                                "title":  "99.99% de Tempo de Atividade",
+                                "desc":  "Disponibilidade garantida com nossa CDN distribuÃ­da globalmente."
+                            }
+             },
+    "cta":  {
+                "heading":  "Pronto para comeÃ§ar?",
+                "btn_create":  "Criar Conta",
+                "btn_docs":  "Ler DocumentaÃ§Ã£o"
+            },
+    "features":  {
+                     "list":  {
+                                  "speed":  {
+                                                "title":  "Ultra RÃ¡pido",
+                                                "description":  "Performance otimizada com tempos de carregamento inferiores a 100ms. ConstruÃ­do para escala global com infraestrutura edge."
+                                            },
+                                  "design":  {
+                                                 "title":  "Design Moderno",
+                                                 "description":  "Interface limpa e responsiva com aparÃªncia profissional em qualquer dispositivo. Componentes totalmente personalizÃ¡veis."
+                                             },
+                                  "security":  {
+                                                   "title":  "Alta SeguranÃ§a",
+                                                   "description":  "Criptografia de ponta a ponta, autenticaÃ§Ã£o multifator e conformidade SOC2 para proteger seus dados."
+                                               }
+                              },
+                     "heading":  "Funcionalidades Principais",
+                     "subheading":  "Tudo o que vocÃª precisa para construir e escalar."
+                 }
+}

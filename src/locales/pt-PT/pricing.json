@@ -1,0 +1,56 @@
+{
+    "period_monthly":  "mÃªs",
+    "period_yearly":  "ano",
+    "hero":  {
+                 "title_part1":  "PreÃ§os simples, ",
+                 "title_highlight":  "transparentes",
+                 "description":  "Sem taxas escondidas. Sem cobranÃ§as de surpresa. Escolhe o plano que se adapta perfeitamente Ã s tuas necessidades.",
+                 "badge":  "Escolhe o teu plano"
+             },
+    "toggle":  {
+                   "monthly":  "Mensal",
+                   "yearly":  "Anual",
+                   "yearly_hint":  "faturado anualmente",
+                   "discount":  "POUPA 20%",
+                   "aria_label":  "Toggle Pricing Plan"
+               },
+    "plans":  {
+                  "hobby":  {
+                                "name":  "Hobby",
+                                "desc":  "Perfeito para projetos pessoais e aprendizagem.",
+                                "btn":  "ComeÃ§ar",
+                                "feature_0":  "1 Projeto",
+                                "feature_1":  "Suporte da Comunidade",
+                                "feature_2":  "5GB de Armazenamento"
+                            },
+                  "pro":  {
+                              "name":  "Pro",
+                              "badge":  "Mais Popular",
+                              "desc":  "Para developers profissionais e equipas pequenas.",
+                              "btn":  "Obter Pro Agora",
+                              "feature_0":  "Projetos Ilimitados",
+                              "feature_1":  "Suporte por Email PrioritÃ¡rio",
+                              "feature_2":  "100GB de Armazenamento",
+                              "feature_3":  "AnÃ¡lises AvanÃ§adas"
+                          },
+                  "enterprise":  {
+                                     "name":  "Enterprise",
+                                     "desc":  "Para aplicaÃ§Ãµes em grande escala e organizaÃ§Ãµes.",
+                                     "btn":  "Contactar Vendas",
+                                     "feature_0":  "Tudo em Pro",
+                                     "feature_1":  "Gestor Dedicado",
+                                     "feature_2":  "SSO e Logs de Auditoria",
+                                     "feature_3":  "Armazenamento Ilimitado"
+                                 }
+              },
+    "faq":  {
+                "title":  "Perguntas Frequentes",
+                "subtitle":  "Encontra respostas para as perguntas mais frequentes sobre os nossos planos e serviÃ§os.",
+                "q_0":  "Posso cancelar a qualquer momento?",
+                "a_0":  "Sim, podes cancelar a tua assinatura a qualquer momento. O teu acesso continuarÃ¡ atÃ© ao final do perÃ­odo de faturaÃ§Ã£o.",
+                "q_1":  "Oferecem teste gratuito?",
+                "a_1":  "Oferecemos um teste gratuito de 14 dias para o plano Pro. NÃ£o Ã© necessÃ¡rio cartÃ£o de crÃ©dito para comeÃ§ar.",
+                "q_2":  "Que mÃ©todos de pagamento aceitam?",
+                "a_2":  "Aceitamos todos os principais cartÃµes de crÃ©dito (Visa, Mastercard, Amex) e PayPal. Para planos Enterprise, suportamos transferÃªncias bancÃ¡rias."
+            }
+}

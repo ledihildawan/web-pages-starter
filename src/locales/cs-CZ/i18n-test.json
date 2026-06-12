@@ -1,0 +1,203 @@
+{
+    "meta":  {
+                 "title":  "i18n test | Demo",
+                 "description":  "KomplexnÃ­ testovacÃ­ strÃ¡nka pro funkce internacionalizace"
+             },
+    "hero":  {
+                 "badge":  "i18n funkce",
+                 "title":  "KomplexnÃ­ \u003cspan class=\u0027text-violet-400\u0027\u003etest\u003c/span\u003e internacionalizace",
+                 "description":  "Otestujte vÅ¡echny i18n funkce: pÅ™eklad, mnoÅ¾nÃ© ÄÃ­slo, formÃ¡tovÃ¡nÃ­ ÄÃ­sel, mÄ›ny a pÅ™evod mÄ›n."
+             },
+    "language_info":  {
+                          "title":  "Informace o aktuÃ¡lnÃ­m jazyce",
+                          "code":  "KÃ³d jazyka",
+                          "currency":  "MÄ›na",
+                          "direction":  "SmÄ›r textu",
+                          "digits":  "NativnÃ­ ÄÃ­slice",
+                          "enabled":  "Povoleno",
+                          "disabled":  "ZakÃ¡zÃ¡no",
+                          "languages":  "Jazyky",
+                          "switching":  "PÅ™epÃ­nÃ¡nÃ­ bez obnovenÃ­",
+                          "current_code":  "cs",
+                          "current_currency":  "CZK",
+                          "current_direction":  "LTR (zleva doprava)"
+                      },
+    "numbers":  {
+                    "title":  "FormÃ¡tovÃ¡nÃ­ ÄÃ­sel",
+                    "description":  "ÄŒÃ­sla jsou formÃ¡tovÃ¡na podle aktivnÃ­ lokalizace.",
+                    "large":  "VelkÃ© ÄÃ­slo",
+                    "decimal":  "DesetinnÃ©",
+                    "million":  "Milion",
+                    "percent":  "Procento",
+                    "raw":  "SurovÃ©"
+                },
+    "currency":  {
+                     "title":  "PÅ™evod mÄ›n",
+                     "description":  "Ceny v CZK pÅ™evedenÃ© na mÄ›nu aktivnÃ­ho jazyka.",
+                     "currencies":  "MÄ›ny",
+                     "small":  "MalÃ½",
+                     "medium":  "StÅ™ednÃ­",
+                     "large":  "VelkÃ½",
+                     "enterprise":  "Enterprise"
+                 },
+    "currency_comparison":  {
+                                "title":  "SrovnÃ¡nÃ­ mÄ›n",
+                                "description":  "StejnÃ¡ cena v rÅ¯znÃ½ch podporovanÃ½ch mÄ›nÃ¡ch.",
+                                "base_price":  "ZÃ¡kladnÃ­ cena (USD)",
+                                "aed":  "SAE dirham",
+                                "aud":  "AustralskÃ½ dolar",
+                                "brl":  "BrazilskÃ½ real",
+                                "cad":  "KanadskÃ½ dolar",
+                                "chf":  "Å vÃ½carskÃ½ frank",
+                                "cny":  "ÄŒÃ­nskÃ½ juan",
+                                "eur":  "Euro",
+                                "gbp":  "BritskÃ¡ libra",
+                                "idr":  "Rupie",
+                                "inr":  "IndickÃ¡ rupie",
+                                "jpy":  "JaponskÃ½ jen",
+                                "krw":  "KorejskÃ½ won",
+                                "mxn":  "MexickÃ© peso",
+                                "sar":  "SaÃºdskÃ½ rijÃ¡l",
+                                "sgd":  "SingapurskÃ½ dolar",
+                                "usd":  "AmerickÃ½ dolar",
+                                "zar":  "JihoafrickÃ½ rand"
+                            },
+    "core":  {
+                 "title":  "HlavnÃ­ funkce",
+                 "description":  "PÅ™eklad, mnoÅ¾nÃ© ÄÃ­slo a HTML obsah."
+             },
+    "pluralization":  {
+                          "title":  "MnoÅ¾nÃ© ÄÃ­slo",
+                          "description":  "RÅ¯znÃ© tvary mnoÅ¾nÃ©ho ÄÃ­sla pro kaÅ¾dÃ½ jazyk.",
+                          "item_title":  "Item (poloÅ¾ka)",
+                          "user_title":  "User (uÅ¾ivatel)",
+                          "product_title":  "Product (produkt)"
+                      },
+    "form":  {
+                 "title":  "FormulÃ¡Å™ s pÅ™eloÅ¾enÃ½mi placeholdery",
+                 "description":  "Placeholdery a popisky jsou zÃ­skÃ¡vÃ¡ny z jazykovÃ½ch souborÅ¯.",
+                 "name_label":  "JmÃ©no",
+                 "name_placeholder":  "Zadejte svÃ© celÃ© jmÃ©no",
+                 "email_label":  "E-mail",
+                 "email_placeholder":  "priklad@email.cz",
+                 "message_label":  "ZprÃ¡va",
+                 "message_placeholder":  "NapiÅ¡te svou zprÃ¡vu sem...",
+                 "submit":  "Odeslat"
+             },
+    "missing_keys":  {
+                         "title":  "ZpracovÃ¡nÃ­ chybÄ›jÃ­cÃ­ch klÃ­ÄÅ¯",
+                         "description":  "ChybÄ›jÃ­cÃ­ pÅ™ekladovÃ© klÃ­Äe se zobrazujÃ­ v hranatÃ½ch zÃ¡vorkÃ¡ch."
+                     },
+    "html_content":  {
+                         "title":  "HTML obsah",
+                         "description":  "PÅ™eklady mohou obsahovat HTML tagy pro formÃ¡tovÃ¡nÃ­.",
+                         "example":  "Toto je ukÃ¡zkovÃ½ text s \u003cspan class=\u0027text-emerald-400\u0027\u003ebarevnÃ½m zvÃ½raznÄ›nÃ­m\u003c/span\u003e a \u003cstrong\u003etuÄnÃ½m textem\u003c/strong\u003e.",
+                         "note":  "PoznÃ¡mka: HTML tagy v pÅ™ekladech musÃ­ bÃ½t uvnitÅ™ obalovacÃ­ho elementu."
+                     },
+    "switcher":  {
+                     "title":  "PÅ™epnout jazyk",
+                     "description":  "KliknÄ›te na tlaÄÃ­tko nÃ­Å¾e pro pÅ™epnutÃ­ jazyka a uvidÃ­te vÅ¡echny i18n funkce v akci."
+                 },
+    "advanced":  {
+                     "title":  "PokroÄilÃ© formÃ¡tovÃ¡nÃ­",
+                     "description":  "PokroÄilÃ© formÃ¡tovacÃ­ funkce pro procenta, jednotky, bajty, seznamy a Å™adovÃ© ÄÃ­slovky.",
+                     "percentages":  "Procenta",
+                     "units":  "Jednotky",
+                     "bytes":  "Bajty",
+                     "bytes_unit":  "bajt",
+                     "lists":  "Seznamy",
+                     "ordinals":  "Å˜adovÃ© ÄÃ­slovky",
+                     "cardinals":  "KardinÃ¡lnÃ­ ÄÃ­slovky",
+                     "scientific":  "VÄ›deckÃ½ zÃ¡pis",
+                     "abbreviated":  "ZkrÃ¡cenÃ½",
+                     "date_formats":  "FormÃ¡ty data",
+                     "time_formats":  "FormÃ¡ty Äasu",
+                     "datetime":  "Datum + Äas",
+                     "durations":  "Doby trvÃ¡nÃ­",
+                     "relative_time":  "RelativnÃ­ Äas",
+                     "regional_pricing":  "RegionÃ¡lnÃ­ ceny",
+                     "fifty_percent":  "PadesÃ¡t procent",
+                     "small_percent":  "MalÃ© procento",
+                     "ninety_nine":  "DevadesÃ¡t devÄ›t",
+                     "hundred":  "Sto",
+                     "kilobyte":  "Kilobajt",
+                     "distance":  "VzdÃ¡lenost",
+                     "temperature":  "Teplota",
+                     "weight":  "Hmotnost",
+                     "half_kb":  "PÅ¯l KB",
+                     "one_and_half_kb":  "Jeden a pÅ¯l KB",
+                     "one_mb":  "Jeden MB",
+                     "one_gb":  "Jeden GB",
+                     "two_items":  "DvÄ› poloÅ¾ky",
+                     "three_items":  "TÅ™i poloÅ¾ky",
+                     "four_items":  "ÄŒtyÅ™i poloÅ¾ky",
+                     "date_short":  "KrÃ¡tkÃ© datum",
+                     "date_long":  "DlouhÃ© datum",
+                     "time_short":  "KrÃ¡tkÃ½ Äas",
+                     "time_long":  "DlouhÃ½ Äas",
+                     "day_ago":  "DnÅ¯ zpÄ›t",
+                     "months_ago":  "MÄ›sÃ­cÅ¯ zpÄ›t",
+                     "hour_in":  "Za 1 hodinu",
+                     "starter_plan":  "PlÃ¡n Starter",
+                     "pro_plan":  "PlÃ¡n Pro",
+                     "discount_20":  "20% sleva",
+                     "number_modes":  "ReÅ¾imy ÄÃ­sel",
+                     "number_modes_desc":  "SrovnÃ¡nÃ­ mezi nativnÃ­mi ÄÃ­slicemi (Ù Ù¡Ù¢Ù£Ù¤) a univerzÃ¡lnÃ­m (0-9) formÃ¡tovÃ¡nÃ­m.",
+                     "native_label":  "NativnÃ­ ÄÃ­slice (Ù Ù¡Ù¢Ù£Ù¤)",
+                     "universal_label":  "UniverzÃ¡lnÃ­ (0-9)",
+                     "plain_label":  "Automaticky"
+                 },
+    "template_macros":  {
+                            "title":  "Å ablonovÃ© makra",
+                            "description":  "Makra pro zÃ­skÃ¡nÃ­ surovÃ½ch hodnot bez HTML markupu.",
+                            "raw_value":  "SurovÃ¡ hodnota bez markupu",
+                            "current_year":  "AktuÃ¡lnÃ­ rok je {{year}}"
+                        },
+    "datetime":  {
+                     "title":  "Datum a Äas",
+                     "description":  "KombinovanÃ½ formÃ¡t data a Äasu.",
+                     "iso":  "ISO standard",
+                     "eve":  "Å tÄ›drÃ½ den"
+                 },
+    "unit":  {
+                 "title":  "FormÃ¡t jednotek"
+             },
+    "native_digits":  {
+                          "title":  "NativnÃ­ ÄÃ­slice",
+                          "description":  "Text s ASCII ÄÃ­slicemi se zobrazuje v nativnÃ­ch ÄÃ­slicÃ­ch, kdyÅ¾ to lokalizace povolÃ­. Aktualizuje se Å¾ivÄ› pÅ™i pÅ™epÃ­nÃ¡nÃ­ jazyka."
+                      },
+    "inflection":  {
+                       "title":  "AnglickÃ¡ flexe",
+                       "description":  "AnglickÃ© mnoÅ¾nÃ© a jednotnÃ© ÄÃ­slo. Aktualizuje se Å¾ivÄ› pÅ™i pÅ™epÃ­nÃ¡nÃ­ jazyka."
+                   },
+    "live_label":  "Å½ivÄ›",
+    "pricing_details":  {
+                            "title":  "Detaily ceny",
+                            "description":  "KompletnÃ­ pipeline: surovÃ¡ hodnota, kÃ³d mÄ›ny, formÃ¡t, sleva a konverze.",
+                            "raw_value":  "SurovÃ¡ hodnota",
+                            "raw_currency":  "KÃ³d mÄ›ny",
+                            "formatted":  "FormÃ¡tovÃ¡no",
+                            "discounted":  "20% sleva",
+                            "converted_usd":  "PÅ™evedeno na USD"
+                        },
+    "live_update":  {
+                        "note":  "VÅ¡imnÄ›te si, Å¾e se vÅ¡echna ÄÃ­sla, data a ceny okamÅ¾itÄ› mÄ›nÃ­ pÅ™i pÅ™epnutÃ­ jazyka â€” bez obnovenÃ­ strÃ¡nky."
+                    },
+    "section_modes":  {
+                          "title":  "ReÅ¾imy ÄŒÃ­sel",
+                          "description":  "Porovnejte nativnÃ­ ÄÃ­slice, univerzÃ¡lnÃ­ formÃ¡t a automatickÃ½ reÅ¾im pro aktivnÃ­ lokalitu."
+                      },
+    "section_systems":  {
+                            "title":  "PÃ­semnÃ© SystÃ©my",
+                            "description":  "VÅ¡ech 7 algoritmickÃ½ch a 4 dalÅ¡Ã­ch numerickÃ½ch systÃ©mÅ¯ na Ãºrovni systÃ©mu, s pÅ™ipojenÃ½mi zavadÄ›Äi pÃ­sem.",
+                            "note":  "VÅ¡echny ÄÃ­selnÃ© systÃ©my (algoritmickÃ© a numerickÃ©) zobrazujÃ­ sprÃ¡vnÃ© nativnÃ­ ÄÃ­slice s ICU fallback."
+                        },
+    "nav":  {
+                "translations":  "PÅ™eklady",
+                "formatting":  "ÄŒÃ­sla",
+                "pricing":  "Ceny",
+                "modes":  "ReÅ¾imy",
+                "systems":  "SystÃ©my",
+                "switcher":  "ZmÄ›nit Lokalitu"
+            }
+}

@@ -94,7 +94,7 @@ const localeContent = `{
   "hero": {
     "badge": "Badge",
     "title": "${titleCase} Page",
-    "description": "This text is managed from locales/{{lng}}/${formattedName}.json5"
+    "description": "This text is managed from locales/{{lng}}/${formattedName}.json"
   },
   "content": {
     "intro": "Add your content here."
@@ -114,12 +114,12 @@ try {
   if (fs.existsSync(baseLocaleDir)) {
     for (const lng of LOCALE_CODES) {
       const lngDir = path.join(baseLocaleDir, lng);
-      const filePath = path.join(lngDir, `${formattedName}.json5`);
+      const filePath = path.join(lngDir, `${formattedName}.json`);
 
       if (!fs.existsSync(filePath)) {
         fs.writeFileSync(filePath, localeContent, 'utf-8');
         log.info(
-          `Created locale [${lng}]: src/locales/${lng}/${formattedName}.json5`,
+          `Created locale [${lng}]: src/locales/${lng}/${formattedName}.json`,
         );
       }
     }

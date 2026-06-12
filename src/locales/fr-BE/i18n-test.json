@@ -1,0 +1,203 @@
+{
+    "meta":  {
+                 "title":  "Test i18n | DÃ©mo",
+                 "description":  "Page de test complÃ¨te des fonctionnalitÃ©s d\u0027internationalisation"
+             },
+    "hero":  {
+                 "badge":  "FonctionnalitÃ©s i18n",
+                 "title":  "Test complet de \u003cspan class=\u0027text-violet-400\u0027\u003el\u0027i18n\u003c/span\u003e",
+                 "description":  "Essayez toutes les fonctionnalitÃ©s i18n: traduction, pluralisation, formatage des nombres, devise et conversion de devise."
+             },
+    "language_info":  {
+                          "title":  "Informations sur la Langue Actuelle",
+                          "code":  "Code de Langue",
+                          "currency":  "Devise",
+                          "direction":  "Direction du Texte",
+                          "current_code":  "fr",
+                          "current_currency":  "EUR",
+                          "current_direction":  "LTR (Left to Right)",
+                          "digits":  "Chiffres Natifs",
+                          "enabled":  "ActivÃ©",
+                          "disabled":  "DÃ©sactivÃ©",
+                          "languages":  "Langues",
+                          "switching":  "Changement Sans Rechargement"
+                      },
+    "numbers":  {
+                    "title":  "Formatage des Nombres",
+                    "description":  "Nombres formatÃ©s selon la langue active.",
+                    "large":  "Grand Nombre",
+                    "decimal":  "DÃ©cimal",
+                    "million":  "Million",
+                    "percent":  "Pourcentage",
+                    "raw":  "Brut"
+                },
+    "currency":  {
+                     "title":  "Formatage de Devise",
+                     "description":  "Prix en IDR convertis vers la devise de la langue active.",
+                     "small":  "Petit",
+                     "medium":  "Moyen",
+                     "large":  "Grand",
+                     "enterprise":  "Entreprise",
+                     "currencies":  "Devises"
+                 },
+    "currency_comparison":  {
+                                "title":  "Comparaison de Devises",
+                                "description":  "MÃªme prix dans toutes les devises supportÃ©es.",
+                                "base_price":  "Prix de Base (IDR)",
+                                "aed":  "Dirham des Ã‰mirats",
+                                "aud":  "Dollar Australien",
+                                "brl":  "RÃ©al BrÃ©silien",
+                                "cad":  "Dollar Canadien",
+                                "chf":  "Franc Suisse",
+                                "cny":  "CNY",
+                                "eur":  "Euro",
+                                "gbp":  "Livre Sterling",
+                                "idr":  "IDR",
+                                "inr":  "Roupie Indienne",
+                                "jpy":  "JPY",
+                                "krw":  "Won corÃ©en",
+                                "mxn":  "Peso Mexicain",
+                                "sar":  "SAR",
+                                "sgd":  "Dollar Singapourien",
+                                "usd":  "USD",
+                                "zar":  "Rand Sud-Africain"
+                            },
+    "pluralization":  {
+                          "title":  "Pluralisation",
+                          "description":  "Les formes plurielles varient selon la langue.",
+                          "item_title":  "Ã‰lÃ©ment (Nom)",
+                          "user_title":  "Utilisateur (Personne)",
+                          "product_title":  "Produit (Biens)"
+                      },
+    "form":  {
+                 "title":  "Formulaire avec Placeholders Traduits",
+                 "description":  "Placeholders et Ã©tiquettes chargÃ©s depuis les fichiers de paramÃ¨tres rÃ©gionaux.",
+                 "name_label":  "Nom",
+                 "name_placeholder":  "Entrez votre nom complet",
+                 "email_label":  "E-mail",
+                 "email_placeholder":  "exemple@email.com",
+                 "message_label":  "Message",
+                 "message_placeholder":  "Tapez votre message ici...",
+                 "submit":  "Envoyer"
+             },
+    "missing_keys":  {
+                         "title":  "Gestionnaire de ClÃ©s Manquantes",
+                         "description":  "Les clÃ©s manquantes sont affichÃ©es entre crochets."
+                     },
+    "html_content":  {
+                         "title":  "Contenu HTML",
+                         "description":  "Les traductions peuvent inclure des balises HTML pour le style.",
+                         "example":  "Ceci est un exemple avec \u003cspan class=\u0027text-emerald-400\u0027\u003emise en Ã©vidence colorÃ©e\u003c/span\u003e et \u003cstrong\u003etexte en gras\u003c/strong\u003e.",
+                         "note":  "Note: Le HTML dans les traductions doit avoir un seul Ã©lÃ©ment racine."
+                     },
+    "switcher":  {
+                     "title":  "Changer de Langue",
+                     "description":  "Cliquez sur les boutons ci-dessous pour changer la langue et voir l\u0027i18n en action."
+                 },
+    "advanced":  {
+                     "title":  "Formatage AvancÃ©",
+                     "description":  "FonctionnalitÃ©s de formatage avancÃ©es pour les pourcentages, unitÃ©s, octets, listes et ordinaux.",
+                     "percentages":  "Pourcentages",
+                     "units":  "UnitÃ©s",
+                     "bytes":  "Octets",
+                     "bytes_unit":  "octets",
+                     "lists":  "Listes",
+                     "ordinals":  "Ordinaux",
+                     "cardinals":  "Cardinaux",
+                     "scientific":  "Notation Scientifique",
+                     "abbreviated":  "AbrÃ©gÃ©",
+                     "date_formats":  "Formats de Date",
+                     "time_formats":  "Formats d\u0027Heure",
+                     "datetime":  "Date + Heure",
+                     "durations":  "DurÃ©es",
+                     "relative_time":  "Temps Relatif",
+                     "regional_pricing":  "Tarification RÃ©gionale",
+                     "fifty_percent":  "Cinquante Pour Cent",
+                     "small_percent":  "Petit Pourcentage",
+                     "ninety_nine":  "Quatre-Vingt-Dix-Neuf",
+                     "hundred":  "Cent",
+                     "kilobyte":  "Kilooctet",
+                     "distance":  "Distance",
+                     "temperature":  "TempÃ©rature",
+                     "weight":  "Poids",
+                     "half_kb":  "Demi KO",
+                     "one_and_half_kb":  "Un KO et Demi",
+                     "one_mb":  "Un MO",
+                     "one_gb":  "Un GO",
+                     "two_items":  "Deux Ã‰lÃ©ments",
+                     "three_items":  "Trois Ã‰lÃ©ments",
+                     "four_items":  "Quatre Ã‰lÃ©ments",
+                     "date_short":  "Date Courte",
+                     "date_long":  "Date Longue",
+                     "time_short":  "Heure Courte",
+                     "time_long":  "Heure Longue",
+                     "day_ago":  "il y a 1 jour",
+                     "months_ago":  "il y a 2 mois",
+                     "hour_in":  "dans 1 heure",
+                     "starter_plan":  "Plan DÃ©butant",
+                     "pro_plan":  "Plan Pro",
+                     "discount_20":  "RÃ©duction 20%",
+                     "number_modes":  "Modes de Nombre",
+                     "number_modes_desc":  "DÃ©monstration de tNative (chiffres natifs) et tUniversal (universel 0-9).",
+                     "native_label":  "Natif (Ù Ù¡Ù¢Ù£Ù¤)",
+                     "universal_label":  "Universel (0-9)",
+                     "plain_label":  "Simple (auto)"
+                 },
+    "template_macros":  {
+                            "title":  "Macros de Template",
+                            "description":  "Macros pour obtenir des valeurs brutes sans balisage HTML.",
+                            "raw_value":  "Valeur brute sans formatage",
+                            "current_year":  "L\u0027annÃ©e actuelle est {{year}}"
+                        },
+    "datetime":  {
+                     "title":  "Date et Heure",
+                     "description":  "Format combinÃ© de date et heure.",
+                     "iso":  "Standard ISO",
+                     "eve":  "RÃ©veillon de NoÃ«l"
+                 },
+    "unit":  {
+                 "title":  "Formatage d\u0027UnitÃ©s"
+             },
+    "native_digits":  {
+                          "title":  "Chiffres Natifs",
+                          "description":  "Le texte avec des chiffres ASCII est rendu dans les chiffres natifs de la locale active. ActualisÃ© en direct lors du changement de langue."
+                      },
+    "inflection":  {
+                       "title":  "Inflexion de l\u0027Anglais",
+                       "description":  "Pluralisation et singularisation de l\u0027anglais. ActualisÃ© en direct lors du changement de langue."
+                   },
+    "live_label":  "En direct",
+    "pricing_details":  {
+                            "title":  "DÃ©tails des Prix",
+                            "description":  "Pipeline complet : valeur raw, code devise, formatÃ©, discountÃ© et converti.",
+                            "raw_value":  "Valeur Raw",
+                            "raw_currency":  "Code Devise",
+                            "formatted":  "FormatÃ©",
+                            "discounted":  "20% RÃ©duction",
+                            "converted_usd":  "Converti en USD"
+                        },
+    "live_update":  {
+                        "note":  "Remarquez comment tous les chiffres, dates et prix se mettent Ã  jour instantanÃ©ment lorsque vous changez de langue â€” sans rechargement de page."
+                    },
+    "core":  {
+                 "title":  "FonctionnalitÃ©s Principales",
+                 "description":  "Traduction, pluralisation et contenu HTML."
+             },
+    "section_modes":  {
+                          "title":  "Modes de Nombre",
+                          "description":  "Comparez les chiffres natifs, le format universel et le mode automatique pour la locale active."
+                      },
+    "section_systems":  {
+                            "title":  "SystÃ¨mes d\u0027Ã‰criture",
+                            "description":  "Les 7 systÃ¨mes algorithmiques et 4 systÃ¨mes numÃ©riques supplÃ©mentaires au niveau systÃ¨me, avec les chargeurs de polices connectÃ©s.",
+                            "note":  "Tous les systÃ¨mes numÃ©riques (algorithmes et numÃ©riques) affichent les chiffres natifs corrects avec le fallback ICU."
+                        },
+    "nav":  {
+                "translations":  "Traductions",
+                "formatting":  "Nombres",
+                "pricing":  "Tarifs",
+                "modes":  "Modes",
+                "systems":  "SystÃ¨mes",
+                "switcher":  "Changer de Locale"
+            }
+}

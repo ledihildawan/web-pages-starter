@@ -1,0 +1,75 @@
+{
+    "hero":  {
+                 "badge":  "Silmapaistvad funktsioonid",
+                 "title_part1":  "KÃµik, mida Te vajate, et",
+                 "title_highlight":  "kasvada kiiremini",
+                 "description":  "VÃµimsast analÃ¼Ã¼tikast sujuvate integratsioonideni â€“ pakume tÃ¶Ã¶riistakomplekti, mida Te vajate maailmataseme rakenduste ehitamiseks ilma peavaludeta."
+             },
+    "features":  {
+                     "heading":  "Silmapaistvad funktsioonid",
+                     "subheading":  "KÃµik, mida Te vajate ehitamiseks ja kasvamiseks.",
+                     "list":  {
+                                  "speed":  {
+                                                "title":  "Eriti kiire",
+                                                "description":  "Optimaalne jÃµudlus allalaadimisajaga alla 100 ms. Loodud globaalseks skaleerimiseks servataristuga."
+                                            },
+                                  "design":  {
+                                                 "title":  "Modernne disain",
+                                                 "description":  "Reageeriv ja puhas kasutajaliides, mis nÃ¤eb professionaalne vÃ¤lja kÃµigil seadmetel. TÃ¤ielikult kohandatavad komponendid."
+                                             },
+                                  "security":  {
+                                                   "title":  "KÃµrge turvalisus",
+                                                   "description":  "Otspunkti krÃ¼pteerimine, mitme teguri autentimine ja SOC2 nÃµuetele vastavus Teie andmete kaitsmiseks."
+                                               }
+                              }
+                 },
+    "sections":  {
+                     "sync":  {
+                                  "title":  "Reaalajas sÃ¼nkroonimine",
+                                  "description":  "Muudatused levivad koheselt kÃµigis seadmetes. Oleni sellest, kas Teie kasutajad kasutavad telefoni, arvutit vÃµi tahvelarvutit â€“ nad nÃ¤evad samu andmeid samal ajal.",
+                                  "check_0":  "Latentsus alla millisekundi",
+                                  "check_1":  "Sisseehitatud vÃµrguÃ¼henduseta tugi",
+                                  "check_2":  "Konfliktide lahendamine"
+                              },
+                     "analytics":  {
+                                       "title":  "Tegevuslik analÃ¼Ã¼tika",
+                                       "description":  "Ã„rge arvake. Saage sÃ¼gavaid Ã¼levaateid kasutajate kÃ¤itumise, sÃ¼steemi jÃµudluse ja tulude nÃ¤itajate kohta. Visualiseerige andmeid interaktiivsete graafikutega.",
+                                       "check_0":  "Kohandatavad juhtpaneelid",
+                                       "check_1":  "Eksport PDF-i, CSV-i vÃµi Excelisse",
+                                       "check_2":  "Automaatsed nÃ¤dalaaruanded"
+                                   }
+                 },
+    "more_title":  "Ja veel palju muud...",
+    "more_subtitle":  "TÃ¤iustatud funktsioonid, mis on loodud aitamaks Teil ehitada kiiremini ja skaleeruvamalt.",
+    "more":  {
+                 "dark_mode":  {
+                                   "title":  "Tume reÅ¾iim",
+                                   "desc":  "Sisseehitatud tugi heledale ja tumendale teemale automaatse tuvastusega."
+                               },
+                 "api_first":  {
+                                   "title":  "API esikohal",
+                                   "desc":  "REST ja GraphQL API saadaval tÃ¤ielikuks programmiliseks kontrolliks."
+                               },
+                 "sso":  {
+                             "title":  "SSO sisselogimine",
+                             "desc":  "Enterprise-tasemel Ã¼hekordne sisselogimine Google, GitHub ja Okta toega."
+                         },
+                 "audit":  {
+                               "title":  "Auditilogi",
+                               "desc":  "JÃ¤lgige iga muudatust oma projektis detailsete ajatemplitega."
+                           },
+                 "rbac":  {
+                              "title":  "RollipÃµhine juurdepÃ¤Ã¤s",
+                              "desc":  "TÃ¤pne Ãµiguste haldus administraatoritele, toimetajatele ja vaatajatele."
+                          },
+                 "uptime":  {
+                                "title":  "99,99 % tÃ¶Ã¶aeg",
+                                "desc":  "Garanteeritud saadavus meie globaalselt jaotatud CDN-iga."
+                            }
+             },
+    "cta":  {
+                "heading":  "Valmis alustama?",
+                "btn_create":  "Loo konto",
+                "btn_docs":  "Loe dokumentatsiooni"
+            }
+}

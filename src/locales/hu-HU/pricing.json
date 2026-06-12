@@ -1,0 +1,56 @@
+{
+    "period_monthly":  "hÃ³nap",
+    "period_yearly":  "Ã©v",
+    "hero":  {
+                 "badge":  "VÃ¡lassz tervet",
+                 "title_part1":  "EgyszerÅ± Ã©s ",
+                 "title_highlight":  "Ã¡tlÃ¡thatÃ³ Ã¡razÃ¡s",
+                 "description":  "Nincs rejtett dÃ­j. Nincsenek meglepetÃ©sdÃ­jak. VÃ¡laszd azt a tervet, amelyik a legjobban megfelel az igÃ©nyeidnek."
+             },
+    "toggle":  {
+                   "monthly":  "Havi",
+                   "yearly":  "Ã‰ves",
+                   "yearly_hint":  "Ã©vente szÃ¡mlÃ¡zva",
+                   "discount":  "SPÃ“ROLJ 20%-OT",
+                   "aria_label":  "ÃrazÃ¡si csomag vÃ¡ltÃ¡sa"
+               },
+    "plans":  {
+                  "hobby":  {
+                                "name":  "Hobbi",
+                                "desc":  "TÃ¶kÃ©letes mellÃ©kprojektekhez Ã©s tanulÃ¡shoz.",
+                                "btn":  "Kezdj ingyen",
+                                "feature_0":  "1 projekt",
+                                "feature_1":  "KÃ¶zÃ¶ssÃ©gi tÃ¡mogatÃ¡s",
+                                "feature_2":  "5 GB tÃ¡rhely"
+                            },
+                  "pro":  {
+                              "name":  "Pro",
+                              "badge":  "LegnÃ©pszerÅ±bb",
+                              "desc":  "ProfesszionÃ¡lis fejlesztÅ‘knek Ã©s kis csapatoknak.",
+                              "btn":  "Pro csomag vÃ¡lasztÃ¡sa",
+                              "feature_0":  "KorlÃ¡tlan projekt",
+                              "feature_1":  "PrioritÃ¡sos e-mail tÃ¡mogatÃ¡s",
+                              "feature_2":  "100 GB tÃ¡rhely",
+                              "feature_3":  "Fejlett analitika"
+                          },
+                  "enterprise":  {
+                                     "name":  "Enterprise",
+                                     "desc":  "Nagy lÃ©ptÃ©kÅ± alkalmazÃ¡sokhoz Ã©s szervezetekhez.",
+                                     "btn":  "Kapcsolat az Ã©rtÃ©kesÃ­tÃ©ssel",
+                                     "feature_0":  "Minden Pro funkciÃ³",
+                                     "feature_1":  "DedikÃ¡lt fiÃ³kkezelÅ‘",
+                                     "feature_2":  "SSO Ã©s naplÃ³zÃ¡s",
+                                     "feature_3":  "KorlÃ¡tlan tÃ¡rhely"
+                                 }
+              },
+    "faq":  {
+                "title":  "Gyakran ismÃ©telt kÃ©rdÃ©sek",
+                "subtitle":  "TalÃ¡ld meg a vÃ¡laszokat a leggyakoribb kÃ©rdÃ©sekre a csomagjainkkal Ã©s szolgÃ¡ltatÃ¡sainkkal kapcsolatban.",
+                "q_0":  "BÃ¡rmikor lemondhatom?",
+                "a_0":  "Igen, bÃ¡rmikor lemondhatod az elÅ‘fizetÃ©sed. A hozzÃ¡fÃ©rÃ©sed a szÃ¡mlÃ¡zÃ¡si idÅ‘szak vÃ©gÃ©ig aktÃ­v marad.",
+                "q_1":  "Van ingyenes prÃ³ba?",
+                "a_1":  "14 napos ingyenes prÃ³bÃ¡t kÃ­nÃ¡lunk a Pro csomagra. Nincs szÃ¼ksÃ©g hitelkÃ¡rtyÃ¡ra az indulÃ¡shoz.",
+                "q_2":  "Milyen fizetÃ©si mÃ³dok Ã¡llnak rendelkezÃ©sre?",
+                "a_2":  "Elfogadunk minden fÅ‘bb hitelkÃ¡rtyÃ¡t Ã©s a PayPal-t. Az Enterprise csomaghoz banki Ã¡tutalÃ¡st is tÃ¡mogatunk."
+            }
+}

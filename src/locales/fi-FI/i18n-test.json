@@ -1,0 +1,203 @@
+{
+    "meta":  {
+                 "title":  "i18n-testi | Demo",
+                 "description":  "Kattava testisivu kansainvÃ¤listymisominaisuuksille"
+             },
+    "hero":  {
+                 "badge":  "i18n-ominaisuudet",
+                 "title":  "Kattava \u003cspan class=\u0027text-violet-400\u0027\u003etesti\u003c/span\u003e kansainvÃ¤listymisestÃ¤",
+                 "description":  "Testaa kaikki i18n-ominaisuudet: kÃ¤Ã¤nnÃ¶s, monikkomuotoilu, numeroiden muotoilu, valuutat ja valuutan muunto."
+             },
+    "language_info":  {
+                          "title":  "Nykyisen kielen tiedot",
+                          "code":  "Kielikoodi",
+                          "currency":  "Valuutta",
+                          "direction":  "Tekstin suunta",
+                          "digits":  "AlkuperÃ¤iset numerot",
+                          "enabled":  "KÃ¤ytÃ¶ssÃ¤",
+                          "disabled":  "Ei kÃ¤ytÃ¶ssÃ¤",
+                          "languages":  "Kielet",
+                          "switching":  "Vaihto ilman uudelleenlatausta",
+                          "current_code":  "fi",
+                          "current_currency":  "EUR",
+                          "current_direction":  "LTR (vasemmalta oikealle)"
+                      },
+    "numbers":  {
+                    "title":  "Numeroiden muotoilu",
+                    "description":  "Numerot muotoillaan aktiivisen lokalisoinnin mukaan.",
+                    "large":  "Suuri numero",
+                    "decimal":  "Desimaali",
+                    "million":  "Miljoona",
+                    "percent":  "Prosentti",
+                    "raw":  "Raaka"
+                },
+    "currency":  {
+                     "title":  "Valuutan muunto",
+                     "description":  "Hinnat EUR-muunnettuna aktiivisen kielen valuuttaan.",
+                     "currencies":  "Valuutat",
+                     "small":  "Pieni",
+                     "medium":  "Keskikokoinen",
+                     "large":  "Suuri",
+                     "enterprise":  "Yritys"
+                 },
+    "currency_comparison":  {
+                                "title":  "Valuuttojen vertailu",
+                                "description":  "Sama hinta eri tuetuissa valuutoissa.",
+                                "base_price":  "Perushinta (USD)",
+                                "aed":  "Arabiemiirikuntien dirhami",
+                                "aud":  "Australian dollari",
+                                "brl":  "Brasilian real",
+                                "cad":  "Kanadan dollari",
+                                "chf":  "Sveitsin frangi",
+                                "cny":  "Kiinan juan",
+                                "eur":  "Euro",
+                                "gbp":  "Englannin punta",
+                                "idr":  "Rupia",
+                                "inr":  "Intian rupia",
+                                "jpy":  "Japanin jeni",
+                                "krw":  "Korean won",
+                                "mxn":  "Meksikon peso",
+                                "sar":  "Saudi-Arabian rial",
+                                "sgd":  "Singaporen dollari",
+                                "usd":  "Yhdysvaltain dollari",
+                                "zar":  "EtelÃ¤-Afrikan randi"
+                            },
+    "core":  {
+                 "title":  "Ydinosaamisalueet",
+                 "description":  "KÃ¤Ã¤nnÃ¶s, monikkomuotoilu ja HTML-sisÃ¤ltÃ¶."
+             },
+    "pluralization":  {
+                          "title":  "Monikkomuotoilu",
+                          "description":  "Eri monikkomuodot kullekin kielelle.",
+                          "item_title":  "Item (kohde)",
+                          "user_title":  "User (kÃ¤yttÃ¤jÃ¤)",
+                          "product_title":  "Product (tuote)"
+                      },
+    "form":  {
+                 "title":  "Lomake kÃ¤Ã¤nnetyillÃ¤ paikanpitimillÃ¤",
+                 "description":  "Paikanpitimet ja tunnisteet haetaan kielitiedostoista.",
+                 "name_label":  "Nimi",
+                 "name_placeholder":  "Anna koko nimesi",
+                 "email_label":  "SÃ¤hkÃ¶posti",
+                 "email_placeholder":  "esimerkki@sahkoposti.fi",
+                 "message_label":  "Viesti",
+                 "message_placeholder":  "Kirjoita viestisi tÃ¤hÃ¤n...",
+                 "submit":  "LÃ¤hetÃ¤"
+             },
+    "missing_keys":  {
+                         "title":  "Puuttuvien avainten kÃ¤sittely",
+                         "description":  "LÃ¶ytymÃ¤ttÃ¶miÃ¤ kÃ¤Ã¤nnÃ¶savaimia nÃ¤ytetÃ¤Ã¤n hakasulkeissa."
+                     },
+    "html_content":  {
+                         "title":  "HTML-sisÃ¤ltÃ¶",
+                         "description":  "KÃ¤Ã¤nnÃ¶kset voivat sisÃ¤ltÃ¤Ã¤ HTML-tageja muotoilua varten.",
+                         "example":  "TÃ¤mÃ¤ on esimerkkiteksti, jossa on \u003cspan class=\u0027text-emerald-400\u0027\u003evÃ¤ri-korostus\u003c/span\u003e ja \u003cstrong\u003elihavoitu teksti\u003c/strong\u003e.",
+                         "note":  "Huomaa: HTML-tagit kÃ¤Ã¤nnÃ¶ksissÃ¤ tÃ¤ytyy olla kÃ¤Ã¤revÃ¤n elementin sisÃ¤llÃ¤."
+                     },
+    "switcher":  {
+                     "title":  "Vaihda kieli",
+                     "description":  "Napsauta alla olevaa painiketta vaihtaaksesi kieltÃ¤ ja nÃ¤hdÃ¤ksesi kaikki i18n-ominaisuudet toiminnassa."
+                 },
+    "advanced":  {
+                     "title":  "Edistynyt muotoilu",
+                     "description":  "EdistyneitÃ¤ muotoiluominaisuuksia prosenteille, yksikÃ¶ille, tavuilla, listoille ja jÃ¤rjestysluvuille.",
+                     "percentages":  "Prosentit",
+                     "units":  "YksikÃ¶t",
+                     "bytes":  "Tavut",
+                     "bytes_unit":  "tavu",
+                     "lists":  "Listat",
+                     "ordinals":  "JÃ¤rjestysluvut",
+                     "cardinals":  "Kardinaalit",
+                     "scientific":  "Tieteellinen merkintÃ¤",
+                     "abbreviated":  "Lyhennetty",
+                     "date_formats":  "PÃ¤ivÃ¤mÃ¤Ã¤rÃ¤muodot",
+                     "time_formats":  "Aikamuodot",
+                     "datetime":  "PÃ¤ivÃ¤mÃ¤Ã¤rÃ¤ + aika",
+                     "durations":  "Kestot",
+                     "relative_time":  "Suhteellinen aika",
+                     "regional_pricing":  "Alueelliset hinnat",
+                     "fifty_percent":  "ViisikymmentÃ¤ prosenttia",
+                     "small_percent":  "Pieni prosentti",
+                     "ninety_nine":  "YhdeksÃ¤nkymmentÃ¤yhdeksÃ¤n",
+                     "hundred":  "Sata",
+                     "kilobyte":  "Kilotavu",
+                     "distance":  "EtÃ¤isyys",
+                     "temperature":  "LÃ¤mpÃ¶tila",
+                     "weight":  "Paino",
+                     "half_kb":  "Puoli KB",
+                     "one_and_half_kb":  "Puolitoista KB",
+                     "one_mb":  "Yksi MB",
+                     "one_gb":  "Yksi GB",
+                     "two_items":  "Kaksi kohdetta",
+                     "three_items":  "Kolme kohdetta",
+                     "four_items":  "NeljÃ¤ kohdetta",
+                     "date_short":  "Lyhyt pÃ¤ivÃ¤mÃ¤Ã¤rÃ¤",
+                     "date_long":  "PitkÃ¤ pÃ¤ivÃ¤mÃ¤Ã¤rÃ¤",
+                     "time_short":  "Lyhyt aika",
+                     "time_long":  "PitkÃ¤ aika",
+                     "day_ago":  "PÃ¤ivÃ¤Ã¤ sitten",
+                     "months_ago":  "Kuukautta sitten",
+                     "hour_in":  "1 tunnin pÃ¤Ã¤stÃ¤",
+                     "starter_plan":  "Starter-tilaus",
+                     "pro_plan":  "Pro-tilaus",
+                     "discount_20":  "20% alennus",
+                     "number_modes":  "Numerotilat",
+                     "number_modes_desc":  "Vertailu alkuperÃ¤isten numeroiden (Ù Ù¡Ù¢Ù£Ù¤) ja yleisen (0-9) muotoilun vÃ¤lillÃ¤.",
+                     "native_label":  "AlkuperÃ¤iset numerot (Ù Ù¡Ù¢Ù£Ù¤)",
+                     "universal_label":  "Yleinen (0-9)",
+                     "plain_label":  "Automaattinen"
+                 },
+    "template_macros":  {
+                            "title":  "Mallimakrot",
+                            "description":  "Makrot raaka-arvojen hakemiseen ilman HTML-merkintÃ¤Ã¤.",
+                            "raw_value":  "Raaka-arvo ilman merkintÃ¤Ã¤",
+                            "current_year":  "Nykyinen vuosi on {{year}}"
+                        },
+    "datetime":  {
+                     "title":  "PÃ¤ivÃ¤mÃ¤Ã¤rÃ¤ ja aika",
+                     "description":  "Yhdistetty pÃ¤ivÃ¤mÃ¤Ã¤rÃ¤n ja ajan muoto.",
+                     "iso":  "ISO-standardi",
+                     "eve":  "Jouluaatto"
+                 },
+    "unit":  {
+                 "title":  "YksikkÃ¶muoto"
+             },
+    "native_digits":  {
+                          "title":  "AlkuperÃ¤iset numerot",
+                          "description":  "ASCII-numeroita sisÃ¤ltÃ¤vÃ¤ teksti nÃ¤ytetÃ¤Ã¤n alkuperÃ¤isinÃ¤ numeroina, kun lokalisointi ne ottaa kÃ¤yttÃ¶Ã¶n. PÃ¤ivittyy live-tilassa kieltÃ¤ vaihdettaessa."
+                      },
+    "inflection":  {
+                       "title":  "Englannin taivutus",
+                       "description":  "Englannin monikko- ja yksikkÃ¶muotoilu. PÃ¤ivittyy live-tilassa kieltÃ¤ vaihdettaessa."
+                   },
+    "live_label":  "Live",
+    "pricing_details":  {
+                            "title":  "Hinnan tiedot",
+                            "description":  "TÃ¤ydellinen putki: raaka-arvo, valuuttakoodi, muoto, alennus ja muunto.",
+                            "raw_value":  "Raaka-arvo",
+                            "raw_currency":  "Valuuttakoodi",
+                            "formatted":  "Muotoiltu",
+                            "discounted":  "20% alennus",
+                            "converted_usd":  "Muunnettu USD:ksi"
+                        },
+    "live_update":  {
+                        "note":  "Huomaa, ettÃ¤ kaikki numerot, pÃ¤ivÃ¤mÃ¤Ã¤rÃ¤t ja hinnat muuttuvat vÃ¤littÃ¶mÃ¤sti, kun vaihdat kieltÃ¤ â€” ilman sivun uudelleenlatausta."
+                    },
+    "section_modes":  {
+                          "title":  "Numerotilat",
+                          "description":  "Vertaa natiiveja numeroita, yleismaailmallista muotoa ja automaattitilaa aktiiviselle kielialueelle."
+                      },
+    "section_systems":  {
+                            "title":  "KirjoitusjÃ¤rjestelmÃ¤t",
+                            "description":  "Kaikki 7 algoritmista ja 4 lisÃ¤numeerista jÃ¤rjestelmÃ¤Ã¤ jÃ¤rjestelmÃ¤tasolla, fonttien latausyhteydellÃ¤.",
+                            "note":  "Kaikki lukujÃ¤rjestelmÃ¤t (algoritmiset ja numeeriset) nÃ¤yttÃ¤vÃ¤t oikeita natiiveja numeroita ICU-fallbackilla."
+                        },
+    "nav":  {
+                "translations":  "KÃ¤Ã¤nnÃ¶kset",
+                "formatting":  "Numerot",
+                "pricing":  "Hinnat",
+                "modes":  "Tilat",
+                "systems":  "JÃ¤rjestelmÃ¤t",
+                "switcher":  "Vaihda Kielialue"
+            }
+}

@@ -1,0 +1,75 @@
+{
+    "hero":  {
+                 "badge":  "FuncÈ›ionalitÄƒÈ›i evidenÈ›iate",
+                 "title_part1":  "Tot ce ai nevoie pentru a",
+                 "title_highlight":  "scala mai rapid",
+                 "description":  "De la analize puternice la integrÄƒri fÄƒrÄƒ probleme, Ã®È›i oferim setul de instrumente de care ai nevoie pentru a construi aplicaÈ›ii de clasÄƒ mondialÄƒ fÄƒrÄƒ complicaÈ›ii."
+             },
+    "sections":  {
+                     "sync":  {
+                                  "title":  "Sincronizare Ã®n timp real",
+                                  "description":  "ModificÄƒrile se propagÄƒ instantaneu pe toate dispozitivele. Indiferent dacÄƒ utilizatorii tÄƒi folosesc mobil, desktop sau tabletÄƒ, vÄƒd aceleaÈ™i date Ã®n acelaÈ™i timp.",
+                                  "check_0":  "LatenÈ›Äƒ sub milisecundÄƒ",
+                                  "check_1":  "Suport offline integrat",
+                                  "check_2":  "Gestionarea rezolvÄƒrii conflictelor"
+                              },
+                     "analytics":  {
+                                       "title":  "Analize acÈ›ionabile",
+                                       "description":  "Nu mai ghici. ObÈ›ine informaÈ›ii detaliate despre comportamentul utilizatorilor, performanÈ›a sistemului È™i metricile de venit. VizualizeazÄƒ-È›i datele cu diagrame interactive.",
+                                       "check_0":  "Dashboard-uri personalizabile",
+                                       "check_1":  "ExportÄƒ Ã®n PDF, CSV sau Excel",
+                                       "check_2":  "Rapoarte sÄƒptÄƒmÃ¢nale automatizate"
+                                   }
+                 },
+    "more_title":  "È˜i mult mai mult...",
+    "more_subtitle":  "FuncÈ›ionalitÄƒÈ›i avansate concepute pentru a te ajuta sÄƒ construieÈ™ti mai rapid È™i mai scalabil.",
+    "more":  {
+                 "dark_mode":  {
+                                   "title":  "Mod Ã®ntunecat",
+                                   "desc":  "Suport integrat pentru teme luminoase È™i Ã®ntunecate cu detectare automatÄƒ."
+                               },
+                 "api_first":  {
+                                   "title":  "API Ã®nainte de toate",
+                                   "desc":  "API-uri REST È™i GraphQL disponibile pentru control programatic complet."
+                               },
+                 "sso":  {
+                             "title":  "Autentificare SSO",
+                             "desc":  "Single Sign-On de nivel enterprise pentru Google, GitHub È™i Okta."
+                         },
+                 "audit":  {
+                               "title":  "Jurnal de audit",
+                               "desc":  "UrmÄƒreÈ™te fiecare modificare a proiectelor tale cu marcaje de timp detaliate."
+                           },
+                 "rbac":  {
+                              "title":  "Acces bazat pe roluri",
+                              "desc":  "Control granular al permisiunilor pentru administratori, editori È™i vizualizatori."
+                          },
+                 "uptime":  {
+                                "title":  "99,99% disponibilitate",
+                                "desc":  "Disponibilitate garantatÄƒ cu CDN-ul nostru distribuit global."
+                            }
+             },
+    "cta":  {
+                "heading":  "Gata sÄƒ Ã®ncepi?",
+                "btn_create":  "CreeazÄƒ cont",
+                "btn_docs":  "CiteÈ™te documentaÈ›ia"
+            },
+    "features":  {
+                     "list":  {
+                                  "speed":  {
+                                                "title":  "FulgerÄƒtor",
+                                                "description":  "PerformanÈ›Äƒ optimizatÄƒ cu timpi de Ã®ncÄƒrcare sub 100ms. Construit pentru scarÄƒ globalÄƒ cu infrastructurÄƒ edge."
+                                            },
+                                  "design":  {
+                                                 "title":  "Design Modern",
+                                                 "description":  "InterfaÈ›Äƒ curatÄƒ È™i responsivÄƒ cu aspect profesional pe orice dispozitiv. Componente complet personalizabile."
+                                             },
+                                  "security":  {
+                                                   "title":  "Securitate RidicatÄƒ",
+                                                   "description":  "Criptare end-to-end, autentificare multifactor È™i conformitate SOC2 pentru a-È›i proteja datele."
+                                               }
+                              },
+                     "heading":  "FuncÈ›ionalitÄƒÈ›i Cheie",
+                     "subheading":  "Tot ce ai nevoie pentru a construi È™i scala."
+                 }
+}

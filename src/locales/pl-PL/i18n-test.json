@@ -1,0 +1,203 @@
+{
+    "meta":  {
+                 "title":  "Test i18n | Demo",
+                 "description":  "Kompleksowa strona testowa dla funkcji internacjonalizacji"
+             },
+    "hero":  {
+                 "badge":  "Funkcje i18n",
+                 "title":  "Kompleksowy \u003cspan class=\u0027text-violet-400\u0027\u003etest\u003c/span\u003e internacjonalizacji",
+                 "description":  "Przetestuj wszystkie funkcje i18n: tÅ‚umaczenie, pluralizacjÄ™, formatowanie liczb, waluty i konwersjÄ™ walut."
+             },
+    "language_info":  {
+                          "title":  "Informacje o bieÅ¼Ä…cym jÄ™zyku",
+                          "code":  "Kod jÄ™zyka",
+                          "currency":  "Waluta",
+                          "direction":  "Kierunek tekstu",
+                          "digits":  "Natywne cyfry",
+                          "enabled":  "WÅ‚Ä…czone",
+                          "disabled":  "WyÅ‚Ä…czone",
+                          "languages":  "JÄ™zyki",
+                          "switching":  "PrzeÅ‚Ä…czanie bez przeÅ‚adowania",
+                          "current_code":  "pl",
+                          "current_currency":  "PLN",
+                          "current_direction":  "LTR (od lewej do prawej)"
+                      },
+    "numbers":  {
+                    "title":  "Formatowanie liczb",
+                    "description":  "Liczby sÄ… formatowane zgodnie z aktywnÄ… lokalizacjÄ….",
+                    "large":  "DuÅ¼a liczba",
+                    "decimal":  "DziesiÄ™tna",
+                    "million":  "Milion",
+                    "percent":  "Procent",
+                    "raw":  "Surowe"
+                },
+    "currency":  {
+                     "title":  "Konwersja walut",
+                     "description":  "Ceny w PLN przeliczone na walutÄ™ aktywnego jÄ™zyka.",
+                     "currencies":  "Waluty",
+                     "small":  "MaÅ‚y",
+                     "medium":  "Åšredni",
+                     "large":  "DuÅ¼y",
+                     "enterprise":  "Enterprise"
+                 },
+    "currency_comparison":  {
+                                "title":  "PorÃ³wnanie walut",
+                                "description":  "Ta sama cena w rÃ³Å¼nych obsÅ‚ugiwanych walutach.",
+                                "base_price":  "Cena bazowa (USD)",
+                                "aed":  "Dirham ZEA",
+                                "aud":  "Dolar australijski",
+                                "brl":  "Real brazylijski",
+                                "cad":  "Dolar kanadyjski",
+                                "chf":  "Frank szwajcarski",
+                                "cny":  "Juan chiÅ„ski",
+                                "eur":  "Euro",
+                                "gbp":  "Funt brytyjski",
+                                "idr":  "Rupia",
+                                "inr":  "Rupia indyjska",
+                                "jpy":  "Jen japoÅ„ski",
+                                "krw":  "Won koreaÅ„ski",
+                                "mxn":  "Peso meksykaÅ„skie",
+                                "sar":  "Rial saudyjski",
+                                "sgd":  "Dolar singapurski",
+                                "usd":  "Dolar amerykaÅ„ski",
+                                "zar":  "Rand poÅ‚udniowoafrykaÅ„ski"
+                            },
+    "core":  {
+                 "title":  "GÅ‚Ã³wne funkcje",
+                 "description":  "TÅ‚umaczenie, pluralizacja i treÅ›Ä‡ HTML."
+             },
+    "pluralization":  {
+                          "title":  "Pluralizacja",
+                          "description":  "RÃ³Å¼ne formy liczby mnogiej dla kaÅ¼dego jÄ™zyka.",
+                          "item_title":  "Item (element)",
+                          "user_title":  "User (uÅ¼ytkownik)",
+                          "product_title":  "Product (produkt)"
+                      },
+    "form":  {
+                 "title":  "Formularz z przetÅ‚umaczonymi placeholderami",
+                 "description":  "Placeholdery i etykiety sÄ… pobierane z plikÃ³w jÄ™zykowych.",
+                 "name_label":  "ImiÄ™",
+                 "name_placeholder":  "Wpisz swoje peÅ‚ne imiÄ™",
+                 "email_label":  "E-mail",
+                 "email_placeholder":  "przyklad@email.pl",
+                 "message_label":  "WiadomoÅ›Ä‡",
+                 "message_placeholder":  "Wpisz swojÄ… wiadomoÅ›Ä‡ tutaj...",
+                 "submit":  "WyÅ›lij"
+             },
+    "missing_keys":  {
+                         "title":  "ObsÅ‚uga brakujÄ…cych kluczy",
+                         "description":  "BrakujÄ…ce klucze tÅ‚umaczeÅ„ sÄ… wyÅ›wietlane w nawiasach kwadratowych."
+                     },
+    "html_content":  {
+                         "title":  "TreÅ›Ä‡ HTML",
+                         "description":  "TÅ‚umaczenia mogÄ… zawieraÄ‡ tagi HTML do formatowania.",
+                         "example":  "To jest przykÅ‚adowy tekst z \u003cspan class=\u0027text-emerald-400\u0027\u003ekolorowym wyrÃ³Å¼nieniem\u003c/span\u003e i \u003cstrong\u003epogrubionym tekstem\u003c/strong\u003e.",
+                         "note":  "Uwaga: tagi HTML w tÅ‚umaczeniach muszÄ… znajdowaÄ‡ siÄ™ wewnÄ…trz elementu kontenerowego."
+                     },
+    "switcher":  {
+                     "title":  "PrzeÅ‚Ä…cz jÄ™zyk",
+                     "description":  "Kliknij przycisk poniÅ¼ej, aby przeÅ‚Ä…czyÄ‡ jÄ™zyk i zobaczyÄ‡ wszystkie funkcje i18n w akcji."
+                 },
+    "advanced":  {
+                     "title":  "Formatowanie zaawansowane",
+                     "description":  "Zaawansowane funkcje formatowania dla procentÃ³w, jednostek, bajtÃ³w, list i liczebnikÃ³w porzÄ…dkowych.",
+                     "percentages":  "Procenty",
+                     "units":  "Jednostki",
+                     "bytes":  "Bajty",
+                     "bytes_unit":  "bajt",
+                     "lists":  "Listy",
+                     "ordinals":  "Liczebniki porzÄ…dkowe",
+                     "cardinals":  "Liczebniki gÅ‚Ã³wne",
+                     "scientific":  "Notacja naukowa",
+                     "abbreviated":  "SkrÃ³cone",
+                     "date_formats":  "Formaty dat",
+                     "time_formats":  "Formaty czasu",
+                     "datetime":  "Data + czas",
+                     "durations":  "Czas trwania",
+                     "relative_time":  "Czas wzglÄ™dny",
+                     "regional_pricing":  "Ceny regionalne",
+                     "fifty_percent":  "PiÄ™Ä‡dziesiÄ…t procent",
+                     "small_percent":  "MaÅ‚y procent",
+                     "ninety_nine":  "DziewiÄ™Ä‡dziesiÄ…t dziewiÄ™Ä‡",
+                     "hundred":  "Sto",
+                     "kilobyte":  "Kilobajt",
+                     "distance":  "Dystans",
+                     "temperature":  "Temperatura",
+                     "weight":  "Waga",
+                     "half_kb":  "PÃ³Å‚ KB",
+                     "one_and_half_kb":  "PÃ³Å‚tora KB",
+                     "one_mb":  "Jeden MB",
+                     "one_gb":  "Jeden GB",
+                     "two_items":  "Dwa elementy",
+                     "three_items":  "Trzy elementy",
+                     "four_items":  "Cztery elementy",
+                     "date_short":  "KrÃ³tka data",
+                     "date_long":  "DÅ‚uga data",
+                     "time_short":  "KrÃ³tki czas",
+                     "time_long":  "DÅ‚ugi czas",
+                     "day_ago":  "Dni temu",
+                     "months_ago":  "MiesiÄ™cy temu",
+                     "hour_in":  "Za 1 godzinÄ™",
+                     "starter_plan":  "Plan Starter",
+                     "pro_plan":  "Plan Pro",
+                     "discount_20":  "20% zniÅ¼ki",
+                     "number_modes":  "Tryby liczb",
+                     "number_modes_desc":  "PorÃ³wnanie miÄ™dzy natywnymi cyframi (Ù Ù¡Ù¢Ù£Ù¤) a uniwersalnym (0-9) formatowaniem.",
+                     "native_label":  "Natywne cyfry (Ù Ù¡Ù¢Ù£Ù¤)",
+                     "universal_label":  "Uniwersalne (0-9)",
+                     "plain_label":  "Automatycznie"
+                 },
+    "template_macros":  {
+                            "title":  "Makra szablonu",
+                            "description":  "Makra do pobierania surowych wartoÅ›ci bez znacznikÃ³w HTML.",
+                            "raw_value":  "Surowa wartoÅ›Ä‡ bez znacznikÃ³w",
+                            "current_year":  "BieÅ¼Ä…cy rok to {{year}}"
+                        },
+    "datetime":  {
+                     "title":  "Data i czas",
+                     "description":  "PoÅ‚Ä…czony format daty i czasu.",
+                     "iso":  "Standard ISO",
+                     "eve":  "Wigilia"
+                 },
+    "unit":  {
+                 "title":  "Format jednostek"
+             },
+    "native_digits":  {
+                          "title":  "Natywne cyfry",
+                          "description":  "Tekst z cyframi ASCII jest wyÅ›wietlany w natywnych cyfrach, gdy lokalizacja je wÅ‚Ä…cza. Aktualizuje siÄ™ na Å¼ywo przy przeÅ‚Ä…czaniu jÄ™zyka."
+                      },
+    "inflection":  {
+                       "title":  "Angielska fleksja",
+                       "description":  "Angielska pluralizacja i singularyzacja. Aktualizuje siÄ™ na Å¼ywo przy przeÅ‚Ä…czaniu jÄ™zyka."
+                   },
+    "live_label":  "Na Å¼ywo",
+    "pricing_details":  {
+                            "title":  "SzczegÃ³Å‚y ceny",
+                            "description":  "Kompletny pipeline: surowa wartoÅ›Ä‡, kod waluty, format, zniÅ¼ka i konwersja.",
+                            "raw_value":  "Surowa wartoÅ›Ä‡",
+                            "raw_currency":  "Kod waluty",
+                            "formatted":  "Sformatowane",
+                            "discounted":  "20% zniÅ¼ki",
+                            "converted_usd":  "Przeliczone na USD"
+                        },
+    "live_update":  {
+                        "note":  "ZauwaÅ¼, Å¼e wszystkie liczby, daty i ceny zmieniajÄ… siÄ™ natychmiast po przeÅ‚Ä…czeniu jÄ™zyka â€” bez przeÅ‚adowywania strony."
+                    },
+    "section_modes":  {
+                          "title":  "Tryby Liczb",
+                          "description":  "PorÃ³wnaj cyfry natywne, format uniwersalny i tryb automatyczny dla aktywnej lokalizacji."
+                      },
+    "section_systems":  {
+                            "title":  "Systemy Pisma",
+                            "description":  "Wszystkie 7 algorytmiczne i 4 dodatkowe systemy numeryczne na poziomie systemu, z podÅ‚Ä…czonymi Å‚adowarkami czcionek.",
+                            "note":  "Wszystkie systemy liczbowe (algorytmiczne i numeryczne) wyÅ›wietlajÄ… poprawne natywne cyfry z fallbackiem ICU."
+                        },
+    "nav":  {
+                "translations":  "TÅ‚umaczenia",
+                "formatting":  "Liczby",
+                "pricing":  "Ceny",
+                "modes":  "Tryby",
+                "systems":  "Systemy",
+                "switcher":  "ZmieÅ„ Locale"
+            }
+}

@@ -1,0 +1,72 @@
+{
+    "hero":  {
+                 "badge":  "Tietoa meistÃ¤",
+                 "title_part1":  "Voimamme on ",
+                 "title_highlight":  "intohimo",
+                 "description":  "Matkamme alkoi yksinkertaisella idealla."
+             },
+    "mission":  {
+                    "title":  "TehtÃ¤vÃ¤mme",
+                    "description":  "Valtuuttaa kehittÃ¤jiÃ¤ ja yrityksiÃ¤ eleganteilla, nopeilla ja helppokÃ¤yttÃ¶isillÃ¤ tyÃ¶kaluilla poikkeuksellisten digitaalisten tuotteiden rakentamiseen."
+                },
+    "vision":  {
+                   "title":  "Visiomme",
+                   "description":  "Tulla modernien kehittÃ¤jien valitsemaksi alustaksi, jotka arvostavat kauneutta, suorituskykyÃ¤ ja kÃ¤yttÃ¤jÃ¤kokemusta jokaisella koodirivillÃ¤."
+               },
+    "story":  {
+                  "tag":  "Tarinamme",
+                  "visual_label":  "Luovan studion kuva",
+                  "title":  "Intohimon ajamia, \u003cbr\u003eerinomaisuuden mÃ¤Ã¤rittelemiÃ¤.",
+                  "para1":  "Matkamme alkoi yksinkertaisella idealla: tehdÃ¤ web-kehityksestÃ¤ saavutettavaa ja hauskaa kaikille. Olimme kyllÃ¤styneitÃ¤ raskaisiin kehyksiin ja monimutkaisiin asetuksiin.",
+                  "para2":  "NykyÃ¤Ã¤n olemme monimuotoinen tiimi insinÃ¶Ã¶rejÃ¤, suunnittelijoita ja ajattelijoita, jotka tyÃ¶skentelevÃ¤t yhdessÃ¤ ratkaistakseen monimutkaisia ongelmia eleganteilla ratkaisuilla.",
+                  "val1":  "KÃ¤yttÃ¤jÃ¤keskeinen muotoilufilosofia",
+                  "val2":  "Suorituskyky edellÃ¤ -arkkitehtuuri",
+                  "val3":  "Avoimuus ja avoin viestintÃ¤"
+              },
+    "values":  {
+                   "title":  "Arvomme",
+                   "subtitle":  "Periaatteet, jotka ohjaavat jokaista pÃ¤Ã¤tÃ¶stÃ¤mme."
+               },
+    "passion":  {
+                    "title":  "Intohimo",
+                    "description":  "Rakastamme sitÃ¤, mitÃ¤ teemme, ja se nÃ¤kyy tuotteidemme jokaisessa yksityiskohdassa."
+                },
+    "collaboration":  {
+                          "title":  "YhteistyÃ¶",
+                          "description":  "YhdessÃ¤ tyÃ¶skentely tuottaa parhaat tulokset. Uskomme vahvan tiimin voimaan."
+                      },
+    "innovation":  {
+                       "title":  "Innovaatio",
+                       "description":  "Etsimme aina parempia tapoja ratkaista ongelmia ja luoda arvoa."
+                   },
+    "integrity":  {
+                      "title":  "Rehellisyys",
+                      "description":  "Rehellisyys ja avoimuus ovat jokaisen rakentamamme suhteen perusta."
+                  },
+    "excellence":  {
+                       "title":  "Erinomaisuus",
+                       "description":  "Emme tyydy \u0027riittÃ¤vÃ¤n hyvÃ¤Ã¤n\u0027. Pyrimme aina parhaaseen."
+                   },
+    "quality":  {
+                    "title":  "Laatu",
+                    "description":  "Puhdas koodi, kaunis muotoilu ja saumaton kokemus ovat standardimme."
+                },
+    "team":  {
+                 "title":  "Tapaa tiimi",
+                 "subtitle":  "Loistavat mielet jokaisen kirjoittamamme koodirivin takana.",
+                 "alex_desc":  "VisionÃ¤Ã¤rinen johtaja, jolla on yli 10 vuoden kokemus SaaS-ekosysteemien kehittÃ¤misestÃ¤.",
+                 "sarah_desc":  "Fullstack-taikuutta erikoistuen suuren mittakaavan jÃ¤rjestelmÃ¤arkkitehtuurien rakentamiseen.",
+                 "mike_desc":  "Pakkomielteinen pikselien yksityiskohdista, sujuvista UX-virroista ja saavutettavuusstandardeista.",
+                 "jessica_desc":  "Luova tarinankertoja, joka auttaa brÃ¤ndejÃ¤ lÃ¶ytÃ¤mÃ¤Ã¤n ainutlaatuisen Ã¤Ã¤nensÃ¤ digitaalisessa maailmassa."
+             },
+    "stats":  {
+                  "years":  "Vuoden kokemus",
+                  "years_val":  "3+",
+                  "clients":  "Globaalit asiakkaat",
+                  "clients_val":  "120+",
+                  "countries":  "Tavoitetut maat",
+                  "countries_val":  "15",
+                  "support":  "Asiantuntijatuki",
+                  "support_val":  "24/7"
+              }
+}

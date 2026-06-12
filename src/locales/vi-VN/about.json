@@ -1,0 +1,72 @@
+{
+    "hero":  {
+                 "badge":  "Giá»›i thiá»‡u",
+                 "title_part1":  "ÄÆ°á»£c dáº«n dáº¯t bá»Ÿi ",
+                 "title_highlight":  "Ä‘am mÃª",
+                 "description":  "HÃ nh trÃ¬nh cá»§a chÃºng tÃ´i báº¯t Ä‘áº§u tá»« má»™t Ã½ tÆ°á»Ÿng Ä‘Æ¡n giáº£n."
+             },
+    "mission":  {
+                    "title":  "Sá»© má»‡nh cá»§a chÃºng tÃ´i",
+                    "description":  "Trao quyá»n cho cÃ¡c nhÃ  phÃ¡t triá»ƒn vÃ  doanh nghiá»‡p báº±ng cÃ¡c cÃ´ng cá»¥ thanh lá»‹ch, nhanh chÃ³ng vÃ  dá»… sá»­ dá»¥ng Ä‘á»ƒ xÃ¢y dá»±ng cÃ¡c sáº£n pháº©m sá»‘ tuyá»‡t vá»i."
+                },
+    "vision":  {
+                   "title":  "Táº§m nhÃ¬n cá»§a chÃºng tÃ´i",
+                   "description":  "Trá»Ÿ thÃ nh ná»n táº£ng Ä‘Æ°á»£c lá»±a chá»n bá»Ÿi cÃ¡c nhÃ  phÃ¡t triá»ƒn hiá»‡n Ä‘áº¡i, nhá»¯ng ngÆ°á»i trÃ¢n trá»ng váº» Ä‘áº¹p, hiá»‡u suáº¥t vÃ  tráº£i nghiá»‡m ngÆ°á»i dÃ¹ng trong tá»«ng dÃ²ng mÃ£."
+               },
+    "story":  {
+                  "tag":  "CÃ¢u chuyá»‡n cá»§a chÃºng tÃ´i",
+                  "visual_label":  "HÃ¬nh minh há»a Studio SÃ¡ng táº¡o",
+                  "title":  "ÄÆ°á»£c dáº«n dáº¯t bá»Ÿi Ä‘am mÃª, \u003cbr\u003eÄ‘á»‹nh nghÄ©a bá»Ÿi sá»± xuáº¥t sáº¯c.",
+                  "para1":  "HÃ nh trÃ¬nh cá»§a chÃºng tÃ´i báº¯t Ä‘áº§u tá»« má»™t Ã½ tÆ°á»Ÿng Ä‘Æ¡n giáº£n: biáº¿n phÃ¡t triá»ƒn web trá»Ÿ nÃªn dá»… tiáº¿p cáº­n vÃ  thÃº vá»‹ cho má»i ngÆ°á»i. ChÃºng tÃ´i Ä‘Ã£ má»‡t má»i vá»›i cÃ¡c framework náº·ng ná» vÃ  cáº¥u hÃ¬nh phá»©c táº¡p.",
+                  "para2":  "NgÃ y nay, chÃºng tÃ´i lÃ  má»™t Ä‘á»™i ngÅ© Ä‘a dáº¡ng gá»“m cÃ¡c ká»¹ sÆ°, nhÃ  thiáº¿t káº¿ vÃ  nhá»¯ng nhÃ  tÆ° duy cÃ¹ng há»£p tÃ¡c giáº£i quyáº¿t cÃ¡c váº¥n Ä‘á» phá»©c táº¡p báº±ng giáº£i phÃ¡p thanh lá»‹ch.",
+                  "val1":  "Triáº¿t lÃ½ thiáº¿t káº¿ láº¥y ngÆ°á»i dÃ¹ng lÃ m trung tÃ¢m",
+                  "val2":  "Kiáº¿n trÃºc Æ°u tiÃªn hiá»‡u suáº¥t",
+                  "val3":  "Minh báº¡ch vÃ  giao tiáº¿p cá»Ÿi má»Ÿ"
+              },
+    "values":  {
+                   "title":  "GiÃ¡ trá»‹ cá»‘t lÃµi",
+                   "subtitle":  "Nhá»¯ng nguyÃªn táº¯c dáº«n dáº¯t má»i quyáº¿t Ä‘á»‹nh cá»§a chÃºng tÃ´i."
+               },
+    "passion":  {
+                    "title":  "Äam mÃª",
+                    "description":  "ChÃºng tÃ´i yÃªu thÃ­ch nhá»¯ng gÃ¬ mÃ¬nh lÃ m, vÃ  Ä‘iá»u Ä‘Ã³ thá»ƒ hiá»‡n trong tá»«ng chi tiáº¿t cá»§a sáº£n pháº©m."
+                },
+    "collaboration":  {
+                          "title":  "Há»£p tÃ¡c",
+                          "description":  "LÃ m viá»‡c cÃ¹ng nhau mang láº¡i káº¿t quáº£ tá»‘t nháº¥t. ChÃºng tÃ´i tin vÃ o sá»©c máº¡nh cá»§a má»™t Ä‘á»™i ngÅ© vá»¯ng máº¡nh."
+                      },
+    "innovation":  {
+                       "title":  "Äá»•i má»›i",
+                       "description":  "LuÃ´n tÃ¬m kiáº¿m nhá»¯ng cÃ¡ch tá»‘t hÆ¡n Ä‘á»ƒ giáº£i quyáº¿t váº¥n Ä‘á» vÃ  táº¡o ra giÃ¡ trá»‹."
+                   },
+    "integrity":  {
+                      "title":  "ChÃ­nh trá»±c",
+                      "description":  "Sá»± trung thá»±c vÃ  minh báº¡ch lÃ  ná»n táº£ng cá»§a má»i má»‘i quan há»‡ chÃºng tÃ´i xÃ¢y dá»±ng."
+                  },
+    "excellence":  {
+                       "title":  "Xuáº¥t sáº¯c",
+                       "description":  "ChÃºng tÃ´i khÃ´ng hÃ i lÃ²ng vá»›i cÃ¡i Ä‘á»§ tá»‘t. LuÃ´n pháº¥n Ä‘áº¥u vÃ¬ Ä‘iá»u tá»‘t nháº¥t."
+                   },
+    "quality":  {
+                    "title":  "Cháº¥t lÆ°á»£ng",
+                    "description":  "MÃ£ nguá»“n sáº¡ch, thiáº¿t káº¿ Ä‘áº¹p vÃ  tráº£i nghiá»‡m liá»n máº¡ch lÃ  tiÃªu chuáº©n cá»§a chÃºng tÃ´i."
+                },
+    "team":  {
+                 "title":  "Gáº·p gá»¡ Äá»™i ngÅ©",
+                 "subtitle":  "Nhá»¯ng bá»™ Ã³c xuáº¥t sáº¯c Ä‘áº±ng sau tá»«ng dÃ²ng mÃ£ chÃºng tÃ´i viáº¿t.",
+                 "alex_desc":  "LÃ£nh Ä‘áº¡o cÃ³ táº§m nhÃ¬n vá»›i hÆ¡n 10 nÄƒm kinh nghiá»‡m phÃ¡t triá»ƒn há»‡ sinh thÃ¡i SaaS.",
+                 "sarah_desc":  "ChuyÃªn gia full-stack chuyÃªn xÃ¢y dá»±ng kiáº¿n trÃºc há»‡ thá»‘ng quy mÃ´ lá»›n.",
+                 "mike_desc":  "Say mÃª vá»›i chi tiáº¿t pixel, luá»“ng UX mÆ°á»£t mÃ  vÃ  cÃ¡c tiÃªu chuáº©n kháº£ nÄƒng tiáº¿p cáº­n.",
+                 "jessica_desc":  "NgÆ°á»i ká»ƒ chuyá»‡n sÃ¡ng táº¡o giÃºp cÃ¡c thÆ°Æ¡ng hiá»‡u tÃ¬m tháº¥y tiáº¿ng nÃ³i riÃªng trong tháº¿ giá»›i sá»‘."
+             },
+    "stats":  {
+                  "years":  "NÄƒm Kinh nghiá»‡m",
+                  "years_val":  "3+",
+                  "clients":  "KhÃ¡ch hÃ ng ToÃ n cáº§u",
+                  "clients_val":  "120+",
+                  "countries":  "Quá»‘c gia Äáº¡t tá»›i",
+                  "countries_val":  "15",
+                  "support":  "Há»— trá»£ ChuyÃªn gia",
+                  "support_val":  "24/7"
+              }
+}

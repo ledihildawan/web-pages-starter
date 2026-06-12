@@ -1,0 +1,203 @@
+{
+    "meta":  {
+                 "title":  "i18n Testi | Demo",
+                 "description":  "BeynÉ™lxalqlaÅŸdÄ±rma xÃ¼susiyyÉ™tlÉ™ri Ã¼Ã§Ã¼n tam sÄ±naq sÉ™hifÉ™si"
+             },
+    "hero":  {
+                 "badge":  "i18n XÃ¼susiyyÉ™tlÉ™ri",
+                 "title":  "BeynÉ™lxalqlaÅŸdÄ±rma \u003cspan class=\u0027text-violet-400\u0027\u003eTam\u003c/span\u003e Testi",
+                 "description":  "BÃ¼tÃ¼n i18n xÃ¼susiyyÉ™tlÉ™rini sÄ±nayÄ±n: tÉ™rcÃ¼mÉ™, cÉ™m formasÄ±, nÃ¶mrÉ™ formatÄ±, valyuta vÉ™ valyuta konversiyasÄ±."
+             },
+    "language_info":  {
+                          "title":  "Cari Dil MÉ™lumatlarÄ±",
+                          "code":  "Dil Kodu",
+                          "currency":  "Valyuta",
+                          "direction":  "MÉ™tn Ä°stiqamÉ™ti",
+                          "digits":  "DoÄŸma RÉ™qÉ™mlÉ™r",
+                          "enabled":  "Aktiv",
+                          "disabled":  "Deaktiv",
+                          "languages":  "DillÉ™r",
+                          "switching":  "YenidÉ™n YÃ¼klÉ™nmÉ™dÉ™n KeÃ§id",
+                          "current_code":  "az",
+                          "current_currency":  "AZN",
+                          "current_direction":  "LTR (Soldan SaÄŸa)"
+                      },
+    "numbers":  {
+                    "title":  "NÃ¶mrÉ™ FormatÄ±",
+                    "description":  "NÃ¶mrÉ™lÉ™r aktiv dilin lokalÄ±na uyÄŸun formatlanÄ±r.",
+                    "large":  "BÃ¶yÃ¼k NÃ¶mrÉ™",
+                    "decimal":  "OndalÄ±q",
+                    "million":  "Milyon",
+                    "percent":  "Faiz",
+                    "raw":  "Xam"
+                },
+    "currency":  {
+                     "title":  "Valyuta KonversiyasÄ±",
+                     "description":  "IDR ilÉ™ qiymÉ™tlÉ™r aktiv dilin valyutasÄ±na konvertasiya olunur.",
+                     "currencies":  "Valyutalar",
+                     "small":  "KiÃ§ik",
+                     "medium":  "Orta",
+                     "large":  "BÃ¶yÃ¼k",
+                     "enterprise":  "Enterprise"
+                 },
+    "currency_comparison":  {
+                                "title":  "Valyuta MÃ¼qayisÉ™si",
+                                "description":  "Eyni qiymÉ™t mÃ¼xtÉ™lif dÉ™stÉ™klÉ™nÉ™n valyutalarda.",
+                                "base_price":  "Æsas QiymÉ™t (USD)",
+                                "aed":  "BÆÆ DirhÉ™mi",
+                                "aud":  "Avstraliya DollarÄ±",
+                                "brl":  "Braziliya RealÄ±",
+                                "cad":  "Kanada DollarÄ±",
+                                "chf":  "Ä°sveÃ§rÉ™ FrankÄ±",
+                                "cny":  "Ã‡in YuanÄ±",
+                                "eur":  "Avro",
+                                "gbp":  "Sterlinq Funt",
+                                "idr":  "Rupiya",
+                                "inr":  "Hind Rupisi",
+                                "jpy":  "Yaponiya Yeni",
+                                "krw":  "Koreya Vonu",
+                                "mxn":  "Meksika Pesosu",
+                                "sar":  "SÉ™udiyyÉ™ RialÄ±",
+                                "sgd":  "Sinqapur DollarÄ±",
+                                "usd":  "ABÅž DollarÄ±",
+                                "zar":  "CÉ™nubi Afrika RandÄ±"
+                            },
+    "core":  {
+                 "title":  "Æsas XÃ¼susiyyÉ™tlÉ™r",
+                 "description":  "TÉ™rcÃ¼mÉ™, cÉ™m formasÄ± vÉ™ HTML mÉ™zmunu."
+             },
+    "pluralization":  {
+                          "title":  "CÉ™m FormasÄ±",
+                          "description":  "HÉ™r dil Ã¼Ã§Ã¼n fÉ™rqli cÉ™m formalarÄ±.",
+                          "item_title":  "Element (Ä°sim)",
+                          "user_title":  "Ä°stifadÉ™Ã§i",
+                          "product_title":  "MÉ™hsul"
+                      },
+    "form":  {
+                 "title":  "TÉ™rcÃ¼mÉ™li Yer Tutucularla Forma",
+                 "description":  "Yer tutucular vÉ™ etiketlÉ™r lokal fayldan gÃ¶tÃ¼rÃ¼lÃ¼r.",
+                 "name_label":  "Ad",
+                 "name_placeholder":  "Tam adÄ±nÄ±zÄ± daxil edin",
+                 "email_label":  "E-poÃ§t",
+                 "email_placeholder":  "nÃ¼munÉ™@email.com",
+                 "message_label":  "Mesaj",
+                 "message_placeholder":  "MesajÄ±nÄ±zÄ± buraya yazÄ±n...",
+                 "submit":  "GÃ¶ndÉ™r"
+             },
+    "missing_keys":  {
+                         "title":  "Ã‡atÄ±ÅŸmayan AÃ§arlarÄ±n Ä°darÉ™olunmasÄ±",
+                         "description":  "TapÄ±lmayan tÉ™rcÃ¼mÉ™ aÃ§arlarÄ± mÃ¶tÉ™rizÉ™dÉ™ gÃ¶stÉ™rilÉ™cÉ™k."
+                     },
+    "html_content":  {
+                         "title":  "HTML MÉ™zmunu",
+                         "description":  "TÉ™rcÃ¼mÉ™lÉ™r formatlaÅŸdÄ±rma Ã¼Ã§Ã¼n HTML teqlÉ™ri ehtiva edÉ™ bilÉ™r.",
+                         "example":  "Bu, \u003cspan class=\u0027text-emerald-400\u0027\u003erÉ™ngli vurÄŸulama\u003c/span\u003e vÉ™ \u003cstrong\u003eqalÄ±n mÉ™tn\u003c/strong\u003e ilÉ™ nÃ¼munÉ™ mÉ™tndir.",
+                         "note":  "Qeyd: TÉ™rcÃ¼mÉ™dÉ™ki HTML teqlÉ™ri bir sarÄŸÄ±layan elementdÉ™ olmalÄ±dÄ±r."
+                     },
+    "switcher":  {
+                     "title":  "Dili DÉ™yiÅŸ",
+                     "description":  "Dili dÉ™yiÅŸmÉ™k vÉ™ bÃ¼tÃ¼n i18n xÃ¼susiyyÉ™tlÉ™rini iÅŸlÉ™k vÉ™ziyyÉ™tdÉ™ gÃ¶rmÉ™k Ã¼Ã§Ã¼n aÅŸaÄŸÄ±dakÄ± dÃ¼ymÉ™yÉ™ basÄ±n."
+                 },
+    "advanced":  {
+                     "title":  "GeniÅŸlÉ™ndirilmiÅŸ Format",
+                     "description":  "FaizlÉ™r, vahidlÉ™r, baytlar, siyahÄ±lar vÉ™ sÄ±ra nÃ¶mrÉ™lÉ™ri Ã¼Ã§Ã¼n geniÅŸlÉ™ndirilmiÅŸ format xÃ¼susiyyÉ™tlÉ™ri.",
+                     "percentages":  "FaizlÉ™r",
+                     "units":  "VahidlÉ™r",
+                     "bytes":  "Bayt",
+                     "bytes_unit":  "bayt",
+                     "lists":  "SiyahÄ±",
+                     "ordinals":  "SÄ±ra",
+                     "cardinals":  "Miqdar",
+                     "scientific":  "Elmi YazÄ±lÄ±ÅŸ",
+                     "abbreviated":  "QÄ±saldÄ±lmÄ±ÅŸ",
+                     "date_formats":  "Tarix FormatlarÄ±",
+                     "time_formats":  "Vaxt FormatlarÄ±",
+                     "datetime":  "Tarix + Vaxt",
+                     "durations":  "MÃ¼ddÉ™t",
+                     "relative_time":  "Nisbi Vaxt",
+                     "regional_pricing":  "Regional QiymÉ™tlÉ™r",
+                     "fifty_percent":  "Ælli Faiz",
+                     "small_percent":  "KiÃ§ik Faiz",
+                     "ninety_nine":  "Doxsan Doqquz",
+                     "hundred":  "YÃ¼z",
+                     "kilobyte":  "Kilobayt",
+                     "distance":  "MÉ™safÉ™",
+                     "temperature":  "Temperatur",
+                     "weight":  "Ã‡É™ki",
+                     "half_kb":  "YarÄ±m KB",
+                     "one_and_half_kb":  "Bir yarÄ±m KB",
+                     "one_mb":  "Bir MB",
+                     "one_gb":  "Bir GB",
+                     "two_items":  "Ä°ki Element",
+                     "three_items":  "ÃœÃ§ Element",
+                     "four_items":  "DÃ¶rd Element",
+                     "date_short":  "QÄ±sa Tarix",
+                     "date_long":  "Uzun Tarix",
+                     "time_short":  "QÄ±sa Vaxt",
+                     "time_long":  "Uzun Vaxt",
+                     "day_ago":  "GÃ¼n ÆvvÉ™l",
+                     "months_ago":  "Ay ÆvvÉ™l",
+                     "hour_in":  "1 Saat ÆrzindÉ™",
+                     "starter_plan":  "Starter Plan",
+                     "pro_plan":  "Pro Plan",
+                     "discount_20":  "20% Endirim",
+                     "number_modes":  "NÃ¶mrÉ™ RejimlÉ™ri",
+                     "number_modes_desc":  "DoÄŸma rÉ™qÉ™m (Ù Ù¡Ù¢Ù£Ù¤) vÉ™ universal (0-9) formatÄ±nÄ±n mÃ¼qayisÉ™si.",
+                     "native_label":  "DoÄŸma RÉ™qÉ™mlÉ™r (Ù Ù¡Ù¢Ù£Ù¤)",
+                     "universal_label":  "Universal (0-9)",
+                     "plain_label":  "Avtomatik"
+                 },
+    "template_macros":  {
+                            "title":  "Åžablon MakrolarÄ±",
+                            "description":  "HTML markup olmadan xam dÉ™yÉ™r almaq Ã¼Ã§Ã¼n makro.",
+                            "raw_value":  "Markup olmadan xam dÉ™yÉ™r",
+                            "current_year":  "Cari il {{year}}-dir"
+                        },
+    "datetime":  {
+                     "title":  "Tarix vÉ™ Vaxt",
+                     "description":  "Tarix vÉ™ vaxtÄ±n birlÉ™ÅŸmiÅŸ formatÄ±.",
+                     "iso":  "ISO StandartÄ±",
+                     "eve":  "Milad AxÅŸamÄ±"
+                 },
+    "unit":  {
+                 "title":  "Vahid FormatÄ±"
+             },
+    "native_digits":  {
+                          "title":  "DoÄŸma RÉ™qÉ™mlÉ™r",
+                          "description":  "ASCII rÉ™qÉ™mli mÉ™tn lokal aktiv etdikdÉ™ doÄŸma rÉ™qÉ™mlÉ™rdÉ™ gÃ¶stÉ™rilir. Dil dÉ™yiÅŸdirildikdÉ™ dÉ™rhal yenilÉ™nir."
+                      },
+    "inflection":  {
+                       "title":  "Ä°ngiliscÉ™ Ä°nfleksiya",
+                       "description":  "Ä°ngiliscÉ™ cÉ™m vÉ™ tÉ™k formalar. Dil dÉ™yiÅŸdirildikdÉ™ dÉ™rhal yenilÉ™nir."
+                   },
+    "live_label":  "CanlÄ±",
+    "pricing_details":  {
+                            "title":  "QiymÉ™t DetallarÄ±",
+                            "description":  "Tam pipeline: xam dÉ™yÉ™r, valyuta kodu, format, endirim vÉ™ konversiya.",
+                            "raw_value":  "Xam DÉ™yÉ™r",
+                            "raw_currency":  "Valyuta Kodu",
+                            "formatted":  "FormatlanmÄ±ÅŸ",
+                            "discounted":  "20% Endirim",
+                            "converted_usd":  "USD-É™ Konversiya"
+                        },
+    "live_update":  {
+                        "note":  "BÃ¼tÃ¼n nÃ¶mrÉ™lÉ™rin, tarix vÉ™ qiymÉ™tlÉ™rin dÉ™yiÅŸdirildiyi zaman ani olaraq dÉ™yiÅŸdiyinÉ™ diqqÉ™t yetirin â€” sÉ™hifÉ™ni yenidÉ™n yÃ¼klÉ™mÉ™dÉ™n."
+                    },
+    "section_modes":  {
+                          "title":  "NÃ¶mrÉ™ RejimlÉ™ri",
+                          "description":  "Aktiv lokalda doÄŸma rÉ™qÉ™m formatÄ±nÄ±, universal formatÄ± vÉ™ avtomatik rejimi mÃ¼qayisÉ™ edin."
+                      },
+    "section_systems":  {
+                            "title":  "Writing Systems",
+                            "description":  "BÃ¼tÃ¼n rÉ™qÉ™m sistemlÉ™ri (alqoritmik vÉ™ rÉ™qÉ™mli) dÃ¼zgÃ¼n doÄŸma rÉ™qÉ™mlÉ™ri ICU fallback ilÉ™ gÃ¶stÉ™rir.",
+                            "note":  "BÃ¼tÃ¼n rÉ™qÉ™m sistemlÉ™ri (alqoritmik vÉ™ rÉ™qÉ™mli) dÃ¼zgÃ¼n doÄŸma rÉ™qÉ™mlÉ™ri gÃ¶stÉ™rir. Alqoritmik sistemlÉ™r NUMBERING_SYSTEMS-dÉ™n rÉ™qÉ™m fallback istifadÉ™ edir. Roma rÉ™qÉ™mlÉ™ri birbaÅŸa alqoritm ilÉ™ konvertasiya olunur. RÉ™qÉ™mli sistemlÉ™r yÃ¼klÉ™nmiÅŸ ÅŸriftin rÉ™qÉ™mlÉ™rindÉ™n istifadÉ™ edir."
+                        },
+    "nav":  {
+                "translations":  "TÉ™rcÃ¼mÉ™lÉ™r",
+                "formatting":  "NÃ¶mrÉ™lÉ™r",
+                "pricing":  "QiymÉ™tlÉ™r",
+                "modes":  "RejimlÉ™r",
+                "systems":  "SistemlÉ™r",
+                "switcher":  "Lokal SeÃ§"
+            }
+}

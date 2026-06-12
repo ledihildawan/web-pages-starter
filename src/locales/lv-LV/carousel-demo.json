@@ -1,0 +1,17 @@
+{
+    "meta":  {
+                 "page_title":  "Splide slinki ielÄdes demo | Starter"
+             },
+    "hero":  {
+                 "slide_1":  {
+                                 "title":  "Dabas slinkÄ ielÄde",
+                                 "subtitle":  "AttÄ“li tiek ielÄdÄ“ti gudri, lai taupÄ«tu datu pÄrraides apjomu.",
+                                 "alt":  "Skaists kalnu skats"
+                             },
+                 "slide_2":  {
+                                 "title":  "MaksimÄla veiktspÄ“ja",
+                                 "subtitle":  "IelÄdÄ“jiet tikai to, kas Jums nepiecieÅ¡ams.",
+                                 "alt":  "Sniegotu kalnu skats"
+                             }
+             }
+}

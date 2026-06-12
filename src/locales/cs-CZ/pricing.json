@@ -1,0 +1,56 @@
+{
+    "period_monthly":  "mÄ›sÃ­c",
+    "period_yearly":  "rok",
+    "hero":  {
+                 "badge":  "Vyberte si plÃ¡n",
+                 "title_part1":  "JednoduchÃ© a ",
+                 "title_highlight":  "transparentnÃ­ ceny",
+                 "description":  "Å½Ã¡dnÃ© skrytÃ© poplatky. Å½Ã¡dnÃ¡ pÅ™ekvapenÃ­. Vyberte si plÃ¡n, kterÃ½ nejlÃ©pe vyhovuje vaÅ¡im potÅ™ebÃ¡m."
+             },
+    "toggle":  {
+                   "monthly":  "MÄ›sÃ­ÄnÄ›",
+                   "yearly":  "RoÄnÄ›",
+                   "yearly_hint":  "fakturovÃ¡no roÄnÄ›",
+                   "discount":  "UÅ ETÅ˜ETE 20%",
+                   "aria_label":  "PÅ™epnout cenovÃ½ plÃ¡n"
+               },
+    "plans":  {
+                  "hobby":  {
+                                "name":  "Hobby",
+                                "desc":  "IdeÃ¡lnÃ­ pro vedlejÅ¡Ã­ projekty a uÄenÃ­.",
+                                "btn":  "ZaÄÃ­t zdarma",
+                                "feature_0":  "1 projekt",
+                                "feature_1":  "KomunitnÃ­ podpora",
+                                "feature_2":  "5 GB ÃºloÅ¾iÅ¡tÄ›"
+                            },
+                  "pro":  {
+                              "name":  "Pro",
+                              "badge":  "NejoblÃ­benÄ›jÅ¡Ã­",
+                              "desc":  "Pro profesionÃ¡lnÃ­ vÃ½vojÃ¡Å™e a malÃ© tÃ½my.",
+                              "btn":  "Vybrat Pro plÃ¡n",
+                              "feature_0":  "NeomezenÃ© projekty",
+                              "feature_1":  "PrioritnÃ­ e-mailovÃ¡ podpora",
+                              "feature_2":  "100 GB ÃºloÅ¾iÅ¡tÄ›",
+                              "feature_3":  "PokroÄilÃ¡ analytika"
+                          },
+                  "enterprise":  {
+                                     "name":  "Enterprise",
+                                     "desc":  "Pro rozsÃ¡hlÃ© aplikace a organizace.",
+                                     "btn":  "Kontaktovat obchod",
+                                     "feature_0":  "VÅ¡echny Pro funkce",
+                                     "feature_1":  "DedikovanÃ½ sprÃ¡vce ÃºÄtu",
+                                     "feature_2":  "SSO a auditnÃ­ log",
+                                     "feature_3":  "NeomezenÃ© ÃºloÅ¾iÅ¡tÄ›"
+                                 }
+              },
+    "faq":  {
+                "title":  "ÄŒasto kladenÃ© otÃ¡zky",
+                "subtitle":  "NajdÄ›te odpovÄ›di na nejÄastÄ›jÅ¡Ã­ dotazy ohlednÄ› naÅ¡ich plÃ¡nÅ¯ a sluÅ¾eb.",
+                "q_0":  "Mohu kdykoli zruÅ¡it?",
+                "a_0":  "Ano, pÅ™edplatnÃ© mÅ¯Å¾ete kdykoli zruÅ¡it. VÃ¡Å¡ pÅ™Ã­stup zÅ¯stane aktivnÃ­ do konce zÃºÄtovacÃ­ho obdobÃ­.",
+                "q_1":  "Je k dispozici bezplatnÃ¡ zkouÅ¡ka?",
+                "a_1":  "NabÃ­zÃ­me 14dennÃ­ bezplatnou zkouÅ¡ku Pro plÃ¡nu. K zaÄÃ¡tku nenÃ­ potÅ™eba kreditnÃ­ karta.",
+                "q_2":  "JakÃ© platebnÃ­ metody jsou k dispozici?",
+                "a_2":  "PÅ™ijÃ­mÃ¡me hlavnÃ­ kreditnÃ­ karty a PayPal. Pro Enterprise podporujeme bankovnÃ­ pÅ™evody."
+            }
+}

@@ -1,0 +1,203 @@
+{
+    "meta":  {
+                 "title":  "Test i18n | Demo",
+                 "description":  "PaginÄƒ de test cuprinzÄƒtoare pentru funcÈ›ionalitÄƒÈ›ile de internaÈ›ionalizare"
+             },
+    "hero":  {
+                 "badge":  "FuncÈ›ionalitÄƒÈ›i i18n",
+                 "title":  "Test \u003cspan class=\u0027text-violet-400\u0027\u003ecuprinzÄƒtor\u003c/span\u003e de internaÈ›ionalizare",
+                 "description":  "TesteazÄƒ toate funcÈ›ionalitÄƒÈ›ile i18n: traducere, pluralizare, formatare numere, valute È™i conversie valutarÄƒ."
+             },
+    "language_info":  {
+                          "title":  "InformaÈ›ii despre limba curentÄƒ",
+                          "code":  "Cod limbÄƒ",
+                          "currency":  "ValutÄƒ",
+                          "direction":  "DirecÈ›ia textului",
+                          "digits":  "Cifre native",
+                          "enabled":  "Activat",
+                          "disabled":  "Dezactivat",
+                          "languages":  "Limbi",
+                          "switching":  "Comutare fÄƒrÄƒ reÃ®ncÄƒrcare",
+                          "current_code":  "ro",
+                          "current_currency":  "RON",
+                          "current_direction":  "LTR (de la stÃ¢nga la dreapta)"
+                      },
+    "numbers":  {
+                    "title":  "Formatare numere",
+                    "description":  "Numerele sunt formatate conform localizÄƒrii active.",
+                    "large":  "NumÄƒr mare",
+                    "decimal":  "Zecimal",
+                    "million":  "Milion",
+                    "percent":  "Procent",
+                    "raw":  "Brut"
+                },
+    "currency":  {
+                     "title":  "Conversie valutarÄƒ",
+                     "description":  "PreÈ›uri Ã®n RON convertite Ã®n valuta limbii active.",
+                     "currencies":  "Valute",
+                     "small":  "Mic",
+                     "medium":  "Mediu",
+                     "large":  "Mare",
+                     "enterprise":  "Enterprise"
+                 },
+    "currency_comparison":  {
+                                "title":  "ComparaÈ›ie valute",
+                                "description":  "AcelaÈ™i preÈ› Ã®n diverse valute suportate.",
+                                "base_price":  "PreÈ› de bazÄƒ (USD)",
+                                "aed":  "Dirham EAU",
+                                "aud":  "Dolar australian",
+                                "brl":  "Real brazilian",
+                                "cad":  "Dolar canadian",
+                                "chf":  "Franc elveÈ›ian",
+                                "cny":  "Yuan chinezesc",
+                                "eur":  "Euro",
+                                "gbp":  "LirÄƒ sterlinÄƒ",
+                                "idr":  "Rupie",
+                                "inr":  "Rupie indianÄƒ",
+                                "jpy":  "Yen japonez",
+                                "krw":  "Won coreean",
+                                "mxn":  "Peso mexican",
+                                "sar":  "Riyal saudit",
+                                "sgd":  "Dolar singaporez",
+                                "usd":  "Dolar american",
+                                "zar":  "Rand sud-african"
+                            },
+    "core":  {
+                 "title":  "FuncÈ›ionalitÄƒÈ›i de bazÄƒ",
+                 "description":  "Traducere, pluralizare È™i conÈ›inut HTML."
+             },
+    "pluralization":  {
+                          "title":  "Pluralizare",
+                          "description":  "Forme diferite de plural pentru fiecare limbÄƒ.",
+                          "item_title":  "Item (element)",
+                          "user_title":  "User (utilizator)",
+                          "product_title":  "Product (produs)"
+                      },
+    "form":  {
+                 "title":  "Formular cu placeholder-uri traduse",
+                 "description":  "Placeholder-urile È™i etichetele sunt preluate din fiÈ™ierele de limbÄƒ.",
+                 "name_label":  "Nume",
+                 "name_placeholder":  "Introdu numele tÄƒu complet",
+                 "email_label":  "E-mail",
+                 "email_placeholder":  "exemplu@email.ro",
+                 "message_label":  "Mesaj",
+                 "message_placeholder":  "Scrie mesajul tÄƒu aici...",
+                 "submit":  "Trimite"
+             },
+    "missing_keys":  {
+                         "title":  "Gestionarea cheilor lipsÄƒ",
+                         "description":  "Cheile de traducere lipsÄƒ sunt afiÈ™ate Ã®n paranteze pÄƒtrate."
+                     },
+    "html_content":  {
+                         "title":  "ConÈ›inut HTML",
+                         "description":  "Traducerile pot include tag-uri HTML pentru formatare.",
+                         "example":  "Acesta este un text exemplu cu \u003cspan class=\u0027text-emerald-400\u0027\u003eevidenÈ›iere coloratÄƒ\u003c/span\u003e È™i \u003cstrong\u003etext Ã®ngroÈ™at\u003c/strong\u003e.",
+                         "note":  "NotÄƒ: tag-urile HTML din traduceri trebuie sÄƒ fie Ã®n interiorul unui element container."
+                     },
+    "switcher":  {
+                     "title":  "ComutÄƒ limba",
+                     "description":  "ApasÄƒ butonul de mai jos pentru a comuta limba È™i a vedea toate funcÈ›ionalitÄƒÈ›ile i18n Ã®n acÈ›iune."
+                 },
+    "advanced":  {
+                     "title":  "Formatare avansatÄƒ",
+                     "description":  "FuncÈ›ionalitÄƒÈ›i avansate de formatare pentru procente, unitÄƒÈ›i, octeÈ›i, liste È™i numerale ordinale.",
+                     "percentages":  "Procente",
+                     "units":  "UnitÄƒÈ›i",
+                     "bytes":  "OcteÈ›i",
+                     "bytes_unit":  "octet",
+                     "lists":  "Liste",
+                     "ordinals":  "Numerale ordinale",
+                     "cardinals":  "Numerale cardinale",
+                     "scientific":  "NotaÈ›ie È™tiinÈ›ificÄƒ",
+                     "abbreviated":  "Abreviate",
+                     "date_formats":  "Formate de datÄƒ",
+                     "time_formats":  "Formate de orÄƒ",
+                     "datetime":  "DatÄƒ + orÄƒ",
+                     "durations":  "Durate",
+                     "relative_time":  "Timp relativ",
+                     "regional_pricing":  "PreÈ›uri regionale",
+                     "fifty_percent":  "Cincizeci la sutÄƒ",
+                     "small_percent":  "Procent mic",
+                     "ninety_nine":  "NouÄƒzeci È™i nouÄƒ",
+                     "hundred":  "O sutÄƒ",
+                     "kilobyte":  "Kilooctet",
+                     "distance":  "DistanÈ›Äƒ",
+                     "temperature":  "TemperaturÄƒ",
+                     "weight":  "Greutate",
+                     "half_kb":  "JumÄƒtate de KB",
+                     "one_and_half_kb":  "Un KB È™i jumÄƒtate",
+                     "one_mb":  "Un MB",
+                     "one_gb":  "Un GB",
+                     "two_items":  "DouÄƒ elemente",
+                     "three_items":  "Trei elemente",
+                     "four_items":  "Patru elemente",
+                     "date_short":  "DatÄƒ scurtÄƒ",
+                     "date_long":  "DatÄƒ lungÄƒ",
+                     "time_short":  "OrÄƒ scurtÄƒ",
+                     "time_long":  "OrÄƒ lungÄƒ",
+                     "day_ago":  "Zile Ã®n urmÄƒ",
+                     "months_ago":  "Luni Ã®n urmÄƒ",
+                     "hour_in":  "ÃŽn 1 orÄƒ",
+                     "starter_plan":  "Plan Starter",
+                     "pro_plan":  "Plan Pro",
+                     "discount_20":  "20% reducere",
+                     "number_modes":  "Moduri de numere",
+                     "number_modes_desc":  "ComparaÈ›ie Ã®ntre cifrele native (Ù Ù¡Ù¢Ù£Ù¤) È™i formatarea universalÄƒ (0-9).",
+                     "native_label":  "Cifre native (Ù Ù¡Ù¢Ù£Ù¤)",
+                     "universal_label":  "Universal (0-9)",
+                     "plain_label":  "Automat"
+                 },
+    "template_macros":  {
+                            "title":  "Macro-uri È™ablon",
+                            "description":  "Macro-uri pentru obÈ›inerea valorilor brute fÄƒrÄƒ marcare HTML.",
+                            "raw_value":  "Valoare brutÄƒ fÄƒrÄƒ marcare",
+                            "current_year":  "Anul curent este {{year}}"
+                        },
+    "datetime":  {
+                     "title":  "DatÄƒ È™i orÄƒ",
+                     "description":  "Format combinat de datÄƒ È™i orÄƒ.",
+                     "iso":  "Standard ISO",
+                     "eve":  "Ajun de CrÄƒciun"
+                 },
+    "unit":  {
+                 "title":  "Format unitÄƒÈ›i"
+             },
+    "native_digits":  {
+                          "title":  "Cifre native",
+                          "description":  "Textul cu cifre ASCII este afiÈ™at Ã®n cifre native cÃ¢nd localizarea le activeazÄƒ. Se actualizeazÄƒ live la comutarea limbii."
+                      },
+    "inflection":  {
+                       "title":  "Flexiune englezÄƒ",
+                       "description":  "Pluralizare È™i singularizare Ã®n englezÄƒ. Se actualizeazÄƒ live la comutarea limbii."
+                   },
+    "live_label":  "Live",
+    "pricing_details":  {
+                            "title":  "Detalii preÈ›",
+                            "description":  "Pipeline complet: valoare brutÄƒ, cod valutÄƒ, format, reducere È™i conversie.",
+                            "raw_value":  "Valoare brutÄƒ",
+                            "raw_currency":  "Cod valutÄƒ",
+                            "formatted":  "Formatat",
+                            "discounted":  "20% reducere",
+                            "converted_usd":  "Convertit Ã®n USD"
+                        },
+    "live_update":  {
+                        "note":  "ObservÄƒ cÄƒ toate numerele, datele È™i preÈ›urile se schimbÄƒ instantaneu cÃ¢nd comuÈ›i limba â€” fÄƒrÄƒ reÃ®ncÄƒrcarea paginii."
+                    },
+    "section_modes":  {
+                          "title":  "Moduri de Numere",
+                          "description":  "ComparÄƒ cifrele native, formatul universal È™i modul automat pentru localizarea activÄƒ."
+                      },
+    "section_systems":  {
+                            "title":  "Sisteme de Scriere",
+                            "description":  "Toate cele 7 sisteme algoritmice È™i 4 sisteme numerice suplimentare la nivel de sistem, cu Ã®ncÄƒrcÄƒtoare de fonturi conectate.",
+                            "note":  "Toate sistemele numerice (algoritmice È™i numerice) afiÈ™eazÄƒ cifre native corecte cu fallback ICU."
+                        },
+    "nav":  {
+                "translations":  "Traduceri",
+                "formatting":  "Numere",
+                "pricing":  "PreÈ›uri",
+                "modes":  "Moduri",
+                "systems":  "Sisteme",
+                "switcher":  "SchimbÄƒ Locale"
+            }
+}

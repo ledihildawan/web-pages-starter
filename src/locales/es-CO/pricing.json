@@ -1,0 +1,56 @@
+{
+    "period_monthly":  "mes",
+    "period_yearly":  "aÃ±o",
+    "hero":  {
+                 "title_part1":  "Precios simples, ",
+                 "title_highlight":  "transparentes",
+                 "description":  "Sin tarifas ocultas. Sin cargos sorpresa. Elija el plan que se ajuste perfectamente a sus necesidades.",
+                 "badge":  "Elija su plan"
+             },
+    "toggle":  {
+                   "monthly":  "Mensual",
+                   "yearly":  "Anual",
+                   "yearly_hint":  "facturado anualmente",
+                   "discount":  "AHORRA 20%",
+                   "aria_label":  "Toggle Pricing Plan"
+               },
+    "plans":  {
+                  "hobby":  {
+                                "name":  "Hobby",
+                                "desc":  "Perfecto para proyectos personales y aprendizaje.",
+                                "btn":  "Comenzar",
+                                "feature_0":  "1 Proyecto",
+                                "feature_1":  "Soporte de Comunidad",
+                                "feature_2":  "5GB de Almacenamiento"
+                            },
+                  "pro":  {
+                              "name":  "Pro",
+                              "badge":  "MÃ¡s Popular",
+                              "desc":  "Para desarrolladores profesionales y equipos pequeÃ±os.",
+                              "btn":  "Obtener Pro Ahora",
+                              "feature_0":  "Proyectos Ilimitados",
+                              "feature_1":  "Soporte por Correo Prioritario",
+                              "feature_2":  "100GB de Almacenamiento",
+                              "feature_3":  "AnÃ¡lisis Avanzados"
+                          },
+                  "enterprise":  {
+                                     "name":  "Enterprise",
+                                     "desc":  "Para aplicaciones a gran escala y organizaciones.",
+                                     "btn":  "Contactar Ventas",
+                                     "feature_0":  "Todo en Pro",
+                                     "feature_1":  "Gerente Dedicado",
+                                     "feature_2":  "SSO y Registros de AuditorÃ­a",
+                                     "feature_3":  "Almacenamiento Ilimitado"
+                                 }
+              },
+    "faq":  {
+                "title":  "Preguntas Frecuentes",
+                "subtitle":  "Encuentre respuestas a las preguntas mÃ¡s frecuentes sobre nuestros planes y servicios.",
+                "q_0":  "Â¿Puedo cancelar en cualquier momento?",
+                "a_0":  "SÃ­, puede cancelar su suscripciÃ³n en cualquier momento. Su acceso continuarÃ¡ hasta el final de su perÃ­odo de facturaciÃ³n.",
+                "q_1":  "Â¿Ofrecen prueba gratuita?",
+                "a_1":  "Ofrecemos una prueba gratuita de 14 dÃ­as para el plan Pro. No se requiere tarjeta de crÃ©dito para comenzar.",
+                "q_2":  "Â¿QuÃ© mÃ©todos de pago aceptan?",
+                "a_2":  "Aceptamos todas las tarjetas de crÃ©dito principales (Visa, Mastercard, Amex) y PayPal. Para planes Enterprise, admitimos transferencias bancarias."
+            }
+}

@@ -1,0 +1,47 @@
+{
+    "meta":  {
+                 "title":  "VÃµtke meiega Ã¼hendust | Starter App",
+                 "description":  "VÃµtke meiega Ã¼hendust kÃ¼simuste ja toe jaoks."
+             },
+    "contact":  {
+                    "badge":  "Valmis aitama",
+                    "title_part1":  "Laske ",
+                    "title_highlight":  "suhtlema",
+                    "description":  "Kas Teil on kÃ¼simusi vÃµi soovite koostÃ¶Ã¶d teha? Me rÃµÃµmustame Teilt kuulda. Saadake sÃµnum ja me vastame peagi.",
+                    "form_title":  "Saada sÃµnum",
+                    "form_subtitle":  "TÃ¤itke allolev vorm ja me vastame peagi.",
+                    "social_title":  "JÃ¤lgige meid",
+                    "social_subtitle":  "Saage uusimaid uuendusi meie sotsiaalmeedia kaudu",
+                    "info":  {
+                                 "response_time":  {
+                                                       "title":  "Kiire vastus",
+                                                       "description":  "PÃ¼Ã¼ame vastata iga sÃµnumi peale 24 tunni jooksul tÃ¶Ã¶pÃ¤evadel."
+                                                   },
+                                 "working_hours":  {
+                                                       "title":  "TÃ¶Ã¶aeg",
+                                                       "description":  "EsmaspÃ¤ev â€“ Reede: 09:00 â€“ 18:00. NÃ¤dalavahetustel: prioriteedi alusel."
+                                                   },
+                                 "support":  {
+                                                 "title":  "Pidev tugi",
+                                                 "description":  "Meie tugimeeskond on alati valmis aitama Teie tehniliste probleemide lahendamisel."
+                                             }
+                             },
+                    "form":  {
+                                 "name":  "Nimi",
+                                 "name_placeholder":  "Sisestage oma nimi",
+                                 "email":  "E-post",
+                                 "email_placeholder":  "nimi@epost.ee",
+                                 "subject":  "Teema",
+                                 "subject_placeholder":  "Millest soovite rÃ¤Ã¤kida?",
+                                 "message":  "SÃµnum",
+                                 "message_placeholder":  "RÃ¤Ã¤kige lÃ¤hemalt oma kÃ¼simusest...",
+                                 "submit":  "Saada sÃµnum"
+                             }
+                },
+    "email_label":  "E-post",
+    "email_value":  "hello@starter.app",
+    "phone_label":  "Telefon",
+    "phone_value":  "+372 612 34567",
+    "location_label":  "Asukoht",
+    "location_value":  "Tallinn, Eesti"
+}

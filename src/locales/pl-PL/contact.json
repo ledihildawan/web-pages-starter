@@ -1,0 +1,47 @@
+{
+    "meta":  {
+                 "title":  "Kontakt | Starter App",
+                 "description":  "Skontaktuj siÄ™ z nami w sprawach pytaÅ„ i wsparcia."
+             },
+    "contact":  {
+                    "badge":  "Skontaktuj siÄ™",
+                    "title_part1":  "PoÅ‚Ä…czmy siÄ™",
+                    "title_highlight":  "wspÃ³lnie",
+                    "description":  "Masz pytania lub chcesz wspÃ³Å‚pracowaÄ‡? ChÄ™tnie CiÄ™ poznamy. WyÅ›lij nam wiadomoÅ›Ä‡, a odpowiemy najszybciej jak to moÅ¼liwe.",
+                    "form_title":  "WyÅ›lij WiadomoÅ›Ä‡",
+                    "form_subtitle":  "WypeÅ‚nij formularz poniÅ¼ej, a odpowiemy wkrÃ³tce.",
+                    "social_title":  "Obserwuj nas",
+                    "social_subtitle":  "BÄ…dÅº na bieÅ¼Ä…co z naszymi najnowszymi wiadomoÅ›ciami w mediach spoÅ‚ecznoÅ›ciowych",
+                    "info":  {
+                                 "response_time":  {
+                                                       "title":  "Szybka OdpowiedÅº",
+                                                       "description":  "Staramy siÄ™ odpowiadaÄ‡ na kaÅ¼dÄ… wiadomoÅ›Ä‡ w ciÄ…gu 24 godzin w dni robocze."
+                                                   },
+                                 "working_hours":  {
+                                                       "title":  "Godziny Pracy",
+                                                       "description":  "PoniedziaÅ‚ek - PiÄ…tek: 09:00 - 18:00. Weekendy: WedÅ‚ug priorytetu."
+                                                   },
+                                 "support":  {
+                                                 "title":  "CiÄ…gÅ‚e Wsparcie",
+                                                 "description":  "Nasz zespÃ³Å‚ wsparcia jest zawsze gotowy, aby pomÃ³c w rozwiÄ…zywaniu problemÃ³w technicznych."
+                                             }
+                             },
+                    "form":  {
+                                 "name":  "ImiÄ™",
+                                 "name_placeholder":  "Wpisz swoje imiÄ™",
+                                 "email":  "E-mail",
+                                 "email_placeholder":  "nazwa@przykÅ‚ad.com",
+                                 "subject":  "Temat",
+                                 "subject_placeholder":  "Co chciaÅ‚byÅ› omÃ³wiÄ‡?",
+                                 "message":  "WiadomoÅ›Ä‡",
+                                 "message_placeholder":  "Opowiedz nam wiÄ™cej o swoim zapytaniu...",
+                                 "submit":  "WyÅ›lij WiadomoÅ›Ä‡"
+                             }
+                },
+    "email_label":  "E-mail",
+    "email_value":  "hello@starter.app",
+    "phone_label":  "Telefon",
+    "phone_value":  "+48 500 000 000",
+    "location_label":  "Lokalizacja",
+    "location_value":  "Warszawa, Polska"
+}

@@ -1,0 +1,75 @@
+{
+    "hero":  {
+                 "badge":  "HlavnÃ­ funkce",
+                 "title_part1":  "VÅ¡e, co potÅ™ebujete pro",
+                 "title_highlight":  "rychlejÅ¡Ã­ Å¡kÃ¡lovÃ¡nÃ­",
+                 "description":  "Od vÃ½konnÃ© analytiky po bezproblÃ©movÃ© integrace vÃ¡m poskytujeme sadu nÃ¡strojÅ¯, kterou potÅ™ebujete k vytvÃ¡Å™enÃ­ Å¡piÄkovÃ½ch aplikacÃ­ bez komplikacÃ­."
+             },
+    "sections":  {
+                     "sync":  {
+                                  "title":  "Synchronizace v reÃ¡lnÃ©m Äase",
+                                  "description":  "ZmÄ›ny se okamÅ¾itÄ› Å¡Ã­Å™Ã­ do vÅ¡ech zaÅ™Ã­zenÃ­. AÅ¥ vaÅ¡i uÅ¾ivatelÃ© pouÅ¾Ã­vajÃ­ mobil, desktop nebo tablet, vidÃ­ stejnÃ¡ data ve stejnÃ½ Äas.",
+                                  "check_0":  "Latence pod milisekundu",
+                                  "check_1":  "VestavÄ›nÃ¡ offline podpora",
+                                  "check_2":  "SprÃ¡va Å™eÅ¡enÃ­ konfliktÅ¯"
+                              },
+                     "analytics":  {
+                                       "title":  "AkÄnÃ­ analytika",
+                                       "description":  "PÅ™estaÅˆte hÃ¡dat. ZÃ­skejte detailnÃ­ pÅ™ehledy o chovÃ¡nÃ­ uÅ¾ivatelÅ¯, vÃ½konu systÃ©mu a metrikÃ¡ch pÅ™Ã­jmÅ¯. Vizualizujte svÃ¡ data interaktivnÃ­mi grafy.",
+                                       "check_0":  "PÅ™izpÅ¯sobitelnÃ© dashboardy",
+                                       "check_1":  "Export do PDF, CSV nebo Excelu",
+                                       "check_2":  "AutomatizovanÃ© tÃ½dennÃ­ reporty"
+                                   }
+                 },
+    "more_title":  "A mnohem vÃ­ce...",
+    "more_subtitle":  "PokroÄilÃ© funkce navrÅ¾enÃ© tak, abyste mohli stavÄ›t rychleji a Å¡kÃ¡lovatelnÄ›ji.",
+    "more":  {
+                 "dark_mode":  {
+                                   "title":  "TmavÃ½ reÅ¾im",
+                                   "desc":  "VestavÄ›nÃ¡ podpora svÄ›tlÃ½ch a tmavÃ½ch motivÅ¯ s automatickou detekcÃ­."
+                               },
+                 "api_first":  {
+                                   "title":  "API na prvnÃ­m mÃ­stÄ›",
+                                   "desc":  "REST a GraphQL API dostupnÃ¡ pro plnou programovou kontrolu."
+                               },
+                 "sso":  {
+                             "title":  "SSO pÅ™ihlÃ¡Å¡enÃ­",
+                             "desc":  "Enterprise Single Sign-On pro Google, GitHub a Okta."
+                         },
+                 "audit":  {
+                               "title":  "AuditnÃ­ log",
+                               "desc":  "Sledujte kaÅ¾dou zmÄ›nu ve vaÅ¡ich projektech s detailnÃ­mi ÄasovÃ½mi razÃ­tky."
+                           },
+                 "rbac":  {
+                              "title":  "PÅ™Ã­stup na zÃ¡kladÄ› rolÃ­",
+                              "desc":  "GranulÃ¡rnÃ­ kontrola oprÃ¡vnÄ›nÃ­ pro administrÃ¡tory, editory a prohlÃ­Å¾ejÃ­cÃ­."
+                          },
+                 "uptime":  {
+                                "title":  "99,99% dostupnost",
+                                "desc":  "GarantovanÃ¡ dostupnost s naÅ¡Ã­ globÃ¡lnÄ› distribuovanou CDN."
+                            }
+             },
+    "cta":  {
+                "heading":  "PÅ™ipraveni zaÄÃ­t?",
+                "btn_create":  "VytvoÅ™it ÃºÄet",
+                "btn_docs":  "ÄŒÃ­st dokumentaci"
+            },
+    "features":  {
+                     "list":  {
+                                  "speed":  {
+                                                "title":  "BleskovÄ› rychlÃ½",
+                                                "description":  "OptimalizovanÃ½ vÃ½kon s dobou naÄÃ­tÃ¡nÃ­ pod 100 ms. Postaveno pro globÃ¡lnÃ­ Å¡kÃ¡lovÃ¡nÃ­ s edge infrastrukturou."
+                                            },
+                                  "design":  {
+                                                 "title":  "ModernÃ­ design",
+                                                 "description":  "ÄŒistÃ©, responzivnÃ­ rozhranÃ­, kterÃ© vypadÃ¡ profesionÃ¡lnÄ› na kaÅ¾dÃ©m zaÅ™Ã­zenÃ­. PlnÄ› pÅ™izpÅ¯sobitelnÃ© komponenty."
+                                             },
+                                  "security":  {
+                                                   "title":  "VysokÃ¡ bezpeÄnost",
+                                                   "description":  "KomplexnÃ­ Å¡ifrovÃ¡nÃ­, vÃ­cefaktorovÃ¡ autentizace a soulad se SOC2 pro ochranu vaÅ¡ich dat."
+                                               }
+                              },
+                     "heading":  "KlÃ­ÄovÃ© funkce",
+                     "subheading":  "VÅ¡e, co potÅ™ebujete pro stavbu a Å¡kÃ¡lovÃ¡nÃ­."
+                 }
+}

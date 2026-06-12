@@ -1,0 +1,75 @@
+{
+    "hero":  {
+                 "badge":  "KljuÄne znaÄajke",
+                 "title_part1":  "Sve Å¡to vam treba da",
+                 "title_highlight":  "skalirate brÅ¾e",
+                 "description":  "Od moÄ‡ne analitike do besprijekorne integracije, pruÅ¾amo alate koji su vam potrebni za izgradnju aplikacija svjetske klase bez briga."
+             },
+    "features":  {
+                     "heading":  "KljuÄne znaÄajke",
+                     "subheading":  "Sve Å¡to vam je potrebno za izgradnju i rast.",
+                     "list":  {
+                                  "speed":  {
+                                                "title":  "Izuzetno brzo",
+                                                "description":  "Optimalne performanse s vremenom uÄitavanja ispod 100ms. Dizajnirano za globalno skaliranje s edge infrastrukturom."
+                                            },
+                                  "design":  {
+                                                 "title":  "Moderan dizajn",
+                                                 "description":  "Responzivan i Äist UI koji izgleda profesionalno na svim ureÄ‘ajima. Potpuno prilagodljive komponente."
+                                             },
+                                  "security":  {
+                                                   "title":  "Visoka razina sigurnosti",
+                                                   "description":  "End-to-end enkripcija, viÅ¡efaktorska autentikacija i SOC2 usklaÄ‘enost za zaÅ¡titu vaÅ¡ih podataka."
+                                               }
+                              }
+                 },
+    "sections":  {
+                     "sync":  {
+                                  "title":  "Sinkronizacija u stvarnom vremenu",
+                                  "description":  "Promjene se trenutno prenose na sve ureÄ‘aje. Bez obzira koriste li vaÅ¡i korisnici telefon, raÄunalo ili tablet, vidjet Ä‡e iste podatke u isto vrijeme.",
+                                  "check_0":  "Latencija ispod milisekunde",
+                                  "check_1":  "UgraÄ‘ena podrÅ¡ka za offline rad",
+                                  "check_2":  "RjeÅ¡avanje konflikata"
+                              },
+                     "analytics":  {
+                                       "title":  "Akcijska analitika",
+                                       "description":  "Ne pogaÄ‘ajte. Dobijte duboke uvide u ponaÅ¡anje korisnika, performanse sustava i metrike prihoda. Vizualizirajte podatke interaktivnim grafikonima.",
+                                       "check_0":  "Prilagodljive upravljaÄke ploÄe",
+                                       "check_1":  "Izvoz u PDF, CSV ili Excel",
+                                       "check_2":  "Automatski tjedni izvjeÅ¡taji"
+                                   }
+                 },
+    "more_title":  "I joÅ¡ mnogo toga...",
+    "more_subtitle":  "Napredne znaÄajke dizajnirane da vam pomognu graditi brÅ¾e i skalabilnije.",
+    "more":  {
+                 "dark_mode":  {
+                                   "title":  "Tamni naÄin",
+                                   "desc":  "UgraÄ‘ena podrÅ¡ka za svijetlu i tamnu temu s automatskom detekcijom."
+                               },
+                 "api_first":  {
+                                   "title":  "API First",
+                                   "desc":  "REST i GraphQL API dostupni za potpunu programsku kontrolu."
+                               },
+                 "sso":  {
+                             "title":  "SSO prijava",
+                             "desc":  "Enterprise Single Sign-On za Google, GitHub i Okta."
+                         },
+                 "audit":  {
+                               "title":  "Auditni zapisi",
+                               "desc":  "Pratite svaku promjenu na svom projektu s detaljnim vremenskim Å¾igovima."
+                           },
+                 "rbac":  {
+                              "title":  "Pristup temeljen na ulogama",
+                              "desc":  "Granularna kontrola dozvola za administratore, urednike i preglednike."
+                          },
+                 "uptime":  {
+                                "title":  "Vrijeme rada 99.99%",
+                                "desc":  "Garantirana dostupnost s naÅ¡im globalno distribuiranim CDN-om."
+                            }
+             },
+    "cta":  {
+                "heading":  "Spremni za poÄetak?",
+                "btn_create":  "Stvorite raÄun",
+                "btn_docs":  "ProÄitajte dokumentaciju"
+            }
+}

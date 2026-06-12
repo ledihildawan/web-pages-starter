@@ -36,7 +36,7 @@ function getCurrentRootFolder(): string {
     const localePath = path.join(
       LOCALES_DIR,
       i18nConfig.defaultLocale,
-      `${folder}.json5`,
+      `${folder}.json`,
     );
     if (fs.existsSync(localePath)) {
       const content = fs.readFileSync(localePath, 'utf-8');
@@ -88,9 +88,9 @@ async function main() {
     const oldLocalePath = path.join(
       LOCALES_DIR,
       locale,
-      `${currentFolder}.json5`,
+      `${currentFolder}.json`,
     );
-    const newLocalePath = path.join(LOCALES_DIR, locale, `${newName}.json5`);
+    const newLocalePath = path.join(LOCALES_DIR, locale, `${newName}.json`);
     if (fs.existsSync(oldLocalePath)) {
       fs.renameSync(oldLocalePath, newLocalePath);
     }
@@ -117,7 +117,7 @@ async function main() {
 
   logBox('Sync Complete', {
     Folder: currentFolder,
-    Locale: `${newName}.json5 (all locales)`,
+    Locale: `${newName}.json (all locales)`,
     'global.json5': 'Updated root_page',
   });
 }

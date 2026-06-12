@@ -1,0 +1,72 @@
+{
+    "hero":  {
+                 "badge":  "Apie mus",
+                 "title_part1":  "Skatinti ",
+                 "title_highlight":  "aistra",
+                 "description":  "MÅ«sÅ³ kelionÄ— prasidÄ—jo nuo paprastos idÄ—jos."
+             },
+    "mission":  {
+                    "title":  "MÅ«sÅ³ misija",
+                    "description":  "Suteikti galimybÄ™ kÅ«rÄ—jams ir verslams naudotis elegantiÅ¡kais, greitais ir lengvais Ä¯rankiais kuriant iÅ¡skirtinius skaitmeninius produktus."
+                },
+    "vision":  {
+                   "title":  "MÅ«sÅ³ vizija",
+                   "description":  "Tapti pageidaujama platforma Å¡iuolaikiniams kÅ«rÄ—jams, kurie vertina groÅ¾Ä¯, naÅ¡umÄ… ir vartotojo patirtÄ¯ kiekvienoje kodo eilutÄ—je."
+               },
+    "story":  {
+                  "tag":  "MÅ«sÅ³ istorija",
+                  "visual_label":  "KÅ«rybinÄ—s studijos iliustracija",
+                  "title":  "Skatinti aistra, \u003cbr\u003eapibrÄ—Å¾ti tobulumu.",
+                  "para1":  "MÅ«sÅ³ kelionÄ— prasidÄ—jo nuo paprastos idÄ—jos: padaryti Å¾iniatinklio kÅ«rimÄ… prieinamÄ… ir malonÅ³ visiems. Mes pavargome nuo sunkiÅ³ sistemÅ³ ir sudÄ—tingÅ³ konfigÅ«racijÅ³.",
+                  "para2":  "Å iandien mes esame Ä¯vairi inÅ¾inieriÅ³, dizaineriÅ³ ir mÄ…stytojÅ³ komanda, kuri kartu sprendÅ¾ia sudÄ—tingas problemas elegantiÅ¡kais sprendimais.",
+                  "val1":  "Vartotojui orientuota dizaino filosofija",
+                  "val2":  "Pirmiausia naÅ¡umo architektÅ«ra",
+                  "val3":  "Skaidrumas ir atviras bendravimas"
+              },
+    "values":  {
+                   "title":  "MÅ«sÅ³ vertybÄ—s",
+                   "subtitle":  "Principai, kurie vadovauja kiekvienam mÅ«sÅ³ priimtam sprendimui."
+               },
+    "passion":  {
+                    "title":  "Aistra",
+                    "description":  "Mes mylime tai, kÄ… darome, ir tai matosi kiekvienoje mÅ«sÅ³ produkto detalÄ—je."
+                },
+    "collaboration":  {
+                          "title":  "Bendradarbiavimas",
+                          "description":  "Kartu dirbant gimsta geriausi rezultatai. Tikime stiprios komandos galia."
+                      },
+    "innovation":  {
+                       "title":  "Inovacijos",
+                       "description":  "Visada ieÅ¡kome geresniÅ³ bÅ«dÅ³ sprÄ™sti problemas ir kurti vertÄ™."
+                   },
+    "integrity":  {
+                      "title":  "SÄ…Å¾iningumas",
+                      "description":  "SÄ…Å¾iningumas ir skaidrumas yra kiekvienÅ³ mÅ«sÅ³ uÅ¾megztÅ³ ryÅ¡iÅ³ pagrindas."
+                  },
+    "excellence":  {
+                       "title":  "Tobulumas",
+                       "description":  "Nesame patenkinti pakankamai geru. Visada siekiame geriausio."
+                   },
+    "quality":  {
+                    "title":  "KokybÄ—",
+                    "description":  "Å varus kodas, graÅ¾us dizainas ir sklandi patirtis â€“ tai mÅ«sÅ³ standartas."
+                },
+    "team":  {
+                 "title":  "SusipaÅ¾inkite su komanda",
+                 "subtitle":  "PuikÅ«s protai uÅ¾ kiekvienos kodo eilutÄ—s, kuriÄ… paraÅ¡ome.",
+                 "alex_desc":  "Vizionierius lyderis su daugiau nei 10 metÅ³ patirtimi kuriant SaaS ekosistemas.",
+                 "sarah_desc":  "Pilno steko specialistÄ—, besitelkianti Ä¯ didelio masto sistemÅ³ architektÅ«ros kÅ«rimÄ….",
+                 "mike_desc":  "Fiksuotas ties pikseliÅ³ detalÄ—mis, sklandÅ¾iais UX srautais ir prieinamumo standartais.",
+                 "jessica_desc":  "KÅ«rybinÄ— pasakotoja, padedanti prekÄ—ms rasti unikalÅ³ balsÄ… skaitmeniniame pasaulyje."
+             },
+    "stats":  {
+                  "years":  "MetÅ³ patirtis",
+                  "years_val":  "3+",
+                  "clients":  "Pasauliniai klientai",
+                  "clients_val":  "120+",
+                  "countries":  "Pasiekiamos Å¡alys",
+                  "countries_val":  "15",
+                  "support":  "EkspertÅ³ pagalba",
+                  "support_val":  "24/7"
+              }
+}

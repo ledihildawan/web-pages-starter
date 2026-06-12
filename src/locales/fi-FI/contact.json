@@ -1,0 +1,47 @@
+{
+    "meta":  {
+                 "title":  "Ota yhteyttÃ¤ | Starter App",
+                 "description":  "Ota meihin yhteyttÃ¤ kysymyksissÃ¤ ja tuessa."
+             },
+    "contact":  {
+                    "badge":  "Valmiina auttamaan",
+                    "title_part1":  "Otetaan ",
+                    "title_highlight":  "yhteyttÃ¤",
+                    "description":  "Onko sinulla kysymys tai haluatko tehdÃ¤ yhteistyÃ¶tÃ¤? Haluaisimme kuulla sinusta. LÃ¤hetÃ¤ viesti, niin vastaamme pian.",
+                    "form_title":  "LÃ¤hetÃ¤ viesti",
+                    "form_subtitle":  "TÃ¤ytÃ¤ alla oleva lomake, niin vastaamme sinulle pian.",
+                    "social_title":  "Seuraa meitÃ¤",
+                    "social_subtitle":  "Saa uusimmat pÃ¤ivitykset sosiaalisten kanaviemme kautta",
+                    "info":  {
+                                 "response_time":  {
+                                                       "title":  "Nopea vastaus",
+                                                       "description":  "Pyrimme vastaamaan jokaiseen viestiin 24 tunnin sisÃ¤llÃ¤ arkipÃ¤ivinÃ¤."
+                                                   },
+                                 "working_hours":  {
+                                                       "title":  "TyÃ¶ajat",
+                                                       "description":  "Maanantai - perjantai: 09:00 - 18:00. Viikonloput: prioriteetilla."
+                                                   },
+                                 "support":  {
+                                                 "title":  "Jatkuva tuki",
+                                                 "description":  "Tukitiimimme on aina valmis ratkaisemaan teknisiÃ¤ ongelmiasi."
+                                             }
+                             },
+                    "form":  {
+                                 "name":  "Nimi",
+                                 "name_placeholder":  "Anna nimesi",
+                                 "email":  "SÃ¤hkÃ¶posti",
+                                 "email_placeholder":  "nimi@sahkoposti.fi",
+                                 "subject":  "Aihe",
+                                 "subject_placeholder":  "MistÃ¤ haluaisit keskustella?",
+                                 "message":  "Viesti",
+                                 "message_placeholder":  "Kerro meille lisÃ¤Ã¤ kysymyksestÃ¤si...",
+                                 "submit":  "LÃ¤hetÃ¤ viesti"
+                             }
+                },
+    "email_label":  "SÃ¤hkÃ¶posti",
+    "email_value":  "hello@starter.app",
+    "phone_label":  "Puhelin",
+    "phone_value":  "+358 9 1234 567",
+    "location_label":  "Sijainti",
+    "location_value":  "Helsinki, Suomi"
+}

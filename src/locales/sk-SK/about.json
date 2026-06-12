@@ -1,0 +1,72 @@
+{
+    "hero":  {
+                 "badge":  "O nÃ¡s",
+                 "title_part1":  "VedenÃ­ ",
+                 "title_highlight":  "vÃ¡Å¡Åˆou",
+                 "description":  "NaÅ¡a cesta zaÄala jednoduchou myÅ¡lienkou."
+             },
+    "mission":  {
+                    "title":  "NaÅ¡a misia",
+                    "description":  "PosilniÅ¥ vÃ½vojÃ¡rov a firmy elegantnÃ½mi, rÃ½chlymi a jednoduchÃ½mi nÃ¡strojmi na budovanie vÃ½nimoÄnÃ½ch digitÃ¡lnych produktov."
+                },
+    "vision":  {
+                   "title":  "NaÅ¡a vÃ­zia",
+                   "description":  "StaÅ¥ sa platformou voÄ¾by pre modernÃ½ch vÃ½vojÃ¡rov, ktorÃ­ si vÃ¡Å¾ia krÃ¡su, vÃ½kon a pouÅ¾Ã­vateÄ¾skÃ½ zÃ¡Å¾itok v kaÅ¾dom riadku kÃ³du."
+               },
+    "story":  {
+                  "tag":  "NÃ¡Å¡ prÃ­beh",
+                  "visual_label":  "IlustrÃ¡cia kreatÃ­vneho Å¡tÃºdia",
+                  "title":  "VedenÃ­ vÃ¡Å¡Åˆou, \u003cbr\u003edefinovanÃ­ excelentnosÅ¥ou.",
+                  "para1":  "NaÅ¡a cesta zaÄala jednoduchou myÅ¡lienkou: spraviÅ¥ web development prÃ­stupnÃ½ a zÃ¡bavnÃ½ pre vÅ¡etkÃ½ch. Boli sme unavenÃ­ z Å¥aÅ¾kÃ½ch frameworkov a zloÅ¾itÃ½ch konfigurÃ¡ciÃ­.",
+                  "para2":  "Dnes sme rozmanitÃ½ tÃ­m inÅ¾inierov, dizajnÃ©rov a mysliteÄ¾ov, ktorÃ­ spolupracujÃº na rieÅ¡enÃ­ komplexnÃ½ch problÃ©mov elegantnÃ½mi rieÅ¡eniami.",
+                  "val1":  "DizajnovÃ¡ filozofia zameranÃ¡ na pouÅ¾Ã­vateÄ¾a",
+                  "val2":  "ArchitektÃºra s vÃ½konom na prvom mieste",
+                  "val3":  "TransparentnosÅ¥ a otvorenÃ¡ komunikÃ¡cia"
+              },
+    "values":  {
+                   "title":  "NaÅ¡e hodnoty",
+                   "subtitle":  "PrincÃ­py, ktorÃ© vedÃº kaÅ¾dÃ© rozhodnutie, ktorÃ© urobÃ­me."
+               },
+    "passion":  {
+                    "title":  "VÃ¡Å¡eÅˆ",
+                    "description":  "Milujeme to, Äo robÃ­me, a to je vidieÅ¥ v kaÅ¾dom detaile naÅ¡ich produktov."
+                },
+    "collaboration":  {
+                          "title":  "SpoluprÃ¡ca",
+                          "description":  "SpoloÄnÃ¡ prÃ¡ca prinÃ¡Å¡a najlepÅ¡ie vÃ½sledky. VerÃ­me v silu silnÃ©ho tÃ­mu."
+                      },
+    "innovation":  {
+                       "title":  "InovÃ¡cie",
+                       "description":  "VÅ¾dy hÄ¾adÃ¡me lepÅ¡ie spÃ´soby, ako rieÅ¡iÅ¥ problÃ©my a vytvÃ¡raÅ¥ hodnotu."
+                   },
+    "integrity":  {
+                      "title":  "Integrita",
+                      "description":  "ÄŒestnosÅ¥ a transparentnosÅ¥ sÃº zÃ¡kladom kaÅ¾dÃ©ho vzÅ¥ahu, ktorÃ½ budujeme."
+                  },
+    "excellence":  {
+                       "title":  "ExcelentnosÅ¥",
+                       "description":  "NespokojÃ­me sa s dobrÃ½m. VÅ¾dy sa snaÅ¾Ã­me o to najlepÅ¡ie."
+                   },
+    "quality":  {
+                    "title":  "Kvalita",
+                    "description":  "ÄŒistÃ½ kÃ³d, krÃ¡sny dizajn a bezproblÃ©movÃ½ zÃ¡Å¾itok sÃº naÅ¡e Å¡tandardy."
+                },
+    "team":  {
+                 "title":  "Spoznajte tÃ­m",
+                 "subtitle":  "BrilantnÃ© mysle za kaÅ¾dÃ½m riadkom kÃ³du, ktorÃ½ pÃ­Å¡eme.",
+                 "alex_desc":  "VizionÃ¡rsky lÃ­der s 10+ rokmi skÃºsenostÃ­ vo vÃ½voji SaaS ekosystÃ©mov.",
+                 "sarah_desc":  "Full-stack ÄarodejnÃ­k Å¡pecializujÃºci sa na budovanie Å¡kÃ¡lovateÄ¾nÃ½ch systÃ©movÃ½ch architektÃºr.",
+                 "mike_desc":  "PosadnutÃ½ pixelovÃ½mi detailmi, plynulÃ½mi UX tokmi a Å¡tandardmi prÃ­stupnosti.",
+                 "jessica_desc":  "KreatÃ­vny rozprÃ¡vaÄ, ktorÃ½ znaÄkÃ¡m pomÃ¡ha nÃ¡jsÅ¥ ich jedineÄnÃ½ hlas v digitÃ¡lnom svete."
+             },
+    "stats":  {
+                  "years":  "Rokov skÃºsenostÃ­",
+                  "years_val":  "3+",
+                  "clients":  "GlobÃ¡lnych klientov",
+                  "clients_val":  "120+",
+                  "countries":  "PokrytÃ½ch krajÃ­n",
+                  "countries_val":  "15",
+                  "support":  "OdbornÃ¡ podpora",
+                  "support_val":  "24/7"
+              }
+}

@@ -1,0 +1,56 @@
+{
+    "period_monthly":  "thÃ¡ng",
+    "period_yearly":  "nÄƒm",
+    "hero":  {
+                 "badge":  "Chá»n GÃ³i cá»§a báº¡n",
+                 "title_part1":  "Báº£ng giÃ¡ ÄÆ¡n giáº£n \u0026 ",
+                 "title_highlight":  "Minh báº¡ch",
+                 "description":  "KhÃ´ng cÃ³ phÃ­ áº©n. KhÃ´ng cÃ³ chi phÃ­ báº¥t ngá». Chá»n gÃ³i phÃ¹ há»£p nháº¥t vá»›i nhu cáº§u cá»§a báº¡n."
+             },
+    "toggle":  {
+                   "monthly":  "HÃ ng thÃ¡ng",
+                   "yearly":  "HÃ ng nÄƒm",
+                   "yearly_hint":  "thanh toÃ¡n hÃ ng nÄƒm",
+                   "discount":  "TIáº¾T KIá»†M 20%",
+                   "aria_label":  "Chuyá»ƒn Ä‘á»•i GÃ³i Báº£ng giÃ¡"
+               },
+    "plans":  {
+                  "hobby":  {
+                                "name":  "Hobby",
+                                "desc":  "PhÃ¹ há»£p cho dá»± Ã¡n phá»¥ vÃ  viá»‡c há»c táº­p.",
+                                "btn":  "Báº¯t Ä‘áº§u miá»…n phÃ­",
+                                "feature_0":  "1 Dá»± Ã¡n",
+                                "feature_1":  "Há»— trá»£ Cá»™ng Ä‘á»“ng",
+                                "feature_2":  "5GB LÆ°u trá»¯"
+                            },
+                  "pro":  {
+                              "name":  "Pro",
+                              "badge":  "Phá»• biáº¿n nháº¥t",
+                              "desc":  "DÃ nh cho nhÃ  phÃ¡t triá»ƒn chuyÃªn nghiá»‡p vÃ  nhÃ³m nhá».",
+                              "btn":  "Chá»n GÃ³i Pro",
+                              "feature_0":  "Dá»± Ã¡n KhÃ´ng giá»›i háº¡n",
+                              "feature_1":  "Há»— trá»£ Email Æ¯u tiÃªn",
+                              "feature_2":  "100GB LÆ°u trá»¯",
+                              "feature_3":  "PhÃ¢n tÃ­ch NÃ¢ng cao"
+                          },
+                  "enterprise":  {
+                                     "name":  "Enterprise",
+                                     "desc":  "DÃ nh cho á»©ng dá»¥ng quy mÃ´ lá»›n vÃ  tá»• chá»©c.",
+                                     "btn":  "LiÃªn há»‡ Bá»™ pháº­n BÃ¡n hÃ ng",
+                                     "feature_0":  "Táº¥t cáº£ tÃ­nh nÄƒng cá»§a gÃ³i Pro",
+                                     "feature_1":  "Quáº£n lÃ½ TÃ i khoáº£n ChuyÃªn trÃ¡ch",
+                                     "feature_2":  "SSO \u0026 Nháº­t kÃ½ Kiá»ƒm tra",
+                                     "feature_3":  "LÆ°u trá»¯ KhÃ´ng giá»›i háº¡n"
+                                 }
+              },
+    "faq":  {
+                "title":  "CÃ¢u há»i ThÆ°á»ng gáº·p",
+                "subtitle":  "TÃ¬m cÃ¢u tráº£ lá»i cho nhá»¯ng cÃ¢u há»i phá»• biáº¿n nháº¥t vá» cÃ¡c gÃ³i vÃ  dá»‹ch vá»¥ cá»§a chÃºng tÃ´i.",
+                "q_0":  "TÃ´i cÃ³ thá»ƒ há»§y báº¥t cá»© lÃºc nÃ o khÃ´ng?",
+                "a_0":  "CÃ³, báº¡n cÃ³ thá»ƒ há»§y Ä‘Äƒng kÃ½ báº¥t cá»© lÃºc nÃ o. Quyá»n truy cáº­p cá»§a báº¡n váº«n cÃ²n hiá»‡u lá»±c Ä‘áº¿n háº¿t ká»³ thanh toÃ¡n.",
+                "q_1":  "CÃ³ dÃ¹ng thá»­ miá»…n phÃ­ khÃ´ng?",
+                "a_1":  "ChÃºng tÃ´i cung cáº¥p dÃ¹ng thá»­ miá»…n phÃ­ 14 ngÃ y cho gÃ³i Pro. KhÃ´ng cáº§n tháº» tÃ­n dá»¥ng Ä‘á»ƒ báº¯t Ä‘áº§u.",
+                "q_2":  "CÃ³ nhá»¯ng phÆ°Æ¡ng thá»©c thanh toÃ¡n nÃ o?",
+                "a_2":  "ChÃºng tÃ´i cháº¥p nháº­n cÃ¡c tháº» tÃ­n dá»¥ng phá»• biáº¿n vÃ  PayPal. Äá»‘i vá»›i Enterprise, chÃºng tÃ´i há»— trá»£ chuyá»ƒn khoáº£n ngÃ¢n hÃ ng."
+            }
+}

@@ -1,0 +1,72 @@
+{
+    "hero":  {
+                 "badge":  "Despre noi",
+                 "title_part1":  "GhidaÈ›i de ",
+                 "title_highlight":  "pasiune",
+                 "description":  "CÄƒlÄƒtoria noastrÄƒ a Ã®nceput cu o idee simplÄƒ."
+             },
+    "mission":  {
+                    "title":  "Misiunea noastrÄƒ",
+                    "description":  "SÄƒ oferim dezvoltatorilor È™i companiilor unelte elegante, rapide È™i uÈ™or de folosit pentru a construi produse digitale excepÈ›ionale."
+                },
+    "vision":  {
+                   "title":  "Viziunea noastrÄƒ",
+                   "description":  "SÄƒ devenim platforma preferatÄƒ pentru dezvoltatorii moderni care apreciazÄƒ frumuseÈ›ea, performanÈ›a È™i experienÈ›a utilizatorului Ã®n fiecare linie de cod."
+               },
+    "story":  {
+                  "tag":  "Povestea noastrÄƒ",
+                  "visual_label":  "IlustraÈ›ie de studio creativ",
+                  "title":  "GhidaÈ›i de pasiune, \u003cbr\u003edefiniÈ›i de excelenÈ›Äƒ.",
+                  "para1":  "CÄƒlÄƒtoria noastrÄƒ a Ã®nceput cu o idee simplÄƒ: sÄƒ facem dezvoltarea web accesibilÄƒ È™i distractivÄƒ pentru toatÄƒ lumea. Eram sÄƒtui de framework-uri grele È™i configuraÈ›ii complicate.",
+                  "para2":  "AstÄƒzi, suntem o echipÄƒ diversificatÄƒ de ingineri, designeri È™i gÃ¢nditori care lucreazÄƒ Ã®mpreunÄƒ pentru a rezolva probleme complexe cu soluÈ›ii elegante.",
+                  "val1":  "Filosofie de design centratÄƒ pe utilizator",
+                  "val2":  "ArhitecturÄƒ cu accent pe performanÈ›Äƒ",
+                  "val3":  "TransparenÈ›Äƒ È™i comunicare deschisÄƒ"
+              },
+    "values":  {
+                   "title":  "Valorile noastre",
+                   "subtitle":  "Principiile care ghideazÄƒ fiecare decizie pe care o luÄƒm."
+               },
+    "passion":  {
+                    "title":  "Pasiune",
+                    "description":  "Iubim ceea ce facem, È™i se vede Ã®n fiecare detaliu al produselor noastre."
+                },
+    "collaboration":  {
+                          "title":  "Colaborare",
+                          "description":  "Lucrul Ã®mpreunÄƒ produce cele mai bune rezultate. Credem Ã®n puterea unei echipe puternice."
+                      },
+    "innovation":  {
+                       "title":  "InovaÈ›ie",
+                       "description":  "CÄƒutÄƒm mereu modalitÄƒÈ›i mai bune de a rezolva probleme È™i de a crea valoare."
+                   },
+    "integrity":  {
+                      "title":  "Integritate",
+                      "description":  "Onestitatea È™i transparenÈ›a sunt fundamentul fiecÄƒrei relaÈ›ii pe care o construim."
+                  },
+    "excellence":  {
+                       "title":  "ExcelenÈ›Äƒ",
+                       "description":  "Nu ne mulÈ›umim cu \u0027destul de bun\u0027. AspirÄƒm mereu spre ce e mai bun."
+                   },
+    "quality":  {
+                    "title":  "Calitate",
+                    "description":  "Cod curat, design frumos È™i experienÈ›Äƒ fÄƒrÄƒ cusur sunt standardul nostru."
+                },
+    "team":  {
+                 "title":  "CunoaÈ™te echipa",
+                 "subtitle":  "MinÈ›ile strÄƒlucite din spatele fiecÄƒrei linii de cod pe care o scriem.",
+                 "alex_desc":  "Lider vizionar cu peste 10 ani de experienÈ›Äƒ Ã®n dezvoltarea ecosistemelor SaaS.",
+                 "sarah_desc":  "Magie fullstack specializatÄƒ Ã®n construirea de arhitecturi de sisteme la scarÄƒ largÄƒ.",
+                 "mike_desc":  "Obsedat de detaliile pixelilor, fluxurile UX fluide È™i standardele de accesibilitate.",
+                 "jessica_desc":  "Povestitoare creativÄƒ care ajutÄƒ brandurile sÄƒ-È™i gÄƒseascÄƒ vocea unicÄƒ Ã®n lumea digitalÄƒ."
+             },
+    "stats":  {
+                  "years":  "Ani de ExperienÈ›Äƒ",
+                  "years_val":  "3+",
+                  "clients":  "ClienÈ›i Globali",
+                  "clients_val":  "120+",
+                  "countries":  "ÈšÄƒri Atinse",
+                  "countries_val":  "15",
+                  "support":  "Suport Expert",
+                  "support_val":  "24/7"
+              }
+}

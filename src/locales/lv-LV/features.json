@@ -1,0 +1,75 @@
+{
+    "hero":  {
+                 "badge":  "IzcilÄs funkcijas",
+                 "title_part1":  "Viss, kas Jums nepiecieÅ¡ams, lai",
+                 "title_highlight":  "auga ÄtrÄk",
+                 "description":  "No jaudÄ«gas analÄ«tikas lÄ«dz plÅ«stoÅ¡Äm integrÄcijÄm â€“ mÄ“s nodroÅ¡inÄm rÄ«ku komplektu, kas nepiecieÅ¡ams, lai veidotu pasaules klases lietotnes bez galvassÄpÄ“m."
+             },
+    "features":  {
+                     "heading":  "IzcilÄs funkcijas",
+                     "subheading":  "Viss, kas Jums nepiecieÅ¡ams veidoÅ¡anai un izaugsmei.",
+                     "list":  {
+                                  "speed":  {
+                                                "title":  "ÄªpaÅ¡i Ätri",
+                                                "description":  "OptimÄla veiktspÄ“ja ar ielÄdes laiku zem 100 ms. Veidota globÄlai mÄ“rogstelÅ¡anai ar malas infrastruktÅ«ru."
+                                            },
+                                  "design":  {
+                                                 "title":  "Moderns dizains",
+                                                 "description":  "AtsaucÄ«ga un tÄ«ra lietotÄja saskarne, kas izskatÄs profesionÄli visÄs ierÄ«cÄ“s. PilnÄ«bÄ pielÄgojami komponenti."
+                                             },
+                                  "security":  {
+                                                   "title":  "Augsta droÅ¡Ä«ba",
+                                                   "description":  "Gala Å¡ifrÄ“Å¡ana, vairÄkfaktoru autentifikÄcija un SOC2 atbilstÄ«ba, lai aizsargÄtu JÅ«su datus."
+                                               }
+                              }
+                 },
+    "sections":  {
+                     "sync":  {
+                                  "title":  "ReÄllaika sinhronizÄcija",
+                                  "description":  "IzmaiÅ†as momentÄni izplatÄs visÄs ierÄ«cÄ“s. NeatkarÄ«gi no tÄ, vai JÅ«su lietotÄji izmanto tÄlruni, datoru vai planÅ¡eti â€“ tie redz vienus un tos paÅ¡us datus vienÄ un tajÄ paÅ¡Ä laikÄ.",
+                                  "check_0":  "Latence zem milisekundes",
+                                  "check_1":  "IebÅ«vÄ“ts bezsaistes atbalsts",
+                                  "check_2":  "Konfliktu atrisinÄÅ¡ana"
+                              },
+                     "analytics":  {
+                                       "title":  "RÄ«cÄ«bspÄ“jÄ«ga analÄ«tika",
+                                       "description":  "Neminieties. IegÅ«stiet dziÄ¼as atziÅ†as par lietotÄju uzvedÄ«bu, sistÄ“mas veiktspÄ“ju un ieÅ†Ä“mumu rÄdÄ«tÄjiem. VizualizÄ“jiet datus ar interaktÄ«vÄm diagrammÄm.",
+                                       "check_0":  "PielÄgojami vadÄ«bas paneÄ¼i",
+                                       "check_1":  "EksportÄ“t uz PDF, CSV vai Excel",
+                                       "check_2":  "AutomÄtiskas iknedÄ“Ä¼as atskaites"
+                                   }
+                 },
+    "more_title":  "Un vÄ“l vairÄk...",
+    "more_subtitle":  "Uzlabotas funkcijas, izstrÄdÄtas, lai palÄ«dzÄ“tu Jums veidot ÄtrÄk un mÄ“rogotÄk.",
+    "more":  {
+                 "dark_mode":  {
+                                   "title":  "TumÅ¡ais reÅ¾Ä«ms",
+                                   "desc":  "IebÅ«vÄ“ts atbalsts gaiÅ¡ajai un tumÅ¡ajai tÄ“mai ar automÄtisku noteikÅ¡anu."
+                               },
+                 "api_first":  {
+                                   "title":  "API pirmajÄ vietÄ",
+                                   "desc":  "REST un GraphQL API pieejams pilnÄ«gai programmatiskai kontrolei."
+                               },
+                 "sso":  {
+                             "title":  "SSO pieteikÅ¡anÄs",
+                             "desc":  "Enterprise lÄ«meÅ†a vienotÄ pieteikÅ¡anÄs ar Google, GitHub un Okta."
+                         },
+                 "audit":  {
+                               "title":  "Audita Å¾urnÄls",
+                               "desc":  "Izsekojiet katru JÅ«su projekta izmaiÅ†u ar detalizÄ“tiem laika zÄ«mogiem."
+                           },
+                 "rbac":  {
+                              "title":  "LomÄm balstÄ«ta piekÄ¼uve",
+                              "desc":  "GranulÄ“ta atÄ¼auju pÄrvaldÄ«ba administratoriem, redaktoriem un skatÄ«tÄjiem."
+                          },
+                 "uptime":  {
+                                "title":  "99,99 % darbÄ«bas laiks",
+                                "desc":  "GarantÄ“ta pieejamÄ«ba ar mÅ«su globÄli izplatÄ«to CDN."
+                            }
+             },
+    "cta":  {
+                "heading":  "Gatavi sÄkt?",
+                "btn_create":  "Izveidot kontu",
+                "btn_docs":  "LasÄ«t dokumentÄciju"
+            }
+}

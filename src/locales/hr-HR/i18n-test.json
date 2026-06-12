@@ -1,0 +1,203 @@
+{
+    "meta":  {
+                 "title":  "i18n test | Demo",
+                 "description":  "Kompletna testna stranica za znaÄajke internacionalizacije"
+             },
+    "hero":  {
+                 "badge":  "i18n znaÄajke",
+                 "title":  "Kompletni \u003cspan class=\u0027text-violet-400\u0027\u003etest\u003c/span\u003e internacionalizacije",
+                 "description":  "Isprobajte sve i18n znaÄajke: prijevode, mnoÅ¾inu, format brojeva, valute i konverziju valuta."
+             },
+    "language_info":  {
+                          "title":  "Informacije o trenutnom jeziku",
+                          "code":  "KÃ´d jezika",
+                          "currency":  "Valuta",
+                          "direction":  "Smjer teksta",
+                          "digits":  "Izvorne znamenke",
+                          "enabled":  "OmoguÄ‡eno",
+                          "disabled":  "OnemoguÄ‡eno",
+                          "languages":  "Jezici",
+                          "switching":  "Prebacivanje bez osvjeÅ¾avanja",
+                          "current_code":  "hr",
+                          "current_currency":  "EUR",
+                          "current_direction":  "LTR (Slijeva nadesno)"
+                      },
+    "numbers":  {
+                    "title":  "Format brojeva",
+                    "description":  "Brojevi su formatirani prema aktivnom lokalitetu.",
+                    "large":  "Veliki broj",
+                    "decimal":  "Decimalni",
+                    "million":  "Milijun",
+                    "percent":  "Postotak",
+                    "raw":  "Sirovo"
+                },
+    "currency":  {
+                     "title":  "Konverzija valuta",
+                     "description":  "Cijene u IDR konvertirane u valutu aktivnog jezika.",
+                     "currencies":  "Valute",
+                     "small":  "Malo",
+                     "medium":  "Srednje",
+                     "large":  "Veliko",
+                     "enterprise":  "Enterprise"
+                 },
+    "currency_comparison":  {
+                                "title":  "Usporedba valuta",
+                                "description":  "Ista cijena u razliÄitim podrÅ¾anim valutama.",
+                                "base_price":  "Osnovna cijena (USD)",
+                                "aed":  "UAE dirham",
+                                "aud":  "Australski dolar",
+                                "brl":  "Brazilski real",
+                                "cad":  "Kanadski dolar",
+                                "chf":  "Å vicarski franak",
+                                "cny":  "Kineski juan",
+                                "eur":  "Euro",
+                                "gbp":  "Britanska funta",
+                                "idr":  "Rupija",
+                                "inr":  "Indijska rupija",
+                                "jpy":  "Japanski jen",
+                                "krw":  "Korejski von",
+                                "mxn":  "MeksiÄki pezo",
+                                "sar":  "Saudijski rijal",
+                                "sgd":  "Singapurski dolar",
+                                "usd":  "AmeriÄki dolar",
+                                "zar":  "JuÅ¾noafriÄki rand"
+                            },
+    "core":  {
+                 "title":  "KljuÄne znaÄajke",
+                 "description":  "Prijevodi, mnoÅ¾ina i HTML sadrÅ¾aj."
+             },
+    "pluralization":  {
+                          "title":  "MnoÅ¾ina",
+                          "description":  "RazliÄiti oblici mnoÅ¾ine za svaki jezik.",
+                          "item_title":  "Stavka (Imenica)",
+                          "user_title":  "Korisnik",
+                          "product_title":  "Proizvod"
+                      },
+    "form":  {
+                 "title":  "Obrazac s prevedenim placeholderima",
+                 "description":  "Placeholder i label vrijednosti preuzimaju se iz lokalnih datoteka.",
+                 "name_label":  "Ime",
+                 "name_placeholder":  "Unesite svoje puno ime",
+                 "email_label":  "Email",
+                 "email_placeholder":  "primjer@email.com",
+                 "message_label":  "Poruka",
+                 "message_placeholder":  "NapiÅ¡ite svoju poruku ovdje...",
+                 "submit":  "PoÅ¡alji"
+             },
+    "missing_keys":  {
+                         "title":  "Obrada nedostajuÄ‡ih kljuÄeva",
+                         "description":  "KljuÄevi prijevoda koji nisu pronaÄ‘eni bit Ä‡e prikazani u uglatim zagradama."
+                     },
+    "html_content":  {
+                         "title":  "HTML sadrÅ¾aj",
+                         "description":  "Prijevodi mogu sadrÅ¾avati HTML oznake za formatiranje.",
+                         "example":  "Ovo je primjer teksta s \u003cspan class=\u0027text-emerald-400\u0027\u003eobojenim naglaskom\u003c/span\u003e i \u003cstrong\u003epodebljanim tekstom\u003c/strong\u003e.",
+                         "note":  "Napomena: HTML oznake u prijevodu moraju biti unutar jednog omotaÄkog elementa."
+                     },
+    "switcher":  {
+                     "title":  "Promijeni jezik",
+                     "description":  "Kliknite gumb ispod da promijenite jezik i vidite sve i18n znaÄajke u akciji."
+                 },
+    "advanced":  {
+                     "title":  "Napredno formatiranje",
+                     "description":  "Napredne funkcije formatiranja za postotke, jedinice, bajtove, liste i redne brojeve.",
+                     "percentages":  "Postoci",
+                     "units":  "Jedinice",
+                     "bytes":  "Bajtovi",
+                     "bytes_unit":  "bajt",
+                     "lists":  "Liste",
+                     "ordinals":  "Redni brojevi",
+                     "cardinals":  "Kardinalni brojevi",
+                     "scientific":  "Znanstvena notacija",
+                     "abbreviated":  "SkraÄ‡eno",
+                     "date_formats":  "Formati datuma",
+                     "time_formats":  "Formati vremena",
+                     "datetime":  "Datum + Vrijeme",
+                     "durations":  "Trajanja",
+                     "relative_time":  "Relativno vrijeme",
+                     "regional_pricing":  "Regionalne cijene",
+                     "fifty_percent":  "Pedeset posto",
+                     "small_percent":  "Mali postotak",
+                     "ninety_nine":  "Devedeset devet",
+                     "hundred":  "Sto",
+                     "kilobyte":  "Kilobajt",
+                     "distance":  "Udaljenost",
+                     "temperature":  "Temperatura",
+                     "weight":  "TeÅ¾ina",
+                     "half_kb":  "Pola KB",
+                     "one_and_half_kb":  "Jedan i pol KB",
+                     "one_mb":  "Jedan MB",
+                     "one_gb":  "Jedan GB",
+                     "two_items":  "Dvije stavke",
+                     "three_items":  "Tri stavke",
+                     "four_items":  "ÄŒetiri stavke",
+                     "date_short":  "Kratki datum",
+                     "date_long":  "Dugi datum",
+                     "time_short":  "Kratko vrijeme",
+                     "time_long":  "Dugo vrijeme",
+                     "day_ago":  "Prije jedan dan",
+                     "months_ago":  "Prije nekoliko mjeseci",
+                     "hour_in":  "Za 1 sat",
+                     "starter_plan":  "Starter plan",
+                     "pro_plan":  "Pro plan",
+                     "discount_20":  "Popust 20%",
+                     "number_modes":  "NaÄini brojeva",
+                     "number_modes_desc":  "Usporedba formata izvornih znamenki (Ù Ù¡Ù¢Ù£Ù¤) i univerzalnog formata (0-9).",
+                     "native_label":  "Izvorne znamenke (Ù Ù¡Ù¢Ù£Ù¤)",
+                     "universal_label":  "Univerzalno (0-9)",
+                     "plain_label":  "Automatski"
+                 },
+    "template_macros":  {
+                            "title":  "PredloÅ¾aÄki makroi",
+                            "description":  "Makroi za dobivanje sirovih vrijednosti bez HTML oznaka.",
+                            "raw_value":  "Sirova vrijednost bez oznaka",
+                            "current_year":  "Trenutna godina je {{year}}"
+                        },
+    "datetime":  {
+                     "title":  "Datum i vrijeme",
+                     "description":  "Kombinirani format datuma i vremena.",
+                     "iso":  "ISO standard",
+                     "eve":  "Badnja veÄer"
+                 },
+    "unit":  {
+                 "title":  "Format jedinica"
+             },
+    "native_digits":  {
+                          "title":  "Izvorne znamenke",
+                          "description":  "Tekst s ASCII znamenkama prikazuje se u izvornim znamenkama kada lokalitet to omoguÄ‡uje. AÅ¾urira se uÅ¾ivo pri promjeni jezika."
+                      },
+    "inflection":  {
+                       "title":  "Engleska infleksija",
+                       "description":  "Engleska mnoÅ¾ina i jednina. AÅ¾urira se uÅ¾ivo pri promjeni jezika."
+                   },
+    "live_label":  "UÅ¾ivo",
+    "pricing_details":  {
+                            "title":  "Detalji cijena",
+                            "description":  "Kompletni proces: sirova vrijednost, kÃ´d valute, format, popust i konverzija.",
+                            "raw_value":  "Sirova vrijednost",
+                            "raw_currency":  "KÃ´d valute",
+                            "formatted":  "Formatirano",
+                            "discounted":  "Popust 20%",
+                            "converted_usd":  "Konverzija u USD"
+                        },
+    "live_update":  {
+                        "note":  "Primijetite kako se svi brojevi, datumi i cijene mijenjaju trenutno kada promijenite jezik â€” bez potrebe za ponovnim uÄitavanjem stranice."
+                    },
+    "section_modes":  {
+                          "title":  "NaÄini brojeva",
+                          "description":  "Usporedite format izvornih znamenki, univerzalni format i automatski naÄin na aktivnom lokalitetu."
+                      },
+    "section_systems":  {
+                            "title":  "Writing Systems",
+                            "description":  "Svi sustavi brojeva (algoritamski i numeriÄki) prikazuju ispravne izvorne znamenke s ICU priÄuvom.",
+                            "note":  "Svi sustavi brojeva (algoritamski i numeriÄki) prikazuju ispravne izvorne znamenke. Algoritamski sustavi koriste priÄuvne znamenke iz NUMBERING_SYSTEMS. Rimski brojevi pretvaraju se izravno putem algoritma. NumeriÄki sustavi koriste znamenke iz uÄitanih fontova."
+                        },
+    "nav":  {
+                "translations":  "Prijevodi",
+                "formatting":  "Brojevi",
+                "pricing":  "Cijene",
+                "modes":  "NaÄini",
+                "systems":  "Sustavi",
+                "switcher":  "Odaberite lokalitet"
+            }
+}

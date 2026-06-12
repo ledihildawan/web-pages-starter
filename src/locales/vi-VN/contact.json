@@ -1,0 +1,47 @@
+{
+    "meta":  {
+                 "title":  "LiÃªn há»‡ chÃºng tÃ´i | Starter App",
+                 "description":  "LiÃªn há»‡ chÃºng tÃ´i Ä‘á»ƒ Ä‘Æ°á»£c giáº£i Ä‘Ã¡p vÃ  há»— trá»£."
+             },
+    "contact":  {
+                    "badge":  "Sáºµn sÃ ng Há»— trá»£",
+                    "title_part1":  "HÃ£y",
+                    "title_highlight":  "káº¿t ná»‘i",
+                    "description":  "CÃ³ cÃ¢u há»i hay muá»‘n há»£p tÃ¡c? ChÃºng tÃ´i ráº¥t vui Ä‘Æ°á»£c nghe tá»« báº¡n. Gá»­i tin nháº¯n vÃ  chÃºng tÃ´i sáº½ pháº£n há»“i sá»›m nháº¥t.",
+                    "form_title":  "Gá»­i Tin nháº¯n",
+                    "form_subtitle":  "Äiá»n biá»ƒu máº«u dÆ°á»›i Ä‘Ã¢y vÃ  chÃºng tÃ´i sáº½ pháº£n há»“i sá»›m nháº¥t.",
+                    "social_title":  "Theo dÃµi chÃºng tÃ´i",
+                    "social_subtitle":  "Cáº­p nháº­t má»›i nháº¥t qua cÃ¡c kÃªnh máº¡ng xÃ£ há»™i cá»§a chÃºng tÃ´i",
+                    "info":  {
+                                 "response_time":  {
+                                                       "title":  "Pháº£n há»“i Nhanh",
+                                                       "description":  "ChÃºng tÃ´i cá»‘ gáº¯ng pháº£n há»“i má»i tin nháº¯n trong vÃ²ng 24 giá» vÃ o cÃ¡c ngÃ y lÃ m viá»‡c."
+                                                   },
+                                 "working_hours":  {
+                                                       "title":  "Giá» LÃ m viá»‡c",
+                                                       "description":  "Thá»© Hai - Thá»© SÃ¡u: 09:00 - 18:00. Cuá»‘i tuáº§n: Theo Æ°u tiÃªn."
+                                                   },
+                                 "support":  {
+                                                 "title":  "Há»— trá»£ LiÃªn tá»¥c",
+                                                 "description":  "Äá»™i ngÅ© há»— trá»£ cá»§a chÃºng tÃ´i luÃ´n sáºµn sÃ ng giÃºp Ä‘á»¡ giáº£i quyáº¿t cÃ¡c váº¥n Ä‘á» ká»¹ thuáº­t cá»§a báº¡n."
+                                             }
+                             },
+                    "form":  {
+                                 "name":  "TÃªn",
+                                 "name_placeholder":  "Nháº­p tÃªn cá»§a báº¡n",
+                                 "email":  "Email",
+                                 "email_placeholder":  "ten@email.com",
+                                 "subject":  "TiÃªu Ä‘á»",
+                                 "subject_placeholder":  "Báº¡n muá»‘n tháº£o luáº­n vá» Ä‘iá»u gÃ¬?",
+                                 "message":  "Tin nháº¯n",
+                                 "message_placeholder":  "HÃ£y cho chÃºng tÃ´i biáº¿t thÃªm vá» cÃ¢u há»i cá»§a báº¡n...",
+                                 "submit":  "Gá»­i Tin nháº¯n"
+                             }
+                },
+    "email_label":  "Email",
+    "email_value":  "hello@starter.app",
+    "phone_label":  "Äiá»‡n thoáº¡i",
+    "phone_value":  "+84 24 1234 5678",
+    "location_label":  "Vá»‹ trÃ­",
+    "location_value":  "HÃ  Ná»™i, Viá»‡t Nam"
+}

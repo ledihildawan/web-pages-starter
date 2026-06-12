@@ -1,0 +1,56 @@
+{
+    "period_monthly":  "mj",
+    "period_yearly":  "god",
+    "hero":  {
+                 "badge":  "Odaberite svoj plan",
+                 "title_part1":  "Jednostavne i ",
+                 "title_highlight":  "transparentne cijene",
+                 "description":  "Bez skrivenih troÅ¡kova. Bez iznenaÄ‘enja. Odaberite plan koji najviÅ¡e odgovara vaÅ¡im potrebama."
+             },
+    "toggle":  {
+                   "monthly":  "MjeseÄno",
+                   "yearly":  "GodiÅ¡nje",
+                   "yearly_hint":  "godÅ¡nje fakturiranje",
+                   "discount":  "UÅ TEDA 20%",
+                   "aria_label":  "Prebacivanje cjenovnog plana"
+               },
+    "plans":  {
+                  "hobby":  {
+                                "name":  "Hobby",
+                                "desc":  "SavrÅ¡eno za sporedne projekte i uÄenje.",
+                                "btn":  "ZapoÄnite besplatno",
+                                "feature_0":  "1 projekt",
+                                "feature_1":  "PodrÅ¡ka zajednice",
+                                "feature_2":  "5GB pohrane"
+                            },
+                  "pro":  {
+                              "name":  "Pro",
+                              "badge":  "Najpopularniji",
+                              "desc":  "Za profesionalne programere i male timove.",
+                              "btn":  "Odaberite Pro plan",
+                              "feature_0":  "NeograniÄeni projekti",
+                              "feature_1":  "Prioritetna email podrÅ¡ka",
+                              "feature_2":  "100GB pohrane",
+                              "feature_3":  "Napredna analitika"
+                          },
+                  "enterprise":  {
+                                     "name":  "Enterprise",
+                                     "desc":  "Za aplikacije velikog opsega i organizacije.",
+                                     "btn":  "Kontaktirajte prodaju",
+                                     "feature_0":  "Sve znaÄajke iz Pro plana",
+                                     "feature_1":  "PosveÄ‡eni menadÅ¾er raÄuna",
+                                     "feature_2":  "SSO i auditni zapisi",
+                                     "feature_3":  "NeograniÄena pohrana"
+                                 }
+              },
+    "faq":  {
+                "title":  "ÄŒesta pitanja",
+                "subtitle":  "PronaÄ‘ite odgovore na najÄeÅ¡Ä‡e postavljana pitanja o naÅ¡im planovima i uslugama.",
+                "q_0":  "Mogu li otkazati u bilo kojem trenutku?",
+                "a_0":  "Da, moÅ¾ete otkazati pretplatu u bilo kojem trenutku. VaÅ¡ pristup ostaje aktivan do kraja obraÄunskog razdoblja.",
+                "q_1":  "Postoji li besplatno probno razdoblje?",
+                "a_1":  "Nudimo 14-dnevno besplatno probno razdoblje za Pro plan. Kreditna kartica nije potrebna za poÄetak.",
+                "q_2":  "Koje su metode plaÄ‡anja dostupne?",
+                "a_2":  "PrihvaÄ‡amo sve glavne kreditne kartice i PayPal. Za Enterprise podrÅ¾avamo bankovne transfere."
+            }
+}

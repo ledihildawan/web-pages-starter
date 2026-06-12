@@ -1,0 +1,203 @@
+{
+    "meta":  {
+                 "title":  "i18n-test | Demo",
+                 "description":  "Omfattande testsida fÃ¶r internationaliseringsfunktioner"
+             },
+    "hero":  {
+                 "badge":  "i18n-funktioner",
+                 "title":  "Omfattande \u003cspan class=\u0027text-violet-400\u0027\u003etest\u003c/span\u003e av internationalisering",
+                 "description":  "Testa alla i18n-funktioner: Ã¶versÃ¤ttning, pluralisering, talformatering, valutor och valutakonvertering."
+             },
+    "language_info":  {
+                          "title":  "Information om aktuellt sprÃ¥k",
+                          "code":  "SprÃ¥kkod",
+                          "currency":  "Valuta",
+                          "direction":  "Textriktning",
+                          "digits":  "Inhemska siffror",
+                          "enabled":  "Aktiverad",
+                          "disabled":  "Inaktiverad",
+                          "languages":  "SprÃ¥k",
+                          "switching":  "Byte utan omladdning",
+                          "current_code":  "sv",
+                          "current_currency":  "SEK",
+                          "current_direction":  "LTR (vÃ¤nster till hÃ¶ger)"
+                      },
+    "numbers":  {
+                    "title":  "Talformatering",
+                    "description":  "Tal formateras enligt den aktiva lokaliseringen.",
+                    "large":  "Stort tal",
+                    "decimal":  "Decimal",
+                    "million":  "Miljon",
+                    "percent":  "Procent",
+                    "raw":  "RÃ¥"
+                },
+    "currency":  {
+                     "title":  "Valutakonvertering",
+                     "description":  "Priser i SEK omvandlade till det aktiva sprÃ¥kets valuta.",
+                     "currencies":  "Valutor",
+                     "small":  "Liten",
+                     "medium":  "Mellan",
+                     "large":  "Stor",
+                     "enterprise":  "Enterprise"
+                 },
+    "currency_comparison":  {
+                                "title":  "ValutajÃ¤mfÃ¶relse",
+                                "description":  "Samma pris i olika stÃ¶dda valutor.",
+                                "base_price":  "Grundpris (USD)",
+                                "aed":  "FÃ¶renade Arabemiraten dirham",
+                                "aud":  "Australisk dollar",
+                                "brl":  "Brasiliansk real",
+                                "cad":  "Kanadensisk dollar",
+                                "chf":  "Schweizisk franc",
+                                "cny":  "Kinesisk yuan",
+                                "eur":  "Euro",
+                                "gbp":  "Brittiskt pund",
+                                "idr":  "Rupia",
+                                "inr":  "Indisk rupie",
+                                "jpy":  "Japansk yen",
+                                "krw":  "Koreansk won",
+                                "mxn":  "Mexikansk peso",
+                                "sar":  "Saudiarabisk riyal",
+                                "sgd":  "Singaporiansk dollar",
+                                "usd":  "Amerikansk dollar",
+                                "zar":  "Sydafrikansk rand"
+                            },
+    "core":  {
+                 "title":  "KÃ¤rnfunktioner",
+                 "description":  "Ã–versÃ¤ttning, pluralisering och HTML-innehÃ¥ll."
+             },
+    "pluralization":  {
+                          "title":  "Pluralisering",
+                          "description":  "Olika pluralformer fÃ¶r varje sprÃ¥k.",
+                          "item_title":  "Item (objekt)",
+                          "user_title":  "User (anvÃ¤ndare)",
+                          "product_title":  "Product (produkt)"
+                      },
+    "form":  {
+                 "title":  "FormulÃ¤r med Ã¶versatta platshÃ¥llare",
+                 "description":  "PlatshÃ¥llare och etiketter hÃ¤mtas frÃ¥n sprÃ¥kfilerna.",
+                 "name_label":  "Namn",
+                 "name_placeholder":  "Ange ditt fullstÃ¤ndiga namn",
+                 "email_label":  "E-post",
+                 "email_placeholder":  "exempel@epost.se",
+                 "message_label":  "Meddelande",
+                 "message_placeholder":  "Skriv ditt meddelande hÃ¤r...",
+                 "submit":  "Skicka"
+             },
+    "missing_keys":  {
+                         "title":  "Hantering av saknade nycklar",
+                         "description":  "Saknade Ã¶versÃ¤ttningsnycklar visas inom hakparenteser."
+                     },
+    "html_content":  {
+                         "title":  "HTML-innehÃ¥ll",
+                         "description":  "Ã–versÃ¤ttningar kan innehÃ¥lla HTML-taggar fÃ¶r formatering.",
+                         "example":  "Detta Ã¤r exempeltext med \u003cspan class=\u0027text-emerald-400\u0027\u003efÃ¤rgmarkering\u003c/span\u003e och \u003cstrong\u003efet text\u003c/strong\u003e.",
+                         "note":  "Observera: HTML-taggar i Ã¶versÃ¤ttningar mÃ¥ste vara inuti ett omslutande element."
+                     },
+    "switcher":  {
+                     "title":  "Byt sprÃ¥k",
+                     "description":  "Klicka pÃ¥ knappen nedan fÃ¶r att byta sprÃ¥k och se alla i18n-funktioner i aktion."
+                 },
+    "advanced":  {
+                     "title":  "Avancerad formatering",
+                     "description":  "Avancerade formateringsfunktioner fÃ¶r procent, enheter, byte, listor och ordningstal.",
+                     "percentages":  "Procent",
+                     "units":  "Enheter",
+                     "bytes":  "Byte",
+                     "bytes_unit":  "byte",
+                     "lists":  "Listor",
+                     "ordinals":  "Ordningstal",
+                     "cardinals":  "Kardinaltal",
+                     "scientific":  "Vetenskaplig notation",
+                     "abbreviated":  "FÃ¶rkortad",
+                     "date_formats":  "Datumformat",
+                     "time_formats":  "Tidsformat",
+                     "datetime":  "Datum + tid",
+                     "durations":  "Varaktigheter",
+                     "relative_time":  "Relativ tid",
+                     "regional_pricing":  "Regionala priser",
+                     "fifty_percent":  "Femtio procent",
+                     "small_percent":  "Liten procent",
+                     "ninety_nine":  "Nittionio",
+                     "hundred":  "Hundra",
+                     "kilobyte":  "Kilobyte",
+                     "distance":  "AvstÃ¥nd",
+                     "temperature":  "Temperatur",
+                     "weight":  "Vikt",
+                     "half_kb":  "Halv KB",
+                     "one_and_half_kb":  "En och en halv KB",
+                     "one_mb":  "En MB",
+                     "one_gb":  "En GB",
+                     "two_items":  "TvÃ¥ objekt",
+                     "three_items":  "Tre objekt",
+                     "four_items":  "Fyra objekt",
+                     "date_short":  "Kort datum",
+                     "date_long":  "LÃ¥ngt datum",
+                     "time_short":  "Kort tid",
+                     "time_long":  "LÃ¥ng tid",
+                     "day_ago":  "Dagar sedan",
+                     "months_ago":  "MÃ¥nader sedan",
+                     "hour_in":  "Om 1 timme",
+                     "starter_plan":  "Starter-plan",
+                     "pro_plan":  "Pro-plan",
+                     "discount_20":  "20% rabatt",
+                     "number_modes":  "TallÃ¤gen",
+                     "number_modes_desc":  "JÃ¤mfÃ¶relse mellan inhemska siffror (Ù Ù¡Ù¢Ù£Ù¤) och universell (0-9) formatering.",
+                     "native_label":  "Inhemska siffror (Ù Ù¡Ù¢Ù£Ù¤)",
+                     "universal_label":  "Universell (0-9)",
+                     "plain_label":  "Automatisk"
+                 },
+    "template_macros":  {
+                            "title":  "Mall-makron",
+                            "description":  "Makron fÃ¶r att hÃ¤mta rÃ¥a vÃ¤rden utan HTML-uppmÃ¤rkning.",
+                            "raw_value":  "RÃ¥vÃ¤rde utan uppmÃ¤rkning",
+                            "current_year":  "Aktuellt Ã¥r Ã¤r {{year}}"
+                        },
+    "datetime":  {
+                     "title":  "Datum och tid",
+                     "description":  "Kombinerat format fÃ¶r datum och tid.",
+                     "iso":  "ISO-standard",
+                     "eve":  "Julafton"
+                 },
+    "unit":  {
+                 "title":  "Enhetsformat"
+             },
+    "native_digits":  {
+                          "title":  "Inhemska siffror",
+                          "description":  "Text med ASCII-siffror visas i inhemska siffror nÃ¤r lokaliseringen aktiverar dem. Uppdateras live nÃ¤r du byter sprÃ¥k."
+                      },
+    "inflection":  {
+                       "title":  "Engelsk bÃ¶jning",
+                       "description":  "Engelsk pluralisering och singularisering. Uppdateras live nÃ¤r du byter sprÃ¥k."
+                   },
+    "live_label":  "Live",
+    "pricing_details":  {
+                            "title":  "Prisinformation",
+                            "description":  "Komplett pipeline: rÃ¥vÃ¤rde, valutakod, format, rabatt och konvertering.",
+                            "raw_value":  "RÃ¥vÃ¤rde",
+                            "raw_currency":  "Valutakod",
+                            "formatted":  "Formaterad",
+                            "discounted":  "20% rabatt",
+                            "converted_usd":  "Konverterad till USD"
+                        },
+    "live_update":  {
+                        "note":  "LÃ¤gg mÃ¤rke till att alla tal, datum och priser Ã¤ndras omedelbart nÃ¤r du byter sprÃ¥k â€” utan att ladda om sidan."
+                    },
+    "section_modes":  {
+                          "title":  "NummerlÃ¤gen",
+                          "description":  "JÃ¤mfÃ¶r inbyggda siffror, universellt format och automatiskt lÃ¤ge fÃ¶r den aktiva lokalen."
+                      },
+    "section_systems":  {
+                            "title":  "Skriftsystem",
+                            "description":  "Alla 7 algoritmiska och 4 ytterligare numeriska system pÃ¥ systemnivÃ¥, med anslutna typsnittsladdare.",
+                            "note":  "Alla talsystem (algoritmiska och numeriska) visar korrekta nativa siffror med ICU-fallback."
+                        },
+    "nav":  {
+                "translations":  "Ã–versÃ¤ttningar",
+                "formatting":  "Nummer",
+                "pricing":  "Priser",
+                "modes":  "LÃ¤gen",
+                "systems":  "System",
+                "switcher":  "Byt Lokal"
+            }
+}

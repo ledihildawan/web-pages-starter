@@ -1,0 +1,47 @@
+{
+    "meta":  {
+                 "title":  "ContÃ¡ctenos | Starter App",
+                 "description":  "PÃ³ngase en contacto con nosotros para preguntas y soporte."
+             },
+    "contact":  {
+                    "badge":  "PÃ³ngase en Contacto",
+                    "title_part1":  "Conectemos",
+                    "title_highlight":  "juntos",
+                    "description":  "Â¿Tiene preguntas o desea colaborar? Nos encantarÃ­a saber de usted. EnvÃ­enos un mensaje y responderemos lo antes posible.",
+                    "form_title":  "EnvÃ­e un Mensaje",
+                    "form_subtitle":  "Complete el formulario a continuaciÃ³n y le responderemos en breve.",
+                    "social_title":  "SÃ­ganos",
+                    "social_subtitle":  "MantÃ©ngase actualizado con nuestras Ãºltimas noticias en redes sociales",
+                    "info":  {
+                                 "response_time":  {
+                                                       "title":  "Respuesta RÃ¡pida",
+                                                       "description":  "Nos esforzamos por responder a cada mensaje dentro de las 24 horas en dÃ­as hÃ¡biles."
+                                                   },
+                                 "working_hours":  {
+                                                       "title":  "Horario de Trabajo",
+                                                       "description":  "Lunes - Viernes: 09:00 - 18:00. Fines de semana: Por prioridad."
+                                                   },
+                                 "support":  {
+                                                 "title":  "Soporte Continuo",
+                                                 "description":  "Nuestro equipo de soporte siempre estÃ¡ listo para ayudar a resolver sus problemas tÃ©cnicos."
+                                             }
+                             },
+                    "form":  {
+                                 "name":  "Nombre",
+                                 "name_placeholder":  "Ingrese su nombre",
+                                 "email":  "Correo ElectrÃ³nico",
+                                 "email_placeholder":  "nombre@ejemplo.com",
+                                 "subject":  "Asunto",
+                                 "subject_placeholder":  "Â¿QuÃ© le gustarÃ­a discutir?",
+                                 "message":  "Mensaje",
+                                 "message_placeholder":  "CuÃ©ntenos mÃ¡s sobre su consulta...",
+                                 "submit":  "Enviar Mensaje"
+                             }
+                },
+    "email_label":  "Correo ElectrÃ³nico",
+    "email_value":  "hello@starter.app",
+    "phone_label":  "TelÃ©fono",
+    "phone_value":  "+57 1 000 0000",
+    "location_label":  "UbicaciÃ³n",
+    "location_value":  "BogotÃ¡, Colombia"
+}

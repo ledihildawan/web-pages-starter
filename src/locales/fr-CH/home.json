@@ -1,0 +1,102 @@
+{
+    "about":  {
+                  "badge":  "Ã€ Propos"
+              },
+    "hero":  {
+                 "badge":  "Ã€ Propos",
+                 "title_part1":  "Nous crÃ©ons l\u0027",
+                 "title_highlight":  "avenir numÃ©rique",
+                 "description":  "FondÃ© en 2024, Starter existe pour aider les dÃ©veloppeurs Ã  construire de meilleures applications plus rapidement. Nous croyons au pouvoir du code propre, du design beau et de la collaboration open source.",
+                 "primary_btn":  {
+                                     "label":  "Commencez Gratuitement",
+                                     "url":  "#pricing"
+                                 },
+                 "secondary_btn":  {
+                                       "label":  "Voir la DÃ©mo",
+                                       "url":  "#features"
+                                   },
+                 "note":  "Aucune carte bancaire requise"
+             },
+    "stats":  {
+                  "community":  "CommunautÃ© Internationale",
+                  "community_val":  "50K+",
+                  "projects":  "Projets RÃ©alisÃ©s",
+                  "projects_val":  "120+",
+                  "uptime":  "DisponibilitÃ©",
+                  "uptime_val":  "99.99%",
+                  "rating":  "Note",
+                  "rating_val":  "4.9/5"
+              },
+    "story":  {
+                  "tag":  "Notre Histoire",
+                  "visual_label":  "Illustration de Studio CrÃ©atif",
+                  "title":  "GuidÃ©s par la passion, \u003cbr\u003edÃ©finis par l\u0027excellence.",
+                  "para1":  "Notre voyage a commencÃ© avec une idÃ©e simple: rendre le dÃ©veloppement web accessible et amusant pour tous. Nous Ã©tions fatiguÃ©s des frameworks gonflÃ©s et des configurations complexes.",
+                  "para2":  "Aujourd\u0027hui, nous sommes une Ã©quipe diversifiÃ©e d\u0027ingÃ©nieurs, de concepteurs et de penseurs travaillant ensemble pour rÃ©soudre des problÃ¨mes complexes avec des solutions Ã©lÃ©gantes.",
+                  "val1":  "Philosophie de design centrÃ©e sur l\u0027utilisateur",
+                  "val2":  "Architecture performance d\u0027abord",
+                  "val3":  "Transparence et communication ouverte"
+              },
+    "mission":  {
+                    "title":  "Notre Mission",
+                    "description":  "Autonomiser les dÃ©veloppeurs et les entreprises avec des outils Ã©lÃ©gants, rapides et faciles Ã  utiliser pour construire des produits numÃ©riques exceptionnels."
+                },
+    "vision":  {
+                   "title":  "Notre Vision",
+                   "description":  "ÃŠtre la plateforme de choix pour les dÃ©veloppeurs modernes qui valorisent la beautÃ©, la performance et l\u0027expÃ©rience utilisateur dans chaque ligne de code."
+               },
+    "values":  {
+                   "title":  "Nos Valeurs",
+                   "subtitle":  "Principes qui guident chaque dÃ©cision que nous prenons."
+               },
+    "passion":  {
+                    "title":  "Passion",
+                    "description":  "Nous aimons ce que nous faisons, et cela se voit dans chaque dÃ©tail de nos produits."
+                },
+    "collaboration":  {
+                          "title":  "Collaboration",
+                          "description":  "Travailler ensemble donne les meilleurs rÃ©sultats. Nous croyons au pouvoir d\u0027Ã©quipes solides."
+                      },
+    "innovation":  {
+                       "title":  "Innovation",
+                       "description":  "Toujours chercher de meilleures faÃ§ons de rÃ©soudre les problÃ¨mes et de crÃ©er de la valeur."
+                   },
+    "integrity":  {
+                      "title":  "IntÃ©gritÃ©",
+                      "description":  "L\u0027honnÃªtetÃ© et la transparence sont la fondation de chaque relation que nous construisons."
+                  },
+    "excellence":  {
+                       "title":  "Excellence",
+                       "description":  "Nous ne nous contentons pas de assez bon. Nous nous efforÃ§ons toujours du meilleur."
+                   },
+    "quality":  {
+                    "title":  "QualitÃ©",
+                    "description":  "Code propre, design beau et expÃ©riences fluides sont nos standards."
+                },
+    "team":  {
+                 "title":  "Rencontrez l\u0027Ã‰quipe",
+                 "subtitle":  "Les esprits brillants derriÃ¨re chaque ligne de code que nous Ã©crivons.",
+                 "alex_desc":  "Leader visionnaire avec 10+ ans d\u0027expÃ©rience dans le dÃ©veloppement d\u0027Ã©cosystÃ¨me SaaS.",
+                 "sarah_desc":  "Full-stack wizard spÃ©cialisÃ©e dans la construction d\u0027architectures de systÃ¨mes Ã  grande Ã©chelle.",
+                 "mike_desc":  "ProfondÃ©ment obsÃ©dÃ© par les dÃ©tails de pixels, flux UX fluides et standards d\u0027accessibilitÃ©.",
+                 "jessica_desc":  "Narratrice crÃ©ative aidant les marques Ã  trouver leur voix unique dans le monde numÃ©rique."
+             },
+    "features":  {
+                     "list":  {
+                                  "speed":  {
+                                                "title":  "Foudroyant",
+                                                "description":  "Performance optimisÃ©e avec des temps de chargement infÃ©rieurs Ã  100 ms. ConÃ§u pour une envergure mondiale avec une infrastructure edge."
+                                            },
+                                  "design":  {
+                                                 "title":  "Design Moderne",
+                                                 "description":  "Interface Ã©purÃ©e et rÃ©active d\u0027allure professionnelle sur tout appareil. Composants entiÃ¨rement personnalisables."
+                                             },
+                                  "security":  {
+                                                   "title":  "Haute SÃ©curitÃ©",
+                                                   "description":  "Chiffrement de bout en bout, authentification multi-facteurs et conformitÃ© SOC2 pour protÃ©ger vos donnÃ©es."
+                                               }
+                              },
+                     "heading":  "FonctionnalitÃ©s ClÃ©s",
+                     "subheading":  "Tout ce dont vous avez besoin pour construire et Ã©voluer."
+                 }
+}

@@ -1,0 +1,47 @@
+{
+    "meta":  {
+                 "title":  "Kontaktirajte nas | Starter App",
+                 "description":  "Kontaktirajte nas za pitanja i podrÅ¡ku."
+             },
+    "contact":  {
+                    "badge":  "Spremni pomoÄ‡i",
+                    "title_part1":  "Hajdemo se ",
+                    "title_highlight":  "povezati",
+                    "description":  "Imate pitanje ili Å¾elite suraÄ‘ivati? Rado bismo Äuli od vas. PoÅ¡aljite poruku i odgovorit Ä‡emo u najkraÄ‡em roku.",
+                    "form_title":  "PoÅ¡aljite poruku",
+                    "form_subtitle":  "Ispunite obrazac ispod i odgovorit Ä‡emo vam u najkraÄ‡em roku.",
+                    "social_title":  "Pratite nas",
+                    "social_subtitle":  "Budite u tijeku s najnovijim vijestima putem naÅ¡ih druÅ¡tvenih mreÅ¾a",
+                    "info":  {
+                                 "response_time":  {
+                                                       "title":  "Brz odgovor",
+                                                       "description":  "Trudimo se odgovoriti na svaku poruku u roku od 24 sata na radne dane."
+                                                   },
+                                 "working_hours":  {
+                                                       "title":  "Radno vrijeme",
+                                                       "description":  "Ponedjeljak - Petak: 09:00 - 18:00. Vikend: Po prioritetu."
+                                                   },
+                                 "support":  {
+                                                 "title":  "Kontinuirana podrÅ¡ka",
+                                                 "description":  "NaÅ¡ tim za podrÅ¡ku uvijek je spreman pomoÄ‡i u rjeÅ¡avanju vaÅ¡ih tehniÄkih problema."
+                                             }
+                             },
+                    "form":  {
+                                 "name":  "Ime",
+                                 "name_placeholder":  "Unesite svoje ime",
+                                 "email":  "Email",
+                                 "email_placeholder":  "ime@email.com",
+                                 "subject":  "Predmet",
+                                 "subject_placeholder":  "O Äemu Å¾elite raspravljati?",
+                                 "message":  "Poruka",
+                                 "message_placeholder":  "Recite nam viÅ¡e o vaÅ¡em pitanju...",
+                                 "submit":  "PoÅ¡alji poruku"
+                             }
+                },
+    "email_label":  "Email",
+    "email_value":  "hello@starter.app",
+    "phone_label":  "Telefon",
+    "phone_value":  "+385 1 234 5678",
+    "location_label":  "Lokacija",
+    "location_value":  "Zagreb, Hrvatska"
+}

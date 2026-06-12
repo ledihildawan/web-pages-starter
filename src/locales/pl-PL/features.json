@@ -1,0 +1,75 @@
+{
+    "hero":  {
+                 "badge":  "WyrÃ³Å¼nione funkcje",
+                 "title_part1":  "Wszystko, czego potrzebujesz, aby",
+                 "title_highlight":  "skalowaÄ‡ szybciej",
+                 "description":  "Od potÄ™Å¼nej analityki po bezproblemowe integracje, dajemy Ci zestaw narzÄ™dzi potrzebnych do budowania Å›wiatowej klasy aplikacji bez komplikacji."
+             },
+    "sections":  {
+                     "sync":  {
+                                  "title":  "Synchronizacja w czasie rzeczywistym",
+                                  "description":  "Zmiany rozprzestrzeniajÄ… siÄ™ natychmiast na wszystkie urzÄ…dzenia. NiezaleÅ¼nie od tego, czy Twoi uÅ¼ytkownicy korzystajÄ… z telefonu, komputera czy tabletu, widzÄ… te same dane w tym samym czasie.",
+                                  "check_0":  "OpÃ³Åºnienie poniÅ¼ej milisekundy",
+                                  "check_1":  "Wbudowane wsparcie offline",
+                                  "check_2":  "ZarzÄ…dzanie rozwiÄ…zywaniem konfliktÃ³w"
+                              },
+                     "analytics":  {
+                                       "title":  "Analityka do dziaÅ‚ania",
+                                       "description":  "PrzestaÅ„ zgadywaÄ‡. Uzyskaj szczegÃ³Å‚owe informacje o zachowaniach uÅ¼ytkownikÃ³w, wydajnoÅ›ci systemu i wskaÅºnikach przychodÃ³w. Wizualizuj swoje dane za pomocÄ… interaktywnych wykresÃ³w.",
+                                       "check_0":  "Konfigurowalne dashboardy",
+                                       "check_1":  "Eksport do PDF, CSV lub Excela",
+                                       "check_2":  "Zautomatyzowane raporty tygodniowe"
+                                   }
+                 },
+    "more_title":  "I wiele wiÄ™cej...",
+    "more_subtitle":  "Zaawansowane funkcje zaprojektowane, aby pomÃ³c Ci budowaÄ‡ szybciej i bardziej skalowalnie.",
+    "more":  {
+                 "dark_mode":  {
+                                   "title":  "Tryb ciemny",
+                                   "desc":  "Wbudowane wsparcie dla jasnych i ciemnych motywÃ³w z automatycznym wykrywaniem."
+                               },
+                 "api_first":  {
+                                   "title":  "API na pierwszym miejscu",
+                                   "desc":  "API REST i GraphQL dostÄ™pne dla peÅ‚nej kontroli programowej."
+                               },
+                 "sso":  {
+                             "title":  "Logowanie SSO",
+                             "desc":  "Enterprise Single Sign-On dla Google, GitHub i Okta."
+                         },
+                 "audit":  {
+                               "title":  "Log audytu",
+                               "desc":  "ÅšledÅº kaÅ¼dÄ… zmianÄ™ w swoich projektach ze szczegÃ³Å‚owymi znacznikami czasu."
+                           },
+                 "rbac":  {
+                              "title":  "DostÄ™p oparty na rolach",
+                              "desc":  "SzczegÃ³Å‚owa kontrola uprawnieÅ„ dla administratorÃ³w, edytorÃ³w i przeglÄ…dajÄ…cych."
+                          },
+                 "uptime":  {
+                                "title":  "99,99% dostÄ™pnoÅ›ci",
+                                "desc":  "Gwarantowana dostÄ™pnoÅ›Ä‡ dziÄ™ki naszemu globalnie rozproszonemu CDN."
+                            }
+             },
+    "cta":  {
+                "heading":  "Gotowy do startu?",
+                "btn_create":  "UtwÃ³rz konto",
+                "btn_docs":  "Przeczytaj dokumentacjÄ™"
+            },
+    "features":  {
+                     "list":  {
+                                  "speed":  {
+                                                "title":  "BÅ‚yskawicznie szybki",
+                                                "description":  "Zoptymalizowana wydajnoÅ›Ä‡ z czasem Å‚adowania poniÅ¼ej 100 ms. Zbudowany do globalnego skalowania z infrastrukturÄ… edge."
+                                            },
+                                  "design":  {
+                                                 "title":  "Nowoczesny design",
+                                                 "description":  "Czysty, responsywny interfejs, ktÃ³ry wyglÄ…da profesjonalnie na kaÅ¼dym urzÄ…dzeniu. W peÅ‚ni konfigurowalne komponenty."
+                                             },
+                                  "security":  {
+                                                   "title":  "Wysokie bezpieczeÅ„stwo",
+                                                   "description":  "Szyfrowanie end-to-end, uwierzytelnianie wieloskÅ‚adnikowe i zgodnoÅ›Ä‡ SOC2 w celu ochrony Twoich danych."
+                                               }
+                              },
+                     "heading":  "Kluczowe funkcje",
+                     "subheading":  "Wszystko, czego potrzebujesz do budowania i skalowania."
+                 }
+}

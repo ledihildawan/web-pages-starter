@@ -1,0 +1,203 @@
+{
+    "meta":  {
+                 "title":  "Prova i18n | Demo",
+                 "description":  "PÃ gina de prova completa per a funcions d\u0027internacionalitzaciÃ³"
+             },
+    "hero":  {
+                 "badge":  "CaracterÃ­stiques i18n",
+                 "title":  "Prova \u003cspan class=\u0027text-violet-400\u0027\u003ecompleta\u003c/span\u003e d\u0027internacionalitzaciÃ³",
+                 "description":  "Proveu totes les funcions i18n: traducciÃ³, pluralitzaciÃ³, format de nÃºmeros, monedes i conversiÃ³ de monedes."
+             },
+    "language_info":  {
+                          "title":  "InformaciÃ³ de l\u0027idioma actual",
+                          "code":  "Codi d\u0027idioma",
+                          "currency":  "Moneda",
+                          "direction":  "DirecciÃ³ del text",
+                          "digits":  "Xifres natives",
+                          "enabled":  "Activat",
+                          "disabled":  "Desactivat",
+                          "languages":  "Idiomes",
+                          "switching":  "Canviar sense recarregar",
+                          "current_code":  "ca",
+                          "current_currency":  "EUR",
+                          "current_direction":  "LTR (d\u0027esquerra a dreta)"
+                      },
+    "numbers":  {
+                    "title":  "Format de nÃºmeros",
+                    "description":  "Els nÃºmeros es formategen segons la localitzaciÃ³ activa.",
+                    "large":  "NÃºmero gran",
+                    "decimal":  "Decimal",
+                    "million":  "MiliÃ³",
+                    "percent":  "Percentatge",
+                    "raw":  "En brut"
+                },
+    "currency":  {
+                     "title":  "ConversiÃ³ de moneda",
+                     "description":  "Preus en EUR convertits a la moneda de l\u0027idioma actiu.",
+                     "currencies":  "Monedes",
+                     "small":  "Petit",
+                     "medium":  "MitjÃ ",
+                     "large":  "Gran",
+                     "enterprise":  "Enterprise"
+                 },
+    "currency_comparison":  {
+                                "title":  "ComparaciÃ³ de monedes",
+                                "description":  "El mateix preu en diverses monedes compatibles.",
+                                "base_price":  "Preu base (USD)",
+                                "aed":  "DÃ­rham dels EAU",
+                                "aud":  "DÃ²lar australiÃ ",
+                                "brl":  "Real brasiler",
+                                "cad":  "DÃ²lar canadenc",
+                                "chf":  "Franc suÃ­s",
+                                "cny":  "Iuan xinÃ¨s",
+                                "eur":  "Euro",
+                                "gbp":  "Lliura esterlina",
+                                "idr":  "Rupia",
+                                "inr":  "Rupia Ã­ndia",
+                                "jpy":  "Ien japonÃ¨s",
+                                "krw":  "Won coreÃ ",
+                                "mxn":  "Peso mexicÃ ",
+                                "sar":  "Riyal saudita",
+                                "sgd":  "DÃ²lar singapurÃ¨s",
+                                "usd":  "DÃ²lar dels EUA",
+                                "zar":  "Rand sud-africÃ "
+                            },
+    "core":  {
+                 "title":  "CaracterÃ­stiques principals",
+                 "description":  "TraducciÃ³, pluralitzaciÃ³ i contingut HTML."
+             },
+    "pluralization":  {
+                          "title":  "PluralitzaciÃ³",
+                          "description":  "Diferents formes de plural per a cada idioma.",
+                          "item_title":  "Item (substantiu)",
+                          "user_title":  "User (usuari)",
+                          "product_title":  "Product (producte)"
+                      },
+    "form":  {
+                 "title":  "Formulari amb placeholders traduÃ¯ts",
+                 "description":  "Els placeholders i les etiquetes s\u0027obtenen dels fitxers d\u0027idioma.",
+                 "name_label":  "Nom",
+                 "name_placeholder":  "IntroduÃ¯u el vostre nom complet",
+                 "email_label":  "Correu electrÃ²nic",
+                 "email_placeholder":  "exemple@correu.com",
+                 "message_label":  "Missatge",
+                 "message_placeholder":  "Escriviu el vostre missatge aquÃ­...",
+                 "submit":  "Enviar"
+             },
+    "missing_keys":  {
+                         "title":  "GestiÃ³ de claus inexistents",
+                         "description":  "Les claus de traducciÃ³ no trobades es mostren entre claudÃ tors."
+                     },
+    "html_content":  {
+                         "title":  "Contingut HTML",
+                         "description":  "Les traduccions poden incloure etiquetes HTML per al format.",
+                         "example":  "Aquest Ã©s un text d\u0027exemple amb \u003cspan class=\u0027text-emerald-400\u0027\u003eressaltat de color\u003c/span\u003e i \u003cstrong\u003etext en negreta\u003c/strong\u003e.",
+                         "note":  "Nota: les etiquetes HTML dins de les traduccions han d\u0027estar dins d\u0027un element contenidor."
+                     },
+    "switcher":  {
+                     "title":  "Canviar idioma",
+                     "description":  "Feu clic al botÃ³ segÃ¼ent per canviar l\u0027idioma i veure totes les funcions i18n en acciÃ³."
+                 },
+    "advanced":  {
+                     "title":  "Format avanÃ§at",
+                     "description":  "Funcions de format avanÃ§at per a percentatges, unitats, bytes, llistes i ordinals.",
+                     "percentages":  "Percentatges",
+                     "units":  "Unitats",
+                     "bytes":  "Bytes",
+                     "bytes_unit":  "byte",
+                     "lists":  "Llistes",
+                     "ordinals":  "Ordinals",
+                     "cardinals":  "Cardinals",
+                     "scientific":  "NotaciÃ³ cientÃ­fica",
+                     "abbreviated":  "Abreviada",
+                     "date_formats":  "Formats de data",
+                     "time_formats":  "Formats d\u0027hora",
+                     "datetime":  "Data + hora",
+                     "durations":  "Durades",
+                     "relative_time":  "Temps relatiu",
+                     "regional_pricing":  "Preus regionals",
+                     "fifty_percent":  "Cinquanta per cent",
+                     "small_percent":  "Percentatge petit",
+                     "ninety_nine":  "Noranta-nou",
+                     "hundred":  "Cent",
+                     "kilobyte":  "Kilobyte",
+                     "distance":  "DistÃ ncia",
+                     "temperature":  "Temperatura",
+                     "weight":  "Pes",
+                     "half_kb":  "Mig KB",
+                     "one_and_half_kb":  "Un KB i mig",
+                     "one_mb":  "Un MB",
+                     "one_gb":  "Un GB",
+                     "two_items":  "Dos elements",
+                     "three_items":  "Tres elements",
+                     "four_items":  "Quatre elements",
+                     "date_short":  "Data curta",
+                     "date_long":  "Data llarga",
+                     "time_short":  "Hora curta",
+                     "time_long":  "Hora llarga",
+                     "day_ago":  "Dies enrere",
+                     "months_ago":  "Mesos enrere",
+                     "hour_in":  "En 1 hora",
+                     "starter_plan":  "Pla Starter",
+                     "pro_plan":  "Pla Pro",
+                     "discount_20":  "20% de descompte",
+                     "number_modes":  "Modes de nÃºmero",
+                     "number_modes_desc":  "ComparaciÃ³ entre el format de xifres natives (Ù Ù¡Ù¢Ù£Ù¤) i el format universal (0-9).",
+                     "native_label":  "Xifres natives (Ù Ù¡Ù¢Ù£Ù¤)",
+                     "universal_label":  "Universal (0-9)",
+                     "plain_label":  "AutomÃ tic"
+                 },
+    "template_macros":  {
+                            "title":  "Macros de plantilla",
+                            "description":  "Macros per obtenir valors en brut sense marcat HTML.",
+                            "raw_value":  "Valor en brut sense marcat",
+                            "current_year":  "L\u0027any actual Ã©s {{year}}"
+                        },
+    "datetime":  {
+                     "title":  "Data i hora",
+                     "description":  "Format combinat de data i hora.",
+                     "iso":  "EstÃ ndard ISO",
+                     "eve":  "Vespre de Nadal"
+                 },
+    "unit":  {
+                 "title":  "Format d\u0027unitats"
+             },
+    "native_digits":  {
+                          "title":  "Xifres natives",
+                          "description":  "El text amb xifres ASCII es mostra en xifres natives quan la localitzaciÃ³ les activa. S\u0027actualitza en directe en canviar d\u0027idioma."
+                      },
+    "inflection":  {
+                       "title":  "InflexiÃ³ anglesa",
+                       "description":  "PluralitzaciÃ³ i singularitzaciÃ³ anglesa. S\u0027actualitza en directe en canviar d\u0027idioma."
+                   },
+    "live_label":  "En directe",
+    "pricing_details":  {
+                            "title":  "Detalls del preu",
+                            "description":  "Pipeline completa: valor en brut, codi de moneda, format, descompte i conversiÃ³.",
+                            "raw_value":  "Valor en brut",
+                            "raw_currency":  "Codi de moneda",
+                            "formatted":  "Formatejat",
+                            "discounted":  "20% de descompte",
+                            "converted_usd":  "ConversiÃ³ a USD"
+                        },
+    "live_update":  {
+                        "note":  "Fixeu-vos que tots els nÃºmeros, dates i preus canvien a l\u0027instant quan canvieu d\u0027idioma â€” sense recarregar la pÃ gina."
+                    },
+    "section_modes":  {
+                          "title":  "Modes de NÃºmero",
+                          "description":  "Compara dÃ­gits nadius, format universal i mode automÃ tic per a la localitzaciÃ³ activa."
+                      },
+    "section_systems":  {
+                            "title":  "Sistemes d\u0027Escriptura",
+                            "description":  "Els 7 sistemes algorÃ­tmics i 4 sistemes numÃ¨rics addicionals a nivell de sistema, amb carregadors de fonts connectats.",
+                            "note":  "Tots els sistemes numÃ¨rics (algorÃ­tmics i numÃ¨rics) mostren els dÃ­gits natius correctes amb fallback ICU."
+                        },
+    "nav":  {
+                "translations":  "Traduccions",
+                "formatting":  "NÃºmeros",
+                "pricing":  "Preus",
+                "modes":  "Modes",
+                "systems":  "Sistemes",
+                "switcher":  "Canvia Locale"
+            }
+}

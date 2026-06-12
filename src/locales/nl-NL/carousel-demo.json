@@ -1,0 +1,17 @@
+{
+    "meta":  {
+                 "page_title":  "Lazy Load Splide Demo | Starter"
+             },
+    "hero":  {
+                 "slide_1":  {
+                                 "title":  "Lazy Load Natuur",
+                                 "subtitle":  "Afbeeldingen worden slim geladen om data te besparen.",
+                                 "alt":  "Prachtig berglandschap"
+                             },
+                 "slide_2":  {
+                                 "title":  "Topprestaties",
+                                 "subtitle":  "Alleen laden wat u nodig heeft.",
+                                 "alt":  "Besneeuwd berglandschap"
+                             }
+             }
+}

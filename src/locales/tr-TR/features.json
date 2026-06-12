@@ -1,0 +1,75 @@
+{
+    "hero":  {
+                 "badge":  "Ã–ne Ã‡Ä±kan Ã–zellikler",
+                 "title_part1":  "Daha hÄ±zlÄ± Ã¶lÃ§eklenmek iÃ§in ihtiyacÄ±nÄ±z olan",
+                 "title_highlight":  "her ÅŸey",
+                 "description":  "GÃ¼Ã§lÃ¼ analizlerden kusursuz entegrasyonlara kadar, dÃ¼nyaca standartta uygulamalar oluÅŸturmak iÃ§in ihtiyacÄ±nÄ±z olan tÃ¼m araÃ§ setini sunuyoruz."
+             },
+    "features":  {
+                     "heading":  "Ã–ne Ã‡Ä±kan Ã–zellikler",
+                     "subheading":  "OluÅŸturmak ve bÃ¼yÃ¼mek iÃ§in ihtiyacÄ±nÄ±z olan her ÅŸey.",
+                     "list":  {
+                                  "speed":  {
+                                                "title":  "Son Derece HÄ±zlÄ±",
+                                                "description":  "100ms altÄ±nda yÃ¼kleme sÃ¼resiyle optimum performans. Edge altyapÄ±sÄ±yla kÃ¼resel Ã¶lÃ§ek iÃ§in tasarlandÄ±."
+                                            },
+                                  "design":  {
+                                                 "title":  "Modern TasarÄ±m",
+                                                 "description":  "TÃ¼m cihazlarda profesyonel gÃ¶rÃ¼nen responsive ve temiz arayÃ¼z. Tamamen Ã¶zelleÅŸtirilebilir bileÅŸenler."
+                                             },
+                                  "security":  {
+                                                   "title":  "YÃ¼ksek GÃ¼venlik",
+                                                   "description":  "Verilerinizi korumak iÃ§in uÃ§tan uca ÅŸifreleme, Ã§ok faktÃ¶rlÃ¼ kimlik doÄŸrulama ve SOC2 uyumluluÄŸu."
+                                               }
+                              }
+                 },
+    "sections":  {
+                     "sync":  {
+                                  "title":  "GerÃ§ek ZamanlÄ± Senkronizasyon",
+                                  "description":  "DeÄŸiÅŸiklikler tÃ¼m cihazlara anÄ±nda yayÄ±lÄ±r. KullanÄ±cÄ±larÄ±nÄ±z mobil, masaÃ¼stÃ¼ veya tablet kullansÄ±n, aynÄ± anda aynÄ± veriyi gÃ¶rÃ¼rler.",
+                                  "check_0":  "Milisaniyenin altÄ±nda gecikme",
+                                  "check_1":  "YerleÅŸik Ã§evrimdÄ±ÅŸÄ± destek",
+                                  "check_2":  "Ã‡akÄ±ÅŸma Ã§Ã¶zÃ¼mÃ¼ yÃ¶netimi"
+                              },
+                     "analytics":  {
+                                       "title":  "Eyleme DÃ¶nÃ¼ÅŸtÃ¼rÃ¼lebilir Analitik",
+                                       "description":  "Tahmin etmeyin. KullanÄ±cÄ± davranÄ±ÅŸÄ±, sistem performansÄ± ve gelir metrikleri hakkÄ±nda derin iÃ§gÃ¶rÃ¼ler edinin. Verilerinizi interaktif grafiklerle gÃ¶rselleÅŸtirin.",
+                                       "check_0":  "Ã–zelleÅŸtirilebilir gÃ¶sterge paneli",
+                                       "check_1":  "PDF, CSV veya Excel\u0027e aktarma",
+                                       "check_2":  "Otomatik haftalÄ±k raporlar"
+                                   }
+                 },
+    "more_title":  "Ve daha fazlasÄ±...",
+    "more_subtitle":  "Daha hÄ±zlÄ± ve daha Ã¶lÃ§eklenebilir oluÅŸturmanÄ±za yardÄ±mcÄ± olmak iÃ§in tasarlanmÄ±ÅŸ gÃ¼Ã§lÃ¼ Ã¶zellikler.",
+    "more":  {
+                 "dark_mode":  {
+                                   "title":  "KaranlÄ±k Mod",
+                                   "desc":  "Otomatik algÄ±lama ile aÃ§Ä±k ve koyu tema desteÄŸi."
+                               },
+                 "api_first":  {
+                                   "title":  "API Ã–ncelikli",
+                                   "desc":  "Tam programlÄ± kontrol iÃ§in REST ve GraphQL API\u0027leri."
+                               },
+                 "sso":  {
+                             "title":  "SSO GiriÅŸi",
+                             "desc":  "Google, GitHub ve Okta iÃ§in kurumsal dÃ¼zeyde Single Sign-On."
+                         },
+                 "audit":  {
+                               "title":  "Denetim GÃ¼nlÃ¼kleri",
+                               "desc":  "Projenizdeki her deÄŸiÅŸikliÄŸi ayrÄ±ntÄ±lÄ± zaman damgalarÄ±yla izleyin."
+                           },
+                 "rbac":  {
+                              "title":  "Rol TabanlÄ± EriÅŸim",
+                              "desc":  "Admin, editÃ¶r ve gÃ¶rÃ¼ntÃ¼leyici iÃ§in ayrÄ±ntÄ±lÄ± izin kontrolÃ¼."
+                          },
+                 "uptime":  {
+                                "title":  "%99.99 Ã‡alÄ±ÅŸma SÃ¼resi",
+                                "desc":  "KÃ¼resel olarak daÄŸÄ±tÄ±lmÄ±ÅŸ CDN\u0027imizle garanti edilen kullanÄ±labilirlik."
+                            }
+             },
+    "cta":  {
+                "heading":  "BaÅŸlamaya hazÄ±r mÄ±sÄ±nÄ±z?",
+                "btn_create":  "Hesap OluÅŸtur",
+                "btn_docs":  "Belgeleri Okuyun"
+            }
+}

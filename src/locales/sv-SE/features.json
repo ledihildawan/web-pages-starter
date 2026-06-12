@@ -1,0 +1,75 @@
+{
+    "hero":  {
+                 "badge":  "Utvalda funktioner",
+                 "title_part1":  "Allt du behÃ¶ver fÃ¶r att",
+                 "title_highlight":  "skalera snabbare",
+                 "description":  "FrÃ¥n kraftfull analys till sÃ¶mlÃ¶sa integrationer ger vi dig den verktygslÃ¥da du behÃ¶ver fÃ¶r att bygga applikationer i vÃ¤rldsklass utan komplikationer."
+             },
+    "sections":  {
+                     "sync":  {
+                                  "title":  "Realtidssynkronisering",
+                                  "description":  "Ã„ndringar sprids omedelbart till alla enheter. Oavsett om dina anvÃ¤ndare anvÃ¤nder mobil, dator eller surfplatta ser de samma data vid samma tidpunkt.",
+                                  "check_0":  "Latens under millisekunden",
+                                  "check_1":  "Inbyggt offline-stÃ¶d",
+                                  "check_2":  "Hantering av konfliktlÃ¶sning"
+                              },
+                     "analytics":  {
+                                       "title":  "Handlingsbar analys",
+                                       "description":  "Sluta gissa. FÃ¥ detaljerade insikter om anvÃ¤ndarbeteende, systemprestanda och intÃ¤ktsmÃ¥tt. Visualisera din data med interaktiva diagram.",
+                                       "check_0":  "Anpassningsbara dashboards",
+                                       "check_1":  "Exportera till PDF, CSV eller Excel",
+                                       "check_2":  "Automatiserade veckorapporter"
+                                   }
+                 },
+    "more_title":  "Och mycket mer...",
+    "more_subtitle":  "Avancerade funktioner designade fÃ¶r att hjÃ¤lpa dig bygga snabbare och mer skalbart.",
+    "more":  {
+                 "dark_mode":  {
+                                   "title":  "MÃ¶rkt lÃ¤ge",
+                                   "desc":  "Inbyggt stÃ¶d fÃ¶r ljusa och mÃ¶rka teman med automatisk detektering."
+                               },
+                 "api_first":  {
+                                   "title":  "API-fÃ¶rst",
+                                   "desc":  "REST- och GraphQL-API:er tillgÃ¤ngliga fÃ¶r fullstÃ¤ndig programmatisk kontroll."
+                               },
+                 "sso":  {
+                             "title":  "SSO-inloggning",
+                             "desc":  "Enterprise Single Sign-On fÃ¶r Google, GitHub och Okta."
+                         },
+                 "audit":  {
+                               "title":  "Granskningslogg",
+                               "desc":  "SpÃ¥ra varje Ã¤ndring i dina projekt med detaljerade tidsstÃ¤mplar."
+                           },
+                 "rbac":  {
+                              "title":  "Rollbaserad Ã¥tkomst",
+                              "desc":  "GranulÃ¤r behÃ¶righetskontroll fÃ¶r administratÃ¶rer, redaktÃ¶rer och lÃ¤sare."
+                          },
+                 "uptime":  {
+                                "title":  "99,99% drifttid",
+                                "desc":  "Garanterad tillgÃ¤nglighet med vÃ¥rt globalt distribuerade CDN."
+                            }
+             },
+    "cta":  {
+                "heading":  "Redo att bÃ¶rja?",
+                "btn_create":  "Skapa konto",
+                "btn_docs":  "LÃ¤s dokumentationen"
+            },
+    "features":  {
+                     "list":  {
+                                  "speed":  {
+                                                "title":  "Blixtsnabbt",
+                                                "description":  "Optimerad prestanda med laddtider under 100 ms. Byggd fÃ¶r global skalning med edge-infrastruktur."
+                                            },
+                                  "design":  {
+                                                 "title":  "Modern design",
+                                                 "description":  "Ren, responsiv UI som ser professionell ut pÃ¥ alla enheter. Fullt anpassningsbara komponenter."
+                                             },
+                                  "security":  {
+                                                   "title":  "HÃ¶g sÃ¤kerhet",
+                                                   "description":  "End-to-end-kryptering, multifaktorautentisering och SOC2-efterlevnad fÃ¶r att skydda dina data."
+                                               }
+                              },
+                     "heading":  "Huvudfunktioner",
+                     "subheading":  "Allt du behÃ¶ver fÃ¶r att bygga och skala."
+                 }
+}

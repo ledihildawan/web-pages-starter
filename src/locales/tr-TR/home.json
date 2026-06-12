@@ -1,0 +1,102 @@
+{
+    "about":  {
+                  "badge":  "HakkÄ±mÄ±zda"
+              },
+    "hero":  {
+                 "badge":  "HakkÄ±mÄ±zda",
+                 "title_part1":  "Biz ",
+                 "title_highlight":  "dijital geleceÄŸi",
+                 "description":  "2024 yÄ±lÄ±nda kurulan Starter, geliÅŸtiricilerin daha hÄ±zlÄ± ve daha iyi uygulamalar oluÅŸturmasÄ±na yardÄ±mcÄ± olmak iÃ§in var. Temiz kod, gÃ¼zel tasarÄ±m ve aÃ§Ä±k kaynak iÅŸbirliÄŸinin gÃ¼cÃ¼ne inanÄ±yoruz.",
+                 "primary_btn":  {
+                                     "label":  "Ãœcretsiz BaÅŸlayÄ±n",
+                                     "url":  "#pricing"
+                                 },
+                 "secondary_btn":  {
+                                       "label":  "Demoyu GÃ¶rÃ¼ntÃ¼le",
+                                       "url":  "#features"
+                                   },
+                 "note":  "Kredi kartÄ± gerekmez"
+             },
+    "stats":  {
+                  "community":  "KÃ¼resel Topluluk",
+                  "community_val":  "50K+",
+                  "projects":  "Tamamlanan Proje",
+                  "projects_val":  "120+",
+                  "uptime":  "Ã‡alÄ±ÅŸma SÃ¼resi",
+                  "uptime_val":  "99.99%",
+                  "rating":  "Puan",
+                  "rating_val":  "4.9/5"
+              },
+    "story":  {
+                  "tag":  "Hikayemiz",
+                  "visual_label":  "YaratÄ±cÄ± StÃ¼dyo Ä°llÃ¼strasyonu",
+                  "title":  "Tutkuyla hareket eden, \u003cbr\u003emÃ¼kemmellikle tanÄ±mlanan.",
+                  "para1":  "YolculuÄŸumuz basit bir fikirle baÅŸladÄ±: web geliÅŸtirmeyi herkes iÃ§in eriÅŸilebilir ve eÄŸlenceli hale getirmek. AÄŸÄ±r framework\u0027lerden ve karmaÅŸÄ±k yapÄ±landÄ±rmalardan bÄ±kmÄ±ÅŸtÄ±k.",
+                  "para2":  "BugÃ¼n, karmaÅŸÄ±k sorunlarÄ± zarif Ã§Ã¶zÃ¼mlerle Ã§Ã¶zmek iÃ§in birlikte Ã§alÄ±ÅŸan mÃ¼hendisler, tasarÄ±mcÄ±lar ve dÃ¼ÅŸÃ¼nÃ¼rlerden oluÅŸan Ã§eÅŸitli bir ekibiz.",
+                  "val1":  "KullanÄ±cÄ± odaklÄ± tasarÄ±m felsefesi",
+                  "val2":  "Performans Ã¶ncelikli mimari",
+                  "val3":  "ÅžeffaflÄ±k ve aÃ§Ä±k iletiÅŸim"
+              },
+    "mission":  {
+                    "title":  "Misyonumuz",
+                    "description":  "GeliÅŸtiricileri ve iÅŸletmeleri, harika dijital Ã¼rÃ¼nler oluÅŸturmak iÃ§in zarif, hÄ±zlÄ± ve kullanÄ±mÄ± kolay araÃ§larla gÃ¼Ã§lendirmek."
+                },
+    "vision":  {
+                   "title":  "Vizyonumuz",
+                   "description":  "Her satÄ±r kodda gÃ¼zelliÄŸe, performansa ve kullanÄ±cÄ± deneyimine deÄŸer veren modern geliÅŸtiricilerin tercih ettiÄŸi platform olmak."
+               },
+    "values":  {
+                   "title":  "DeÄŸerlerimiz",
+                   "subtitle":  "AldÄ±ÄŸÄ±mÄ±z her karara rehberlik eden ilkeler."
+               },
+    "passion":  {
+                    "title":  "Tutku",
+                    "description":  "Ne yaptÄ±ÄŸÄ±mÄ±zÄ± seviyoruz ve bu, Ã¼rÃ¼nÃ¼mÃ¼zÃ¼n her detayÄ±nda gÃ¶rÃ¼lÃ¼yor."
+                },
+    "collaboration":  {
+                          "title":  "Ä°ÅŸbirliÄŸi",
+                          "description":  "Birlikte Ã§alÄ±ÅŸmak en iyi sonuÃ§larÄ± doÄŸurur. SaÄŸlam bir ekibin gÃ¼cÃ¼ne inanÄ±yoruz."
+                      },
+    "innovation":  {
+                       "title":  "Yenilik",
+                       "description":  "SorunlarÄ± Ã§Ã¶zmek ve deÄŸer yaratmak iÃ§in her zaman daha iyi yollar arÄ±yoruz."
+                   },
+    "integrity":  {
+                      "title":  "DÃ¼rÃ¼stlÃ¼k",
+                      "description":  "ÅžeffaflÄ±k ve dÃ¼rÃ¼stlÃ¼k, kurduÄŸumuz her iliÅŸkinin temelidir."
+                  },
+    "excellence":  {
+                       "title":  "MÃ¼kemmellik",
+                       "description":  "Yeterince iyiyiyle yetinmiyoruz. Her zaman en iyisini hedefliyoruz."
+                   },
+    "quality":  {
+                    "title":  "Kalite",
+                    "description":  "Temiz kod, gÃ¼zel tasarÄ±m ve kusursuz deneyim bizim standartlarÄ±mÄ±zdÄ±r."
+                },
+    "team":  {
+                 "title":  "Ekibi TanÄ±yÄ±n",
+                 "subtitle":  "YazdÄ±ÄŸÄ±mÄ±z her satÄ±r kodun arkasÄ±ndaki parlak zihinler.",
+                 "alex_desc":  "SaaS ekosistemi geliÅŸtirmede 10+ yÄ±l deneyime sahip vizyoner lider.",
+                 "sarah_desc":  "BÃ¼yÃ¼k Ã¶lÃ§ekli sistem mimarileri oluÅŸturma konusunda uzmanlaÅŸmÄ±ÅŸ full-stack sihirbazÄ±.",
+                 "mike_desc":  "Piksel detaylarÄ±, akÄ±cÄ± UX akÄ±ÅŸlarÄ± ve eriÅŸilebilirlik standartlarÄ±na takÄ±ntÄ±lÄ±.",
+                 "jessica_desc":  "MarkalarÄ±n dijital dÃ¼nyada benzersiz seslerini bulmalarÄ±na yardÄ±mcÄ± olan yaratÄ±cÄ± hikaye anlatÄ±cÄ±."
+             },
+    "features":  {
+                     "list":  {
+                                  "speed":  {
+                                                "title":  "Son Derece HÄ±zlÄ±",
+                                                "description":  "100ms altÄ±nda yÃ¼kleme sÃ¼resiyle optimum performans. Edge altyapÄ±sÄ±yla kÃ¼resel Ã¶lÃ§ek iÃ§in tasarlandÄ±."
+                                            },
+                                  "design":  {
+                                                 "title":  "Modern TasarÄ±m",
+                                                 "description":  "TÃ¼m cihazlarda profesyonel gÃ¶rÃ¼nen responsive ve temiz arayÃ¼z. Tamamen Ã¶zelleÅŸtirilebilir bileÅŸenler."
+                                             },
+                                  "security":  {
+                                                   "title":  "YÃ¼ksek GÃ¼venlik",
+                                                   "description":  "Verilerinizi korumak iÃ§in uÃ§tan uca ÅŸifreleme, Ã§ok faktÃ¶rlÃ¼ kimlik doÄŸrulama ve SOC2 uyumluluÄŸu."
+                                               }
+                              },
+                     "heading":  "Ã–ne Ã‡Ä±kan Ã–zellikler",
+                     "subheading":  "OluÅŸturmak ve bÃ¼yÃ¼mek iÃ§in ihtiyacÄ±nÄ±z olan her ÅŸey."
+                 }
+}

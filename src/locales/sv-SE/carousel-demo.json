@@ -1,0 +1,17 @@
+{
+    "meta":  {
+                 "page_title":  "Splide lazy loading-demo | Starter"
+             },
+    "hero":  {
+                 "slide_1":  {
+                                 "title":  "Lat laddning av naturen",
+                                 "subtitle":  "Bilder laddas intelligent fÃ¶r att spara data.",
+                                 "alt":  "Vacker bergslandskap"
+                             },
+                 "slide_2":  {
+                                 "title":  "Ã–verlÃ¤gsen prestanda",
+                                 "subtitle":  "Ladda bara det du behÃ¶ver.",
+                                 "alt":  "SnÃ¶tÃ¤ckt bergslandskap"
+                             }
+             }
+}

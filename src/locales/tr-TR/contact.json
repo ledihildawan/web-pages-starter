@@ -1,0 +1,47 @@
+{
+    "meta":  {
+                 "title":  "Bize UlaÅŸÄ±n | Starter App",
+                 "description":  "SorularÄ±nÄ±z ve destek iÃ§in bizimle iletiÅŸime geÃ§in."
+             },
+    "contact":  {
+                    "badge":  "YardÄ±ma HazÄ±rÄ±z",
+                    "title_part1":  "Ä°letiÅŸime",
+                    "title_highlight":  "geÃ§elim",
+                    "description":  "Sorunuz mu var veya iÅŸbirliÄŸi mi yapmak istiyorsunuz? Sizden haber almak bizi mutlu eder. Bir mesaj gÃ¶nderin, en kÄ±sa sÃ¼rede yanÄ±t verelim.",
+                    "form_title":  "Mesaj GÃ¶nderin",
+                    "form_subtitle":  "AÅŸaÄŸÄ±daki formu doldurun, en kÄ±sa sÃ¼rede yanÄ±t verelim.",
+                    "social_title":  "Bizi Takip Edin",
+                    "social_subtitle":  "Sosyal medya hesaplarÄ±mÄ±zdan en gÃ¼ncel geliÅŸmeleri takip edin",
+                    "info":  {
+                                 "response_time":  {
+                                                       "title":  "HÄ±zlÄ± YanÄ±t",
+                                                       "description":  "Her mesaja iÅŸ gÃ¼nlerinde 24 saat iÃ§inde yanÄ±t vermeye Ã§alÄ±ÅŸÄ±yoruz."
+                                                   },
+                                 "working_hours":  {
+                                                       "title":  "Ã‡alÄ±ÅŸma Saatleri",
+                                                       "description":  "Pazartesi - Cuma: 09:00 - 18:00. Hafta sonu: Ã–ncelikli olarak."
+                                                   },
+                                 "support":  {
+                                                 "title":  "SÃ¼rekli Destek",
+                                                 "description":  "Destek ekibimiz teknik sorunlarÄ±nÄ±zÄ± Ã§Ã¶zmek iÃ§in her zaman hazÄ±r."
+                                             }
+                             },
+                    "form":  {
+                                 "name":  "AdÄ±nÄ±z",
+                                 "name_placeholder":  "AdÄ±nÄ±zÄ± girin",
+                                 "email":  "E-posta",
+                                 "email_placeholder":  "ad@email.com",
+                                 "subject":  "Konu",
+                                 "subject_placeholder":  "Neyi tartÄ±ÅŸmak istersiniz?",
+                                 "message":  "Mesaj",
+                                 "message_placeholder":  "Sorunuzu daha detaylÄ± aÃ§Ä±klayÄ±n...",
+                                 "submit":  "Mesaj GÃ¶nder"
+                             }
+                },
+    "email_label":  "E-posta",
+    "email_value":  "hello@starter.app",
+    "phone_label":  "Telefon",
+    "phone_value":  "+90 212 555 0123",
+    "location_label":  "Konum",
+    "location_value":  "Ä°stanbul, TÃ¼rkiye"
+}

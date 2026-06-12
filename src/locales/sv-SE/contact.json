@@ -1,0 +1,47 @@
+{
+    "meta":  {
+                 "title":  "Kontakta oss | Starter App",
+                 "description":  "Kom i kontakt med oss fÃ¶r frÃ¥gor och support."
+             },
+    "contact":  {
+                    "badge":  "Redo att hjÃ¤lpa",
+                    "title_part1":  "LÃ¥t oss koppla",
+                    "title_highlight":  "ihop",
+                    "description":  "Har du en frÃ¥ga eller vill du samarbeta? Vi vill gÃ¤rna hÃ¶ra frÃ¥n dig. Skicka ett meddelande sÃ¥ svarar vi snart.",
+                    "form_title":  "Skicka ett meddelande",
+                    "form_subtitle":  "Fyll i formulÃ¤ret nedan sÃ¥ svarar vi dig snart.",
+                    "social_title":  "FÃ¶lj oss",
+                    "social_subtitle":  "FÃ¥ de senaste uppdateringarna via vÃ¥ra sociala kanaler",
+                    "info":  {
+                                 "response_time":  {
+                                                       "title":  "Snabbt svar",
+                                                       "description":  "Vi strÃ¤var efter att svara pÃ¥ varje meddelande inom 24 timmar pÃ¥ vardagar."
+                                                   },
+                                 "working_hours":  {
+                                                       "title":  "Arbetstider",
+                                                       "description":  "MÃ¥ndag - fredag: 09:00 - 18:00. Helger: med prioritet."
+                                                   },
+                                 "support":  {
+                                                 "title":  "Kontinuerlig support",
+                                                 "description":  "VÃ¥rt supportteam Ã¤r alltid redo att lÃ¶sa dina tekniska problem."
+                                             }
+                             },
+                    "form":  {
+                                 "name":  "Namn",
+                                 "name_placeholder":  "Ange ditt namn",
+                                 "email":  "E-post",
+                                 "email_placeholder":  "namn@epost.se",
+                                 "subject":  "Ã„mne",
+                                 "subject_placeholder":  "Vad vill du diskutera?",
+                                 "message":  "Meddelande",
+                                 "message_placeholder":  "BerÃ¤tta mer om din frÃ¥ga...",
+                                 "submit":  "Skicka meddelande"
+                             }
+                },
+    "email_label":  "E-post",
+    "email_value":  "hello@starter.app",
+    "phone_label":  "Telefon",
+    "phone_value":  "+46 8 123 456 78",
+    "location_label":  "Plats",
+    "location_value":  "Stockholm, Sverige"
+}

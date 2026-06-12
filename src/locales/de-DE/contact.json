@@ -1,0 +1,47 @@
+{
+    "meta":  {
+                 "title":  "Kontakt | Starter App",
+                 "description":  "Kontaktieren Sie uns fÃ¼r Fragen und Support."
+             },
+    "contact":  {
+                    "badge":  "Kontakt aufnehmen",
+                    "title_part1":  "Lass uns",
+                    "title_highlight":  "verbinden",
+                    "description":  "Haben Sie Fragen oder mÃ¶chten Sie zusammenarbeiten? Wir wÃ¼rden uns freuen, von Ihnen zu hÃ¶ren. Senden Sie uns eine Nachricht und wir werden so schnell wie mÃ¶glich antworten.",
+                    "form_title":  "Nachricht senden",
+                    "form_subtitle":  "FÃ¼llen Sie das Formular unten aus und wir werden Ihnen in KÃ¼rze antworten.",
+                    "social_title":  "Folgen Sie uns",
+                    "social_subtitle":  "Bleiben Sie auf dem Laufenden mit unseren neuesten Nachrichten in den sozialen Medien",
+                    "info":  {
+                                 "response_time":  {
+                                                       "title":  "Schnelle Antwort",
+                                                       "description":  "Wir bemÃ¼hen uns, jede Nachricht innerhalb von 24 Stunden an Werktagen zu beantworten."
+                                                   },
+                                 "working_hours":  {
+                                                       "title":  "Arbeitszeiten",
+                                                       "description":  "Montag - Freitag: 09:00 - 18:00. Wochenenden: Nach PrioritÃ¤t."
+                                                   },
+                                 "support":  {
+                                                 "title":  "Laufender Support",
+                                                 "description":  "Unser Support-Team ist immer bereit, bei der LÃ¶sung Ihrer technischen Probleme zu helfen."
+                                             }
+                             },
+                    "form":  {
+                                 "name":  "Name",
+                                 "name_placeholder":  "Geben Sie Ihren Namen ein",
+                                 "email":  "E-Mail",
+                                 "email_placeholder":  "name@beispiel.com",
+                                 "subject":  "Betreff",
+                                 "subject_placeholder":  "Was mÃ¶chten Sie besprechen?",
+                                 "message":  "Nachricht",
+                                 "message_placeholder":  "ErzÃ¤hlen Sie uns mehr Ã¼ber Ihre Anfrage...",
+                                 "submit":  "Nachricht senden"
+                             }
+                },
+    "email_label":  "E-Mail",
+    "email_value":  "hello@starter.app",
+    "phone_label":  "Telefon",
+    "phone_value":  "+49 500 000 000",
+    "location_label":  "Standort",
+    "location_value":  "Berlin, Deutschland"
+}

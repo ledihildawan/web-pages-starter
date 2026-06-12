@@ -1,0 +1,75 @@
+{
+    "hero":  {
+                 "badge":  "KÄ¾ÃºÄovÃ© funkcie",
+                 "title_part1":  "VÅ¡etko, Äo potrebujete na",
+                 "title_highlight":  "rÃ½chlejÅ¡ie Å¡kÃ¡lovanie",
+                 "description":  "Od vÃ½konnej analytiky po bezproblÃ©movÃº integrÃ¡ciu â€” poskytujeme nÃ¡stroje, ktorÃ© potrebujete na budovanie aplikÃ¡ciÃ­ svetovej Ãºrovne bez starostÃ­."
+             },
+    "features":  {
+                     "heading":  "KÄ¾ÃºÄovÃ© funkcie",
+                     "subheading":  "VÅ¡etko, Äo potrebujete na budovanie a rast.",
+                     "list":  {
+                                  "speed":  {
+                                                "title":  "ExtrÃ©mne rÃ½chle",
+                                                "description":  "OptimÃ¡lny vÃ½kon s Äasom naÄÃ­tania pod 100ms. NavrhnutÃ© pre globÃ¡lne Å¡kÃ¡lovanie s edge infraÅ¡truktÃºrou."
+                                            },
+                                  "design":  {
+                                                 "title":  "ModernÃ½ dizajn",
+                                                 "description":  "ResponzÃ­vne a ÄistÃ© UI, ktorÃ© vyzerÃ¡ profesionÃ¡lne na vÅ¡etkÃ½ch zariadeniach. Plne prispÃ´sobiteÄ¾nÃ© komponenty."
+                                             },
+                                  "security":  {
+                                                   "title":  "VysokÃ¡ ÃºroveÅˆ bezpeÄnosti",
+                                                   "description":  "End-to-end Å¡ifrovanie, viacfaktorovÃ¡ autentifikÃ¡cia a SOC2 sÃºlad na ochranu vaÅ¡ich Ãºdajov."
+                                               }
+                              }
+                 },
+    "sections":  {
+                     "sync":  {
+                                  "title":  "SynchronizÃ¡cia v reÃ¡lnom Äase",
+                                  "description":  "Zmeny sa okamÅ¾ite Å¡Ã­ria na vÅ¡etky zariadenia. ÄŒi vaÅ¡i pouÅ¾Ã­vatelia pouÅ¾Ã­vajÃº telefÃ³n, poÄÃ­taÄ alebo tablet, uvidia rovnakÃ© Ãºdaje v rovnakom Äase.",
+                                  "check_0":  "Latencia pod milisekundu",
+                                  "check_1":  "VstavanÃ¡ podpora offline reÅ¾imu",
+                                  "check_2":  "RieÅ¡enie konfliktov"
+                              },
+                     "analytics":  {
+                                       "title":  "AkÄnÃ¡ analytika",
+                                       "description":  "NehÃ¡dÅ¾te. ZÃ­skajte hlbokÃ© vhÄ¾ady do sprÃ¡vania pouÅ¾Ã­vateÄ¾ov, vÃ½konu systÃ©mu a metrÃ­k prÃ­jmov. Vizualizujte Ãºdaje interaktÃ­vnymi grafmi.",
+                                       "check_0":  "PrispÃ´sobiteÄ¾nÃ© panely",
+                                       "check_1":  "Export do PDF, CSV alebo Excelu",
+                                       "check_2":  "AutomatickÃ© tÃ½Å¾dennÃ© reporty"
+                                   }
+                 },
+    "more_title":  "A eÅ¡te oveÄ¾a viac...",
+    "more_subtitle":  "PokroÄilÃ© funkcie navrhnutÃ© na to, aby vÃ¡m pomohli budovaÅ¥ rÃ½chlejÅ¡ie a Å¡kÃ¡lovateÄ¾nejÅ¡ie.",
+    "more":  {
+                 "dark_mode":  {
+                                   "title":  "TmavÃ½ reÅ¾im",
+                                   "desc":  "VstavanÃ¡ podpora svetlej a tmavej tÃ©my s automatickÃ½m rozpoznÃ¡vanÃ­m."
+                               },
+                 "api_first":  {
+                                   "title":  "API First",
+                                   "desc":  "REST a GraphQL API dostupnÃ© pre plnÃº programovÃº kontrolu."
+                               },
+                 "sso":  {
+                             "title":  "SSO prihlÃ¡senie",
+                             "desc":  "Enterprise Single Sign-On pre Google, GitHub a Okta."
+                         },
+                 "audit":  {
+                               "title":  "AudÃ­torskÃ© zÃ¡znamy",
+                               "desc":  "Sledujte kaÅ¾dÃº zmenu vo svojom projekte s podrobnÃ½mi ÄasovÃ½mi peÄiatkami."
+                           },
+                 "rbac":  {
+                              "title":  "PrÃ­stup zaloÅ¾enÃ½ na rolÃ¡ch",
+                              "desc":  "GranulÃ¡rna kontrola oprÃ¡vnenÃ­ pre administrÃ¡torov, editorov a ÄitateÄ¾ov."
+                          },
+                 "uptime":  {
+                                "title":  "DostupnosÅ¥ 99.99%",
+                                "desc":  "GarantovanÃ¡ dostupnosÅ¥ s naÅ¡Ã­m globÃ¡lne distribuovanÃ½m CDN."
+                            }
+             },
+    "cta":  {
+                "heading":  "PripravenÃ­ zaÄaÅ¥?",
+                "btn_create":  "VytvoriÅ¥ ÃºÄet",
+                "btn_docs":  "PreÄÃ­taÅ¥ dokumentÃ¡ciu"
+            }
+}
