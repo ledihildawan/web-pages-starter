@@ -1,19 +1,19 @@
-{% macro section_header(badge, title, description, icon = null, show_gradient = true, i18n = {}) %}
+{% macro section_header(badge, title, description, icon = null, show_gradient = true) %}
   <div class="text-center mbe-24 space-y-4">
     {% if badge %}
       <div class="inline-flex items-center gap-2.5 px-4 py-2 bg-violet-500/10 border border-violet-500/30 rounded-full text-violet-300 text-sm mbe-6">
-        {% if icon %}{{ icon}}
+        {% if icon %}{{ icon }}
         {% endif %}
-        <span class="font-bold tracking-wide uppercase text-[10px]">{{ i18n.t(badge) }}</span>
+        <span class="font-bold tracking-wide uppercase text-[10px]">{{ badge }}</span>
       </div>
     {% endif %}
 
     <h2 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white">
-      {{ i18n.t(title) }}
+      {{ title }}
     </h2>
 
     <p class="text-slate-400 max-inline-2xl mx-auto text-lg md:text-xl leading-relaxed">
-      {{ i18n.t(description) }}
+      {{ description }}
     </p>
 
     {% if show_gradient %}

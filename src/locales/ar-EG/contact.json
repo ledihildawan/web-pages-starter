@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "title": "كلمنا | Starter App",
+    "description": "تواصل معانا للأسئلة والدعم."
+  },
+  "contact": {
+    "badge": "كلمنا",
+    "title_part1": "يلا نتكلم",
+    "title_highlight": "مع بعض",
+    "description": "عندك سؤال أو عايز تتعاون معانا؟ يسعدنا نسمعك. ابعتلنا رسالة وهنرد عليك في أسرع وقت.",
+    "form_title": "ابعت رسالة",
+    "form_subtitle": "املأ الفورم ده وهنرد عليك قريب.",
+    "social_title": "تابعنا",
+    "social_subtitle": "خلينك متابع آخر أخبارنا على السوشيال ميديا",
+    "info": {
+      "response_time": {
+        "title": "رد سريع",
+        "description": "بنسعى نرد على كل رسالة خلال ٢٤ ساعة في أيام الشغل."
+      },
+      "working_hours": {
+        "title": "ساعات الشغل",
+        "description": "الحد - الخميس: ٠٩:٠٠ - ١٨:٠٠. الإجازة: حسب الأولوية."
+      },
+      "support": {
+        "title": "دعم مستمر",
+        "description": "فريق الدعم بتاعنا جاهز دايماً يساعدك في حل المشاكل التقنية."
+      }
+    },
+    "form": {
+      "name": "الاسم",
+      "name_placeholder": "اكتب اسمك",
+      "email": "الإيميل",
+      "email_placeholder": "اسم@مثال.com",
+      "subject": "الموضوع",
+      "subject_placeholder": "إيه اللي عايز تناقشه؟",
+      "message": "الرسالة",
+      "message_placeholder": "قولنا أكتر عن استفسارك...",
+      "submit": "ابعت الرسالة"
+    }
+  },
+  "email_label": "الإيميل",
+  "email_value": "hello@starter.app",
+  "phone_label": "التليفون",
+  "phone_value": "+٢٠ ٥٠ ٠٠٠٠ ٠٠٠٠",
+  "location_label": "المكان",
+  "location_value": "القاهرة، مصر"
+}

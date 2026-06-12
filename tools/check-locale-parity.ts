@@ -143,14 +143,14 @@ function checkParity() {
     if (report) allReports.push(report);
   }
 
-  log.info('\nChecking common.json5...');
-  checkAndTrack('common.json5');
+  log.info('\nChecking common.json...');
+  checkAndTrack('common.json');
 
   const baseDir = path.join(LOCALES_DIR, BASE_LOCALE);
   if (fs.existsSync(baseDir)) {
     const pageFiles = fs
       .readdirSync(baseDir)
-      .filter((f) => f.endsWith('.json5') && f !== 'common.json5');
+      .filter((f) => f.endsWith('.json') && f !== 'common.json');
 
     for (const file of pageFiles) {
       log.info(`Checking ${file}...`);
@@ -161,7 +161,7 @@ function checkParity() {
     if (fs.existsSync(compDir)) {
       for (const file of fs
         .readdirSync(compDir)
-        .filter((f) => f.endsWith('.json5'))) {
+        .filter((f) => f.endsWith('.json'))) {
         log.info(`Checking components/${file}...`);
         checkAndTrack(`components/${file}`);
       }

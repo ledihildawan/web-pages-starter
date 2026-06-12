@@ -1,12 +1,12 @@
 {% import "macros/page-meta.njk" as page_meta %}
-{% import "icons.njk" as icon with context %}
+{% import "icons.njk" as icon %}
 
 {% set seo_config = global.seo or {} %}
 {% set theme_color = seo_config.theme_color or "#020617" %}
 {% set theme_color_light = seo_config.theme_color_light or "#f8fafc" %}
-{% set manifest_path = seo_config.manifest_path or (base_path + "manifest.json") %}
-{% set favicon_path = seo_config.favicon_path or (base_path + "favicon.svg") %}
-{% set apple_icon_path = seo_config.apple_touch_icon_path or (base_path + "favicon.svg") %}
+{% set manifest_path = seo_config.manifest_path or (base_path ~ "manifest.json") %}
+{% set favicon_path = seo_config.favicon_path or (base_path ~ "favicon.svg") %}
+{% set apple_icon_path = seo_config.apple_touch_icon_path or (base_path ~ "favicon.svg") %}
 
 {% set pwa = global.pwa or {} %}
 {% set mobile_capable = pwa.mobile_web_app_capable !== false %}
@@ -94,7 +94,7 @@
 
   <body class="min-block-screen bg-slate-950 text-slate-200 antialiased" data-page="{{ page_id }}">
     <a href="#main-content" class="skip-to-content">
-      <svg class="inline-5 block-5" fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+      <svg class="inline-5 block-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0l-10.5 10.5M21 3v10.5"/>
       </svg>
       {{ i18n.t('skip_to_content') }}

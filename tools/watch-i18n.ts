@@ -23,7 +23,7 @@ const watcher = chokidar.watch(LOCALE_DIR, {
 });
 
 watcher.on('all', (event, filePath) => {
-  if (filePath.endsWith('.json5')) {
+  if (filePath.endsWith('.json')) {
     log.info(`${event}: ${path.basename(filePath)}`);
     log.info(
       'Run `bun ./tools/generate-i18n.ts` to regenerate types if needed.\n',

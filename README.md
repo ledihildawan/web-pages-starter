@@ -32,13 +32,13 @@ src/
 │       ├── index.ts       #   page entry (auto-imported by Rsbuild)
 │       ├── index.css      #   page styles (optional)
 │       └── components/    #   page-local partials (optional)
-├── components/            # 10 shared Nunjucks partials
+├── components/            # 9 shared Nunjucks partials
 ├── layouts/               # base template (main.njk) + macros/ (page-meta.njk)
 ├── locales/               # translation source of truth (87 locales)
 │   └── {locale}/
-│       ├── common.json5   #   shared copy (nav, footer, labels, plurals)
-│       ├── {page}.json5   #   page-specific copy
-│       └── components/{name}.json5
+│       ├── common.json    #   shared copy (nav, footer, labels, plurals)
+│       ├── {page}.json    #   page-specific copy
+│       └── components/{name}.json
 ├── scripts/
 │   ├── lib/i18n/          #   i18n engine (20 files)
 │   ├── lib/utils/         #   shared utilities (microtask queue)
@@ -53,7 +53,7 @@ tools/                     #   build-time CLI scripts
   └── shared/              #   shared modules (logger, signal-handler, hono-server, site-url, write-file)
 public/                    #   static assets (favicon, sw.js, generated manifest/robots/sitemap)
   └── assets/i18n/         #   pre-compiled i18n JSON bundles (generated)
-generated/                 #   auto-generated (i18n.d.ts, exchange-rates.ts)
+generated/                 #   auto-generated (i18n.d.ts, i18n-catalog.ts, exchange-rates.ts)
 docs/                      #   documentation
 ```
 
@@ -90,7 +90,7 @@ Each page has an optional `index.json5` for structural/layout data (colors, icon
 | --- | --- | --- |
 | `global.*` | `src/data/global.json5` + `menu.json5` | site name, SEO, social, navigation |
 | `page.*` | `src/pages/{page}/index.json5` | page-specific layout data |
-| `i18n.*` | `src/locales/{locale}/*.json5` | translated text (see [i18n](#i18n)) |
+| `i18n.*` | `src/locales/{locale}/*.json` | translated text (see [i18n](#i18n)) |
 | `lang` | `i18nConfig.defaultLocale` | current locale code |
 | `base_path` | `process.env.BASE_PATH` | subpath prefix for asset URLs (default `/`) |
 | `localeConfig` | `LOCALES` lookup | current locale's `dir`, `writingSystem`, etc. |
@@ -100,6 +100,17 @@ Each page has an optional `index.json5` for structural/layout data (colors, icon
 ### Template inheritance
 
 All pages extend `src/layouts/main.njk` which provides the `<head>`, navbar, footer, and the inline i18n bootstrap script. Pages override `{% block content %}` for their body.
+
+### URL helper
+
+The `url()` helper generates `BASE_PATH`-aware internal links at build time:
+
+```njk
+<a href="{{ url('/about') }}">About</a>
+<!-- With BASE_PATH=/web-pages-starter → href="/web-pages-starter/about" -->
+```
+
+Use `url()` for all internal links instead of hardcoded paths.
 
 ## Components
 
@@ -114,17 +125,16 @@ Shared Nunjucks partials live in `src/components/`. Two usage patterns:
 
 **Import macros** (parameterized, reusable):
 ```njk
-{% import "hero-section.njk" as hero with context %}
-{% import "section-header.njk" as section with context %}
-{% import "icons.njk" as icon with context %}
-{% import "badge.njk" as badge %}
+{% import "hero-section.njk" as hero %}
+{% import "section-header.njk" as section %}
+{% import "icons.njk" as icon %}
 {% import "form-input.njk" as form %}
 {% import "info-card.njk" as card %}
 {% import "social-link.njk" as social_link %}
 
-{{ hero.hero_section('hero', badge=true, i18n=i18n) }}
+{{ hero.hero_section(badge=i18n.t('home:hero.badge'), title_part1=i18n.t('home:hero.title_part1'), title_highlight=i18n.t('home:hero.title_highlight'), description=i18n.t('home:hero.description')) }}
 {{ icon.icon('lightning', 'w-8 h-8', size='xl') }}
-{{ form.form_input('email', 'label_key', 'placeholder_key', 'email', i18n=i18n) }}
+{{ form.form_input('email', i18n.t('contact:form.email_label'), i18n.attr('contact:form.email_placeholder', 'placeholder'), 'email', i18n=i18n) }}
 ```
 
 Pages can also have **local components** in `src/pages/{page}/components/`.
@@ -141,7 +151,7 @@ CSS custom properties on `:root` in `src/styles/main.css`:
 
 | Token | Purpose |
 | --- | --- |
-| `--gradient-primary` / `--gradient-hero` / `--gradient-violet` | Gradient presets |
+| `--gradient-primary` / `--gradient-primary-subtle` / `--gradient-hero` / `--gradient-violet` | Gradient presets |
 | `--elevation-1` / `--elevation-2` / `--elevation-3` | Shadow depth |
 | `--radius-card-*` / `--radius-btn` / `--radius-icon` | Border radii |
 | `--font-primary` | Dynamic font (set by i18n writing system) |
@@ -178,7 +188,7 @@ The i18n system is the most complex subsystem. Full reference: **[`docs/i18n.md`
 ### Data flow
 
 ```
-src/locales/{locale}/*.json5
+src/locales/{locale}/*.json
         │
         ├─► Build time (template.ts)
         │     Resolves keys with the default locale,
@@ -189,12 +199,12 @@ src/locales/{locale}/*.json5
               User switches language → Alpine store → in-place DOM update
 ```
 
-The same key (`i18n.t('page.hero.title')`) renders at build time **and** updates in place at runtime — no full reload.
+The same key (`i18n.t('home:hero.title')`) renders at build time **and** updates in place at runtime — no full reload.
 
 ### At a glance
 
 ```njk
-<h1>{{ i18n.t('page.hero.title') }}</h1>
+<h1>{{ i18n.t('home:hero.title') }}</h1>
 <span>{{ i18n.formatNumber(1234.56) }}</span>
 <span>{{ i18n.formatCurrency(99, 'USD') }}</span>
 <time>{{ i18n.formatDate('2026-06-04', { dateStyle: 'long' }) }}</time>
@@ -255,7 +265,7 @@ clean:cache → fetch:rates → [watch:i18n || rsbuild dev]
 ```
 
 - Rsbuild dev server on port 8888 with HMR
-- File watching for `.njk`, `.json5`, `.json`, `.css` (polling 100ms)
+- File watching for `.njk`, `.json`, `.css` (polling 100ms)
 - i18n type regeneration on locale changes
 
 ### Production

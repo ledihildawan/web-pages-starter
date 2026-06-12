@@ -7,6 +7,11 @@
 - TypeScript: [tsconfig.json](tsconfig.json)
 - Formatting: [biome.json](biome.json)
 
+## Git Policy
+
+- **NEVER** create branches, commit, stage files, push, or create PRs to origin without explicit user confirmation
+- Always present the planned git actions first and wait for approval before executing
+
 ## Conventions
 
 ### Writing Style

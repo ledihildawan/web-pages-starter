@@ -72,7 +72,3 @@ class MicrotaskQueue {
 
 export const microtaskQueue = new MicrotaskQueue();
 export const scheduleTask = (task: Task): void => microtaskQueue.push(task);
-export const scheduleBatch = (tasks: Task[]): void =>
-  microtaskQueue.pushBatch(tasks);
-export const flushTasks = (): void => microtaskQueue.flush();
-export const clearTasks = (): void => microtaskQueue.clear();

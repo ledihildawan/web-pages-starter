@@ -318,8 +318,9 @@
                   <span class="text-4xl sm:text-5xl font-black tracking-tighter transition duration-300 text-white">
                     {{ i18n.t(item.label) }}
                   </span>
-                  <button @click="activeMobileSub = (activeMobileSub === {{ loop.index0 }} ? null : {{ loop.index0 }}); hapticFeedback()" :aria-expanded="activeMobileSub === {{ loop.index0 }}" aria-controls="sub-menu-{{ loop.index0 }}" aria-label="{{ i18n.t(item.label + '_submenu', {}, {raw: true}) }}" class="inline-11 block-11 flex items-center justify-center bg-white/5 radius-btn border border-white/10 active:scale-[0.96] transition duration-200 icon-squash hover:bg-white/10">
-                    <svg class="inline-6 block-6 transition-transform duration-500 ease-emphasized" :class="activeMobileSub === {{ loop.index0 }} ? 'rotate-180 text-violet-400' : 'text-slate-600'" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+                  {% set submenu_key = item.label ~ '_submenu' %}
+                  <button @click="activeMobileSub = (activeMobileSub === {{ loop.index0 }} ? null : {{ loop.index0 }}); hapticFeedback()" :aria-expanded="activeMobileSub === {{ loop.index0 }}" aria-controls="sub-menu-{{ loop.index0 }}" aria-label="{{ i18n.t(submenu_key, {}, {raw: true}) }}" class="inline-11 block-11 flex items-center justify-center bg-white/5 radius-btn border border-white/10 active:scale-[0.96] transition duration-200 icon-squash hover:bg-white/10">
+                    <svg class="inline-6 block-6 transition-transform duration-500 ease-emphasized" :class="activeMobileSub === {{ loop.index0 }} ? 'rotate-180 text-violet-400' : 'text-slate-600'" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
                     </svg>
                   </button>

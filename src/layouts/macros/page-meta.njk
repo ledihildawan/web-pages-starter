@@ -5,14 +5,14 @@
   {% set description = page.meta.description or global.site_description or "Default description for the site." %}
 
   {% set site_url = global.site_url or "" %}
-  {% set page_path = "" if (page.page_id == global.root_page) else ("/" + (page.page_id or "")) %}
-  {% set canonical_url = page.meta.canonical or (site_url + page_path) or "" %}
+  {% set page_path = "" if (page.page_id == global.root_page) else ("/" ~ (page.page_id or "")) %}
+  {% set canonical_url = page.meta.canonical or (site_url ~ page_path) or "" %}
 
   {% set image = page.meta.image or global.site_image or "" %}
   {% set image_alt = page.meta.image_alt or page.meta.title or title %}
   {% set absolute_image = image %}
   {% if image and image.indexOf("http://") != 0 and image.indexOf("https://") != 0 %}
-    {% set absolute_image = site_url + image %}
+    {% set absolute_image = site_url ~ image %}
   {% endif %}
 
   {% set seo_config = global.seo or {} %}

@@ -1,0 +1,56 @@
+{
+  "period_monthly": "mês",
+  "period_yearly": "ano",
+  "hero": {
+    "title_part1": "Preços simples, ",
+    "title_highlight": "transparentes",
+    "description": "Sem taxas escondidas. Sem cobranças de surpresa. Escolhe o plano que se adapta perfeitamente às tuas necessidades.",
+    "badge": "Escolhe o teu plano"
+  },
+  "toggle": {
+    "monthly": "Mensal",
+    "yearly": "Anual",
+    "yearly_hint": "faturado anualmente",
+    "discount": "POUPA 20%",
+    "aria_label": "Toggle Pricing Plan"
+  },
+  "plans": {
+    "hobby": {
+      "name": "Hobby",
+      "desc": "Perfeito para projetos pessoais e aprendizagem.",
+      "btn": "Começar",
+      "feature_0": "1 Projeto",
+      "feature_1": "Suporte da Comunidade",
+      "feature_2": "5GB de Armazenamento"
+    },
+    "pro": {
+      "name": "Pro",
+      "badge": "Mais Popular",
+      "desc": "Para developers profissionais e equipas pequenas.",
+      "btn": "Obter Pro Agora",
+      "feature_0": "Projetos Ilimitados",
+      "feature_1": "Suporte por Email Prioritário",
+      "feature_2": "100GB de Armazenamento",
+      "feature_3": "Análises Avançadas"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "desc": "Para aplicações em grande escala e organizações.",
+      "btn": "Contactar Vendas",
+      "feature_0": "Tudo em Pro",
+      "feature_1": "Gestor Dedicado",
+      "feature_2": "SSO e Logs de Auditoria",
+      "feature_3": "Armazenamento Ilimitado"
+    }
+  },
+  "faq": {
+    "title": "Perguntas Frequentes",
+    "subtitle": "Encontra respostas para as perguntas mais frequentes sobre os nossos planos e serviços.",
+    "q_0": "Posso cancelar a qualquer momento?",
+    "a_0": "Sim, podes cancelar a tua assinatura a qualquer momento. O teu acesso continuará até ao final do período de faturação.",
+    "q_1": "Oferecem teste gratuito?",
+    "a_1": "Oferecemos um teste gratuito de 14 dias para o plano Pro. Não é necessário cartão de crédito para começar.",
+    "q_2": "Que métodos de pagamento aceitam?",
+    "a_2": "Aceitamos todos os principais cartões de crédito (Visa, Mastercard, Amex) e PayPal. Para planos Enterprise, suportamos transferências bancárias."
+  }
+}

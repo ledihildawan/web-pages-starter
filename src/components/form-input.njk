@@ -1,6 +1,6 @@
 {% macro form_input(type, label_key, placeholder_key, name, rows, i18n) %}
   {% set input_id = name %}
-  {% set error_id = input_id + "-error" %}
+  {% set error_id = input_id ~ "-error" %}
   {% set autocomplete_map = {
     'name': 'name',
     'email': 'email',
