@@ -46,6 +46,10 @@ const NOTO_SANS: Partial<
     css: '@fontsource-variable/noto-sans-tamil/index.css',
     loader: () => import('@fontsource-variable/noto-sans-tamil/index.css'),
   },
+  tamldec: {
+    css: '@fontsource-variable/noto-sans-tamil/index.css',
+    loader: () => import('@fontsource-variable/noto-sans-tamil/index.css'),
+  },
   telu: {
     css: '@fontsource-variable/noto-sans-telugu/index.css',
     loader: () => import('@fontsource-variable/noto-sans-telugu/index.css'),

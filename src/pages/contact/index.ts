@@ -1,5 +1,6 @@
 import './index.css';
 import type { Alpine as AlpineType } from 'alpinejs';
+import i18next from 'i18next';
 
 declare global {
   interface Window {
@@ -40,9 +41,10 @@ export function contactFormData() {
           message: '',
           validate(value: string) {
             const trimmed = value.trim();
-            if (!trimmed) return 'This field is required.';
+            if (!trimmed)
+              return i18next.t('contact:contact.form.errors.required');
             if (el.type === 'email' && !EMAIL_PATTERN.test(trimmed)) {
-              return 'Please enter a valid email address.';
+              return i18next.t('contact:contact.form.errors.email_invalid');
             }
             return null;
           },
@@ -83,12 +85,15 @@ export function contactFormData() {
       }
 
       if (invalid.length > 0) {
-        this.statusMessage = `Please fix ${invalid.length} error${invalid.length === 1 ? '' : 's'} before submitting.`;
+        this.statusMessage = i18next.t(
+          'contact:contact.form.errors.submit_errors',
+          { count: invalid.length },
+        );
         invalid[0].el.focus();
         return;
       }
 
-      this.statusMessage = 'Submitting form...';
+      this.statusMessage = i18next.t('contact:contact.form.submitting');
       form.submit();
     },
   };

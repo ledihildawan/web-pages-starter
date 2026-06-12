@@ -35,7 +35,13 @@
       "subject_placeholder": "คุณอยากหารือเรื่องอะไร?",
       "message": "ข้อความ",
       "message_placeholder": "เล่ารายละเอียดเพิ่มเติมเกี่ยวกับคำถามของคุณ...",
-      "submit": "ส่งข้อความ"
+      "submit": "ส่งข้อความ",
+      "errors": {
+        "required": "This field is required.",
+        "email_invalid": "Please enter a valid email address.",
+        "submit_errors": "Please fix {{count}} error(s) before submitting."
+      },
+      "submitting": "Submitting form..."
     }
   },
   "email_label": "อีเมล",

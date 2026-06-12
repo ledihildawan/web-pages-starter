@@ -35,7 +35,13 @@
       "subject_placeholder": "तपाईं के छलफल गर्न चाहानुहुन्छ?",
       "message": "सन्देश",
       "message_placeholder": "हामीलाई आफ्नो प्रश्नको बारेमा बढी भन्नुहोस्...",
-      "submit": "सन्देश पठाउनुहोस्"
+      "submit": "सन्देश पठाउनुहोस्",
+      "errors": {
+        "required": "This field is required.",
+        "email_invalid": "Please enter a valid email address.",
+        "submit_errors": "Please fix {{count}} error(s) before submitting."
+      },
+      "submitting": "Submitting form..."
     }
   },
   "email_label": "इमेल",

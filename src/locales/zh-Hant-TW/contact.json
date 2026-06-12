@@ -35,7 +35,13 @@
       "subject_placeholder": "您想討論什麼？",
       "message": "留言",
       "message_placeholder": "請告訴我們更多關於您的問題...",
-      "submit": "發送消息"
+      "submit": "發送消息",
+      "errors": {
+        "required": "This field is required.",
+        "email_invalid": "Please enter a valid email address.",
+        "submit_errors": "Please fix {{count}} error(s) before submitting."
+      },
+      "submitting": "Submitting form..."
     }
   },
   "email_label": "郵箱",

@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import type { I18nTranslationKeys } from '../../../../generated/i18n';
+import type { I18nTranslationKeys } from '@generated/i18n';
 import { i18nConfig } from '../../../configs/i18n';
 import { PATHS } from '../../../configs/paths';
 import { ROOT_PAGE } from '../../../configs/site';
@@ -277,8 +277,9 @@ const createI18nObject = (
 
       if (options?.raw) return translated;
 
+      const baseItem = createItem(key, mergedVars);
       const attrs = buildAttrs(
-        { 'i18n-plural': item.k, 'i18n-count': count },
+        { 'i18n-plural': baseItem.k, 'i18n-count': count },
         item.vars?.replace(/"/g, '&quot;'),
       );
 
@@ -366,11 +367,12 @@ const createI18nObject = (
         formatOpts as Intl.DateTimeFormatOptions,
       );
       if (options?.raw) return formatted;
-      return renderHtml(
-        formatted,
-        { 'format-date': String(date) },
-        options?.className,
-      );
+      const attrs: Record<string, string | number | boolean> = {
+        'format-date': String(date),
+      };
+      if (Object.keys(formatOpts).length > 0)
+        attrs['format-opts'] = JSON.stringify(formatOpts);
+      return renderHtml(formatted, attrs, options?.className);
     },
 
     formatTime: (
@@ -394,11 +396,12 @@ const createI18nObject = (
         formatOpts as Intl.DateTimeFormatOptions,
       );
       if (options?.raw) return formatted;
-      return renderHtml(
-        formatted,
-        { 'format-datetime': String(date) },
-        options?.className,
-      );
+      const attrs: Record<string, string | number | boolean> = {
+        'format-datetime': String(date),
+      };
+      if (Object.keys(formatOpts).length > 0)
+        attrs['format-opts'] = JSON.stringify(formatOpts);
+      return renderHtml(formatted, attrs, options?.className);
     },
 
     formatOrdinal: (
@@ -507,7 +510,15 @@ const createI18nObject = (
     ) => {
       const formatted = String(localPrice(plan));
       if (options?.raw) return formatted;
-      return renderHtml(formatted, {}, options?.className);
+      return renderHtml(
+        formatted,
+        buildAttrs(
+          { 'local-price': escapeHtmlAttr(JSON.stringify(plan.pricing)) },
+          undefined,
+          options?.nativeDigits,
+        ),
+        options?.className,
+      );
     },
 
     localPriceCurrency: (
@@ -516,7 +527,15 @@ const createI18nObject = (
     ) => {
       const formatted = localPriceCurrency(plan);
       if (options?.raw) return formatted;
-      return renderHtml(formatted, {}, options?.className);
+      return renderHtml(
+        formatted,
+        buildAttrs(
+          { 'local-price': escapeHtmlAttr(JSON.stringify(plan.pricing)) },
+          undefined,
+          options?.nativeDigits,
+        ),
+        options?.className,
+      );
     },
 
     convertLocalPrice: (
@@ -560,7 +579,7 @@ const createI18nObject = (
     formatLocalPriceDiscounted: (
       plan: { pricing: { base: number; [locale: string]: number } },
       discountMultiplier: number,
-      targetCurrency: CurrencyCode,
+      targetCurrency?: CurrencyCode,
       options?: TemplateFormatOptions,
     ) => {
       const formatted = formatLocalPriceDiscounted(
@@ -753,6 +772,7 @@ export const createTemplateParams = (
 
   return {
     ...params,
+    currentYear: new Date().getFullYear(),
     lang,
     localeConfig,
     localeStorageKey: LOCALE_STORAGE_KEY,

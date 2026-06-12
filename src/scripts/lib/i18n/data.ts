@@ -1,5 +1,4 @@
-﻿import type { ReplaceAll } from '../../utils/types';
-import { CALENDAR_CODE } from './calendars';
+﻿import { CALENDAR_CODE } from './calendars';
 import { CURRENCY_CODE } from './currencies';
 import { DIRECTION_CODE } from './directions';
 import { FLAG_CODE } from './flags';
@@ -1585,14 +1584,6 @@ export const LOCALES = [
 ] as const;
 
 export const LOCALE_CODES = LOCALES.map((l) => l.code) as LocaleCode[];
-
-export const LOCALE_CODE = Object.fromEntries(
-  LOCALE_CODES.map(
-    (code) => [code.replace(/-/g, '_').toUpperCase(), code] as const,
-  ),
-) as {
-  [K in LocaleCode as ReplaceAll<Uppercase<K>, '-', '_'>]: K;
-};
 
 export type LocaleCode = (typeof LOCALES)[number]['code'];
 export type LocaleConfig = (typeof LOCALES)[number];

@@ -35,7 +35,13 @@
       "subject_placeholder": "¿Qué te gustaría discutir?",
       "message": "Mensaje",
       "message_placeholder": "Contanos más sobre tu consulta...",
-      "submit": "Enviar Mensaje"
+      "submit": "Enviar Mensaje",
+      "errors": {
+        "required": "This field is required.",
+        "email_invalid": "Please enter a valid email address.",
+        "submit_errors": "Please fix {{count}} error(s) before submitting."
+      },
+      "submitting": "Submitting form..."
     }
   },
   "email_label": "Correo Electrónico",

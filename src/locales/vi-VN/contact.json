@@ -35,7 +35,13 @@
       "subject_placeholder": "Bạn muốn thảo luận về điều gì?",
       "message": "Tin nhắn",
       "message_placeholder": "Hãy cho chúng tôi biết thêm về câu hỏi của bạn...",
-      "submit": "Gửi Tin nhắn"
+      "submit": "Gửi Tin nhắn",
+      "errors": {
+        "required": "This field is required.",
+        "email_invalid": "Please enter a valid email address.",
+        "submit_errors": "Please fix {{count}} error(s) before submitting."
+      },
+      "submitting": "Submitting form..."
     }
   },
   "email_label": "Email",

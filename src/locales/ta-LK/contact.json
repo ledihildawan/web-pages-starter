@@ -35,7 +35,13 @@
       "subject_placeholder": "எதைப் பற்றி விவாதிக்க விரும்புகிறீர்கள்?",
       "message": "செய்தி",
       "message_placeholder": "உங்கள் கேள்வி பற்றி மேலும் சொல்லுங்கள்...",
-      "submit": "செய்தியை அனுப்புங்கள்"
+      "submit": "செய்தியை அனுப்புங்கள்",
+      "errors": {
+        "required": "This field is required.",
+        "email_invalid": "Please enter a valid email address.",
+        "submit_errors": "Please fix {{count}} error(s) before submitting."
+      },
+      "submitting": "Submitting form..."
     }
   },
   "email_label": "மின்னஞ்சல்",

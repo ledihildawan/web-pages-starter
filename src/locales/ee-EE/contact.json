@@ -35,7 +35,13 @@
       "subject_placeholder": "Millest soovite rääkida?",
       "message": "Sõnum",
       "message_placeholder": "Rääkige lähemalt oma küsimusest...",
-      "submit": "Saada sõnum"
+      "submit": "Saada sõnum",
+      "errors": {
+        "required": "This field is required.",
+        "email_invalid": "Please enter a valid email address.",
+        "submit_errors": "Please fix {{count}} error(s) before submitting."
+      },
+      "submitting": "Submitting form..."
     }
   },
   "email_label": "E-post",

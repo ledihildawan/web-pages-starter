@@ -57,7 +57,11 @@
     "alex_desc": "Vizionierius lyderis su daugiau nei 10 metų patirtimi kuriant SaaS ekosistemas.",
     "sarah_desc": "Pilno steko specialistė, besitelkianti į didelio masto sistemų architektūros kūrimą.",
     "mike_desc": "Fiksuotas ties pikselių detalėmis, sklandžiais UX srautais ir prieinamumo standartais.",
-    "jessica_desc": "Kūrybinė pasakotoja, padedanti prekėms rasti unikalų balsą skaitmeniniame pasaulyje."
+    "jessica_desc": "Kūrybinė pasakotoja, padedanti prekėms rasti unikalų balsą skaitmeniniame pasaulyje.",
+    "alex_role": "Founder & CEO",
+    "sarah_role": "Lead Engineer",
+    "mike_role": "Product Design",
+    "jessica_role": "Marketing"
   },
   "stats": {
     "years": "Metų patirtis",

@@ -1,4 +1,22 @@
 {
+  "editor.fontFamily": "Monolisa",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 11.5,
+  "editor.tabSize": 2,
+  "editor.fontWeight": "600",
+  "editor.lineHeight": 22.5,
+  "editor.letterSpacing": 0.118,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports.biome": "explicit",
+    "source.fixAll.biome": "explicit"
+  },
+  "editor.renderWhitespace": "boundary",
+
+  "workbench.sideBar.location": "right",
+  "workbench.colorTheme": "Shades of Purple (Super Dark)",
+  "workbench.iconTheme": "material-icon-theme",
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#9b69f1",
     "activityBar.background": "#9b69f1",
@@ -18,35 +36,35 @@
     "titleBar.inactiveBackground": "#7c3aed99",
     "titleBar.inactiveForeground": "#e7e7e799"
   },
+
   "peacock.color": "#7c3aed",
 
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "biomejs.biome",
-  "editor.codeActionsOnSave": {
-    "source.organizeImports.biome": "explicit",
-    "source.fixAll.biome": "explicit"
-  },
   "editor.quickSuggestions": {
     "strings": "on"
+  },
+
+  "files.watcherExclude": {
+    "**/node_modules/**": true,
+    "**/dist/**": true,
+    "**/coverage/**": true
+  },
+
+  "search.exclude": {
+    "dist": true,
+    "node_modules": true,
+    "coverage": true
   },
 
   "files.associations": {
     "*.njk": "njk",
     "*.css": "tailwindcss"
   },
-  "files.exclude": {
-    "**/.git": true,
-    "**/.DS_Store": true,
-    "node_modules": true
-  },
-  "files.watcherExclude": {
-    "**/node_modules/**": true
-  },
-  "search.exclude": {
-    "node_modules": true
-  },
 
   "html.suggest.html5": true,
+
+  "[njk]": {
+    "editor.defaultFormatter": "douglaszaltron.nunjucks-vscode-extensionpack"
+  },
 
   "emmet.includeLanguages": {
     "njk": "html"
@@ -54,10 +72,6 @@
 
   "tailwindCSS.includeLanguages": {
     "njk": "html"
-  },
-
-  "[njk]": {
-    "editor.defaultFormatter": "douglaszaltron.nunjucks-vscode-extensionpack"
   },
 
   "i18n-ally.localesPaths": "src/locales",

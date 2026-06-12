@@ -66,25 +66,25 @@
     "members": [
       {
         "name": "Alex Morgan",
-        "role": "Founder & CEO",
+        "role_key": "team.alex_role",
         "color": "violet",
         "desc_key": "team.alex_desc"
       },
       {
         "name": "Sarah Chen",
-        "role": "Lead Engineer",
+        "role_key": "team.sarah_role",
         "color": "fuchsia",
         "desc_key": "team.sarah_desc"
       },
       {
         "name": "Mike Ross",
-        "role": "Product Design",
+        "role_key": "team.mike_role",
         "color": "pink",
         "desc_key": "team.mike_desc"
       },
       {
         "name": "Jessica Lee",
-        "role": "Marketing",
+        "role_key": "team.jessica_role",
         "color": "amber",
         "desc_key": "team.jessica_desc"
       }

@@ -80,7 +80,7 @@ export default defineConfig({
     strictPort: true,
     historyApiFallback: {
       rewrites: [
-        { from: /^\/$/, to: '/home.html' },
+        { from: /^\/$/, to: `/${ROOT_PAGE}.html` },
         {
           from: /^\/(?!locales\/|assets\/|fonts\/|images\/|favicon\.svg$|favicon\.ico$|manifest\.json$|sw\.js$|robots\.txt$|sitemap\.xml$|.*\.[a-z0-9]+$)/,
           to: '/404.html',
@@ -163,6 +163,11 @@ export default defineConfig({
       {
         from: resolveRoot('public', 'robots.txt'),
         to: 'robots.txt',
+        noErrorOnMissing: true,
+      },
+      {
+        from: resolveRoot('public', 'sitemap.xml'),
+        to: 'sitemap.xml',
         noErrorOnMissing: true,
       },
       {

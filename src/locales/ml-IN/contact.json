@@ -35,7 +35,13 @@
       "subject_placeholder": "നിങ്ങൾ എന്തിനെക്കുറിച്ചാണ് ചർച്ച ചെയ്യാൻ ആഗ്രഹിക്കുന്നത്?",
       "message": "സന്ദേശം",
       "message_placeholder": "നിങ്ങളുടെ ചോദ്യത്തെക്കുറിച്ച് കൂടുതൽ പറയുക...",
-      "submit": "സന്ദേശം അയയ്ക്കുക"
+      "submit": "സന്ദേശം അയയ്ക്കുക",
+      "errors": {
+        "required": "This field is required.",
+        "email_invalid": "Please enter a valid email address.",
+        "submit_errors": "Please fix {{count}} error(s) before submitting."
+      },
+      "submitting": "Submitting form..."
     }
   },
   "email_label": "ഇമെയിൽ",

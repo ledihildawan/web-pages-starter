@@ -35,7 +35,13 @@
       "subject_placeholder": "درباره چه چیزی می‌خواهید صحبت کنید؟",
       "message": "پیام",
       "message_placeholder": "بیشتر درباره سوال خود توضیح دهید...",
-      "submit": "ارسال پیام"
+      "submit": "ارسال پیام",
+      "errors": {
+        "required": "This field is required.",
+        "email_invalid": "Please enter a valid email address.",
+        "submit_errors": "Please fix {{count}} error(s) before submitting."
+      },
+      "submitting": "Submitting form..."
     }
   },
   "email_label": "ایمیل",

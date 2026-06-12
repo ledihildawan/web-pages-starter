@@ -73,10 +73,6 @@ export const getFirstDayOfWeek = (locale: LocaleCode): number =>
 export const getNumberingSystem = (locale: LocaleCode): string =>
   getLanguageConfig(locale)?.numberingSystem || NUMBERING_SYSTEM_CODE.LATN;
 
-export const getNativeNumberingSystem = (locale: LocaleCode): string =>
-  getLanguageConfig(locale)?.nativeNumberingSystem ||
-  NUMBERING_SYSTEM_CODE.LATN;
-
 export const getDefaultNativeDigits = (locale: LocaleCode): boolean =>
   getLanguageConfig(locale)?.nativeDigits ?? false;
 

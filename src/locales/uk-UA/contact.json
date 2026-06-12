@@ -35,7 +35,13 @@
       "subject_placeholder": "Що б ви хотіли обговорити?",
       "message": "Повідомлення",
       "message_placeholder": "Розкажіть детальніше про ваше запитання...",
-      "submit": "Надіслати Повідомлення"
+      "submit": "Надіслати Повідомлення",
+      "errors": {
+        "required": "This field is required.",
+        "email_invalid": "Please enter a valid email address.",
+        "submit_errors": "Please fix {{count}} error(s) before submitting."
+      },
+      "submitting": "Submitting form..."
     }
   },
   "email_label": "Ел. пошта",

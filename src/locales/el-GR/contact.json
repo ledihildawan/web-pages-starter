@@ -35,7 +35,13 @@
       "subject_placeholder": "Τι θα θέλατε να συζητήσετε;",
       "message": "Μήνυμα",
       "message_placeholder": "Πείτε μας περισσότερα για την ερώτησή σας...",
-      "submit": "Αποστολή μηνύματος"
+      "submit": "Αποστολή μηνύματος",
+      "errors": {
+        "required": "This field is required.",
+        "email_invalid": "Please enter a valid email address.",
+        "submit_errors": "Please fix {{count}} error(s) before submitting."
+      },
+      "submitting": "Submitting form..."
     }
   },
   "email_label": "E-mail",

@@ -35,7 +35,6 @@ import {
   getLanguageConfig,
   getLanguageSubtag,
   getLocale,
-  getNativeNumberingSystem,
   getNumberingSystem,
   getPluralSuffix,
   getRegionSubtag,
@@ -63,14 +62,6 @@ export type {
 const getLocaleDisplayRegion = (regionCode: RegionCode): string => {
   if (regionCode === REGION_CODE.GB) return 'UK';
   return regionCode;
-};
-
-export const getLocaleLabel = (localeCode: LocaleCode): string => {
-  const locale = LOCALES.find((l) => l.code === localeCode);
-  if (!locale) return localeCode;
-
-  const language = LANGUAGES.find((l) => l.code === locale.language);
-  return language?.nativeName || localeCode;
 };
 
 export const getLocaleLabelCountry = (localeCode: LocaleCode): string => {
@@ -122,7 +113,6 @@ export {
   getLanguageConfig,
   getLanguageSubtag,
   getLocale,
-  getNativeNumberingSystem,
   getNumberingSystem,
   getPluralSuffix,
   getRegionSubtag,

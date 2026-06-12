@@ -57,7 +57,11 @@
     "alex_desc": "Vizionarski lider s 10+ godina iskustva u razvoju SaaS ekosustava.",
     "sarah_desc": "Full-stack čarobnjak specijaliziran za izgradnju skalabilnih sustavnih arhitektura.",
     "mike_desc": "Opsjednut piksel detaljima, glatkim UX tokovima i standardima pristupačnosti.",
-    "jessica_desc": "Kreativni pripovjedač koji pomaže brendovima pronaći svoj jedinstveni glas u digitalnom svijetu."
+    "jessica_desc": "Kreativni pripovjedač koji pomaže brendovima pronaći svoj jedinstveni glas u digitalnom svijetu.",
+    "alex_role": "Founder & CEO",
+    "sarah_role": "Lead Engineer",
+    "mike_role": "Product Design",
+    "jessica_role": "Marketing"
   },
   "stats": {
     "years": "Godina iskustva",

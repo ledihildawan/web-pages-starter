@@ -35,7 +35,13 @@
       "subject_placeholder": "ما الذي تريد مناقشته؟",
       "message": "الرسالة",
       "message_placeholder": "أخبرنا المزيد عن استفسارك...",
-      "submit": "إرسال الرسالة"
+      "submit": "إرسال الرسالة",
+      "errors": {
+        "required": "This field is required.",
+        "email_invalid": "Please enter a valid email address.",
+        "submit_errors": "Please fix {{count}} error(s) before submitting."
+      },
+      "submitting": "Submitting form..."
     }
   },
   "email_label": "البريد الإلكتروني",

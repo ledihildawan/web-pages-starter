@@ -57,7 +57,11 @@
     "alex_desc": "SaaS ekotizimini rivojlantirishda 10+ yillik tajribaga bo'lgan vizioner yetakchi.",
     "sarah_desc": "Katta masshtabli tizim arxitekturasini qurishga ixtisoslashgan full-stack mutaxassis.",
     "mike_desc": "Piksel tafsilotlari, silliq UX oqimlari va kirish imkoniyati standartlari bilan shug'ullanadi.",
-    "jessica_desc": "Brendlarga raqamli dunyoda o'z ovozlarini topishga yordam beruvchi ijodiy hikoyachi."
+    "jessica_desc": "Brendlarga raqamli dunyoda o'z ovozlarini topishga yordam beruvchi ijodiy hikoyachi.",
+    "alex_role": "Founder & CEO",
+    "sarah_role": "Lead Engineer",
+    "mike_role": "Product Design",
+    "jessica_role": "Marketing"
   },
   "stats": {
     "years": "Yillik tajriba",

@@ -1,8 +1,8 @@
-import pluralize from 'pluralize';
 import {
   convertCurrency as convertCurrencyRaw,
   EXCHANGE_RATES,
-} from '../../../../generated/exchange-rates';
+} from '@generated/exchange-rates';
+import pluralize from 'pluralize';
 import type { DateValue } from '../../utils/types';
 import type { CurrencyCode } from './currencies';
 import { LOCALES } from './data';
@@ -63,10 +63,6 @@ const getNumberingSystem = (options: FormatOptions = {}) => {
     NUMBERING_SYSTEM_CODE.LATN
   );
 };
-
-export const getNativeNumberingSystem = () =>
-  getLanguageConfig(getLocale())?.nativeNumberingSystem ||
-  NUMBERING_SYSTEM_CODE.LATN;
 
 export const toNativeDigits = (text: string, force?: boolean) => {
   if (force === false) return text;
@@ -879,6 +875,7 @@ export const formatScientific = (
 };
 
 export const formatBytes = (bytes: number, decimals: number = 1) => {
+  if (bytes < 0) bytes = Math.abs(bytes);
   if (bytes === 0) {
     try {
       return new Intl.NumberFormat(getLocale(), {

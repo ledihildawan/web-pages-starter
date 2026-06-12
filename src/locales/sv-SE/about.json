@@ -57,7 +57,11 @@
     "alex_desc": "Visionär ledare med över 10 års erfarenhet av att utveckla SaaS-ekosystem.",
     "sarah_desc": "Fullstack-magi specialiserad på att bygga storskalig systemarkitektur.",
     "mike_desc": "Besatt av pixeldetaljer, smidiga UX-flöden och tillgänglighetsstandarder.",
-    "jessica_desc": "Kreativ berättare som hjälper varumärken att hitta sin unika röst i den digitala världen."
+    "jessica_desc": "Kreativ berättare som hjälper varumärken att hitta sin unika röst i den digitala världen.",
+    "alex_role": "Founder & CEO",
+    "sarah_role": "Lead Engineer",
+    "mike_role": "Product Design",
+    "jessica_role": "Marketing"
   },
   "stats": {
     "years": "Års erfarenhet",

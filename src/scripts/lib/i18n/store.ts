@@ -37,7 +37,7 @@ const ensureLocaleData = async (
     const compData = data.comp
       ? Object.fromEntries(
           Object.entries(data.comp).map(([name, content]) => [
-            `components/${name}`,
+            `components.${name}`,
             content,
           ]),
         )

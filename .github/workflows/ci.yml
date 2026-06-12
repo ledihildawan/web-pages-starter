@@ -24,6 +24,8 @@ jobs:
 
       - run: bunx biome ci .
 
+      - run: bun run typecheck
+
       - run: bun run build
         env:
           NODE_ENV: production

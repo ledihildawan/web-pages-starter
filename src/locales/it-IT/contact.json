@@ -35,7 +35,13 @@
       "subject_placeholder": "Cosa vorresti discutere?",
       "message": "Messaggio",
       "message_placeholder": "Raccontaci di più sulla tua domanda...",
-      "submit": "Invia messaggio"
+      "submit": "Invia messaggio",
+      "errors": {
+        "required": "This field is required.",
+        "email_invalid": "Please enter a valid email address.",
+        "submit_errors": "Please fix {{count}} error(s) before submitting."
+      },
+      "submitting": "Submitting form..."
     }
   },
   "email_label": "Email",

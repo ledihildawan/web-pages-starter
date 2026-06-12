@@ -57,7 +57,11 @@
     "alex_desc": "Pemimpin visioner dengan pengalaman 10+ tahun dalam pengembangan ekosistem SaaS.",
     "sarah_desc": "Full-stack wizard yang mengkhususkan diri dalam membangun arsitektur sistem berskala besar.",
     "mike_desc": "Terobsesi dengan detail pixel, alur UX yang halus, dan standar aksesibilitas.",
-    "jessica_desc": "Pencerita kreatif yang membantu merek menemukan suara unik mereka di dunia digital."
+    "jessica_desc": "Pencerita kreatif yang membantu merek menemukan suara unik mereka di dunia digital.",
+    "alex_role": "Pendiri & CEO",
+    "sarah_role": "Insinyur Utama",
+    "mike_role": "Desain Produk",
+    "jessica_role": "Pemasaran"
   },
   "stats": {
     "years": "Tahun Pengalaman",

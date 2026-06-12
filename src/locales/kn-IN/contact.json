@@ -35,7 +35,13 @@
       "subject_placeholder": "ನೀವು ಯಾವುದರ ಬಗ್ಗೆ ಚರ್ಚಿಸಲು ಬಯಸುತ್ತೀರಿ?",
       "message": "ಸಂದೇಶ",
       "message_placeholder": "ನಿಮ್ಮ ಪ್ರಶ್ನೆಯ ಬಗ್ಗೆ ಇನ್ನಷ್ಟು ಹೇಳಿ...",
-      "submit": "ಸಂದೇಶ ಕಳುಹಿಸಿ"
+      "submit": "ಸಂದೇಶ ಕಳುಹಿಸಿ",
+      "errors": {
+        "required": "This field is required.",
+        "email_invalid": "Please enter a valid email address.",
+        "submit_errors": "Please fix {{count}} error(s) before submitting."
+      },
+      "submitting": "Submitting form..."
     }
   },
   "email_label": "ಇಮೇಲ್",

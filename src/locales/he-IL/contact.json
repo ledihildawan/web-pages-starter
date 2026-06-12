@@ -35,7 +35,13 @@
       "subject_placeholder": "על מה תרצה לדבר?",
       "message": "הודעה",
       "message_placeholder": "ספר לנו עוד על השאלה שלך...",
-      "submit": "שלח הודעה"
+      "submit": "שלח הודעה",
+      "errors": {
+        "required": "This field is required.",
+        "email_invalid": "Please enter a valid email address.",
+        "submit_errors": "Please fix {{count}} error(s) before submitting."
+      },
+      "submitting": "Submitting form..."
     }
   },
   "email_label": "אימייל",
