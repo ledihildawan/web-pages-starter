@@ -1,0 +1,204 @@
+{
+  "meta": {
+    "title": "i18n-test | Demo",
+    "description": "Omfattande testsida för internationaliseringsfunktioner"
+  },
+  "hero": {
+    "badge": "i18n-funktioner",
+    "title": "Omfattande <span class='text-violet-400'>test</span> av internationalisering",
+    "description": "Testa alla i18n-funktioner: översättning, pluralisering, talformatering, valutor och valutakonvertering."
+  },
+  "language_info": {
+    "title": "Information om aktuellt språk",
+    "code": "Språkkod",
+    "currency": "Valuta",
+    "direction": "Textriktning",
+    "digits": "Inhemska siffror",
+    "enabled": "Aktiverad",
+    "disabled": "Inaktiverad",
+    "languages": "Språk",
+    "switching": "Byte utan omladdning",
+    "current_code": "sv",
+    "current_currency": "SEK",
+    "current_direction": "LTR (vänster till höger)"
+  },
+  "numbers": {
+    "title": "Talformatering",
+    "description": "Tal formateras enligt den aktiva lokaliseringen.",
+    "large": "Stort tal",
+    "decimal": "Decimal",
+    "million": "Miljon",
+    "percent": "Procent",
+    "raw": "Rå"
+  },
+  "currency": {
+    "title": "Valutakonvertering",
+    "description": "Priser i SEK omvandlade till det aktiva språkets valuta.",
+    "currencies": "Valutor",
+    "small": "Liten",
+    "medium": "Mellan",
+    "large": "Stor",
+    "enterprise": "Enterprise"
+  },
+  "currency_comparison": {
+    "title": "Valutajämförelse",
+    "description": "Samma pris i olika stödda valutor.",
+    "base_price": "Grundpris (USD)",
+    "aed": "Förenade Arabemiraten dirham",
+    "aud": "Australisk dollar",
+    "brl": "Brasiliansk real",
+    "cad": "Kanadensisk dollar",
+    "chf": "Schweizisk franc",
+    "cny": "Kinesisk yuan",
+    "eur": "Euro",
+    "gbp": "Brittiskt pund",
+    "idr": "Rupia",
+    "inr": "Indisk rupie",
+    "jpy": "Japansk yen",
+    "krw": "Koreansk won",
+    "mxn": "Mexikansk peso",
+    "sar": "Saudiarabisk riyal",
+    "sgd": "Singaporiansk dollar",
+    "usd": "Amerikansk dollar",
+    "zar": "Sydafrikansk rand"
+  },
+  "core": {
+    "title": "Kärnfunktioner",
+    "description": "Översättning, pluralisering och HTML-innehåll."
+  },
+  "pluralization": {
+    "title": "Pluralisering",
+    "description": "Olika pluralformer för varje språk.",
+    "item_title": "Item (objekt)",
+    "user_title": "User (användare)",
+    "product_title": "Product (produkt)"
+  },
+  "form": {
+    "title": "Formulär med översatta platshållare",
+    "description": "Platshållare och etiketter hämtas från språkfilerna.",
+    "name_label": "Namn",
+    "name_placeholder": "Ange ditt fullständiga namn",
+    "email_label": "E-post",
+    "email_placeholder": "exempel@epost.se",
+    "message_label": "Meddelande",
+    "message_placeholder": "Skriv ditt meddelande här...",
+    "submit": "Skicka"
+  },
+  "missing_keys": {
+    "title": "Hantering av saknade nycklar",
+    "description": "Saknade översättningsnycklar visas inom hakparenteser."
+  },
+  "html_content": {
+    "title": "HTML-innehåll",
+    "description": "Översättningar kan innehålla HTML-taggar för formatering.",
+    "example": "Detta är exempeltext med <span class='text-emerald-400'>färgmarkering</span> och <strong>fet text</strong>.",
+    "note": "Observera: HTML-taggar i översättningar måste vara inuti ett omslutande element."
+  },
+  "switcher": {
+    "title": "Byt språk",
+    "description": "Klicka på knappen nedan för att byta språk och se alla i18n-funktioner i aktion."
+  },
+  "advanced": {
+    "title": "Avancerad formatering",
+    "description": "Avancerade formateringsfunktioner för procent, enheter, byte, listor och ordningstal.",
+    "percentages": "Procent",
+    "units": "Enheter",
+    "bytes": "Byte",
+    "bytes_unit": "byte",
+    "lists": "Listor",
+    "ordinals": "Ordningstal",
+    "cardinals": "Kardinaltal",
+    "scientific": "Vetenskaplig notation",
+    "abbreviated": "Förkortad",
+    "date_formats": "Datumformat",
+    "time_formats": "Tidsformat",
+    "datetime": "Datum + tid",
+    "durations": "Varaktigheter",
+    "relative_time": "Relativ tid",
+    "regional_pricing": "Regionala priser",
+    "fifty_percent": "Femtio procent",
+    "small_percent": "Liten procent",
+    "ninety_nine": "Nittionio",
+    "hundred": "Hundra",
+    "kilobyte": "Kilobyte",
+    "distance": "Avstånd",
+    "temperature": "Temperatur",
+    "weight": "Vikt",
+    "half_kb": "Halv KB",
+    "one_and_half_kb": "En och en halv KB",
+    "one_mb": "En MB",
+    "one_gb": "En GB",
+    "two_items": "Två objekt",
+    "three_items": "Tre objekt",
+    "four_items": "Fyra objekt",
+    "date_short": "Kort datum",
+    "date_long": "Långt datum",
+    "time_short": "Kort tid",
+    "time_long": "Lång tid",
+    "day_ago": "Dagar sedan",
+    "months_ago": "Månader sedan",
+    "hour_in": "Om 1 timme",
+    "starter_plan": "Starter-plan",
+    "pro_plan": "Pro-plan",
+    "discount_20": "20% rabatt",
+    "number_modes": "Tallägen",
+    "number_modes_desc": "Jämförelse mellan inhemska siffror (٠١٢٣٤) och universell (0-9) formatering.",
+    "native_label": "Inhemska siffror (٠١٢٣٤)",
+    "universal_label": "Universell (0-9)",
+    "plain_label": "Automatisk"
+  },
+  "template_macros": {
+    "title": "Mall-makron",
+    "description": "Makron för att hämta råa värden utan HTML-uppmärkning.",
+    "raw_value": "Råvärde utan uppmärkning",
+    "current_year": "Aktuellt år är {{year}}"
+  },
+  "datetime": {
+    "title": "Datum och tid",
+    "description": "Kombinerat format för datum och tid.",
+    "iso": "ISO-standard",
+    "eve": "Julafton"
+  },
+  "unit": {
+    "title": "Enhetsformat"
+  },
+  "native_digits": {
+    "title": "Inhemska siffror",
+    "description": "Text med ASCII-siffror visas i inhemska siffror när lokaliseringen aktiverar dem. Uppdateras live när du byter språk."
+  },
+  "inflection": {
+    "title": "Engelsk böjning",
+    "description": "Engelsk pluralisering och singularisering. Uppdateras live när du byter språk."
+  },
+  "live_label": "Live",
+  "pricing_details": {
+    "title": "Prisinformation",
+    "description": "Komplett pipeline: råvärde, valutakod, format, rabatt och konvertering.",
+    "raw_value": "Råvärde",
+    "raw_currency": "Valutakod",
+    "formatted": "Formaterad",
+    "discounted": "20% rabatt",
+    "converted_usd": "Konverterad till USD"
+  },
+  "live_update": {
+    "note": "Lägg märke till att alla tal, datum och priser ändras omedelbart när du byter språk — utan att ladda om sidan."
+  },
+  "section_modes": {
+    "title": "Nummerlägen",
+    "description": "Jämför inbyggda siffror, universellt format och automatiskt läge för den aktiva lokalen.",
+    "number_modes_example": "Example: {{val}}"
+  },
+  "section_systems": {
+    "title": "Skriftsystem",
+    "description": "Alla 7 algoritmiska och 4 ytterligare numeriska system på systemnivå, med anslutna typsnittsladdare.",
+    "note": "Alla talsystem (algoritmiska och numeriska) visar korrekta nativa siffror med ICU-fallback."
+  },
+  "nav": {
+    "translations": "Översättningar",
+    "formatting": "Nummer",
+    "pricing": "Priser",
+    "modes": "Lägen",
+    "systems": "System",
+    "switcher": "Byt Lokal"
+  }
+}

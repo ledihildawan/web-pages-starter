@@ -11,6 +11,7 @@ import {
   readJSON5,
 } from '../../utils/json5';
 import type { DateValue, JsonData } from '../../utils/types';
+import type { CardinalOptions } from './types';
 import type { CurrencyCode } from './currencies';
 import { LOCALES, type LocaleCode, type LocaleConfig } from './data';
 import {
@@ -94,13 +95,13 @@ const generateClientI18nScript = (
     supportedLangs.map((l) => [
       l,
       {
-        common: readJSON5(resolveRoot(`${PATHS.LOCALES}/${l}/common.json5`)),
+        common: readJSON5(resolveRoot(`${PATHS.LOCALES}/${l}/common.json`)),
         comp: loadSelectedComponentLocales(
           l,
           usedComponents,
           resolveRoot(PATHS.LOCALES),
         ),
-        page: readJSON5(resolveRoot(`${PATHS.LOCALES}/${l}/${name}.json5`)),
+        page: readJSON5(resolveRoot(`${PATHS.LOCALES}/${l}/${name}.json`)),
       },
     ]),
   ) as Record<string, JsonData>;
@@ -184,7 +185,6 @@ const createI18nObject = (
     base: Record<string, string | number | boolean | undefined>,
     vars?: string | null,
     nativeDigits?: boolean,
-    numberingSystem?: string,
   ): Record<string, string | number | boolean> => {
     const result: Record<string, string | number | boolean> = {};
     for (const [key, value] of Object.entries(base)) {
@@ -192,7 +192,6 @@ const createI18nObject = (
     }
     if (vars) result['i18n-vars'] = vars;
     if (nativeDigits) result['use-native'] = 'true';
-    if (numberingSystem) result['numbering-system'] = numberingSystem;
     return result;
   };
 
@@ -244,9 +243,6 @@ const createI18nObject = (
 
       return renderHtml(translated, attrs, options?.className);
     },
-
-    text: (key: string | undefined, vars: Record<string, unknown> = {}) =>
-      createItem(key, vars).v,
 
     html: (key: string | undefined, vars: Record<string, unknown> = {}) =>
       createItem(key, vars).v,
@@ -311,10 +307,9 @@ const createI18nObject = (
       return renderHtml(
         formatted,
         buildAttrs(
-          { 'format-currency': value, 'currency-code': currency },
+          { 'format-currency': value, 'target-currency': currency },
           undefined,
           options?.nativeDigits,
-          options?.numberingSystem,
         ),
         options?.className,
       );
@@ -332,7 +327,6 @@ const createI18nObject = (
           { 'format-percent': value },
           undefined,
           options?.nativeDigits,
-          options?.numberingSystem,
         ),
         options?.className,
       );
@@ -421,12 +415,13 @@ const createI18nObject = (
       value: number | string,
       options?: TemplateFormatOptions,
     ) => {
-      const formatted = formatCardinal(value);
-      if (options?.raw) return formatted;
+      const { raw, className, ...formatOpts } = options ?? {};
+      const formatted = formatCardinal(value, formatOpts as CardinalOptions);
+      if (raw) return formatted;
       return renderHtml(
         formatted,
         { 'format-cardinal': value },
-        options?.className,
+        className,
       );
     },
 
@@ -442,14 +437,13 @@ const createI18nObject = (
           { 'format-scientific': value },
           undefined,
           options?.nativeDigits,
-          options?.numberingSystem,
         ),
         options?.className,
       );
     },
 
     formatAbbreviated: (value: number, options?: TemplateFormatOptions) => {
-      const formatted = formatAbbreviated(value);
+      const formatted = formatAbbreviated(value, options);
       if (options?.raw) return formatted;
       return renderHtml(
         formatted,
@@ -459,15 +453,16 @@ const createI18nObject = (
     },
 
     formatList: (items: string[], options?: TemplateFormatOptions) => {
-      const formatted = formatList(items);
-      if (options?.raw) return formatted;
+      const { raw, className, ...formatOpts } = options ?? {};
+      const formatted = formatList(items, formatOpts as Intl.ListFormatOptions);
+      if (raw) return formatted;
       return renderHtml(
         formatted,
         {
           'format-list': '',
           items: escapeHtmlAttr(JSON.stringify(items)),
         },
-        options?.className,
+        className,
       );
     },
 
@@ -484,7 +479,6 @@ const createI18nObject = (
           { 'format-unit': value, unit },
           undefined,
           options?.nativeDigits,
-          options?.numberingSystem,
         ),
         options?.className,
       );
@@ -503,7 +497,6 @@ const createI18nObject = (
           { 'convert-currency': value, 'target-currency': targetCurrency },
           undefined,
           options?.nativeDigits,
-          options?.numberingSystem,
         ),
         options?.className,
       );
@@ -543,7 +536,6 @@ const createI18nObject = (
           },
           undefined,
           options?.nativeDigits,
-          options?.numberingSystem,
         ),
         options?.className,
       );
@@ -561,7 +553,6 @@ const createI18nObject = (
           { 'local-price': escapeHtmlAttr(JSON.stringify(plan.pricing)) },
           undefined,
           options?.nativeDigits,
-          options?.numberingSystem,
         ),
         options?.className,
       );
@@ -590,7 +581,6 @@ const createI18nObject = (
           },
           undefined,
           options?.nativeDigits,
-          options?.numberingSystem,
         ),
         options?.className,
       );
@@ -672,8 +662,8 @@ export const createTemplateParams = (
   const usedComponents = getUsedComponents(templatePath);
 
   const mergedLocales: JsonData = {
-    ...readJSON5(resolveRoot(`${PATHS.LOCALES}/${lang}/common.json5`)),
-    page: readJSON5(resolveRoot(`${PATHS.LOCALES}/${lang}/${name}.json5`)),
+    ...readJSON5(resolveRoot(`${PATHS.LOCALES}/${lang}/common.json`)),
+    page: readJSON5(resolveRoot(`${PATHS.LOCALES}/${lang}/${name}.json`)),
     comp: loadSelectedComponentLocales(
       lang,
       usedComponents,
@@ -681,38 +671,43 @@ export const createTemplateParams = (
     ),
   };
 
-  const resolve = (
-    jsonPath: string,
-    vars: Record<string, unknown> = {},
-  ): string => {
+  const resolveKeyToPath = (key: string): string => {
+    const colonIdx = key.indexOf(':');
+    if (colonIdx !== -1) {
+      const ns = key.slice(0, colonIdx);
+      const clientKey = key.slice(colonIdx + 1);
+      if (ns === name) return `page.${clientKey}`;
+      if (ns.startsWith('components.'))
+        return `comp.${ns.slice(11)}.${clientKey}`;
+      return clientKey;
+    }
+    return key;
+  };
+
+  const resolve = (key: string, vars: Record<string, unknown> = {}): string => {
+    const jsonPath = resolveKeyToPath(key);
     const val = getValueByPath(mergedLocales, jsonPath);
-    let str = val !== undefined ? String(val) : jsonPath;
+    let str = val !== undefined ? String(val) : key;
 
     if (
       val === undefined &&
       process.env.NODE_ENV !== 'production' &&
-      !warnedKeys.has(jsonPath)
+      !warnedKeys.has(key)
     ) {
-      warnedKeys.add(jsonPath);
-      console.warn(`[i18n] Missing key "${jsonPath}" in locale "${lang}"`);
+      warnedKeys.add(key);
+      console.warn(`[i18n] Missing key "${key}" in locale "${lang}"`);
     }
 
-    for (const [key, value] of Object.entries(vars)) {
-      str = str.replaceAll(`{{${key}}}`, String(value));
+    for (const [k, value] of Object.entries(vars)) {
+      str = str.replaceAll(`{{${k}}}`, String(value));
     }
     return str;
   };
 
   const normalizeI18nKey = (key: string): { ns: string; clientKey: string } => {
-    if (key.startsWith('page.')) {
-      return { ns: name, clientKey: key.slice(5) };
-    }
-    if (key.startsWith('comp.')) {
-      const parts = key.split('.');
-      return {
-        ns: `components/${parts[1]}`,
-        clientKey: parts.slice(2).join('.'),
-      };
+    const colonIdx = key.indexOf(':');
+    if (colonIdx !== -1) {
+      return { ns: key.slice(0, colonIdx), clientKey: key.slice(colonIdx + 1) };
     }
     return { ns: 'common', clientKey: key };
   };

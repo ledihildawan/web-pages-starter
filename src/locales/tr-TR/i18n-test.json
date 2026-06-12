@@ -1,0 +1,204 @@
+{
+  "meta": {
+    "title": "i18n Testi | Demo",
+    "description": "Uluslararasılaştırma özellikleri için kapsamlı test sayfası"
+  },
+  "hero": {
+    "badge": "i18n Özellikleri",
+    "title": "Kapsamlı <span class='text-violet-400'>Uluslararasılaştırma</span> Testi",
+    "description": "Tüm i18n özelliklerini deneyin: çeviri, çoğullaştırma, sayı biçimlendirme, para birimi ve para birimi dönüşümü."
+  },
+  "language_info": {
+    "title": "Geçerli Dil Bilgileri",
+    "code": "Dil Kodu",
+    "currency": "Para Birimi",
+    "direction": "Metin Yönü",
+    "digits": "Yerel Rakamlar",
+    "enabled": "Etkin",
+    "disabled": "Devre Dışı",
+    "languages": "Diller",
+    "switching": "Yeniden Yüklemeden Geçiş",
+    "current_code": "tr",
+    "current_currency": "TRY",
+    "current_direction": "LTR (Soldan Sağa)"
+  },
+  "numbers": {
+    "title": "Sayı Biçimlendirme",
+    "description": "Sayılar aktif yerel dile göre biçimlendirilir.",
+    "large": "Büyük Sayı",
+    "decimal": "Ondalık",
+    "million": "Milyon",
+    "percent": "Yüzde",
+    "raw": "Ham"
+  },
+  "currency": {
+    "title": "Para Birimi Dönüşümü",
+    "description": "TRY cinsinden fiyatlar, aktif dilin para birimine dönüştürülür.",
+    "currencies": "Para Birimleri",
+    "small": "Küçük",
+    "medium": "Orta",
+    "large": "Büyük",
+    "enterprise": "Enterprise"
+  },
+  "currency_comparison": {
+    "title": "Para Birimi Karşılaştırması",
+    "description": "Aynı fiyat, desteklenen çeşitli para birimlerinde.",
+    "base_price": "Temel Fiyat (USD)",
+    "aed": "BAE Dirhemi",
+    "aud": "Avustralya Doları",
+    "brl": "Brezilya Reali",
+    "cad": "Kanada Doları",
+    "chf": "İsviçre Frangı",
+    "cny": "Çin Yuanı",
+    "eur": "Euro",
+    "gbp": "İngiliz Sterlini",
+    "idr": "Endonezya Rupisi",
+    "inr": "Hint Rupisi",
+    "jpy": "Japon Yeni",
+    "krw": "Kore Wonu",
+    "mxn": "Meksika Pesosu",
+    "sar": "Suudi Riyali",
+    "sgd": "Singapur Doları",
+    "usd": "ABD Doları",
+    "zar": "Güney Afrika Randı"
+  },
+  "core": {
+    "title": "Temel Özellikler",
+    "description": "Çeviri, çoğullaştırma ve HTML içeriği."
+  },
+  "pluralization": {
+    "title": "Çoğullaştırma",
+    "description": "Her dil için farklı çoğul biçimler.",
+    "item_title": "Öğe (İsim)",
+    "user_title": "Kullanıcı",
+    "product_title": "Ürün"
+  },
+  "form": {
+    "title": "Çevirili Form",
+    "description": "Yer tutucular ve etiketler yerel dil dosyalarından alınır.",
+    "name_label": "Adınız",
+    "name_placeholder": "Tam adınızı girin",
+    "email_label": "E-posta",
+    "email_placeholder": "ornek@email.com",
+    "message_label": "Mesaj",
+    "message_placeholder": "Mesajınızı buraya yazın...",
+    "submit": "Gönder"
+  },
+  "missing_keys": {
+    "title": "Eksik Anahtar İşleme",
+    "description": "Bulunamayan çeviri anahtarları köşeli parantez içinde gösterilir."
+  },
+  "html_content": {
+    "title": "HTML İçeriği",
+    "description": "Çeviriler biçimlendirme için HTML etiketleri içerebilir.",
+    "example": "Bu, <span class='text-emerald-400'>renkli vurgulu</span> ve <strong>kalın metin</strong> içeren örnek bir metindir.",
+    "note": "Not: Çevirilerdeki HTML etiketleri tek bir sarmalayıcı öğe içinde olmalıdır."
+  },
+  "switcher": {
+    "title": "Dil Değiştir",
+    "description": "Dili değiştirmek ve tüm i18n özelliklerini işlem halinde görmek için aşağıdaki düğmeye tıklayın."
+  },
+  "advanced": {
+    "title": "Gelişmiş Biçimlendirme",
+    "description": "Yüzdeler, birimler, baytlar, listeler ve sıra sayıları için gelişmiş biçimlendirme özellikleri.",
+    "percentages": "Yüzdeler",
+    "units": "Birimler",
+    "bytes": "Bayt",
+    "bytes_unit": "bayt",
+    "lists": "Listeler",
+    "ordinals": "Sıra",
+    "cardinals": "Asal",
+    "scientific": "Bilimsel Gösterim",
+    "abbreviated": "Kısaltılmış",
+    "date_formats": "Tarih Biçimleri",
+    "time_formats": "Saat Biçimleri",
+    "datetime": "Tarih + Saat",
+    "durations": "Süreler",
+    "relative_time": "Göreli Zaman",
+    "regional_pricing": "Bölgesel Fiyatlandırma",
+    "fifty_percent": "Elli Yüzde",
+    "small_percent": "Küçük Yüzde",
+    "ninety_nine": "Doksan Dokuz",
+    "hundred": "Yüz",
+    "kilobyte": "Kilobayt",
+    "distance": "Mesafe",
+    "temperature": "Sıcaklık",
+    "weight": "Ağırlık",
+    "half_kb": "Yarım KB",
+    "one_and_half_kb": "Bir Buçuk KB",
+    "one_mb": "Bir MB",
+    "one_gb": "Bir GB",
+    "two_items": "İki Öğe",
+    "three_items": "Üç Öğe",
+    "four_items": "Dört Öğe",
+    "date_short": "Kısa Tarih",
+    "date_long": "Uzun Tarih",
+    "time_short": "Kısa Saat",
+    "time_long": "Uzun Saat",
+    "day_ago": "Gün Önce",
+    "months_ago": "Ay Önce",
+    "hour_in": "1 Saat İçinde",
+    "starter_plan": "Starter Planı",
+    "pro_plan": "Pro Planı",
+    "discount_20": "%20 İndirim",
+    "number_modes": "Sayı Modları",
+    "number_modes_desc": "Yerel rakam biçimi (٠١٢٣٤) ve evrensel biçim (0-9) karşılaştırması.",
+    "native_label": "Yerel Rakamlar (٠١٢٣٤)",
+    "universal_label": "Evrensel (0-9)",
+    "plain_label": "Otomatik"
+  },
+  "template_macros": {
+    "title": "Şablon Makroları",
+    "description": "HTML işaretleme olmadan ham değer almak için makrolar.",
+    "raw_value": "İşaretleme olmadan ham değer",
+    "current_year": "Geçerli yıl {{year}}"
+  },
+  "datetime": {
+    "title": "Tarih ve Saat",
+    "description": "Birleşik tarih ve saat biçimleri.",
+    "iso": "ISO Standardı",
+    "eve": "Noel Arifesi"
+  },
+  "unit": {
+    "title": "Birim Biçimlendirme"
+  },
+  "native_digits": {
+    "title": "Yerel Rakamlar",
+    "description": "ASCII rakamları içeren metin, yerel dil etkinleştirdiğinde yerel rakamlarla gösterilir. Dil değiştirildiğinde anında güncellenir."
+  },
+  "inflection": {
+    "title": "İngilizce Çekim",
+    "description": "İngilizce çoğullaştırma ve tekilleştirme. Dil değiştirildiğinde anında güncellenir."
+  },
+  "live_label": "Canlı",
+  "pricing_details": {
+    "title": "Fiyat Detayları",
+    "description": "Tam işlem hattı: ham değer, para birimi kodu, biçimlendirme, indirim ve dönüşüm.",
+    "raw_value": "Ham Değer",
+    "raw_currency": "Para Birimi Kodu",
+    "formatted": "Biçimlendirilmiş",
+    "discounted": "%20 İndirim",
+    "converted_usd": "USD'ye Dönüştürülen"
+  },
+  "live_update": {
+    "note": "Dil değiştirdiğinizde tüm sayı, tarih ve fiyatların anında değiştiğini gözlemleyin — sayfayı yeniden yüklemeden."
+  },
+  "section_modes": {
+    "title": "Sayı Modları",
+    "description": "Aktif yerel dilde yerel rakam biçimi, evrensel biçim ve otomatik mod karşılaştırması.",
+    "number_modes_example": "Example: {{val}}"
+  },
+  "section_systems": {
+    "title": "Yazı Sistemleri",
+    "description": "Tüm sayı sistemleri (algoritmik ve sayısal), ICU geri dönüşü ile doğru yerel rakamları gösterir.",
+    "note": "Tüm sayı sistemleri (algoritmik ve sayısal), doğru yerel rakamları gösterir. Algoritmik sistemler NUMBERING_SYSTEMS'den rakam geri dönüşü kullanır. Roma rakamları doğrudan algoritma ile dönüştürülür. Sayısal sistemler yüklenen fonttaki rakamları kullanır."
+  },
+  "nav": {
+    "translations": "Çeviriler",
+    "formatting": "Sayılar",
+    "pricing": "Fiyatlar",
+    "modes": "Modlar",
+    "systems": "Sistemler",
+    "switcher": "Yerel Dil Seç"
+  }
+}

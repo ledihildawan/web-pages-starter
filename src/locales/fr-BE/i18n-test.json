@@ -1,0 +1,204 @@
+{
+  "meta": {
+    "title": "Test i18n | Démo",
+    "description": "Page de test complète des fonctionnalités d'internationalisation"
+  },
+  "hero": {
+    "badge": "Fonctionnalités i18n",
+    "title": "Test complet de <span class='text-violet-400'>l'i18n</span>",
+    "description": "Essayez toutes les fonctionnalités i18n: traduction, pluralisation, formatage des nombres, devise et conversion de devise."
+  },
+  "language_info": {
+    "title": "Informations sur la Langue Actuelle",
+    "code": "Code de Langue",
+    "currency": "Devise",
+    "direction": "Direction du Texte",
+    "current_code": "fr",
+    "current_currency": "EUR",
+    "current_direction": "LTR (Left to Right)",
+    "digits": "Chiffres Natifs",
+    "enabled": "Activé",
+    "disabled": "Désactivé",
+    "languages": "Langues",
+    "switching": "Changement Sans Rechargement"
+  },
+  "numbers": {
+    "title": "Formatage des Nombres",
+    "description": "Nombres formatés selon la langue active.",
+    "large": "Grand Nombre",
+    "decimal": "Décimal",
+    "million": "Million",
+    "percent": "Pourcentage",
+    "raw": "Brut"
+  },
+  "currency": {
+    "title": "Formatage de Devise",
+    "description": "Prix en IDR convertis vers la devise de la langue active.",
+    "small": "Petit",
+    "medium": "Moyen",
+    "large": "Grand",
+    "enterprise": "Entreprise",
+    "currencies": "Devises"
+  },
+  "currency_comparison": {
+    "title": "Comparaison de Devises",
+    "description": "Même prix dans toutes les devises supportées.",
+    "base_price": "Prix de Base (IDR)",
+    "aed": "Dirham des Émirats",
+    "aud": "Dollar Australien",
+    "brl": "Réal Brésilien",
+    "cad": "Dollar Canadien",
+    "chf": "Franc Suisse",
+    "cny": "CNY",
+    "eur": "Euro",
+    "gbp": "Livre Sterling",
+    "idr": "IDR",
+    "inr": "Roupie Indienne",
+    "jpy": "JPY",
+    "krw": "Won coréen",
+    "mxn": "Peso Mexicain",
+    "sar": "SAR",
+    "sgd": "Dollar Singapourien",
+    "usd": "USD",
+    "zar": "Rand Sud-Africain"
+  },
+  "pluralization": {
+    "title": "Pluralisation",
+    "description": "Les formes plurielles varient selon la langue.",
+    "item_title": "Élément (Nom)",
+    "user_title": "Utilisateur (Personne)",
+    "product_title": "Produit (Biens)"
+  },
+  "form": {
+    "title": "Formulaire avec Placeholders Traduits",
+    "description": "Placeholders et étiquettes chargés depuis les fichiers de paramètres régionaux.",
+    "name_label": "Nom",
+    "name_placeholder": "Entrez votre nom complet",
+    "email_label": "E-mail",
+    "email_placeholder": "exemple@email.com",
+    "message_label": "Message",
+    "message_placeholder": "Tapez votre message ici...",
+    "submit": "Envoyer"
+  },
+  "missing_keys": {
+    "title": "Gestionnaire de Clés Manquantes",
+    "description": "Les clés manquantes sont affichées entre crochets."
+  },
+  "html_content": {
+    "title": "Contenu HTML",
+    "description": "Les traductions peuvent inclure des balises HTML pour le style.",
+    "example": "Ceci est un exemple avec <span class='text-emerald-400'>mise en évidence colorée</span> et <strong>texte en gras</strong>.",
+    "note": "Note: Le HTML dans les traductions doit avoir un seul élément racine."
+  },
+  "switcher": {
+    "title": "Changer de Langue",
+    "description": "Cliquez sur les boutons ci-dessous pour changer la langue et voir l'i18n en action."
+  },
+  "advanced": {
+    "title": "Formatage Avancé",
+    "description": "Fonctionnalités de formatage avancées pour les pourcentages, unités, octets, listes et ordinaux.",
+    "percentages": "Pourcentages",
+    "units": "Unités",
+    "bytes": "Octets",
+    "bytes_unit": "octets",
+    "lists": "Listes",
+    "ordinals": "Ordinaux",
+    "cardinals": "Cardinaux",
+    "scientific": "Notation Scientifique",
+    "abbreviated": "Abrégé",
+    "date_formats": "Formats de Date",
+    "time_formats": "Formats d'Heure",
+    "datetime": "Date + Heure",
+    "durations": "Durées",
+    "relative_time": "Temps Relatif",
+    "regional_pricing": "Tarification Régionale",
+    "fifty_percent": "Cinquante Pour Cent",
+    "small_percent": "Petit Pourcentage",
+    "ninety_nine": "Quatre-Vingt-Dix-Neuf",
+    "hundred": "Cent",
+    "kilobyte": "Kilooctet",
+    "distance": "Distance",
+    "temperature": "Température",
+    "weight": "Poids",
+    "half_kb": "Demi KO",
+    "one_and_half_kb": "Un KO et Demi",
+    "one_mb": "Un MO",
+    "one_gb": "Un GO",
+    "two_items": "Deux Éléments",
+    "three_items": "Trois Éléments",
+    "four_items": "Quatre Éléments",
+    "date_short": "Date Courte",
+    "date_long": "Date Longue",
+    "time_short": "Heure Courte",
+    "time_long": "Heure Longue",
+    "day_ago": "il y a 1 jour",
+    "months_ago": "il y a 2 mois",
+    "hour_in": "dans 1 heure",
+    "starter_plan": "Plan Débutant",
+    "pro_plan": "Plan Pro",
+    "discount_20": "Réduction 20%",
+    "number_modes": "Modes de Nombre",
+    "number_modes_desc": "Démonstration de tNative (chiffres natifs) et tUniversal (universel 0-9).",
+    "native_label": "Natif (٠١٢٣٤)",
+    "universal_label": "Universel (0-9)",
+    "plain_label": "Simple (auto)"
+  },
+  "template_macros": {
+    "title": "Macros de Template",
+    "description": "Macros pour obtenir des valeurs brutes sans balisage HTML.",
+    "raw_value": "Valeur brute sans formatage",
+    "current_year": "L'année actuelle est {{year}}"
+  },
+  "datetime": {
+    "title": "Date et Heure",
+    "description": "Format combiné de date et heure.",
+    "iso": "Standard ISO",
+    "eve": "Réveillon de Noël"
+  },
+  "unit": {
+    "title": "Formatage d'Unités"
+  },
+  "native_digits": {
+    "title": "Chiffres Natifs",
+    "description": "Le texte avec des chiffres ASCII est rendu dans les chiffres natifs de la locale active. Actualisé en direct lors du changement de langue."
+  },
+  "inflection": {
+    "title": "Inflexion de l'Anglais",
+    "description": "Pluralisation et singularisation de l'anglais. Actualisé en direct lors du changement de langue."
+  },
+  "live_label": "En direct",
+  "pricing_details": {
+    "title": "Détails des Prix",
+    "description": "Pipeline complet : valeur raw, code devise, formaté, discounté et converti.",
+    "raw_value": "Valeur Raw",
+    "raw_currency": "Code Devise",
+    "formatted": "Formaté",
+    "discounted": "20% Réduction",
+    "converted_usd": "Converti en USD"
+  },
+  "live_update": {
+    "note": "Remarquez comment tous les chiffres, dates et prix se mettent à jour instantanément lorsque vous changez de langue — sans rechargement de page."
+  },
+  "core": {
+    "title": "Fonctionnalités Principales",
+    "description": "Traduction, pluralisation et contenu HTML."
+  },
+  "section_modes": {
+    "title": "Modes de Nombre",
+    "description": "Comparez les chiffres natifs, le format universel et le mode automatique pour la locale active.",
+    "number_modes_example": "Example: {{val}}"
+  },
+  "section_systems": {
+    "title": "Systèmes d'Écriture",
+    "description": "Les 7 systèmes algorithmiques et 4 systèmes numériques supplémentaires au niveau système, avec les chargeurs de polices connectés.",
+    "note": "Tous les systèmes numériques (algorithmes et numériques) affichent les chiffres natifs corrects avec le fallback ICU."
+  },
+  "nav": {
+    "translations": "Traductions",
+    "formatting": "Nombres",
+    "pricing": "Tarifs",
+    "modes": "Modes",
+    "systems": "Systèmes",
+    "switcher": "Changer de Locale"
+  }
+}

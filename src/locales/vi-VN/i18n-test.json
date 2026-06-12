@@ -1,0 +1,204 @@
+{
+  "meta": {
+    "title": "Kiểm tra i18n | Demo",
+    "description": "Trang kiểm tra toàn diện cho các tính năng quốc tế hóa"
+  },
+  "hero": {
+    "badge": "Tính năng i18n",
+    "title": "Kiểm tra <span class='text-violet-400'>Toàn diện</span> Quốc tế hóa",
+    "description": "Trải nghiệm tất cả các tính năng i18n: dịch thuật, số nhiều, định dạng số, tiền tệ và chuyển đổi tiền tệ."
+  },
+  "language_info": {
+    "title": "Thông tin Ngôn ngữ Hiện tại",
+    "code": "Mã Ngôn ngữ",
+    "currency": "Tiền tệ",
+    "direction": "Hướng Văn bản",
+    "digits": "Chữ số Bản địa",
+    "enabled": "Bật",
+    "disabled": "Tắt",
+    "languages": "Ngôn ngữ",
+    "switching": "Chuyển đổi Không cần Tải lại",
+    "current_code": "vi",
+    "current_currency": "VND",
+    "current_direction": "LTR (Trái sang Phải)"
+  },
+  "numbers": {
+    "title": "Định dạng Số",
+    "description": "Số được định dạng theo ngôn ngữ địa phương đang hoạt động.",
+    "large": "Số Lớn",
+    "decimal": "Thập phân",
+    "million": "Triệu",
+    "percent": "Phần trăm",
+    "raw": "Gốc"
+  },
+  "currency": {
+    "title": "Chuyển đổi Tiền tệ",
+    "description": "Giá bằng VND được chuyển đổi sang tiền tệ của ngôn ngữ đang hoạt động.",
+    "currencies": "Tiền tệ",
+    "small": "Nhỏ",
+    "medium": "Vừa",
+    "large": "Lớn",
+    "enterprise": "Enterprise"
+  },
+  "currency_comparison": {
+    "title": "So sánh Tiền tệ",
+    "description": "Cùng một mức giá trong các loại tiền tệ được hỗ trợ.",
+    "base_price": "Giá Cơ bản (USD)",
+    "aed": "Dirham UAE",
+    "aud": "Đô la Úc",
+    "brl": "Real Brazil",
+    "cad": "Đô la Canada",
+    "chf": "Franc Thụy Sĩ",
+    "cny": "Nhân dân tệ",
+    "eur": "Euro",
+    "gbp": "Bảng Anh",
+    "idr": "Rupiah",
+    "inr": "Rupee Ấn Độ",
+    "jpy": "Yên Nhật",
+    "krw": "Won Hàn Quốc",
+    "mxn": "Peso Mexico",
+    "sar": "Riyal Ả Rập Xê Út",
+    "sgd": "Đô la Singapore",
+    "usd": "Đô la Mỹ",
+    "zar": "Rand Nam Phi"
+  },
+  "core": {
+    "title": "Tính năng Cốt lõi",
+    "description": "Dịch thuật, số nhiều và nội dung HTML."
+  },
+  "pluralization": {
+    "title": "Số nhiều",
+    "description": "Các hình thức số nhiều khác nhau cho từng ngôn ngữ.",
+    "item_title": "Mục (Danh từ)",
+    "user_title": "Người dùng",
+    "product_title": "Sản phẩm"
+  },
+  "form": {
+    "title": "Biểu mẫu với Placeholder Dịch thuật",
+    "description": "Placeholder và nhãn được lấy từ tệp ngôn ngữ địa phương.",
+    "name_label": "Tên",
+    "name_placeholder": "Nhập họ và tên của bạn",
+    "email_label": "Email",
+    "email_placeholder": "vidu@email.com",
+    "message_label": "Tin nhắn",
+    "message_placeholder": "Viết tin nhắn của bạn tại đây...",
+    "submit": "Gửi"
+  },
+  "missing_keys": {
+    "title": "Xử lý Khóa Thiếu",
+    "description": "Các khóa dịch thuật không tìm thấy sẽ được hiển thị trong ngoặc vuông."
+  },
+  "html_content": {
+    "title": "Nội dung HTML",
+    "description": "Bản dịch có thể bao gồm các thẻ HTML để định dạng.",
+    "example": "Đây là văn bản mẫu với <span class='text-emerald-400'>điểm nhấn màu sắc</span> và <strong>văn bản in đậm</strong>.",
+    "note": "Lưu ý: Các thẻ HTML trong bản dịch phải nằm trong một phần tử bao bọc duy nhất."
+  },
+  "switcher": {
+    "title": "Chuyển đổi Ngôn ngữ",
+    "description": "Nhấp vào nút bên dưới để chuyển ngôn ngữ và xem tất cả các tính năng i18n hoạt động."
+  },
+  "advanced": {
+    "title": "Định dạng Nâng cao",
+    "description": "Các tính năng định dạng nâng cao cho phần trăm, đơn vị, byte, danh sách và số thứ tự.",
+    "percentages": "Phần trăm",
+    "units": "Đơn vị",
+    "bytes": "Byte",
+    "bytes_unit": "byte",
+    "lists": "Danh sách",
+    "ordinals": "Số thứ tự",
+    "cardinals": "Số đếm",
+    "scientific": "Ký hiệu Khoa học",
+    "abbreviated": "Viết tắt",
+    "date_formats": "Định dạng Ngày",
+    "time_formats": "Định dạng Giờ",
+    "datetime": "Ngày + Giờ",
+    "durations": "Thời lượng",
+    "relative_time": "Thời gian Tương đối",
+    "regional_pricing": "Giá theo Khu vực",
+    "fifty_percent": "Năm mươi Phần trăm",
+    "small_percent": "Phần trăm Nhỏ",
+    "ninety_nine": "Chín mươi Chín",
+    "hundred": "Một trăm",
+    "kilobyte": "Kilobyte",
+    "distance": "Khoảng cách",
+    "temperature": "Nhiệt độ",
+    "weight": "Trọng lượng",
+    "half_kb": "Nửa KB",
+    "one_and_half_kb": "Một rưỡi KB",
+    "one_mb": "Một MB",
+    "one_gb": "Một GB",
+    "two_items": "Hai Mục",
+    "three_items": "Ba Mục",
+    "four_items": "Bốn Mục",
+    "date_short": "Ngày Ngắn",
+    "date_long": "Ngày Dài",
+    "time_short": "Giờ Ngắn",
+    "time_long": "Giờ Dài",
+    "day_ago": "Ngày trước",
+    "months_ago": "Tháng trước",
+    "hour_in": "Trong 1 giờ",
+    "starter_plan": "Gói Starter",
+    "pro_plan": "Gói Pro",
+    "discount_20": "Giảm giá 20%",
+    "number_modes": "Chế độ Số",
+    "number_modes_desc": "So sánh định dạng chữ số bản địa (٠١٢٣٤) và định dạng phổ quát (0-9).",
+    "native_label": "Chữ số Bản địa (٠١٢٣٤)",
+    "universal_label": "Phổ quát (0-9)",
+    "plain_label": "Tự động"
+  },
+  "template_macros": {
+    "title": "Macro Mẫu",
+    "description": "Macro để lấy giá trị gốc không có đánh dấu HTML.",
+    "raw_value": "Giá trị gốc không có đánh dấu",
+    "current_year": "Năm hiện tại là {{year}}"
+  },
+  "datetime": {
+    "title": "Ngày & Giờ",
+    "description": "Định dạng kết hợp ngày và giờ.",
+    "iso": "Tiêu chuẩn ISO",
+    "eve": "Đêm Giáng sinh"
+  },
+  "unit": {
+    "title": "Định dạng Đơn vị"
+  },
+  "native_digits": {
+    "title": "Chữ số Bản địa",
+    "description": "Văn bản có chứa chữ số ASCII sẽ được hiển thị bằng chữ số bản địa khi ngôn ngữ bật tính năng này. Cập nhật ngay lập tức khi chuyển ngôn ngữ."
+  },
+  "inflection": {
+    "title": "Biến tố Tiếng Anh",
+    "description": "Số nhiều và số ít trong tiếng Anh. Cập nhật ngay lập tức khi chuyển ngôn ngữ."
+  },
+  "live_label": "Trực tiếp",
+  "pricing_details": {
+    "title": "Chi tiết Giá",
+    "description": "Quy trình đầy đủ: giá trị gốc, mã tiền tệ, định dạng, giảm giá và chuyển đổi.",
+    "raw_value": "Giá trị Gốc",
+    "raw_currency": "Mã Tiền tệ",
+    "formatted": "Đã định dạng",
+    "discounted": "Giảm giá 20%",
+    "converted_usd": "Chuyển đổi sang USD"
+  },
+  "live_update": {
+    "note": "Hãy quan sát tất cả số, ngày và giá thay đổi ngay lập tức khi bạn chuyển ngôn ngữ — mà không cần tải lại trang."
+  },
+  "section_modes": {
+    "title": "Chế độ Số",
+    "description": "So sánh định dạng chữ số bản địa, định dạng phổ quát và chế độ tự động trong ngôn ngữ đang hoạt động.",
+    "number_modes_example": "Ví dụ: {{val}}"
+  },
+  "section_systems": {
+    "title": "Hệ thống Viết",
+    "description": "Tất cả các hệ thống số (thuật toán và số học) hiển thị chữ số bản địa chính xác với fallback ICU.",
+    "note": "Tất cả các hệ thống số (thuật toán và số học) hiển thị chữ số bản địa chính xác. Hệ thống thuật toán sử dụng fallback chữ số từ NUMBERING_SYSTEMS. Số La Mã được chuyển đổi trực tiếp qua thuật toán. Hệ thống số học sử dụng chữ số từ font đã tải."
+  },
+  "nav": {
+    "translations": "Dịch thuật",
+    "formatting": "Số",
+    "pricing": "Giá",
+    "modes": "Chế độ",
+    "systems": "Hệ thống",
+    "switcher": "Chọn Ngôn ngữ"
+  }
+}

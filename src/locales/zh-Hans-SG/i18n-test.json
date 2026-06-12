@@ -1,0 +1,204 @@
+{
+  "meta": {
+    "title": "i18n 测试 | 演示",
+    "description": "完整的国际化功能测试页面"
+  },
+  "hero": {
+    "badge": "i18n 功能",
+    "title": "完整的 <span class='text-violet-400'>i18n</span> 测试",
+    "description": "尝试所有 i18n 功能：翻译、复数、数字格式、货币和货币转换。"
+  },
+  "language_info": {
+    "title": "当前语言信息",
+    "code": "语言代码",
+    "currency": "货币",
+    "direction": "文本方向",
+    "digits": "原生数字",
+    "enabled": "已启用",
+    "disabled": "已禁用",
+    "languages": "语言",
+    "switching": "无重载切换",
+    "current_code": "zh-Hans",
+    "current_currency": "SGD",
+    "current_direction": "LTR (从左到右)"
+  },
+  "numbers": {
+    "title": "数字格式",
+    "description": "根据活动语言环境格式化的数字。",
+    "large": "大数字",
+    "decimal": "小数",
+    "million": "百万",
+    "percent": "百分比",
+    "raw": "原始"
+  },
+  "currency": {
+    "title": "货币格式",
+    "description": "印尼盾价格转换为活动语言货币。",
+    "currencies": "货币",
+    "small": "小型",
+    "medium": "中型",
+    "large": "大型",
+    "enterprise": "企业"
+  },
+  "currency_comparison": {
+    "title": "货币比较",
+    "description": "所有支持货币中的相同价格。",
+    "base_price": "基础价格",
+    "aed": "阿联酋迪拉姆",
+    "aud": "澳大利亚元",
+    "brl": "巴西雷亚尔",
+    "cad": "加拿大元",
+    "chf": "瑞士法郎",
+    "cny": "人民币",
+    "eur": "欧元",
+    "gbp": "英镑",
+    "idr": "印尼盾",
+    "inr": "印度卢比",
+    "jpy": "日元",
+    "krw": "韩元",
+    "mxn": "墨西哥比索",
+    "sar": "沙特里亚尔",
+    "sgd": "新加坡元",
+    "usd": "美元",
+    "zar": "南非兰特"
+  },
+  "pluralization": {
+    "title": "复数形式",
+    "description": "复数形式因语言而异。",
+    "item_title": "项目（名词）",
+    "user_title": "用户（人）",
+    "product_title": "产品（商品）"
+  },
+  "form": {
+    "title": "带有翻译占位符的表单",
+    "description": "占位符和标签从本地文件加载。",
+    "name_label": "姓名",
+    "name_placeholder": "请输入您的全名",
+    "email_label": "电子邮件",
+    "email_placeholder": "example@email.com",
+    "message_label": "消息",
+    "message_placeholder": "在此输入您的消息...",
+    "submit": "提交"
+  },
+  "missing_keys": {
+    "title": "缺失密钥处理程序",
+    "description": "缺失的密钥将显示在方括号中。"
+  },
+  "html_content": {
+    "title": "HTML 内容",
+    "description": "翻译可以包含用于样式的 HTML 标签。",
+    "example": "这是一个带有<span class='text-emerald-400'>彩色高亮</span>和<strong>粗体文本</strong>的示例。",
+    "note": "注意：翻译中的 HTML 必须具有单个根元素。"
+  },
+  "switcher": {
+    "title": "切换语言",
+    "description": "点击下面的按钮更改语言并查看 i18n 的实际效果。"
+  },
+  "advanced": {
+    "title": "高级格式",
+    "description": "百分比、单位、字节、列表和序数的高级格式功能。",
+    "percentages": "百分比",
+    "units": "单位",
+    "bytes": "字节",
+    "bytes_unit": "字节",
+    "lists": "列表",
+    "ordinals": "序数",
+    "cardinals": "基数",
+    "scientific": "科学记数",
+    "abbreviated": "缩写",
+    "date_formats": "日期格式",
+    "time_formats": "时间格式",
+    "datetime": "日期 + 时间",
+    "durations": "持续时间",
+    "relative_time": "相对时间",
+    "regional_pricing": "区域定价",
+    "fifty_percent": "百分之五十",
+    "small_percent": "小百分比",
+    "ninety_nine": "九十九",
+    "hundred": "一百",
+    "kilobyte": "千字节",
+    "distance": "距离",
+    "temperature": "温度",
+    "weight": "重量",
+    "half_kb": "半 KB",
+    "one_and_half_kb": "1.5 KB",
+    "one_mb": "1 MB",
+    "one_gb": "1 GB",
+    "two_items": "两项",
+    "three_items": "三项",
+    "four_items": "四项",
+    "date_short": "短日期",
+    "date_long": "长日期",
+    "time_short": "短时间",
+    "time_long": "长时间",
+    "day_ago": "1天前",
+    "months_ago": "2个月前",
+    "hour_in": "1小时内",
+    "starter_plan": "入门计划",
+    "pro_plan": "专业计划",
+    "discount_20": "20%折扣",
+    "number_modes": "数字模式",
+    "number_modes_desc": "tNative（本地数字）和tUniversal（通用0-9）的演示。",
+    "native_label": "本地 (٠١٢٣٤)",
+    "universal_label": "通用 (0-9)",
+    "plain_label": "普通 (auto)"
+  },
+  "template_macros": {
+    "title": "模板宏",
+    "description": "用于获取无HTML标记原始值的宏。",
+    "raw_value": "无标记的原始值",
+    "current_year": "当前年份是{{year}}"
+  },
+  "datetime": {
+    "title": "日期和时间",
+    "description": "组合日期和时间格式。",
+    "iso": "ISO 标准",
+    "eve": "圣诞夜"
+  },
+  "unit": {
+    "title": "单位格式"
+  },
+  "native_digits": {
+    "title": "原生数字",
+    "description": "带有 ASCII 数字的文本以活动语言环境的原生数字呈现。切换语言时实时更新。"
+  },
+  "inflection": {
+    "title": "英语屈折",
+    "description": "英语的复数和单数形式。切换语言时实时更新。"
+  },
+  "live_label": "实时",
+  "pricing_details": {
+    "title": "价格详情",
+    "description": "完整流程：原始值、货币代码、格式化、折扣和转换。",
+    "raw_value": "原始值",
+    "raw_currency": "货币代码",
+    "formatted": "已格式化",
+    "discounted": "20% 折扣",
+    "converted_usd": "转换为 USD"
+  },
+  "live_update": {
+    "note": "请注意，当您更改语言时，所有数字、日期和价格都会立即更新 — 无需重新加载页面。"
+  },
+  "core": {
+    "title": "核心功能",
+    "description": "翻译、复数和 HTML 内容。"
+  },
+  "section_modes": {
+    "title": "数字模式",
+    "description": "比较当前区域设置的本机数字、通用格式和自动模式。",
+    "number_modes_example": "示例: {{val}}"
+  },
+  "section_systems": {
+    "title": "书写系统",
+    "description": "系统级别的全部 7 套算法系统和 4 套附加数字系统,字体加载器已连接。",
+    "note": "所有数字系统（算法和数字）通过ICU回退显示正确的原生数字。"
+  },
+  "nav": {
+    "translations": "翻译",
+    "formatting": "数字",
+    "pricing": "价格",
+    "modes": "模式",
+    "systems": "系统",
+    "switcher": "切换区域"
+  }
+}

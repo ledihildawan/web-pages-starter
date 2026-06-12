@@ -1,0 +1,12 @@
+languageIds:
+  - njk
+  - typescript
+  - javascript
+
+usageMatchRegex:
+  - "i18n\\.(?:t|html)\\(\\s*['\"]({key})['\"]"
+
+refactorTemplates:
+  - "i18n.t('{key}')"
+
+monopoly: false

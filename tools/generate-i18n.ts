@@ -12,7 +12,7 @@ const DEFAULT_LOCALE_DIR = path.join(LOCALES_ROOT, i18nConfig.defaultLocale);
 const OUTPUT_FILE = path.join(PATHS.ROOT, PATHS.GENERATED, 'i18n.d.ts');
 
 const INDENT = '  ';
-const LOCALE_EXTS = ['.json5', '.json'] as const;
+const LOCALE_EXTS = ['.json'] as const;
 
 function toTsInterface(obj: unknown, indent = INDENT): string {
   if (typeof obj !== 'object' || obj === null || Array.isArray(obj)) {
@@ -145,7 +145,7 @@ try {
 
   if (!commonData) {
     throw new Error(
-      `Missing default common locale: ${path.join(DEFAULT_LOCALE_DIR, 'common.json5')}`,
+      `Missing default common locale: ${path.join(DEFAULT_LOCALE_DIR, 'common.json')}`,
     );
   }
 

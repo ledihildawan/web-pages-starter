@@ -1,0 +1,204 @@
+{
+  "meta": {
+    "title": "i18n ٹیسٹ | ڈیمو",
+    "description": "انترراشٹریکرن خاصیتاں لئی پورا ٹیسٹ صفہ"
+  },
+  "hero": {
+    "badge": "i18n خصوصیات",
+    "title": "انترراشٹریکرن دی <span class='text-violet-400'>پوری</span> جانچ",
+    "description": "ساریاں i18n خاصیتاں ازماؤ: انوواد، بہووشن، نمبر فارمیٹ، مدرا، تے مدرا پرورتے۔"
+  },
+  "language_info": {
+    "title": "موجودہ بولی جانکاری",
+    "code": "بولی کوڈ",
+    "currency": "مدرا",
+    "direction": "لکھت دی سمت",
+    "digits": "مول انک",
+    "enabled": "سمرتھ",
+    "disabled": "اےوگ",
+    "languages": "بولیاں",
+    "switching": "ریلوڈ توں بناں بدلو",
+    "current_code": "pa",
+    "current_currency": "PKR",
+    "current_direction": "RTL (سجے توں کبھے)"
+  },
+  "numbers": {
+    "title": "نمبر فارمیٹ",
+    "description": "سنگھیاں نوں سرگرم بولی لوکل مطابق فارمیٹ کیتا جاندا اے۔",
+    "large": "وڈی سنگھ",
+    "decimal": "دشمول",
+    "million": "ملین",
+    "percent": "فیصد",
+    "raw": "کچا"
+  },
+  "currency": {
+    "title": "مدرا پرورتے",
+    "description": "PKR وچ قیمتاں نوں سرگرم بولی دی مدرا وچ بدلیا جاندا اے۔",
+    "currencies": "مدراواں",
+    "small": "چھوٹا",
+    "medium": "درمیانا",
+    "large": "وڈا",
+    "enterprise": "Enterprise"
+  },
+  "currency_comparison": {
+    "title": "مدرا تلنا",
+    "description": "اکو قیمت وکھریاں سمردت مدراواں وچ۔",
+    "base_price": "بنیاد قیمت (USD)",
+    "aed": "UAE دیرہام",
+    "aud": "آسٹریلوی ڈالر",
+    "brl": "برازیلی ریئل",
+    "cad": "کینیڈین ڈالر",
+    "chf": "سوئس فرینک",
+    "cny": "چینی یوان",
+    "eur": "یورو",
+    "gbp": "پاؤنڈ سٹرلنگ",
+    "idr": "روپیہ",
+    "inr": "بھارتی روپیہ",
+    "jpy": "جاپانی ین",
+    "krw": "کوریائی وون",
+    "mxn": "میکسیکن پیسو",
+    "sar": "سعودی ریال",
+    "sgd": "سنگاپور ڈالر",
+    "usd": "امریکی ڈالر",
+    "zar": "جنوبی افریقی رینڈ"
+  },
+  "core": {
+    "title": "مکھ خصوصیات",
+    "description": "انوواد، بہووشن، تے HTML مواد۔"
+  },
+  "pluralization": {
+    "title": "بہووشن",
+    "description": "ہر بولی لئی وکھرے بہووشن روپ۔",
+    "item_title": "آئٹم",
+    "user_title": "یوزر",
+    "product_title": "مصنوعات"
+  },
+  "form": {
+    "title": "انووادت پلیسہولڈر والا فارم",
+    "description": "پلیسہولڈر تے لیبل لوکل فائلاں توں حاصل کیتے جاندے نیں۔",
+    "name_label": "ناں",
+    "name_placeholder": "اپنا پورا ناں درج کرو",
+    "email_label": "ایمیل",
+    "email_placeholder": "مثال@ایمیل.com",
+    "message_label": "سنیہا",
+    "message_placeholder": "اپنا سنیہا ایتھے لکھو...",
+    "submit": "بھیجو"
+  },
+  "missing_keys": {
+    "title": "گم کلیدی ہینڈلنگ",
+    "description": "نہ ملیاں انوواد کلیاں نوں بریکٹاں وچ دکھایا جاوے گا۔"
+  },
+  "html_content": {
+    "title": "HTML مواد",
+    "description": "انوواداں وچ فارمیٹنگ لئی HTML ٹیگ شامل ہو سکدے نیں۔",
+    "example": "ایہہ <span class='text-emerald-400'>رنگین ہائیلائیٹ</span> تے <strong>بولڈ ٹیکسٹ</strong> والا نمونہ ٹیکسٹ اے۔",
+    "note": "نوٹ: انوواداں وچ HTML ٹیگ اک ریپر ایلیمینٹ دے اندر ہونے چاہیدے نیں۔"
+  },
+  "switcher": {
+    "title": "بولی بدلو",
+    "description": "بولی بدلن تے ساریاں i18n خصوصیات کم کردیاں ویکھن لئی ہیٹھاں دتا بٹن دباؤ۔"
+  },
+  "advanced": {
+    "title": "اُتی فارمیٹنگ",
+    "description": "فیصد، یونٹ، بائٹ، لسٹ، تے اورڈینل لئی اُتی فارمیٹنگ خاصیتاں۔",
+    "percentages": "فیصد",
+    "units": "یونٹ",
+    "bytes": "بائٹ",
+    "bytes_unit": "بائٹ",
+    "lists": "لسٹ",
+    "ordinals": "اورڈینل",
+    "cardinals": "کارڈینل",
+    "scientific": "سائنسی سنکیت",
+    "abbreviated": "مختصر",
+    "date_formats": "متی فارمیٹ",
+    "time_formats": "سماں فارمیٹ",
+    "datetime": "متی + سماں",
+    "durations": "مدت",
+    "relative_time": "ساپیکھ سماں",
+    "regional_pricing": "علاقائی قیمت",
+    "fifty_percent": "پنجاہ فیصد",
+    "small_percent": "چھوٹا فیصد",
+    "ninety_nine": "ننانوے",
+    "hundred": "اک سو",
+    "kilobyte": "کلوبائٹ",
+    "distance": "دوری",
+    "temperature": "تاپمان",
+    "weight": "بھار",
+    "half_kb": "ادھا KB",
+    "one_and_half_kb": "ڈیڈھ KB",
+    "one_mb": "اک MB",
+    "one_gb": "اک GB",
+    "two_items": "دو آئٹماں",
+    "three_items": "تن آئٹماں",
+    "four_items": "چار آئٹماں",
+    "date_short": "چھوٹی متی",
+    "date_long": "لمبی متی",
+    "time_short": "چھوٹا سماں",
+    "time_long": "لمبا سماں",
+    "day_ago": "دن پہلاں",
+    "months_ago": "مہینے پہلاں",
+    "hour_in": "1 گھنٹے وچ",
+    "starter_plan": "Starter پلان",
+    "pro_plan": "Pro پلان",
+    "discount_20": "20% چھوٹ",
+    "number_modes": "نمبر موڈ",
+    "number_modes_desc": "مول انک (۰۱۲۳۴) تے یونیورسل فارمیٹ (0-9) دی تلنا۔",
+    "native_label": "مول انک (۰۱۲۳۴)",
+    "universal_label": "یونیورسل (0-9)",
+    "plain_label": "آٹومیٹک"
+  },
+  "template_macros": {
+    "title": "ٹیمپلیٹ میکرو",
+    "description": "HTML مارکاپ توں بناں کچے مل حاصل کرن لئی میکرو۔",
+    "raw_value": "مارکاپ توں بناں کچا مل",
+    "current_year": "موجودہ سال {{year}} اے"
+  },
+  "datetime": {
+    "title": "متی تے سماں",
+    "description": "متی تے سمے دا سنجکت فارمیٹ۔",
+    "iso": "ISO معیار",
+    "eve": "کرسمس ایو"
+  },
+  "unit": {
+    "title": "یونٹ فارمیٹ"
+  },
+  "native_digits": {
+    "title": "مول انک",
+    "description": "ASCII انکاں والا ٹیکسٹ مول انکاں وچ دکھایا جاندا اے جدوں لوکل سمرتھ کردا اے۔ بولی بدلن تے ترنت اپڈیٹ ہندا اے۔"
+  },
+  "inflection": {
+    "title": "انگریزی انفلیکشن",
+    "description": "انگریزی بہووشن تے اکوشن۔ بولی بدلن تے ترنت اپڈیٹ ہندا اے۔"
+  },
+  "live_label": "لائیو",
+  "pricing_details": {
+    "title": "قیمت ویروے",
+    "description": "پورا پائپلائن: کچا مل، مدرا کوڈ، فارمیٹ، چھوٹ، تے پرورتے۔",
+    "raw_value": "کچا مل",
+    "raw_currency": "مدرا کوڈ",
+    "formatted": "فارمیٹ کیتا",
+    "discounted": "20% چھوٹ",
+    "converted_usd": "USD وچ پرورتے"
+  },
+  "live_update": {
+    "note": "دھیان دو کہ جدوں تسیں بولی بدلدے او تے سارے نمبر، متیاں تے قیمتاں ترنت بدل جاندیاں نیں — صفہ نوں دوبارہ لوڈ کیتے بناں۔"
+  },
+  "section_modes": {
+    "title": "نمبر موڈ",
+    "description": "سرگرم لوکل وچ مول انک فارمیٹ، یونیورسل فارمیٹ، تے آٹو موڈ دی تلنا کرو۔",
+    "number_modes_example": "Example: {{val}}"
+  },
+  "section_systems": {
+    "title": "لکھت پرنالیاں",
+    "description": "ساریاں انک پرنالیاں (الگوردمک تے نیومیرک) ICU فالبیک نال صحیح مول انک دکھاؤندیاں نیں۔",
+    "note": "ساریاں انک پرنالیاں (الگوردمک تے نیومیرک) صحیح مول انک دکھاؤندیاں نیں۔ الگوردمک پرنالیاں NUMBERING_SYSTEMS توں انک فالبیک ورتدیاں نیں۔ رومن انک سدھے طور تے الگورتھم راہیں بدلے جاندے نیں۔ نیومیرک پرنالیاں لوڈ کیتے فونٹ توں انک ورتدیاں نیں۔"
+  },
+  "nav": {
+    "translations": "انوواد",
+    "formatting": "نمبر",
+    "pricing": "قیمت",
+    "modes": "موڈ",
+    "systems": "پرنالیاں",
+    "switcher": "لوکل چنو"
+  }
+}
