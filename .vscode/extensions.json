@@ -3,14 +3,14 @@
     "biomejs.biome",
     "usernamehw.errorlens",
     "sleistner.vscode-fileutils",
+    "lokalise.i18n-ally",
     "savh.json5-kit",
-    "bradlc.vscode-tailwindcss",
+    "PKief.material-icon-theme",
     "douglaszaltron.nunjucks-vscode-extensionpack",
     "johnpapa.vscode-peacock",
     "YoavBls.pretty-ts-errors",
-    "lokalise.i18n-ally",
     "ahmadawais.shades-of-purple",
-    "PKief.material-icon-theme",
+    "bradlc.vscode-tailwindcss",
     "pflannery.vscode-versionlens"
   ]
 }

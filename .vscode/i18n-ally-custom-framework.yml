@@ -1,0 +1,9 @@
+languageIds:
+  - njk
+  - typescript
+  - javascript
+
+usageMatchRegex:
+  - "i18n\\.t\\(\\s*'({key})'"
+
+monopoly: false
