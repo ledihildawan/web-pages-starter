@@ -1,8 +1,8 @@
+import pluralize from 'pluralize';
 import {
   convertCurrency as convertCurrencyRaw,
   EXCHANGE_RATES,
-} from '@generated/exchange-rates';
-import pluralize from 'pluralize';
+} from '../../../../generated/exchange-rates';
 import type { DateValue } from '../../utils/types';
 import type { CurrencyCode } from './currencies';
 import { LOCALES } from './data';

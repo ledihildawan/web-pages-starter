@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import type { I18nTranslationKeys } from '@generated/i18n';
+import type { I18nTranslationKeys } from '../../../../generated/i18n';
 import { i18nConfig } from '../../../configs/i18n';
 import { PATHS } from '../../../configs/paths';
 import { ROOT_PAGE } from '../../../configs/site';
