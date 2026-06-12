@@ -57,7 +57,11 @@
     "alex_desc": "Vizionārs līderis ar vairāk nekā 10 gadu pieredzi SaaS ekosistēmu izstrādē.",
     "sarah_desc": "Pilna steka speciāliste, kas specializējas liela mēroga sistēmu arhitektūras veidošanā.",
     "mike_desc": "Aizrāvies ar pikseļu detaļām, plūstošām UX plūsmām un pieejamības standartiem.",
-    "jessica_desc": "Radoša stāstniece, kas palīdz zīmoliem atrast unikālu balsi digitālajā pasaulē."
+    "jessica_desc": "Radoša stāstniece, kas palīdz zīmoliem atrast unikālu balsi digitālajā pasaulē.",
+    "alex_role": "Founder & CEO",
+    "sarah_role": "Lead Engineer",
+    "mike_role": "Product Design",
+    "jessica_role": "Marketing"
   },
   "stats": {
     "years": "Gadu pieredze",

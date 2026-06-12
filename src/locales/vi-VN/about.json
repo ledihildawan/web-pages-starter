@@ -57,7 +57,11 @@
     "alex_desc": "Lãnh đạo có tầm nhìn với hơn 10 năm kinh nghiệm phát triển hệ sinh thái SaaS.",
     "sarah_desc": "Chuyên gia full-stack chuyên xây dựng kiến trúc hệ thống quy mô lớn.",
     "mike_desc": "Say mê với chi tiết pixel, luồng UX mượt mà và các tiêu chuẩn khả năng tiếp cận.",
-    "jessica_desc": "Người kể chuyện sáng tạo giúp các thương hiệu tìm thấy tiếng nói riêng trong thế giới số."
+    "jessica_desc": "Người kể chuyện sáng tạo giúp các thương hiệu tìm thấy tiếng nói riêng trong thế giới số.",
+    "alex_role": "Founder & CEO",
+    "sarah_role": "Lead Engineer",
+    "mike_role": "Product Design",
+    "jessica_role": "Marketing"
   },
   "stats": {
     "years": "Năm Kinh nghiệm",

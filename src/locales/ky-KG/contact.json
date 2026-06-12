@@ -35,7 +35,13 @@
       "subject_placeholder": "Эмнени талкуулагыңыз келет?",
       "message": "Билдирүү",
       "message_placeholder": "Сурооңуз жөнүндө кененирээк жазыңыз...",
-      "submit": "Билдирүү жөнөтүү"
+      "submit": "Билдирүү жөнөтүү",
+      "errors": {
+        "required": "This field is required.",
+        "email_invalid": "Please enter a valid email address.",
+        "submit_errors": "Please fix {{count}} error(s) before submitting."
+      },
+      "submitting": "Submitting form..."
     }
   },
   "email_label": "Электрондук почта",

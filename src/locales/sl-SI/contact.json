@@ -35,7 +35,13 @@
       "subject_placeholder": "O čem želite razpravljati?",
       "message": "Sporočilo",
       "message_placeholder": "Povejte nam več o vašem vprašanju...",
-      "submit": "Pošlji sporočilo"
+      "submit": "Pošlji sporočilo",
+      "errors": {
+        "required": "This field is required.",
+        "email_invalid": "Please enter a valid email address.",
+        "submit_errors": "Please fix {{count}} error(s) before submitting."
+      },
+      "submitting": "Submitting form..."
     }
   },
   "email_label": "Email",

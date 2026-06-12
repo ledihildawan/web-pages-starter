@@ -35,7 +35,13 @@
       "subject_placeholder": "तुम्ही काय चर्चा करू इच्छिता?",
       "message": "संदेश",
       "message_placeholder": "तुमच्या प्रश्नाबद्दल अधिक सांगा...",
-      "submit": "संदेश पाठवा"
+      "submit": "संदेश पाठवा",
+      "errors": {
+        "required": "This field is required.",
+        "email_invalid": "Please enter a valid email address.",
+        "submit_errors": "Please fix {{count}} error(s) before submitting."
+      },
+      "submitting": "Submitting form..."
     }
   },
   "email_label": "ईमेल",

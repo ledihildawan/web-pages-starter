@@ -70,5 +70,5 @@ class MicrotaskQueue {
   }
 }
 
-export const microtaskQueue = new MicrotaskQueue();
+const microtaskQueue = new MicrotaskQueue();
 export const scheduleTask = (task: Task): void => microtaskQueue.push(task);

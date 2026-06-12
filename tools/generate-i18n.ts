@@ -80,7 +80,7 @@ function pickPages(
   return Object.fromEntries(
     Object.entries(namespaces).filter(
       ([namespace]) =>
-        namespace !== 'common' && !namespace.startsWith('components/'),
+        namespace !== 'common' && !namespace.startsWith('components.'),
     ),
   );
 }
@@ -90,9 +90,9 @@ function pickComponents(
 ): Record<string, unknown> {
   return Object.fromEntries(
     Object.entries(namespaces)
-      .filter(([namespace]) => namespace.startsWith('components/'))
+      .filter(([namespace]) => namespace.startsWith('components.'))
       .map(([namespace, data]) => [
-        namespace.replace(/^components\//, ''),
+        namespace.replace(/^components\./, ''),
         data,
       ]),
   );
@@ -160,12 +160,14 @@ try {
   });
 
   if (parityErrors.length > 0) {
-    log.warn(
-      `\nWarning: [i18n] ${parityErrors.length} parity issue(s) detected.`,
+    log.error(`Error: [i18n] ${parityErrors.length} parity issue(s) detected.`);
+    for (const err of parityErrors) {
+      log.error(`  ${err}`);
+    }
+    log.error(
+      '\n   Run `bun ./tools/check-locale-parity.ts` for a detailed report.',
     );
-    log.warn(
-      '   Run `bun ./tools/check-locale-parity.ts` for a detailed report.\n',
-    );
+    process.exit(1);
   }
 
   const commonKeys = collectKeys(commonData).map((k) => `'common:${k}'`);
@@ -173,7 +175,7 @@ try {
     collectKeys(data).map((k) => `'${page}:${k}'`),
   );
   const compKeys = Object.entries(componentsData).flatMap(([comp, data]) =>
-    collectKeys(data).map((k) => `'components/${comp}:${k}'`),
+    collectKeys(data).map((k) => `'components.${comp}:${k}'`),
   );
 
   const allKeyCount = commonKeys.length + pageKeys.length + compKeys.length;
@@ -187,12 +189,37 @@ try {
 export type I18nTranslationKeys =
 ${allKeys};
 
-export interface I18nCommon ${toTsInterface(commonData)}
 export interface I18nPages ${toTsInterface(pagesData)}
 export interface I18nComponents ${toTsInterface(componentsData)}
 `;
 
   writeFilePath(OUTPUT_FILE, output);
+
+  const vscodeSettingsPath = path.join(PATHS.ROOT, '.vscode', 'settings.json');
+  if (fs.existsSync(vscodeSettingsPath)) {
+    const settings = JSON.parse(
+      fs.readFileSync(vscodeSettingsPath, 'utf-8'),
+    ) as Record<string, unknown>;
+    let changed = false;
+
+    const patch = (key: string, value: string) => {
+      if (settings[key] !== value) {
+        settings[key] = value;
+        changed = true;
+      }
+    };
+
+    patch('i18n-ally.sourceLanguage', i18nConfig.defaultLocale);
+    patch('i18n-ally.displayLanguage', i18nConfig.defaultLocale);
+
+    if (changed) {
+      writeFilePath(
+        vscodeSettingsPath,
+        `${JSON.stringify(settings, null, 2)}\n`,
+      );
+      log.info('  .vscode/settings.json synced');
+    }
+  }
 
   log.info(`\n  ${allKeyCount} translation keys typed`);
   log.info(`  ${OUTPUT_FILE.replace(PATHS.ROOT, '.')}`);

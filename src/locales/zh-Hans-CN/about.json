@@ -57,7 +57,11 @@
     "alex_desc": "在 SaaS 生态系统开发方面拥有 10 多年经验的远见卓识的领导者。",
     "sarah_desc": "擅长构建大规模系统架构的全栈高手。",
     "mike_desc": "痴迷于像素细节、流畅的 UX 流程和无障碍标准。",
-    "jessica_desc": "通过创意叙事帮助品牌在数字世界中找到独特声音的专家。"
+    "jessica_desc": "通过创意叙事帮助品牌在数字世界中找到独特声音的专家。",
+    "alex_role": "Founder & CEO",
+    "sarah_role": "Lead Engineer",
+    "mike_role": "Product Design",
+    "jessica_role": "Marketing"
   },
   "stats": {
     "years": "年经验",

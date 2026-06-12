@@ -57,7 +57,11 @@
     "alex_desc": "Visionary leader with over 10 years' experience building SaaS ecosystems.",
     "sarah_desc": "Full-stack wizard specialising in scalable system architecture.",
     "mike_desc": "Obsessed with pixel-perfect detail, smooth UX flows, and accessibility standards.",
-    "jessica_desc": "Creative storyteller helping brands find their unique voice in the digital world."
+    "jessica_desc": "Creative storyteller helping brands find their unique voice in the digital world.",
+    "alex_role": "Founder & CEO",
+    "sarah_role": "Lead Engineer",
+    "mike_role": "Product Design",
+    "jessica_role": "Marketing"
   },
   "stats": {
     "years": "Years of Experience",

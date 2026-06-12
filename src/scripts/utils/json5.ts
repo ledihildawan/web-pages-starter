@@ -57,7 +57,7 @@ export const loadSelectedComponentLocales = (
 ): JsonData => {
   const compData: JsonData = {};
   for (const name of selected) {
-    const data = readJSON5(`${localesDir}/${lang}/components/${name}.json`);
+    const data = readJSON5(`${localesDir}/${lang}/components.${name}.json`);
     if (Object.keys(data).length > 0) {
       compData[name] = data;
     }

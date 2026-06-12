@@ -35,7 +35,13 @@
       "subject_placeholder": "Ce ai vrea să discuți?",
       "message": "Mesaj",
       "message_placeholder": "Spune-ne mai multe despre întrebarea ta...",
-      "submit": "Trimite mesaj"
+      "submit": "Trimite mesaj",
+      "errors": {
+        "required": "This field is required.",
+        "email_invalid": "Please enter a valid email address.",
+        "submit_errors": "Please fix {{count}} error(s) before submitting."
+      },
+      "submitting": "Submitting form..."
     }
   },
   "email_label": "E-mail",

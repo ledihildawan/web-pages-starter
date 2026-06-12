@@ -57,7 +57,11 @@
     "alex_desc": "Visionäärinen johtaja, jolla on yli 10 vuoden kokemus SaaS-ekosysteemien kehittämisestä.",
     "sarah_desc": "Fullstack-taikuutta erikoistuen suuren mittakaavan järjestelmäarkkitehtuurien rakentamiseen.",
     "mike_desc": "Pakkomielteinen pikselien yksityiskohdista, sujuvista UX-virroista ja saavutettavuusstandardeista.",
-    "jessica_desc": "Luova tarinankertoja, joka auttaa brändejä löytämään ainutlaatuisen äänensä digitaalisessa maailmassa."
+    "jessica_desc": "Luova tarinankertoja, joka auttaa brändejä löytämään ainutlaatuisen äänensä digitaalisessa maailmassa.",
+    "alex_role": "Founder & CEO",
+    "sarah_role": "Lead Engineer",
+    "mike_role": "Product Design",
+    "jessica_role": "Marketing"
   },
   "stats": {
     "years": "Vuoden kokemus",

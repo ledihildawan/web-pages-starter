@@ -1,4 +1,4 @@
-import type { FontConfig, FontStack, I18nConfig } from './types';
+import type { FontConfig, I18nConfig } from './types';
 
 const validateFont = (font: FontConfig): void => {
   if (!font.name || !/^[\w-]+$/.test(font.name)) {
@@ -14,13 +14,6 @@ const validateFont = (font: FontConfig): void => {
 export const defineFont = (config: FontConfig): FontConfig => {
   validateFont(config);
   return config;
-};
-
-export const defineStack = (stack: FontStack): FontStack => {
-  validateFont(stack.primary);
-  if (stack.secondary) validateFont(stack.secondary);
-  if (stack.monospace) validateFont(stack.monospace);
-  return stack;
 };
 
 export const defineI18n = (config: I18nConfig): I18nConfig => {

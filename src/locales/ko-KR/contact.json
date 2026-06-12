@@ -35,7 +35,13 @@
       "subject_placeholder": "무엇을 토론하고 싶으신가요?",
       "message": "메시지",
       "message_placeholder": "문의 사항에 대해 더 알려주세요...",
-      "submit": "메시지 보내기"
+      "submit": "메시지 보내기",
+      "errors": {
+        "required": "This field is required.",
+        "email_invalid": "Please enter a valid email address.",
+        "submit_errors": "Please fix {{count}} error(s) before submitting."
+      },
+      "submitting": "Submitting form..."
     }
   },
   "email_label": "이메일",

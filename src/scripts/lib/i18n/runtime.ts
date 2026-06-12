@@ -1,10 +1,10 @@
+import i18next, { type Resource } from 'i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
 import {
   convertCurrency as convertCurrencyRaw,
   EXCHANGE_RATES,
-} from '@generated/exchange-rates';
-import type { I18nTranslationKeys } from '@generated/i18n';
-import i18next, { type Resource } from 'i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
+} from '../../../../generated/exchange-rates';
+import type { I18nTranslationKeys } from '../../../../generated/i18n';
 import { i18nConfig } from '../../../configs/i18n';
 import { ROOT_PAGE } from '../../../configs/site';
 import type { DateTimePreset } from '../../utils/types';
@@ -119,11 +119,23 @@ const FORMATTERS = [
   },
   {
     attr: 'data-format-date',
-    format: (v: string) => formatDate(v as DateTimePreset),
+    format: (v: string, el: HTMLElement) => {
+      const opts = el.getAttribute('data-format-opts');
+      return formatDate(
+        v as DateTimePreset,
+        opts ? JSON.parse(opts) : undefined,
+      );
+    },
   },
   {
     attr: 'data-format-datetime',
-    format: (v: string) => formatDateTime(v as DateTimePreset),
+    format: (v: string, el: HTMLElement) => {
+      const opts = el.getAttribute('data-format-opts');
+      return formatDateTime(
+        v as DateTimePreset,
+        opts ? JSON.parse(opts) : undefined,
+      );
+    },
   },
   {
     attr: 'data-format-time',
@@ -191,7 +203,9 @@ const FORMATTERS = [
           price = pricing.base;
           fromCurrency = CURRENCY_CODE.USD;
         }
-      } catch {}
+      } catch (err) {
+        if (isDev) console.error('[i18n] initIntl failed:', err);
+      }
 
       if (discountStr) {
         price = price * parseFloat(discountStr);
@@ -232,7 +246,7 @@ const FORMATTERS = [
     format: (v: string, el: HTMLElement) =>
       formatBytes(
         parseFloat(v),
-        parseInt(el.getAttribute('data-bytes-decimals') ?? '2', 10),
+        parseInt(el.getAttribute('data-bytes-decimals') ?? '1', 10),
       ),
   },
   {
@@ -240,7 +254,7 @@ const FORMATTERS = [
     format: (v: string, el: HTMLElement) => {
       const unit = (el.getAttribute('data-unit') ??
         'second') as Intl.RelativeTimeFormatUnit;
-      const numeric = el.getAttribute('data-numeric') ?? 'auto';
+      const numeric = el.getAttribute('data-numeric') ?? 'always';
       const value = parseFloat(v);
       return formatRelativeTime(value, {
         unit,
@@ -303,7 +317,7 @@ export async function initIntl(localeOverride?: string): Promise<void> {
     const compData = data.comp
       ? Object.fromEntries(
           Object.entries(data.comp).map(([name, content]) => [
-            `components/${name}`,
+            `components.${name}`,
             content,
           ]),
         )
@@ -321,7 +335,7 @@ export async function initIntl(localeOverride?: string): Promise<void> {
       lng: savedLocale,
       resources,
       supportedLngs: LOCALE_CODES,
-      ns: ['common', pageID],
+      ns: ['common', pageID, ...Object.keys(compData)],
       defaultNS: 'common',
       detection: localeOverride
         ? undefined
@@ -359,7 +373,9 @@ export async function initIntl(localeOverride?: string): Promise<void> {
     translatePage();
     updateFormattedElements();
     updateI18nStoreLabels();
-  } catch {}
+  } catch (err) {
+    if (isDev) console.error('[i18n] initIntl failed:', err);
+  }
 }
 
 export const updateI18nStoreLabels = (): void => {
@@ -402,7 +418,7 @@ export const t = (
   if (result === key && isDev && !missingKeys.has(key)) {
     missingKeys.add(key);
   }
-  return result === key ? `[${key}]` : result;
+  return result;
 };
 
 export const translatePage = (): void => {
@@ -414,7 +430,7 @@ export const translatePage = (): void => {
 
     processElements('[data-i18n]', 'data-i18n', (el, key) => {
       const translated = t(key as I18nTranslationKeys, getVars(el));
-      el.innerHTML = toNativeDigits(translated, getNativeDigitSetting(el));
+      el.textContent = toNativeDigits(translated, getNativeDigitSetting(el));
     });
 
     processElements('[data-i18n-attr]', 'data-i18n-attr', (el, raw) => {
@@ -430,7 +446,7 @@ export const translatePage = (): void => {
       const countStr = el.getAttribute('data-i18n-count');
       if (!countStr) return;
       const pluralKey = key.includes(':') ? key : `common:${key}`;
-      const translated = t(pluralKey as I18nTranslationKeys, {
+      const translated = i18next.t(pluralKey, {
         ...getVars(el),
         count: parseInt(countStr, 10),
       });

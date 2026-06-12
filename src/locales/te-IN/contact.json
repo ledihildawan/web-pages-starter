@@ -35,7 +35,13 @@
       "subject_placeholder": "మీరు దేని గురించి చర్చించాలనుకుంటున్నారు?",
       "message": "సందేశం",
       "message_placeholder": "మీ ప్రశ్న గురించి మరింత చెప్పండి...",
-      "submit": "సందేశం పంపండి"
+      "submit": "సందేశం పంపండి",
+      "errors": {
+        "required": "This field is required.",
+        "email_invalid": "Please enter a valid email address.",
+        "submit_errors": "Please fix {{count}} error(s) before submitting."
+      },
+      "submitting": "Submitting form..."
     }
   },
   "email_label": "ఇమెయిల్",

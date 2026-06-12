@@ -7,7 +7,7 @@
 {% import "icons.njk" as icon %}
 
 {% block content %}
-  {% set hero_key = 'contact:hero' %}
+  {% set hero_key = 'contact:contact' %}
   {{ hero.hero_section(
     i18n.t(hero_key ~ '.badge'),
     i18n.t(hero_key ~ '.title_part1'),
@@ -48,7 +48,7 @@
             <div class="absolute -inset-be-24 -inset-e-24 inline-48 block-48 bg-violet-600/5 blur-3xl rounded-full"></div>
             <div class="absolute inset-0 opacity-30 bg-[radial-gradient(#8b5cf6_1px,transparent_1px)] bg-[length:32px_32px]"></div>
 
-            <form class="space-y-6 relative" method="post" action="/contact" novalidate="novalidate" x-data="contactForm()" @submit.prevent="validate()">
+            <form class="space-y-6 relative" method="post" action="{{ url('/contact') }}" novalidate="novalidate" x-data="contactForm()" @submit.prevent="validate()">
               {{ form.form_input('text', 'contact:contact.form.name', 'contact:contact.form.name_placeholder', 'name', i18n=i18n) }}
               {{ form.form_input('email', 'contact:contact.form.email', 'contact:contact.form.email_placeholder', 'email', i18n=i18n) }}
               {{ form.form_input('text', 'contact:contact.form.subject', 'contact:contact.form.subject_placeholder', 'subject', i18n=i18n) }}
@@ -56,7 +56,7 @@
 
               <div class="sr-only" role="status" aria-live="polite" x-text="statusMessage"></div>
 
-              <button type="submit" class="magnetic-btn btn-press btn-squash anticipate-press hover-lift ripple-click sparkle-hover group relative inline-full min-block-14 px-12 py-4 bg-white text-slate-950 radius-btn font-black text-lg flex items-center justify-center gap-3 transition duration-200 ease-emphasized hover:shadow-[0_20px_50px_rgba(255,255,255,0.3)] hover:scale-[1.02] overflow-hidden">
+              <button type="submit" class="magnetic-btn btn-press btn-squash anticipate-press hover-lift ripple-click sparkle-hover group relative inline-full min-block-14 pl-12 pr-[46px] py-4 bg-white text-slate-950 radius-btn font-black text-lg flex items-center justify-center gap-3 transition-[scale,box-shadow] duration-200 ease-emphasized hover:shadow-[0_20px_50px_rgba(255,255,255,0.3)] hover:scale-[1.02] overflow-hidden">
                 <span class="absolute inset-0 bg-linear-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-400 ease-in-out"></span>
                 <span class="relative flex items-center gap-3">
                   {{ i18n.t('contact:contact.form.submit') }}
@@ -68,10 +68,10 @@
         </div>
 
         <div class="space-y-6">
-          <div class="spotlight-card card-border-glow card-squash group relative p-8 lg:p-10 radius-card-lg bg-linear-to-br from-slate-900/60 to-slate-900/40 border border-white/5 hover:border-emerald-500/40 hover:shadow-[0_15px_40px_rgba(16,185,129,0.2)] hover:-translate-y-1 transition duration-250 ease-emphasized overflow-hidden backdrop-blur-xl hover-lift">
+          <div class="spotlight-card card-border-glow card-squash group relative p-8 lg:p-10 radius-card-lg bg-linear-to-br from-slate-900/60 to-slate-900/40 card-border hover:border-emerald-500/40 hover:shadow-[0_15px_40px_rgba(16,185,129,0.2)] hover:-translate-y-1 transition-[transform,box-shadow,border-color] duration-250 ease-emphasized overflow-hidden backdrop-blur-xl hover-lift">
             <div class="absolute inset-be-0 inset-e-0 inline-32 block-32 bg-linear-to-br from-emerald-500/15 to-transparent rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
             <div class="relative flex items-start gap-6">
-              <div class="flex-none inline-14 lg:inline-16 block-14 lg:block-16 radius-nested-lg bg-linear-to-br from-emerald-500/20 to-emerald-500/5 flex items-center justify-center text-emerald-400 border border-emerald-500/30 group-hover:scale-110 transition duration-200 shadow-lg group-hover:shadow-[0_0_40px_rgba(16,185,129,0.3)] icon-squash">
+              <div class="flex-none inline-14 lg:inline-16 block-14 lg:block-16 radius-nested-lg bg-linear-to-br from-emerald-500/20 to-emerald-500/5 flex items-center justify-center text-emerald-400 border border-emerald-500/30 group-hover:scale-110 transition-[scale,box-shadow] duration-200 shadow-lg group-hover:shadow-[0_0_40px_rgba(16,185,129,0.3)] icon-squash">
                 {{ icon.icon('clock', 'inline-7 block-7', size='xl') }}
               </div>
               <div>
@@ -81,10 +81,10 @@
             </div>
           </div>
 
-          <div class="spotlight-card card-border-glow card-squash group relative p-8 lg:p-10 radius-card-lg bg-linear-to-br from-slate-900/60 to-slate-900/40 border border-white/5 hover:border-violet-500/40 hover:shadow-[0_15px_40px_rgba(139,92,246,0.2)] hover:-translate-y-1 transition duration-250 ease-emphasized overflow-hidden backdrop-blur-xl hover-lift">
+          <div class="spotlight-card card-border-glow card-squash group relative p-8 lg:p-10 radius-card-lg bg-linear-to-br from-slate-900/60 to-slate-900/40 card-border hover:border-violet-500/40 hover:shadow-[0_15px_40px_rgba(139,92,246,0.2)] hover:-translate-y-1 transition-[transform,box-shadow,border-color] duration-250 ease-emphasized overflow-hidden backdrop-blur-xl hover-lift">
             <div class="absolute inset-be-0 inset-e-0 inline-32 block-32 bg-linear-to-br from-violet-500/15 to-transparent rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
             <div class="relative flex items-start gap-6">
-              <div class="flex-none inline-14 lg:inline-16 block-14 lg:block-16 radius-nested-lg bg-linear-to-br from-violet-500/20 to-violet-500/5 flex items-center justify-center text-violet-400 border border-violet-500/30 group-hover:scale-110 transition duration-200 shadow-lg group-hover:shadow-[0_0_40px_rgba(139,92,246,0.3)] icon-squash">
+              <div class="flex-none inline-14 lg:inline-16 block-14 lg:block-16 radius-nested-lg bg-linear-to-br from-violet-500/20 to-violet-500/5 flex items-center justify-center text-violet-400 border border-violet-500/30 group-hover:scale-110 transition-[scale,box-shadow] duration-200 shadow-lg group-hover:shadow-[0_0_40px_rgba(139,92,246,0.3)] icon-squash">
                 {{ icon.icon('sun', 'inline-7 block-7', size='xl') }}
               </div>
               <div>
@@ -94,10 +94,10 @@
             </div>
           </div>
 
-          <div class="spotlight-card card-border-glow card-squash group relative p-8 lg:p-10 radius-card-lg bg-linear-to-br from-slate-900/60 to-slate-900/40 border border-white/5 hover:border-fuchsia-500/40 hover:shadow-[0_15px_40px_rgba(217,70,239,0.2)] hover:-translate-y-1 transition duration-250 ease-emphasized overflow-hidden backdrop-blur-xl hover-lift">
+          <div class="spotlight-card card-border-glow card-squash group relative p-8 lg:p-10 radius-card-lg bg-linear-to-br from-slate-900/60 to-slate-900/40 card-border hover:border-fuchsia-500/40 hover:shadow-[0_15px_40px_rgba(217,70,239,0.2)] hover:-translate-y-1 transition-[transform,box-shadow,border-color] duration-250 ease-emphasized overflow-hidden backdrop-blur-xl hover-lift">
             <div class="absolute inset-be-0 inset-e-0 inline-32 block-32 bg-linear-to-br from-fuchsia-500/15 to-transparent rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
             <div class="relative flex items-start gap-6">
-              <div class="flex-none inline-14 lg:inline-16 block-14 lg:block-16 radius-nested-lg bg-linear-to-br from-fuchsia-500/20 to-fuchsia-500/5 flex items-center justify-center text-fuchsia-400 border border-fuchsia-500/30 group-hover:scale-110 transition duration-200 shadow-lg group-hover:shadow-[0_0_40px_rgba(217,70,239,0.3)] icon-squash">
+              <div class="flex-none inline-14 lg:inline-16 block-14 lg:block-16 radius-nested-lg bg-linear-to-br from-fuchsia-500/20 to-fuchsia-500/5 flex items-center justify-center text-fuchsia-400 border border-fuchsia-500/30 group-hover:scale-110 transition-[scale,box-shadow] duration-200 shadow-lg group-hover:shadow-[0_0_40px_rgba(217,70,239,0.3)] icon-squash">
                 {{ icon.icon('support', 'inline-7 block-7', size='xl') }}
               </div>
               <div>

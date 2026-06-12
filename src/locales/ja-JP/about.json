@@ -57,7 +57,11 @@
     "alex_desc": "SaaSエコシステム開発で10年以上の経験を持つビジョナリーリーダー。",
     "sarah_desc": "大規模システムアーキテクチャの構築を専門とするフルスタックウィザード。",
     "mike_desc": "ピクセル詳細、スムーズなUXフロー、アクセシビリティ標準に深くこだわっています。",
-    "jessica_desc": "ブランドがデジタル世界で独自の声を見つけるのを助けるクリエイティブストーリーテラー。"
+    "jessica_desc": "ブランドがデジタル世界で独自の声を見つけるのを助けるクリエイティブストーリーテラー。",
+    "alex_role": "Founder & CEO",
+    "sarah_role": "Lead Engineer",
+    "mike_role": "Product Design",
+    "jessica_role": "Marketing"
   },
   "stats": {
     "years": "年の経験",

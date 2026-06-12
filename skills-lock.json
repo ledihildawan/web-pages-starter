@@ -61,6 +61,12 @@
       "skillPath": "skills/misc/setup-pre-commit/SKILL.md",
       "computedHash": "f9aeedf0a1f560ec465c3939c54434c2d949ac8b958a0493db52216f688a0366"
     },
+    "userinterface-wiki": {
+      "source": "raphaelsalaja/userinterface-wiki",
+      "sourceType": "github",
+      "skillPath": "skills/SKILL.md",
+      "computedHash": "7bd58aa2aaf874dd421b18700ee688b02ce72276612d7115ad6849d4878e115e"
+    },
     "web-quality-audit": {
       "source": "addyosmani/web-quality-skills",
       "sourceType": "github",

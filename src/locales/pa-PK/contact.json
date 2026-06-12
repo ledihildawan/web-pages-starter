@@ -35,7 +35,13 @@
       "subject_placeholder": "تسیں کی وچار وٹاندرا کرنا چاہندے او؟",
       "message": "سنیہا",
       "message_placeholder": "اپنے سوال بارے ہور دسو...",
-      "submit": "سنیہا بھیجو"
+      "submit": "سنیہا بھیجو",
+      "errors": {
+        "required": "This field is required.",
+        "email_invalid": "Please enter a valid email address.",
+        "submit_errors": "Please fix {{count}} error(s) before submitting."
+      },
+      "submitting": "Submitting form..."
     }
   },
   "email_label": "ایمیل",

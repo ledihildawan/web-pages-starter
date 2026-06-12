@@ -4,7 +4,7 @@ languageIds:
   - javascript
 
 usageMatchRegex:
-  - "i18n\\.(?:t|html)\\(\\s*['\"]({key})['\"]"
+  - "i18n(?:\\.(?:t|html|attr|plural))?\\(\\s*['\"]({key})['\"]"
 
 refactorTemplates:
   - "i18n.t('{key}')"

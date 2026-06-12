@@ -156,16 +156,6 @@ function checkParity() {
       log.info(`Checking ${file}...`);
       checkAndTrack(file);
     }
-
-    const compDir = path.join(baseDir, 'components');
-    if (fs.existsSync(compDir)) {
-      for (const file of fs
-        .readdirSync(compDir)
-        .filter((f) => f.endsWith('.json'))) {
-        log.info(`Checking components/${file}...`);
-        checkAndTrack(`components/${file}`);
-      }
-    }
   }
 
   const baseTotal = [...fileBaseSizes.values()].reduce((s, v) => s + v, 0);

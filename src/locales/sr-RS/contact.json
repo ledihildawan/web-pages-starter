@@ -35,7 +35,13 @@
       "subject_placeholder": "Шта желите да дискутујете?",
       "message": "Порука",
       "message_placeholder": "Реците нам више о вашем питању...",
-      "submit": "Пошаљи поруку"
+      "submit": "Пошаљи поруку",
+      "errors": {
+        "required": "This field is required.",
+        "email_invalid": "Please enter a valid email address.",
+        "submit_errors": "Please fix {{count}} error(s) before submitting."
+      },
+      "submitting": "Submitting form..."
     }
   },
   "email_label": "Email",

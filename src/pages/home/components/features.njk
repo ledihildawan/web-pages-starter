@@ -15,7 +15,7 @@
         {% set feat_key = 'home:features.list.' ~ item.t_key %}
         {% set feat_title_key = feat_key ~ '.title' %}
         {% set feat_desc_key = feat_key ~ '.description' %}
-        <div class="group p-12 radius-card-2xl bg-slate-900/40 border border-white/5 hover:bg-slate-900/60 hover:border-{{ item.color }}-500/30 transition duration-500 ease-emphasized relative overflow-hidden shadow-2xl gpu-boost">
+        <div class="group p-12 radius-card-2xl bg-slate-900/40 card-border hover:border-{{ item.color }}-500/30 hover:bg-slate-900/60 transition-[background-color,border-color] duration-500 ease-emphasized relative overflow-hidden shadow-2xl gpu-boost">
 
           <div class="absolute -inset-be-16 -inset-e-16 inline-32 block-32 bg-{{ item.color }}-500/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 

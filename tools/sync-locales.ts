@@ -23,26 +23,7 @@ function createLocale(
   const files = fs.readdirSync(sourceDir);
   for (const file of files) {
     const sourcePath = path.join(sourceDir, file);
-    const stat = fs.statSync(sourcePath);
-
-    if (stat.isDirectory() && file === 'components') {
-      const compTargetDir = path.join(targetDir, 'components');
-      if (!fs.existsSync(compTargetDir)) {
-        fs.mkdirSync(compTargetDir, { recursive: true });
-      }
-
-      const compFiles = fs
-        .readdirSync(sourcePath)
-        .filter((f) => f.endsWith('.json'));
-      for (const compFile of compFiles) {
-        const targetPath = path.join(compTargetDir, compFile);
-        if (!fs.existsSync(targetPath)) {
-          fs.copyFileSync(path.join(sourcePath, compFile), targetPath);
-          log.info(`    components/${compFile}`);
-          created++;
-        }
-      }
-    } else if (file.endsWith('.json')) {
+    if (file.endsWith('.json')) {
       const targetPath = path.join(targetDir, file);
       if (!fs.existsSync(targetPath)) {
         fs.copyFileSync(sourcePath, targetPath);

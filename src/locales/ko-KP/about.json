@@ -57,7 +57,11 @@
     "alex_desc": "SaaS 생태계 개발 10년 이상 경험의 전망성 있는 지도자.",
     "sarah_desc": "대규모 체계 구조 구축을 전문으로 하는 전방위 전문가.",
     "mike_desc": "픽셀 세부사항, 매끄러운 UX 흐름, 접근성 기준에 깊이 몰두합니다.",
-    "jessica_desc": "브랜드가 디지털 세계에서 고유한 목소리를 찾도록 돕는 창조적 이야기작가."
+    "jessica_desc": "브랜드가 디지털 세계에서 고유한 목소리를 찾도록 돕는 창조적 이야기작가.",
+    "alex_role": "Founder & CEO",
+    "sarah_role": "Lead Engineer",
+    "mike_role": "Product Design",
+    "jessica_role": "Marketing"
   },
   "stats": {
     "years": "년 경험",

@@ -64,10 +64,6 @@ const getNumberingSystem = (options: FormatOptions = {}) => {
   );
 };
 
-export const getNativeNumberingSystem = () =>
-  getLanguageConfig(getLocale())?.nativeNumberingSystem ||
-  NUMBERING_SYSTEM_CODE.LATN;
-
 export const toNativeDigits = (text: string, force?: boolean) => {
   if (force === false) return text;
 
@@ -879,6 +875,7 @@ export const formatScientific = (
 };
 
 export const formatBytes = (bytes: number, decimals: number = 1) => {
+  if (bytes < 0) bytes = Math.abs(bytes);
   if (bytes === 0) {
     try {
       return new Intl.NumberFormat(getLocale(), {

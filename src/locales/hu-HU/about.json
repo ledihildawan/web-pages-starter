@@ -57,7 +57,11 @@
     "alex_desc": "Vízionárius vezető, több mint 10 év tapasztalattal a SaaS ökoszisztémák fejlesztésében.",
     "sarah_desc": "Fullstack varázsló, aki nagyléptékű rendszerarchitektúrák építésére specializálódott.",
     "mike_desc": "Megszállottja a pixeldetáloknak, a sima UX-folyamatoknak és az akadálymentességi szabványoknak.",
-    "jessica_desc": "Kreatív történetmesélő, aki segít a márkáknak megtalálni egyedi hangjukat a digitális világban."
+    "jessica_desc": "Kreatív történetmesélő, aki segít a márkáknak megtalálni egyedi hangjukat a digitális világban.",
+    "alex_role": "Founder & CEO",
+    "sarah_role": "Lead Engineer",
+    "mike_role": "Product Design",
+    "jessica_role": "Marketing"
   },
   "stats": {
     "years": "Év tapasztalat",

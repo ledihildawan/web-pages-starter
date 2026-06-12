@@ -35,7 +35,13 @@
       "subject_placeholder": "نیمنی موهاکه قیلماقچیسز؟",
       "message": "خabar",
       "message_placeholder": "سوالینگیز حقیندا بتافسیل یازینگ...",
-      "submit": "خabar یولینگ"
+      "submit": "خabar یولینگ",
+      "errors": {
+        "required": "This field is required.",
+        "email_invalid": "Please enter a valid email address.",
+        "submit_errors": "Please fix {{count}} error(s) before submitting."
+      },
+      "submitting": "Submitting form..."
     }
   },
   "email_label": "الکترون پوچته",

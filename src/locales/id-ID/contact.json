@@ -35,7 +35,13 @@
       "subject_placeholder": "Apa yang ingin Anda diskusikan?",
       "message": "Pesan",
       "message_placeholder": "Ceritakan lebih lanjut tentang pertanyaan Anda...",
-      "submit": "Kirim Pesan"
+      "submit": "Kirim Pesan",
+      "errors": {
+        "required": "Field ini wajib diisi.",
+        "email_invalid": "Masukkan alamat email yang valid.",
+        "submit_errors": "Harap perbaiki {{count}} kesalahan sebelum mengirim."
+      },
+      "submitting": "Mengirim formulir..."
     }
   },
   "email_label": "Email",

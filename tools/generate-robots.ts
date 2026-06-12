@@ -7,12 +7,13 @@ import { writeFilePath } from './shared/write-file';
 
 const OUTPUT_PUBLIC = path.join(PATHS.ROOT, 'public', 'robots.txt');
 
+const basePath = (process.env.BASE_PATH || '/').replace(/\/?$/, '/');
 const baseUrl = SITE_URL.endsWith('/') ? SITE_URL : `${SITE_URL}/`;
 
 const robots = `User-agent: *
-Allow: /
-Disallow: /404.html
-Disallow: /assets/sw.js
+Allow: ${basePath}
+Disallow: ${basePath}404.html
+Disallow: ${basePath}sw.js
 
 Sitemap: ${baseUrl}sitemap.xml
 `;

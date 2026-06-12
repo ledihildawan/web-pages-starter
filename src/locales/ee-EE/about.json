@@ -57,7 +57,11 @@
     "alex_desc": "Visionäärne juht rohkem kui 10 aasta kogemusega SaaS ökosüsteemide arendamises.",
     "sarah_desc": "Täistacki spetsialist, kes keskendub suuremahuliste süsteemide arhitektuuri ehitamisele.",
     "mike_desc": "Huvitatud pikslite detailidest, sujuvatest UX voogudest ja juurdepääsetavuse standarditest.",
-    "jessica_desc": "Loov jutustaja, kes aitab kaubamärkidel leida unikaalse hääle digitaalses maailmas."
+    "jessica_desc": "Loov jutustaja, kes aitab kaubamärkidel leida unikaalse hääle digitaalses maailmas.",
+    "alex_role": "Founder & CEO",
+    "sarah_role": "Lead Engineer",
+    "mike_role": "Product Design",
+    "jessica_role": "Marketing"
   },
   "stats": {
     "years": "Aastat kogemust",

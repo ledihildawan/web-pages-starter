@@ -19,16 +19,18 @@ const seo = (global.seo as Record<string, unknown>) || {};
 const themeColor = (seo.theme_color as string) || '#020617';
 const defaultLocale = i18nConfig.defaultLocale;
 
+const basePath = process.env.BASE_PATH?.replace(/\/+$/, '') || '';
+
 const manifest = {
   name: siteName,
   short_name: siteName,
   description: siteDescription,
-  start_url: '.',
+  start_url: basePath ? `${basePath}/` : './',
   display: 'standalone',
   background_color: themeColor,
   theme_color: themeColor,
   orientation: 'any',
-  scope: '.',
+  scope: basePath ? `${basePath}/` : '.',
   dir: 'ltr',
   lang: defaultLocale,
   categories: ['productivity', 'utilities', 'developer'],
@@ -46,7 +48,7 @@ const manifest = {
       name: 'Home',
       short_name: 'Home',
       description: `Go to ${siteName} home page`,
-      url: './',
+      url: basePath ? `${basePath}/` : './',
       icons: [
         {
           src: 'favicon.svg',

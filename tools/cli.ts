@@ -29,9 +29,9 @@ const runTool = (name: string, args: string[] = []): Promise<void> => {
   });
 };
 
-const runBunScript = (name: string, args: string[] = []): Promise<void> => {
+const runBunScript = (name: string, ...extraArgs: string[]): Promise<void> => {
   return new Promise((resolve, reject) => {
-    const proc = spawn('bun', ['run', name, ...args], {
+    const proc = spawn('bun', ['run', name, ...extraArgs], {
       stdio: 'inherit',
       shell: false,
       cwd: PATHS.ROOT,
@@ -208,6 +208,43 @@ const tools: Tool[] = [
     name: 'Sync Locales',
     description: 'Synchronize locale files from default',
     action: () => runTool('sync-locales'),
+  },
+  {
+    name: 'Test',
+    description: 'Run unit tests with optional coverage',
+    action: async () => {
+      const { testType } = await inquirer.prompt<{ testType: string }>([
+        {
+          type: 'select',
+          name: 'testType',
+          message: 'Select test mode:',
+          choices: [
+            { name: 'Run tests', value: 'run' },
+            { name: 'Run with coverage', value: 'coverage' },
+            { name: 'Watch mode', value: 'watch' },
+          ],
+        },
+      ]);
+      const args =
+        testType === 'coverage'
+          ? [
+              '--coverage',
+              '--coverage.include',
+              'src/scripts/lib/i18n/**',
+              '--coverage.reporters',
+              'text',
+              '--coverage.reporters',
+              'text-summary',
+              '--coverage.reporters',
+              'html',
+              '--coverage.reporters',
+              'lcov',
+            ]
+          : testType === 'watch'
+            ? ['--watch']
+            : [];
+      await runBunScript('test', ...args);
+    },
   },
   {
     name: 'Clean Cache',

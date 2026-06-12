@@ -300,18 +300,6 @@ export const WRITING_SYSTEMS = [
 export type WritingSystemCode = (typeof WRITING_SYSTEMS)[number]['code'];
 export type WritingSystemConfig = (typeof WRITING_SYSTEMS)[number];
 
-export const WRITING_SYSTEM_CODES = WRITING_SYSTEMS.map(
-  (ws) => ws.code,
-) as WritingSystemCode[];
-
-export const WRITING_SYSTEM_CODE = Object.fromEntries(
-  WRITING_SYSTEM_CODES.map(
-    (writingSystem) => [writingSystem.toUpperCase(), writingSystem] as const,
-  ),
-) as {
-  [K in WritingSystemCode as Uppercase<K>]: K;
-};
-
 export const WRITING_SYSTEM = Object.fromEntries(
   WRITING_SYSTEMS.flatMap(
     (ws) =>
@@ -320,6 +308,6 @@ export const WRITING_SYSTEM = Object.fromEntries(
         [`${ws.code.toUpperCase()}_LANGUAGES`, ws.languages],
       ] as const,
   ),
-) as typeof WRITING_SYSTEM_CODE & {
+) as Record<Uppercase<WritingSystemCode>, WritingSystemCode> & {
   [K in WritingSystemCode as `${Uppercase<K>}_LANGUAGES`]: readonly LanguageCode[];
 };

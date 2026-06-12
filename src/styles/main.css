@@ -39,6 +39,9 @@
     --radius-card-2xl: 2.5rem;
     --radius-btn: 0.625rem;
     --radius-icon: 0.5rem;
+
+    --shadow-border: 0 0 0 1px rgba(255, 255, 255, 0.08);
+    --shadow-border-hover: 0 0 0 1px rgba(255, 255, 255, 0.13);
   }
 
   @media (prefers-color-scheme: dark) {
@@ -137,13 +140,13 @@
   @keyframes entrance-blur {
     0% {
       opacity: 0;
-      filter: blur(8px);
-      transform: scale(0.98);
+      filter: blur(4px);
+      transform: translateY(12px);
     }
     100% {
       opacity: 1;
       filter: blur(0);
-      transform: scale(1);
+      transform: translateY(0);
     }
   }
 
@@ -334,7 +337,6 @@
 }
 
 @layer components {
-  .gpu-accelerated,
   .gpu-boost,
   .magnetic-btn {
     backface-visibility: hidden;
@@ -365,35 +367,15 @@
   }
 
   .btn-squash:active:not(:disabled) {
-    transform: scale(0.97, 0.99);
+    transform: scale(0.96);
   }
 
   .card-squash:active:not(:disabled) {
-    transform: scale(0.98, 0.99);
+    transform: scale(0.96);
   }
 
   .icon-squash:active {
     transform: scale(0.96);
-  }
-
-  .icon-bounce:hover {
-    animation: bounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-
-  @keyframes bounce {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-4px);
-    }
-  }
-
-  .icon-transition {
-    transition:
-      opacity 150ms ease-out,
-      transform 150ms cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   .icon-transition.fade-out {
@@ -402,21 +384,11 @@
   }
 
   .anticipate-press:active:not(:disabled) {
-    transform: scale(0.97, 0.99);
-  }
-
-  .icon-anticipate:active {
     transform: scale(0.96);
   }
 
   .input-active:active {
-    transform: scale(0.99);
-  }
-
-  .hover-lift {
-    transition:
-      transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
-      box-shadow 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform: scale(0.96);
   }
 
   .hover-lift:hover:not(:disabled) {
@@ -424,67 +396,13 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
   }
 
-  .card-hover-lift {
-    transition:
-      transform 250ms cubic-bezier(0.34, 1.56, 0.64, 1),
-      box-shadow 250ms cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-
   .card-hover-lift:hover:not(:disabled) {
     transform: translateY(-4px);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
   }
 
-  .sparkle-hover::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: radial-gradient(
-      circle at var(--sparkle-x, 50%) var(--sparkle-y, 50%),
-      rgba(255, 255, 255, 0.3) 0%,
-      transparent 50%
-    );
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-  }
-
   .sparkle-hover:hover::before {
     opacity: 1;
-  }
-
-  .checkmark-success::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    animation: pulse-success 0.6s ease-out;
-  }
-
-  .checkmark-success::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-      circle,
-      rgba(255, 255, 255, 0.8) 0%,
-      transparent 70%
-    );
-    border-radius: 50%;
-    animation: success-sparkle 0.8s ease-out;
-  }
-
-  .float-gentle {
-    animation: float-gentle 4s ease-in-out infinite;
-  }
-
-  .entrance-blur {
-    animation: entrance-blur 0.6s ease-out forwards;
-  }
-
-  .entrance-fade-scale {
-    animation: entrance-fade-scale 0.5s ease-out forwards;
   }
 
   .entrance-delay-100 {
@@ -505,20 +423,6 @@
 
   .entrance-delay-500 {
     animation-delay: 500ms;
-  }
-
-  .sparkle::after {
-    content: "";
-    position: absolute;
-    width: 8px;
-    block-size: 8px;
-    border-radius: 50%;
-    background: radial-gradient(
-      circle,
-      rgba(255, 255, 255, 0.8) 0%,
-      rgba(168, 85, 247, 0.4) 100%
-    );
-    animation: sparkle 1s ease-in-out;
   }
 
   .color-shift {
@@ -610,12 +514,6 @@
     border-color: rgba(255, 255, 255, 0.08);
   }
 
-  @media print {
-    .no-print {
-      display: none;
-    }
-  }
-
   h1,
   h2,
   h3,
@@ -648,7 +546,6 @@
   }
 
   .anticipate-press,
-  .icon-anticipate,
   .input-active {
     transition: transform 100ms cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -741,77 +638,6 @@
     opacity: 1;
   }
 
-  .icon-state {
-    position: relative;
-  }
-
-  .icon-state svg {
-    position: absolute;
-    inset: 0;
-    transition:
-      opacity 200ms ease-out,
-      transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
-      filter 200ms ease-out;
-  }
-
-  .icon-state .icon-default {
-    opacity: 1;
-    transform: scale(1);
-    filter: blur(0);
-  }
-
-  .icon-state .icon-hover {
-    opacity: 0;
-    transform: scale(0.25);
-    filter: blur(4px);
-  }
-
-  .icon-state:hover .icon-default {
-    opacity: 0;
-    transform: scale(0.25);
-    filter: blur(4px);
-  }
-
-  .icon-state:hover .icon-hover {
-    opacity: 1;
-    transform: scale(1);
-    filter: blur(0);
-  }
-
-  .icon-container {
-    position: relative;
-  }
-
-  .icon-container svg {
-    transition:
-      opacity 200ms ease-out,
-      transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-
-  .icon-swap .icon-primary {
-    opacity: 1;
-    transform: scale(1);
-    filter: blur(0);
-  }
-
-  .icon-swap .icon-secondary {
-    opacity: 0;
-    transform: scale(0.25);
-    filter: blur(4px);
-  }
-
-  .icon-swap.success .icon-primary {
-    opacity: 0;
-    transform: scale(0.25);
-    filter: blur(4px);
-  }
-
-  .icon-swap.success .icon-secondary {
-    opacity: 1;
-    transform: scale(1);
-    filter: blur(0);
-  }
-
   .btn-press {
     transition:
       transform 0.15s cubic-bezier(0.4, 0, 0.2, 1),
@@ -819,7 +645,7 @@
   }
 
   .btn-press:active:not(:disabled) {
-    transform: scale(0.97) translateY(0.5px);
+    transform: scale(0.96);
     box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.15);
   }
 
@@ -866,28 +692,6 @@
     opacity: 0.04;
     pointer-events: none;
     mix-blend-mode: overlay;
-  }
-
-  .ripple-effect {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .ripple-effect::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-      circle at var(--ripple-x, 50%) var(--ripple-y, 50%),
-      rgba(255, 255, 255, 0.3) 0%,
-      transparent 60%
-    );
-    opacity: 0;
-    transition: opacity 0.5s ease;
-  }
-
-  .ripple-effect:hover::after {
-    opacity: 1;
   }
 }
 
@@ -952,29 +756,37 @@
     transition-duration: 50ms;
   }
 
-  .text-gradient-primary {
+  .text-gradient {
     background: var(--gradient-primary);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
-  .text-gradient-primary-subtle {
-    background: var(--gradient-primary-subtle);
+  .text-gradient-white {
+    background: linear-gradient(
+      180deg,
+      #ffffff 0%,
+      rgba(255, 255, 255, 0.7) 100%
+    );
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
-  .text-gradient-hero {
-    background: var(--gradient-hero);
+  .text-gradient-white-subtle {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.5) 0%,
+      rgba(255, 255, 255, 0.15) 100%
+    );
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
-  .text-gradient-violet {
-    background: var(--gradient-violet);
+  .text-gradient-white-full {
+    background: #ffffff;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -1096,6 +908,14 @@
   .radius-corner-xl {
     border-radius: 1.25rem;
   }
+
+  .card-border {
+    box-shadow: var(--shadow-border);
+  }
+
+  .card-border-hover:hover {
+    box-shadow: var(--shadow-border-hover);
+  }
 }
 
 @layer accessibility {
@@ -1128,7 +948,6 @@
     .btn-squash:active:not(:disabled),
     .icon-bounce:hover,
     .anticipate-press:active:not(:disabled),
-    .icon-anticipate:active,
     .card-squash:active:not(:disabled),
     .icon-squash:active,
     .input-active:active,
@@ -1139,7 +958,7 @@
 
     .btn-squash:active:not(:disabled),
     .anticipate-press:active:not(:disabled) {
-      transform: scale(0.97, 0.99) !important;
+      transform: scale(0.96) !important;
     }
 
     .bg-linear-to-r,

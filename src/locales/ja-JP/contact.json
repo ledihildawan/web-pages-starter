@@ -35,7 +35,13 @@
       "subject_placeholder": "どのようなご用件でしょうか？",
       "message": "メッセージ",
       "message_placeholder": "お問い合わせ内容をご記入ください...",
-      "submit": "送信する"
+      "submit": "送信する",
+      "errors": {
+        "required": "This field is required.",
+        "email_invalid": "Please enter a valid email address.",
+        "submit_errors": "Please fix {{count}} error(s) before submitting."
+      },
+      "submitting": "Submitting form..."
     }
   },
   "email_label": "メール",

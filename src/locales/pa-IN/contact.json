@@ -35,7 +35,13 @@
       "subject_placeholder": "ਤੁਸੀਂ ਕੀ ਵਿਚਾਰ ਵਟਾਂਦਰਾ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?",
       "message": "ਸੁਨੇਹਾ",
       "message_placeholder": "ਆਪਣੇ ਸਵਾਲ ਬਾਰੇ ਹੋਰ ਦੱਸੋ...",
-      "submit": "ਸੁਨੇਹਾ ਭੇਜੋ"
+      "submit": "ਸੁਨੇਹਾ ਭੇਜੋ",
+      "errors": {
+        "required": "This field is required.",
+        "email_invalid": "Please enter a valid email address.",
+        "submit_errors": "Please fix {{count}} error(s) before submitting."
+      },
+      "submitting": "Submitting form..."
     }
   },
   "email_label": "ਈਮੇਲ",

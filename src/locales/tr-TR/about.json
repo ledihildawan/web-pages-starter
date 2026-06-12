@@ -57,7 +57,11 @@
     "alex_desc": "SaaS ekosistemi geliştirmede 10+ yıl deneyime sahip vizyoner lider.",
     "sarah_desc": "Büyük ölçekli sistem mimarileri oluşturma konusunda uzmanlaşmış full-stack sihirbazı.",
     "mike_desc": "Piksel detayları, akıcı UX akışları ve erişilebilirlik standartlarına takıntılı.",
-    "jessica_desc": "Markaların dijital dünyada benzersiz seslerini bulmalarına yardımcı olan yaratıcı hikaye anlatıcı."
+    "jessica_desc": "Markaların dijital dünyada benzersiz seslerini bulmalarına yardımcı olan yaratıcı hikaye anlatıcı.",
+    "alex_role": "Founder & CEO",
+    "sarah_role": "Lead Engineer",
+    "mike_role": "Product Design",
+    "jessica_role": "Marketing"
   },
   "stats": {
     "years": "Yıllık Deneyim",

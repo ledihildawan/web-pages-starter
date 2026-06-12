@@ -57,7 +57,11 @@
     "alex_desc": "Lider vizionar cu peste 10 ani de experiență în dezvoltarea ecosistemelor SaaS.",
     "sarah_desc": "Magie fullstack specializată în construirea de arhitecturi de sisteme la scară largă.",
     "mike_desc": "Obsedat de detaliile pixelilor, fluxurile UX fluide și standardele de accesibilitate.",
-    "jessica_desc": "Povestitoare creativă care ajută brandurile să-și găsească vocea unică în lumea digitală."
+    "jessica_desc": "Povestitoare creativă care ajută brandurile să-și găsească vocea unică în lumea digitală.",
+    "alex_role": "Founder & CEO",
+    "sarah_role": "Lead Engineer",
+    "mike_role": "Product Design",
+    "jessica_role": "Marketing"
   },
   "stats": {
     "years": "Ani de Experiență",

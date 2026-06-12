@@ -35,7 +35,13 @@
       "subject_placeholder": "Co chcete probrat?",
       "message": "Zpráva",
       "message_placeholder": "Řekněte nám více o vašem dotazu...",
-      "submit": "Odeslat zprávu"
+      "submit": "Odeslat zprávu",
+      "errors": {
+        "required": "This field is required.",
+        "email_invalid": "Please enter a valid email address.",
+        "submit_errors": "Please fix {{count}} error(s) before submitting."
+      },
+      "submitting": "Submitting form..."
     }
   },
   "email_label": "E-mail",
