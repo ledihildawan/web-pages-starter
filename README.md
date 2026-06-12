@@ -53,7 +53,7 @@ tools/                     #   build-time CLI scripts
   └── shared/              #   shared modules (logger, signal-handler, hono-server, site-url, write-file)
 public/                    #   static assets (favicon, sw.js, generated manifest/robots/sitemap)
   └── assets/i18n/         #   pre-compiled i18n JSON bundles (generated)
-generated/                 #   auto-generated (i18n.d.ts, exchange-rates.ts)
+generated/                 #   auto-generated (gitignored at file level; stubs tracked for typecheck)
 docs/                      #   documentation
 ```
 
