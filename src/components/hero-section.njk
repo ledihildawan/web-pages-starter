@@ -13,7 +13,7 @@
             <span class="relative inline-flex rounded-full block-2.5 inline-2.5 bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.6)]"></span>
           </span>
           <span class="font-bold tracking-wide uppercase text-[10px]">
-            {{ i18n.t('page.' + t_key + '.badge') }}
+            {{ i18n.t(t_key + '.badge') }}
           </span>
         </div>
       {% endif %}
@@ -24,15 +24,15 @@
       {% else %}
         <h1 class="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter mbe-8 leading-[1.1]">
           <span class="block text-gradient-white">
-            {{ i18n.t('page.' + t_key + '.title_part1') }}
+            {{ i18n.t(t_key + '.title_part1') }}
           </span>
           <span class="block text-gradient">
-            {{ i18n.t('page.' + t_key + '.title_highlight') }}
+            {{ i18n.t(t_key + '.title_highlight') }}
           </span>
         </h1>
       {% endif %}
       <p class="text-xl md:text-2xl lg:text-3xl text-slate-300 max-inline-3xl mx-auto mbe-16 leading-relaxed font-medium">
-        {{ i18n.t('page.' + t_key + '.description') }}
+        {{ i18n.t(t_key + '.description') }}
       </p>
       {% if show_stats %}
         <div id="hero-stats"></div>

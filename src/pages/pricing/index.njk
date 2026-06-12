@@ -4,20 +4,20 @@
 
 {% block content %}
   <div x-data="{ yearly: false }">
-    {{ hero.hero_section('hero', badge=true, i18n=i18n) }}
+    {{ hero.hero_section('pricing:hero', badge=true, i18n=i18n) }}
 
     <section class="pbe-40 px-6">
       <div class="max-inline-lg mx-auto">
         <div class="flex flex-col sm:flex-row items-center justify-center gap-6 p-6 bg-slate-900/40 backdrop-blur-xl radius-card-md border border-white/10">
           <span class="text-sm font-bold uppercase tracking-[0.15em] transition duration-200" :class="!yearly ? 'text-slate-400' : 'text-white scale-105'">
-            {{ i18n.t('page.toggle.monthly') }}
+            {{ i18n.t('pricing:toggle.monthly') }}
           </span>
           <button
             type="button"
             @click="yearly = !yearly"
             role="switch"
             :aria-checked="yearly.toString()"
-            aria-label="{{ i18n.text('page.toggle.aria_label', {}, {raw: true}) }}"
+            aria-label="{{ i18n.text('pricing:toggle.aria_label', {}, {raw: true}) }}"
             class="toggle-btn group relative inline-16 block-11 bg-slate-800 rounded-full transition duration-200 border border-white/10 cursor-pointer hover:border-violet-500/50 hover:scale-105 shadow-lg btn-squash icon-squash anticipate-press"
             :class="yearly ? 'border-violet-500/50 toggle-active' : ''"
           >
@@ -28,10 +28,10 @@
           </button>
           <div class="flex items-center gap-3">
             <span class="text-sm font-bold uppercase tracking-[0.15em] transition duration-200" :class="yearly ? 'text-white scale-105' : 'text-slate-400'">
-              {{ i18n.t('page.toggle.yearly') }}
+              {{ i18n.t('pricing:toggle.yearly') }}
             </span>
             <span class="px-4 py-2 text-[11px] font-black rounded-full border shadow-[0_0_20px_rgba(16,185,129,0.2)] transition duration-200" :class="yearly ? 'bg-linear-to-r from-emerald-500/30 to-emerald-500/20 text-emerald-300 border-emerald-500/50 shadow-[0_0_30px_rgba(16,185,129,0.4)] scale-110' : 'bg-linear-to-r from-emerald-500/10 to-emerald-500/5 text-emerald-400/60 border-emerald-500/20'">
-              {{ i18n.t('page.toggle.discount') }}
+              {{ i18n.t('pricing:toggle.discount') }}
             </span>
           </div>
         </div>
@@ -49,12 +49,12 @@
 
             {% if plan.featured %}
               <div class="absolute -inset-bs-6 inset-s-1/2 ltr:-translate-x-1/2 rtl:translate-x-1/2 px-6 py-2.5 bg-linear-to-r from-violet-500 via-fuchsia-500 to-pink-500 rounded-full text-[10px] font-black text-white uppercase tracking-[0.2em] shadow-[0_10px_30px_rgba(139,92,246,0.4)] whitespace-nowrap anticipate-press">
-                {{ i18n.t('page.plans.' + plan.id + '.badge') }}
+                {{ i18n.t('pricing:plans.' + plan.id + '.badge') }}
               </div>
             {% endif %}
 
             <h3 class="text-xs font-black uppercase tracking-[0.2em] mbe-8 {% if plan.featured %}text-violet-300{% else %}text-slate-400 group-hover:text-slate-400{% endif %} transition-colors duration-200">
-              {{ i18n.t('page.plans.' + plan.id + '.name') }}
+              {{ i18n.t('pricing:plans.' + plan.id + '.name') }}
             </h3>
 
             <div class="mbe-6">
@@ -63,13 +63,13 @@
                 <span x-show="yearly">{{ i18n.formatLocalPriceDiscounted(plan, 0.8) }}</span>
               </div>
               <div class="flex items-center gap-2 flex-wrap">
-                <span class="text-slate-400 font-bold text-xs sm:text-sm">/{{ i18n.t('page.period_monthly') }}</span>
-                <span x-show="yearly" class="text-[10px] sm:text-xs text-violet-400 font-semibold">{{ i18n.t('page.toggle.yearly_hint') }}</span>
+                <span class="text-slate-400 font-bold text-xs sm:text-sm">/{{ i18n.t('pricing:period_monthly') }}</span>
+                <span x-show="yearly" class="text-[10px] sm:text-xs text-violet-400 font-semibold">{{ i18n.t('pricing:toggle.yearly_hint') }}</span>
               </div>
             </div>
 
             <p class="text-slate-400 mbe-10 leading-relaxed font-medium">
-              {{ i18n.t('page.plans.' + plan.id + '.desc') }}
+              {{ i18n.t('pricing:plans.' + plan.id + '.desc') }}
             </p>
 
             <div class="block-px inline-full bg-linear-to-r from-transparent via-white/10 to-transparent mbe-10"></div>
@@ -80,7 +80,7 @@
                   <div class="mbs-1 flex-none inline-5.5 block-5.5 rounded-full bg-{{ 'violet-500/20' if plan.featured else 'white/5' }} flex items-center justify-center border border-{{ 'violet-500/30' if plan.featured else 'white/10' }} group-hover/icon:scale-110 group-hover/icon:rotate-12 transition duration-200">
                     {{ icon.icon('check', 'inline-3.5 block-3.5 text-' + ('violet-400' if plan.featured else 'slate-500'), size='md') }}
                   </div>
-                  <span class="font-medium leading-tight">{{ i18n.t('page.plans.' + plan.id + '.feature_' + i) }}</span>
+                  <span class="font-medium leading-tight">{{ i18n.t('pricing:plans.' + plan.id + '.feature_' + i) }}</span>
                 </li>
               {% endfor %}
             </ul>
@@ -95,7 +95,7 @@
                 <span class="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
               {% endif %}
               <span class="relative flex items-center gap-2">
-                {{ i18n.t('page.plans.' + plan.id + '.btn') }}
+                {{ i18n.t('pricing:plans.' + plan.id + '.btn') }}
                 {{ icon.icon('arrow-right', 'inline-5 block-5 icon-transition group-hover:translate-x-1', size='md') }}
               </span>
             </a>
@@ -107,9 +107,9 @@
     <section class="pbs-40 pbe-40 px-6 relative bg-linear-to-b from-white/2 to-transparent border-bs border-be border-white/5">
       <div class="max-inline-6xl mx-auto">
         {{ section.section_header(
-          'page.faq.title',
-          'page.faq.title',
-          'page.faq.subtitle',
+          'pricing:faq.title',
+          'pricing:faq.title',
+          'pricing:faq.subtitle',
           icon.icon('question', 'inline-4 block-4'),
           i18n=i18n
         ) }}
@@ -119,10 +119,10 @@
             <div class="spotlight-card card-border-glow card-squash group p-8 lg:p-10 radius-card-lg bg-linear-to-br from-slate-900/60 to-slate-900/40 border border-white/5 hover:shadow-[0_15px_40px_rgba(0,0,0,0.3)] transition duration-200 ease-emphasized cursor-default hover-lift">
               <h3 class="text-xl lg:text-2xl font-black text-white mbe-5 flex items-start gap-5">
                 <span class="text-gradient-violet-fuchsia-br font-mono text-sm mbs-1.5">{{ i18n.formatNumber(i + 1, tag='span', useNative=true) }}</span>
-                <span class="grow group-hover:text-slate-200 transition-colors duration-300">{{ i18n.t('page.faq.q_' + i) }}</span>
+                <span class="grow group-hover:text-slate-200 transition-colors duration-300">{{ i18n.t('pricing:faq.q_' + i) }}</span>
               </h3>
               <p class="text-slate-400 leading-relaxed pis-14 font-medium group-hover:text-slate-300 transition-colors duration-300">
-                {{ i18n.t('page.faq.a_' + i) }}
+                {{ i18n.t('pricing:faq.a_' + i) }}
               </p>
             </div>
           {% endfor %}

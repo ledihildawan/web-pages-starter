@@ -3,7 +3,7 @@
 {% import "section-header.njk" as section with context %}
 
 {% block content %}
-  {{ hero.hero_section(page.hero.t_key, badge=true, i18n=i18n) }}
+  {{ hero.hero_section('about:' ~ page.hero.t_key, badge=true, i18n=i18n) }}
 
   <section class="pbs-40 pbe-40 px-6">
     <div class="max-inline-6xl mx-auto">
@@ -13,10 +13,10 @@
             <div class="absolute inset-0 bg-linear-to-br from-{{ stat.color }}-500/20 to-transparent radius-card-md blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
             <div class="relative">
               <div class="text-4xl md:text-5xl lg:text-6xl font-black mbe-2 tracking-tighter tabular-nums text-white group-hover:scale-110 group-hover:text-{{ stat.color }}-300 transition duration-400" :style="`transition-delay: {{ loop.index0 * 100 }}ms`">
-                {{ i18n.t('page.stats.' + stat.label + '_val') }}
+                {{ i18n.t('about:stats.' + stat.label + '_val') }}
               </div>
               <div class="text-[10px] text-slate-400 font-black uppercase tracking-[0.2em] group-hover:text-slate-400 transition-colors duration-200">
-                {{ i18n.t('page.stats.' + stat.label) }}
+                {{ i18n.t('about:stats.' + stat.label) }}
               </div>
             </div>
           </div>
@@ -39,7 +39,7 @@
               {{ icon.icon('book', 'inline-12 block-12 text-violet-400', size='xl') }}
             </div>
             <p class="text-slate-400 text-xs font-black uppercase tracking-[0.3em]">
-              {{ i18n.t('page.' + page.story.t_key + '.visual_label') }}
+              {{ i18n.t('about:' + page.story.t_key + '.visual_label') }}
             </p>
           </div>
         </div>
@@ -48,16 +48,16 @@
       <div class="space-y-8 order-1 md:order-2">
         <div class="inline-flex items-center gap-3 px-5 py-2.5 bg-linear-to-r from-violet-500/10 to-fuchsia-500/10 border border-violet-500/30 rounded-full text-violet-300 text-sm">
           {{ icon.icon('book', 'inline-4 block-4') }}
-          <span class="font-bold tracking-wide uppercase text-[10px]">{{ i18n.t('page.' + page.story.t_key + '.tag') }}</span>
+          <span class="font-bold tracking-wide uppercase text-[10px]">{{ i18n.t('about:' + page.story.t_key + '.tag') }}</span>
         </div>
 
         <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tight text-white">
-          {{ i18n.html('page.' + page.story.t_key + '.title') }}
+          {{ i18n.html('about:' + page.story.t_key + '.title') }}
         </h2>
 
         <div class="space-y-6 text-slate-300 text-lg md:text-xl leading-relaxed font-medium">
-          <p>{{ i18n.t('page.' + page.story.t_key + '.para1') }}</p>
-          <p>{{ i18n.t('page.' + page.story.t_key + '.para2') }}</p>
+          <p>{{ i18n.t('about:' + page.story.t_key + '.para1') }}</p>
+          <p>{{ i18n.t('about:' + page.story.t_key + '.para2') }}</p>
         </div>
 
         <ul class="space-y-5 pbs-4">
@@ -67,7 +67,7 @@
               <span class="flex-none flex items-center justify-center inline-9 block-9 radius-icon bg-linear-to-br from-{{ value_colors[i-1] }}-500/20 to-{{ value_colors[i-1] }}-500/5 text-{{ value_colors[i-1] }}-400 text-xs font-black border border-{{ value_colors[i-1] }}-500/30 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-[0_0_30px_rgba(139,92,246,0.3)] transition duration-200">
                 {{ icon.icon('check', 'inline-5 block-5', size='md') }}
               </span>
-              <span class="tracking-tight font-medium">{{ i18n.t('page.' + page.story.t_key + '.val' + i) }}</span>
+              <span class="tracking-tight font-medium">{{ i18n.t('about:' + page.story.t_key + '.val' + i) }}</span>
             </li>
           {% endfor %}
         </ul>
@@ -86,8 +86,8 @@
             <div class="inline-16 block-16 radius-nested-lg bg-linear-to-br from-violet-500/20 to-violet-500/5 flex items-center justify-center text-violet-400 mbe-8 border border-violet-500/30 group-hover:scale-110 transition duration-200 shadow-lg group-hover:shadow-[0_0_40px_rgba(139,92,246,0.3)] icon-squash">
               {{ icon.icon('chart', 'inline-8 block-8', size='lg') }}
             </div>
-            <h3 class="text-2xl lg:text-3xl font-black text-white mbe-4">{{ i18n.t('page.mission.title') }}</h3>
-            <p class="text-slate-400 leading-relaxed text-lg">{{ i18n.t('page.mission.description') }}</p>
+            <h3 class="text-2xl lg:text-3xl font-black text-white mbe-4">{{ i18n.t('about:mission.title') }}</h3>
+            <p class="text-slate-400 leading-relaxed text-lg">{{ i18n.t('about:mission.description') }}</p>
           </div>
         </div>
 
@@ -99,8 +99,8 @@
             <div class="inline-16 block-16 radius-nested-lg bg-linear-to-br from-fuchsia-500/20 to-fuchsia-500/5 flex items-center justify-center text-fuchsia-400 mbe-8 border border-fuchsia-500/30 group-hover:scale-110 transition duration-200 shadow-lg group-hover:shadow-[0_0_40px_rgba(217,70,239,0.3)] icon-squash">
               {{ icon.icon('sparkles', 'inline-8 block-8', size='lg') }}
             </div>
-            <h3 class="text-2xl lg:text-3xl font-black text-white mbe-4">{{ i18n.t('page.vision.title') }}</h3>
-            <p class="text-slate-400 leading-relaxed text-lg">{{ i18n.t('page.vision.description') }}</p>
+            <h3 class="text-2xl lg:text-3xl font-black text-white mbe-4">{{ i18n.t('about:vision.title') }}</h3>
+            <p class="text-slate-400 leading-relaxed text-lg">{{ i18n.t('about:vision.description') }}</p>
           </div>
         </div>
       </div>
@@ -109,9 +109,9 @@
 
   <section class="pbs-40 pbe-40 px-6">
     {{ section.section_header(
-      'page.values.title',
-      'page.values.title',
-      'page.values.subtitle',
+      'about:values.title',
+      'about:values.title',
+      'about:values.subtitle',
       icon.icon('star', 'inline-4 block-4'),
       i18n=i18n
     ) }}
@@ -139,8 +139,8 @@
                   {{ icon.icon('star', 'inline-8 block-8 lg:inline-10 lg:block-10', size='xl') }}
                 {% endif %}
               </div>
-              <h3 class="text-xl lg:text-2xl font-black text-white mbe-3 group-hover:text-{{ value.color }}-200 transition-colors duration-200">{{ i18n.t('page.' + value.t_key + '.title') }}</h3>
-              <p class="text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors duration-200">{{ i18n.t('page.' + value.t_key + '.description') }}</p>
+              <h3 class="text-xl lg:text-2xl font-black text-white mbe-3 group-hover:text-{{ value.color }}-200 transition-colors duration-200">{{ i18n.t('about:' + value.t_key + '.title') }}</h3>
+              <p class="text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors duration-200">{{ i18n.t('about:' + value.t_key + '.description') }}</p>
             </div>
           </div>
         {% endfor %}
@@ -151,8 +151,8 @@
   <section class="pbs-40 pbe-40 px-6 relative bg-linear-to-b from-white/2 to-transparent border-bs border-be border-white/5">
     {{ section.section_header(
       'our_team',
-      'page.' + page.team.t_key + '.title',
-      'page.' + page.team.t_key + '.subtitle',
+      'about:' + page.team.t_key + '.title',
+      'about:' + page.team.t_key + '.subtitle',
       icon.icon('users', 'inline-4 block-4'),
       i18n=i18n
     ) }}
@@ -175,7 +175,7 @@
               <h3 class="text-xl font-black text-white mbe-2 tracking-tight group-hover:text-{{ member.color }}-200 transition-colors duration-200">{{ member.name }}</h3>
               <p class="text-[10px] font-black text-{{ member.color }}-400 mbe-4 uppercase tracking-[0.2em]">{{ member.role }}</p>
               <p class="text-sm text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors duration-200">
-                {{ i18n.t('page.' + member.desc_key) }}
+                {{ i18n.t('about:' + member.desc_key) }}
               </p>
 
               <div class="mbs-6 flex justify-center gap-3 opacity-0 group-hover:opacity-100 transition duration-200 transform translate-y-2 group-hover:translate-y-0">

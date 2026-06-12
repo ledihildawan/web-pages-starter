@@ -3,7 +3,7 @@
 {% import "section-header.njk" as section with context %}
 
 {% block content %}
-  {{ hero.hero_section('hero', badge=true, i18n=i18n) }}
+  {{ hero.hero_section('features:hero', badge=true, i18n=i18n) }}
 
   <section class="pbs-40 pbe-40 px-6 space-y-32 lg:space-y-40">
     {% for feature in page.main_features %}
@@ -18,11 +18,11 @@
           </div>
 
           <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.1]">
-            {{ i18n.t('page.' + feature.t_key + '.title') }}
+            {{ i18n.t('features:' + feature.t_key + '.title') }}
           </h2>
 
           <p class="text-slate-400 text-lg md:text-xl leading-relaxed font-medium">
-            {{ i18n.t('page.' + feature.t_key + '.description') }}
+            {{ i18n.t('features:' + feature.t_key + '.description') }}
           </p>
 
           <ul class="grid grid-cols-1 gap-5 pbs-4">
@@ -31,7 +31,7 @@
                 <div class="flex-none inline-7 block-7 radius-icon bg-linear-to-br from-{{ feature.accent }}-500/20 to-{{ feature.accent }}-500/5 border border-{{ feature.accent }}-500/30 flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] transition duration-200">
                   {{ icon.icon('check', 'inline-4 block-4 text-' + feature.accent + '-400', size='md') }}
                 </div>
-                <span class="text-sm md:text-base font-medium group-hover:text-white transition-colors duration-300">{{ i18n.t('page.' + feature.t_key + '.check_' + i) }}</span>
+                <span class="text-sm md:text-base font-medium group-hover:text-white transition-colors duration-300">{{ i18n.t('features:' + feature.t_key + '.check_' + i) }}</span>
               </li>
             {% endfor %}
           </ul>
@@ -128,8 +128,8 @@
     <div class="max-inline-7xl mx-auto">
       {{ section.section_header(
         'more',
-        'page.more_title',
-        'page.more_subtitle',
+        'features:more_title',
+        'features:more_subtitle',
         icon.icon('plus', 'inline-4 block-4'),
         i18n=i18n
       ) }}
@@ -144,10 +144,10 @@
                 {{ icon.icon('plus', 'inline-7 block-7 text-violet-400', size='lg') }}
               </div>
               <h3 class="text-xl font-black text-white mbe-4 tracking-tight group-hover:text-violet-200 transition-colors duration-200">
-                {{ i18n.t('page.' + item.t_key + '.title') }}
+                {{ i18n.t('features:' + item.t_key + '.title') }}
               </h3>
               <p class="text-slate-400 text-base leading-relaxed font-medium group-hover:text-slate-300 transition-colors duration-200">
-                {{ i18n.t('page.' + item.t_key + '.desc') }}
+                {{ i18n.t('features:' + item.t_key + '.desc') }}
               </p>
             </div>
           </div>

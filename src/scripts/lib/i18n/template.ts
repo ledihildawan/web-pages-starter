@@ -671,29 +671,49 @@ export const createTemplateParams = (
     ),
   };
 
-  const resolve = (
-    jsonPath: string,
-    vars: Record<string, unknown> = {},
-  ): string => {
+  const resolveKeyToPath = (key: string): string => {
+    const colonIdx = key.indexOf(':');
+    if (colonIdx !== -1) {
+      const ns = key.slice(0, colonIdx);
+      const clientKey = key.slice(colonIdx + 1);
+      if (ns === name) return `page.${clientKey}`;
+      if (ns.startsWith('components/'))
+        return `comp.${ns.slice(11)}.${clientKey}`;
+      return clientKey;
+    }
+    if (key.startsWith('page.')) return `page.${key.slice(5)}`;
+    if (key.startsWith('comp.')) {
+      const parts = key.split('.');
+      return `comp.${parts[1]}.${parts.slice(2).join('.')}`;
+    }
+    return key;
+  };
+
+  const resolve = (key: string, vars: Record<string, unknown> = {}): string => {
+    const jsonPath = resolveKeyToPath(key);
     const val = getValueByPath(mergedLocales, jsonPath);
-    let str = val !== undefined ? String(val) : jsonPath;
+    let str = val !== undefined ? String(val) : key;
 
     if (
       val === undefined &&
       process.env.NODE_ENV !== 'production' &&
-      !warnedKeys.has(jsonPath)
+      !warnedKeys.has(key)
     ) {
-      warnedKeys.add(jsonPath);
-      console.warn(`[i18n] Missing key "${jsonPath}" in locale "${lang}"`);
+      warnedKeys.add(key);
+      console.warn(`[i18n] Missing key "${key}" in locale "${lang}"`);
     }
 
-    for (const [key, value] of Object.entries(vars)) {
-      str = str.replaceAll(`{{${key}}}`, String(value));
+    for (const [k, value] of Object.entries(vars)) {
+      str = str.replaceAll(`{{${k}}}`, String(value));
     }
     return str;
   };
 
   const normalizeI18nKey = (key: string): { ns: string; clientKey: string } => {
+    const colonIdx = key.indexOf(':');
+    if (colonIdx !== -1) {
+      return { ns: key.slice(0, colonIdx), clientKey: key.slice(colonIdx + 1) };
+    }
     if (key.startsWith('page.')) {
       return { ns: name, clientKey: key.slice(5) };
     }

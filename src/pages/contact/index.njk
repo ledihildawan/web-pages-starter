@@ -7,15 +7,15 @@
 {% import "icons.njk" as icon with context %}
 
 {% block content %}
-  {{ hero.hero_section(page.contact.t_key, badge=true, i18n=i18n) }}
+  {{ hero.hero_section('contact:' ~ page.contact.t_key, badge=true, i18n=i18n) }}
 
   <section class="pbs-40 pbe-40 px-6">
     <div class="max-inline-6xl mx-auto">
       <div class="grid md:grid-cols-3 gap-8">
         {% for item in page.contact_items %}
           {{ card.info_card(
-            'page.' + item.label,
-            'page.' + item.label,
+            'contact:' + item.label,
+            'contact:' + item.label,
             item.color,
             item.icon,
             i18n=i18n
@@ -28,9 +28,9 @@
   <section class="pbs-40 pbe-40 px-6 relative bg-linear-to-b from-white/[0.02] to-transparent border-bs border-be border-white/5">
     <div class="max-inline-7xl mx-auto">
       {{ section.section_header(
-        'page.contact.badge',
-        'page.contact.form_title',
-        'page.contact.form_subtitle',
+        'contact:contact.badge',
+        'contact:contact.form_title',
+        'contact:contact.form_subtitle',
         icon.icon('envelope', 'inline-4 block-4'),
         i18n=i18n
       ) }}
@@ -43,17 +43,17 @@
             <div class="absolute inset-0 opacity-30 bg-[radial-gradient(#8b5cf6_1px,transparent_1px)] bg-[length:32px_32px]"></div>
 
             <form class="space-y-6 relative" method="post" action="/contact" novalidate="novalidate" x-data="contactForm()" @submit.prevent="validate()">
-              {{ form.form_input('text', 'page.contact.form.name', 'page.contact.form.name_placeholder', 'name', i18n=i18n) }}
-              {{ form.form_input('email', 'page.contact.form.email', 'page.contact.form.email_placeholder', 'email', i18n=i18n) }}
-              {{ form.form_input('text', 'page.contact.form.subject', 'page.contact.form.subject_placeholder', 'subject', i18n=i18n) }}
-              {{ form.form_input('textarea', 'page.contact.form.message', 'page.contact.form.message_placeholder', 'message', rows=4, i18n=i18n) }}
+              {{ form.form_input('text', 'contact:contact.form.name', 'contact:contact.form.name_placeholder', 'name', i18n=i18n) }}
+              {{ form.form_input('email', 'contact:contact.form.email', 'contact:contact.form.email_placeholder', 'email', i18n=i18n) }}
+              {{ form.form_input('text', 'contact:contact.form.subject', 'contact:contact.form.subject_placeholder', 'subject', i18n=i18n) }}
+              {{ form.form_input('textarea', 'contact:contact.form.message', 'contact:contact.form.message_placeholder', 'message', rows=4, i18n=i18n) }}
 
               <div class="sr-only" role="status" aria-live="polite" x-text="statusMessage"></div>
 
               <button type="submit" class="magnetic-btn btn-press btn-squash anticipate-press hover-lift ripple-click sparkle-hover group relative inline-full min-block-14 px-12 py-4 bg-white text-slate-950 radius-btn font-black text-lg flex items-center justify-center gap-3 transition duration-200 ease-emphasized hover:shadow-[0_20px_50px_rgba(255,255,255,0.3)] hover:scale-[1.02] overflow-hidden">
                 <span class="absolute inset-0 bg-linear-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-400 ease-in-out"></span>
                 <span class="relative flex items-center gap-3">
-                  {{ i18n.t('page.contact.form.submit') }}
+                  {{ i18n.t('contact:contact.form.submit') }}
                   {{ icon.icon('arrow-right', 'inline-5 block-5 icon-transition group-hover:translate-x-1', size='md') }}
                 </span>
               </button>
@@ -69,8 +69,8 @@
                 {{ icon.icon('clock', 'inline-7 block-7', size='xl') }}
               </div>
               <div>
-                <h3 class="text-xl font-black text-white mbe-2 group-hover:text-emerald-200 transition-colors duration-200">{{ i18n.t('page.contact.info.response_time.title') }}</h3>
-                <p class="text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors duration-200">{{ i18n.t('page.contact.info.response_time.description') }}</p>
+                <h3 class="text-xl font-black text-white mbe-2 group-hover:text-emerald-200 transition-colors duration-200">{{ i18n.t('contact:contact.info.response_time.title') }}</h3>
+                <p class="text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors duration-200">{{ i18n.t('contact:contact.info.response_time.description') }}</p>
               </div>
             </div>
           </div>
@@ -82,8 +82,8 @@
                 {{ icon.icon('sun', 'inline-7 block-7', size='xl') }}
               </div>
               <div>
-                <h3 class="text-xl font-black text-white mbe-2 group-hover:text-violet-200 transition-colors duration-200">{{ i18n.t('page.contact.info.working_hours.title') }}</h3>
-                <p class="text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors duration-200">{{ i18n.t('page.contact.info.working_hours.description') }}</p>
+                <h3 class="text-xl font-black text-white mbe-2 group-hover:text-violet-200 transition-colors duration-200">{{ i18n.t('contact:contact.info.working_hours.title') }}</h3>
+                <p class="text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors duration-200">{{ i18n.t('contact:contact.info.working_hours.description') }}</p>
               </div>
             </div>
           </div>
@@ -95,8 +95,8 @@
                 {{ icon.icon('support', 'inline-7 block-7', size='xl') }}
               </div>
               <div>
-                <h3 class="text-xl font-black text-white mbe-2 group-hover:text-fuchsia-200 transition-colors duration-200">{{ i18n.t('page.contact.info.support.title') }}</h3>
-                <p class="text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors duration-200">{{ i18n.t('page.contact.info.support.description') }}</p>
+                <h3 class="text-xl font-black text-white mbe-2 group-hover:text-fuchsia-200 transition-colors duration-200">{{ i18n.t('contact:contact.info.support.title') }}</h3>
+                <p class="text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors duration-200">{{ i18n.t('contact:contact.info.support.description') }}</p>
               </div>
             </div>
           </div>
@@ -108,10 +108,10 @@
   <section class="pbs-40 pbe-40 px-6 relative">
     <div class="max-inline-6xl mx-auto text-center">
       <h2 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white mbe-6">
-        {{ i18n.t('page.contact.social_title') }}
+        {{ i18n.t('contact:contact.social_title') }}
       </h2>
       <p class="text-slate-400 text-lg mbe-12">
-        {{ i18n.t('page.contact.social_subtitle') }}
+        {{ i18n.t('contact:contact.social_subtitle') }}
       </p>
 
       <div class="inline-flex items-center gap-4">
