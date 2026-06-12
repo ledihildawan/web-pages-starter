@@ -404,6 +404,9 @@ Ideal for Lighthouse audits, mobile testing, or sharing WIP via a public URL.
 
 1. **lint-staged** — runs `biome check --no-errors-on-unmatched --write` on staged files
 2. **typecheck** — runs `bunx tsc --noEmit`
+3. **test** — runs `bun run test` via rstest
+
+All three must pass for the commit to succeed.
 
 Config: `.husky/pre-commit`, `.lintstagedrc`.
 
@@ -413,7 +416,7 @@ Config: `.husky/pre-commit`, `.lintstagedrc`.
 - No deprecated or backward-compat code — remove entirely
 - Import paths: relative `../../../../generated/*` in source (jiti compatibility); `@generated/*` in `tsconfig.json` paths and `rsbuild.resolve.alias` for bundling
 - Biome for lint + format (not Prettier) — config in `biome.json`
-- Pre-commit chain: Husky + lint-staged (Biome) + typecheck (`&&`)
+- Pre-commit chain: Husky + lint-staged (Biome) + typecheck + test (`&&`)
 
 ## CI/CD
 
@@ -428,8 +431,9 @@ Runs on every push and PR to `main`:
 3. **install** — `bun install --frozen-lockfile`
 4. **biome ci** — lint + format check (no writes)
 5. **typecheck** — `bun run typecheck`
-6. **build** — `bun run build` with `NODE_ENV=production`, `BASE_PATH=/web-pages-starter/`, `SITE_URL=https://ledihildawan.github.io/web-pages-starter`
-7. **upload artifact** — uploads `dist/` for the deploy workflow
+6. **test** — `bun run test` (rstest)
+7. **build** — `bun run build` with `NODE_ENV=production`, `BASE_PATH=/web-pages-starter/`, `SITE_URL=https://ledihildawan.github.io/web-pages-starter`
+8. **upload artifact** — uploads `dist/` for the deploy workflow
 
 ### Deploy (`deploy.yml`)
 
@@ -444,11 +448,46 @@ Runs after CI succeeds on `main`:
 
 [Rstest](https://rstest.dev) + `happy-dom` + Testing Library.
 
+### Commands
+
 ```bash
-bun test
+bun run test                                          # run all tests
+bun run test -- --watch                               # watch mode
+bun run test -- --coverage                            # with coverage report (terminal + html + lcov)
+bun run test -- --coverage --coverage.include "src/scripts/lib/i18n/**"  # coverage for specific paths
 ```
 
-Tests live in `tests/`. The setup extends `expect` with `@testing-library/jest-dom` matchers.
+### Structure
+
+```
+tests/
+├── rstest.setup.ts          # extends expect with jest-dom matchers
+├── tsconfig.json            # test-specific TS config
+├── dom.test.ts              # DOM rendering sanity check
+└── i18n/
+    ├── helpers.test.ts      # locale lookup, fallback, direction, currency
+    ├── formatters.test.ts   # formatNumber, formatCurrency, formatDate, formatBytes, cardinal, ordinal
+    └── home-data.test.ts    # home page structure + locale key parity (id-ID ↔ en-US)
+```
+
+### Coverage
+
+Coverage output goes to `coverage/` (gitignored). Open `coverage/index.html` in a browser for the full HTML report.
+
+| File | Stmts | Notes |
+| --- | --- | --- |
+| `helpers.ts` | ~85% | Locale lookup, fallback chain, direction, currency |
+| `formatters.ts` | ~38% | Core formatters covered; Arabic/Chinese cardinals, scientific, abbreviated need more tests |
+| Data files | 100% | All locale data fully imported |
+| `runtime.ts`, `template.ts`, `store.ts` | 0% | Browser-only; not testable without DOM integration |
+
+### CLI
+
+Run tests interactively via `bun run cli` → **Test** menu:
+
+- **Run tests** — standard test run
+- **Run with coverage** — full coverage report (text + html + lcov)
+- **Watch mode** — rerun on file changes
 
 ## Commands
 
@@ -460,8 +499,8 @@ Tests live in `tests/`. The setup extends `expect` with `@testing-library/jest-d
 | `bun run serve` | Serve the production build locally |
 | `bun run clean:cache` | Remove `node_modules/.cache`, `.cache`, `dist` |
 | `bun run typecheck` | Run `tsc --noEmit` type checking |
-| `bun run test` | Run tests via `rstest` |
-| `bun run cli` | Interactive menu for all tools |
+| `bun run test` | Run tests via `rstest`; supports `--coverage`, `--watch` flags |
+| `bun run cli` | Interactive menu for all tools (includes Test with coverage option) |
 
 Direct tool access:
 
