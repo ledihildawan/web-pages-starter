@@ -11,7 +11,6 @@ import {
   readJSON5,
 } from '../../utils/json5';
 import type { DateValue, JsonData } from '../../utils/types';
-import type { CardinalOptions } from './types';
 import type { CurrencyCode } from './currencies';
 import { LOCALES, type LocaleCode, type LocaleConfig } from './data';
 import {
@@ -43,8 +42,12 @@ import {
   singular,
   toNativeDigits,
 } from './index';
-
-import type { FormatOptions, I18nItem, TemplateParams } from './types';
+import type {
+  CardinalOptions,
+  FormatOptions,
+  I18nItem,
+  TemplateParams,
+} from './types';
 
 interface TemplateFormatOptions extends FormatOptions {
   raw?: boolean;
@@ -418,11 +421,7 @@ const createI18nObject = (
       const { raw, className, ...formatOpts } = options ?? {};
       const formatted = formatCardinal(value, formatOpts as CardinalOptions);
       if (raw) return formatted;
-      return renderHtml(
-        formatted,
-        { 'format-cardinal': value },
-        className,
-      );
+      return renderHtml(formatted, { 'format-cardinal': value }, className);
     },
 
     formatScientific: (
