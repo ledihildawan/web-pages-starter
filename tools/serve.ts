@@ -3,6 +3,7 @@ import path from 'node:path';
 import process from 'node:process';
 import '../src/configs/env';
 import { PATHS } from '../src/configs/paths';
+import { ROOT_PAGE } from '../src/configs/site';
 import {
   createStaticApp,
   getPageNames,
@@ -38,7 +39,10 @@ createServer({ fetch: app.fetch, port: PORT, hostname: HOST }, () => {
     'offline',
   ];
   log.info(
-    `  Pages: ${pageNames.filter((n) => !ERROR_PAGES.includes(n)).join(', ')}\n`,
+    `  Pages: ${pageNames
+      .filter((n) => !ERROR_PAGES.includes(n))
+      .map((n) => (n === ROOT_PAGE ? `${n} (index)` : n))
+      .join(', ')}\n`,
   );
 });
 

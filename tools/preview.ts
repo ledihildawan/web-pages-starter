@@ -6,6 +6,7 @@ import type { serve } from '@hono/node-server';
 import ngrok from '@ngrok/ngrok';
 import inquirer from 'inquirer';
 import { PATHS } from '../src/configs/paths';
+import { ROOT_PAGE } from '../src/configs/site';
 import { createStaticApp } from './shared/hono-server';
 import { log } from './shared/logger';
 import {
@@ -248,6 +249,7 @@ const main = async () => {
               'offline',
             ].includes(n),
         )
+        .map((n) => (n === ROOT_PAGE ? `${n} (index)` : n))
         .join(', ')}\n`,
     );
 

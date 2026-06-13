@@ -57,7 +57,7 @@ async function main() {
   const currentFolder = getCurrentRootFolder();
 
   logBox('Sync Root Page', {
-    'ROOT_PAGE in config': currentRootPage,
+    'ROOT_PAGE in config': `${currentRootPage} (index)`,
     'Current folder': currentFolder,
   });
 
