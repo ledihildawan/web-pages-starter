@@ -1,9 +1,5 @@
 # Agents
 
-`AGENTS.md` is read by AI agents before working on this project. It provides context, rules, and instructions for consistent, accurate, and efficient work.
-
----
-
 ## Project Overview
 
 **Web Pages Starter** — A multi-page SSG starter for content sites with built-in i18n support. Built with Rsbuild + Nunjucks + Alpine.js + Tailwind CSS v4 + i18next. Ships **87 BCP 47 locales** out of the box with runtime language switching, locale-aware formatting, RTL support, and regional pricing.
