@@ -1,7 +1,7 @@
 {
   "heading": "403",
-  "subheading": "Access Denied",
-  "description": "You do not have permission to access this page or resource.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Приступ одбијен",
+  "description": "Немате дозволу за приступ овој страници или ресурсу.",
+  "button_text": "На почетну",
+  "or_try": "Или покушајте:"
 }

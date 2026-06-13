@@ -1,7 +1,7 @@
 {
   "heading": "401",
-  "subheading": "Authentication Required",
-  "description": "You need to sign in or authenticate to access this page.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "प्रमाणीकरण आवश्यक",
+  "description": "हे पृष्ठ ऍक्सेस करण्यासाठी तुम्हाला साइन इन करावे लागेल किंवा प्रमाणीकरण करावे लागेल.",
+  "button_text": "मुख्य पृष्ठावर परत जा",
+  "or_try": "किंवा प्रयत्न करा:"
 }

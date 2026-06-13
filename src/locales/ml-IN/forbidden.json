@@ -1,7 +1,7 @@
 {
   "heading": "403",
-  "subheading": "Access Denied",
-  "description": "You do not have permission to access this page or resource.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "ആക്സസ് നിഷേധിച്ചു",
+  "description": "ഈ പേജോ റിസോഴ്‌സോ ആക്സസ് ചെയ്യാൻ നിങ്ങൾക്ക് അനുമതിയില്ല.",
+  "button_text": "ഹോമിലേക്ക് മടങ്ങുക",
+  "or_try": "അല്ലെങ്കിൽ ശ്രമിക്കുക:"
 }

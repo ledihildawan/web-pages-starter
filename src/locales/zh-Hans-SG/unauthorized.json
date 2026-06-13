@@ -1,7 +1,7 @@
 {
   "heading": "401",
-  "subheading": "Authentication Required",
-  "description": "You need to sign in or authenticate to access this page.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "需要身份验证",
+  "description": "您需要登录或进行身份验证才能访问此页面。",
+  "button_text": "返回首页",
+  "or_try": "或尝试："
 }

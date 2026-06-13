@@ -1,7 +1,7 @@
 {
   "heading": "401",
-  "subheading": "Authentication Required",
-  "description": "You need to sign in or authenticate to access this page.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Wymagane uwierzytelnienie",
+  "description": "Aby uzyskać dostęp do tej strony, musisz się zalogować lub uwierzytelnić.",
+  "button_text": "Wróć na stronę główną",
+  "or_try": "Lub wypróbuj:"
 }

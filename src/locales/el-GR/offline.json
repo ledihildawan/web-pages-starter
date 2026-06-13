@@ -1,8 +1,8 @@
 {
-  "heading": "You're Offline",
-  "subheading": "No Connection",
-  "description": "You are currently not connected to the internet. Some pages may still be available from cache.",
-  "button_text": "Try Again",
-  "hint": "Check your internet connection and try reloading the page.",
-  "cached_pages": "Cached pages:"
+  "heading": "Είστε εκτός σύνδεσης",
+  "subheading": "Χωρίς σύνδεση",
+  "description": "Αυτή τη στιγμή δεν είστε συνδεδεμένοι στο διαδίκτυο. Ορισμένες σελίδες ενδέχεται να εξακολουθούν να είναι διαθέσιμες από τη μνήμη cache.",
+  "button_text": "Δοκιμάστε ξανά",
+  "hint": "Ελέγξτε τη σύνδεσή σας στο διαδίκτυο και δοκιμάστε να φορτώσετε ξανά τη σελίδα.",
+  "cached_pages": "Σελίδες στη μνήμη cache:"
 }

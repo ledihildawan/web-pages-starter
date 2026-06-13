@@ -1,8 +1,8 @@
 {
-  "heading": "You're Offline",
-  "subheading": "No Connection",
-  "description": "You are currently not connected to the internet. Some pages may still be available from cache.",
-  "button_text": "Try Again",
-  "hint": "Check your internet connection and try reloading the page.",
-  "cached_pages": "Cached pages:"
+  "heading": "أنت غير متصل",
+  "subheading": "لا يوجد اتصال",
+  "description": "أنت غير متصل بالإنترنت حاليًا. قد تكون بعض الصفحات متاحة من ذاكرة التخزين المؤقت.",
+  "button_text": "حاول مرة أخرى",
+  "hint": "تحقق من اتصالك بالإنترنت وحاول إعادة تحميل الصفحة.",
+  "cached_pages": "الصفحات المخزنة مؤقتًا:"
 }

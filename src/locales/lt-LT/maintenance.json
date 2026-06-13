@@ -1,7 +1,7 @@
 {
   "heading": "503",
-  "subheading": "Service Unavailable",
-  "description": "The service is temporarily unavailable due to scheduled maintenance. Please try again in a moment.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Tarnyba nepasiekiama",
+  "description": "Dėl suplanuotos priežiūros tarnyba laikinai nepasiekiama. Prašome bandyti dar kartą po akimirkos.",
+  "button_text": "Grįžti į pagrindinį",
+  "or_try": "Arba išbandykite:"
 }

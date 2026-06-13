@@ -1,7 +1,7 @@
 {
   "heading": "403",
-  "subheading": "Access Denied",
-  "description": "You do not have permission to access this page or resource.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "ปฏิเสธการเข้าถึง",
+  "description": "คุณไม่มีสิทธิ์เข้าถึงหน้าหรือทรัพยากรนี้",
+  "button_text": "กลับหน้าแรก",
+  "or_try": "หรือลอง:"
 }

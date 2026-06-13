@@ -1,7 +1,7 @@
 {
   "heading": "500",
-  "subheading": "Server Error",
-  "description": "An unexpected error occurred on the server. Our team has been notified and is working on it.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "സെർവർ പിശക്",
+  "description": "സെർവറിൽ അപ്രതീക്ഷിതമായ ഒരു പിശക് സംഭവിച്ചു. ഞങ്ങളുടെ ടീമിനെ അറിയിച്ചിട്ടുണ്ട്, അവർ അതിൽ പ്രവർത്തിക്കുന്നു.",
+  "button_text": "ഹോമിലേക്ക് മടങ്ങുക",
+  "or_try": "അല്ലെങ്കിൽ ശ്രമിക്കുക:"
 }

@@ -1,7 +1,7 @@
 {
   "heading": "401",
-  "subheading": "Authentication Required",
-  "description": "You need to sign in or authenticate to access this page.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "인증 필요",
+  "description": "이 페이지에 접근하려면 로그인 또는 인증이 필요합니다.",
+  "button_text": "홈으로",
+  "or_try": "또는 시도해 보세요:"
 }

@@ -1,8 +1,8 @@
 {
-  "heading": "You're Offline",
-  "subheading": "No Connection",
-  "description": "You are currently not connected to the internet. Some pages may still be available from cache.",
-  "button_text": "Try Again",
-  "hint": "Check your internet connection and try reloading the page.",
-  "cached_pages": "Cached pages:"
+  "heading": "Шумо Пайваст Шуда Нестед",
+  "subheading": "Пайваст нест",
+  "description": "Шумо ҳоло ба интернет пайваст нестанд. Баъзе саҳифаҳо метавонанд аз кэш ҳанӯз дастрас бошанд.",
+  "button_text": "Бори дигар кӯшиш кунед",
+  "hint": "Пайвасти интернети худро санҷед ва саҳифаро аз нав боркунӣ кунед.",
+  "cached_pages": "Саҳифаҳои кэшшуда:"
 }

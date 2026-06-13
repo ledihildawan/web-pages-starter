@@ -1,8 +1,8 @@
 {
-  "heading": "You're Offline",
-  "subheading": "No Connection",
-  "description": "You are currently not connected to the internet. Some pages may still be available from cache.",
-  "button_text": "Try Again",
-  "hint": "Check your internet connection and try reloading the page.",
-  "cached_pages": "Cached pages:"
+  "heading": "თქვენ გათიშული ხართ",
+  "subheading": "კავშირი არ არის",
+  "description": "ამჟამად ინტერნეტთან არ ხართ დაკავშირებული. ზოგიერთი გვერდი ჯერ კიდევ შეიძლება ხელმისაწვდომი იყოს ქეშიდან.",
+  "button_text": "კიდევ სცადეთ",
+  "hint": "შეამოწმეთ ინტერნეტ კავშირი და სცადეთ გვერდის თავიდან ჩატვირთვა.",
+  "cached_pages": "ქეშირებული გვერდები:"
 }

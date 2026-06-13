@@ -1,7 +1,7 @@
 {
   "heading": "401",
-  "subheading": "Authentication Required",
-  "description": "You need to sign in or authenticate to access this page.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Баталгаажуулалт шаардлагатай",
+  "description": "Энэ хуудсанд нэвтрэхийн тулд нэвтэрч орох эсвэл баталгаажуулах хэрэгтэй.",
+  "button_text": "Нүүр хуудас руу буцах",
+  "or_try": "Эсвэл туршиж үзээрэй:"
 }

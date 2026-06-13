@@ -1,7 +1,7 @@
 {
   "heading": "500",
-  "subheading": "Server Error",
-  "description": "An unexpected error occurred on the server. Our team has been notified and is working on it.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Serverfout",
+  "description": "Er is een onverwachte fout opgetreden op de server. Ons team is op de hoogte gesteld en werkt aan een oplossing.",
+  "button_text": "Terug naar home",
+  "or_try": "Of probeer:"
 }

@@ -1,7 +1,7 @@
 {
   "heading": "401",
-  "subheading": "Authentication Required",
-  "description": "You need to sign in or authenticate to access this page.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Todennus vaaditaan",
+  "description": "Sinun on kirjauduttava sisään tai todennettava, jotta voit käyttää tätä sivua.",
+  "button_text": "Takaisin etusivulle",
+  "or_try": "Tai kokeile:"
 }

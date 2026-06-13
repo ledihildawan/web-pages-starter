@@ -1,8 +1,8 @@
 {
-  "heading": "You're Offline",
-  "subheading": "No Connection",
-  "description": "You are currently not connected to the internet. Some pages may still be available from cache.",
-  "button_text": "Try Again",
-  "hint": "Check your internet connection and try reloading the page.",
-  "cached_pages": "Cached pages:"
+  "heading": "Сіз желіденсіз",
+  "subheading": "Қосылым жоқ",
+  "description": "Сіз қазіргі уақытта интернетке қосылмағансыз. Кейбір беттер кэштен әлі қолжетімді болуы мүмкін.",
+  "button_text": "Қайта көріңіз",
+  "hint": "Интернет қосылымыңызды тексеріп, бетті қайта жүктеп көріңіз.",
+  "cached_pages": "Кэштелген беттер:"
 }

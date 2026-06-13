@@ -1,8 +1,8 @@
 {
-  "heading": "You're Offline",
-  "subheading": "No Connection",
-  "description": "You are currently not connected to the internet. Some pages may still be available from cache.",
-  "button_text": "Try Again",
-  "hint": "Check your internet connection and try reloading the page.",
-  "cached_pages": "Cached pages:"
+  "heading": "Ești offline",
+  "subheading": "Fără conexiune",
+  "description": "În prezent nu ești conectat la internet. Unele pagini ar putea fi încă disponibile din memoria cache.",
+  "button_text": "Încearcă din nou",
+  "hint": "Verifică conexiunea la internet și încearcă să reîncarci pagina.",
+  "cached_pages": "Pagini în cache:"
 }

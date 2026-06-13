@@ -1,7 +1,7 @@
 {
   "heading": "401",
-  "subheading": "Authentication Required",
-  "description": "You need to sign in or authenticate to access this page.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Reikia prisijungti",
+  "description": "Norėdami pasiekti šį puslapį, turite prisijungti arba patvirtinti tapatybę.",
+  "button_text": "Grįžti į pagrindinį",
+  "or_try": "Arba išbandykite:"
 }

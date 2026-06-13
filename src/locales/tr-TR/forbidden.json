@@ -1,7 +1,7 @@
 {
   "heading": "403",
-  "subheading": "Access Denied",
-  "description": "You do not have permission to access this page or resource.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Erişim Reddedildi",
+  "description": "Bu sayfaya veya kaynağa erişim izniniz yok.",
+  "button_text": "Ana Sayfaya Dön",
+  "or_try": "Veya deneyin:"
 }

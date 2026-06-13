@@ -1,7 +1,7 @@
 {
   "heading": "403",
-  "subheading": "Access Denied",
-  "description": "You do not have permission to access this page or resource.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Zugriff verweigert",
+  "description": "Sie haben keine Berechtigung, auf diese Seite oder Ressource zuzugreifen.",
+  "button_text": "Zurück zur Startseite",
+  "or_try": "Oder versuchen Sie:"
 }

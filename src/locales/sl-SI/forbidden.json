@@ -1,7 +1,7 @@
 {
   "heading": "403",
-  "subheading": "Access Denied",
-  "description": "You do not have permission to access this page or resource.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Dostop zavrnjen",
+  "description": "Nimate dovoljenja za dostop do te strani ali vira.",
+  "button_text": "Nazaj na domačo stran",
+  "or_try": "Ali poskusite:"
 }

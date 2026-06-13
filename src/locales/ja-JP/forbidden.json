@@ -1,7 +1,7 @@
 {
   "heading": "403",
-  "subheading": "Access Denied",
-  "description": "You do not have permission to access this page or resource.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "アクセスが拒否されました",
+  "description": "このページまたはリソースにアクセスする権限がありません。",
+  "button_text": "ホームに戻る",
+  "or_try": "またはこちら："
 }

@@ -1,7 +1,7 @@
 {
   "heading": "500",
-  "subheading": "Server Error",
-  "description": "An unexpected error occurred on the server. Our team has been notified and is working on it.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Palvelinvirhe",
+  "description": "Palvelimella tapahtui odottamaton virhe. Tiimimme on saanut ilmoituksen ja työskentelee asian parissa.",
+  "button_text": "Takaisin etusivulle",
+  "or_try": "Tai kokeile:"
 }

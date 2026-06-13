@@ -1,8 +1,8 @@
 {
-  "heading": "You're Offline",
-  "subheading": "No Connection",
-  "description": "You are currently not connected to the internet. Some pages may still be available from cache.",
-  "button_text": "Try Again",
-  "hint": "Check your internet connection and try reloading the page.",
-  "cached_pages": "Cached pages:"
+  "heading": "U bent offline",
+  "subheading": "Geen verbinding",
+  "description": "U bent momenteel niet verbonden met internet. Sommige pagina's zijn mogelijk nog beschikbaar via de cache.",
+  "button_text": "Opnieuw proberen",
+  "hint": "Controleer uw internetverbinding en probeer de pagina opnieuw te laden.",
+  "cached_pages": "Pagina's in cache:"
 }

@@ -1,7 +1,7 @@
 {
   "heading": "503",
-  "subheading": "Service Unavailable",
-  "description": "The service is temporarily unavailable due to scheduled maintenance. Please try again in a moment.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "సేవ అందుబాటులో లేదు",
+  "description": "షెడ్యూల్ చేయబడిన నిర్వహణ కారణంగా సేవ తాత్కాలికంగా అందుబాటులో లేదు. దయచేసి కొద్ది సేపట్లో మళ్లీ ప్రయత్నించండి.",
+  "button_text": "హోమ్‌కు తిరిగి వెళ్లండి",
+  "or_try": "లేదా ప్రయత్నించండి:"
 }

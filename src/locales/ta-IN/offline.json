@@ -1,8 +1,8 @@
 {
-  "heading": "You're Offline",
-  "subheading": "No Connection",
-  "description": "You are currently not connected to the internet. Some pages may still be available from cache.",
-  "button_text": "Try Again",
-  "hint": "Check your internet connection and try reloading the page.",
-  "cached_pages": "Cached pages:"
+  "heading": "நீங்கள் இணைப்பில் இல்லை",
+  "subheading": "இணைப்பு இல்லை",
+  "description": "நீங்கள் தற்போது இணையத்துடன் இணைக்கப்படவில்லை. தற்காலிக சேமிப்பிலிருந்து சில பக்கங்கள் இன்னும் கிடைக்கக்கூடும்.",
+  "button_text": "மீண்டும் முயற்சிக்கவும்",
+  "hint": "உங்கள் இணைய இணைப்பைச் சரிபார்த்து பக்கத்தை மீண்டும் ஏற்ற முயற்சிக்கவும்.",
+  "cached_pages": "தற்காலிக சேமிப்பு பக்கங்கள்:"
 }

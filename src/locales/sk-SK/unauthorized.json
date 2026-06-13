@@ -1,7 +1,7 @@
 {
   "heading": "401",
-  "subheading": "Authentication Required",
-  "description": "You need to sign in or authenticate to access this page.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Vyžaduje sa prihlásenie",
+  "description": "Pre prístup k tejto stránke sa musíte prihlásiť alebo overiť.",
+  "button_text": "Späť na domov",
+  "or_try": "Alebo skúste:"
 }

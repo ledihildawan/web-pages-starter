@@ -1,7 +1,7 @@
 {
   "heading": "403",
-  "subheading": "Access Denied",
-  "description": "You do not have permission to access this page or resource.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Доступ заборонено",
+  "description": "Ви не маєте дозволу на доступ до цієї сторінки або ресурсу.",
+  "button_text": "На головну",
+  "or_try": "Або спробуйте:"
 }

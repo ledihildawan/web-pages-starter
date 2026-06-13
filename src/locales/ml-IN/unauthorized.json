@@ -1,7 +1,7 @@
 {
   "heading": "401",
-  "subheading": "Authentication Required",
-  "description": "You need to sign in or authenticate to access this page.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "പ്രാമാണീകരണം ആവശ്യമാണ്",
+  "description": "ഈ പേജ് ആക്സസ് ചെയ്യാൻ നിങ്ങൾ സൈൻ ഇൻ ചെയ്യണം അല്ലെങ്കിൽ പ്രാമാണീകരണം നടത്തണം.",
+  "button_text": "ഹോമിലേക്ക് മടങ്ങുക",
+  "or_try": "അല്ലെങ്കിൽ ശ്രമിക്കുക:"
 }

@@ -1,7 +1,7 @@
 {
   "heading": "401",
-  "subheading": "Authentication Required",
-  "description": "You need to sign in or authenticate to access this page.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Hitelesítés szükséges",
+  "description": "Az oldal eléréséhez be kell jelentkeznie vagy hitelesítenie kell magát.",
+  "button_text": "Vissza a kezdőlapra",
+  "or_try": "Vagy próbálja ki:"
 }

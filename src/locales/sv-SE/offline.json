@@ -1,8 +1,8 @@
 {
-  "heading": "You're Offline",
-  "subheading": "No Connection",
-  "description": "You are currently not connected to the internet. Some pages may still be available from cache.",
-  "button_text": "Try Again",
-  "hint": "Check your internet connection and try reloading the page.",
-  "cached_pages": "Cached pages:"
+  "heading": "Du är frånkopplad",
+  "subheading": "Ingen anslutning",
+  "description": "Du är för närvarande inte ansluten till internet. Vissa sidor kanske fortfarande är tillgängliga från cachen.",
+  "button_text": "Försök igen",
+  "hint": "Kontrollera din internetanslutning och försök läsa in sidan igen.",
+  "cached_pages": "Cachade sidor:"
 }

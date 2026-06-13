@@ -1,8 +1,8 @@
 {
-  "heading": "You're Offline",
-  "subheading": "No Connection",
-  "description": "You are currently not connected to the internet. Some pages may still be available from cache.",
-  "button_text": "Try Again",
-  "hint": "Check your internet connection and try reloading the page.",
-  "cached_pages": "Cached pages:"
+  "heading": "നിങ്ങൾ ഓഫ്‌ലൈനാണ്",
+  "subheading": "കണക്ഷൻ ഇല്ല",
+  "description": "നിങ്ങൾ നിലവിൽ ഇന്റർനെറ്റുമായി ബന്ധിപ്പിച്ചിട്ടില്ല. കാഷെയിൽ നിന്ന് ചില പേജുകൾ ഇപ്പോഴും ലഭ്യമായിരിക്കാം.",
+  "button_text": "വീണ്ടും ശ്രമിക്കുക",
+  "hint": "നിങ്ങളുടെ ഇന്റർനെറ്റ് കണക്ഷൻ പരിശോധിച്ച് പേജ് വീണ്ടും ലോഡ് ചെയ്യാൻ ശ്രമിക്കുക.",
+  "cached_pages": "കാഷെ ചെയ്ത പേജുകൾ:"
 }

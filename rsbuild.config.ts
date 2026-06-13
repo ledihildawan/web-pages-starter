@@ -3,8 +3,9 @@ import path from 'node:path';
 import { defineConfig, type RsbuildPlugin } from '@rsbuild/core';
 import { pluginImageCompress } from '@rsbuild/plugin-image-compress';
 import { minify } from 'html-minifier-terser';
+import { i18nConfig } from './src/configs/i18n';
+import { getRootPageSlug, getSystemPageSlug } from './src/configs/pages';
 import { PATHS } from './src/configs/paths';
-import { ROOT_PAGE } from './src/configs/site';
 import { LOCALE_CODES } from './src/scripts/lib/i18n/data';
 import { LOCALE_STORAGE_KEY } from './src/scripts/lib/i18n/index';
 import { createTemplateParams } from './src/scripts/lib/i18n/template';
@@ -35,7 +36,8 @@ const pluginRootPageAsIndex = (): RsbuildPlugin => ({
   setup(api) {
     api.onAfterBuild(() => {
       const distDir = api.context.distPath;
-      const src = path.join(distDir, `${ROOT_PAGE}.html`);
+      const rootSlug = getRootPageSlug(i18nConfig.defaultLocale);
+      const src = path.join(distDir, `${rootSlug}.html`);
       const dest = path.join(distDir, 'index.html');
       if (fs.existsSync(src)) {
         fs.renameSync(src, dest);
@@ -80,10 +82,13 @@ export default defineConfig({
     strictPort: true,
     historyApiFallback: {
       rewrites: [
-        { from: /^\/$/, to: `/${ROOT_PAGE}.html` },
+        {
+          from: /^\/$/,
+          to: `/${getRootPageSlug(i18nConfig.defaultLocale)}.html`,
+        },
         {
           from: /^\/(?!locales\/|assets\/|fonts\/|images\/|favicon\.svg$|favicon\.ico$|manifest\.json$|sw\.js$|robots\.txt$|sitemap\.xml$|.*\.[a-z0-9]+$)/,
-          to: '/not-found.html',
+          to: `/${getSystemPageSlug('not-found', i18nConfig.defaultLocale)}.html`,
         },
       ],
       disableDotRule: true,

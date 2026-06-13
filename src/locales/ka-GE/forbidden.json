@@ -1,7 +1,7 @@
 {
   "heading": "403",
-  "subheading": "Access Denied",
-  "description": "You do not have permission to access this page or resource.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "წვდომა უარყოფილია",
+  "description": "არ გაქვთ ამ გვერდზე ან რესურსზე წვდომის უფლება.",
+  "button_text": "მთავარზე დაბრუნება",
+  "or_try": "ან სცადეთ:"
 }

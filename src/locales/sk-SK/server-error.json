@@ -1,7 +1,7 @@
 {
   "heading": "500",
-  "subheading": "Server Error",
-  "description": "An unexpected error occurred on the server. Our team has been notified and is working on it.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Chyba servera",
+  "description": "Na serveri sa vyskytla neočakávaná chyba. Náš tím bol informovaný a pracuje na jej odstránení.",
+  "button_text": "Späť na domov",
+  "or_try": "Alebo skúste:"
 }

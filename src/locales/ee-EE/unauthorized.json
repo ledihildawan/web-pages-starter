@@ -1,7 +1,7 @@
 {
   "heading": "401",
-  "subheading": "Authentication Required",
-  "description": "You need to sign in or authenticate to access this page.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Vajalik on autentimine",
+  "description": "Sellele lehele pääsemiseks peate sisse logima või end autentima.",
+  "button_text": "Tagasi avalehele",
+  "or_try": "Või proovi:"
 }

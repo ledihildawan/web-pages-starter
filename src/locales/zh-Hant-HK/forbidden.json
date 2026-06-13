@@ -1,7 +1,7 @@
 {
   "heading": "403",
-  "subheading": "Access Denied",
-  "description": "You do not have permission to access this page or resource.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "存取被拒絕",
+  "description": "您沒有權限存取此頁面或資源。",
+  "button_text": "返回首頁",
+  "or_try": "或嘗試："
 }

@@ -1,8 +1,8 @@
 {
-  "heading": "You're Offline",
-  "subheading": "No Connection",
-  "description": "You are currently not connected to the internet. Some pages may still be available from cache.",
-  "button_text": "Try Again",
-  "hint": "Check your internet connection and try reloading the page.",
-  "cached_pages": "Cached pages:"
+  "heading": "તમે ઑફલાઇન છો",
+  "subheading": "કોઈ કનેક્શન નથી",
+  "description": "તમે હાલમાં ઇન્ટરનેટ સાથે જોડાયેલા નથી. કેશમાંથી કેટલાક પૃષ્ઠો હજુ પણ ઉપલબ્ધ હોઈ શકે છે.",
+  "button_text": "ફરી પ્રયાસ કરો",
+  "hint": "તમારું ઇન્ટરનેટ કનેક્શન તપાસો અને પૃષ્ઠને ફરીથી લોડ કરવાનો પ્રયાસ કરો.",
+  "cached_pages": "કેશ કરેલા પૃષ્ઠો:"
 }

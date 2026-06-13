@@ -6,82 +6,62 @@ import { LOCALE_CODES } from '../src/scripts/lib/i18n/data';
 import { log, logBox } from './shared/logger';
 
 const LOCALES_ROOT = path.join(PATHS.ROOT, PATHS.LOCALES);
-
-function createLocale(
-  targetLang: string,
-  sourceDir: string,
-  targetDir: string,
-): number {
-  let created = 0;
-
-  if (!fs.existsSync(targetDir)) {
-    fs.mkdirSync(targetDir, { recursive: true });
-    log.info(`  Created: ${targetLang}/`);
-    created++;
-  }
-
-  const files = fs.readdirSync(sourceDir);
-  for (const file of files) {
-    const sourcePath = path.join(sourceDir, file);
-    if (file.endsWith('.json')) {
-      const targetPath = path.join(targetDir, file);
-      if (!fs.existsSync(targetPath)) {
-        fs.copyFileSync(sourcePath, targetPath);
-        log.info(`    ${file}`);
-        created++;
-      }
-    }
-  }
-
-  return created;
-}
+const DEFAULT_LOCALE = i18nConfig.defaultLocale;
+const sourceDir = path.join(LOCALES_ROOT, DEFAULT_LOCALE);
 
 try {
-  logBox('Sync Locale Files', {
-    Configured: LOCALE_CODES.length,
-    Default: i18nConfig.defaultLocale,
-  });
-
-  const existingLocales = fs.existsSync(LOCALES_ROOT)
-    ? fs.readdirSync(LOCALES_ROOT).filter((f) => {
-        const stat = fs.statSync(path.join(LOCALES_ROOT, f));
-        return stat.isDirectory() && !f.startsWith('.');
-      })
-    : [];
-
-  const missingLocales = LOCALE_CODES.filter(
-    (code) => !existingLocales.includes(code),
-  );
-
-  if (missingLocales.length === 0) {
-    log.success('Done: All configured locales exist.\n');
-    process.exit(0);
-  }
-
-  const sourceDir = path.join(LOCALES_ROOT, i18nConfig.defaultLocale);
   if (!fs.existsSync(sourceDir)) {
     throw new Error(`Default locale directory not found: ${sourceDir}`);
   }
 
-  log.info(
-    `Creating ${missingLocales.length} missing locale(s) from ${i18nConfig.defaultLocale}:\n`,
-  );
+  const sourceFiles = fs
+    .readdirSync(sourceDir)
+    .filter((f) => f.endsWith('.json'));
 
-  let totalCreated = 0;
-  for (const lang of missingLocales) {
-    log.info(`${lang}:`);
-    totalCreated += createLocale(
-      lang,
-      sourceDir,
-      path.join(LOCALES_ROOT, lang),
-    );
-    log.info('');
+  logBox('Sync Locale Files', {
+    Configured: LOCALE_CODES.length,
+    Default: DEFAULT_LOCALE,
+    'Source files': sourceFiles.length,
+  });
+
+  let missingDirs = 0;
+  let missingFiles = 0;
+
+  for (const lang of LOCALE_CODES) {
+    if (lang === DEFAULT_LOCALE) continue;
+
+    const targetDir = path.join(LOCALES_ROOT, lang);
+    const isNewDir = !fs.existsSync(targetDir);
+
+    if (isNewDir) {
+      fs.mkdirSync(targetDir, { recursive: true });
+      missingDirs++;
+    }
+
+    for (const file of sourceFiles) {
+      const targetPath = path.join(targetDir, file);
+      if (!fs.existsSync(targetPath)) {
+        fs.copyFileSync(path.join(sourceDir, file), targetPath);
+        missingFiles++;
+      }
+    }
   }
 
-  logBox('Done', { Created: `${totalCreated} file(s)` });
-  log.info('\nNext steps:');
-  log.info('  1. Translate the new locale files');
-  log.info('  2. Run `bun run build` to update types\n');
+  if (missingDirs === 0 && missingFiles === 0) {
+    log.success('Done: All configured locales are up to date.\n');
+  } else {
+    logBox('Done', {
+      'New directories': missingDirs,
+      'Missing files synced': missingFiles,
+    });
+    if (missingDirs > 0) {
+      log.info('\nNext steps:');
+      log.info('  1. Translate the new locale files');
+      log.info('  2. Run `bun run build` to update types\n');
+    } else {
+      log.info('');
+    }
+  }
 } catch (error) {
   log.error(`Error: Sync failed — ${error}`);
   process.exit(1);

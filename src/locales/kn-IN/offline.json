@@ -1,8 +1,8 @@
 {
-  "heading": "You're Offline",
-  "subheading": "No Connection",
-  "description": "You are currently not connected to the internet. Some pages may still be available from cache.",
-  "button_text": "Try Again",
-  "hint": "Check your internet connection and try reloading the page.",
-  "cached_pages": "Cached pages:"
+  "heading": "ನೀವು ಆಫ್‌ಲೈನ್ ಆಗಿದ್ದೀರಿ",
+  "subheading": "ಸಂಪರ್ಕವಿಲ್ಲ",
+  "description": "ನೀವು ಪ್ರಸ್ತುತ ಇಂಟರ್ನೆಟ್‌ಗೆ ಸಂಪರ್ಕಿತರಾಗಿಲ್ಲ. ಕ್ಯಾಶೆಯಿಂದ ಕೆಲವು ಪುಟಗಳು ಇನ್ನೂ ಲಭ್ಯವಿರಬಹುದು.",
+  "button_text": "ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ",
+  "hint": "ನಿಮ್ಮ ಇಂಟರ್ನೆಟ್ ಸಂಪರ್ಕವನ್ನು ಪರಿಶೀಲಿಸಿ ಮತ್ತು ಪುಟವನ್ನು ಮರುಲೋಡ್ ಮಾಡಲು ಪ್ರಯತ್ನಿಸಿ.",
+  "cached_pages": "ಕ್ಯಾಶೆ ಮಾಡಿದ ಪುಟಗಳು:"
 }

@@ -1,7 +1,7 @@
 {
   "heading": "401",
-  "subheading": "Authentication Required",
-  "description": "You need to sign in or authenticate to access this page.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "ਪ੍ਰਮਾਣਿਕਤਾ ਲੋੜੀਂਦੀ ਹੈ",
+  "description": "ਇਸ ਸਫ਼ੇ ਤੱਕ ਪਹੁੰਚਣ ਲਈ ਤੁਹਾਨੂੰ ਸਾਈਨ ਇਨ ਕਰਨਾ ਜਾਂ ਪ੍ਰਮਾਣਿਤ ਹੋਣਾ ਪਵੇਗਾ।",
+  "button_text": "ਮੁੱਖ ਸਫ਼ੇ 'ਤੇ ਵਾਪਸ ਜਾਓ",
+  "or_try": "ਜਾਂ ਕੋਸ਼ਿਸ਼ ਕਰੋ:"
 }

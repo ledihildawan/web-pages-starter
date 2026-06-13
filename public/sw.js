@@ -1,4 +1,4 @@
-const CACHE_NAME = 'starter-v4';
+const CACHE_NAME = 'starter-v5';
 const BASE = new URL('.', self.location.href).pathname;
 const ERROR_PAGES = [
   `${BASE}not-found.html`,

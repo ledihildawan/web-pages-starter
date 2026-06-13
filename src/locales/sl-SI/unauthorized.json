@@ -1,7 +1,7 @@
 {
   "heading": "401",
-  "subheading": "Authentication Required",
-  "description": "You need to sign in or authenticate to access this page.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Zahtevana je overitev",
+  "description": "Za dostop do te strani se morate prijaviti ali overiti.",
+  "button_text": "Nazaj na domačo stran",
+  "or_try": "Ali poskusite:"
 }

@@ -1,7 +1,7 @@
 {
   "heading": "403",
-  "subheading": "Access Denied",
-  "description": "You do not have permission to access this page or resource.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Pääsy evätty",
+  "description": "Sinulla ei ole oikeutta käyttää tätä sivua tai resurssia.",
+  "button_text": "Takaisin etusivulle",
+  "or_try": "Tai kokeile:"
 }

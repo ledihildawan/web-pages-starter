@@ -1,7 +1,7 @@
 {
   "heading": "403",
-  "subheading": "Access Denied",
-  "description": "You do not have permission to access this page or resource.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "ઍક્સેસ નામંજૂર",
+  "description": "આ પૃષ્ઠ અથવા સંસાધનને ઍક્સેસ કરવાની તમારી પાસે પરવાનગી નથી.",
+  "button_text": "હોમ પર પાછા જાઓ",
+  "or_try": "અથવા પ્રયાસ કરો:"
 }

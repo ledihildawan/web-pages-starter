@@ -5,6 +5,8 @@ import process from 'node:process';
 import type { serve } from '@hono/node-server';
 import ngrok from '@ngrok/ngrok';
 import inquirer from 'inquirer';
+import { i18nConfig } from '../src/configs/i18n';
+import { getErrorPageSlugs, getRootPageSlug } from '../src/configs/pages';
 import { PATHS } from '../src/configs/paths';
 import { createStaticApp } from './shared/hono-server';
 import { log } from './shared/logger';
@@ -23,9 +25,11 @@ const runBuild = (): Promise<void> => {
     const steps = [
       'clean:cache',
       './tools/fetch-exchange-rates.ts',
-      './tools/sync-root-page.ts',
+      './tools/sync-system-pages.ts',
+      './tools/sync-locales.ts',
       './tools/generate-i18n.ts',
       './tools/generate-sitemap.ts',
+      './tools/generate-sw.ts',
       './tools/build.ts',
     ];
     const env: NodeJS.ProcessEnv = {
@@ -235,19 +239,12 @@ const main = async () => {
     const { getPageNames } = await import('./shared/hono-server');
     log.info(`\n  Preview ready at ${tunnelUrl || `http://${HOST}:${PORT}`}\n`);
     log.info(`  Mode: preview (${provider})`);
+    const errorPages = getErrorPageSlugs(i18nConfig.defaultLocale);
+    const rootSlug = getRootPageSlug(i18nConfig.defaultLocale);
     log.info(
       `  Pages: ${getPageNames(DIST)
-        .filter(
-          (n) =>
-            ![
-              'not-found',
-              'unauthorized',
-              'forbidden',
-              'server-error',
-              'maintenance',
-              'offline',
-            ].includes(n),
-        )
+        .filter((n) => !errorPages.includes(n))
+        .map((n) => (n === rootSlug ? `${n} (index)` : n))
         .join(', ')}\n`,
     );
 

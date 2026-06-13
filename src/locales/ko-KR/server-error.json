@@ -1,7 +1,7 @@
 {
   "heading": "500",
-  "subheading": "Server Error",
-  "description": "An unexpected error occurred on the server. Our team has been notified and is working on it.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "서버 오류",
+  "description": "서버에서 예기치 않은 오류가 발생했습니다. 팀이 알림을 받아 처리 중입니다.",
+  "button_text": "홈으로",
+  "or_try": "또는 시도해 보세요:"
 }

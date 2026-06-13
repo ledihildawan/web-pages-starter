@@ -1,7 +1,7 @@
 {
   "heading": "401",
-  "subheading": "Authentication Required",
-  "description": "You need to sign in or authenticate to access this page.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Απαιτείται ταυτοποίηση",
+  "description": "Πρέπει να συνδεθείτε ή να ταυτοποιηθείτε για να αποκτήσετε πρόσβαση σε αυτή τη σελίδα.",
+  "button_text": "Επιστροφή στην αρχική",
+  "or_try": "Ή δοκιμάστε:"
 }
