@@ -62,14 +62,14 @@ const njkContent = `{% extends "main.njk" %}
           <span class="relative inline-flex rounded-full block-2 inline-2 bg-emerald-500"></span>
         </span>
         <span class="font-bold tracking-wide uppercase text-[10px]">
-          {{ i18n.t('page.' + page.hero.t_key + '.badge') | default('Badge') }}
+          {{ i18n.t('${formattedName}:hero.badge') }}
         </span>
       </div>
       <h1 class="text-6xl md:text-7xl font-black tracking-tighter mbe-8 leading-[1.1] bg-linear-to-b from-white to-slate-400 bg-clip-text text-transparent">
-        {{ i18n.html('page.' + page.hero.t_key + '.title') }}
+        {{ i18n.t('${formattedName}:hero.title') }}
       </h1>
       <p class="text-xl md:text-2xl text-slate-300 max-inline-2xl mx-auto mbe-14 leading-relaxed font-medium">
-        {{ i18n.t('page.' + page.hero.t_key + '.description') }}
+        {{ i18n.t('${formattedName}:hero.description') }}
       </p>
     </div>
   </section>
@@ -77,12 +77,12 @@ const njkContent = `{% extends "main.njk" %}
   <section class="pbs-32 pbe-32 px-6 content-auto">
     <div class="max-inline-6xl mx-auto">
       <p class="text-slate-300 text-lg leading-relaxed text-center">
-        {{ i18n.t('page.content.intro') | default('Add your content here.') }}
+        {{ i18n.t('${formattedName}:content.intro') }}
       </p>
     </div>
   </section>
 
-  {% include "cta.njk" %}
+  {% include "components/cta.njk" %}
 {% endblock %}
 `;
 
