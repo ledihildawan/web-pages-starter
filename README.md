@@ -215,7 +215,7 @@ Ten principles enforced across all pages:
 
 The i18n system is the most complex subsystem. Full reference: **[`docs/i18n.md`](docs/i18n.md)**.
 
-87 BCP 47 locales spanning 54 languages. Default locale: `id-ID`.
+87 BCP 47 locales spanning 54 languages. Default locale: `en-US`.
 
 ### Data flow
 
@@ -249,8 +249,8 @@ The same key (`i18n.t('home:hero.title')`) renders at build time **and** updates
 
 | Group | Codes | Notes |
 | --- | --- | --- |
-| Indonesian | `id-ID` | Default, source of truth |
-| English | `en-US`, `en-GB`, `en-CA`, `en-AU`, `en-IN`, `en-NZ`, `en-ZA` | Region-specific currencies |
+| Indonesian | `id-ID` | |
+| English | `en-US`, `en-GB`, `en-CA`, `en-AU`, `en-IN`, `en-NZ`, `en-ZA` | Default, source of truth; region-specific currencies |
 | Chinese | `zh-Hans-CN`, `zh-Hans-SG`, `zh-Hans-MY`, `zh-Hant-TW`, `zh-Hant-HK`, `zh-Hant-MO` | Script variants |
 | Arabic | `ar-SA`, `ar-AE`, `ar-EG`, `ar-MA`, `ar-TN` | RTL, native digits, six-form plurals |
 | Japanese, Korean, Thai, Hindi, Russian | `ja-JP`, `ko-KR`, `ko-KP`, `th-TH`, `hi-IN`, `hi-NP`, `ru-RU` | Native digits where applicable |
@@ -497,7 +497,7 @@ tests/
 └── i18n/
     ├── helpers.test.ts      # locale lookup, fallback, direction, currency
     ├── formatters.test.ts   # formatNumber, formatCurrency, formatDate, formatBytes, cardinal, ordinal
-    └── home-data.test.ts    # home page structure + locale key parity (id-ID ↔ en-US)
+    └── home-data.test.ts    # home page structure + locale key parity (en-US ↔ id-ID)
 ```
 
 ### Coverage
