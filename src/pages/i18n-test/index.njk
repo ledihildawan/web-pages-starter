@@ -4,19 +4,19 @@
 
 {% block content %}
 
-  <section class="relative pt-24 pb-16 lg:pt-32 lg:pb-20 px-6 text-center overflow-hidden">
+  <section class="relative pbs-52 pbe-28 px-6 text-center overflow-hidden">
     <div class="absolute inset-0 -z-10">
-      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-200 h-100 bg-violet-500/10 rounded-full blur-[120px]"></div>
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 inline-200 block-100 bg-violet-500/10 rounded-full blur-[120px]"></div>
       <div class="absolute inset-0 bg-linear-to-b from-transparent via-slate-950/50 to-slate-950"></div>
     </div>
 
-    <div class="max-w-4xl mx-auto relative">
-      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-xs font-bold uppercase tracking-wider mb-8">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+    <div class="max-inline-4xl mx-auto relative">
+      <div class="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-300 text-sm font-black uppercase tracking-wider mbe-12">
+        <span class="inline-2 block-2 rounded-full bg-emerald-400 animate-pulse"></span>
         {{ i18n.t('i18n-test:hero.badge') | safe }}
       </div>
 
-      <h1 class="text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-6 leading-[1.1]">
+      <h1 class="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter mbe-8 leading-[1.1]">
         <span class="bg-linear-to-br from-white via-white to-slate-400 bg-clip-text text-transparent">
           <span data-i18n-html="{{ i18n('i18n-test:hero.title').k }}">Tes
             <span class="text-violet-400">Lengkap</span>
@@ -24,7 +24,7 @@
         </span>
       </h1>
 
-      <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-12 leading-relaxed">
+      <p class="text-xl md:text-2xl lg:text-3xl text-slate-300 max-inline-3xl mx-auto mbe-16 font-medium leading-relaxed">
         {{ i18n.t('i18n-test:hero.description') | safe }}
       </p>
 
@@ -37,7 +37,7 @@
               {{ i18n.t('i18n-test:language_info.languages') | safe }}</div>
           </div>
         </div>
-        <div class="w-px h-12 bg-white/10"></div>
+        <div class="inline-px block-12 bg-white/10"></div>
         <div class="flex items-center gap-3">
           <span class="text-2xl" aria-hidden="true">💱</span>
           <div class="text-left">
@@ -46,7 +46,7 @@
               {{ i18n.t('i18n-test:currency.currencies') | safe }}</div>
           </div>
         </div>
-        <div class="w-px h-12 bg-white/10"></div>
+        <div class="inline-px block-12 bg-white/10"></div>
         <div class="flex items-center gap-3">
           <span class="text-2xl" aria-hidden="true">🔄</span>
           <div class="text-left">
@@ -59,24 +59,24 @@
     </div>
   </section>
 
-  <section class="py-8 px-6 border-y border-white/5 bg-slate-900/30">
-    <div class="max-w-5xl mx-auto">
+  <section class="pbs-8 pbe-8 px-6 border-y border-white/5 bg-slate-900/30">
+    <div class="max-inline-5xl mx-auto">
       <div class="flex items-center justify-center gap-4 md:gap-8 flex-wrap">
-        <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/50 border border-white/5">
+        <div class="flex items-center gap-2 px-4 py-2 radius-card-md bg-slate-900/50 border border-white/5">
           <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('i18n-test:language_info.code') | safe }}</span>
-          <span class="text-sm font-bold text-white tabular-nums">{{ localeConfig.code }}</span>
+          <span class="text-sm font-black text-white tabular-nums">{{ localeConfig.code }}</span>
         </div>
-        <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
+        <div class="flex items-center gap-2 px-4 py-2 radius-card-md bg-emerald-500/10 border border-emerald-500/20">
           <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('i18n-test:language_info.currency') | safe }}</span>
-          <span class="text-sm font-bold text-emerald-400 tabular-nums">{{ localeConfig.currency }}</span>
+          <span class="text-sm font-black text-emerald-400 tabular-nums">{{ localeConfig.currency }}</span>
         </div>
-        <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/50 border border-white/5">
+        <div class="flex items-center gap-2 px-4 py-2 radius-card-md bg-slate-900/50 border border-white/5">
           <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('i18n-test:language_info.direction') | safe }}</span>
-          <span class="text-sm font-bold text-white">{{ localeConfig.dir }}</span>
+          <span class="text-sm font-black text-white">{{ localeConfig.dir }}</span>
         </div>
-        <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/50 border border-white/5">
+        <div class="flex items-center gap-2 px-4 py-2 radius-card-md bg-slate-900/50 border border-white/5">
           <span class="text-xs text-slate-400 uppercase tracking-wider">{{ i18n.t('i18n-test:language_info.digits') | safe }}</span>
-          <span class="text-sm font-bold text-white">
+          <span class="text-sm font-black text-white">
             {% if localeConfig.nativeDigits %}
               {{ i18n.t('i18n-test:language_info.enabled') | safe }}
             {% else %}
@@ -88,32 +88,32 @@
   </section>
 
   <nav x-data="{ activeId: '' }" x-init="const observer = new IntersectionObserver((entries) => { entries.forEach((e) => { if (e.isIntersecting) activeId = e.target.id; }); }, { rootMargin: '-30% 0px -50% 0px' }); document.querySelectorAll('section[id]').forEach((s) => observer.observe(s));" class="sticky top-0 z-30 bg-slate-950/80 backdrop-blur-xl border-b border-white/5">
-    <div class="max-w-6xl mx-auto px-6">
+    <div class="max-inline-6xl mx-auto px-6">
       <div class="flex items-center gap-1 py-2 overflow-x-auto scrollbar-none">
-        <a href="#translations" :class="activeId === 'translations' ? 'bg-violet-500/20 text-white border-violet-500/40' : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors">
+        <a href="#translations" :class="activeId === 'translations' ? 'bg-violet-500/20 text-white border-violet-500/40' : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 radius-icon text-xs font-black border transition-colors">
           {{ i18n.t('i18n-test:nav.translations') | safe }}
         </a>
-        <a href="#formatting" :class="activeId === 'formatting' ? 'bg-emerald-500/20 text-white border-emerald-500/40' : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors">
+        <a href="#formatting" :class="activeId === 'formatting' ? 'bg-emerald-500/20 text-white border-emerald-500/40' : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 radius-icon text-xs font-black border transition-colors">
           {{ i18n.t('i18n-test:nav.formatting') | safe }}
         </a>
-        <a href="#pricing" :class="activeId === 'pricing' ? 'bg-amber-500/20 text-white border-amber-500/40' : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors">
+        <a href="#pricing" :class="activeId === 'pricing' ? 'bg-amber-500/20 text-white border-amber-500/40' : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 radius-icon text-xs font-black border transition-colors">
           {{ i18n.t('i18n-test:nav.pricing') | safe }}
         </a>
-        <a href="#modes" :class="activeId === 'modes' ? 'bg-cyan-500/20 text-white border-cyan-500/40' : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors">
+        <a href="#modes" :class="activeId === 'modes' ? 'bg-cyan-500/20 text-white border-cyan-500/40' : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 radius-icon text-xs font-black border transition-colors">
           {{ i18n.t('i18n-test:nav.modes') | safe }}
         </a>
-        <a href="#systems" :class="activeId === 'systems' ? 'bg-sky-500/20 text-white border-sky-500/40' : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors">
+        <a href="#systems" :class="activeId === 'systems' ? 'bg-sky-500/20 text-white border-sky-500/40' : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 radius-icon text-xs font-black border transition-colors">
           {{ i18n.t('i18n-test:nav.systems') | safe }}
         </a>
-        <a href="#switcher" :class="activeId === 'switcher' ? 'bg-fuchsia-500/20 text-white border-fuchsia-500/40' : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors">
+        <a href="#switcher" :class="activeId === 'switcher' ? 'bg-fuchsia-500/20 text-white border-fuchsia-500/40' : 'text-slate-400 border-transparent hover:text-white hover:bg-white/5'" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 radius-icon text-xs font-black border transition-colors">
           {{ i18n.t('i18n-test:nav.switcher') | safe }}
         </a>
       </div>
     </div>
   </nav>
 
-  <section id="translations" class="px-6 py-24 scroll-mt-16">
-    <div class="max-w-6xl mx-auto">
+  <section id="translations" class="px-6 pbs-40 pbe-40 scroll-mt-16">
+    <div class="max-inline-6xl mx-auto">
       {{ section.section_header(
         null,
         i18n.t('i18n-test:core.title'),
@@ -122,17 +122,17 @@
       ) }}
 
       <div class="grid lg:grid-cols-2 gap-6">
-        <div class="group p-6 rounded-3xl bg-linear-to-br from-fuchsia-500/8 to-transparent border border-fuchsia-500/10 hover:border-fuchsia-500/30 transition">
-          <div class="flex items-center gap-4 mb-6">
-            <div class="w-14 h-14 rounded-2xl bg-fuchsia-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform" aria-hidden="true">a</div>
-            <h3 class="text-lg font-bold text-white">
+        <div class="group p-6 radius-card-lg bg-linear-to-br from-fuchsia-500/8 to-transparent card-border card-border-hover hover-lift transition">
+          <div class="flex items-center gap-4 mbe-6">
+            <div class="inline-14 block-14 radius-nested-lg bg-fuchsia-500/20 flex items-center justify-center text-2xl group-hover:scale-110 icon-squash transition-transform" aria-hidden="true">a</div>
+            <h3 class="text-lg font-black text-white">
               {{ i18n.t('i18n-test:pluralization.title') | safe }}</h3>
           </div>
           <div class="space-y-4">
             {% for plural in page.plurals %}
               {% set plural_title_key = 'i18n-test:pluralization.' ~ plural.key ~ '_title' %}
-              <div class="border-b border-white/5 last:border-0 pb-3 last:pb-0">
-                <div class="text-xs uppercase tracking-wider text-fuchsia-300/70 mb-2">
+              <div class="border-b border-white/5 last:border-0 pbe-3 last:pbe-0">
+                <div class="text-xs uppercase tracking-wider text-fuchsia-300/70 mbe-2">
                   {{ i18n.t(plural_title_key) | safe }}</div>
                 <div class="space-y-1.5">
                   {% for count in plural.counts %}
@@ -147,14 +147,14 @@
           </div>
         </div>
 
-        <div class="group p-6 rounded-3xl bg-linear-to-br from-emerald-500/8 to-transparent border border-emerald-500/10 hover:border-emerald-500/30 transition">
-          <div class="flex items-center gap-4 mb-6">
-            <div class="w-14 h-14 rounded-2xl bg-emerald-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform" aria-hidden="true">&lt;/&gt;</div>
-            <h3 class="text-lg font-bold text-white">
+        <div class="group p-6 radius-card-lg bg-linear-to-br from-emerald-500/8 to-transparent card-border card-border-hover hover-lift transition">
+          <div class="flex items-center gap-4 mbe-6">
+            <div class="inline-14 block-14 radius-nested-lg bg-emerald-500/20 flex items-center justify-center text-2xl group-hover:scale-110 icon-squash transition-transform" aria-hidden="true">&lt;/&gt;</div>
+            <h3 class="text-lg font-black text-white">
               {{ i18n.t('i18n-test:html_content.title') | safe }}</h3>
           </div>
-          <div class="text-center py-4 px-3 rounded-2xl bg-emerald-500/5">
-            <div class="text-base text-white mb-2">
+          <div class="text-center py-4 px-3 radius-card-md bg-emerald-500/5">
+            <div class="text-base text-white mbe-2">
               <span data-i18n-html="{{ i18n('i18n-test:html_content.example').k }}">Ini adalah contoh teks dengan
                 <span class='text-emerald-400'>highlight warna</span>
                 dan
@@ -163,38 +163,38 @@
         </div>
       </div>
 
-      <div class="grid lg:grid-cols-2 gap-6 mt-6">
-        <div class="group p-6 rounded-3xl bg-linear-to-br from-amber-500/8 to-transparent border border-amber-500/10 hover:border-amber-500/30 transition">
-          <div class="flex items-center gap-4 mb-6">
-            <div class="w-14 h-14 rounded-2xl bg-amber-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform" aria-hidden="true">📝</div>
-            <h3 class="text-lg font-bold text-white">
+      <div class="grid lg:grid-cols-2 gap-6 mbs-6">
+        <div class="group p-6 radius-card-lg bg-linear-to-br from-amber-500/8 to-transparent card-border card-border-hover hover-lift transition">
+          <div class="flex items-center gap-4 mbe-6">
+            <div class="inline-14 block-14 radius-nested-lg bg-amber-500/20 flex items-center justify-center text-2xl group-hover:scale-110 icon-squash transition-transform" aria-hidden="true">📝</div>
+            <h3 class="text-lg font-black text-white">
               {{ i18n.t('i18n-test:form.title') | safe }}</h3>
           </div>
           <form class="grid md:grid-cols-2 gap-3">
             {% for field in page.form_fields %}
               {% if loop.index <= page.display.max_form_fields %}
                 {% set field_key = 'i18n-test:form.' ~ field.key %}
-                <input type="{{ field.type }}" {{ i18n.attr(field_key ~ '_placeholder', 'placeholder', {}, {raw: true}) }} {{ i18n.attr(field_key ~ '_label', 'aria-label', {}, {raw: true}) }} class="w-full px-4 py-3 bg-slate-900/50 border border-white/10 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-500/30 focus:ring-2 focus:ring-amber-500/10 transition">
+                <input type="{{ field.type }}" {{ i18n.attr(field_key ~ '_placeholder', 'placeholder', {}, {raw: true}) }} {{ i18n.attr(field_key ~ '_label', 'aria-label', {}, {raw: true}) }} class="inline-full px-4 py-3 bg-slate-900/50 border border-white/10 radius-card-md text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-500/30 focus:ring-2 focus:ring-amber-500/10 transition">
               {% endif %}
             {% endfor %}
-            <button type="submit" class="md:col-span-2 px-6 py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-xl font-bold text-sm transition hover:shadow-lg hover:shadow-amber-500/20">
+            <button type="submit" class="md:col-span-2 px-6 py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 radius-btn font-black text-sm transition hover:shadow-lg hover:shadow-amber-500/20">
               {{ i18n.t('i18n-test:form.submit') | safe }}
             </button>
           </form>
         </div>
 
-        <div class="group p-6 rounded-3xl bg-linear-to-br from-red-500/8 to-transparent border border-red-500/10 hover:border-red-500/30 transition">
-          <div class="flex items-center gap-4 mb-6">
-            <div class="w-14 h-14 rounded-2xl bg-red-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform" aria-hidden="true">⚠️</div>
-            <h3 class="text-lg font-bold text-white">
+        <div class="group p-6 radius-card-lg bg-linear-to-br from-red-500/8 to-transparent card-border card-border-hover hover-lift transition">
+          <div class="flex items-center gap-4 mbe-6">
+            <div class="inline-14 block-14 radius-nested-lg bg-red-500/20 flex items-center justify-center text-2xl group-hover:scale-110 icon-squash transition-transform" aria-hidden="true">⚠️</div>
+            <h3 class="text-lg font-black text-white">
               {{ i18n.t('i18n-test:missing_keys.title') | safe }}</h3>
           </div>
-          <p class="text-xs text-slate-500 mb-3">
+          <p class="text-xs text-slate-500 mbe-3">
               {{ i18n.t('i18n-test:missing_keys.description') | safe }}</p>
           <div class="space-y-2">
             {% for key in page.missing_keys %}
               {% if loop.index <= page.display.max_missing_keys %}
-                <div class="px-4 py-3 rounded-xl bg-red-950/30 border border-red-500/10">
+                <div class="px-4 py-3 radius-card-md bg-red-950/30 border border-red-500/10">
                   <code class="text-red-400 text-sm">{{ i18n.t(key) | safe }}</code>
                 </div>
               {% endif %}
@@ -203,39 +203,39 @@
         </div>
       </div>
 
-      <div class="grid lg:grid-cols-2 gap-6 mt-6">
-        <div class="p-6 rounded-3xl bg-linear-to-br from-slate-900/40 to-slate-900/20 border border-white/5">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-bold text-white">
+      <div class="grid lg:grid-cols-2 gap-6 mbs-6">
+        <div class="p-6 radius-card-lg bg-linear-to-br from-slate-900/40 to-slate-900/20 card-border">
+          <div class="flex items-center justify-between mbe-4">
+            <h3 class="text-lg font-black text-white">
               {{ i18n.t('i18n-test:native_digits.title') | safe }}</h3>
             <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 uppercase tracking-wider">{{ i18n.t('i18n-test:live_label') | safe }}</span>
           </div>
-          <p class="text-xs text-slate-500 mb-3">
+          <p class="text-xs text-slate-500 mbe-3">
             {{ i18n.t('i18n-test:native_digits.description') | safe }}</p>
           <div class="space-y-2">
             {% for sample in page.native_digit_samples %}
               {% if loop.index <= page.display.max_native_samples %}
-                <div class="flex items-center justify-between px-4 py-2.5 rounded-xl bg-slate-800/40 border border-white/5">
+                <div class="flex items-center justify-between px-4 py-2.5 radius-card-md bg-slate-800/40 border border-white/5">
                   <code class="text-xs text-slate-500 font-mono">{{ sample }}</code>
-                  <span class="text-sm font-bold text-amber-300">{{ i18n.nativeDigits(sample) }}</span>
+                  <span class="text-sm font-black text-amber-300">{{ i18n.nativeDigits(sample) }}</span>
                 </div>
               {% endif %}
             {% endfor %}
           </div>
         </div>
 
-        <div class="p-6 rounded-3xl bg-linear-to-br from-slate-900/40 to-slate-900/20 border border-white/5">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-bold text-white">
+        <div class="p-6 radius-card-lg bg-linear-to-br from-slate-900/40 to-slate-900/20 card-border">
+          <div class="flex items-center justify-between mbe-4">
+            <h3 class="text-lg font-black text-white">
               {{ i18n.t('i18n-test:inflection.title') | safe }}</h3>
             <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 uppercase tracking-wider">{{ i18n.t('i18n-test:live_label') | safe }}</span>
           </div>
-          <p class="text-xs text-slate-500 mb-3">
+          <p class="text-xs text-slate-500 mbe-3">
             {{ i18n.t('i18n-test:inflection.description') | safe }}</p>
           <div class="space-y-2">
             {% for pair in page.inflection_pairs %}
               {% if loop.index <= page.display.max_inflection %}
-                <div class="grid grid-cols-3 gap-2 px-4 py-2.5 rounded-xl bg-slate-800/40 border border-white/5 text-sm">
+                <div class="grid grid-cols-3 gap-2 px-4 py-2.5 radius-card-md bg-slate-800/40 border border-white/5 text-sm">
                   <code class="text-slate-500 font-mono">{{ pair.singular }}</code>
                   <span class="text-emerald-400 text-center">{{ i18n.pluralize(pair.singular) }}</span>
                   <code class="text-slate-500 font-mono text-right">{{ pair.plural }}
@@ -250,8 +250,8 @@
     </div>
   </section>
 
-  <section id="formatting" class="px-6 py-24 bg-linear-to-b from-slate-900/30 to-transparent scroll-mt-16">
-    <div class="max-w-6xl mx-auto">
+  <section id="formatting" class="px-6 pbs-40 pbe-40 bg-linear-to-b from-white/2 to-transparent scroll-mt-16">
+    <div class="max-inline-6xl mx-auto">
       {{ section.section_header(
         null,
         i18n.t('i18n-test:advanced.title'),
@@ -260,10 +260,10 @@
       ) }}
 
       <div class="grid lg:grid-cols-2 gap-6">
-        <div class="group p-6 rounded-3xl bg-linear-to-br from-violet-500/8 to-transparent border border-violet-500/10 hover:border-violet-500/30 transition">
-          <div class="flex items-center gap-4 mb-6">
-            <div class="w-14 h-14 rounded-2xl bg-violet-500/20 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform" aria-hidden="true">🔢</div>
-            <h3 class="text-lg font-bold text-white">
+        <div class="group p-6 radius-card-lg bg-linear-to-br from-violet-500/8 to-transparent card-border card-border-hover hover-lift transition">
+          <div class="flex items-center gap-4 mbe-6">
+            <div class="inline-14 block-14 radius-nested-lg bg-violet-500/20 flex items-center justify-center text-2xl group-hover:scale-110 icon-squash transition-transform" aria-hidden="true">🔢</div>
+            <h3 class="text-lg font-black text-white">
               {{ i18n.t('i18n-test:numbers.title') | safe }}</h3>
           </div>
           <div class="space-y-3">
@@ -279,28 +279,28 @@
           </div>
         </div>
 
-        <div class="p-6 rounded-3xl bg-slate-900/40 border border-white/5 hover:border-white/10 transition">
-          <div class="flex items-center gap-3 mb-6">
-            <div class="w-12 h-12 rounded-xl bg-violet-500/20 flex items-center justify-center">
+        <div class="p-6 radius-card-lg bg-slate-900/40 card-border card-border-hover transition">
+          <div class="flex items-center gap-3 mbe-6">
+            <div class="inline-12 block-12 radius-icon bg-violet-500/20 flex items-center justify-center">
               <span class="text-xl" aria-hidden="true">🌐</span>
             </div>
             <div>
-              <h3 class="text-lg font-bold text-white">
+              <h3 class="text-lg font-black text-white">
                 {{ i18n.t('i18n-test:currency_comparison.title') | safe }}</h3>
               <p class="text-sm text-slate-400">
                 {{ i18n.t('i18n-test:currency_comparison.description') | safe }}</p>
             </div>
           </div>
-          <div class="text-center mb-6 p-4 rounded-2xl bg-violet-500/5">
-            <div class="text-3xl font-black text-white mb-1">{{ i18n.formatCurrency(page.display.currency_comparison_base, 'USD', {raw: true}) }}</div>
+          <div class="text-center mbe-6 p-4 radius-card-md bg-violet-500/5">
+            <div class="text-3xl font-black text-white mbe-1">{{ i18n.formatCurrency(page.display.currency_comparison_base, 'USD', {raw: true}) }}</div>
             <div class="text-xs text-slate-400">
               {{ i18n.t('i18n-test:currency_comparison.base_price') | safe }}</div>
           </div>
           <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
             {% for curr in page.display.currency_comparison_currencies %}
               {% set curr_key = 'i18n-test:currency_comparison.' ~ (curr | lower) %}
-              <div class="p-3 rounded-lg bg-slate-800/30 border border-white/5 hover:border-white/10 transition text-center">
-                <div class="text-[10px] text-slate-400 mb-1">
+              <div class="p-3 radius-icon bg-slate-800/30 border border-white/5 hover:border-white/10 transition text-center">
+                <div class="text-[10px] text-slate-400 mbe-1">
                   {{ i18n.t(curr_key) | safe }}</div>
                 <div class="text-sm font-black tabular-nums {% if curr == 'USD' %}text-emerald-400{% elif curr == 'JPY' %}text-fuchsia-400{% elif curr == 'CNY' %}text-amber-400{% else %}text-rose-400{% endif %}">{{ i18n.convertCurrency(page.display.currency_comparison_base, curr) }}</div>
               </div>
@@ -309,9 +309,9 @@
         </div>
       </div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
-        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-emerald-500/20 transition">
-          <div class="flex items-center gap-2 mb-3">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mbs-6">
+        <div class="p-5 radius-card-md bg-slate-900/30 card-border card-border-hover transition">
+          <div class="flex items-center gap-2 mbe-3">
             <span class="text-base" aria-hidden="true">%</span>
             <span class="text-[10px] text-slate-400 uppercase tracking-wider">{{ i18n.t('i18n-test:advanced.percentages') | safe }}</span>
           </div>
@@ -328,8 +328,8 @@
           </div>
         </div>
 
-        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-violet-500/20 transition">
-          <div class="flex items-center gap-2 mb-3">
+        <div class="p-5 radius-card-md bg-slate-900/30 card-border card-border-hover transition">
+          <div class="flex items-center gap-2 mbe-3">
             <span class="text-base" aria-hidden="true">💾</span>
             <span class="text-[10px] text-slate-400 uppercase tracking-wider">{{ i18n.t('i18n-test:advanced.bytes') | safe }}</span>
           </div>
@@ -346,8 +346,8 @@
           </div>
         </div>
 
-        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-cyan-500/20 transition">
-          <div class="flex items-center gap-2 mb-3">
+        <div class="p-5 radius-card-md bg-slate-900/30 card-border card-border-hover transition">
+          <div class="flex items-center gap-2 mbe-3">
             <span class="text-base" aria-hidden="true">🔬</span>
             <span class="text-[10px] text-slate-400 uppercase tracking-wider">{{ i18n.t('i18n-test:advanced.scientific') | safe }}</span>
           </div>
@@ -363,8 +363,8 @@
           </div>
         </div>
 
-        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-lime-500/20 transition">
-          <div class="flex items-center gap-2 mb-3">
+        <div class="p-5 radius-card-md bg-slate-900/30 card-border card-border-hover transition">
+          <div class="flex items-center gap-2 mbe-3">
             <span class="text-base" aria-hidden="true">📊</span>
             <span class="text-[10px] text-slate-400 uppercase tracking-wider">{{ i18n.t('i18n-test:advanced.abbreviated') | safe }}</span>
           </div>
@@ -381,9 +381,9 @@
         </div>
       </div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
-        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-rose-500/20 transition">
-          <div class="flex items-center gap-2 mb-3">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mbs-4">
+        <div class="p-5 radius-card-md bg-slate-900/30 card-border card-border-hover transition">
+          <div class="flex items-center gap-2 mbe-3">
             <span class="text-base" aria-hidden="true">🥇</span>
             <span class="text-[10px] text-slate-400 uppercase tracking-wider">{{ i18n.t('i18n-test:advanced.ordinals') | safe }}</span>
           </div>
@@ -399,8 +399,8 @@
           </div>
         </div>
 
-        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-orange-500/20 transition">
-          <div class="flex items-center gap-2 mb-3">
+        <div class="p-5 radius-card-md bg-slate-900/30 card-border card-border-hover transition">
+          <div class="flex items-center gap-2 mbe-3">
             <span class="text-base" aria-hidden="true">🔢</span>
             <span class="text-[10px] text-slate-400 uppercase tracking-wider">{{ i18n.t('i18n-test:advanced.cardinals') | safe }}</span>
           </div>
@@ -416,8 +416,8 @@
           </div>
         </div>
 
-        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-teal-500/20 transition">
-          <div class="flex items-center gap-2 mb-3">
+        <div class="p-5 radius-card-md bg-slate-900/30 card-border card-border-hover transition">
+          <div class="flex items-center gap-2 mbe-3">
             <span class="text-base" aria-hidden="true">⏱️</span>
             <span class="text-[10px] text-slate-400 uppercase tracking-wider">{{ i18n.t('i18n-test:advanced.durations') | safe }}</span>
           </div>
@@ -426,15 +426,15 @@
               {% if loop.index <= page.display.max_durations %}
                 <div class="flex justify-between items-baseline">
                   <span class="text-[11px] font-mono text-slate-400">{{ dur }}s</span>
-                  <span class="text-xs font-bold text-teal-400">{{ i18n.formatDuration(dur) }}</span>
+                  <span class="text-xs font-black text-teal-400">{{ i18n.formatDuration(dur) }}</span>
                 </div>
               {% endif %}
             {% endfor %}
           </div>
         </div>
 
-        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-pink-500/20 transition">
-          <div class="flex items-center gap-2 mb-3">
+        <div class="p-5 radius-card-md bg-slate-900/30 card-border card-border-hover transition">
+          <div class="flex items-center gap-2 mbe-3">
             <span class="text-base" aria-hidden="true">⏰</span>
             <span class="text-[10px] text-slate-400 uppercase tracking-wider">{{ i18n.t('i18n-test:advanced.relative_time') | safe }}</span>
           </div>
@@ -442,16 +442,16 @@
             {% for rel in page.relative_time %}
               <div class="flex justify-between items-baseline">
                 <span class="text-[11px] font-mono text-slate-400">{{ rel.val }}{{ rel.unit[0] }}</span>
-                <span class="text-xs font-bold text-pink-400">{{ i18n.formatRelativeTime(rel.val, { unit: rel.unit }) }}</span>
+                <span class="text-xs font-black text-pink-400">{{ i18n.formatRelativeTime(rel.val, { unit: rel.unit }) }}</span>
               </div>
             {% endfor %}
           </div>
         </div>
       </div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-indigo-500/20 transition">
-          <div class="flex items-center gap-2 mb-3">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mbs-4">
+        <div class="p-5 radius-card-md bg-slate-900/30 card-border card-border-hover transition">
+          <div class="flex items-center gap-2 mbe-3">
             <span class="text-base" aria-hidden="true">📅</span>
             <span class="text-[10px] text-slate-400 uppercase tracking-wider">{{ i18n.t('i18n-test:advanced.date_formats') | safe }}</span>
           </div>
@@ -466,8 +466,8 @@
           </div>
         </div>
 
-        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-purple-500/20 transition">
-          <div class="flex items-center gap-2 mb-3">
+        <div class="p-5 radius-card-md bg-slate-900/30 card-border card-border-hover transition">
+          <div class="flex items-center gap-2 mbe-3">
             <span class="text-base" aria-hidden="true">🕐</span>
             <span class="text-[10px] text-slate-400 uppercase tracking-wider">{{ i18n.t('i18n-test:advanced.time_formats') | safe }}</span>
           </div>
@@ -482,8 +482,8 @@
           </div>
         </div>
 
-        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-fuchsia-500/20 transition">
-          <div class="flex items-center gap-2 mb-3">
+        <div class="p-5 radius-card-md bg-slate-900/30 card-border card-border-hover transition">
+          <div class="flex items-center gap-2 mbe-3">
             <span class="text-base" aria-hidden="true">🕓</span>
             <span class="text-[10px] text-slate-400 uppercase tracking-wider">{{ i18n.t('i18n-test:advanced.datetime') | safe }}</span>
           </div>
@@ -501,9 +501,9 @@
         </div>
       </div>
 
-      <div class="grid sm:grid-cols-2 gap-4 mt-4">
-        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-sky-500/20 transition">
-          <div class="flex items-center gap-2 mb-3">
+      <div class="grid sm:grid-cols-2 gap-4 mbs-4">
+        <div class="p-5 radius-card-md bg-slate-900/30 card-border card-border-hover transition">
+          <div class="flex items-center gap-2 mbe-3">
             <span class="text-base" aria-hidden="true">📏</span>
             <span class="text-[10px] text-slate-400 uppercase tracking-wider">{{ i18n.t('i18n-test:unit.title') | safe }}</span>
           </div>
@@ -518,8 +518,8 @@
           </div>
         </div>
 
-        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5 hover:border-amber-500/20 transition">
-          <div class="flex items-center gap-2 mb-3">
+        <div class="p-5 radius-card-md bg-slate-900/30 card-border card-border-hover transition">
+          <div class="flex items-center gap-2 mbe-3">
             <span class="text-base" aria-hidden="true">📝</span>
             <span class="text-[10px] text-slate-400 uppercase tracking-wider">{{ i18n.t('i18n-test:advanced.lists') | safe }}</span>
           </div>
@@ -535,8 +535,8 @@
     </div>
   </section>
 
-  <section id="pricing" class="px-6 py-24 scroll-mt-16">
-    <div class="max-w-6xl mx-auto">
+  <section id="pricing" class="px-6 pbs-40 pbe-40 scroll-mt-16">
+    <div class="max-inline-6xl mx-auto">
       {{ section.section_header(
         null,
         i18n.t('i18n-test:currency.title'),
@@ -545,8 +545,8 @@
       ) }}
 
       <div class="grid md:grid-cols-2 gap-6">
-        <div class="p-6 rounded-3xl bg-slate-900/40 border border-white/5">
-          <h3 class="text-lg font-bold text-white mb-4">
+        <div class="p-6 radius-card-lg bg-slate-900/40 card-border">
+          <h3 class="text-lg font-black text-white mbe-4">
             {{ i18n.t('i18n-test:advanced.regional_pricing') | safe }}</h3>
           <div class="space-y-3">
             {% for plan in page.regional_pricing %}
@@ -559,16 +559,16 @@
           </div>
         </div>
 
-        <div class="p-6 rounded-3xl bg-slate-900/40 border border-white/5">
-          <h3 class="text-lg font-bold text-white mb-1">
+        <div class="p-6 radius-card-lg bg-slate-900/40 card-border">
+          <h3 class="text-lg font-black text-white mbe-1">
             {{ i18n.t('i18n-test:pricing_details.title') | safe }}</h3>
-          <p class="text-xs text-slate-500 mb-4">
+          <p class="text-xs text-slate-500 mbe-4">
             {{ i18n.t('i18n-test:pricing_details.description') | safe }}</p>
           <div class="space-y-4">
             {% for plan in page.regional_pricing %}
               {% set plan_key = 'i18n-test:advanced.' ~ plan.id ~ '_plan' %}
-              <div class="p-4 rounded-xl bg-slate-800/30 border border-white/5">
-                <div class="text-sm font-bold text-white mb-3">
+              <div class="p-4 radius-card-md bg-slate-800/30 border border-white/5">
+                <div class="text-sm font-black text-white mbe-3">
                   {{ i18n.t(plan_key) | safe }}</div>
                 <div class="space-y-1.5 text-xs">
                   <div class="flex justify-between">
@@ -600,8 +600,8 @@
     </div>
   </section>
 
-  <section id="modes" class="px-6 py-24 bg-linear-to-b from-slate-900/30 to-transparent scroll-mt-16">
-    <div class="max-w-4xl mx-auto">
+  <section id="modes" class="px-6 pbs-40 pbe-40 bg-linear-to-b from-white/2 to-transparent scroll-mt-16">
+    <div class="max-inline-4xl mx-auto">
       {{ section.section_header(
         null,
         i18n.t('i18n-test:section_modes.title'),
@@ -609,25 +609,25 @@
         icon.icon('light', 'inline-5 block-5')
       ) }}
 
-      <div class="p-10 rounded-3xl bg-slate-900/40 border border-white/5">
-        <div class="text-center mb-10">
-          <div class="text-6xl md:text-7xl font-black text-white tabular-nums mb-3">{{ i18n.formatNumber(page.display.number_modes_example) }}</div>
+      <div class="p-10 radius-card-lg bg-slate-900/40 card-border">
+        <div class="text-center mbe-10">
+          <div class="text-6xl md:text-7xl font-black text-white tabular-nums mbe-3">{{ i18n.formatNumber(page.display.number_modes_example) }}</div>
           <div class="text-sm text-slate-400">{{ i18n.t('i18n-test:advanced.number_modes_example', { val: page.display.number_modes_example }) | safe }}</div>
         </div>
 
         <div class="grid md:grid-cols-3 gap-4">
-          <div class="p-6 rounded-2xl bg-slate-800/30 text-center">
-            <div class="text-xs text-slate-400 uppercase tracking-wider mb-3">
+          <div class="p-6 radius-card-md bg-slate-800/30 text-center">
+            <div class="text-xs text-slate-400 uppercase tracking-wider mbe-3">
               {{ i18n.t('i18n-test:advanced.plain_label') | safe }}</div>
             <div class="text-2xl font-black text-white tabular-nums">{{ i18n.formatNumber(page.display.number_modes_example) }}</div>
           </div>
-          <div class="p-6 rounded-2xl bg-violet-500/10 border border-violet-500/20 text-center">
-            <div class="text-xs text-slate-400 uppercase tracking-wider mb-3">
+          <div class="p-6 radius-card-md bg-violet-500/10 border border-violet-500/20 text-center">
+            <div class="text-xs text-slate-400 uppercase tracking-wider mbe-3">
               {{ i18n.t('i18n-test:advanced.native_label') | safe }}</div>
             <div class="text-2xl font-black text-violet-400 tabular-nums">{{ i18n.formatNumber(page.display.number_modes_example, {nativeDigits: true}) }}</div>
           </div>
-          <div class="p-6 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-center">
-            <div class="text-xs text-slate-400 uppercase tracking-wider mb-3">
+          <div class="p-6 radius-card-md bg-emerald-500/10 border border-emerald-500/20 text-center">
+            <div class="text-xs text-slate-400 uppercase tracking-wider mbe-3">
               {{ i18n.t('i18n-test:advanced.universal_label') | safe }}</div>
             <div class="text-2xl font-black text-emerald-400 tabular-nums">{{ page.display.number_modes_example }}</div>
           </div>
@@ -636,21 +636,18 @@
     </div>
   </section>
 
-  <section id="systems" class="px-6 py-24 scroll-mt-16">
-    <div class="max-w-5xl mx-auto">
-      <div class="text-center mb-12">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 text-[10px] font-bold uppercase tracking-wider mb-4">
-          {{ i18n.t('i18n-test:advanced.number_modes') | safe }}
-        </div>
-        <h2 class="text-3xl md:text-4xl font-black text-white mb-4">
-          {{ i18n.t('i18n-test:section_systems.title') | safe }}</h2>
-        <p class="text-slate-400 text-sm max-w-2xl mx-auto">
-          {{ i18n.t('i18n-test:section_systems.description') | safe }}</p>
-      </div>
+  <section id="systems" class="px-6 pbs-40 pbe-40 scroll-mt-16">
+    <div class="max-inline-5xl mx-auto">
+      {{ section.section_header(
+        null,
+        i18n.t('i18n-test:section_systems.title'),
+        i18n.t('i18n-test:section_systems.description'),
+        icon.icon('sparkles', 'inline-5 block-5')
+      ) }}
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5">
-          <div class="flex items-center justify-between mb-3">
+        <div class="p-5 radius-card-md bg-slate-900/30 card-border card-border-hover transition">
+          <div class="flex items-center justify-between mbe-3">
             <span class="text-xs text-slate-400 uppercase tracking-wider">Greek (grek)</span>
             <span class="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 uppercase tracking-wider">algorithmic</span>
           </div>
@@ -660,8 +657,8 @@
           </div>
         </div>
 
-        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5">
-          <div class="flex items-center justify-between mb-3">
+        <div class="p-5 radius-card-md bg-slate-900/30 card-border card-border-hover transition">
+          <div class="flex items-center justify-between mbe-3">
             <span class="text-xs text-slate-400 uppercase tracking-wider">Hebrew (hebr)</span>
             <span class="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 uppercase tracking-wider">algorithmic</span>
           </div>
@@ -671,8 +668,8 @@
           </div>
         </div>
 
-        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5">
-          <div class="flex items-center justify-between mb-3">
+        <div class="p-5 radius-card-md bg-slate-900/30 card-border card-border-hover transition">
+          <div class="flex items-center justify-between mbe-3">
             <span class="text-xs text-slate-400 uppercase tracking-wider">Armenian (armn)</span>
             <span class="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 uppercase tracking-wider">algorithmic</span>
           </div>
@@ -682,8 +679,8 @@
           </div>
         </div>
 
-        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5">
-          <div class="flex items-center justify-between mb-3">
+        <div class="p-5 radius-card-md bg-slate-900/30 card-border card-border-hover transition">
+          <div class="flex items-center justify-between mbe-3">
             <span class="text-xs text-slate-400 uppercase tracking-wider">Ethiopic (ethi)</span>
             <span class="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 uppercase tracking-wider">algorithmic</span>
           </div>
@@ -693,8 +690,8 @@
           </div>
         </div>
 
-        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5">
-          <div class="flex items-center justify-between mb-3">
+        <div class="p-5 radius-card-md bg-slate-900/30 card-border card-border-hover transition">
+          <div class="flex items-center justify-between mbe-3">
             <span class="text-xs text-slate-400 uppercase tracking-wider">Tamil (taml)</span>
             <span class="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 uppercase tracking-wider">algorithmic</span>
           </div>
@@ -704,8 +701,8 @@
           </div>
         </div>
 
-        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5">
-          <div class="flex items-center justify-between mb-3">
+        <div class="p-5 radius-card-md bg-slate-900/30 card-border card-border-hover transition">
+          <div class="flex items-center justify-between mbe-3">
             <span class="text-xs text-slate-400 uppercase tracking-wider">Georgian (geor)</span>
             <span class="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 uppercase tracking-wider">algorithmic</span>
           </div>
@@ -715,8 +712,8 @@
           </div>
         </div>
 
-        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5">
-          <div class="flex items-center justify-between mb-3">
+        <div class="p-5 radius-card-md bg-slate-900/30 card-border card-border-hover transition">
+          <div class="flex items-center justify-between mbe-3">
             <span class="text-xs text-slate-400 uppercase tracking-wider">Roman (roman)</span>
             <span class="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 uppercase tracking-wider">algorithmic</span>
           </div>
@@ -726,8 +723,8 @@
           </div>
         </div>
 
-        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5">
-          <div class="flex items-center justify-between mb-3">
+        <div class="p-5 radius-card-md bg-slate-900/30 card-border card-border-hover transition">
+          <div class="flex items-center justify-between mbe-3">
             <span class="text-xs text-slate-400 uppercase tracking-wider">Odia (orya)</span>
             <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 uppercase tracking-wider">numeric</span>
           </div>
@@ -737,8 +734,8 @@
           </div>
         </div>
 
-        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5">
-          <div class="flex items-center justify-between mb-3">
+        <div class="p-5 radius-card-md bg-slate-900/30 card-border card-border-hover transition">
+          <div class="flex items-center justify-between mbe-3">
             <span class="text-xs text-slate-400 uppercase tracking-wider">Tibetan (tibt)</span>
             <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 uppercase tracking-wider">numeric</span>
           </div>
@@ -748,8 +745,8 @@
           </div>
         </div>
 
-        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5">
-          <div class="flex items-center justify-between mb-3">
+        <div class="p-5 radius-card-md bg-slate-900/30 card-border card-border-hover transition">
+          <div class="flex items-center justify-between mbe-3">
             <span class="text-xs text-slate-400 uppercase tracking-wider">N'Ko (nkoo)</span>
             <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 uppercase tracking-wider">numeric</span>
           </div>
@@ -759,8 +756,8 @@
           </div>
         </div>
 
-        <div class="p-5 rounded-2xl bg-slate-900/30 border border-white/5">
-          <div class="flex items-center justify-between mb-3">
+        <div class="p-5 radius-card-md bg-slate-900/30 card-border card-border-hover transition">
+          <div class="flex items-center justify-between mbe-3">
             <span class="text-xs text-slate-400 uppercase tracking-wider">Adlam (adlm)</span>
             <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 uppercase tracking-wider">numeric</span>
           </div>
@@ -771,12 +768,12 @@
         </div>
       </div>
 
-      <p class="text-[11px] text-slate-500 text-center mt-6 max-w-2xl mx-auto">{{ i18n.t('i18n-test:section_systems.note') | safe }}</p>
+      <p class="text-[11px] text-slate-500 text-center mbs-6 max-inline-2xl mx-auto">{{ i18n.t('i18n-test:section_systems.note') | safe }}</p>
     </div>
   </section>
 
-  <section id="switcher" class="px-6 py-24 bg-linear-to-b from-slate-900/30 to-transparent scroll-mt-16">
-    <div class="max-w-4xl mx-auto">
+  <section id="switcher" class="px-6 pbs-40 pbe-40 bg-linear-to-b from-white/2 to-transparent scroll-mt-16">
+    <div class="max-inline-4xl mx-auto">
       {{ section.section_header(
         null,
         i18n.t('i18n-test:switcher.title'),
@@ -784,7 +781,7 @@
         icon.icon('rocket', 'inline-5 block-5')
       ) }}
 
-      <div class="p-6 rounded-3xl bg-slate-900/40 border border-white/5 mb-6">
+      <div class="p-6 radius-card-lg bg-slate-900/40 card-border mbe-6">
         <div class="flex items-center justify-center gap-3 text-emerald-300 text-sm">
           <span class="text-2xl" aria-hidden="true">ⓘ</span>
           <p>
@@ -794,8 +791,8 @@
 
       <div x-data class="flex flex-wrap justify-center gap-3">
         {% for locale in locales %}
-          <button type="button" @click="$store.i18n.change('{{ locale.code }}')" :aria-pressed="$store.i18n.current === '{{ locale.code }}'" :class="$store.i18n.current === '{{ locale.code }}' ? 'bg-violet-500/20 border-violet-500/50 text-white shadow-lg shadow-violet-500/10' : 'bg-slate-900/30 border-white/5 text-slate-300 hover:bg-violet-500/10 hover:border-violet-500/30 hover:text-white'" class="flex items-center gap-3 px-5 py-3 rounded-xl border transition text-sm font-medium">
-            <img src="https://flagcdn.com/w40/{{ locale.flag }}.png" alt="{{ locale.label }}" class="w-6 h-4 rounded shadow-sm object-cover" loading="lazy">
+          <button type="button" @click="$store.i18n.change('{{ locale.code }}')" :aria-pressed="$store.i18n.current === '{{ locale.code }}'" :class="$store.i18n.current === '{{ locale.code }}' ? 'bg-violet-500/20 border-violet-500/50 text-white shadow-lg shadow-violet-500/10' : 'bg-slate-900/30 border-white/5 text-slate-300 hover:bg-violet-500/10 hover:border-violet-500/30 hover:text-white'" class="flex items-center gap-3 px-5 py-3 radius-card-md border transition text-sm font-black">
+            <img src="https://flagcdn.com/w40/{{ locale.flag }}.png" alt="{{ locale.label }}" class="inline-6 block-4 rounded shadow-sm object-cover" loading="lazy">
             <span>{{ locale.label }}</span>
           </button>
         {% endfor %}
