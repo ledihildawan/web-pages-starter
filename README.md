@@ -593,15 +593,15 @@ All tools live in `tools/`. They share five modules from `tools/shared/`:
 | Layer | Technology | Version |
 | --- | --- | --- |
 | Runtime | Bun | `^1.3.14` |
-| Bundler | Rsbuild | `^2.0.12` |
+| Bundler | Rsbuild | `^2.0.13` |
 | Language | TypeScript | `^6.0.3` |
 | Templates | Nunjucks | `^3.2.4` |
 | Reactive UI | Alpine.js | `^3.15.12` |
-| CSS | Tailwind CSS v4 | `^4.3.0` |
+| CSS | Tailwind CSS v4 | `^4.3.1` |
 | i18n | i18next | `^26.3.1` |
 | Server | Hono | `^4.12.25` |
-| Lint/Format | Biome | `^2.4.16` |
-| Testing | Rstest | `^0.10.3` |
+| Lint/Format | Biome | `^2.5.0` |
+| Testing | Rstest | `^0.10.4` |
 | HTML minifier | html-minifier-terser | `^7.2.0` |
 | Romanization | limax | `^4.2.3` |
 
