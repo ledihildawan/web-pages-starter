@@ -163,6 +163,8 @@ export const preloadActiveFont = (): void => {
   loadFontForLang(getCurrentLang());
 };
 
+let fontObserver: MutationObserver | null = null;
+
 export const watchScriptAndLoadFont = (): void => {
   if (
     typeof window === 'undefined' ||
@@ -171,14 +173,16 @@ export const watchScriptAndLoadFont = (): void => {
     return;
   }
 
+  if (fontObserver) return;
+
   const htmlEl = document.documentElement;
   loadFontForLang(getCurrentLang());
 
-  const observer = new MutationObserver(() => {
+  fontObserver = new MutationObserver(() => {
     loadFontForLang(getCurrentLang());
   });
 
-  observer.observe(htmlEl, {
+  fontObserver.observe(htmlEl, {
     attributes: true,
     attributeFilter: ['lang', 'data-script'],
   });
