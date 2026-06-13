@@ -1,0 +1,8 @@
+{
+  "heading": "Anda Offline",
+  "subheading": "Tidak Ada Koneksi",
+  "description": "Anda sedang tidak terhubung ke internet. Beberapa halaman mungkin masih tersedia dari cache.",
+  "button_text": "Coba Lagi",
+  "hint": "Periksa koneksi internet Anda dan coba muat ulang halaman.",
+  "cached_pages": "Halaman yang tersimpan:"
+}

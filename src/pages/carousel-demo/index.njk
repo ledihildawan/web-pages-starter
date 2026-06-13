@@ -1,4 +1,5 @@
 {% extends "main.njk" %}
+{% import "icons.njk" as icon %}
 
 {% block extra_head %}
   {{ super() }}
@@ -12,12 +13,12 @@
     <div class="absolute inset-bs-[10%] inset-s-[10%] inline-96 block-96 bg-violet-600/10 blur-[100px]"></div>
   </div>
 
-  <div class="max-inline-7xl mx-auto pbs-20 pbe-10 px-6">
+  <div class="max-inline-7xl mx-auto pbs-52 pbe-28 px-6">
     <div class="text-center mbe-16">
-      <h1 class="text-5xl md:text-6xl lg:text-7xl font-black text-white mbe-6 tracking-tight">
+      <h1 class="text-6xl md:text-8xl lg:text-9xl font-black text-white mbe-8 tracking-tighter leading-[1.1]">
         {{ i18n.t('carousel-demo:hero.slide_1.title') }}
       </h1>
-      <p class="text-xl md:text-2xl text-slate-300 max-inline-3xl mx-auto">
+      <p class="text-xl md:text-2xl lg:text-3xl text-slate-300 max-inline-3xl mx-auto mbe-16 leading-relaxed font-medium">
         {{ i18n.t('carousel-demo:hero.slide_1.subtitle') }}
       </p>
     </div>
@@ -52,4 +53,6 @@
     </div>
   </div>
 </section>
+
+{% include "cta.njk" %}
 {% endblock %}

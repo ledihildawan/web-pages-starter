@@ -183,7 +183,7 @@
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {% for member in page.team.members %}
           {% set desc_key = 'about:' ~ member.desc_key %}
-          <div class="spotlight-card card-border-glow card-squash group relative p-8 lg:p-10 radius-card-lg bg-linear-to-br from-slate-900/60 to-slate-900/40 card-border hover:border-{{ member.color }}-500/50 hover:shadow-[0_20px_50px_rgba(139,92,246,0.25)] hover:-translate-y-2 transition-[transform,box-shadow,border-color] duration-250 ease-emphasized text-center overflow-hidden backdrop-blur-xl hover-lift">
+          <div class="spotlight-card card-border-glow card-squash group relative p-8 lg:p-10 radius-card-lg bg-linear-to-br from-slate-900/60 to-slate-900/40 card-border hover:border-{{ member.color }}-500/40 hover:shadow-[0_20px_50px_rgba(139,92,246,0.2)] hover:-translate-y-2 transition-[transform,box-shadow,border-color] duration-250 ease-emphasized text-center overflow-hidden backdrop-blur-xl hover-lift">
             <div class="absolute inset-be-0 inset-e-0 inline-40 block-40 bg-linear-to-br from-{{ member.color }}-500/15 to-transparent rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
 
             <div class="relative">

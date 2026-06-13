@@ -83,22 +83,15 @@ export default defineConfig({
         { from: /^\/$/, to: `/${ROOT_PAGE}.html` },
         {
           from: /^\/(?!locales\/|assets\/|fonts\/|images\/|favicon\.svg$|favicon\.ico$|manifest\.json$|sw\.js$|robots\.txt$|sitemap\.xml$|.*\.[a-z0-9]+$)/,
-          to: '/404.html',
+          to: '/not-found.html',
         },
       ],
       disableDotRule: true,
     },
   },
   dev: {
-    client: { overlay: true, reconnect: 5 },
     watchFiles: {
-      paths: [
-        'src/**/*.njk',
-        'src/**/*.json',
-        'src/**/*.json5',
-        'src/**/*.css',
-      ],
-      options: { usePolling: true, interval: 100 },
+      paths: ['src/**/*.njk', 'src/**/*.json', 'src/**/*.json5'],
       type: 'reload-page',
     },
   },
@@ -184,7 +177,7 @@ export default defineConfig({
   },
   plugins: [
     pluginRootPageAsIndex(),
-    pluginImageCompress({ use: 'avif', quality: 75 }),
+    ...(isProd ? [pluginImageCompress({ use: 'avif', quality: 75 })] : []),
   ],
   tools: {
     htmlPlugin: (config) => {

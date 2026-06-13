@@ -54,14 +54,12 @@
           {% set plan_name_key = plan_key ~ '.name' %}
           {% set plan_desc_key = plan_key ~ '.desc' %}
           {% set plan_btn_key = plan_key ~ '.btn' %}
-          <div class="{% if plan.featured %}
-            spotlight-card card-border-glow card-squash relative p-12 lg:p-14 radius-card-lg bg-linear-to-br from-violet-900/40 to-slate-900/60 border border-violet-500/40 shadow-[0_25px_60px_rgba(139,92,246,0.25)] md:-translate-y-8 z-10 hover:shadow-[0_30px_80px_rgba(139,92,246,0.35)] hover:-translate-y-10
-            {% else %}
-            spotlight-card card-border-glow card-squash group relative p-10 lg:p-12 radius-card-lg bg-linear-to-br from-slate-900/60 to-slate-900/40 card-border card-border-hover backdrop-blur-xl hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)] hover:-translate-y-2
-            {% endif %} flex flex-col transition-[transform,box-shadow] duration-250 ease-emphasized hover-lift">
+          <div class="spotlight-card card-border-glow card-squash group relative {% if plan.featured %}p-12 lg:p-14 bg-linear-to-br from-violet-900/40 to-slate-900/60 border border-violet-500/40 shadow-[0_25px_60px_rgba(139,92,246,0.25)] md:-translate-y-8 z-10 hover:shadow-[0_30px_80px_rgba(139,92,246,0.35)] hover:-translate-y-10
+            {% else %}p-10 lg:p-12 bg-linear-to-br from-slate-900/60 to-slate-900/40 card-border card-border-hover backdrop-blur-xl hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)] hover:-translate-y-2
+            {% endif %} radius-card-lg flex flex-col transition-[transform,box-shadow] duration-250 ease-emphasized hover-lift overflow-hidden">
 
             {% if plan.featured %}
-              <div class="absolute -inset-bs-6 inset-s-1/2 ltr:-translate-x-1/2 rtl:translate-x-1/2 px-6 py-2.5 bg-linear-to-r from-violet-500 via-fuchsia-500 to-pink-500 rounded-full text-[10px] font-black text-white uppercase tracking-[0.2em] shadow-[0_10px_30px_rgba(139,92,246,0.4)] whitespace-nowrap anticipate-press">
+              <div class="absolute -inset-bs-6 inset-s-1/2 ltr:-translate-x-1/2 rtl:translate-x-1/2 px-6 py-2.5 bg-linear-to-r from-violet-500 via-fuchsia-500 to-pink-500 rounded-full text-[10px] font-black text-white uppercase tracking-[0.2em] shadow-[0_10px_30px_rgba(139,92,246,0.4)] whitespace-nowrap">
                 {{ i18n.t(plan_badge_key) }}
               </div>
             {% endif %}
@@ -131,7 +129,7 @@
           {% for i in range(0, page.faq_count) %}
             {% set q_key = 'pricing:faq.q_' ~ i %}
             {% set a_key = 'pricing:faq.a_' ~ i %}
-            <div class="spotlight-card card-border-glow card-squash group p-8 lg:p-10 radius-card-lg bg-linear-to-br from-slate-900/60 to-slate-900/40 card-border card-border-hover hover:shadow-[0_15px_40px_rgba(0,0,0,0.3)] transition-[box-shadow] duration-200 ease-emphasized cursor-default hover-lift">
+            <div class="spotlight-card card-border-glow card-squash group p-8 lg:p-10 radius-card-lg bg-linear-to-br from-slate-900/60 to-slate-900/40 card-border card-border-hover hover:shadow-[0_15px_40px_rgba(0,0,0,0.3)] transition-[transform,box-shadow,border-color] duration-250 ease-emphasized overflow-hidden backdrop-blur-xl hover-lift cursor-default">
               <h3 class="text-xl lg:text-2xl font-black text-white mbe-5 flex items-start gap-5">
                 <span class="text-gradient-violet-fuchsia-br font-mono text-sm mbs-1.5">{{ i18n.formatNumber(i + 1, { nativeDigits: true }) }}</span>
                 <span class="grow group-hover:text-slate-200 transition-colors duration-300">{{ i18n.t(q_key) }}</span>

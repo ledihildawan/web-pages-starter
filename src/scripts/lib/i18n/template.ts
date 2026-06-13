@@ -62,6 +62,29 @@ const escapeHtmlAttr = (value: string | number | boolean): string =>
 
 const warnedKeys = new Set<string>();
 
+const i18nScriptCache = new Map<string, { hash: string; script: string }>();
+
+const hashLocales = (name: string, usedComponents: string[]): string => {
+  const parts: string[] = [];
+  for (const locale of LOCALES) {
+    const files = [
+      resolveRoot(`${PATHS.LOCALES}/${locale.code}/common.json`),
+      resolveRoot(`${PATHS.LOCALES}/${locale.code}/${name}.json`),
+      ...usedComponents.map((c) =>
+        resolveRoot(`${PATHS.LOCALES}/${locale.code}/components.${c}.json`),
+      ),
+    ];
+    for (const f of files) {
+      try {
+        parts.push(String(fs.statSync(f).mtimeMs));
+      } catch {
+        parts.push('0');
+      }
+    }
+  }
+  return parts.join('|');
+};
+
 export const getUsedComponents = (
   templatePath: string,
   found = new Set<string>(),
@@ -94,6 +117,11 @@ const generateClientI18nScript = (
   LOCALE_STORAGE_KEY: string,
   locales: typeof LOCALES,
 ): string => {
+  const cacheKey = name;
+  const hash = hashLocales(name, usedComponents);
+  const cached = i18nScriptCache.get(cacheKey);
+  if (cached && cached.hash === hash) return cached.script;
+
   const allI18nData = Object.fromEntries(
     supportedLangs.map((l) => [
       l,
@@ -125,7 +153,7 @@ const generateClientI18nScript = (
     }
   }
 
-  return `<script>
+  const result = `<script>
 (() => {
   const defaultLocale = ${JSON.stringify(lang)};
 
@@ -151,8 +179,10 @@ const generateClientI18nScript = (
     htmlEl.setAttribute('data-script', ws);
     htmlEl.classList.toggle('is-rtl', dir === 'rtl');
   }
-})();
-</script>`;
+  })();\n  </script>`;
+
+  i18nScriptCache.set(cacheKey, { hash, script: result });
+  return result;
 };
 
 const createI18nObject = (

@@ -29,7 +29,17 @@ createServer({ fetch: app.fetch, port: PORT, hostname: HOST }, () => {
   const localUrl = `http://${HOST === '0.0.0.0' ? 'localhost' : HOST}:${PORT}`;
   log.info(`\n  \x1b[32m✓\x1b[0m Server ready at \x1b[1m${localUrl}\x1b[0m\n`);
   log.info(`  Mode: serve`);
-  log.info(`  Pages: ${pageNames.filter((n) => n !== '404').join(', ')}\n`);
+  const ERROR_PAGES = [
+    'not-found',
+    'unauthorized',
+    'forbidden',
+    'server-error',
+    'maintenance',
+    'offline',
+  ];
+  log.info(
+    `  Pages: ${pageNames.filter((n) => !ERROR_PAGES.includes(n)).join(', ')}\n`,
+  );
 });
 
 setupSigintHandler();

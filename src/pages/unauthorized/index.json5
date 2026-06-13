@@ -1,0 +1,7 @@
+{
+  "page_id": "unauthorized",
+  "meta": {
+    "title": "Unauthorized | Login Required",
+    "description": "Authentication is required to access this page."
+  }
+}

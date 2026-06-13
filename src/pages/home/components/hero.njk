@@ -5,13 +5,13 @@
 {% static 'images/hero-test-900.avif' as hero_900 %}
 {% static 'images/hero-test-1200.avif' as hero_1200 %}
 
-<section class="relative pbs-44 pbe-24 px-6 text-center overflow-hidden">
+<section class="relative pbs-52 pbe-28 px-6 text-center overflow-hidden">
 
   <div class="absolute inset-bs-0 inset-s-1/2 ltr:-translate-x-1/2 rtl:translate-x-1/2 inline-[120%] block-[120%] bg-[radial-gradient(circle_at_top,var(--tw-gradient-stops))] from-violet-600/15 via-transparent to-transparent -z-10 blur-3xl opacity-60"></div>
 
   <div class="max-inline-6xl mx-auto relative">
 
-    <div class="inline-flex items-center gap-3 px-4 py-2 bg-violet-500/10 border border-violet-500/30 rounded-full text-violet-100 text-sm mbe-10 transition-colors hover:bg-violet-500/20 cursor-default gpu-boost">
+    <div class="inline-flex items-center gap-3 px-5 py-2.5 bg-linear-to-r from-violet-500/10 to-fuchsia-500/10 border border-violet-500/30 rounded-full text-violet-100 text-sm mbe-12 transition-[background-color,border-color,box-shadow] duration-200 hover:bg-violet-500/20 hover:border-violet-500/40 hover:shadow-[0_0_30px_rgba(139,92,246,0.3)] cursor-default">
       <span class="relative flex block-2 inline-2">
         <span class="animate-ping absolute inline-flex block-full inline-full rounded-full bg-emerald-400 opacity-75"></span>
         <span class="relative inline-flex rounded-full block-2 inline-2 bg-emerald-500"></span>
@@ -21,14 +21,14 @@
       </span>
     </div>
 
-    <h1 class="text-6xl md:text-8xl font-black tracking-tighter mbe-8 leading-none bg-linear-to-b from-white to-slate-400 bg-clip-text text-transparent">
-      <span>{{ i18n.t('home:hero.title_part1') }}</span>
+    <h1 class="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter mbe-8 leading-[1.1]">
+      <span class="block text-gradient-white">{{ i18n.t('home:hero.title_part1') }}</span>
       <span class="block bg-linear-to-r from-violet-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent">
         {{ i18n.t('home:hero.title_highlight') }}
       </span>
     </h1>
 
-    <p class="text-xl md:text-2xl text-slate-300 max-inline-3xl mx-auto mbe-14 leading-relaxed font-medium">
+    <p class="text-xl md:text-2xl lg:text-3xl text-slate-300 max-inline-3xl mx-auto mbe-16 leading-relaxed font-medium">
       {{ i18n.t('home:hero.description') }}
     </p>
 

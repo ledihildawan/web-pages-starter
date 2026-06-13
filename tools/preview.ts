@@ -237,7 +237,17 @@ const main = async () => {
     log.info(`  Mode: preview (${provider})`);
     log.info(
       `  Pages: ${getPageNames(DIST)
-        .filter((n) => n !== '404')
+        .filter(
+          (n) =>
+            ![
+              'not-found',
+              'unauthorized',
+              'forbidden',
+              'server-error',
+              'maintenance',
+              'offline',
+            ].includes(n),
+        )
         .join(', ')}\n`,
     );
 

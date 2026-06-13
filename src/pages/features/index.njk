@@ -147,17 +147,17 @@
           {% set add_feat_title_key = add_feat_key ~ '.title' %}
           {% set add_feat_desc_key = add_feat_key ~ '.desc' %}
 
-          <div class="spotlight-card card-border-glow card-squash group relative p-10 lg:p-12 radius-card-lg bg-linear-to-br from-slate-900/60 to-slate-900/40 card-border card-border-hover hover:shadow-[0_20px_50px_rgba(139,92,246,0.2)] hover:-translate-y-2 transition-[transform,box-shadow] duration-250 ease-emphasized overflow-hidden backdrop-blur-xl hover-lift">
-            <div class="absolute inset-be-0 inset-e-0 inline-40 block-40 bg-linear-to-br from-violet-500/15 to-transparent rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
+          <div class="spotlight-card card-border-glow card-squash group relative p-10 lg:p-12 radius-card-lg bg-linear-to-br from-slate-900/60 to-slate-900/40 card-border card-border-hover hover:border-{{ item.color }}-500/40 hover:shadow-[0_20px_50px_rgba(139,92,246,0.2)] hover:-translate-y-2 transition-[transform,box-shadow,border-color] duration-250 ease-emphasized overflow-hidden backdrop-blur-xl hover-lift">
+            <div class="absolute inset-be-0 inset-e-0 inline-40 block-40 bg-linear-to-br from-{{ item.color }}-500/15 to-transparent rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
 
             <div class="relative">
-              <div class="inline-14 block-14 radius-nested-lg bg-linear-to-br from-violet-500/20 to-violet-500/5 flex items-center justify-center mbe-8 group-hover:rotate-6 group-hover:scale-110 transition-[transform,box-shadow,border-color] duration-200 border border-violet-500/30 group-hover:border-violet-500/50 shadow-lg group-hover:shadow-[0_0_40px_rgba(139,92,246,0.3)] icon-squash">
-                {{ icon.icon(item.icon, 'inline-7 block-7 text-violet-400', size='lg') }}
+              <div class="inline-14 block-14 radius-nested-lg bg-linear-to-br from-{{ item.color }}-500/20 to-{{ item.color }}-500/5 flex items-center justify-center mbe-8 group-hover:rotate-6 group-hover:scale-110 transition-[transform,box-shadow,border-color] duration-200 border border-{{ item.color }}-500/30 group-hover:border-{{ item.color }}-500/50 shadow-lg group-hover:shadow-[0_0_40px_rgba(139,92,246,0.3)] icon-squash">
+                {{ icon.icon(item.icon, 'inline-7 block-7 text-' ~ item.color ~ '-400', size='lg') }}
               </div>
-              <h3 class="text-xl font-black text-white mbe-4 tracking-tight group-hover:text-violet-200 transition-colors duration-200">
+              <h3 class="text-xl font-black text-white mbe-4 tracking-tight group-hover:text-{{ item.color }}-200 transition-colors duration-200">
                 {{ i18n.t(add_feat_title_key) }}
               </h3>
-              <p class="text-slate-400 text-base leading-relaxed font-medium group-hover:text-slate-300 transition-colors duration-200">
+              <p class="text-slate-400 leading-relaxed font-medium group-hover:text-slate-300 transition-colors duration-200">
                 {{ i18n.t(add_feat_desc_key) }}
               </p>
             </div>
