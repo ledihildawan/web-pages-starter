@@ -26,6 +26,7 @@ const runBuild = (): Promise<void> => {
       'clean:cache',
       './tools/fetch-exchange-rates.ts',
       './tools/sync-system-pages.ts',
+      './tools/sync-locales.ts',
       './tools/generate-i18n.ts',
       './tools/generate-sitemap.ts',
       './tools/generate-sw.ts',

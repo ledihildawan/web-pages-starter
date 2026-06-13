@@ -302,7 +302,7 @@ The i18n store provides reactive locale switching. Registered in `src/scripts/li
 ### Development
 
 ```
-sync-system-pages → clean:cache → fetch:rates → generate-i18n → [watch:i18n || rsbuild dev]
+sync-system-pages → clean:cache → fetch:rates → sync-locales → generate-i18n → [watch:i18n || rsbuild dev]
 ```
 
 - Rsbuild dev server on port 8888 with HMR
@@ -313,18 +313,19 @@ sync-system-pages → clean:cache → fetch:rates → generate-i18n → [watch:i
 ### Production
 
 ```
-sync-system-pages → clean:cache → fetch:rates → generate-i18n → generate-sitemap → generate-manifest → generate-robots → generate-sw → build
+sync-system-pages → clean:cache → fetch:rates → sync-locales → generate-i18n → generate-sitemap → generate-manifest → generate-robots → generate-sw → build
 ```
 
 1. **sync-system-pages** — renames ALL system page folders to match locale-dependent slugs from `SYSTEM_PAGE_SLUGS` when the default locale changes
 2. **clean-cache** — purges `node_modules/.cache`, `.cache`, `dist`
 3. **fetch-exchange-rates** — pulls live rates from Frankfurter API (24h cache)
-4. **generate-i18n** — generates `generated/i18n.d.ts` type definitions (overwrites stub), checks locale parity (errors fail the build), syncs `i18n-ally.sourceLanguage`/`displayLanguage` from `i18nConfig.defaultLocale`
-5. **generate-sitemap** — generates `public/sitemap.xml` from pages and `SITE_URL`
-6. **generate-manifest** — generates `public/manifest.json` from `global.json5` + `i18nConfig`, uses `BASE_PATH` for `start_url` and `scope`
-7. **generate-robots** — generates `public/robots.txt` from `SITE_URL`
-8. **generate-sw** — generates `public/sw.js` dynamically with locale-specific error page URLs from `SYSTEM_PAGE_SLUGS` (cache version v5)
-9. **build** — Rsbuild production bundle with:
+4. **sync-locales** — creates missing locale directories and syncs missing `.json` files within existing directories from the default locale (Phase 1: missing dirs; Phase 2: missing files in existing dirs)
+5. **generate-i18n** — generates `generated/i18n.d.ts` type definitions (overwrites stub), checks locale parity (errors fail the build), syncs `i18n-ally.sourceLanguage`/`displayLanguage` from `i18nConfig.defaultLocale`
+6. **generate-sitemap** — generates `public/sitemap.xml` from pages and `SITE_URL`
+7. **generate-manifest** — generates `public/manifest.json` from `global.json5` + `i18nConfig`, uses `BASE_PATH` for `start_url` and `scope`
+8. **generate-robots** — generates `public/robots.txt` from `SITE_URL`
+9. **generate-sw** — generates `public/sw.js` dynamically with locale-specific error page URLs from `SYSTEM_PAGE_SLUGS` (cache version v5)
+10. **build** — Rsbuild production bundle with:
    - JS + CSS minification
    - HTML minification (`html-minifier-terser`)
    - `home.html` → `index.html` rename (`pluginRootPageAsIndex`)
@@ -545,7 +546,8 @@ Direct tool access:
 | `bun ./tools/generate-robots.ts` | Generate `public/robots.txt` from `SITE_URL` |
 | `bun ./tools/generate-sw.ts` | Generate `public/sw.js` with locale-specific error page URLs |
 | `bun ./tools/sync-system-pages.ts` | Rename system page folders to match locale-dependent slugs |
-| `bun ./tools/sync-locales.ts` | Create missing locale folders from default |
+| `bun ./tools/sync-locales.ts` | Sync missing locale directories and files from default |
+| `bun ./tools/delete-page.ts [name]` | Delete a page and its 87 locale files (system pages protected) |
 | `bun ./tools/check-locale-parity.ts` | Diff translation keys across all locales |
 | `bun ./tools/fetch-exchange-rates.ts` | Fetch exchange rates with 24h cache |
 | `bun ./tools/fetch-exchange-rates.ts -- --force` | Force-refresh exchange rates |
@@ -579,7 +581,8 @@ All tools live in `tools/`. They share five modules from `tools/shared/`:
 | `generate-robots.ts` | logBox, SITE_URL, writeFilePath | Generate robots.txt from SITE_URL |
 | `generate-sw.ts` | logBox, writeFilePath | Generate `public/sw.js` with locale-specific error page URLs |
 | `sync-system-pages.ts` | log, logBox, wrapMainError | Rename ALL system page folders to locale-dependent slugs when default locale changes |
-| `sync-locales.ts` | log, logBox | Create missing locale directories |
+| `sync-locales.ts` | log, logBox | Create missing locale directories; sync missing files in existing directories |
+| `delete-page.ts` | log | Delete a page (folder + 87 locale files); scans for broken URL references before deletion; system pages protected |
 | `check-locale-parity.ts` | log | Diff translation keys across locales |
 | `fetch-exchange-rates.ts` | log, writeFilePath, generatedHeader | Fetch and cache exchange rates |
 | `watch-i18n.ts` | log, logBox, setupSigintHandler | Watch locale file changes |

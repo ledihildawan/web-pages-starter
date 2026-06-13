@@ -11,8 +11,8 @@
     "bun": ">=1.3.14"
   },
   "scripts": {
-    "dev": "bun ./tools/sync-system-pages.ts && bun ./tools/clean-cache.ts && bun ./tools/fetch-exchange-rates.ts && bun ./tools/generate-i18n.ts && concurrently \"bun ./tools/watch-i18n.ts\" \"rsbuild dev\"",
-    "build": "bun ./tools/sync-system-pages.ts && bun ./tools/clean-cache.ts && bun ./tools/fetch-exchange-rates.ts && bun ./tools/generate-i18n.ts && bun ./tools/generate-sitemap.ts && bun ./tools/generate-manifest.ts && bun ./tools/generate-robots.ts && bun ./tools/generate-sw.ts && bun ./tools/build.ts",
+    "dev": "bun ./tools/sync-system-pages.ts && bun ./tools/clean-cache.ts && bun ./tools/fetch-exchange-rates.ts && bun ./tools/sync-locales.ts && bun ./tools/generate-i18n.ts && concurrently \"bun ./tools/watch-i18n.ts\" \"rsbuild dev\"",
+    "build": "bun ./tools/sync-system-pages.ts && bun ./tools/clean-cache.ts && bun ./tools/fetch-exchange-rates.ts && bun ./tools/sync-locales.ts && bun ./tools/generate-i18n.ts && bun ./tools/generate-sitemap.ts && bun ./tools/generate-manifest.ts && bun ./tools/generate-robots.ts && bun ./tools/generate-sw.ts && bun ./tools/build.ts",
     "preview": "bun ./tools/preview.ts",
     "serve": "bun ./tools/serve.ts",
     "clean:cache": "bun ./tools/clean-cache.ts",
@@ -63,14 +63,14 @@
     "pluralize": "^8.0.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.16",
+    "@biomejs/biome": "^2.5.0",
     "@fontsource-variable/inter": "^5.2.8",
     "@ngrok/ngrok": "^1.7.0",
-    "@rsbuild/core": "^2.0.12",
+    "@rsbuild/core": "^2.0.13",
     "@rsbuild/plugin-image-compress": "^1.3.4",
-    "@rstest/core": "^0.10.3",
+    "@rstest/core": "^0.10.4",
     "@rstest/coverage-istanbul": "^0.10.4",
-    "@tailwindcss/postcss": "^4.3.0",
+    "@tailwindcss/postcss": "^4.3.1",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@types/alpinejs": "^3.13.11",
@@ -84,7 +84,7 @@
     "bun-types": "^1.3.14",
     "chokidar": "^5.0.0",
     "concurrently": "^10.0.3",
-    "happy-dom": "^20.10.2",
+    "happy-dom": "^20.10.3",
     "html-minifier-terser": "^7.2.0",
     "husky": "^9.1.7",
     "inquirer": "^14.0.2",
@@ -95,7 +95,7 @@
     "postcss": "^8.5.15",
     "postcss-loader": "^8.2.1",
     "simple-nunjucks-loader": "^3.2.0",
-    "tailwindcss": "^4.3.0",
+    "tailwindcss": "^4.3.1",
     "typescript": "^6.0.3"
   },
   "browserslist": [

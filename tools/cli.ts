@@ -205,6 +205,11 @@ const tools: Tool[] = [
     },
   },
   {
+    name: 'Delete Page',
+    description: 'Remove a page and its locale files',
+    action: () => runTool('delete-page'),
+  },
+  {
     name: 'Sync Locales',
     description: 'Synchronize locale files from default',
     action: () => runTool('sync-locales'),
