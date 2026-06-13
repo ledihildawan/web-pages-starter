@@ -49,7 +49,7 @@ function getCurrentRootFolder(): string {
 
   return folders.includes('home')
     ? 'home'
-    : folders.find((f) => f !== '404') || folders[0] || '';
+    : folders.find((f) => f !== 'not-found') || folders[0] || '';
 }
 
 async function main() {

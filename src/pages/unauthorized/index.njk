@@ -1,0 +1,12 @@
+{% extends "main.njk" %}
+{% import "icons.njk" as icon %}
+
+{% block content %}
+{% set error_icon_name = 'key' %}
+{% set error_icon_color = 'yellow' %}
+{% set error_gradient_from = 'yellow' %}
+{% set error_gradient_via = 'amber' %}
+{% set error_i18n_ns = 'unauthorized' %}
+{% set error_quick_links = '/|home,/contact|contact' %}
+{% include "error-page.njk" %}
+{% endblock %}

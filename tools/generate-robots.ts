@@ -12,7 +12,12 @@ const baseUrl = SITE_URL.endsWith('/') ? SITE_URL : `${SITE_URL}/`;
 
 const robots = `User-agent: *
 Allow: ${basePath}
-Disallow: ${basePath}404.html
+Disallow: ${basePath}not-found.html
+Disallow: ${basePath}unauthorized.html
+Disallow: ${basePath}forbidden.html
+Disallow: ${basePath}server-error.html
+Disallow: ${basePath}maintenance.html
+Disallow: ${basePath}offline.html
 Disallow: ${basePath}sw.js
 
 Sitemap: ${baseUrl}sitemap.xml

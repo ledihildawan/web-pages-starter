@@ -1,11 +1,19 @@
-const CACHE_NAME = 'starter-v3';
+const CACHE_NAME = 'starter-v4';
 const BASE = new URL('.', self.location.href).pathname;
+const ERROR_PAGES = [
+  `${BASE}not-found.html`,
+  `${BASE}unauthorized.html`,
+  `${BASE}forbidden.html`,
+  `${BASE}server-error.html`,
+  `${BASE}maintenance.html`,
+  `${BASE}offline.html`,
+];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache
-        .addAll([BASE, `${BASE}404.html`, `${BASE}manifest.json`])
+        .addAll([BASE, ...ERROR_PAGES, `${BASE}manifest.json`])
         .catch(() => Promise.resolve());
     }),
   );
@@ -34,7 +42,7 @@ self.addEventListener('fetch', (event) => {
         })
         .catch(() => {
           if (event.request.mode === 'navigate') {
-            return caches.match(`${BASE}404.html`);
+            return caches.match(`${BASE}offline.html`);
           }
         });
     }),

@@ -78,7 +78,7 @@ export function createStaticApp(
     const segments = reqPath.replace(/^\/+|\/+$/g, '').split('/');
     const first = segments[0];
     if (first && cache.has(first)) return c.html(cache.get(first) as string);
-    const notFound = cache.get('404');
+    const notFound = cache.get('not-found');
     if (notFound) return c.html(notFound, 404);
     return c.notFound();
   });

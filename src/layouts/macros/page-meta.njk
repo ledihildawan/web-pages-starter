@@ -27,7 +27,8 @@
   {% if page.meta.keywords %}
     <meta name="keywords" content="{{ page.meta.keywords }}">
   {% endif %}
-  {% if page.page_id == "404" %}
+  {% set is_error_page = page.page_id == "not-found" or page.page_id == "unauthorized" or page.page_id == "forbidden" or page.page_id == "server-error" or page.page_id == "maintenance" or page.page_id == "offline" %}
+  {% if is_error_page %}
     <meta name="robots" content="noindex, nofollow">
   {% endif %}
 
@@ -64,7 +65,7 @@
     <meta name="twitter:image:alt" content="{{ image_alt }}">
   {% endif %}
 
-  {% if page.page_id != "404" %}
+  {% if not is_error_page %}
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",

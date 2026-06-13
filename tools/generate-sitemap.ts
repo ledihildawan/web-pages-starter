@@ -24,7 +24,14 @@ const getPages = () => {
     return [];
   }
 
-  const EXCLUDED = ['404'];
+  const EXCLUDED = [
+    'not-found',
+    'unauthorized',
+    'forbidden',
+    'server-error',
+    'maintenance',
+    'offline',
+  ];
 
   const entries = fs.readdirSync(PAGES_DIR, { withFileTypes: true });
   return entries
