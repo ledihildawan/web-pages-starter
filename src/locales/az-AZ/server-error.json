@@ -1,7 +1,7 @@
 {
   "heading": "500",
-  "subheading": "Server Error",
-  "description": "An unexpected error occurred on the server. Our team has been notified and is working on it.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Server Xətası",
+  "description": "Serverdə gözlənilməz xəta baş verdi. Komandamız xəbərdar edildi və üzərində işləyir.",
+  "button_text": "Ana Səhifəyə Qayıt",
+  "or_try": "Və ya sınayın:"
 }

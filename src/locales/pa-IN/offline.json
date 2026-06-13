@@ -1,8 +1,8 @@
 {
-  "heading": "You're Offline",
-  "subheading": "No Connection",
-  "description": "You are currently not connected to the internet. Some pages may still be available from cache.",
-  "button_text": "Try Again",
-  "hint": "Check your internet connection and try reloading the page.",
-  "cached_pages": "Cached pages:"
+  "heading": "ਤੁਸੀਂ ਆਫ਼ਲਾਈਨ ਹੋ",
+  "subheading": "ਕੋਈ ਕਨੈਕਸ਼ਨ ਨਹੀਂ",
+  "description": "ਤੁਸੀਂ ਮੌਜੂਦਾ ਤੌਰ 'ਤੇ ਇੰਟਰਨੈੱਟ ਨਾਲ ਕਨੈਕਟ ਨਹੀਂ ਹੋ। ਕੈਚੇ ਤੋਂ ਕੁਝ ਸਫ਼ੇ ਅਜੇ ਵੀ ਉਪਲਬਧ ਹੋ ਸਕਦੇ ਹਨ।",
+  "button_text": "ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ",
+  "hint": "ਆਪਣਾ ਇੰਟਰਨੈੱਟ ਕਨੈਕਸ਼ਨ ਜਾਂਚੋ ਅਤੇ ਸਫ਼ਾ ਮੁੜ ਲੋਡ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+  "cached_pages": "ਕੈਚੇ ਕੀਤੇ ਸਫ਼ੇ:"
 }

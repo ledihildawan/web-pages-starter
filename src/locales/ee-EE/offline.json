@@ -1,8 +1,8 @@
 {
-  "heading": "You're Offline",
-  "subheading": "No Connection",
-  "description": "You are currently not connected to the internet. Some pages may still be available from cache.",
-  "button_text": "Try Again",
-  "hint": "Check your internet connection and try reloading the page.",
-  "cached_pages": "Cached pages:"
+  "heading": "Olete võrguühenduseta",
+  "subheading": "Ühendus puudub",
+  "description": "Teil pole praegu internetti ühendatud. Mõned lehed võivad olla endiselt saadaval vahemälust.",
+  "button_text": "Proovi uuesti",
+  "hint": "Kontrollige internetiühendust ja proovige lehte uuesti laadida.",
+  "cached_pages": "Vahemälus olevad lehed:"
 }

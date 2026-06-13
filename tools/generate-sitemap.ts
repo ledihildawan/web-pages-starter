@@ -2,8 +2,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 import '../src/configs/env';
+import { i18nConfig } from '../src/configs/i18n';
+import { getErrorPageSlugs, getRootPageSlug } from '../src/configs/pages';
 import { PATHS } from '../src/configs/paths';
-import { ROOT_PAGE } from '../src/configs/site';
 import { log, logBox } from './shared/logger';
 import { SITE_URL } from './shared/site-url';
 import { writeFilePath } from './shared/write-file';
@@ -24,14 +25,7 @@ const getPages = () => {
     return [];
   }
 
-  const EXCLUDED = [
-    'not-found',
-    'unauthorized',
-    'forbidden',
-    'server-error',
-    'maintenance',
-    'offline',
-  ];
+  const EXCLUDED = getErrorPageSlugs(i18nConfig.defaultLocale);
 
   const entries = fs.readdirSync(PAGES_DIR, { withFileTypes: true });
   return entries
@@ -49,8 +43,9 @@ const generateSitemap = () => {
   const pages = getPages();
   const baseUrl = SITE_URL.endsWith('/') ? SITE_URL.slice(0, -1) : SITE_URL;
 
-  const homePage = pages.includes(ROOT_PAGE) ? ROOT_PAGE : null;
-  const otherPages = pages.filter((p) => p !== ROOT_PAGE);
+  const rootSlug = getRootPageSlug(i18nConfig.defaultLocale);
+  const homePage = pages.includes(rootSlug) ? rootSlug : null;
+  const otherPages = pages.filter((p) => p !== rootSlug);
 
   const urls: string[] = [];
 

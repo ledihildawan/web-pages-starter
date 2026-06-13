@@ -2,8 +2,9 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 import '../src/configs/env';
+import { i18nConfig } from '../src/configs/i18n';
+import { getErrorPageSlugs, getRootPageSlug } from '../src/configs/pages';
 import { PATHS } from '../src/configs/paths';
-import { ROOT_PAGE } from '../src/configs/site';
 import {
   createStaticApp,
   getPageNames,
@@ -30,18 +31,12 @@ createServer({ fetch: app.fetch, port: PORT, hostname: HOST }, () => {
   const localUrl = `http://${HOST === '0.0.0.0' ? 'localhost' : HOST}:${PORT}`;
   log.info(`\n  \x1b[32m✓\x1b[0m Server ready at \x1b[1m${localUrl}\x1b[0m\n`);
   log.info(`  Mode: serve`);
-  const ERROR_PAGES = [
-    'not-found',
-    'unauthorized',
-    'forbidden',
-    'server-error',
-    'maintenance',
-    'offline',
-  ];
+  const errorPages = getErrorPageSlugs(i18nConfig.defaultLocale);
+  const rootSlug = getRootPageSlug(i18nConfig.defaultLocale);
   log.info(
     `  Pages: ${pageNames
-      .filter((n) => !ERROR_PAGES.includes(n))
-      .map((n) => (n === ROOT_PAGE ? `${n} (index)` : n))
+      .filter((n) => !errorPages.includes(n))
+      .map((n) => (n === rootSlug ? `${n} (index)` : n))
       .join(', ')}\n`,
   );
 });

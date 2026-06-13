@@ -1,8 +1,8 @@
 {
-  "heading": "You're Offline",
-  "subheading": "No Connection",
-  "description": "You are currently not connected to the internet. Some pages may still be available from cache.",
-  "button_text": "Try Again",
-  "hint": "Check your internet connection and try reloading the page.",
-  "cached_pages": "Cached pages:"
+  "heading": "Դուք Չեք Կապակցված",
+  "subheading": "Կապ Չկա",
+  "description": "Այս պահին դուք չեք կապակցված ինտերնետին։ Որոշ էջեր դեռևս կարող են հասանելի լինել քեշից։",
+  "button_text": "Կրկին Փորձել",
+  "hint": "Ստուգեք ձեր ինտերնետ կապը և փորձեք վերաբեռնել էջը։",
+  "cached_pages": "Քեշավորված էջեր՝"
 }

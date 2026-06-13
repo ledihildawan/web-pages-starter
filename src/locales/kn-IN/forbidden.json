@@ -1,7 +1,7 @@
 {
   "heading": "403",
-  "subheading": "Access Denied",
-  "description": "You do not have permission to access this page or resource.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "ಪ್ರವೇಶ ನಿರಾಕರಿಸಲಾಗಿದೆ",
+  "description": "ಈ ಪುಟ ಅಥವಾ ಸಂಪನ್ಮೂಲವನ್ನು ಪ್ರವೇಶಿಸಲು ನಿಮಗೆ ಅನುಮತಿ ಇಲ್ಲ.",
+  "button_text": "ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ",
+  "or_try": "ಅಥವಾ ಪ್ರಯತ್ನಿಸಿ:"
 }

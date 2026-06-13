@@ -1,8 +1,8 @@
 {
-  "heading": "You're Offline",
-  "subheading": "No Connection",
-  "description": "You are currently not connected to the internet. Some pages may still be available from cache.",
-  "button_text": "Try Again",
-  "hint": "Check your internet connection and try reloading the page.",
-  "cached_pages": "Cached pages:"
+  "heading": "Offline módban van",
+  "subheading": "Nincs kapcsolat",
+  "description": "Jelenleg nincs csatlakozva az internethez. Egyes oldalak továbbra is elérhetők lehetnek a gyorsítótárból.",
+  "button_text": "Újrapróbálás",
+  "hint": "Ellenőrizze az internetkapcsolatot, és próbálja újra betölteni az oldalt.",
+  "cached_pages": "Gyorsítótárazott oldalak:"
 }

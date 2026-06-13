@@ -1,8 +1,8 @@
 {
-  "heading": "You're Offline",
-  "subheading": "No Connection",
-  "description": "You are currently not connected to the internet. Some pages may still be available from cache.",
-  "button_text": "Try Again",
-  "hint": "Check your internet connection and try reloading the page.",
-  "cached_pages": "Cached pages:"
+  "heading": "Vous êtes hors ligne",
+  "subheading": "Aucune connexion",
+  "description": "Vous n'êtes actuellement pas connecté à internet. Certaines pages peuvent encore être disponibles depuis le cache.",
+  "button_text": "Réessayer",
+  "hint": "Vérifiez votre connexion internet et essayez de recharger la page.",
+  "cached_pages": "Pages en cache :"
 }

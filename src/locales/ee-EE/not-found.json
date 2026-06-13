@@ -1,7 +1,7 @@
 {
   "heading": "404",
   "subheading": "Lehte ei leitud",
-  "description": "Tundub, et otsitav leht ei eksisteeri või on teisaldatud.",
+  "description": "Tundub, et otsitavat lehte pole olemas või on see teisaldatud.",
   "button_text": "Tagasi avalehele",
-  "or_try": "Või proovige:"
+  "or_try": "Või proovi:"
 }

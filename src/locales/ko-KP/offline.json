@@ -1,8 +1,8 @@
 {
-  "heading": "You're Offline",
-  "subheading": "No Connection",
-  "description": "You are currently not connected to the internet. Some pages may still be available from cache.",
-  "button_text": "Try Again",
-  "hint": "Check your internet connection and try reloading the page.",
-  "cached_pages": "Cached pages:"
+  "heading": "오프라인 상태입니다",
+  "subheading": "연결 없음",
+  "description": "현재 인터넷에 연결되어 있지 않습니다. 일부 페이지는 캐시에서 이용할 수 있습니다.",
+  "button_text": "다시 시도",
+  "hint": "인터넷 연결을 확인하고 페이지를 새로고침해 보세요.",
+  "cached_pages": "캐시된 페이지:"
 }

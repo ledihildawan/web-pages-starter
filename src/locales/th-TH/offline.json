@@ -1,8 +1,8 @@
 {
-  "heading": "You're Offline",
-  "subheading": "No Connection",
-  "description": "You are currently not connected to the internet. Some pages may still be available from cache.",
-  "button_text": "Try Again",
-  "hint": "Check your internet connection and try reloading the page.",
-  "cached_pages": "Cached pages:"
+  "heading": "คุณออฟไลน์อยู่",
+  "subheading": "ไม่มีการเชื่อมต่อ",
+  "description": "ขณะนี้คุณไม่ได้เชื่อมต่ออินเทอร์เน็ต บางหน้าอาจยังคงพร้อมใช้งานจากแคช",
+  "button_text": "ลองอีกครั้ง",
+  "hint": "ตรวจสอบการเชื่อมต่ออินเทอร์เน็ตของคุณแล้วลองโหลดหน้าเว็บใหม่",
+  "cached_pages": "หน้าในแคช:"
 }

@@ -1,7 +1,7 @@
 {
   "heading": "403",
-  "subheading": "Access Denied",
-  "description": "You do not have permission to access this page or resource.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Juurdepääs keelatud",
+  "description": "Teil pole õigust sellele lehele või ressursile juurde pääseda.",
+  "button_text": "Tagasi avalehele",
+  "or_try": "Või proovi:"
 }

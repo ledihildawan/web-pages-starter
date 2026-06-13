@@ -1,7 +1,7 @@
 {
   "heading": "403",
-  "subheading": "Access Denied",
-  "description": "You do not have permission to access this page or resource.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Tilgang nektet",
+  "description": "Du har ikke tillatelse til å få tilgang til denne siden eller ressursen.",
+  "button_text": "Tilbake til startsiden",
+  "or_try": "Eller prøv:"
 }

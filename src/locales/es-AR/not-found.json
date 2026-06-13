@@ -1,7 +1,7 @@
 {
   "heading": "404",
-  "subheading": "Page Not Found",
-  "description": "It looks like the page you're looking for doesn't exist or has been moved.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Página no encontrada",
+  "description": "Parece que la página que busca no existe o ha sido movida.",
+  "button_text": "Volver al inicio",
+  "or_try": "O pruebe:"
 }

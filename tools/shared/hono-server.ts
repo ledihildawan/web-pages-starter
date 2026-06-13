@@ -3,6 +3,8 @@ import path from 'node:path';
 import { serveStatic } from '@hono/node-server/serve-static';
 import { Hono } from 'hono';
 import { compress } from 'hono/compress';
+import { i18nConfig } from '../../src/configs/i18n';
+import { getSystemPageSlug } from '../../src/configs/pages';
 import { log } from './logger';
 
 const STATIC_ASSET_RE =
@@ -78,7 +80,11 @@ export function createStaticApp(
     const segments = reqPath.replace(/^\/+|\/+$/g, '').split('/');
     const first = segments[0];
     if (first && cache.has(first)) return c.html(cache.get(first) as string);
-    const notFound = cache.get('not-found');
+    const notFoundSlug = getSystemPageSlug(
+      'not-found',
+      i18nConfig.defaultLocale,
+    );
+    const notFound = cache.get(notFoundSlug);
     if (notFound) return c.html(notFound, 404);
     return c.notFound();
   });

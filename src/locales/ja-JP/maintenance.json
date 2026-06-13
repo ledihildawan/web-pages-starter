@@ -1,7 +1,7 @@
 {
   "heading": "503",
-  "subheading": "Service Unavailable",
-  "description": "The service is temporarily unavailable due to scheduled maintenance. Please try again in a moment.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "サービス利用不可",
+  "description": "予定されたメンテナンスのため、サービスは一時的に利用できません。しばらくしてからもう一度お試しください。",
+  "button_text": "ホームに戻る",
+  "or_try": "またはこちら："
 }

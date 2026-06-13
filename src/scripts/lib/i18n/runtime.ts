@@ -6,7 +6,7 @@ import {
 } from '../../../../generated/exchange-rates';
 import type { I18nTranslationKeys } from '../../../../generated/i18n';
 import { i18nConfig } from '../../../configs/i18n';
-import { ROOT_PAGE } from '../../../configs/site';
+import { ROOT_PAGE } from '../../../configs/pages';
 import type { DateTimePreset } from '../../utils/types';
 import { scheduleTask } from '../utils/microtask-queue';
 import { CURRENCY_CODE } from './currencies';

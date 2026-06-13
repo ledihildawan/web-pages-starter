@@ -1,7 +1,7 @@
 {
   "heading": "500",
-  "subheading": "Server Error",
-  "description": "An unexpected error occurred on the server. Our team has been notified and is working on it.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "सर्वर त्रुटि",
+  "description": "सर्वर पर एक अप्रत्याशित त्रुटि हुई। हमारी टीम को सूचित कर दिया गया है और वह इस पर काम कर रही है।",
+  "button_text": "होम पर वापस जाएं",
+  "or_try": "या आजमाएं:"
 }

@@ -1,7 +1,7 @@
 {
   "heading": "503",
-  "subheading": "Service Unavailable",
-  "description": "The service is temporarily unavailable due to scheduled maintenance. Please try again in a moment.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Storitev ni na voljo",
+  "description": "Storitev je začasno nedosegljiva zaradi načrtovanega vzdrževanja. Poskusite znova čez trenutek.",
+  "button_text": "Nazaj na domačo stran",
+  "or_try": "Ali poskusite:"
 }

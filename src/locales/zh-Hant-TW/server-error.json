@@ -1,7 +1,7 @@
 {
   "heading": "500",
-  "subheading": "Server Error",
-  "description": "An unexpected error occurred on the server. Our team has been notified and is working on it.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "伺服器錯誤",
+  "description": "伺服器發生了意外錯誤。我們的團隊已收到通知並正在處理。",
+  "button_text": "返回首頁",
+  "or_try": "或嘗試："
 }

@@ -1,7 +1,7 @@
 {
   "heading": "404",
-  "subheading": "Page Not Found",
-  "description": "It looks like the page you're looking for doesn't exist or has been moved.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Az oldal nem található",
+  "description": "Úgy tűnik, hogy a keresett oldal nem létezik vagy áthelyezték.",
+  "button_text": "Vissza a kezdőlapra",
+  "or_try": "Vagy próbálja ki:"
 }

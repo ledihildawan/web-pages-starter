@@ -1,8 +1,8 @@
 {
-  "heading": "You're Offline",
-  "subheading": "No Connection",
-  "description": "You are currently not connected to the internet. Some pages may still be available from cache.",
-  "button_text": "Try Again",
-  "hint": "Check your internet connection and try reloading the page.",
-  "cached_pages": "Cached pages:"
+  "heading": "אתה לא מחובר",
+  "subheading": "אין חיבור",
+  "description": "אינך מחובר לאינטרנט כעת. ייתכן שחלק מהדפים עדיין יהיו זמינים מהמטמון.",
+  "button_text": "נסה שוב",
+  "hint": "בדוק את חיבור האינטרנט שלך ונסה לטעון את הדף מחדש.",
+  "cached_pages": "דפים במטמון:"
 }

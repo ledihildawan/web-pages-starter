@@ -1,7 +1,7 @@
 {
   "heading": "401",
-  "subheading": "Authentication Required",
-  "description": "You need to sign in or authenticate to access this page.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Tasdiqlash talab qilinadi",
+  "description": "Bu sahifaga kirish uchun tizimga kirishingiz yoki tasdiqlashingiz kerak.",
+  "button_text": "Bosh sahifaga qaytish",
+  "or_try": "Yoki urinib ko'ring:"
 }

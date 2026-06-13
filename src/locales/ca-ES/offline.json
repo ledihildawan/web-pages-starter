@@ -1,8 +1,8 @@
 {
-  "heading": "You're Offline",
-  "subheading": "No Connection",
-  "description": "You are currently not connected to the internet. Some pages may still be available from cache.",
-  "button_text": "Try Again",
-  "hint": "Check your internet connection and try reloading the page.",
-  "cached_pages": "Cached pages:"
+  "heading": "Esteu fora de línia",
+  "subheading": "Sense connexió",
+  "description": "Actualment no esteu connectat a internet. És possible que algunes pàgines encara estiguin disponibles a la memòria cau.",
+  "button_text": "Torna-ho a provar",
+  "hint": "Comproveu la vostra connexió a internet i torneu a carregar la pàgina.",
+  "cached_pages": "Pàgines a la memòria cau:"
 }

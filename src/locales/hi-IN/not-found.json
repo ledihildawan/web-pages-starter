@@ -1,7 +1,7 @@
 {
   "heading": "404",
-  "subheading": "Page Not Found",
-  "description": "It looks like the page you're looking for doesn't exist or has been moved.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "पेज नहीं मिला",
+  "description": "ऐसा लगता है कि आप जो पेज खोज रहे हैं वह मौजूद नहीं है या स्थानांतरित कर दिया गया है।",
+  "button_text": "होम पर वापस जाएं",
+  "or_try": "या आज़माएं:"
 }

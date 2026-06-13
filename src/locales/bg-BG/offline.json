@@ -1,8 +1,8 @@
 {
-  "heading": "You're Offline",
-  "subheading": "No Connection",
-  "description": "You are currently not connected to the internet. Some pages may still be available from cache.",
-  "button_text": "Try Again",
-  "hint": "Check your internet connection and try reloading the page.",
-  "cached_pages": "Cached pages:"
+  "heading": "Без връзка",
+  "subheading": "Няма връзка",
+  "description": "В момента не сте свързани с интернет. Някои страници все още могат да са налични от кеша.",
+  "button_text": "Опитайте отново",
+  "hint": "Проверете интернет връзката си и опитайте да заредите страницата отново.",
+  "cached_pages": "Кеширани страници:"
 }

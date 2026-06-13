@@ -1,7 +1,7 @@
 {
   "heading": "503",
-  "subheading": "Service Unavailable",
-  "description": "The service is temporarily unavailable due to scheduled maintenance. Please try again in a moment.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "บริการไม่พร้อมใช้งาน",
+  "description": "บริการไม่พร้อมใช้งานชั่วคราวเนื่องจากการบำรุงรักษาตามกำหนดการ กรุณาลองอีกครั้งในอีกครู่",
+  "button_text": "กลับหน้าแรก",
+  "or_try": "หรือลอง:"
 }

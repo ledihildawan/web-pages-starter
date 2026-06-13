@@ -1,8 +1,8 @@
 {
-  "heading": "You're Offline",
-  "subheading": "No Connection",
-  "description": "You are currently not connected to the internet. Some pages may still be available from cache.",
-  "button_text": "Try Again",
-  "hint": "Check your internet connection and try reloading the page.",
-  "cached_pages": "Cached pages:"
+  "heading": "您已离线",
+  "subheading": "无网络连接",
+  "description": "您当前未连接到互联网。部分页面可能仍可从缓存中访问。",
+  "button_text": "重试",
+  "hint": "请检查您的网络连接并尝试重新加载页面。",
+  "cached_pages": "缓存页面："
 }

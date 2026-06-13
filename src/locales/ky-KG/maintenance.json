@@ -1,7 +1,7 @@
 {
   "heading": "503",
-  "subheading": "Service Unavailable",
-  "description": "The service is temporarily unavailable due to scheduled maintenance. Please try again in a moment.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Кызмат жеткиликтүү эмес",
+  "description": "Жоспарланган техникалык тейлөө себептүү кызмат убактылуу жеткиликтүү эмес. Сураныч, бир азда кайра аракет кылыңыз.",
+  "button_text": "Башкы бетке кайтуу",
+  "or_try": "Же аракет кылыңыз:"
 }

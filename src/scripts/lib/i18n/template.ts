@@ -2,8 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import type { I18nTranslationKeys } from '../../../../generated/i18n';
 import { i18nConfig } from '../../../configs/i18n';
+import { getRootPageSlug } from '../../../configs/pages';
 import { PATHS } from '../../../configs/paths';
-import { ROOT_PAGE } from '../../../configs/site';
 import { getValueByPath } from '../../utils/common';
 import {
   loadGlobalData,
@@ -703,15 +703,21 @@ export const createTemplateParams = (
   LOCALE_STORAGE_KEY: string,
   LOCALE_CODES: readonly string[],
 ) => {
-  const name = String(params.entryName || ROOT_PAGE);
   const lang = i18nConfig.defaultLocale;
+  const folderName = String(params.entryName || getRootPageSlug(lang));
+  const pageData = readJSON5(
+    resolveRoot(`${PATHS.SRC}/pages/${folderName}/index.json5`),
+  );
+  const pageId = String(pageData.page_id || folderName);
 
-  const templatePath = resolveRoot(`${PATHS.SRC}/pages/${name}/index.njk`);
+  const templatePath = resolveRoot(
+    `${PATHS.SRC}/pages/${folderName}/index.njk`,
+  );
   const usedComponents = getUsedComponents(templatePath);
 
   const mergedLocales: JsonData = {
     ...readJSON5(resolveRoot(`${PATHS.LOCALES}/${lang}/common.json`)),
-    page: readJSON5(resolveRoot(`${PATHS.LOCALES}/${lang}/${name}.json`)),
+    page: readJSON5(resolveRoot(`${PATHS.LOCALES}/${lang}/${pageId}.json`)),
     comp: loadSelectedComponentLocales(
       lang,
       usedComponents,
@@ -724,7 +730,7 @@ export const createTemplateParams = (
     if (colonIdx !== -1) {
       const ns = key.slice(0, colonIdx);
       const clientKey = key.slice(colonIdx + 1);
-      if (ns === name) return `page.${clientKey}`;
+      if (ns === pageId) return `page.${clientKey}`;
       if (ns.startsWith('components.'))
         return `comp.${ns.slice(11)}.${clientKey}`;
       return clientKey;
@@ -768,7 +774,7 @@ export const createTemplateParams = (
 
   const clientI18nScript = generateClientI18nScript(
     lang,
-    name,
+    pageId,
     usedComponents,
     LOCALE_CODES,
     LOCALE_STORAGE_KEY,
@@ -812,13 +818,13 @@ export const createTemplateParams = (
       flag: l.flag.toLowerCase(),
     })),
     clientI18nScript,
-    page_id: name,
+    page_id: pageId,
     global: (() => {
       const data = loadGlobalData(resolveRoot(`${PATHS.SRC}/data`));
       data.site_url = process.env.SITE_URL || 'http://localhost:8888';
       return data;
     })(),
-    page: readJSON5(resolveRoot(`${PATHS.SRC}/pages/${name}/index.json5`)),
+    page: pageData,
     i18n,
     url,
     base_path: basePath,

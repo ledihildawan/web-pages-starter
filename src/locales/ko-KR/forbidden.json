@@ -1,7 +1,7 @@
 {
   "heading": "403",
-  "subheading": "Access Denied",
-  "description": "You do not have permission to access this page or resource.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "접근 거부됨",
+  "description": "이 페이지 또는 리소스에 접근할 권한이 없습니다.",
+  "button_text": "홈으로",
+  "or_try": "또는 시도해 보세요:"
 }

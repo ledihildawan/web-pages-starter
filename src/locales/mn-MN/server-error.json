@@ -1,7 +1,7 @@
 {
   "heading": "500",
-  "subheading": "Server Error",
-  "description": "An unexpected error occurred on the server. Our team has been notified and is working on it.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Серверийн алдаа",
+  "description": "Серверт гэнэтийн алдаа гарлаа. Бидний баг мэдэгдэл хүлээн авсан бөгөөд үүн дээрээ ажиллаж байна.",
+  "button_text": "Нүүр хуудас руу буцах",
+  "or_try": "Эсвэл туршиж үзээрэй:"
 }

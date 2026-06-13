@@ -1,7 +1,7 @@
 {
   "heading": "401",
-  "subheading": "Authentication Required",
-  "description": "You need to sign in or authenticate to access this page.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "அங்கீகாரம் தேவை",
+  "description": "இந்தப் பக்கத்தை அணுக நீங்கள் உள்நுழைய வேண்டும் அல்லது அங்கீகரிக்க வேண்டும்.",
+  "button_text": "முகப்புக்குத் திரும்பு",
+  "or_try": "அல்லது முயற்சிக்கவும்:"
 }

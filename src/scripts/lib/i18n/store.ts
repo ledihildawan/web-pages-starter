@@ -1,5 +1,5 @@
 import { i18nConfig } from '../../../configs/i18n';
-import { ROOT_PAGE } from '../../../configs/site';
+import { ROOT_PAGE } from '../../../configs/pages';
 import { scheduleTask } from '../utils/microtask-queue';
 import { LOCALE_CODES, LOCALES } from './data';
 import { DIRECTION_CODE } from './directions';

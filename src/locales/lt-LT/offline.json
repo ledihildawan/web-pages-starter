@@ -1,8 +1,8 @@
 {
-  "heading": "You're Offline",
-  "subheading": "No Connection",
-  "description": "You are currently not connected to the internet. Some pages may still be available from cache.",
-  "button_text": "Try Again",
-  "hint": "Check your internet connection and try reloading the page.",
-  "cached_pages": "Cached pages:"
+  "heading": "Esate neprisijungę",
+  "subheading": "Nėra ryšio",
+  "description": "Šiuo metu nesate prisijungę prie interneto. Kai kurie puslapiai vis tiek gali būti pasiekiami iš podėlio.",
+  "button_text": "Bandyti dar kartą",
+  "hint": "Patikrinkite interneto ryšį ir bandykite iš naujo įkelti puslapį.",
+  "cached_pages": "Podėlio puslapiai:"
 }

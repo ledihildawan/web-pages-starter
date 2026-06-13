@@ -1,7 +1,7 @@
 {
   "heading": "403",
-  "subheading": "Access Denied",
-  "description": "You do not have permission to access this page or resource.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Prístup zamietnutý",
+  "description": "Nemáte povolenie na prístup k tejto stránke alebo zdroju.",
+  "button_text": "Späť na domov",
+  "or_try": "Alebo skúste:"
 }

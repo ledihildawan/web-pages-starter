@@ -1,7 +1,7 @@
 {
   "heading": "401",
-  "subheading": "Authentication Required",
-  "description": "You need to sign in or authenticate to access this page.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "احراز هویت لازم است",
+  "description": "برای دسترسی به این صفحه باید وارد شوید یا احراز هویت کنید.",
+  "button_text": "بازگشت به خانه",
+  "or_try": "یا امتحان کنید:"
 }

@@ -1,7 +1,7 @@
 {
   "heading": "404",
-  "subheading": "Page Not Found",
-  "description": "It looks like the page you're looking for doesn't exist or has been moved.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Siden blev ikke fundet",
+  "description": "Det ser ud til, at den side, du leder efter, ikke findes eller er blevet flyttet.",
+  "button_text": "Tilbage til forsiden",
+  "or_try": "Eller prøv:"
 }

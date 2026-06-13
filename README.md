@@ -21,7 +21,7 @@ src/
 │   ├── env.ts             #   environment variable loading
 │   ├── i18n.ts            #   defaultLocale + fonts
 │   ├── paths.ts           #   filesystem path constants
-│   └── site.ts            #   ROOT_PAGE constant
+│   └── pages.ts            #   ROOT_PAGE, SYSTEM_PAGE_IDS, SYSTEM_PAGE_SLUGS, slug helpers
 ├── data/                  # global site data
 │   ├── global.json5       #   site_name, seo, social, dns, preconnect
 │   └── menu.json5         #   navigation structure (header links + dropdowns)
@@ -50,8 +50,8 @@ src/
 └── *.d.ts                 #   TS type declarations (env, global, globals, linkedom)
 
 tools/                     #   build-time CLI scripts
-  └── shared/              #   shared modules (logger, signal-handler, hono-server, site-url, write-file)
-public/                    #   static assets (favicon, sw.js, generated manifest/robots/sitemap)
+  └── shared/              #   shared modules (logger, signal-handler, hono-server, site-url, write-file, romanize)
+public/                    #   static assets (favicon, generated sw.js/manifest/robots/sitemap)
   └── assets/i18n/         #   pre-compiled i18n JSON bundles (generated)
 generated/                 #   auto-generated types + exchange rates (gitignored at file level; stubs committed for fresh-clone typecheck; overwritten at build time)
 docs/                      #   documentation
@@ -60,6 +60,8 @@ docs/                      #   documentation
 ## Pages & Routing
 
 File-system based, zero-config routing. Drop a folder under `src/pages/` and it becomes a route. The root page (`home` by default) is output as `index.html` via the `pluginRootPageAsIndex` Rsbuild plugin.
+
+`ROOT_PAGE` lives in `src/configs/pages.ts`. System pages (root + 6 error pages) have locale-dependent folder names driven by `SYSTEM_PAGE_SLUGS` — `page_id` (from `index.json5`) is the stable identifier, decoupled from the folder name. When the default locale changes, `sync-system-pages` renames ALL system page folders to the new locale's slugs. Locale files stay keyed by `page_id` (`home.json`, `not-found.json`, etc.) and are never renamed.
 
 ### Pages
 
@@ -100,7 +102,7 @@ Each page has an optional `index.json5` for structural/layout data (colors, icon
 | `base_path` | `process.env.BASE_PATH` | subpath prefix for asset URLs (default `/`) |
 | `localeConfig` | `LOCALES` lookup | current locale's `dir`, `writingSystem`, etc. |
 | `clientI18nScript` | `template.ts` | inline `<script>` for i18n bootstrap |
-| `page_id` | `params.entryName` | current page identifier |
+| `page_id` | `params.entryName` | stable page identifier (decoupled from folder name; folder uses locale-dependent slug) |
 
 ### Template inheritance
 
@@ -300,7 +302,7 @@ The i18n store provides reactive locale switching. Registered in `src/scripts/li
 ### Development
 
 ```
-sync-root-page → clean:cache → fetch:rates → generate-i18n → [watch:i18n || rsbuild dev]
+sync-system-pages → clean:cache → fetch:rates → generate-i18n → [watch:i18n || rsbuild dev]
 ```
 
 - Rsbuild dev server on port 8888 with HMR
@@ -311,17 +313,18 @@ sync-root-page → clean:cache → fetch:rates → generate-i18n → [watch:i18n
 ### Production
 
 ```
-sync-root-page → clean:cache → fetch:rates → generate-i18n → generate-sitemap → generate-manifest → generate-robots → build
+sync-system-pages → clean:cache → fetch:rates → generate-i18n → generate-sitemap → generate-manifest → generate-robots → generate-sw → build
 ```
 
-1. **sync-root-page** — ensures root page folder matches `ROOT_PAGE` config
+1. **sync-system-pages** — renames ALL system page folders to match locale-dependent slugs from `SYSTEM_PAGE_SLUGS` when the default locale changes
 2. **clean-cache** — purges `node_modules/.cache`, `.cache`, `dist`
 3. **fetch-exchange-rates** — pulls live rates from Frankfurter API (24h cache)
 4. **generate-i18n** — generates `generated/i18n.d.ts` type definitions (overwrites stub), checks locale parity (errors fail the build), syncs `i18n-ally.sourceLanguage`/`displayLanguage` from `i18nConfig.defaultLocale`
 5. **generate-sitemap** — generates `public/sitemap.xml` from pages and `SITE_URL`
 6. **generate-manifest** — generates `public/manifest.json` from `global.json5` + `i18nConfig`, uses `BASE_PATH` for `start_url` and `scope`
 7. **generate-robots** — generates `public/robots.txt` from `SITE_URL`
-8. **build** — Rsbuild production bundle with:
+8. **generate-sw** — generates `public/sw.js` dynamically with locale-specific error page URLs from `SYSTEM_PAGE_SLUGS` (cache version v5)
+9. **build** — Rsbuild production bundle with:
    - JS + CSS minification
    - HTML minification (`html-minifier-terser`)
    - `home.html` → `index.html` rename (`pluginRootPageAsIndex`)
@@ -373,7 +376,7 @@ Ideal for Lighthouse audits, mobile testing, or sharing WIP via a public URL.
 | File | Purpose |
 | --- | --- |
 | `src/configs/i18n.ts` | Default locale + font stack |
-| `src/configs/site.ts` | `ROOT_PAGE` — which page serves at `/` |
+| `src/configs/pages.ts` | `ROOT_PAGE`, `SYSTEM_PAGE_IDS` (7 system pages), `SYSTEM_PAGE_SLUGS` (locale-dependent URL slugs), slug helpers (`getSystemPageSlug`, `getRootPageSlug`, `getErrorPageSlugs`, `isSystemPageId`, `isSystemPageSlug`) |
 | `src/configs/paths.ts` | Filesystem path constants |
 | `src/data/global.json5` | Site name, SEO metadata, social links, DNS/prefetch |
 | `src/data/menu.json5` | Navigation structure (header menu with children) |
@@ -410,12 +413,12 @@ Recommended extensions are listed in `.vscode/extensions.json`. Key extensions:
 ## PWA
 
 - `public/manifest.json` — web app manifest (generated by `tools/generate-manifest.ts` from `global.json5` + `i18nConfig`)
-- `public/sw.js` — cache-first service worker with network fallback (derives `BASE_PATH` from `self.location`, precaches `index.html`, 6 error pages, and `manifest.json`; offline fallback to `offline.html`)
+- `public/sw.js` — **generated** by `tools/generate-sw.ts` (not static). Cache-first service worker with network fallback (derives `BASE_PATH` from `self.location`, precaches `index.html`, 6 error pages with locale-dependent URLs from `SYSTEM_PAGE_SLUGS`, and `manifest.json`; offline fallback to `offline.html`). Cache version: v5
 - Registered automatically in production builds via `import.meta.env.BASE_PATH`
 
 ### Error pages
 
-Six error pages using shared Nunjucks partials (`error-page.njk` and `offline-page.njk`). Each has its own i18n namespace and locale files across all 87 locales.
+Six error pages using shared Nunjucks partials (`error-page.njk` and `offline-page.njk`). Each has its own i18n namespace and locale files across all 87 locales. Error page URLs are locale-dependent — the URL slug for each error page is defined per-locale in `SYSTEM_PAGE_SLUGS` (`src/configs/pages.ts`).
 
 | Page | URL | Status | Icon | Gradient | Pattern |
 | --- | --- | --- | --- | --- | --- |
@@ -523,8 +526,8 @@ Run tests interactively via `bun run cli` → **Test** menu:
 
 | Command | What it does |
 | --- | --- |
-| `bun run dev` | Sync root page, clean cache, fetch rates, generate i18n types, watch locales, start Rsbuild dev server |
-| `bun run build` | Sync root page, clean cache, fetch rates, generate i18n types, generate sitemap, manifest, robots, production build |
+| `bun run dev` | Sync system pages, clean cache, fetch rates, generate i18n types, watch locales, start Rsbuild dev server |
+| `bun run build` | Sync system pages, clean cache, fetch rates, generate i18n types, generate sitemap, manifest, robots, service worker, production build |
 | `bun run preview` | Tunnel orchestrator — build and serve via ngrok or cloudflared |
 | `bun run serve` | Serve the production build locally |
 | `bun run clean:cache` | Remove `node_modules/.cache`, `.cache`, `dist` |
@@ -540,6 +543,8 @@ Direct tool access:
 | `bun ./tools/generate-sitemap.ts` | Generate `public/sitemap.xml` from page directories |
 | `bun ./tools/generate-manifest.ts` | Generate `public/manifest.json` from `global.json5` + `i18nConfig` |
 | `bun ./tools/generate-robots.ts` | Generate `public/robots.txt` from `SITE_URL` |
+| `bun ./tools/generate-sw.ts` | Generate `public/sw.js` with locale-specific error page URLs |
+| `bun ./tools/sync-system-pages.ts` | Rename system page folders to match locale-dependent slugs |
 | `bun ./tools/sync-locales.ts` | Create missing locale folders from default |
 | `bun ./tools/check-locale-parity.ts` | Diff translation keys across all locales |
 | `bun ./tools/fetch-exchange-rates.ts` | Fetch exchange rates with 24h cache |
@@ -558,6 +563,7 @@ All tools live in `tools/`. They share five modules from `tools/shared/`:
 | `shared/hono-server.ts` | `createStaticApp()`, `loadHtmlCache()`, `getPageNames()` — shared Hono static server with cache headers |
 | `shared/site-url.ts` | `SITE_URL` constant from `process.env` |
 | `shared/write-file.ts` | `writeFilePath()` (mkdir + write) and `generatedHeader()` for auto-generated file headers |
+| `shared/romanize.ts` | `romanize()` — limax-based romanization for URL-safe slug generation from non-Latin page names |
 
 | Tool | Shared imports | Purpose |
 | --- | --- | --- |
@@ -571,7 +577,8 @@ All tools live in `tools/`. They share five modules from `tools/shared/`:
 | `generate-sitemap.ts` | log, logBox, SITE_URL, writeFilePath | Generate sitemap.xml |
 | `generate-manifest.ts` | logBox, writeFilePath | Generate manifest.json from global.json5 + i18nConfig |
 | `generate-robots.ts` | logBox, SITE_URL, writeFilePath | Generate robots.txt from SITE_URL |
-| `sync-root-page.ts` | log, logBox, wrapMainError | Sync root page folder with config |
+| `generate-sw.ts` | logBox, writeFilePath | Generate `public/sw.js` with locale-specific error page URLs |
+| `sync-system-pages.ts` | log, logBox, wrapMainError | Rename ALL system page folders to locale-dependent slugs when default locale changes |
 | `sync-locales.ts` | log, logBox | Create missing locale directories |
 | `check-locale-parity.ts` | log | Diff translation keys across locales |
 | `fetch-exchange-rates.ts` | log, writeFilePath, generatedHeader | Fetch and cache exchange rates |
@@ -593,6 +600,7 @@ All tools live in `tools/`. They share five modules from `tools/shared/`:
 | Lint/Format | Biome | `^2.4.16` |
 | Testing | Rstest | `^0.10.3` |
 | HTML minifier | html-minifier-terser | `^7.2.0` |
+| Romanization | limax | `^4.2.3` |
 
 ## Browser Support
 

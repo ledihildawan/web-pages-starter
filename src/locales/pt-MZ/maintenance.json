@@ -1,7 +1,7 @@
 {
   "heading": "503",
-  "subheading": "Service Unavailable",
-  "description": "The service is temporarily unavailable due to scheduled maintenance. Please try again in a moment.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Serviço indisponível",
+  "description": "O serviço está temporariamente indisponível devido a manutenção programada. Tente novamente dentro de momentos.",
+  "button_text": "Voltar ao início",
+  "or_try": "Ou tente:"
 }

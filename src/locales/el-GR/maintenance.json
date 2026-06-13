@@ -1,7 +1,7 @@
 {
   "heading": "503",
-  "subheading": "Service Unavailable",
-  "description": "The service is temporarily unavailable due to scheduled maintenance. Please try again in a moment.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Η υπηρεσία δεν είναι διαθέσιμη",
+  "description": "Η υπηρεσία είναι προσωρινά μη διαθέσιμη λόγω προγραμματισμένης συντήρησης. Δοκιμάστε ξανά σε λίγο.",
+  "button_text": "Επιστροφή στην αρχική",
+  "or_try": "Ή δοκιμάστε:"
 }

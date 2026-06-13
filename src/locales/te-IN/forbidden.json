@@ -1,7 +1,7 @@
 {
   "heading": "403",
-  "subheading": "Access Denied",
-  "description": "You do not have permission to access this page or resource.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "యాక్సెస్ తిరస్కరించబడింది",
+  "description": "ఈ పేజీ లేదా వనరును యాక్సెస్ చేయడానికి మీకు అనుమతి లేదు.",
+  "button_text": "హోమ్‌కు తిరిగి వెళ్లండి",
+  "or_try": "లేదా ప్రయత్నించండి:"
 }

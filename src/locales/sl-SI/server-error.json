@@ -1,7 +1,7 @@
 {
   "heading": "500",
-  "subheading": "Server Error",
-  "description": "An unexpected error occurred on the server. Our team has been notified and is working on it.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Napaka strežnika",
+  "description": "Na strežniku je prišlo do nepričakovane napake. Naša ekipa je obveščena in odpravlja težavo.",
+  "button_text": "Nazaj na domačo stran",
+  "or_try": "Ali poskusite:"
 }

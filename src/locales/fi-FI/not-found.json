@@ -1,7 +1,7 @@
 {
   "heading": "404",
-  "subheading": "Page Not Found",
-  "description": "It looks like the page you're looking for doesn't exist or has been moved.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Sivua ei löydy",
+  "description": "Näyttää siltä, että etsimääsi sivua ei ole olemassa tai se on siirretty.",
+  "button_text": "Takaisin etusivulle",
+  "or_try": "Tai kokeile:"
 }

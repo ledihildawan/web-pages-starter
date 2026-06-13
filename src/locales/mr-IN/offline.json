@@ -1,8 +1,8 @@
 {
-  "heading": "You're Offline",
-  "subheading": "No Connection",
-  "description": "You are currently not connected to the internet. Some pages may still be available from cache.",
-  "button_text": "Try Again",
-  "hint": "Check your internet connection and try reloading the page.",
-  "cached_pages": "Cached pages:"
+  "heading": "तुम्ही ऑफलाइन आहात",
+  "subheading": "कनेक्शन नाही",
+  "description": "तुम्ही सध्या इंटरनेटशी कनेक्ट नाही. कॅशमधून काही पृष्ठे अजूनही उपलब्ध असू शकतात.",
+  "button_text": "पुन्हा प्रयत्न करा",
+  "hint": "तुमचे इंटरनेट कनेक्शन तपासा आणि पृष्ठ पुन्हा लोड करण्याचा प्रयत्न करा.",
+  "cached_pages": "कॅश केलेली पृष्ठे:"
 }

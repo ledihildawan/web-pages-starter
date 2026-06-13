@@ -1,7 +1,7 @@
 {
   "heading": "403",
-  "subheading": "Access Denied",
-  "description": "You do not have permission to access this page or resource.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "அணுகல் மறுக்கப்பட்டது",
+  "description": "இந்தப் பக்கம் அல்லது வளத்தை அணுக உங்களுக்கு அனுமதி இல்லை.",
+  "button_text": "முகப்புக்குத் திரும்பு",
+  "or_try": "அல்லது முயற்சிக்கவும்:"
 }

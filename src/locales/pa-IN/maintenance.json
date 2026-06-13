@@ -1,7 +1,7 @@
 {
   "heading": "503",
-  "subheading": "Service Unavailable",
-  "description": "The service is temporarily unavailable due to scheduled maintenance. Please try again in a moment.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "ਸੇਵਾ ਉਪਲਬਧ ਨਹੀਂ",
+  "description": "ਨਿਰਧਾਰਿਤ ਰੱਖ-ਰਖਾਅ ਕਾਰਨ ਸੇਵਾ ਆਰਜ਼ੀ ਤੌਰ 'ਤੇ ਉਪਲਬਧ ਨਹੀਂ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਥੋੜ੍ਹੀ ਦੇਰ ਬਾਅਦ ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+  "button_text": "ਮੁੱਖ ਸਫ਼ੇ 'ਤੇ ਵਾਪਸ ਜਾਓ",
+  "or_try": "ਜਾਂ ਕੋਸ਼ਿਸ਼ ਕਰੋ:"
 }

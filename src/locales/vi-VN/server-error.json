@@ -1,7 +1,7 @@
 {
   "heading": "500",
-  "subheading": "Server Error",
-  "description": "An unexpected error occurred on the server. Our team has been notified and is working on it.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Lỗi Máy Chủ",
+  "description": "Đã xảy ra lỗi không mong muốn trên máy chủ. Đội ngũ của chúng tôi đã được thông báo và đang xử lý.",
+  "button_text": "Về Trang Chủ",
+  "or_try": "Hoặc thử:"
 }

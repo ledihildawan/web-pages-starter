@@ -1,8 +1,8 @@
 {
-  "heading": "You're Offline",
-  "subheading": "No Connection",
-  "description": "You are currently not connected to the internet. Some pages may still be available from cache.",
-  "button_text": "Try Again",
-  "hint": "Check your internet connection and try reloading the page.",
-  "cached_pages": "Cached pages:"
+  "heading": "تساں آف لائن او",
+  "subheading": "کوئی کنیکشن نئیں",
+  "description": "تسیں ہنے انٹرنیٹ نال کنیکٹ نئیں او۔ کیش توں کجھ صفے ہنے وی دستیاب ہو سکدے نیں۔",
+  "button_text": "مڑ کوشش کرو",
+  "hint": "اپنا انٹرنیٹ کنیکشن چیک کرو تے صفہ مڑ لوڈ کرن دی کوشش کرو۔",
+  "cached_pages": "کیش کیتے صفے:"
 }

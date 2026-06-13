@@ -1,7 +1,7 @@
 {
   "heading": "404",
-  "subheading": "Page Not Found",
-  "description": "It looks like the page you're looking for doesn't exist or has been moved.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "페이지를 찾을 수 없음",
+  "description": "찾으시는 페이지가 존재하지 않거나 이동되었습니다.",
+  "button_text": "홈으로",
+  "or_try": "또는 시도해 보세요:"
 }

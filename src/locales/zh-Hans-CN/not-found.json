@@ -1,7 +1,7 @@
 {
   "heading": "404",
-  "subheading": "Page Not Found",
-  "description": "It looks like the page you're looking for doesn't exist or has been moved.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "页面未找到",
+  "description": "您要查找的页面不存在或已被移动。",
+  "button_text": "返回首页",
+  "or_try": "或尝试："
 }

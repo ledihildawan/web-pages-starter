@@ -1,7 +1,7 @@
 {
   "heading": "503",
-  "subheading": "Service Unavailable",
-  "description": "The service is temporarily unavailable due to scheduled maintenance. Please try again in a moment.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "服务不可用",
+  "description": "由于计划维护，服务暂时不可用。请稍后重试。",
+  "button_text": "返回首页",
+  "or_try": "或尝试："
 }

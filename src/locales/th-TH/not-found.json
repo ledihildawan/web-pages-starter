@@ -1,7 +1,7 @@
 {
   "heading": "404",
-  "subheading": "Page Not Found",
-  "description": "It looks like the page you're looking for doesn't exist or has been moved.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "ไม่พบหน้า",
+  "description": "ดูเหมือนว่าหน้าที่คุณกำลังมองหาไม่มีอยู่หรือถูกย้ายไปแล้ว",
+  "button_text": "กลับหน้าแรก",
+  "or_try": "หรือลอง:"
 }

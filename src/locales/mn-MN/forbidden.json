@@ -1,7 +1,7 @@
 {
   "heading": "403",
-  "subheading": "Access Denied",
-  "description": "You do not have permission to access this page or resource.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Хандах эрх хязгаарлагдсан",
+  "description": "Танд энэ хуудас эсвэл нөөц рүү хандах эрх байхгүй байна.",
+  "button_text": "Нүүр хуудас руу буцах",
+  "or_try": "Эсвэл туршиж үзээрэй:"
 }

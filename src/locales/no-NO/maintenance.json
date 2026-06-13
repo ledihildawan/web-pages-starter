@@ -1,7 +1,7 @@
 {
   "heading": "503",
-  "subheading": "Service Unavailable",
-  "description": "The service is temporarily unavailable due to scheduled maintenance. Please try again in a moment.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Tjenesten er utilgjengelig",
+  "description": "Tjenesten er midlertidig utilgjengelig på grunn av planlagt vedlikehold. Prøv igjen om et øyeblikk.",
+  "button_text": "Tilbake til startsiden",
+  "or_try": "Eller prøv:"
 }

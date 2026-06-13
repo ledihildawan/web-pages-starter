@@ -1,8 +1,8 @@
 {
-  "heading": "You're Offline",
-  "subheading": "No Connection",
-  "description": "You are currently not connected to the internet. Some pages may still be available from cache.",
-  "button_text": "Try Again",
-  "hint": "Check your internet connection and try reloading the page.",
-  "cached_pages": "Cached pages:"
+  "heading": "Niste povezani",
+  "subheading": "Nema veze",
+  "description": "Trenutno niste povezani s internetom. Neke stranice možda su i dalje dostupne iz predmemorije.",
+  "button_text": "Pokušaj ponovno",
+  "hint": "Provjerite internetsku vezu i pokušajte ponovno učitati stranicu.",
+  "cached_pages": "Predmemorirane stranice:"
 }

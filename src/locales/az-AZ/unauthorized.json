@@ -1,7 +1,7 @@
 {
   "heading": "401",
-  "subheading": "Authentication Required",
-  "description": "You need to sign in or authenticate to access this page.",
-  "button_text": "Back to Home",
-  "or_try": "Or try:"
+  "subheading": "Kimlik Təsdiqi Tələb Olunur",
+  "description": "Bu səhifəyə daxil olmaq üçün daxil olmalı və ya kimliğinizi təsdiqləməlisiniz.",
+  "button_text": "Ana Səhifəyə Qayıt",
+  "or_try": "Və ya sınayın:"
 }

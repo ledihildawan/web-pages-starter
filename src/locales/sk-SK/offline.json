@@ -1,8 +1,8 @@
 {
-  "heading": "You're Offline",
-  "subheading": "No Connection",
-  "description": "You are currently not connected to the internet. Some pages may still be available from cache.",
-  "button_text": "Try Again",
-  "hint": "Check your internet connection and try reloading the page.",
-  "cached_pages": "Cached pages:"
+  "heading": "Ste offline",
+  "subheading": "Žiadne pripojenie",
+  "description": "Momentálne nie ste pripojení na internet. Niektoré stránky môžu byť stále dostupné z vyrovnávacej pamäte.",
+  "button_text": "Skúsiť znova",
+  "hint": "Skontrolujte internetové pripojenie a skúste stránku znova načítať.",
+  "cached_pages": "Stránky vo vyrovnávacej pamäti:"
 }
