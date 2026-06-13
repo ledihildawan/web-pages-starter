@@ -93,9 +93,9 @@ describe('home page data', () => {
   });
 });
 
-describe('home locale keys (id-ID)', () => {
+describe('home locale keys (en-US)', () => {
   const locale = JSON.parse(
-    readFileSync(join(ROOT, 'src/locales/id-ID/home.json'), 'utf-8'),
+    readFileSync(join(ROOT, 'src/locales/en-US/home.json'), 'utf-8'),
   );
 
   test('has all hero keys', () => {
@@ -134,11 +134,11 @@ describe('home locale keys (id-ID)', () => {
 });
 
 describe('home locale parity across locales', () => {
-  const idHome = JSON.parse(
-    readFileSync(join(ROOT, 'src/locales/id-ID/home.json'), 'utf-8'),
-  );
   const enHome = JSON.parse(
     readFileSync(join(ROOT, 'src/locales/en-US/home.json'), 'utf-8'),
+  );
+  const idHome = JSON.parse(
+    readFileSync(join(ROOT, 'src/locales/id-ID/home.json'), 'utf-8'),
   );
 
   function getAllKeys(obj: Record<string, unknown>, prefix = ''): string[] {
@@ -154,9 +154,9 @@ describe('home locale parity across locales', () => {
     return keys;
   }
 
-  test('en-US has same keys as id-ID', () => {
-    const idKeys = getAllKeys(idHome).sort();
+  test('id-ID has same keys as en-US', () => {
     const enKeys = getAllKeys(enHome).sort();
-    expect(enKeys).toEqual(idKeys);
+    const idKeys = getAllKeys(idHome).sort();
+    expect(idKeys).toEqual(enKeys);
   });
 });

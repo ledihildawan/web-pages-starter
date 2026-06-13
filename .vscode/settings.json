@@ -13,7 +13,6 @@
     "source.fixAll.biome": "explicit"
   },
   "editor.renderWhitespace": "boundary",
-
   "workbench.sideBar.location": "right",
   "workbench.colorTheme": "Shades of Purple (Super Dark)",
   "workbench.iconTheme": "material-icon-theme",
@@ -36,47 +35,37 @@
     "titleBar.inactiveBackground": "#7c3aed99",
     "titleBar.inactiveForeground": "#e7e7e799"
   },
-
   "peacock.color": "#7c3aed",
-
   "editor.quickSuggestions": {
     "strings": "on"
   },
-
   "files.watcherExclude": {
     "**/node_modules/**": true,
     "**/dist/**": true,
     "**/coverage/**": true
   },
-
   "search.exclude": {
     "dist": true,
     "node_modules": true,
     "coverage": true
   },
-
   "files.associations": {
     "*.njk": "njk",
     "*.css": "tailwindcss"
   },
-
   "html.suggest.html5": true,
-
   "[njk]": {
     "editor.defaultFormatter": "douglaszaltron.nunjucks-vscode-extensionpack"
   },
-
   "emmet.includeLanguages": {
     "njk": "html"
   },
-
   "tailwindCSS.includeLanguages": {
     "njk": "html"
   },
-
   "i18n-ally.localesPaths": "src/locales",
-  "i18n-ally.sourceLanguage": "id-ID",
-  "i18n-ally.displayLanguage": "id-ID",
+  "i18n-ally.sourceLanguage": "en-US",
+  "i18n-ally.displayLanguage": "en-US",
   "i18n-ally.keystyle": "nested",
   "i18n-ally.defaultNamespace": "common",
   "i18n-ally.dirStructure": "dir",

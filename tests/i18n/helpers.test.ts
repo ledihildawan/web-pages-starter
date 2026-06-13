@@ -23,11 +23,11 @@ describe('getLocale', () => {
 
   test('returns default locale when no locale set and no arg', () => {
     setLocale(undefined as never);
-    expect(getLocale()).toBe('id-ID');
+    expect(getLocale()).toBe('en-US');
   });
 
   test('returns default locale for unknown locale', () => {
-    expect(getLocale('xx-XX' as never)).toBe('id-ID');
+    expect(getLocale('xx-XX' as never)).toBe('en-US');
   });
 
   test('resolves valid locale via argument even if current differs', () => {
@@ -44,11 +44,11 @@ describe('getFallbackChain', () => {
   test('falls back to matching language locale for unknown variant', () => {
     const chain = getFallbackChain('en-XX' as never);
     expect(chain[0]).toMatch(/^en-/);
-    expect(chain[chain.length - 1]).toBe('id-ID');
+    expect(chain[chain.length - 1]).toBe('en-US');
   });
 
   test('falls back to default for unknown language', () => {
-    expect(getFallbackChain('zz-ZZ')).toEqual(['id-ID']);
+    expect(getFallbackChain('zz-ZZ')).toEqual(['en-US']);
   });
 });
 
