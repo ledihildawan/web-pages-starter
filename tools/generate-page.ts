@@ -1,7 +1,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '../src/configs/i18n';
-import { isSystemPageSlug, SYSTEM_PAGE_IDS } from '../src/configs/pages';
+import {
+  isSystemPageSlug,
+  SYSTEM_PAGE_IDS,
+  type SystemPageId,
+} from '../src/configs/pages';
 import { PATHS } from '../src/configs/paths';
 import { LOCALE_CODES } from '../src/scripts/lib/i18n/data';
 import { log } from './shared/logger';
@@ -26,7 +30,7 @@ if (!formattedName) {
 const defaultLocale = i18nConfig.defaultLocale;
 if (
   isSystemPageSlug(formattedName, defaultLocale) ||
-  SYSTEM_PAGE_IDS.includes(formattedName as any)
+  SYSTEM_PAGE_IDS.includes(formattedName as SystemPageId)
 ) {
   log.error(`Error: "${formattedName}" is a reserved system page name.`);
   process.exit(1);
