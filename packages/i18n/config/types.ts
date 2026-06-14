@@ -10,20 +10,20 @@ export type FontConfig = {
 };
 
 export type FontStack = {
-  primary: FontConfig;
-  secondary?: FontConfig;
-  monospace?: FontConfig;
+  sans: FontConfig;
+  serif?: FontConfig;
+  mono?: FontConfig;
+  [key: string]: FontConfig | undefined;
 };
 
 export type I18nConfig<T extends LocaleCode = LocaleCode> = {
   defaultLocale: T;
   locales?: Exclude<LocaleCode, T>[];
-  fonts: FontStack;
 };
 
 export interface I18nItem {
-  v: string;
-  k: string;
+  value: string;
+  key: string;
   vars: string | null;
 }
 
@@ -68,4 +68,9 @@ export interface RegionalPrice {
     base: number;
     [locale: string]: number;
   };
+}
+
+export interface TemplateFormatOptions extends FormatOptions {
+  raw?: boolean;
+  className?: string;
 }

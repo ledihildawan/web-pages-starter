@@ -1,6 +1,4 @@
-import '@fontsource-variable/inter/index.css';
-
-import { i18nConfig } from '../../../configs/i18n';
+import { fontsConfig } from '../../../configs/fonts';
 import {
   ACTIVE_NOTO_SANS,
   ACTIVE_WRITING_SYSTEMS,
@@ -82,6 +80,12 @@ export const watchScriptAndLoadFont = (): void => {
 export const setupFontStackCSS = (): void => {
   if (typeof document === 'undefined') return;
 
+  for (const [key, font] of Object.entries(fontsConfig)) {
+    if (font) {
+      document.documentElement.style.setProperty(`--font-${key}`, font.family);
+    }
+  }
+
   const lang = getCurrentLang();
   if (!lang) return;
 
@@ -91,8 +95,12 @@ export const setupFontStackCSS = (): void => {
     (ws) => ws.code === writingSystem,
   );
 
-  const primaryFont = wsConfig?.defaultFont ?? i18nConfig.fonts.primary.family;
-  document.documentElement.style.setProperty('--font-primary', primaryFont);
+  if (wsConfig?.defaultFont) {
+    document.documentElement.style.setProperty(
+      '--font-sans',
+      wsConfig.defaultFont,
+    );
+  }
 };
 
 export const loadLanguageFonts = (): void => {

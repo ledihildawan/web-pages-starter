@@ -45,7 +45,11 @@ class MicrotaskQueue {
     this.#scheduled = false;
     const batch = this.#queue.splice(0, this.#maxBatchSize);
     for (const task of batch) {
-      task();
+      try {
+        task();
+      } catch (err) {
+        console.warn('[microtask-queue] task failed:', err);
+      }
     }
     if (this.#queue.length > 0) {
       if (typeof globalThis.requestAnimationFrame === 'function') {

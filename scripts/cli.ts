@@ -8,7 +8,11 @@ import { setupSigintHandler, wrapMainError } from './shared/signal-handler';
 
 const runTool = (name: string, args: string[] = []): Promise<void> => {
   return new Promise((resolve, reject) => {
-    const proc = spawn('bun', [path.join(__dirname, `${name}.ts`), ...args], {
+    const scriptsPath = path.join(__dirname, `${name}.ts`);
+    const toolPath = fs.existsSync(scriptsPath)
+      ? scriptsPath
+      : path.join(PATHS.ROOT, 'packages', 'i18n', 'cli', `${name}.ts`);
+    const proc = spawn('bun', [toolPath, ...args], {
       stdio: 'inherit',
       shell: false,
       cwd: PATHS.ROOT,
@@ -181,7 +185,7 @@ const tools: Tool[] = [
   {
     name: 'Check Parity',
     description: 'Verify translation key parity across locales',
-    action: () => runTool('check-locale-parity'),
+    action: () => runTool('check-parity'),
   },
   {
     name: 'Fetch Rates',

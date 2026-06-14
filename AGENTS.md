@@ -14,6 +14,7 @@ bun run build      # production build to ./dist
 - No deprecated code — remove entirely
 - Nunjucks string concat: `~` (never `+`)
 - Import paths: relative in source (`../../../../generated/*`), `@generated/*` in tsconfig/alias
+- i18n CLI scripts live in `packages/i18n/cli/` (not `scripts/`)
 
 ## Testing
 
@@ -42,6 +43,13 @@ Shared locales are auto-detected by scanning templates for `i18n.t('namespace:..
 - Macros receive resolved text, not keys (except `form-input.njk`)
 - Error pages: `{% set %}` + `{% include "error-page.njk" %}`
 - Quick links: string-encoded `'/|home,/features|features'`
+
+## Config Files
+
+- `configs/i18n.ts` — default locale + active locales (`defineI18n`)
+- `configs/fonts.ts` — font CSS import + font stack (`defineFontStack`, `sans`/`serif`/`mono`)
+- `configs/pages.ts` — root page, system page IDs, locale-dependent slugs
+- `configs/paths.ts` — filesystem path constants
 
 ## Restrictions
 

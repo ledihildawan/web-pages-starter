@@ -82,14 +82,14 @@ const njkContent = `{% extends "main.njk" %}
     </div>
   </section>
 
-  {% include "components/cta.njk" %}
+  {% include "shared/layout/cta.njk" %}
 {% endblock %}
 `;
 
 const jsonContent = `{
   "meta": {
     "title": "${titleCase}",
-    "description": "Structure data for ${titleCase}"
+    "description": "Structured data for ${titleCase}"
   },
   "hero": {
     "t_key": "hero"

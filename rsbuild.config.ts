@@ -48,8 +48,6 @@ const pluginRootPageAsIndex = (): RsbuildPlugin => ({
   },
 });
 
-const EXCLUDED_PAGES = new Set<string>([]);
-
 const getEntries = (): Record<string, string | string[]> => {
   const dir = resolveRoot('pages');
   const entries: Record<string, string | string[]> = {};
@@ -57,10 +55,6 @@ const getEntries = (): Record<string, string | string[]> => {
   if (!fs.existsSync(dir)) return entries;
 
   for (const folder of fs.readdirSync(dir)) {
-    if (EXCLUDED_PAGES.has(folder)) {
-      continue;
-    }
-
     const tsFile = path.join(dir, folder, 'index.ts');
     const cssFile = path.join(dir, folder, 'index.css');
 

@@ -2,7 +2,15 @@
 @import "./tokens.css";
 @import "./components.css";
 
-@layer accessibility, reset, base, components, utilities, overrides;
+@theme {
+  --font-sans: "Inter Variable", system-ui, -apple-system, sans-serif;
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    monospace;
+}
+
+@layer accessibility, base, components, utilities, overrides;
 
 @layer base {
   @keyframes fade-in {
@@ -120,13 +128,21 @@
   }
 
   html {
+    color-scheme: dark;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: auto;
-    font-family: var(--font-primary, "Inter", system-ui);
+    font-family: var(--font-sans);
     scrollbar-width: thin;
     scrollbar-color: #1e293b #020617;
+  }
+
+  body {
+    margin: 0;
+    background: #020617;
+    color: #e2e8f0;
+    min-block-size: 100vh;
   }
 
   img {

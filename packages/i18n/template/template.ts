@@ -40,9 +40,10 @@ import {
 } from '..';
 import type {
   CardinalOptions,
-  FormatOptions,
   I18nItem,
   RegionalPrice,
+  RelativeTimeOptions,
+  TemplateFormatOptions,
   TemplateParams,
 } from '../config/types';
 import type { CurrencyCode } from '../data/currencies';
@@ -57,11 +58,6 @@ setStrategies(
   { id: idCardinal, ja: jaCardinal, zh: zhCardinal, ar: arCardinal },
   { id: idOrdinal, ja: jaOrdinal, ar: arOrdinal },
 );
-
-interface TemplateFormatOptions extends FormatOptions {
-  raw?: boolean;
-  className?: string;
-}
 
 const ROOT = process.cwd();
 const resolveRoot = (...args: string[]): string => path.resolve(ROOT, ...args);
@@ -219,8 +215,8 @@ const createI18nObject = (
   ): I18nItem => {
     if (!key) {
       return {
-        v: `[missing_key]`,
-        k: 'common:site_name' as I18nTranslationKeys,
+        value: `[missing_key]`,
+        key: 'common:site_name' as I18nTranslationKeys,
         vars: null,
       };
     }
@@ -229,8 +225,8 @@ const createI18nObject = (
     const varsJson = Object.keys(vars).length ? JSON.stringify(vars) : null;
 
     return {
-      v: resolveFn(key, vars),
-      k: `${ns}:${clientKey}` as I18nTranslationKeys,
+      value: resolveFn(key, vars),
+      key: `${ns}:${clientKey}` as I18nTranslationKeys,
       vars: varsJson,
     };
   };
@@ -279,15 +275,15 @@ const createI18nObject = (
     ) => {
       const item = createItem(key, vars);
       const translated = options?.native
-        ? toNativeDigits(item.v, true)
+        ? toNativeDigits(item.value, true)
         : options?.universal
-          ? item.v
-          : toNativeDigits(item.v);
+          ? item.value
+          : toNativeDigits(item.value);
 
       if (options?.raw) return translated;
 
       const attrs = buildAttrs(
-        { i18n: item.k },
+        { i18n: item.key },
         item.vars?.replace(/"/g, '&quot;'),
         options?.native ? true : undefined,
       );
@@ -299,7 +295,7 @@ const createI18nObject = (
     },
 
     html: (key: string | undefined, vars: Record<string, unknown> = {}) =>
-      createItem(key, vars).v,
+      createItem(key, vars).value,
 
     attr: (
       key: string | undefined,
@@ -308,8 +304,8 @@ const createI18nObject = (
     ) => {
       const item = createItem(key, vars);
       return (
-        `${attrName}="${item.v}"` +
-        (key ? ` data-i18n-attr="${attrName}:${item.k}"` : '')
+        `${attrName}="${item.value}"` +
+        (key ? ` data-i18n-attr="${attrName}:${item.key}"` : '')
       );
     },
 
@@ -324,13 +320,13 @@ const createI18nObject = (
       const mergedVars = { ...vars, count };
       const lookupKey = `${key}${getPluralSuffix(count)}`;
       const item = createItem(lookupKey, mergedVars);
-      const translated = toNativeDigits(item.v);
+      const translated = toNativeDigits(item.value);
 
       if (options?.raw) return translated;
 
       const baseItem = createItem(key, mergedVars);
       const attrs = buildAttrs(
-        { 'i18n-plural': baseItem.k, 'i18n-count': count },
+        { 'i18n-plural': baseItem.key, 'i18n-count': count },
         item.vars?.replace(/"/g, '&quot;'),
       );
 
@@ -675,12 +671,8 @@ const createI18nObject = (
 
     formatRelativeTime: (
       value: number,
-      options: {
-        unit: Intl.RelativeTimeFormatUnit;
-        numeric?: 'always' | 'auto';
-        raw?: boolean;
-        className?: string;
-      },
+      options: RelativeTimeOptions &
+        Pick<TemplateFormatOptions, 'raw' | 'className'>,
     ) => {
       const formatted = formatRelativeTime(value, {
         unit: options.unit,

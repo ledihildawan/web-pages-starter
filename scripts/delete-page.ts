@@ -121,7 +121,7 @@ async function confirmDeletion(pageName: string): Promise<boolean> {
   log.info(`\nYou are about to delete page: "${pageName}"`);
   log.info('This will DELETE:');
   log.info(`   - pages/${pageName}/ (entire folder)`);
-  log.info(`   - locales/*/${pageName}.json (all 87 locales)\n`);
+  log.info(`   - locales/*/${pageName}.json (all 136 locales)\n`);
 
   const { confirm } = await inquirer.prompt<{ confirm: boolean }>([
     {
@@ -185,7 +185,7 @@ function deletePage(pageName: string): {
 async function runSyncLocales(): Promise<void> {
   return new Promise((resolve, reject) => {
     log.info('\nRunning locale sync to ensure consistency...');
-    const proc = spawn('bun', ['./scripts/sync-locales.ts'], {
+    const proc = spawn('bun', ['./packages/i18n/cli/sync-locales.ts'], {
       stdio: 'inherit',
       shell: false,
       cwd: PATHS.ROOT,

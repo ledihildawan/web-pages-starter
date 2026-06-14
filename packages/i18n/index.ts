@@ -57,6 +57,7 @@ export type {
   OrdinalOptions,
   RegionalPrice,
   RelativeTimeOptions,
+  TemplateFormatOptions,
   TemplateParams,
   TimeFormatOptions,
 } from './config/types';

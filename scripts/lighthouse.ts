@@ -43,7 +43,9 @@ const parseSitemap = (xml: string) => {
   const parser = new DOMParser();
   const doc = parser.parseFromString(xml, 'text/xml');
   const urls = doc.querySelectorAll('url loc');
-  return Array.from(urls).map((el: Element) => (el.textContent ?? '').trim());
+  return Array.from(urls).map((el) =>
+    ((el as Element).textContent ?? '').trim(),
+  );
 };
 
 const runLighthouse = (
@@ -123,8 +125,8 @@ const buildArgs = (
     args.push('--quiet-throttle');
   }
 
-  for (const flag of chromeFlags) {
-    args.push('--chrome-flags', `"${flag}"`);
+  if (chromeFlags.length > 0) {
+    args.push('--chrome-flags', chromeFlags.join(' '));
   }
 
   if (formFactor === 'desktop') {

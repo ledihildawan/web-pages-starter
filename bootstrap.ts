@@ -8,16 +8,6 @@ const deferTask = (fn: () => void, timeout = 2000): void => {
   }
 };
 
-const deferred = (): void => {
-  import('@i18n/fonts/fonts')
-    .then((fonts) => {
-      fonts.setupFontStackCSS();
-      fonts.loadLanguageFonts();
-      fonts.watchScriptAndLoadFont();
-    })
-    .catch(() => {});
-};
-
 const registerServiceWorker = (): void => {
   if (!isProd || !('serviceWorker' in navigator)) return;
 
@@ -39,19 +29,25 @@ async function bootstrap() {
     globalThis.Alpine = Alpine;
     registerI18nStore();
 
-    Alpine.start();
-
     const { i18next, initIntl } = await import('@i18n/runtime/runtime');
     if (!i18next.isInitialized) {
       const locale = window.__SAVED_LOCALE__ || window.__SERVER_LOCALE__;
       await initIntl(locale);
     }
 
-    deferTask(deferred);
+    Alpine.start();
 
-    import('@i18n/fonts/fonts').then(({ preloadActiveFont }) =>
-      preloadActiveFont(),
-    );
+    import('@i18n/fonts/fonts')
+      .then((fonts) => {
+        fonts.preloadActiveFont();
+        deferTask(() => {
+          fonts.setupFontStackCSS();
+          fonts.loadLanguageFonts();
+          fonts.watchScriptAndLoadFont();
+        });
+      })
+      .catch(() => {});
+
     registerServiceWorker();
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : String(error);
