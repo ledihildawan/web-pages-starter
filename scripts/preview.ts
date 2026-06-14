@@ -25,7 +25,7 @@ const runBuild = (): Promise<void> => {
     const steps = [
       'clean:cache',
       './scripts/fetch-exchange-rates.ts',
-      './packages/i18n/cli/generate-active-locales.ts',
+      './packages/i18n/cli/generate-active-locales.ts --prod',
       './packages/i18n/cli/sync-system-pages.ts',
       './packages/i18n/cli/sync-locales.ts',
       './packages/i18n/cli/generate-types.ts',
