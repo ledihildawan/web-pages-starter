@@ -1,6 +1,7 @@
-import { ACTIVE_LANGUAGES } from '../../../../generated/active-locales-data';
-import { getActiveLocales } from './active-locales';
-import type { LocaleCode } from './data';
+import { ACTIVE_LANGUAGES } from '../../../generated/active-locales-data';
+import type { LocaleCode } from './data/locales';
+import type { RegionCode } from './data/regions';
+import { getActiveLocales } from './engine/active-locales';
 import {
   convertCurrency,
   convertLocalPrice,
@@ -27,7 +28,7 @@ import {
   setStrategies,
   singular,
   toNativeDigits,
-} from './formatters';
+} from './engine/formatters';
 import {
   getCalendar,
   getCurrency,
@@ -45,8 +46,7 @@ import {
   getTimezoneOffset,
   isRTL,
   setLocale,
-} from './helpers';
-import type { RegionCode } from './regions';
+} from './engine/helpers';
 
 export type {
   CardinalOptions,
@@ -59,7 +59,7 @@ export type {
   RelativeTimeOptions,
   TemplateParams,
   TimeFormatOptions,
-} from './types';
+} from './config/types';
 
 const getLocaleDisplayRegion = (regionCode: RegionCode): string => {
   if (regionCode === 'GB') return 'UK';
@@ -84,7 +84,7 @@ export const getLocaleLabelCountry = (localeCode: LocaleCode): string => {
   return `${nativeName}${regionSuffix}`;
 };
 
-export { getActiveLocaleCodes } from './active-locales';
+export { getActiveLocaleCodes } from './engine/active-locales';
 
 export const getActiveLocalesDisplay = () =>
   getActiveLocales()

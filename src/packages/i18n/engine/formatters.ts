@@ -7,15 +7,7 @@ import {
   convertCurrency as convertCurrencyRaw,
   EXCHANGE_RATES,
 } from '../../../../generated/exchange-rates';
-import type { DateValue } from '../../utils/types';
-import { getActiveLocales } from './active-locales';
-import type { CurrencyCode } from './currencies';
-import {
-  getCurrency,
-  getLanguageConfig,
-  getLanguageSubtag,
-  getLocale,
-} from './helpers';
+import type { DateValue } from '../../../scripts/utils/types';
 import type {
   CardinalOptions,
   DurationOptions,
@@ -25,7 +17,15 @@ import type {
   RegionalPrice,
   RelativeTimeOptions,
   TimeFormatOptions,
-} from './types';
+} from '../config/types';
+import type { CurrencyCode } from '../data/currencies';
+import { getActiveLocales } from './active-locales';
+import {
+  getCurrency,
+  getLanguageConfig,
+  getLanguageSubtag,
+  getLocale,
+} from './helpers';
 
 const toDateObj = (date: DateValue): Date =>
   typeof date === 'string' || typeof date === 'number' ? new Date(date) : date;

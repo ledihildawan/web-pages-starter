@@ -1,4 +1,4 @@
-import { defineFont, defineI18n } from '../scripts/lib/i18n/i18n-config';
+import { defineFont, defineI18n } from '../packages/i18n/config/define';
 
 export const i18nConfig = defineI18n({
   defaultLocale: 'en-US',

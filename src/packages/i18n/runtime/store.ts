@@ -1,15 +1,15 @@
 import { i18nConfig } from '../../../configs/i18n';
 import { ROOT_PAGE } from '../../../configs/pages';
-import { scheduleTask } from '../utils/microtask-queue';
-import { getActiveLocales } from './active-locales';
-import type { LocaleCode } from './data';
 import {
   getActiveLocalesDisplay,
   getLanguageSubtag,
   LOCALE_STORAGE_KEY,
   setStrategies,
-} from './index';
-import { loadStrategies } from './strategies/loader';
+} from '..';
+import type { LocaleCode } from '../data/locales';
+import { getActiveLocales } from '../engine/active-locales';
+import { loadStrategies } from '../strategies/loader';
+import { scheduleTask } from './microtask-queue';
 
 const updateDocumentAttributes = (code: string): void => {
   const locale = getActiveLocales().find((l) => l.code === code);
@@ -23,7 +23,7 @@ const updateDocumentAttributes = (code: string): void => {
 };
 
 const refreshFonts = async (): Promise<void> => {
-  const fonts = await import('./fonts');
+  const fonts = await import('../fonts/fonts');
   fonts.setupFontStackCSS();
   fonts.loadLanguageFonts();
 };

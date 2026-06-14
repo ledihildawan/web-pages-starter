@@ -4,15 +4,13 @@ import type { I18nTranslationKeys } from '../../../../generated/i18n';
 import { i18nConfig } from '../../../configs/i18n';
 import { getRootPageSlug } from '../../../configs/pages';
 import { PATHS } from '../../../configs/paths';
-import { getValueByPath } from '../../utils/common';
+import { getValueByPath } from '../../../scripts/utils/common';
 import {
   loadGlobalData,
   loadSelectedComponentLocales,
   readJSON5,
-} from '../../utils/json5';
-import type { DateValue, JsonData } from '../../utils/types';
-import type { CurrencyCode } from './currencies';
-import { LOCALES, type LocaleCode, type LocaleConfig } from './data';
+} from '../../../scripts/utils/json5';
+import type { DateValue, JsonData } from '../../../scripts/utils/types';
 import {
   convertCurrency,
   convertLocalPrice,
@@ -43,17 +41,19 @@ import {
   setStrategies,
   singular,
   toNativeDigits,
-} from './index';
-import { cardinal as arCardinal, ordinal as arOrdinal } from './strategies/ar';
-import { cardinal as idCardinal, ordinal as idOrdinal } from './strategies/id';
-import { cardinal as jaCardinal, ordinal as jaOrdinal } from './strategies/ja';
-import { cardinal as zhCardinal } from './strategies/zh';
+} from '..';
 import type {
   CardinalOptions,
   FormatOptions,
   I18nItem,
   TemplateParams,
-} from './types';
+} from '../config/types';
+import type { CurrencyCode } from '../data/currencies';
+import { LOCALES, type LocaleCode, type LocaleConfig } from '../data/locales';
+import { cardinal as arCardinal, ordinal as arOrdinal } from '../strategies/ar';
+import { cardinal as idCardinal, ordinal as idOrdinal } from '../strategies/id';
+import { cardinal as jaCardinal, ordinal as jaOrdinal } from '../strategies/ja';
+import { cardinal as zhCardinal } from '../strategies/zh';
 
 setStrategies(
   { id: idCardinal, ja: jaCardinal, zh: zhCardinal, ar: arCardinal },

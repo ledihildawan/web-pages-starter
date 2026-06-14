@@ -7,9 +7,7 @@ import {
 import type { I18nTranslationKeys } from '../../../../generated/i18n';
 import { i18nConfig } from '../../../configs/i18n';
 import { ROOT_PAGE } from '../../../configs/pages';
-import type { DateTimePreset } from '../../utils/types';
-import { scheduleTask } from '../utils/microtask-queue';
-import type { LocaleCode } from './data';
+import type { DateTimePreset } from '../../../scripts/utils/types';
 import {
   formatAbbreviated,
   formatBytes,
@@ -37,8 +35,10 @@ import {
   setStrategies,
   singular,
   toNativeDigits,
-} from './index';
-import { loadStrategies } from './strategies/loader';
+} from '..';
+import type { LocaleCode } from '../data/locales';
+import { loadStrategies } from '../strategies/loader';
+import { scheduleTask } from './microtask-queue';
 
 export { i18next };
 

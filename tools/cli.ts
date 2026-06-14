@@ -235,7 +235,7 @@ const tools: Tool[] = [
           ? [
               '--coverage',
               '--coverage.include',
-              'src/scripts/lib/i18n/**',
+              'src/packages/i18n/**',
               '--coverage.reporters',
               'text',
               '--coverage.reporters',

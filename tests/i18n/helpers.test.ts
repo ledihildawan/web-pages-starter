@@ -1,5 +1,6 @@
 import { describe, expect, test } from '@rstest/core';
-import { DIRECTION_CODE } from '../../src/scripts/lib/i18n/directions';
+import { DIRECTION_CODE } from '../../src/packages/i18n/data/directions';
+import { NUMBERING_SYSTEM_CODE } from '../../src/packages/i18n/data/numbering-systems';
 import {
   getCurrency,
   getDirection,
@@ -12,8 +13,7 @@ import {
   getTimezone,
   isRTL,
   setLocale,
-} from '../../src/scripts/lib/i18n/helpers';
-import { NUMBERING_SYSTEM_CODE } from '../../src/scripts/lib/i18n/numbering-systems';
+} from '../../src/packages/i18n/engine/helpers';
 
 describe('getLocale', () => {
   test('returns valid locale unchanged', () => {

@@ -5,10 +5,10 @@ import {
   ACTIVE_WRITING_SYSTEMS,
 } from '../../../../generated/active-locales-data';
 import { i18nConfig } from '../../../configs/i18n';
-import { getActiveLocales } from './active-locales';
-import type { LocaleConfig } from './data';
-import type { NumberingSystemCode } from './numbering-systems';
-import type { WritingSystemCode } from './writing-systems';
+import type { LocaleConfig } from '../data/locales';
+import type { NumberingSystemCode } from '../data/numbering-systems';
+import type { WritingSystemCode } from '../data/writing-systems';
+import { getActiveLocales } from '../engine/active-locales';
 
 type FontLoader = () => Promise<unknown>;
 

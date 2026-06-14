@@ -12,21 +12,21 @@ import {
   formatUnit,
   setStrategies,
   toNativeDigits,
-} from '../../src/scripts/lib/i18n/formatters';
-import { setLocale } from '../../src/scripts/lib/i18n/helpers';
+} from '../../src/packages/i18n/engine/formatters';
+import { setLocale } from '../../src/packages/i18n/engine/helpers';
 import {
   cardinal as arCardinal,
   ordinal as arOrdinal,
-} from '../../src/scripts/lib/i18n/strategies/ar';
+} from '../../src/packages/i18n/strategies/ar';
 import {
   cardinal as idCardinal,
   ordinal as idOrdinal,
-} from '../../src/scripts/lib/i18n/strategies/id';
+} from '../../src/packages/i18n/strategies/id';
 import {
   cardinal as jaCardinal,
   ordinal as jaOrdinal,
-} from '../../src/scripts/lib/i18n/strategies/ja';
-import { cardinal as zhCardinal } from '../../src/scripts/lib/i18n/strategies/zh';
+} from '../../src/packages/i18n/strategies/ja';
+import { cardinal as zhCardinal } from '../../src/packages/i18n/strategies/zh';
 
 setStrategies(
   { id: idCardinal, ja: jaCardinal, zh: zhCardinal, ar: arCardinal },

@@ -3,10 +3,10 @@ import {
   LOCALES,
 } from '../../../../generated/active-locales-data';
 import { i18nConfig } from '../../../configs/i18n';
-import type { CurrencyCode } from './currencies';
-import type { LocaleCode, LocaleConfig } from './data';
-import type { DirectionCode } from './directions';
-import type { LanguageCode } from './languages';
+import type { CurrencyCode } from '../data/currencies';
+import type { DirectionCode } from '../data/directions';
+import type { LanguageCode } from '../data/languages';
+import type { LocaleCode, LocaleConfig } from '../data/locales';
 
 export const getFallbackChain = (locale: string): LocaleCode[] => {
   if (LOCALE_CODES.includes(locale as LocaleCode)) {

@@ -1,5 +1,5 @@
-import type { DateTimePreset } from '../../utils/types';
-import type { LocaleCode } from './data';
+import type { DateTimePreset } from '../../../scripts/utils/types';
+import type { LocaleCode } from '../data/locales';
 
 export type FontWeight = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
 

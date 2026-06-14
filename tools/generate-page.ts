@@ -7,7 +7,7 @@ import {
   type SystemPageId,
 } from '../src/configs/pages';
 import { PATHS } from '../src/configs/paths';
-import { LOCALE_CODES } from '../src/scripts/lib/i18n/data';
+import { LOCALE_CODES } from '../src/packages/i18n/data/locales';
 import { log } from './shared/logger';
 import { romanize } from './shared/romanize';
 

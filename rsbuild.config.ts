@@ -9,8 +9,8 @@ import { PATHS } from './src/configs/paths';
 import {
   getActiveLocaleCodes,
   LOCALE_STORAGE_KEY,
-} from './src/scripts/lib/i18n/index';
-import { createTemplateParams } from './src/scripts/lib/i18n/template';
+} from './src/packages/i18n/index';
+import { createTemplateParams } from './src/packages/i18n/template/template';
 
 const ROOT = process.cwd();
 const PORT = Number(process.env.PORT) || 8888;
