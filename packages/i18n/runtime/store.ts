@@ -1,5 +1,6 @@
 import { i18nConfig } from '../../../configs/i18n';
 import { ROOT_PAGE } from '../../../configs/pages';
+import { scheduleTask } from '../../core/utils/microtask-queue';
 import {
   getActiveLocalesDisplay,
   getLanguageSubtag,
@@ -9,7 +10,6 @@ import {
 import type { LocaleCode } from '../data/locales';
 import { getActiveLocales } from '../engine/active-locales';
 import { loadStrategies } from '../strategies/loader';
-import { scheduleTask } from './microtask-queue';
 
 const updateDocumentAttributes = (code: string): void => {
   const locale = getActiveLocales().find((l) => l.code === code);

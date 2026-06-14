@@ -7,6 +7,7 @@ import {
   EXCHANGE_RATES,
 } from '../../../generated/exchange-rates';
 import type { I18nTranslationKeys } from '../../../generated/i18n';
+import { scheduleTask } from '../../core/utils/microtask-queue';
 import type { DateTimePreset } from '../../core/utils/types';
 import {
   formatAbbreviated,
@@ -38,7 +39,6 @@ import {
 } from '..';
 import type { LocaleCode } from '../data/locales';
 import { loadStrategies } from '../strategies/loader';
-import { scheduleTask } from './microtask-queue';
 
 export { i18next };
 
