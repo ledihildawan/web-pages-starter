@@ -42,6 +42,7 @@ import type {
   CardinalOptions,
   FormatOptions,
   I18nItem,
+  RegionalPrice,
   TemplateParams,
 } from '../config/types';
 import type { CurrencyCode } from '../data/currencies';
@@ -554,10 +555,7 @@ const createI18nObject = (
       );
     },
 
-    localPrice: (
-      plan: { pricing: { base: number; [locale: string]: number } },
-      options?: TemplateFormatOptions,
-    ) => {
+    localPrice: (plan: RegionalPrice, options?: TemplateFormatOptions) => {
       const formatted = String(localPrice(plan));
       if (options?.raw) return formatted;
       return renderHtml(
@@ -572,7 +570,7 @@ const createI18nObject = (
     },
 
     localPriceCurrency: (
-      plan: { pricing: { base: number; [locale: string]: number } },
+      plan: RegionalPrice,
       options?: TemplateFormatOptions,
     ) => {
       const formatted = localPriceCurrency(plan);
@@ -589,7 +587,7 @@ const createI18nObject = (
     },
 
     convertLocalPrice: (
-      plan: { pricing: { base: number; [locale: string]: number } },
+      plan: RegionalPrice,
       targetCurrency: CurrencyCode,
       options?: TemplateFormatOptions,
     ) => {
@@ -610,7 +608,7 @@ const createI18nObject = (
     },
 
     formatLocalPrice: (
-      plan: { pricing: { base: number; [locale: string]: number } },
+      plan: RegionalPrice,
       options?: TemplateFormatOptions,
     ) => {
       const formatted = formatLocalPrice(plan, options);
@@ -627,7 +625,7 @@ const createI18nObject = (
     },
 
     formatLocalPriceDiscounted: (
-      plan: { pricing: { base: number; [locale: string]: number } },
+      plan: RegionalPrice,
       discountMultiplier: number,
       targetCurrency?: CurrencyCode,
       options?: TemplateFormatOptions,
@@ -738,7 +736,7 @@ export const createTemplateParams = (
     ...loadSharedLocales(lang, sharedLocales, resolveRoot(PATHS.LOCALES)),
   };
 
-  const resolveKeyToPath = (key: string): string => key.replace(':', '.');
+  const resolveKeyToPath = (key: string): string => key.replaceAll(':', '.');
 
   const resolve = (key: string, vars: Record<string, unknown> = {}): string => {
     const jsonPath = resolveKeyToPath(key);

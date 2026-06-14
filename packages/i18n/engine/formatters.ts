@@ -638,7 +638,7 @@ export const convertCurrency = (
 };
 
 export const convertLocalPrice = (
-  plan: { pricing: { base: number; [locale: string]: number } },
+  plan: RegionalPrice,
   targetCurrency?: CurrencyCode,
   options?: FormatOptions,
 ) => {
@@ -661,9 +661,7 @@ export const convertLocalPrice = (
 };
 
 export const formatLocalPrice = (
-  plan: {
-    pricing: { base: number; [locale: string]: number };
-  },
+  plan: RegionalPrice,
   options?: FormatOptions,
 ) => {
   const price = localPrice(plan);
@@ -673,7 +671,7 @@ export const formatLocalPrice = (
 };
 
 export const formatLocalPriceDiscounted = (
-  plan: { pricing: { base: number; [locale: string]: number } },
+  plan: RegionalPrice,
   discountMultiplier: number,
   targetCurrency?: CurrencyCode,
   options?: FormatOptions,
@@ -696,10 +694,8 @@ export const formatLocalPriceDiscounted = (
   return formatCurrency(converted, toCurrency, options);
 };
 
-export const plural = (word: string, count?: number, inclusive = false) => {
-  if (inclusive && count !== undefined) return pluralize(word, count);
-  return count === undefined ? pluralize(word) : pluralize(word, count);
-};
+export const plural = (word: string, count?: number, inclusive = false) =>
+  count === undefined ? pluralize(word) : pluralize(word, count, inclusive);
 
 export const singular = (word: string) => pluralize.singular(word);
 

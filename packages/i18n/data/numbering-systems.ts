@@ -81,7 +81,7 @@ export const NUMBERING_SYSTEMS = [
     label: 'Sinhala',
     type: 'numeric' as const,
     writingSystem: 'sinhala',
-    digits: ['෦', '෧', 'ྼ', '෩', '෪', '෫', '෬', '෭', '෮', '෯'],
+    digits: ['෦', '෧', '෨', '෩', '෪', '෫', '෬', '෭', '෮', '෯'],
   },
   {
     code: 'khmr',

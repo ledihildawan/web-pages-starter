@@ -1,5 +1,4 @@
-import { LOCALE_CODES } from '../../../generated/active-locales-data';
-import type { LocaleCode } from '../data/locales';
+import { LOCALE_CODES, type LocaleCode } from '../data/locales';
 import type { FontConfig, I18nConfig } from './types';
 
 const validateFont = (font: FontConfig): void => {

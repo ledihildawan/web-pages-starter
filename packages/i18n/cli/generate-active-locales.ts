@@ -44,7 +44,8 @@ const wsEntries = WRITING_SYSTEMS.filter((ws) =>
 
 function serializeLocale(locale: LocaleConfig): string {
   const entries = Object.entries(locale).map(([key, value]) => {
-    if (typeof value === 'string') return `${key}: '${value}'`;
+    if (typeof value === 'string')
+      return `${key}: '${value.replace(/'/g, "\\'")}'`;
     if (typeof value === 'boolean') return `${key}: ${value}`;
     return `${key}: ${value}`;
   });
