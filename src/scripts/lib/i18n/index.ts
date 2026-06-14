@@ -1,5 +1,5 @@
-import { i18nConfig } from '../../../configs/i18n';
-import { LOCALES, type LocaleCode } from './data';
+import { getActiveLocales } from './active-locales';
+import type { LocaleCode } from './data';
 import {
   convertCurrency,
   convertLocalPrice,
@@ -66,7 +66,7 @@ const getLocaleDisplayRegion = (regionCode: RegionCode): string => {
 };
 
 export const getLocaleLabelCountry = (localeCode: LocaleCode): string => {
-  const locale = LOCALES.find((l) => l.code === localeCode);
+  const locale = getActiveLocales().find((l) => l.code === localeCode);
   if (!locale) return localeCode;
 
   const language = LANGUAGES.find((l) => l.code === locale.language);
@@ -83,13 +83,10 @@ export const getLocaleLabelCountry = (localeCode: LocaleCode): string => {
   return `${nativeName}${regionSuffix}`;
 };
 
-export const getActiveLocaleCodes = (): LocaleCode[] => [
-  i18nConfig.defaultLocale,
-  ...(i18nConfig.locales ?? []),
-];
+export { getActiveLocaleCodes } from './active-locales';
 
 export const getActiveLocalesDisplay = () =>
-  LOCALES.filter((l) => getActiveLocaleCodes().includes(l.code))
+  getActiveLocales()
     .map((l) => ({
       code: l.code,
       label: getLocaleLabelCountry(l.code),

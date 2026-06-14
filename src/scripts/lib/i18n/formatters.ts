@@ -4,8 +4,8 @@ import {
   EXCHANGE_RATES,
 } from '../../../../generated/exchange-rates';
 import type { DateValue } from '../../utils/types';
+import { getActiveLocales } from './active-locales';
 import type { CurrencyCode } from './currencies';
-import { LOCALES } from './data';
 import {
   getCurrency,
   getLanguageConfig,
@@ -33,7 +33,7 @@ const createDigitConverter =
   (digitsArray: readonly string[]) => (num: number | string) =>
     String(num).replace(/\d/g, (d) => digitsArray[Number(d)]);
 
-const NATIVE_DIGITS_MAP = LOCALES.reduce(
+const NATIVE_DIGITS_MAP = getActiveLocales().reduce(
   (acc, locale) => {
     const lang = locale.language;
     const ns = locale.nativeNumberingSystem;

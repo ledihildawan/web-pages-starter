@@ -1,7 +1,8 @@
 import '@fontsource-variable/inter/index.css';
 
 import { i18nConfig } from '../../../configs/i18n';
-import { LOCALES, type LocaleConfig } from './data';
+import { getActiveLocales } from './active-locales';
+import type { LocaleConfig } from './data';
 import type { NumberingSystemCode } from './numbering-systems';
 import { WRITING_SYSTEMS, type WritingSystemCode } from './writing-systems';
 
@@ -135,7 +136,9 @@ function getCurrentLang(): string | null {
 }
 
 function findLocale(lang: string): LocaleConfig | undefined {
-  return LOCALES.find((l) => l.code === lang || lang.startsWith(`${l.code}-`));
+  return getActiveLocales().find(
+    (l) => l.code === lang || lang.startsWith(`${l.code}-`),
+  );
 }
 
 function handleLoadError(context: string, err: unknown): void {

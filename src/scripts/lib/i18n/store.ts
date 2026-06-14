@@ -1,12 +1,12 @@
 import { i18nConfig } from '../../../configs/i18n';
 import { ROOT_PAGE } from '../../../configs/pages';
 import { scheduleTask } from '../utils/microtask-queue';
-import { LOCALES } from './data';
+import { getActiveLocales } from './active-locales';
 import { DIRECTION_CODE } from './directions';
 import { getActiveLocalesDisplay, LOCALE_STORAGE_KEY } from './index';
 
 const updateDocumentAttributes = (code: string): void => {
-  const locale = LOCALES.find((l) => l.code === code);
+  const locale = getActiveLocales().find((l) => l.code === code);
   if (!locale) return;
 
   const htmlEl = document.documentElement;
