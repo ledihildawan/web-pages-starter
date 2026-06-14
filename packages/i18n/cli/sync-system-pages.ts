@@ -1,10 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { i18nConfig } from '../configs/i18n';
-import { getSystemPageSlug, SYSTEM_PAGE_IDS } from '../configs/pages';
-import { PATHS } from '../configs/paths';
-import { log, logBox } from './shared/logger';
-import { wrapMainError } from './shared/signal-handler';
+import { i18nConfig } from '@config/i18n';
+import { getSystemPageSlug, SYSTEM_PAGE_IDS } from '@config/pages';
+import { PATHS } from '@config/paths';
+import { log, logBox } from '@scripts/shared/logger';
+import { wrapMainError } from '@scripts/shared/signal-handler';
 
 const PAGES_DIR = path.join(PATHS.ROOT, 'pages');
 

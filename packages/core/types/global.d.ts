@@ -1,11 +1,10 @@
-import type { I18nComponents, I18nPages } from '@generated/i18n';
+import type { I18nPages } from '@generated/i18n';
 import type { LocaleCode } from '@i18n/data/locales';
 import type { Alpine as AlpineType } from 'alpinejs';
 
 declare global {
   interface Window {
     __PAGE_ID__: keyof I18nPages;
-    __USED_COMPONENTS__: (keyof I18nComponents)[];
     __SAVED_LOCALE__: LocaleCode;
     __SERVER_LOCALE__: LocaleCode;
   }

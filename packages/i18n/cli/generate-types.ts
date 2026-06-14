@@ -1,11 +1,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { i18nConfig } from '@config/i18n';
+import { PATHS } from '@config/paths';
 import { collectKeys, readJSON5 } from '@core/utils/json5';
 import { LOCALE_CODES } from '@i18n/data/locales';
-import { i18nConfig } from '../configs/i18n';
-import { PATHS } from '../configs/paths';
-import { log, logBox } from './shared/logger';
-import { generatedHeader, writeFilePath } from './shared/write-file';
+import { log, logBox } from '@scripts/shared/logger';
+import { generatedHeader, writeFilePath } from '@scripts/shared/write-file';
 
 const LOCALES_ROOT = path.join(PATHS.ROOT, PATHS.LOCALES);
 const DEFAULT_LOCALE_DIR = path.join(LOCALES_ROOT, i18nConfig.defaultLocale);
@@ -74,27 +74,40 @@ function readLocaleTree(dirPath: string): Record<string, unknown> {
   return namespaces;
 }
 
-function pickPages(
-  namespaces: Record<string, unknown>,
-): Record<string, unknown> {
-  return Object.fromEntries(
-    Object.entries(namespaces).filter(
-      ([namespace]) =>
-        namespace !== 'common' && !namespace.startsWith('components.'),
-    ),
+function getPageIds(): Set<string> {
+  const pagesDir = path.join(PATHS.ROOT, 'pages');
+  if (!fs.existsSync(pagesDir)) return new Set();
+  return new Set(
+    fs
+      .readdirSync(pagesDir)
+      .filter((f) => fs.statSync(path.join(pagesDir, f)).isDirectory()),
   );
 }
 
-function pickComponents(
+function pickByNamespaces(
   namespaces: Record<string, unknown>,
+  match: Set<string>,
 ): Record<string, unknown> {
   return Object.fromEntries(
-    Object.entries(namespaces)
-      .filter(([namespace]) => namespace.startsWith('components.'))
-      .map(([namespace, data]) => [
-        namespace.replace(/^components\./, ''),
-        data,
-      ]),
+    Object.entries(namespaces).filter(([ns]) => match.has(ns)),
+  );
+}
+
+function pickPages(
+  namespaces: Record<string, unknown>,
+  pageIds: Set<string>,
+): Record<string, unknown> {
+  return pickByNamespaces(namespaces, pageIds);
+}
+
+function pickShared(
+  namespaces: Record<string, unknown>,
+  pageIds: Set<string>,
+): Record<string, unknown> {
+  return Object.fromEntries(
+    Object.entries(namespaces).filter(
+      ([ns]) => ns !== 'common' && !pageIds.has(ns),
+    ),
   );
 }
 
@@ -140,8 +153,9 @@ try {
 
   const defaultNamespaces = readLocaleTree(DEFAULT_LOCALE_DIR);
   const commonData = defaultNamespaces.common;
-  const pagesData = pickPages(defaultNamespaces);
-  const componentsData = pickComponents(defaultNamespaces);
+  const pageIds = getPageIds();
+  const pagesData = pickPages(defaultNamespaces, pageIds);
+  const sharedData = pickShared(defaultNamespaces, pageIds);
 
   if (!commonData) {
     throw new Error(
@@ -165,7 +179,7 @@ try {
       log.error(`  ${err}`);
     }
     log.error(
-      '\n   Run `bun ./scripts/check-locale-parity.ts` for a detailed report.',
+      '\n   Run `bun ./packages/i18n/cli/check-parity.ts` for a detailed report.',
     );
     process.exit(1);
   }
@@ -174,23 +188,23 @@ try {
   const pageKeys = Object.entries(pagesData).flatMap(([page, data]) =>
     collectKeys(data).map((k) => `'${page}:${k}'`),
   );
-  const compKeys = Object.entries(componentsData).flatMap(([comp, data]) =>
-    collectKeys(data).map((k) => `'components.${comp}:${k}'`),
+  const sharedKeys = Object.entries(sharedData).flatMap(([ns, data]) =>
+    collectKeys(data).map((k) => `'${ns}:${k}'`),
   );
 
-  const allKeyCount = commonKeys.length + pageKeys.length + compKeys.length;
-  const allKeys = [...commonKeys, ...pageKeys, ...compKeys]
+  const allKeyCount = commonKeys.length + pageKeys.length + sharedKeys.length;
+  const allKeys = [...commonKeys, ...pageKeys, ...sharedKeys]
     .map((k) => `  | ${k}`)
     .join('\n');
 
-  const header = generatedHeader('scripts/generate-i18n.ts');
+  const header = generatedHeader('packages/i18n/cli/generate-types.ts');
   const output = `${header}
 
 export type I18nTranslationKeys =
 ${allKeys};
 
 export interface I18nPages ${toTsInterface(pagesData)}
-export interface I18nComponents ${toTsInterface(componentsData)}
+export interface I18nShared ${toTsInterface(sharedData)}
 `;
 
   writeFilePath(OUTPUT_FILE, output);

@@ -46,7 +46,7 @@ Requires [Bun](https://bun.sh) `>= 1.3.14`.
 │   └── {locale}/
 │       ├── common.json    #   shared copy (nav, footer, labels, plurals)
 │       ├── {page}.json    #   page-specific copy
-│       └── components.{name}.json  #   component copy (flat, dot-notation namespace)
+│       └── {shared}.json  #   shared locale copy (e.g. cta.json)
 ├── styles/
 │   ├── tokens.css         #   design tokens (CSS custom properties)
 │   ├── components.css      #   component classes
@@ -168,9 +168,7 @@ Shared Nunjucks partials live in `components/`. Two usage patterns:
 {{ form.form_input('text', 'contact:contact.form.name', 'contact:contact.form.name_placeholder', 'name', i18n=i18n) }}
 ```
 
-Pages can also have **local components** in `pages/{page}/components/`.
-
-The build auto-detects which components a page uses (via `getUsedComponents()`) and loads only the relevant i18n namespaces at runtime.
+Pages declare which shared locale files they need in `index.json5` (e.g. `"locales": ["cta"]`). The build loads only the declared namespaces per page, keeping bundles small.
 
 ## Styling
 
@@ -562,13 +560,13 @@ Direct tool access:
 | `bun ./scripts/generate-manifest.ts` | Generate `public/manifest.json` from `global.json5` + `i18nConfig` |
 | `bun ./scripts/generate-robots.ts` | Generate `public/robots.txt` from `SITE_URL` |
 | `bun ./scripts/generate-sw.ts` | Generate `public/sw.js` with locale-specific error page URLs |
-| `bun ./scripts/sync-system-pages.ts` | Rename system page folders to match locale-dependent slugs |
-| `bun ./scripts/sync-locales.ts` | Sync missing locale directories and files from default |
+| `bun ./packages/i18n/cli/sync-system-pages.ts` | Rename system page folders to match locale-dependent slugs |
+| `bun ./packages/i18n/cli/sync-locales.ts` | Sync missing locale directories and files from default |
 | `bun ./scripts/delete-page.ts [name]` | Delete a page and its 136 locale files (system pages protected) |
-| `bun ./scripts/check-locale-parity.ts` | Diff translation keys across all locales |
+| `bun ./packages/i18n/cli/check-parity.ts` | Diff translation keys across all locales |
 | `bun ./scripts/fetch-exchange-rates.ts` | Fetch exchange rates with 24h cache |
 | `bun ./scripts/fetch-exchange-rates.ts -- --force` | Force-refresh exchange rates |
-| `bun ./scripts/generate-i18n.ts` | Generate i18n types, check parity (build error on mismatch), sync i18n-ally config |
+| `bun ./packages/i18n/cli/generate-types.ts` | Generate i18n types, check parity (build error on mismatch), sync i18n-ally config |
 | `bun ./scripts/lighthouse.ts` | Run Lighthouse audits with interactive configuration |
 
 ## Tools
@@ -592,7 +590,7 @@ All tools live in `scripts/`. They share five modules from `scripts/shared/`:
 | `serve.ts` | log, createServer, setupSigintHandler, createStaticApp, loadHtmlCache, getPageNames | Serve production build locally |
 | `lighthouse.ts` | log, logBox, setupSigintHandler, wrapMainError, SITE_URL | Lighthouse audit runner |
 | `generate-page.ts` | log | Scaffold new page with locale files |
-| `generate-i18n.ts` | log, logBox, writeFilePath, generatedHeader | Generate i18n types, parity check (build error), sync i18n-ally config |
+| `generate-types.ts` | log, logBox, writeFilePath, generatedHeader | Generate i18n types, parity check (build error), sync i18n-ally config |
 | `generate-sitemap.ts` | log, logBox, SITE_URL, writeFilePath | Generate sitemap.xml |
 | `generate-manifest.ts` | logBox, writeFilePath | Generate manifest.json from global.json5 + i18nConfig |
 | `generate-robots.ts` | logBox, SITE_URL, writeFilePath | Generate robots.txt from SITE_URL |
@@ -600,9 +598,9 @@ All tools live in `scripts/`. They share five modules from `scripts/shared/`:
 | `sync-system-pages.ts` | log, logBox, wrapMainError | Rename ALL system page folders to locale-dependent slugs when default locale changes |
 | `sync-locales.ts` | log, logBox | Create missing locale directories; sync missing files in existing directories |
 | `delete-page.ts` | log | Delete a page (folder + 136 locale files); scans for broken URL references before deletion; system pages protected |
-| `check-locale-parity.ts` | log | Diff translation keys across locales |
+| `check-parity.ts` | log | Diff translation keys across locales |
 | `fetch-exchange-rates.ts` | log, writeFilePath, generatedHeader | Fetch and cache exchange rates |
-| `watch-i18n.ts` | log, logBox, setupSigintHandler | Watch locale file changes |
+| `watch.ts (i18n)` | log, logBox, setupSigintHandler | Watch locale file changes |
 | `clean-cache.ts` | log | Remove cache directories |
 
 ## Tech Stack

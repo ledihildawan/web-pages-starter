@@ -29,9 +29,11 @@ bun run typecheck         # tsc --noEmit
 ```
 i18n.t('home:hero.title')          → locales/{locale}/home.json
 i18n.t('common:nav.home')          → locales/{locale}/common.json
-i18n.t('components.cta:heading')   → locales/{locale}/components.cta.json
+i18n.t('cta:heading')              → locales/{locale}/cta.json
 i18n.t('site_name')                → common:site_name (bare keys resolve to common)
 ```
+
+Shared locales are auto-detected by scanning templates for `i18n.t('namespace:...')` usage. No declaration needed.
 
 ## Template Conventions
 

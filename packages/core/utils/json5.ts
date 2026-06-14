@@ -49,18 +49,3 @@ export const loadGlobalData = (dataDir: string): JsonData => {
   }
   return globalData;
 };
-
-export const loadSelectedComponentLocales = (
-  lang: string,
-  selected: string[],
-  localesDir: string,
-): JsonData => {
-  const compData: JsonData = {};
-  for (const name of selected) {
-    const data = readJSON5(`${localesDir}/${lang}/components.${name}.json`);
-    if (Object.keys(data).length > 0) {
-      compData[name] = data;
-    }
-  }
-  return compData;
-};

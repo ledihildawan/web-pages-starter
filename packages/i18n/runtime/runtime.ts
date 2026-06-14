@@ -326,21 +326,8 @@ export async function initIntl(localeOverride?: string): Promise<void> {
     );
     const data = await response.json();
 
-    const compData = data.comp
-      ? Object.fromEntries(
-          Object.entries(data.comp).map(([name, content]) => [
-            `components.${name}`,
-            content,
-          ]),
-        )
-      : {};
-
     const resources: Resource = {
-      [savedLocale]: {
-        common: data.common,
-        [pageID]: data.page,
-        ...compData,
-      },
+      [savedLocale]: data,
     };
 
     const initOptions = {
@@ -348,7 +335,7 @@ export async function initIntl(localeOverride?: string): Promise<void> {
       resources,
       supportedLngs: getActiveLocaleCodes(),
       fallbackLng: i18nConfig.defaultLocale,
-      ns: ['common', pageID, ...Object.keys(compData)],
+      ns: Object.keys(data),
       defaultNS: 'common',
       detection: localeOverride
         ? undefined

@@ -5,11 +5,7 @@ import { getRootPageSlug } from '../../../configs/pages';
 import { PATHS } from '../../../configs/paths';
 import type { I18nTranslationKeys } from '../../../generated/i18n';
 import { getValueByPath } from '../../core/utils/common';
-import {
-  loadGlobalData,
-  loadSelectedComponentLocales,
-  readJSON5,
-} from '../../core/utils/json5';
+import { loadGlobalData, readJSON5 } from '../../core/utils/json5';
 import type { DateValue, JsonData } from '../../core/utils/types';
 import {
   convertCurrency,
@@ -54,6 +50,7 @@ import { cardinal as arCardinal, ordinal as arOrdinal } from '../strategies/ar';
 import { cardinal as idCardinal, ordinal as idOrdinal } from '../strategies/id';
 import { cardinal as jaCardinal, ordinal as jaOrdinal } from '../strategies/ja';
 import { cardinal as zhCardinal } from '../strategies/zh';
+import { loadSharedLocales } from '../utils';
 
 setStrategies(
   { id: idCardinal, ja: jaCardinal, zh: zhCardinal, ar: arCardinal },
@@ -75,7 +72,7 @@ const warnedKeys = new Set<string>();
 
 const i18nScriptCache = new Map<string, { hash: string; script: string }>();
 
-const hashLocales = (name: string, usedComponents: string[]): string => {
+const hashLocales = (name: string, sharedLocales: string[]): string => {
   const parts: string[] = [];
   for (const locale of LOCALES.filter((l) =>
     getActiveLocaleCodes().includes(l.code),
@@ -83,8 +80,8 @@ const hashLocales = (name: string, usedComponents: string[]): string => {
     const files = [
       resolveRoot(`${PATHS.LOCALES}/${locale.code}/common.json`),
       resolveRoot(`${PATHS.LOCALES}/${locale.code}/${name}.json`),
-      ...usedComponents.map((c) =>
-        resolveRoot(`${PATHS.LOCALES}/${locale.code}/components.${c}.json`),
+      ...sharedLocales.map((lName) =>
+        resolveRoot(`${PATHS.LOCALES}/${locale.code}/${lName}.json`),
       ),
     ];
     for (const f of files) {
@@ -98,25 +95,34 @@ const hashLocales = (name: string, usedComponents: string[]): string => {
   return parts.join('|');
 };
 
-export const getUsedComponents = (
+export const scanSharedLocales = (
   templatePath: string,
+  pageId: string,
   found = new Set<string>(),
+  scanned = new Set<string>(),
 ): string[] => {
+  if (scanned.has(templatePath)) return [...found];
+  scanned.add(templatePath);
   if (!fs.existsSync(templatePath)) return [...found];
 
   const content = fs.readFileSync(templatePath, 'utf-8');
+
+  const keyRegex = /i18n\.\w+\(\s*['"]([^'"]+)['"]/g;
+  for (const match of content.matchAll(keyRegex)) {
+    const key = match[1];
+    const colonIdx = key.indexOf(':');
+    if (colonIdx !== -1) {
+      const ns = key.slice(0, colonIdx);
+      if (ns !== 'common' && ns !== pageId) found.add(ns);
+    }
+  }
+
   const includeRegex = /(?:include|import|extends)\s+['"]([^'"]+\.njk)['"]/g;
-
   for (const match of content.matchAll(includeRegex)) {
-    const ref = match[1];
-    const compName = path.basename(ref, '.njk');
-    if (found.has(compName)) continue;
-
     for (const dir of ['pages', 'layouts', '.']) {
-      const candidate = resolveRoot(dir, ref);
+      const candidate = resolveRoot(dir, match[1]);
       if (fs.existsSync(candidate)) {
-        found.add(compName);
-        getUsedComponents(candidate, found);
+        scanSharedLocales(candidate, pageId, found, scanned);
         break;
       }
     }
@@ -128,13 +134,13 @@ export const getUsedComponents = (
 const generateClientI18nScript = (
   lang: string,
   name: string,
-  usedComponents: string[],
+  sharedLocales: string[],
   supportedLangs: readonly string[],
   LOCALE_STORAGE_KEY: string,
   locales: Array<{ code: string; dir: string; writingSystem: string }>,
 ): string => {
   const cacheKey = name;
-  const hash = hashLocales(name, usedComponents);
+  const hash = hashLocales(name, sharedLocales);
   const cached = i18nScriptCache.get(cacheKey);
   if (cached && cached.hash === hash) return cached.script;
 
@@ -143,12 +149,8 @@ const generateClientI18nScript = (
       l,
       {
         common: readJSON5(resolveRoot(`${PATHS.LOCALES}/${l}/common.json`)),
-        comp: loadSelectedComponentLocales(
-          l,
-          usedComponents,
-          resolveRoot(PATHS.LOCALES),
-        ),
-        page: readJSON5(resolveRoot(`${PATHS.LOCALES}/${l}/${name}.json`)),
+        [name]: readJSON5(resolveRoot(`${PATHS.LOCALES}/${l}/${name}.json`)),
+        ...loadSharedLocales(l, sharedLocales, resolveRoot(PATHS.LOCALES)),
       },
     ]),
   ) as Record<string, JsonData>;
@@ -183,7 +185,6 @@ const generateClientI18nScript = (
   const locales = ${JSON.stringify(locales)};
 
   window.__PAGE_ID__ = ${JSON.stringify(name)};
-  window.__USED_COMPONENTS__ = ${JSON.stringify(usedComponents)};
   window.__SAVED_LOCALE__ = savedLocale;
   window.__SERVER_LOCALE__ = defaultLocale;
 
@@ -726,32 +727,18 @@ export const createTemplateParams = (
   const folderName = String(params.entryName || getRootPageSlug(lang));
   const pageData = readJSON5(resolveRoot(`pages/${folderName}/index.json5`));
   const pageId = String(pageData.page_id || folderName);
-
-  const templatePath = resolveRoot(`pages/${folderName}/index.njk`);
-  const usedComponents = getUsedComponents(templatePath);
+  const sharedLocales = scanSharedLocales(
+    resolveRoot(`pages/${folderName}/index.njk`),
+    pageId,
+  );
 
   const mergedLocales: JsonData = {
     ...readJSON5(resolveRoot(`${PATHS.LOCALES}/${lang}/common.json`)),
-    page: readJSON5(resolveRoot(`${PATHS.LOCALES}/${lang}/${pageId}.json`)),
-    comp: loadSelectedComponentLocales(
-      lang,
-      usedComponents,
-      resolveRoot(PATHS.LOCALES),
-    ),
+    [pageId]: readJSON5(resolveRoot(`${PATHS.LOCALES}/${lang}/${pageId}.json`)),
+    ...loadSharedLocales(lang, sharedLocales, resolveRoot(PATHS.LOCALES)),
   };
 
-  const resolveKeyToPath = (key: string): string => {
-    const colonIdx = key.indexOf(':');
-    if (colonIdx !== -1) {
-      const ns = key.slice(0, colonIdx);
-      const clientKey = key.slice(colonIdx + 1);
-      if (ns === pageId) return `page.${clientKey}`;
-      if (ns.startsWith('components.'))
-        return `comp.${ns.slice(11)}.${clientKey}`;
-      return clientKey;
-    }
-    return key;
-  };
+  const resolveKeyToPath = (key: string): string => key.replace(':', '.');
 
   const resolve = (key: string, vars: Record<string, unknown> = {}): string => {
     const jsonPath = resolveKeyToPath(key);
@@ -790,7 +777,7 @@ export const createTemplateParams = (
   const clientI18nScript = generateClientI18nScript(
     lang,
     pageId,
-    usedComponents,
+    sharedLocales,
     LOCALE_CODES,
     LOCALE_STORAGE_KEY,
     LOCALES.filter((l) => getActiveLocaleCodes().includes(l.code)).map((l) => ({

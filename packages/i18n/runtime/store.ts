@@ -40,18 +40,10 @@ const ensureLocaleData = async (
       `${import.meta.env.BASE_PATH}assets/i18n/${pageID}/${code}.json`,
     );
     const data = await response.json();
-    const compData = data.comp
-      ? Object.fromEntries(
-          Object.entries(data.comp).map(([name, content]) => [
-            `components.${name}`,
-            content,
-          ]),
-        )
-      : {};
-    m.i18next.addResourceBundle(code, 'common', data.common);
-    m.i18next.addResourceBundle(code, pageID, data.page);
-    for (const [ns, bundle] of Object.entries(compData)) {
-      m.i18next.addResourceBundle(code, ns, bundle as Record<string, string>);
+    for (const [ns, bundle] of Object.entries(
+      data as Record<string, Record<string, string>>,
+    )) {
+      m.i18next.addResourceBundle(code, ns, bundle);
     }
   } catch {
     console.warn(`[i18n] Failed to load locale: ${code}`);

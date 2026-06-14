@@ -1,10 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
+import { PATHS } from '@config/paths';
+import { log, logBox } from '@scripts/shared/logger';
+import { setupSigintHandler } from '@scripts/shared/signal-handler';
 import chokidar from 'chokidar';
-import { PATHS } from '../configs/paths';
-import { log, logBox } from './shared/logger';
-import { setupSigintHandler } from './shared/signal-handler';
 
 const LOCALE_DIR = path.resolve(process.cwd(), PATHS.LOCALES);
 
@@ -26,7 +26,7 @@ watcher.on('all', (event, filePath) => {
   if (filePath.endsWith('.json')) {
     log.info(`${event}: ${path.basename(filePath)}`);
     log.info(
-      'Run `bun ./scripts/generate-i18n.ts` to regenerate types if needed.\n',
+      'Run `bun ./packages/i18n/cli/generate-types.ts` to regenerate types if needed.\n',
     );
   }
 });
