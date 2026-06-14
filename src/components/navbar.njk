@@ -54,11 +54,6 @@
       init() {
         this.lastScroll = window.scrollY;
         this.scrolled = this.lastScroll > 20;
-
-        if (window.location.hash) {
-          this.navHidden = true;
-        }
-
         this._pluginPromise = this._loadPlugins();
       },
 
@@ -240,9 +235,10 @@
           </li>
         {% endfor %}
       </ul>
+      {% if locales.length > 1 %}
       <div class="relative hidden lg:block">
         <button @click="langOpen = !langOpen" @click.outside="langOpen = false" :aria-expanded="langOpen" aria-haspopup="listbox" aria-label="Select language" class="flex items-center gap-2.5 px-3.5 py-2.5 block-11 bg-white/5 border border-white/10 radius-icon text-slate-400 hover:text-white hover:bg-white/8 hover:border-white/15 transition-[color,background-color,border-color] duration-200 font-black text-[10px] group icon-squash">
-          <span class="inline-5 block-3.5 shrink-0 flex items-center justify-center overflow-hidden rounded-xs opacity-70 group-hover:opacity-100 transition-[opacity] duration-300 bg-white/5 aspect-4/3">
+          <span class="inline-5 block-3.5 shrink-0 flex items-center justify-center overflow-hidden rounded-xs opacity-70 group-hover:opacity-100 transition-opacity duration-300 bg-white/5 aspect-4/3">
             <template x-if="$store.i18n.languages.find(l => l.code === $store.i18n.current)">
               <img :src="`https://flagcdn.com/w20/${$store.i18n.languages.find(l => l.code === $store.i18n.current).flag.toLowerCase()}.png`" width="20" height="15" class="inline-full block-full object-cover" loading="lazy" :alt="`${$store.i18n.languages.find(l => l.code === $store.i18n.current)?.label || 'Language'} flag - ${$store.i18n.languages.find(l => l.code === $store.i18n.current).flag.toUpperCase()}`">
             </template>
@@ -263,8 +259,9 @@
           </div>
         </div>
       </div>
-      <div class="hidden lg:block ms-2 ps-5 border-s border-white/10">
-        <a href="{{ url('/pricing') }}" class="group relative pl-6 pr-[22px] block-11 flex items-center bg-linear-to-r from-violet-600 via-fuchsia-600 to-pink-600 text-white radius-icon text-[12px] font-black hover-lift btn-squash anticipate-press ripple-click sparkle-hover uppercase tracking-wider border border-white/10 overflow-hidden">
+      {% endif %}
+      <div class="hidden lg:block {% if locales.length > 1 %}ms-2 ps-5 border-s border-white/10{% endif %}">
+        <a href="{{ url('/pricing') }}" class="group relative pl-6 pr-5.5 block-11 flex items-center bg-linear-to-r from-violet-600 via-fuchsia-600 to-pink-600 text-white radius-icon text-[12px] font-black hover-lift btn-squash anticipate-press ripple-click sparkle-hover uppercase tracking-wider border border-white/10 overflow-hidden">
           <span class="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></span>
           <span class="relative z-10 flex items-center gap-2">
             {{ i18n.t('get_started') }}
@@ -341,13 +338,14 @@
             </li>
           {% endfor %}
         </ul>
+        {% if locales.length > 1 %}
         <div class="mbs-12 pbs-8 border-bs border-white/10" x-show="menuChildrenVisible" x-transition:enter="transition ease-emphasized duration-700" x-transition:enter-start="opacity-0 translate-y-8" role="group" aria-label="{{ i18n.t('select_language', {}, {raw: true}) }}">
           <p class="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase mbe-5 ps-1">{{ i18n.t('select_language') }}</p>
           <div class="grid grid-cols-2 gap-2" role="listbox" aria-label="Select language" :data-current-lang="$store.i18n.current" @click="const opt = $event.target.closest('[data-lang-option]'); if (opt) { $store.i18n.change(opt.dataset.langOption); closeMobileMenu(); hapticFeedback(); }">
             {% for lang in locales %}
               <button data-lang-option="{{ lang.code }}" class="lang-option group relative flex items-center gap-3 px-4 pbs-4 pbe-4 radius-btn transition-[color,background-color,border-color] duration-300 border text-start active:scale-[0.96]" role="option" :aria-selected="$store.i18n.current === '{{ lang.code }}'" aria-label="{{ lang.label }} ({{ lang.flag | upper }})">
                 <div class="relative shrink-0 inline-5 block-3.5 overflow-hidden rounded-xs bg-white/5 aspect-4/3">
-                                     <img src="https://flagcdn.com/w40/{{ lang.flag }}.png" width="40" height="30" class="inline-full block-full object-cover transition-[opacity,filter] duration-200 lang-flag" loading="lazy" alt="{{ lang.label }} flag - {{ lang.flag | upper }}">
+                  <img src="https://flagcdn.com/w40/{{ lang.flag }}.png" width="40" height="30" class="inline-full block-full object-cover transition-[opacity,filter] duration-200 lang-flag" loading="lazy" alt="{{ lang.label }} flag - {{ lang.flag | upper }}">
                 </div>
                 <div class="flex flex-col min-inline-0">
                   <span class="text-[13px] font-bold truncate leading-none">{{ lang.label }}</span>
@@ -357,6 +355,7 @@
             {% endfor %}
           </div>
         </div>
+        {% endif %}
         <div class="mbs-8" x-show="menuChildrenVisible" x-transition:enter="transition ease-emphasized duration-700" x-transition:enter-start="opacity-0 translate-y-10">
           <a href="{{ url('/pricing') }}" @click.prevent="closeMobileMenu('{{ url('/pricing') }}')" @touchstart.passive="hapticFeedback()" class="group block inline-full pbs-5 pbe-5 bg-linear-to-r from-violet-600 via-fuchsia-600 to-pink-600 text-white radius-card-md text-center font-black text-xl shadow-2xl btn-squash anticipate-press ripple-click sparkle-hover overflow-hidden hover-lift active:scale-[0.96] relative">
             <span class="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
