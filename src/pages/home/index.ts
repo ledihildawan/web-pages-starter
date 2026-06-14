@@ -1,1 +1,1 @@
-import './components/features.css';
+import './partials/features.css';
