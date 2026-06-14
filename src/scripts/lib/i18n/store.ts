@@ -2,7 +2,6 @@ import { i18nConfig } from '../../../configs/i18n';
 import { ROOT_PAGE } from '../../../configs/pages';
 import { scheduleTask } from '../utils/microtask-queue';
 import { getActiveLocales } from './active-locales';
-import { DIRECTION_CODE } from './directions';
 import { getActiveLocalesDisplay, LOCALE_STORAGE_KEY } from './index';
 
 const updateDocumentAttributes = (code: string): void => {
@@ -13,7 +12,7 @@ const updateDocumentAttributes = (code: string): void => {
   htmlEl.setAttribute('lang', code);
   htmlEl.setAttribute('dir', locale.dir);
   htmlEl.setAttribute('data-script', locale.writingSystem);
-  htmlEl.classList.toggle('is-rtl', locale.dir === DIRECTION_CODE.RTL);
+  htmlEl.classList.toggle('is-rtl', locale.dir === 'rtl');
 };
 
 const refreshFonts = async (): Promise<void> => {

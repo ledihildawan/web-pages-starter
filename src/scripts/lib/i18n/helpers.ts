@@ -6,9 +6,8 @@ import { i18nConfig } from '../../../configs/i18n';
 import { CALENDAR_CODE } from './calendars';
 import type { CurrencyCode } from './currencies';
 import type { LocaleCode, LocaleConfig } from './data';
-import { DIRECTION_CODE, type DirectionCode } from './directions';
+import type { DirectionCode } from './directions';
 import type { LanguageCode } from './languages';
-import { NUMBERING_SYSTEM_CODE } from './numbering-systems';
 
 export const getFallbackChain = (locale: string): LocaleCode[] => {
   if (LOCALE_CODES.includes(locale as LocaleCode)) {
@@ -77,7 +76,7 @@ export const getFirstDayOfWeek = (locale: LocaleCode): number =>
   getLanguageConfig(locale)?.firstDayOfWeek ?? 0;
 
 export const getNumberingSystem = (locale: LocaleCode): string =>
-  getLanguageConfig(locale)?.numberingSystem || NUMBERING_SYSTEM_CODE.LATN;
+  getLanguageConfig(locale)?.numberingSystem || 'latn';
 
 export const getDefaultNativeDigits = (locale: LocaleCode): boolean =>
   getLanguageConfig(locale)?.nativeDigits ?? false;
@@ -86,10 +85,10 @@ export const getRegionSubtag = (locale: LocaleCode): string | undefined =>
   getLanguageConfig(locale)?.region;
 
 export const getDirection = (locale: LocaleCode): DirectionCode =>
-  getLanguageConfig(locale)?.dir || DIRECTION_CODE.LTR;
+  getLanguageConfig(locale)?.dir || 'ltr';
 
 export const isRTL = (locale: LocaleCode): boolean =>
-  getDirection(locale) === DIRECTION_CODE.RTL;
+  getDirection(locale) === 'rtl';
 
 export const getPluralSuffix = (n: number, locale?: LocaleCode): string => {
   const loc = getLocale(locale);

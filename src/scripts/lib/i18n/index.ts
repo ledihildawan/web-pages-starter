@@ -1,3 +1,4 @@
+import { ACTIVE_LANGUAGES } from '../../../../generated/active-locales-data';
 import { getActiveLocales } from './active-locales';
 import type { LocaleCode } from './data';
 import {
@@ -44,8 +45,7 @@ import {
   isRTL,
   setLocale,
 } from './helpers';
-import { LANGUAGE_CODE, LANGUAGES, SCRIPT_CODE } from './languages';
-import { REGION_CODE, type RegionCode } from './regions';
+import type { RegionCode } from './regions';
 
 export type {
   CardinalOptions,
@@ -61,7 +61,7 @@ export type {
 } from './types';
 
 const getLocaleDisplayRegion = (regionCode: RegionCode): string => {
-  if (regionCode === REGION_CODE.GB) return 'UK';
+  if (regionCode === 'GB') return 'UK';
   return regionCode;
 };
 
@@ -69,12 +69,12 @@ export const getLocaleLabelCountry = (localeCode: LocaleCode): string => {
   const locale = getActiveLocales().find((l) => l.code === localeCode);
   if (!locale) return localeCode;
 
-  const language = LANGUAGES.find((l) => l.code === locale.language);
+  const language = ACTIVE_LANGUAGES.find((l) => l.code === locale.language);
   if (!language) return localeCode;
 
   let nativeName: string;
-  if (locale.language === LANGUAGE_CODE.ZH && locale.script) {
-    nativeName = locale.script === SCRIPT_CODE.HANS ? '简体中文' : '繁體中文';
+  if (locale.language === 'zh' && locale.script) {
+    nativeName = locale.script === 'Hans' ? '简体中文' : '繁體中文';
   } else {
     nativeName = language.nativeName;
   }

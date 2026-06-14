@@ -1,10 +1,11 @@
 import '@fontsource-variable/inter/index.css';
 
+import { ACTIVE_WRITING_SYSTEMS } from '../../../../generated/active-locales-data';
 import { i18nConfig } from '../../../configs/i18n';
 import { getActiveLocales } from './active-locales';
 import type { LocaleConfig } from './data';
 import type { NumberingSystemCode } from './numbering-systems';
-import { WRITING_SYSTEMS, type WritingSystemCode } from './writing-systems';
+import type { WritingSystemCode } from './writing-systems';
 
 type FontLoader = () => Promise<unknown>;
 
@@ -199,7 +200,9 @@ export const setupFontStackCSS = (): void => {
 
   const locale = findLocale(lang);
   const writingSystem = locale?.writingSystem as WritingSystemCode | undefined;
-  const wsConfig = WRITING_SYSTEMS.find((ws) => ws.code === writingSystem);
+  const wsConfig = ACTIVE_WRITING_SYSTEMS.find(
+    (ws) => ws.code === writingSystem,
+  );
 
   const primaryFont = wsConfig?.defaultFont ?? i18nConfig.fonts.primary.family;
   document.documentElement.style.setProperty('--font-primary', primaryFont);

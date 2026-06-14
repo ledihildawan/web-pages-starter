@@ -1,5 +1,9 @@
 import pluralize from 'pluralize';
 import {
+  ACTIVE_NUMBERING_SYSTEMS,
+  WRITING_SYSTEM,
+} from '../../../../generated/active-locales-data';
+import {
   convertCurrency as convertCurrencyRaw,
   EXCHANGE_RATES,
 } from '../../../../generated/exchange-rates';
@@ -12,8 +16,6 @@ import {
   getLanguageSubtag,
   getLocale,
 } from './helpers';
-import { LANGUAGE_CODE } from './languages';
-import { NUMBERING_SYSTEM_CODE, NUMBERING_SYSTEMS } from './numbering-systems';
 import type {
   CardinalOptions,
   DurationOptions,
@@ -24,7 +26,6 @@ import type {
   RelativeTimeOptions,
   TimeFormatOptions,
 } from './types';
-import { WRITING_SYSTEM } from './writing-systems';
 
 const toDateObj = (date: DateValue): Date =>
   typeof date === 'string' || typeof date === 'number' ? new Date(date) : date;
@@ -40,7 +41,9 @@ const NATIVE_DIGITS_MAP = getActiveLocales().reduce(
 
     if (acc[lang]) return acc;
 
-    const nsConfig = NUMBERING_SYSTEMS.find((config) => config.code === ns);
+    const nsConfig = ACTIVE_NUMBERING_SYSTEMS.find(
+      (config) => config.code === ns,
+    );
     if (nsConfig?.digits) {
       acc[lang] = createDigitConverter(nsConfig.digits);
     }
@@ -53,15 +56,9 @@ const NATIVE_DIGITS_MAP = getActiveLocales().reduce(
 const getNumberingSystem = (options: FormatOptions = {}) => {
   if (options.numberingSystem) return options.numberingSystem;
   if (options.nativeDigits) {
-    return (
-      getLanguageConfig(getLocale())?.nativeNumberingSystem ||
-      NUMBERING_SYSTEM_CODE.LATN
-    );
+    return getLanguageConfig(getLocale())?.nativeNumberingSystem || 'latn';
   }
-  return (
-    getLanguageConfig(getLocale())?.numberingSystem ||
-    NUMBERING_SYSTEM_CODE.LATN
-  );
+  return getLanguageConfig(getLocale())?.numberingSystem || 'latn';
 };
 
 export const toNativeDigits = (text: string, force?: boolean) => {
@@ -75,8 +72,7 @@ export const toNativeDigits = (text: string, force?: boolean) => {
 
   try {
     const formatter = new Intl.NumberFormat(getLocale(), {
-      numberingSystem:
-        localeConfig?.nativeNumberingSystem || NUMBERING_SYSTEM_CODE.LATN,
+      numberingSystem: localeConfig?.nativeNumberingSystem || 'latn',
     });
     const testNum = 0;
     const formatted = formatter.format(testNum);
@@ -165,7 +161,9 @@ const applyDigitsFallback = (
     const parsed = parseInt(result.replace(/\D/g, ''), 10);
     return Number.isNaN(parsed) ? result : toRoman(parsed);
   }
-  const nsConfig = NUMBERING_SYSTEMS.find((ns) => ns.code === numberingSystem);
+  const nsConfig = ACTIVE_NUMBERING_SYSTEMS.find(
+    (ns) => ns.code === numberingSystem,
+  );
   if (!nsConfig?.digits) return result;
   if (/\d/.test(result)) {
     return convertLatinDigits(result, nsConfig.digits);
@@ -668,17 +666,17 @@ const processNumeric = (
     }[] = [
       {
         languages: WRITING_SYSTEM.ARABIC_LANGUAGES as readonly string[],
-        converter: NATIVE_DIGITS_MAP[LANGUAGE_CODE.AR],
+        converter: NATIVE_DIGITS_MAP.ar,
         fallback: config.arabicFallback,
       },
       {
         languages: WRITING_SYSTEM.DEVANAGARI_LANGUAGES as readonly string[],
-        converter: NATIVE_DIGITS_MAP[LANGUAGE_CODE.HI],
+        converter: NATIVE_DIGITS_MAP.hi,
         fallback: config.devanagariFallback,
       },
       {
         languages: WRITING_SYSTEM.CYRILLIC_LANGUAGES as readonly string[],
-        converter: NATIVE_DIGITS_MAP[LANGUAGE_CODE.RU],
+        converter: NATIVE_DIGITS_MAP.ru,
         fallback: config.cyrillicFallback,
       },
     ];
@@ -724,9 +722,9 @@ export const formatNumber = (
       invalid: String,
       intlFallback: String,
       cjk: (num, _languageSubtag) => formatCardinal(num),
-      arabicFallback: NATIVE_DIGITS_MAP[LANGUAGE_CODE.AR],
-      devanagariFallback: NATIVE_DIGITS_MAP[LANGUAGE_CODE.HI],
-      cyrillicFallback: NATIVE_DIGITS_MAP[LANGUAGE_CODE.RU],
+      arabicFallback: NATIVE_DIGITS_MAP.ar,
+      devanagariFallback: NATIVE_DIGITS_MAP.hi,
+      cyrillicFallback: NATIVE_DIGITS_MAP.ru,
     },
   );
 
@@ -744,12 +742,9 @@ export const formatCurrency = (
       intlFallback: (num) => `${currency} ${num}`,
       cjk: (num, _languageSubtag) =>
         `${currency || getLanguageConfig(getLocale())?.currency || ''}${formatCardinal(num)}`,
-      arabicFallback: (num) =>
-        `${currency} ${NATIVE_DIGITS_MAP[LANGUAGE_CODE.AR](num)}`,
-      devanagariFallback: (num) =>
-        `${currency} ${NATIVE_DIGITS_MAP[LANGUAGE_CODE.HI](num)}`,
-      cyrillicFallback: (num) =>
-        `${currency} ${NATIVE_DIGITS_MAP[LANGUAGE_CODE.RU](num)}`,
+      arabicFallback: (num) => `${currency} ${NATIVE_DIGITS_MAP.ar(num)}`,
+      devanagariFallback: (num) => `${currency} ${NATIVE_DIGITS_MAP.hi(num)}`,
+      cyrillicFallback: (num) => `${currency} ${NATIVE_DIGITS_MAP.ru(num)}`,
     },
   );
 };
@@ -768,11 +763,11 @@ export const formatPercent = (
       cjk: (num, _languageSubtag) =>
         `${formatCardinal(Math.round(num * 100))}%`,
       arabicFallback: (num) =>
-        `${NATIVE_DIGITS_MAP[LANGUAGE_CODE.AR](Math.round(num * 100))}%`,
+        `${NATIVE_DIGITS_MAP.ar(Math.round(num * 100))}%`,
       devanagariFallback: (num) =>
-        `${NATIVE_DIGITS_MAP[LANGUAGE_CODE.HI](Math.round(num * 100))}%`,
+        `${NATIVE_DIGITS_MAP.hi(Math.round(num * 100))}%`,
       cyrillicFallback: (num) =>
-        `${NATIVE_DIGITS_MAP[LANGUAGE_CODE.RU](Math.round(num * 100))}%`,
+        `${NATIVE_DIGITS_MAP.ru(Math.round(num * 100))}%`,
     },
   );
 };
@@ -790,12 +785,9 @@ export const formatUnit = (
       invalid: (v) => `${v} ${unit}`,
       intlFallback: (num) => `${num} ${unit}`,
       cjk: (num, _languageSubtag) => `${formatCardinal(num)}${unit}`,
-      arabicFallback: (num) =>
-        `${NATIVE_DIGITS_MAP[LANGUAGE_CODE.AR](num)} ${unit}`,
-      devanagariFallback: (num) =>
-        `${NATIVE_DIGITS_MAP[LANGUAGE_CODE.HI](num)} ${unit}`,
-      cyrillicFallback: (num) =>
-        `${NATIVE_DIGITS_MAP[LANGUAGE_CODE.RU](num)} ${unit}`,
+      arabicFallback: (num) => `${NATIVE_DIGITS_MAP.ar(num)} ${unit}`,
+      devanagariFallback: (num) => `${NATIVE_DIGITS_MAP.hi(num)} ${unit}`,
+      cyrillicFallback: (num) => `${NATIVE_DIGITS_MAP.ru(num)} ${unit}`,
     },
   );
 };
@@ -809,14 +801,14 @@ export const formatScientific = (
     options.numberingSystem ?? getNumberingSystem(options);
 
   if (num === 0) {
-    if (numberingSystem === NUMBERING_SYSTEM_CODE.ARAB) return '٠';
-    if (numberingSystem === NUMBERING_SYSTEM_CODE.DEVA) return '०';
+    if (numberingSystem === 'arab') return '٠';
+    if (numberingSystem === 'deva') return '०';
     if (
       ALGORITHMIC_SYSTEMS.includes(
         numberingSystem as (typeof ALGORITHMIC_SYSTEMS)[number],
       )
     ) {
-      const nsConfig = NUMBERING_SYSTEMS.find(
+      const nsConfig = ACTIVE_NUMBERING_SYSTEMS.find(
         (ns) => ns.code === numberingSystem,
       );
       if (nsConfig?.digits) return nsConfig.digits[0];
@@ -851,24 +843,20 @@ export const formatScientific = (
         const cMan = formatCardinal(Math.abs(n) / 10 ** exp);
         const cExp = formatCardinal(10 ** Math.abs(exp));
         const minus =
-          n < 0
-            ? languageSubtag === LANGUAGE_CODE.JA
-              ? 'マイナス'
-              : '负'
-            : '';
+          n < 0 ? (languageSubtag === 'ja' ? 'マイナス' : '负') : '';
         return `${minus}${cMan}×${cExp}`;
       },
       arabicFallback: (n) => {
         const exp = Math.floor(Math.log10(Math.abs(n)));
-        return `${n < 0 ? '−' : ''}${NATIVE_DIGITS_MAP[LANGUAGE_CODE.AR]((Math.abs(n) / 10 ** exp).toFixed(1))}×١٠${NATIVE_DIGITS_MAP[LANGUAGE_CODE.AR](Math.abs(exp))}`;
+        return `${n < 0 ? '−' : ''}${NATIVE_DIGITS_MAP.ar((Math.abs(n) / 10 ** exp).toFixed(1))}×١٠${NATIVE_DIGITS_MAP.ar(Math.abs(exp))}`;
       },
       devanagariFallback: (n) => {
         const exp = Math.floor(Math.log10(Math.abs(n)));
-        return `${n < 0 ? '-' : ''}${NATIVE_DIGITS_MAP[LANGUAGE_CODE.HI]((Math.abs(n) / 10 ** exp).toFixed(1))}×१०${NATIVE_DIGITS_MAP[LANGUAGE_CODE.HI](Math.abs(exp))}`;
+        return `${n < 0 ? '-' : ''}${NATIVE_DIGITS_MAP.hi((Math.abs(n) / 10 ** exp).toFixed(1))}×१०${NATIVE_DIGITS_MAP.hi(Math.abs(exp))}`;
       },
       cyrillicFallback: (n) => {
         const exp = Math.floor(Math.log10(Math.abs(n)));
-        return `${n < 0 ? '−' : ''}${NATIVE_DIGITS_MAP[LANGUAGE_CODE.RU]((Math.abs(n) / 10 ** exp).toFixed(1))}×¹⁰${NATIVE_DIGITS_MAP[LANGUAGE_CODE.RU](Math.abs(exp))}`;
+        return `${n < 0 ? '−' : ''}${NATIVE_DIGITS_MAP.ru((Math.abs(n) / 10 ** exp).toFixed(1))}×¹⁰${NATIVE_DIGITS_MAP.ru(Math.abs(exp))}`;
       },
     },
   );

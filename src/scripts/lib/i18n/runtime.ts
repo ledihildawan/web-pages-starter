@@ -9,7 +9,6 @@ import { i18nConfig } from '../../../configs/i18n';
 import { ROOT_PAGE } from '../../../configs/pages';
 import type { DateTimePreset } from '../../utils/types';
 import { scheduleTask } from '../utils/microtask-queue';
-import { CURRENCY_CODE } from './currencies';
 import type { LocaleCode } from './data';
 import {
   formatAbbreviated,
@@ -192,7 +191,7 @@ const FORMATTERS = [
       const explicitTarget = el.getAttribute('data-target-currency');
 
       let price = 0;
-      let fromCurrency: string = CURRENCY_CODE.USD;
+      let fromCurrency: string = 'USD';
       const locale = getLocale();
 
       try {
@@ -202,7 +201,7 @@ const FORMATTERS = [
           fromCurrency = getCurrency(locale);
         } else if (pricing.base) {
           price = pricing.base;
-          fromCurrency = CURRENCY_CODE.USD;
+          fromCurrency = 'USD';
         }
       } catch (err) {
         if (isDev) console.error('[i18n] initIntl failed:', err);
