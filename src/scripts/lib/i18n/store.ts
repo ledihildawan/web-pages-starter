@@ -2,7 +2,14 @@ import { i18nConfig } from '../../../configs/i18n';
 import { ROOT_PAGE } from '../../../configs/pages';
 import { scheduleTask } from '../utils/microtask-queue';
 import { getActiveLocales } from './active-locales';
-import { getActiveLocalesDisplay, LOCALE_STORAGE_KEY } from './index';
+import type { LocaleCode } from './data';
+import {
+  getActiveLocalesDisplay,
+  getLanguageSubtag,
+  LOCALE_STORAGE_KEY,
+  setStrategies,
+} from './index';
+import { loadStrategies } from './strategies/loader';
 
 const updateDocumentAttributes = (code: string): void => {
   const locale = getActiveLocales().find((l) => l.code === code);
@@ -60,6 +67,10 @@ const changeLanguage = async (code: string): Promise<void> => {
     const pageID = (window.__PAGE_ID__ ?? ROOT_PAGE) as string;
     await ensureLocaleData(code, pageID, m);
     await m.i18next.changeLanguage(code);
+    const strategies = await loadStrategies(
+      getLanguageSubtag(code as LocaleCode),
+    );
+    setStrategies(strategies.cardinal, strategies.ordinal);
     scheduleTask(() => m.translatePage());
     scheduleTask(() => m.updateFormattedElements());
     scheduleTask(() => m.updateI18nStoreLabels?.());

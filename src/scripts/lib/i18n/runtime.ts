@@ -29,13 +29,16 @@ import {
   getActiveLocaleCodes,
   getActiveLocalesDisplay,
   getCurrency,
+  getLanguageSubtag,
   getLocale,
   LOCALE_STORAGE_KEY,
   plural,
   setLocale,
+  setStrategies,
   singular,
   toNativeDigits,
 } from './index';
+import { loadStrategies } from './strategies/loader';
 
 export { i18next };
 
@@ -312,6 +315,10 @@ export async function initIntl(localeOverride?: string): Promise<void> {
     : i18nConfig.defaultLocale;
 
   setLocale(getLocale(savedLocale));
+
+  const lang = getLanguageSubtag(getLocale());
+  const strategies = await loadStrategies(lang);
+  setStrategies(strategies.cardinal, strategies.ordinal);
 
   try {
     const response = await fetch(

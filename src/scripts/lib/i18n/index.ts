@@ -24,6 +24,7 @@ import {
   localPrice,
   localPriceCurrency,
   plural,
+  setStrategies,
   singular,
   toNativeDigits,
 } from './formatters';
@@ -135,6 +136,7 @@ export {
   localPriceCurrency,
   plural,
   setLocale,
+  setStrategies,
   singular,
   toNativeDigits,
 };

@@ -40,15 +40,25 @@ import {
   localPriceCurrency,
   plural,
   setLocale,
+  setStrategies,
   singular,
   toNativeDigits,
 } from './index';
+import { cardinal as arCardinal, ordinal as arOrdinal } from './strategies/ar';
+import { cardinal as idCardinal, ordinal as idOrdinal } from './strategies/id';
+import { cardinal as jaCardinal, ordinal as jaOrdinal } from './strategies/ja';
+import { cardinal as zhCardinal } from './strategies/zh';
 import type {
   CardinalOptions,
   FormatOptions,
   I18nItem,
   TemplateParams,
 } from './types';
+
+setStrategies(
+  { id: idCardinal, ja: jaCardinal, zh: zhCardinal, ar: arCardinal },
+  { id: idOrdinal, ja: jaOrdinal, ar: arOrdinal },
+);
 
 interface TemplateFormatOptions extends FormatOptions {
   raw?: boolean;
