@@ -233,6 +233,12 @@ const main = async () => {
       log.info('\nShutting down...');
       closeServer();
       if (tunnelClose) tunnelClose();
+      const { spawn } = await import('node:child_process');
+      spawn('bun', ['./packages/i18n/cli/generate-active-locales.ts'], {
+        stdio: 'ignore',
+        cwd: PATHS.ROOT,
+        detached: true,
+      });
       process.exit(0);
     };
 

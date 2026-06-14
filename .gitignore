@@ -18,6 +18,7 @@ public/assets/i18n/
 public/manifest.json
 public/robots.txt
 public/sitemap.xml
+public/sw.js
 
 # Profile
 .rspack-profile-*/
