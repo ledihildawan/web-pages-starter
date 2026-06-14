@@ -2,7 +2,7 @@ import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import inquirer from 'inquirer';
-import { PATHS } from '../src/configs/paths';
+import { PATHS } from '../configs/paths';
 import { log } from './shared/logger';
 import { setupSigintHandler, wrapMainError } from './shared/signal-handler';
 
@@ -235,7 +235,7 @@ const tools: Tool[] = [
           ? [
               '--coverage',
               '--coverage.include',
-              'src/packages/i18n/**',
+              'packages/i18n/**',
               '--coverage.reporters',
               'text',
               '--coverage.reporters',

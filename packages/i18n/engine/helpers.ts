@@ -1,5 +1,5 @@
+import { i18nConfig } from '../../../configs/i18n';
 import { LOCALE_CODES, LOCALES } from '../../../generated/active-locales-data';
-import { i18nConfig } from '../../../src/configs/i18n';
 import type { CurrencyCode } from '../data/currencies';
 import type { DirectionCode } from '../data/directions';
 import type { LanguageCode } from '../data/languages';

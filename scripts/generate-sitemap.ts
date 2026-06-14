@@ -1,10 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
-import '../src/configs/env';
-import { i18nConfig } from '../src/configs/i18n';
-import { getErrorPageSlugs, getRootPageSlug } from '../src/configs/pages';
-import { PATHS } from '../src/configs/paths';
+import '../configs/env';
+import { i18nConfig } from '../configs/i18n';
+import { getErrorPageSlugs, getRootPageSlug } from '../configs/pages';
+import { PATHS } from '../configs/paths';
 import { log, logBox } from './shared/logger';
 import { SITE_URL } from './shared/site-url';
 import { writeFilePath } from './shared/write-file';
@@ -13,7 +13,7 @@ const cliArgs = process.argv.slice(2);
 const distOnly = cliArgs.includes('--dist-only');
 const isPreviewRegen = process.env.FOR_PREVIEW === 'true';
 
-const PAGES_DIR = path.join(PATHS.ROOT, PATHS.SRC, 'pages');
+const PAGES_DIR = path.join(PATHS.ROOT, 'pages');
 const OUTPUT_PUBLIC = path.join(PATHS.ROOT, 'public', 'sitemap.xml');
 const OUTPUT_DIST = path.join(PATHS.ROOT, 'dist', 'sitemap.xml');
 

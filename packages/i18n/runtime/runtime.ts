@@ -1,13 +1,13 @@
-import type { DateTimePreset } from '@core/utils/types';
 import i18next, { type Resource } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
+import { i18nConfig } from '../../../configs/i18n';
+import { ROOT_PAGE } from '../../../configs/pages';
 import {
   convertCurrency as convertCurrencyRaw,
   EXCHANGE_RATES,
 } from '../../../generated/exchange-rates';
 import type { I18nTranslationKeys } from '../../../generated/i18n';
-import { i18nConfig } from '../../../src/configs/i18n';
-import { ROOT_PAGE } from '../../../src/configs/pages';
+import type { DateTimePreset } from '../../core/utils/types';
 import {
   formatAbbreviated,
   formatBytes,

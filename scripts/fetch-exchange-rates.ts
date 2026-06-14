@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { CURRENCY_CODE } from '@i18n/data/currencies';
 import { LOCALES } from '@i18n/data/locales';
-import { PATHS } from '../src/configs/paths';
+import { PATHS } from '../configs/paths';
 import { log } from './shared/logger';
 import { generatedHeader, writeFilePath } from './shared/write-file';
 
@@ -89,7 +89,7 @@ async function generateExchangeRates(forceRefresh = false): Promise<void> {
       log.info(`  1 ${BASE_CURRENCY} = ${rate.toFixed(4)} ${currency}`);
     }
 
-    const header = generatedHeader('tools/fetch-exchange-rates.ts');
+    const header = generatedHeader('scripts/fetch-exchange-rates.ts');
     const content = `${header}
 
 export const EXCHANGE_RATES = ${formatRatesObject(rates)} as const;

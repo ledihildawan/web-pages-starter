@@ -41,7 +41,7 @@
   },
   "overrides": [
     {
-      "includes": ["src/styles/main.css"],
+      "includes": ["styles/main.css"],
       "linter": {
         "rules": {
           "complexity": {
@@ -54,7 +54,7 @@
       }
     },
     {
-      "includes": ["src/core/utils/common.ts"],
+      "includes": ["packages/core/utils/common.ts"],
       "linter": {
         "rules": {
           "suspicious": {

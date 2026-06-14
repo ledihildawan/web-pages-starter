@@ -1,11 +1,11 @@
 import path from 'node:path';
-import { i18nConfig } from '../src/configs/i18n';
+import { i18nConfig } from '../configs/i18n';
 import {
   getErrorPageSlugs,
   getRootPageSlug,
   getSystemPageSlug,
-} from '../src/configs/pages';
-import { PATHS } from '../src/configs/paths';
+} from '../configs/pages';
+import { PATHS } from '../configs/paths';
 import { logBox } from './shared/logger';
 import { writeFilePath } from './shared/write-file';
 

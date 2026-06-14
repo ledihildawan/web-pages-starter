@@ -1,10 +1,10 @@
 import '@fontsource-variable/inter/index.css';
 
+import { i18nConfig } from '../../../configs/i18n';
 import {
   ACTIVE_NOTO_SANS,
   ACTIVE_WRITING_SYSTEMS,
 } from '../../../generated/active-locales-data';
-import { i18nConfig } from '../../../src/configs/i18n';
 import type { LocaleConfig } from '../data/locales';
 import type { NumberingSystemCode } from '../data/numbering-systems';
 import type { WritingSystemCode } from '../data/writing-systems';

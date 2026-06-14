@@ -3,9 +3,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { LOCALE_CODES } from '@i18n/data/locales';
 import inquirer from 'inquirer';
-import { i18nConfig } from '../src/configs/i18n';
-import { isSystemPageId, isSystemPageSlug } from '../src/configs/pages';
-import { PATHS } from '../src/configs/paths';
+import { i18nConfig } from '../configs/i18n';
+import { isSystemPageId, isSystemPageSlug } from '../configs/pages';
+import { PATHS } from '../configs/paths';
 import { log } from './shared/logger';
 
 const args = process.argv.slice(2);
@@ -14,7 +14,7 @@ const providedPageName = args[0]?.trim();
 const defaultLocale = i18nConfig.defaultLocale;
 
 function getAllPages(): string[] {
-  const pagesDir = path.resolve(PATHS.ROOT, PATHS.SRC, 'pages');
+  const pagesDir = path.resolve(PATHS.ROOT, 'pages');
   if (!fs.existsSync(pagesDir)) return [];
   return fs
     .readdirSync(pagesDir)
@@ -28,7 +28,7 @@ function isSystemPage(name: string): boolean {
 async function selectPage(): Promise<string | null> {
   const pages = getAllPages();
   if (pages.length === 0) {
-    log.error('Error: No pages found in src/pages/.');
+    log.error('Error: No pages found in pages/.');
     return null;
   }
 
@@ -77,14 +77,14 @@ function findReferences(pageName: string): Reference[] {
   const pattern = new RegExp(`/${pageName}(?=[^a-zA-Z0-9-]|$)`, 'g');
 
   const scanFiles: string[] = [];
-  collectFiles(path.join(PATHS.SRC, 'pages'), '.njk', scanFiles);
-  collectFiles(path.join(PATHS.SRC, 'components'), '.njk', scanFiles);
-  collectFiles(path.join(PATHS.SRC, 'layouts'), '.njk', scanFiles);
+  collectFiles(path.join('pages'), '.njk', scanFiles);
+  collectFiles(path.join('components'), '.njk', scanFiles);
+  collectFiles(path.join('layouts'), '.njk', scanFiles);
 
-  const menuFile = path.join(PATHS.SRC, 'data', 'menu.json5');
+  const menuFile = path.join('data', 'menu.json5');
   if (fs.existsSync(menuFile)) scanFiles.push(menuFile);
 
-  const pageDir = path.join(PATHS.SRC, 'pages', pageName);
+  const pageDir = path.join('pages', pageName);
 
   for (const file of scanFiles) {
     if (file.startsWith(pageDir)) continue;
@@ -120,8 +120,8 @@ function showReferenceWarnings(refs: Reference[]): void {
 async function confirmDeletion(pageName: string): Promise<boolean> {
   log.info(`\nYou are about to delete page: "${pageName}"`);
   log.info('This will DELETE:');
-  log.info(`   - src/pages/${pageName}/ (entire folder)`);
-  log.info(`   - src/locales/*/${pageName}.json (all 87 locales)\n`);
+  log.info(`   - pages/${pageName}/ (entire folder)`);
+  log.info(`   - locales/*/${pageName}.json (all 87 locales)\n`);
 
   const { confirm } = await inquirer.prompt<{ confirm: boolean }>([
     {
@@ -160,7 +160,7 @@ function deletePage(pageName: string): {
   folderDeleted: boolean;
   localeFilesDeleted: number;
 } {
-  const pagesDir = path.resolve(PATHS.ROOT, PATHS.SRC, 'pages');
+  const pagesDir = path.resolve(PATHS.ROOT, 'pages');
   const pageDir = path.join(pagesDir, pageName);
 
   let folderDeleted = false;
@@ -185,7 +185,7 @@ function deletePage(pageName: string): {
 async function runSyncLocales(): Promise<void> {
   return new Promise((resolve, reject) => {
     log.info('\nRunning locale sync to ensure consistency...');
-    const proc = spawn('bun', ['./tools/sync-locales.ts'], {
+    const proc = spawn('bun', ['./scripts/sync-locales.ts'], {
       stdio: 'inherit',
       shell: false,
       cwd: PATHS.ROOT,

@@ -1,5 +1,5 @@
-import { i18nConfig } from '../../../src/configs/i18n';
-import { ROOT_PAGE } from '../../../src/configs/pages';
+import { i18nConfig } from '../../../configs/i18n';
+import { ROOT_PAGE } from '../../../configs/pages';
 import {
   getActiveLocalesDisplay,
   getLanguageSubtag,

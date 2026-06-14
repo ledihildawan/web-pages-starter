@@ -2,8 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { collectKeys, readJSON5 } from '@core/utils/json5';
 import { LOCALE_CODES } from '@i18n/data/locales';
-import { i18nConfig } from '../src/configs/i18n';
-import { PATHS } from '../src/configs/paths';
+import { i18nConfig } from '../configs/i18n';
+import { PATHS } from '../configs/paths';
 import { log } from './shared/logger';
 
 const LOCALES_DIR = path.resolve(PATHS.LOCALES);

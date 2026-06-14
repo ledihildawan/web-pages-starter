@@ -11,12 +11,12 @@
     "bun": ">=1.3.14"
   },
   "scripts": {
-    "dev": "bun ./tools/sync-system-pages.ts && bun ./tools/clean-cache.ts && bun ./tools/fetch-exchange-rates.ts && bun ./tools/generate-active-locales.ts && bun ./tools/sync-locales.ts && bun ./tools/generate-i18n.ts && concurrently \"bun ./tools/watch-i18n.ts\" \"rsbuild dev\"",
-    "build": "bun ./tools/sync-system-pages.ts && bun ./tools/clean-cache.ts && bun ./tools/fetch-exchange-rates.ts && bun ./tools/generate-active-locales.ts --prod && bun ./tools/sync-locales.ts && bun ./tools/generate-i18n.ts && bun ./tools/generate-sitemap.ts && bun ./tools/generate-manifest.ts && bun ./tools/generate-robots.ts && bun ./tools/generate-sw.ts && bun ./tools/build.ts",
-    "preview": "bun ./tools/preview.ts",
-    "serve": "bun ./tools/serve.ts",
-    "clean:cache": "bun ./tools/clean-cache.ts",
-    "cli": "bun ./tools/cli.ts",
+    "dev": "bun ./scripts/sync-system-pages.ts && bun ./scripts/clean-cache.ts && bun ./scripts/fetch-exchange-rates.ts && bun ./scripts/generate-active-locales.ts && bun ./scripts/sync-locales.ts && bun ./scripts/generate-i18n.ts && concurrently \"bun ./scripts/watch-i18n.ts\" \"rsbuild dev\"",
+    "build": "bun ./scripts/sync-system-pages.ts && bun ./scripts/clean-cache.ts && bun ./scripts/fetch-exchange-rates.ts && bun ./scripts/generate-active-locales.ts --prod && bun ./scripts/sync-locales.ts && bun ./scripts/generate-i18n.ts && bun ./scripts/generate-sitemap.ts && bun ./scripts/generate-manifest.ts && bun ./scripts/generate-robots.ts && bun ./scripts/generate-sw.ts && bun ./scripts/build.ts",
+    "preview": "bun ./scripts/preview.ts",
+    "serve": "bun ./scripts/serve.ts",
+    "clean:cache": "bun ./scripts/clean-cache.ts",
+    "cli": "bun ./scripts/cli.ts",
     "typecheck": "bunx tsc --noEmit",
     "test": "rstest",
     "prepare": "husky"

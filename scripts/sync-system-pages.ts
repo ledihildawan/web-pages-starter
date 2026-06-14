@@ -1,12 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { i18nConfig } from '../src/configs/i18n';
-import { getSystemPageSlug, SYSTEM_PAGE_IDS } from '../src/configs/pages';
-import { PATHS } from '../src/configs/paths';
+import { i18nConfig } from '../configs/i18n';
+import { getSystemPageSlug, SYSTEM_PAGE_IDS } from '../configs/pages';
+import { PATHS } from '../configs/paths';
 import { log, logBox } from './shared/logger';
 import { wrapMainError } from './shared/signal-handler';
 
-const PAGES_DIR = path.join(PATHS.ROOT, PATHS.SRC, 'pages');
+const PAGES_DIR = path.join(PATHS.ROOT, 'pages');
 
 function getPageIdFromFolder(folderName: string): string | null {
   const indexPath = path.join(PAGES_DIR, folderName, 'index.json5');

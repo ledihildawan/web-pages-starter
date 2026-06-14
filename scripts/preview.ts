@@ -5,9 +5,9 @@ import process from 'node:process';
 import type { serve } from '@hono/node-server';
 import ngrok from '@ngrok/ngrok';
 import inquirer from 'inquirer';
-import { i18nConfig } from '../src/configs/i18n';
-import { getErrorPageSlugs, getRootPageSlug } from '../src/configs/pages';
-import { PATHS } from '../src/configs/paths';
+import { i18nConfig } from '../configs/i18n';
+import { getErrorPageSlugs, getRootPageSlug } from '../configs/pages';
+import { PATHS } from '../configs/paths';
 import { createStaticApp } from './shared/hono-server';
 import { log } from './shared/logger';
 import {
@@ -24,13 +24,13 @@ const runBuild = (): Promise<void> => {
   return new Promise((resolve, reject) => {
     const steps = [
       'clean:cache',
-      './tools/fetch-exchange-rates.ts',
-      './tools/sync-system-pages.ts',
-      './tools/sync-locales.ts',
-      './tools/generate-i18n.ts',
-      './tools/generate-sitemap.ts',
-      './tools/generate-sw.ts',
-      './tools/build.ts',
+      './scripts/fetch-exchange-rates.ts',
+      './scripts/sync-system-pages.ts',
+      './scripts/sync-locales.ts',
+      './scripts/generate-i18n.ts',
+      './scripts/generate-sitemap.ts',
+      './scripts/generate-sw.ts',
+      './scripts/build.ts',
     ];
     const env: NodeJS.ProcessEnv = {
       ...process.env,

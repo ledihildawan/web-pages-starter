@@ -1,14 +1,14 @@
 import path from 'node:path';
-import '../src/configs/env';
+import '../configs/env';
 import { loadGlobalData } from '@core/utils/json5';
-import { i18nConfig } from '../src/configs/i18n';
-import { PATHS } from '../src/configs/paths';
+import { i18nConfig } from '../configs/i18n';
+import { PATHS } from '../configs/paths';
 import { logBox } from './shared/logger';
 import { writeFilePath } from './shared/write-file';
 
 const OUTPUT_PUBLIC = path.join(PATHS.ROOT, 'public', 'manifest.json');
 
-const dataDir = path.join(PATHS.ROOT, PATHS.SRC, 'data');
+const dataDir = path.join(PATHS.ROOT, 'data');
 const global = loadGlobalData(dataDir);
 
 const siteName = (global.site_name as string) || 'Starter';

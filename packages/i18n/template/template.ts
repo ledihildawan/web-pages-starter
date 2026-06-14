@@ -1,16 +1,16 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { getValueByPath } from '@core/utils/common';
+import { i18nConfig } from '../../../configs/i18n';
+import { getRootPageSlug } from '../../../configs/pages';
+import { PATHS } from '../../../configs/paths';
+import type { I18nTranslationKeys } from '../../../generated/i18n';
+import { getValueByPath } from '../../core/utils/common';
 import {
   loadGlobalData,
   loadSelectedComponentLocales,
   readJSON5,
-} from '@core/utils/json5';
-import type { DateValue, JsonData } from '@core/utils/types';
-import type { I18nTranslationKeys } from '../../../generated/i18n';
-import { i18nConfig } from '../../../src/configs/i18n';
-import { getRootPageSlug } from '../../../src/configs/pages';
-import { PATHS } from '../../../src/configs/paths';
+} from '../../core/utils/json5';
+import type { DateValue, JsonData } from '../../core/utils/types';
 import {
   convertCurrency,
   convertLocalPrice,
@@ -111,7 +111,7 @@ export const getUsedComponents = (
   for (const match of content.matchAll(componentRegex)) {
     const compName = match[1];
     if (!found.has(compName)) {
-      const compPath = resolveRoot(`${PATHS.SRC}/components/${compName}.njk`);
+      const compPath = resolveRoot(`components/${compName}.njk`);
       if (fs.existsSync(compPath)) {
         found.add(compName);
         getUsedComponents(compPath, found);
@@ -721,14 +721,10 @@ export const createTemplateParams = (
 ) => {
   const lang = i18nConfig.defaultLocale;
   const folderName = String(params.entryName || getRootPageSlug(lang));
-  const pageData = readJSON5(
-    resolveRoot(`${PATHS.SRC}/pages/${folderName}/index.json5`),
-  );
+  const pageData = readJSON5(resolveRoot(`pages/${folderName}/index.json5`));
   const pageId = String(pageData.page_id || folderName);
 
-  const templatePath = resolveRoot(
-    `${PATHS.SRC}/pages/${folderName}/index.njk`,
-  );
+  const templatePath = resolveRoot(`pages/${folderName}/index.njk`);
   const usedComponents = getUsedComponents(templatePath);
 
   const mergedLocales: JsonData = {
@@ -837,7 +833,7 @@ export const createTemplateParams = (
     clientI18nScript,
     page_id: pageId,
     global: (() => {
-      const data = loadGlobalData(resolveRoot(`${PATHS.SRC}/data`));
+      const data = loadGlobalData(resolveRoot(`data`));
       data.site_url = process.env.SITE_URL || 'http://localhost:8888';
       return data;
     })(),

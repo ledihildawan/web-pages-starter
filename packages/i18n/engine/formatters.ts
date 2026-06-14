@@ -1,4 +1,3 @@
-import type { DateValue } from '@core/utils/types';
 import pluralize from 'pluralize';
 import {
   ACTIVE_NUMBERING_SYSTEMS,
@@ -8,6 +7,7 @@ import {
   convertCurrency as convertCurrencyRaw,
   EXCHANGE_RATES,
 } from '../../../generated/exchange-rates';
+import type { DateValue } from '../../core/utils/types';
 import type {
   CardinalOptions,
   DurationOptions,

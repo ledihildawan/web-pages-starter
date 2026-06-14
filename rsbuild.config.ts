@@ -3,14 +3,14 @@ import path from 'node:path';
 import { defineConfig, type RsbuildPlugin } from '@rsbuild/core';
 import { pluginImageCompress } from '@rsbuild/plugin-image-compress';
 import { minify } from 'html-minifier-terser';
+import { i18nConfig } from './configs/i18n';
+import { getRootPageSlug, getSystemPageSlug } from './configs/pages';
+import { PATHS } from './configs/paths';
 import {
   getActiveLocaleCodes,
   LOCALE_STORAGE_KEY,
 } from './packages/i18n/index';
 import { createTemplateParams } from './packages/i18n/template/template';
-import { i18nConfig } from './src/configs/i18n';
-import { getRootPageSlug, getSystemPageSlug } from './src/configs/pages';
-import { PATHS } from './src/configs/paths';
 
 const ROOT = process.cwd();
 const PORT = Number(process.env.PORT) || 8888;
@@ -51,7 +51,7 @@ const pluginRootPageAsIndex = (): RsbuildPlugin => ({
 const EXCLUDED_PAGES = new Set<string>([]);
 
 const getEntries = (): Record<string, string | string[]> => {
-  const dir = resolveRoot(PATHS.SRC, 'pages');
+  const dir = resolveRoot('pages');
   const entries: Record<string, string | string[]> = {};
 
   if (!fs.existsSync(dir)) return entries;
@@ -72,10 +72,9 @@ const getEntries = (): Record<string, string | string[]> => {
 };
 
 const getGlobalEntries = (): string[] => {
-  return [
-    resolveRoot(PATHS.SRC, 'scripts/main.ts'),
-    resolveRoot(PATHS.SRC, 'styles/main.css'),
-  ].filter((p) => fs.existsSync(p));
+  return [resolveRoot('bootstrap.ts'), resolveRoot('styles/main.css')].filter(
+    (p) => fs.existsSync(p),
+  );
 };
 
 export default defineConfig({
@@ -98,7 +97,13 @@ export default defineConfig({
   },
   dev: {
     watchFiles: {
-      paths: ['src/**/*.njk', 'src/**/*.json', 'src/**/*.json5'],
+      paths: [
+        'pages/**/*.njk',
+        'layouts/**/*.njk',
+        'shared/**/*.njk',
+        'locales/**/*.json',
+        'pages/**/*.json5',
+      ],
       type: 'reload-page',
     },
   },
@@ -107,12 +112,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': resolveRoot(PATHS.SRC),
-      '@shared': resolveRoot(PATHS.SRC, 'shared'),
-      '@assets': resolveRoot(PATHS.SRC, 'assets'),
       '@generated': resolveRoot(PATHS.GENERATED),
-      '@configs': resolveRoot(PATHS.SRC, 'configs'),
-      '@data': resolveRoot(PATHS.SRC, 'data'),
       '@i18n': resolveRoot('packages', 'i18n'),
       '@core': resolveRoot('packages', 'core'),
     },
@@ -147,7 +147,7 @@ export default defineConfig({
     },
     copy: [
       {
-        from: resolveRoot(PATHS.SRC, 'assets'),
+        from: resolveRoot('assets'),
         to: 'assets',
         globOptions: { ignore: MANAGED_EXTS.map((ext) => `**/*.${ext}`) },
         noErrorOnMissing: true,
@@ -233,10 +233,10 @@ export default defineConfig({
                 loader: 'simple-nunjucks-loader',
                 options: {
                   autoescape: false,
-                  searchPaths: ['pages', 'layouts', 'shared', ''].map((d) =>
-                    resolveRoot(PATHS.SRC, d),
+                  searchPaths: ['pages', 'layouts', '.'].map((d) =>
+                    resolveRoot(d),
                   ),
-                  assetsPaths: [resolveRoot(PATHS.SRC, 'assets')],
+                  assetsPaths: [resolveRoot('assets')],
                 },
               },
             ],
@@ -248,8 +248,7 @@ export default defineConfig({
   html: {
     inject: 'head',
     scriptLoading: 'defer',
-    template: ({ entryName }) =>
-      path.join(PATHS.SRC, 'pages', entryName, 'index.njk'),
+    template: ({ entryName }) => path.join('pages', entryName, 'index.njk'),
     templateParameters: (params) =>
       createTemplateParams(params, LOCALE_STORAGE_KEY, getActiveLocaleCodes()),
   },

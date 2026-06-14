@@ -2,8 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { collectKeys, readJSON5 } from '@core/utils/json5';
 import { LOCALE_CODES } from '@i18n/data/locales';
-import { i18nConfig } from '../src/configs/i18n';
-import { PATHS } from '../src/configs/paths';
+import { i18nConfig } from '../configs/i18n';
+import { PATHS } from '../configs/paths';
 import { log, logBox } from './shared/logger';
 import { generatedHeader, writeFilePath } from './shared/write-file';
 
@@ -165,7 +165,7 @@ try {
       log.error(`  ${err}`);
     }
     log.error(
-      '\n   Run `bun ./tools/check-locale-parity.ts` for a detailed report.',
+      '\n   Run `bun ./scripts/check-locale-parity.ts` for a detailed report.',
     );
     process.exit(1);
   }
@@ -183,7 +183,7 @@ try {
     .map((k) => `  | ${k}`)
     .join('\n');
 
-  const header = generatedHeader('tools/generate-i18n.ts');
+  const header = generatedHeader('scripts/generate-i18n.ts');
   const output = `${header}
 
 export type I18nTranslationKeys =

@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { PATHS } from '../src/configs/paths';
+import { PATHS } from '../configs/paths';
 import { log } from './shared/logger';
 
 const dirs = ['node_modules/.cache', '.cache', 'dist'];

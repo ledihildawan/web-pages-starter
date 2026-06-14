@@ -1,6 +1,6 @@
 import type { I18nComponents, I18nPages } from '@generated/i18n';
+import type { LocaleCode } from '@i18n/data/locales';
 import type { Alpine as AlpineType } from 'alpinejs';
-import type { LocaleCode } from './scripts/lib/i18n/data';
 
 declare global {
   interface Window {

@@ -25,11 +25,6 @@
     "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@data/*": ["./src/data/*"],
-      "@assets/*": ["./src/assets/*"],
-      "@configs/*": ["./src/configs/*"],
-      "@shared/*": ["./src/shared/*"],
       "@core/*": ["./packages/core/*"],
       "@generated/*": ["./generated/*"],
       "@i18n": ["./packages/i18n/index.ts"],
@@ -38,10 +33,10 @@
     "types": ["bun-types", "node"]
   },
   "include": [
-    "src/**/*.ts",
+    "**/*.ts",
     "packages/**/*.ts",
-    "tools/**/*.ts",
+    "scripts/**/*.ts",
     "rsbuild.config.ts"
   ],
-  "exclude": ["dist", "node_modules"]
+  "exclude": ["dist", "node_modules", "temp", "coverage", "tests"]
 }

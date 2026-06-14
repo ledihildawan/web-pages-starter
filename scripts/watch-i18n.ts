@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 import chokidar from 'chokidar';
-import { PATHS } from '../src/configs/paths';
+import { PATHS } from '../configs/paths';
 import { log, logBox } from './shared/logger';
 import { setupSigintHandler } from './shared/signal-handler';
 
@@ -26,7 +26,7 @@ watcher.on('all', (event, filePath) => {
   if (filePath.endsWith('.json')) {
     log.info(`${event}: ${path.basename(filePath)}`);
     log.info(
-      'Run `bun ./tools/generate-i18n.ts` to regenerate types if needed.\n',
+      'Run `bun ./scripts/generate-i18n.ts` to regenerate types if needed.\n',
     );
   }
 });

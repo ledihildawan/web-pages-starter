@@ -1,13 +1,13 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { LOCALE_CODES } from '@i18n/data/locales';
-import { i18nConfig } from '../src/configs/i18n';
+import { i18nConfig } from '../configs/i18n';
 import {
   isSystemPageSlug,
   SYSTEM_PAGE_IDS,
   type SystemPageId,
-} from '../src/configs/pages';
-import { PATHS } from '../src/configs/paths';
+} from '../configs/pages';
+import { PATHS } from '../configs/paths';
 import { log } from './shared/logger';
 import { romanize } from './shared/romanize';
 
@@ -16,7 +16,7 @@ const pageName = args[0];
 
 if (!pageName) {
   log.error('Error: Please provide a page name.');
-  log.info('Usage: bun ./tools/generate-page.ts <page-name>');
+  log.info('Usage: bun ./scripts/generate-page.ts <page-name>');
   process.exit(1);
 }
 
@@ -40,7 +40,7 @@ const titleCase = pageName
   .replace(/-/g, ' ')
   .replace(/\b\w/g, (l) => l.toUpperCase());
 
-const targetDir = path.resolve(PATHS.ROOT, PATHS.SRC, 'pages', formattedName);
+const targetDir = path.resolve(PATHS.ROOT, 'pages', formattedName);
 const baseLocaleDir = path.resolve(PATHS.ROOT, PATHS.LOCALES);
 
 if (fs.existsSync(targetDir)) {
@@ -126,14 +126,14 @@ try {
       if (!fs.existsSync(filePath)) {
         fs.writeFileSync(filePath, localeContent, 'utf-8');
         log.info(
-          `Created locale [${lng}]: src/locales/${lng}/${formattedName}.json`,
+          `Created locale [${lng}]: locales/${lng}/${formattedName}.json`,
         );
       }
     }
   }
 
   log.success(`\nDone: Page "${formattedName}" generated`);
-  log.info(`Path: src/pages/${formattedName}/`);
+  log.info(`Path: pages/${formattedName}/`);
   log.info('\nTip: Restart dev server if the new entry is not detected.');
 } catch (error) {
   log.error(`Error: Generation failed — ${error}`);

@@ -1,8 +1,8 @@
 import path from 'node:path';
-import '../src/configs/env';
-import { i18nConfig } from '../src/configs/i18n';
-import { getErrorPageSlugs } from '../src/configs/pages';
-import { PATHS } from '../src/configs/paths';
+import '../configs/env';
+import { i18nConfig } from '../configs/i18n';
+import { getErrorPageSlugs } from '../configs/pages';
+import { PATHS } from '../configs/paths';
 import { logBox } from './shared/logger';
 import { SITE_URL } from './shared/site-url';
 import { writeFilePath } from './shared/write-file';

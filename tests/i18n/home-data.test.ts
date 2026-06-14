@@ -57,7 +57,7 @@ function getNestedValue(obj: Record<string, unknown>, path: string): unknown {
 
 describe('home page data', () => {
   const pageData = JSON5.parse(
-    readFileSync(join(ROOT, 'src/pages/home/index.json5'), 'utf-8'),
+    readFileSync(join(ROOT, 'pages/home/index.json5'), 'utf-8'),
   );
 
   test('has page_id', () => {
@@ -95,7 +95,7 @@ describe('home page data', () => {
 
 describe('home locale keys (en-US)', () => {
   const locale = JSON.parse(
-    readFileSync(join(ROOT, 'src/locales/en-US/home.json'), 'utf-8'),
+    readFileSync(join(ROOT, 'locales/en-US/home.json'), 'utf-8'),
   );
 
   test('has all hero keys', () => {
@@ -135,10 +135,10 @@ describe('home locale keys (en-US)', () => {
 
 describe('home locale parity across locales', () => {
   const enHome = JSON.parse(
-    readFileSync(join(ROOT, 'src/locales/en-US/home.json'), 'utf-8'),
+    readFileSync(join(ROOT, 'locales/en-US/home.json'), 'utf-8'),
   );
   const idHome = JSON.parse(
-    readFileSync(join(ROOT, 'src/locales/id-ID/home.json'), 'utf-8'),
+    readFileSync(join(ROOT, 'locales/id-ID/home.json'), 'utf-8'),
   );
 
   function getAllKeys(obj: Record<string, unknown>, prefix = ''): string[] {
