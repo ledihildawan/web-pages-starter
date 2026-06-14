@@ -1,8 +1,8 @@
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
+import { LOCALE_CODES } from '@i18n/data/locales';
 import inquirer from 'inquirer';
-import { LOCALE_CODES } from '../packages/i18n/data/locales';
 import { i18nConfig } from '../src/configs/i18n';
 import { isSystemPageId, isSystemPageSlug } from '../src/configs/pages';
 import { PATHS } from '../src/configs/paths';

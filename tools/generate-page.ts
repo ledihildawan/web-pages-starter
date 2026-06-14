@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { LOCALE_CODES } from '../packages/i18n/data/locales';
+import { LOCALE_CODES } from '@i18n/data/locales';
 import { i18nConfig } from '../src/configs/i18n';
 import {
   isSystemPageSlug,

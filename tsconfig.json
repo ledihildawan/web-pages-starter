@@ -30,7 +30,9 @@
       "@assets/*": ["./src/assets/*"],
       "@configs/*": ["./src/configs/*"],
       "@components/*": ["./src/components/*"],
-      "@generated/*": ["./generated/*"]
+      "@generated/*": ["./generated/*"],
+      "@i18n": ["./packages/i18n/index.ts"],
+      "@i18n/*": ["./packages/i18n/*"]
     },
     "types": ["bun-types", "node"]
   },

@@ -113,6 +113,7 @@ export default defineConfig({
       '@generated': resolveRoot(PATHS.GENERATED),
       '@configs': resolveRoot(PATHS.SRC, 'configs'),
       '@data': resolveRoot(PATHS.SRC, 'data'),
+      '@i18n': resolveRoot('packages', 'i18n'),
     },
   },
   source: {

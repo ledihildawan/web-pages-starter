@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { CURRENCY_CODE } from '../packages/i18n/data/currencies';
-import { LOCALES } from '../packages/i18n/data/locales';
+import { CURRENCY_CODE } from '@i18n/data/currencies';
+import { LOCALES } from '@i18n/data/locales';
 import { PATHS } from '../src/configs/paths';
 import { log } from './shared/logger';
 import { generatedHeader, writeFilePath } from './shared/write-file';

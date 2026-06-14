@@ -1,4 +1,3 @@
-import { describe, expect, test } from '@rstest/core';
 import {
   formatBytes,
   formatCardinal,
@@ -12,21 +11,22 @@ import {
   formatUnit,
   setStrategies,
   toNativeDigits,
-} from '../../packages/i18n/engine/formatters';
-import { setLocale } from '../../packages/i18n/engine/helpers';
+} from '@i18n/engine/formatters';
+import { setLocale } from '@i18n/engine/helpers';
 import {
   cardinal as arCardinal,
   ordinal as arOrdinal,
-} from '../../packages/i18n/strategies/ar';
+} from '@i18n/strategies/ar';
 import {
   cardinal as idCardinal,
   ordinal as idOrdinal,
-} from '../../packages/i18n/strategies/id';
+} from '@i18n/strategies/id';
 import {
   cardinal as jaCardinal,
   ordinal as jaOrdinal,
-} from '../../packages/i18n/strategies/ja';
-import { cardinal as zhCardinal } from '../../packages/i18n/strategies/zh';
+} from '@i18n/strategies/ja';
+import { cardinal as zhCardinal } from '@i18n/strategies/zh';
+import { describe, expect, test } from '@rstest/core';
 
 setStrategies(
   { id: idCardinal, ja: jaCardinal, zh: zhCardinal, ar: arCardinal },

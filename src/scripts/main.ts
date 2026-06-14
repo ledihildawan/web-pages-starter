@@ -9,7 +9,7 @@ const deferTask = (fn: () => void, timeout = 2000): void => {
 };
 
 const deferred = (): void => {
-  import('../../packages/i18n/fonts/fonts')
+  import('@i18n/fonts/fonts')
     .then((fonts) => {
       fonts.setupFontStackCSS();
       fonts.loadLanguageFonts();
@@ -32,7 +32,7 @@ const registerServiceWorker = (): void => {
 async function bootstrap() {
   try {
     const [{ registerI18nStore }, Alpine] = await Promise.all([
-      import('../../packages/i18n/runtime/store'),
+      import('@i18n/runtime/store'),
       import('alpinejs').then((m) => m.default),
     ]);
 
@@ -41,9 +41,7 @@ async function bootstrap() {
 
     Alpine.start();
 
-    const { i18next, initIntl } = await import(
-      '../../packages/i18n/runtime/runtime'
-    );
+    const { i18next, initIntl } = await import('@i18n/runtime/runtime');
     if (!i18next.isInitialized) {
       const locale = window.__SAVED_LOCALE__ || window.__SERVER_LOCALE__;
       await initIntl(locale);
@@ -51,7 +49,7 @@ async function bootstrap() {
 
     deferTask(deferred);
 
-    import('../../packages/i18n/fonts/fonts').then(({ preloadActiveFont }) =>
+    import('@i18n/fonts/fonts').then(({ preloadActiveFont }) =>
       preloadActiveFont(),
     );
     registerServiceWorker();

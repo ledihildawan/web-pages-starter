@@ -1,13 +1,10 @@
 import path from 'node:path';
-import { FONT_CSS_PATHS } from '../packages/i18n/data/font-paths';
-import { LANGUAGES } from '../packages/i18n/data/languages';
-import type { LocaleCode, LocaleConfig } from '../packages/i18n/data/locales';
-import { LOCALE_CODES, LOCALES } from '../packages/i18n/data/locales';
-import { NUMBERING_SYSTEMS } from '../packages/i18n/data/numbering-systems';
-import {
-  WRITING_SYSTEM,
-  WRITING_SYSTEMS,
-} from '../packages/i18n/data/writing-systems';
+import { FONT_CSS_PATHS } from '@i18n/data/font-paths';
+import { LANGUAGES } from '@i18n/data/languages';
+import type { LocaleCode, LocaleConfig } from '@i18n/data/locales';
+import { LOCALE_CODES, LOCALES } from '@i18n/data/locales';
+import { NUMBERING_SYSTEMS } from '@i18n/data/numbering-systems';
+import { WRITING_SYSTEM, WRITING_SYSTEMS } from '@i18n/data/writing-systems';
 import { i18nConfig } from '../src/configs/i18n';
 import { PATHS } from '../src/configs/paths';
 import { log } from './shared/logger';
@@ -104,7 +101,7 @@ function serializeFontEntry(ns: string, cssPath: string): string {
 
 const content = `${generatedHeader('tools/generate-active-locales.ts')}
 
-import type { LocaleCode, LocaleConfig } from '../packages/i18n/data/locales';
+import type { LocaleCode, LocaleConfig } from '@i18n/data/locales';
 
 export const LOCALES: LocaleConfig[] = [
 ${activeLocales.map(serializeLocale).join(',\n')}
