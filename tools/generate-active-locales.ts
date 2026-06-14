@@ -3,6 +3,7 @@ import { i18nConfig } from '../src/configs/i18n';
 import { PATHS } from '../src/configs/paths';
 import type { LocaleCode, LocaleConfig } from '../src/scripts/lib/i18n/data';
 import { LOCALE_CODES, LOCALES } from '../src/scripts/lib/i18n/data';
+import { FONT_CSS_PATHS } from '../src/scripts/lib/i18n/font-paths';
 import { LANGUAGES } from '../src/scripts/lib/i18n/languages';
 import { NUMBERING_SYSTEMS } from '../src/scripts/lib/i18n/numbering-systems';
 import {
@@ -79,6 +80,28 @@ function serializeWritingSystem(ws: (typeof WRITING_SYSTEMS)[number]): string {
   return `  { code: '${ws.code}', name: '${ws.name}', nameId: '${ws.nameId}', description: '${desc}', languages: [${langs}], numberingSystems: [${nsList}], direction: '${ws.direction}', defaultFont: '${font}' }`;
 }
 
+const filteredWritingSystem = Object.fromEntries(
+  Object.entries(WRITING_SYSTEM).map(([key, value]) => {
+    if (key.endsWith('_LANGUAGES') && Array.isArray(value)) {
+      return [
+        key,
+        (value as readonly string[]).filter((lang) =>
+          activeLanguageCodes.includes(lang),
+        ),
+      ];
+    }
+    return [key, value];
+  }),
+);
+
+const activeFontEntries = Object.entries(FONT_CSS_PATHS).filter(([ns]) =>
+  activeNsCodes.includes(ns),
+);
+
+function serializeFontEntry(ns: string, cssPath: string): string {
+  return `  '${ns}': { css: '${cssPath}', loader: () => import('${cssPath}') }`;
+}
+
 const content = `${generatedHeader('tools/generate-active-locales.ts')}
 
 import type { LocaleCode, LocaleConfig } from '../src/scripts/lib/i18n/data';
@@ -101,7 +124,11 @@ export const ACTIVE_WRITING_SYSTEMS = [
 ${wsEntries.map(serializeWritingSystem).join(',\n')}
 ] as const;
 
-export const WRITING_SYSTEM = ${JSON.stringify(WRITING_SYSTEM)} as Record<string, string | readonly string[]>;
+export const WRITING_SYSTEM = ${JSON.stringify(filteredWritingSystem)} as Record<string, string | readonly string[]>;
+
+export const ACTIVE_NOTO_SANS: Record<string, { css: string; loader: () => Promise<unknown> }> = {
+${activeFontEntries.map(([ns, css]) => serializeFontEntry(ns, css)).join(',\n')}
+};
 `;
 
 writeFilePath(OUTPUT_FILE, content);

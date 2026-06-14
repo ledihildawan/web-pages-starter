@@ -3,7 +3,6 @@ import {
   LOCALES,
 } from '../../../../generated/active-locales-data';
 import { i18nConfig } from '../../../configs/i18n';
-import { CALENDAR_CODE } from './calendars';
 import type { CurrencyCode } from './currencies';
 import type { LocaleCode, LocaleConfig } from './data';
 import type { DirectionCode } from './directions';
@@ -70,7 +69,7 @@ export const getTimezoneOffset = (locale: LocaleCode): number =>
   getLanguageConfig(locale)?.timezoneOffset ?? 0;
 
 export const getCalendar = (locale: LocaleCode): string =>
-  getLanguageConfig(locale)?.calendar || CALENDAR_CODE.GREGORY;
+  getLanguageConfig(locale)?.calendar || 'gregory';
 
 export const getFirstDayOfWeek = (locale: LocaleCode): number =>
   getLanguageConfig(locale)?.firstDayOfWeek ?? 0;
