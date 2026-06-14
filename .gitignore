@@ -13,6 +13,7 @@ dist/
 # Generated (stub files are tracked)
 generated/i18n.d.ts
 generated/exchange-rates.ts
+generated/active-locales-data.ts
 coverage
 reports/
 

@@ -1,12 +1,11 @@
-import { i18nConfig } from '../../../configs/i18n';
-import { CALENDAR_CODE } from './calendars';
-import type { CurrencyCode } from './currencies';
 import {
   LOCALE_CODES,
   LOCALES,
-  type LocaleCode,
-  type LocaleConfig,
-} from './data';
+} from '../../../../generated/active-locales-data';
+import { i18nConfig } from '../../../configs/i18n';
+import { CALENDAR_CODE } from './calendars';
+import type { CurrencyCode } from './currencies';
+import type { LocaleCode, LocaleConfig } from './data';
 import { DIRECTION_CODE, type DirectionCode } from './directions';
 import type { LanguageCode } from './languages';
 import { NUMBERING_SYSTEM_CODE } from './numbering-systems';
@@ -50,10 +49,17 @@ export const getLanguageSubtag = (locale: LocaleCode): LanguageCode => {
   ) as LanguageCode;
 };
 
+const localeMap = new Map<string, LocaleConfig>(
+  LOCALES.map((l) => [l.code, l]),
+);
+
 export const getLanguageConfig = (
   locale: LocaleCode,
-): LocaleConfig | undefined =>
-  LOCALES.find((l) => l.code === locale || locale.startsWith(`${l.code}-`));
+): LocaleConfig | undefined => {
+  const exact = localeMap.get(locale);
+  if (exact) return exact;
+  return LOCALES.find((l) => locale.startsWith(`${l.code}-`));
+};
 
 export const getCurrency = (locale: LocaleCode): CurrencyCode =>
   getLanguageConfig(locale)?.currency || LOCALES[0].currency;

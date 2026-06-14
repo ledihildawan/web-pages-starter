@@ -1,4 +1,5 @@
-import { LOCALE_CODES } from './data';
+import { LOCALE_CODES } from '../../../../generated/active-locales-data';
+import type { LocaleCode } from './data';
 import type { FontConfig, I18nConfig } from './types';
 
 const validateFont = (font: FontConfig): void => {
@@ -17,7 +18,7 @@ export const defineFont = (config: FontConfig): FontConfig => {
   return config;
 };
 
-export const defineI18n = <T extends (typeof LOCALE_CODES)[number]>(
+export const defineI18n = <T extends LocaleCode>(
   config: I18nConfig<T>,
 ): I18nConfig<T> => {
   if (!config.defaultLocale) {
