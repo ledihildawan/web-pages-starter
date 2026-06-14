@@ -85,7 +85,10 @@ export const getLocaleLabelCountry = (localeCode: LocaleCode): string => {
   return `${nativeName}${regionSuffix}`;
 };
 
-export { getActiveLocaleCodes } from './engine/active-locales';
+export {
+  getActiveLocaleCodes,
+  getActiveLocales,
+} from './engine/active-locales';
 
 export const getActiveLocalesDisplay = () =>
   getActiveLocales()

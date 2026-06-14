@@ -27,7 +27,7 @@ import {
   formatScientific,
   formatTime,
   formatUnit,
-  getActiveLocaleCodes,
+  getActiveLocales,
   getActiveLocalesDisplay,
   getPluralSuffix,
   localPrice,
@@ -47,7 +47,7 @@ import type {
   TemplateParams,
 } from '../config/types';
 import type { CurrencyCode } from '../data/currencies';
-import { LOCALES, type LocaleCode, type LocaleConfig } from '../data/locales';
+import type { LocaleCode, LocaleConfig } from '../data/locales';
 import { cardinal as arCardinal, ordinal as arOrdinal } from '../strategies/ar';
 import { cardinal as idCardinal, ordinal as idOrdinal } from '../strategies/id';
 import { cardinal as jaCardinal, ordinal as jaOrdinal } from '../strategies/ja';
@@ -71,9 +71,7 @@ const i18nScriptCache = new Map<string, { hash: string; script: string }>();
 
 const hashLocales = (name: string, sharedLocales: string[]): string => {
   const parts: string[] = [];
-  for (const locale of LOCALES.filter((l) =>
-    getActiveLocaleCodes().includes(l.code),
-  )) {
+  for (const locale of getActiveLocales()) {
     const files = [
       resolveRoot(`${PATHS.LOCALES}/${locale.code}/common.json`),
       resolveRoot(`${PATHS.LOCALES}/${locale.code}/${name}.json`),
@@ -763,7 +761,7 @@ export const createTemplateParams = (
 
   const i18n = createI18nObject(lang, resolve, normalizeI18nKey);
 
-  const localeConfig: LocaleConfig | undefined = LOCALES.find(
+  const localeConfig: LocaleConfig | undefined = getActiveLocales().find(
     (l) => l.code === lang,
   );
 
@@ -773,7 +771,7 @@ export const createTemplateParams = (
     sharedLocales,
     LOCALE_CODES,
     LOCALE_STORAGE_KEY,
-    LOCALES.filter((l) => getActiveLocaleCodes().includes(l.code)).map((l) => ({
+    getActiveLocales().map((l) => ({
       code: l.code,
       dir: l.dir,
       writingSystem: l.writingSystem,
