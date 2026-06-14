@@ -723,12 +723,15 @@ export const createTemplateParams = (
   );
 
   const mergedLocales: JsonData = {
-    ...readJSON5(resolveRoot(`${PATHS.LOCALES}/${lang}/common.json`)),
+    common: readJSON5(resolveRoot(`${PATHS.LOCALES}/${lang}/common.json`)),
     [pageId]: readJSON5(resolveRoot(`${PATHS.LOCALES}/${lang}/${pageId}.json`)),
     ...loadSharedLocales(lang, sharedLocales, resolveRoot(PATHS.LOCALES)),
   };
 
-  const resolveKeyToPath = (key: string): string => key.replaceAll(':', '.');
+  const resolveKeyToPath = (key: string): string => {
+    if (key.includes(':')) return key.replaceAll(':', '.');
+    return `common.${key}`;
+  };
 
   const resolve = (key: string, vars: Record<string, unknown> = {}): string => {
     const jsonPath = resolveKeyToPath(key);
