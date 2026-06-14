@@ -3,11 +3,11 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import {
   convertCurrency as convertCurrencyRaw,
   EXCHANGE_RATES,
-} from '../../../../generated/exchange-rates';
-import type { I18nTranslationKeys } from '../../../../generated/i18n';
-import { i18nConfig } from '../../../configs/i18n';
-import { ROOT_PAGE } from '../../../configs/pages';
-import type { DateTimePreset } from '../../../scripts/utils/types';
+} from '../../../generated/exchange-rates';
+import type { I18nTranslationKeys } from '../../../generated/i18n';
+import { i18nConfig } from '../../../src/configs/i18n';
+import { ROOT_PAGE } from '../../../src/configs/pages';
+import type { DateTimePreset } from '../../../src/scripts/utils/types';
 import {
   formatAbbreviated,
   formatBytes,

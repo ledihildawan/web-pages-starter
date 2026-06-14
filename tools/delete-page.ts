@@ -2,10 +2,10 @@ import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import inquirer from 'inquirer';
+import { LOCALE_CODES } from '../packages/i18n/data/locales';
 import { i18nConfig } from '../src/configs/i18n';
 import { isSystemPageId, isSystemPageSlug } from '../src/configs/pages';
 import { PATHS } from '../src/configs/paths';
-import { LOCALE_CODES } from '../src/packages/i18n/data/locales';
 import { log } from './shared/logger';
 
 const args = process.argv.slice(2);

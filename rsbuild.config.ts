@@ -3,14 +3,14 @@ import path from 'node:path';
 import { defineConfig, type RsbuildPlugin } from '@rsbuild/core';
 import { pluginImageCompress } from '@rsbuild/plugin-image-compress';
 import { minify } from 'html-minifier-terser';
-import { i18nConfig } from './src/configs/i18n';
-import { getRootPageSlug, getSystemPageSlug } from './src/configs/pages';
-import { PATHS } from './src/configs/paths';
 import {
   getActiveLocaleCodes,
   LOCALE_STORAGE_KEY,
-} from './src/packages/i18n/index';
-import { createTemplateParams } from './src/packages/i18n/template/template';
+} from './packages/i18n/index';
+import { createTemplateParams } from './packages/i18n/template/template';
+import { i18nConfig } from './src/configs/i18n';
+import { getRootPageSlug, getSystemPageSlug } from './src/configs/pages';
+import { PATHS } from './src/configs/paths';
 
 const ROOT = process.cwd();
 const PORT = Number(process.env.PORT) || 8888;

@@ -1,4 +1,4 @@
-import { ACTIVE_LANGUAGES } from '../../../generated/active-locales-data';
+import { ACTIVE_LANGUAGES } from '../../generated/active-locales-data';
 import type { LocaleCode } from './data/locales';
 import type { RegionCode } from './data/regions';
 import { getActiveLocales } from './engine/active-locales';

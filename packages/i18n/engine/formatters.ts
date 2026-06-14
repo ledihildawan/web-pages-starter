@@ -2,12 +2,12 @@ import pluralize from 'pluralize';
 import {
   ACTIVE_NUMBERING_SYSTEMS,
   WRITING_SYSTEM,
-} from '../../../../generated/active-locales-data';
+} from '../../../generated/active-locales-data';
 import {
   convertCurrency as convertCurrencyRaw,
   EXCHANGE_RATES,
-} from '../../../../generated/exchange-rates';
-import type { DateValue } from '../../../scripts/utils/types';
+} from '../../../generated/exchange-rates';
+import type { DateValue } from '../../../src/scripts/utils/types';
 import type {
   CardinalOptions,
   DurationOptions,

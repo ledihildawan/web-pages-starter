@@ -1,16 +1,16 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import type { I18nTranslationKeys } from '../../../../generated/i18n';
-import { i18nConfig } from '../../../configs/i18n';
-import { getRootPageSlug } from '../../../configs/pages';
-import { PATHS } from '../../../configs/paths';
-import { getValueByPath } from '../../../scripts/utils/common';
+import type { I18nTranslationKeys } from '../../../generated/i18n';
+import { i18nConfig } from '../../../src/configs/i18n';
+import { getRootPageSlug } from '../../../src/configs/pages';
+import { PATHS } from '../../../src/configs/paths';
+import { getValueByPath } from '../../../src/scripts/utils/common';
 import {
   loadGlobalData,
   loadSelectedComponentLocales,
   readJSON5,
-} from '../../../scripts/utils/json5';
-import type { DateValue, JsonData } from '../../../scripts/utils/types';
+} from '../../../src/scripts/utils/json5';
+import type { DateValue, JsonData } from '../../../src/scripts/utils/types';
 import {
   convertCurrency,
   convertLocalPrice,

@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { LOCALE_CODES } from '../packages/i18n/data/locales';
 import { i18nConfig } from '../src/configs/i18n';
 import {
   isSystemPageSlug,
@@ -7,7 +8,6 @@ import {
   type SystemPageId,
 } from '../src/configs/pages';
 import { PATHS } from '../src/configs/paths';
-import { LOCALE_CODES } from '../src/packages/i18n/data/locales';
 import { log } from './shared/logger';
 import { romanize } from './shared/romanize';
 
