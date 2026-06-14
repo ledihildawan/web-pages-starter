@@ -22,43 +22,18 @@ const DIST = path.resolve(PATHS.ROOT, 'dist');
 
 const runBuild = (): Promise<void> => {
   return new Promise((resolve, reject) => {
-    const steps = [
-      'clean:cache',
-      './scripts/fetch-exchange-rates.ts',
-      './packages/i18n/cli/generate-active-locales.ts --prod',
-      './packages/i18n/cli/sync-system-pages.ts',
-      './packages/i18n/cli/sync-locales.ts',
-      './packages/i18n/cli/generate-types.ts',
-      './scripts/generate-sitemap.ts',
-      './scripts/generate-manifest.ts',
-      './scripts/generate-robots.ts',
-      './scripts/generate-sw.ts',
-      './scripts/build.ts',
-    ];
-    const env: NodeJS.ProcessEnv = {
-      ...process.env,
-      BUILD_PREVIEW: 'true',
-    };
-
-    const run = async (i = 0) => {
-      if (i >= steps.length) return resolve();
-      const step = steps[i];
-      const isNpmScript = !step.startsWith('./');
-      const cmd = isNpmScript ? ['run', step] : [step];
-      log.info(`\n[${i + 1}/${steps.length}] ${step}`);
-      const proc = spawn('bun', cmd, {
-        stdio: 'inherit',
-        cwd: PATHS.ROOT,
-        env,
-        shell: !isNpmScript,
-      });
-      proc.on('close', (code) => {
-        if (code !== 0) return reject(new Error(`Step "${step}" failed`));
-        run(i + 1);
-      });
-      proc.on('error', reject);
-    };
-    run();
+    log.info('\n[Build] Running production build...');
+    const proc = spawn('bun', ['run', 'build'], {
+      stdio: 'inherit',
+      cwd: PATHS.ROOT,
+      env: { ...process.env, BUILD_PREVIEW: 'true' },
+      shell: false,
+    });
+    proc.on('close', (code) => {
+      if (code !== 0) return reject(new Error('Build failed'));
+      resolve();
+    });
+    proc.on('error', reject);
   });
 };
 
