@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { CURRENCY_CODE } from '@i18n/data/currencies';
-import { LOCALES } from '@i18n/data/locales';
+import { getActiveLocales } from '@i18n/engine/active-locales';
 import { PATHS } from '../configs/paths';
 import { log } from './shared/logger';
 import { generatedHeader, writeFilePath } from './shared/write-file';
@@ -10,7 +10,9 @@ const EXCHANGE_RATES_URL = 'https://api.frankfurter.dev/v2/rates';
 const GENERATED_DIR = path.resolve(process.cwd(), PATHS.GENERATED);
 const EXCHANGE_RATES_FILE = path.resolve(GENERATED_DIR, 'exchange-rates.ts');
 const BASE_CURRENCY = CURRENCY_CODE.USD;
-const LOCALE_CURRENCIES = [...new Set(LOCALES.map((l) => l.currency))];
+const LOCALE_CURRENCIES = [
+  ...new Set(getActiveLocales().map((l) => l.currency)),
+];
 
 async function fetchExchangeRates(): Promise<Record<string, number>> {
   const quotes = LOCALE_CURRENCIES.filter((c) => c !== BASE_CURRENCY).join(',');

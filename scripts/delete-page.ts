@@ -1,7 +1,6 @@
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
-import { LOCALE_CODES } from '@i18n/data/locales';
 import inquirer from 'inquirer';
 import { i18nConfig } from '../configs/i18n';
 import { isSystemPageId, isSystemPageSlug } from '../configs/pages';
@@ -121,7 +120,7 @@ async function confirmDeletion(pageName: string): Promise<boolean> {
   log.info(`\nYou are about to delete page: "${pageName}"`);
   log.info('This will DELETE:');
   log.info(`   - pages/${pageName}/ (entire folder)`);
-  log.info(`   - locales/*/${pageName}.json (all 136 locales)\n`);
+  log.info(`   - locales/*/${pageName}.json (all locale directories)\n`);
 
   const { confirm } = await inquirer.prompt<{ confirm: boolean }>([
     {
@@ -171,11 +170,13 @@ function deletePage(pageName: string): {
 
   let localeFilesDeleted = 0;
   const localesDir = path.resolve(PATHS.ROOT, PATHS.LOCALES);
-  for (const lng of LOCALE_CODES) {
-    const localeFile = path.join(localesDir, lng, `${pageName}.json`);
-    if (fs.existsSync(localeFile)) {
-      fs.rmSync(localeFile, { force: true });
-      localeFilesDeleted++;
+  if (fs.existsSync(localesDir)) {
+    for (const lng of fs.readdirSync(localesDir)) {
+      const localeFile = path.join(localesDir, lng, `${pageName}.json`);
+      if (fs.existsSync(localeFile)) {
+        fs.rmSync(localeFile, { force: true });
+        localeFilesDeleted++;
+      }
     }
   }
 

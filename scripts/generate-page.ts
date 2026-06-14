@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { LOCALE_CODES } from '@i18n/data/locales';
+import { getActiveLocaleCodes } from '@i18n/engine/active-locales';
 import { i18nConfig } from '../configs/i18n';
 import {
   isSystemPageSlug,
@@ -119,7 +119,7 @@ try {
   fs.writeFileSync(path.join(targetDir, 'index.json5'), jsonContent);
 
   if (fs.existsSync(baseLocaleDir)) {
-    for (const lng of LOCALE_CODES) {
+    for (const lng of getActiveLocaleCodes()) {
       const lngDir = path.join(baseLocaleDir, lng);
       const filePath = path.join(lngDir, `${formattedName}.json`);
 
