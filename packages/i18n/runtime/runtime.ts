@@ -7,7 +7,7 @@ import {
 import type { I18nTranslationKeys } from '../../../generated/i18n';
 import { i18nConfig } from '../../../src/configs/i18n';
 import { ROOT_PAGE } from '../../../src/configs/pages';
-import type { DateTimePreset } from '../../../src/scripts/utils/types';
+import type { DateTimePreset } from '../../../src/core/utils/types';
 import {
   formatAbbreviated,
   formatBytes,

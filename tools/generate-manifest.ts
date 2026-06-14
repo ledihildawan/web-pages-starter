@@ -2,7 +2,7 @@ import path from 'node:path';
 import '../src/configs/env';
 import { i18nConfig } from '../src/configs/i18n';
 import { PATHS } from '../src/configs/paths';
-import { loadGlobalData } from '../src/scripts/utils/json5';
+import { loadGlobalData } from '../src/core/utils/json5';
 import { logBox } from './shared/logger';
 import { writeFilePath } from './shared/write-file';
 

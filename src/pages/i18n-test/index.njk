@@ -1,6 +1,6 @@
 {% extends "main.njk" %}
-{% import "section-header.njk" as section %}
-{% import "icons.njk" as icon %}
+{% import "shared/layout/section-header.njk" as section %}
+{% import "shared/ui/icons.njk" as icon %}
 
 {% block content %}
 
@@ -800,5 +800,5 @@
     </div>
   </section>
 
-  {% include "cta.njk" %}
+  {% include "shared/layout/cta.njk" %}
 {% endblock %}

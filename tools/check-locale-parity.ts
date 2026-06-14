@@ -3,7 +3,7 @@ import path from 'node:path';
 import { LOCALE_CODES } from '@i18n/data/locales';
 import { i18nConfig } from '../src/configs/i18n';
 import { PATHS } from '../src/configs/paths';
-import { collectKeys, readJSON5 } from '../src/scripts/utils/json5';
+import { collectKeys, readJSON5 } from '../src/core/utils/json5';
 import { log } from './shared/logger';
 
 const LOCALES_DIR = path.resolve(PATHS.LOCALES);

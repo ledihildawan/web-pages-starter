@@ -54,7 +54,7 @@
       }
     },
     {
-      "includes": ["src/scripts/utils/common.ts"],
+      "includes": ["src/core/utils/common.ts"],
       "linter": {
         "rules": {
           "suspicious": {

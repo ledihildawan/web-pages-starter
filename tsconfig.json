@@ -29,7 +29,8 @@
       "@data/*": ["./src/data/*"],
       "@assets/*": ["./src/assets/*"],
       "@configs/*": ["./src/configs/*"],
-      "@components/*": ["./src/components/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@core/*": ["./src/core/*"],
       "@generated/*": ["./generated/*"],
       "@i18n": ["./packages/i18n/index.ts"],
       "@i18n/*": ["./packages/i18n/*"]

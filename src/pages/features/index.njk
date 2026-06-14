@@ -1,7 +1,7 @@
 {% extends "main.njk" %}
-{% import "hero-section.njk" as hero %}
-{% import "section-header.njk" as section %}
-{% import "icons.njk" as icon %}
+{% import "shared/layout/hero-section.njk" as hero %}
+{% import "shared/layout/section-header.njk" as section %}
+{% import "shared/ui/icons.njk" as icon %}
 
 {% block content %}
   {% set hero_key = 'features:hero' %}
@@ -167,5 +167,5 @@
     </div>
   </section>
 
-  {% include "cta.njk" %}
+  {% include "shared/layout/cta.njk" %}
 {% endblock %}

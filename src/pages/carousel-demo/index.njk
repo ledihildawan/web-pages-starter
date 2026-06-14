@@ -1,5 +1,5 @@
 {% extends "main.njk" %}
-{% import "icons.njk" as icon %}
+{% import "shared/ui/icons.njk" as icon %}
 
 {% block extra_head %}
   {{ super() }}
@@ -54,5 +54,5 @@
   </div>
 </section>
 
-{% include "cta.njk" %}
+{% include "shared/layout/cta.njk" %}
 {% endblock %}

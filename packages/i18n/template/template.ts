@@ -4,13 +4,13 @@ import type { I18nTranslationKeys } from '../../../generated/i18n';
 import { i18nConfig } from '../../../src/configs/i18n';
 import { getRootPageSlug } from '../../../src/configs/pages';
 import { PATHS } from '../../../src/configs/paths';
-import { getValueByPath } from '../../../src/scripts/utils/common';
+import { getValueByPath } from '../../../src/core/utils/common';
 import {
   loadGlobalData,
   loadSelectedComponentLocales,
   readJSON5,
-} from '../../../src/scripts/utils/json5';
-import type { DateValue, JsonData } from '../../../src/scripts/utils/types';
+} from '../../../src/core/utils/json5';
+import type { DateValue, JsonData } from '../../../src/core/utils/types';
 import {
   convertCurrency,
   convertLocalPrice,

@@ -7,7 +7,7 @@ import {
   convertCurrency as convertCurrencyRaw,
   EXCHANGE_RATES,
 } from '../../../generated/exchange-rates';
-import type { DateValue } from '../../../src/scripts/utils/types';
+import type { DateValue } from '../../../src/core/utils/types';
 import type {
   CardinalOptions,
   DurationOptions,

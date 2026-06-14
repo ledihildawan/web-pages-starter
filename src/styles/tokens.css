@@ -1,0 +1,54 @@
+@layer base {
+  :root {
+    --dir: 1;
+
+    --gradient-primary: linear-gradient(
+      135deg,
+      #7c3aed 0%,
+      #a855f7 35%,
+      #ec4899 65%,
+      #f472b6 100%
+    );
+    --gradient-primary-subtle: linear-gradient(
+      135deg,
+      rgba(124, 58, 237, 0.08) 0%,
+      rgba(168, 85, 247, 0.08) 35%,
+      rgba(236, 72, 153, 0.08) 65%,
+      rgba(244, 114, 182, 0.08) 100%
+    );
+    --gradient-hero: linear-gradient(
+      180deg,
+      rgba(124, 58, 237, 0.12) 0%,
+      rgba(168, 85, 247, 0.08) 50%,
+      transparent 100%
+    );
+    --gradient-violet: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+
+    --elevation-1: rgba(0, 0, 0, 0.05);
+    --elevation-2: rgba(0, 0, 0, 0.08);
+    --elevation-3: rgba(0, 0, 0, 0.12);
+
+    --radius-card-sm: 0.75rem;
+    --radius-card-md: 1rem;
+    --radius-card-lg: 1.25rem;
+    --radius-card-xl: 1.5rem;
+    --radius-card-2xl: 2.5rem;
+    --radius-btn: 0.625rem;
+    --radius-icon: 0.5rem;
+
+    --shadow-border: 0 0 0 1px rgba(255, 255, 255, 0.08);
+    --shadow-border-hover: 0 0 0 1px rgba(255, 255, 255, 0.13);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --elevation-1: rgba(255, 255, 255, 0.05);
+      --elevation-2: rgba(255, 255, 255, 0.08);
+      --elevation-3: rgba(255, 255, 255, 0.12);
+    }
+  }
+
+  [dir="rtl"] {
+    --dir: -1;
+  }
+}

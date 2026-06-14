@@ -108,7 +108,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolveRoot(PATHS.SRC),
-      '@components': resolveRoot(PATHS.SRC, 'components'),
+      '@shared': resolveRoot(PATHS.SRC, 'shared'),
       '@assets': resolveRoot(PATHS.SRC, 'assets'),
       '@generated': resolveRoot(PATHS.GENERATED),
       '@configs': resolveRoot(PATHS.SRC, 'configs'),
@@ -232,7 +232,7 @@ export default defineConfig({
                 loader: 'simple-nunjucks-loader',
                 options: {
                   autoescape: false,
-                  searchPaths: ['pages', 'layouts', 'components', ''].map((d) =>
+                  searchPaths: ['pages', 'layouts', 'shared', ''].map((d) =>
                     resolveRoot(PATHS.SRC, d),
                   ),
                   assetsPaths: [resolveRoot(PATHS.SRC, 'assets')],
