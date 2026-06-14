@@ -1,9 +1,9 @@
 import { i18nConfig } from '../../../configs/i18n';
 import { ROOT_PAGE } from '../../../configs/pages';
 import { scheduleTask } from '../utils/microtask-queue';
-import { LOCALE_CODES, LOCALES } from './data';
+import { LOCALES } from './data';
 import { DIRECTION_CODE } from './directions';
-import { getLocaleLabelCountry, LOCALE_STORAGE_KEY } from './index';
+import { getActiveLocalesDisplay, LOCALE_STORAGE_KEY } from './index';
 
 const updateDocumentAttributes = (code: string): void => {
   const locale = LOCALES.find((l) => l.code === code);
@@ -74,13 +74,7 @@ export function registerI18nStore(): void {
   if (typeof window === 'undefined' || !globalThis.Alpine) return;
 
   globalThis.Alpine.store('i18n', {
-    languages: LOCALES.filter((l) => LOCALE_CODES.includes(l.code)).map(
-      (l) => ({
-        code: l.code,
-        label: getLocaleLabelCountry(l.code),
-        flag: l.flag.toLowerCase(),
-      }),
-    ),
+    languages: getActiveLocalesDisplay(),
 
     current:
       localStorage.getItem(LOCALE_STORAGE_KEY) || i18nConfig.defaultLocale,

@@ -6,8 +6,10 @@ import { minify } from 'html-minifier-terser';
 import { i18nConfig } from './src/configs/i18n';
 import { getRootPageSlug, getSystemPageSlug } from './src/configs/pages';
 import { PATHS } from './src/configs/paths';
-import { LOCALE_CODES } from './src/scripts/lib/i18n/data';
-import { LOCALE_STORAGE_KEY } from './src/scripts/lib/i18n/index';
+import {
+  getActiveLocaleCodes,
+  LOCALE_STORAGE_KEY,
+} from './src/scripts/lib/i18n/index';
 import { createTemplateParams } from './src/scripts/lib/i18n/template';
 
 const ROOT = process.cwd();
@@ -247,6 +249,6 @@ export default defineConfig({
     template: ({ entryName }) =>
       path.join(PATHS.SRC, 'pages', entryName, 'index.njk'),
     templateParameters: (params) =>
-      createTemplateParams(params, LOCALE_STORAGE_KEY, LOCALE_CODES),
+      createTemplateParams(params, LOCALE_STORAGE_KEY, getActiveLocaleCodes()),
   },
 });

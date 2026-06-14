@@ -33,7 +33,8 @@ import {
   formatScientific,
   formatTime,
   formatUnit,
-  getLocaleLabelCountry,
+  getActiveLocaleCodes,
+  getActiveLocalesDisplay,
   getPluralSuffix,
   localPrice,
   localPriceCurrency,
@@ -66,7 +67,9 @@ const i18nScriptCache = new Map<string, { hash: string; script: string }>();
 
 const hashLocales = (name: string, usedComponents: string[]): string => {
   const parts: string[] = [];
-  for (const locale of LOCALES) {
+  for (const locale of LOCALES.filter((l) =>
+    getActiveLocaleCodes().includes(l.code),
+  )) {
     const files = [
       resolveRoot(`${PATHS.LOCALES}/${locale.code}/common.json`),
       resolveRoot(`${PATHS.LOCALES}/${locale.code}/${name}.json`),
@@ -115,7 +118,7 @@ const generateClientI18nScript = (
   usedComponents: string[],
   supportedLangs: readonly string[],
   LOCALE_STORAGE_KEY: string,
-  locales: typeof LOCALES,
+  locales: Array<{ code: string; dir: string; writingSystem: string }>,
 ): string => {
   const cacheKey = name;
   const hash = hashLocales(name, usedComponents);
@@ -159,8 +162,11 @@ const generateClientI18nScript = (
 
   const pathParts = window.location.pathname.split('/').filter(Boolean);
   const pathLocale = pathParts[0]?.match(/^[a-z]{2}(-[A-Z]{2})?$/)?.[0];
+  const activeCodes = ${JSON.stringify(supportedLangs)};
 
-  const savedLocale = localStorage.getItem('${LOCALE_STORAGE_KEY}') ?? pathLocale ?? defaultLocale;
+  const stored = localStorage.getItem('${LOCALE_STORAGE_KEY}');
+  const savedLocale = [stored, pathLocale].find(l => l && activeCodes.includes(l)) || defaultLocale;
+  if (stored && stored !== savedLocale) localStorage.setItem('${LOCALE_STORAGE_KEY}', savedLocale);
   const locales = ${JSON.stringify(locales)};
 
   window.__PAGE_ID__ = ${JSON.stringify(name)};
@@ -778,7 +784,11 @@ export const createTemplateParams = (
     usedComponents,
     LOCALE_CODES,
     LOCALE_STORAGE_KEY,
-    LOCALES,
+    LOCALES.filter((l) => getActiveLocaleCodes().includes(l.code)).map((l) => ({
+      code: l.code,
+      dir: l.dir,
+      writingSystem: l.writingSystem,
+    })),
   );
 
   const basePath = process.env.BASE_PATH || '/';
@@ -812,11 +822,8 @@ export const createTemplateParams = (
     lang,
     localeConfig,
     localeStorageKey: LOCALE_STORAGE_KEY,
-    locales: LOCALES.map((l) => ({
-      ...l,
-      label: getLocaleLabelCountry(l.code),
-      flag: l.flag.toLowerCase(),
-    })),
+    locales: getActiveLocalesDisplay(),
+    LOCALE_CODES,
     clientI18nScript,
     page_id: pageId,
     global: (() => {
