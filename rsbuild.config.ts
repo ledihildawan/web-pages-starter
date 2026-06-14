@@ -48,6 +48,17 @@ const pluginRootPageAsIndex = (): RsbuildPlugin => ({
   },
 });
 
+const getPageNames = (): string[] => {
+  const dir = resolveRoot('pages');
+  if (!fs.existsSync(dir)) return [];
+  return fs.readdirSync(dir).filter((folder) => {
+    const stat = fs.statSync(path.join(dir, folder));
+    return (
+      stat.isDirectory() && fs.existsSync(path.join(dir, folder, 'index.njk'))
+    );
+  });
+};
+
 const getEntries = (): Record<string, string | string[]> => {
   const dir = resolveRoot('pages');
   const entries: Record<string, string | string[]> = {};
@@ -81,6 +92,12 @@ export default defineConfig({
           from: /^\/$/,
           to: `/${getRootPageSlug(i18nConfig.defaultLocale)}.html`,
         },
+        ...getPageNames()
+          .filter((p) => p !== getRootPageSlug(i18nConfig.defaultLocale))
+          .map((p) => ({
+            from: new RegExp(`^/${p}$`),
+            to: `/${p}.html`,
+          })),
         {
           from: /^\/(?!locales\/|assets\/|fonts\/|images\/|favicon\.svg$|favicon\.ico$|manifest\.json$|sw\.js$|robots\.txt$|sitemap\.xml$|.*\.[a-z0-9]+$)/,
           to: `/${getSystemPageSlug('not-found', i18nConfig.defaultLocale)}.html`,
