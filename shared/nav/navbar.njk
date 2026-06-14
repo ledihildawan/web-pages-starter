@@ -26,8 +26,13 @@
 
       isActive(path) {
         const base = this.basePath.replace(/\/$/, '') || '';
-        const current = this.currentPath.replace(/\/$/, '') || '/';
-        const target = (base + path).replace(/\/$/, '') || '/';
+        const normalize = (p) => {
+          let n = p.replace(/\.html$/, '').replace(/\/+$/, '');
+          if (n === '' || n === '/index') n = '/';
+          return n;
+        };
+        const current = normalize(this.currentPath);
+        const target = normalize(base + path);
         return current === target;
       },
 
