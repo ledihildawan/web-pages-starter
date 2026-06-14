@@ -1,4 +1,4 @@
-import type { ReplaceAll } from '../../../src/core/utils/types';
+import type { ReplaceAll } from '@core/utils/types';
 
 export const TIMEZONES = [
   {

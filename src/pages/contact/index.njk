@@ -113,12 +113,7 @@
 
   <section class="pbs-40 pbe-40 px-6 relative">
     <div class="max-inline-6xl mx-auto text-center">
-      {{ section.section_header(
-        i18n.t('contact:contact.social_badge'),
-        i18n.t('contact:contact.social_title'),
-        i18n.t('contact:contact.social_subtitle'),
-        icon.icon('share', 'inline-4 block-4')
-      ) }}
+      {{ section.section_header(i18n.t('contact:contact.social_badge'), i18n.t('contact:contact.social_title'), i18n.t('contact:contact.social_subtitle'), icon.icon('share', 'inline-4 block-4')) }}
 
       <div class="inline-flex items-center gap-4">
         {% for social in page.socials %}
