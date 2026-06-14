@@ -15,8 +15,9 @@ export type FontStack = {
   monospace?: FontConfig;
 };
 
-export type I18nConfig = {
-  defaultLocale: LocaleCode;
+export type I18nConfig<T extends LocaleCode = LocaleCode> = {
+  defaultLocale: T;
+  locales?: Exclude<LocaleCode, T>[];
   fonts: FontStack;
 };
 

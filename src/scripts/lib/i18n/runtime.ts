@@ -10,7 +10,7 @@ import { ROOT_PAGE } from '../../../configs/pages';
 import type { DateTimePreset } from '../../utils/types';
 import { scheduleTask } from '../utils/microtask-queue';
 import { CURRENCY_CODE } from './currencies';
-import { LOCALE_CODES, LOCALES, type LocaleCode } from './data';
+import type { LocaleCode } from './data';
 import {
   formatAbbreviated,
   formatBytes,
@@ -27,9 +27,10 @@ import {
   formatScientific,
   formatTime,
   formatUnit,
+  getActiveLocaleCodes,
+  getActiveLocalesDisplay,
   getCurrency,
   getLocale,
-  getLocaleLabelCountry,
   LOCALE_STORAGE_KEY,
   plural,
   setLocale,
@@ -300,11 +301,16 @@ const FORMATTERS = [
 export async function initIntl(localeOverride?: string): Promise<void> {
   const pageID = (window.__PAGE_ID__ ?? ROOT_PAGE) as string;
 
-  const savedLocale = (localeOverride ||
+  const rawLocale = (localeOverride ||
     localStorage.getItem(LOCALE_STORAGE_KEY) ||
     document.documentElement.getAttribute('lang')) as LocaleCode | null;
 
-  if (!savedLocale) return;
+  if (!rawLocale) return;
+
+  const activeCodes = getActiveLocaleCodes();
+  const savedLocale = activeCodes.includes(rawLocale)
+    ? rawLocale
+    : i18nConfig.defaultLocale;
 
   setLocale(getLocale(savedLocale));
 
@@ -334,7 +340,8 @@ export async function initIntl(localeOverride?: string): Promise<void> {
     const initOptions = {
       lng: savedLocale,
       resources,
-      supportedLngs: LOCALE_CODES,
+      supportedLngs: getActiveLocaleCodes(),
+      fallbackLng: i18nConfig.defaultLocale,
       ns: ['common', pageID, ...Object.keys(compData)],
       defaultNS: 'common',
       detection: localeOverride
@@ -391,15 +398,7 @@ export const updateI18nStoreLabels = (): void => {
     return;
   }
 
-  const updatedLanguages = LOCALES.filter((l) =>
-    LOCALE_CODES.includes(l.code),
-  ).map((l) => {
-    return {
-      code: l.code,
-      label: getLocaleLabelCountry(l.code),
-      flag: l.flag,
-    };
-  });
+  const updatedLanguages = getActiveLocalesDisplay();
 
   store.languages.length = 0;
   updatedLanguages.forEach((lang) => {

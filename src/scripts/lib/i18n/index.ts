@@ -1,3 +1,4 @@
+import { i18nConfig } from '../../../configs/i18n';
 import { LOCALES, type LocaleCode } from './data';
 import {
   convertCurrency,
@@ -81,6 +82,20 @@ export const getLocaleLabelCountry = (localeCode: LocaleCode): string => {
 
   return `${nativeName}${regionSuffix}`;
 };
+
+export const getActiveLocaleCodes = (): LocaleCode[] => [
+  i18nConfig.defaultLocale,
+  ...(i18nConfig.locales ?? []),
+];
+
+export const getActiveLocalesDisplay = () =>
+  LOCALES.filter((l) => getActiveLocaleCodes().includes(l.code))
+    .map((l) => ({
+      code: l.code,
+      label: getLocaleLabelCountry(l.code),
+      flag: l.flag.toLowerCase(),
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label));
 
 export const LOCALE_STORAGE_KEY = 'i18nextLocale' as const;
 

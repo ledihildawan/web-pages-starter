@@ -1,3 +1,4 @@
+import { LOCALE_CODES } from './data';
 import type { FontConfig, I18nConfig } from './types';
 
 const validateFont = (font: FontConfig): void => {
@@ -16,7 +17,9 @@ export const defineFont = (config: FontConfig): FontConfig => {
   return config;
 };
 
-export const defineI18n = (config: I18nConfig): I18nConfig => {
+export const defineI18n = <T extends (typeof LOCALE_CODES)[number]>(
+  config: I18nConfig<T>,
+): I18nConfig<T> => {
   if (!config.defaultLocale) {
     throw new Error('[i18n] defaultLocale is required');
   }
@@ -26,5 +29,12 @@ export const defineI18n = (config: I18nConfig): I18nConfig => {
   validateFont(config.fonts.primary);
   if (config.fonts.secondary) validateFont(config.fonts.secondary);
   if (config.fonts.monospace) validateFont(config.fonts.monospace);
+  if (config.locales) {
+    for (const locale of config.locales) {
+      if (!LOCALE_CODES.includes(locale)) {
+        throw new Error(`[i18n] locale "${locale}" is not a valid locale code`);
+      }
+    }
+  }
   return config;
 };
