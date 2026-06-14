@@ -48,6 +48,43 @@ const pluginRootPageAsIndex = (): RsbuildPlugin => ({
   },
 });
 
+const pluginHotReloadContent = (): RsbuildPlugin => ({
+  name: 'plugin-hot-reload-content',
+  setup(api) {
+    api.modifyBundlerChain((chain, { isServer, isWebWorker }) => {
+      if (isServer || isWebWorker) return;
+
+      chain.plugin('watch-content-files').use({
+        apply(compiler: {
+          hooks: {
+            afterCompile: {
+              tap: (
+                name: string,
+                fn: (c: { contextDependencies: Set<string> }) => void,
+              ) => void;
+            };
+          };
+        }) {
+          compiler.hooks.afterCompile.tap(
+            'watch-content-files',
+            (compilation) => {
+              compilation.contextDependencies.add(
+                path.resolve(ROOT, 'locales'),
+              );
+              compilation.contextDependencies.add(path.resolve(ROOT, 'data'));
+              compilation.contextDependencies.add(path.resolve(ROOT, 'pages'));
+              compilation.contextDependencies.add(path.resolve(ROOT, 'shared'));
+              compilation.contextDependencies.add(
+                path.resolve(ROOT, 'layouts'),
+              );
+            },
+          );
+        },
+      });
+    });
+  },
+});
+
 const getPageNames = (): string[] => {
   const dir = resolveRoot('pages');
   if (!fs.existsSync(dir)) return [];
@@ -107,16 +144,7 @@ export default defineConfig({
     },
   },
   dev: {
-    watchFiles: {
-      paths: [
-        'pages/**/*.njk',
-        'layouts/**/*.njk',
-        'shared/**/*.njk',
-        'locales/**/*.json',
-        'pages/**/*.json5',
-      ],
-      type: 'reload-page',
-    },
+    writeToDisk: false,
   },
   splitChunks: {
     preset: 'default',
@@ -197,6 +225,7 @@ export default defineConfig({
   },
   plugins: [
     pluginRootPageAsIndex(),
+    pluginHotReloadContent(),
     ...(isProd ? [pluginImageCompress({ use: 'avif', quality: 75 })] : []),
   ],
   tools: {
