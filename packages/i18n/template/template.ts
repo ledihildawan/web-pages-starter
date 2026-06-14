@@ -105,16 +105,19 @@ export const getUsedComponents = (
   if (!fs.existsSync(templatePath)) return [...found];
 
   const content = fs.readFileSync(templatePath, 'utf-8');
-  const componentRegex =
-    /(?:include|import|extends)\s+['"](?:components\/)?([\w-]+)\.njk['"]/g;
+  const includeRegex = /(?:include|import|extends)\s+['"]([^'"]+\.njk)['"]/g;
 
-  for (const match of content.matchAll(componentRegex)) {
-    const compName = match[1];
-    if (!found.has(compName)) {
-      const compPath = resolveRoot(`components/${compName}.njk`);
-      if (fs.existsSync(compPath)) {
+  for (const match of content.matchAll(includeRegex)) {
+    const ref = match[1];
+    const compName = path.basename(ref, '.njk');
+    if (found.has(compName)) continue;
+
+    for (const dir of ['pages', 'layouts', '.']) {
+      const candidate = resolveRoot(dir, ref);
+      if (fs.existsSync(candidate)) {
         found.add(compName);
-        getUsedComponents(compPath, found);
+        getUsedComponents(candidate, found);
+        break;
       }
     }
   }
