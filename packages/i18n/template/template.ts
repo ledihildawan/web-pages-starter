@@ -798,10 +798,7 @@ export const createTemplateParams = (
     const [beforeHash, afterHash] = hasAnchor
       ? clean.split('#', 2)
       : [clean, ''];
-    const withExt = beforeHash.endsWith('.html')
-      ? beforeHash
-      : `${beforeHash}.html`;
-    const result = `${base}${withExt}`.replace(/\/+/g, '/');
+    const result = `${base}${beforeHash}`.replace(/\/+/g, '/');
     return hasAnchor ? `${result}#${afterHash}` : result;
   };
 
