@@ -1,8 +1,8 @@
-import path from 'node:path';
 import process from 'node:process';
 import '../configs/env';
 import { ROOT } from '@constants';
 import { getErrorPageSlugs, getRootPageSlug, scanPages } from '@page-engine';
+import { resolveRoot } from '@utils/paths';
 import { i18nConfig } from '../configs/i18n';
 import { log, logBox } from './lib/logger';
 import { SITE_URL } from './lib/site-url';
@@ -12,9 +12,9 @@ const cliArgs = process.argv.slice(2);
 const distOnly = cliArgs.includes('--dist-only');
 const isPreviewRegen = process.env.FOR_PREVIEW === 'true';
 
-const PAGES_DIR = path.join(ROOT, 'pages');
-const OUTPUT_PUBLIC = path.join(ROOT, 'public', 'sitemap.xml');
-const OUTPUT_DIST = path.join(ROOT, 'dist', 'sitemap.xml');
+const PAGES_DIR = resolveRoot('pages');
+const OUTPUT_PUBLIC = resolveRoot('public', 'sitemap.xml');
+const OUTPUT_DIST = resolveRoot('dist', 'sitemap.xml');
 
 const DEFAULT_PRIORITY = process.env.SITEMAP_DEFAULT_PRIORITY || '0.7';
 const DEFAULT_CHANGEFREQ = process.env.SITEMAP_DEFAULT_CHANGEFREQ || 'weekly';

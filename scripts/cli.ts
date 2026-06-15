@@ -2,6 +2,7 @@ import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { ROOT } from '@constants';
+import { resolveRoot } from '@utils/paths';
 import inquirer from 'inquirer';
 import { log } from './lib/logger';
 import { setupSigintHandler, wrapMainError } from './lib/signal-handler';
@@ -11,7 +12,7 @@ const runTool = (name: string, args: string[] = []): Promise<void> => {
     const scriptsPath = path.join(__dirname, `${name}.ts`);
     const toolPath = fs.existsSync(scriptsPath)
       ? scriptsPath
-      : path.join(ROOT, 'packages', 'i18n', 'cli', `${name}.ts`);
+      : resolveRoot('packages', 'i18n', 'cli', `${name}.ts`);
     const proc = spawn('bun', [toolPath, ...args], {
       stdio: 'inherit',
       shell: false,
@@ -99,7 +100,7 @@ const tools: Tool[] = [
     name: 'Serve',
     description: 'Serve production build locally',
     action: async () => {
-      const distPath = path.join(ROOT, 'dist');
+      const distPath = resolveRoot('dist');
       if (!fs.existsSync(distPath)) {
         log.distNotFound();
         const { choice } = await inquirer.prompt<{ choice: string }>([
@@ -304,7 +305,7 @@ const tools: Tool[] = [
       const dirs = ['node_modules', 'dist', 'bun.lock'];
       for (const dir of dirs) {
         try {
-          fs.rmSync(path.join(ROOT, dir), {
+          fs.rmSync(resolveRoot(dir), {
             recursive: true,
             force: true,
           });

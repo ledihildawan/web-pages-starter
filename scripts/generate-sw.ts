@@ -1,15 +1,14 @@
-import path from 'node:path';
-import { ROOT } from '@constants';
 import {
   getErrorPageSlugs,
   getRootPageSlug,
   getSystemPageSlug,
 } from '@page-engine';
+import { resolveRoot } from '@utils/paths';
 import { i18nConfig } from '../configs/i18n';
 import { logBox } from './lib/logger';
 import { writeFilePath } from './lib/write-file';
 
-const OUTPUT = path.join(ROOT, 'public', 'sw.js');
+const OUTPUT = resolveRoot('public', 'sw.js');
 
 const defaultLocale = i18nConfig.defaultLocale;
 const rootSlug = getRootPageSlug(defaultLocale);

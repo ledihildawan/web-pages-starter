@@ -1,14 +1,13 @@
-import path from 'node:path';
 import '../configs/env';
-import { ROOT } from '@constants';
+import { resolveRoot } from '@utils/paths';
 import { i18nConfig } from '../configs/i18n';
 import { loadGlobalData } from '../utils/json5';
 import { logBox } from './lib/logger';
 import { writeFilePath } from './lib/write-file';
 
-const OUTPUT_PUBLIC = path.join(ROOT, 'public', 'manifest.json');
+const OUTPUT_PUBLIC = resolveRoot('public', 'manifest.json');
 
-const dataDir = path.join(ROOT, 'data');
+const dataDir = resolveRoot('data');
 const global = loadGlobalData(dataDir);
 
 const siteName = (global.site_name as string) || 'Starter';

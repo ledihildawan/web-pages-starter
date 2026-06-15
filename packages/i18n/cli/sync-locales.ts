@@ -1,11 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
-import { LOCALES, ROOT } from '@constants';
+import { LOCALES } from '@constants';
 import { LOCALE_CODES } from '@i18n/data/locales';
 import { log, logBox } from '@scripts/lib/logger';
+import { resolveRoot } from '@utils/paths';
 
-const LOCALES_ROOT = path.join(ROOT, LOCALES);
+const LOCALES_ROOT = resolveRoot(LOCALES);
 const DEFAULT_LOCALE = i18nConfig.defaultLocale;
 const sourceDir = path.join(LOCALES_ROOT, DEFAULT_LOCALE);
 
