@@ -141,9 +141,7 @@ const main = async () => {
       port: PORT,
       hostname: HOST,
     });
-  }
-
-  if (provider === 'cloudflared') {
+  } else if (provider === 'cloudflared') {
     const placeholderUrl = `http://${HOST}:${PORT}`;
     process.env.SITE_URL = placeholderUrl;
 
@@ -203,37 +201,36 @@ const main = async () => {
     } catch (error) {
       log.error(`Error: URL replacement failed — ${error}`);
     }
-
-    const shutdown = async () => {
-      log.info('\nShutting down...');
-      closeServer();
-      if (tunnelClose) tunnelClose();
-      const { spawn } = await import('node:child_process');
-      spawn('bun', ['./packages/i18n/cli/generate-active-locales.ts'], {
-        stdio: 'ignore',
-        cwd: PATHS.ROOT,
-        detached: true,
-      });
-      process.exit(0);
-    };
-
-    process.on('SIGINT', shutdown);
-    process.on('SIGTERM', shutdown);
-
-    const { getPageNames } = await import('./shared/hono-server');
-    log.info(`\n  Preview ready at ${tunnelUrl || `http://${HOST}:${PORT}`}\n`);
-    log.info(`  Mode: preview (${provider})`);
-    const errorPages = getErrorPageSlugs(i18nConfig.defaultLocale);
-    const rootSlug = getRootPageSlug(i18nConfig.defaultLocale);
-    log.info(
-      `  Pages: ${getPageNames(DIST)
-        .filter((n) => !errorPages.includes(n))
-        .map((n) => (n === rootSlug ? `${n} (index)` : n))
-        .join(', ')}\n`,
-    );
-
-    await new Promise(() => {});
   }
+
+  const shutdown = async () => {
+    log.info('\nShutting down...');
+    closeServer();
+    if (tunnelClose) await tunnelClose();
+    spawn('bun', ['./packages/i18n/cli/generate-active-locales.ts'], {
+      stdio: 'ignore',
+      cwd: PATHS.ROOT,
+      detached: true,
+    });
+    process.exit(0);
+  };
+
+  process.on('SIGINT', shutdown);
+  process.on('SIGTERM', shutdown);
+
+  const { getPageNames } = await import('./shared/hono-server');
+  log.info(`\n  Preview ready at ${tunnelUrl || `http://${HOST}:${PORT}`}\n`);
+  log.info(`  Mode: preview (${provider})`);
+  const errorPages = getErrorPageSlugs(i18nConfig.defaultLocale);
+  const rootSlug = getRootPageSlug(i18nConfig.defaultLocale);
+  log.info(
+    `  Pages: ${getPageNames(DIST)
+      .filter((n) => !errorPages.includes(n))
+      .map((n) => (n === rootSlug ? `${n} (index)` : n))
+      .join(', ')}\n`,
+  );
+
+  await new Promise(() => {});
 };
 
 setupSigintHandler();
