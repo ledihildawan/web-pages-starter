@@ -89,6 +89,7 @@
     "happy-dom": "^20.10.3",
     "husky": "^9.1.7",
     "inquirer": "^14.0.2",
+    "jiti": "^2.7.0",
     "js-beautify": "^1.15.4",
     "lighthouse": "^13.4.0",
     "linkedom": "^0.18.12",

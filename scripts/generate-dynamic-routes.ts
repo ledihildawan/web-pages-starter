@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { isSlugDir } from '../packages/page-engine/scanner';
-import { readJSON5 } from '../utils/json5';
+import { isSlugDir } from '@page-engine/scanner';
+import { readJSON5 } from '@utils/json5';
 
 interface DynamicEntry {
   entryKey: string;

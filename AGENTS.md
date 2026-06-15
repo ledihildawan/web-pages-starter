@@ -13,7 +13,7 @@ bun run build      # production build to ./dist
 - No comments unless requested
 - No deprecated code — remove entirely
 - Nunjucks string concat: `~` (never `+`)
-- Import paths: relative in source (`../../../../generated/*`), `@generated/*` in tsconfig/alias. Jiti-loaded files (rsbuild config chain, `generate-dynamic-routes.ts`) use relative paths — no aliases.
+- Import paths: `@i18n`, `@page-engine`, `@config/*`, `@constants/*`, `@scripts/*`, `@utils/*`, `@generated/*` aliases everywhere. `rsbuild.config.ts` is a thin jiti wrapper that configures aliases for the config chain — real config lives in `rsbuild.config.inner.ts`.
 - i18n CLI scripts live in `packages/i18n/cli/` (not `scripts/`). Page-engine CLI lives in `packages/page-engine/cli/`.
 
 ## Build Modes

@@ -1,21 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { i18nConfig } from '../../configs/i18n';
-import { PATHS } from '../../constants/paths';
-import type { I18nTranslationKeys } from '../../generated/i18n';
-import { getValueByPath } from '../../utils/common';
-import { loadGlobalData, readJSON5 } from '../../utils/json5';
-import type { DateValue, JsonData } from '../../utils/types';
-import type {
-  CardinalOptions,
-  I18nItem,
-  RegionalPrice,
-  RelativeTimeOptions,
-  TemplateFormatOptions,
-  TemplateParams,
-} from '../i18n/config/types';
-import type { CurrencyCode } from '../i18n/data/currencies';
-import type { LocaleCode, LocaleConfig } from '../i18n/data/locales';
+import { i18nConfig } from '@config/i18n';
+import { PATHS } from '@constants/paths';
+import type { I18nTranslationKeys } from '@generated/i18n';
 import {
   convertCurrency,
   convertLocalPrice,
@@ -46,22 +33,35 @@ import {
   setStrategies,
   singular,
   toNativeDigits,
-} from '../i18n/index';
+} from '@i18n';
+import type {
+  CardinalOptions,
+  I18nItem,
+  RegionalPrice,
+  RelativeTimeOptions,
+  TemplateFormatOptions,
+  TemplateParams,
+} from '@i18n/config/types';
+import type { CurrencyCode } from '@i18n/data/currencies';
+import type { LocaleCode, LocaleConfig } from '@i18n/data/locales';
 import {
   cardinal as arCardinal,
   ordinal as arOrdinal,
-} from '../i18n/strategies/ar';
+} from '@i18n/strategies/ar';
 import {
   cardinal as idCardinal,
   ordinal as idOrdinal,
-} from '../i18n/strategies/id';
+} from '@i18n/strategies/id';
 import {
   cardinal as jaCardinal,
   ordinal as jaOrdinal,
-} from '../i18n/strategies/ja';
-import { cardinal as zhCardinal } from '../i18n/strategies/zh';
-import { loadSharedLocales } from '../i18n/utils';
-import { getRootPageSlug } from './system-pages';
+} from '@i18n/strategies/ja';
+import { cardinal as zhCardinal } from '@i18n/strategies/zh';
+import { loadSharedLocales } from '@i18n/utils';
+import { getRootPageSlug } from '@page-engine';
+import { getValueByPath } from '@utils/common';
+import { loadGlobalData, readJSON5 } from '@utils/json5';
+import type { DateValue, JsonData } from '@utils/types';
 
 setStrategies(
   { id: idCardinal, ja: jaCardinal, zh: zhCardinal, ar: arCardinal },
