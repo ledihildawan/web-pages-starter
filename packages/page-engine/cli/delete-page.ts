@@ -3,41 +3,58 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
 import { ROOT_PATH, resolveRoot } from '@config/paths';
-import { isSystemPageId, isSystemPageSlug } from '@page-engine';
+import { isSystemPageId, isSystemPageSlug, scanPages } from '@page-engine';
 import { log } from '@scripts/lib/logger';
 import { setupSigintHandler, wrapMainError } from '@scripts/lib/signal-handler';
+import { readJSON5 } from '@utils/json5';
 import inquirer from 'inquirer';
 
 const args = process.argv.slice(2);
 const providedPageName = args[0]?.trim();
 
-function getAllPages(): string[] {
+interface PageInfo {
+  name: string;
+  dir: string;
+  pageId: string;
+  urlPath: string;
+}
+
+function getAllPages(): PageInfo[] {
   const pagesDir = resolveRoot('pages');
-  if (!fs.existsSync(pagesDir)) return [];
-  return fs.readdirSync(pagesDir).filter((f) => fs.statSync(path.join(pagesDir, f)).isDirectory());
+  const scanned = scanPages(pagesDir, '');
+  return scanned.map((p) => {
+    let pageId = p.name;
+    let urlPath = p.name;
+    try {
+      const data = readJSON5(path.join(p.dir, 'index.json5'));
+      pageId = String(data.page_id || p.name.split('/').pop() || p.name);
+      urlPath = String(data.url_path || p.name);
+    } catch {}
+    return { name: p.name, dir: p.dir, pageId, urlPath };
+  });
 }
 
 function isSystemPage(name: string): boolean {
   return isSystemPageId(name) || isSystemPageSlug(name, i18nConfig.defaultLocale);
 }
 
-async function selectPage(): Promise<string | null> {
+async function selectPage(): Promise<PageInfo | null> {
   const pages = getAllPages();
   if (pages.length === 0) {
     log.error('Error: No pages found in pages/.');
     return null;
   }
 
-  const choices = pages.map((name) => {
-    const isSystem = isSystemPage(name);
+  const choices = pages.map((p) => {
+    const isSystem = isSystemPage(p.pageId) || isSystemPage(p.urlPath);
     return {
-      name: isSystem ? `${name} (system)` : name,
-      value: name,
+      name: isSystem ? `${p.name} (system)` : p.name,
+      value: p,
       disabled: isSystem ? true : undefined,
     };
   });
 
-  const { page } = await inquirer.prompt<{ page: string }>([
+  const { page } = await inquirer.prompt<{ page: PageInfo }>([
     {
       type: 'rawlist',
       name: 'page',
@@ -68,9 +85,13 @@ function collectFiles(dir: string, ext: string, out: string[]): void {
   }
 }
 
-function findReferences(pageName: string): Reference[] {
+function findReferences(pageInfo: PageInfo): Reference[] {
   const refs: Reference[] = [];
-  const pattern = new RegExp(`/${pageName}(?=[^a-zA-Z0-9-]|$)`, 'g');
+  const searchPatterns = [pageInfo.urlPath, pageInfo.name, pageInfo.pageId];
+  const pattern = new RegExp(
+    `/${searchPatterns.map((p) => p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')}(?=[^a-zA-Z0-9-]|$)`,
+    'g',
+  );
 
   const scanFiles: string[] = [];
   collectFiles(path.join('pages'), '.njk', scanFiles);
@@ -80,10 +101,8 @@ function findReferences(pageName: string): Reference[] {
   const menuFile = path.join('data', 'menu.json5');
   if (fs.existsSync(menuFile)) scanFiles.push(menuFile);
 
-  const pageDir = path.join('pages', pageName);
-
   for (const file of scanFiles) {
-    if (file.startsWith(pageDir)) continue;
+    if (file.includes(pageInfo.dir)) continue;
 
     const content = fs.readFileSync(file, 'utf-8');
     const lines = content.split('\n');
@@ -152,16 +171,13 @@ async function confirmDeletion(pageName: string): Promise<boolean> {
   return true;
 }
 
-function deletePage(pageName: string): {
+function deletePage(pageInfo: PageInfo): {
   folderDeleted: boolean;
   localeFilesDeleted: number;
 } {
-  const pagesDir = resolveRoot('pages');
-  const pageDir = path.join(pagesDir, pageName);
-
   let folderDeleted = false;
-  if (fs.existsSync(pageDir)) {
-    fs.rmSync(pageDir, { recursive: true, force: true });
+  if (fs.existsSync(pageInfo.dir)) {
+    fs.rmSync(pageInfo.dir, { recursive: true, force: true });
     folderDeleted = true;
   }
 
@@ -169,7 +185,7 @@ function deletePage(pageName: string): {
   const localesDir = resolveRoot('locales');
   if (fs.existsSync(localesDir)) {
     for (const lng of fs.readdirSync(localesDir)) {
-      const localeFile = path.join(localesDir, lng, `${pageName}.json`);
+      const localeFile = path.join(localesDir, lng, `${pageInfo.pageId}.json`);
       if (fs.existsSync(localeFile)) {
         fs.rmSync(localeFile, { force: true });
         localeFilesDeleted++;
@@ -201,30 +217,40 @@ async function runSyncLocales(): Promise<void> {
 }
 
 async function main(): Promise<void> {
-  let pageName: string | null | undefined = providedPageName;
+  let pageInfo: PageInfo | null | undefined = null;
 
-  if (!pageName) {
-    pageName = await selectPage();
+  if (providedPageName) {
+    const pages = getAllPages();
+    pageInfo =
+      pages.find(
+        (p) => p.name === providedPageName || p.urlPath === providedPageName || p.pageId === providedPageName,
+      ) || null;
+    if (!pageInfo) {
+      log.error(`Error: Page "${providedPageName}" not found.`);
+      process.exit(1);
+    }
+  } else {
+    pageInfo = await selectPage();
   }
 
-  if (!pageName) return;
+  if (!pageInfo) return;
 
-  if (isSystemPage(pageName)) {
-    log.error(`Error: "${pageName}" is a system page and cannot be deleted.`);
+  if (isSystemPage(pageInfo.pageId) || isSystemPage(pageInfo.urlPath)) {
+    log.error(`Error: "${pageInfo.name}" is a system page and cannot be deleted.`);
     process.exit(1);
   }
 
-  const refs = findReferences(pageName);
+  const refs = findReferences(pageInfo);
   showReferenceWarnings(refs);
 
-  const confirmed = await confirmDeletion(pageName);
+  const confirmed = await confirmDeletion(pageInfo.name);
   if (!confirmed) return;
 
-  const { folderDeleted, localeFilesDeleted } = deletePage(pageName);
+  const { folderDeleted, localeFilesDeleted } = deletePage(pageInfo);
 
-  log.success(`\nDone: Page "${pageName}" deleted`);
+  log.success(`\nDone: Page "${pageInfo.name}" deleted`);
   log.info(`  - Folder: ${folderDeleted ? 'deleted' : 'not found'}`);
-  log.info(`  - Locale files: ${localeFilesDeleted} files removed`);
+  log.info(`  - Locale files: ${localeFilesDeleted} files removed (page_id: ${pageInfo.pageId})`);
 
   try {
     await runSyncLocales();

@@ -1,5 +1,9 @@
 {
   "page_id": "pricing",
+  "meta": {
+    "title": "Pricing",
+    "description": "Simple, transparent pricing plans for every team. Start free, scale as you grow."
+  },
   "hero": {
     "t_key": "hero"
   },

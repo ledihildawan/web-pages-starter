@@ -1,11 +1,10 @@
-{% macro render(page, global, locale_codes) %}
+{% macro render(page, global, locale_codes, page_id, i18n) %}
 
   {% set title = page.meta.title or page.title or global.site_name or "Starter App" %}
-
   {% set description = page.meta.description or global.site_description or "Default description for the site." %}
 
   {% set site_url = global.site_url or "" %}
-  {% set page_path = "" if (page.page_id == global.root_page) else ("/" ~ (page.page_id or "")) %}
+  {% set page_path = "" if (page_id == global.root_page) else ("/" ~ (page.url_path or page_id or "")) %}
   {% set canonical_url = page.meta.canonical or (site_url ~ page_path) or "" %}
 
   {% set image = page.meta.image or global.site_image or "" %}
@@ -18,20 +17,36 @@
   {% set seo_config = global.seo or {} %}
   {% set og_type = page.meta.og_type or seo_config.og_type or "website" %}
   {% set twitter_card = seo_config.twitter_card or "summary_large_image" %}
+  {% set author = page.meta.author or seo_config.default_author %}
+  {% set theme_color = page.meta.theme_color or seo_config.theme_color %}
 
-  {% set default_locale = lang or "id" %}
+  {% set default_locale = lang or "en-US" %}
   {% set hreflang_locales = locale_codes or [] %}
 
+  {# --- Basic meta --- #}
   <title>{{ title }}</title>
   <meta name="description" content="{{ description }}">
-  {% if page.meta.keywords %}
-    <meta name="keywords" content="{{ page.meta.keywords }}">
+  {% if author %}
+    <meta name="author" content="{{ author }}">
   {% endif %}
-  {% set is_error_page = page.page_id == "not-found" or page.page_id == "unauthorized" or page.page_id == "forbidden" or page.page_id == "server-error" or page.page_id == "maintenance" or page.page_id == "offline" %}
-  {% if is_error_page %}
-    <meta name="robots" content="noindex, nofollow">
+  {% if theme_color %}
+    <meta name="theme-color" content="{{ theme_color }}">
   {% endif %}
 
+  {# --- Robots --- #}
+  {% set is_error_page = page_id == "not-found" or page_id == "unauthorized" or page_id == "forbidden" or page_id == "server-error" or page_id == "maintenance" or page_id == "offline" %}
+  {% if is_error_page %}
+    <meta name="robots" content="noindex, nofollow">
+  {% elif page.meta.robots %}
+    <meta name="robots" content="{{ page.meta.robots }}">
+  {% endif %}
+
+  {# --- Verification --- #}
+  {% if seo_config.google_verification %}
+    <meta name="google-site-verification" content="{{ seo_config.google_verification }}">
+  {% endif %}
+
+  {# --- Canonical + hreflang --- #}
   {% if canonical_url %}
     <link rel="canonical" href="{{ canonical_url }}">
     <link rel="alternate" hreflang="x-default" href="{{ canonical_url }}">
@@ -40,6 +55,7 @@
     {% endfor %}
   {% endif %}
 
+  {# --- Open Graph --- #}
   <meta property="og:title" content="{{ title }}">
   <meta property="og:description" content="{{ description }}">
   <meta property="og:type" content="{{ og_type }}">
@@ -53,8 +69,24 @@
   {% if image_alt %}
     <meta property="og:image:alt" content="{{ image_alt }}">
   {% endif %}
+  {% if page.meta.image_width or seo_config.og_image_width %}
+    <meta property="og:image:width" content="{{ page.meta.image_width or seo_config.og_image_width }}">
+  {% endif %}
+  {% if page.meta.image_height or seo_config.og_image_height %}
+    <meta property="og:image:height" content="{{ page.meta.image_height or seo_config.og_image_height }}">
+  {% endif %}
   <meta property="og:locale" content="{{ default_locale | replace('-', '_') }}">
+  {% if page.meta.date_published %}
+    <meta property="article:published_time" content="{{ page.meta.date_published }}">
+  {% endif %}
+  {% if page.meta.date_modified %}
+    <meta property="article:modified_time" content="{{ page.meta.date_modified }}">
+  {% endif %}
+  {% if author and og_type == "article" %}
+    <meta property="article:author" content="{{ author }}">
+  {% endif %}
 
+  {# --- Twitter Cards --- #}
   <meta name="twitter:card" content="{{ twitter_card }}">
   <meta name="twitter:title" content="{{ title }}">
   <meta name="twitter:description" content="{{ description }}">
@@ -64,8 +96,45 @@
   {% if image_alt %}
     <meta name="twitter:image:alt" content="{{ image_alt }}">
   {% endif %}
+  {% if global.social and global.social.twitter %}
+    <meta name="twitter:site" content="{{ global.social.twitter }}">
+  {% endif %}
 
+  {# --- JSON-LD Structured Data --- #}
   {% if not is_error_page %}
+
+  {# Build Organization sameAs links #}
+  {% set same_as = "" %}
+  {% set sep = "" %}
+  {% if global.social %}
+    {% if global.social.github %}
+      {% set same_as = same_as ~ sep ~ '"https://github.com/' ~ global.social.github ~ '"' %}
+      {% set sep = ", " %}
+    {% endif %}
+    {% if global.social.twitter %}
+      {% set same_as = same_as ~ sep ~ '"https://twitter.com/' ~ global.social.twitter ~ '"' %}
+      {% set sep = ", " %}
+    {% endif %}
+    {% if global.social.linkedin %}
+      {% set same_as = same_as ~ sep ~ '"https://linkedin.com/' ~ global.social.linkedin ~ '"' %}
+      {% set sep = ", " %}
+    {% endif %}
+    {% if global.social.facebook %}
+      {% set same_as = same_as ~ sep ~ '"https://facebook.com/' ~ global.social.facebook ~ '"' %}
+      {% set sep = ", " %}
+    {% endif %}
+    {% if global.social.instagram %}
+      {% set same_as = same_as ~ sep ~ '"https://instagram.com/' ~ global.social.instagram ~ '"' %}
+      {% set sep = ", " %}
+    {% endif %}
+    {% if global.social.youtube %}
+      {% set same_as = same_as ~ sep ~ '"https://youtube.com/' ~ global.social.youtube ~ '"' %}
+    {% endif %}
+  {% endif %}
+
+  {# Determine page type for schema #}
+  {% set is_article = page.meta.date_published or og_type == "article" %}
+
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -76,8 +145,12 @@
           "url": "{{ site_url }}/",
           "name": "{{ global.site_name or title }}",
           "description": "{{ description }}",
-          "inLanguage": "{{ default_locale }}",
-          "potentialAction": {
+          "publisher": {
+            "@id": "{{ site_url }}/#organization"
+          },
+          "inLanguage": "{{ default_locale }}"
+          {% if seo_config.search_action %}
+          ,"potentialAction": {
             "@type": "SearchAction",
             "target": {
               "@type": "EntryPoint",
@@ -85,17 +158,102 @@
             },
             "query-input": "required name=search_term_string"
           }
+          {% endif %}
         },
         {
           "@type": "Organization",
           "@id": "{{ site_url }}/#organization",
           "name": "{{ global.site_name or title }}",
-          "url": "{{ site_url }}/",
-          {% if global.social and global.social.github %}"sameAs": ["https://github.com/{{ global.social.github }}"],{% endif %}
+          "url": "{{ site_url }}/"
+          {% if same_as %},"sameAs": [{{ same_as }}]{% endif %}
+          {% if absolute_image %},
           "logo": {
             "@type": "ImageObject",
             "url": "{{ absolute_image }}"
+          }{% endif %}
+        },
+        {
+          "@type": {% if is_article %}"Article"{% else %}"WebPage"{% endif %},
+          "@id": "{{ canonical_url }}#webpage",
+          "url": "{{ canonical_url }}",
+          "name": "{{ title }}",
+          "description": "{{ description }}",
+          "isPartOf": {
+            "@id": "{{ site_url }}/#website"
+          },
+          "inLanguage": "{{ default_locale }}"
+          {% if is_article and author %},
+          "author": {
+            "@type": "Person",
+            "name": "{{ author }}"
+          }{% endif %}
+          {% if is_article and page.meta.date_published %},
+          "datePublished": "{{ page.meta.date_published }}"{% endif %}
+          {% if is_article and page.meta.date_modified %},
+          "dateModified": "{{ page.meta.date_modified }}"{% endif %}
+          {% if absolute_image %},
+          "primaryImageOfPage": {
+            "@id": "{{ canonical_url }}#primaryimage"
+          }{% endif %},
+          "breadcrumb": {
+            "@id": "{{ canonical_url }}#breadcrumb"
           }
+        }{% if absolute_image %},
+        {
+          "@type": "ImageObject",
+          "@id": "{{ canonical_url }}#primaryimage",
+          "url": "{{ absolute_image }}",
+          "contentUrl": "{{ absolute_image }}",
+          "caption": "{{ image_alt }}"
+        }{% endif %},
+        {
+          "@type": "BreadcrumbList",
+          "@id": "{{ canonical_url }}#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "{{ global.site_name or 'Home' }}",
+              "item": "{{ site_url }}/"
+            }
+            {% if page_id != global.root_page %}
+              {% if page.breadcrumb %}
+                {# Explicit breadcrumbs from index.json5 #}
+                {% for crumb in page.breadcrumb %}
+            ,{
+              "@type": "ListItem",
+              "position": {{ loop.index + 1 }},
+              "name": "{{ crumb.name }}",
+              "item": "{{ site_url }}/{{ crumb.path }}"
+            }
+                {% endfor %}
+            ,{
+              "@type": "ListItem",
+              "position": {{ (page.breadcrumb or []).length + 2 }},
+              "name": "{{ title }}",
+              "item": "{{ canonical_url }}"
+            }
+              {% else %}
+                {# Auto-generate from page_path segments #}
+                {% set path_segments = page_path.split('/') %}
+                {% for part in path_segments %}
+                  {% if part %}
+            ,{
+              "@type": "ListItem",
+              "position": {{ loop.index }},
+              {% if loop.last %}
+              "name": "{{ title }}",
+              "item": "{{ canonical_url }}"
+              {% else %}
+              "name": "{{ part | replace('-', ' ') | capitalize }}",
+              "item": "{{ site_url }}{{ path_segments.slice(0, loop.index).join('/') }}"
+              {% endif %}
+            }
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+            {% endif %}
+          ]
         }
       ]
     }

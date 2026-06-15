@@ -78,7 +78,7 @@
     {% endfor %}
 
     {% block extra_head %}
-      {{ page_meta.render(page, global, LOCALE_CODES) }}
+      {{ page_meta.render(page, global, LOCALE_CODES, page_id, i18n) }}
     {% endblock %}
 
     {% block resource_hints %}

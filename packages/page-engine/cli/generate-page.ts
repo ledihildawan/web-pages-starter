@@ -8,36 +8,60 @@ import { log } from '@scripts/lib/logger';
 import { romanize } from '@scripts/lib/romanize';
 
 const args = process.argv.slice(2);
-const pageName = args[0];
+const inputPath = args[0];
 
-if (!pageName) {
-  log.error('Error: Please provide a page name.');
-  log.info('Usage: bun ./packages/page-engine/cli/generate-page.ts <page-name>');
+if (!inputPath) {
+  log.error('Error: Please provide a page path.');
+  log.info('Usage: bun ./packages/page-engine/cli/generate-page.ts <page-path>');
+  log.info('');
+  log.info('Examples:');
+  log.info('  bun generate-page.ts pricing                    → pages/pricing/');
+  log.info('  bun generate-page.ts services/web               → pages/services/web/');
+  log.info('  bun generate-page.ts "(marketing)/landing"      → pages/(marketing)/landing/');
+  log.info('  bun generate-page.ts blog/getting-started       → pages/blog/getting-started/');
   process.exit(1);
 }
 
-const formattedName = romanize(pageName);
+const groupMatch = inputPath.match(/^\(([^)]+)\)\/(.+)/);
+const groupFolder = groupMatch ? `(${groupMatch[1]})` : null;
+const pathWithoutGroup = groupMatch ? groupMatch[2] : inputPath;
 
-if (!formattedName) {
-  log.error('Error: Page name must contain valid characters.');
+const segments = pathWithoutGroup.split('/').filter(Boolean);
+if (segments.length === 0) {
+  log.error('Error: Invalid page path.');
   process.exit(1);
 }
+
+const formattedSegments = segments.map((s) => romanize(s)).filter(Boolean);
+if (formattedSegments.length !== segments.length) {
+  log.error('Error: Page path contains invalid characters.');
+  process.exit(1);
+}
+
+const lastSegment = formattedSegments[formattedSegments.length - 1];
+const fullSlug = formattedSegments.join('-');
 
 if (
-  isSystemPageSlug(formattedName, i18nConfig.defaultLocale) ||
-  SYSTEM_PAGE_IDS.includes(formattedName as SystemPageId)
+  isSystemPageSlug(fullSlug, i18nConfig.defaultLocale) ||
+  isSystemPageSlug(lastSegment, i18nConfig.defaultLocale) ||
+  SYSTEM_PAGE_IDS.includes(fullSlug as SystemPageId) ||
+  SYSTEM_PAGE_IDS.includes(lastSegment as SystemPageId)
 ) {
-  log.error(`Error: "${formattedName}" is a reserved system page name.`);
+  log.error(`Error: "${inputPath}" contains a reserved system page name.`);
   process.exit(1);
 }
 
-const titleCase = pageName.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase());
+const pageId = lastSegment;
+const urlPath = formattedSegments.join('/');
+const titleCase = lastSegment.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase());
 
-const targetDir = resolveRoot('pages', formattedName);
-const baseLocaleDir = resolveRoot('locales');
+const pagesRoot = resolveRoot('pages');
+const targetDir = groupFolder
+  ? path.join(pagesRoot, groupFolder, ...formattedSegments)
+  : path.join(pagesRoot, ...formattedSegments);
 
 if (fs.existsSync(targetDir)) {
-  log.error(`Error: Page "${formattedName}" already exists.`);
+  log.error(`Error: Page "${urlPath}" already exists.`);
   process.exit(1);
 }
 
@@ -55,14 +79,14 @@ const njkContent = `{% extends "main.njk" %}
           <span class="relative inline-flex rounded-full block-2 inline-2 bg-emerald-500"></span>
         </span>
         <span class="font-bold tracking-wide uppercase text-[10px]">
-          {{ i18n.t('${formattedName}:hero.badge') }}
+          {{ i18n.t('${pageId}:hero.badge') }}
         </span>
       </div>
       <h1 class="text-6xl md:text-7xl font-black tracking-tighter mbe-8 leading-[1.1] bg-linear-to-b from-white to-slate-400 bg-clip-text text-transparent">
-        {{ i18n.t('${formattedName}:hero.title') }}
+        {{ i18n.t('${pageId}:hero.title') }}
       </h1>
       <p class="text-xl md:text-2xl text-slate-300 max-inline-2xl mx-auto mbe-14 leading-relaxed font-medium">
-        {{ i18n.t('${formattedName}:hero.description') }}
+        {{ i18n.t('${pageId}:hero.description') }}
       </p>
     </div>
   </section>
@@ -70,7 +94,7 @@ const njkContent = `{% extends "main.njk" %}
   <section class="pbs-32 pbe-32 px-6 content-auto">
     <div class="max-inline-6xl mx-auto">
       <p class="text-slate-300 text-lg leading-relaxed text-center">
-        {{ i18n.t('${formattedName}:content.intro') }}
+        {{ i18n.t('${pageId}:content.intro') }}
       </p>
     </div>
   </section>
@@ -80,6 +104,8 @@ const njkContent = `{% extends "main.njk" %}
 `;
 
 const jsonContent = `{
+  "page_id": "${pageId}",
+  "url_path": "${urlPath}",
   "meta": {
     "title": "${titleCase}",
     "description": "Structured data for ${titleCase}"
@@ -94,7 +120,7 @@ const localeContent = `{
   "hero": {
     "badge": "Badge",
     "title": "${titleCase} Page",
-    "description": "This text is managed from locales/{{lng}}/${formattedName}.json"
+    "description": "This text is managed from locales/{{lng}}/${pageId}.json"
   },
   "content": {
     "intro": "Add your content here."
@@ -102,29 +128,36 @@ const localeContent = `{
 }
 `;
 
-const tsContent = '';
-const cssContent = '';
-
 try {
   fs.writeFileSync(path.join(targetDir, 'index.njk'), njkContent);
-  fs.writeFileSync(path.join(targetDir, 'index.ts'), tsContent);
-  fs.writeFileSync(path.join(targetDir, 'index.css'), cssContent);
   fs.writeFileSync(path.join(targetDir, 'index.json5'), jsonContent);
+  fs.writeFileSync(path.join(targetDir, 'index.ts'), '');
+  fs.writeFileSync(path.join(targetDir, 'index.css'), '');
 
+  const baseLocaleDir = resolveRoot('locales');
   if (fs.existsSync(baseLocaleDir)) {
     for (const lng of getActiveLocaleCodes()) {
-      const lngDir = path.join(baseLocaleDir, lng);
-      const filePath = path.join(lngDir, `${formattedName}.json`);
-
+      const filePath = path.join(baseLocaleDir, lng, `${pageId}.json`);
       if (!fs.existsSync(filePath)) {
         fs.writeFileSync(filePath, localeContent, 'utf-8');
-        log.info(`Created locale [${lng}]: locales/${lng}/${formattedName}.json`);
+        log.info(`Created locale [${lng}]: locales/${lng}/${pageId}.json`);
       }
     }
   }
 
-  log.success(`\nDone: Page "${formattedName}" generated`);
-  log.info(`Path: pages/${formattedName}/`);
+  log.success(`\nDone: Page "${urlPath}" generated`);
+  log.info(`Path: pages/${groupFolder ? groupFolder + '/' : ''}${urlPath}/`);
+  log.info(`page_id: ${pageId}`);
+  log.info(`url_path: ${urlPath}`);
+  if (formattedSegments.length > 1) {
+    log.info(`\nBreadcrumb (auto-generated):`);
+    log.info(
+      `  Home → ${formattedSegments
+        .slice(0, -1)
+        .map((s) => s.replace(/-/g, ' '))
+        .join(' → ')} → ${titleCase}`,
+    );
+  }
   log.info('\nTip: Restart dev server if the new entry is not detected.');
 } catch (error) {
   log.error(`Error: Generation failed — ${error}`);

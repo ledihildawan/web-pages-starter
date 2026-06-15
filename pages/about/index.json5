@@ -1,5 +1,9 @@
 {
   "page_id": "about",
+  "meta": {
+    "title": "About",
+    "description": "Learn about our mission, values, and the team building the future of web development."
+  },
   "hero": {
     "t_key": "hero"
   },

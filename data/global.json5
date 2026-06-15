@@ -8,6 +8,8 @@
     "theme_color_light": "#f8fafc",
     "og_type": "website",
     "twitter_card": "summary_large_image",
+    "og_image_width": 1200,
+    "og_image_height": 630,
   },
   "pwa": {
     "mobile_web_app_capable": true,
