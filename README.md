@@ -583,7 +583,7 @@ Direct tool access:
 | `bun ./scripts/generate-manifest.ts` | Generate `public/manifest.json` from `global.json5` + `i18nConfig` |
 | `bun ./scripts/generate-robots.ts` | Generate `public/robots.txt` from `SITE_URL` |
 | `bun ./scripts/generate-sw.ts` | Generate `public/sw.js` with locale-specific error page URLs |
-| `bun ./packages/i18n/cli/sync-system-pages.ts` | Rename system page folders to match locale-dependent slugs |
+| `bun ./packages/page-engine/cli/sync-system-pages.ts` | Rename system page folders to match locale-dependent slugs |
 | `bun ./packages/i18n/cli/sync-locales.ts` | Sync missing locale directories and files from default |
 | `bun ./scripts/delete-page.ts [name]` | Delete a page and its locale files across all locale directories (system pages protected) |
 | `bun ./packages/i18n/cli/check-parity.ts` | Diff translation keys across all locales |
@@ -618,7 +618,7 @@ Most tools live in `scripts/`; i18n-specific CLI tools live in `packages/i18n/cl
 | `scripts/generate-manifest.ts` | logBox, writeFilePath | Generate manifest.json from global.json5 + i18nConfig |
 | `scripts/generate-robots.ts` | logBox, SITE_URL, writeFilePath | Generate robots.txt from SITE_URL |
 | `scripts/generate-sw.ts` | logBox, writeFilePath | Generate `public/sw.js` with locale-specific error page URLs |
-| `packages/i18n/cli/sync-system-pages.ts` | log, logBox, wrapMainError | Rename ALL system page folders to locale-dependent slugs when default locale changes |
+| `packages/page-engine/cli/sync-system-pages.ts` | log, logBox, wrapMainError | Rename ALL system page folders to locale-dependent slugs when default locale changes |
 | `packages/i18n/cli/sync-locales.ts` | log, logBox | Create missing locale directories; sync missing files in existing directories |
 | `scripts/delete-page.ts` | log | Delete a page (folder + locale files across all locale dirs); scans for broken URL references before deletion; system pages protected |
 | `packages/i18n/cli/check-parity.ts` | log | Diff translation keys across locales |

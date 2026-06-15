@@ -10,12 +10,12 @@ import {
   getActiveLocaleCodes,
   LOCALE_STORAGE_KEY,
 } from './packages/i18n/index';
-import { createTemplateParams } from './packages/i18n/template/template';
 import {
   getRootPageSlug,
   getSystemPageSlug,
   scanPages,
 } from './packages/page-engine/index';
+import { createTemplateParams } from './packages/page-engine/template';
 import { generateDynamicEntries } from './scripts/generate-dynamic-routes';
 
 const ROOT = process.cwd();

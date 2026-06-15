@@ -1,12 +1,21 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { i18nConfig } from '../../../configs/i18n';
-import { PATHS } from '../../../configs/paths';
-import type { I18nTranslationKeys } from '../../../generated/i18n';
-import { getValueByPath } from '../../../utils/common';
-import { loadGlobalData, readJSON5 } from '../../../utils/json5';
-import type { DateValue, JsonData } from '../../../utils/types';
-import { getRootPageSlug } from '../../page-engine/index';
+import { i18nConfig } from '../../configs/i18n';
+import { PATHS } from '../../configs/paths';
+import type { I18nTranslationKeys } from '../../generated/i18n';
+import { getValueByPath } from '../../utils/common';
+import { loadGlobalData, readJSON5 } from '../../utils/json5';
+import type { DateValue, JsonData } from '../../utils/types';
+import type {
+  CardinalOptions,
+  I18nItem,
+  RegionalPrice,
+  RelativeTimeOptions,
+  TemplateFormatOptions,
+  TemplateParams,
+} from '../i18n/config/types';
+import type { CurrencyCode } from '../i18n/data/currencies';
+import type { LocaleCode, LocaleConfig } from '../i18n/data/locales';
 import {
   convertCurrency,
   convertLocalPrice,
@@ -37,22 +46,22 @@ import {
   setStrategies,
   singular,
   toNativeDigits,
-} from '..';
-import type {
-  CardinalOptions,
-  I18nItem,
-  RegionalPrice,
-  RelativeTimeOptions,
-  TemplateFormatOptions,
-  TemplateParams,
-} from '../config/types';
-import type { CurrencyCode } from '../data/currencies';
-import type { LocaleCode, LocaleConfig } from '../data/locales';
-import { cardinal as arCardinal, ordinal as arOrdinal } from '../strategies/ar';
-import { cardinal as idCardinal, ordinal as idOrdinal } from '../strategies/id';
-import { cardinal as jaCardinal, ordinal as jaOrdinal } from '../strategies/ja';
-import { cardinal as zhCardinal } from '../strategies/zh';
-import { loadSharedLocales } from '../utils';
+} from '../i18n/index';
+import {
+  cardinal as arCardinal,
+  ordinal as arOrdinal,
+} from '../i18n/strategies/ar';
+import {
+  cardinal as idCardinal,
+  ordinal as idOrdinal,
+} from '../i18n/strategies/id';
+import {
+  cardinal as jaCardinal,
+  ordinal as jaOrdinal,
+} from '../i18n/strategies/ja';
+import { cardinal as zhCardinal } from '../i18n/strategies/zh';
+import { loadSharedLocales } from '../i18n/utils';
+import { getRootPageSlug } from './system-pages';
 
 setStrategies(
   { id: idCardinal, ja: jaCardinal, zh: zhCardinal, ar: arCardinal },
