@@ -3,6 +3,7 @@ import path from 'node:path';
 import { defineConfig, type RsbuildPlugin } from '@rsbuild/core';
 import { pluginImageCompress } from '@rsbuild/plugin-image-compress';
 import { minify } from 'html-minifier-terser';
+import { html as beautifyHtml } from 'js-beautify';
 import { i18nConfig } from './configs/i18n';
 import { getRootPageSlug, getSystemPageSlug } from './configs/pages';
 import { PATHS } from './configs/paths';
@@ -18,7 +19,8 @@ const BASE_PATH = process.env.BASE_PATH || '/';
 const isProd =
   process.env.NODE_ENV === 'production' || process.env.BUILD_PREVIEW === 'true';
 const shouldMinify = isProd && process.env.MINIFY !== 'false';
-const shouldMinifyHTML = shouldMinify && process.env.MINIFY_HTML !== 'false';
+const isPrettyHtml = process.env.PRETTY_HTML === 'true';
+const shouldMinifyHTML = shouldMinify && !isPrettyHtml;
 const MANAGED_EXTS = [
   'ts',
   'css',
@@ -81,6 +83,31 @@ const pluginHotReloadContent = (): RsbuildPlugin => ({
           );
         },
       });
+    });
+  },
+});
+
+const pluginPrettyHtml = (): RsbuildPlugin => ({
+  name: 'plugin-pretty-html',
+  setup(api) {
+    if (!isPrettyHtml) return;
+    api.onAfterBuild(() => {
+      const distDir = api.context.distPath;
+      if (!fs.existsSync(distDir)) return;
+
+      for (const file of fs.readdirSync(distDir)) {
+        if (!file.endsWith('.html')) continue;
+        const filePath = path.join(distDir, file);
+        const content = fs.readFileSync(filePath, 'utf8');
+        const beautified = beautifyHtml(content, {
+          indent_size: 2,
+          indent_inner_html: true,
+          preserve_newlines: false,
+          end_with_newline: true,
+          unformatted: ['script', 'style', 'pre', 'code', 'textarea', 'span'],
+        });
+        fs.writeFileSync(filePath, beautified);
+      }
     });
   },
 });
@@ -226,24 +253,29 @@ export default defineConfig({
   plugins: [
     pluginRootPageAsIndex(),
     pluginHotReloadContent(),
+    pluginPrettyHtml(),
     ...(isProd ? [pluginImageCompress({ use: 'avif', quality: 75 })] : []),
   ],
   tools: {
     htmlPlugin: (config) => {
-      config.minify = (html) =>
+      config.minify = (html: string) =>
         !shouldMinifyHTML
           ? html
           : minify(html, {
               collapseWhitespace: true,
+              conservativeCollapse: true,
+              collapseBooleanAttributes: true,
               removeComments: true,
-              decodeEntities: true,
-              minifyCSS: true,
-              minifyJS: true,
-              minifyURLs: true,
               removeRedundantAttributes: true,
               removeScriptTypeAttributes: true,
               removeStyleLinkTypeAttributes: true,
               useShortDoctype: true,
+              decodeEntities: true,
+              minifyCSS: true,
+              minifyJS: true,
+              processScripts: ['application/ld+json'],
+              sortAttributes: true,
+              sortClassName: true,
               continueOnParseError: true,
               customEventAttributes: [/^on[a-z]{3,}$/],
               removeAttributeQuotes: false,
@@ -253,11 +285,10 @@ export default defineConfig({
                 /\{%[\s\S]*?%\}/,
                 /\{#[\s\S]*?#\}/,
               ],
-              conservativeCollapse: true,
               collapseInlineTagWhitespace: false,
               removeEmptyAttributes: false,
+              removeEmptyElements: false,
             });
-
       return config;
     },
     rspack: {

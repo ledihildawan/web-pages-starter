@@ -343,13 +343,19 @@ sync-system-pages → clean:cache → fetch:rates → generate-active-locales --
 9. **generate-robots** — generates `public/robots.txt` from `SITE_URL`
 10. **generate-sw** — generates `public/sw.js` dynamically with locale-specific error page URLs from `SYSTEM_PAGE_SLUGS` (cache version v5)
 11. **build** — Rsbuild production bundle with:
-   - JS + CSS minification
-   - HTML minification (`html-minifier-terser`)
-   - `home.html` → `index.html` rename (`pluginRootPageAsIndex`)
-   - Image compression (AVIF, quality 75)
-   - CSS inlined into HTML; small JS inlined (<2048 bytes)
-   - Per-page code splitting with shared runtime chunk
-   - Content-hashed filenames for JS/CSS/images
+    - JS + CSS minification (Rspack)
+    - HTML minification (`html-minifier-terser` — collapse, sort, minify inline CSS/JS, minify JSON-LD)
+    - `home.html` → `index.html` rename (`pluginRootPageAsIndex`)
+    - Image compression (AVIF, quality 75)
+    - CSS inlined into HTML; small JS inlined (<2048 bytes)
+    - Per-page code splitting with shared runtime chunk
+    - Content-hashed filenames for JS/CSS/images
+
+   **Build flags:**
+   - `--pretty` — pretty-print HTML instead of minifying (for CMS template porting)
+   - `--debug` — disable JS/CSS minification
+
+12. **postbuild** — restores dev stub (`generate-active-locales` without `--prod`) so local dev/test environment stays functional
 
 ### Rsbuild configuration highlights
 
@@ -426,7 +432,8 @@ Recommended extensions are listed in `.vscode/extensions.json`. Key extensions:
 | `PORT` | Server port (default 8888) |
 | `HOST` | Server bind address (serve: `0.0.0.0`, preview: `127.0.0.1`) |
 | `BUILD_PREVIEW` | Set automatically by preview tool |
-| `MINIFY` / `MINIFY_HTML` | Disable minification (`"false"`) |
+| `MINIFY` | Disable JS/CSS minification (`"false"`) |
+| `PRETTY_HTML` | Pretty-print HTML output instead of minifying (`"true"`). Set automatically by `bun run build -- --pretty` |
 | `NODE_BINARY` / `RSBUILD_RUNTIME` | Runtime override for build process |
 | `NGROK_AUTHTOKEN` | Auth token for ngrok tunnel (preview tool) |
 
@@ -547,7 +554,9 @@ Run tests interactively via `bun run cli` → **Test** menu:
 | Command | What it does |
 | --- | --- |
 | `bun run dev` | Sync system pages, clean cache, fetch rates, generate i18n types, watch locales, start Rsbuild dev server |
-| `bun run build` | Sync system pages, clean cache, fetch rates, generate i18n types (--prod), generate sitemap, manifest, robots, service worker, production build |
+| `bun run build` | Production build: minified HTML + CSS/JS, `--prod` active locales, sitemap, manifest, robots, SW |
+| `bun run build -- --pretty` | Same as build but HTML is pretty-printed (for CMS template porting) |
+| `bun run build -- --debug` | Same as build but JS/CSS not minified (for debugging) |
 | `bun run preview` | Run production build (`BUILD_PREVIEW=true`) + serve via ngrok or cloudflared tunnel |
 | `bun run serve` | Serve the production build locally |
 | `bun run clean:cache` | Remove `node_modules/.cache`, `.cache`, `dist` |

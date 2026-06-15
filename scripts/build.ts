@@ -9,12 +9,16 @@ const args = process.argv.slice(2);
 
 const env: NodeJS.ProcessEnv = { ...process.env, NODE_ENV: 'production' };
 
-const mode = args.includes('--debug') ? 'debug (no minify)' : 'production';
+const mode = args.includes('--debug')
+  ? 'debug (no minify)'
+  : args.includes('--pretty')
+    ? 'production (pretty HTML)'
+    : 'production';
 if (args.includes('--debug')) {
   env.MINIFY = 'false';
 }
-if (args.includes('--no-html-minify')) {
-  env.MINIFY_HTML = 'false';
+if (args.includes('--pretty')) {
+  env.PRETTY_HTML = 'true';
 }
 
 logBox('Build Process', { Mode: mode });
