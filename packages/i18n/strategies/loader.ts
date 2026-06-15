@@ -6,25 +6,37 @@ export type StrategyBundle = {
   ordinal: Record<string, (num: number) => string>;
 };
 
+const strategyCache = new Map<string, StrategyBundle>();
+
 export async function loadStrategies(lang: string): Promise<StrategyBundle> {
+  const cached = strategyCache.get(lang);
+  if (cached) return cached;
+
+  let bundle: StrategyBundle;
   switch (lang) {
     case 'id': {
       const m = await import('./id');
-      return { cardinal: { id: m.cardinal }, ordinal: { id: m.ordinal } };
+      bundle = { cardinal: { id: m.cardinal }, ordinal: { id: m.ordinal } };
+      break;
     }
     case 'ja': {
       const m = await import('./ja');
-      return { cardinal: { ja: m.cardinal }, ordinal: { ja: m.ordinal } };
+      bundle = { cardinal: { ja: m.cardinal }, ordinal: { ja: m.ordinal } };
+      break;
     }
     case 'zh': {
       const m = await import('./zh');
-      return { cardinal: { zh: m.cardinal }, ordinal: {} };
+      bundle = { cardinal: { zh: m.cardinal }, ordinal: {} };
+      break;
     }
     case 'ar': {
       const m = await import('./ar');
-      return { cardinal: { ar: m.cardinal }, ordinal: { ar: m.ordinal } };
+      bundle = { cardinal: { ar: m.cardinal }, ordinal: { ar: m.ordinal } };
+      break;
     }
     default:
-      return { cardinal: {}, ordinal: {} };
+      bundle = { cardinal: {}, ordinal: {} };
   }
+  strategyCache.set(lang, bundle);
+  return bundle;
 }

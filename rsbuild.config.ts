@@ -148,14 +148,14 @@ const scanPages = (
   return results;
 };
 
-const getPageNames = (): string[] =>
-  scanPages(resolveRoot('pages'), '').map((p) => p.name);
+const scannedPages = scanPages(resolveRoot('pages'), '');
+
+const getPageNames = (): string[] => scannedPages.map((p) => p.name);
 
 const getEntries = (): Record<string, string | string[]> => {
-  const pages = scanPages(resolveRoot('pages'), '');
   const entries: Record<string, string | string[]> = {};
 
-  for (const page of pages) {
+  for (const page of scannedPages) {
     const tsFile = path.join(page.dir, 'index.ts');
     const cssFile = path.join(page.dir, 'index.css');
     if (fs.existsSync(tsFile)) {

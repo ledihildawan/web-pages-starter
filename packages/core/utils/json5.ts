@@ -19,10 +19,19 @@ export const collectKeys = (obj: unknown, prefix = ''): string[] => {
     });
 };
 
+const json5Cache = new Map<string, { mtime: number; data: JsonData }>();
+
 export const readJSON5 = (filePath: string): JsonData => {
   try {
     if (!fs.existsSync(filePath)) return {};
-    return JSON5.parse(fs.readFileSync(filePath, 'utf-8')) as JsonData;
+    const stat = fs.statSync(filePath);
+
+    const cached = json5Cache.get(filePath);
+    if (cached && cached.mtime === stat.mtimeMs) return cached.data;
+
+    const data = JSON5.parse(fs.readFileSync(filePath, 'utf-8')) as JsonData;
+    json5Cache.set(filePath, { mtime: stat.mtimeMs, data });
+    return data;
   } catch (err) {
     console.warn(`[JSON5 Read Error]: ${filePath}`, err);
     return {};
