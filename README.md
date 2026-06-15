@@ -448,16 +448,16 @@ Recommended extensions are listed in `.vscode/extensions.json`. Key extensions:
 
 ### Error pages
 
-Six error pages using shared Nunjucks partials (`error-page.njk` and `offline-page.njk`). Each has its own i18n namespace and locale files across all 136 locales. Error page URLs are locale-dependent — the URL slug for each error page is defined per-locale in `SYSTEM_PAGE_SLUGS` (`configs/pages.ts`).
+Six error pages using shared Nunjucks partials (`shared/error/error-page.njk` and `shared/error/offline-page.njk`). Each has its own i18n namespace and locale files across all 136 locales. Error page URLs are locale-dependent — the URL slug for each error page is defined per-locale in `SYSTEM_PAGE_SLUGS` (`configs/pages.ts`).
 
 | Page | URL | Status | Icon | Gradient | Pattern |
 | --- | --- | --- | --- | --- | --- |
-| `not-found` | `/not-found` | 404 | search | violet/fuchsia | `{% set %}` + `{% include "error-page.njk" %}` |
+| `not-found` | `/not-found` | 404 | search | violet/fuchsia | `{% set %}` + `{% include "shared/error/error-page.njk" %}` |
 | `unauthorized` | `/unauthorized` | 401 | key | yellow/amber | Same |
 | `forbidden` | `/forbidden` | 403 | shield | amber/orange | Same |
 | `server-error` | `/server-error` | 500 | lightning | rose/red | Same |
 | `maintenance` | `/maintenance` | 503 | clock | sky/blue | Same |
-| `offline` | `/offline` | — | cloud | slate/zinc | `{% include "offline-page.njk" %}` (reload button) |
+| `offline` | `/offline` | — | cloud | slate/zinc | `{% include "shared/error/offline-page.njk" %}` (reload button) |
 
 Error pages are excluded from sitemap (`generate-sitemap`), disallowed in `robots.txt`, and have `noindex, nofollow` via `page-meta.njk`. The service worker precaches all six and serves `offline.html` when the network is unavailable. Dev server `historyApiFallback` redirects unknown routes to `/not-found.html`.
 
@@ -623,7 +623,7 @@ Most tools live in `scripts/`; i18n-specific CLI tools live in `packages/i18n/cl
 | Layer | Technology | Version |
 | --- | --- | --- |
 | Runtime | Bun | `>= 1.3.14` |
-| Bundler | Rsbuild | `^2.0.13` |
+| Bundler | Rsbuild | `^2.0.14` |
 | Language | TypeScript | `^6.0.3` |
 | Templates | Nunjucks | `^3.2.4` |
 | Reactive UI | Alpine.js | `^3.15.12` |
@@ -633,6 +633,7 @@ Most tools live in `scripts/`; i18n-specific CLI tools live in `packages/i18n/cl
 | Lint/Format | Biome | `^2.5.0` |
 | Testing | Rstest | `^0.10.4` |
 | HTML minifier | html-minifier-terser | `^7.2.0` |
+| HTML beautifier | js-beautify | `^1.15.4` |
 | Romanization | limax | `^4.2.3` |
 
 ## Browser Support
