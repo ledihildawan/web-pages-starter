@@ -1,9 +1,9 @@
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
+import { isSystemPageId, isSystemPageSlug } from '@page-engine';
 import inquirer from 'inquirer';
 import { i18nConfig } from '../configs/i18n';
-import { isSystemPageId, isSystemPageSlug } from '../configs/pages';
 import { PATHS } from '../configs/paths';
 import { log } from './lib/logger';
 

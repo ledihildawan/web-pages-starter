@@ -1,10 +1,10 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { serveStatic } from '@hono/node-server/serve-static';
+import { getSystemPageSlug } from '@page-engine';
 import { Hono } from 'hono';
 import { compress } from 'hono/compress';
 import { i18nConfig } from '../../configs/i18n';
-import { getSystemPageSlug } from '../../configs/pages';
 import { log } from './logger';
 
 const STATIC_ASSET_RE =

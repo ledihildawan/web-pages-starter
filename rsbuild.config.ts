@@ -5,13 +5,17 @@ import { pluginImageCompress } from '@rsbuild/plugin-image-compress';
 import { minify } from 'html-minifier-terser';
 import { html as beautifyHtml } from 'js-beautify';
 import { i18nConfig } from './configs/i18n';
-import { getRootPageSlug, getSystemPageSlug } from './configs/pages';
 import { PATHS } from './configs/paths';
 import {
   getActiveLocaleCodes,
   LOCALE_STORAGE_KEY,
 } from './packages/i18n/index';
 import { createTemplateParams } from './packages/i18n/template/template';
+import {
+  getRootPageSlug,
+  getSystemPageSlug,
+  scanPages,
+} from './packages/page-engine/index';
 import { generateDynamicEntries } from './scripts/generate-dynamic-routes';
 
 const ROOT = process.cwd();
@@ -112,41 +116,6 @@ const pluginPrettyHtml = (): RsbuildPlugin => ({
     });
   },
 });
-
-const isGroup = (name: string): boolean =>
-  name.startsWith('(') && name.endsWith(')');
-
-const isSlugDir = (name: string): boolean =>
-  name.startsWith('[') && name.endsWith(']');
-
-const scanPages = (
-  dir: string,
-  basePath: string,
-): Array<{ name: string; dir: string }> => {
-  const results: Array<{ name: string; dir: string }> = [];
-  if (!fs.existsSync(dir)) return results;
-
-  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (!entry.isDirectory()) continue;
-    if (entry.name.startsWith('_')) continue;
-    if (isSlugDir(entry.name)) continue;
-
-    const fullPath = path.join(dir, entry.name);
-    const hasIndex = fs.existsSync(path.join(fullPath, 'index.njk'));
-
-    if (isGroup(entry.name)) {
-      results.push(...scanPages(fullPath, basePath));
-    } else if (hasIndex) {
-      const name = basePath ? `${basePath}/${entry.name}` : entry.name;
-      results.push({ name, dir: fullPath });
-      results.push(...scanPages(fullPath, name));
-    } else {
-      const name = basePath ? `${basePath}/${entry.name}` : entry.name;
-      results.push(...scanPages(fullPath, name));
-    }
-  }
-  return results;
-};
 
 const scannedPages = scanPages(resolveRoot('pages'), '');
 

@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
-import { getSystemPageSlug, SYSTEM_PAGE_IDS } from '@config/pages';
 import { PATHS } from '@config/paths';
+import { getSystemPageSlug, SYSTEM_PAGE_IDS } from '@page-engine';
 import { log, logBox } from '@scripts/lib/logger';
 import { wrapMainError } from '@scripts/lib/signal-handler';
 

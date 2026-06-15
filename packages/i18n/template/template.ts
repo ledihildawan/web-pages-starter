@@ -1,12 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '../../../configs/i18n';
-import { getRootPageSlug } from '../../../configs/pages';
 import { PATHS } from '../../../configs/paths';
 import type { I18nTranslationKeys } from '../../../generated/i18n';
 import { getValueByPath } from '../../../utils/common';
 import { loadGlobalData, readJSON5 } from '../../../utils/json5';
 import type { DateValue, JsonData } from '../../../utils/types';
+import { getRootPageSlug } from '../../page-engine/index';
 import {
   convertCurrency,
   convertLocalPrice,

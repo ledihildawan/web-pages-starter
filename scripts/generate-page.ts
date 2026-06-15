@@ -1,12 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { getActiveLocaleCodes } from '@i18n/engine/active-locales';
-import { i18nConfig } from '../configs/i18n';
 import {
   isSystemPageSlug,
   SYSTEM_PAGE_IDS,
   type SystemPageId,
-} from '../configs/pages';
+} from '@page-engine';
+import { i18nConfig } from '../configs/i18n';
 import { PATHS } from '../configs/paths';
 import { log } from './lib/logger';
 import { romanize } from './lib/romanize';

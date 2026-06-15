@@ -1,7 +1,7 @@
 import path from 'node:path';
 import '../configs/env';
+import { getErrorPageSlugs } from '@page-engine';
 import { i18nConfig } from '../configs/i18n';
-import { getErrorPageSlugs } from '../configs/pages';
 import { PATHS } from '../configs/paths';
 import { logBox } from './lib/logger';
 import { SITE_URL } from './lib/site-url';

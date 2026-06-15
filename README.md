@@ -78,7 +78,7 @@ Requires [Bun](https://bun.sh) `>= 1.3.14`.
 
 File-system based, zero-config routing. Drop a folder under `pages/` and it becomes a route. The root page (`home` by default) is output as `index.html` via the `pluginRootPageAsIndex` Rsbuild plugin.
 
-`ROOT_PAGE` lives in `configs/pages.ts`. System pages (root + 6 error pages) have locale-dependent folder names driven by `SYSTEM_PAGE_SLUGS` — `page_id` (from `index.json5`) is the stable identifier, decoupled from the folder name. When the default locale changes, `sync-system-pages` renames ALL system page folders to the new locale's slugs. Locale files stay keyed by `page_id` (`home.json`, `not-found.json`, etc.) and are never renamed.
+`ROOT_PAGE` lives in `packages/page-engine/system-pages.ts`. System pages (root + 6 error pages) have locale-dependent folder names driven by `SYSTEM_PAGE_SLUGS` — `page_id` (from `index.json5`) is the stable identifier, decoupled from the folder name. When the default locale changes, `sync-system-pages` renames ALL system page folders to the new locale's slugs. Locale files stay keyed by `page_id` (`home.json`, `not-found.json`, etc.) and are never renamed.
 
 ### Pages
 
@@ -368,7 +368,7 @@ sync-system-pages → clean:cache → fetch:rates → generate-active-locales --
 | `BASE_PATH` support | `source.define` injects `import.meta.env.BASE_PATH` for runtime JS; template param `base_path` for Nunjucks |
 | Output paths | `dist/assets/{scripts,styles,images,fonts}` — organized by asset type |
 | Static copy | `output.copy` moves `public/` static files (favicon, sw.js, manifest, robots, i18n bundles) to `dist/` |
-| Path aliases | `@i18n` / `@i18n/*` → `packages/i18n/`, `@utils/*` → `utils/`, `@config/*` → `configs/`, `@scripts/*` → `scripts/`, `@generated/*` → `generated/`. Rsbuild resolves `@generated`, `@i18n` at bundle time; CLI scripts (run via Bun) resolve all aliases through `tsconfig.json`. Source files in the rsbuild config chain use relative paths for jiti compatibility |
+| Path aliases | `@i18n` / `@i18n/*` → `packages/i18n/`, `@page-engine` / `@page-engine/*` → `packages/page-engine/`, `@utils/*` → `utils/`, `@config/*` → `configs/`, `@scripts/*` → `scripts/`, `@generated/*` → `generated/`. Rsbuild resolves `@generated`, `@i18n` at bundle time; CLI scripts (run via Bun) resolve all aliases through `tsconfig.json`. Source files in the rsbuild config chain use relative paths for jiti compatibility |
 | Nunjucks loader | `simple-nunjucks-loader` with search paths: `pages/`, `layouts/`, `.` (root); `assetsPaths: assets/` |
 | Pre-entries | `bootstrap.ts` + `styles/main.css` loaded before every page |
 
@@ -402,7 +402,7 @@ Ideal for Lighthouse audits, mobile testing, or sharing WIP via a public URL.
 | --- | --- |
 | `configs/i18n.ts` | Default locale + active locales |
 | `configs/fonts.ts` | Font stack — CSS import + family config (`sans`/`serif`/`mono` + custom keys) |
-| `configs/pages.ts` | `ROOT_PAGE`, `SYSTEM_PAGE_IDS` (7 system pages), `SYSTEM_PAGE_SLUGS` (locale-dependent URL slugs), slug helpers (`getSystemPageSlug`, `getRootPageSlug`, `getErrorPageSlugs`, `isSystemPageId`, `isSystemPageSlug`) |
+| `packages/page-engine/system-pages.ts` | `ROOT_PAGE`, `SYSTEM_PAGE_IDS` (7 system pages), `SYSTEM_PAGE_SLUGS` (locale-dependent URL slugs), slug helpers (`getSystemPageSlug`, `getRootPageSlug`, `getErrorPageSlugs`, `isSystemPageId`, `isSystemPageSlug`) |
 | `configs/paths.ts` | Filesystem path constants |
 | `data/global.json5` | Site name, SEO metadata, social links, DNS/prefetch |
 | `data/menu.json5` | Navigation structure (header menu with children) |
@@ -448,7 +448,7 @@ Recommended extensions are listed in `.vscode/extensions.json`. Key extensions:
 
 ### Error pages
 
-Six error pages using shared Nunjucks partials (`shared/error/error-page.njk` and `shared/error/offline-page.njk`). Each has its own i18n namespace and locale files across all 136 locales. Error page URLs are locale-dependent — the URL slug for each error page is defined per-locale in `SYSTEM_PAGE_SLUGS` (`configs/pages.ts`).
+Six error pages using shared Nunjucks partials (`shared/error/error-page.njk` and `shared/error/offline-page.njk`). Each has its own i18n namespace and locale files across all 136 locales. Error page URLs are locale-dependent — the URL slug for each error page is defined per-locale in `SYSTEM_PAGE_SLUGS` (`packages/page-engine/system-pages.ts`).
 
 | Page | URL | Status | Icon | Gradient | Pattern |
 | --- | --- | --- | --- | --- | --- |

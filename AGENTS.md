@@ -80,7 +80,7 @@ pages/
 
 - `configs/i18n.ts` — default locale + active locales (`defineI18n`)
 - `configs/fonts.ts` — font CSS import + font stack (`defineFontStack`, `sans`/`serif`/`mono` + custom keys)
-- `configs/pages.ts` — root page, system page IDs, locale-dependent slugs
+- `packages/page-engine/system-pages.ts` — root page, system page IDs, locale-dependent slugs
 - `configs/paths.ts` — filesystem path constants
 
 ## Generated Files
@@ -100,7 +100,7 @@ Biome is configured to skip `generated/**` (formatter + linter disabled).
 - **File mods**: use `bun` or script in `temp/` — avoid PowerShell
 - **Never add dependency** without user approval
 - **After changing `i18nConfig`**: re-run `bun run dev` or `bun run build` to regenerate active locale data and exchange rates
-- **Adding a locale to `LOCALES`**: also add entries to `SYSTEM_PAGE_SLUGS` in `configs/pages.ts` (getSystemPageSlug warns in dev if missing)
+- **Adding a locale to `LOCALES`**: also add entries to `SYSTEM_PAGE_SLUGS` in `packages/page-engine/system-pages.ts` (getSystemPageSlug warns in dev if missing)
 - Husky pre-commit: Biome → typecheck → test (all must pass)
 
 ## CI Fixes Flow

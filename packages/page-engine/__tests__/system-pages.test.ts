@@ -8,7 +8,7 @@ import {
   ROOT_PAGE,
   SYSTEM_PAGE_IDS,
   SYSTEM_PAGE_SLUGS,
-} from '../../configs/pages';
+} from '../system-pages';
 
 describe('pages config', () => {
   describe('ROOT_PAGE', () => {
