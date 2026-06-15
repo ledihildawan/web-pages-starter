@@ -1,4 +1,4 @@
-import { isProd } from '@constants/env';
+import { IS_PROD } from '@constants/env';
 
 const deferTask = (fn: () => void, timeout = 2000): void => {
   if ('requestIdleCallback' in window) {
@@ -9,7 +9,7 @@ const deferTask = (fn: () => void, timeout = 2000): void => {
 };
 
 const registerServiceWorker = (): void => {
-  if (!isProd || !('serviceWorker' in navigator)) return;
+  if (!IS_PROD || !('serviceWorker' in navigator)) return;
 
   navigator.serviceWorker
     .register(`${import.meta.env.BASE_PATH}sw.js`)

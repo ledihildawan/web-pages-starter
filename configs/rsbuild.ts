@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
-import { isProd } from '@constants/env';
+import { IS_PROD } from '@constants/env';
 import { PATHS } from '@constants/paths';
 import { getActiveLocaleCodes, LOCALE_STORAGE_KEY } from '@i18n';
 import { getRootPageSlug, getSystemPageSlug, scanPages } from '@page-engine';
@@ -15,7 +15,7 @@ import { html as beautifyHtml } from 'js-beautify';
 const ROOT = process.cwd();
 const PORT = Number(process.env.PORT) || 8888;
 const BASE_PATH = process.env.BASE_PATH || '/';
-const isBuild = isProd || process.env.BUILD_PREVIEW === 'true';
+const isBuild = IS_PROD || process.env.BUILD_PREVIEW === 'true';
 const shouldMinify = isBuild && process.env.MINIFY !== 'false';
 const isPrettyHtml = process.env.PRETTY_HTML === 'true';
 const shouldMinifyHTML = shouldMinify && !isPrettyHtml;

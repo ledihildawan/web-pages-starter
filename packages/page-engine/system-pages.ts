@@ -1,4 +1,4 @@
-import { isProd } from '@constants/env';
+import { IS_PROD } from '@constants/env';
 
 export const ROOT_PAGE = 'home';
 
@@ -991,7 +991,7 @@ export function getSystemPageSlug(pageId: string, locale: string): string {
   const slug = entry[locale];
   if (!slug) {
     const key = `${pageId}:${locale}`;
-    if (!isProd && !warnedMissing.has(key)) {
+    if (!IS_PROD && !warnedMissing.has(key)) {
       warnedMissing.add(key);
       console.warn(
         `[pages] No system page slug for "${pageId}" in locale "${locale}". Add an entry to SYSTEM_PAGE_SLUGS in packages/page-engine/system-pages.ts. Falling back to en-US.`,
