@@ -1,5 +1,5 @@
 import { describe, expect, test } from '@rstest/core';
-import { romanize } from '../../scripts/shared/romanize';
+import { romanize } from '../romanize';
 
 describe('romanize', () => {
   test('romanizes Chinese to pinyin with tone numbers', () => {

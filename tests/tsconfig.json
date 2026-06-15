@@ -1,5 +1,10 @@
 {
   "extends": "../tsconfig.json",
-  "include": ["./**/*"],
+  "include": [
+    "./**/*",
+    "../packages/i18n/__tests__/**/*",
+    "../configs/__tests__/**/*",
+    "../scripts/shared/__tests__/**/*"
+  ],
   "exclude": []
 }

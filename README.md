@@ -525,11 +525,18 @@ bun run test -- --coverage --coverage.include "packages/i18n/**"  # coverage for
 ```
 tests/
 ├── tsconfig.json            # test-specific TS config
-├── dom.test.ts              # DOM rendering sanity check
-└── i18n/
-    ├── helpers.test.ts      # locale lookup, fallback, direction, currency
-    ├── formatters.test.ts   # formatNumber, formatCurrency, formatDate, formatBytes, cardinal, ordinal
-    └── home-data.test.ts    # home page structure + locale key parity (en-US ↔ id-ID)
+└── dom.test.ts              # DOM rendering sanity check
+
+packages/i18n/__tests__/
+├── helpers.test.ts          # locale lookup, fallback, direction, currency
+├── formatters.test.ts       # formatNumber, formatCurrency, formatDate, formatBytes, cardinal, ordinal
+└── home-data.test.ts        # home page structure + locale key parity (en-US ↔ id-ID)
+
+configs/__tests__/
+└── pages.test.ts            # ROOT_PAGE, SYSTEM_PAGE_SLUGS, slug helpers
+
+scripts/shared/__tests__/
+└── romanize.test.ts         # limax romanization
 ```
 
 ### Coverage

@@ -29,8 +29,10 @@ Postbuild automatically restores dev stub (`generated/active-locales-data.ts` wi
 
 ## Testing
 
+Tests are colocated with source in `__tests__/` directories:
+
 ```bash
-bun run test              # all tests
+bun run test              # all tests (auto-discovers __tests__/**/*.test.ts)
 bun run test -- --watch   # watch mode
 bunx biome ci             # lint check (no write)
 bun run typecheck         # tsc --noEmit

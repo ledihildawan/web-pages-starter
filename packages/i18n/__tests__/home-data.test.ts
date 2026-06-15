@@ -3,7 +3,7 @@ import { join } from 'node:path';
 import { describe, expect, test } from '@rstest/core';
 import JSON5 from 'json5';
 
-const ROOT = join(__dirname, '../..');
+const ROOT = join(__dirname, '../../..');
 
 const REQUIRED_HERO_KEYS = [
   'hero.badge',
