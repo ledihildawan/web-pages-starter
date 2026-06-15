@@ -60,6 +60,22 @@ Shared locales are auto-detected by scanning templates for `i18n.t('namespace:..
 - Quick links: string-encoded `'/|home,/features|features'`
 - No inline `<style>` in templates — all CSS via `styles/main.css`
 
+## Page Routing Conventions
+
+```
+pages/
+  _components/     ← underscore prefix = NOT a page (skipped by scanner)
+  (marketing)/     ← parentheses = group folder (stripped from URL)
+    home/          ← /home
+    about/         ← /about
+  services/        ← nested folder = /services
+    web/           ← /services/web
+  blog/
+    [slug]/        ← dynamic page (generates from data.json5)
+      index.njk
+    data.json5     ← { items: [{ slug: "getting-started", title: "..." }] }
+```
+
 ## Config Files
 
 - `configs/i18n.ts` — default locale + active locales (`defineI18n`)

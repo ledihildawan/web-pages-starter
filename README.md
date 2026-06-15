@@ -55,7 +55,7 @@ Requires [Bun](https://bun.sh) `>= 1.3.14`.
 ├── assets/                # images, fonts, raw assets
 ├── bootstrap.ts           # app entry — store registration, initIntl, Alpine.start(), fonts, SW
 ├── scripts/               # build-time CLI scripts (build, generate-*, serve, cli)
-│   └── shared/            #   logger, signal-handler, hono-server, site-url, write-file, romanize
+│   └── lib/               #   logger, signal-handler, hono-server, site-url, write-file, romanize
 ├── packages/
 │   ├── core/              #   shared utilities (json5, common, types, microtask-queue) + type declarations
 │   └── i18n/              #   self-contained i18n package
@@ -70,8 +70,8 @@ Requires [Bun](https://bun.sh) `>= 1.3.14`.
 ├── public/                # static assets (favicon, generated sw.js/manifest/robots/sitemap)
 │   └── assets/i18n/       #   pre-compiled i18n JSON bundles (generated)
 ├── generated/             # auto-generated active-locales-data + exchange rates + i18n types (tracked in git; regenerated at build)
-├── tests/                 # unit tests (rstest)
-└── docs/                  # documentation
+├── tests/                 # general DOM sanity check (rstest)
+├── docs/                  # documentation
 ```
 
 ## Pages & Routing
@@ -361,7 +361,7 @@ sync-system-pages → clean:cache → fetch:rates → generate-active-locales --
 
 | Feature | Detail |
 | --- | --- |
-| Entry discovery | Auto-scans `pages/*/index.ts` |
+| Entry discovery | Recursive scan: `pages/**/index.ts` with `_` prefix (skip), `()` groups (strip from URL), `[slug]` (dynamic from data.json5) |
 | Root page as index | `pluginRootPageAsIndex` renames `home.html` → `index.html` post-build |
 | Clean URLs | Dev server `historyApiFallback` with per-page rewrites: `/pricing` → `pricing.html`, `/about` → `about.html`, etc. |
 | Hot reload | `pluginHotReloadContent` adds `compilation.contextDependencies` for `locales/`, `data/`, `pages/`, `shared/`, `layouts/` — Rspack rebuilds on any file change in these dirs |
@@ -522,9 +522,10 @@ bun run test -- --coverage --coverage.include "packages/i18n/**"  # coverage for
 
 ### Structure
 
+Tests are colocated with source in `__tests__/` directories:
+
 ```
 tests/
-├── tsconfig.json            # test-specific TS config
 └── dom.test.ts              # DOM rendering sanity check
 
 packages/i18n/__tests__/
@@ -535,7 +536,7 @@ packages/i18n/__tests__/
 configs/__tests__/
 └── pages.test.ts            # ROOT_PAGE, SYSTEM_PAGE_SLUGS, slug helpers
 
-scripts/shared/__tests__/
+scripts/lib/__tests__/
 └── romanize.test.ts         # limax romanization
 ```
 
@@ -593,16 +594,16 @@ Direct tool access:
 
 ## Tools
 
-Most tools live in `scripts/`; i18n-specific CLI tools live in `packages/i18n/cli/`. They share modules from `scripts/shared/`:
+Most tools live in `scripts/`; i18n-specific CLI tools live in `packages/i18n/cli/`. They share modules from `scripts/lib/`:
 
 | Module | Purpose |
 | --- | --- |
-| `shared/logger.ts` | Centralized `log.*()` and `logBox()` for formatted box output |
-| `shared/signal-handler.ts` | SIGINT handling, `wrapMainError()`, `handleExitPromptError()`, `createServer()` with EADDRINUSE protection |
-| `shared/hono-server.ts` | `createStaticApp()`, `loadHtmlCache()`, `getPageNames()` — shared Hono static server with cache headers |
-| `shared/site-url.ts` | `SITE_URL` constant from `process.env` |
-| `shared/write-file.ts` | `writeFilePath()` (mkdir + write) and `generatedHeader()` for auto-generated file headers |
-| `shared/romanize.ts` | `romanize()` — limax-based romanization for URL-safe slug generation from non-Latin page names |
+| `lib/logger.ts` | Centralized `log.*()` and `logBox()` for formatted box output |
+| `lib/signal-handler.ts` | SIGINT handling, `wrapMainError()`, `handleExitPromptError()`, `createServer()` with EADDRINUSE protection |
+| `lib/hono-server.ts` | `createStaticApp()`, `loadHtmlCache()`, `getPageNames()` — shared Hono static server with cache headers |
+| `lib/site-url.ts` | `SITE_URL` constant from `process.env` |
+| `lib/write-file.ts` | `writeFilePath()` (mkdir + write) and `generatedHeader()` for auto-generated file headers |
+| `lib/romanize.ts` | `romanize()` — limax-based romanization for URL-safe slug generation from non-Latin page names |
 
 | Tool | Shared imports | Purpose |
 | --- | --- | --- |
