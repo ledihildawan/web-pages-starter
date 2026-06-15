@@ -11,6 +11,10 @@ const args = process.argv.slice(2);
 
 const spawnEnv: NodeJS.ProcessEnv = { ...process.env, NODE_ENV: 'production' };
 
+for (const key of ['SITE_URL', 'BASE_PATH', 'PORT', 'HOST', 'MINIFY', 'PRETTY_HTML', 'BUILD_PREVIEW', 'FOR_PREVIEW']) {
+  delete spawnEnv[key];
+}
+
 const mode = args.includes('--debug')
   ? 'debug (no minify)'
   : args.includes('--pretty')
@@ -31,7 +35,27 @@ if (fs.existsSync(distPath)) {
   fs.rmSync(distPath, { recursive: true, force: true });
 }
 
-log.info('Bundling with Rsbuild...\n');
+const generators = [
+  'scripts/generate-sitemap.ts',
+  'scripts/generate-manifest.ts',
+  'scripts/generate-robots.ts',
+  'scripts/generate-sw.ts',
+];
+
+for (const gen of generators) {
+  const genPath = resolveRoot(gen);
+  const result = spawnSync('bun', [genPath], {
+    stdio: 'inherit',
+    env: spawnEnv,
+    cwd: process.cwd(),
+  });
+  if (result.status !== 0) {
+    log.error(`Error: ${path.basename(gen)} failed — exit code ${result.status}`);
+    process.exit(result.status || 1);
+  }
+}
+
+log.info('\nBundling with Rsbuild...\n');
 const rsbuildBin = path.resolve(process.cwd(), 'node_modules', '@rsbuild', 'core', 'bin', 'rsbuild.js');
 const runtimes = [process.env.RSBUILD_RUNTIME, process.env.NODE_BINARY, 'node', 'bun'].filter(Boolean) as string[];
 
