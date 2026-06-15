@@ -1,0 +1,63 @@
+{
+  "name": "@web-pages-starter/i18n",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./index.ts",
+      "default": "./index.ts"
+    },
+    "./config/define": {
+      "types": "./config/define.ts",
+      "default": "./config/define.ts"
+    },
+    "./config/types": {
+      "types": "./config/types.ts",
+      "default": "./config/types.ts"
+    },
+    "./engine/active-locales": {
+      "types": "./engine/active-locales.ts",
+      "default": "./engine/active-locales.ts"
+    },
+    "./engine/formatters": {
+      "types": "./engine/formatters.ts",
+      "default": "./engine/formatters.ts"
+    },
+    "./engine/helpers": {
+      "types": "./engine/helpers.ts",
+      "default": "./engine/helpers.ts"
+    },
+    "./runtime/runtime": {
+      "types": "./runtime/runtime.ts",
+      "default": "./runtime/runtime.ts"
+    },
+    "./runtime/store": {
+      "types": "./runtime/store.ts",
+      "default": "./runtime/store.ts"
+    },
+    "./template/template": {
+      "types": "./template/template.ts",
+      "default": "./template/template.ts"
+    },
+    "./fonts/fonts": {
+      "types": "./fonts/fonts.ts",
+      "default": "./fonts/fonts.ts"
+    },
+    "./strategies/loader": {
+      "types": "./strategies/loader.ts",
+      "default": "./strategies/loader.ts"
+    },
+    "./data/locales": {
+      "types": "./data/locales.ts",
+      "default": "./data/locales.ts"
+    },
+    "./utils": {
+      "types": "./utils.ts",
+      "default": "./utils.ts"
+    }
+  }
+}
