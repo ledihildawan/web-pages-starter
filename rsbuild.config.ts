@@ -12,6 +12,7 @@ import {
   LOCALE_STORAGE_KEY,
 } from './packages/i18n/index';
 import { createTemplateParams } from './packages/i18n/template/template';
+import { generateDynamicEntries } from './scripts/generate-dynamic-routes';
 
 const ROOT = process.cwd();
 const PORT = Number(process.env.PORT) || 8888;
@@ -112,31 +113,62 @@ const pluginPrettyHtml = (): RsbuildPlugin => ({
   },
 });
 
-const getPageNames = (): string[] => {
-  const dir = resolveRoot('pages');
-  if (!fs.existsSync(dir)) return [];
-  return fs.readdirSync(dir).filter((folder) => {
-    const stat = fs.statSync(path.join(dir, folder));
-    return (
-      stat.isDirectory() && fs.existsSync(path.join(dir, folder, 'index.njk'))
-    );
-  });
-};
+const isGroup = (name: string): boolean =>
+  name.startsWith('(') && name.endsWith(')');
 
-const getEntries = (): Record<string, string | string[]> => {
-  const dir = resolveRoot('pages');
-  const entries: Record<string, string | string[]> = {};
+const isSlugDir = (name: string): boolean =>
+  name.startsWith('[') && name.endsWith(']');
 
-  if (!fs.existsSync(dir)) return entries;
+const scanPages = (
+  dir: string,
+  basePath: string,
+): Array<{ name: string; dir: string }> => {
+  const results: Array<{ name: string; dir: string }> = [];
+  if (!fs.existsSync(dir)) return results;
 
-  for (const folder of fs.readdirSync(dir)) {
-    const tsFile = path.join(dir, folder, 'index.ts');
-    const cssFile = path.join(dir, folder, 'index.css');
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue;
+    if (entry.name.startsWith('_')) continue;
+    if (isSlugDir(entry.name)) continue;
 
-    if (fs.existsSync(tsFile)) {
-      entries[folder] = fs.existsSync(cssFile) ? [tsFile, cssFile] : tsFile;
+    const fullPath = path.join(dir, entry.name);
+    const hasIndex = fs.existsSync(path.join(fullPath, 'index.njk'));
+
+    if (isGroup(entry.name)) {
+      results.push(...scanPages(fullPath, basePath));
+    } else if (hasIndex) {
+      const name = basePath ? `${basePath}/${entry.name}` : entry.name;
+      results.push({ name, dir: fullPath });
     }
   }
+  return results;
+};
+
+const getPageNames = (): string[] =>
+  scanPages(resolveRoot('pages'), '').map((p) => p.name);
+
+const getEntries = (): Record<string, string | string[]> => {
+  const pages = scanPages(resolveRoot('pages'), '');
+  const entries: Record<string, string | string[]> = {};
+
+  for (const page of pages) {
+    const tsFile = path.join(page.dir, 'index.ts');
+    const cssFile = path.join(page.dir, 'index.css');
+    if (fs.existsSync(tsFile)) {
+      entries[page.name] = fs.existsSync(cssFile) ? [tsFile, cssFile] : tsFile;
+    }
+  }
+
+  for (const dyn of generateDynamicEntries()) {
+    const tsFile = path.join(dyn.templateDir, 'index.ts');
+    const cssFile = path.join(dyn.templateDir, 'index.css');
+    if (fs.existsSync(tsFile)) {
+      entries[dyn.entryKey] = fs.existsSync(cssFile)
+        ? [tsFile, cssFile]
+        : tsFile;
+    }
+  }
+
   return entries;
 };
 
@@ -145,6 +177,26 @@ const getGlobalEntries = (): string[] => {
     (p) => fs.existsSync(p),
   );
 };
+
+const dynamicEntries = generateDynamicEntries();
+const dynamicRouteMap = new Map(
+  dynamicEntries.map((e) => [e.entryKey, { slug: e.slug, data: e.data }]),
+);
+
+const pluginDynamicRoutes = (): RsbuildPlugin => ({
+  name: 'plugin-dynamic-routes',
+  setup(api) {
+    api.modifyRsbuildConfig((config) => {
+      if (!config.source) config.source = {};
+      config.source.define = {
+        ...(config.source.define ?? {}),
+        'import.meta.env.__DYNAMIC_ROUTES__': JSON.stringify(
+          Array.from(dynamicRouteMap.entries()),
+        ),
+      };
+    });
+  },
+});
 
 export default defineConfig({
   server: {
@@ -158,10 +210,13 @@ export default defineConfig({
         },
         ...getPageNames()
           .filter((p) => p !== getRootPageSlug(i18nConfig.defaultLocale))
-          .map((p) => ({
-            from: new RegExp(`^/${p}$`),
-            to: `/${p}.html`,
-          })),
+          .map((p) => {
+            const escaped = p.replace(/\//g, '\\/');
+            return {
+              from: new RegExp(`^/${escaped}$`),
+              to: `/${p}.html`,
+            };
+          }),
         {
           from: /^\/(?!locales\/|assets\/|fonts\/|images\/|favicon\.svg$|favicon\.ico$|manifest\.json$|sw\.js$|robots\.txt$|sitemap\.xml$|.*\.[a-z0-9]+$)/,
           to: `/${getSystemPageSlug('not-found', i18nConfig.defaultLocale)}.html`,
@@ -254,6 +309,7 @@ export default defineConfig({
     pluginRootPageAsIndex(),
     pluginHotReloadContent(),
     pluginPrettyHtml(),
+    pluginDynamicRoutes(),
     ...(isProd ? [pluginImageCompress({ use: 'avif', quality: 75 })] : []),
   ],
   tools: {

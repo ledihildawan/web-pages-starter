@@ -20,23 +20,35 @@ const OUTPUT_DIST = path.join(PATHS.ROOT, 'dist', 'sitemap.xml');
 const DEFAULT_PRIORITY = process.env.SITEMAP_DEFAULT_PRIORITY || '0.7';
 const DEFAULT_CHANGEFREQ = process.env.SITEMAP_DEFAULT_CHANGEFREQ || 'weekly';
 
-const getPages = () => {
-  if (!fs.existsSync(PAGES_DIR)) {
-    return [];
+const scanPageDirs = (
+  dir: string,
+  basePath: string,
+  excluded: string[],
+): string[] => {
+  const results: string[] = [];
+  if (!fs.existsSync(dir)) return results;
+
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue;
+    if (entry.name.startsWith('.') || entry.name.startsWith('_')) continue;
+    if (excluded.includes(entry.name)) continue;
+
+    const fullPath = path.join(dir, entry.name);
+    const hasIndex = fs.existsSync(path.join(fullPath, 'index.njk'));
+
+    if (entry.name.startsWith('(') && entry.name.endsWith(')')) {
+      results.push(...scanPageDirs(fullPath, basePath, excluded));
+    } else if (hasIndex) {
+      const name = basePath ? `${basePath}/${entry.name}` : entry.name;
+      results.push(name);
+    }
   }
+  return results;
+};
 
+const getPages = () => {
   const EXCLUDED = getErrorPageSlugs(i18nConfig.defaultLocale);
-
-  const entries = fs.readdirSync(PAGES_DIR, { withFileTypes: true });
-  return entries
-    .filter(
-      (entry) =>
-        entry.isDirectory() &&
-        !entry.name.startsWith('.') &&
-        !EXCLUDED.includes(entry.name),
-    )
-    .map((entry) => entry.name)
-    .sort();
+  return scanPageDirs(PAGES_DIR, '', EXCLUDED).sort();
 };
 
 const generateSitemap = () => {

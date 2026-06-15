@@ -1,4 +1,4 @@
-import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { serveStatic } from '@hono/node-server/serve-static';
 import { Hono } from 'hono';
@@ -26,25 +26,38 @@ const getCacheControl = (urlPath: string): string => {
   return 'public, max-age=0, must-revalidate';
 };
 
+function scanHtmlFiles(
+  dir: string,
+  basePath: string,
+): Array<{ key: string; content: string }> {
+  const results: Array<{ key: string; content: string }> = [];
+  if (!existsSync(dir)) return results;
+
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      const childBase = basePath ? `${basePath}/${entry.name}` : entry.name;
+      results.push(...scanHtmlFiles(fullPath, childBase));
+    } else if (entry.name.endsWith('.html')) {
+      const key = basePath
+        ? `${basePath}/${entry.name.replace(/\.html$/, '')}`
+        : entry.name.replace(/\.html$/, '');
+      results.push({ key, content: readFileSync(fullPath, 'utf8') });
+    }
+  }
+  return results;
+}
+
 export function loadHtmlCache(distDir: string): Map<string, string> {
   const cache = new Map<string, string>();
-  if (!existsSync(distDir)) return cache;
-
-  for (const f of readdirSync(distDir)) {
-    if (!f.endsWith('.html')) continue;
-    const fullPath = path.join(distDir, f);
-    if (!statSync(fullPath).isFile()) continue;
-    cache.set(f.replace(/\.html$/, ''), readFileSync(fullPath, 'utf8'));
+  for (const { key, content } of scanHtmlFiles(distDir, '')) {
+    cache.set(key, content);
   }
-
   return cache;
 }
 
 export function getPageNames(distDir: string): string[] {
-  if (!existsSync(distDir)) return [];
-  return readdirSync(distDir)
-    .filter((f) => f.endsWith('.html'))
-    .map((f) => f.replace(/\.html$/, ''));
+  return scanHtmlFiles(distDir, '').map((f) => f.key);
 }
 
 export function createStaticApp(
@@ -88,9 +101,8 @@ export function createStaticApp(
       if (home) return c.html(home);
       return c.notFound();
     }
-    const segments = reqPath.replace(/^\/+|\/+$/g, '').split('/');
-    const first = segments[0];
-    if (first && cache.has(first)) return c.html(cache.get(first) as string);
+    const cleanPath = reqPath.replace(/^\/+|\/+$/g, '');
+    if (cache.has(cleanPath)) return c.html(cache.get(cleanPath) as string);
     const notFoundSlug = getSystemPageSlug(
       'not-found',
       i18nConfig.defaultLocale,
