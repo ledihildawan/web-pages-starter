@@ -6,6 +6,7 @@ import { PATHS } from '../../../configs/paths';
 import type { I18nTranslationKeys } from '../../../generated/i18n';
 import { getValueByPath } from '../../core/utils/common';
 import { loadGlobalData, readJSON5 } from '../../core/utils/json5';
+import type { DateValue, JsonData } from '../../core/utils/types';
 import {
   convertCurrency,
   convertLocalPrice,
@@ -39,9 +40,7 @@ import {
 } from '..';
 import type {
   CardinalOptions,
-  DateValue,
   I18nItem,
-  JsonData,
   RegionalPrice,
   RelativeTimeOptions,
   TemplateFormatOptions,

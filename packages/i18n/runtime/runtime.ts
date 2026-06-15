@@ -8,6 +8,7 @@ import {
 } from '../../../generated/exchange-rates';
 import type { I18nTranslationKeys } from '../../../generated/i18n';
 import { scheduleTask } from '../../core/utils/microtask-queue';
+import type { DateTimePreset } from '../../core/utils/types';
 import {
   formatAbbreviated,
   formatBytes,
@@ -36,7 +37,6 @@ import {
   singular,
   toNativeDigits,
 } from '..';
-import type { DateTimePreset } from '../config/types';
 import type { LocaleCode } from '../data/locales';
 import { loadStrategies } from '../strategies/loader';
 
