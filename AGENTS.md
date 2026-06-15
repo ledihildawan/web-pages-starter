@@ -16,6 +16,17 @@ bun run build      # production build to ./dist
 - Import paths: relative in source (`../../../../generated/*`), `@generated/*` in tsconfig/alias
 - i18n CLI scripts live in `packages/i18n/cli/` (not `scripts/`)
 
+## Build Modes
+
+```bash
+bun run build              # minified HTML + CSS/JS (default)
+bun run build -- --pretty  # pretty-printed HTML for CMS template porting
+bun run build -- --debug   # skip JS/CSS minify
+bun run preview            # build (BUILD_PREVIEW=true) + serve via tunnel
+```
+
+Postbuild automatically restores dev stub (`generated/active-locales-data.ts` with all 136 locales).
+
 ## Testing
 
 ```bash
@@ -24,6 +35,8 @@ bun run test -- --watch   # watch mode
 bunx biome ci             # lint check (no write)
 bun run typecheck         # tsc --noEmit
 ```
+
+Tests use native rstest assertions (`expect().not.toBeNull()`, `.toBe()`, etc.) — no jest-dom matchers.
 
 ## i18n Key Patterns
 
@@ -38,18 +51,28 @@ Shared locales are auto-detected by scanning templates for `i18n.t('namespace:..
 
 ## Template Conventions
 
-- `url()` for all internal links
-- `isActive()` for navbar active state
+- `url()` for all internal links (no `.html` extension — clean URLs)
+- `isActive()` for navbar active state (normalizes `.html` and `/index`)
 - Macros receive resolved text, not keys (except `form-input.njk`)
 - Error pages: `{% set %}` + `{% include "shared/error/error-page.njk" %}`
 - Quick links: string-encoded `'/|home,/features|features'`
+- No inline `<style>` in templates — all CSS via `styles/main.css`
 
 ## Config Files
 
 - `configs/i18n.ts` — default locale + active locales (`defineI18n`)
-- `configs/fonts.ts` — font CSS import + font stack (`defineFontStack`, `sans`/`serif`/`mono`)
+- `configs/fonts.ts` — font CSS import + font stack (`defineFontStack`, `sans`/`serif`/`mono` + custom keys)
 - `configs/pages.ts` — root page, system page IDs, locale-dependent slugs
 - `configs/paths.ts` — filesystem path constants
+
+## Generated Files
+
+All 3 generated files are **tracked in git** (not gitignored):
+- `generated/active-locales-data.ts` — filtered locale data (regenerated at build)
+- `generated/exchange-rates.ts` — currency rates (24h cache)
+- `generated/i18n.d.ts` — TypeScript key types from locale JSON
+
+Biome is configured to skip `generated/**` (formatter + linter disabled).
 
 ## Restrictions
 
