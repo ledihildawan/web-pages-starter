@@ -1,8 +1,7 @@
 import { existsSync } from 'node:fs';
-import path from 'node:path';
 import process from 'node:process';
 import '../configs/env';
-import { PATHS } from '@constants/paths';
+import { resolveRoot } from '@constants/paths';
 import { getErrorPageSlugs, getRootPageSlug } from '@page-engine';
 import { i18nConfig } from '../configs/i18n';
 import {
@@ -16,7 +15,7 @@ import { createServer, setupSigintHandler } from './lib/signal-handler';
 const PORT = Number.parseInt(process.env.PORT ?? '8888', 10);
 const HOST = process.env.HOST ?? '0.0.0.0';
 
-const DIST = path.resolve(PATHS.ROOT, 'dist');
+const DIST = resolveRoot('dist');
 
 if (!existsSync(DIST)) {
   log.distNotFound();

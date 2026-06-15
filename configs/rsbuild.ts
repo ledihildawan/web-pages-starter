@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
 import { IS_PROD } from '@constants/env';
-import { PATHS } from '@constants/paths';
+import { PATHS, resolveRoot } from '@constants/paths';
 import { getActiveLocaleCodes, LOCALE_STORAGE_KEY } from '@i18n';
 import { getRootPageSlug, getSystemPageSlug, scanPages } from '@page-engine';
 import { createTemplateParams } from '@page-engine/template';
@@ -12,7 +12,6 @@ import { generateDynamicEntries } from '@scripts/generate-dynamic-routes';
 import { minify } from 'html-minifier-terser';
 import { html as beautifyHtml } from 'js-beautify';
 
-const ROOT = process.cwd();
 const PORT = Number(process.env.PORT) || 8888;
 const BASE_PATH = process.env.BASE_PATH || '/';
 const isBuild = IS_PROD || process.env.BUILD_PREVIEW === 'true';
@@ -30,8 +29,6 @@ const MANAGED_EXTS = [
   'svg',
   'gif',
 ];
-
-const resolveRoot = (...args: string[]): string => path.resolve(ROOT, ...args);
 
 const pluginRootPageAsIndex = (): RsbuildPlugin => ({
   name: 'plugin-root-page-as-index',
@@ -68,15 +65,11 @@ const pluginHotReloadContent = (): RsbuildPlugin => ({
           compiler.hooks.afterCompile.tap(
             'watch-content-files',
             (compilation) => {
-              compilation.contextDependencies.add(
-                path.resolve(ROOT, 'locales'),
-              );
-              compilation.contextDependencies.add(path.resolve(ROOT, 'data'));
-              compilation.contextDependencies.add(path.resolve(ROOT, 'pages'));
-              compilation.contextDependencies.add(path.resolve(ROOT, 'shared'));
-              compilation.contextDependencies.add(
-                path.resolve(ROOT, 'layouts'),
-              );
+              compilation.contextDependencies.add(resolveRoot('locales'));
+              compilation.contextDependencies.add(resolveRoot('data'));
+              compilation.contextDependencies.add(resolveRoot('pages'));
+              compilation.contextDependencies.add(resolveRoot('shared'));
+              compilation.contextDependencies.add(resolveRoot('layouts'));
             },
           );
         },
@@ -153,7 +146,7 @@ const dynamicTemplateMap = new Map(
 const resolveTemplate = (entryName: string): string => {
   const dynDir = dynamicTemplateMap.get(entryName);
   if (dynDir) {
-    return path.relative(ROOT, path.join(dynDir, 'index.njk'));
+    return path.relative(PATHS.ROOT, path.join(dynDir, 'index.njk'));
   }
   return path.join('pages', entryName, 'index.njk');
 };

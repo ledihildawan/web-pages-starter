@@ -1,7 +1,7 @@
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
-import { PATHS } from '@constants/paths';
+import { PATHS, resolveRoot } from '@constants/paths';
 import { isSystemPageId, isSystemPageSlug } from '@page-engine';
 import inquirer from 'inquirer';
 import { i18nConfig } from '../configs/i18n';
@@ -13,7 +13,7 @@ const providedPageName = args[0]?.trim();
 const defaultLocale = i18nConfig.defaultLocale;
 
 function getAllPages(): string[] {
-  const pagesDir = path.resolve(PATHS.ROOT, 'pages');
+  const pagesDir = resolveRoot('pages');
   if (!fs.existsSync(pagesDir)) return [];
   return fs
     .readdirSync(pagesDir)
@@ -159,7 +159,7 @@ function deletePage(pageName: string): {
   folderDeleted: boolean;
   localeFilesDeleted: number;
 } {
-  const pagesDir = path.resolve(PATHS.ROOT, 'pages');
+  const pagesDir = resolveRoot('pages');
   const pageDir = path.join(pagesDir, pageName);
 
   let folderDeleted = false;
@@ -169,7 +169,7 @@ function deletePage(pageName: string): {
   }
 
   let localeFilesDeleted = 0;
-  const localesDir = path.resolve(PATHS.ROOT, PATHS.LOCALES);
+  const localesDir = resolveRoot(PATHS.LOCALES);
   if (fs.existsSync(localesDir)) {
     for (const lng of fs.readdirSync(localesDir)) {
       const localeFile = path.join(localesDir, lng, `${pageName}.json`);

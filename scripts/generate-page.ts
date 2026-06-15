@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { PATHS } from '@constants/paths';
+import { PATHS, resolveRoot } from '@constants/paths';
 import { getActiveLocaleCodes } from '@i18n/engine/active-locales';
 import {
   isSystemPageSlug,
@@ -40,8 +40,8 @@ const titleCase = pageName
   .replace(/-/g, ' ')
   .replace(/\b\w/g, (l) => l.toUpperCase());
 
-const targetDir = path.resolve(PATHS.ROOT, 'pages', formattedName);
-const baseLocaleDir = path.resolve(PATHS.ROOT, PATHS.LOCALES);
+const targetDir = resolveRoot('pages', formattedName);
+const baseLocaleDir = resolveRoot(PATHS.LOCALES);
 
 if (fs.existsSync(targetDir)) {
   log.error(`Error: Page "${formattedName}" already exists.`);

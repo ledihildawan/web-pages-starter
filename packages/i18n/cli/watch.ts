@@ -1,12 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
-import { PATHS } from '@constants/paths';
+import { PATHS, resolveRoot } from '@constants/paths';
 import { log, logBox } from '@scripts/lib/logger';
 import { setupSigintHandler } from '@scripts/lib/signal-handler';
 import chokidar from 'chokidar';
 
-const LOCALE_DIR = path.resolve(process.cwd(), PATHS.LOCALES);
+const LOCALE_DIR = resolveRoot(PATHS.LOCALES);
 
 if (!fs.existsSync(LOCALE_DIR)) {
   log.error(`Error: Locale directory not found at ${LOCALE_DIR}`);

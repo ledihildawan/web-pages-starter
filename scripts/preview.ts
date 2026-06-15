@@ -2,7 +2,7 @@ import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
-import { PATHS } from '@constants/paths';
+import { PATHS, resolveRoot } from '@constants/paths';
 import type { serve } from '@hono/node-server';
 import ngrok from '@ngrok/ngrok';
 import { getErrorPageSlugs, getRootPageSlug } from '@page-engine';
@@ -18,7 +18,7 @@ import {
 
 const PORT = Number.parseInt(process.env.PORT ?? '8888', 10);
 const HOST = process.env.HOST ?? '127.0.0.1';
-const DIST = path.resolve(PATHS.ROOT, 'dist');
+const DIST = resolveRoot('dist');
 
 const runBuild = (): Promise<void> => {
   return new Promise((resolve, reject) => {

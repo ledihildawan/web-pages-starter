@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
 import { IS_PROD } from '@constants/env';
-import { PATHS } from '@constants/paths';
+import { PATHS, resolveRoot } from '@constants/paths';
 import type { I18nTranslationKeys } from '@generated/i18n';
 import {
   convertCurrency,
@@ -68,9 +68,6 @@ setStrategies(
   { id: idCardinal, ja: jaCardinal, zh: zhCardinal, ar: arCardinal },
   { id: idOrdinal, ja: jaOrdinal, ar: arOrdinal },
 );
-
-const ROOT = process.cwd();
-const resolveRoot = (...args: string[]): string => path.resolve(ROOT, ...args);
 
 const escapeHtmlAttr = (value: string | number | boolean): string =>
   String(value).replace(/"/g, '&quot;');

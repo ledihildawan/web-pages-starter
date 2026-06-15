@@ -1,13 +1,13 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { PATHS } from '@constants/paths';
+import { PATHS, resolveRoot } from '@constants/paths';
 import { CURRENCY_CODE } from '@i18n/data/currencies';
 import { getActiveLocales } from '@i18n/engine/active-locales';
 import { log } from './lib/logger';
 import { generatedHeader, writeFilePath } from './lib/write-file';
 
 const EXCHANGE_RATES_URL = 'https://api.frankfurter.dev/v2/rates';
-const GENERATED_DIR = path.resolve(process.cwd(), PATHS.GENERATED);
+const GENERATED_DIR = resolveRoot(PATHS.GENERATED);
 const EXCHANGE_RATES_FILE = path.resolve(GENERATED_DIR, 'exchange-rates.ts');
 const BASE_CURRENCY = CURRENCY_CODE.USD;
 const LOCALE_CURRENCIES = [

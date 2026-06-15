@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { resolveRoot } from '@constants/paths';
 import { isSlugDir } from '@page-engine/scanner';
 import { readJSON5 } from '@utils/json5';
 
@@ -10,7 +11,7 @@ interface DynamicEntry {
   data: Record<string, unknown>;
 }
 
-const PAGES_DIR = path.resolve(process.cwd(), 'pages');
+const PAGES_DIR = resolveRoot('pages');
 
 function scanSlugDirs(
   dir: string,
