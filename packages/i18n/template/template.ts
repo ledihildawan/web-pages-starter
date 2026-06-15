@@ -69,7 +69,15 @@ const warnedKeys = new Set<string>();
 
 const i18nScriptCache = new Map<string, { hash: string; script: string }>();
 
+const hashCache = new Map<string, { hash: string; ts: number }>();
+const HASH_TTL = 1000;
+
 const hashLocales = (name: string, sharedLocales: string[]): string => {
+  const cacheKey = `${name}:${sharedLocales.join(',')}`;
+  const now = Date.now();
+  const cached = hashCache.get(cacheKey);
+  if (cached && now - cached.ts < HASH_TTL) return cached.hash;
+
   const parts: string[] = [];
   for (const locale of getActiveLocales()) {
     const files = [
@@ -87,7 +95,9 @@ const hashLocales = (name: string, sharedLocales: string[]): string => {
       }
     }
   }
-  return parts.join('|');
+  const hash = parts.join('|');
+  hashCache.set(cacheKey, { hash, ts: now });
+  return hash;
 };
 
 export const scanSharedLocales = (

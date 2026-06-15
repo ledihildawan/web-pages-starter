@@ -28,6 +28,9 @@ const refreshFonts = async (): Promise<void> => {
   fonts.loadLanguageFonts();
 };
 
+const MAX_LOADED_LOCALES = 5;
+const loadedLocales = new Set<string>();
+
 const ensureLocaleData = async (
   code: string,
   pageID: string,
@@ -45,6 +48,15 @@ const ensureLocaleData = async (
     )) {
       m.i18next.addResourceBundle(code, ns, bundle);
     }
+    loadedLocales.add(code);
+
+    while (loadedLocales.size > MAX_LOADED_LOCALES) {
+      const oldest = loadedLocales.values().next().value;
+      if (!oldest || oldest === code) break;
+      loadedLocales.delete(oldest);
+      m.i18next.removeResourceBundle(oldest, 'common');
+      m.i18next.removeResourceBundle(oldest, pageID);
+    }
   } catch {
     console.warn(`[i18n] Failed to load locale: ${code}`);
   }
@@ -59,6 +71,7 @@ const changeLanguage = async (code: string): Promise<void> => {
     const pageID = (window.__PAGE_ID__ ?? ROOT_PAGE) as string;
     await ensureLocaleData(code, pageID, m);
     await m.i18next.changeLanguage(code);
+    m.clearMissingKeys();
     const strategies = await loadStrategies(
       getLanguageSubtag(code as LocaleCode),
     );

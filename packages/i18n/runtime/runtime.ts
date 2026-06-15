@@ -42,6 +42,10 @@ import { loadStrategies } from '../strategies/loader';
 
 export { i18next };
 
+export const clearMissingKeys = (): void => {
+  missingKeys.clear();
+};
+
 const isDev = import.meta.env.DEV;
 const missingKeys = new Set<string>();
 
