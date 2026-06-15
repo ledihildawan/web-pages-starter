@@ -1,8 +1,7 @@
-import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 import '../configs/env';
-import { getErrorPageSlugs, getRootPageSlug } from '@page-engine';
+import { getErrorPageSlugs, getRootPageSlug, scanPages } from '@page-engine';
 import { i18nConfig } from '../configs/i18n';
 import { PATHS } from '../configs/paths';
 import { log, logBox } from './lib/logger';
@@ -20,37 +19,12 @@ const OUTPUT_DIST = path.join(PATHS.ROOT, 'dist', 'sitemap.xml');
 const DEFAULT_PRIORITY = process.env.SITEMAP_DEFAULT_PRIORITY || '0.7';
 const DEFAULT_CHANGEFREQ = process.env.SITEMAP_DEFAULT_CHANGEFREQ || 'weekly';
 
-const scanPageDirs = (
-  dir: string,
-  basePath: string,
-  excluded: string[],
-): string[] => {
-  const results: string[] = [];
-  if (!fs.existsSync(dir)) return results;
-
-  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (!entry.isDirectory()) continue;
-    if (entry.name.startsWith('.') || entry.name.startsWith('_')) continue;
-    if (excluded.includes(entry.name)) continue;
-    if (entry.name.startsWith('[') && entry.name.endsWith(']')) continue;
-
-    const fullPath = path.join(dir, entry.name);
-    const hasIndex = fs.existsSync(path.join(fullPath, 'index.njk'));
-
-    if (entry.name.startsWith('(') && entry.name.endsWith(')')) {
-      results.push(...scanPageDirs(fullPath, basePath, excluded));
-    } else {
-      const name = basePath ? `${basePath}/${entry.name}` : entry.name;
-      if (hasIndex) results.push(name);
-      results.push(...scanPageDirs(fullPath, name, excluded));
-    }
-  }
-  return results;
-};
-
 const getPages = () => {
   const EXCLUDED = getErrorPageSlugs(i18nConfig.defaultLocale);
-  return scanPageDirs(PAGES_DIR, '', EXCLUDED).sort();
+  return scanPages(PAGES_DIR, '')
+    .map((p) => p.name)
+    .filter((name) => !EXCLUDED.includes(name))
+    .sort();
 };
 
 const generateSitemap = () => {

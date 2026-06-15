@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import JSON5 from 'json5';
+import { isSlugDir } from '../packages/page-engine/scanner';
+import { readJSON5 } from '../utils/json5';
 
 interface DynamicEntry {
   entryKey: string;
@@ -10,19 +11,6 @@ interface DynamicEntry {
 }
 
 const PAGES_DIR = path.resolve(process.cwd(), 'pages');
-
-function readJSON5(filePath: string): Record<string, unknown> {
-  try {
-    if (!fs.existsSync(filePath)) return {};
-    return JSON5.parse(fs.readFileSync(filePath, 'utf-8'));
-  } catch {
-    return {};
-  }
-}
-
-function isSlugDir(name: string): boolean {
-  return name.startsWith('[') && name.endsWith(']');
-}
 
 function scanSlugDirs(
   dir: string,

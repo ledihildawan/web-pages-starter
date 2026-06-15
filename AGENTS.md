@@ -13,8 +13,8 @@ bun run build      # production build to ./dist
 - No comments unless requested
 - No deprecated code — remove entirely
 - Nunjucks string concat: `~` (never `+`)
-- Import paths: relative in source (`../../../../generated/*`), `@generated/*` in tsconfig/alias
-- i18n CLI scripts live in `packages/i18n/cli/` (not `scripts/`)
+- Import paths: relative in source (`../../../../generated/*`), `@generated/*` in tsconfig/alias. Jiti-loaded files (rsbuild config chain, `generate-dynamic-routes.ts`) use relative paths — no aliases.
+- i18n CLI scripts live in `packages/i18n/cli/` (not `scripts/`). Page-engine CLI lives in `packages/page-engine/cli/`.
 
 ## Build Modes
 
@@ -80,8 +80,15 @@ pages/
 
 - `configs/i18n.ts` — default locale + active locales (`defineI18n`)
 - `configs/fonts.ts` — font CSS import + font stack (`defineFontStack`, `sans`/`serif`/`mono` + custom keys)
-- `packages/page-engine/system-pages.ts` — root page, system page IDs, locale-dependent slugs
 - `configs/paths.ts` — filesystem path constants
+
+## Packages
+
+- `packages/i18n/` — i18n engine (data, formatting, runtime, strategies, fonts). Pure engine — no imports from `configs/` or `page-engine` in runtime.
+- `packages/page-engine/` — page system (SSR template rendering, system pages, scanner). Depends on `@i18n` (one-way).
+  - `system-pages.ts` — root page, system page IDs, locale-dependent slugs
+  - `scanner.ts` — `scanPages()`, `isGroup()`, `isSlugDir()` (jiti-safe)
+  - `template.ts` — SSR rendering: `createTemplateParams()`, `generateClientI18nScript()`, `scanSharedLocales()`
 
 ## Generated Files
 
