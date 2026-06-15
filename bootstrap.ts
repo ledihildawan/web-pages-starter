@@ -1,4 +1,4 @@
-const isProd = process.env.NODE_ENV === 'production';
+import { isProd } from '@constants/env';
 
 const deferTask = (fn: () => void, timeout = 2000): void => {
   if ('requestIdleCallback' in window) {

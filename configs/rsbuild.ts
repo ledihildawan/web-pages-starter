@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
+import { isProd } from '@constants/env';
 import { PATHS } from '@constants/paths';
 import { getActiveLocaleCodes, LOCALE_STORAGE_KEY } from '@i18n';
 import { getRootPageSlug, getSystemPageSlug, scanPages } from '@page-engine';
@@ -14,9 +15,8 @@ import { html as beautifyHtml } from 'js-beautify';
 const ROOT = process.cwd();
 const PORT = Number(process.env.PORT) || 8888;
 const BASE_PATH = process.env.BASE_PATH || '/';
-const isProd =
-  process.env.NODE_ENV === 'production' || process.env.BUILD_PREVIEW === 'true';
-const shouldMinify = isProd && process.env.MINIFY !== 'false';
+const isBuild = isProd || process.env.BUILD_PREVIEW === 'true';
+const shouldMinify = isBuild && process.env.MINIFY !== 'false';
 const isPrettyHtml = process.env.PRETTY_HTML === 'true';
 const shouldMinifyHTML = shouldMinify && !isPrettyHtml;
 const MANAGED_EXTS = [
@@ -193,8 +193,12 @@ export default defineConfig({
   },
   resolve: {
     alias: {
+      '@config': resolveRoot('configs'),
+      '@constants': resolveRoot('constants'),
       '@generated': resolveRoot(PATHS.GENERATED),
       '@i18n': resolveRoot('packages', 'i18n'),
+      '@page-engine': resolveRoot('packages', 'page-engine'),
+      '@utils': resolveRoot('utils'),
     },
   },
   source: {
@@ -268,7 +272,7 @@ export default defineConfig({
     pluginRootPageAsIndex(),
     pluginHotReloadContent(),
     pluginPrettyHtml(),
-    ...(isProd ? [pluginImageCompress({ use: 'avif', quality: 75 })] : []),
+    ...(isBuild ? [pluginImageCompress({ use: 'avif', quality: 75 })] : []),
   ],
   tools: {
     htmlPlugin: (config) => {
