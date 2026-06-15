@@ -34,18 +34,6 @@
     },
     "types": ["bun-types", "node"]
   },
-  "include": [
-    "**/*.ts",
-    "packages/**/*.ts",
-    "scripts/**/*.ts",
-    "rsbuild.config.ts"
-  ],
-  "exclude": [
-    "dist",
-    "node_modules",
-    "temp",
-    "coverage",
-    "tests",
-    "**/__tests__"
-  ]
+  "include": ["**/*.ts"],
+  "exclude": ["dist", "node_modules", "temp", "coverage"]
 }
