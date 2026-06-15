@@ -1,14 +1,11 @@
-import { i18nConfig } from '../../../configs/i18n';
-import { scheduleTask } from '../../../utils/microtask-queue';
-import {
-  getActiveLocalesDisplay,
-  getLanguageSubtag,
-  LOCALE_STORAGE_KEY,
-  setStrategies,
-} from '..';
-import type { LocaleCode } from '../data/locales';
-import { getActiveLocales } from '../engine/active-locales';
-import { loadStrategies } from '../strategies/loader';
+import { i18nConfig } from '@config/i18n';
+import { getActiveLocalesDisplay, LOCALE_STORAGE_KEY } from '@i18n';
+import type { LocaleCode } from '@i18n/data/locales';
+import { getActiveLocales } from '@i18n/engine/active-locales';
+import { setStrategies } from '@i18n/engine/formatters';
+import { getLanguageSubtag } from '@i18n/engine/helpers';
+import { loadStrategies } from '@i18n/strategies/loader';
+import { scheduleTask } from '@utils/microtask-queue';
 
 const updateDocumentAttributes = (code: string): void => {
   const locale = getActiveLocales().find((l) => l.code === code);
@@ -30,21 +27,13 @@ const refreshFonts = async (): Promise<void> => {
 const MAX_LOADED_LOCALES = 5;
 const loadedLocales = new Set<string>();
 
-const ensureLocaleData = async (
-  code: string,
-  pageID: string,
-  m: typeof import('./runtime'),
-): Promise<void> => {
+const ensureLocaleData = async (code: string, pageID: string, m: typeof import('./runtime')): Promise<void> => {
   if (m.i18next.hasResourceBundle(code, 'common')) return;
 
   try {
-    const response = await fetch(
-      `${import.meta.env.BASE_PATH}assets/i18n/${pageID}/${code}.json`,
-    );
+    const response = await fetch(`${import.meta.env.BASE_PATH}assets/i18n/${pageID}/${code}.json`);
     const data = await response.json();
-    for (const [ns, bundle] of Object.entries(
-      data as Record<string, Record<string, string>>,
-    )) {
+    for (const [ns, bundle] of Object.entries(data as Record<string, Record<string, string>>)) {
       m.i18next.addResourceBundle(code, ns, bundle);
     }
     loadedLocales.add(code);
@@ -71,9 +60,7 @@ const changeLanguage = async (code: string): Promise<void> => {
     await ensureLocaleData(code, pageID, m);
     await m.i18next.changeLanguage(code);
     m.clearMissingKeys();
-    const strategies = await loadStrategies(
-      getLanguageSubtag(code as LocaleCode),
-    );
+    const strategies = await loadStrategies(getLanguageSubtag(code as LocaleCode));
     setStrategies(strategies.cardinal, strategies.ordinal);
     scheduleTask(() => m.translatePage());
     scheduleTask(() => m.updateFormattedElements());
@@ -90,8 +77,7 @@ export function registerI18nStore(): void {
   globalThis.Alpine.store('i18n', {
     languages: getActiveLocalesDisplay(),
 
-    current:
-      localStorage.getItem(LOCALE_STORAGE_KEY) || i18nConfig.defaultLocale,
+    current: localStorage.getItem(LOCALE_STORAGE_KEY) || i18nConfig.defaultLocale,
 
     change(code: string): void {
       localStorage.setItem(LOCALE_STORAGE_KEY, code);

@@ -1,12 +1,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
-import { LOCALES } from '@constants';
+import { resolveRoot } from '@config/paths';
 import { LOCALE_CODES } from '@i18n/data/locales';
 import { log, logBox } from '@scripts/lib/logger';
-import { resolveRoot } from '@utils/paths';
 
-const LOCALES_ROOT = resolveRoot(LOCALES);
+const LOCALES_ROOT = resolveRoot('locales');
 const DEFAULT_LOCALE = i18nConfig.defaultLocale;
 const sourceDir = path.join(LOCALES_ROOT, DEFAULT_LOCALE);
 
@@ -15,9 +14,7 @@ try {
     throw new Error(`[i18n] Default locale directory not found: ${sourceDir}`);
   }
 
-  const sourceFiles = fs
-    .readdirSync(sourceDir)
-    .filter((f) => f.endsWith('.json'));
+  const sourceFiles = fs.readdirSync(sourceDir).filter((f) => f.endsWith('.json'));
 
   logBox('Sync Locale Files', {
     Configured: LOCALE_CODES.length,

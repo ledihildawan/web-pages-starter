@@ -13,7 +13,7 @@ bun run build      # production build to ./dist
 - No comments unless requested
 - No deprecated code — remove entirely
 - Nunjucks string concat: `~` (never `+`)
-- Import paths: `@i18n`, `@page-engine`, `@config/*`, `@constants/*`, `@scripts/*`, `@utils/*`, `@generated/*` aliases everywhere. `rsbuild.config.ts` is a thin jiti wrapper that configures aliases for the config chain — real config lives in `rsbuild.config.inner.ts`.
+- Import paths: `@i18n`, `@page-engine`, `@config/*`, `@constants`, `@scripts/*`, `@utils/*`, `@generated/*` aliases used everywhere (including the rsbuild config chain). `rsbuild.config.ts` is a thin jiti wrapper that loads `configs/rsbuild.ts` with tsconfig path aliases — real config lives in `configs/rsbuild.ts`.
 - i18n CLI scripts live in `packages/i18n/cli/` (not `scripts/`). Page-engine CLI lives in `packages/page-engine/cli/`.
 
 ## Build Modes
@@ -80,15 +80,19 @@ pages/
 
 - `configs/i18n.ts` — default locale + active locales (`defineI18n`)
 - `configs/fonts.ts` — font CSS import + font stack (`defineFontStack`, `sans`/`serif`/`mono` + custom keys)
-- `constants/paths.ts` — filesystem path constants
+- `configs/env.ts` — type-safe env validation (`@t3-oss/env-core` + Zod): exports `env`, `IS_DEV`, `IS_PROD`, `IS_NODE`. `SITE_URL` required (no default), `PORT` defaults to 8888, `HOST` defaults to localhost
+- `configs/rsbuild.ts` — Rsbuild build configuration (loaded via the jiti wrapper in `rsbuild.config.ts`)
+- `constants.ts` (root) — `IS_NODE`, `IS_PROD`, `ROOT_PATH`. Browser-safe (no `node:` imports)
+- `utils/paths.ts` — `resolveRoot()` centralizes all path resolution (replaces `path.resolve(ROOT, ...)`, `path.join(ROOT, ...)`, `path.resolve(process.cwd(), ...)`)
 
 ## Packages
 
-- `packages/i18n/` — i18n engine (data, formatting, runtime, strategies, fonts). Pure engine — no imports from `configs/` or `page-engine` in runtime.
-- `packages/page-engine/` — page system (SSR template rendering, system pages, scanner). Depends on `@i18n` (one-way).
-  - `system-pages.ts` — root page, system page IDs, locale-dependent slugs
+- `packages/i18n/` — i18n engine (data, formatting, runtime, strategies, fonts). Pure engine — ZERO imports from `configs/` or `page-engine` in runtime.
+- `packages/page-engine/` — page system (SSR template rendering, system pages, scanner, CLI). Depends on `@i18n` (one-way only).
+  - `system-pages.ts` — root page, system page IDs, locale-dependent slugs (`ROOT_PAGE`, `SYSTEM_PAGE_IDS`, `SYSTEM_PAGE_SLUGS`)
   - `scanner.ts` — `scanPages()`, `isGroup()`, `isSlugDir()` (jiti-safe)
   - `template.ts` — SSR rendering: `createTemplateParams()`, `generateClientI18nScript()`, `scanSharedLocales()`
+  - `cli/sync-system-pages.ts` — system page slug syncing
 
 ## Generated Files
 

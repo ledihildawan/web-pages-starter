@@ -2,23 +2,19 @@ import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
-import { ROOT } from '@constants';
+import { env } from '@config/env';
+import { i18nConfig } from '@config/i18n';
+import { ROOT_PATH, resolveRoot } from '@config/paths';
 import type { serve } from '@hono/node-server';
 import ngrok from '@ngrok/ngrok';
 import { getErrorPageSlugs, getRootPageSlug } from '@page-engine';
-import { resolveRoot } from '@utils/paths';
 import inquirer from 'inquirer';
-import { i18nConfig } from '../configs/i18n';
 import { createStaticApp } from './lib/hono-server';
 import { log } from './lib/logger';
-import {
-  createServer,
-  setupSigintHandler,
-  wrapMainError,
-} from './lib/signal-handler';
+import { createServer, setupSigintHandler, wrapMainError } from './lib/signal-handler';
 
-const PORT = Number.parseInt(process.env.PORT ?? '8888', 10);
-const HOST = process.env.HOST ?? '127.0.0.1';
+const PORT = env.PORT;
+const HOST = env.HOST;
 const DIST = resolveRoot('dist');
 
 const runBuild = (): Promise<void> => {
@@ -26,7 +22,7 @@ const runBuild = (): Promise<void> => {
     log.info('\n[Build] Running production build...');
     const proc = spawn('bun', ['run', 'build'], {
       stdio: 'inherit',
-      cwd: ROOT,
+      cwd: ROOT_PATH,
       env: { ...process.env, BUILD_PREVIEW: 'true' },
       shell: false,
     });
@@ -65,7 +61,7 @@ const replaceUrls = (fromUrl: string, toUrl: string): void => {
       const newContent = content.split(fromUrl).join(toUrl);
       fs.writeFileSync(file, newContent, 'utf-8');
       updatedCount++;
-      const relativePath = file.replace(ROOT, '.').replace(/\\/g, '/');
+      const relativePath = file.replace(ROOT_PATH, '.').replace(/\\/g, '/');
       log.info(`  Replaced in: ${relativePath}`);
     }
   }
@@ -81,9 +77,7 @@ const isValidProvider = (p: string) => p === 'ngrok' || p === 'cloudflared';
 
 const main = async () => {
   if (cliProvider && !isValidProvider(cliProvider)) {
-    log.error(
-      'Error: Invalid tunnel provider. Use --tunnel ngrok or --tunnel cloudflared',
-    );
+    log.error('Error: Invalid tunnel provider. Use --tunnel ngrok or --tunnel cloudflared');
     process.exit(1);
   }
 
@@ -126,7 +120,7 @@ const main = async () => {
       addr: PORT,
       authtoken_from_env: true,
     });
-    tunnelUrl = listener.url() ?? `http://localhost:${PORT}`;
+    tunnelUrl = listener.url() || env.SITE_URL;
     process.env.SITE_URL = tunnelUrl;
     tunnelClose = async () => {
       await listener.close();
@@ -143,8 +137,7 @@ const main = async () => {
       hostname: HOST,
     });
   } else if (provider === 'cloudflared') {
-    const placeholderUrl = `http://${HOST}:${PORT}`;
-    process.env.SITE_URL = placeholderUrl;
+    process.env.SITE_URL = env.SITE_URL;
 
     await runBuild();
 
@@ -162,19 +155,13 @@ const main = async () => {
     const checkProc = spawn('cloudflared', ['--version'], { stdio: 'ignore' });
     checkProc.on('error', () => {
       log.error('Error: cloudflared not found.');
-      log.error(
-        'Install: https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads',
-      );
+      log.error('Install: https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads');
       process.exit(1);
     });
 
-    const proc = spawn(
-      'cloudflared',
-      ['tunnel', '--url', `http://localhost:${PORT}`],
-      {
-        stdio: ['ignore', 'pipe', 'pipe'],
-      },
-    );
+    const proc = spawn('cloudflared', ['tunnel', '--url', env.SITE_URL], {
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
 
     await new Promise<void>((resolve, reject) => {
       const checkLine = (line: string) => {
@@ -198,7 +185,7 @@ const main = async () => {
     };
 
     try {
-      replaceUrls(placeholderUrl, tunnelUrl);
+      replaceUrls(env.SITE_URL, tunnelUrl);
     } catch (error) {
       log.error(`Error: URL replacement failed — ${error}`);
     }
@@ -210,7 +197,7 @@ const main = async () => {
     if (tunnelClose) await tunnelClose();
     spawn('bun', ['./packages/i18n/cli/generate-active-locales.ts'], {
       stdio: 'ignore',
-      cwd: ROOT,
+      cwd: ROOT_PATH,
       detached: true,
     });
     process.exit(0);
@@ -220,7 +207,7 @@ const main = async () => {
   process.on('SIGTERM', shutdown);
 
   const { getPageNames } = await import('./lib/hono-server');
-  log.info(`\n  Preview ready at ${tunnelUrl || `http://${HOST}:${PORT}`}\n`);
+  log.info(`\n  Preview ready at ${tunnelUrl}\n`);
   log.info(`  Mode: preview (${provider})`);
   const errorPages = getErrorPageSlugs(i18nConfig.defaultLocale);
   const rootSlug = getRootPageSlug(i18nConfig.defaultLocale);

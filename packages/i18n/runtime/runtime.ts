@@ -1,13 +1,9 @@
-import i18next, { type Resource } from 'i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
-import { i18nConfig } from '../../../configs/i18n';
-import {
-  convertCurrency as convertCurrencyRaw,
-  EXCHANGE_RATES,
-} from '../../../generated/exchange-rates';
-import type { I18nTranslationKeys } from '../../../generated/i18n';
-import { scheduleTask } from '../../../utils/microtask-queue';
-import type { DateTimePreset } from '../../../utils/types';
+import { i18nConfig } from '@config/i18n';
+import { convertCurrency, EXCHANGE_RATES } from '@generated/exchange-rates';
+import type { I18nTranslationKeys } from '@generated/i18n';
+import { getActiveLocalesDisplay, LOCALE_STORAGE_KEY } from '@i18n';
+import type { LocaleCode } from '@i18n/data/locales';
+import { getActiveLocaleCodes } from '@i18n/engine/active-locales';
 import {
   formatAbbreviated,
   formatBytes,
@@ -24,20 +20,17 @@ import {
   formatScientific,
   formatTime,
   formatUnit,
-  getActiveLocaleCodes,
-  getActiveLocalesDisplay,
-  getCurrency,
-  getLanguageSubtag,
-  getLocale,
-  LOCALE_STORAGE_KEY,
   plural,
-  setLocale,
   setStrategies,
   singular,
   toNativeDigits,
-} from '..';
-import type { LocaleCode } from '../data/locales';
-import { loadStrategies } from '../strategies/loader';
+} from '@i18n/engine/formatters';
+import { getCurrency, getLanguageSubtag, getLocale, setLocale } from '@i18n/engine/helpers';
+import { loadStrategies } from '@i18n/strategies/loader';
+import { scheduleTask } from '@utils/microtask-queue';
+import type { DateTimePreset } from '@utils/types';
+import i18next, { type Resource } from 'i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
 
 export { i18next };
 
@@ -48,9 +41,7 @@ export const clearMissingKeys = (): void => {
 const isDev = import.meta.env.DEV;
 const missingKeys = new Set<string>();
 
-const getVars = (
-  el: HTMLElement,
-): Record<string, string | number | boolean> => {
+const getVars = (el: HTMLElement): Record<string, string | number | boolean> => {
   const vars = el.getAttribute('data-i18n-vars');
   if (!vars) return {};
   try {
@@ -60,11 +51,7 @@ const getVars = (
   }
 };
 
-const processElements = (
-  selector: string,
-  attr: string,
-  callback: (el: HTMLElement, val: string) => void,
-) => {
+const processElements = (selector: string, attr: string, callback: (el: HTMLElement, val: string) => void) => {
   document.querySelectorAll<HTMLElement>(selector).forEach((el) => {
     const val = el.getAttribute(attr);
     if (val !== null) callback(el, val);
@@ -127,49 +114,37 @@ const FORMATTERS = [
     attr: 'data-format-date',
     format: (v: string, el: HTMLElement) => {
       const opts = el.getAttribute('data-format-opts');
-      return formatDate(
-        v as DateTimePreset,
-        opts ? JSON.parse(opts) : undefined,
-      );
+      return formatDate(v as DateTimePreset, opts ? JSON.parse(opts) : undefined);
     },
   },
   {
     attr: 'data-format-datetime',
     format: (v: string, el: HTMLElement) => {
       const opts = el.getAttribute('data-format-opts');
-      return formatDateTime(
-        v as DateTimePreset,
-        opts ? JSON.parse(opts) : undefined,
-      );
+      return formatDateTime(v as DateTimePreset, opts ? JSON.parse(opts) : undefined);
     },
   },
   {
     attr: 'data-format-time',
     format: (v: string, el: HTMLElement) =>
       formatTime(v as DateTimePreset, {
-        timeStyle: (el.getAttribute('data-time-preset') ??
-          'short') as DateTimePreset,
+        timeStyle: (el.getAttribute('data-time-preset') ?? 'short') as DateTimePreset,
       }),
   },
   {
     attr: 'data-format-date-preset',
     format: (v: string, el: HTMLElement) =>
       formatDate(v as DateTimePreset, {
-        dateStyle: (el.getAttribute('data-date-preset') ??
-          'medium') as DateTimePreset,
+        dateStyle: (el.getAttribute('data-date-preset') ?? 'medium') as DateTimePreset,
       }),
   },
   {
     attr: 'data-format-currency',
     format: (v: string, el: HTMLElement, dc: string) =>
-      formatCurrency(
-        parseFloat(v),
-        el.getAttribute('data-target-currency') ?? dc,
-        {
-          numberingSystem: getNs(el),
-          nativeDigits: el.getAttribute('data-use-native') === 'true',
-        },
-      ),
+      formatCurrency(parseFloat(v), el.getAttribute('data-target-currency') ?? dc, {
+        numberingSystem: getNs(el),
+        nativeDigits: el.getAttribute('data-use-native') === 'true',
+      }),
   },
   {
     attr: 'data-convert-currency',
@@ -217,21 +192,13 @@ const FORMATTERS = [
         price = price * parseFloat(discountStr);
       }
 
-      const targetCurrency =
-        explicitTarget && explicitTarget !== 'undefined'
-          ? explicitTarget
-          : getCurrency(locale);
+      const targetCurrency = explicitTarget && explicitTarget !== 'undefined' ? explicitTarget : getCurrency(locale);
 
       if (fromCurrency === targetCurrency) {
         return formatCurrency(price, targetCurrency);
       }
 
-      const converted = convertCurrencyRaw(
-        price,
-        fromCurrency,
-        targetCurrency,
-        EXCHANGE_RATES,
-      );
+      const converted = convertCurrency(price, fromCurrency, targetCurrency, EXCHANGE_RATES);
       return formatCurrency(converted, targetCurrency);
     },
   },
@@ -250,16 +217,12 @@ const FORMATTERS = [
   {
     attr: 'data-format-bytes',
     format: (v: string, el: HTMLElement) =>
-      formatBytes(
-        parseFloat(v),
-        parseInt(el.getAttribute('data-bytes-decimals') ?? '1', 10),
-      ),
+      formatBytes(parseFloat(v), parseInt(el.getAttribute('data-bytes-decimals') ?? '1', 10)),
   },
   {
     attr: 'data-relative-time',
     format: (v: string, el: HTMLElement) => {
-      const unit = (el.getAttribute('data-unit') ??
-        'second') as Intl.RelativeTimeFormatUnit;
+      const unit = (el.getAttribute('data-unit') ?? 'second') as Intl.RelativeTimeFormatUnit;
       const numeric = el.getAttribute('data-numeric') ?? 'always';
       const value = parseFloat(v);
       return formatRelativeTime(value, {
@@ -313,9 +276,7 @@ export async function initIntl(localeOverride?: string): Promise<void> {
   if (!rawLocale) return;
 
   const activeCodes = getActiveLocaleCodes();
-  const savedLocale = activeCodes.includes(rawLocale)
-    ? rawLocale
-    : i18nConfig.defaultLocale;
+  const savedLocale = activeCodes.includes(rawLocale) ? rawLocale : i18nConfig.defaultLocale;
 
   setLocale(getLocale(savedLocale));
 
@@ -324,9 +285,7 @@ export async function initIntl(localeOverride?: string): Promise<void> {
   setStrategies(strategies.cardinal, strategies.ordinal);
 
   try {
-    const response = await fetch(
-      `${import.meta.env.BASE_PATH}assets/i18n/${pageID}/${savedLocale}.json`,
-    );
+    const response = await fetch(`${import.meta.env.BASE_PATH}assets/i18n/${pageID}/${savedLocale}.json`);
     const data = await response.json();
 
     const resources: Resource = {
@@ -352,9 +311,7 @@ export async function initIntl(localeOverride?: string): Promise<void> {
       parseMissingKeyHandler: (key: string) => {
         if (isDev && !missingKeys.has(key)) {
           missingKeys.add(key);
-          console.warn(
-            `[i18n] Missing key "${key}" in locale "${i18next.language}"`,
-          );
+          console.warn(`[i18n] Missing key "${key}" in locale "${i18next.language}"`);
         }
         return `[${key}]`;
       },
@@ -401,14 +358,10 @@ export const updateI18nStoreLabels = (): void => {
     store.languages.push(lang);
   });
 
-  store.current =
-    localStorage.getItem(LOCALE_STORAGE_KEY) || i18nConfig.defaultLocale;
+  store.current = localStorage.getItem(LOCALE_STORAGE_KEY) || i18nConfig.defaultLocale;
 };
 
-export const t = (
-  key: I18nTranslationKeys,
-  vars?: Record<string, string | number | boolean>,
-): string => {
+export const t = (key: I18nTranslationKeys, vars?: Record<string, string | number | boolean>): string => {
   const result = i18next.t(key, vars);
   if (result === key && isDev && !missingKeys.has(key)) {
     missingKeys.add(key);

@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { resolveRoot } from '@config/paths';
 import { isSlugDir } from '@page-engine/scanner';
 import { readJSON5 } from '@utils/json5';
-import { resolveRoot } from '@utils/paths';
 
 interface DynamicEntry {
   entryKey: string;
@@ -13,10 +13,7 @@ interface DynamicEntry {
 
 const PAGES_DIR = resolveRoot('pages');
 
-function scanSlugDirs(
-  dir: string,
-  basePath: string,
-): Array<{ dir: string; basePath: string; param: string }> {
+function scanSlugDirs(dir: string, basePath: string): Array<{ dir: string; basePath: string; param: string }> {
   const results: Array<{ dir: string; basePath: string; param: string }> = [];
   if (!fs.existsSync(dir)) return results;
 
@@ -49,16 +46,10 @@ function findDataSource(slugDir: string): {
   const dataPath = path.join(parentDir, 'data.json5');
   const dataPathTs = path.join(parentDir, 'data.json');
 
-  const dataFile = fs.existsSync(dataPath)
-    ? dataPath
-    : fs.existsSync(dataPathTs)
-      ? dataPathTs
-      : null;
+  const dataFile = fs.existsSync(dataPath) ? dataPath : fs.existsSync(dataPathTs) ? dataPathTs : null;
 
   if (!dataFile) {
-    console.warn(
-      `[dynamic-routes] No data.json5 found at ${parentDir}. Skipping [slug] directory.`,
-    );
+    console.warn(`[dynamic-routes] No data.json5 found at ${parentDir}. Skipping [slug] directory.`);
     return { slugs: [], data: {} };
   }
 
@@ -69,9 +60,7 @@ function findDataSource(slugDir: string): {
   };
 
   const items = data.items ?? data.posts ?? data.slugs ?? [];
-  const slugs = items.map((item) =>
-    typeof item === 'string' ? item : (item.slug as string),
-  );
+  const slugs = items.map((item) => (typeof item === 'string' ? item : (item.slug as string)));
   const itemData = items.reduce<Record<string, unknown>>((acc, item) => {
     if (typeof item === 'string') {
       acc[item] = { slug: item };
@@ -101,9 +90,7 @@ export function generateDynamicEntries(): DynamicEntry[] {
       });
     }
 
-    console.info(
-      `[dynamic-routes] ${basePath || param}: generated ${slugs.length} page(s) from [${param}]`,
-    );
+    console.info(`[dynamic-routes] ${basePath || param}: generated ${slugs.length} page(s) from [${param}]`);
   }
 
   return entries;

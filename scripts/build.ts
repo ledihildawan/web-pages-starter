@@ -1,14 +1,15 @@
+import '@config/env';
+
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
-import '../configs/env';
-import { resolveRoot } from '@utils/paths';
+import { resolveRoot } from '@config/paths';
 import { log, logBox } from './lib/logger';
 
 const args = process.argv.slice(2);
 
-const env: NodeJS.ProcessEnv = { ...process.env, NODE_ENV: 'production' };
+const spawnEnv: NodeJS.ProcessEnv = { ...process.env, NODE_ENV: 'production' };
 
 const mode = args.includes('--debug')
   ? 'debug (no minify)'
@@ -16,10 +17,10 @@ const mode = args.includes('--debug')
     ? 'production (pretty HTML)'
     : 'production';
 if (args.includes('--debug')) {
-  env.MINIFY = 'false';
+  spawnEnv.MINIFY = 'false';
 }
 if (args.includes('--pretty')) {
-  env.PRETTY_HTML = 'true';
+  spawnEnv.PRETTY_HTML = 'true';
 }
 
 logBox('Build Process', { Mode: mode });
@@ -31,20 +32,8 @@ if (fs.existsSync(distPath)) {
 }
 
 log.info('Bundling with Rsbuild...\n');
-const rsbuildBin = path.resolve(
-  process.cwd(),
-  'node_modules',
-  '@rsbuild',
-  'core',
-  'bin',
-  'rsbuild.js',
-);
-const runtimes = [
-  process.env.RSBUILD_RUNTIME,
-  process.env.NODE_BINARY,
-  'node',
-  'bun',
-].filter(Boolean) as string[];
+const rsbuildBin = path.resolve(process.cwd(), 'node_modules', '@rsbuild', 'core', 'bin', 'rsbuild.js');
+const runtimes = [process.env.RSBUILD_RUNTIME, process.env.NODE_BINARY, 'node', 'bun'].filter(Boolean) as string[];
 
 let result: ReturnType<typeof spawnSync> | null = null;
 
@@ -52,7 +41,7 @@ for (const runtime of runtimes) {
   try {
     result = spawnSync(runtime, [rsbuildBin, 'build'], {
       stdio: 'inherit',
-      env,
+      env: spawnEnv,
       cwd: process.cwd(),
     });
   } catch {

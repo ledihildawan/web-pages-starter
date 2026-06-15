@@ -1,13 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
-import { LOCALES } from '@constants';
+import { resolveRoot } from '@config/paths';
 import { log, logBox } from '@scripts/lib/logger';
 import { setupSigintHandler } from '@scripts/lib/signal-handler';
-import { resolveRoot } from '@utils/paths';
 import chokidar from 'chokidar';
 
-const LOCALE_DIR = resolveRoot(LOCALES);
+const LOCALE_DIR = resolveRoot('locales');
 
 if (!fs.existsSync(LOCALE_DIR)) {
   log.error(`Error: Locale directory not found at ${LOCALE_DIR}`);
@@ -26,9 +25,7 @@ const watcher = chokidar.watch(LOCALE_DIR, {
 watcher.on('all', (event, filePath) => {
   if (filePath.endsWith('.json')) {
     log.info(`${event}: ${path.basename(filePath)}`);
-    log.info(
-      'Run `bun ./packages/i18n/cli/generate-types.ts` to regenerate types if needed.\n',
-    );
+    log.info('Run `bun ./packages/i18n/cli/generate-types.ts` to regenerate types if needed.\n');
   }
 });
 

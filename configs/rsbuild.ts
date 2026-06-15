@@ -1,34 +1,23 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { env, IS_PROD } from '@config/env';
 import { i18nConfig } from '@config/i18n';
-import { GENERATED, IS_PROD, ROOT } from '@constants';
 import { getActiveLocaleCodes, LOCALE_STORAGE_KEY } from '@i18n';
 import { getRootPageSlug, getSystemPageSlug, scanPages } from '@page-engine';
+import { generateDynamicEntries } from '@page-engine/dynamic-routes';
 import { createTemplateParams } from '@page-engine/template';
 import { defineConfig, type RsbuildPlugin } from '@rsbuild/core';
 import { pluginImageCompress } from '@rsbuild/plugin-image-compress';
-import { generateDynamicEntries } from '@scripts/generate-dynamic-routes';
-import { resolveRoot } from '@utils/paths';
 import { minify } from 'html-minifier-terser';
 import { html as beautifyHtml } from 'js-beautify';
+import { ROOT_PATH, resolveRoot } from './paths';
 
-const PORT = Number(process.env.PORT) || 8888;
-const BASE_PATH = process.env.BASE_PATH || '/';
-const isBuild = IS_PROD || process.env.BUILD_PREVIEW === 'true';
-const shouldMinify = isBuild && process.env.MINIFY !== 'false';
-const isPrettyHtml = process.env.PRETTY_HTML === 'true';
+const BASE_PATH = env.BASE_PATH;
+const isBuild = IS_PROD || env.BUILD_PREVIEW;
+const shouldMinify = isBuild && env.MINIFY;
+const isPrettyHtml = env.PRETTY_HTML;
 const shouldMinifyHTML = shouldMinify && !isPrettyHtml;
-const MANAGED_EXTS = [
-  'ts',
-  'css',
-  'njk',
-  'png',
-  'jpg',
-  'jpeg',
-  'webp',
-  'svg',
-  'gif',
-];
+const MANAGED_EXTS = ['ts', 'css', 'njk', 'png', 'jpg', 'jpeg', 'webp', 'svg', 'gif'];
 
 const pluginRootPageAsIndex = (): RsbuildPlugin => ({
   name: 'plugin-root-page-as-index',
@@ -55,23 +44,17 @@ const pluginHotReloadContent = (): RsbuildPlugin => ({
         apply(compiler: {
           hooks: {
             afterCompile: {
-              tap: (
-                name: string,
-                fn: (c: { contextDependencies: Set<string> }) => void,
-              ) => void;
+              tap: (name: string, fn: (c: { contextDependencies: Set<string> }) => void) => void;
             };
           };
         }) {
-          compiler.hooks.afterCompile.tap(
-            'watch-content-files',
-            (compilation) => {
-              compilation.contextDependencies.add(resolveRoot('locales'));
-              compilation.contextDependencies.add(resolveRoot('data'));
-              compilation.contextDependencies.add(resolveRoot('pages'));
-              compilation.contextDependencies.add(resolveRoot('shared'));
-              compilation.contextDependencies.add(resolveRoot('layouts'));
-            },
-          );
+          compiler.hooks.afterCompile.tap('watch-content-files', (compilation) => {
+            compilation.contextDependencies.add(resolveRoot('locales'));
+            compilation.contextDependencies.add(resolveRoot('data'));
+            compilation.contextDependencies.add(resolveRoot('pages'));
+            compilation.contextDependencies.add(resolveRoot('shared'));
+            compilation.contextDependencies.add(resolveRoot('layouts'));
+          });
         },
       });
     });
@@ -122,9 +105,7 @@ const getEntries = (): Record<string, string | string[]> => {
     const tsFile = path.join(dyn.templateDir, 'index.ts');
     const cssFile = path.join(dyn.templateDir, 'index.css');
     if (fs.existsSync(tsFile)) {
-      entries[dyn.entryKey] = fs.existsSync(cssFile)
-        ? [tsFile, cssFile]
-        : tsFile;
+      entries[dyn.entryKey] = fs.existsSync(cssFile) ? [tsFile, cssFile] : tsFile;
     }
   }
 
@@ -132,28 +113,25 @@ const getEntries = (): Record<string, string | string[]> => {
 };
 
 const getGlobalEntries = (): string[] => {
-  return [resolveRoot('bootstrap.ts'), resolveRoot('styles/main.css')].filter(
-    (p) => fs.existsSync(p),
-  );
+  return [resolveRoot('bootstrap.ts'), resolveRoot('styles/main.css')].filter((p) => fs.existsSync(p));
 };
 
 const dynamicEntries = generateDynamicEntries();
 
-const dynamicTemplateMap = new Map(
-  dynamicEntries.map((e) => [e.entryKey, e.templateDir]),
-);
+const dynamicTemplateMap = new Map(dynamicEntries.map((e) => [e.entryKey, e.templateDir]));
 
 const resolveTemplate = (entryName: string): string => {
   const dynDir = dynamicTemplateMap.get(entryName);
   if (dynDir) {
-    return path.relative(ROOT, path.join(dynDir, 'index.njk'));
+    return path.relative(ROOT_PATH, path.join(dynDir, 'index.njk'));
   }
   return path.join('pages', entryName, 'index.njk');
 };
 
 export default defineConfig({
   server: {
-    port: PORT,
+    host: env.HOST,
+    port: env.PORT,
     strictPort: true,
     historyApiFallback: {
       rewrites: [
@@ -188,7 +166,7 @@ export default defineConfig({
     alias: {
       '@config': resolveRoot('configs'),
       '@constants': resolveRoot('constants.ts'),
-      '@generated': resolveRoot(GENERATED),
+      '@generated': resolveRoot('generated'),
       '@i18n': resolveRoot('packages', 'i18n'),
       '@page-engine': resolveRoot('packages', 'page-engine'),
       '@utils': resolveRoot('utils'),
@@ -213,9 +191,7 @@ export default defineConfig({
     minify: shouldMinify ? { js: 'always', css: 'always' } : false,
     inlineStyles: true,
     inlineScripts: ({ size }) => size < 2 * 1_024,
-    sourceMap: !shouldMinify
-      ? { js: 'cheap-module-source-map', css: true }
-      : false,
+    sourceMap: !shouldMinify ? { js: 'cheap-module-source-map', css: true } : false,
     filename: {
       js: '[name].[contenthash:8].js',
       css: '[name].[contenthash:8].css',
@@ -291,11 +267,7 @@ export default defineConfig({
               customEventAttributes: [/^on[a-z]{3,}$/],
               removeAttributeQuotes: false,
               keepClosingSlash: true,
-              ignoreCustomFragments: [
-                /\{\{[\s\S]*?\}\}/,
-                /\{%[\s\S]*?%\}/,
-                /\{#[\s\S]*?#\}/,
-              ],
+              ignoreCustomFragments: [/\{\{[\s\S]*?\}\}/, /\{%[\s\S]*?%\}/, /\{#[\s\S]*?#\}/],
               collapseInlineTagWhitespace: false,
               removeEmptyAttributes: false,
               removeEmptyElements: false,
@@ -315,9 +287,7 @@ export default defineConfig({
                 loader: 'simple-nunjucks-loader',
                 options: {
                   autoescape: false,
-                  searchPaths: ['pages', 'layouts', '.'].map((d) =>
-                    resolveRoot(d),
-                  ),
+                  searchPaths: ['pages', 'layouts', '.'].map((d) => resolveRoot(d)),
                   assetsPaths: [resolveRoot('assets')],
                 },
               },
@@ -332,28 +302,19 @@ export default defineConfig({
     scriptLoading: 'defer',
     template: ({ entryName }) => resolveTemplate(entryName),
     templateParameters: (params) => {
-      const dynEntry = dynamicEntries.find(
-        (e) => e.entryKey === params.entryName,
-      );
+      const dynEntry = dynamicEntries.find((e) => e.entryKey === params.entryName);
       if (dynEntry) {
         return createTemplateParams(
           {
             ...params,
-            entryName: path.relative(
-              resolveRoot('pages'),
-              dynEntry.templateDir,
-            ),
+            entryName: path.relative(resolveRoot('pages'), dynEntry.templateDir),
           },
           LOCALE_STORAGE_KEY,
           getActiveLocaleCodes(),
           { slug: dynEntry.slug, data: dynEntry.data },
         );
       }
-      return createTemplateParams(
-        params,
-        LOCALE_STORAGE_KEY,
-        getActiveLocaleCodes(),
-      );
+      return createTemplateParams(params, LOCALE_STORAGE_KEY, getActiveLocaleCodes());
     },
   },
 });

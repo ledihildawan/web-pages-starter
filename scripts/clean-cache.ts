@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import { resolveRoot } from '@utils/paths';
+import { resolveRoot } from '@config/paths';
 import { log } from './lib/logger';
 
 const dirs = ['node_modules/.cache', '.cache', 'dist'];

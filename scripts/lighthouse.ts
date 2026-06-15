@@ -1,22 +1,21 @@
+import '@config/env';
+
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
+import { env } from '@config/env';
 import inquirer from 'inquirer';
 import { DOMParser } from 'linkedom';
-import '../configs/env';
 import { log, logBox } from './lib/logger';
 import { setupSigintHandler, wrapMainError } from './lib/signal-handler';
-import { SITE_URL } from './lib/site-url';
 
 const OUTPUT_DIR = process.env.LIGHTHOUSE_OUTPUT_DIR || './reports';
 
 const hasNgrokFlag = (args: string[]) => args.includes('--ngrok');
 const isNgrokUrl = (url: string) => url.includes('ngrok');
 const getExtraHeaders = (url: string, args: string[]) =>
-  hasNgrokFlag(args) || isNgrokUrl(url)
-    ? JSON.stringify({ 'ngrok-skip-browser-warning': '1' })
-    : null;
+  hasNgrokFlag(args) || isNgrokUrl(url) ? JSON.stringify({ 'ngrok-skip-browser-warning': '1' }) : null;
 
 const getTimestamp = () => {
   const now = new Date();
@@ -24,9 +23,7 @@ const getTimestamp = () => {
 };
 
 const fetchSitemap = async (url: string, extraHeaders: string | null) => {
-  const sitemapUrl = url.endsWith('/')
-    ? `${url}sitemap.xml`
-    : `${url}/sitemap.xml`;
+  const sitemapUrl = url.endsWith('/') ? `${url}sitemap.xml` : `${url}/sitemap.xml`;
 
   const headers: Record<string, string> = {};
   if (extraHeaders) {
@@ -43,18 +40,10 @@ const parseSitemap = (xml: string) => {
   const parser = new DOMParser();
   const doc = parser.parseFromString(xml, 'text/xml');
   const urls = doc.querySelectorAll('url loc');
-  return Array.from(urls).map((el) =>
-    ((el as Element).textContent ?? '').trim(),
-  );
+  return Array.from(urls).map((el) => ((el as Element).textContent ?? '').trim());
 };
 
-const runLighthouse = (
-  url: string,
-  args: string[],
-  label: string,
-  outputPath: string,
-  outputTypes: string[],
-) => {
+const runLighthouse = (url: string, args: string[], label: string, outputPath: string, outputTypes: string[]) => {
   return new Promise<void>((resolve, reject) => {
     log.info(`\n${label} Running Lighthouse for ${url}...`);
     const proc = spawn('bunx', ['lighthouse', url, ...args], {
@@ -69,12 +58,7 @@ const runLighthouse = (
 
     proc.on('close', (code) => {
       if (code === 0 || code === 1) {
-        if (
-          code === 1 &&
-          stderr &&
-          !stderr.includes('EPERM') &&
-          !stderr.includes('Permission denied')
-        ) {
+        if (code === 1 && stderr && !stderr.includes('EPERM') && !stderr.includes('Permission denied')) {
           process.stderr.write(stderr);
         }
         if (outputTypes.includes('html')) {
@@ -111,12 +95,7 @@ const buildArgs = (
   }
 
   const noThrottle = cliArgs.includes('--no-throttle');
-  const chromeFlags = [
-    '--disable-dev-shm-usage',
-    '--no-sandbox',
-    '--disable-setuid-sandbox',
-    '--disable-gpu',
-  ];
+  const chromeFlags = ['--disable-dev-shm-usage', '--no-sandbox', '--disable-setuid-sandbox', '--disable-gpu'];
 
   if (noThrottle) {
     args.push('--skip-throttling');
@@ -147,10 +126,7 @@ const buildArgs = (
     json: '.report.json',
     csv: '.report.csv',
   };
-  const finalPath =
-    outputTypes.length === 1
-      ? outputPath + (extMap[outputTypes[0]] || '')
-      : outputPath;
+  const finalPath = outputTypes.length === 1 ? outputPath + (extMap[outputTypes[0]] || '') : outputPath;
   args.push('--output-path', finalPath);
 
   if (view) {
@@ -377,28 +353,21 @@ Examples:
       log.error('Error: --url requires a path argument');
       process.exit(1);
     }
-    const base = SITE_URL.endsWith('/') ? SITE_URL.slice(0, -1) : SITE_URL;
+    const base = env.SITE_URL.endsWith('/') ? env.SITE_URL.slice(0, -1) : env.SITE_URL;
     urls = [`${base}${urlPath.startsWith('/') ? urlPath : `/${urlPath}`}`];
   } else if (cliArgs.includes('--no-sitemap')) {
-    urls = [SITE_URL];
+    urls = [env.SITE_URL];
   } else {
     try {
-      const sitemapXml = await fetchSitemap(
-        SITE_URL,
-        getExtraHeaders(SITE_URL, cliArgs),
-      );
+      const sitemapXml = await fetchSitemap(env.SITE_URL, getExtraHeaders(env.SITE_URL, cliArgs));
       urls = parseSitemap(sitemapXml);
     } catch (err) {
       log.warn(`Warning: Could not fetch sitemap — ${(err as Error).message}`);
-      urls = [SITE_URL];
+      urls = [env.SITE_URL];
     }
   }
 
-  if (
-    urls.length > 1 &&
-    !cliArgs.includes('--url') &&
-    !cliArgs.includes('--no-sitemap')
-  ) {
+  if (urls.length > 1 && !cliArgs.includes('--url') && !cliArgs.includes('--no-sitemap')) {
     const { selectedUrls } = await inquirer.prompt([
       {
         type: 'checkbox',
@@ -429,12 +398,10 @@ Examples:
 
   const timestamp = getTimestamp();
   const formFactorDisplay = runBoth ? 'All (Desktop + Mobile)' : formFactor;
-  const categoriesLabel =
-    categories.length === categoriesList.length ? 'All' : categories.join(', ');
+  const categoriesLabel = categories.length === categoriesList.length ? 'All' : categories.join(', ');
   const reportDir = path.join(OUTPUT_DIR, 'lighthouse', timestamp);
   const maxLen = 36;
-  const truncate = (s: string) =>
-    s.length > maxLen ? `...${s.slice(-(maxLen - 3))}` : s;
+  const truncate = (s: string) => (s.length > maxLen ? `...${s.slice(-(maxLen - 3))}` : s);
 
   logBox('Lighthouse Audit', {
     'Form factor': formFactorDisplay,
@@ -462,15 +429,7 @@ Examples:
       const ffDir = path.join(reportDir, ff);
       fs.mkdirSync(ffDir, { recursive: true });
       const outputPath = path.join(ffDir, urlSlug).replace(/\\/g, '/');
-      const args = buildArgs(
-        ff,
-        categories,
-        outputTypes,
-        outputPath,
-        false,
-        url,
-        cliArgs,
-      );
+      const args = buildArgs(ff, categories, outputTypes, outputPath, false, url, cliArgs);
       tasks.push({ url, ff, outputPath, args });
     }
   }
@@ -486,18 +445,10 @@ Examples:
       while (next < tasks.length) {
         const i = next++;
         const { url, ff, outputPath, args } = tasks[i];
-        await runLighthouse(
-          url,
-          args,
-          `[${i + 1}/${totalRuns}] ${ff}`,
-          outputPath,
-          outputTypes,
-        );
+        await runLighthouse(url, args, `[${i + 1}/${totalRuns}] ${ff}`, outputPath, outputTypes);
       }
     };
-    await Promise.all(
-      Array.from({ length: Math.min(concurrency, tasks.length) }, run),
-    );
+    await Promise.all(Array.from({ length: Math.min(concurrency, tasks.length) }, run));
   };
 
   await pool(1);
@@ -509,11 +460,7 @@ Examples:
     log.info('│         Scores Summary                  │');
     log.info('├────────────────────────────────────────┤');
 
-    const pages = [
-      ...new Set(
-        Object.keys(scores).map((k) => k.replace(/-desktop|-mobile$/, '')),
-      ),
-    ];
+    const pages = [...new Set(Object.keys(scores).map((k) => k.replace(/-desktop|-mobile$/, '')))];
     const formFactors = runBoth ? ['desktop', 'mobile'] : [formFactor];
 
     for (const page of pages) {
@@ -550,12 +497,7 @@ Examples:
   if (openReport) {
     const absolutePath = path.resolve(reportDir);
     const platform = process.platform;
-    const cmd =
-      platform === 'win32'
-        ? 'explorer'
-        : platform === 'darwin'
-          ? 'open'
-          : 'xdg-open';
+    const cmd = platform === 'win32' ? 'explorer' : platform === 'darwin' ? 'open' : 'xdg-open';
     spawn(cmd, [absolutePath], { stdio: 'ignore' }).on('error', () => {});
   }
 };

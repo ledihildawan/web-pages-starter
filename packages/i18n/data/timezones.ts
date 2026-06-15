@@ -1,4 +1,4 @@
-import type { ReplaceAll } from '../../../utils/types';
+import type { ReplaceAll } from '@utils/types';
 
 export const TIMEZONES = [
   {
@@ -782,10 +782,7 @@ export const TIMEZONES = [
 export const TIMEZONE_CODES = TIMEZONES.map((t) => t.code) as TimezoneCode[];
 
 export const TIMEZONE_CODE = Object.fromEntries(
-  TIMEZONE_CODES.map(
-    (timezone) =>
-      [timezone.replace(/\//g, '_').toUpperCase(), timezone] as const,
-  ),
+  TIMEZONE_CODES.map((timezone) => [timezone.replace(/\//g, '_').toUpperCase(), timezone] as const),
 ) as {
   [K in TimezoneCode as ReplaceAll<Uppercase<K>, '/', '_'>]: K;
 };

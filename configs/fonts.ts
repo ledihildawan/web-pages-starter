@@ -1,6 +1,6 @@
 import '@fontsource-variable/inter/index.css';
 
-import { defineFontStack } from '../packages/i18n/config/define';
+import { defineFontStack } from '@i18n/config/define';
 
 export const fontsConfig = defineFontStack({
   sans: {

@@ -1,12 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
-import { LOCALES } from '@constants';
+import { resolveRoot } from '@config/paths';
 import { LOCALE_CODES } from '@i18n/data/locales';
 import { log } from '@scripts/lib/logger';
 import { collectKeys, readJSON5 } from '@utils/json5';
 
-const LOCALES_DIR = path.resolve(LOCALES);
+const LOCALES_DIR = resolveRoot('locales');
 const BASE_LOCALE = i18nConfig.defaultLocale;
 
 interface LocaleDiff {
@@ -32,8 +32,7 @@ function levenshtein(a: string, b: string): number {
     dp[0] = i;
     for (let j = 1; j <= n; j++) {
       const tmp = dp[j];
-      dp[j] =
-        a[i - 1] === b[j - 1] ? prev : 1 + Math.min(prev, dp[j], dp[j - 1]);
+      dp[j] = a[i - 1] === b[j - 1] ? prev : 1 + Math.min(prev, dp[j], dp[j - 1]);
       prev = tmp;
     }
   }
@@ -72,10 +71,7 @@ function findDuplicateKeys(content: string): Record<string, number> {
   return dupes;
 }
 
-function tryDetectDuplicates(
-  locale: string,
-  filePath: string,
-): Record<string, number> | null {
+function tryDetectDuplicates(locale: string, filePath: string): Record<string, number> | null {
   const full = path.join(LOCALES_DIR, locale, filePath);
   if (!fs.existsSync(full)) return null;
   try {
@@ -148,9 +144,7 @@ function checkParity() {
 
   const baseDir = path.join(LOCALES_DIR, BASE_LOCALE);
   if (fs.existsSync(baseDir)) {
-    const pageFiles = fs
-      .readdirSync(baseDir)
-      .filter((f) => f.endsWith('.json') && f !== 'common.json');
+    const pageFiles = fs.readdirSync(baseDir).filter((f) => f.endsWith('.json') && f !== 'common.json');
 
     for (const file of pageFiles) {
       log.info(`Checking ${file}...`);
@@ -160,10 +154,7 @@ function checkParity() {
 
   const baseTotal = [...fileBaseSizes.values()].reduce((s, v) => s + v, 0);
 
-  const localeTotals = new Map<
-    string,
-    { missing: number; extra: number; dupeCount: number; totalKeys: number }
-  >();
+  const localeTotals = new Map<string, { missing: number; extra: number; dupeCount: number; totalKeys: number }>();
   for (const locale of LOCALE_CODES) {
     localeTotals.set(locale, {
       missing: 0,
@@ -196,29 +187,19 @@ function printReport(report: ReturnType<typeof checkParity>): void {
   log.info('LOCALE PARITY CHECK REPORT');
   log.info('='.repeat(60));
 
-  const baseTotal =
-    report.summary.find((s) => s.locale === BASE_LOCALE)?.totalKeys ?? 0;
+  const baseTotal = report.summary.find((s) => s.locale === BASE_LOCALE)?.totalKeys ?? 0;
 
   log.info('\nSummary by Locale:');
   log.info('┌──────────────┬────────┬─────────┬───────┬──────────┬────────┐');
   log.info('│ Locale       │ Keys   │ Missing │ Extra │ Duplicate │ Status │');
   log.info('├──────────────┼────────┼─────────┼───────┼──────────┼────────┤');
 
-  for (const {
-    locale,
-    totalKeys,
-    missing,
-    extra,
-    dupeCount,
-  } of report.summary) {
-    const hasIssue =
-      missing > 0 || extra > 0 || dupeCount > 0 || totalKeys !== baseTotal;
+  for (const { locale, totalKeys, missing, extra, dupeCount } of report.summary) {
+    const hasIssue = missing > 0 || extra > 0 || dupeCount > 0 || totalKeys !== baseTotal;
     const color = hasIssue ? '\x1b[31m' : '\x1b[32m';
     const status = hasIssue ? 'Issues' : 'OK';
     const keysStr =
-      totalKeys !== baseTotal
-        ? `${color}${String(totalKeys).padStart(6)}\x1b[0m`
-        : String(totalKeys).padStart(6);
+      totalKeys !== baseTotal ? `${color}${String(totalKeys).padStart(6)}\x1b[0m` : String(totalKeys).padStart(6);
     log.info(
       `│ ${locale.padEnd(12)} │ ${keysStr} │ ${color}${String(missing).padStart(7)}\x1b[0m │ ${String(extra).padStart(5)} │ ${String(dupeCount).padStart(8)} │ ${color}${status.padEnd(6)}\x1b[0m │`,
     );
@@ -263,16 +244,13 @@ function printReport(report: ReturnType<typeof checkParity>): void {
           log.info(`    -> rename "${extra}" to "${miss}"`);
         }
         for (let ei = 0; ei < diff.extra.length; ei++) {
-          if (!usedExtra.has(ei))
-            log.info(`    -> remove key "${diff.extra[ei]}"`);
+          if (!usedExtra.has(ei)) log.info(`    -> remove key "${diff.extra[ei]}"`);
         }
       }
     }
   }
 
-  const localeCount = report.summary.filter(
-    (s) => s.missing > 0 || s.extra > 0 || s.dupeCount > 0,
-  ).length;
+  const localeCount = report.summary.filter((s) => s.missing > 0 || s.extra > 0 || s.dupeCount > 0).length;
 
   log.info(`\n${'═'.repeat(60)}`);
   if (localeCount === 0) {

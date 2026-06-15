@@ -2,13 +2,7 @@
   :root {
     --dir: 1;
 
-    --gradient-primary: linear-gradient(
-      135deg,
-      #7c3aed 0%,
-      #a855f7 35%,
-      #ec4899 65%,
-      #f472b6 100%
-    );
+    --gradient-primary: linear-gradient(135deg, #7c3aed 0%, #a855f7 35%, #ec4899 65%, #f472b6 100%);
     --gradient-primary-subtle: linear-gradient(
       135deg,
       rgba(124, 58, 237, 0.08) 0%,

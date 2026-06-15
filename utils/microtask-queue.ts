@@ -15,10 +15,7 @@ class MicrotaskQueue {
     this.#maxBatchSize = options.maxBatchSize ?? 100;
     this.#flushOnUnload = options.flushOnUnload ?? true;
 
-    if (
-      this.#flushOnUnload &&
-      typeof globalThis.addEventListener === 'function'
-    ) {
+    if (this.#flushOnUnload && typeof globalThis.addEventListener === 'function') {
       globalThis.addEventListener('beforeunload', () => this.flush(), {
         once: true,
       });
@@ -75,4 +72,5 @@ class MicrotaskQueue {
 }
 
 const microtaskQueue = new MicrotaskQueue();
+
 export const scheduleTask = (task: Task): void => microtaskQueue.push(task);

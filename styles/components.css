@@ -105,23 +105,13 @@
     position: absolute;
     inset: -1px;
     border-radius: var(--radius-card-lg);
-    background: linear-gradient(
-      135deg,
-      rgba(124, 58, 237, 0),
-      rgba(168, 85, 247, 0),
-      rgba(236, 72, 153, 0)
-    );
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0), rgba(168, 85, 247, 0), rgba(236, 72, 153, 0));
     transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: -1;
   }
 
   .card-border-glow:hover::before {
-    background: linear-gradient(
-      135deg,
-      rgba(124, 58, 237, 0.4),
-      rgba(168, 85, 247, 0.4),
-      rgba(236, 72, 153, 0.4)
-    );
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.4), rgba(168, 85, 247, 0.4), rgba(236, 72, 153, 0.4));
   }
 
   .spotlight-card {
@@ -261,11 +251,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(
-      circle,
-      rgba(255, 255, 255, 0.8) 0%,
-      transparent 70%
-    );
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
     border-radius: 50%;
     animation: success-sparkle 0.8s ease-out;
   }

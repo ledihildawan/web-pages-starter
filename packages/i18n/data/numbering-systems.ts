@@ -246,9 +246,7 @@ export const NUMBERING_SYSTEMS = [
 
 export type NumberingSystemCode = (typeof NUMBERING_SYSTEMS)[number]['code'];
 
-export const NUMBERING_SYSTEM_CODES = NUMBERING_SYSTEMS.map(
-  (c) => c.code,
-) as NumberingSystemCode[];
+export const NUMBERING_SYSTEM_CODES = NUMBERING_SYSTEMS.map((c) => c.code) as NumberingSystemCode[];
 
 export const NUMBERING_SYSTEM_CODE = Object.fromEntries(
   NUMBERING_SYSTEM_CODES.map((ns) => [ns.toUpperCase(), ns] as const),

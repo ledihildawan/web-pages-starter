@@ -1,20 +1,19 @@
-import '../configs/env';
+import '@config/env';
+
+import { env } from '@config/env';
+import { i18nConfig } from '@config/i18n';
+import { resolveRoot } from '@config/paths';
 import { getErrorPageSlugs } from '@page-engine';
-import { resolveRoot } from '@utils/paths';
-import { i18nConfig } from '../configs/i18n';
 import { logBox } from './lib/logger';
-import { SITE_URL } from './lib/site-url';
 import { writeFilePath } from './lib/write-file';
 
 const OUTPUT_PUBLIC = resolveRoot('public', 'robots.txt');
 
-const basePath = (process.env.BASE_PATH || '/').replace(/\/?$/, '/');
-const baseUrl = SITE_URL.endsWith('/') ? SITE_URL : `${SITE_URL}/`;
+const basePath = env.BASE_PATH.replace(/\/?$/, '/');
+const baseUrl = env.SITE_URL.endsWith('/') ? env.SITE_URL : `${env.SITE_URL}/`;
 
 const errorSlugs = getErrorPageSlugs(i18nConfig.defaultLocale);
-const disallowRules = errorSlugs
-  .map((slug) => `Disallow: ${basePath}${slug}.html`)
-  .join('\n');
+const disallowRules = errorSlugs.map((slug) => `Disallow: ${basePath}${slug}.html`).join('\n');
 
 const robots = `User-agent: *
 Allow: ${basePath}

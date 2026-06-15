@@ -1,23 +1,23 @@
+import '@config/env';
+
 import process from 'node:process';
-import '../configs/env';
-import { ROOT } from '@constants';
+import { env } from '@config/env';
+import { i18nConfig } from '@config/i18n';
+import { ROOT_PATH, resolveRoot } from '@config/paths';
 import { getErrorPageSlugs, getRootPageSlug, scanPages } from '@page-engine';
-import { resolveRoot } from '@utils/paths';
-import { i18nConfig } from '../configs/i18n';
 import { log, logBox } from './lib/logger';
-import { SITE_URL } from './lib/site-url';
 import { writeFilePath } from './lib/write-file';
 
 const cliArgs = process.argv.slice(2);
 const distOnly = cliArgs.includes('--dist-only');
-const isPreviewRegen = process.env.FOR_PREVIEW === 'true';
+const isPreviewRegen = env.FOR_PREVIEW;
 
 const PAGES_DIR = resolveRoot('pages');
 const OUTPUT_PUBLIC = resolveRoot('public', 'sitemap.xml');
 const OUTPUT_DIST = resolveRoot('dist', 'sitemap.xml');
 
-const DEFAULT_PRIORITY = process.env.SITEMAP_DEFAULT_PRIORITY || '0.7';
-const DEFAULT_CHANGEFREQ = process.env.SITEMAP_DEFAULT_CHANGEFREQ || 'weekly';
+const DEFAULT_PRIORITY = env.SITEMAP_DEFAULT_PRIORITY;
+const DEFAULT_CHANGEFREQ = env.SITEMAP_DEFAULT_CHANGEFREQ;
 
 const getPages = () => {
   const EXCLUDED = getErrorPageSlugs(i18nConfig.defaultLocale);
@@ -29,7 +29,7 @@ const getPages = () => {
 
 const generateSitemap = () => {
   const pages = getPages();
-  const baseUrl = SITE_URL.endsWith('/') ? SITE_URL.slice(0, -1) : SITE_URL;
+  const baseUrl = env.SITE_URL.endsWith('/') ? env.SITE_URL.slice(0, -1) : env.SITE_URL;
 
   const rootSlug = getRootPageSlug(i18nConfig.defaultLocale);
   const homePage = pages.includes(rootSlug) ? rootSlug : null;
@@ -46,8 +46,7 @@ const generateSitemap = () => {
   }
 
   otherPages.forEach((page, index) => {
-    const priority =
-      !homePage && index === 0 ? '1.0' : index === 0 ? '0.9' : DEFAULT_PRIORITY;
+    const priority = !homePage && index === 0 ? '1.0' : index === 0 ? '0.9' : DEFAULT_PRIORITY;
     urls.push(`  <url>
     <loc>${baseUrl}/${page}</loc>
     <changefreq>${DEFAULT_CHANGEFREQ}</changefreq>
@@ -70,7 +69,7 @@ ${urls.join('\n')}
     logBox('Generate Sitemap', {
       Pages: urls.length,
       'Base URL': baseUrl.slice(0, 24),
-      Output: OUTPUT_PUBLIC.replace(ROOT, '.').slice(0, 24),
+      Output: OUTPUT_PUBLIC.replace(ROOT_PATH, '.').slice(0, 24),
     });
   }
 };

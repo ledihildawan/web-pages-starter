@@ -1,16 +1,15 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
-import { GENERATED, LOCALES, ROOT } from '@constants';
+import { ROOT_PATH, resolveRoot } from '@config/paths';
 import { LOCALE_CODES } from '@i18n/data/locales';
 import { log, logBox } from '@scripts/lib/logger';
 import { generatedHeader, writeFilePath } from '@scripts/lib/write-file';
 import { collectKeys, readJSON5 } from '@utils/json5';
-import { resolveRoot } from '@utils/paths';
 
-const LOCALES_ROOT = resolveRoot(LOCALES);
+const LOCALES_ROOT = resolveRoot('locales');
 const DEFAULT_LOCALE_DIR = path.join(LOCALES_ROOT, i18nConfig.defaultLocale);
-const OUTPUT_FILE = resolveRoot(GENERATED, 'i18n.d.ts');
+const OUTPUT_FILE = resolveRoot('generated', 'i18n.d.ts');
 
 const INDENT = '  ';
 const LOCALE_EXTS = ['.json'] as const;
@@ -62,9 +61,7 @@ function readLocaleTree(dirPath: string): Record<string, unknown> {
 
       const namespace = `${prefix}${stripLocaleExt(entry)}`;
       if (namespaces[namespace]) {
-        throw new Error(
-          `[i18n] Duplicate locale namespace "${namespace}" in ${currentDir}`,
-        );
+        throw new Error(`[i18n] Duplicate locale namespace "${namespace}" in ${currentDir}`);
       }
 
       namespaces[namespace] = readJSON5(entryPath) as Record<string, unknown>;
@@ -78,38 +75,19 @@ function readLocaleTree(dirPath: string): Record<string, unknown> {
 function getPageIds(): Set<string> {
   const pagesDir = resolveRoot('pages');
   if (!fs.existsSync(pagesDir)) return new Set();
-  return new Set(
-    fs
-      .readdirSync(pagesDir)
-      .filter((f) => fs.statSync(path.join(pagesDir, f)).isDirectory()),
-  );
+  return new Set(fs.readdirSync(pagesDir).filter((f) => fs.statSync(path.join(pagesDir, f)).isDirectory()));
 }
 
-function pickByNamespaces(
-  namespaces: Record<string, unknown>,
-  match: Set<string>,
-): Record<string, unknown> {
-  return Object.fromEntries(
-    Object.entries(namespaces).filter(([ns]) => match.has(ns)),
-  );
+function pickByNamespaces(namespaces: Record<string, unknown>, match: Set<string>): Record<string, unknown> {
+  return Object.fromEntries(Object.entries(namespaces).filter(([ns]) => match.has(ns)));
 }
 
-function pickPages(
-  namespaces: Record<string, unknown>,
-  pageIds: Set<string>,
-): Record<string, unknown> {
+function pickPages(namespaces: Record<string, unknown>, pageIds: Set<string>): Record<string, unknown> {
   return pickByNamespaces(namespaces, pageIds);
 }
 
-function pickShared(
-  namespaces: Record<string, unknown>,
-  pageIds: Set<string>,
-): Record<string, unknown> {
-  return Object.fromEntries(
-    Object.entries(namespaces).filter(
-      ([ns]) => ns !== 'common' && !pageIds.has(ns),
-    ),
-  );
+function pickShared(namespaces: Record<string, unknown>, pageIds: Set<string>): Record<string, unknown> {
+  return Object.fromEntries(Object.entries(namespaces).filter(([ns]) => ns !== 'common' && !pageIds.has(ns)));
 }
 
 function compareLocaleParity(
@@ -132,15 +110,12 @@ function compareLocaleParity(
     const missingKeys = [...defaultKeys].filter((key) => !langKeys.has(key));
     const extraKeys = [...langKeys].filter((key) => !defaultKeys.has(key));
 
-    for (const key of missingKeys)
-      errors.push(`${lang}:${namespace} missing key "${key}"`);
-    for (const key of extraKeys)
-      errors.push(`${lang}:${namespace} extra key "${key}"`);
+    for (const key of missingKeys) errors.push(`${lang}:${namespace} missing key "${key}"`);
+    for (const key of extraKeys) errors.push(`${lang}:${namespace} extra key "${key}"`);
   }
 
   for (const namespace of langNamespaces) {
-    if (!(namespace in defaultData))
-      errors.push(`${lang}: extra namespace "${namespace}"`);
+    if (!(namespace in defaultData)) errors.push(`${lang}: extra namespace "${namespace}"`);
   }
 
   return errors;
@@ -159,19 +134,13 @@ try {
   const sharedData = pickShared(defaultNamespaces, pageIds);
 
   if (!commonData) {
-    throw new Error(
-      `[i18n] Missing default common locale: ${path.join(DEFAULT_LOCALE_DIR, 'common.json')}`,
-    );
+    throw new Error(`[i18n] Missing default common locale: ${path.join(DEFAULT_LOCALE_DIR, 'common.json')}`);
   }
 
   const parityErrors = LOCALE_CODES.flatMap((lang) => {
     const langDir = path.join(LOCALES_ROOT, lang);
     if (!fs.existsSync(langDir)) return [`${lang}: missing locale directory`];
-    return compareLocaleParity(
-      defaultNamespaces,
-      readLocaleTree(langDir),
-      lang,
-    );
+    return compareLocaleParity(defaultNamespaces, readLocaleTree(langDir), lang);
   });
 
   if (parityErrors.length > 0) {
@@ -179,24 +148,16 @@ try {
     for (const err of parityErrors) {
       log.error(`  ${err}`);
     }
-    log.error(
-      '\n   Run `bun ./packages/i18n/cli/check-parity.ts` for a detailed report.',
-    );
+    log.error('\n   Run `bun ./packages/i18n/cli/check-parity.ts` for a detailed report.');
     process.exit(1);
   }
 
   const commonKeys = collectKeys(commonData).map((k) => `'common:${k}'`);
-  const pageKeys = Object.entries(pagesData).flatMap(([page, data]) =>
-    collectKeys(data).map((k) => `'${page}:${k}'`),
-  );
-  const sharedKeys = Object.entries(sharedData).flatMap(([ns, data]) =>
-    collectKeys(data).map((k) => `'${ns}:${k}'`),
-  );
+  const pageKeys = Object.entries(pagesData).flatMap(([page, data]) => collectKeys(data).map((k) => `'${page}:${k}'`));
+  const sharedKeys = Object.entries(sharedData).flatMap(([ns, data]) => collectKeys(data).map((k) => `'${ns}:${k}'`));
 
   const allKeyCount = commonKeys.length + pageKeys.length + sharedKeys.length;
-  const allKeys = [...commonKeys, ...pageKeys, ...sharedKeys]
-    .map((k) => `  | ${k}`)
-    .join('\n');
+  const allKeys = [...commonKeys, ...pageKeys, ...sharedKeys].map((k) => `  | ${k}`).join('\n');
 
   const header = generatedHeader('packages/i18n/cli/generate-types.ts');
   const output = `${header}
@@ -212,9 +173,7 @@ export interface I18nShared ${toTsInterface(sharedData)}
 
   const vscodeSettingsPath = resolveRoot('.vscode', 'settings.json');
   if (fs.existsSync(vscodeSettingsPath)) {
-    const settings = JSON.parse(
-      fs.readFileSync(vscodeSettingsPath, 'utf-8'),
-    ) as Record<string, unknown>;
+    const settings = JSON.parse(fs.readFileSync(vscodeSettingsPath, 'utf-8')) as Record<string, unknown>;
     let changed = false;
 
     const patch = (key: string, value: string) => {
@@ -228,16 +187,13 @@ export interface I18nShared ${toTsInterface(sharedData)}
     patch('i18n-ally.displayLanguage', i18nConfig.defaultLocale);
 
     if (changed) {
-      writeFilePath(
-        vscodeSettingsPath,
-        `${JSON.stringify(settings, null, 2)}\n`,
-      );
+      writeFilePath(vscodeSettingsPath, `${JSON.stringify(settings, null, 2)}\n`);
       log.info('  .vscode/settings.json synced');
     }
   }
 
   log.info(`\n  ${allKeyCount} translation keys typed`);
-  log.info(`  ${OUTPUT_FILE.replace(ROOT, '.')}`);
+  log.info(`  ${OUTPUT_FILE.replace(ROOT_PATH, '.')}`);
   log.success('\nDone: i18n types generated');
 } catch (error) {
   log.error(`Error: Generation failed — ${error}`);

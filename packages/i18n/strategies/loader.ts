@@ -1,8 +1,5 @@
 export type StrategyBundle = {
-  cardinal: Record<
-    string,
-    (num: number, gender?: 'masculine' | 'feminine') => string
-  >;
+  cardinal: Record<string, (num: number, gender?: 'masculine' | 'feminine') => string>;
   ordinal: Record<string, (num: number) => string>;
 };
 

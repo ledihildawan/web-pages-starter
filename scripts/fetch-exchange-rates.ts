@@ -1,19 +1,14 @@
 import fs from 'node:fs';
-import path from 'node:path';
-import { GENERATED } from '@constants';
+import { resolveRoot } from '@config/paths';
 import { CURRENCY_CODE } from '@i18n/data/currencies';
 import { getActiveLocales } from '@i18n/engine/active-locales';
-import { resolveRoot } from '@utils/paths';
 import { log } from './lib/logger';
 import { generatedHeader, writeFilePath } from './lib/write-file';
 
 const EXCHANGE_RATES_URL = 'https://api.frankfurter.dev/v2/rates';
-const GENERATED_DIR = resolveRoot(GENERATED);
-const EXCHANGE_RATES_FILE = path.resolve(GENERATED_DIR, 'exchange-rates.ts');
+const EXCHANGE_RATES_FILE = resolveRoot('generated', 'exchange-rates.ts');
 const BASE_CURRENCY = CURRENCY_CODE.USD;
-const LOCALE_CURRENCIES = [
-  ...new Set(getActiveLocales().map((l) => l.currency)),
-];
+const LOCALE_CURRENCIES = [...new Set(getActiveLocales().map((l) => l.currency))];
 
 async function fetchExchangeRates(): Promise<Record<string, number>> {
   const quotes = LOCALE_CURRENCIES.filter((c) => c !== BASE_CURRENCY).join(',');
@@ -23,9 +18,7 @@ async function fetchExchangeRates(): Promise<Record<string, number>> {
 
   const response = await fetch(url);
   if (!response.ok) {
-    throw new Error(
-      `[i18n] Failed to fetch exchange rates: ${response.statusText}`,
-    );
+    throw new Error(`[i18n] Failed to fetch exchange rates: ${response.statusText}`);
   }
 
   const data = (await response.json()) as Array<{
@@ -67,8 +60,7 @@ async function loadExistingRates(): Promise<{ lastUpdated: Date } | null> {
 
 function isRatesFresh(data: { lastUpdated: Date }): boolean {
   const now = new Date();
-  const hoursSinceUpdate =
-    (now.getTime() - data.lastUpdated.getTime()) / (1_000 * 60 * 60);
+  const hoursSinceUpdate = (now.getTime() - data.lastUpdated.getTime()) / (1_000 * 60 * 60);
   return hoursSinceUpdate < 24;
 }
 
@@ -76,15 +68,11 @@ async function generateExchangeRates(forceRefresh = false): Promise<void> {
   const existing = await loadExistingRates();
 
   if (!forceRefresh && existing && isRatesFresh(existing)) {
-    log.info(
-      `Using cached exchange rates (last updated: ${existing.lastUpdated})`,
-    );
+    log.info(`Using cached exchange rates (last updated: ${existing.lastUpdated})`);
     return;
   }
 
-  log.info(
-    `Fetching ${LOCALE_CURRENCIES.length} currencies: ${LOCALE_CURRENCIES.join(', ')}`,
-  );
+  log.info(`Fetching ${LOCALE_CURRENCIES.length} currencies: ${LOCALE_CURRENCIES.join(', ')}`);
 
   try {
     const rates = await fetchExchangeRates();
@@ -123,9 +111,7 @@ export function convertCurrency(
 
     writeFilePath(EXCHANGE_RATES_FILE, content);
 
-    log.info(
-      `Exchange rates saved to ${EXCHANGE_RATES_FILE.replace(process.cwd(), '.')}`,
-    );
+    log.info(`Exchange rates saved to ${EXCHANGE_RATES_FILE.replace(process.cwd(), '.')}`);
     log.info(`Last updated: ${new Date().toISOString()}`);
   } catch (error) {
     log.error(`Error: Failed to generate exchange rates — ${error}`);

@@ -43,11 +43,7 @@ function getNestedValue(obj: Record<string, unknown>, path: string): unknown {
   const keys = path.split('.');
   let current: unknown = obj;
   for (const key of keys) {
-    if (
-      current === null ||
-      current === undefined ||
-      typeof current !== 'object'
-    ) {
+    if (current === null || current === undefined || typeof current !== 'object') {
       return undefined;
     }
     current = (current as Record<string, unknown>)[key];
@@ -56,9 +52,7 @@ function getNestedValue(obj: Record<string, unknown>, path: string): unknown {
 }
 
 describe('home page data', () => {
-  const pageData = JSON5.parse(
-    readFileSync(join(ROOT, 'pages/home/index.json5'), 'utf-8'),
-  );
+  const pageData = JSON5.parse(readFileSync(join(ROOT, 'pages/home/index.json5'), 'utf-8'));
 
   test('has page_id', () => {
     expect(pageData.page_id).toBe('home');
@@ -94,9 +88,7 @@ describe('home page data', () => {
 });
 
 describe('home locale keys (en-US)', () => {
-  const locale = JSON.parse(
-    readFileSync(join(ROOT, 'locales/en-US/home.json'), 'utf-8'),
-  );
+  const locale = JSON.parse(readFileSync(join(ROOT, 'locales/en-US/home.json'), 'utf-8'));
 
   test('has all hero keys', () => {
     for (const key of REQUIRED_HERO_KEYS) {
@@ -134,12 +126,8 @@ describe('home locale keys (en-US)', () => {
 });
 
 describe('home locale parity across locales', () => {
-  const enHome = JSON.parse(
-    readFileSync(join(ROOT, 'locales/en-US/home.json'), 'utf-8'),
-  );
-  const idHome = JSON.parse(
-    readFileSync(join(ROOT, 'locales/id-ID/home.json'), 'utf-8'),
-  );
+  const enHome = JSON.parse(readFileSync(join(ROOT, 'locales/en-US/home.json'), 'utf-8'));
+  const idHome = JSON.parse(readFileSync(join(ROOT, 'locales/id-ID/home.json'), 'utf-8'));
 
   function getAllKeys(obj: Record<string, unknown>, prefix = ''): string[] {
     const keys: string[] = [];

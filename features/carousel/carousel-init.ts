@@ -1,5 +1,6 @@
-import Splide from '@splidejs/splide';
 import '@splidejs/splide/dist/css/splide.min.css';
+
+import Splide from '@splidejs/splide';
 
 export function initCarousel(): void {
   const el = document.getElementById('main-carousel');

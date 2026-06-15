@@ -6,11 +6,9 @@ export interface ScannedPage {
   dir: string;
 }
 
-export const isGroup = (name: string): boolean =>
-  name.startsWith('(') && name.endsWith(')');
+export const isGroup = (name: string): boolean => name.startsWith('(') && name.endsWith(')');
 
-export const isSlugDir = (name: string): boolean =>
-  name.startsWith('[') && name.endsWith(']');
+export const isSlugDir = (name: string): boolean => name.startsWith('[') && name.endsWith(']');
 
 export const isPrivateDir = (name: string): boolean => name.startsWith('_');
 

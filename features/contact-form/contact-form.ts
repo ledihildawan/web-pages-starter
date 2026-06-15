@@ -16,25 +16,17 @@ export function contactFormData() {
     statusMessage: '',
 
     fields(): ContactFormField[] {
-      const form = (this as unknown as { $root: HTMLElement })
-        .$root as HTMLFormElement;
-      return Array.from(
-        form.querySelectorAll<ContactFormEl>(
-          'input[required], textarea[required]',
-        ),
-      ).map((el) => {
+      const form = (this as unknown as { $root: HTMLElement }).$root as HTMLFormElement;
+      return Array.from(form.querySelectorAll<ContactFormEl>('input[required], textarea[required]')).map((el) => {
         const id = el.id;
-        const errorEl = form.querySelector<HTMLElement>(
-          `[data-error-for="${id}"]`,
-        );
+        const errorEl = form.querySelector<HTMLElement>(`[data-error-for="${id}"]`);
         return {
           el,
           errorEl,
           message: '',
           validate(value: string) {
             const trimmed = value.trim();
-            if (!trimmed)
-              return i18next.t('contact:contact.form.errors.required');
+            if (!trimmed) return i18next.t('contact:contact.form.errors.required');
             if (el.type === 'email' && !EMAIL_PATTERN.test(trimmed)) {
               return i18next.t('contact:contact.form.errors.email_invalid');
             }
@@ -61,8 +53,7 @@ export function contactFormData() {
     },
 
     validate() {
-      const form = (this as unknown as { $root: HTMLElement })
-        .$root as HTMLFormElement;
+      const form = (this as unknown as { $root: HTMLElement }).$root as HTMLFormElement;
       const fieldsList = this.fields();
       const invalid: ContactFormField[] = [];
 
@@ -77,10 +68,7 @@ export function contactFormData() {
       }
 
       if (invalid.length > 0) {
-        this.statusMessage = i18next.t(
-          'contact:contact.form.errors.submit_errors',
-          { count: invalid.length },
-        );
+        this.statusMessage = i18next.t('contact:contact.form.errors.submit_errors', { count: invalid.length });
         invalid[0].el.focus();
         return;
       }

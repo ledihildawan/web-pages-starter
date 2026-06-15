@@ -16,12 +16,7 @@ export const setupSigintHandler = () => {
 export const handleExitPromptError = (err: unknown): boolean => {
   if (isShuttingDown) return true;
   const message = err instanceof Error ? err.message : String(err);
-  if (
-    err &&
-    typeof err === 'object' &&
-    'name' in err &&
-    (err as { name: string }).name === 'ExitPromptError'
-  ) {
+  if (err && typeof err === 'object' && 'name' in err && (err as { name: string }).name === 'ExitPromptError') {
     handleShutdown();
     return true;
   }
@@ -34,11 +29,8 @@ export const handleExitPromptError = (err: unknown): boolean => {
 
 type ServeArgs = Parameters<typeof serve>;
 
-export const createServer = (
-  options: ServeArgs[0],
-  callback?: ServeArgs[1],
-) => {
-  const port = options.port ?? 3000;
+export const createServer = (options: ServeArgs[0], callback?: ServeArgs[1]) => {
+  const port = options.port ?? 8888;
   const server = serve(options, callback);
   server.on('error', (err: NodeJS.ErrnoException) => {
     if (err.code === 'EADDRINUSE') {
@@ -51,10 +43,7 @@ export const createServer = (
   return server;
 };
 
-export const wrapMainError = (
-  mainFn: () => Promise<void>,
-  label = 'Error:',
-) => {
+export const wrapMainError = (mainFn: () => Promise<void>, label = 'Error:') => {
   mainFn().catch((err) => {
     if (handleExitPromptError(err)) return;
     log.error(`\n${label} ${err}`);

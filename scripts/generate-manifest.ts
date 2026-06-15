@@ -1,7 +1,9 @@
-import '../configs/env';
-import { resolveRoot } from '@utils/paths';
-import { i18nConfig } from '../configs/i18n';
-import { loadGlobalData } from '../utils/json5';
+import '@config/env';
+
+import { env } from '@config/env';
+import { i18nConfig } from '@config/i18n';
+import { resolveRoot } from '@config/paths';
+import { loadGlobalData } from '@utils/json5';
 import { logBox } from './lib/logger';
 import { writeFilePath } from './lib/write-file';
 
@@ -11,14 +13,11 @@ const dataDir = resolveRoot('data');
 const global = loadGlobalData(dataDir);
 
 const siteName = (global.site_name as string) || 'Starter';
-const siteDescription =
-  (global.site_description as string) ||
-  'A modern web application with i18n support';
+const siteDescription = (global.site_description as string) || 'A modern web application with i18n support';
 const seo = (global.seo as Record<string, unknown>) || {};
 const themeColor = (seo.theme_color as string) || '#020617';
-const defaultLocale = i18nConfig.defaultLocale;
 
-const basePath = process.env.BASE_PATH?.replace(/\/+$/, '') || '';
+const basePath = env.BASE_PATH.replace(/\/+$/, '');
 
 const manifest = {
   name: siteName,
@@ -31,7 +30,7 @@ const manifest = {
   orientation: 'any',
   scope: basePath ? `${basePath}/` : '.',
   dir: 'ltr',
-  lang: defaultLocale,
+  lang: i18nConfig.defaultLocale,
   categories: ['productivity', 'utilities', 'developer'],
   icons: [
     {
@@ -64,7 +63,7 @@ writeFilePath(OUTPUT_PUBLIC, `${JSON.stringify(manifest, null, 2)}\n`);
 
 logBox('Generate Manifest', {
   Name: siteName,
-  Lang: defaultLocale,
+  Lang: i18nConfig.defaultLocale,
   Theme: themeColor,
   Output: 'public/manifest.json',
 });

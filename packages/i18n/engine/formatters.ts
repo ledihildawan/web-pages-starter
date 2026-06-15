@@ -1,12 +1,7 @@
+import { ACTIVE_NUMBERING_SYSTEMS, WRITING_SYSTEM } from '@generated/active-locales-data';
+import type { CurrencyCode } from '@i18n/data/currencies';
 import pluralize from 'pluralize';
-import {
-  ACTIVE_NUMBERING_SYSTEMS,
-  WRITING_SYSTEM,
-} from '../../../generated/active-locales-data';
-import {
-  convertCurrency as convertCurrencyRaw,
-  EXCHANGE_RATES,
-} from '../../../generated/exchange-rates';
+import { convertCurrency as convertCurrencyRaw, EXCHANGE_RATES } from '../../../generated/exchange-rates';
 import type { DateValue } from '../../../utils/types';
 import type {
   CardinalOptions,
@@ -18,21 +13,14 @@ import type {
   RelativeTimeOptions,
   TimeFormatOptions,
 } from '../config/types';
-import type { CurrencyCode } from '../data/currencies';
 import { getActiveLocales } from './active-locales';
-import {
-  getCurrency,
-  getLanguageConfig,
-  getLanguageSubtag,
-  getLocale,
-} from './helpers';
+import { getCurrency, getLanguageConfig, getLanguageSubtag, getLocale } from './helpers';
 
 const toDateObj = (date: DateValue): Date =>
   typeof date === 'string' || typeof date === 'number' ? new Date(date) : date;
 
-const createDigitConverter =
-  (digitsArray: readonly string[]) => (num: number | string) =>
-    String(num).replace(/\d/g, (d) => digitsArray[Number(d)]);
+const createDigitConverter = (digitsArray: readonly string[]) => (num: number | string) =>
+  String(num).replace(/\d/g, (d) => digitsArray[Number(d)]);
 
 const NATIVE_DIGITS_MAP = getActiveLocales().reduce(
   (acc, locale) => {
@@ -41,9 +29,7 @@ const NATIVE_DIGITS_MAP = getActiveLocales().reduce(
 
     if (acc[lang]) return acc;
 
-    const nsConfig = ACTIVE_NUMBERING_SYSTEMS.find(
-      (config) => config.code === ns,
-    );
+    const nsConfig = ACTIVE_NUMBERING_SYSTEMS.find((config) => config.code === ns);
     if (nsConfig?.digits) {
       acc[lang] = createDigitConverter(nsConfig.digits);
     }
@@ -65,8 +51,7 @@ export const toNativeDigits = (text: string, force?: boolean) => {
   if (force === false) return text;
 
   const localeConfig = getLanguageConfig(getLocale());
-  const shouldConvert =
-    force === true || (force === undefined && localeConfig?.nativeDigits);
+  const shouldConvert = force === true || (force === undefined && localeConfig?.nativeDigits);
 
   if (!shouldConvert) return text;
 
@@ -86,11 +71,7 @@ export const toNativeDigits = (text: string, force?: boolean) => {
   return converter ? converter(text) : text;
 };
 
-const safeIntlFormat = (
-  options: Intl.NumberFormatOptions,
-  num: number,
-  fallback: string,
-) => {
+const safeIntlFormat = (options: Intl.NumberFormatOptions, num: number, fallback: string) => {
   try {
     return new Intl.NumberFormat(getLocale(), options).format(num);
   } catch {
@@ -118,21 +99,7 @@ const convertLatinDigits = (text: string, targetDigits: readonly string[]) =>
 
 const toRoman = (num: number): string => {
   const vals = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
-  const syms = [
-    'M',
-    'CM',
-    'D',
-    'CD',
-    'C',
-    'XC',
-    'L',
-    'XL',
-    'X',
-    'IX',
-    'V',
-    'IV',
-    'I',
-  ];
+  const syms = ['M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I'];
   let result = '';
   for (let i = 0; i < vals.length; i++) {
     while (num >= vals[i]) {
@@ -143,16 +110,8 @@ const toRoman = (num: number): string => {
   return result;
 };
 
-const applyDigitsFallback = (
-  result: string,
-  numberingSystem: string,
-  num?: number,
-) => {
-  if (
-    !ALGORITHMIC_SYSTEMS.includes(
-      numberingSystem as (typeof ALGORITHMIC_SYSTEMS)[number],
-    )
-  ) {
+const applyDigitsFallback = (result: string, numberingSystem: string, num?: number) => {
+  if (!ALGORITHMIC_SYSTEMS.includes(numberingSystem as (typeof ALGORITHMIC_SYSTEMS)[number])) {
     return result;
   }
   if (numberingSystem === 'roman') {
@@ -161,9 +120,7 @@ const applyDigitsFallback = (
     const parsed = parseInt(result.replace(/\D/g, ''), 10);
     return Number.isNaN(parsed) ? result : toRoman(parsed);
   }
-  const nsConfig = ACTIVE_NUMBERING_SYSTEMS.find(
-    (ns) => ns.code === numberingSystem,
-  );
+  const nsConfig = ACTIVE_NUMBERING_SYSTEMS.find((ns) => ns.code === numberingSystem);
   if (!nsConfig?.digits) return result;
   if (/\d/.test(result)) {
     return convertLatinDigits(result, nsConfig.digits);
@@ -174,24 +131,15 @@ const applyDigitsFallback = (
   return result;
 };
 
-let cardinalStrategies: Record<
-  string,
-  (num: number, gender?: 'masculine' | 'feminine') => string
-> = {};
+let cardinalStrategies: Record<string, (num: number, gender?: 'masculine' | 'feminine') => string> = {};
 let ordinalStrategies: Record<string, (num: number) => string> = {};
 
-export const setStrategies = (
-  cardinal: typeof cardinalStrategies,
-  ordinal: typeof ordinalStrategies,
-) => {
+export const setStrategies = (cardinal: typeof cardinalStrategies, ordinal: typeof ordinalStrategies) => {
   cardinalStrategies = cardinal;
   ordinalStrategies = ordinal;
 };
 
-export const formatCardinal = (
-  value: number | string,
-  options: CardinalOptions = {},
-) => {
+export const formatCardinal = (value: number | string, options: CardinalOptions = {}) => {
   const num = parseInt(`${value}`, 10);
   if (Number.isNaN(num)) return `${value}`;
   const strategy = cardinalStrategies[getLanguageSubtag(getLocale())];
@@ -199,10 +147,7 @@ export const formatCardinal = (
   return strategy(num, options.gender) ?? `${num}`;
 };
 
-export const formatOrdinal = (
-  value: number | string,
-  _options?: OrdinalOptions,
-) => {
+export const formatOrdinal = (value: number | string, _options?: OrdinalOptions) => {
   const num = typeof value === 'number' ? value : parseInt(value, 10);
   if (Number.isNaN(num)) return `${value}`;
 
@@ -221,10 +166,7 @@ export const formatOrdinal = (
     const category = new Intl.PluralRules(getLocale(), {
       type: 'ordinal',
     }).select(num);
-    const suffix =
-      ordinalSuffixes[category]?.[getLanguageSubtag(getLocale())] ??
-      ordinalSuffixes[category]?.en ??
-      'th';
+    const suffix = ordinalSuffixes[category]?.[getLanguageSubtag(getLocale())] ?? ordinalSuffixes[category]?.en ?? 'th';
     return `${num}${suffix}`;
   } catch {
     const rem = num % 100;
@@ -254,8 +196,7 @@ const processNumeric = (
 
   if (options.nativeDigits && !options.numberingSystem) {
     const cjkLanguages = WRITING_SYSTEM.CJK_LANGUAGES as readonly string[];
-    if (config.cjk && cjkLanguages.includes(languageSubtag))
-      return config.cjk(num, languageSubtag);
+    if (config.cjk && cjkLanguages.includes(languageSubtag)) return config.cjk(num, languageSubtag);
 
     const digitRules: {
       languages: readonly string[];
@@ -279,23 +220,18 @@ const processNumeric = (
       },
     ];
 
-    const matchedRule = digitRules.find((rule) =>
-      rule.languages.includes(languageSubtag),
-    );
+    const matchedRule = digitRules.find((rule) => rule.languages.includes(languageSubtag));
 
     if (matchedRule) {
       const intlOpts = { ...intlOptions, ...options };
       delete intlOpts.nativeDigits;
       const intlResult = safeIntlFormat(intlOpts, num, '');
 
-      return intlResult
-        ? matchedRule.converter(intlResult)
-        : matchedRule.fallback(num);
+      return intlResult ? matchedRule.converter(intlResult) : matchedRule.fallback(num);
     }
   }
 
-  const numberingSystem =
-    options.numberingSystem ?? getNumberingSystem(options);
+  const numberingSystem = options.numberingSystem ?? getNumberingSystem(options);
   const result = safeIntlFormat(
     {
       ...intlOptions,
@@ -308,10 +244,7 @@ const processNumeric = (
   return applyDigitsFallback(result, numberingSystem, num);
 };
 
-export const formatNumber = (
-  value: number | string,
-  options: FormatOptions = {},
-) =>
+export const formatNumber = (value: number | string, options: FormatOptions = {}) =>
   processNumeric(
     value,
     options,
@@ -326,11 +259,7 @@ export const formatNumber = (
     },
   );
 
-export const formatCurrency = (
-  value: number | string,
-  currency: string,
-  options: FormatOptions = {},
-) => {
+export const formatCurrency = (value: number | string, currency: string, options: FormatOptions = {}) => {
   return processNumeric(
     value,
     options,
@@ -347,10 +276,7 @@ export const formatCurrency = (
   );
 };
 
-export const formatPercent = (
-  value: number | string,
-  options: FormatOptions = {},
-) => {
+export const formatPercent = (value: number | string, options: FormatOptions = {}) => {
   return processNumeric(
     value,
     options,
@@ -358,23 +284,15 @@ export const formatPercent = (
     {
       invalid: (v) => `${v}%`,
       intlFallback: (num) => `${num * 100}%`,
-      cjk: (num, _languageSubtag) =>
-        `${formatCardinal(Math.round(num * 100))}%`,
-      arabicFallback: (num) =>
-        `${NATIVE_DIGITS_MAP.ar(Math.round(num * 100))}%`,
-      devanagariFallback: (num) =>
-        `${NATIVE_DIGITS_MAP.hi(Math.round(num * 100))}%`,
-      cyrillicFallback: (num) =>
-        `${NATIVE_DIGITS_MAP.ru(Math.round(num * 100))}%`,
+      cjk: (num, _languageSubtag) => `${formatCardinal(Math.round(num * 100))}%`,
+      arabicFallback: (num) => `${NATIVE_DIGITS_MAP.ar(Math.round(num * 100))}%`,
+      devanagariFallback: (num) => `${NATIVE_DIGITS_MAP.hi(Math.round(num * 100))}%`,
+      cyrillicFallback: (num) => `${NATIVE_DIGITS_MAP.ru(Math.round(num * 100))}%`,
     },
   );
 };
 
-export const formatUnit = (
-  value: number | string,
-  unit: string,
-  options: FormatOptions = {},
-) => {
+export const formatUnit = (value: number | string, unit: string, options: FormatOptions = {}) => {
   return processNumeric(
     value,
     options,
@@ -390,25 +308,15 @@ export const formatUnit = (
   );
 };
 
-export const formatScientific = (
-  value: number | string,
-  options: FormatOptions = {},
-) => {
+export const formatScientific = (value: number | string, options: FormatOptions = {}) => {
   const num = typeof value === 'number' ? value : parseFloat(value);
-  const numberingSystem =
-    options.numberingSystem ?? getNumberingSystem(options);
+  const numberingSystem = options.numberingSystem ?? getNumberingSystem(options);
 
   if (num === 0) {
     if (numberingSystem === 'arab') return '٠';
     if (numberingSystem === 'deva') return '०';
-    if (
-      ALGORITHMIC_SYSTEMS.includes(
-        numberingSystem as (typeof ALGORITHMIC_SYSTEMS)[number],
-      )
-    ) {
-      const nsConfig = ACTIVE_NUMBERING_SYSTEMS.find(
-        (ns) => ns.code === numberingSystem,
-      );
+    if (ALGORITHMIC_SYSTEMS.includes(numberingSystem as (typeof ALGORITHMIC_SYSTEMS)[number])) {
+      const nsConfig = ACTIVE_NUMBERING_SYSTEMS.find((ns) => ns.code === numberingSystem);
       if (nsConfig?.digits) return nsConfig.digits[0];
     }
     return '0';
@@ -440,8 +348,7 @@ export const formatScientific = (
         const exp = Math.floor(Math.log10(Math.abs(n)));
         const cMan = formatCardinal(Math.abs(n) / 10 ** exp);
         const cExp = formatCardinal(10 ** Math.abs(exp));
-        const minus =
-          n < 0 ? (languageSubtag === 'ja' ? 'マイナス' : '负') : '';
+        const minus = n < 0 ? (languageSubtag === 'ja' ? 'マイナス' : '负') : '';
         return `${minus}${cMan}×${cExp}`;
       },
       arabicFallback: (n) => {
@@ -473,14 +380,7 @@ export const formatBytes = (bytes: number, decimals: number = 1) => {
     }
   }
 
-  const units = [
-    'byte',
-    'kilobyte',
-    'megabyte',
-    'gigabyte',
-    'terabyte',
-    'petabyte',
-  ];
+  const units = ['byte', 'kilobyte', 'megabyte', 'gigabyte', 'terabyte', 'petabyte'];
   const k = 1_024;
   const i = Math.floor(Math.log(bytes) / Math.log(k));
   const scaled = bytes / k ** i;
@@ -497,10 +397,7 @@ export const formatBytes = (bytes: number, decimals: number = 1) => {
   }
 };
 
-export const formatAbbreviated = (
-  value: number,
-  options: FormatOptions = {},
-) => {
+export const formatAbbreviated = (value: number, options: FormatOptions = {}) => {
   try {
     return new Intl.NumberFormat(getLocale(), {
       notation: 'compact',
@@ -531,10 +428,7 @@ export const formatAbbreviated = (
   }
 };
 
-const formatIntlDate = (
-  date: DateValue,
-  options?: Intl.DateTimeFormatOptions,
-) => {
+const formatIntlDate = (date: DateValue, options?: Intl.DateTimeFormatOptions) => {
   try {
     const config = getLanguageConfig(getLocale());
     return new Intl.DateTimeFormat(getLocale(), {
@@ -547,18 +441,12 @@ const formatIntlDate = (
   }
 };
 
-export const formatDate = (
-  date: DateValue,
-  options?: Intl.DateTimeFormatOptions,
-) => formatIntlDate(date, options);
+export const formatDate = (date: DateValue, options?: Intl.DateTimeFormatOptions) => formatIntlDate(date, options);
 
 export const formatTime = (date: DateValue, options?: TimeFormatOptions) =>
   formatIntlDate(date, { timeStyle: options?.timeStyle ?? 'short' });
 
-export const formatDateTime = (
-  date: DateValue,
-  options?: Intl.DateTimeFormatOptions,
-) =>
+export const formatDateTime = (date: DateValue, options?: Intl.DateTimeFormatOptions) =>
   formatIntlDate(date, {
     dateStyle: 'short',
     timeStyle: 'short',
@@ -621,27 +509,14 @@ export const localPriceCurrency = (_plan: RegionalPrice) => {
   return getCurrency(getLocale());
 };
 
-export const convertCurrency = (
-  value: number,
-  targetCurrency?: string,
-  options?: FormatOptions,
-) => {
+export const convertCurrency = (value: number, targetCurrency?: string, options?: FormatOptions) => {
   const currency = targetCurrency || getCurrency(getLocale());
-  const converted = convertCurrencyRaw(
-    value,
-    getCurrency(getLocale()),
-    currency,
-    EXCHANGE_RATES,
-  );
+  const converted = convertCurrencyRaw(value, getCurrency(getLocale()), currency, EXCHANGE_RATES);
 
   return formatCurrency(converted, currency, options);
 };
 
-export const convertLocalPrice = (
-  plan: RegionalPrice,
-  targetCurrency?: CurrencyCode,
-  options?: FormatOptions,
-) => {
+export const convertLocalPrice = (plan: RegionalPrice, targetCurrency?: CurrencyCode, options?: FormatOptions) => {
   const price = localPrice(plan);
   const fromCurrency = localPriceCurrency(plan);
   const toCurrency = targetCurrency || getCurrency(getLocale());
@@ -650,20 +525,12 @@ export const convertLocalPrice = (
     return formatCurrency(price, toCurrency, options);
   }
 
-  const converted = convertCurrencyRaw(
-    price,
-    fromCurrency,
-    toCurrency,
-    EXCHANGE_RATES,
-  );
+  const converted = convertCurrencyRaw(price, fromCurrency, toCurrency, EXCHANGE_RATES);
 
   return formatCurrency(converted, toCurrency, options);
 };
 
-export const formatLocalPrice = (
-  plan: RegionalPrice,
-  options?: FormatOptions,
-) => {
+export const formatLocalPrice = (plan: RegionalPrice, options?: FormatOptions) => {
   const price = localPrice(plan);
   const currency = localPriceCurrency(plan);
 
@@ -684,12 +551,7 @@ export const formatLocalPriceDiscounted = (
     return formatCurrency(price, toCurrency, options);
   }
 
-  const converted = convertCurrencyRaw(
-    price,
-    fromCurrency,
-    toCurrency,
-    EXCHANGE_RATES,
-  );
+  const converted = convertCurrencyRaw(price, fromCurrency, toCurrency, EXCHANGE_RATES);
 
   return formatCurrency(converted, toCurrency, options);
 };
@@ -699,10 +561,7 @@ export const plural = (word: string, count?: number, inclusive = false) =>
 
 export const singular = (word: string) => pluralize.singular(word);
 
-export const formatRelativeTime = (
-  value: number,
-  options: RelativeTimeOptions,
-) => {
+export const formatRelativeTime = (value: number, options: RelativeTimeOptions) => {
   const lang = getLocale();
   try {
     return new Intl.RelativeTimeFormat(lang, {

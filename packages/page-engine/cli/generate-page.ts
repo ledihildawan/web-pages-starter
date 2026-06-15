@@ -1,23 +1,18 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { LOCALES } from '@constants';
+import { i18nConfig } from '@config/i18n';
+import { resolveRoot } from '@config/paths';
 import { getActiveLocaleCodes } from '@i18n/engine/active-locales';
-import {
-  isSystemPageSlug,
-  SYSTEM_PAGE_IDS,
-  type SystemPageId,
-} from '@page-engine';
-import { resolveRoot } from '@utils/paths';
-import { i18nConfig } from '../configs/i18n';
-import { log } from './lib/logger';
-import { romanize } from './lib/romanize';
+import { isSystemPageSlug, SYSTEM_PAGE_IDS, type SystemPageId } from '@page-engine';
+import { log } from '@scripts/lib/logger';
+import { romanize } from '@scripts/lib/romanize';
 
 const args = process.argv.slice(2);
 const pageName = args[0];
 
 if (!pageName) {
   log.error('Error: Please provide a page name.');
-  log.info('Usage: bun ./scripts/generate-page.ts <page-name>');
+  log.info('Usage: bun ./packages/page-engine/cli/generate-page.ts <page-name>');
   process.exit(1);
 }
 
@@ -28,21 +23,18 @@ if (!formattedName) {
   process.exit(1);
 }
 
-const defaultLocale = i18nConfig.defaultLocale;
 if (
-  isSystemPageSlug(formattedName, defaultLocale) ||
+  isSystemPageSlug(formattedName, i18nConfig.defaultLocale) ||
   SYSTEM_PAGE_IDS.includes(formattedName as SystemPageId)
 ) {
   log.error(`Error: "${formattedName}" is a reserved system page name.`);
   process.exit(1);
 }
 
-const titleCase = pageName
-  .replace(/-/g, ' ')
-  .replace(/\b\w/g, (l) => l.toUpperCase());
+const titleCase = pageName.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase());
 
 const targetDir = resolveRoot('pages', formattedName);
-const baseLocaleDir = resolveRoot(LOCALES);
+const baseLocaleDir = resolveRoot('locales');
 
 if (fs.existsSync(targetDir)) {
   log.error(`Error: Page "${formattedName}" already exists.`);
@@ -126,9 +118,7 @@ try {
 
       if (!fs.existsSync(filePath)) {
         fs.writeFileSync(filePath, localeContent, 'utf-8');
-        log.info(
-          `Created locale [${lng}]: locales/${lng}/${formattedName}.json`,
-        );
+        log.info(`Created locale [${lng}]: locales/${lng}/${formattedName}.json`);
       }
     }
   }

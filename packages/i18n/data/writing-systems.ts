@@ -6,8 +6,7 @@ export const WRITING_SYSTEMS = [
     code: 'latin',
     name: 'Latin Script',
     nameId: 'Skrip Latin',
-    description:
-      'Latin alphabet and variants used in Western and many other languages',
+    description: 'Latin alphabet and variants used in Western and many other languages',
     languages: [
       LANGUAGE_CODE.ID,
       LANGUAGE_CODE.EN,
@@ -60,20 +59,17 @@ export const WRITING_SYSTEMS = [
     code: 'cjk',
     name: 'CJK Unified Ideographs',
     nameId: 'Ideografi CJK Terpadu',
-    description:
-      'Chinese, Japanese, Korean unified characters and their variants',
+    description: 'Chinese, Japanese, Korean unified characters and their variants',
     languages: [LANGUAGE_CODE.ZH, LANGUAGE_CODE.JA, LANGUAGE_CODE.KO],
     numberingSystems: ['jpan', 'hans', 'hant', 'kore', 'hanidec', 'fullwide'],
     direction: DIRECTION_CODE.LTR,
-    defaultFont:
-      'Noto Sans JP Variable, Noto Sans SC Variable, Noto Sans TC Variable, Noto Sans KR Variable',
+    defaultFont: 'Noto Sans JP Variable, Noto Sans SC Variable, Noto Sans TC Variable, Noto Sans KR Variable',
   },
   {
     code: 'arabic',
     name: 'Arabic Script',
     nameId: 'Skrip Arab',
-    description:
-      'Arabic alphabet and variants used in Arabic and other languages',
+    description: 'Arabic alphabet and variants used in Arabic and other languages',
     languages: [
       LANGUAGE_CODE.AR,
       LANGUAGE_CODE.FA,
@@ -231,8 +227,7 @@ export const WRITING_SYSTEMS = [
     code: 'ethiopic',
     name: 'Ethiopic Script',
     nameId: 'Skrip Ethiopic',
-    description:
-      'Ethiopic script used in Amharic and other Ethiopian languages',
+    description: 'Ethiopic script used in Amharic and other Ethiopian languages',
     languages: [LANGUAGE_CODE.AM] as LanguageCode[],
     numberingSystems: ['ethi'],
     direction: DIRECTION_CODE.LTR,
@@ -282,8 +277,7 @@ export const WRITING_SYSTEMS = [
     code: 'hebrew',
     name: 'Hebrew Script',
     nameId: 'Skrip Ibrani',
-    description:
-      'Hebrew script used in Hebrew language (included in Inter font)',
+    description: 'Hebrew script used in Hebrew language (included in Inter font)',
     languages: [LANGUAGE_CODE.HE],
     numberingSystems: ['hebr'],
     direction: DIRECTION_CODE.RTL,
@@ -313,8 +307,7 @@ export const WRITING_SYSTEMS = [
     code: 'nko',
     name: 'N\u2019Ko Script',
     nameId: 'Skrip N\u2019Ko',
-    description:
-      'N\u2019Ko script used in West Africa (Mali, Guinea, Ivory Coast)',
+    description: 'N\u2019Ko script used in West Africa (Mali, Guinea, Ivory Coast)',
     languages: [] as LanguageCode[],
     numberingSystems: ['nkoo'],
     direction: DIRECTION_CODE.RTL,

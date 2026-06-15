@@ -1,34 +1,9 @@
 import { buildCardinal } from './builder';
 
-export const cardinal = (
-  num: number,
-  gender: 'masculine' | 'feminine' = 'masculine',
-) => {
+export const cardinal = (num: number, gender: 'masculine' | 'feminine' = 'masculine') => {
   const units = {
-    masculine: [
-      '',
-      'واحِد',
-      'اِثنان',
-      'ثَلاثة',
-      'أرْبَعَة',
-      'خَمْسة',
-      'سِتَّة',
-      'سَبْعَة',
-      'ثَمانِية',
-      'تِسْعة',
-    ],
-    feminine: [
-      '',
-      'واحِدَة',
-      'اِثنتان',
-      'ثَلالث',
-      'أرْبَع',
-      'خَمس',
-      'سِتّ',
-      'سَبع',
-      'ثَمان',
-      'تِسع',
-    ],
+    masculine: ['', 'واحِد', 'اِثنان', 'ثَلاثة', 'أرْبَعَة', 'خَمْسة', 'سِتَّة', 'سَبْعَة', 'ثَمانِية', 'تِسْعة'],
+    feminine: ['', 'واحِدَة', 'اِثنتان', 'ثَلالث', 'أرْبَع', 'خَمس', 'سِتّ', 'سَبع', 'ثَمان', 'تِسع'],
   }[gender];
 
   const tenWord = gender === 'feminine' ? 'عَشر' : 'عَشرة';
@@ -59,18 +34,7 @@ export const cardinal = (
     ],
   }[gender];
 
-  const tens = [
-    '',
-    '',
-    'عشرون',
-    'ثَلالثون',
-    'أربَعون',
-    'خَمسون',
-    'سِتّون',
-    'سَبعون',
-    'ثَمانون',
-    'تِسْعون',
-  ];
+  const tens = ['', '', 'عشرون', 'ثَلالثون', 'أربَعون', 'خَمسون', 'سِتّون', 'سَبعون', 'ثَمانون', 'تِسْعون'];
 
   return buildCardinal('صِفْر', (s) => `سالب ${s}`, [
     {
@@ -144,20 +108,7 @@ export const cardinal = (
 
 export const ordinal = (num: number): string => {
   if (num < 1) return `${num}`;
-  if (num < 11)
-    return [
-      '',
-      'أول',
-      'ثان',
-      'ثالث',
-      'رابع',
-      'خامس',
-      'سادس',
-      'سابع',
-      'ثامن',
-      'تاسع',
-      'عاشر',
-    ][num];
+  if (num < 11) return ['', 'أول', 'ثان', 'ثالث', 'رابع', 'خامس', 'سادس', 'سابع', 'ثامن', 'تاسع', 'عاشر'][num];
   if (num < 20)
     return [
       '',
@@ -172,17 +123,7 @@ export const ordinal = (num: number): string => {
       'التاسع عشر',
     ][num - 10];
   if (num < 100) {
-    const tens = [
-      '',
-      'العشرون',
-      'الثلاثون',
-      'الأربعون',
-      'الخمسون',
-      'الستون',
-      'السبعون',
-      'الثمانون',
-      'التسعون',
-    ];
+    const tens = ['', 'العشرون', 'الثلاثون', 'الأربعون', 'الخمسون', 'الستون', 'السبعون', 'الثمانون', 'التسعون'];
     const rem = num % 10;
     if (rem === 0) return tens[Math.floor(num / 10)];
     if (rem === 1) return `الحادي و${tens[Math.floor(num / 10)]}`;

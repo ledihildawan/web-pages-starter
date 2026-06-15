@@ -1,28 +1,24 @@
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
-import { LOCALES, ROOT } from '@constants';
+import { i18nConfig } from '@config/i18n';
+import { ROOT_PATH, resolveRoot } from '@config/paths';
 import { isSystemPageId, isSystemPageSlug } from '@page-engine';
-import { resolveRoot } from '@utils/paths';
+import { log } from '@scripts/lib/logger';
+import { setupSigintHandler, wrapMainError } from '@scripts/lib/signal-handler';
 import inquirer from 'inquirer';
-import { i18nConfig } from '../configs/i18n';
-import { log } from './lib/logger';
 
 const args = process.argv.slice(2);
 const providedPageName = args[0]?.trim();
 
-const defaultLocale = i18nConfig.defaultLocale;
-
 function getAllPages(): string[] {
   const pagesDir = resolveRoot('pages');
   if (!fs.existsSync(pagesDir)) return [];
-  return fs
-    .readdirSync(pagesDir)
-    .filter((f) => fs.statSync(path.join(pagesDir, f)).isDirectory());
+  return fs.readdirSync(pagesDir).filter((f) => fs.statSync(path.join(pagesDir, f)).isDirectory());
 }
 
 function isSystemPage(name: string): boolean {
-  return isSystemPageId(name) || isSystemPageSlug(name, defaultLocale);
+  return isSystemPageId(name) || isSystemPageSlug(name, i18nConfig.defaultLocale);
 }
 
 async function selectPage(): Promise<string | null> {
@@ -96,7 +92,7 @@ function findReferences(pageName: string): Reference[] {
       pattern.lastIndex = 0;
       if (pattern.test(lines[i])) {
         refs.push({
-          file: path.relative(ROOT, file).replace(/\\/g, '/'),
+          file: path.relative(ROOT_PATH, file).replace(/\\/g, '/'),
           line: i + 1,
           content: lines[i].trim(),
         });
@@ -170,7 +166,7 @@ function deletePage(pageName: string): {
   }
 
   let localeFilesDeleted = 0;
-  const localesDir = resolveRoot(LOCALES);
+  const localesDir = resolveRoot('locales');
   if (fs.existsSync(localesDir)) {
     for (const lng of fs.readdirSync(localesDir)) {
       const localeFile = path.join(localesDir, lng, `${pageName}.json`);
@@ -190,7 +186,7 @@ async function runSyncLocales(): Promise<void> {
     const proc = spawn('bun', ['./packages/i18n/cli/sync-locales.ts'], {
       stdio: 'inherit',
       shell: false,
-      cwd: ROOT,
+      cwd: ROOT_PATH,
     });
     proc.on('close', (code) => {
       if (code !== 0) {
@@ -236,8 +232,6 @@ async function main(): Promise<void> {
     log.warn('Continuing despite sync-locales issues...');
   }
 }
-
-import { setupSigintHandler, wrapMainError } from './lib/signal-handler';
 
 setupSigintHandler();
 wrapMainError(main);

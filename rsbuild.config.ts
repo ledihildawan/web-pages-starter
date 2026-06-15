@@ -13,8 +13,6 @@ const jiti = createJiti(import.meta.url, {
   },
 });
 
-const mod = await jiti.import<typeof import('./configs/rsbuild')>(
-  './configs/rsbuild.ts',
-);
+const mod = await jiti.import<typeof import('./configs/rsbuild')>('./configs/rsbuild.ts');
 
 export default mod.default;

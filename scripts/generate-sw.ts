@@ -1,28 +1,17 @@
-import {
-  getErrorPageSlugs,
-  getRootPageSlug,
-  getSystemPageSlug,
-} from '@page-engine';
-import { resolveRoot } from '@utils/paths';
-import { i18nConfig } from '../configs/i18n';
+import { i18nConfig } from '@config/i18n';
+import { resolveRoot } from '@config/paths';
+import { getErrorPageSlugs, getRootPageSlug, getSystemPageSlug } from '@page-engine';
 import { logBox } from './lib/logger';
 import { writeFilePath } from './lib/write-file';
 
 const OUTPUT = resolveRoot('public', 'sw.js');
 
-const defaultLocale = i18nConfig.defaultLocale;
-const rootSlug = getRootPageSlug(defaultLocale);
-const [
-  notFoundSlug,
-  unauthorizedSlug,
-  forbiddenSlug,
-  serverErrorSlug,
-  maintenanceSlug,
-  offlineErrorSlug,
-] = getErrorPageSlugs(defaultLocale);
-const offlineSlug = getSystemPageSlug('offline', defaultLocale);
+const rootSlug = getRootPageSlug(i18nConfig.defaultLocale);
+const [notFoundSlug, unauthorizedSlug, forbiddenSlug, serverErrorSlug, maintenanceSlug, offlineErrorSlug] =
+  getErrorPageSlugs(i18nConfig.defaultLocale);
+const offlineSlug = getSystemPageSlug('offline', i18nConfig.defaultLocale);
 
-const swContent = `const CACHE_NAME = 'starter-v5';
+const swContent = `const CACHE_NAME = 'starter-v2';
 const BASE = new URL('.', self.location.href).pathname;
 const ERROR_PAGES = [
   \`\${BASE}${notFoundSlug}.html\`,
@@ -92,7 +81,7 @@ self.addEventListener('activate', (event) => {
 writeFilePath(OUTPUT, swContent);
 
 logBox('Generate SW', {
-  Locale: defaultLocale,
+  Locale: i18nConfig.defaultLocale,
   Root: rootSlug,
   Version: 'starter-v5',
   Output: 'public/sw.js',

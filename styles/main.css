@@ -5,9 +5,7 @@
 @theme {
   --font-sans: "Inter Variable", system-ui, -apple-system, sans-serif;
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", serif;
-  --font-mono:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-    monospace;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
 }
 
 @layer accessibility, base, components, utilities, overrides;
@@ -370,22 +368,14 @@
   }
 
   .text-gradient-white {
-    background: linear-gradient(
-      180deg,
-      #ffffff 0%,
-      rgba(255, 255, 255, 0.7) 100%
-    );
+    background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.7) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   .text-gradient-white-subtle {
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.5) 0%,
-      rgba(255, 255, 255, 0.15) 100%
-    );
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.15) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -616,11 +606,7 @@
   }
   [data-current-lang] .lang-option[aria-selected="true"] {
     color: rgb(255 255 255);
-    background-image: linear-gradient(
-      to right,
-      rgb(139 92 246 / 0.2),
-      rgb(217 70 239 / 0.2)
-    );
+    background-image: linear-gradient(to right, rgb(139 92 246 / 0.2), rgb(217 70 239 / 0.2));
     border-color: rgb(139 92 246 / 0.3);
   }
   [data-current-lang] .lang-option[aria-selected="true"] .lang-flag {

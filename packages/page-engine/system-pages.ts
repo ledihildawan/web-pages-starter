@@ -1,4 +1,4 @@
-import { IS_PROD } from '@constants';
+import { IS_PROD } from '@config/env';
 
 export const ROOT_PAGE = 'home';
 
@@ -1007,9 +1007,7 @@ export function getRootPageSlug(locale: string): string {
 }
 
 export function getErrorPageSlugs(locale: string): string[] {
-  return SYSTEM_PAGE_IDS.filter((id) => id !== ROOT_PAGE).map((id) =>
-    getSystemPageSlug(id, locale),
-  );
+  return SYSTEM_PAGE_IDS.filter((id) => id !== ROOT_PAGE).map((id) => getSystemPageSlug(id, locale));
 }
 
 export function isSystemPageId(pageId: string): boolean {

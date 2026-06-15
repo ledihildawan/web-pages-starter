@@ -1,9 +1,9 @@
-import { i18nConfig } from '../../../configs/i18n';
-import { LOCALE_CODES, LOCALES } from '../../../generated/active-locales-data';
-import type { CurrencyCode } from '../data/currencies';
-import type { DirectionCode } from '../data/directions';
-import type { LanguageCode } from '../data/languages';
-import type { LocaleCode, LocaleConfig } from '../data/locales';
+import { i18nConfig } from '@config/i18n';
+import { LOCALE_CODES, LOCALES } from '@generated/active-locales-data';
+import type { CurrencyCode } from '@i18n/data/currencies';
+import type { DirectionCode } from '@i18n/data/directions';
+import type { LanguageCode } from '@i18n/data/languages';
+import type { LocaleCode, LocaleConfig } from '@i18n/data/locales';
 
 export const getFallbackChain = (locale: string): LocaleCode[] => {
   if (LOCALE_CODES.includes(locale as LocaleCode)) {
@@ -39,18 +39,12 @@ export const getLocale = (locale?: LocaleCode): LocaleCode => {
 
 export const getLanguageSubtag = (locale: LocaleCode): LanguageCode => {
   const [language, secondPart] = locale.split('-');
-  return (
-    secondPart?.length === 4 ? language : locale.split('-')[0]
-  ) as LanguageCode;
+  return (secondPart?.length === 4 ? language : locale.split('-')[0]) as LanguageCode;
 };
 
-const localeMap = new Map<string, LocaleConfig>(
-  LOCALES.map((l) => [l.code, l]),
-);
+const localeMap = new Map<string, LocaleConfig>(LOCALES.map((l) => [l.code, l]));
 
-export const getLanguageConfig = (
-  locale: LocaleCode,
-): LocaleConfig | undefined => {
+export const getLanguageConfig = (locale: LocaleCode): LocaleConfig | undefined => {
   const exact = localeMap.get(locale);
   if (exact) return exact;
   return LOCALES.find((l) => locale.startsWith(`${l.code}-`));
@@ -59,32 +53,23 @@ export const getLanguageConfig = (
 export const getCurrency = (locale: LocaleCode): CurrencyCode =>
   getLanguageConfig(locale)?.currency || LOCALES[0].currency;
 
-export const getTimezone = (locale: LocaleCode): string =>
-  getLanguageConfig(locale)?.timezone || 'UTC';
+export const getTimezone = (locale: LocaleCode): string => getLanguageConfig(locale)?.timezone || 'UTC';
 
-export const getTimezoneOffset = (locale: LocaleCode): number =>
-  getLanguageConfig(locale)?.timezoneOffset ?? 0;
+export const getTimezoneOffset = (locale: LocaleCode): number => getLanguageConfig(locale)?.timezoneOffset ?? 0;
 
-export const getCalendar = (locale: LocaleCode): string =>
-  getLanguageConfig(locale)?.calendar || 'gregory';
+export const getCalendar = (locale: LocaleCode): string => getLanguageConfig(locale)?.calendar || 'gregory';
 
-export const getFirstDayOfWeek = (locale: LocaleCode): number =>
-  getLanguageConfig(locale)?.firstDayOfWeek ?? 0;
+export const getFirstDayOfWeek = (locale: LocaleCode): number => getLanguageConfig(locale)?.firstDayOfWeek ?? 0;
 
-export const getNumberingSystem = (locale: LocaleCode): string =>
-  getLanguageConfig(locale)?.numberingSystem || 'latn';
+export const getNumberingSystem = (locale: LocaleCode): string => getLanguageConfig(locale)?.numberingSystem || 'latn';
 
-export const getDefaultNativeDigits = (locale: LocaleCode): boolean =>
-  getLanguageConfig(locale)?.nativeDigits ?? false;
+export const getDefaultNativeDigits = (locale: LocaleCode): boolean => getLanguageConfig(locale)?.nativeDigits ?? false;
 
-export const getRegionSubtag = (locale: LocaleCode): string | undefined =>
-  getLanguageConfig(locale)?.region;
+export const getRegionSubtag = (locale: LocaleCode): string | undefined => getLanguageConfig(locale)?.region;
 
-export const getDirection = (locale: LocaleCode): DirectionCode =>
-  getLanguageConfig(locale)?.dir || 'ltr';
+export const getDirection = (locale: LocaleCode): DirectionCode => getLanguageConfig(locale)?.dir || 'ltr';
 
-export const isRTL = (locale: LocaleCode): boolean =>
-  getDirection(locale) === 'rtl';
+export const isRTL = (locale: LocaleCode): boolean => getDirection(locale) === 'rtl';
 
 export const getPluralSuffix = (n: number, locale?: LocaleCode): string => {
   const loc = getLocale(locale);

@@ -34,9 +34,7 @@ describe('pages config', () => {
     test('returns locale-specific slug', () => {
       expect(getSystemPageSlug('home', 'en-US')).toBe('home');
       expect(getSystemPageSlug('home', 'id-ID')).toBe('beranda');
-      expect(getSystemPageSlug('not-found', 'id-ID')).toBe(
-        'halaman-tidak-ditemukan',
-      );
+      expect(getSystemPageSlug('not-found', 'id-ID')).toBe('halaman-tidak-ditemukan');
     });
 
     test('falls back to en-US for unknown locale', () => {

@@ -1,10 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
+import { resolveRoot } from '@config/paths';
+import { getSystemPageSlug, SYSTEM_PAGE_IDS } from '@page-engine/system-pages';
 import { log, logBox } from '@scripts/lib/logger';
 import { wrapMainError } from '@scripts/lib/signal-handler';
-import { resolveRoot } from '@utils/paths';
-import { getSystemPageSlug, SYSTEM_PAGE_IDS } from '../system-pages';
 
 const PAGES_DIR = resolveRoot('pages');
 
@@ -44,9 +44,7 @@ async function main() {
 
     const entries = fs.readdirSync(PAGES_DIR, { withFileTypes: true });
     const folders = entries.filter((e) => e.isDirectory()).map((e) => e.name);
-    const currentFolder = folders.find(
-      (f) => getPageIdFromFolder(f) === pageId,
-    );
+    const currentFolder = folders.find((f) => getPageIdFromFolder(f) === pageId);
 
     if (!currentFolder || currentFolder === expectedSlug) {
       continue;

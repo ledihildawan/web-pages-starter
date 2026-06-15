@@ -1,19 +1,15 @@
-import { fontsConfig } from '../../../configs/fonts';
-import {
-  ACTIVE_NOTO_SANS,
-  ACTIVE_WRITING_SYSTEMS,
-} from '../../../generated/active-locales-data';
-import type { LocaleConfig } from '../data/locales';
-import type { NumberingSystemCode } from '../data/numbering-systems';
-import type { WritingSystemCode } from '../data/writing-systems';
-import { getActiveLocales } from '../engine/active-locales';
+import { fontsConfig } from '@config/fonts';
+import { ACTIVE_NOTO_SANS, ACTIVE_WRITING_SYSTEMS } from '@generated/active-locales-data';
+import type { LocaleConfig } from '@i18n/data/locales';
+import type { NumberingSystemCode } from '@i18n/data/numbering-systems';
+import type { WritingSystemCode } from '@i18n/data/writing-systems';
+import { getActiveLocales } from '@i18n/engine/active-locales';
 
 type FontLoader = () => Promise<unknown>;
 
-const SCRIPT_FONT_LOADERS: Partial<Record<string, FontLoader>> =
-  Object.fromEntries(
-    Object.entries(ACTIVE_NOTO_SANS).map(([ns, { loader }]) => [ns, loader]),
-  );
+const SCRIPT_FONT_LOADERS: Partial<Record<string, FontLoader>> = Object.fromEntries(
+  Object.entries(ACTIVE_NOTO_SANS).map(([ns, { loader }]) => [ns, loader]),
+);
 
 const loaded = new Set<NumberingSystemCode>();
 
@@ -22,9 +18,7 @@ function getCurrentLang(): string | null {
 }
 
 function findLocale(lang: string): LocaleConfig | undefined {
-  return getActiveLocales().find(
-    (l) => l.code === lang || lang.startsWith(`${l.code}-`),
-  );
+  return getActiveLocales().find((l) => l.code === lang || lang.startsWith(`${l.code}-`));
 }
 
 function handleLoadError(context: string, err: unknown): void {
@@ -42,9 +36,7 @@ function loadFontForLang(lang: string | null): void {
   const loader = SCRIPT_FONT_LOADERS[ns];
   if (!loader || loaded.has(ns)) return;
   loaded.add(ns);
-  loader().catch((err: unknown) =>
-    handleLoadError(`load failed for "${ns}"`, err),
-  );
+  loader().catch((err: unknown) => handleLoadError(`load failed for "${ns}"`, err));
 }
 
 export const preloadActiveFont = (): void => {
@@ -55,10 +47,7 @@ export const preloadActiveFont = (): void => {
 let fontObserver: MutationObserver | null = null;
 
 export const watchScriptAndLoadFont = (): void => {
-  if (
-    typeof window === 'undefined' ||
-    typeof MutationObserver === 'undefined'
-  ) {
+  if (typeof window === 'undefined' || typeof MutationObserver === 'undefined') {
     return;
   }
 
@@ -91,15 +80,10 @@ export const setupFontStackCSS = (): void => {
 
   const locale = findLocale(lang);
   const writingSystem = locale?.writingSystem as WritingSystemCode | undefined;
-  const wsConfig = ACTIVE_WRITING_SYSTEMS.find(
-    (ws) => ws.code === writingSystem,
-  );
+  const wsConfig = ACTIVE_WRITING_SYSTEMS.find((ws) => ws.code === writingSystem);
 
   if (wsConfig?.defaultFont) {
-    document.documentElement.style.setProperty(
-      '--font-sans',
-      wsConfig.defaultFont,
-    );
+    document.documentElement.style.setProperty('--font-sans', wsConfig.defaultFont);
   }
 };
 

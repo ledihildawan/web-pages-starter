@@ -1,22 +1,27 @@
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
-import { ROOT } from '@constants';
-import { resolveRoot } from '@utils/paths';
+import { ROOT_PATH, resolveRoot } from '@config/paths';
 import inquirer from 'inquirer';
 import { log } from './lib/logger';
 import { setupSigintHandler, wrapMainError } from './lib/signal-handler';
 
 const runTool = (name: string, args: string[] = []): Promise<void> => {
   return new Promise((resolve, reject) => {
-    const scriptsPath = path.join(__dirname, `${name}.ts`);
-    const toolPath = fs.existsSync(scriptsPath)
-      ? scriptsPath
-      : resolveRoot('packages', 'i18n', 'cli', `${name}.ts`);
+    const candidates = [
+      path.join(__dirname, `${name}.ts`),
+      resolveRoot('packages', 'page-engine', 'cli', `${name}.ts`),
+      resolveRoot('packages', 'i18n', 'cli', `${name}.ts`),
+    ];
+    const toolPath = candidates.find((p) => fs.existsSync(p));
+    if (!toolPath) {
+      reject(new Error(`Tool "${name}" not found`));
+      return;
+    }
     const proc = spawn('bun', [toolPath, ...args], {
       stdio: 'inherit',
       shell: false,
-      cwd: ROOT,
+      cwd: ROOT_PATH,
       env: { ...process.env },
     });
     proc.on('close', (code) => {
@@ -39,7 +44,7 @@ const runBunScript = (name: string, ...extraArgs: string[]): Promise<void> => {
     const proc = spawn('bun', ['run', name, ...extraArgs], {
       stdio: 'inherit',
       shell: false,
-      cwd: ROOT,
+      cwd: ROOT_PATH,
       env: { ...process.env },
     });
     proc.on('close', (code) => {
@@ -126,8 +131,7 @@ const tools: Tool[] = [
   },
   {
     name: 'Lighthouse',
-    description:
-      'Audit accessibility, SEO, best practices, performance, and AI agent compatibility',
+    description: 'Audit accessibility, SEO, best practices, performance, and AI agent compatibility',
     action: async () => {
       const { auditType } = await inquirer.prompt<{ auditType: string }>([
         {
@@ -151,12 +155,7 @@ const tools: Tool[] = [
 
       switch (auditType) {
         case 'quick':
-          await runTool('lighthouse', [
-            '--mobile',
-            '--no-throttle',
-            '--only-cats',
-            'accessibility',
-          ]);
+          await runTool('lighthouse', ['--mobile', '--no-throttle', '--only-cats', 'accessibility']);
           break;
         case 'full':
           await runTool('lighthouse', ['--both', '--no-throttle']);
@@ -170,16 +169,10 @@ const tools: Tool[] = [
               type: 'input',
               name: 'urlPath',
               message: 'Enter URL path (e.g., /about):',
-              validate: (input: string) =>
-                input.trim().length > 0 ? true : 'URL path is required',
+              validate: (input: string) => (input.trim().length > 0 ? true : 'URL path is required'),
             },
           ]);
-          await runTool('lighthouse', [
-            '--no-sitemap',
-            '--url',
-            urlPath,
-            '--no-throttle',
-          ]);
+          await runTool('lighthouse', ['--no-sitemap', '--url', urlPath, '--no-throttle']);
           break;
         }
       }
@@ -204,8 +197,7 @@ const tools: Tool[] = [
           type: 'input',
           name: 'pageName',
           message: 'Enter page name:',
-          validate: (input: string) =>
-            input.trim().length > 0 ? true : 'Page name is required',
+          validate: (input: string) => (input.trim().length > 0 ? true : 'Page name is required'),
         },
       ]);
       await runTool('generate-page', [pageName.trim()]);
@@ -316,7 +308,7 @@ const tools: Tool[] = [
       const proc = spawn('bun', ['install'], {
         stdio: 'inherit',
         shell: false,
-        cwd: ROOT,
+        cwd: ROOT_PATH,
       });
       return new Promise<void>((resolve) => proc.on('close', () => resolve()));
     },
