@@ -509,7 +509,7 @@ Runs after CI succeeds on `main`:
 
 ## Testing
 
-[Rstest](https://rstest.dev) + `happy-dom` + Testing Library.
+[Rstest](https://rstest.dev) + `happy-dom` + `@testing-library/dom`.
 
 ### Commands
 
@@ -524,7 +524,6 @@ bun run test -- --coverage --coverage.include "packages/i18n/**"  # coverage for
 
 ```
 tests/
-├── rstest.setup.ts          # extends expect with jest-dom matchers
 ├── tsconfig.json            # test-specific TS config
 ├── dom.test.ts              # DOM rendering sanity check
 └── i18n/
