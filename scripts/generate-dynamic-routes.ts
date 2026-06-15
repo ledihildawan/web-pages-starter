@@ -1,6 +1,5 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { log } from '@scripts/shared/logger';
 import JSON5 from 'json5';
 
 interface DynamicEntry {
@@ -68,7 +67,7 @@ function findDataSource(slugDir: string): {
       : null;
 
   if (!dataFile) {
-    log.warn(
+    console.warn(
       `[dynamic-routes] No data.json5 found at ${parentDir}. Skipping [slug] directory.`,
     );
     return { slugs: [], data: {} };
@@ -113,7 +112,7 @@ export function generateDynamicEntries(): DynamicEntry[] {
       });
     }
 
-    log.info(
+    console.info(
       `[dynamic-routes] ${basePath || param}: generated ${slugs.length} page(s) from [${param}]`,
     );
   }
