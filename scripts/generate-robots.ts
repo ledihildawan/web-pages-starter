@@ -3,9 +3,9 @@ import '../configs/env';
 import { i18nConfig } from '../configs/i18n';
 import { getErrorPageSlugs } from '../configs/pages';
 import { PATHS } from '../configs/paths';
-import { logBox } from './shared/logger';
-import { SITE_URL } from './shared/site-url';
-import { writeFilePath } from './shared/write-file';
+import { logBox } from './lib/logger';
+import { SITE_URL } from './lib/site-url';
+import { writeFilePath } from './lib/write-file';
 
 const OUTPUT_PUBLIC = path.join(PATHS.ROOT, 'public', 'robots.txt');
 

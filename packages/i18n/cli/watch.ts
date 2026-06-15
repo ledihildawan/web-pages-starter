@@ -2,8 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 import { PATHS } from '@config/paths';
-import { log, logBox } from '@scripts/shared/logger';
-import { setupSigintHandler } from '@scripts/shared/signal-handler';
+import { log, logBox } from '@scripts/lib/logger';
+import { setupSigintHandler } from '@scripts/lib/signal-handler';
 import chokidar from 'chokidar';
 
 const LOCALE_DIR = path.resolve(process.cwd(), PATHS.LOCALES);

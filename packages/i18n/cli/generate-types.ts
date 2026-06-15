@@ -4,8 +4,8 @@ import { i18nConfig } from '@config/i18n';
 import { PATHS } from '@config/paths';
 import { collectKeys, readJSON5 } from '@core/utils/json5';
 import { LOCALE_CODES } from '@i18n/data/locales';
-import { log, logBox } from '@scripts/shared/logger';
-import { generatedHeader, writeFilePath } from '@scripts/shared/write-file';
+import { log, logBox } from '@scripts/lib/logger';
+import { generatedHeader, writeFilePath } from '@scripts/lib/write-file';
 
 const LOCALES_ROOT = path.join(PATHS.ROOT, PATHS.LOCALES);
 const DEFAULT_LOCALE_DIR = path.join(LOCALES_ROOT, i18nConfig.defaultLocale);

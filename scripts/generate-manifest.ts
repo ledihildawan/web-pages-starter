@@ -3,8 +3,8 @@ import '../configs/env';
 import { loadGlobalData } from '@core/utils/json5';
 import { i18nConfig } from '../configs/i18n';
 import { PATHS } from '../configs/paths';
-import { logBox } from './shared/logger';
-import { writeFilePath } from './shared/write-file';
+import { logBox } from './lib/logger';
+import { writeFilePath } from './lib/write-file';
 
 const OUTPUT_PUBLIC = path.join(PATHS.ROOT, 'public', 'manifest.json');
 

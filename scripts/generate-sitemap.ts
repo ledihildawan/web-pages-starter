@@ -5,9 +5,9 @@ import '../configs/env';
 import { i18nConfig } from '../configs/i18n';
 import { getErrorPageSlugs, getRootPageSlug } from '../configs/pages';
 import { PATHS } from '../configs/paths';
-import { log, logBox } from './shared/logger';
-import { SITE_URL } from './shared/site-url';
-import { writeFilePath } from './shared/write-file';
+import { log, logBox } from './lib/logger';
+import { SITE_URL } from './lib/site-url';
+import { writeFilePath } from './lib/write-file';
 
 const cliArgs = process.argv.slice(2);
 const distOnly = cliArgs.includes('--dist-only');

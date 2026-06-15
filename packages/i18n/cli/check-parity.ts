@@ -4,7 +4,7 @@ import { i18nConfig } from '@config/i18n';
 import { PATHS } from '@config/paths';
 import { collectKeys, readJSON5 } from '@core/utils/json5';
 import { LOCALE_CODES } from '@i18n/data/locales';
-import { log } from '@scripts/shared/logger';
+import { log } from '@scripts/lib/logger';
 
 const LOCALES_DIR = path.resolve(PATHS.LOCALES);
 const BASE_LOCALE = i18nConfig.defaultLocale;

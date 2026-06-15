@@ -7,8 +7,8 @@ import type { LocaleCode, LocaleConfig } from '@i18n/data/locales';
 import { LOCALE_CODES, LOCALES } from '@i18n/data/locales';
 import { NUMBERING_SYSTEMS } from '@i18n/data/numbering-systems';
 import { WRITING_SYSTEM, WRITING_SYSTEMS } from '@i18n/data/writing-systems';
-import { log } from '@scripts/shared/logger';
-import { generatedHeader, writeFilePath } from '@scripts/shared/write-file';
+import { log } from '@scripts/lib/logger';
+import { generatedHeader, writeFilePath } from '@scripts/lib/write-file';
 
 const isProd = process.argv.includes('--prod');
 const GENERATED_DIR = path.resolve(process.cwd(), PATHS.GENERATED);

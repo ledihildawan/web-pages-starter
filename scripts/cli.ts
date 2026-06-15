@@ -3,8 +3,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import inquirer from 'inquirer';
 import { PATHS } from '../configs/paths';
-import { log } from './shared/logger';
-import { setupSigintHandler, wrapMainError } from './shared/signal-handler';
+import { log } from './lib/logger';
+import { setupSigintHandler, wrapMainError } from './lib/signal-handler';
 
 const runTool = (name: string, args: string[] = []): Promise<void> => {
   return new Promise((resolve, reject) => {

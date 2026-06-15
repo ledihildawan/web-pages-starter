@@ -8,13 +8,13 @@ import inquirer from 'inquirer';
 import { i18nConfig } from '../configs/i18n';
 import { getErrorPageSlugs, getRootPageSlug } from '../configs/pages';
 import { PATHS } from '../configs/paths';
-import { createStaticApp } from './shared/hono-server';
-import { log } from './shared/logger';
+import { createStaticApp } from './lib/hono-server';
+import { log } from './lib/logger';
 import {
   createServer,
   setupSigintHandler,
   wrapMainError,
-} from './shared/signal-handler';
+} from './lib/signal-handler';
 
 const PORT = Number.parseInt(process.env.PORT ?? '8888', 10);
 const HOST = process.env.HOST ?? '127.0.0.1';
@@ -218,7 +218,7 @@ const main = async () => {
   process.on('SIGINT', shutdown);
   process.on('SIGTERM', shutdown);
 
-  const { getPageNames } = await import('./shared/hono-server');
+  const { getPageNames } = await import('./lib/hono-server');
   log.info(`\n  Preview ready at ${tunnelUrl || `http://${HOST}:${PORT}`}\n`);
   log.info(`  Mode: preview (${provider})`);
   const errorPages = getErrorPageSlugs(i18nConfig.defaultLocale);

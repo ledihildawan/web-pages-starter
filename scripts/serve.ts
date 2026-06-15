@@ -9,9 +9,9 @@ import {
   createStaticApp,
   getPageNames,
   loadHtmlCache,
-} from './shared/hono-server';
-import { log } from './shared/logger';
-import { createServer, setupSigintHandler } from './shared/signal-handler';
+} from './lib/hono-server';
+import { log } from './lib/logger';
+import { createServer, setupSigintHandler } from './lib/signal-handler';
 
 const PORT = Number.parseInt(process.env.PORT ?? '8888', 10);
 const HOST = process.env.HOST ?? '0.0.0.0';

@@ -5,7 +5,7 @@ import inquirer from 'inquirer';
 import { i18nConfig } from '../configs/i18n';
 import { isSystemPageId, isSystemPageSlug } from '../configs/pages';
 import { PATHS } from '../configs/paths';
-import { log } from './shared/logger';
+import { log } from './lib/logger';
 
 const args = process.argv.slice(2);
 const providedPageName = args[0]?.trim();
@@ -236,7 +236,7 @@ async function main(): Promise<void> {
   }
 }
 
-import { setupSigintHandler, wrapMainError } from './shared/signal-handler';
+import { setupSigintHandler, wrapMainError } from './lib/signal-handler';
 
 setupSigintHandler();
 wrapMainError(main);

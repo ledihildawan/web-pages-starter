@@ -6,8 +6,8 @@ import {
   getSystemPageSlug,
 } from '../configs/pages';
 import { PATHS } from '../configs/paths';
-import { logBox } from './shared/logger';
-import { writeFilePath } from './shared/write-file';
+import { logBox } from './lib/logger';
+import { writeFilePath } from './lib/write-file';
 
 const OUTPUT = path.join(PATHS.ROOT, 'public', 'sw.js');
 

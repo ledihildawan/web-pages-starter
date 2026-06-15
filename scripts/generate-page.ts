@@ -8,8 +8,8 @@ import {
   type SystemPageId,
 } from '../configs/pages';
 import { PATHS } from '../configs/paths';
-import { log } from './shared/logger';
-import { romanize } from './shared/romanize';
+import { log } from './lib/logger';
+import { romanize } from './lib/romanize';
 
 const args = process.argv.slice(2);
 const pageName = args[0];

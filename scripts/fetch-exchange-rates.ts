@@ -3,8 +3,8 @@ import path from 'node:path';
 import { CURRENCY_CODE } from '@i18n/data/currencies';
 import { getActiveLocales } from '@i18n/engine/active-locales';
 import { PATHS } from '../configs/paths';
-import { log } from './shared/logger';
-import { generatedHeader, writeFilePath } from './shared/write-file';
+import { log } from './lib/logger';
+import { generatedHeader, writeFilePath } from './lib/write-file';
 
 const EXCHANGE_RATES_URL = 'https://api.frankfurter.dev/v2/rates';
 const GENERATED_DIR = path.resolve(process.cwd(), PATHS.GENERATED);

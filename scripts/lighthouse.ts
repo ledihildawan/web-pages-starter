@@ -5,9 +5,9 @@ import process from 'node:process';
 import inquirer from 'inquirer';
 import { DOMParser } from 'linkedom';
 import '../configs/env';
-import { log, logBox } from './shared/logger';
-import { setupSigintHandler, wrapMainError } from './shared/signal-handler';
-import { SITE_URL } from './shared/site-url';
+import { log, logBox } from './lib/logger';
+import { setupSigintHandler, wrapMainError } from './lib/signal-handler';
+import { SITE_URL } from './lib/site-url';
 
 const OUTPUT_DIR = process.env.LIGHTHOUSE_OUTPUT_DIR || './reports';
 
