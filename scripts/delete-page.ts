@@ -1,10 +1,10 @@
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
+import { PATHS } from '@constants/paths';
 import { isSystemPageId, isSystemPageSlug } from '@page-engine';
 import inquirer from 'inquirer';
 import { i18nConfig } from '../configs/i18n';
-import { PATHS } from '../configs/paths';
 import { log } from './lib/logger';
 
 const args = process.argv.slice(2);

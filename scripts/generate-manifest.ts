@@ -1,7 +1,7 @@
 import path from 'node:path';
 import '../configs/env';
+import { PATHS } from '@constants/paths';
 import { i18nConfig } from '../configs/i18n';
-import { PATHS } from '../configs/paths';
 import { loadGlobalData } from '../utils/json5';
 import { logBox } from './lib/logger';
 import { writeFilePath } from './lib/write-file';

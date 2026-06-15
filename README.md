@@ -403,7 +403,7 @@ Ideal for Lighthouse audits, mobile testing, or sharing WIP via a public URL.
 | `configs/i18n.ts` | Default locale + active locales |
 | `configs/fonts.ts` | Font stack — CSS import + family config (`sans`/`serif`/`mono` + custom keys) |
 | `packages/page-engine/system-pages.ts` | `ROOT_PAGE`, `SYSTEM_PAGE_IDS` (7 system pages), `SYSTEM_PAGE_SLUGS` (locale-dependent URL slugs), slug helpers (`getSystemPageSlug`, `getRootPageSlug`, `getErrorPageSlugs`, `isSystemPageId`, `isSystemPageSlug`) |
-| `configs/paths.ts` | Filesystem path constants |
+| `constants/paths.ts` | Filesystem path constants |
 | `data/global.json5` | Site name, SEO metadata, social links, DNS/prefetch |
 | `data/menu.json5` | Navigation structure (header menu with children) |
 | `.env.development` | `NODE_ENV`, `SITE_URL`, `PORT`, `HOST` |

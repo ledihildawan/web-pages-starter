@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
-import { PATHS } from '@config/paths';
+import { PATHS } from '@constants/paths';
 import { LOCALE_CODES } from '@i18n/data/locales';
 import { log } from '@scripts/lib/logger';
 import { collectKeys, readJSON5 } from '@utils/json5';

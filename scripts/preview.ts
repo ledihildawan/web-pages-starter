@@ -2,12 +2,12 @@ import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
+import { PATHS } from '@constants/paths';
 import type { serve } from '@hono/node-server';
 import ngrok from '@ngrok/ngrok';
 import { getErrorPageSlugs, getRootPageSlug } from '@page-engine';
 import inquirer from 'inquirer';
 import { i18nConfig } from '../configs/i18n';
-import { PATHS } from '../configs/paths';
 import { createStaticApp } from './lib/hono-server';
 import { log } from './lib/logger';
 import {

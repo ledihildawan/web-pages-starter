@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { PATHS } from '@constants/paths';
 import { getActiveLocaleCodes } from '@i18n/engine/active-locales';
 import {
   isSystemPageSlug,
@@ -7,7 +8,6 @@ import {
   type SystemPageId,
 } from '@page-engine';
 import { i18nConfig } from '../configs/i18n';
-import { PATHS } from '../configs/paths';
 import { log } from './lib/logger';
 import { romanize } from './lib/romanize';
 

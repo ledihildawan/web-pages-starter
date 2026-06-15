@@ -5,7 +5,7 @@ import { pluginImageCompress } from '@rsbuild/plugin-image-compress';
 import { minify } from 'html-minifier-terser';
 import { html as beautifyHtml } from 'js-beautify';
 import { i18nConfig } from './configs/i18n';
-import { PATHS } from './configs/paths';
+import { PATHS } from './constants/paths';
 import {
   getActiveLocaleCodes,
   LOCALE_STORAGE_KEY,

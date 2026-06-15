@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '../../configs/i18n';
-import { PATHS } from '../../configs/paths';
+import { PATHS } from '../../constants/paths';
 import type { I18nTranslationKeys } from '../../generated/i18n';
 import { getValueByPath } from '../../utils/common';
 import { loadGlobalData, readJSON5 } from '../../utils/json5';

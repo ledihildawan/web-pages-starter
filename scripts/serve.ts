@@ -2,9 +2,9 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 import '../configs/env';
+import { PATHS } from '@constants/paths';
 import { getErrorPageSlugs, getRootPageSlug } from '@page-engine';
 import { i18nConfig } from '../configs/i18n';
-import { PATHS } from '../configs/paths';
 import {
   createStaticApp,
   getPageNames,

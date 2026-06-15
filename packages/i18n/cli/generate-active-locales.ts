@@ -1,6 +1,6 @@
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
-import { PATHS } from '@config/paths';
+import { PATHS } from '@constants/paths';
 import { FONT_CSS_PATHS } from '@i18n/data/font-paths';
 import { LANGUAGES } from '@i18n/data/languages';
 import type { LocaleCode, LocaleConfig } from '@i18n/data/locales';

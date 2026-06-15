@@ -1,9 +1,9 @@
 import path from 'node:path';
 import process from 'node:process';
 import '../configs/env';
+import { PATHS } from '@constants/paths';
 import { getErrorPageSlugs, getRootPageSlug, scanPages } from '@page-engine';
 import { i18nConfig } from '../configs/i18n';
-import { PATHS } from '../configs/paths';
 import { log, logBox } from './lib/logger';
 import { SITE_URL } from './lib/site-url';
 import { writeFilePath } from './lib/write-file';

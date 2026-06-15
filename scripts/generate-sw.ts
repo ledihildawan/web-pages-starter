@@ -1,11 +1,11 @@
 import path from 'node:path';
+import { PATHS } from '@constants/paths';
 import {
   getErrorPageSlugs,
   getRootPageSlug,
   getSystemPageSlug,
 } from '@page-engine';
 import { i18nConfig } from '../configs/i18n';
-import { PATHS } from '../configs/paths';
 import { logBox } from './lib/logger';
 import { writeFilePath } from './lib/write-file';
 

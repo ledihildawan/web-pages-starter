@@ -80,7 +80,7 @@ pages/
 
 - `configs/i18n.ts` — default locale + active locales (`defineI18n`)
 - `configs/fonts.ts` — font CSS import + font stack (`defineFontStack`, `sans`/`serif`/`mono` + custom keys)
-- `configs/paths.ts` — filesystem path constants
+- `constants/paths.ts` — filesystem path constants
 
 ## Packages
 

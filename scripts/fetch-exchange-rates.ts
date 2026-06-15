@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { PATHS } from '@constants/paths';
 import { CURRENCY_CODE } from '@i18n/data/currencies';
 import { getActiveLocales } from '@i18n/engine/active-locales';
-import { PATHS } from '../configs/paths';
 import { log } from './lib/logger';
 import { generatedHeader, writeFilePath } from './lib/write-file';
 
