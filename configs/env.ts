@@ -1,11 +1,5 @@
-import path from 'node:path';
-import { IS_PROD } from '@constants/env';
-import { PATHS } from '@constants/paths';
+import { IS_PROD } from '@constants';
+import { resolveRoot } from '@utils/paths';
 import { config } from 'dotenv';
 
-config({
-  path: path.resolve(
-    PATHS.ROOT,
-    IS_PROD ? '.env.production' : '.env.development',
-  ),
-});
+config({ path: resolveRoot(`.env.${IS_PROD ? 'production' : 'development'}`) });

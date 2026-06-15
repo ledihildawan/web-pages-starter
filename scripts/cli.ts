@@ -1,7 +1,7 @@
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
-import { PATHS } from '@constants/paths';
+import { ROOT } from '@constants';
 import inquirer from 'inquirer';
 import { log } from './lib/logger';
 import { setupSigintHandler, wrapMainError } from './lib/signal-handler';
@@ -11,11 +11,11 @@ const runTool = (name: string, args: string[] = []): Promise<void> => {
     const scriptsPath = path.join(__dirname, `${name}.ts`);
     const toolPath = fs.existsSync(scriptsPath)
       ? scriptsPath
-      : path.join(PATHS.ROOT, 'packages', 'i18n', 'cli', `${name}.ts`);
+      : path.join(ROOT, 'packages', 'i18n', 'cli', `${name}.ts`);
     const proc = spawn('bun', [toolPath, ...args], {
       stdio: 'inherit',
       shell: false,
-      cwd: PATHS.ROOT,
+      cwd: ROOT,
       env: { ...process.env },
     });
     proc.on('close', (code) => {
@@ -38,7 +38,7 @@ const runBunScript = (name: string, ...extraArgs: string[]): Promise<void> => {
     const proc = spawn('bun', ['run', name, ...extraArgs], {
       stdio: 'inherit',
       shell: false,
-      cwd: PATHS.ROOT,
+      cwd: ROOT,
       env: { ...process.env },
     });
     proc.on('close', (code) => {
@@ -99,7 +99,7 @@ const tools: Tool[] = [
     name: 'Serve',
     description: 'Serve production build locally',
     action: async () => {
-      const distPath = path.join(PATHS.ROOT, 'dist');
+      const distPath = path.join(ROOT, 'dist');
       if (!fs.existsSync(distPath)) {
         log.distNotFound();
         const { choice } = await inquirer.prompt<{ choice: string }>([
@@ -304,7 +304,7 @@ const tools: Tool[] = [
       const dirs = ['node_modules', 'dist', 'bun.lock'];
       for (const dir of dirs) {
         try {
-          fs.rmSync(path.join(PATHS.ROOT, dir), {
+          fs.rmSync(path.join(ROOT, dir), {
             recursive: true,
             force: true,
           });
@@ -315,7 +315,7 @@ const tools: Tool[] = [
       const proc = spawn('bun', ['install'], {
         stdio: 'inherit',
         shell: false,
-        cwd: PATHS.ROOT,
+        cwd: ROOT,
       });
       return new Promise<void>((resolve) => proc.on('close', () => resolve()));
     },

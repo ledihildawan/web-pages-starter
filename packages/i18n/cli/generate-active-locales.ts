@@ -1,6 +1,6 @@
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
-import { PATHS, resolveRoot } from '@constants/paths';
+import { GENERATED } from '@constants';
 import { FONT_CSS_PATHS } from '@i18n/data/font-paths';
 import { LANGUAGES } from '@i18n/data/languages';
 import type { LocaleCode, LocaleConfig } from '@i18n/data/locales';
@@ -9,9 +9,10 @@ import { NUMBERING_SYSTEMS } from '@i18n/data/numbering-systems';
 import { WRITING_SYSTEM, WRITING_SYSTEMS } from '@i18n/data/writing-systems';
 import { log } from '@scripts/lib/logger';
 import { generatedHeader, writeFilePath } from '@scripts/lib/write-file';
+import { resolveRoot } from '@utils/paths';
 
 const isProd = process.argv.includes('--prod');
-const GENERATED_DIR = resolveRoot(PATHS.GENERATED);
+const GENERATED_DIR = resolveRoot(GENERATED);
 const OUTPUT_FILE = path.resolve(GENERATED_DIR, 'active-locales-data.ts');
 
 const activeCodes: LocaleCode[] = isProd

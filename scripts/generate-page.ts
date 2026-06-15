@@ -1,12 +1,13 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { PATHS, resolveRoot } from '@constants/paths';
+import { LOCALES } from '@constants';
 import { getActiveLocaleCodes } from '@i18n/engine/active-locales';
 import {
   isSystemPageSlug,
   SYSTEM_PAGE_IDS,
   type SystemPageId,
 } from '@page-engine';
+import { resolveRoot } from '@utils/paths';
 import { i18nConfig } from '../configs/i18n';
 import { log } from './lib/logger';
 import { romanize } from './lib/romanize';
@@ -41,7 +42,7 @@ const titleCase = pageName
   .replace(/\b\w/g, (l) => l.toUpperCase());
 
 const targetDir = resolveRoot('pages', formattedName);
-const baseLocaleDir = resolveRoot(PATHS.LOCALES);
+const baseLocaleDir = resolveRoot(LOCALES);
 
 if (fs.existsSync(targetDir)) {
   log.error(`Error: Page "${formattedName}" already exists.`);

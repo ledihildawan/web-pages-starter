@@ -1,5 +1,5 @@
 import path from 'node:path';
-import { PATHS } from '@constants/paths';
+import { ROOT } from '@constants';
 import {
   getErrorPageSlugs,
   getRootPageSlug,
@@ -9,7 +9,7 @@ import { i18nConfig } from '../configs/i18n';
 import { logBox } from './lib/logger';
 import { writeFilePath } from './lib/write-file';
 
-const OUTPUT = path.join(PATHS.ROOT, 'public', 'sw.js');
+const OUTPUT = path.join(ROOT, 'public', 'sw.js');
 
 const defaultLocale = i18nConfig.defaultLocale;
 const rootSlug = getRootPageSlug(defaultLocale);

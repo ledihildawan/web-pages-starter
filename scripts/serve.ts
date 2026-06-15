@@ -1,8 +1,8 @@
 import { existsSync } from 'node:fs';
 import process from 'node:process';
 import '../configs/env';
-import { resolveRoot } from '@constants/paths';
 import { getErrorPageSlugs, getRootPageSlug } from '@page-engine';
+import { resolveRoot } from '@utils/paths';
 import { i18nConfig } from '../configs/i18n';
 import {
   createStaticApp,

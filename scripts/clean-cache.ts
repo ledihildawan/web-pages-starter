@@ -1,11 +1,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { PATHS } from '@constants/paths';
+import { ROOT } from '@constants';
 import { log } from './lib/logger';
 
 const dirs = ['node_modules/.cache', '.cache', 'dist'];
 for (const dir of dirs) {
-  const fullPath = path.join(PATHS.ROOT, dir);
+  const fullPath = path.join(ROOT, dir);
   try {
     if (fs.existsSync(fullPath)) {
       fs.rmSync(fullPath, { recursive: true, force: true });

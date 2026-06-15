@@ -1,8 +1,9 @@
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
-import { PATHS, resolveRoot } from '@constants/paths';
+import { LOCALES, ROOT } from '@constants';
 import { isSystemPageId, isSystemPageSlug } from '@page-engine';
+import { resolveRoot } from '@utils/paths';
 import inquirer from 'inquirer';
 import { i18nConfig } from '../configs/i18n';
 import { log } from './lib/logger';
@@ -95,7 +96,7 @@ function findReferences(pageName: string): Reference[] {
       pattern.lastIndex = 0;
       if (pattern.test(lines[i])) {
         refs.push({
-          file: path.relative(PATHS.ROOT, file).replace(/\\/g, '/'),
+          file: path.relative(ROOT, file).replace(/\\/g, '/'),
           line: i + 1,
           content: lines[i].trim(),
         });
@@ -169,7 +170,7 @@ function deletePage(pageName: string): {
   }
 
   let localeFilesDeleted = 0;
-  const localesDir = resolveRoot(PATHS.LOCALES);
+  const localesDir = resolveRoot(LOCALES);
   if (fs.existsSync(localesDir)) {
     for (const lng of fs.readdirSync(localesDir)) {
       const localeFile = path.join(localesDir, lng, `${pageName}.json`);
@@ -189,7 +190,7 @@ async function runSyncLocales(): Promise<void> {
     const proc = spawn('bun', ['./packages/i18n/cli/sync-locales.ts'], {
       stdio: 'inherit',
       shell: false,
-      cwd: PATHS.ROOT,
+      cwd: ROOT,
     });
     proc.on('close', (code) => {
       if (code !== 0) {

@@ -1,4 +1,4 @@
-import { IS_PROD } from '@constants/env';
+import { IS_PROD } from '@constants';
 
 export const ROOT_PAGE = 'home';
 

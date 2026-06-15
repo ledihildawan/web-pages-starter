@@ -1,15 +1,15 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
-import { PATHS } from '@constants/paths';
+import { GENERATED, LOCALES, ROOT } from '@constants';
 import { LOCALE_CODES } from '@i18n/data/locales';
 import { log, logBox } from '@scripts/lib/logger';
 import { generatedHeader, writeFilePath } from '@scripts/lib/write-file';
 import { collectKeys, readJSON5 } from '@utils/json5';
 
-const LOCALES_ROOT = path.join(PATHS.ROOT, PATHS.LOCALES);
+const LOCALES_ROOT = path.join(ROOT, LOCALES);
 const DEFAULT_LOCALE_DIR = path.join(LOCALES_ROOT, i18nConfig.defaultLocale);
-const OUTPUT_FILE = path.join(PATHS.ROOT, PATHS.GENERATED, 'i18n.d.ts');
+const OUTPUT_FILE = path.join(ROOT, GENERATED, 'i18n.d.ts');
 
 const INDENT = '  ';
 const LOCALE_EXTS = ['.json'] as const;
@@ -75,7 +75,7 @@ function readLocaleTree(dirPath: string): Record<string, unknown> {
 }
 
 function getPageIds(): Set<string> {
-  const pagesDir = path.join(PATHS.ROOT, 'pages');
+  const pagesDir = path.join(ROOT, 'pages');
   if (!fs.existsSync(pagesDir)) return new Set();
   return new Set(
     fs
@@ -209,7 +209,7 @@ export interface I18nShared ${toTsInterface(sharedData)}
 
   writeFilePath(OUTPUT_FILE, output);
 
-  const vscodeSettingsPath = path.join(PATHS.ROOT, '.vscode', 'settings.json');
+  const vscodeSettingsPath = path.join(ROOT, '.vscode', 'settings.json');
   if (fs.existsSync(vscodeSettingsPath)) {
     const settings = JSON.parse(
       fs.readFileSync(vscodeSettingsPath, 'utf-8'),
@@ -236,7 +236,7 @@ export interface I18nShared ${toTsInterface(sharedData)}
   }
 
   log.info(`\n  ${allKeyCount} translation keys typed`);
-  log.info(`  ${OUTPUT_FILE.replace(PATHS.ROOT, '.')}`);
+  log.info(`  ${OUTPUT_FILE.replace(ROOT, '.')}`);
   log.success('\nDone: i18n types generated');
 } catch (error) {
   log.error(`Error: Generation failed — ${error}`);

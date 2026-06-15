@@ -1,14 +1,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
-import { IS_PROD } from '@constants/env';
-import { PATHS, resolveRoot } from '@constants/paths';
+import { GENERATED, IS_PROD, ROOT } from '@constants';
 import { getActiveLocaleCodes, LOCALE_STORAGE_KEY } from '@i18n';
 import { getRootPageSlug, getSystemPageSlug, scanPages } from '@page-engine';
 import { createTemplateParams } from '@page-engine/template';
 import { defineConfig, type RsbuildPlugin } from '@rsbuild/core';
 import { pluginImageCompress } from '@rsbuild/plugin-image-compress';
 import { generateDynamicEntries } from '@scripts/generate-dynamic-routes';
+import { resolveRoot } from '@utils/paths';
 import { minify } from 'html-minifier-terser';
 import { html as beautifyHtml } from 'js-beautify';
 
@@ -146,7 +146,7 @@ const dynamicTemplateMap = new Map(
 const resolveTemplate = (entryName: string): string => {
   const dynDir = dynamicTemplateMap.get(entryName);
   if (dynDir) {
-    return path.relative(PATHS.ROOT, path.join(dynDir, 'index.njk'));
+    return path.relative(ROOT, path.join(dynDir, 'index.njk'));
   }
   return path.join('pages', entryName, 'index.njk');
 };
@@ -187,8 +187,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '@config': resolveRoot('configs'),
-      '@constants': resolveRoot('constants'),
-      '@generated': resolveRoot(PATHS.GENERATED),
+      '@constants': resolveRoot('constants.ts'),
+      '@generated': resolveRoot(GENERATED),
       '@i18n': resolveRoot('packages', 'i18n'),
       '@page-engine': resolveRoot('packages', 'page-engine'),
       '@utils': resolveRoot('utils'),

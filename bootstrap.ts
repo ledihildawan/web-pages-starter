@@ -1,4 +1,4 @@
-import { IS_PROD } from '@constants/env';
+import { IS_PROD } from '@constants';
 
 const deferTask = (fn: () => void, timeout = 2000): void => {
   if ('requestIdleCallback' in window) {

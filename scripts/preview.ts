@@ -2,10 +2,11 @@ import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
-import { PATHS, resolveRoot } from '@constants/paths';
+import { ROOT } from '@constants';
 import type { serve } from '@hono/node-server';
 import ngrok from '@ngrok/ngrok';
 import { getErrorPageSlugs, getRootPageSlug } from '@page-engine';
+import { resolveRoot } from '@utils/paths';
 import inquirer from 'inquirer';
 import { i18nConfig } from '../configs/i18n';
 import { createStaticApp } from './lib/hono-server';
@@ -25,7 +26,7 @@ const runBuild = (): Promise<void> => {
     log.info('\n[Build] Running production build...');
     const proc = spawn('bun', ['run', 'build'], {
       stdio: 'inherit',
-      cwd: PATHS.ROOT,
+      cwd: ROOT,
       env: { ...process.env, BUILD_PREVIEW: 'true' },
       shell: false,
     });
@@ -64,7 +65,7 @@ const replaceUrls = (fromUrl: string, toUrl: string): void => {
       const newContent = content.split(fromUrl).join(toUrl);
       fs.writeFileSync(file, newContent, 'utf-8');
       updatedCount++;
-      const relativePath = file.replace(PATHS.ROOT, '.').replace(/\\/g, '/');
+      const relativePath = file.replace(ROOT, '.').replace(/\\/g, '/');
       log.info(`  Replaced in: ${relativePath}`);
     }
   }
@@ -209,7 +210,7 @@ const main = async () => {
     if (tunnelClose) await tunnelClose();
     spawn('bun', ['./packages/i18n/cli/generate-active-locales.ts'], {
       stdio: 'ignore',
-      cwd: PATHS.ROOT,
+      cwd: ROOT,
       detached: true,
     });
     process.exit(0);

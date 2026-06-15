@@ -1,8 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
-import { IS_PROD } from '@constants/env';
-import { PATHS, resolveRoot } from '@constants/paths';
+import { IS_PROD, LOCALES } from '@constants';
 import type { I18nTranslationKeys } from '@generated/i18n';
 import {
   convertCurrency,
@@ -62,6 +61,7 @@ import { loadSharedLocales } from '@i18n/utils';
 import { getRootPageSlug } from '@page-engine';
 import { getValueByPath } from '@utils/common';
 import { loadGlobalData, readJSON5 } from '@utils/json5';
+import { resolveRoot } from '@utils/paths';
 import type { DateValue, JsonData } from '@utils/types';
 
 setStrategies(
@@ -88,10 +88,10 @@ const hashLocales = (name: string, sharedLocales: string[]): string => {
   const parts: string[] = [];
   for (const locale of getActiveLocales()) {
     const files = [
-      resolveRoot(`${PATHS.LOCALES}/${locale.code}/common.json`),
-      resolveRoot(`${PATHS.LOCALES}/${locale.code}/${name}.json`),
+      resolveRoot(`${LOCALES}/${locale.code}/common.json`),
+      resolveRoot(`${LOCALES}/${locale.code}/${name}.json`),
       ...sharedLocales.map((lName) =>
-        resolveRoot(`${PATHS.LOCALES}/${locale.code}/${lName}.json`),
+        resolveRoot(`${LOCALES}/${locale.code}/${lName}.json`),
       ),
     ];
     for (const f of files) {
@@ -160,9 +160,9 @@ const generateClientI18nScript = (
     supportedLangs.map((l) => [
       l,
       {
-        common: readJSON5(resolveRoot(`${PATHS.LOCALES}/${l}/common.json`)),
-        [name]: readJSON5(resolveRoot(`${PATHS.LOCALES}/${l}/${name}.json`)),
-        ...loadSharedLocales(l, sharedLocales, resolveRoot(PATHS.LOCALES)),
+        common: readJSON5(resolveRoot(`${LOCALES}/${l}/common.json`)),
+        [name]: readJSON5(resolveRoot(`${LOCALES}/${l}/${name}.json`)),
+        ...loadSharedLocales(l, sharedLocales, resolveRoot(LOCALES)),
       },
     ]),
   ) as Record<string, JsonData>;
@@ -739,9 +739,9 @@ export const createTemplateParams = (
   );
 
   const mergedLocales: JsonData = {
-    common: readJSON5(resolveRoot(`${PATHS.LOCALES}/${lang}/common.json`)),
-    [pageId]: readJSON5(resolveRoot(`${PATHS.LOCALES}/${lang}/${pageId}.json`)),
-    ...loadSharedLocales(lang, sharedLocales, resolveRoot(PATHS.LOCALES)),
+    common: readJSON5(resolveRoot(`${LOCALES}/${lang}/common.json`)),
+    [pageId]: readJSON5(resolveRoot(`${LOCALES}/${lang}/${pageId}.json`)),
+    ...loadSharedLocales(lang, sharedLocales, resolveRoot(LOCALES)),
   };
 
   const resolveKeyToPath = (key: string): string => {

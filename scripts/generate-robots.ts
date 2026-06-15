@@ -1,13 +1,13 @@
 import path from 'node:path';
 import '../configs/env';
-import { PATHS } from '@constants/paths';
+import { ROOT } from '@constants';
 import { getErrorPageSlugs } from '@page-engine';
 import { i18nConfig } from '../configs/i18n';
 import { logBox } from './lib/logger';
 import { SITE_URL } from './lib/site-url';
 import { writeFilePath } from './lib/write-file';
 
-const OUTPUT_PUBLIC = path.join(PATHS.ROOT, 'public', 'robots.txt');
+const OUTPUT_PUBLIC = path.join(ROOT, 'public', 'robots.txt');
 
 const basePath = (process.env.BASE_PATH || '/').replace(/\/?$/, '/');
 const baseUrl = SITE_URL.endsWith('/') ? SITE_URL : `${SITE_URL}/`;

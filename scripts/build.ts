@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 import '../configs/env';
-import { resolveRoot } from '@constants/paths';
+import { resolveRoot } from '@utils/paths';
 import { log, logBox } from './lib/logger';
 
 const args = process.argv.slice(2);
