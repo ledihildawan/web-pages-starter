@@ -31,7 +31,7 @@ Requires [Bun](https://bun.sh) `>= 1.3.14`.
 │       ├── index.json5    #   page data — colors, icons, layout (optional)
 │       ├── index.ts       #   page entry (auto-imported by Rsbuild)
 │       ├── index.css      #   page styles (optional)
-│       └── partials/      #   page-local partials (optional)
+│       └── _components/    #   page-local components (underscore = not a page)
 ├── shared/                # reusable Nunjucks UI + layouts (cross-page)
 │   ├── seo/               #   page-meta.njk macro
 │   ├── ui/                #   icons, form-input, info-card, social-link

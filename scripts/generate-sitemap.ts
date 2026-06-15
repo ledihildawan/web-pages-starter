@@ -32,15 +32,17 @@ const scanPageDirs = (
     if (!entry.isDirectory()) continue;
     if (entry.name.startsWith('.') || entry.name.startsWith('_')) continue;
     if (excluded.includes(entry.name)) continue;
+    if (entry.name.startsWith('[') && entry.name.endsWith(']')) continue;
 
     const fullPath = path.join(dir, entry.name);
     const hasIndex = fs.existsSync(path.join(fullPath, 'index.njk'));
 
     if (entry.name.startsWith('(') && entry.name.endsWith(')')) {
       results.push(...scanPageDirs(fullPath, basePath, excluded));
-    } else if (hasIndex) {
+    } else {
       const name = basePath ? `${basePath}/${entry.name}` : entry.name;
-      results.push(name);
+      if (hasIndex) results.push(name);
+      results.push(...scanPageDirs(fullPath, name, excluded));
     }
   }
   return results;

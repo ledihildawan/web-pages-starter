@@ -139,6 +139,10 @@ const scanPages = (
     } else if (hasIndex) {
       const name = basePath ? `${basePath}/${entry.name}` : entry.name;
       results.push({ name, dir: fullPath });
+      results.push(...scanPages(fullPath, name));
+    } else {
+      const name = basePath ? `${basePath}/${entry.name}` : entry.name;
+      results.push(...scanPages(fullPath, name));
     }
   }
   return results;
@@ -159,7 +163,7 @@ const getEntries = (): Record<string, string | string[]> => {
     }
   }
 
-  for (const dyn of generateDynamicEntries()) {
+  for (const dyn of dynamicEntries) {
     const tsFile = path.join(dyn.templateDir, 'index.ts');
     const cssFile = path.join(dyn.templateDir, 'index.css');
     if (fs.existsSync(tsFile)) {
@@ -179,9 +183,18 @@ const getGlobalEntries = (): string[] => {
 };
 
 const dynamicEntries = generateDynamicEntries();
-const dynamicRouteMap = new Map(
-  dynamicEntries.map((e) => [e.entryKey, { slug: e.slug, data: e.data }]),
+
+const dynamicTemplateMap = new Map(
+  dynamicEntries.map((e) => [e.entryKey, e.templateDir]),
 );
+
+const resolveTemplate = (entryName: string): string => {
+  const dynDir = dynamicTemplateMap.get(entryName);
+  if (dynDir) {
+    return path.relative(ROOT, path.join(dynDir, 'index.njk'));
+  }
+  return path.join('pages', entryName, 'index.njk');
+};
 
 const pluginDynamicRoutes = (): RsbuildPlugin => ({
   name: 'plugin-dynamic-routes',
@@ -191,7 +204,11 @@ const pluginDynamicRoutes = (): RsbuildPlugin => ({
       config.source.define = {
         ...(config.source.define ?? {}),
         'import.meta.env.__DYNAMIC_ROUTES__': JSON.stringify(
-          Array.from(dynamicRouteMap.entries()),
+          dynamicEntries.map((e) => ({
+            entryKey: e.entryKey,
+            slug: e.slug,
+            data: e.data,
+          })),
         ),
       };
     });
@@ -375,7 +392,7 @@ export default defineConfig({
   html: {
     inject: 'head',
     scriptLoading: 'defer',
-    template: ({ entryName }) => path.join('pages', entryName, 'index.njk'),
+    template: ({ entryName }) => resolveTemplate(entryName),
     templateParameters: (params) =>
       createTemplateParams(params, LOCALE_STORAGE_KEY, getActiveLocaleCodes()),
   },
