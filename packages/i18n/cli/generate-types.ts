@@ -62,7 +62,7 @@ function readLocaleTree(dirPath: string): Record<string, unknown> {
       const namespace = `${prefix}${stripLocaleExt(entry)}`;
       if (namespaces[namespace]) {
         throw new Error(
-          `Duplicate locale namespace "${namespace}" in ${currentDir}`,
+          `[i18n] Duplicate locale namespace "${namespace}" in ${currentDir}`,
         );
       }
 
@@ -159,7 +159,7 @@ try {
 
   if (!commonData) {
     throw new Error(
-      `Missing default common locale: ${path.join(DEFAULT_LOCALE_DIR, 'common.json')}`,
+      `[i18n] Missing default common locale: ${path.join(DEFAULT_LOCALE_DIR, 'common.json')}`,
     );
   }
 

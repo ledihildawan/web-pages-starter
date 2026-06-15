@@ -81,16 +81,18 @@ const tools: Tool[] = [
           message: 'Select build type:',
           choices: [
             { name: 'Production (minified)', value: 'build' },
-            { name: 'Debug (no minify)', value: 'build --debug' },
+            { name: 'Pretty HTML (CMS porting)', value: 'build -- --pretty' },
+            { name: 'Debug (no minify)', value: 'build -- --debug' },
           ],
         },
       ]);
-      await runBunScript(buildType);
+      const [script, ...args] = buildType.split(' ');
+      await runBunScript(script, ...args);
     },
   },
   {
     name: 'Preview',
-    description: 'Build and serve with ngrok tunnel for external access',
+    description: 'Build and serve via ngrok or cloudflared tunnel',
     action: () => runBunScript('preview'),
   },
   {

@@ -549,7 +549,14 @@ Examples:
 
   if (openReport) {
     const absolutePath = path.resolve(reportDir);
-    spawn('explorer', [absolutePath], { stdio: 'ignore' });
+    const platform = process.platform;
+    const cmd =
+      platform === 'win32'
+        ? 'explorer'
+        : platform === 'darwin'
+          ? 'open'
+          : 'xdg-open';
+    spawn(cmd, [absolutePath], { stdio: 'ignore' }).on('error', () => {});
   }
 };
 

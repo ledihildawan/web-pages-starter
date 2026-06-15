@@ -41,7 +41,7 @@ Shared locales are auto-detected by scanning templates for `i18n.t('namespace:..
 - `url()` for all internal links
 - `isActive()` for navbar active state
 - Macros receive resolved text, not keys (except `form-input.njk`)
-- Error pages: `{% set %}` + `{% include "error-page.njk" %}`
+- Error pages: `{% set %}` + `{% include "shared/error/error-page.njk" %}`
 - Quick links: string-encoded `'/|home,/features|features'`
 
 ## Config Files
@@ -58,6 +58,8 @@ Shared locales are auto-detected by scanning templates for `i18n.t('namespace:..
 - **DESTRUCTIVE git ops** (`reset --hard`, `rebase`) require `git status` first
 - **File mods**: use `bun` or script in `temp/` — avoid PowerShell
 - **Never add dependency** without user approval
+- **After changing `i18nConfig`**: re-run `bun run dev` or `bun run build` to regenerate active locale data and exchange rates
+- **Adding a locale to `LOCALES`**: also add entries to `SYSTEM_PAGE_SLUGS` in `configs/pages.ts` (getSystemPageSlug warns in dev if missing)
 - Husky pre-commit: Biome → typecheck → test (all must pass)
 
 ## CI Fixes Flow

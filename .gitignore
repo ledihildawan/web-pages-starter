@@ -3,7 +3,6 @@
 *.log*
 temp/
 .env*
-!.env.example
 !.env.*.example
 
 # Dependencies & build output

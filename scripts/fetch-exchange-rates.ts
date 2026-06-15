@@ -22,7 +22,9 @@ async function fetchExchangeRates(): Promise<Record<string, number>> {
 
   const response = await fetch(url);
   if (!response.ok) {
-    throw new Error(`Failed to fetch exchange rates: ${response.statusText}`);
+    throw new Error(
+      `[i18n] Failed to fetch exchange rates: ${response.statusText}`,
+    );
   }
 
   const data = (await response.json()) as Array<{

@@ -981,10 +981,23 @@ export const SYSTEM_PAGE_SLUGS: Record<SystemPageId, Record<string, string>> = {
   },
 };
 
+const warnedMissing: Set<string> = new Set();
+
 export function getSystemPageSlug(pageId: string, locale: string): string {
   const entry = SYSTEM_PAGE_SLUGS[pageId as SystemPageId];
   if (!entry) return pageId;
-  return entry[locale] ?? entry['en-US'] ?? pageId;
+  const slug = entry[locale];
+  if (!slug) {
+    const key = `${pageId}:${locale}`;
+    if (process.env.NODE_ENV !== 'production' && !warnedMissing.has(key)) {
+      warnedMissing.add(key);
+      console.warn(
+        `[pages] No system page slug for "${pageId}" in locale "${locale}". Add an entry to SYSTEM_PAGE_SLUGS in configs/pages.ts. Falling back to en-US.`,
+      );
+    }
+    return entry['en-US'] ?? pageId;
+  }
+  return slug;
 }
 
 export function getRootPageSlug(locale: string): string {

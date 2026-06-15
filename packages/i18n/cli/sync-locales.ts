@@ -11,7 +11,7 @@ const sourceDir = path.join(LOCALES_ROOT, DEFAULT_LOCALE);
 
 try {
   if (!fs.existsSync(sourceDir)) {
-    throw new Error(`Default locale directory not found: ${sourceDir}`);
+    throw new Error(`[i18n] Default locale directory not found: ${sourceDir}`);
   }
 
   const sourceFiles = fs

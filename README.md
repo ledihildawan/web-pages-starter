@@ -150,19 +150,19 @@ Shared Nunjucks partials live in `shared/`. Two usage patterns:
 
 **Include partials** (self-contained blocks):
 ```njk
-{% include "navbar.njk" %}
-{% include "footer.njk" %}
-{% include "cta.njk" %}
+{% include "shared/nav/navbar.njk" %}
+{% include "shared/layout/footer.njk" %}
+{% include "shared/layout/cta.njk" %}
 ```
 
 **Import macros** (parameterized, reusable):
 ```njk
-{% import "hero-section.njk" as hero %}
-{% import "section-header.njk" as section %}
-{% import "icons.njk" as icon %}
-{% import "form-input.njk" as form %}
-{% import "info-card.njk" as card %}
-{% import "social-link.njk" as social_link %}
+{% import "shared/layout/hero-section.njk" as hero %}
+{% import "shared/layout/section-header.njk" as section %}
+{% import "shared/ui/icons.njk" as icon %}
+{% import "shared/ui/form-input.njk" as form %}
+{% import "shared/ui/info-card.njk" as card %}
+{% import "shared/ui/social-link.njk" as social_link %}
 
 {{ hero.hero_section(badge=i18n.t('home:hero.badge'), title_part1=i18n.t('home:hero.title_part1'), title_highlight=i18n.t('home:hero.title_highlight'), description=i18n.t('home:hero.description')) }}
 {{ icon.icon('lightning', 'w-8 h-8', size='xl') }}
@@ -336,7 +336,7 @@ sync-system-pages → clean:cache → fetch:rates → generate-active-locales --
 2. **clean-cache** — purges `node_modules/.cache`, `.cache`, `dist`
 3. **fetch-exchange-rates** — pulls live rates from Frankfurter API (24h cache)
 4. **generate-active-locales** — generates `generated/active-locales-data.ts` with filtered locale/language/numbering/writing-system/font data. Production mode (`--prod`) outputs only active locale entries; dev mode outputs all entries.
-5. **sync-locales** — creates missing locale directories and syncs missing `.json` files within existing directories from the default locale (Phase 1: missing dirs; Phase 2: missing files in existing dirs)
+5. **sync-locales** — creates missing locale directories and syncs missing `.json` files from the default locale
 6. **generate-types** — generates `generated/i18n.d.ts` type definitions (overwrites stub), checks locale parity (errors fail the build), syncs `i18n-ally.sourceLanguage`/`displayLanguage` from `i18nConfig.defaultLocale`
 7. **generate-sitemap** — generates `public/sitemap.xml` from pages and `SITE_URL`
 8. **generate-manifest** — generates `public/manifest.json` from `global.json5` + `i18nConfig`, uses `BASE_PATH` for `start_url` and `scope`
@@ -436,6 +436,9 @@ Recommended extensions are listed in `.vscode/extensions.json`. Key extensions:
 | `PRETTY_HTML` | Pretty-print HTML output instead of minifying (`"true"`). Set automatically by `bun run build -- --pretty` |
 | `NODE_BINARY` / `RSBUILD_RUNTIME` | Runtime override for build process |
 | `NGROK_AUTHTOKEN` | Auth token for ngrok tunnel (preview tool) |
+| `LIGHTHOUSE_OUTPUT_DIR` | Custom output directory for Lighthouse reports |
+| `SITEMAP_DEFAULT_PRIORITY` | Default priority for sitemap URLs (default `0.8`) |
+| `SITEMAP_DEFAULT_CHANGEFREQ` | Default change frequency for sitemap URLs (default `weekly`) |
 
 ## PWA
 
@@ -620,7 +623,7 @@ Most tools live in `scripts/`; i18n-specific CLI tools live in `packages/i18n/cl
 
 | Layer | Technology | Version |
 | --- | --- | --- |
-| Runtime | Bun | `^1.3.14` |
+| Runtime | Bun | `>= 1.3.14` |
 | Bundler | Rsbuild | `^2.0.13` |
 | Language | TypeScript | `^6.0.3` |
 | Templates | Nunjucks | `^3.2.4` |

@@ -77,7 +77,7 @@ function findReferences(pageName: string): Reference[] {
 
   const scanFiles: string[] = [];
   collectFiles(path.join('pages'), '.njk', scanFiles);
-  collectFiles(path.join('components'), '.njk', scanFiles);
+  collectFiles(path.join('shared'), '.njk', scanFiles);
   collectFiles(path.join('layouts'), '.njk', scanFiles);
 
   const menuFile = path.join('data', 'menu.json5');

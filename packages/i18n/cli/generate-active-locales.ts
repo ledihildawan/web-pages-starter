@@ -131,7 +131,14 @@ ${activeFontEntries.map(([ns, css]) => serializeFontEntry(ns, css)).join(',\n')}
 
 writeFilePath(OUTPUT_FILE, content);
 
-const mode = isProd ? 'production (active-only)' : 'dev/test (all)';
-log.success(
-  `Generated active-locales-data.ts — ${activeLocales.length} locales, ${languageEntries.length} languages, ${nsEntries.length} numbering systems, ${wsEntries.length} writing systems (${mode})`,
-);
+const configActive = [i18nConfig.defaultLocale, ...(i18nConfig.locales ?? [])];
+
+if (isProd) {
+  log.success(
+    `Generated production data — ${activeLocales.length} active locale(s): ${configActive.join(', ')}`,
+  );
+} else {
+  log.success(
+    `Generated dev stub — all ${LOCALES.length} locales available for development (${configActive.length} active in config)`,
+  );
+}
