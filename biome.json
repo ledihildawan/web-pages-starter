@@ -60,7 +60,7 @@
       }
     },
     {
-      "includes": ["packages/core/utils/common.ts"],
+      "includes": ["utils/common.ts"],
       "linter": {
         "rules": {
           "suspicious": {

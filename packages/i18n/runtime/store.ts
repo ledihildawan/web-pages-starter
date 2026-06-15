@@ -1,6 +1,5 @@
 import { i18nConfig } from '../../../configs/i18n';
-import { ROOT_PAGE } from '../../../configs/pages';
-import { scheduleTask } from '../../core/utils/microtask-queue';
+import { scheduleTask } from '../../../utils/microtask-queue';
 import {
   getActiveLocalesDisplay,
   getLanguageSubtag,
@@ -68,7 +67,7 @@ const changeLanguage = async (code: string): Promise<void> => {
   if (!m.i18next.isInitialized) {
     await m.initIntl(code);
   } else {
-    const pageID = (window.__PAGE_ID__ ?? ROOT_PAGE) as string;
+    const pageID = window.__PAGE_ID__;
     await ensureLocaleData(code, pageID, m);
     await m.i18next.changeLanguage(code);
     m.clearMissingKeys();

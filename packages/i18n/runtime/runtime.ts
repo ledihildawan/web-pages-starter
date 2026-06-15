@@ -1,14 +1,13 @@
 import i18next, { type Resource } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { i18nConfig } from '../../../configs/i18n';
-import { ROOT_PAGE } from '../../../configs/pages';
 import {
   convertCurrency as convertCurrencyRaw,
   EXCHANGE_RATES,
 } from '../../../generated/exchange-rates';
 import type { I18nTranslationKeys } from '../../../generated/i18n';
-import { scheduleTask } from '../../core/utils/microtask-queue';
-import type { DateTimePreset } from '../../core/utils/types';
+import { scheduleTask } from '../../../utils/microtask-queue';
+import type { DateTimePreset } from '../../../utils/types';
 import {
   formatAbbreviated,
   formatBytes,
@@ -305,7 +304,7 @@ const FORMATTERS = [
 ] as const;
 
 export async function initIntl(localeOverride?: string): Promise<void> {
-  const pageID = (window.__PAGE_ID__ ?? ROOT_PAGE) as string;
+  const pageID = window.__PAGE_ID__;
 
   const rawLocale = (localeOverride ||
     localStorage.getItem(LOCALE_STORAGE_KEY) ||

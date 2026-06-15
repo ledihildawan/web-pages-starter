@@ -1,5 +1,5 @@
-import { readJSON5 } from '../core/utils/json5';
-import type { JsonData } from '../core/utils/types';
+import { readJSON5 } from '../../utils/json5';
+import type { JsonData } from '../../utils/types';
 
 export const loadSharedLocales = (
   lang: string,

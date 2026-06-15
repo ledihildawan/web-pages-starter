@@ -26,7 +26,7 @@
     "baseUrl": ".",
     "paths": {
       "@config/*": ["./configs/*"],
-      "@core/*": ["./packages/core/*"],
+      "@utils/*": ["./utils/*"],
       "@generated/*": ["./generated/*"],
       "@i18n": ["./packages/i18n/index.ts"],
       "@i18n/*": ["./packages/i18n/*"],

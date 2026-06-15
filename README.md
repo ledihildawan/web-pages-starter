@@ -368,7 +368,7 @@ sync-system-pages → clean:cache → fetch:rates → generate-active-locales --
 | `BASE_PATH` support | `source.define` injects `import.meta.env.BASE_PATH` for runtime JS; template param `base_path` for Nunjucks |
 | Output paths | `dist/assets/{scripts,styles,images,fonts}` — organized by asset type |
 | Static copy | `output.copy` moves `public/` static files (favicon, sw.js, manifest, robots, i18n bundles) to `dist/` |
-| Path aliases | `@i18n` / `@i18n/*` → `packages/i18n/`, `@core/*` → `packages/core/`, `@config/*` → `configs/`, `@scripts/*` → `scripts/`, `@generated/*` → `generated/`. Rsbuild resolves `@generated`, `@i18n`, `@core` at bundle time; CLI scripts (run via Bun) resolve all aliases through `tsconfig.json`. Source files in the rsbuild config chain use relative paths for jiti compatibility |
+| Path aliases | `@i18n` / `@i18n/*` → `packages/i18n/`, `@utils/*` → `utils/`, `@config/*` → `configs/`, `@scripts/*` → `scripts/`, `@generated/*` → `generated/`. Rsbuild resolves `@generated`, `@i18n` at bundle time; CLI scripts (run via Bun) resolve all aliases through `tsconfig.json`. Source files in the rsbuild config chain use relative paths for jiti compatibility |
 | Nunjucks loader | `simple-nunjucks-loader` with search paths: `pages/`, `layouts/`, `.` (root); `assetsPaths: assets/` |
 | Pre-entries | `bootstrap.ts` + `styles/main.css` loaded before every page |
 
@@ -477,7 +477,7 @@ Config: `.husky/pre-commit`, `.lintstagedrc`.
 
 - No comments unless explicitly requested
 - No deprecated or backward-compat code — remove entirely
-- Import paths: `@i18n/*`, `@core/*`, `@config/*`, `@scripts/*` aliases for Bun/CLI; relative paths in source for jiti compatibility; `@generated`, `@i18n`, `@core` resolved by Rsbuild at bundle time
+- Import paths: `@i18n/*`, `@utils/*`, `@config/*`, `@scripts/*` aliases for Bun/CLI; relative paths in source for jiti compatibility; `@generated`, `@i18n` resolved by Rsbuild at bundle time
 - Biome for lint + format (not Prettier) — config in `biome.json`
 - Pre-commit chain: Husky + lint-staged (Biome) + typecheck + test (`&&`)
 

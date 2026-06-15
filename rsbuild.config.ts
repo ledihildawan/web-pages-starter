@@ -233,7 +233,6 @@ export default defineConfig({
     alias: {
       '@generated': resolveRoot(PATHS.GENERATED),
       '@i18n': resolveRoot('packages', 'i18n'),
-      '@core': resolveRoot('packages', 'core'),
     },
   },
   source: {

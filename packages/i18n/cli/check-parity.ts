@@ -2,9 +2,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
 import { PATHS } from '@config/paths';
-import { collectKeys, readJSON5 } from '@core/utils/json5';
 import { LOCALE_CODES } from '@i18n/data/locales';
 import { log } from '@scripts/lib/logger';
+import { collectKeys, readJSON5 } from '@utils/json5';
 
 const LOCALES_DIR = path.resolve(PATHS.LOCALES);
 const BASE_LOCALE = i18nConfig.defaultLocale;

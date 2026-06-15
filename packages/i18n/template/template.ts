@@ -4,9 +4,9 @@ import { i18nConfig } from '../../../configs/i18n';
 import { getRootPageSlug } from '../../../configs/pages';
 import { PATHS } from '../../../configs/paths';
 import type { I18nTranslationKeys } from '../../../generated/i18n';
-import { getValueByPath } from '../../core/utils/common';
-import { loadGlobalData, readJSON5 } from '../../core/utils/json5';
-import type { DateValue, JsonData } from '../../core/utils/types';
+import { getValueByPath } from '../../../utils/common';
+import { loadGlobalData, readJSON5 } from '../../../utils/json5';
+import type { DateValue, JsonData } from '../../../utils/types';
 import {
   convertCurrency,
   convertLocalPrice,
