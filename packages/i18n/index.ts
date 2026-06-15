@@ -57,6 +57,7 @@ export type {
   OrdinalOptions,
   RegionalPrice,
   RelativeTimeOptions,
+  RouteData,
   TemplateFormatOptions,
   TemplateParams,
   TimeFormatOptions,

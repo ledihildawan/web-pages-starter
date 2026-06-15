@@ -120,17 +120,3 @@ export function generateDynamicEntries(): DynamicEntry[] {
 
   return entries;
 }
-
-export function getDynamicRouteMap(): Map<
-  string,
-  { slug: string; data: Record<string, unknown> }
-> {
-  const map = new Map<
-    string,
-    { slug: string; data: Record<string, unknown> }
-  >();
-  for (const entry of generateDynamicEntries()) {
-    map.set(entry.entryKey, { slug: entry.slug, data: entry.data });
-  }
-  return map;
-}

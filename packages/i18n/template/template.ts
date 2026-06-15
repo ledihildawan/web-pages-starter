@@ -710,6 +710,7 @@ export const createTemplateParams = (
   params: TemplateParams,
   LOCALE_STORAGE_KEY: string,
   LOCALE_CODES: readonly string[],
+  route?: { slug: string; data: Record<string, unknown> },
 ) => {
   const lang = i18nConfig.defaultLocale;
   const folderName = String(params.entryName || getRootPageSlug(lang));
@@ -810,6 +811,7 @@ export const createTemplateParams = (
     LOCALE_CODES,
     clientI18nScript,
     page_id: pageId,
+    route,
     global: (() => {
       const data = loadGlobalData(resolveRoot(`data`));
       data.site_url = process.env.SITE_URL || 'http://localhost:8888';

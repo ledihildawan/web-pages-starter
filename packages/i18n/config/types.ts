@@ -27,6 +27,11 @@ export interface I18nItem {
   vars: string | null;
 }
 
+export interface RouteData {
+  slug: string;
+  data: Record<string, unknown>;
+}
+
 export interface TemplateParams {
   entryName?: string;
   [key: string]: unknown;

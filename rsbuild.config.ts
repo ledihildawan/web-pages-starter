@@ -196,25 +196,6 @@ const resolveTemplate = (entryName: string): string => {
   return path.join('pages', entryName, 'index.njk');
 };
 
-const pluginDynamicRoutes = (): RsbuildPlugin => ({
-  name: 'plugin-dynamic-routes',
-  setup(api) {
-    api.modifyRsbuildConfig((config) => {
-      if (!config.source) config.source = {};
-      config.source.define = {
-        ...(config.source.define ?? {}),
-        'import.meta.env.__DYNAMIC_ROUTES__': JSON.stringify(
-          dynamicEntries.map((e) => ({
-            entryKey: e.entryKey,
-            slug: e.slug,
-            data: e.data,
-          })),
-        ),
-      };
-    });
-  },
-});
-
 export default defineConfig({
   server: {
     port: PORT,
@@ -326,7 +307,6 @@ export default defineConfig({
     pluginRootPageAsIndex(),
     pluginHotReloadContent(),
     pluginPrettyHtml(),
-    pluginDynamicRoutes(),
     ...(isProd ? [pluginImageCompress({ use: 'avif', quality: 75 })] : []),
   ],
   tools: {
@@ -393,7 +373,29 @@ export default defineConfig({
     inject: 'head',
     scriptLoading: 'defer',
     template: ({ entryName }) => resolveTemplate(entryName),
-    templateParameters: (params) =>
-      createTemplateParams(params, LOCALE_STORAGE_KEY, getActiveLocaleCodes()),
+    templateParameters: (params) => {
+      const dynEntry = dynamicEntries.find(
+        (e) => e.entryKey === params.entryName,
+      );
+      if (dynEntry) {
+        return createTemplateParams(
+          {
+            ...params,
+            entryName: path.relative(
+              resolveRoot('pages'),
+              dynEntry.templateDir,
+            ),
+          },
+          LOCALE_STORAGE_KEY,
+          getActiveLocaleCodes(),
+          { slug: dynEntry.slug, data: dynEntry.data },
+        );
+      }
+      return createTemplateParams(
+        params,
+        LOCALE_STORAGE_KEY,
+        getActiveLocaleCodes(),
+      );
+    },
   },
 });
