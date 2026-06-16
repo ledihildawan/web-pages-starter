@@ -15,7 +15,6 @@ const imageUrl = (file: string): string => `${ASSET_PREFIX}/assets/images/${file
 
 const SIZES = [400, 800, 1600];
 const AVIF_QUALITY = 50;
-const WEBP_QUALITY = 65;
 const LQIP_WIDTH = 20;
 const LQIP_BLUR = 5;
 const LQIP_QUALITY = 20;
@@ -29,7 +28,6 @@ interface ImageEntry {
   height: number;
   src: string;
   srcset: string;
-  srcsetFallback: string;
   lqip: string;
 }
 
@@ -44,51 +42,35 @@ async function processImage(inputFile: string, outputName: string): Promise<Imag
     }
 
     const srcsetParts: string[] = [];
-    const srcsetFallbackParts: string[] = [];
     let defaultSrc = '';
-    let defaultFallbackSrc = '';
 
     for (const size of SIZES) {
       if (size <= metadata.width) {
-        const avifOut = path.join(OUTPUT_DIR, `${outputName}-${size}w.avif`);
-        const webpOut = path.join(OUTPUT_DIR, `${outputName}-${size}w.webp`);
+        const outFile = path.join(OUTPUT_DIR, `${outputName}-${size}w.avif`);
         await sharp(inputFile)
           .resize({ width: size, withoutEnlargement: true })
           .avif({ quality: AVIF_QUALITY })
-          .toFile(avifOut);
-        await sharp(inputFile)
-          .resize({ width: size, withoutEnlargement: true })
-          .webp({ quality: WEBP_QUALITY })
-          .toFile(webpOut);
+          .toFile(outFile);
 
-        const avifUrl = imageUrl(`${outputName}-${size}w.avif`);
-        const webpUrl = imageUrl(`${outputName}-${size}w.webp`);
-        srcsetParts.push(`${avifUrl} ${size}w`);
-        srcsetFallbackParts.push(`${webpUrl} ${size}w`);
+        const url = imageUrl(`${outputName}-${size}w.avif`);
+        srcsetParts.push(`${url} ${size}w`);
 
         if (size === DEFAULT_SIZE || (!defaultSrc && size <= DEFAULT_SIZE)) {
-          defaultSrc = avifUrl;
-          defaultFallbackSrc = webpUrl;
+          defaultSrc = url;
         }
       }
     }
 
     if (!defaultSrc) {
       defaultSrc = srcsetParts.length > 0 ? srcsetParts[0].split(' ')[0] : '';
-      defaultFallbackSrc = srcsetFallbackParts.length > 0 ? srcsetFallbackParts[0].split(' ')[0] : '';
     }
 
     if (srcsetParts.length === 0) {
-      const avifName = `${outputName}-${metadata.width}w.avif`;
-      const webpName = `${outputName}-${metadata.width}w.webp`;
-      await sharp(inputFile).avif({ quality: AVIF_QUALITY }).toFile(path.join(OUTPUT_DIR, avifName));
-      await sharp(inputFile).webp({ quality: WEBP_QUALITY }).toFile(path.join(OUTPUT_DIR, webpName));
-      const avifUrl = imageUrl(avifName);
-      const webpUrl = imageUrl(webpName);
-      srcsetParts.push(`${avifUrl} ${metadata.width}w`);
-      srcsetFallbackParts.push(`${webpUrl} ${metadata.width}w`);
-      defaultSrc = avifUrl;
-      defaultFallbackSrc = webpUrl;
+      const outName = `${outputName}-${metadata.width}w.avif`;
+      await sharp(inputFile).avif({ quality: AVIF_QUALITY }).toFile(path.join(OUTPUT_DIR, outName));
+      const url = imageUrl(outName);
+      srcsetParts.push(`${url} ${metadata.width}w`);
+      defaultSrc = url;
     }
 
     const lqipBuffer = await sharp(inputFile)
@@ -102,9 +84,8 @@ async function processImage(inputFile: string, outputName: string): Promise<Imag
     return {
       width: metadata.width,
       height: metadata.height,
-      src: defaultFallbackSrc,
+      src: defaultSrc,
       srcset: srcsetParts.join(', '),
-      srcsetFallback: srcsetFallbackParts.join(', '),
       lqip,
     };
   } catch (err) {
@@ -163,7 +144,6 @@ export interface ImageEntry {
   height: number;
   src: string;
   srcset: string;
-  srcsetFallback: string;
   lqip: string;
 }
 
