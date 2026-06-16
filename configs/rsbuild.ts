@@ -17,6 +17,49 @@ const isPrettyHtml = env.PRETTY_HTML;
 const shouldMinifyHTML = shouldMinify && !isPrettyHtml;
 const MANAGED_EXTS = ['ts', 'css', 'njk', 'png', 'jpg', 'jpeg', 'webp', 'svg', 'gif'];
 
+const pluginRemoveEmptyCss = (): RsbuildPlugin => ({
+  name: 'plugin-remove-empty-css',
+  setup(api) {
+    api.onAfterBuild(() => {
+      const distDir = api.context.distPath;
+      const stylesDir = path.join(distDir, 'assets', 'styles');
+      if (!fs.existsSync(stylesDir)) return;
+
+      const emptyFiles: string[] = [];
+      const checkDir = (dir: string): void => {
+        for (const file of fs.readdirSync(dir)) {
+          const filePath = path.join(dir, file);
+          if (fs.statSync(filePath).isDirectory()) {
+            checkDir(filePath);
+            continue;
+          }
+          if (!file.endsWith('.css')) continue;
+          const content = fs.readFileSync(filePath, 'utf-8').trim();
+          if (content.length === 0) {
+            fs.unlinkSync(filePath);
+            emptyFiles.push(file);
+          }
+        }
+      };
+      checkDir(stylesDir);
+      if (emptyFiles.length === 0) return;
+
+      for (const file of fs.readdirSync(distDir)) {
+        if (!file.endsWith('.html')) continue;
+        const filePath = path.join(distDir, file);
+        let content = fs.readFileSync(filePath, 'utf-8');
+        for (const emptyFile of emptyFiles) {
+          content = content.replace(
+            new RegExp(`<link[^>]*href="[^"]*${emptyFile.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"[^>]*>s*`, 'g'),
+            '',
+          );
+        }
+        fs.writeFileSync(filePath, content);
+      }
+    });
+  },
+});
+
 const pluginRootPageAsIndex = (): RsbuildPlugin => ({
   name: 'plugin-root-page-as-index',
   setup(api) {
@@ -86,6 +129,12 @@ const pluginPrettyHtml = (): RsbuildPlugin => ({
 
 const scannedPages = scanPages(resolveRoot('pages'), '');
 
+const hasCssContent = (file: string): boolean => {
+  if (!fs.existsSync(file)) return false;
+  const content = fs.readFileSync(file, 'utf-8').trim();
+  return content.length > 0;
+};
+
 const getPageNames = (): string[] => scannedPages.map((p) => p.name);
 
 const getEntries = (): Record<string, string | string[]> => {
@@ -95,7 +144,7 @@ const getEntries = (): Record<string, string | string[]> => {
     const tsFile = path.join(page.dir, 'index.ts');
     const cssFile = path.join(page.dir, 'index.css');
     if (fs.existsSync(tsFile)) {
-      entries[page.name] = fs.existsSync(cssFile) ? [tsFile, cssFile] : tsFile;
+      entries[page.name] = hasCssContent(cssFile) ? [tsFile, cssFile] : tsFile;
     }
   }
 
@@ -103,7 +152,7 @@ const getEntries = (): Record<string, string | string[]> => {
     const tsFile = path.join(dyn.templateDir, 'index.ts');
     const cssFile = path.join(dyn.templateDir, 'index.css');
     if (fs.existsSync(tsFile)) {
-      entries[dyn.entryKey] = fs.existsSync(cssFile) ? [tsFile, cssFile] : tsFile;
+      entries[dyn.entryKey] = hasCssContent(cssFile) ? [tsFile, cssFile] : tsFile;
     }
   }
 
@@ -241,7 +290,7 @@ export default defineConfig({
       },
     ],
   },
-  plugins: [pluginRootPageAsIndex(), pluginHotReloadContent(), pluginPrettyHtml()],
+  plugins: [pluginRemoveEmptyCss(), pluginRootPageAsIndex(), pluginHotReloadContent(), pluginPrettyHtml()],
   tools: {
     htmlPlugin: (config) => {
       config.minify = (html: string) =>
