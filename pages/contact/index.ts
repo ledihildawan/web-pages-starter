@@ -1,4 +1,3 @@
-import './index.css';
 import type { Alpine as AlpineType } from 'alpinejs';
 import { contactFormData } from '../../features/contact-form/contact-form';
 
