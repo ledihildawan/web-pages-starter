@@ -1,5 +1,9 @@
 {% macro render(image, alt, sizes, loading="lazy", class="", fetchpriority="") %}
 {% if image %}
-<img width="{{ image.width }}" height="{{ image.height }}" src="{{ image.src }}" srcset="{{ image.srcset }}" sizes="{{ sizes }}" alt="{{ alt }}" loading="{{ loading }}" decoding="async" {% if fetchpriority %}fetchpriority="{{ fetchpriority }}"{% endif %} {% if class %}class="{{ class }}"{% endif %} style="background-image:url('{{ image.lqip }}');background-size:cover">
+<picture>
+  <source type="image/avif" srcset="{{ image.srcset }}" sizes="{{ sizes }}">
+  <source type="image/webp" srcset="{{ image.srcsetFallback }}" sizes="{{ sizes }}">
+  <img width="{{ image.width }}" height="{{ image.height }}" src="{{ image.src }}" sizes="{{ sizes }}" alt="{{ alt }}" loading="{{ loading }}" decoding="async" {% if fetchpriority %}fetchpriority="{{ fetchpriority }}"{% endif %} {% if class %}class="{{ class }}"{% endif %} style="background-image:url('{{ image.lqip }}');background-size:cover">
+</picture>
 {% endif %}
 {% endmacro %}
