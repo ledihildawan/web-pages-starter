@@ -88,6 +88,8 @@ const scannedPages = scanPages(resolveRoot('pages'), '');
 
 const getPageNames = (): string[] => scannedPages.map((p) => p.name);
 
+const hasContent = (file: string): boolean => fs.existsSync(file) && fs.statSync(file).size > 0;
+
 const getEntries = (): Record<string, string | string[]> => {
   const entries: Record<string, string | string[]> = {};
 
@@ -95,7 +97,7 @@ const getEntries = (): Record<string, string | string[]> => {
     const tsFile = path.join(page.dir, 'index.ts');
     const cssFile = path.join(page.dir, 'index.css');
     if (fs.existsSync(tsFile)) {
-      entries[page.name] = fs.existsSync(cssFile) ? [tsFile, cssFile] : tsFile;
+      entries[page.name] = hasContent(cssFile) ? [tsFile, cssFile] : tsFile;
     }
   }
 
@@ -103,7 +105,7 @@ const getEntries = (): Record<string, string | string[]> => {
     const tsFile = path.join(dyn.templateDir, 'index.ts');
     const cssFile = path.join(dyn.templateDir, 'index.css');
     if (fs.existsSync(tsFile)) {
-      entries[dyn.entryKey] = fs.existsSync(cssFile) ? [tsFile, cssFile] : tsFile;
+      entries[dyn.entryKey] = hasContent(cssFile) ? [tsFile, cssFile] : tsFile;
     }
   }
 
