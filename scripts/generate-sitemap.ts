@@ -1,5 +1,3 @@
-import '@config/env';
-
 import process from 'node:process';
 import { env } from '@config/env';
 import { i18nConfig } from '@config/i18n';

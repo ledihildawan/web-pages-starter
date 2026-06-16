@@ -1,5 +1,3 @@
-import '@config/env';
-
 import { env } from '@config/env';
 import { i18nConfig } from '@config/i18n';
 import { resolveRoot } from '@config/paths';

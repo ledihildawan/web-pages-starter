@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { env, IS_PROD } from '@config/env';
+import { env, schemaKeys } from '@config/env';
 import { i18nConfig } from '@config/i18n';
 import { getActiveLocaleCodes, LOCALE_STORAGE_KEY } from '@i18n';
 import { getRootPageSlug, getSystemPageSlug, scanPages } from '@page-engine';
@@ -11,8 +11,7 @@ import { minify } from 'html-minifier-terser';
 import { html as beautifyHtml } from 'js-beautify';
 import { ROOT_PATH, resolveRoot } from './paths';
 
-const BASE_PATH = env.BASE_PATH;
-const isBuild = IS_PROD || env.BUILD_PREVIEW;
+const isBuild = env.IS_PROD || env.BUILD_PREVIEW;
 const shouldMinify = isBuild && env.MINIFY;
 const isPrettyHtml = env.PRETTY_HTML;
 const shouldMinifyHTML = shouldMinify && !isPrettyHtml;
@@ -169,14 +168,15 @@ export default defineConfig({
       '@i18n': resolveRoot('packages', 'i18n'),
       '@page-engine': resolveRoot('packages', 'page-engine'),
       '@utils': resolveRoot('utils'),
+      '@web-pages-starter/env': resolveRoot('packages', 'env'),
     },
   },
   source: {
     preEntry: getGlobalEntries(),
     entry: getEntries(),
-    define: {
-      'import.meta.env.BASE_PATH': JSON.stringify(BASE_PATH),
-    },
+    define: Object.fromEntries(
+      schemaKeys.map((k) => [`import.meta.env.${k}`, JSON.stringify(env[k as keyof typeof env])]),
+    ),
   },
   output: {
     distPath: {
@@ -185,10 +185,10 @@ export default defineConfig({
       image: 'assets/images',
       font: 'assets/fonts',
     },
-    assetPrefix: BASE_PATH,
+    assetPrefix: env.BASE_PATH,
     cleanDistPath: true,
     minify: shouldMinify ? { js: 'always', css: 'always' } : false,
-    inlineStyles: true,
+    inlineStyles: false,
     inlineScripts: ({ size }) => size < 2 * 1_024,
     sourceMap: !shouldMinify ? { js: 'cheap-module-source-map', css: true } : false,
     filename: {

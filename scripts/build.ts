@@ -1,17 +1,16 @@
-import '@config/env';
-
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
+import { env } from '@config/env';
 import { resolveRoot } from '@config/paths';
 import { log, logBox } from './lib/logger';
 
 const args = process.argv.slice(2);
-const isPreview = process.env.BUILD_PREVIEW === 'true';
-const callerSiteUrl = process.env.SITE_URL;
+const isPreview = env.BUILD_PREVIEW;
+const callerSiteUrl = env.SITE_URL;
 
-const spawnEnv: NodeJS.ProcessEnv = { ...process.env, NODE_ENV: 'production' };
+const spawnEnv: NodeJS.ProcessEnv = { ...process.env, NODE_ENV: 'production', STAGE: 'prod' };
 
 for (const key of ['SITE_URL', 'BASE_PATH', 'PORT', 'HOST', 'MINIFY', 'PRETTY_HTML', 'BUILD_PREVIEW']) {
   delete spawnEnv[key];
@@ -20,7 +19,7 @@ for (const key of ['SITE_URL', 'BASE_PATH', 'PORT', 'HOST', 'MINIFY', 'PRETTY_HT
 if (isPreview) {
   spawnEnv.BUILD_PREVIEW = 'true';
   spawnEnv.BASE_PATH = '/';
-  spawnEnv.SITE_URL = callerSiteUrl || `http://localhost:${process.env.PORT || '8888'}`;
+  spawnEnv.SITE_URL = callerSiteUrl || `http://localhost:${String(env.PORT)}`;
 }
 
 const mode = args.includes('--debug')
@@ -66,7 +65,7 @@ for (const gen of generators) {
 
 log.info('\nBundling with Rsbuild...\n');
 const rsbuildBin = path.resolve(process.cwd(), 'node_modules', '@rsbuild', 'core', 'bin', 'rsbuild.js');
-const runtimes = [process.env.RSBUILD_RUNTIME, process.env.NODE_BINARY, 'node', 'bun'].filter(Boolean) as string[];
+const runtimes = [env.RSBUILD_RUNTIME, env.NODE_BINARY, 'node', 'bun'].filter(Boolean) as string[];
 
 let result: ReturnType<typeof spawnSync> | null = null;
 

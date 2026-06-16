@@ -9,8 +9,8 @@ const SOURCE_DIR = resolveRoot('assets', 'images');
 const OUTPUT_DIR = resolveRoot('public', 'assets', 'images');
 const MANIFEST_FILE = resolveRoot('generated', 'image-manifest.ts');
 
-const SIZES = [400, 800, 1200, 1600];
-const AVIF_QUALITY = 60;
+const SIZES = [400, 800, 1600];
+const AVIF_QUALITY = 50;
 const LQIP_WIDTH = 20;
 const LQIP_BLUR = 5;
 const LQIP_QUALITY = 20;

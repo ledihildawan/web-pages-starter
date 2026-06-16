@@ -1,3 +1,4 @@
+import { env } from '@config/env';
 import { i18nConfig } from '@config/i18n';
 import { getActiveLocalesDisplay, LOCALE_STORAGE_KEY } from '@i18n';
 import type { LocaleCode } from '@i18n/data/locales';
@@ -31,7 +32,7 @@ const ensureLocaleData = async (code: string, pageID: string, m: typeof import('
   if (m.i18next.hasResourceBundle(code, 'common')) return;
 
   try {
-    const response = await fetch(`${import.meta.env.BASE_PATH}assets/i18n/${pageID}/${code}.json`);
+    const response = await fetch(`${env.BASE_PATH}assets/i18n/${pageID}/${code}.json`);
     const data = await response.json();
     for (const [ns, bundle] of Object.entries(data as Record<string, Record<string, string>>)) {
       m.i18next.addResourceBundle(code, ns, bundle);

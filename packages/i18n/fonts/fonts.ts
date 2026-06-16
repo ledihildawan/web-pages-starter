@@ -39,9 +39,13 @@ function loadFontForLang(lang: string | null): void {
   loader().catch((err: unknown) => handleLoadError(`load failed for "${ns}"`, err));
 }
 
+function loadAllActiveFonts(lang: string | null): void {
+  loadFontForLang(lang);
+}
+
 export const preloadActiveFont = (): void => {
   if (typeof document === 'undefined') return;
-  loadFontForLang(getCurrentLang());
+  loadAllActiveFonts(getCurrentLang());
 };
 
 let fontObserver: MutationObserver | null = null;

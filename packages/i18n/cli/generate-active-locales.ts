@@ -3,16 +3,15 @@ import { resolveRoot } from '@config/paths';
 import { FONT_CSS_PATHS } from '@i18n/data/font-paths';
 import { LANGUAGES } from '@i18n/data/languages';
 import type { LocaleCode, LocaleConfig } from '@i18n/data/locales';
-import { LOCALE_CODES, LOCALES } from '@i18n/data/locales';
+import { LOCALES } from '@i18n/data/locales';
 import { NUMBERING_SYSTEMS } from '@i18n/data/numbering-systems';
 import { WRITING_SYSTEM, WRITING_SYSTEMS } from '@i18n/data/writing-systems';
 import { log } from '@scripts/lib/logger';
 import { generatedHeader, writeFilePath } from '@scripts/lib/write-file';
 
-const isProd = process.argv.includes('--prod');
 const OUTPUT_FILE = resolveRoot('generated', 'active-locales-data.ts');
 
-const activeCodes: LocaleCode[] = isProd ? [i18nConfig.defaultLocale, ...(i18nConfig.locales ?? [])] : LOCALE_CODES;
+const activeCodes: LocaleCode[] = [i18nConfig.defaultLocale, ...(i18nConfig.locales ?? [])];
 
 const activeLocales = LOCALES.filter((l) => activeCodes.includes(l.code));
 
@@ -101,10 +100,4 @@ writeFilePath(OUTPUT_FILE, content);
 
 const configActive = [i18nConfig.defaultLocale, ...(i18nConfig.locales ?? [])];
 
-if (isProd) {
-  log.success(`Generated production data — ${activeLocales.length} active locale(s): ${configActive.join(', ')}`);
-} else {
-  log.success(
-    `Generated dev stub — all ${LOCALES.length} locales available for development (${configActive.length} active in config)`,
-  );
-}
+log.success(`Generated active locale data — ${activeLocales.length} locale(s): ${configActive.join(', ')}`);

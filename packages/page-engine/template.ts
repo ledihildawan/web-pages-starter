@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { env, IS_PROD } from '@config/env';
+import { env } from '@config/env';
 import { i18nConfig } from '@config/i18n';
 import { resolveRoot } from '@config/paths';
 import type { I18nTranslationKeys } from '@generated/i18n';
@@ -602,7 +602,7 @@ export const createTemplateParams = (
     const val = getValueByPath(mergedLocales, jsonPath);
     let str = val !== undefined ? String(val) : key;
 
-    if (val === undefined && !IS_PROD && !warnedKeys.has(key)) {
+    if (val === undefined && !env.IS_PROD && !warnedKeys.has(key)) {
       warnedKeys.add(key);
       console.warn(`[i18n] Missing key "${key}" in locale "${lang}"`);
     }

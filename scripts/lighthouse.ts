@@ -1,5 +1,3 @@
-import '@config/env';
-
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -10,7 +8,7 @@ import { DOMParser } from 'linkedom';
 import { log, logBox } from './lib/logger';
 import { setupSigintHandler, wrapMainError } from './lib/signal-handler';
 
-const OUTPUT_DIR = process.env.LIGHTHOUSE_OUTPUT_DIR || './reports';
+const OUTPUT_DIR = env.LIGHTHOUSE_OUTPUT_DIR;
 
 const hasNgrokFlag = (args: string[]) => args.includes('--ngrok');
 const isNgrokUrl = (url: string) => url.includes('ngrok');

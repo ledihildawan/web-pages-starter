@@ -2,7 +2,9 @@
 .DS_Store
 *.log*
 temp/
-.env*
+.env
+.env.*
+!.env.example
 !.env.*.example
 
 # Dependencies & build output

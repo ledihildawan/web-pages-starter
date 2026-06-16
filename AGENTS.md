@@ -80,7 +80,10 @@ pages/
 
 - `configs/i18n.ts` — default locale + active locales (`defineI18n`)
 - `configs/fonts.ts` — font CSS import + font stack (`defineFontStack`, `sans`/`serif`/`mono` + custom keys)
-- `configs/env.ts` — type-safe env validation (`@t3-oss/env-core` + Zod): exports `env`, `IS_DEV`, `IS_PROD`, `IS_NODE`. `SITE_URL` required (no default), `PORT` defaults to 8888, `HOST` defaults to localhost
+- `configs/env.ts` — env config: single Zod schema (all keys, no defaults). Calls `initEnv()` (server-only, lazy-loads `dotenv` from `@web-pages-starter/env`) then `validateEnv(schema)` to export typed `env` (all keys + `IS_PROD` + `STAGE`). All values must come from `.env` (general) + `.env.{stage}` (stage-specific override). No schema defaults — strict, fail fast. Stage pipeline: `dev → qa → uat → preprod → prod`
+- `packages/env/` — generic env engine: `initEnv()` (async, server-only, uses `/* webpackIgnore: true */` comment to exclude `dotenv` from client bundle) lazy-loads `dotenv` + populates `process.env` from `.env` (general) + `.env.{stage}` (override, via auto-detected stage), then `validateEnv(schema, runtimeEnv?)` (sync, no Node deps) returns typed `Env<S>`. Runtime env auto-detected: `process.env` (server) or `import.meta.env` (client). Defines stage pipeline `STAGES` (`['dev', 'qa', 'uat', 'preprod', 'prod']`) + `resolveStage()` (auto-detects `STAGE` env var, falls back to `NODE_ENV` mapping: `development → dev`, `production → prod`, `test → qa`, default `dev`). Pure engine, no hardcoded keys. Reusable across projects — pass your own schema
+- `.env` — general defaults shared across all stages. Required. Real file gitignored, `.env.example` template git-tracked
+- `.env.{stage}` — per-stage overrides (stage-specific keys: `STAGE`, `NODE_ENV`, `SITE_URL`, `BASE_PATH`, optional secrets). Active: `.env.dev`, `.env.prod`. Templates: `.env.{stage}.example` (git-tracked). Real files gitignored. Stage pipeline: `dev → qa → uat → preprod → prod`
 - `configs/rsbuild.ts` — Rsbuild build configuration (loaded via the jiti wrapper in `rsbuild.config.ts`)
 - `configs/paths.ts` — `ROOT_PATH` + `resolveRoot()` centralizes all path resolution
 

@@ -33,6 +33,8 @@
       "@i18n/*": ["./packages/i18n/*"],
       "@page-engine": ["./packages/page-engine/index.ts"],
       "@page-engine/*": ["./packages/page-engine/*"],
+      "@web-pages-starter/env": ["./packages/env/index.ts"],
+      "@web-pages-starter/env/*": ["./packages/env/*"],
       "@scripts/*": ["./scripts/*"]
     },
     "types": ["bun-types", "node"]

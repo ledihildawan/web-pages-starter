@@ -17,7 +17,7 @@ Requires [Bun](https://bun.sh) `>= 1.3.14`.
 
 ```
 ├── configs/               # app configuration
-│   ├── env.ts             #   type-safe env validation (@t3-oss/env-core + Zod) → env, IS_DEV, IS_PROD, IS_NODE
+│   ├── env.ts             #   env config: Zod schema + initEnv() (load .env files via package) + validateEnv(schema) → typed env
 │   ├── i18n.ts            #   defaultLocale + active locales
 │   ├── fonts.ts           #   font stack (CSS import + family config)
 │   ├── paths.ts           #   ROOT_PATH + resolveRoot() — centralizes all filesystem path resolution
@@ -341,7 +341,7 @@ sync-system-pages → clean:cache → fetch:rates → generate-active-locales --
 
 `build.ts` orchestrates the final steps with `NODE_ENV=production`:
 1. Cleans `dist/`
-2. Runs generators (sitemap, manifest, robots, sw) with production env vars from `.env.production`
+2. Runs generators (sitemap, manifest, robots, sw) with production env vars from `.env.prod`
 3. Spawns Rsbuild for production bundle
 
 **Pre-build steps:**
@@ -415,7 +415,10 @@ Ideal for Lighthouse audits, mobile testing, or sharing WIP via a public URL.
 
 | File | Purpose |
 | --- | --- |
-| `configs/env.ts` | Type-safe env validation (`@t3-oss/env-core` + Zod) → `env`, `IS_DEV`, `IS_PROD`, `IS_NODE`; `SITE_URL` required (no default), `PORT` defaults to 8888, `HOST` defaults to localhost |
+| `configs/env.ts` | Env config: single Zod schema (all keys, no defaults). Calls `initEnv()` (server-only, lazy-loads `dotenv` from `@web-pages-starter/env`) then `validateEnv(schema)` to export typed `env` (all keys + `IS_PROD` + `STAGE`). All values must come from `.env` (general) + `.env.{stage}` (override). No schema defaults — strict, fail fast. Stage pipeline: `dev → qa → uat → preprod → prod` |
+| `packages/env/` | Generic env engine: `initEnv()` (async, server-only, uses `/* webpackIgnore: true */` comment to exclude `dotenv` from client bundle) lazy-loads `dotenv` + populates `process.env` from `.env` (general) + `.env.{stage}` (override, via auto-detected stage), then `validateEnv(schema, runtimeEnv?)` (sync, no Node deps) returns typed `Env<S>`. Runtime env auto-detected: `process.env` (server) or `import.meta.env` (client). Defines stage pipeline `STAGES` (`['dev', 'qa', 'uat', 'preprod', 'prod']`) + `resolveStage()` (auto-detects `STAGE` env var, falls back to `NODE_ENV` mapping: `development → dev`, `production → prod`, `test → qa`, default `dev`). No hardcoded keys — pass your own schema |
+| `.env` | General defaults shared across all stages. Required. Real file gitignored, `.env.example` template git-tracked |
+| `.env.{stage}` | Per-stage overrides. Active: `.env.dev`, `.env.prod`. Templates: `.env.{stage}.example` (git-tracked). Real files gitignored. Stage pipeline: `dev → qa → uat → preprod → prod` |
 | `configs/i18n.ts` | Default locale + active locales |
 | `configs/fonts.ts` | Font stack — CSS import + family config (`sans`/`serif`/`mono` + custom keys) |
 | `configs/rsbuild.ts` | Rsbuild build configuration (real config; `rsbuild.config.ts` is a thin jiti wrapper) |
@@ -423,8 +426,7 @@ Ideal for Lighthouse audits, mobile testing, or sharing WIP via a public URL.
 | `configs/paths.ts` | `ROOT_PATH` + `resolveRoot()` — centralizes all filesystem path resolution |
 | `data/global.json5` | Site name, SEO metadata, social links, DNS/prefetch |
 | `data/menu.json5` | Navigation structure (header menu with children) |
-| `.env.development` | `NODE_ENV`, `SITE_URL`, `PORT`, `HOST` |
-| `.env.production` | `NODE_ENV`, `SITE_URL` (production domain) |
+| `.env.{stage}` | Per-stage env vars. Stages: `dev`, `qa`, `uat`, `preprod`, `prod`. Templates: `.env.{stage}.example` (git-tracked). Real files gitignored |
 | `biome.json` | Linting (Tailwind class sorting, organize imports) + formatting (2-space indent, single quotes). Overrides: `main.css` disables `noDescendingSpecificity`/`noImportantStyles`; `common.ts` disables `noExplicitAny` |
 | `.vscode/settings.json` | Editor config: Biome formatter, Tailwind IntelliSense, i18n-ally, Peacock color |
 | `.vscode/extensions.json` | Workspace extension recommendations (12 extensions) |
@@ -442,7 +444,7 @@ Recommended extensions are listed in `.vscode/extensions.json`. Key extensions:
 
 ### Environment variables
 
-All variables are validated at load time by `configs/env.ts` via `@t3-oss/env-core` + Zod into a typed `env` object; invalid or missing required values fail fast. `SITE_URL` is required (no default).
+All variables are validated at load time by `configs/env.ts` via `validateEnv()` from `@web-pages-starter/env` (uses `@t3-oss/env-core` + Zod internally) into a typed `env` object; invalid or missing required values fail fast. `SITE_URL` is required (no default).
 
 | Variable | Purpose |
 | --- | --- |

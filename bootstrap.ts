@@ -1,9 +1,10 @@
+import { env } from '@config/env';
 import { deferTask } from '@utils/scheduler';
 
 const registerServiceWorker = (): void => {
-  if (process.env.NODE_ENV !== 'production' || !('serviceWorker' in navigator)) return;
+  if (!env.IS_PROD || !('serviceWorker' in navigator)) return;
 
-  navigator.serviceWorker.register(`${import.meta.env.BASE_PATH}sw.js`).catch((error: unknown) => {
+  navigator.serviceWorker.register(`${env.BASE_PATH}sw.js`).catch((error: unknown) => {
     const message = error instanceof Error ? error.message : String(error);
     console.warn('Warning: Service worker registration failed —', message);
   });

@@ -1,9 +1,8 @@
 import { i18nConfig } from '@config/i18n';
-import { LOCALE_CODES, LOCALES } from '@generated/active-locales-data';
 import type { CurrencyCode } from '@i18n/data/currencies';
 import type { DirectionCode } from '@i18n/data/directions';
 import type { LanguageCode } from '@i18n/data/languages';
-import type { LocaleCode, LocaleConfig } from '@i18n/data/locales';
+import { LOCALE_CODES, LOCALES, type LocaleCode, type LocaleConfig } from '@i18n/data/locales';
 
 export const getFallbackChain = (locale: string): LocaleCode[] => {
   if (LOCALE_CODES.includes(locale as LocaleCode)) {

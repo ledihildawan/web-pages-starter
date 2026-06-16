@@ -10,6 +10,7 @@ const jiti = createJiti(import.meta.url, {
     '@page-engine': path.resolve('packages', 'page-engine'),
     '@scripts': path.resolve('scripts'),
     '@utils': path.resolve('utils'),
+    '@web-pages-starter/env': path.resolve('packages', 'env'),
   },
 });
 

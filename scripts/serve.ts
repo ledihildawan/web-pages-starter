@@ -1,5 +1,3 @@
-import '@config/env';
-
 import { existsSync } from 'node:fs';
 import process from 'node:process';
 import { env } from '@config/env';

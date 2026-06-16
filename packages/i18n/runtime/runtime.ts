@@ -1,3 +1,4 @@
+import { env } from '@config/env';
 import { i18nConfig } from '@config/i18n';
 import { convertCurrency, EXCHANGE_RATES } from '@generated/exchange-rates';
 import type { I18nTranslationKeys } from '@generated/i18n';
@@ -285,7 +286,7 @@ export async function initIntl(localeOverride?: string): Promise<void> {
   setStrategies(strategies.cardinal, strategies.ordinal);
 
   try {
-    const response = await fetch(`${import.meta.env.BASE_PATH}assets/i18n/${pageID}/${savedLocale}.json`);
+    const response = await fetch(`${env.BASE_PATH}assets/i18n/${pageID}/${savedLocale}.json`);
     const data = await response.json();
 
     const resources: Resource = {

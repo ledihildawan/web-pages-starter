@@ -2,7 +2,14 @@ import fs from 'node:fs';
 import { resolveRoot } from '@config/paths';
 import { log } from './lib/logger';
 
-const dirs = ['node_modules/.cache', '.cache', 'dist', 'public/assets/i18n', 'public/assets/images'];
+const dirs = [
+  'node_modules/.cache',
+  '.cache',
+  'dist',
+  'public/assets/i18n',
+  'public/assets/images',
+  'public/assets/fonts',
+];
 for (const dir of dirs) {
   const fullPath = resolveRoot(dir);
   try {
