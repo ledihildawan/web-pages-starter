@@ -625,18 +625,22 @@ export const createTemplateParams = (
 
   const localeConfig: LocaleConfig | undefined = getActiveLocales().find((l) => l.code === lang);
 
-  const clientI18nScript = generateClientI18nScript(
-    lang,
-    pageId,
-    sharedLocales,
-    LOCALE_CODES,
-    LOCALE_STORAGE_KEY,
-    getActiveLocales().map((l) => ({
-      code: l.code,
-      dir: l.dir,
-      writingSystem: l.writingSystem,
-    })),
-  );
+  const isSingleLocale = LOCALE_CODES.length <= 1;
+
+  const clientI18nScript = isSingleLocale
+    ? `<script>window.__SERVER_LOCALE__=${JSON.stringify(lang)};window.__SAVED_LOCALE__=${JSON.stringify(lang)};</script>`
+    : generateClientI18nScript(
+        lang,
+        pageId,
+        sharedLocales,
+        LOCALE_CODES,
+        LOCALE_STORAGE_KEY,
+        getActiveLocales().map((l) => ({
+          code: l.code,
+          dir: l.dir,
+          writingSystem: l.writingSystem,
+        })),
+      );
 
   const basePath = env.BASE_PATH;
 

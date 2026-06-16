@@ -126,6 +126,8 @@ const resolveTemplate = (entryName: string): string => {
   return path.join('pages', entryName, 'index.njk');
 };
 
+const isSingleLocale = (i18nConfig.locales ?? []).length === 0;
+
 export default defineConfig({
   server: {
     host: env.HOST,
@@ -174,9 +176,12 @@ export default defineConfig({
   source: {
     preEntry: getGlobalEntries(),
     entry: getEntries(),
-    define: Object.fromEntries(
-      schemaKeys.map((k) => [`import.meta.env.${k}`, JSON.stringify(env[k as keyof typeof env])]),
-    ),
+    define: {
+      ...Object.fromEntries(
+        schemaKeys.map((k) => [`import.meta.env.${k}`, JSON.stringify(env[k as keyof typeof env])]),
+      ),
+      'import.meta.env.SINGLE_LOCALE': JSON.stringify(isSingleLocale),
+    },
   },
   output: {
     distPath: {
