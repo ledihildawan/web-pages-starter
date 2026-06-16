@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { env } from '@config/env';
 import { resolveRoot } from '@config/paths';
 import { generatedHeader, writeFilePath } from '@scripts/lib/write-file';
 import sharp from 'sharp';
@@ -8,6 +9,9 @@ import { log, logBox } from './lib/logger';
 const SOURCE_DIR = resolveRoot('assets', 'images');
 const OUTPUT_DIR = resolveRoot('public', 'assets', 'images');
 const MANIFEST_FILE = resolveRoot('generated', 'image-manifest.ts');
+
+const ASSET_PREFIX = env.BASE_PATH.replace(/\/$/, '');
+const imageUrl = (file: string): string => `${ASSET_PREFIX}/assets/images/${file}`;
 
 const SIZES = [400, 800, 1600];
 const AVIF_QUALITY = 50;
@@ -48,7 +52,7 @@ async function processImage(inputFile: string, outputName: string): Promise<Imag
           .avif({ quality: AVIF_QUALITY })
           .toFile(outFile);
 
-        const url = `/assets/images/${outputName}-${size}w.avif`;
+        const url = imageUrl(`${outputName}-${size}w.avif`);
         srcsetParts.push(`${url} ${size}w`);
 
         if (size === DEFAULT_SIZE || (!defaultSrc && size <= DEFAULT_SIZE)) {
@@ -64,7 +68,7 @@ async function processImage(inputFile: string, outputName: string): Promise<Imag
     if (srcsetParts.length === 0) {
       const outName = `${outputName}-${metadata.width}w.avif`;
       await sharp(inputFile).avif({ quality: AVIF_QUALITY }).toFile(path.join(OUTPUT_DIR, outName));
-      const url = `/assets/images/${outName}`;
+      const url = imageUrl(outName);
       srcsetParts.push(`${url} ${metadata.width}w`);
       defaultSrc = url;
     }
