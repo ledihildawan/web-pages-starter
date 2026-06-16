@@ -96,7 +96,7 @@ const getEntries = (): Record<string, string | string[]> => {
   for (const page of scannedPages) {
     const tsFile = path.join(page.dir, 'index.ts');
     const cssFile = path.join(page.dir, 'index.css');
-    if (fs.existsSync(tsFile)) {
+    if (hasContent(tsFile)) {
       entries[page.name] = hasContent(cssFile) ? [tsFile, cssFile] : tsFile;
     }
   }
@@ -104,7 +104,7 @@ const getEntries = (): Record<string, string | string[]> => {
   for (const dyn of dynamicEntries) {
     const tsFile = path.join(dyn.templateDir, 'index.ts');
     const cssFile = path.join(dyn.templateDir, 'index.css');
-    if (fs.existsSync(tsFile)) {
+    if (hasContent(tsFile)) {
       entries[dyn.entryKey] = hasContent(cssFile) ? [tsFile, cssFile] : tsFile;
     }
   }
