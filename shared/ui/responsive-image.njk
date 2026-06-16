@@ -1,0 +1,3 @@
+{% macro render(image, alt, sizes, loading="lazy", class="", fetchpriority="") %}
+<img width="{{ image.width }}" height="{{ image.height }}" src="{{ image.src }}" srcset="{{ image.srcset }}" sizes="{{ sizes }}" alt="{{ alt }}" loading="{{ loading }}" decoding="async" {% if fetchpriority %}fetchpriority="{{ fetchpriority }}"{% endif %} {% if class %}class="{{ class }}"{% endif %} style="background-image:url('{{ image.lqip }}');background-size:cover">
+{% endmacro %}

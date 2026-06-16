@@ -60,10 +60,12 @@ function findDuplicateKeys(content: string): Record<string, number> {
       let k = j + 1;
       while (k < content.length && /\s/.test(content[k])) k++;
       if (content[k] === ':') {
-        const scope = scopeStack[scopeStack.length - 1];
-        const count = (scope.get(key) || 0) + 1;
-        scope.set(key, count);
-        if (count > 1) dupes[key] = (dupes[key] || 1) + 1;
+        const scope = scopeStack.at(-1);
+        if (scope) {
+          const count = (scope.get(key) || 0) + 1;
+          scope.set(key, count);
+          if (count > 1) dupes[key] = (dupes[key] || 1) + 1;
+        }
       }
       i = j;
     }

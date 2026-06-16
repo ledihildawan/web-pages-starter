@@ -15,7 +15,8 @@
       "label": "Vedi Demo",
       "url": "#features"
     },
-    "note": "Nessuna carta di credito richiesta"
+    "note": "Nessuna carta di credito richiesta",
+    "image_alt": "Web Pages Starter dashboard preview"
   },
   "stats": {
     "community": "Comunità Globale",
@@ -30,10 +31,10 @@
   "story": {
     "tag": "La nostra storia",
     "visual_label": "Illustrazione di studio creativo",
-    "title": "Spinti dalla passione, <br>definiti dall'eccellenza.",
-    "para1": "Il nostro viaggio è iniziato con un'idea semplice: rendere lo sviluppo web accessibile e divertente per tutti. Eravamo stufi dei framework pesanti e delle configurazioni complicate.",
+    "title": "Spinti dalla passione, \u003cbr\u003edefiniti dall\u0027eccellenza.",
+    "para1": "Il nostro viaggio è iniziato con un\u0027idea semplice: rendere lo sviluppo web accessibile e divertente per tutti. Eravamo stufi dei framework pesanti e delle configurazioni complicate.",
     "para2": "Oggi, siamo un team diversificato di ingegneri, designer e pensatori che lavorano insieme per risolvere problemi complessi con soluzioni eleganti.",
-    "val1": "Filosofia di design incentrata sull'utente",
+    "val1": "Filosofia di design incentrata sull\u0027utente",
     "val2": "Architettura performance-first",
     "val3": "Trasparenza e comunicazione aperta"
   },
@@ -43,7 +44,7 @@
   },
   "vision": {
     "title": "La nostra visione",
-    "description": "Diventare la piattaforma preferita dagli sviluppatori moderni che apprezzano la bellezza, le prestazioni e l'esperienza utente in ogni riga di codice."
+    "description": "Diventare la piattaforma preferita dagli sviluppatori moderni che apprezzano la bellezza, le prestazioni e l\u0027esperienza utente in ogni riga di codice."
   },
   "values": {
     "title": "I nostri valori",
@@ -63,11 +64,11 @@
   },
   "integrity": {
     "title": "Integrità",
-    "description": "L'onestà e la trasparenza sono il fondamento di ogni relazione che costruiamo."
+    "description": "L\u0027onestà e la trasparenza sono il fondamento di ogni relazione che costruiamo."
   },
   "excellence": {
     "title": "Eccellenza",
-    "description": "Non ci accontentiamo del 'sufficiente'. Puntiamo sempre al meglio."
+    "description": "Non ci accontentiamo del \u0027sufficiente\u0027. Puntiamo sempre al meglio."
   },
   "quality": {
     "title": "Qualità",
@@ -89,7 +90,7 @@
       },
       "design": {
         "title": "Design Moderno",
-        "description": "Interfaccia pulita e responsiva dall'aspetto professionale su qualsiasi dispositivo. Componenti completamente personalizzabili."
+        "description": "Interfaccia pulita e responsiva dall\u0027aspetto professionale su qualsiasi dispositivo. Componenti completamente personalizzabili."
       },
       "security": {
         "title": "Alta Sicurezza",

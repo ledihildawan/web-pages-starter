@@ -15,7 +15,8 @@
       "label": "Se demo",
       "url": "#features"
     },
-    "note": "Ingen kredittkort påkrevd"
+    "note": "Ingen kredittkort påkrevd",
+    "image_alt": "Web Pages Starter dashboard preview"
   },
   "stats": {
     "community": "Globalt fellesskap",
@@ -30,7 +31,7 @@
   "story": {
     "tag": "Vår historie",
     "visual_label": "Kreativ studioillustrasjon",
-    "title": "Drevet av lidenskap, <br>definert av kvalitet.",
+    "title": "Drevet av lidenskap, \u003cbr\u003edefinert av kvalitet.",
     "para1": "Reisen vår startet med en enkel idé: gjøre webutvikling tilgjengelig og morsom for alle. Vi var lei av tunge rammeverk og kompliserte oppsett.",
     "para2": "I dag er vi et mangfoldig team av ingeniører, designere og tenkere som jobber sammen for å løse komplekse problemer med elegante løsninger.",
     "val1": "Brukersentrert designfilosofi",
@@ -67,7 +68,7 @@
   },
   "excellence": {
     "title": "Kvalitet",
-    "description": "Vi nøyer oss ikke med 'godt nok'. Vi streber alltid etter det beste."
+    "description": "Vi nøyer oss ikke med \u0027godt nok\u0027. Vi streber alltid etter det beste."
   },
   "quality": {
     "title": "Kvalitet",

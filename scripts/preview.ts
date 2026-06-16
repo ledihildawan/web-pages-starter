@@ -1,4 +1,4 @@
-import { spawn } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
@@ -9,13 +9,16 @@ import type { serve } from '@hono/node-server';
 import ngrok from '@ngrok/ngrok';
 import { getErrorPageSlugs, getRootPageSlug } from '@page-engine';
 import inquirer from 'inquirer';
-import { createStaticApp } from './lib/hono-server';
+import { createStaticApp, getPageNames, loadHtmlCache } from './lib/hono-server';
 import { log } from './lib/logger';
-import { createServer, setupSigintHandler, wrapMainError } from './lib/signal-handler';
+import { createServer, wrapMainError } from './lib/signal-handler';
 
 const PORT = env.PORT;
 const HOST = env.HOST;
+const LOCAL_URL = `http://localhost:${PORT}`;
 const DIST = resolveRoot('dist');
+
+const TEXT_EXTS = ['.html', '.css', '.js', '.json', '.xml', '.txt', '.svg', '.webmanifest'];
 
 const runBuild = (): Promise<void> => {
   return new Promise((resolve, reject) => {
@@ -34,63 +37,126 @@ const runBuild = (): Promise<void> => {
   });
 };
 
-const replaceUrls = (fromUrl: string, toUrl: string): void => {
-  log.info('  Starting URL replacement...');
-  const getAllFiles = (dir: string): string[] => {
+const replaceUrls = (fromUrl: string, toUrl: string): number => {
+  let replaced = 0;
+
+  const getAllTextFiles = (dir: string): string[] => {
     const files: string[] = [];
     if (!fs.existsSync(dir)) return files;
     const entries = fs.readdirSync(dir, { withFileTypes: true });
     for (const entry of entries) {
       const fullPath = path.join(dir, entry.name);
       if (entry.isDirectory()) {
-        files.push(...getAllFiles(fullPath));
-      } else {
+        files.push(...getAllTextFiles(fullPath));
+      } else if (TEXT_EXTS.includes(path.extname(entry.name).toLowerCase())) {
         files.push(fullPath);
       }
     }
     return files;
   };
 
-  const allFiles = getAllFiles(DIST);
-  log.info(`  Found ${allFiles.length} files to check`);
-  let updatedCount = 0;
+  const files = getAllTextFiles(DIST);
+  log.info(`  Found ${files.length} text files to check`);
 
-  for (const file of allFiles) {
+  for (const file of files) {
     const content = fs.readFileSync(file, 'utf-8');
     if (content.includes(fromUrl)) {
-      const newContent = content.split(fromUrl).join(toUrl);
-      fs.writeFileSync(file, newContent, 'utf-8');
-      updatedCount++;
-      const relativePath = file.replace(ROOT_PATH, '.').replace(/\\/g, '/');
-      log.info(`  Replaced in: ${relativePath}`);
+      fs.writeFileSync(file, content.replaceAll(fromUrl, toUrl));
+      replaced++;
     }
   }
 
-  log.info(`\n  Done: Replaced URLs in ${updatedCount} file(s)`);
+  return replaced;
 };
 
-const cliArgs = process.argv.slice(2);
-const tunnelIdx = cliArgs.indexOf('--tunnel');
-const cliProvider = tunnelIdx >= 0 ? cliArgs[tunnelIdx + 1] : null;
+const closeServer = (server: ReturnType<typeof serve> | null): Promise<void> => {
+  return new Promise((resolve) => {
+    if (!server) {
+      resolve();
+      return;
+    }
+    let done = false;
+    const finish = () => {
+      if (!done) {
+        done = true;
+        resolve();
+      }
+    };
+    server.close(finish);
+    setTimeout(finish, 2000);
+  });
+};
 
-const isValidProvider = (p: string) => p === 'ngrok' || p === 'cloudflared';
+const checkCloudflared = (): boolean => {
+  try {
+    const result = spawnSync('cloudflared', ['--version'], { stdio: 'ignore' });
+    return result.status === 0;
+  } catch {
+    return false;
+  }
+};
+
+const startCloudflaredTunnel = (): Promise<{ url: string; kill: () => void }> => {
+  return new Promise((resolve, reject) => {
+    const tunnelTarget = `http://${HOST}:${PORT}`;
+    const proc = spawn('cloudflared', ['tunnel', '--url', tunnelTarget], {
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+
+    let lineBuffer = '';
+    let settled = false;
+
+    const finish = (fn: () => void) => {
+      if (!settled) {
+        settled = true;
+        fn();
+      }
+    };
+
+    const processChunk = (data: Buffer) => {
+      lineBuffer += data.toString();
+      const lines = lineBuffer.split(/\r?\n/);
+      lineBuffer = lines.pop() || '';
+
+      for (const line of lines) {
+        const match = line.match(/https:\/\/[a-zA-Z0-9-]+\.trycloudflare\.com/);
+        if (match) {
+          finish(() => resolve({ url: match[0], kill: () => proc.kill() }));
+          return;
+        }
+      }
+    };
+
+    proc.stdout.on('data', processChunk);
+    proc.stderr.on('data', processChunk);
+    proc.on('error', (err) => finish(() => reject(new Error(`cloudflared failed — ${err.message}`))));
+    proc.on('close', (code) => finish(() => reject(new Error(`cloudflared exited (code ${code})`))));
+
+    setTimeout(() => {
+      finish(() => reject(new Error('cloudflared tunnel timeout (30s) — no URL received')));
+    }, 30000);
+  });
+};
 
 const main = async () => {
-  if (cliProvider && !isValidProvider(cliProvider)) {
+  const cliProvider = process.argv.includes('--tunnel') ? process.argv[process.argv.indexOf('--tunnel') + 1] : null;
+
+  let provider: string;
+
+  if (cliProvider && (cliProvider === 'ngrok' || cliProvider === 'cloudflared')) {
+    provider = cliProvider;
+  } else if (cliProvider) {
     log.error('Error: Invalid tunnel provider. Use --tunnel ngrok or --tunnel cloudflared');
     process.exit(1);
-  }
-
-  let provider = cliProvider;
-  if (!provider) {
-    const { selected } = await inquirer.prompt([
+  } else {
+    const { selected } = await inquirer.prompt<{ selected: string }>([
       {
         type: 'select',
         name: 'selected',
         message: 'Select tunnel provider:',
         choices: [
-          { name: 'ngrok', value: 'ngrok' },
-          { name: 'cloudflared', value: 'cloudflared' },
+          { name: 'ngrok (requires NGROK_AUTHTOKEN)', value: 'ngrok' },
+          { name: 'cloudflared (requires cloudflared installed)', value: 'cloudflared' },
         ],
       },
     ]);
@@ -101,113 +167,77 @@ const main = async () => {
   let tunnelClose: (() => void) | null = null;
   let serverInstance: ReturnType<typeof serve> | null = null;
 
-  const closeServer = (): Promise<void> => {
-    return new Promise((resolve) => {
-      if (!serverInstance) {
-        resolve();
-        return;
-      }
-      serverInstance.close(() => {
-        serverInstance = null;
-        resolve();
-      });
-      setTimeout(resolve, 2000);
-    });
-  };
-
   if (provider === 'ngrok') {
     const listener = await ngrok.forward({
       addr: PORT,
       authtoken_from_env: true,
     });
-    tunnelUrl = listener.url() || env.SITE_URL;
+    tunnelUrl = listener.url() || '';
+    if (!tunnelUrl) {
+      log.error('Error: ngrok returned no tunnel URL. Check NGROK_AUTHTOKEN.');
+      await listener.close();
+      process.exit(1);
+    }
     process.env.SITE_URL = tunnelUrl;
     tunnelClose = async () => {
       await listener.close();
     };
 
     await runBuild();
-
-    const app = createStaticApp(DIST);
-
-    log.info('Starting server...');
-    serverInstance = createServer({
-      fetch: app.fetch,
-      port: PORT,
-      hostname: HOST,
-    });
-  } else if (provider === 'cloudflared') {
-    process.env.SITE_URL = env.SITE_URL;
-
-    await runBuild();
-
-    const app = createStaticApp(DIST);
-
-    log.info('Starting server...');
-    serverInstance = createServer({
-      fetch: app.fetch,
-      port: PORT,
-      hostname: HOST,
-    });
-
-    log.info('Starting cloudflared tunnel...');
-
-    const checkProc = spawn('cloudflared', ['--version'], { stdio: 'ignore' });
-    checkProc.on('error', () => {
+  } else {
+    if (!checkCloudflared()) {
       log.error('Error: cloudflared not found.');
       log.error('Install: https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads');
       process.exit(1);
-    });
-
-    const proc = spawn('cloudflared', ['tunnel', '--url', env.SITE_URL], {
-      stdio: ['ignore', 'pipe', 'pipe'],
-    });
-
-    await new Promise<void>((resolve, reject) => {
-      const checkLine = (line: string) => {
-        const match = line.match(/https:\/\/[a-zA-Z0-9-]+\.trycloudflare\.com/);
-        if (match && !tunnelUrl) {
-          tunnelUrl = match[0];
-          resolve();
-        }
-      };
-
-      proc.stdout.on('data', (data) => checkLine(data.toString()));
-      proc.stderr.on('data', (data) => checkLine(data.toString()));
-      proc.on('error', (err) => {
-        log.error(`Error: cloudflared failed — ${err.message}`);
-        reject(err);
-      });
-    });
-
-    tunnelClose = () => {
-      proc.kill();
-    };
-
-    try {
-      replaceUrls(env.SITE_URL, tunnelUrl);
-    } catch (error) {
-      log.error(`Error: URL replacement failed — ${error}`);
     }
+
+    await runBuild();
+
+    log.info('Starting cloudflared tunnel...');
+    try {
+      const tunnel = await startCloudflaredTunnel();
+      tunnelUrl = tunnel.url;
+      tunnelClose = tunnel.kill;
+    } catch (err) {
+      log.error(`Error: ${(err as Error).message}`);
+      process.exit(1);
+    }
+
+    const replaced = replaceUrls(LOCAL_URL, tunnelUrl);
+    log.info(`  Done: Replaced URLs in ${replaced} file(s)`);
   }
+
+  const htmlCache = loadHtmlCache(DIST);
+  const app = createStaticApp(DIST, htmlCache);
+
+  log.info('Starting server...');
+  serverInstance = createServer({
+    fetch: app.fetch,
+    port: PORT,
+    hostname: HOST,
+  });
 
   const shutdown = async () => {
     log.info('\nShutting down...');
-    closeServer();
-    if (tunnelClose) await tunnelClose();
-    spawn('bun', ['./packages/i18n/cli/generate-active-locales.ts'], {
+    await closeServer(serverInstance);
+    if (tunnelClose) {
+      try {
+        await tunnelClose();
+      } catch {}
+    }
+    const restoreProc = spawn('bun', ['./packages/i18n/cli/generate-active-locales.ts'], {
       stdio: 'ignore',
       cwd: ROOT_PATH,
       detached: true,
     });
+    restoreProc.unref();
     process.exit(0);
   };
 
   process.on('SIGINT', shutdown);
   process.on('SIGTERM', shutdown);
 
-  const { getPageNames } = await import('./lib/hono-server');
-  log.info(`\n  Preview ready at ${tunnelUrl}\n`);
+  log.info(`\n  \x1b[32m✓\x1b[0m Preview ready at \x1b[1m${tunnelUrl}\x1b[0m\n`);
   log.info(`  Mode: preview (${provider})`);
   const errorPages = getErrorPageSlugs(i18nConfig.defaultLocale);
   const rootSlug = getRootPageSlug(i18nConfig.defaultLocale);
@@ -221,5 +251,4 @@ const main = async () => {
   await new Promise(() => {});
 };
 
-setupSigintHandler();
 wrapMainError(main);

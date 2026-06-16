@@ -7,7 +7,6 @@ import { getRootPageSlug, getSystemPageSlug, scanPages } from '@page-engine';
 import { generateDynamicEntries } from '@page-engine/dynamic-routes';
 import { createTemplateParams } from '@page-engine/template';
 import { defineConfig, type RsbuildPlugin } from '@rsbuild/core';
-import { pluginImageCompress } from '@rsbuild/plugin-image-compress';
 import { minify } from 'html-minifier-terser';
 import { html as beautifyHtml } from 'js-beautify';
 import { ROOT_PATH, resolveRoot } from './paths';
@@ -237,12 +236,7 @@ export default defineConfig({
       },
     ],
   },
-  plugins: [
-    pluginRootPageAsIndex(),
-    pluginHotReloadContent(),
-    pluginPrettyHtml(),
-    ...(isBuild ? [pluginImageCompress({ use: 'avif', quality: 75 })] : []),
-  ],
+  plugins: [pluginRootPageAsIndex(), pluginHotReloadContent(), pluginPrettyHtml()],
   tools: {
     htmlPlugin: (config) => {
       config.minify = (html: string) =>

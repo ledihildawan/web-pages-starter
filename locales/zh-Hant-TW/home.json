@@ -15,7 +15,8 @@
       "label": "觀看示範",
       "url": "#features"
     },
-    "note": "免綁信用卡"
+    "note": "免綁信用卡",
+    "image_alt": "Web Pages Starter dashboard preview"
   },
   "stats": {
     "community": "全球社群",
@@ -30,7 +31,7 @@
   "story": {
     "tag": "我們的故事",
     "visual_label": "創意工作室插圖",
-    "title": "激情驅動，<br>卓越定義。",
+    "title": "激情驅動，\u003cbr\u003e卓越定義。",
     "para1": "我們的旅程始於一個簡單的想法：讓每個人都能輕鬆愉快地進行 Web 開發。我們厭倦了臃腫的框架和複雜的配置。",
     "para2": "今天，我們是一個由工程師、設計師和思想家組成的多元化團隊，共同努力用優雅的方案解決複雜的問題。",
     "val1": "以用戶為中心的設計理念",

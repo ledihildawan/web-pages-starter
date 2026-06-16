@@ -15,7 +15,8 @@
       "label": "Demo bekijken",
       "url": "#features"
     },
-    "note": "Geen creditcard nodig"
+    "note": "Geen creditcard nodig",
+    "image_alt": "Web Pages Starter dashboard preview"
   },
   "stats": {
     "community": "Wereldwijde community",
@@ -30,7 +31,7 @@
   "story": {
     "tag": "Ons verhaal",
     "visual_label": "Creatieve studio illustratie",
-    "title": "Gedreven door passie, <br>gedefinieerd door uitmuntendheid.",
+    "title": "Gedreven door passie, \u003cbr\u003egedefinieerd door uitmuntendheid.",
     "para1": "Onze reis begon met een eenvoudig idee: webontwikkeling toegankelijk en leuk maken voor iedereen. We waren de zware frameworks en ingewikkelde configuraties beu.",
     "para2": "Vandaag zijn wij een divers team van engineers, ontwerpers en denkers die samenwerken om complexe problemen op te lossen met elegante oplossingen.",
     "val1": "User-centric ontwerpfilosofie",
@@ -67,7 +68,7 @@
   },
   "excellence": {
     "title": "Uitmuntendheid",
-    "description": "Wij zijn niet tevreden met 'goed genoeg'. Wij streven altijd naar het beste."
+    "description": "Wij zijn niet tevreden met \u0027goed genoeg\u0027. Wij streven altijd naar het beste."
   },
   "quality": {
     "title": "Kwaliteit",

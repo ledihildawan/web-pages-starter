@@ -15,7 +15,8 @@
       "label": "Pozrieť demo",
       "url": "#features"
     },
-    "note": "Bez potreby kreditnej karty"
+    "note": "Bez potreby kreditnej karty",
+    "image_alt": "Web Pages Starter dashboard preview"
   },
   "stats": {
     "community": "Globálna komunita",
@@ -30,7 +31,7 @@
   "story": {
     "tag": "Náš príbeh",
     "visual_label": "Ilustrácia kreatívneho štúdia",
-    "title": "Vedení vášňou, <br>definovaní excelentnosťou.",
+    "title": "Vedení vášňou, \u003cbr\u003edefinovaní excelentnosťou.",
     "para1": "Naša cesta začala jednoduchou myšlienkou: spraviť web development prístupný a zábavný pre všetkých. Boli sme unavení z ťažkých frameworkov a zložitých konfigurácií.",
     "para2": "Dnes sme rozmanitý tím inžinierov, dizajnérov a mysliteľov, ktorí spolupracujú na riešení komplexných problémov elegantnými riešeniami.",
     "val1": "Dizajnová filozofia zameraná na používateľa",

@@ -15,7 +15,8 @@
       "label": "Peržiūrėti demo",
       "url": "#features"
     },
-    "note": "Nereikia kredito kortelės"
+    "note": "Nereikia kredito kortelės",
+    "image_alt": "Web Pages Starter dashboard preview"
   },
   "stats": {
     "community": "Pasaulinė bendruomenė",
@@ -30,7 +31,7 @@
   "story": {
     "tag": "Mūsų istorija",
     "visual_label": "Kūrybinės studijos iliustracija",
-    "title": "Skatinti aistra, <br>apibrėžti tobulumu.",
+    "title": "Skatinti aistra, \u003cbr\u003eapibrėžti tobulumu.",
     "para1": "Mūsų kelionė prasidėjo nuo paprastos idėjos: padaryti žiniatinklio kūrimą prieinamą ir malonų visiems. Mes pavargome nuo sunkių sistemų ir sudėtingų konfigūracijų.",
     "para2": "Šiandien mes esame įvairi inžinierių, dizainerių ir mąstytojų komanda, kuri kartu sprendžia sudėtingas problemas elegantiškais sprendimais.",
     "val1": "Vartotojui orientuota dizaino filosofija",

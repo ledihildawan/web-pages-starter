@@ -8,6 +8,7 @@ import { logBox } from './lib/logger';
 import { writeFilePath } from './lib/write-file';
 
 const OUTPUT_PUBLIC = resolveRoot('public', 'manifest.json');
+const OUTPUT_DIST = resolveRoot('dist', 'manifest.json');
 
 const dataDir = resolveRoot('data');
 const global = loadGlobalData(dataDir);
@@ -60,6 +61,7 @@ const manifest = {
 };
 
 writeFilePath(OUTPUT_PUBLIC, `${JSON.stringify(manifest, null, 2)}\n`);
+writeFilePath(OUTPUT_DIST, `${JSON.stringify(manifest, null, 2)}\n`);
 
 logBox('Generate Manifest', {
   Name: siteName,

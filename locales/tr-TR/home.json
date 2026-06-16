@@ -15,7 +15,8 @@
       "label": "Demoyu Görüntüle",
       "url": "#features"
     },
-    "note": "Kredi kartı gerekmez"
+    "note": "Kredi kartı gerekmez",
+    "image_alt": "Web Pages Starter dashboard preview"
   },
   "stats": {
     "community": "Küresel Topluluk",
@@ -30,8 +31,8 @@
   "story": {
     "tag": "Hikayemiz",
     "visual_label": "Yaratıcı Stüdyo İllüstrasyonu",
-    "title": "Tutkuyla hareket eden, <br>mükemmellikle tanımlanan.",
-    "para1": "Yolculuğumuz basit bir fikirle başladı: web geliştirmeyi herkes için erişilebilir ve eğlenceli hale getirmek. Ağır framework'lerden ve karmaşık yapılandırmalardan bıkmıştık.",
+    "title": "Tutkuyla hareket eden, \u003cbr\u003emükemmellikle tanımlanan.",
+    "para1": "Yolculuğumuz basit bir fikirle başladı: web geliştirmeyi herkes için erişilebilir ve eğlenceli hale getirmek. Ağır framework\u0027lerden ve karmaşık yapılandırmalardan bıkmıştık.",
     "para2": "Bugün, karmaşık sorunları zarif çözümlerle çözmek için birlikte çalışan mühendisler, tasarımcılar ve düşünürlerden oluşan çeşitli bir ekibiz.",
     "val1": "Kullanıcı odaklı tasarım felsefesi",
     "val2": "Performans öncelikli mimari",

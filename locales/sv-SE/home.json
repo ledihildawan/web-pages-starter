@@ -15,7 +15,8 @@
       "label": "Se demo",
       "url": "#features"
     },
-    "note": "Inget kreditkort krävs"
+    "note": "Inget kreditkort krävs",
+    "image_alt": "Web Pages Starter dashboard preview"
   },
   "stats": {
     "community": "Global gemenskap",
@@ -30,7 +31,7 @@
   "story": {
     "tag": "Vår historia",
     "visual_label": "Kreativ studioillustration",
-    "title": "Drivna av passion, <br>definierade av kvalitet.",
+    "title": "Drivna av passion, \u003cbr\u003edefinierade av kvalitet.",
     "para1": "Vår resa började med en enkel idé: göra webbutveckling tillgänglig och rolig för alla. Vi var trötta på tunga ramverk och komplicerade inställningar.",
     "para2": "Idag är vi ett mångsidigt team av ingenjörer, designers och tänkare som arbetar tillsammans för att lösa komplexa problem med eleganta lösningar.",
     "val1": "Användarcentrerad designfilosofi",
@@ -67,7 +68,7 @@
   },
   "excellence": {
     "title": "Kvalitet",
-    "description": "Vi nöjer oss inte med 'tillräckligt bra'. Vi strävar alltid efter det bästa."
+    "description": "Vi nöjer oss inte med \u0027tillräckligt bra\u0027. Vi strävar alltid efter det bästa."
   },
   "quality": {
     "title": "Kvalitet",

@@ -15,7 +15,8 @@
       "label": "Skatīt demo",
       "url": "#features"
     },
-    "note": "Nav nepieciešama kredītkarte"
+    "note": "Nav nepieciešama kredītkarte",
+    "image_alt": "Web Pages Starter dashboard preview"
   },
   "stats": {
     "community": "Globālā kopiena",
@@ -30,7 +31,7 @@
   "story": {
     "tag": "Mūsu stāsts",
     "visual_label": "Radošās studijas ilustrācija",
-    "title": "Vadīti ar kaislību, <br>noteikti ar izcilību.",
+    "title": "Vadīti ar kaislību, \u003cbr\u003enoteikti ar izcilību.",
     "para1": "Mūsu ceļojums sākās ar vienkāršu ideju: padarīt tīmekļa izstrādi pieejamu un patīkamu visiem. Mēs bijām noguruši no smagajiem ietvariem un sarežģītajām konfigurācijām.",
     "para2": "Šodien mēs esam daudzveidīga inženieru, dizaineru un domātāju komanda, kas kopā risina sarežģītas problēmas ar elegantiem risinājumiem.",
     "val1": "Uz lietotāju vērsta dizaina filozofija",

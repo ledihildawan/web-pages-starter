@@ -15,7 +15,8 @@
       "label": "Ver Demo",
       "url": "#features"
     },
-    "note": "Não é necessário cartão de crédito"
+    "note": "Não é necessário cartão de crédito",
+    "image_alt": "Web Pages Starter dashboard preview"
   },
   "stats": {
     "community": "Comunidade Global",
@@ -30,7 +31,7 @@
   "story": {
     "tag": "A Nossa História",
     "visual_label": "Ilustração de Estúdio Criativo",
-    "title": "Movidos pela paixão, <br>definidos pela excelência.",
+    "title": "Movidos pela paixão, \u003cbr\u003edefinidos pela excelência.",
     "para1": "A nossa jornada começou com uma ideia simples: tornar o desenvolvimento web acessível e divertido para todos. Estávamos cansados de frameworks inchados e configurações complexas.",
     "para2": "Hoje, somos uma equipa diversificada de engenheiros, designers e pensadores a trabalhar juntos para resolver problemas complexos com soluções elegantes.",
     "val1": "Filosofia de design centrada no utilizador",

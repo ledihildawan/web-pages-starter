@@ -15,7 +15,8 @@
       "label": "Oglejte demo",
       "url": "#features"
     },
-    "note": "Brez potrebe po kreditni kartici"
+    "note": "Brez potrebe po kreditni kartici",
+    "image_alt": "Web Pages Starter dashboard preview"
   },
   "stats": {
     "community": "Globalna skupnost",
@@ -30,7 +31,7 @@
   "story": {
     "tag": "Naša zgodba",
     "visual_label": "Ilustracija kreativnega studia",
-    "title": "Vodeni s strastjo, <br>opredeljeni z odličnostjo.",
+    "title": "Vodeni s strastjo, \u003cbr\u003eopredeljeni z odličnostjo.",
     "para1": "Naše potovanje se je začelo z enostavno idejo: narediti spletni razvoj dostopen in zabaven za vse. Bili smo utrujeni od težkih ogrodij in zapletenih konfiguracij.",
     "para2": "Danes smo raznolika ekipa inženirjev, oblikovalcev in mislecev, ki skupaj rešujejo kompleksne probleme z elegantnimi rešitvami.",
     "val1": "Oblikovalna filozofija, osredotočena na uporabnika",

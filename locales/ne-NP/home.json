@@ -15,7 +15,8 @@
       "label": "View Demo",
       "url": "#features"
     },
-    "note": "No credit card required"
+    "note": "No credit card required",
+    "image_alt": "Web Pages Starter dashboard preview"
   },
   "stats": {
     "community": "Global Community",
@@ -30,7 +31,7 @@
   "story": {
     "tag": "Our Story",
     "visual_label": "Creative Studio Illustration",
-    "title": "Driven by passion, <br>defined by excellence.",
+    "title": "Driven by passion, \u003cbr\u003edefined by excellence.",
     "para1": "Our journey began with a simple idea: make web development accessible and enjoyable for everyone. We were tired of bloated frameworks and complex configurations.",
     "para2": "Today, we are a diverse team of engineers, designers, and thinkers working together to solve complex problems with elegant solutions.",
     "val1": "User-centric design philosophy",
@@ -67,7 +68,7 @@
   },
   "excellence": {
     "title": "Excellence",
-    "description": "We don't settle for good enough. We always strive for the best."
+    "description": "We don\u0027t settle for good enough. We always strive for the best."
   },
   "quality": {
     "title": "Quality",

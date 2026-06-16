@@ -15,7 +15,8 @@
       "label": "Zobacz demo",
       "url": "#features"
     },
-    "note": "Nie wymaga karty kredytowej"
+    "note": "Nie wymaga karty kredytowej",
+    "image_alt": "Web Pages Starter dashboard preview"
   },
   "stats": {
     "community": "Globalna społeczność",
@@ -30,7 +31,7 @@
   "story": {
     "tag": "Nasza Historia",
     "visual_label": "Ilustracja Studia Kreatywnego",
-    "title": "Napędzani pasją, <br>określani przez doskonałość.",
+    "title": "Napędzani pasją, \u003cbr\u003eokreślani przez doskonałość.",
     "para1": "Nasza podróż rozpoczęła się od prostej idei: uczynienie tworzenia stron internetowych dostępnym i przyjemnym dla wszystkich. Byliśmy zmęczeni rozdętymi frameworkami i skomplikowanymi konfiguracjami.",
     "para2": "Dziś jesteśmy zróżnicowanym zespołem inżynierów, projektantów i myślicieli pracujących razem nad rozwiązywaniem złożonych problemów eleganckimi rozwiązaniami.",
     "val1": "Filozofia projektowania zorientowanego na użytkownika",

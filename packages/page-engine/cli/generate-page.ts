@@ -38,7 +38,7 @@ if (formattedSegments.length !== segments.length) {
   process.exit(1);
 }
 
-const lastSegment = formattedSegments[formattedSegments.length - 1];
+const lastSegment = formattedSegments.at(-1) ?? '';
 const fullSlug = formattedSegments.join('-');
 
 if (
@@ -146,7 +146,7 @@ try {
   }
 
   log.success(`\nDone: Page "${urlPath}" generated`);
-  log.info(`Path: pages/${groupFolder ? groupFolder + '/' : ''}${urlPath}/`);
+  log.info(`Path: pages/${groupFolder ? `${groupFolder}/` : ''}${urlPath}/`);
   log.info(`page_id: ${pageId}`);
   log.info(`url_path: ${urlPath}`);
   if (formattedSegments.length > 1) {

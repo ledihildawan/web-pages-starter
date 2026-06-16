@@ -15,7 +15,8 @@
       "label": "Vezi Demo",
       "url": "#features"
     },
-    "note": "Nu necesită card de credit"
+    "note": "Nu necesită card de credit",
+    "image_alt": "Web Pages Starter dashboard preview"
   },
   "stats": {
     "community": "Comunitate Globală",
@@ -30,7 +31,7 @@
   "story": {
     "tag": "Povestea noastră",
     "visual_label": "Ilustrație de studio creativ",
-    "title": "Ghidați de pasiune, <br>definiți de excelență.",
+    "title": "Ghidați de pasiune, \u003cbr\u003edefiniți de excelență.",
     "para1": "Călătoria noastră a început cu o idee simplă: să facem dezvoltarea web accesibilă și distractivă pentru toată lumea. Eram sătui de framework-uri grele și configurații complicate.",
     "para2": "Astăzi, suntem o echipă diversificată de ingineri, designeri și gânditori care lucrează împreună pentru a rezolva probleme complexe cu soluții elegante.",
     "val1": "Filosofie de design centrată pe utilizator",
@@ -67,7 +68,7 @@
   },
   "excellence": {
     "title": "Excelență",
-    "description": "Nu ne mulțumim cu 'destul de bun'. Aspirăm mereu spre ce e mai bun."
+    "description": "Nu ne mulțumim cu \u0027destul de bun\u0027. Aspirăm mereu spre ce e mai bun."
   },
   "quality": {
     "title": "Calitate",

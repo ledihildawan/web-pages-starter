@@ -8,6 +8,7 @@ import { logBox } from './lib/logger';
 import { writeFilePath } from './lib/write-file';
 
 const OUTPUT_PUBLIC = resolveRoot('public', 'robots.txt');
+const OUTPUT_DIST = resolveRoot('dist', 'robots.txt');
 
 const basePath = env.BASE_PATH.replace(/\/?$/, '/');
 const baseUrl = env.SITE_URL.endsWith('/') ? env.SITE_URL : `${env.SITE_URL}/`;
@@ -24,6 +25,7 @@ Sitemap: ${baseUrl}sitemap.xml
 `;
 
 writeFilePath(OUTPUT_PUBLIC, robots);
+writeFilePath(OUTPUT_DIST, robots);
 
 logBox('Generate Robots.txt', {
   Sitemap: baseUrl.slice(0, 28),

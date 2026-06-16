@@ -15,7 +15,8 @@
       "label": "Xem Demo",
       "url": "#features"
     },
-    "note": "Không cần thẻ tín dụng"
+    "note": "Không cần thẻ tín dụng",
+    "image_alt": "Web Pages Starter dashboard preview"
   },
   "stats": {
     "community": "Cộng đồng Toàn cầu",
@@ -30,7 +31,7 @@
   "story": {
     "tag": "Câu chuyện của chúng tôi",
     "visual_label": "Hình minh họa Studio Sáng tạo",
-    "title": "Được dẫn dắt bởi đam mê, <br>định nghĩa bởi sự xuất sắc.",
+    "title": "Được dẫn dắt bởi đam mê, \u003cbr\u003eđịnh nghĩa bởi sự xuất sắc.",
     "para1": "Hành trình của chúng tôi bắt đầu từ một ý tưởng đơn giản: biến phát triển web trở nên dễ tiếp cận và thú vị cho mọi người. Chúng tôi đã mệt mỏi với các framework nặng nề và cấu hình phức tạp.",
     "para2": "Ngày nay, chúng tôi là một đội ngũ đa dạng gồm các kỹ sư, nhà thiết kế và những nhà tư duy cùng hợp tác giải quyết các vấn đề phức tạp bằng giải pháp thanh lịch.",
     "val1": "Triết lý thiết kế lấy người dùng làm trung tâm",

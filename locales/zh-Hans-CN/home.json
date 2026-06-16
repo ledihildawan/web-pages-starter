@@ -15,7 +15,8 @@
       "label": "查看演示",
       "url": "#features"
     },
-    "note": "无需信用卡"
+    "note": "无需信用卡",
+    "image_alt": "Web Pages Starter dashboard preview"
   },
   "stats": {
     "community": "全球社区",
@@ -30,7 +31,7 @@
   "story": {
     "tag": "我们的故事",
     "visual_label": "创意工作室插图",
-    "title": "激情驱动，<br>卓越定义。",
+    "title": "激情驱动，\u003cbr\u003e卓越定义。",
     "para1": "我们的旅程始于一个简单的想法：让每个人都能轻松愉快地进行 Web 开发。我们厌倦了臃肿的框架和复杂的配置。",
     "para2": "今天，我们是一个由工程师、设计师和思想家组成的多元化团队，共同努力用优雅的方案解决复杂的问题。",
     "val1": "以用户为中心的设计理念",

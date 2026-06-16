@@ -435,7 +435,7 @@ Examples:
   }
 
   if (view && tasks.length > 0) {
-    tasks[tasks.length - 1].args.push('--view');
+    tasks.at(-1)?.args.push('--view');
   }
 
   const totalRuns = tasks.length;

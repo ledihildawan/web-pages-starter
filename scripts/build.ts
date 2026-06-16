@@ -8,11 +8,19 @@ import { resolveRoot } from '@config/paths';
 import { log, logBox } from './lib/logger';
 
 const args = process.argv.slice(2);
+const isPreview = process.env.BUILD_PREVIEW === 'true';
+const callerSiteUrl = process.env.SITE_URL;
 
 const spawnEnv: NodeJS.ProcessEnv = { ...process.env, NODE_ENV: 'production' };
 
-for (const key of ['SITE_URL', 'BASE_PATH', 'PORT', 'HOST', 'MINIFY', 'PRETTY_HTML', 'BUILD_PREVIEW', 'FOR_PREVIEW']) {
+for (const key of ['SITE_URL', 'BASE_PATH', 'PORT', 'HOST', 'MINIFY', 'PRETTY_HTML', 'BUILD_PREVIEW']) {
   delete spawnEnv[key];
+}
+
+if (isPreview) {
+  spawnEnv.BUILD_PREVIEW = 'true';
+  spawnEnv.BASE_PATH = '/';
+  spawnEnv.SITE_URL = callerSiteUrl || `http://localhost:${process.env.PORT || '8888'}`;
 }
 
 const mode = args.includes('--debug')
@@ -36,6 +44,7 @@ if (fs.existsSync(distPath)) {
 }
 
 const generators = [
+  'scripts/generate-images.ts',
   'scripts/generate-sitemap.ts',
   'scripts/generate-manifest.ts',
   'scripts/generate-robots.ts',

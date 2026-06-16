@@ -10,7 +10,6 @@ import { writeFilePath } from './lib/write-file';
 
 const cliArgs = process.argv.slice(2);
 const distOnly = cliArgs.includes('--dist-only');
-const isPreviewRegen = env.FOR_PREVIEW;
 
 const PAGES_DIR = resolveRoot('pages');
 const OUTPUT_PUBLIC = resolveRoot('public', 'sitemap.xml');
@@ -60,18 +59,16 @@ const generateSitemap = () => {
 ${urls.join('\n')}
 </urlset>`;
 
-  if (!distOnly && !isPreviewRegen) {
+  if (!distOnly) {
     writeFilePath(OUTPUT_PUBLIC, xml);
   }
   writeFilePath(OUTPUT_DIST, xml);
 
-  if (!isPreviewRegen) {
-    logBox('Generate Sitemap', {
-      Pages: urls.length,
-      'Base URL': baseUrl.slice(0, 24),
-      Output: OUTPUT_PUBLIC.replace(ROOT_PATH, '.').slice(0, 24),
-    });
-  }
+  logBox('Generate Sitemap', {
+    Pages: urls.length,
+    'Base URL': baseUrl.slice(0, 24),
+    Output: OUTPUT_PUBLIC.replace(ROOT_PATH, '.').slice(0, 24),
+  });
 };
 
 try {

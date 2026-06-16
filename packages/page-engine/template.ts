@@ -4,6 +4,7 @@ import { env, IS_PROD } from '@config/env';
 import { i18nConfig } from '@config/i18n';
 import { resolveRoot } from '@config/paths';
 import type { I18nTranslationKeys } from '@generated/i18n';
+import { IMAGE_MANIFEST } from '@generated/image-manifest';
 import {
   convertCurrency,
   convertLocalPrice,
@@ -677,5 +678,6 @@ export const createTemplateParams = (
     i18n,
     url,
     base_path: basePath,
+    images: IMAGE_MANIFEST,
   };
 };

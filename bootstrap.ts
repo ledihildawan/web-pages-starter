@@ -1,13 +1,7 @@
-const deferTask = (fn: () => void, timeout = 2000): void => {
-  if ('requestIdleCallback' in window) {
-    requestIdleCallback(fn, { timeout });
-  } else {
-    setTimeout(fn, 0);
-  }
-};
+import { deferTask } from '@utils/scheduler';
 
 const registerServiceWorker = (): void => {
-  if (!import.meta.env.IS_PROD || !('serviceWorker' in navigator)) return;
+  if (process.env.NODE_ENV !== 'production' || !('serviceWorker' in navigator)) return;
 
   navigator.serviceWorker.register(`${import.meta.env.BASE_PATH}sw.js`).catch((error: unknown) => {
     const message = error instanceof Error ? error.message : String(error);

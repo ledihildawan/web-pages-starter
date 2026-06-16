@@ -26,7 +26,6 @@ export const env = createEnv({
     BUILD_PREVIEW: strToBoolDefaultFalse,
     MINIFY: strToBoolDefaultTrue,
     PRETTY_HTML: strToBoolDefaultFalse,
-    FOR_PREVIEW: strToBoolDefaultFalse,
     NGROK_AUTHTOKEN: z.string().optional(),
     NODE_BINARY: z.string().optional(),
     RSBUILD_RUNTIME: z.enum(['node', 'bun']).optional(),

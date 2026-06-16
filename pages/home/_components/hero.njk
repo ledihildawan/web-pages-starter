@@ -1,9 +1,4 @@
-{% static 'images/hero-test-400.avif' as hero_400 %}
-{% static 'images/hero-test-500.avif' as hero_500 %}
-{% static 'images/hero-test-700.avif' as hero_700 %}
-{% static 'images/hero-test-800.avif' as hero_800 %}
-{% static 'images/hero-test-900.avif' as hero_900 %}
-{% static 'images/hero-test-1200.avif' as hero_1200 %}
+{% import "shared/ui/responsive-image.njk" as ri %}
 
 <section class="relative pbs-52 pbe-28 px-6 text-center overflow-hidden">
 
@@ -48,7 +43,7 @@
     <div class="relative group max-inline-2xl mx-auto">
       <div class="absolute -inset-1 bg-linear-to-r from-violet-600 to-fuchsia-600 rounded-3xl blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-700 ease-emphasized"></div>
       <div class="relative bg-slate-900 rounded-2xl p-2 border border-white/10 shadow-2xl overflow-hidden gpu-boost">
-        <img width="1200" height="800" src="{{ hero_700 }}" srcset="{{ hero_400 }} 400w, {{ hero_500 }} 500w, {{ hero_700 }} 700w, {{ hero_800 }} 800w, {{ hero_900 }} 900w, {{ hero_1200 }} 1200w" sizes="(min-width: 720px) 654px, calc(100vw - 66px)" alt="Web Pages Starter dashboard preview showing the analytics view with sidebar navigation" class="inline-full block-auto rounded-lg transition-transform duration-700 ease-emphasized group-hover:scale-[1.02]" fetchpriority="high" loading="eager" decoding="async">
+        {{ ri.render(images['hero-test'], i18n.t('home:hero.image_alt', {}, { raw: true }), '(min-width: 720px) 654px, calc(100vw - 66px)', 'eager', 'inline-full block-auto rounded-lg transition-transform duration-700 ease-emphasized group-hover:scale-[1.02]', 'high') }}
       </div>
     </div>
 

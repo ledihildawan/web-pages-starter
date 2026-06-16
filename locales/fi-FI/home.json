@@ -15,7 +15,8 @@
       "label": "Näytä demo",
       "url": "#features"
     },
-    "note": "Ei luottokorttia tarvita"
+    "note": "Ei luottokorttia tarvita",
+    "image_alt": "Web Pages Starter dashboard preview"
   },
   "stats": {
     "community": "Globaali yhteisö",
