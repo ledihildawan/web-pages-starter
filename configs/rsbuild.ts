@@ -90,23 +90,31 @@ const getPageNames = (): string[] => scannedPages.map((p) => p.name);
 
 const hasContent = (file: string): boolean => fs.existsSync(file) && fs.statSync(file).size > 0;
 
+const PAGE_ENTRY = resolveRoot('shared', 'page-entry.ts');
+
 const getEntries = (): Record<string, string | string[]> => {
   const entries: Record<string, string | string[]> = {};
 
   for (const page of scannedPages) {
-    const tsFile = path.join(page.dir, 'index.ts');
-    const cssFile = path.join(page.dir, 'index.css');
-    if (hasContent(tsFile)) {
-      entries[page.name] = hasContent(cssFile) ? [tsFile, cssFile] : tsFile;
-    }
+    const scriptFile = path.join(page.dir, 'script.ts');
+    const styleFile = path.join(page.dir, 'style.css');
+
+    const files: string[] = [];
+    files.push(fs.existsSync(scriptFile) ? scriptFile : PAGE_ENTRY);
+    if (hasContent(styleFile)) files.push(styleFile);
+
+    entries[page.name] = files;
   }
 
   for (const dyn of dynamicEntries) {
-    const tsFile = path.join(dyn.templateDir, 'index.ts');
-    const cssFile = path.join(dyn.templateDir, 'index.css');
-    if (hasContent(tsFile)) {
-      entries[dyn.entryKey] = hasContent(cssFile) ? [tsFile, cssFile] : tsFile;
-    }
+    const scriptFile = path.join(dyn.templateDir, 'script.ts');
+    const styleFile = path.join(dyn.templateDir, 'style.css');
+
+    const files: string[] = [];
+    files.push(fs.existsSync(scriptFile) ? scriptFile : PAGE_ENTRY);
+    if (hasContent(styleFile)) files.push(styleFile);
+
+    entries[dyn.entryKey] = files;
   }
 
   return entries;

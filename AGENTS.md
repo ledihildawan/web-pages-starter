@@ -76,6 +76,23 @@ pages/
     data.json5     ← { items: [{ slug: "getting-started", title: "..." }] }
 ```
 
+### Page file convention (traditional web inspired)
+
+Each page folder contains optional files — only `index.njk` is required:
+
+```
+pages/home/
+  index.njk        ← template (required, like index.html)
+  script.ts        ← page-specific JS (optional, like script.js)
+  style.css        ← page-specific CSS (optional, like style.css)
+  data.json5       ← page metadata: page_id, SEO (optional)
+```
+
+- No `script.ts` → uses `shared/page-entry.ts` as fallback entry
+- No `style.css` → no page-specific CSS chunk
+- 0-byte `style.css` → skipped from build entries
+- CSS is auto-loaded via entry array (not via `import` in TS)
+
 ## Config Files
 
 - `configs/i18n.ts` — default locale + active locales (`defineI18n`)

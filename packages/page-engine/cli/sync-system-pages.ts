@@ -9,7 +9,7 @@ import { wrapMainError } from '@scripts/lib/signal-handler';
 const PAGES_DIR = resolveRoot('pages');
 
 function getPageIdFromFolder(folderName: string): string | null {
-  const indexPath = path.join(PAGES_DIR, folderName, 'index.json5');
+  const indexPath = path.join(PAGES_DIR, folderName, 'data.json5');
   if (!fs.existsSync(indexPath)) return null;
   const content = fs.readFileSync(indexPath, 'utf-8');
   const match = content.match(/"page_id":\s*"([^"]+)"/);

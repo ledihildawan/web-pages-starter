@@ -130,9 +130,9 @@ const localeContent = `{
 
 try {
   fs.writeFileSync(path.join(targetDir, 'index.njk'), njkContent);
-  fs.writeFileSync(path.join(targetDir, 'index.json5'), jsonContent);
-  fs.writeFileSync(path.join(targetDir, 'index.ts'), '');
-  fs.writeFileSync(path.join(targetDir, 'index.css'), '');
+  fs.writeFileSync(path.join(targetDir, 'data.json5'), jsonContent);
+  fs.writeFileSync(path.join(targetDir, 'script.ts'), '');
+  fs.writeFileSync(path.join(targetDir, 'style.css'), '');
 
   const baseLocaleDir = resolveRoot('locales');
   if (fs.existsSync(baseLocaleDir)) {

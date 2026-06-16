@@ -52,7 +52,7 @@ function getNestedValue(obj: Record<string, unknown>, path: string): unknown {
 }
 
 describe('home page data', () => {
-  const pageData = JSON5.parse(readFileSync(join(ROOT, 'pages/home/index.json5'), 'utf-8'));
+  const pageData = JSON5.parse(readFileSync(join(ROOT, 'pages/home/data.json5'), 'utf-8'));
 
   test('has page_id', () => {
     expect(pageData.page_id).toBe('home');

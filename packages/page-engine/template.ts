@@ -582,7 +582,7 @@ export const createTemplateParams = (
 ) => {
   const lang = i18nConfig.defaultLocale;
   const folderName = String(params.entryName || getRootPageSlug(lang));
-  const pageData = readJSON5(resolveRoot('pages', folderName, 'index.json5'));
+  const pageData = readJSON5(resolveRoot('pages', folderName, 'data.json5'));
   const pageId = String(pageData.page_id || folderName);
   const sharedLocales = scanSharedLocales(resolveRoot('pages', folderName, 'index.njk'), pageId);
 

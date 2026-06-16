@@ -26,7 +26,7 @@ function getAllPages(): PageInfo[] {
     let pageId = p.name;
     let urlPath = p.name;
     try {
-      const data = readJSON5(path.join(p.dir, 'index.json5'));
+      const data = readJSON5(path.join(p.dir, 'data.json5'));
       pageId = String(data.page_id || p.name.split('/').pop() || p.name);
       urlPath = String(data.url_path || p.name);
     } catch {}
