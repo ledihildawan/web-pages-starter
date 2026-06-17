@@ -1,33 +1,11 @@
-import type { z } from 'zod';
-
 export const STAGES = ['dev', 'qa', 'uat', 'preprod', 'prod'] as const;
 
-export type SchemaShape = Record<string, z.ZodType>;
-
-export type Inferred<S extends SchemaShape> = {
-  [K in keyof S]: z.infer<S[K]>;
-};
-
-export type Env<S extends SchemaShape> = Inferred<S> & {
+export type Env = Record<string, unknown> & {
   STAGE: (typeof STAGES)[number];
   IS_PROD: boolean;
 };
 
 const IS_BROWSER = typeof window !== 'undefined' && typeof window.document !== 'undefined';
-
-let serverLoadPromise: Promise<void> | undefined;
-if (!IS_BROWSER) {
-  serverLoadPromise = (async () => {
-    const mod = (await import(/* webpackIgnore: true */ './server.ts')) as {
-      loadServerEnvFiles?: () => Promise<void>;
-    };
-    if (mod.loadServerEnvFiles) await mod.loadServerEnvFiles();
-  })();
-}
-
-async function ensureServerLoaded(): Promise<void> {
-  if (serverLoadPromise) await serverLoadPromise;
-}
 
 function getMetaEnv(): Record<string, unknown> {
   if (IS_BROWSER) return getBrowserEnv();
@@ -35,7 +13,7 @@ function getMetaEnv(): Record<string, unknown> {
 }
 
 function getBrowserEnv(): Record<string, unknown> {
-  const raw: Record<string, unknown> = {
+  return {
     PORT: import.meta.env.PORT,
     HOST: import.meta.env.HOST,
     SITE_URL: import.meta.env.SITE_URL,
@@ -51,27 +29,30 @@ function getBrowserEnv(): Record<string, unknown> {
     MINIFY: import.meta.env.MINIFY,
     PRETTY_HTML: import.meta.env.PRETTY_HTML,
   };
-  const result: Record<string, string | undefined> = {};
-  for (const [key, value] of Object.entries(raw)) {
-    result[key] = value === undefined || value === null ? undefined : String(value);
-  }
-  return result;
 }
 
-export async function readEnv<S extends SchemaShape>(schema: S): Promise<Env<S>> {
-  await ensureServerLoaded();
+function coerce(raw: unknown): unknown {
+  if (raw === undefined || raw === null) return undefined;
+  if (typeof raw !== 'string') return raw;
+  if (raw === 'true') return true;
+  if (raw === 'false') return false;
+  if (/^-?\d+$/.test(raw)) return Number(raw);
+  return raw;
+}
+
+export function readEnv(keys: readonly string[]): Env {
   const env = getMetaEnv();
-  const values = {} as Record<string, unknown>;
-  for (const key of Object.keys(schema)) {
-    const raw = env[key];
-    try {
-      values[key] = schema[key].parse(raw);
-    } catch {}
+  const values: Record<string, unknown> = {};
+  for (const key of keys) {
+    const raw = IS_BROWSER ? env[key] : coerce(env[key]);
+    if (raw !== undefined && raw !== null) {
+      values[key] = raw;
+    }
   }
   const stage = (values.STAGE as (typeof STAGES)[number]) ?? 'dev';
   return {
     ...values,
     STAGE: stage,
     IS_PROD: stage === 'prod',
-  } as Env<S>;
+  } as Env;
 }

@@ -12,10 +12,6 @@ const callerSiteUrl = env.SITE_URL;
 
 const spawnEnv: NodeJS.ProcessEnv = { ...process.env, NODE_ENV: 'production', STAGE: 'prod' };
 
-for (const key of ['SITE_URL', 'BASE_PATH', 'PORT', 'HOST', 'MINIFY', 'PRETTY_HTML', 'BUILD_PREVIEW']) {
-  delete spawnEnv[key];
-}
-
 if (isPreview) {
   spawnEnv.BUILD_PREVIEW = 'true';
   spawnEnv.BASE_PATH = '/';

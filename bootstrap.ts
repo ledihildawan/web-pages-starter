@@ -1,3 +1,5 @@
+import './styles/main.css';
+
 import { env } from '@config/env';
 import { deferTask } from '@utils/scheduler';
 
@@ -14,9 +16,15 @@ const registerServiceWorker = (): void => {
 
 async function bootstrap() {
   try {
-    const Alpine = await import('alpinejs').then((m) => m.default);
+    const [Alpine, Collapse, Focus] = await Promise.all([
+      import('alpinejs').then((m) => m.default),
+      import('@alpinejs/collapse').then((m) => m.default),
+      import('@alpinejs/focus').then((m) => m.default),
+    ]);
 
     globalThis.Alpine = Alpine;
+    Alpine.plugin(Collapse);
+    Alpine.plugin(Focus);
 
     if (SINGLE_LOCALE) {
       Alpine.store('i18n', {
@@ -35,7 +43,7 @@ async function bootstrap() {
       }
     }
 
-    Alpine.start();
+    requestAnimationFrame(() => Alpine.start());
 
     import('@i18n/fonts/fonts')
       .then((fonts) => {

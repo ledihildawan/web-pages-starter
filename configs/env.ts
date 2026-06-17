@@ -1,34 +1,49 @@
-import { type Env, readEnv, type SchemaShape, type STAGES } from '@web-pages-starter/env';
-import { z } from 'zod';
+import { readEnv, type STAGES } from '@web-pages-starter/env';
 
-const schema = {
-  STAGE: z.enum(['dev', 'qa', 'uat', 'preprod', 'prod']),
-  PORT: z.coerce.number(),
-  HOST: z.string(),
-  SITE_URL: z.url(),
-  NGROK_AUTHTOKEN: z.string().optional(),
-  NODE_BINARY: z.string().optional(),
-  RSBUILD_RUNTIME: z.enum(['node', 'bun']).optional(),
-  LIGHTHOUSE_OUTPUT_DIR: z.string(),
-  SITEMAP_DEFAULT_PRIORITY: z.string(),
-  SITEMAP_DEFAULT_CHANGEFREQ: z.string(),
-  BASE_PATH: z.string(),
-  BUILD_PREVIEW: z
-    .string()
-    .optional()
-    .transform((v) => v === 'true'),
-  MINIFY: z
-    .string()
-    .optional()
-    .transform((v) => v !== 'false'),
-  PRETTY_HTML: z
-    .string()
-    .optional()
-    .transform((v) => v === 'true'),
-} as const;
+const SCHEMA_KEYS = [
+  'STAGE',
+  'PORT',
+  'HOST',
+  'SITE_URL',
+  'NGROK_AUTHTOKEN',
+  'NODE_BINARY',
+  'RSBUILD_RUNTIME',
+  'LIGHTHOUSE_OUTPUT_DIR',
+  'SITEMAP_DEFAULT_PRIORITY',
+  'SITEMAP_DEFAULT_CHANGEFREQ',
+  'BASE_PATH',
+  'BUILD_PREVIEW',
+  'MINIFY',
+  'PRETTY_HTML',
+] as const;
 
-export type { Env, SchemaShape, STAGES };
+export type { STAGES };
 
-export const schemaKeys = Object.keys(schema) as (keyof typeof schema)[];
+export const schemaKeys = SCHEMA_KEYS as readonly string[];
 
-export const env: Env<typeof schema> = await readEnv(schema);
+interface TypedEnv {
+  STAGE: (typeof STAGES)[number];
+  PORT: number;
+  HOST: string;
+  SITE_URL: string;
+  NGROK_AUTHTOKEN: string | undefined;
+  NODE_BINARY: string | undefined;
+  RSBUILD_RUNTIME: string | undefined;
+  LIGHTHOUSE_OUTPUT_DIR: string;
+  SITEMAP_DEFAULT_PRIORITY: string;
+  SITEMAP_DEFAULT_CHANGEFREQ: string;
+  BASE_PATH: string;
+  BUILD_PREVIEW: boolean;
+  MINIFY: boolean;
+  PRETTY_HTML: boolean;
+  IS_PROD: boolean;
+}
+
+const rawEnv = readEnv(schemaKeys);
+
+export const env = {
+  ...rawEnv,
+  MINIFY: rawEnv.MINIFY ?? true,
+  BUILD_PREVIEW: rawEnv.BUILD_PREVIEW ?? false,
+  PRETTY_HTML: rawEnv.PRETTY_HTML ?? false,
+} as unknown as TypedEnv;

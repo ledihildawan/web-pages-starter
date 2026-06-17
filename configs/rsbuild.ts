@@ -17,6 +17,54 @@ const isPrettyHtml = env.PRETTY_HTML;
 const shouldMinifyHTML = shouldMinify && !isPrettyHtml;
 const MANAGED_EXTS = ['ts', 'css', 'njk', 'png', 'jpg', 'jpeg', 'webp', 'svg', 'gif'];
 
+const pluginResourceHints = (): RsbuildPlugin => ({
+  name: 'plugin-resource-hints',
+  setup(api) {
+    api.onAfterBuild(() => {
+      const distDir = api.context.distPath;
+      if (!fs.existsSync(distDir)) return;
+
+      for (const file of fs.readdirSync(distDir)) {
+        if (!file.endsWith('.html')) continue;
+        const filePath = path.join(distDir, file);
+        let content = fs.readFileSync(filePath, 'utf-8');
+
+        const jsScripts = [...content.matchAll(/<script[^>]*defer[^>]*src="([^"]*)"[^>]*><\/script>/g)];
+
+        let hints = '';
+
+        for (const m of jsScripts) {
+          const src = m[1];
+          if (!src.includes('runtime.')) {
+            hints += `<link rel="modulepreload" href="${src}">\n`;
+          }
+        }
+
+        const fontDir = path.join(distDir, 'assets', 'fonts');
+        if (fs.existsSync(fontDir)) {
+          for (const fontFile of fs.readdirSync(fontDir)) {
+            if (fontFile.endsWith('.woff2')) {
+              const fontPath = `${env.BASE_PATH}assets/fonts/${fontFile}`;
+              hints += `<link rel="preload" as="font" type="font/woff2" href="${fontPath}" crossorigin>\n`;
+            }
+          }
+        }
+
+        const imgMatch = content.match(/<img[^>]*src="([^"]*hero[^"]*)"/);
+        if (imgMatch) {
+          hints += `<link rel="preload" as="image" href="${imgMatch[1]}" fetchpriority="high">\n`;
+        }
+
+        if (hints) {
+          content = content.replace('</title>', `</title>\n${hints.trim()}`);
+        }
+
+        fs.writeFileSync(filePath, content);
+      }
+    });
+  },
+});
+
 const pluginRootPageAsIndex = (): RsbuildPlugin => ({
   name: 'plugin-root-page-as-index',
   setup(api) {
@@ -88,8 +136,6 @@ const scannedPages = scanPages(resolveRoot('pages'), '');
 
 const getPageNames = (): string[] => scannedPages.map((p) => p.name);
 
-const hasContent = (file: string): boolean => fs.existsSync(file) && fs.statSync(file).size > 0;
-
 const PAGE_ENTRY = resolveRoot('shared', 'page-entry.ts');
 
 const getEntries = (): Record<string, string | string[]> => {
@@ -97,31 +143,15 @@ const getEntries = (): Record<string, string | string[]> => {
 
   for (const page of scannedPages) {
     const scriptFile = path.join(page.dir, 'script.ts');
-    const styleFile = path.join(page.dir, 'style.css');
-
-    const files: string[] = [];
-    files.push(fs.existsSync(scriptFile) ? scriptFile : PAGE_ENTRY);
-    if (hasContent(styleFile)) files.push(styleFile);
-
-    entries[page.name] = files;
+    entries[page.name] = fs.existsSync(scriptFile) ? scriptFile : PAGE_ENTRY;
   }
 
   for (const dyn of dynamicEntries) {
     const scriptFile = path.join(dyn.templateDir, 'script.ts');
-    const styleFile = path.join(dyn.templateDir, 'style.css');
-
-    const files: string[] = [];
-    files.push(fs.existsSync(scriptFile) ? scriptFile : PAGE_ENTRY);
-    if (hasContent(styleFile)) files.push(styleFile);
-
-    entries[dyn.entryKey] = files;
+    entries[dyn.entryKey] = fs.existsSync(scriptFile) ? scriptFile : PAGE_ENTRY;
   }
 
   return entries;
-};
-
-const getGlobalEntries = (): string[] => {
-  return [resolveRoot('bootstrap.ts'), resolveRoot('styles/main.css')].filter((p) => fs.existsSync(p));
 };
 
 const dynamicEntries = generateDynamicEntries();
@@ -170,7 +200,13 @@ export default defineConfig({
     writeToDisk: false,
   },
   splitChunks: {
-    preset: 'default',
+    minSize: 0,
+    cacheGroups: {
+      default: {
+        minChunks: 2,
+        reuseExistingChunk: true,
+      },
+    },
   },
   resolve: {
     alias: {
@@ -184,7 +220,6 @@ export default defineConfig({
     },
   },
   source: {
-    preEntry: getGlobalEntries(),
     entry: getEntries(),
     define: {
       ...Object.fromEntries(
@@ -202,7 +237,7 @@ export default defineConfig({
     },
     assetPrefix: env.BASE_PATH,
     cleanDistPath: true,
-    minify: shouldMinify ? { js: 'always', css: 'always' } : false,
+    minify: shouldMinify ? { js: true, css: true } : false,
     inlineStyles: false,
     inlineScripts: ({ size }) => size < 2 * 1_024,
     sourceMap: !shouldMinify ? { js: 'cheap-module-source-map', css: true } : false,
@@ -251,7 +286,7 @@ export default defineConfig({
       },
     ],
   },
-  plugins: [pluginRootPageAsIndex(), pluginHotReloadContent(), pluginPrettyHtml()],
+  plugins: [pluginResourceHints(), pluginRootPageAsIndex(), pluginHotReloadContent(), pluginPrettyHtml()],
   tools: {
     htmlPlugin: (config) => {
       config.minify = (html: string) =>
@@ -289,6 +324,20 @@ export default defineConfig({
       },
       module: {
         rules: [
+          {
+            test: /(?:^|[\\/])(?:script|page-entry)\.ts$/,
+            enforce: 'pre',
+            use: [
+              {
+                loader: resolveRoot('packages', 'page-engine', 'page-inject-loader.cjs'),
+                options: { bootstrap: resolveRoot('bootstrap.ts') },
+              },
+            ],
+          },
+          {
+            test: /(?:bootstrap|script)\.ts$/,
+            sideEffects: true,
+          },
           {
             test: /\.njk$/,
             use: [

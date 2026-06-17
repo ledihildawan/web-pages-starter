@@ -14,6 +14,9 @@ const jiti = createJiti(import.meta.url, {
   },
 });
 
+const envServer = await jiti.import<typeof import('./packages/env/server')>('./packages/env/server.ts');
+await envServer.loadServerEnvFiles();
+
 const mod = await jiti.import<typeof import('./configs/rsbuild')>('./configs/rsbuild.ts');
 
 export default mod.default;

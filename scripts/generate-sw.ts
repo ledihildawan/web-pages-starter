@@ -11,7 +11,7 @@ const [notFoundSlug, unauthorizedSlug, forbiddenSlug, serverErrorSlug, maintenan
   getErrorPageSlugs(i18nConfig.defaultLocale);
 const offlineSlug = getSystemPageSlug('offline', i18nConfig.defaultLocale);
 
-const swContent = `const CACHE_NAME = 'starter-v2';
+const swContent = `const CACHE_NAME = 'starter-v6';
 const BASE = new URL('.', self.location.href).pathname;
 const ERROR_PAGES = [
   \`\${BASE}${notFoundSlug}.html\`,
@@ -21,43 +21,47 @@ const ERROR_PAGES = [
   \`\${BASE}${maintenanceSlug}.html\`,
   \`\${BASE}${offlineErrorSlug}.html\`,
 ];
+const PRECACHE_URLS = [BASE, ...ERROR_PAGES, \`\${BASE}manifest.json\`, \`\${BASE}favicon.svg\`];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache
-        .addAll([BASE, ...ERROR_PAGES, \`\${BASE}manifest.json\`])
-        .catch(() => Promise.resolve());
-    }),
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(PRECACHE_URLS).catch(() => {})),
   );
   self.skipWaiting();
 });
 
 self.addEventListener('fetch', (event) => {
-  if (event.request.method !== 'GET') return;
-  if (!event.request.url.startsWith(self.location.origin)) return;
+  const { request } = event;
+  if (request.method !== 'GET') return;
+  if (!request.url.startsWith(self.location.origin)) return;
 
-  event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      if (cachedResponse) return cachedResponse;
-
-      return fetch(event.request)
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request)
         .then((response) => {
-          if (response?.status !== 200 || response.type === 'opaque')
-            return response;
-
-          const responseToCache = response.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseToCache).catch(() => {});
-          });
-
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(request, clone)).catch(() => {});
           return response;
         })
-        .catch(() => {
-          if (event.request.mode === 'navigate') {
-            return caches.match(\`\${BASE}${offlineSlug}.html\`);
+        .catch(() =>
+          caches.match(request).then((cached) => cached || caches.match(\`\${BASE}${offlineSlug}.html\`)),
+        ),
+    );
+    return;
+  }
+
+  event.respondWith(
+    caches.match(request).then((cached) => {
+      if (cached) return cached;
+      return fetch(request)
+        .then((response) => {
+          if (response?.status === 200 && response.type !== 'opaque') {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, clone)).catch(() => {});
           }
-        });
+          return response;
+        })
+        .catch(() => cached);
     }),
   );
 });
@@ -66,13 +70,7 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches
       .keys()
-      .then((cacheNames) =>
-        Promise.all(
-          cacheNames.map((cacheName) =>
-            cacheName === CACHE_NAME ? null : caches.delete(cacheName),
-          ),
-        ),
-      ),
+      .then((names) => Promise.all(names.map((n) => (n === CACHE_NAME ? null : caches.delete(n))))),
   );
   self.clients.claim();
 });
@@ -83,6 +81,6 @@ writeFilePath(OUTPUT, swContent);
 logBox('Generate SW', {
   Locale: i18nConfig.defaultLocale,
   Root: rootSlug,
-  Version: 'starter-v5',
+  Version: 'starter-v6',
   Output: 'public/sw.js',
 });

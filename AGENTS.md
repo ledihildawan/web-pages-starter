@@ -8,6 +8,8 @@ bun run dev        # http://localhost:8888
 bun run build      # production build to ./dist
 ```
 
+Requires [Python 3](https://python.org) with `fonttools` + `brotli` (`pip install fonttools brotli`) for font subsetting.
+
 ## Code Style
 
 - No comments unless requested
@@ -19,13 +21,13 @@ bun run build      # production build to ./dist
 ## Build Modes
 
 ```bash
-bun run build              # minified HTML + CSS/JS (default)
+bun run build              # minified HTML + CSS/JS + Brotli/Gzip compression (default)
 bun run build -- --pretty  # pretty-printed HTML for CMS template porting
 bun run build -- --debug   # skip JS/CSS minify
 bun run preview            # build (BUILD_PREVIEW=true) + serve via tunnel
 ```
 
-Postbuild automatically restores dev stub (`generated/active-locales-data.ts` with all 136 locales).
+Build pipeline: `sync-system-pages → clean-cache → fetch-exchange-rates → generate-active-locales → generate-fonts-css → sync-locales → generate-types → build.ts → subset-fonts → compress`
 
 ## Testing
 
@@ -91,33 +93,56 @@ pages/home/
 - No `script.ts` → uses `shared/page-entry.ts` as fallback entry
 - No `style.css` → no page-specific CSS chunk
 - 0-byte `style.css` → skipped from build entries
-- CSS is auto-loaded via entry array (not via `import` in TS)
+- Bootstrap + CSS auto-injected by `packages/page-engine/page-inject-loader.cjs` (no manual imports needed)
+
+### Entry system
+
+- `page-inject-loader.cjs` auto-injects `import '../../bootstrap'` + `import './style.css'` into every `script.ts` and `page-entry.ts`
+- Bootstrap (`bootstrap.ts`) imports `main.css` + Alpine + plugins + fonts + SW
+- splitChunks extracts shared bootstrap code to a single cached chunk
+- Pages with small JS (< 2 KB) → inlined in HTML; larger → separate file
+- Pages without `script.ts` → only shared chunk referenced, no page JS file
 
 ## Config Files
 
 - `configs/i18n.ts` — default locale + active locales (`defineI18n`)
-- `configs/fonts.ts` — font CSS import + font stack (`defineFontStack`, `sans`/`serif`/`mono` + custom keys)
-- `configs/env.ts` — env config: single Zod schema (all keys, no defaults). Calls `initEnv()` (server-only, lazy-loads `dotenv` from `@web-pages-starter/env`) then `validateEnv(schema)` to export typed `env` (all keys + `IS_PROD` + `STAGE`). All values must come from `.env` (general) + `.env.{stage}` (stage-specific override). No schema defaults — strict, fail fast. Stage pipeline: `dev → qa → uat → preprod → prod`
-- `packages/env/` — generic env engine: `initEnv()` (async, server-only, uses `/* webpackIgnore: true */` comment to exclude `dotenv` from client bundle) lazy-loads `dotenv` + populates `process.env` from `.env` (general) + `.env.{stage}` (override, via auto-detected stage), then `validateEnv(schema, runtimeEnv?)` (sync, no Node deps) returns typed `Env<S>`. Runtime env auto-detected: `process.env` (server) or `import.meta.env` (client). Defines stage pipeline `STAGES` (`['dev', 'qa', 'uat', 'preprod', 'prod']`) + `resolveStage()` (auto-detects `STAGE` env var, falls back to `NODE_ENV` mapping: `development → dev`, `production → prod`, `test → qa`, default `dev`). Pure engine, no hardcoded keys. Reusable across projects — pass your own schema
+- `configs/fonts.ts` — font stack config (`defineFontStack`). Font CSS imported via `bootstrap.ts` (not here directly)
+- `configs/env.ts` — env config: schema keys array + `readEnv()` (sync, no Zod on client). Manual type coercion for PORT (number), MINIFY/BUILD_PREVIEW/PRETTY_HTML (boolean). Defaults: `MINIFY=true`, `BUILD_PREVIEW=false`, `PRETTY_HTML=false`. All values from `.env` (general) + `.env.{stage}` (stage-specific). Stage pipeline: `dev → qa → uat → preprod → prod`
+- `packages/env/` — env engine: `readEnv(keys)` reads `process.env` (server) or `import.meta.env` (client via Rsbuild define). Sync — no top-level await. Server env file loading via `packages/env/server.ts` (`loadServerEnvFiles()`)
+- `shared/env-preload.ts` — Bun preload script (`bunfig.toml`), loads `.env` + `.env.{stage}` into `process.env` before any module runs
+- `bunfig.toml` — `preload = ["./shared/env-preload.ts"]`
 - `.env` — general defaults shared across all stages. Required. Real file gitignored, `.env.example` template git-tracked
 - `.env.{stage}` — per-stage overrides (stage-specific keys: `STAGE`, `NODE_ENV`, `SITE_URL`, `BASE_PATH`, optional secrets). Active: `.env.dev`, `.env.prod`. Templates: `.env.{stage}.example` (git-tracked). Real files gitignored. Stage pipeline: `dev → qa → uat → preprod → prod`
-- `configs/rsbuild.ts` — Rsbuild build configuration (loaded via the jiti wrapper in `rsbuild.config.ts`)
+- `configs/rsbuild.ts` — Rsbuild build configuration (loaded via the jiti wrapper in `rsbuild.config.ts`). Includes splitChunks cacheGroups, resource hints plugin, page-inject-loader rule
 - `configs/paths.ts` — `ROOT_PATH` + `resolveRoot()` centralizes all path resolution
 
 ## Packages
 
+- `packages/env/` — env engine (readEnv, server loader). No Zod dependency. Sync readEnv.
 - `packages/i18n/` — i18n engine (data, formatting, runtime, strategies, fonts). Pure engine — ZERO imports from `configs/` or `page-engine` in runtime.
-- `packages/page-engine/` — page system (SSR template rendering, system pages, scanner, dynamic routes, CLI). Depends on `@i18n` (one-way only).
+- `packages/page-engine/` — page system (SSR template rendering, system pages, scanner, dynamic routes, CLI, page-inject-loader). Depends on `@i18n` (one-way only).
   - `system-pages.ts` — root page, system page IDs, locale-dependent slugs (`ROOT_PAGE`, `SYSTEM_PAGE_IDS`, `SYSTEM_PAGE_SLUGS`)
   - `scanner.ts` — `scanPages()`, `isGroup()`, `isSlugDir()` (jiti-safe)
   - `template.ts` — SSR rendering: `createTemplateParams()`, `generateClientI18nScript()`, `scanSharedLocales()`
   - `dynamic-routes.ts` — `generateDynamicEntries()` — [slug] discovery from `data.json5`
+  - `page-inject-loader.cjs` — auto-injects bootstrap + page CSS into entry files
   - `cli/` — `sync-system-pages.ts`, `generate-page.ts`, `delete-page.ts`
+
+## Build Optimizations
+
+- **splitChunks**: `minSize: 0` + `default` cacheGroup with `minChunks: 2` — extracts shared bootstrap to single cached chunk
+- **Brotli + Gzip**: `scripts/compress.ts` generates `.br` + `.gz` files post-build
+- **Font subsetting**: `scripts/subset-fonts.ts` uses `pyftsubset` to strip hinting/tables
+- **Resource hints**: `pluginResourceHints` injects modulepreload, font preload, LCP image preload
+- **CSS**: render-blocking (`rel="stylesheet"`), minified in production
+- **JS**: `sideEffects: true` for `bootstrap.ts` + `script.ts` (prevent tree-shaking of entry files)
+- **Single-locale i18n skip**: stub Alpine store, skip i18next init when only 1 locale
+- **Service Worker v6**: stale-while-revalidate for assets, network-first for navigation
 
 ## Generated Files
 
 All 3 generated files are **tracked in git** (not gitignored):
-- `generated/active-locales-data.ts` — filtered locale data (regenerated at build)
+- `generated/active-locales-data.ts` — filtered locale data (always uses `i18nConfig.locales`, no dev stub)
 - `generated/exchange-rates.ts` — currency rates (24h cache)
 - `generated/i18n.d.ts` — TypeScript key types from locale JSON
 
@@ -130,7 +155,7 @@ Biome is configured to skip `generated/**` (formatter + linter disabled).
 - **DESTRUCTIVE git ops** (`reset --hard`, `rebase`) require `git status` first
 - **File mods**: use `bun` or script in `temp/` — avoid PowerShell
 - **Never add dependency** without user approval
-- **After changing `i18nConfig`**: re-run `bun run dev` or `bun run build` to regenerate active locale data and exchange rates
+- **After changing `i18nConfig`**: re-run `bun run dev` or `bun run build` to regenerate active locale data, font CSS, and exchange rates
 - **Adding a locale to `LOCALES`**: also add entries to `SYSTEM_PAGE_SLUGS` in `packages/page-engine/system-pages.ts` (getSystemPageSlug warns in dev if missing)
 - Husky pre-commit: Biome → typecheck → test (all must pass)
 
