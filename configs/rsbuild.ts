@@ -50,7 +50,7 @@ const pluginResourceHints = (): RsbuildPlugin => ({
           }
         }
 
-        const imgMatch = content.match(/<img[^>]*src="([^"]*hero[^"]*)"/);
+        const imgMatch = content.match(/<img[^>]*data-lcp="true"[^>]*src="([^"]*)"[^>]*>/);
         if (imgMatch) {
           hints += `<link rel="preload" as="image" href="${imgMatch[1]}" fetchpriority="high">\n`;
         }
@@ -200,7 +200,7 @@ export default defineConfig({
     writeToDisk: false,
   },
   splitChunks: {
-    minSize: 0,
+    minSize: 2000,
     cacheGroups: {
       default: {
         minChunks: 2,

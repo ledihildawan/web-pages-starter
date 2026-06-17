@@ -149,7 +149,7 @@
             "@id": "{{ site_url }}/#organization"
           },
           "inLanguage": "{{ default_locale }}"
-          {% if seo_config.search_action %}
+          {% if seo_config.search_action and site_url and site_url.startswith('http') %}
           ,"potentialAction": {
             "@type": "SearchAction",
             "target": {
@@ -235,9 +235,8 @@
             }
               {% else %}
                 {# Auto-generate from page_path segments #}
-                {% set path_segments = page_path.split('/') %}
+                {% set path_segments = page_path.split('/') | select('neq', '') | list %}
                 {% for part in path_segments %}
-                  {% if part %}
             ,{
               "@type": "ListItem",
               "position": {{ loop.index }},
@@ -246,10 +245,9 @@
               "item": "{{ canonical_url }}"
               {% else %}
               "name": "{{ part | replace('-', ' ') | capitalize }}",
-              "item": "{{ site_url }}{{ path_segments.slice(0, loop.index).join('/') }}"
+              "item": "{{ site_url }}{{ path_segments.slice(0, loop.index + 1).join('/') }}"
               {% endif %}
             }
-                  {% endif %}
                 {% endfor %}
               {% endif %}
             {% endif %}

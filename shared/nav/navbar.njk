@@ -19,6 +19,7 @@
       _ticking: false,
       _pluginPromise: null,
       _pluginsReady: false,
+      _menuFocusTriggered: false,
 
       get pluginsReady() {
         return this._pluginsReady;
@@ -109,11 +110,12 @@
 
         this.hapticFeedback();
 
+        this._menuFocusTriggered = false;
         this.mobileMenuOpen = false;
 
         const menuButton = document.querySelector('[aria-controls="mobile-menu"]');
         if (menuButton) {
-          setTimeout(() => menuButton.focus(), 550);
+          setTimeout(() => menuButton.focus(), 100);
         }
 
         const targetUrl = typeof url === 'string' ? url : null;
@@ -178,24 +180,34 @@
 
           document.body.style.insetBlockStart = `-${this.scrollY}px`;
           document.body.classList.add('no-scroll');
-          document.documentElement.style.setProperty('--scrollbar-width', `${sbWidth}px`);
+          this.documentElement.style.setProperty('--scrollbar-width', `${sbWidth}px`);
 
           this.mobileMenuOpen = true;
           this.navHidden = false;
 
           this.hapticFeedback();
 
-          setTimeout(() => {
-            const firstLink = this.$refs.mobileMenu.querySelector('a[href]');
-            if (firstLink) firstLink.focus();
-          }, 750);
-
-          setTimeout(() => {
-            this.menuChildrenVisible = true;
-          }, 50);
+          this.menuChildrenVisible = true;
         } else {
           this.closeMobileMenu();
         }
+      },
+
+      focusFirstLink() {
+        if (!this.mobileMenuOpen) return;
+        const firstLink = this.$refs.mobileMenu?.querySelector('a[href]');
+        if (firstLink) firstLink.focus();
+      },
+
+      onMenuVisible() {
+        if (this.mobileMenuOpen && !this._menuFocusTriggered) {
+          this._menuFocusTriggered = true;
+          this.$nextTick(() => this.focusFirstLink());
+        }
+      },
+
+      resetMenuFocus() {
+        this._menuFocusTriggered = false;
       },
     }));
   });
@@ -301,6 +313,8 @@
       @touchstart.passive="handleTouchStart($event)"
       @touchmove.passive="handleTouchMove($event)"
       @touchend="handleTouchEnd()"
+      :class="mobileMenuOpen && menuChildrenVisible && 'menu-ready'"
+      @animationend.capture="mobileMenuOpen && menuChildrenVisible && $nextTick(() => focusFirstLink())"
       class="fixed inset-0 bg-slate-950 z-110 lg:hidden flex flex-col h-dvh"
       role="dialog"
       aria-modal="true"
@@ -312,7 +326,7 @@
       <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,var(--tw-gradient-stops))] from-violet-600/15 via-transparent to-transparent pointer-events-none"></div>
       <div class="absolute inset-be-0 inset-e-0 inline-64 block-64 bg-fuchsia-600/10 rounded-full blur-[100px] pointer-events-none"></div>
       <div class="flex-1 overflow-y-auto pbs-24 pbe-12 px-6 scrollbar-none relative z-10 text-start">
-        <ul class="space-y-2 mbs-6">
+        <ul x-effect="onMenuVisible()" class="space-y-2 mbs-6">
           {% for item in global.menu.header %}
             <li x-show="menuChildrenVisible" x-transition:enter="transition ease-emphasized duration-700" x-transition:enter-start="opacity-0 translate-y-8 scale-95" :style="`transition-delay: {{ loop.index0 * 100 }}ms`" class="gpu-boost">
               <div class="flex items-center justify-between pbs-4 pbe-4 group">

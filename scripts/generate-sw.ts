@@ -50,6 +50,64 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  const isI18nAsset = request.url.includes('/assets/i18n/');
+  if (isI18nAsset) {
+    event.respondWith(
+      caches.match(request).then((cached) => {
+        if (cached) {
+          fetch(request)
+            .then((response) => {
+              if (response?.status === 200 && response.type !== 'opaque') {
+                const clone = response.clone();
+                caches.open(CACHE_NAME).then((cache) => cache.put(request, clone)).catch(() => {});
+              }
+            })
+            .catch(() => {});
+          return cached;
+        }
+        return fetch(request)
+          .then((response) => {
+            if (response?.status === 200 && response.type !== 'opaque') {
+              const clone = response.clone();
+              caches.open(CACHE_NAME).then((cache) => cache.put(request, clone)).catch(() => {});
+            }
+            return response;
+          })
+          .catch(() => cached);
+      }),
+    );
+    return;
+  }
+
+  const isStaticAsset = /.(js|css|woff2?|png|jpg|jpeg|webp|svg|gif|ico|avif|webm|mp4|woff|woff2)$/.test(request.url);
+  if (isStaticAsset) {
+    event.respondWith(
+      caches.match(request).then((cached) => {
+        if (cached) {
+          fetch(request)
+            .then((response) => {
+              if (response?.status === 200 && response.type !== 'opaque') {
+                const clone = response.clone();
+                caches.open(CACHE_NAME).then((cache) => cache.put(request, clone)).catch(() => {});
+              }
+            })
+            .catch(() => {});
+          return cached;
+        }
+        return fetch(request)
+          .then((response) => {
+            if (response?.status === 200 && response.type !== 'opaque') {
+              const clone = response.clone();
+              caches.open(CACHE_NAME).then((cache) => cache.put(request, clone)).catch(() => {});
+            }
+            return response;
+          })
+          .catch(() => cached);
+      }),
+    );
+    return;
+  }
+
   event.respondWith(
     caches.match(request).then((cached) => {
       if (cached) return cached;
@@ -73,6 +131,15 @@ self.addEventListener('activate', (event) => {
       .then((names) => Promise.all(names.map((n) => (n === CACHE_NAME ? null : caches.delete(n))))),
   );
   self.clients.claim();
+});
+
+self.addEventListener('message', (event) => {
+  if (event.data?.type === 'GET_VERSION') {
+    event.ports[0]?.postMessage({ version: CACHE_NAME });
+  }
+  if (event.data?.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
 });
 `;
 

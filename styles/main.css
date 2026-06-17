@@ -253,10 +253,8 @@
     color: #f8fafc;
     text-decoration: none;
     letter-spacing: 0.01em;
-    background: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #ec4899 100%);
-    background-size: 200% 200%;
-    background-position: 0% 0%;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: #7c3aed;
+    border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 9999px;
     box-shadow:
       0 10px 30px -5px rgba(124, 58, 237, 0.5),
@@ -268,8 +266,7 @@
     pointer-events: none;
     transition:
       transform 250ms cubic-bezier(0.34, 1.56, 0.64, 1),
-      opacity 200ms ease-out,
-      background-position 400ms ease;
+      opacity 200ms ease-out;
   }
 
   .skip-to-content:focus,
@@ -278,14 +275,9 @@
     opacity: 1;
     pointer-events: auto;
     outline: none;
-    background-position: 100% 100%;
     box-shadow:
       0 12px 40px -5px rgba(124, 58, 237, 0.6),
       0 0 0 4px rgba(168, 85, 247, 0.3);
-  }
-
-  .skip-to-content:hover {
-    background-position: 100% 100%;
   }
 
   .skip-to-content svg {
@@ -430,10 +422,6 @@
   }
 
   [x-show] {
-    min-block-size: 0;
-  }
-
-  [x-cloak] + * {
     min-block-size: 0;
   }
 
