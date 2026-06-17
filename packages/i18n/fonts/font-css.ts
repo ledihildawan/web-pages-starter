@@ -128,9 +128,10 @@ export interface FontPackageCss {
   pkg: string;
   css: string;
   subsetCount: number;
+  fontFiles: string[];
 }
 
-export function buildFontsCss(locales: LocaleCode[]): FontPackageCss[] {
+export function buildFontsCss(locales: LocaleCode[], fontsBasePath?: string): FontPackageCss[] {
   const packages = getNeededFontPackages(locales);
   const results: FontPackageCss[] = [];
 
@@ -156,16 +157,23 @@ export function buildFontsCss(locales: LocaleCode[]): FontPackageCss[] {
     if (filtered.length === 0) continue;
 
     const pkgDir = resolvePackagePath(pkg);
+    const fontFiles: string[] = [];
     const css = filtered
       .map((b) => {
         const fileName = b.css.match(/url\(\.\/files\/([^)]+)\)/)?.[1];
         if (!fileName) return b.css;
+        fontFiles.push(fileName);
+        if (fontsBasePath) {
+          const pkgName = pkg.replace('@', '').replace('/', '-');
+          const relativePath = `./${pkgName}/files/${fileName}`;
+          return b.css.replace(/url\(\.\/files\/([^)]+)\)/, `url('${relativePath}')`);
+        }
         const resolved = path.join(pkgDir, 'files', fileName);
         return b.css.replace(/url\(\.\/files\/([^)]+)\)/, `url('${resolved.replace(/\\/g, '/')}')`);
       })
       .join('\n\n');
 
-    results.push({ pkg, css, subsetCount: filtered.length });
+    results.push({ pkg, css, subsetCount: filtered.length, fontFiles });
   }
 
   return results;

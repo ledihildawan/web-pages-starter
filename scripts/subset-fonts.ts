@@ -44,21 +44,32 @@ function subsetFont(filePath: string): { before: number; after: number } {
   return { before, after: before };
 }
 
+function findWoff2Files(dir: string): string[] {
+  const results: string[] = [];
+  if (!fs.existsSync(dir)) return results;
+
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      results.push(...findWoff2Files(fullPath));
+    } else if (entry.name.endsWith('.woff2')) {
+      results.push(fullPath);
+    }
+  }
+  return results;
+}
+
 function main(): void {
   let totalBefore = 0;
   let totalAfter = 0;
   let processed = 0;
 
   for (const dir of FONTS_DIRS) {
-    if (!fs.existsSync(dir)) continue;
-
-    const woff2Files = fs
-      .readdirSync(dir)
-      .filter((f) => f.endsWith('.woff2'))
-      .map((f) => path.join(dir, f));
+    const woff2Files = findWoff2Files(dir);
 
     for (const file of woff2Files) {
-      const name = path.basename(file);
+      const name = path.relative(dir, file);
       log.info(`  Subsetting ${name}...`);
       const { before, after } = subsetFont(file);
       totalBefore += before;

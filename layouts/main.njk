@@ -48,7 +48,7 @@
     <meta name="theme-color" content="{{ theme_color }}" media="(prefers-color-scheme: dark)">
     <meta name="msapplication-TileColor" content="{{ ms_tile_color }}">
 
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://flagcdn.com https://images.unsplash.com; font-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; frame-src 'none'; worker-src 'self'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'nonce-{{ csp_nonce }}'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://flagcdn.com https://images.unsplash.com; font-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; frame-src 'none'; worker-src 'self'">
 
     <link rel="manifest" href="{{ manifest_path }}">
     <link rel="icon" href="{{ favicon_path }}">

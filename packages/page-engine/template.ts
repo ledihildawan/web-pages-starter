@@ -1,3 +1,4 @@
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { env } from '@config/env';
@@ -139,37 +140,38 @@ const generateClientI18nScript = (
   supportedLangs: readonly string[],
   LOCALE_STORAGE_KEY: string,
   locales: Array<{ code: string; dir: string; writingSystem: string }>,
+  nonce?: string,
 ): string => {
   const cacheKey = name;
   const hash = hashLocales(name, sharedLocales);
   const cached = i18nScriptCache.get(cacheKey);
-  if (cached && cached.hash === hash) return cached.script;
+  let script = cached && cached.hash === hash ? cached.script : null;
+  if (!script) {
+    const allI18nData = Object.fromEntries(
+      supportedLangs.map((l) => [
+        l,
+        {
+          common: readJSON5(resolveRoot('locales', l, 'common.json')),
+          [name]: readJSON5(resolveRoot('locales', l, `${name}.json`)),
+          ...loadSharedLocales(l, sharedLocales, resolveRoot('locales')),
+        },
+      ]),
+    ) as Record<string, JsonData>;
 
-  const allI18nData = Object.fromEntries(
-    supportedLangs.map((l) => [
-      l,
-      {
-        common: readJSON5(resolveRoot('locales', l, 'common.json')),
-        [name]: readJSON5(resolveRoot('locales', l, `${name}.json`)),
-        ...loadSharedLocales(l, sharedLocales, resolveRoot('locales')),
-      },
-    ]),
-  ) as Record<string, JsonData>;
-
-  const dirs = [resolveRoot('public', 'assets', 'i18n', name), resolveRoot('dist', 'assets', 'i18n', name)];
-  for (const dir of dirs) {
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-  }
-  for (const [localeCode, data] of Object.entries(allI18nData)) {
-    const json = JSON.stringify(data);
+    const dirs = [resolveRoot('public', 'assets', 'i18n', name), resolveRoot('dist', 'assets', 'i18n', name)];
     for (const dir of dirs) {
-      fs.writeFileSync(path.join(dir, `${localeCode}.json`), json, 'utf-8');
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+      }
     }
-  }
+    for (const [localeCode, data] of Object.entries(allI18nData)) {
+      const json = JSON.stringify(data);
+      for (const dir of dirs) {
+        fs.writeFileSync(path.join(dir, `${localeCode}.json`), json, 'utf-8');
+      }
+    }
 
-  const result = `<script>
+    script = `<script>
 (() => {
   const defaultLocale = ${JSON.stringify(lang)};
 
@@ -199,8 +201,12 @@ const generateClientI18nScript = (
   }
   })();\n  </script>`;
 
-  i18nScriptCache.set(cacheKey, { hash, script: result });
-  return result;
+    i18nScriptCache.set(cacheKey, { hash, script });
+  }
+  if (nonce) {
+    script = script.replace('<script>', `<script nonce="${nonce}">`);
+  }
+  return script;
 };
 
 const createI18nObject = (
@@ -627,8 +633,10 @@ export const createTemplateParams = (
 
   const isSingleLocale = LOCALE_CODES.length <= 1;
 
+  const cspNonce = crypto.randomBytes(16).toString('base64');
+
   const clientI18nScript = isSingleLocale
-    ? `<script>window.__SERVER_LOCALE__=${JSON.stringify(lang)};window.__SAVED_LOCALE__=${JSON.stringify(lang)};</script>`
+    ? `<script nonce="${cspNonce}">window.__SERVER_LOCALE__=${JSON.stringify(lang)};window.__SAVED_LOCALE__=${JSON.stringify(lang)};</script>`
     : generateClientI18nScript(
         lang,
         pageId,
@@ -640,6 +648,7 @@ export const createTemplateParams = (
           dir: l.dir,
           writingSystem: l.writingSystem,
         })),
+        cspNonce,
       );
 
   const basePath = env.BASE_PATH;
@@ -671,6 +680,7 @@ export const createTemplateParams = (
     locales: getActiveLocalesDisplay(),
     LOCALE_CODES,
     clientI18nScript,
+    csp_nonce: cspNonce,
     page_id: pageId,
     route,
     global: (() => {
