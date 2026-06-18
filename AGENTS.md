@@ -136,7 +136,7 @@ pages/home/
 - `configs/i18n.ts` — default locale + active locales (`defineI18n`)
 - `configs/fonts.ts` — font stack config (`defineFontStack`). Font CSS imported via `bootstrap.ts` (not here directly)
 - `configs/env.ts` — env config: schema keys array + `readEnv()` (sync, no Zod on client). Manual type coercion for PORT (number), MINIFY/BUILD_PREVIEW/PRETTY_HTML (boolean). Defaults: `MINIFY=true`, `BUILD_PREVIEW=false`, `PRETTY_HTML=false`. All values from `.env` (general) + `.env.{stage}` (stage-specific). Stage pipeline: `dev → qa → uat → preprod → prod`
-- `packages/env/` — env engine: `readEnv(keys)` reads `process.env` (server) or `import.meta.env` (client via Rsbuild define). Sync — no top-level await. Server env file loading via `packages/env/server.ts` (`loadServerEnvFiles()`)
+- `utils/env.ts` — env engine: `readEnv(keys)` reads `process.env` (server) or `import.meta.env` (client via Rsbuild define). Sync — no top-level await. Server env file loading via `loadServerEnvFiles()` (co-located in same file)
 - `shared/env-preload.ts` — Bun preload script (`bunfig.toml`), loads `.env` + `.env.{stage}` into `process.env` before any module runs
 - `bunfig.toml` — `preload = ["./shared/env-preload.ts"]`
 - `.env` — general defaults shared across all stages. Required. Real file gitignored, `.env.example` template git-tracked
@@ -146,7 +146,6 @@ pages/home/
 
 ## Packages
 
-- `packages/env/` — env engine (readEnv, server loader). No Zod dependency. Sync readEnv.
 - `packages/i18n/` — i18n engine (data, formatting, runtime, strategies, fonts). Pure engine — ZERO imports from `configs/` or `page-system` in runtime.
 - `packages/template-engine/` — SSR template rendering (`createTemplateParams`, `scanSharedLocales`). Depends on `@i18n` + `@page-system`.
   - `template.ts` — SSR rendering: `createTemplateParams()`, `generateClientI18nScript()`, `scanSharedLocales()`

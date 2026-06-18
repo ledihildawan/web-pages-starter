@@ -208,7 +208,6 @@ export default defineConfig({
       '@template-engine': resolveRoot('packages', 'template-engine'),
       '@page-system': resolveRoot('packages', 'page-system'),
       '@utils': resolveRoot('utils'),
-      '@web-pages-starter/env': resolveRoot('packages', 'env'),
     },
   },
   source: {

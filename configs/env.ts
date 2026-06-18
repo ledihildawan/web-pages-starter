@@ -1,4 +1,4 @@
-import { readEnv, type STAGES } from '@web-pages-starter/env';
+import { readEnv, type STAGES } from '@utils/env';
 
 const SCHEMA_KEYS = [
   'STAGE',

@@ -35,8 +35,6 @@
       "@template-engine/*": ["./packages/template-engine/*"],
       "@page-system": ["./packages/page-system/index.ts"],
       "@page-system/*": ["./packages/page-system/*"],
-      "@web-pages-starter/env": ["./packages/env/index.ts"],
-      "@web-pages-starter/env/*": ["./packages/env/*"],
       "@scripts/*": ["./scripts/*"]
     },
     "types": ["bun-types", "node"]

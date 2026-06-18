@@ -22,7 +22,7 @@ Requires [Bun](https://bun.sh) `>= 1.3.14`.
 │   ├── fonts.ts           #   font stack config (CSS imported via bootstrap.ts)
 │   ├── paths.ts           #   ROOT_PATH + resolveRoot() — centralizes all filesystem path resolution
 │   └── rsbuild.ts         #   Rsbuild build configuration (real config; rsbuild.config.ts is a jiti wrapper)
-├── utils/                 # shared utilities (flattened from packages/core) — common, json5, microtask-queue, types
+├── utils/                 # shared utilities (flattened from packages/core) — common, env, json5, microtask-queue, types
 ├── types/                 # ambient type declarations (env.d.ts, global.d.ts, globals.d.ts)
 ├── data/                  # global site data
 │   ├── global.json5       #   site_name, seo, social, dns, preconnect
@@ -434,7 +434,7 @@ Ideal for Lighthouse audits, mobile testing, or sharing WIP via a public URL.
 | File | Purpose |
 | --- | --- |
 | `configs/env.ts` | Env config: schema keys array + `readEnv()` (sync, no Zod on client). Manual type coercion. Defaults: `MINIFY=true`, `BUILD_PREVIEW=false`, `PRETTY_HTML=false`. All values from `.env` (general) + `.env.{stage}` (override). Stage pipeline: `dev → qa → uat → preprod → prod` |
-| `packages/env/` | Env engine: `readEnv(keys)` reads `process.env` (server) or `import.meta.env` (client via Rsbuild define). Sync — no top-level await. Server env file loading via `packages/env/server.ts` (`loadServerEnvFiles()`) |
+| `utils/env.ts` | Env engine: `readEnv(keys)` reads `process.env` (server) or `import.meta.env` (client via Rsbuild define). Sync — no top-level await. Server env file loading via `loadServerEnvFiles()` (co-located in same file) |
 | `shared/env-preload.ts` | Bun preload script (`bunfig.toml`), loads `.env` + `.env.{stage}` into `process.env` before any module runs |
 | `bunfig.toml` | `preload = ["./shared/env-preload.ts"]` |
 | `.env` | General defaults shared across all stages. Required. Real file gitignored, `.env.example` template git-tracked |
@@ -464,7 +464,7 @@ Recommended extensions are listed in `.vscode/extensions.json`. Key extensions:
 
 ### Environment variables
 
-All variables are read at load time by `configs/env.ts` via `readEnv()` from `@web-pages-starter/env` (sync, manual type coercion — no Zod on client to keep bundle small). Values come from `.env` (general) + `.env.{stage}` (override), loaded via `bunfig.toml` preload for Bun scripts and `packages/env/server.ts` for the Rsbuild Node process.
+All variables are read at load time by `configs/env.ts` via `readEnv()` from `@utils/env` (sync, manual type coercion — no Zod on client to keep bundle small). Values come from `.env` (general) + `.env.{stage}` (override), loaded via `bunfig.toml` preload for Bun scripts and `loadServerEnvFiles()` from `utils/env.ts` for the Rsbuild Node process.
 
 | Variable | Type | Purpose |
 | --- | --- | --- |

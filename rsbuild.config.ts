@@ -11,11 +11,10 @@ const jiti = createJiti(import.meta.url, {
     '@page-system': path.resolve('packages', 'page-system'),
     '@scripts': path.resolve('scripts'),
     '@utils': path.resolve('utils'),
-    '@web-pages-starter/env': path.resolve('packages', 'env'),
   },
 });
 
-const envServer = await jiti.import<typeof import('./packages/env/server')>('./packages/env/server.ts');
+const envServer = await jiti.import<typeof import('./utils/env')>('./utils/env.ts');
 await envServer.loadServerEnvFiles();
 
 const mod = await jiti.import<typeof import('./configs/rsbuild')>('./configs/rsbuild.ts');
