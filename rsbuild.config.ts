@@ -1,5 +1,5 @@
 import { createJiti } from 'jiti';
-import { alias } from './configs/alias';
+import { alias } from './utils/alias';
 
 const jiti = createJiti(import.meta.url, { alias });
 

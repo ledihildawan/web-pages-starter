@@ -7,10 +7,10 @@ import { getRootPageSlug, getSystemPageSlug, scanPages } from '@page-system';
 import { generateDynamicEntries } from '@page-system/dynamic-routes';
 import { defineConfig, type RsbuildPlugin } from '@rsbuild/core';
 import { createTemplateParams } from '@template-engine';
+import { alias } from '@utils/alias';
 import { resolveRoot } from '@utils/common';
 import { minify } from 'html-minifier-terser';
 import { html as beautifyHtml } from 'js-beautify';
-import { alias } from './alias';
 
 const isBuild = env.IS_PROD || env.BUILD_PREVIEW;
 const shouldMinify = isBuild && env.MINIFY;
