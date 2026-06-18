@@ -1,4 +1,3 @@
-import { env } from '@config/env';
 import { i18nConfig } from '@config/i18n';
 import { convertCurrency, EXCHANGE_RATES } from '@generated/exchange-rates';
 import type { I18nTranslationKeys } from '@generated/i18n';
@@ -28,6 +27,7 @@ import {
 } from '@i18n/engine/formatters';
 import { getCurrency, getLanguageSubtag, getLocale, setLocale } from '@i18n/engine/helpers';
 import { loadStrategies } from '@i18n/strategies/loader';
+import { env } from '@utils/env';
 import { scheduleTask } from '@utils/microtask-queue';
 import type { DateTimePreset } from '@utils/types';
 import i18next, { type Resource } from 'i18next';

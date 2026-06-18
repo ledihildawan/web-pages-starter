@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { env } from '@config/env';
 import { generatedHeader, writeFilePath } from '@scripts/lib/write-file';
 import { resolveRoot } from '@utils/common';
+import { env } from '@utils/env';
 import sharp from 'sharp';
 import { log, logBox } from './lib/logger';
 

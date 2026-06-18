@@ -432,7 +432,7 @@ Ideal for Lighthouse audits, mobile testing, or sharing WIP via a public URL.
 
 | File | Purpose |
 | --- | --- |
-| `configs/env.ts` | Env config: schema keys array + `readEnv()` (sync, no Zod on client). Manual type coercion. Defaults: `MINIFY=true`, `BUILD_PREVIEW=false`, `PRETTY_HTML=false`. All values from `.env` (general) + `.env.{stage}` (override). Stage pipeline: `dev → qa → uat → preprod → prod` |
+| `utils/env.ts` | Env config: schema keys array + `readEnv()` (sync, no Zod on client). Manual type coercion. Defaults: `MINIFY=true`, `BUILD_PREVIEW=false`, `PRETTY_HTML=false`. All values from `.env` (general) + `.env.{stage}` (override). Stage pipeline: `dev → qa → uat → preprod → prod` |
 | `utils/env.ts` | Env engine: `readEnv(keys)` reads `process.env` (server) or `import.meta.env` (client via Rsbuild define). Sync — no top-level await. Server env file loading via `loadServerEnvFiles()` (co-located in same file) |
 | `shared/env-preload.ts` | Bun preload script (`bunfig.toml`), loads `.env` + `.env.{stage}` into `process.env` before any module runs |
 | `bunfig.toml` | `preload = ["./shared/env-preload.ts"]` |
@@ -463,7 +463,7 @@ Recommended extensions are listed in `.vscode/extensions.json`. Key extensions:
 
 ### Environment variables
 
-All variables are read at load time by `configs/env.ts` via `readEnv()` from `@utils/env` (sync, manual type coercion — no Zod on client to keep bundle small). Values come from `.env` (general) + `.env.{stage}` (override), loaded via `bunfig.toml` preload for Bun scripts and `loadServerEnvFiles()` from `utils/env.ts` for the Rsbuild Node process.
+All variables are read at load time by `utils/env.ts` via `readEnv()` from `@utils/env` (sync, manual type coercion — no Zod on client to keep bundle small). Values come from `.env` (general) + `.env.{stage}` (override), loaded via `bunfig.toml` preload for Bun scripts and `loadServerEnvFiles()` from `utils/env.ts` for the Rsbuild Node process.
 
 | Variable | Type | Purpose |
 | --- | --- | --- |

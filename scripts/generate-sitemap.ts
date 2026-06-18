@@ -1,9 +1,9 @@
 import process from 'node:process';
-import { env } from '@config/env';
 import { i18nConfig } from '@config/i18n';
 import { LOCALE_CODES } from '@generated/active-locales-data';
 import { getErrorPageSlugs, getRootPageSlug, scanPages } from '@page-system';
 import { resolveRoot } from '@utils/common';
+import { env } from '@utils/env';
 import { log, logBox } from './lib/logger';
 import { writeFilePath } from './lib/write-file';
 

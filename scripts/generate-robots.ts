@@ -1,7 +1,7 @@
-import { env } from '@config/env';
 import { i18nConfig } from '@config/i18n';
 import { getErrorPageSlugs } from '@page-system';
 import { resolveRoot } from '@utils/common';
+import { env } from '@utils/env';
 import { logBox } from './lib/logger';
 import { writeFilePath } from './lib/write-file';
 

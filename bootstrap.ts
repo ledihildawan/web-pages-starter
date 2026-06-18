@@ -1,6 +1,6 @@
 import './styles/main.css';
 
-import { env } from '@config/env';
+import { env } from '@utils/env';
 import { registerNavbarComponent } from './shared/nav/navbar';
 import { registerSectionNavComponent } from './shared/nav/section-nav';
 

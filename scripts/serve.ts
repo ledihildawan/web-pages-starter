@@ -1,9 +1,9 @@
 import { existsSync } from 'node:fs';
 import process from 'node:process';
-import { env } from '@config/env';
 import { i18nConfig } from '@config/i18n';
 import { getErrorPageSlugs, getRootPageSlug } from '@page-system';
 import { resolveRoot } from '@utils/common';
+import { env } from '@utils/env';
 import { createStaticApp, getPageNames, loadHtmlCache } from './lib/hono-server';
 import { log } from './lib/logger';
 import { createServer, setupSigintHandler } from './lib/signal-handler';

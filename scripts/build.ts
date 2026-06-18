@@ -2,8 +2,8 @@ import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
-import { env } from '@config/env';
 import { resolveRoot } from '@utils/common';
+import { env } from '@utils/env';
 import { log, logBox } from './lib/logger';
 
 const args = process.argv.slice(2);

@@ -135,7 +135,7 @@ pages/home/
 
 - `configs/i18n.ts` — default locale + active locales (`defineI18n`)
 - `configs/fonts.ts` — font stack config (`defineFontStack`). Font CSS imported via `bootstrap.ts` (not here directly)
-- `configs/env.ts` — env config: schema keys array + `readEnv()` (sync, no Zod on client). Manual type coercion for PORT (number), MINIFY/BUILD_PREVIEW/PRETTY_HTML (boolean). Defaults: `MINIFY=true`, `BUILD_PREVIEW=false`, `PRETTY_HTML=false`. All values from `.env` (general) + `.env.{stage}` (stage-specific). Stage pipeline: `dev → qa → uat → preprod → prod`
+- `utils/env.ts` — env config: schema keys array + `readEnv()` (sync, no Zod on client). Manual type coercion for PORT (number), MINIFY/BUILD_PREVIEW/PRETTY_HTML (boolean). Defaults: `MINIFY=true`, `BUILD_PREVIEW=false`, `PRETTY_HTML=false`. All values from `.env` (general) + `.env.{stage}` (stage-specific). Stage pipeline: `dev → qa → uat → preprod → prod`
 - `utils/env.ts` — env engine: `readEnv(keys)` reads `process.env` (server) or `import.meta.env` (client via Rsbuild define). Sync — no top-level await. Server env file loading via `loadServerEnvFiles()` (co-located in same file)
 - `shared/env-preload.ts` — Bun preload script (`bunfig.toml`), loads `.env` + `.env.{stage}` into `process.env` before any module runs
 - `bunfig.toml` — `preload = ["./shared/env-preload.ts"]`
