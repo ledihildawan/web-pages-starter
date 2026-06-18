@@ -35,12 +35,13 @@
     </p>
 
     <div class="flex flex-col items-center justify-center gap-4 mbe-14">
-      <button type="button" onclick="window.location.reload()" class="magnetic-btn btn-press btn-squash anticipate-press hover-lift ripple-click sparkle-hover group relative min-block-14 pl-13.5 pr-14 py-4 bg-white text-slate-950 radius-btn font-black text-lg flex items-center justify-center transition-[scale,box-shadow] duration-200 ease-emphasized hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:scale-105 overflow-hidden">
+      <button type="button" id="error-reload-btn" class="magnetic-btn btn-press btn-squash anticipate-press hover-lift ripple-click sparkle-hover group relative min-block-14 pl-13.5 pr-14 py-4 bg-white text-slate-950 radius-btn font-black text-lg flex items-center justify-center transition-[scale,box-shadow] duration-200 ease-emphasized hover:shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:scale-105 overflow-hidden">
         <span class="absolute inset-0 bg-linear-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-400 ease-in-out"></span>
         <span class="relative flex items-center gap-3">
           {{ i18n.t(error_i18n_ns ~ ':button_text') }}
         </span>
       </button>
+      <script nonce="{{ csp_nonce }}">document.getElementById('error-reload-btn')?.addEventListener('click', function() { window.location.reload(); });</script>
       <p class="text-slate-500 text-sm">{{ i18n.t(error_i18n_ns ~ ':hint') }}</p>
     </div>
 

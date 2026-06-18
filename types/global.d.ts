@@ -3,13 +3,14 @@ import type { LocaleCode } from '@i18n/data/locales';
 import type { Alpine as AlpineType } from 'alpinejs';
 
 declare global {
+  var Alpine: AlpineType;
+
   interface Window {
     __PAGE_ID__: keyof I18nPages;
     __SAVED_LOCALE__: LocaleCode;
     __SERVER_LOCALE__: LocaleCode;
+    __BASE_PATH__: string;
   }
-
-  var Alpine: AlpineType;
 
   interface Navigator {
     connection?: {

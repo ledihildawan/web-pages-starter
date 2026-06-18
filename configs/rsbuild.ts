@@ -40,16 +40,6 @@ const pluginResourceHints = (): RsbuildPlugin => ({
           }
         }
 
-        const fontDir = path.join(distDir, 'assets', 'fonts');
-        if (fs.existsSync(fontDir)) {
-          for (const fontFile of fs.readdirSync(fontDir)) {
-            if (fontFile.endsWith('.woff2')) {
-              const fontPath = `${env.BASE_PATH}assets/fonts/${fontFile}`;
-              hints += `<link rel="preload" as="font" type="font/woff2" href="${fontPath}" crossorigin>\n`;
-            }
-          }
-        }
-
         const imgMatch = content.match(/<img[^>]*data-lcp="true"[^>]*src="([^"]*)"[^>]*>/);
         if (imgMatch) {
           hints += `<link rel="preload" as="image" href="${imgMatch[1]}" fetchpriority="high">\n`;
@@ -100,6 +90,7 @@ const pluginHotReloadContent = (): RsbuildPlugin => ({
             compilation.contextDependencies.add(resolveRoot('pages'));
             compilation.contextDependencies.add(resolveRoot('shared'));
             compilation.contextDependencies.add(resolveRoot('layouts'));
+            compilation.contextDependencies.add(resolveRoot('generated'));
           });
         },
       });
@@ -239,7 +230,7 @@ export default defineConfig({
     cleanDistPath: true,
     minify: shouldMinify ? { js: true, css: true } : false,
     inlineStyles: false,
-    inlineScripts: ({ size }) => size < 2 * 1_024,
+    inlineScripts: false,
     sourceMap: !shouldMinify ? { js: 'cheap-module-source-map', css: true } : false,
     filename: {
       js: '[name].[contenthash:8].js',
@@ -260,8 +251,8 @@ export default defineConfig({
         noErrorOnMissing: true,
       },
       {
-        from: resolveRoot('public', 'sw.js'),
-        to: 'sw.js',
+        from: resolveRoot('public', 'service-worker.js'),
+        to: 'service-worker.js',
         noErrorOnMissing: true,
       },
       {

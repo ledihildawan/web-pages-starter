@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
 import { ROOT_PATH, resolveRoot } from '@config/paths';
+import { LOCALE_CODES as ACTIVE_LOCALE_CODES } from '@generated/active-locales-data';
 import { LOCALE_CODES } from '@i18n/data/locales';
 import { log, logBox } from '@scripts/lib/logger';
 import { generatedHeader, writeFilePath } from '@scripts/lib/write-file';
@@ -10,6 +11,8 @@ import { collectKeys, readJSON5 } from '@utils/json5';
 const LOCALES_ROOT = resolveRoot('locales');
 const DEFAULT_LOCALE_DIR = path.join(LOCALES_ROOT, i18nConfig.defaultLocale);
 const OUTPUT_FILE = resolveRoot('generated', 'i18n.d.ts');
+
+const activeLocaleSet = new Set(ACTIVE_LOCALE_CODES);
 
 const INDENT = '  ';
 const LOCALE_EXTS = ['.json'] as const;
@@ -137,19 +140,23 @@ try {
     throw new Error(`[i18n] Missing default common locale: ${path.join(DEFAULT_LOCALE_DIR, 'common.json')}`);
   }
 
-  const parityErrors = LOCALE_CODES.flatMap((lang) => {
-    const langDir = path.join(LOCALES_ROOT, lang);
-    if (!fs.existsSync(langDir)) return [`${lang}: missing locale directory`];
-    return compareLocaleParity(defaultNamespaces, readLocaleTree(langDir), lang);
-  });
+  if (ACTIVE_LOCALE_CODES.length <= 1) {
+    log.info('  Skipping parity check (single active locale)\n');
+  } else {
+    const parityErrors = LOCALE_CODES.filter((lang) => activeLocaleSet.has(lang)).flatMap((lang) => {
+      const langDir = path.join(LOCALES_ROOT, lang);
+      if (!fs.existsSync(langDir)) return [`${lang}: missing locale directory`];
+      return compareLocaleParity(defaultNamespaces, readLocaleTree(langDir), lang);
+    });
 
-  if (parityErrors.length > 0) {
-    log.error(`Error: [i18n] ${parityErrors.length} parity issue(s) detected.`);
-    for (const err of parityErrors) {
-      log.error(`  ${err}`);
+    if (parityErrors.length > 0) {
+      log.error(`Error: [i18n] ${parityErrors.length} parity issue(s) detected.`);
+      for (const err of parityErrors) {
+        log.error(`  ${err}`);
+      }
+      log.error('\n   Run `bun ./packages/i18n/cli/check-parity.ts` for a detailed report.');
+      process.exit(1);
     }
-    log.error('\n   Run `bun ./packages/i18n/cli/check-parity.ts` for a detailed report.');
-    process.exit(1);
   }
 
   const commonKeys = collectKeys(commonData).map((k) => `'common:${k}'`);

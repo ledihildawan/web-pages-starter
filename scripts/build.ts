@@ -43,7 +43,7 @@ const generators = [
   'scripts/generate-sitemap.ts',
   'scripts/generate-manifest.ts',
   'scripts/generate-robots.ts',
-  'scripts/generate-sw.ts',
+  'scripts/generate-service-worker.ts',
 ];
 
 for (const gen of generators) {

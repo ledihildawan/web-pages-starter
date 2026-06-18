@@ -17,7 +17,7 @@ const disallowRules = errorSlugs.map((slug) => `Disallow: ${basePath}${slug}.htm
 const robots = `User-agent: *
 Allow: ${basePath}
 ${disallowRules}
-Disallow: ${basePath}sw.js
+Disallow: ${basePath}service-worker.js
 
 Sitemap: ${baseUrl}sitemap.xml
 `;

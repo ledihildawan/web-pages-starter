@@ -16,6 +16,7 @@ export function initCarousel(): void {
       preloadPages: 1,
       arrows: true,
       pagination: true,
+      keyboard: true,
     }).mount();
   }
 }

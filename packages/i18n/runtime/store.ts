@@ -21,7 +21,6 @@ const updateDocumentAttributes = (code: string): void => {
 
 const refreshFonts = async (): Promise<void> => {
   const fonts = await import('../fonts/fonts');
-  fonts.setupFontStackCSS();
   fonts.loadLanguageFonts();
 };
 

@@ -1,18 +1,15 @@
 import fs from 'node:fs';
 import { resolveRoot } from '@config/paths';
 import { CURRENCY_CODE } from '@i18n/data/currencies';
-import { getActiveLocales } from '@i18n/engine/active-locales';
 import { log } from './lib/logger';
 import { generatedHeader, writeFilePath } from './lib/write-file';
 
 const EXCHANGE_RATES_URL = 'https://api.frankfurter.dev/v2/rates';
 const EXCHANGE_RATES_FILE = resolveRoot('generated', 'exchange-rates.ts');
 const BASE_CURRENCY = CURRENCY_CODE.USD;
-const LOCALE_CURRENCIES = [...new Set(getActiveLocales().map((l) => l.currency))];
 
 async function fetchExchangeRates(): Promise<Record<string, number>> {
-  const quotes = LOCALE_CURRENCIES.filter((c) => c !== BASE_CURRENCY).join(',');
-  const url = `${EXCHANGE_RATES_URL}?base=${BASE_CURRENCY}${quotes ? `&quotes=${quotes}` : ''}`;
+  const url = `${EXCHANGE_RATES_URL}?base=${BASE_CURRENCY}`;
 
   log.info(`Fetching from: ${url}`);
 
@@ -72,7 +69,7 @@ async function generateExchangeRates(forceRefresh = false): Promise<void> {
     return;
   }
 
-  log.info(`Fetching ${LOCALE_CURRENCIES.length} currencies: ${LOCALE_CURRENCIES.join(', ')}`);
+  log.info(`Fetching all exchange rates (base: ${BASE_CURRENCY})`);
 
   try {
     const rates = await fetchExchangeRates();

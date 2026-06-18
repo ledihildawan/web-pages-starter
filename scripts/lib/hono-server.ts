@@ -67,7 +67,7 @@ export function createStaticApp(distDir: string, htmlCache?: Map<string, string>
     log.info(`\x1b[90m${ms.toString().padStart(4)}ms\x1b[0m ${c.req.method} ${c.req.path}`);
   });
 
-  app.use('/*', serveStatic({ root: './dist', rewriteRequestPath: (p) => p }));
+  app.use('/*', serveStatic({ root: './dist', rewriteRequestPath: (p) => p, precompressed: true }));
 
   app.use('*', async (c, next) => {
     await next();

@@ -2,6 +2,7 @@ import process from 'node:process';
 import { env } from '@config/env';
 import { i18nConfig } from '@config/i18n';
 import { ROOT_PATH, resolveRoot } from '@config/paths';
+import { LOCALE_CODES } from '@generated/active-locales-data';
 import { getErrorPageSlugs, getRootPageSlug, scanPages } from '@page-engine';
 import { log, logBox } from './lib/logger';
 import { writeFilePath } from './lib/write-file';
@@ -24,9 +25,28 @@ const getPages = () => {
     .sort();
 };
 
+const getPagePath = (page: string, rootSlug: string): string => {
+  return page === rootSlug ? '/' : `/${page}`;
+};
+
+const generateHreflangLinks = (baseUrl: string, page: string, rootSlug: string, locales: string[]): string => {
+  const pagePath = getPagePath(page, rootSlug);
+  const links: string[] = [];
+
+  for (const locale of locales) {
+    const localePrefix = locale === i18nConfig.defaultLocale ? '' : `/${locale}`;
+    links.push(`    <xhtml:link rel="alternate" hreflang="${locale}" href="${baseUrl}${localePrefix}${pagePath}"/>`);
+  }
+
+  links.push(`    <xhtml:link rel="alternate" hreflang="x-default" href="${baseUrl}${pagePath}"/>`);
+
+  return links.join('\n');
+};
+
 const generateSitemap = () => {
   const pages = getPages();
   const baseUrl = env.SITE_URL.endsWith('/') ? env.SITE_URL.slice(0, -1) : env.SITE_URL;
+  const locales = LOCALE_CODES;
 
   const rootSlug = getRootPageSlug(i18nConfig.defaultLocale);
   const homePage = pages.includes(rootSlug) ? rootSlug : null;
@@ -34,21 +54,24 @@ const generateSitemap = () => {
 
   const urls: string[] = [];
 
-  if (homePage) {
+  const addPageUrl = (page: string, priority: string) => {
+    const hreflangLinks = generateHreflangLinks(baseUrl, page, rootSlug, locales);
+    const pagePath = getPagePath(page, rootSlug);
     urls.push(`  <url>
-    <loc>${baseUrl}/</loc>
+    <loc>${baseUrl}${pagePath}</loc>
     <changefreq>${DEFAULT_CHANGEFREQ}</changefreq>
-    <priority>1.0</priority>
+    <priority>${priority}</priority>
+${hreflangLinks}
   </url>`);
+  };
+
+  if (homePage) {
+    addPageUrl(homePage, '1.0');
   }
 
   otherPages.forEach((page, index) => {
     const priority = !homePage && index === 0 ? '1.0' : index === 0 ? '0.9' : DEFAULT_PRIORITY;
-    urls.push(`  <url>
-    <loc>${baseUrl}/${page}</loc>
-    <changefreq>${DEFAULT_CHANGEFREQ}</changefreq>
-    <priority>${priority}</priority>
-  </url>`);
+    addPageUrl(page, priority);
   });
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -64,6 +87,7 @@ ${urls.join('\n')}
 
   logBox('Generate Sitemap', {
     Pages: urls.length,
+    Locales: locales.length,
     'Base URL': baseUrl.slice(0, 24),
     Output: OUTPUT_PUBLIC.replace(ROOT_PATH, '.').slice(0, 24),
   });

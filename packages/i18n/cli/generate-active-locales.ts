@@ -11,7 +11,15 @@ import { generatedHeader, writeFilePath } from '@scripts/lib/write-file';
 
 const OUTPUT_FILE = resolveRoot('generated', 'active-locales-data.ts');
 
-const activeCodes: LocaleCode[] = [i18nConfig.defaultLocale, ...(i18nConfig.locales ?? [])];
+const activeCodes: LocaleCode[] = [...new Set([i18nConfig.defaultLocale, ...(i18nConfig.locales ?? [])])];
+
+for (const locale of activeCodes) {
+  if (!LOCALES.some((l) => l.code === locale)) {
+    throw new Error(
+      `[i18n] locale "${locale}" is not a valid locale code. See packages/i18n/data/locales.ts for the full list.`,
+    );
+  }
+}
 
 const activeLocales = LOCALES.filter((l) => activeCodes.includes(l.code));
 
@@ -98,6 +106,4 @@ ${activeFontEntries.map(([ns, css]) => serializeFontEntry(ns, css)).join(',\n')}
 
 writeFilePath(OUTPUT_FILE, content);
 
-const configActive = [i18nConfig.defaultLocale, ...(i18nConfig.locales ?? [])];
-
-log.success(`Generated active locale data — ${activeLocales.length} locale(s): ${configActive.join(', ')}`);
+log.success(`Generated active locale data — ${activeLocales.length} locale(s): ${activeCodes.join(', ')}`);

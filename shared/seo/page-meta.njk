@@ -1,4 +1,4 @@
-{% macro render(page, global, locale_codes, page_id, i18n) %}
+{% macro render(page, global, locale_codes, page_id, i18n, csp_nonce) %}
 
   {% set title = page.meta.title or page.title or global.site_name or "Starter App" %}
   {% set description = page.meta.description or global.site_description or "Default description for the site." %}
@@ -18,7 +18,7 @@
   {% set og_type = page.meta.og_type or seo_config.og_type or "website" %}
   {% set twitter_card = seo_config.twitter_card or "summary_large_image" %}
   {% set author = page.meta.author or seo_config.default_author %}
-  {% set theme_color = page.meta.theme_color or seo_config.theme_color %}
+  {% set theme_color = seo_config.theme_color or global.seo.theme_color %}
 
   {% set default_locale = lang or "en-US" %}
   {% set hreflang_locales = locale_codes or [] %}
@@ -27,34 +27,34 @@
   <title>{{ title }}</title>
   <meta name="description" content="{{ description }}">
   {% if author %}
-    <meta name="author" content="{{ author }}">
+  <meta name="author" content="{{ author }}">
   {% endif %}
   {% if theme_color %}
-    <meta name="theme-color" content="{{ theme_color }}">
+  <meta name="theme-color" content="{{ theme_color }}">
   {% endif %}
 
   {# --- Robots --- #}
   {% set is_error_page = page_id == "not-found" or page_id == "unauthorized" or page_id == "forbidden" or page_id == "server-error" or page_id == "maintenance" or page_id == "offline" %}
   {% if is_error_page %}
-    <meta name="robots" content="noindex, nofollow">
+  <meta name="robots" content="noindex, nofollow">
   {% elif page.meta.robots %}
-    <meta name="robots" content="{{ page.meta.robots }}">
+  <meta name="robots" content="{{ page.meta.robots }}">
   {% endif %}
 
   {# --- Verification --- #}
   {% if seo_config.google_verification %}
-    <meta name="google-site-verification" content="{{ seo_config.google_verification }}">
+  <meta name="google-site-verification" content="{{ seo_config.google_verification }}">
   {% endif %}
 
   {# --- Canonical + hreflang --- #}
   {% if canonical_url %}
-    <link rel="canonical" href="{{ canonical_url }}">
-    <link rel="alternate" hreflang="x-default" href="{{ canonical_url }}">
-    {% for code in hreflang_locales %}
-      {% set hreflang_path = page_path if page_path else "/" %}
-      {% set hreflang_url = site_url ~ "/" ~ code ~ hreflang_path %}
-      <link rel="alternate" hreflang="{{ code }}" href="{{ hreflang_url }}">
-    {% endfor %}
+  <link rel="canonical" href="{{ canonical_url }}">
+  <link rel="alternate" hreflang="x-default" href="{{ canonical_url }}">
+  {% for code in hreflang_locales %}
+  {% set hreflang_path = page_path if page_path else "/" %}
+  {% set hreflang_url = site_url ~ "/" ~ code ~ hreflang_path %}
+  <link rel="alternate" hreflang="{{ code }}" href="{{ hreflang_url }}">
+  {% endfor %}
   {% endif %}
 
   {# --- Open Graph --- #}
@@ -63,29 +63,29 @@
   <meta property="og:type" content="{{ og_type }}">
   <meta property="og:site_name" content="{{ global.site_name or title }}">
   {% if canonical_url %}
-    <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:url" content="{{ canonical_url }}">
   {% endif %}
   {% if absolute_image %}
-    <meta property="og:image" content="{{ absolute_image }}">
+  <meta property="og:image" content="{{ absolute_image }}">
   {% endif %}
   {% if image_alt %}
-    <meta property="og:image:alt" content="{{ image_alt }}">
+  <meta property="og:image:alt" content="{{ image_alt }}">
   {% endif %}
   {% if page.meta.image_width or seo_config.og_image_width %}
-    <meta property="og:image:width" content="{{ page.meta.image_width or seo_config.og_image_width }}">
+  <meta property="og:image:width" content="{{ page.meta.image_width or seo_config.og_image_width }}">
   {% endif %}
   {% if page.meta.image_height or seo_config.og_image_height %}
-    <meta property="og:image:height" content="{{ page.meta.image_height or seo_config.og_image_height }}">
+  <meta property="og:image:height" content="{{ page.meta.image_height or seo_config.og_image_height }}">
   {% endif %}
   <meta property="og:locale" content="{{ default_locale | replace('-', '_') }}">
   {% if page.meta.date_published %}
-    <meta property="article:published_time" content="{{ page.meta.date_published }}">
+  <meta property="article:published_time" content="{{ page.meta.date_published }}">
   {% endif %}
   {% if page.meta.date_modified %}
-    <meta property="article:modified_time" content="{{ page.meta.date_modified }}">
+  <meta property="article:modified_time" content="{{ page.meta.date_modified }}">
   {% endif %}
   {% if author and og_type == "article" %}
-    <meta property="article:author" content="{{ author }}">
+  <meta property="article:author" content="{{ author }}">
   {% endif %}
 
   {# --- Twitter Cards --- #}
@@ -93,170 +93,34 @@
   <meta name="twitter:title" content="{{ title }}">
   <meta name="twitter:description" content="{{ description }}">
   {% if absolute_image %}
-    <meta name="twitter:image" content="{{ absolute_image }}">
+  <meta name="twitter:image" content="{{ absolute_image }}">
   {% endif %}
   {% if image_alt %}
-    <meta name="twitter:image:alt" content="{{ image_alt }}">
+  <meta name="twitter:image:alt" content="{{ image_alt }}">
   {% endif %}
   {% if global.social and global.social.twitter %}
-    <meta name="twitter:site" content="{{ global.social.twitter }}">
+  <meta name="twitter:site" content="{{ global.social.twitter }}">
   {% endif %}
 
   {# --- JSON-LD Structured Data --- #}
   {% if not is_error_page %}
-
-  {# Build Organization sameAs links #}
-  {% set same_as = "" %}
-  {% set sep = "" %}
-  {% if global.social %}
-    {% if global.social.github %}
-      {% set same_as = same_as ~ sep ~ '"https://github.com/' ~ global.social.github ~ '"' %}
-      {% set sep = ", " %}
-    {% endif %}
-    {% if global.social.twitter %}
-      {% set same_as = same_as ~ sep ~ '"https://twitter.com/' ~ global.social.twitter ~ '"' %}
-      {% set sep = ", " %}
-    {% endif %}
-    {% if global.social.linkedin %}
-      {% set same_as = same_as ~ sep ~ '"https://linkedin.com/' ~ global.social.linkedin ~ '"' %}
-      {% set sep = ", " %}
-    {% endif %}
-    {% if global.social.facebook %}
-      {% set same_as = same_as ~ sep ~ '"https://facebook.com/' ~ global.social.facebook ~ '"' %}
-      {% set sep = ", " %}
-    {% endif %}
-    {% if global.social.instagram %}
-      {% set same_as = same_as ~ sep ~ '"https://instagram.com/' ~ global.social.instagram ~ '"' %}
-      {% set sep = ", " %}
-    {% endif %}
-    {% if global.social.youtube %}
-      {% set same_as = same_as ~ sep ~ '"https://youtube.com/' ~ global.social.youtube ~ '"' %}
-    {% endif %}
-  {% endif %}
-
-  {# Determine page type for schema #}
   {% set is_article = page.meta.date_published or og_type == "article" %}
-
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "WebSite",
-          "@id": "{{ site_url }}/#website",
-          "url": "{{ site_url }}/",
-          "name": "{{ global.site_name or title }}",
-          "description": "{{ description }}",
-          "publisher": {
-            "@id": "{{ site_url }}/#organization"
-          },
-          "inLanguage": "{{ default_locale }}"
-          {% if seo_config.search_action and site_url and site_url.startswith('http') %}
-          ,"potentialAction": {
-            "@type": "SearchAction",
-            "target": {
-              "@type": "EntryPoint",
-              "urlTemplate": "{{ site_url }}/search?q={search_term_string}"
-            },
-            "query-input": "required name=search_term_string"
-          }
-          {% endif %}
-        },
-        {
-          "@type": "Organization",
-          "@id": "{{ site_url }}/#organization",
-          "name": "{{ global.site_name or title }}",
-          "url": "{{ site_url }}/"
-          {% if same_as %},"sameAs": [{{ same_as }}]{% endif %}
-          {% if absolute_image %},
-          "logo": {
-            "@type": "ImageObject",
-            "url": "{{ absolute_image }}"
-          }{% endif %}
-        },
-        {
-          "@type": {% if is_article %}"Article"{% else %}"WebPage"{% endif %},
-          "@id": "{{ canonical_url }}#webpage",
-          "url": "{{ canonical_url }}",
-          "name": "{{ title }}",
-          "description": "{{ description }}",
-          "isPartOf": {
-            "@id": "{{ site_url }}/#website"
-          },
-          "inLanguage": "{{ default_locale }}"
-          {% if is_article and author %},
-          "author": {
-            "@type": "Person",
-            "name": "{{ author }}"
-          }{% endif %}
-          {% if is_article and page.meta.date_published %},
-          "datePublished": "{{ page.meta.date_published }}"{% endif %}
-          {% if is_article and page.meta.date_modified %},
-          "dateModified": "{{ page.meta.date_modified }}"{% endif %}
-          {% if absolute_image %},
-          "primaryImageOfPage": {
-            "@id": "{{ canonical_url }}#primaryimage"
-          }{% endif %},
-          "breadcrumb": {
-            "@id": "{{ canonical_url }}#breadcrumb"
-          }
-        }{% if absolute_image %},
-        {
-          "@type": "ImageObject",
-          "@id": "{{ canonical_url }}#primaryimage",
-          "url": "{{ absolute_image }}",
-          "contentUrl": "{{ absolute_image }}",
-          "caption": "{{ image_alt }}"
-        }{% endif %},
-        {
-          "@type": "BreadcrumbList",
-          "@id": "{{ canonical_url }}#breadcrumb",
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "{{ global.site_name or 'Home' }}",
-              "item": "{{ site_url }}/"
-            }
-            {% if page_id != global.root_page %}
-              {% if page.breadcrumb %}
-                {# Explicit breadcrumbs from index.json5 #}
-                {% for crumb in page.breadcrumb %}
-            ,{
-              "@type": "ListItem",
-              "position": {{ loop.index + 1 }},
-              "name": "{{ crumb.name }}",
-              "item": "{{ site_url }}/{{ crumb.path }}"
-            }
-                {% endfor %}
-            ,{
-              "@type": "ListItem",
-              "position": {{ (page.breadcrumb or []).length + 2 }},
-              "name": "{{ title }}",
-              "item": "{{ canonical_url }}"
-            }
-              {% else %}
-                {# Auto-generate from page_path segments #}
-                {% set path_segments = page_path.split('/') | select('neq', '') | list %}
-                {% for part in path_segments %}
-            ,{
-              "@type": "ListItem",
-              "position": {{ loop.index }},
-              {% if loop.last %}
-              "name": "{{ title }}",
-              "item": "{{ canonical_url }}"
-              {% else %}
-              "name": "{{ part | replace('-', ' ') | capitalize }}",
-              "item": "{{ site_url }}{{ path_segments.slice(0, loop.index + 1).join('/') }}"
-              {% endif %}
-            }
-                {% endfor %}
-              {% endif %}
-            {% endif %}
-          ]
-        }
-      ]
-    }
+  {% set same_as_str = "" %}
+  {% if global.social.github %}{% set same_as_str = same_as_str ~ '"https://github.com/' ~ global.social.github ~ '",' %}{% endif %}
+  {% if global.social.twitter %}{% set same_as_str = same_as_str ~ '"https://twitter.com/' ~ global.social.twitter ~ '",' %}{% endif %}
+  {% if global.social.linkedin %}{% set same_as_str = same_as_str ~ '"https://linkedin.com/in/' ~ global.social.linkedin ~ '",' %}{% endif %}
+  {% if global.social.facebook %}{% set same_as_str = same_as_str ~ '"https://facebook.com/' ~ global.social.facebook ~ '",' %}{% endif %}
+  {% if global.social.instagram %}{% set same_as_str = same_as_str ~ '"https://instagram.com/' ~ global.social.instagram ~ '",' %}{% endif %}
+  {% if global.social.youtube %}{% set same_as_str = same_as_str ~ '"https://youtube.com/' ~ global.social.youtube ~ '"' %}{% else %}{% set same_as_str = same_as_str | trim %}{% endif %}
+  {% if same_as_str.endsWith(",") %}{% set same_as_str = same_as_str | trim | truncate(same_as_str | length - 1, false, "") %}{% endif %}
+  <script type="application/ld+json" nonce="{{ csp_nonce }}">
+  {"@context":"https://schema.org","@graph":[
+    {"@type":"WebSite","@id":"{{ site_url }}/#website","url":"{{ site_url }}/","name":"{{ title }}","description":"{{ description }}","publisher":{"@id":"{{ site_url }}/#organization"},"inLanguage":"{{ default_locale }}"{% if seo_config.search_action and site_url.startswith('http') %},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"{{ site_url }}/search?q={search_term_string}"},"query-input":"required name=search_term_string"}{% endif %}},
+    {"@type":"Organization","@id":"{{ site_url }}/#organization","name":"{{ global.site_name or title }}","url":"{{ site_url }}/"{% if same_as_str %},"sameAs":[{{ same_as_str }}]{% endif %}{% if absolute_image %},"logo":{"@type":"ImageObject","url":"{{ absolute_image }}"}{% endif %}},
+    {"@type":"{% if is_article %}Article{% else %}WebPage{% endif %}","@id":"{{ canonical_url }}#webpage","url":"{{ canonical_url }}","name":"{{ title }}","description":"{{ description }}","isPartOf":{"@id":"{{ site_url }}/#website"},"inLanguage":"{{ default_locale }}"{% if is_article and author %},"author":{"@type":"Person","name":"{{ author }}"}{% endif %}{% if is_article and page.meta.date_published %},"datePublished":"{{ page.meta.date_published }}"{% endif %}{% if is_article and page.meta.date_modified %},"dateModified":"{{ page.meta.date_modified }}"{% endif %}{% if absolute_image %},"primaryImageOfPage":{"@id":"{{ canonical_url }}#primaryimage"}{% endif %},"breadcrumb":{"@id":"{{ canonical_url }}#breadcrumb"}}{% if absolute_image %},
+    {"@type":"ImageObject","@id":"{{ canonical_url }}#primaryimage","url":"{{ absolute_image }}","contentUrl":"{{ absolute_image }}","caption":"{{ image_alt }}"}{% endif %},
+    {"@type":"BreadcrumbList","@id":"{{ canonical_url }}#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"{{ global.site_name or 'Home' }}","item":"{{ site_url }}/"}]}
+  ]}
   </script>
   {% endif %}
 

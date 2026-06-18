@@ -10,6 +10,34 @@ bun run build      # production build to ./dist
 
 Requires [Python 3](https://python.org) with `fonttools` + `brotli` (`pip install fonttools brotli`) for font subsetting.
 
+## Simplicity First
+
+- Prefer the simplest solution that correctly solves the problem.
+- Do not over-engineer.
+- Avoid unnecessary abstractions, dependencies, and architectural complexity.
+- Favor readability, maintainability, and clarity.
+- Every added layer of complexity must have a clear and documented benefit.
+
+## Documentation First
+
+- Always use the official documentation as the primary source of truth.
+- Never invent, assume, or hallucinate APIs, functions, configuration options, behaviors, or features.
+- Verify all code examples, API names, parameters, return values, and configuration options against the official documentation before using them.
+- If the official documentation does not mention a feature, assume it does not exist.
+- If the required information cannot be found in the official documentation, explicitly state that it could not be verified.
+- Prefer saying "I don't know" over providing unverified information.
+- Do not rely solely on model memory when official documentation is available.
+- When documentation links are provided, review them before generating code, explanations, or recommendations.
+
+## Constrained Creativity
+
+- You may propose alternative implementations, improvements, refactoring ideas, or architectural suggestions.
+- Any proposed solution must remain compatible with the documented APIs and features.
+- Do not invent new APIs, methods, configuration options, or framework capabilities.
+- Creative solutions are allowed only within the constraints of the official documentation.
+- Before suggesting an approach, verify that it can be implemented using documented functionality.
+- If an idea requires undocumented behavior, clearly label it as an assumption and do not present it as a valid implementation.
+
 ## Code Style
 
 - No comments unless requested
@@ -133,7 +161,7 @@ pages/home/
 - **splitChunks**: `minSize: 0` + `default` cacheGroup with `minChunks: 2` — extracts shared bootstrap to single cached chunk
 - **Brotli + Gzip**: `scripts/compress.ts` generates `.br` + `.gz` files post-build
 - **Font subsetting**: `scripts/subset-fonts.ts` uses `pyftsubset` to strip hinting/tables
-- **Resource hints**: `pluginResourceHints` injects modulepreload, font preload, LCP image preload
+- **Resource hints**: `pluginResourceHints` injects modulepreload, LCP image preload
 - **CSS**: render-blocking (`rel="stylesheet"`), minified in production
 - **JS**: `sideEffects: true` for `bootstrap.ts` + `script.ts` (prevent tree-shaking of entry files)
 - **Single-locale i18n skip**: stub Alpine store, skip i18next init when only 1 locale

@@ -635,8 +635,10 @@ export const createTemplateParams = (
 
   const cspNonce = crypto.randomBytes(16).toString('base64');
 
+  const basePath = env.BASE_PATH;
+
   const clientI18nScript = isSingleLocale
-    ? `<script nonce="${cspNonce}">window.__SERVER_LOCALE__=${JSON.stringify(lang)};window.__SAVED_LOCALE__=${JSON.stringify(lang)};</script>`
+    ? `<script nonce="${cspNonce}">window.__SERVER_LOCALE__=${JSON.stringify(lang)};window.__SAVED_LOCALE__=${JSON.stringify(lang)};window.__BASE_PATH__=${JSON.stringify(basePath)};window.__CSP_NONCE__=${JSON.stringify(cspNonce)};</script>`
     : generateClientI18nScript(
         lang,
         pageId,
@@ -650,8 +652,6 @@ export const createTemplateParams = (
         })),
         cspNonce,
       );
-
-  const basePath = env.BASE_PATH;
 
   const url = (path: string): string => {
     if (
@@ -671,6 +671,12 @@ export const createTemplateParams = (
     return hasAnchor ? `${result}#${afterHash}` : result;
   };
 
+  const globalData = (() => {
+    const data = loadGlobalData(resolveRoot('data'));
+    data.site_url = env.SITE_URL;
+    return data;
+  })();
+
   return {
     ...params,
     currentYear: new Date().getFullYear(),
@@ -683,11 +689,7 @@ export const createTemplateParams = (
     csp_nonce: cspNonce,
     page_id: pageId,
     route,
-    global: (() => {
-      const data = loadGlobalData(resolveRoot('data'));
-      data.site_url = env.SITE_URL;
-      return data;
-    })(),
+    global: globalData,
     page: pageData,
     i18n,
     url,

@@ -1,11 +1,63 @@
 import './styles/main.css';
 
 import { env } from '@config/env';
+import { registerNavbarComponent } from './shared/nav/navbar';
+import { registerSectionNavComponent } from './shared/nav/section-nav';
 
 const SINGLE_LOCALE = Boolean(import.meta.env.SINGLE_LOCALE);
 
+const SW_DISMISS_KEY = 'sw_update_dismissed';
+const SW_DISMISS_DURATION = 24 * 60 * 60 * 1000;
+
+const showBootstrapError = (_message: string): void => {
+  const style = document.createElement('style');
+  style.id = 'bootstrap-error-style';
+  style.textContent = `
+    #bootstrap-error { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #020617; color: #e2e8f0; font-family: system-ui, sans-serif; padding: 2rem; }
+    #bootstrap-error .inner { text-align: center; max-width: 400px; }
+    #bootstrap-error h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: #f87171; }
+    #bootstrap-error p { color: #94a3b8; margin-bottom: 1.5rem; }
+    #bootstrap-error button { background: #7c3aed; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; border: none; }
+  `;
+  document.head.appendChild(style);
+
+  const errorDiv = document.createElement('div');
+  errorDiv.id = 'bootstrap-error';
+  errorDiv.innerHTML = `
+    <div class="inner">
+      <h1>Initialization Error</h1>
+      <p>The application failed to load properly. Please refresh the page or try again later.</p>
+      <button id="bootstrap-reload-btn">Refresh Page</button>
+    </div>
+  `;
+  document.body.appendChild(errorDiv);
+
+  document.getElementById('bootstrap-reload-btn')?.addEventListener('click', () => {
+    window.location.reload();
+  });
+};
+
+const isUpdateRecentlyDismissed = (): boolean => {
+  try {
+    const dismissed = localStorage.getItem(SW_DISMISS_KEY);
+    if (!dismissed) return false;
+    const timestamp = parseInt(dismissed, 10);
+    if (Number.isNaN(timestamp)) return false;
+    return Date.now() - timestamp < SW_DISMISS_DURATION;
+  } catch {
+    return false;
+  }
+};
+
+const dismissUpdate = (): void => {
+  try {
+    localStorage.setItem(SW_DISMISS_KEY, String(Date.now()));
+  } catch {}
+};
+
 const showUpdateNotification = (registration: ServiceWorkerRegistration): void => {
   if (!globalThis.Alpine) return;
+  if (isUpdateRecentlyDismissed()) return;
 
   const currentStore = globalThis.Alpine.store('app') as Record<string, unknown> | undefined;
   globalThis.Alpine.store('app', {
@@ -38,6 +90,7 @@ const showUpdateNotification = (registration: ServiceWorkerRegistration): void =
   });
 
   banner.querySelector('#sw-dismiss-btn')?.addEventListener('click', () => {
+    dismissUpdate();
     banner.remove();
   });
 };
@@ -45,7 +98,7 @@ const showUpdateNotification = (registration: ServiceWorkerRegistration): void =
 const registerServiceWorker = (): void => {
   if (!env.IS_PROD || !('serviceWorker' in navigator)) return;
 
-  navigator.serviceWorker.register(`${env.BASE_PATH}sw.js`).catch((error: unknown) => {
+  navigator.serviceWorker.register(`${env.BASE_PATH}service-worker.js`).catch((error: unknown) => {
     const message = error instanceof Error ? error.message : String(error);
     console.warn('Warning: Service worker registration failed —', message);
   });
@@ -71,14 +124,13 @@ const registerServiceWorker = (): void => {
 
 async function bootstrap() {
   try {
-    const [Alpine, Collapse, Focus, fonts] = await Promise.all([
-      import('alpinejs').then((m) => m.default),
+    const [cspModule, Collapse, Focus, fonts] = await Promise.all([
+      import('@alpinejs/csp'),
       import('@alpinejs/collapse').then((m) => m.default),
       import('@alpinejs/focus').then((m) => m.default),
       import('@i18n/fonts/fonts'),
     ]);
-
-    fonts.setupFontStackCSS();
+    const Alpine = (cspModule as { default: typeof globalThis.Alpine }).default;
 
     globalThis.Alpine = Alpine;
     Alpine.plugin(Collapse);
@@ -101,6 +153,8 @@ async function bootstrap() {
       }
     }
 
+    registerNavbarComponent();
+    registerSectionNavComponent();
     requestAnimationFrame(() => Alpine.start());
 
     fonts.preloadActiveFont();
@@ -111,6 +165,7 @@ async function bootstrap() {
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : String(error);
     console.warn('Warning: Bootstrap failed —', message);
+    showBootstrapError(message);
   }
 }
 

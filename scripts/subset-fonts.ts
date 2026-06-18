@@ -4,7 +4,7 @@ import path from 'node:path';
 import { resolveRoot } from '@config/paths';
 import { log, logBox } from './lib/logger';
 
-const FONTS_DIRS = [resolveRoot('public', 'assets', 'fonts'), resolveRoot('dist', 'assets', 'fonts')];
+const FONTS_DIRS = [resolveRoot('dist', 'assets', 'fonts')];
 
 const SUBSET_FLAGS = [
   '--flavor=woff2',

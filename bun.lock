@@ -6,6 +6,7 @@
       "name": "web-pages-starter",
       "dependencies": {
         "@alpinejs/collapse": "^3.15.12",
+        "@alpinejs/csp": "^3.15.12",
         "@alpinejs/focus": "^3.15.12",
         "@fontsource-variable/noto-sans": "^5.2.10",
         "@fontsource-variable/noto-sans-adlam": "^5.2.9",
@@ -37,7 +38,6 @@
         "@hono/node-server": "^2.0.4",
         "@splidejs/splide": "^4.1.4",
         "@t3-oss/env-core": "^0.13.11",
-        "alpinejs": "^3.15.12",
         "dotenv": "^17.4.2",
         "hono": "^4.12.25",
         "html-minifier-terser": "^7.2.0",
@@ -91,6 +91,8 @@
     "@alloc/quick-lru": ["@alloc/quick-lru@5.2.0", "", {}, "sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw=="],
 
     "@alpinejs/collapse": ["@alpinejs/collapse@3.15.12", "", {}, "sha512-BKNANLtNXuWYOSAnajSKLPjTsmHRNrv0ALFTbpmqt2/klHFooPhctSwkhFVPQb7rZ8BjEKHmNaBwnSbgtpk6xg=="],
+
+    "@alpinejs/csp": ["@alpinejs/csp@3.15.12", "", { "dependencies": { "@vue/reactivity": "~3.1.1" } }, "sha512-9jielHzVPqMlO9zQ6K1WtdhSHVX5OZfq5ZDUSVZfY10VnXRoRBx8nOadWjsG1xev/kz4EPaNN9eDFWtZSvJHxA=="],
 
     "@alpinejs/focus": ["@alpinejs/focus@3.15.12", "", { "dependencies": { "focus-trap": "^8.0.0", "tabbable": "^6.4.0" } }, "sha512-lmqbFTlbQGywDgsW4dY0pv18CKhuHJrq8mffU1OO14J34uUk+lCQElmSgJdRGHYv9qBezE6zdvmhN6n2tg0A1A=="],
 
@@ -571,8 +573,6 @@
     "ajv-formats": ["ajv-formats@2.1.1", "", { "dependencies": { "ajv": "^8.0.0" } }, "sha512-Wx0Kx52hxE7C18hkMEggYlEifqWZtYaRgouJor+WMdPnQyEK13vgEWyVNup7SoeeoLMsr4kf5h6dOW11I15MUA=="],
 
     "ajv-keywords": ["ajv-keywords@5.1.0", "", { "dependencies": { "fast-deep-equal": "^3.1.3" }, "peerDependencies": { "ajv": "^8.8.2" } }, "sha512-YCS/JNFAUyr5vAuhk1DWm1CBxRHW9LbJ2ozWeemrIqpbsqKjHVxYPyi5GC0rjZIT5JxJ3virVTS8wk4i/Z+krw=="],
-
-    "alpinejs": ["alpinejs@3.15.12", "", { "dependencies": { "@vue/reactivity": "~3.1.1" } }, "sha512-nJvPAQVNPdZZ0NrExJ/kzQco3ijR8LwvCOadQecllESiqT4NyZ/57sN9V2XyvhlBGAbmlKYgeWZvYdKq99ij/Q=="],
 
     "ansi-colors": ["ansi-colors@4.1.3", "", {}, "sha512-/6w/C21Pm1A7aZitlI5Ni/2J6FFQN8i1Cvz3kHABAAbw93v/NlvKdVOqz7CCWz/3iv/JplRSEEZ83XION15ovw=="],
 

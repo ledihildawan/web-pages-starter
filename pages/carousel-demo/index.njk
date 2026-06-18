@@ -1,10 +1,6 @@
 {% extends "main.njk" %}
 {% import "shared/ui/icons.njk" as icon %}
-
-{% block extra_head %}
-  {{ super() }}
-  <link rel="preconnect" href="https://images.unsplash.com">
-{% endblock %}
+{% import "shared/ui/responsive-image.njk" as responsive_image %}
 
 {% block content %}
 <section class="relative min-block-screen overflow-hidden">
@@ -27,26 +23,10 @@
       <div class="splide__track">
         <ul class="splide__list">
           <li class="splide__slide">
-            <img
-              src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80"
-              data-splide-lazy="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80"
-              alt="{{ i18n.t('carousel-demo:hero.slide_1.alt', {}, {raw: true}) }}"
-              width="1600"
-              height="1067"
-              loading="lazy"
-              decoding="async"
-            >
+            {{ responsive_image.render(images['carousel-1'], i18n.t('carousel-demo:hero.slide_1.alt', {}, {raw: true}), "(min-width: 800px) 800px, 100vw", loading="eager", fetchpriority="high", lcp=true) }}
           </li>
           <li class="splide__slide">
-            <img
-              src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1600&q=80"
-              data-splide-lazy="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1600&q=80"
-              alt="{{ i18n.t('carousel-demo:hero.slide_2.alt', {}, {raw: true}) }}"
-              width="1600"
-              height="1067"
-              loading="lazy"
-              decoding="async"
-            >
+            {{ responsive_image.render(images['carousel-2'], i18n.t('carousel-demo:hero.slide_2.alt', {}, {raw: true}), "(min-width: 800px) 800px, 100vw", loading="lazy") }}
           </li>
         </ul>
       </div>

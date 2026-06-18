@@ -134,6 +134,8 @@
     font-family: var(--font-sans);
     scrollbar-width: thin;
     scrollbar-color: #1e293b #020617;
+    --body-offset: 0px;
+    --sw-scrollbar-w: 0px;
   }
 
   body {
@@ -141,6 +143,7 @@
     background: #020617;
     color: #e2e8f0;
     min-block-size: 100vh;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
   }
 
   img {
@@ -412,17 +415,95 @@
     }
   }
 
-  .no-scroll {
+  .menu-open {
     position: fixed;
     inset-inline: 0;
     inset-block-start: 0;
     inline-size: 100%;
     overflow-y: scroll;
-    padding-inline-end: var(--scrollbar-width, 0px);
+    padding-inline-end: var(--sw-scrollbar-w);
+    transform: translateY(var(--body-offset));
   }
 
   [x-show] {
     min-block-size: 0;
+  }
+
+  .cv-auto-300 {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 300px;
+  }
+
+  .cv-auto-600 {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 600px;
+  }
+
+  .cv-auto-800 {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 800px;
+  }
+
+  .td-0 {
+    transition-delay: 0ms;
+  }
+  .td-1 {
+    transition-delay: 100ms;
+  }
+  .td-2 {
+    transition-delay: 200ms;
+  }
+  .td-3 {
+    transition-delay: 300ms;
+  }
+  .td-4 {
+    transition-delay: 400ms;
+  }
+  .td-5 {
+    transition-delay: 500ms;
+  }
+
+  .bs-40 {
+    block-size: 40%;
+  }
+  .bs-50 {
+    block-size: 50%;
+  }
+  .bs-60 {
+    block-size: 60%;
+  }
+  .bs-70 {
+    block-size: 70%;
+  }
+  .bs-85 {
+    block-size: 85%;
+  }
+  .bs-90 {
+    block-size: 90%;
+  }
+
+  .word-break-all {
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  .values-grid > div:nth-child(1) > .radial-current {
+    color: rgb(var(--color-violet-500));
+  }
+  .values-grid > div:nth-child(2) > .radial-current {
+    color: rgb(var(--color-fuchsia-500));
+  }
+  .values-grid > div:nth-child(3) > .radial-current {
+    color: rgb(var(--color-pink-500));
+  }
+  .values-grid > div:nth-child(4) > .radial-current {
+    color: rgb(var(--color-amber-500));
+  }
+  .values-grid > div:nth-child(5) > .radial-current {
+    color: rgb(var(--color-emerald-500));
+  }
+  .values-grid > div:nth-child(6) > .radial-current {
+    color: rgb(var(--color-blue-500));
   }
 
   .radius-card {

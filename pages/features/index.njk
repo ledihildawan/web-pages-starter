@@ -45,7 +45,7 @@
           </ul>
         </div>
 
-        <div class="{{ 'order-1' if feature.reverse else 'order-1 md:order-2' }} relative group tilt-card" style="--tilt-x: 0deg; --tilt-y: 0deg;">
+        <div class="{{ 'order-1' if feature.reverse else 'order-1 md:order-2' }} relative group tilt-card">
           <div class="absolute -inset-4 bg-linear-to-r from-{{ feature.accent }}-500/40 via-fuchsia-500/20 to-pink-500/40 radius-card-lg blur-2xl opacity-40 group-hover:opacity-70 transition-opacity duration-1000 ease-emphasized"></div>
 
           <div class="relative spotlight-card radius-card-lg bg-linear-to-br from-slate-900 to-slate-950 border border-white/10 p-4 aspect-4/3 shadow-2xl overflow-hidden backdrop-blur-3xl">
@@ -117,7 +117,7 @@
                         60,
                         85
                       ] %}
-                        <div class="inline-full bg-linear-to-t from-{{ feature.accent }}-500/60 to-{{ feature.accent }}-400 rounded-ts-lg rounded-te-lg transition-[filter,background] duration-1000 hover:brightness-125 hover:from-{{ feature.accent }}-500/80 hover:to-{{ feature.accent }}-400" style="block-size: {{ h }}%">
+                        <div class="inline-full bg-linear-to-t from-{{ feature.accent }}-500/60 to-{{ feature.accent }}-400 rounded-ts-lg rounded-te-lg transition-[filter,background] duration-1000 hover:brightness-125 hover:from-{{ feature.accent }}-500/80 hover:to-{{ feature.accent }}-400 bs-{{ h }}">
                           <div class="inline-full block-full rounded-ts-lg rounded-te-lg bg-linear-to-t from-white/10 to-transparent"></div>
                         </div>
                       {% endfor %}

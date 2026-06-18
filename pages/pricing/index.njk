@@ -31,7 +31,7 @@
           >
             <div class="absolute inset-0 bg-linear-to-r from-violet-500/20 to-fuchsia-500/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" :class="yearly ? 'opacity-100' : ''"></div>
             <div class="absolute inset-0 flex items-center px-1.5">
-              <div class="toggle-knob inline-5 block-5 bg-linear-to-br rounded-full shadow transition-[background,box-shadow] duration-200 ease-emphasized" :class="yearly ? 'from-violet-400 to-fuchsia-400 toggle-knob-active' : 'from-white to-slate-200'" :style="yearly ? 'transform: translateX(calc(32px * var(--dir)))' : 'transform: translateX(0)'"></div>
+              <div class="toggle-knob inline-5 block-5 bg-linear-to-br rounded-full shadow transition-[background,box-shadow] duration-200 ease-emphasized" :class="yearly ? 'from-violet-400 to-fuchsia-400 toggle-knob-active toggle-knob-pos-end' : 'from-white to-slate-200 toggle-knob-pos-start'"></div>
             </div>
           </button>
           <div class="flex items-center gap-3">
@@ -69,7 +69,7 @@
             </h3>
 
             <div class="mbe-6">
-              <div class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black leading-[1.1] tracking-tight tabular-nums {% if plan.featured %}text-white{% else %}text-slate-200{% endif %} mbe-1" style="word-break: keep-all; overflow-wrap: break-word;">
+              <div class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black leading-[1.1] tracking-tight tabular-nums word-break-all {% if plan.featured %}text-white{% else %}text-slate-200{% endif %} mbe-1">
                 <span x-show="!yearly">{{ i18n.formatLocalPrice(plan) }}</span>
                 <span x-show="yearly">{{ i18n.formatLocalPriceDiscounted(plan, 0.8) }}</span>
               </div>

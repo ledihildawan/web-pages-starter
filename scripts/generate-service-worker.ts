@@ -4,14 +4,16 @@ import { getErrorPageSlugs, getRootPageSlug, getSystemPageSlug } from '@page-eng
 import { logBox } from './lib/logger';
 import { writeFilePath } from './lib/write-file';
 
-const OUTPUT = resolveRoot('public', 'sw.js');
+const OUTPUT = resolveRoot('public', 'service-worker.js');
 
 const rootSlug = getRootPageSlug(i18nConfig.defaultLocale);
 const [notFoundSlug, unauthorizedSlug, forbiddenSlug, serverErrorSlug, maintenanceSlug, offlineErrorSlug] =
   getErrorPageSlugs(i18nConfig.defaultLocale);
 const offlineSlug = getSystemPageSlug('offline', i18nConfig.defaultLocale);
 
-const swContent = `const CACHE_NAME = 'starter-v6';
+const CACHE_VERSION = `starter-${Date.now().toString(36)}`;
+
+const swContent = `const CACHE_NAME = '${CACHE_VERSION}';
 const BASE = new URL('.', self.location.href).pathname;
 const ERROR_PAGES = [
   \`\${BASE}${notFoundSlug}.html\`,
@@ -23,9 +25,15 @@ const ERROR_PAGES = [
 ];
 const PRECACHE_URLS = [BASE, ...ERROR_PAGES, \`\${BASE}manifest.json\`, \`\${BASE}favicon.svg\`];
 
+const logCacheError = (context, url) => {
+  console.warn(\`[SW] Cache error in \${context}: \${url}\`);
+};
+
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(PRECACHE_URLS).catch(() => {})),
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(PRECACHE_URLS)).catch((err) => {
+      console.warn('[SW] Precache failed:', err);
+    }),
   );
   self.skipWaiting();
 });
@@ -40,7 +48,7 @@ self.addEventListener('fetch', (event) => {
       fetch(request)
         .then((response) => {
           const clone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(request, clone)).catch(() => {});
+          caches.open(CACHE_NAME).then((cache) => cache.put(request, clone)).catch((err) => logCacheError('navigate', request.url));
           return response;
         })
         .catch(() =>
@@ -59,17 +67,17 @@ self.addEventListener('fetch', (event) => {
             .then((response) => {
               if (response?.status === 200 && response.type !== 'opaque') {
                 const clone = response.clone();
-                caches.open(CACHE_NAME).then((cache) => cache.put(request, clone)).catch(() => {});
+                caches.open(CACHE_NAME).then((cache) => cache.put(request, clone)).catch((err) => logCacheError('i18n', request.url));
               }
             })
-            .catch(() => {});
+            .catch((err) => logCacheError('i18n fetch', request.url));
           return cached;
         }
         return fetch(request)
           .then((response) => {
             if (response?.status === 200 && response.type !== 'opaque') {
               const clone = response.clone();
-              caches.open(CACHE_NAME).then((cache) => cache.put(request, clone)).catch(() => {});
+              caches.open(CACHE_NAME).then((cache) => cache.put(request, clone)).catch((err) => logCacheError('i18n', request.url));
             }
             return response;
           })
@@ -79,7 +87,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  const isStaticAsset = /.(js|css|woff2?|png|jpg|jpeg|webp|svg|gif|ico|avif|webm|mp4|woff|woff2)$/.test(request.url);
+  const isStaticAsset = /.(js|css|woff2?|png|jpg|jpeg|webp|svg|gif|ico|avif|webm|mp4)$/.test(request.url);
   if (isStaticAsset) {
     event.respondWith(
       caches.match(request).then((cached) => {
@@ -88,17 +96,17 @@ self.addEventListener('fetch', (event) => {
             .then((response) => {
               if (response?.status === 200 && response.type !== 'opaque') {
                 const clone = response.clone();
-                caches.open(CACHE_NAME).then((cache) => cache.put(request, clone)).catch(() => {});
+                caches.open(CACHE_NAME).then((cache) => cache.put(request, clone)).catch((err) => logCacheError('static', request.url));
               }
             })
-            .catch(() => {});
+            .catch((err) => logCacheError('static fetch', request.url));
           return cached;
         }
         return fetch(request)
           .then((response) => {
             if (response?.status === 200 && response.type !== 'opaque') {
               const clone = response.clone();
-              caches.open(CACHE_NAME).then((cache) => cache.put(request, clone)).catch(() => {});
+              caches.open(CACHE_NAME).then((cache) => cache.put(request, clone)).catch((err) => logCacheError('static', request.url));
             }
             return response;
           })
@@ -115,7 +123,7 @@ self.addEventListener('fetch', (event) => {
         .then((response) => {
           if (response?.status === 200 && response.type !== 'opaque') {
             const clone = response.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(request, clone)).catch(() => {});
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, clone)).catch((err) => logCacheError('general', request.url));
           }
           return response;
         })
@@ -145,9 +153,9 @@ self.addEventListener('message', (event) => {
 
 writeFilePath(OUTPUT, swContent);
 
-logBox('Generate SW', {
+logBox('Generate Service Worker', {
   Locale: i18nConfig.defaultLocale,
   Root: rootSlug,
-  Version: 'starter-v6',
-  Output: 'public/sw.js',
+  Version: CACHE_VERSION,
+  Output: 'public/service-worker.js',
 });

@@ -29,7 +29,7 @@
           <div class="relative group">
             <div class="absolute inset-0 bg-linear-to-br from-{{ stat.color }}-500/20 to-transparent radius-card-md blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
             <div class="relative">
-              <div class="text-4xl md:text-5xl lg:text-6xl font-black mbe-2 tracking-tighter text-white group-hover:scale-110 group-hover:text-{{ stat.color }}-300 transition-[scale,color] duration-400" :style="`transition-delay: {{ loop.index0 * 100 }}ms`">
+              <div class="text-4xl md:text-5xl lg:text-6xl font-black mbe-2 tracking-tighter text-white group-hover:scale-110 group-hover:text-{{ stat.color }}-300 transition-[scale,color] duration-400 td-{{ loop.index0 }}">
                 {{ i18n.t(stat_val_key) }}
               </div>
               <div class="text-[10px] text-slate-400 font-black uppercase tracking-[0.2em] group-hover:text-slate-400 transition-colors duration-200">
@@ -134,14 +134,14 @@
     ) }}
 
     <div class="max-inline-7xl mx-auto">
-      <div class="grid md:grid-cols-3 gap-8">
+      <div class="grid md:grid-cols-3 gap-8 values-grid">
         {% for value in page.values %}
           {% set val_key = 'about:' ~ value.t_key %}
           {% set val_title_key = val_key ~ '.title' %}
           {% set val_desc_key = val_key ~ '.description' %}
           <div class="spotlight-card card-border-glow card-squash group relative p-10 lg:p-12 radius-card-lg bg-linear-to-br from-slate-900/60 to-slate-900/40 card-border hover:border-{{ value.color }}-500/40 hover:shadow-[0_20px_50px_rgba(139,92,246,0.2)] hover:-translate-y-2 transition-[transform,box-shadow,border-color] duration-250 ease-emphasized overflow-hidden backdrop-blur-xl hover-lift">
             <div class="absolute inset-be-0 inset-e-0 inline-40 block-40 bg-linear-to-br from-{{ value.color }}-500/15 to-transparent rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
-            <div class="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity duration-400 bg-[radial-gradient(currentColor_1px,transparent_1px)] bg-size-[32px_32px]" style="color: rgb(var(--color-{{ value.color }}-500))"></div>
+            <div class="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity duration-400 bg-[radial-gradient(currentColor_1px,transparent_1px)] bg-size-[32px_32px] radial-current"></div>
 
             <div class="relative">
               <div class="inline-16 lg:inline-20 block-16 lg:block-20 radius-nested-lg bg-linear-to-br from-{{ value.color }}-500/20 to-{{ value.color }}-500/5 flex items-center justify-center text-{{ value.color }}-400 mbe-8 border border-{{ value.color }}-500/30 group-hover:rotate-6 group-hover:scale-110 transition-[transform,box-shadow] duration-200 shadow-lg group-hover:shadow-[0_0_40px_rgba(139,92,246,0.3)] icon-squash">

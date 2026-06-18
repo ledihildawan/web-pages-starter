@@ -320,6 +320,14 @@
     box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
   }
 
+  .toggle-knob-pos-start {
+    transform: translateX(0);
+  }
+
+  .toggle-knob-pos-end {
+    transform: translateX(calc(32px * var(--dir)));
+  }
+
   .grid-pattern {
     background-image:
       linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),

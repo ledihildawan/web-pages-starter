@@ -17,8 +17,8 @@ export type FontStack = {
 };
 
 export type I18nConfig<T extends LocaleCode = LocaleCode> = {
+  locales: LocaleCode[];
   defaultLocale: T;
-  locales?: Exclude<LocaleCode, T>[];
 };
 
 export interface I18nItem {
