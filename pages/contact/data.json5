@@ -1,46 +1,46 @@
 {
-  "page_id": "contact",
-  "meta": {
-    "title": "Contact",
-    "description": "Get in touch with our team. We're here to help with any questions or support needs.",
-    "t_key": "contact",
-    "theme_color": "violet"
+  page_id: 'contact',
+  meta: {
+    title: 'Contact',
+    description: "Get in touch with our team. We're here to help with any questions or support needs.",
+    t_key: 'contact',
+    theme_color: 'violet',
   },
-  "contact": {
-    "t_key": "contact"
+  contact: {
+    t_key: 'contact',
   },
-  "contact_items": [
+  contact_items: [
     {
-      "label": "email",
-      "color": "emerald",
-      "icon": "envelope"
+      label: 'email',
+      color: 'emerald',
+      icon: 'envelope',
     },
     {
-      "label": "phone",
-      "color": "violet",
-      "icon": "phone"
+      label: 'phone',
+      color: 'violet',
+      icon: 'phone',
     },
     {
-      "label": "location",
-      "color": "fuchsia",
-      "icon": "map-pin"
-    }
+      label: 'location',
+      color: 'fuchsia',
+      icon: 'map-pin',
+    },
   ],
-  "socials": [
+  socials: [
     {
-      "url": "https://github.com",
-      "name": "GitHub",
-      "color": "emerald"
+      url: 'https://github.com',
+      name: 'GitHub',
+      color: 'emerald',
     },
     {
-      "url": "https://twitter.com",
-      "name": "Twitter",
-      "color": "violet"
+      url: 'https://twitter.com',
+      name: 'Twitter',
+      color: 'violet',
     },
     {
-      "url": "https://linkedin.com",
-      "name": "LinkedIn",
-      "color": "fuchsia"
-    }
-  ]
+      url: 'https://linkedin.com',
+      name: 'LinkedIn',
+      color: 'fuchsia',
+    },
+  ],
 }

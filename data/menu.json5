@@ -1,36 +1,36 @@
 {
-  "header": [
+  header: [
     {
-      "label": "features",
-      "url": "/features",
-      "children": [
+      label: 'features',
+      url: '/features',
+      children: [
         {
-          "label": "core_features",
-          "url": "/features#core"
+          label: 'core_features',
+          url: '/features#core',
         },
         {
-          "label": "integrations",
-          "url": "/features#integrations"
-        }
-      ]
+          label: 'integrations',
+          url: '/features#integrations',
+        },
+      ],
     },
     {
-      "label": "pricing",
-      "url": "/pricing"
+      label: 'pricing',
+      url: '/pricing',
     },
     {
-      "label": "about",
-      "url": "/about",
-      "children": [
+      label: 'about',
+      url: '/about',
+      children: [
         {
-          "label": "our_team",
-          "url": "/about#team"
+          label: 'our_team',
+          url: '/about#team',
         },
         {
-          "label": "contact_us",
-          "url": "/contact"
-        }
-      ]
-    }
-  ]
+          label: 'contact_us',
+          url: '/contact',
+        },
+      ],
+    },
+  ],
 }

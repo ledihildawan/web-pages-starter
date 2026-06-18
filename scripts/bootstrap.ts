@@ -6,8 +6,13 @@ const SW_DISMISS_KEY = 'sw_update_dismissed';
 const SW_DISMISS_DURATION = 24 * 60 * 60 * 1000;
 
 const showBootstrapError = (_message: string) => {
+  const nonce = document
+    .querySelector('meta[http-equiv="Content-Security-Policy"]')
+    ?.getAttribute('content')
+    ?.match(/nonce-([a-zA-Z0-9+/=]+)/)?.[1];
   const style = document.createElement('style');
   style.id = 'bootstrap-error-style';
+  if (nonce) style.setAttribute('nonce', nonce);
   style.textContent = `
     #bootstrap-error { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #020617; color: #e2e8f0; font-family: system-ui, sans-serif; padding: 2rem; }
     #bootstrap-error .inner { text-align: center; max-width: 400px; }

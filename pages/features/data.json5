@@ -1,69 +1,69 @@
 {
-  "page_id": "features",
-  "meta": {
-    "title": "Features",
-    "description": "Explore powerful features including real-time sync, analytics, dark mode, API-first design, and more.",
-    "t_key": "hero",
-    "theme_color": "violet"
+  page_id: 'features',
+  meta: {
+    title: 'Features',
+    description: 'Explore powerful features including real-time sync, analytics, dark mode, API-first design, and more.',
+    t_key: 'hero',
+    theme_color: 'violet',
   },
-  "hero": {
-    "t_key": "hero"
+  hero: {
+    t_key: 'hero',
   },
-  "main_features": [
+  main_features: [
     {
-      "id": "sync",
-      "t_key": "sections.sync",
-      "icon": "lightning",
-      "accent": "violet",
-      "reverse": false,
-      "checklist_count": 3
+      id: 'sync',
+      t_key: 'sections.sync',
+      icon: 'lightning',
+      accent: 'violet',
+      reverse: false,
+      checklist_count: 3,
     },
     {
-      "id": "analytics",
-      "t_key": "sections.analytics",
-      "icon": "chart",
-      "accent": "fuchsia",
-      "reverse": true,
-      "checklist_count": 3
-    }
+      id: 'analytics',
+      t_key: 'sections.analytics',
+      icon: 'chart',
+      accent: 'fuchsia',
+      reverse: true,
+      checklist_count: 3,
+    },
   ],
-  "additional_features": [
+  additional_features: [
     {
-      "t_key": "more.dark_mode",
-      "icon": "moon",
-      "color": "violet"
+      t_key: 'more.dark_mode',
+      icon: 'moon',
+      color: 'violet',
     },
     {
-      "t_key": "more.api_first",
-      "icon": "code",
-      "color": "fuchsia"
+      t_key: 'more.api_first',
+      icon: 'code',
+      color: 'fuchsia',
     },
     {
-      "t_key": "more.sso",
-      "icon": "key",
-      "color": "pink"
+      t_key: 'more.sso',
+      icon: 'key',
+      color: 'pink',
     },
     {
-      "t_key": "more.audit",
-      "icon": "clipboard",
-      "color": "violet"
+      t_key: 'more.audit',
+      icon: 'clipboard',
+      color: 'violet',
     },
     {
-      "t_key": "more.rbac",
-      "icon": "users",
-      "color": "fuchsia"
+      t_key: 'more.rbac',
+      icon: 'users',
+      color: 'fuchsia',
     },
     {
-      "t_key": "more.uptime",
-      "icon": "globe",
-      "color": "pink"
-    }
+      t_key: 'more.uptime',
+      icon: 'globe',
+      color: 'pink',
+    },
   ],
-  "cta": {
-    "t_key": "cta",
-    "links": {
-      "create": "#",
-      "docs": "#"
-    }
-  }
+  cta: {
+    t_key: 'cta',
+    links: {
+      create: '#',
+      docs: '#',
+    },
+  },
 }

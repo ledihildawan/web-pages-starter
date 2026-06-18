@@ -1,62 +1,62 @@
 {
-  "page_id": "pricing",
-  "meta": {
-    "title": "Pricing",
-    "description": "Simple, transparent pricing plans for every team. Start free, scale as you grow."
+  page_id: 'pricing',
+  meta: {
+    title: 'Pricing',
+    description: 'Simple, transparent pricing plans for every team. Start free, scale as you grow.',
   },
-  "hero": {
-    "t_key": "hero"
+  hero: {
+    t_key: 'hero',
   },
-  "plans": [
+  plans: [
     {
-      "id": "hobby",
-      "pricing": {
-        "base": 0
+      id: 'hobby',
+      pricing: {
+        base: 0,
       },
-      "color": "slate",
-      "featured": false,
-      "feature_count": 3
+      color: 'slate',
+      featured: false,
+      feature_count: 3,
     },
     {
-      "id": "pro",
-      "pricing": {
-        "base": 29,
-        "id-ID": 450000,
-        "ja-JP": 4300,
-        "zh-Hans-CN": 200,
-        "ar-SA": 108.75,
-        "de-DE": 27,
-        "fr-FR": 27,
-        "es-ES": 27,
-        "pt-BR": 145,
-        "ru-RU": 2700,
-        "hi-IN": 2400,
-        "ko-KR": 38000
+      id: 'pro',
+      pricing: {
+        base: 29,
+        'id-ID': 450000,
+        'ja-JP': 4300,
+        'zh-Hans-CN': 200,
+        'ar-SA': 108.75,
+        'de-DE': 27,
+        'fr-FR': 27,
+        'es-ES': 27,
+        'pt-BR': 145,
+        'ru-RU': 2700,
+        'hi-IN': 2400,
+        'ko-KR': 38000,
       },
-      "color": "violet",
-      "featured": true,
-      "feature_count": 4
+      color: 'violet',
+      featured: true,
+      feature_count: 4,
     },
     {
-      "id": "enterprise",
-      "pricing": {
-        "base": 99,
-        "id-ID": 1500000,
-        "ja-JP": 15000,
-        "zh-Hans-CN": 700,
-        "ar-SA": 375,
-        "de-DE": 92,
-        "fr-FR": 92,
-        "es-ES": 92,
-        "pt-BR": 490,
-        "ru-RU": 9200,
-        "hi-IN": 8200,
-        "ko-KR": 130000
+      id: 'enterprise',
+      pricing: {
+        base: 99,
+        'id-ID': 1500000,
+        'ja-JP': 15000,
+        'zh-Hans-CN': 700,
+        'ar-SA': 375,
+        'de-DE': 92,
+        'fr-FR': 92,
+        'es-ES': 92,
+        'pt-BR': 490,
+        'ru-RU': 9200,
+        'hi-IN': 8200,
+        'ko-KR': 130000,
       },
-      "color": "slate",
-      "featured": false,
-      "feature_count": 4
-    }
+      color: 'slate',
+      featured: false,
+      feature_count: 4,
+    },
   ],
-  "faq_count": 3
+  faq_count: 3,
 }
