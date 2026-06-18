@@ -21,4 +21,15 @@ for (const [key, targets] of Object.entries(rawPaths)) {
   }
 }
 
-export const alias: Record<string, string> = Object.fromEntries(aliasMap);
+export type AliasKey =
+  | '@'
+  | '@config'
+  | '@constants'
+  | '@generated'
+  | '@i18n'
+  | '@template-engine'
+  | '@page-system'
+  | '@scripts'
+  | '@utils';
+
+export const alias: Record<AliasKey, string> = Object.fromEntries(aliasMap) as Record<AliasKey, string>;

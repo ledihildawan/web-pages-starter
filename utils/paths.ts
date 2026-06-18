@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { alias } from './alias';
+import { type AliasKey, alias } from './alias';
 
-type AliasKey = keyof typeof alias;
+export type { AliasKey };
 
 export function lookup(key: AliasKey, ...parts: string[]): string {
   return path.join(alias[key], ...parts);
