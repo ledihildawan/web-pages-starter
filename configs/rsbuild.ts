@@ -124,6 +124,56 @@ const pluginPrettyHtml = (): RsbuildPlugin => ({
   },
 });
 
+const pluginRemoveEmptyPageJs = (): RsbuildPlugin => ({
+  name: 'plugin-remove-empty-page-js',
+  setup(api) {
+    api.onAfterBuild(() => {
+      const distDir = api.context.distPath;
+      if (!fs.existsSync(distDir)) return;
+
+      const EMPTY_PATTERN = /rspackChunk.*?push\(\[\[\d+\],\{\d+:function\([a-z],[a-z],[a-z]\)\{[a-z]\(\d+\)\}\}/;
+      let removed = 0;
+
+      for (const file of fs.readdirSync(distDir)) {
+        if (!file.endsWith('.html')) continue;
+        const htmlPath = path.join(distDir, file);
+        let html = fs.readFileSync(htmlPath, 'utf-8');
+        let modified = false;
+
+        const scripts = [...html.matchAll(/<script\s+defer\s+src="([^"]+\.js)"><\/script>/g)];
+
+        for (const m of scripts) {
+          const src = m[1];
+          const jsFile = src.replace(/^\//, '');
+          const jsPath = path.join(distDir, jsFile);
+
+          if (!fs.existsSync(jsPath)) continue;
+          const content = fs.readFileSync(jsPath, 'utf-8');
+
+          if (!EMPTY_PATTERN.test(content)) continue;
+
+          html = html.split(m[0]).join('');
+          html = html.replace(
+            new RegExp(`<link[^>]*modulepreload[^>]*href="${src.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"[^>]*>`, 'g'),
+            '',
+          );
+          fs.unlinkSync(jsPath);
+          removed++;
+          modified = true;
+        }
+
+        if (modified) {
+          fs.writeFileSync(htmlPath, html);
+        }
+      }
+
+      if (removed > 0) {
+        console.log(`  [plugin-remove-empty-page-js] Removed ${removed} empty JS file(s) + script tags`);
+      }
+    });
+  },
+});
+
 const scannedPages = scanPages(resolveRoot('pages'), '');
 
 const getPageNames = (): string[] => scannedPages.map((p) => p.name);
@@ -268,7 +318,13 @@ export default defineConfig({
       },
     ],
   },
-  plugins: [pluginResourceHints(), pluginRootPageAsIndex(), pluginHotReloadContent(), pluginPrettyHtml()],
+  plugins: [
+    pluginResourceHints(),
+    pluginRootPageAsIndex(),
+    pluginHotReloadContent(),
+    pluginPrettyHtml(),
+    pluginRemoveEmptyPageJs(),
+  ],
   tools: {
     htmlPlugin: (config) => {
       config.minify = (html: string) =>
