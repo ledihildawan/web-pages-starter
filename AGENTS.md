@@ -135,10 +135,10 @@ pages/home/
 
 - `configs/i18n.ts` — default locale + active locales (`defineI18n`)
 - `configs/fonts.ts` — font stack config (`defineFontStack`). Font CSS imported via `bootstrap.ts` (not here directly)
-- `generated/env.ts` — fully generated env system: schema + engine + validation + singleton. Auto-generated from `.env` files by `scripts/generate-env.ts`. Reads `process.env` (server) or `import.meta.env` (browser). Runtime type validation with warnings. `PRIVATE_` prefix marks server-only keys (browser-safe by default). Stage pipeline: `dev → qa → uat → preprod → prod`
-- `shared/env-preload.ts` — Bun preload script (`bunfig.toml`), loads `.env` + `.env.{stage}` into `process.env` before any module runs
-- `bunfig.toml` — `preload = ["./shared/env-preload.ts"]`
-- `.env` — general env vars shared across all stages. Required. Gitignored. `PRIVATE_` prefix = server-only (not exposed to browser). No prefix = browser-safe (public by default). Edit this file to add/change env vars — `scripts/generate-env.ts` auto-generates `generated/env.ts` from it
+- `generated/env.ts` — fully generated env system: schema + engine + validation + singleton. Auto-generated from `.env` files by `packages/env/cli/generate-env.ts`. Reads `process.env` (server) or `import.meta.env` (browser). Runtime type validation with warnings. `PRIVATE_` prefix marks server-only keys (browser-safe by default). Stage pipeline: `dev → qa → uat → preprod → prod`
+- `packages/env/preload.ts` — Bun preload script (`bunfig.toml`), loads `.env` + `.env.{stage}` into `process.env` before any module runs
+- `bunfig.toml` — `preload = ["./packages/env/preload.ts"]`
+- `.env` — general env vars shared across all stages. Required. Gitignored. `PRIVATE_` prefix = server-only (not exposed to browser). No prefix = browser-safe (public by default). Edit this file to add/change env vars — `packages/env/cli/generate-env.ts` auto-generates `generated/env.ts` from it
 - `.env.{stage}` — per-stage overrides. Active: `.env.dev`, `.env.prod`. Gitignored. Stage pipeline: `dev → qa → uat → preprod → prod`
 - `configs/rsbuild.ts` — Rsbuild build configuration (loaded via the jiti wrapper in `rsbuild.config.ts`). Includes splitChunks cacheGroups, resource hints plugin, page-inject-loader rule
 
@@ -168,7 +168,7 @@ pages/home/
 ## Generated Files
 
 All 4 generated files are **tracked in git** (not gitignored):
-- `generated/env.ts` — auto-generated env system (schema + engine + validation). Regenerated from `.env` files by `scripts/generate-env.ts`
+- `generated/env.ts` — auto-generated env system (schema + engine + validation). Regenerated from `.env` files by `packages/env/cli/generate-env.ts`
 - `generated/active-locales-data.ts` — filtered locale data (always uses `i18nConfig.locales`, no dev stub)
 - `generated/exchange-rates.ts` — currency rates (24h cache)
 - `generated/i18n.d.ts` — TypeScript key types from locale JSON

@@ -432,9 +432,9 @@ Ideal for Lighthouse audits, mobile testing, or sharing WIP via a public URL.
 
 | File | Purpose |
 | --- | --- |
-| `generated/env.ts` | Auto-generated env system: schema + engine + runtime validation + singleton. Generated from `.env` files by `scripts/generate-env.ts`. `PRIVATE_` prefix = server-only (browser-safe by default). Stage pipeline: `dev → qa → uat → preprod → prod` |
-| `shared/env-preload.ts` | Bun preload script (`bunfig.toml`), loads `.env` + `.env.{stage}` into `process.env` before any module runs |
-| `bunfig.toml` | `preload = ["./shared/env-preload.ts"]` |
+| `generated/env.ts` | Auto-generated env system: schema + engine + runtime validation + singleton. Generated from `.env` files by `packages/env/cli/generate-env.ts`. `PRIVATE_` prefix = server-only (browser-safe by default). Stage pipeline: `dev → qa → uat → preprod → prod` |
+| `packages/env/preload.ts` | Bun preload script (`bunfig.toml`), loads `.env` + `.env.{stage}` into `process.env` before any module runs |
+| `bunfig.toml` | `preload = ["./packages/env/preload.ts"]` |
 | `.env` | General defaults shared across all stages. Required. Real file gitignored, `.env.example` template git-tracked |
 | `.env.{stage}` | Per-stage overrides. Active: `.env.dev`, `.env.prod`. Templates: `.env.{stage}.example` (git-tracked). Real files gitignored. Stage pipeline: `dev → qa → uat → preprod → prod` |
 | `configs/i18n.ts` | Default locale + active locales |
@@ -460,7 +460,7 @@ Recommended extensions are listed in `.vscode/extensions.json`. Key extensions:
 
 ### Environment variables
 
-All variables are auto-generated from `.env` files into `generated/env.ts` by `scripts/generate-env.ts`. Runtime type validation warns on mismatches. `PRIVATE_` prefix in `.env` marks server-only keys (browser-safe by default — like TypeScript class members). Types are inferred from values (`true`/`false` → boolean, digits → number, else → string).
+All variables are auto-generated from `.env` files into `generated/env.ts` by `packages/env/cli/generate-env.ts`. Runtime type validation warns on mismatches. `PRIVATE_` prefix in `.env` marks server-only keys (browser-safe by default — like TypeScript class members). Types are inferred from values (`true`/`false` → boolean, digits → number, else → string).
 
 | Variable | Purpose |
 | --- | --- |

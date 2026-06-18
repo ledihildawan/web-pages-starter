@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { log } from '@scripts/lib/logger';
+import { writeFilePath } from '@scripts/lib/write-file';
 import { resolveRoot } from '@utils/common';
-import { log } from './lib/logger';
-import { writeFilePath } from './lib/write-file';
 
 const ROOT = resolveRoot();
 const OUTPUT_FILE = resolveRoot('generated', 'env.ts');
