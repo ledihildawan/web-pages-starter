@@ -1,7 +1,11 @@
+import fs from 'node:fs';
 import path from 'node:path';
-import tsconfig from '../tsconfig.json';
 
-const rawPaths = tsconfig.compilerOptions.paths as Record<string, string[]>;
+const tsconfig = JSON.parse(fs.readFileSync(path.resolve('tsconfig.json'), 'utf-8')) as {
+  compilerOptions: { paths: Record<string, string[]> };
+};
+
+const rawPaths = tsconfig.compilerOptions.paths;
 const aliasMap = new Map<string, string>();
 
 for (const [key, targets] of Object.entries(rawPaths)) {
