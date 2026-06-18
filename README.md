@@ -20,7 +20,6 @@ Requires [Bun](https://bun.sh) `>= 1.3.14`.
 │   ├── env.ts             #   env config: schema keys + readEnv() (sync, no Zod on client) → typed env with defaults
 │   ├── i18n.ts            #   defaultLocale + active locales
 │   ├── fonts.ts           #   font stack config (CSS imported via bootstrap.ts)
-│   ├── paths.ts           #   ROOT_PATH + resolveRoot() — centralizes all filesystem path resolution
 │   └── rsbuild.ts         #   Rsbuild build configuration (real config; rsbuild.config.ts is a jiti wrapper)
 ├── utils/                 # shared utilities (flattened from packages/core) — common, env, json5, microtask-queue, types
 ├── types/                 # ambient type declarations (env.d.ts, global.d.ts, globals.d.ts)

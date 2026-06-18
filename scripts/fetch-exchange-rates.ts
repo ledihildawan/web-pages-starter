@@ -1,6 +1,6 @@
 import fs from 'node:fs';
-import { resolveRoot } from '@config/paths';
 import { CURRENCY_CODE } from '@i18n/data/currencies';
+import { resolveRoot } from '@utils/common';
 import { log } from './lib/logger';
 import { generatedHeader, writeFilePath } from './lib/write-file';
 

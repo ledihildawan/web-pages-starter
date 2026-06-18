@@ -1,9 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
-import { resolveRoot } from '@config/paths';
 import { LOCALE_CODES } from '@i18n/data/locales';
 import { log, logBox } from '@scripts/lib/logger';
+import { resolveRoot } from '@utils/common';
 
 const LOCALES_ROOT = resolveRoot('locales');
 const DEFAULT_LOCALE = i18nConfig.defaultLocale;

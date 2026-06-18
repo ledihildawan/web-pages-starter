@@ -1,7 +1,7 @@
 import { execSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
-import { resolveRoot } from '@config/paths';
+import { resolveRoot } from '@utils/common';
 import { log, logBox } from './lib/logger';
 
 const FONTS_DIRS = [resolveRoot('dist', 'assets', 'fonts')];

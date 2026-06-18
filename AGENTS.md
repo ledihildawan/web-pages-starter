@@ -142,7 +142,6 @@ pages/home/
 - `.env` — general defaults shared across all stages. Required. Real file gitignored, `.env.example` template git-tracked
 - `.env.{stage}` — per-stage overrides (stage-specific keys: `STAGE`, `NODE_ENV`, `SITE_URL`, `BASE_PATH`, optional secrets). Active: `.env.dev`, `.env.prod`. Templates: `.env.{stage}.example` (git-tracked). Real files gitignored. Stage pipeline: `dev → qa → uat → preprod → prod`
 - `configs/rsbuild.ts` — Rsbuild build configuration (loaded via the jiti wrapper in `rsbuild.config.ts`). Includes splitChunks cacheGroups, resource hints plugin, page-inject-loader rule
-- `configs/paths.ts` — `ROOT_PATH` + `resolveRoot()` centralizes all path resolution
 
 ## Packages
 

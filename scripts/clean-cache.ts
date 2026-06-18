@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import { resolveRoot } from '@config/paths';
+import { resolveRoot } from '@utils/common';
 import { log } from './lib/logger';
 
 const dirs = [

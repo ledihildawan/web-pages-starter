@@ -1,9 +1,9 @@
 import process from 'node:process';
 import { env } from '@config/env';
 import { i18nConfig } from '@config/i18n';
-import { ROOT_PATH, resolveRoot } from '@config/paths';
 import { LOCALE_CODES } from '@generated/active-locales-data';
 import { getErrorPageSlugs, getRootPageSlug, scanPages } from '@page-system';
+import { resolveRoot } from '@utils/common';
 import { log, logBox } from './lib/logger';
 import { writeFilePath } from './lib/write-file';
 
@@ -89,7 +89,7 @@ ${urls.join('\n')}
     Pages: urls.length,
     Locales: locales.length,
     'Base URL': baseUrl.slice(0, 24),
-    Output: OUTPUT_PUBLIC.replace(ROOT_PATH, '.').slice(0, 24),
+    Output: OUTPUT_PUBLIC.replace(process.cwd(), '.').slice(0, 24),
   });
 };
 

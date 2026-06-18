@@ -3,7 +3,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { env } from '@config/env';
 import { i18nConfig } from '@config/i18n';
-import { resolveRoot } from '@config/paths';
 import type { I18nTranslationKeys } from '@generated/i18n';
 import { IMAGE_MANIFEST } from '@generated/image-manifest';
 import {
@@ -53,7 +52,7 @@ import { cardinal as jaCardinal, ordinal as jaOrdinal } from '@i18n/strategies/j
 import { cardinal as zhCardinal } from '@i18n/strategies/zh';
 import { loadSharedLocales } from '@i18n/utils';
 import { getRootPageSlug } from '@page-system';
-import { getValueByPath } from '@utils/common';
+import { getValueByPath, resolveRoot } from '@utils/common';
 import { loadGlobalData, readJSON5 } from '@utils/json5';
 import type { DateValue, JsonData } from '@utils/types';
 

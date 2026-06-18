@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
-import { resolveRoot } from '@config/paths';
 import { buildFontsCss } from '@i18n/fonts/font-css';
+import { resolveRoot } from '@utils/common';
 import { log, logBox } from './lib/logger';
 
 const OUTPUT_DIR = resolveRoot('public', 'assets', 'fonts');

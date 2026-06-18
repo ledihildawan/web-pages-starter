@@ -7,9 +7,9 @@ import { getRootPageSlug, getSystemPageSlug, scanPages } from '@page-system';
 import { generateDynamicEntries } from '@page-system/dynamic-routes';
 import { defineConfig, type RsbuildPlugin } from '@rsbuild/core';
 import { createTemplateParams } from '@template-engine';
+import { resolveRoot } from '@utils/common';
 import { minify } from 'html-minifier-terser';
 import { html as beautifyHtml } from 'js-beautify';
-import { ROOT_PATH, resolveRoot } from './paths';
 
 const isBuild = env.IS_PROD || env.BUILD_PREVIEW;
 const shouldMinify = isBuild && env.MINIFY;
@@ -152,7 +152,7 @@ const dynamicTemplateMap = new Map(dynamicEntries.map((e) => [e.entryKey, e.temp
 const resolveTemplate = (entryName: string): string => {
   const dynDir = dynamicTemplateMap.get(entryName);
   if (dynDir) {
-    return path.relative(ROOT_PATH, path.join(dynDir, 'index.njk'));
+    return path.relative(process.cwd(), path.join(dynDir, 'index.njk'));
   }
   return path.join('pages', entryName, 'index.njk');
 };

@@ -1,7 +1,7 @@
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
-import { ROOT_PATH, resolveRoot } from '@config/paths';
+import { resolveRoot } from '@utils/common';
 import inquirer from 'inquirer';
 import { log } from './lib/logger';
 import { setupSigintHandler, wrapMainError } from './lib/signal-handler';
@@ -21,7 +21,7 @@ const runTool = (name: string, args: string[] = []): Promise<void> => {
     const proc = spawn('bun', [toolPath, ...args], {
       stdio: 'inherit',
       shell: false,
-      cwd: ROOT_PATH,
+      cwd: process.cwd(),
       env: { ...process.env },
     });
     proc.on('close', (code) => {
@@ -44,7 +44,7 @@ const runBunScript = (name: string, ...extraArgs: string[]): Promise<void> => {
     const proc = spawn('bun', ['run', name, ...extraArgs], {
       stdio: 'inherit',
       shell: false,
-      cwd: ROOT_PATH,
+      cwd: process.cwd(),
       env: { ...process.env },
     });
     proc.on('close', (code) => {
@@ -308,7 +308,7 @@ const tools: Tool[] = [
       const proc = spawn('bun', ['install'], {
         stdio: 'inherit',
         shell: false,
-        cwd: ROOT_PATH,
+        cwd: process.cwd(),
       });
       return new Promise<void>((resolve) => proc.on('close', () => resolve()));
     },

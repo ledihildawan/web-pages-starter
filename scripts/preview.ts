@@ -4,10 +4,10 @@ import path from 'node:path';
 import process from 'node:process';
 import { env } from '@config/env';
 import { i18nConfig } from '@config/i18n';
-import { ROOT_PATH, resolveRoot } from '@config/paths';
 import type { serve } from '@hono/node-server';
 import ngrok from '@ngrok/ngrok';
 import { getErrorPageSlugs, getRootPageSlug } from '@page-system';
+import { resolveRoot } from '@utils/common';
 import inquirer from 'inquirer';
 import { createStaticApp, getPageNames, loadHtmlCache } from './lib/hono-server';
 import { log } from './lib/logger';
@@ -25,7 +25,7 @@ const runBuild = (): Promise<void> => {
     log.info('\n[Build] Running production build...');
     const proc = spawn('bun', ['run', 'build'], {
       stdio: 'inherit',
-      cwd: ROOT_PATH,
+      cwd: process.cwd(),
       env: { ...process.env, BUILD_PREVIEW: 'true' },
       shell: false,
     });
@@ -227,7 +227,7 @@ const main = async () => {
     }
     const restoreProc = spawn('bun', ['./packages/i18n/cli/generate-active-locales.ts'], {
       stdio: 'ignore',
-      cwd: ROOT_PATH,
+      cwd: process.cwd(),
       detached: true,
     });
     restoreProc.unref();

@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import zlib from 'node:zlib';
-import { resolveRoot } from '@config/paths';
+import { resolveRoot } from '@utils/common';
 import { log } from './lib/logger';
 
 const DIST = resolveRoot('dist');

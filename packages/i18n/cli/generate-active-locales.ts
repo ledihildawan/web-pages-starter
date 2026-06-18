@@ -1,5 +1,4 @@
 import { i18nConfig } from '@config/i18n';
-import { resolveRoot } from '@config/paths';
 import { FONT_CSS_PATHS } from '@i18n/data/font-paths';
 import { LANGUAGES } from '@i18n/data/languages';
 import type { LocaleCode, LocaleConfig } from '@i18n/data/locales';
@@ -8,6 +7,7 @@ import { NUMBERING_SYSTEMS } from '@i18n/data/numbering-systems';
 import { WRITING_SYSTEM, WRITING_SYSTEMS } from '@i18n/data/writing-systems';
 import { log } from '@scripts/lib/logger';
 import { generatedHeader, writeFilePath } from '@scripts/lib/write-file';
+import { resolveRoot } from '@utils/common';
 
 const OUTPUT_FILE = resolveRoot('generated', 'active-locales-data.ts');
 

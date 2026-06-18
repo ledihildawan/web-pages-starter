@@ -1,11 +1,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
-import { resolveRoot } from '@config/paths';
 import { getActiveLocaleCodes } from '@i18n/engine/active-locales';
 import { isSystemPageSlug, SYSTEM_PAGE_IDS, type SystemPageId } from '@page-system';
 import { log } from '@scripts/lib/logger';
 import { romanize } from '@scripts/lib/romanize';
+import { resolveRoot } from '@utils/common';
 
 const args = process.argv.slice(2);
 const inputPath = args[0];

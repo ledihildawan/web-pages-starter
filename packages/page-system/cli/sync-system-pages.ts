@@ -1,10 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
-import { resolveRoot } from '@config/paths';
 import { getSystemPageSlug, SYSTEM_PAGE_IDS } from '@page-system/system-pages';
 import { log, logBox } from '@scripts/lib/logger';
 import { wrapMainError } from '@scripts/lib/signal-handler';
+import { resolveRoot } from '@utils/common';
 
 const PAGES_DIR = resolveRoot('pages');
 

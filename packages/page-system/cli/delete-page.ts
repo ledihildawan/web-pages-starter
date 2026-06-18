@@ -2,10 +2,10 @@ import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
-import { ROOT_PATH, resolveRoot } from '@config/paths';
 import { isSystemPageId, isSystemPageSlug, scanPages } from '@page-system';
 import { log } from '@scripts/lib/logger';
 import { setupSigintHandler, wrapMainError } from '@scripts/lib/signal-handler';
+import { resolveRoot } from '@utils/common';
 import { readJSON5 } from '@utils/json5';
 import inquirer from 'inquirer';
 
@@ -111,7 +111,7 @@ function findReferences(pageInfo: PageInfo): Reference[] {
       pattern.lastIndex = 0;
       if (pattern.test(lines[i])) {
         refs.push({
-          file: path.relative(ROOT_PATH, file).replace(/\\/g, '/'),
+          file: path.relative(process.cwd(), file).replace(/\\/g, '/'),
           line: i + 1,
           content: lines[i].trim(),
         });
@@ -202,7 +202,7 @@ async function runSyncLocales(): Promise<void> {
     const proc = spawn('bun', ['./packages/i18n/cli/sync-locales.ts'], {
       stdio: 'inherit',
       shell: false,
-      cwd: ROOT_PATH,
+      cwd: process.cwd(),
     });
     proc.on('close', (code) => {
       if (code !== 0) {

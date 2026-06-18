@@ -1,11 +1,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
-import { ROOT_PATH, resolveRoot } from '@config/paths';
 import { LOCALE_CODES as ACTIVE_LOCALE_CODES } from '@generated/active-locales-data';
 import { LOCALE_CODES } from '@i18n/data/locales';
 import { log, logBox } from '@scripts/lib/logger';
 import { generatedHeader, writeFilePath } from '@scripts/lib/write-file';
+import { resolveRoot } from '@utils/common';
 import { collectKeys, readJSON5 } from '@utils/json5';
 
 const LOCALES_ROOT = resolveRoot('locales');
@@ -200,7 +200,7 @@ export interface I18nShared ${toTsInterface(sharedData)}
   }
 
   log.info(`\n  ${allKeyCount} translation keys typed`);
-  log.info(`  ${OUTPUT_FILE.replace(ROOT_PATH, '.')}`);
+  log.info(`  ${OUTPUT_FILE.replace(process.cwd(), '.')}`);
   log.success('\nDone: i18n types generated');
 } catch (error) {
   log.error(`Error: Generation failed — ${error}`);
