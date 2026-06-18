@@ -20,7 +20,7 @@ Requires [Bun](https://bun.sh) `>= 1.3.14`.
 │   ├── i18n.ts            #   defaultLocale + active locales
 │   ├── fonts.ts           #   font stack config (CSS imported via bootstrap.ts)
 │   └── rsbuild.ts         #   Rsbuild build configuration (real config; rsbuild.config.ts is a jiti wrapper)
-├── utils/                 # shared utilities — common (resolveRoot, getValueByPath), json5, microtask-queue, scheduler, types
+├── utils/                 # shared utilities — common (resolveRoot, getValueByPath), json5, alias (tsconfig path aliases), microtask-queue, scheduler, types
 ├── types/                 # ambient type declarations (env.d.ts, global.d.ts, globals.d.ts)
 ├── data/                  # global site data
 │   ├── global.json5       #   site_name, seo, social, dns, preconnect
@@ -55,7 +55,7 @@ Requires [Bun](https://bun.sh) `>= 1.3.14`.
 │   └── main.css           #   Tailwind v4 entry (imports tokens + components)
 ├── assets/                # images, fonts, raw assets
 ├── bootstrap.ts           # app entry — global CSS (main.css), Alpine + collapse/focus plugins, i18n store/initIntl, fonts, SW. Auto-injected via page-inject-loader
-├── bunfig.toml            # Bun config — preload env-preload.ts for .env.{stage} loading
+├── bunfig.toml            # Bun config — preload packages/env/preload.ts for .env.{stage} loading
 ├── scripts/               # build-time CLI scripts (build, generate-*, serve, cli, compress, subset-fonts)
 │   └── lib/               #   logger, signal-handler, hono-server, write-file, romanize
 ├── packages/
@@ -67,6 +67,9 @@ Requires [Bun](https://bun.sh) `>= 1.3.14`.
 │   │   ├── fonts/         #     font loading system
 │   │   ├── runtime/       #     i18next init, Alpine store
 │   │   └── config/        #     types, defineI18n/defineFont/defineFontStack
+│   ├── env/                #   env system (auto-generates generated/env.ts from .env files)
+│   │   ├── cli/            #     generate-env.ts (scans .env → schema + engine + validation)
+│   │   └── preload.ts      #     Bun preload (loads .env before any module via bunfig.toml)
 │   ├── template-engine/   #   Nunjucks SSR rendering. Depends on @i18n (one-way) + @page-system (getRootPageSlug)
 │   │   ├── index.ts       #     public API barrel: exports createTemplateParams, scanSharedLocales
 │   │   └── template.ts    #     Nunjucks i18n.* API: createTemplateParams(), generateClientI18nScript(), scanSharedLocales()
@@ -79,7 +82,7 @@ Requires [Bun](https://bun.sh) `>= 1.3.14`.
 │       └── cli/           #     sync-system-pages.ts, generate-page.ts, delete-page.ts
 ├── public/                # static assets (favicon, generated sw.js/manifest/robots/sitemap)
 │   └── assets/i18n/       #   pre-compiled i18n JSON bundles (generated)
-├── generated/             # auto-generated: env.ts (env system), active-locales-data, exchange rates, i18n types, image-manifest (tracked in git; regenerated at build)
+├── generated/             # auto-generated: env.ts (env system), active-locales-data, exchange rates, i18n types, image-manifest (5 files tracked in git; regenerated at build)
 ├── tests/                 # general DOM sanity check (rstest)
 ├── docs/                  # documentation
 ```
@@ -392,7 +395,7 @@ generate-env → sync-system-pages → clean:cache → fetch:rates → generate-
 | --- | --- |
 | Entry discovery | Recursive scan: `pages/**/script.ts` (optional) or `shared/page-entry.ts` (fallback). `_` prefix (skip), `()` groups (strip from URL), `[slug]` (dynamic from data.json5) |
 | Page entry injection | `page-inject-loader.cjs` auto-injects `import '../../bootstrap'` + `import './style.css'` into every `script.ts`/`page-entry.ts` — zero manual imports |
-| Bootstrap shared chunk | `splitChunks` with `minSize: 0` + `default` cacheGroup extracts bootstrap to single cached chunk. No duplication across pages |
+| Bootstrap shared chunk | `splitChunks` with `minSize: 2000` + `default` cacheGroup extracts bootstrap to single cached chunk. No duplication across pages |
 | Resource hints | `pluginResourceHints` injects modulepreload (shared JS), font preload, LCP image preload (`fetchpriority="high"`) |
 | Root page as index | `pluginRootPageAsIndex` renames `home.html` → `index.html` post-build |
 | Clean URLs | Dev server `historyApiFallback` with per-page rewrites: `/pricing` → `pricing.html`, `/about` → `about.html`, etc. |
@@ -400,7 +403,7 @@ generate-env → sync-system-pages → clean:cache → fetch:rates → generate-
 | `import.meta.env` | `source.define` replaces `import.meta.env` with full env object (browser-safe keys only). `PRIVATE_` prefix in `.env` excludes secrets from browser bundle |
 | Output paths | `dist/assets/{scripts,styles,images,fonts}` — organized by asset type |
 | Static copy | `output.copy` moves `public/` static files (favicon, sw.js, manifest, robots, i18n bundles) to `dist/` |
-| Path aliases | `@i18n` / `@i18n/*` → `packages/i18n/`, `@template-engine` / `@template-engine/*` → `packages/template-engine/`, `@page-system` / `@page-system/*` → `packages/page-system/`, `@config/*` → `configs/`, `@scripts/*` → `scripts/`, `@utils/*` → `utils/`, `@generated/*` → `generated/`. All aliases work everywhere via the jiti wrapper in `rsbuild.config.ts` |
+| Path aliases | Single source: `tsconfig.json` paths → `utils/alias.ts` auto-derives bundler format for jiti + Rsbuild. `@i18n`, `@template-engine`, `@page-system`, `@config/*`, `@scripts/*`, `@utils/*`, `@generated/*`. Edit `tsconfig.json` only — all consumers auto-sync |
 | Nunjucks loader | `simple-nunjucks-loader` with search paths: `pages/`, `layouts/`, `.` (root); `assetsPaths: assets/` |
 | Pre-entries | Bootstrap + main.css auto-injected via `page-inject-loader.cjs` (not `preEntry`) |
 
@@ -446,7 +449,7 @@ Ideal for Lighthouse audits, mobile testing, or sharing WIP via a public URL.
 | `biome.json` | Linting (Tailwind class sorting, organize imports) + formatting (2-space indent, single quotes). Overrides: `main.css` disables `noDescendingSpecificity`/`noImportantStyles`; `common.ts` disables `noExplicitAny` |
 | `.vscode/settings.json` | Editor config: Biome formatter, Tailwind IntelliSense, i18n-ally, Peacock color |
 | `.vscode/extensions.json` | Workspace extension recommendations (12 extensions) |
-| `tsconfig.json` | Strict mode, ESNext, path aliases |
+| `tsconfig.json` | Strict mode, ESNext, path aliases (single source of truth — `utils/alias.ts` auto-derives for jiti + bundler) |
 
 ### VS Code extensions
 
@@ -515,7 +518,7 @@ Config: `.husky/pre-commit`, `.lintstagedrc`.
 
 - No comments unless explicitly requested
 - No deprecated or backward-compat code — remove entirely
-- Import paths: `@i18n`, `@template-engine`, `@page-system`, `@config/*`, `@scripts/*`, `@utils/*`, `@generated/*` aliases used consistently (including the rsbuild config chain via jiti wrapper)
+- Import paths: `tsconfig.json` is single source of truth → `utils/alias.ts` auto-derives for jiti + bundler. Aliases: `@i18n`, `@template-engine`, `@page-system`, `@config/*`, `@scripts/*`, `@utils/*`, `@generated/*`
 - Biome for lint + format (not Prettier) — config in `biome.json`
 - Pre-commit chain: Husky + lint-staged (Biome) + typecheck + test (`&&`)
 
@@ -655,6 +658,7 @@ Most tools live in `scripts/`; i18n-specific CLI tools live in `packages/i18n/cl
 | `scripts/generate-manifest.ts` | logBox, writeFilePath | Generate manifest.json from global.json5 + i18nConfig |
 | `scripts/generate-robots.ts` | logBox, env.SITE_URL, writeFilePath | Generate robots.txt from env.SITE_URL |
 | `scripts/generate-service-worker.ts` | logBox, writeFilePath | Generate `public/service-worker.js` with locale-specific error page URLs |
+| `packages/env/cli/generate-env.ts` | log | Regenerate env schema from `.env` files |
 | `packages/page-system/cli/sync-system-pages.ts` | log, logBox, wrapMainError | Rename ALL system page folders to locale-dependent slugs when default locale changes |
 | `packages/i18n/cli/sync-locales.ts` | log, logBox | Create missing locale directories; sync missing files in existing directories |
 | `packages/page-system/cli/delete-page.ts` | log | Delete a page (folder + locale files across all locale dirs); scans for broken URL references before deletion; system pages protected |
