@@ -71,13 +71,8 @@
       <link rel="preconnect" href="{{ host.href }}"{% if host.crossorigin %} crossorigin{% endif %}>
     {% endfor %}
 
-    {% block extra_head %}
-      {{ page_meta.render(page, global, LOCALE_CODES, page_id, i18n, csp_nonce) }}
-    {% endblock %}
-
-    {% block resource_hints %}
-      {{ clientI18nScript }}
-    {% endblock %}
+    {{ page_meta.render(page, global, LOCALE_CODES, page_id, i18n, csp_nonce) }}
+    {{ clientI18nScript }}
   </head>
 
   <body class="min-block-screen bg-slate-950 text-slate-200 antialiased" data-page="{{ page_id }}">
