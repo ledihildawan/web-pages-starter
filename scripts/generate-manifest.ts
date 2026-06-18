@@ -1,6 +1,6 @@
 import { i18nConfig } from '@config/i18n';
+import { env } from '@generated/env';
 import { resolveRoot } from '@utils/common';
-import { env } from '@utils/env';
 import { loadGlobalData } from '@utils/json5';
 import { logBox } from './lib/logger';
 import { writeFilePath } from './lib/write-file';

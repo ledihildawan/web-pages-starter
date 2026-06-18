@@ -1,11 +1,11 @@
 import { i18nConfig } from '@config/i18n';
+import { env } from '@generated/env';
 import { getActiveLocalesDisplay, LOCALE_STORAGE_KEY } from '@i18n';
 import type { LocaleCode } from '@i18n/data/locales';
 import { getActiveLocales } from '@i18n/engine/active-locales';
 import { setStrategies } from '@i18n/engine/formatters';
 import { getLanguageSubtag } from '@i18n/engine/helpers';
 import { loadStrategies } from '@i18n/strategies/loader';
-import { env } from '@utils/env';
 import { scheduleTask } from '@utils/microtask-queue';
 
 const updateDocumentAttributes = (code: string): void => {

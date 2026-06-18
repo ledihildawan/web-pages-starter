@@ -1,13 +1,13 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
+import { browserEnv, env } from '@generated/env';
 import { getActiveLocaleCodes, isSingleLocale, LOCALE_STORAGE_KEY } from '@i18n';
 import { getRootPageSlug, getSystemPageSlug, scanPages } from '@page-system';
 import { generateDynamicEntries } from '@page-system/dynamic-routes';
 import { defineConfig, type RsbuildPlugin } from '@rsbuild/core';
 import { createTemplateParams } from '@template-engine';
 import { resolveRoot } from '@utils/common';
-import { browserEnv, env } from '@utils/env';
 import { minify } from 'html-minifier-terser';
 import { html as beautifyHtml } from 'js-beautify';
 

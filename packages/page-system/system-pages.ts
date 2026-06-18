@@ -1,4 +1,4 @@
-import { env } from '@utils/env';
+import { env } from '@generated/env';
 
 export const ROOT_PAGE = 'home';
 

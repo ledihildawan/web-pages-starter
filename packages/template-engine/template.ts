@@ -2,6 +2,7 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
+import { env } from '@generated/env';
 import type { I18nTranslationKeys } from '@generated/i18n';
 import { IMAGE_MANIFEST } from '@generated/image-manifest';
 import {
@@ -52,7 +53,6 @@ import { cardinal as zhCardinal } from '@i18n/strategies/zh';
 import { loadSharedLocales } from '@i18n/utils';
 import { getRootPageSlug } from '@page-system';
 import { getValueByPath, resolveRoot } from '@utils/common';
-import { env } from '@utils/env';
 import { loadGlobalData, readJSON5 } from '@utils/json5';
 import type { DateValue, JsonData } from '@utils/types';
 

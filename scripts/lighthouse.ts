@@ -2,7 +2,7 @@ import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
-import { env } from '@utils/env';
+import { env } from '@generated/env';
 import inquirer from 'inquirer';
 import { DOMParser } from 'linkedom';
 import { log, logBox } from './lib/logger';
