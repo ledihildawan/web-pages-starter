@@ -10,6 +10,7 @@ const runTool = (name: string, args: string[] = []): Promise<void> => {
   return new Promise((resolve, reject) => {
     const candidates = [
       path.join(__dirname, `${name}.ts`),
+      resolveRoot('packages', 'env', 'cli', `${name}.ts`),
       resolveRoot('packages', 'page-system', 'cli', `${name}.ts`),
       resolveRoot('packages', 'i18n', 'cli', `${name}.ts`),
     ];
@@ -182,6 +183,21 @@ const tools: Tool[] = [
     name: 'Check Parity',
     description: 'Verify translation key parity across locales',
     action: () => runTool('check-parity'),
+  },
+  {
+    name: 'Generate Env',
+    description: 'Regenerate env schema from .env files',
+    action: () => runTool('generate-env'),
+  },
+  {
+    name: 'Generate Types',
+    description: 'Regenerate i18n TypeScript types from locale JSON',
+    action: () => runTool('generate-types'),
+  },
+  {
+    name: 'Sync System Pages',
+    description: 'Rename system page folders to locale-dependent slugs',
+    action: () => runTool('sync-system-pages'),
   },
   {
     name: 'Fetch Rates',
