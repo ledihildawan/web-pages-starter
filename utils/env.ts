@@ -13,7 +13,8 @@ function getMetaEnv(): Record<string, unknown> {
 }
 
 function getBrowserEnv(): Record<string, unknown> {
-  return typeof __APP_ENV__ !== 'undefined' ? __APP_ENV__ : {};
+  const raw = import.meta.env.APP_ENV;
+  return typeof raw === 'object' && raw !== null ? (raw as Record<string, unknown>) : {};
 }
 
 function coerce(raw: unknown): unknown {

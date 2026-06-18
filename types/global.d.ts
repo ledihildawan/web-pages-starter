@@ -4,7 +4,6 @@ import type { Alpine as AlpineType } from 'alpinejs';
 
 declare global {
   var Alpine: AlpineType;
-  const __APP_ENV__: Record<string, unknown> | undefined;
 
   interface Window {
     __PAGE_ID__: keyof I18nPages;
