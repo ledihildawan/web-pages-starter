@@ -18,15 +18,32 @@ const ENV_SCHEMA = {
   PORT: { type: 'number', default: 0 },
   PRETTY_HTML: { type: 'boolean', default: false },
   RSBUILD_RUNTIME: { type: 'string', default: '' },
-  SITE_URL: { type: 'string', default: '' },
   SITEMAP_DEFAULT_CHANGEFREQ: { type: 'string', default: '' },
   SITEMAP_DEFAULT_PRIORITY: { type: 'string', default: '' },
+  SITE_URL: { type: 'string', default: '' },
   STAGE: { type: 'string', default: '' },
 } as const;
 
 const ENV_KEYS = Object.keys(ENV_SCHEMA);
 
-const BROWSER_ENV_KEYS = ['BASE_PATH', 'STAGE'] as const;
+const ENV_KEY_MAP: Record<string, string> = {
+  BASE_PATH: 'BASE_PATH',
+  BUILD_PREVIEW: 'BUILD_PREVIEW',
+  HOST: 'HOST',
+  LIGHTHOUSE_OUTPUT_DIR: 'LIGHTHOUSE_OUTPUT_DIR',
+  MINIFY: 'MINIFY',
+  NGROK_AUTHTOKEN: 'PRIVATE_NGROK_AUTHTOKEN',
+  NODE_BINARY: 'NODE_BINARY',
+  PORT: 'PORT',
+  PRETTY_HTML: 'PRETTY_HTML',
+  RSBUILD_RUNTIME: 'RSBUILD_RUNTIME',
+  SITEMAP_DEFAULT_CHANGEFREQ: 'SITEMAP_DEFAULT_CHANGEFREQ',
+  SITEMAP_DEFAULT_PRIORITY: 'SITEMAP_DEFAULT_PRIORITY',
+  SITE_URL: 'SITE_URL',
+  STAGE: 'STAGE',
+};
+
+const BROWSER_ENV_KEYS = ['BASE_PATH', 'BUILD_PREVIEW', 'HOST', 'LIGHTHOUSE_OUTPUT_DIR', 'MINIFY', 'NODE_BINARY', 'PORT', 'PRETTY_HTML', 'RSBUILD_RUNTIME', 'SITEMAP_DEFAULT_CHANGEFREQ', 'SITEMAP_DEFAULT_PRIORITY', 'SITE_URL', 'STAGE'] as const;
 
 type EnvType = 'string' | 'number' | 'boolean';
 
@@ -82,7 +99,8 @@ function readEnv(): TypedEnv {
 
   for (const key of ENV_KEYS) {
     const field = ENV_SCHEMA[key as keyof typeof ENV_SCHEMA];
-    const raw = source[key];
+    const lookupKey = IS_BROWSER ? key : (ENV_KEY_MAP[key] ?? key);
+    const raw = source[lookupKey];
     const validated = validateValue(key, raw, field.type);
     values[key] = validated ?? field.default;
   }
