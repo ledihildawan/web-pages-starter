@@ -13,8 +13,12 @@ function getMetaEnv(): Record<string, unknown> {
 }
 
 function getBrowserEnv(): Record<string, unknown> {
-  const raw = import.meta.env.APP_ENV;
-  return typeof raw === 'object' && raw !== null ? (raw as Record<string, unknown>) : {};
+  const source = (import.meta.env ?? {}) as Record<string, unknown>;
+  const result: Record<string, unknown> = {};
+  for (const key of schemaKeys) {
+    result[key] = source[key];
+  }
+  return result;
 }
 
 function coerce(raw: unknown): unknown {
