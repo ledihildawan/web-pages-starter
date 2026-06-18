@@ -133,7 +133,6 @@ async function bootstrap() {
     Alpine.plugin(Focus);
 
     await import('./shared/nav/navbar');
-    await import('./shared/nav/section-nav');
 
     if (import.meta.env.SINGLE_LOCALE) {
       Alpine.store('i18n', {
