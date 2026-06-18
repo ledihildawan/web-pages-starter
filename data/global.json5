@@ -30,7 +30,7 @@
     { "href": "https://flagcdn.com" }
   ],
   "dns_prefetch": [
-    "//flagcdn.com"
+    "https://flagcdn.com"
   ],
   "social": {
     "github": "ledihildawan/web-pages-starter",

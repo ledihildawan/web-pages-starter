@@ -23,12 +23,8 @@
 {% set x_ua = compat.x_ua_compatible %}
 {% set referrer = compat.referrer %}
 
-{% set dns_prefetch = global.dns_prefetch or [
-  'https://flagcdn.com'
-] %}
-{% set preconnect = global.preconnect or [
-  { href: 'https://images.unsplash.com', crossorigin: true }
-] %}
+{% set dns_prefetch = global.dns_prefetch or [] %}
+{% set preconnect = global.preconnect or [] %}
 
 <!DOCTYPE html>
 <html lang="{{ lang }}" dir="{{ localeConfig.dir or 'ltr' }}" class="scroll-smooth selection:bg-violet-500/30 selection:text-violet-200">
@@ -48,7 +44,7 @@
     <meta name="theme-color" content="{{ theme_color }}" media="(prefers-color-scheme: dark)">
     <meta name="msapplication-TileColor" content="{{ ms_tile_color }}">
 
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'nonce-{{ csp_nonce }}'; style-src 'self' 'nonce-{{ csp_nonce }}' 'unsafe-inline'; img-src 'self' data: https://flagcdn.com https://images.unsplash.com; font-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; frame-src 'none'; worker-src 'self'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'nonce-{{ csp_nonce }}'; style-src 'self' 'nonce-{{ csp_nonce }}' 'unsafe-inline'; img-src 'self' data: https://flagcdn.com; font-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; frame-src 'none'; worker-src 'self'">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
 
     <link rel="manifest" href="{{ manifest_path }}">
@@ -70,23 +66,13 @@
     {% endif %}
     <meta name="referrer" content="{{ referrer or 'strict-origin-when-cross-origin' }}">
 
-    <link rel="dns-prefetch" href="https://flagcdn.com">
-    <link rel="dns-prefetch" href="https://images.unsplash.com">
-    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+    {% for href in dns_prefetch %}
+      <link rel="dns-prefetch" href="{{ href }}">
+    {% endfor %}
 
-    {% if locales and locales.length > 1 %}
-      {% for href in dns_prefetch %}
-        {% if href != 'https://flagcdn.com' and href != 'https://images.unsplash.com' %}
-          <link rel="dns-prefetch" href="{{ href }}">
-        {% endif %}
-      {% endfor %}
-
-      {% for host in preconnect %}
-        {% if host.href != 'https://images.unsplash.com' %}
-          <link rel="preconnect" href="{{ host.href }}"{% if host.crossorigin %} crossorigin{% endif %}>
-        {% endif %}
-      {% endfor %}
-    {% endif %}
+    {% for host in preconnect %}
+      <link rel="preconnect" href="{{ host.href }}"{% if host.crossorigin %} crossorigin{% endif %}>
+    {% endfor %}
 
     {% block extra_head %}
       {{ page_meta.render(page, global, LOCALE_CODES, page_id, i18n, csp_nonce) }}
