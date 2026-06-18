@@ -1,4 +1,50 @@
-Alpine.data('navbar', () => ({
+import type { AlpineComponent } from 'alpinejs';
+import type { i18nStore, i18nStoreLanguages } from '@/packages/i18n/runtime/store';
+
+export const type = 'data';
+
+export const name = 'navbar';
+
+export const value = (): AlpineComponent<{
+  // --- State Variables ---
+  mobileMenuOpen: boolean;
+  menuChildrenVisible: boolean;
+  langOpen: boolean;
+  scrolled: boolean;
+  navHidden: boolean;
+  lastScroll: number;
+  activeMobileSub: number | null;
+  scrollY: number;
+  currentPath: string;
+  basePath: string;
+  isNavigating: boolean;
+  touchStartY: number;
+  touchCurrentY: number;
+  isDragging: boolean;
+  focusedElement: Element | null;
+  _ticking: boolean;
+  _menuFocusTriggered: boolean;
+
+  // --- Methods ---
+  isActive: (path: string) => boolean;
+  hapticFeedback: () => void;
+  init: () => void;
+  onScroll: () => void;
+  handleTouchStart: (e: TouchEvent) => void;
+  handleTouchMove: (e: TouchEvent) => void;
+  handleTouchEnd: () => void;
+  toggleSubmenuWithFeedback: (index: number) => void;
+  closeMenuAndFeedback: (url: string) => void;
+  closeMobileMenu: (url?: string | null) => boolean;
+  toggleMobile: () => void;
+  navigateToHome: () => void;
+  getCurrentLanguageObj: () => i18nStoreLanguages;
+  getCurrentFlagUrl: () => string;
+  getCurrentFlagAlt: () => string;
+  getCurrentLanguageLabel: () => string;
+  selectLanguageOption: (event: Event) => void;
+  selectLanguageFromClick: (event: Event) => void;
+}> => ({
   mobileMenuOpen: false,
   menuChildrenVisible: false,
   langOpen: false,
@@ -8,7 +54,7 @@ Alpine.data('navbar', () => ({
   activeMobileSub: null as number | null,
   scrollY: 0,
   currentPath: window.location.pathname,
-  basePath: typeof window.__BASE_PATH__ === 'string' ? window.__BASE_PATH__ : '/',
+  basePath: window.__BASE_PATH__ === 'string' ? window.__BASE_PATH__ : '/',
   isNavigating: false,
   touchStartY: 0,
   touchCurrentY: 0,
@@ -127,12 +173,16 @@ Alpine.data('navbar', () => ({
 
   toggleMobile(): void {
     if (!this.mobileMenuOpen) {
-      this.focusedElement = document.activeElement;
       this.scrollY = window.scrollY;
+      this.focusedElement = document.activeElement;
+
       document.body.classList.add('menu-open');
+
       this.mobileMenuOpen = true;
       this.navHidden = false;
+
       this.hapticFeedback();
+
       this.menuChildrenVisible = true;
     } else {
       this.closeMobileMenu();
@@ -148,41 +198,43 @@ Alpine.data('navbar', () => ({
     }
   },
 
-  getCurrentLanguageObj(): { code: string; label: string; flag: string } | null {
-    const store = (this as Record<string, unknown>).$store as {
-      i18n: { current: string; languages: Array<{ code: string; label: string; flag: string }> };
-    };
-    if (!store.i18n?.languages || !store.i18n.current) return null;
-    return store.i18n.languages.find((lang) => lang.code === store.i18n.current) ?? null;
+  getCurrentLanguageObj() {
+    const store = this.$store.i18n as i18nStore;
+
+    return store.languages.find((lang) => lang.code === store.current)!;
   },
 
   getCurrentFlagUrl(): string {
     const lang = this.getCurrentLanguageObj();
+
     if (!lang?.flag) return '';
+
     return `https://flagcdn.com/w20/${lang.flag.toLowerCase()}.png`;
   },
 
   getCurrentFlagAlt(): string {
     const lang = this.getCurrentLanguageObj();
-    if (!lang) return 'Language flag';
+
     return `${lang.label || 'Language'} flag - ${(lang.flag || '').toUpperCase()}`;
   },
 
   getCurrentLanguageLabel(): string {
     const lang = this.getCurrentLanguageObj();
-    const store = (this as Record<string, unknown>).$store as { i18n: { current: string } };
-    if (!lang?.label) return store.i18n.current.toUpperCase();
-    return lang.label;
+
+    return lang!.label;
   },
 
   selectLanguageOption(event: Event): void {
+    const store = this.$store.i18n as i18nStore;
+
     const opt = (event.target as HTMLElement).closest('[data-lang-option]');
+
     if (opt) {
       const langCode = (opt as HTMLElement).dataset.langOption;
+
       if (langCode) {
-        ((this as Record<string, unknown>).$store as { i18n: { change: (code: string) => void } }).i18n.change(
-          langCode,
-        );
+        store.change(langCode);
+
         this.closeMobileMenu();
         this.hapticFeedback();
       }
@@ -190,16 +242,18 @@ Alpine.data('navbar', () => ({
   },
 
   selectLanguageFromClick(event: Event): void {
+    const store = this.$store.i18n as i18nStore;
     const opt = (event.target as HTMLElement).closest('[data-lang-option]');
+
     if (opt) {
       const langCode = (opt as HTMLElement).dataset.langOption;
+
       if (langCode) {
-        ((this as Record<string, unknown>).$store as { i18n: { change: (code: string) => void } }).i18n.change(
-          langCode,
-        );
+        store.change(langCode);
+
         this.langOpen = false;
         this.hapticFeedback();
       }
     }
   },
-}));
+});

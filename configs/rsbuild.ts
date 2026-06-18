@@ -367,7 +367,7 @@ export default defineConfig({
             use: [
               {
                 loader: lookup('@', 'packages', 'page-system', 'page-inject-loader.cjs'),
-                options: { bootstrap: lookup('@', 'bootstrap.ts') },
+                options: { bootstrap: lookup('@scripts', 'bootstrap.ts') },
               },
             ],
           },

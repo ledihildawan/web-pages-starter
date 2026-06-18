@@ -9,6 +9,7 @@ const runTool = (name: string, args: string[] = []): Promise<void> => {
   return new Promise((resolve, reject) => {
     const candidates = [
       find('@scripts', `${name}.ts`),
+      find('@scripts', 'cli', `${name}.ts`),
       find('@scripts', 'generators', `${name}.ts`),
       find('@scripts', 'generators', `generate-${name}.ts`),
       find('@i18n', 'cli', `${name}.ts`),
@@ -16,16 +17,19 @@ const runTool = (name: string, args: string[] = []): Promise<void> => {
       lookup('@', 'packages', 'env', 'cli', `${name}.ts`),
     ];
     const toolPath = candidates.find((c): c is string => c !== null);
+
     if (!toolPath) {
       reject(new Error(`Tool "${name}" not found`));
       return;
     }
+
     const proc = spawn('bun', [toolPath, ...args], {
       stdio: 'inherit',
       shell: false,
       cwd: process.cwd(),
       env: { ...process.env },
     });
+
     proc.on('close', (code) => {
       if (code !== 0) {
         log.toolFailed(name, code ?? 1);
@@ -34,6 +38,7 @@ const runTool = (name: string, args: string[] = []): Promise<void> => {
         resolve();
       }
     });
+
     proc.on('error', (err) => {
       log.toolSpawnFailed(name, err);
       reject(err);
@@ -49,6 +54,7 @@ const runBunScript = (name: string, ...extraArgs: string[]): Promise<void> => {
       cwd: process.cwd(),
       env: { ...process.env },
     });
+
     proc.on('close', (code) => {
       if (code !== 0) {
         log.toolFailed(name, code ?? 1);
@@ -57,6 +63,7 @@ const runBunScript = (name: string, ...extraArgs: string[]): Promise<void> => {
         resolve();
       }
     });
+
     proc.on('error', (err) => {
       log.toolSpawnFailed(name, err);
       reject(err);

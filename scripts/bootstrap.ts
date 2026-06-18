@@ -5,7 +5,7 @@ import { env } from '@generated/env';
 const SW_DISMISS_KEY = 'sw_update_dismissed';
 const SW_DISMISS_DURATION = 24 * 60 * 60 * 1000;
 
-const showBootstrapError = (_message: string): void => {
+const showBootstrapError = (_message: string) => {
   const style = document.createElement('style');
   style.id = 'bootstrap-error-style';
   style.textContent = `
@@ -36,32 +36,39 @@ const showBootstrapError = (_message: string): void => {
 const isUpdateRecentlyDismissed = (): boolean => {
   try {
     const dismissed = localStorage.getItem(SW_DISMISS_KEY);
+
     if (!dismissed) return false;
+
     const timestamp = parseInt(dismissed, 10);
+
     if (Number.isNaN(timestamp)) return false;
+
     return Date.now() - timestamp < SW_DISMISS_DURATION;
   } catch {
     return false;
   }
 };
 
-const dismissUpdate = (): void => {
+const dismissUpdate = () => {
   try {
     localStorage.setItem(SW_DISMISS_KEY, String(Date.now()));
   } catch {}
 };
 
-const showUpdateNotification = (registration: ServiceWorkerRegistration): void => {
+const showUpdateNotification = (registration: ServiceWorkerRegistration) => {
   if (!globalThis.Alpine) return;
+
   if (isUpdateRecentlyDismissed()) return;
 
   const currentStore = globalThis.Alpine.store('app') as Record<string, unknown> | undefined;
+
   globalThis.Alpine.store('app', {
     ...(currentStore ?? {}),
     swUpdateAvailable: true,
   });
 
   const banner = document.createElement('div');
+
   banner.className = 'fixed inset-0 z-[9999] flex items-center justify-center bg-slate-950/80 backdrop-blur-sm';
   banner.innerHTML = `
     <div class="bg-slate-900 border border-white/10 rounded-2xl p-6 max-w-md mx-4 shadow-2xl">
@@ -82,20 +89,22 @@ const showUpdateNotification = (registration: ServiceWorkerRegistration): void =
 
   banner.querySelector('#sw-reload-btn')?.addEventListener('click', () => {
     registration.waiting?.postMessage({ type: 'SKIP_WAITING' });
+
     window.location.reload();
   });
-
   banner.querySelector('#sw-dismiss-btn')?.addEventListener('click', () => {
     dismissUpdate();
+
     banner.remove();
   });
 };
 
-const registerServiceWorker = (): void => {
+const registerServiceWorker = () => {
   if (!env.IS_PROD || !('serviceWorker' in navigator)) return;
 
   navigator.serviceWorker.register(`${env.BASE_PATH}service-worker.js`).catch((error: unknown) => {
     const message = error instanceof Error ? error.message : String(error);
+
     console.warn('Warning: Service worker registration failed —', message);
   });
 
@@ -120,34 +129,36 @@ const registerServiceWorker = (): void => {
 
 async function bootstrap() {
   try {
-    const [cspModule, Collapse, Focus, fonts] = await Promise.all([
+    const [cspModule, plugins, fonts] = await Promise.all([
       import('@alpinejs/csp').then((m) => m.default),
-      import('@alpinejs/collapse').then((m) => m.default),
-      import('@alpinejs/focus').then((m) => m.default),
+      Promise.all([
+        import('@alpinejs/collapse').then((m) => m.default),
+        import('@alpinejs/focus').then((m) => m.default),
+      ]),
       import('@i18n/fonts/fonts'),
     ]);
-    const Alpine = cspModule;
 
-    globalThis.Alpine = Alpine;
-    Alpine.plugin(Collapse);
-    Alpine.plugin(Focus);
+    Alpine = cspModule;
 
-    await import('./shared/nav/navbar');
+    for (const plugin of plugins) {
+      Alpine.plugin(plugin);
+    }
 
-    if (import.meta.env.SINGLE_LOCALE) {
-      Alpine.store('i18n', {
-        current: window.__SERVER_LOCALE__ ?? 'en-US',
-        languages: [],
-        change: () => {},
-      });
-    } else {
-      const [{ registerI18nStore }] = await Promise.all([import('@i18n/runtime/store')]);
-      registerI18nStore();
+    const states = await Promise.all([import('../shared/nav/navbar')]);
+
+    for (const state of states) {
+      Alpine[state.type](state.name, state.value);
+    }
+
+    if (!import.meta.env.SINGLE_LOCALE) {
+      const i18nStore = await import('@i18n/runtime/store');
+
+      Alpine.store(i18nStore.name, i18nStore.value);
 
       const { i18next, initIntl } = await import('@i18n/runtime/runtime');
+
       if (!i18next.isInitialized) {
-        const locale = window.__SAVED_LOCALE__ || window.__SERVER_LOCALE__;
-        await initIntl(locale);
+        await initIntl(window.__SAVED_LOCALE__ || window.__SERVER_LOCALE__);
       }
     }
 
@@ -160,9 +171,11 @@ async function bootstrap() {
     registerServiceWorker();
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : String(error);
+
     console.warn('Warning: Bootstrap failed —', message);
+
     showBootstrapError(message);
   }
 }
 
-void bootstrap();
+bootstrap();
