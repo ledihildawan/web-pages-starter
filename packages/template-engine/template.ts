@@ -682,6 +682,25 @@ export const createTemplateParams = (
     return data;
   })();
 
+  const domains = [
+    ...((globalData.preconnect as Array<{ href: string }>) ?? []).map((h) => h.href),
+    ...((pageData?.preconnect as Array<{ href: string }>) ?? []).map((h) => h.href),
+  ];
+
+  const csp = [
+    "default-src 'self'",
+    `script-src 'self' 'nonce-${cspNonce}'`,
+    `style-src 'self' 'nonce-${cspNonce}' 'unsafe-inline'`,
+    `img-src 'self' data:${domains.map((d) => ` ${d}`).join('')}`,
+    "font-src 'self' data:",
+    "connect-src 'self'",
+    "base-uri 'self'",
+    "form-action 'self'",
+    "object-src 'none'",
+    "frame-src 'none'",
+    "worker-src 'self'",
+  ].join('; ');
+
   return {
     ...params,
     currentYear: new Date().getFullYear(),
@@ -692,6 +711,7 @@ export const createTemplateParams = (
     LOCALE_CODES,
     clientI18nScript,
     csp_nonce: cspNonce,
+    csp,
     page_id: pageId,
     route,
     global: globalData,

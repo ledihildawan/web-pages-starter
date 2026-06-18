@@ -44,7 +44,7 @@
     <meta name="theme-color" content="{{ theme_color }}" media="(prefers-color-scheme: dark)">
     <meta name="msapplication-TileColor" content="{{ ms_tile_color }}">
 
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'nonce-{{ csp_nonce }}'; style-src 'self' 'nonce-{{ csp_nonce }}' 'unsafe-inline'; img-src 'self' data: https://flagcdn.com; font-src 'self' data:; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; frame-src 'none'; worker-src 'self'">
+    <meta http-equiv="Content-Security-Policy" content="{{ csp }}">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
 
     <link rel="manifest" href="{{ manifest_path }}">
@@ -71,6 +71,14 @@
     {% endfor %}
 
     {% for host in preconnect %}
+      <link rel="preconnect" href="{{ host.href }}"{% if host.crossorigin %} crossorigin{% endif %}>
+    {% endfor %}
+
+    {% for href in page.dns_prefetch or [] %}
+      <link rel="dns-prefetch" href="{{ href }}">
+    {% endfor %}
+
+    {% for host in page.preconnect or [] %}
       <link rel="preconnect" href="{{ host.href }}"{% if host.crossorigin %} crossorigin{% endif %}>
     {% endfor %}
 
