@@ -1,5 +1,6 @@
 import type { I18nPages } from '@generated/i18n';
 import type { LocaleCode } from '@i18n/data/locales';
+import type { BrowserEnvType } from '@utils/env';
 import type { Alpine as AlpineType } from 'alpinejs';
 
 declare global {
@@ -19,9 +20,7 @@ declare global {
     };
   }
 
-  interface ImportMetaEnv {
-    BASE_PATH: string;
-    STAGE: string;
+  interface ImportMetaEnv extends BrowserEnvType {
     SINGLE_LOCALE: boolean;
     DEV: boolean;
     PROD: boolean;

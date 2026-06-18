@@ -24,7 +24,7 @@ const ENV_DEFAULTS = {
 
 export const schemaKeys = Object.keys(ENV_DEFAULTS) as readonly string[];
 
-type TypedEnv = typeof ENV_DEFAULTS & {
+export type TypedEnv = typeof ENV_DEFAULTS & {
   IS_PROD: boolean;
 };
 
@@ -128,4 +128,8 @@ export const env: TypedEnv = {
 
 const BROWSER_ENV_KEYS = ['BASE_PATH', 'STAGE'] as const;
 
-export const browserEnv = Object.fromEntries(BROWSER_ENV_KEYS.map((k) => [k, env[k as keyof typeof env]]));
+export type BrowserEnvType = Pick<TypedEnv, (typeof BROWSER_ENV_KEYS)[number]>;
+
+export const browserEnv = Object.fromEntries(
+  BROWSER_ENV_KEYS.map((k) => [k, env[k as keyof typeof env]]),
+) as BrowserEnvType;
