@@ -9,9 +9,9 @@ import ngrok from '@ngrok/ngrok';
 import { getErrorPageSlugs, getRootPageSlug } from '@page-system';
 import { resolveRoot } from '@utils/common';
 import inquirer from 'inquirer';
-import { createStaticApp, getPageNames, loadHtmlCache } from './lib/hono-server';
-import { log } from './lib/logger';
-import { createServer, wrapMainError } from './lib/signal-handler';
+import { createStaticApp, getPageNames, loadHtmlCache } from '../lib/hono-server';
+import { log } from '../lib/logger';
+import { createServer, wrapMainError } from '../lib/signal-handler';
 
 const PORT = env.PORT;
 const HOST = env.HOST;

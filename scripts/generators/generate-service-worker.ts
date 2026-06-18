@@ -1,8 +1,8 @@
 import { i18nConfig } from '@config/i18n';
 import { getErrorPageSlugs, getRootPageSlug, getSystemPageSlug } from '@page-system';
 import { resolveRoot } from '@utils/common';
-import { logBox } from './lib/logger';
-import { writeFilePath } from './lib/write-file';
+import { logBox } from '../lib/logger';
+import { writeFilePath } from '../lib/write-file';
 
 const OUTPUT = resolveRoot('public', 'service-worker.js');
 

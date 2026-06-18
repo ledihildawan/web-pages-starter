@@ -2,8 +2,8 @@ import { i18nConfig } from '@config/i18n';
 import { env } from '@generated/env';
 import { resolveRoot } from '@utils/common';
 import { loadGlobalData } from '@utils/json5';
-import { logBox } from './lib/logger';
-import { writeFilePath } from './lib/write-file';
+import { logBox } from '../lib/logger';
+import { writeFilePath } from '../lib/write-file';
 
 const OUTPUT_PUBLIC = resolveRoot('public', 'manifest.json');
 const OUTPUT_DIST = resolveRoot('dist', 'manifest.json');

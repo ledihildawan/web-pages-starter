@@ -5,8 +5,8 @@ import process from 'node:process';
 import { env } from '@generated/env';
 import inquirer from 'inquirer';
 import { DOMParser } from 'linkedom';
-import { log, logBox } from './lib/logger';
-import { setupSigintHandler, wrapMainError } from './lib/signal-handler';
+import { log, logBox } from '../lib/logger';
+import { setupSigintHandler, wrapMainError } from '../lib/signal-handler';
 
 const OUTPUT_DIR = env.LIGHTHOUSE_OUTPUT_DIR;
 
@@ -217,7 +217,7 @@ security, page speed, and how well AI assistants can understand your site.
 
 Usage:
   bun run cli → Lighthouse (interactive)
-  bun ./scripts/lighthouse.ts [options]
+  bun ./scripts/cli/lighthouse.ts [options]
 
 Options:
   --mobile        Use mobile form factor
@@ -241,9 +241,9 @@ Categories:
 
 Examples:
   bun run cli                                    Interactive mode
-  bun ./scripts/lighthouse.ts --mobile            Mobile accessibility audit
-  bun ./scripts/lighthouse.ts --both --no-throttle Full audit real-world results
-  bun ./scripts/lighthouse.ts --url /about        Audit specific page
+  bun ./scripts/cli/lighthouse.ts --mobile            Mobile accessibility audit
+  bun ./scripts/cli/lighthouse.ts --both --no-throttle Full audit real-world results
+  bun ./scripts/cli/lighthouse.ts --url /about        Audit specific page
 `);
     process.exit(0);
   }

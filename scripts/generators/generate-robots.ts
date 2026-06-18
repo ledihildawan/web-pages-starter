@@ -2,8 +2,8 @@ import { i18nConfig } from '@config/i18n';
 import { env } from '@generated/env';
 import { getErrorPageSlugs } from '@page-system';
 import { resolveRoot } from '@utils/common';
-import { logBox } from './lib/logger';
-import { writeFilePath } from './lib/write-file';
+import { logBox } from '../lib/logger';
+import { writeFilePath } from '../lib/write-file';
 
 const OUTPUT_PUBLIC = resolveRoot('public', 'robots.txt');
 const OUTPUT_DIST = resolveRoot('dist', 'robots.txt');

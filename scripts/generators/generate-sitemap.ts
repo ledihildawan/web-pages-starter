@@ -4,8 +4,8 @@ import { LOCALE_CODES } from '@generated/active-locales-data';
 import { env } from '@generated/env';
 import { getErrorPageSlugs, getRootPageSlug, scanPages } from '@page-system';
 import { resolveRoot } from '@utils/common';
-import { log, logBox } from './lib/logger';
-import { writeFilePath } from './lib/write-file';
+import { log, logBox } from '../lib/logger';
+import { writeFilePath } from '../lib/write-file';
 
 const cliArgs = process.argv.slice(2);
 const distOnly = cliArgs.includes('--dist-only');

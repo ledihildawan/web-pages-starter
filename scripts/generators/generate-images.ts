@@ -4,7 +4,7 @@ import { env } from '@generated/env';
 import { generatedHeader, writeFilePath } from '@scripts/lib/write-file';
 import { resolveRoot } from '@utils/common';
 import sharp from 'sharp';
-import { log, logBox } from './lib/logger';
+import { log, logBox } from '../lib/logger';
 
 const SOURCE_DIR = resolveRoot('assets', 'images');
 const OUTPUT_DIR = resolveRoot('public', 'assets', 'images');
@@ -137,7 +137,7 @@ async function main(): Promise<void> {
     }
   }
 
-  const manifestContent = `${generatedHeader('scripts/generate-images.ts')}
+  const manifestContent = `${generatedHeader('scripts/generators/generate-images.ts')}
 
 export interface ImageEntry {
   width: number;

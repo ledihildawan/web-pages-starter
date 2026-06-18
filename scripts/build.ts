@@ -39,11 +39,11 @@ if (fs.existsSync(distPath)) {
 }
 
 const generators = [
-  'scripts/generate-images.ts',
-  'scripts/generate-sitemap.ts',
-  'scripts/generate-manifest.ts',
-  'scripts/generate-robots.ts',
-  'scripts/generate-service-worker.ts',
+  'scripts/generators/generate-images.ts',
+  'scripts/generators/generate-sitemap.ts',
+  'scripts/generators/generate-manifest.ts',
+  'scripts/generators/generate-robots.ts',
+  'scripts/generators/generate-service-worker.ts',
 ];
 
 for (const gen of generators) {

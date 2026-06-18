@@ -11,12 +11,12 @@
     "bun": ">=1.3.14"
   },
   "scripts": {
-    "dev": "bun ./packages/env/cli/generate-env.ts && bun ./packages/i18n/cli/generate-active-locales.ts && bun ./packages/page-system/cli/sync-system-pages.ts && bun ./scripts/clean-cache.ts && bun ./scripts/fetch-exchange-rates.ts && bun ./scripts/generate-fonts-css.ts && bun ./packages/i18n/cli/sync-locales.ts && bun ./packages/i18n/cli/generate-types.ts && bun ./scripts/generate-images.ts && concurrently \"bun ./packages/i18n/cli/watch.ts\" \"rsbuild dev\"",
-    "build": "bun ./packages/env/cli/generate-env.ts && bun ./packages/i18n/cli/generate-active-locales.ts && bun ./packages/page-system/cli/sync-system-pages.ts && bun ./scripts/clean-cache.ts && bun ./scripts/fetch-exchange-rates.ts && bun ./scripts/generate-fonts-css.ts && bun ./packages/i18n/cli/sync-locales.ts && bun ./packages/i18n/cli/generate-types.ts && bun ./scripts/build.ts && bun ./scripts/subset-fonts.ts && bun ./scripts/compress.ts",
-    "preview": "bun ./scripts/preview.ts",
+    "dev": "bun ./packages/env/cli/generate-env.ts && bun ./packages/i18n/cli/generate-active-locales.ts && bun ./packages/page-system/cli/sync-system-pages.ts && bun ./scripts/clean-cache.ts && bun ./scripts/fetch-exchange-rates.ts && bun ./scripts/generators/generate-fonts-css.ts && bun ./packages/i18n/cli/sync-locales.ts && bun ./packages/i18n/cli/generate-types.ts && bun ./scripts/generators/generate-images.ts && concurrently \"bun ./packages/i18n/cli/watch.ts\" \"rsbuild dev\"",
+    "build": "bun ./packages/env/cli/generate-env.ts && bun ./packages/i18n/cli/generate-active-locales.ts && bun ./packages/page-system/cli/sync-system-pages.ts && bun ./scripts/clean-cache.ts && bun ./scripts/fetch-exchange-rates.ts && bun ./scripts/generators/generate-fonts-css.ts && bun ./packages/i18n/cli/sync-locales.ts && bun ./packages/i18n/cli/generate-types.ts && bun ./scripts/build.ts && bun ./scripts/subset-fonts.ts && bun ./scripts/compress.ts",
+    "preview": "bun ./scripts/cli/preview.ts",
     "serve": "bun ./scripts/serve.ts",
     "clean:cache": "bun ./scripts/clean-cache.ts",
-    "cli": "bun ./scripts/cli.ts",
+    "cli": "bun ./scripts/cli/menu.ts",
     "typecheck": "bunx tsc --noEmit",
     "test": "rstest",
     "prepare": "husky"
