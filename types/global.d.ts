@@ -3,6 +3,19 @@ import type { I18nPages } from '@generated/i18n';
 import type { LocaleCode } from '@i18n/data/locales';
 import type { Alpine as AlpineType } from 'alpinejs';
 
+declare module 'alpinejs' {
+  namespace Alpine {
+    interface Stores {
+      [key: string | symbol]: unknown;
+      i18n: {
+        current: string;
+        languages: Array<{ code: string; label: string; flag: string }>;
+        change: (code: string) => void;
+      };
+    }
+  }
+}
+
 declare global {
   var Alpine: AlpineType;
 
