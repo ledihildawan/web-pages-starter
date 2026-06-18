@@ -3,7 +3,7 @@ import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
 import { resolveRoot } from '@config/paths';
 import { getActiveLocaleCodes } from '@i18n/engine/active-locales';
-import { isSystemPageSlug, SYSTEM_PAGE_IDS, type SystemPageId } from '@page-engine';
+import { isSystemPageSlug, SYSTEM_PAGE_IDS, type SystemPageId } from '@page-system';
 import { log } from '@scripts/lib/logger';
 import { romanize } from '@scripts/lib/romanize';
 
@@ -12,7 +12,7 @@ const inputPath = args[0];
 
 if (!inputPath) {
   log.error('Error: Please provide a page path.');
-  log.info('Usage: bun ./packages/page-engine/cli/generate-page.ts <page-path>');
+  log.info('Usage: bun ./packages/page-system/cli/generate-page.ts <page-path>');
   log.info('');
   log.info('Examples:');
   log.info('  bun generate-page.ts pricing                    → pages/pricing/');

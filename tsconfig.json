@@ -31,8 +31,10 @@
       "@generated/*": ["./generated/*"],
       "@i18n": ["./packages/i18n/index.ts"],
       "@i18n/*": ["./packages/i18n/*"],
-      "@page-engine": ["./packages/page-engine/index.ts"],
-      "@page-engine/*": ["./packages/page-engine/*"],
+      "@template-engine": ["./packages/template-engine/index.ts"],
+      "@template-engine/*": ["./packages/template-engine/*"],
+      "@page-system": ["./packages/page-system/index.ts"],
+      "@page-system/*": ["./packages/page-system/*"],
       "@web-pages-starter/env": ["./packages/env/index.ts"],
       "@web-pages-starter/env/*": ["./packages/env/*"],
       "@scripts/*": ["./scripts/*"]

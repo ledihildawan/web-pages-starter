@@ -52,7 +52,7 @@ import { cardinal as idCardinal, ordinal as idOrdinal } from '@i18n/strategies/i
 import { cardinal as jaCardinal, ordinal as jaOrdinal } from '@i18n/strategies/ja';
 import { cardinal as zhCardinal } from '@i18n/strategies/zh';
 import { loadSharedLocales } from '@i18n/utils';
-import { getRootPageSlug } from '@page-engine';
+import { getRootPageSlug } from '@page-system';
 import { getValueByPath } from '@utils/common';
 import { loadGlobalData, readJSON5 } from '@utils/json5';
 import type { DateValue, JsonData } from '@utils/types';

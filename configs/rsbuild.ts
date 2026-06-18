@@ -3,10 +3,10 @@ import path from 'node:path';
 import { env, schemaKeys } from '@config/env';
 import { i18nConfig } from '@config/i18n';
 import { getActiveLocaleCodes, LOCALE_STORAGE_KEY } from '@i18n';
-import { getRootPageSlug, getSystemPageSlug, scanPages } from '@page-engine';
-import { generateDynamicEntries } from '@page-engine/dynamic-routes';
-import { createTemplateParams } from '@page-engine/template';
+import { getRootPageSlug, getSystemPageSlug, scanPages } from '@page-system';
+import { generateDynamicEntries } from '@page-system/dynamic-routes';
 import { defineConfig, type RsbuildPlugin } from '@rsbuild/core';
+import { createTemplateParams } from '@template-engine';
 import { minify } from 'html-minifier-terser';
 import { html as beautifyHtml } from 'js-beautify';
 import { ROOT_PATH, resolveRoot } from './paths';
@@ -205,7 +205,8 @@ export default defineConfig({
       '@constants': resolveRoot('constants.ts'),
       '@generated': resolveRoot('generated'),
       '@i18n': resolveRoot('packages', 'i18n'),
-      '@page-engine': resolveRoot('packages', 'page-engine'),
+      '@template-engine': resolveRoot('packages', 'template-engine'),
+      '@page-system': resolveRoot('packages', 'page-system'),
       '@utils': resolveRoot('utils'),
       '@web-pages-starter/env': resolveRoot('packages', 'env'),
     },
@@ -320,7 +321,7 @@ export default defineConfig({
             enforce: 'pre',
             use: [
               {
-                loader: resolveRoot('packages', 'page-engine', 'page-inject-loader.cjs'),
+                loader: resolveRoot('packages', 'page-system', 'page-inject-loader.cjs'),
                 options: { bootstrap: resolveRoot('bootstrap.ts') },
               },
             ],

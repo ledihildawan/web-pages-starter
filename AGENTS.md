@@ -43,8 +43,8 @@ Requires [Python 3](https://python.org) with `fonttools` + `brotli` (`pip instal
 - No comments unless requested
 - No deprecated code — remove entirely
 - Nunjucks string concat: `~` (never `+`)
-- Import paths: `@i18n`, `@page-engine`, `@config/*`, `@scripts/*`, `@utils/*`, `@generated/*` aliases used everywhere (including the rsbuild config chain). `rsbuild.config.ts` is a thin jiti wrapper that loads `configs/rsbuild.ts` with tsconfig path aliases — real config lives in `configs/rsbuild.ts`.
-- i18n CLI scripts live in `packages/i18n/cli/` (not `scripts/`). Page-engine CLI lives in `packages/page-engine/cli/`.
+- Import paths: `@i18n`, `@template-engine`, `@page-system`, `@config/*`, `@scripts/*`, `@utils/*`, `@generated/*` aliases used everywhere (including the rsbuild config chain). `rsbuild.config.ts` is a thin jiti wrapper that loads `configs/rsbuild.ts` with tsconfig path aliases — real config lives in `configs/rsbuild.ts`.
+- i18n CLI scripts live in `packages/i18n/cli/` (not `scripts/`). Page-system CLI lives in `packages/page-system/cli/`.
 
 ## Build Modes
 
@@ -121,7 +121,7 @@ pages/home/
 - No `script.ts` → uses `shared/page-entry.ts` as fallback entry
 - No `style.css` → no page-specific CSS chunk
 - 0-byte `style.css` → skipped from build entries
-- Bootstrap + CSS auto-injected by `packages/page-engine/page-inject-loader.cjs` (no manual imports needed)
+- Bootstrap + CSS auto-injected by `packages/page-system/page-inject-loader.cjs` (no manual imports needed)
 
 ### Entry system
 
@@ -147,11 +147,12 @@ pages/home/
 ## Packages
 
 - `packages/env/` — env engine (readEnv, server loader). No Zod dependency. Sync readEnv.
-- `packages/i18n/` — i18n engine (data, formatting, runtime, strategies, fonts). Pure engine — ZERO imports from `configs/` or `page-engine` in runtime.
-- `packages/page-engine/` — page system (SSR template rendering, system pages, scanner, dynamic routes, CLI, page-inject-loader). Depends on `@i18n` (one-way only).
+- `packages/i18n/` — i18n engine (data, formatting, runtime, strategies, fonts). Pure engine — ZERO imports from `configs/` or `page-system` in runtime.
+- `packages/template-engine/` — SSR template rendering (`createTemplateParams`, `scanSharedLocales`). Depends on `@i18n` + `@page-system`.
+  - `template.ts` — SSR rendering: `createTemplateParams()`, `generateClientI18nScript()`, `scanSharedLocales()`
+- `packages/page-system/` — page system (scanner, system pages, dynamic routes, CLI, page-inject-loader). Standalone.
   - `system-pages.ts` — root page, system page IDs, locale-dependent slugs (`ROOT_PAGE`, `SYSTEM_PAGE_IDS`, `SYSTEM_PAGE_SLUGS`)
   - `scanner.ts` — `scanPages()`, `isGroup()`, `isSlugDir()` (jiti-safe)
-  - `template.ts` — SSR rendering: `createTemplateParams()`, `generateClientI18nScript()`, `scanSharedLocales()`
   - `dynamic-routes.ts` — `generateDynamicEntries()` — [slug] discovery from `data.json5`
   - `page-inject-loader.cjs` — auto-injects bootstrap + page CSS into entry files
   - `cli/` — `sync-system-pages.ts`, `generate-page.ts`, `delete-page.ts`
@@ -184,7 +185,7 @@ Biome is configured to skip `generated/**` (formatter + linter disabled).
 - **File mods**: use `bun` or script in `temp/` — avoid PowerShell
 - **Never add dependency** without user approval
 - **After changing `i18nConfig`**: re-run `bun run dev` or `bun run build` to regenerate active locale data, font CSS, and exchange rates
-- **Adding a locale to `LOCALES`**: also add entries to `SYSTEM_PAGE_SLUGS` in `packages/page-engine/system-pages.ts` (getSystemPageSlug warns in dev if missing)
+- **Adding a locale to `LOCALES`**: also add entries to `SYSTEM_PAGE_SLUGS` in `packages/page-system/system-pages.ts` (getSystemPageSlug warns in dev if missing)
 - Husky pre-commit: Biome → typecheck → test (all must pass)
 
 ## CI Fixes Flow

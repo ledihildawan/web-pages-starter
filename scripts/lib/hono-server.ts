@@ -2,7 +2,7 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
 import { serveStatic } from '@hono/node-server/serve-static';
-import { getSystemPageSlug } from '@page-engine';
+import { getSystemPageSlug } from '@page-system';
 import { Hono } from 'hono';
 import { compress } from 'hono/compress';
 import { log } from './logger';

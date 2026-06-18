@@ -7,7 +7,7 @@ import { i18nConfig } from '@config/i18n';
 import { ROOT_PATH, resolveRoot } from '@config/paths';
 import type { serve } from '@hono/node-server';
 import ngrok from '@ngrok/ngrok';
-import { getErrorPageSlugs, getRootPageSlug } from '@page-engine';
+import { getErrorPageSlugs, getRootPageSlug } from '@page-system';
 import inquirer from 'inquirer';
 import { createStaticApp, getPageNames, loadHtmlCache } from './lib/hono-server';
 import { log } from './lib/logger';

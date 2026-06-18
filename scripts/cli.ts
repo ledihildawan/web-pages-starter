@@ -10,7 +10,7 @@ const runTool = (name: string, args: string[] = []): Promise<void> => {
   return new Promise((resolve, reject) => {
     const candidates = [
       path.join(__dirname, `${name}.ts`),
-      resolveRoot('packages', 'page-engine', 'cli', `${name}.ts`),
+      resolveRoot('packages', 'page-system', 'cli', `${name}.ts`),
       resolveRoot('packages', 'i18n', 'cli', `${name}.ts`),
     ];
     const toolPath = candidates.find((p) => fs.existsSync(p));

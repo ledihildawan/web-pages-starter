@@ -1,5 +1,5 @@
 {
-  "name": "@web-pages-starter/page-engine",
+  "name": "@web-pages-starter/page-system",
   "version": "1.0.0",
   "private": true,
   "type": "module",

@@ -1,6 +1,6 @@
 import { i18nConfig } from '@config/i18n';
 import { resolveRoot } from '@config/paths';
-import { getErrorPageSlugs, getRootPageSlug, getSystemPageSlug } from '@page-engine';
+import { getErrorPageSlugs, getRootPageSlug, getSystemPageSlug } from '@page-system';
 import { logBox } from './lib/logger';
 import { writeFilePath } from './lib/write-file';
 

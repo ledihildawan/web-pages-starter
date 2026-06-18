@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { resolveRoot } from '@config/paths';
-import { isSlugDir } from '@page-engine/scanner';
+import { isSlugDir } from '@page-system/scanner';
 import { readJSON5 } from '@utils/json5';
 
 interface DynamicEntry {

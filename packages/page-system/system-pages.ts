@@ -994,7 +994,7 @@ export function getSystemPageSlug(pageId: string, locale: string): string {
     if (!env.IS_PROD && !warnedMissing.has(key)) {
       warnedMissing.add(key);
       console.warn(
-        `[pages] No system page slug for "${pageId}" in locale "${locale}". Add an entry to SYSTEM_PAGE_SLUGS in packages/page-engine/system-pages.ts. Falling back to en-US.`,
+        `[pages] No system page slug for "${pageId}" in locale "${locale}". Add an entry to SYSTEM_PAGE_SLUGS in packages/page-system/system-pages.ts. Falling back to en-US.`,
       );
     }
     return entry['en-US'] ?? pageId;

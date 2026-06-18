@@ -3,7 +3,7 @@ import { env } from '@config/env';
 import { i18nConfig } from '@config/i18n';
 import { ROOT_PATH, resolveRoot } from '@config/paths';
 import { LOCALE_CODES } from '@generated/active-locales-data';
-import { getErrorPageSlugs, getRootPageSlug, scanPages } from '@page-engine';
+import { getErrorPageSlugs, getRootPageSlug, scanPages } from '@page-system';
 import { log, logBox } from './lib/logger';
 import { writeFilePath } from './lib/write-file';
 

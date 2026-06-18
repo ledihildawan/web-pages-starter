@@ -3,7 +3,7 @@ import process from 'node:process';
 import { env } from '@config/env';
 import { i18nConfig } from '@config/i18n';
 import { resolveRoot } from '@config/paths';
-import { getErrorPageSlugs, getRootPageSlug } from '@page-engine';
+import { getErrorPageSlugs, getRootPageSlug } from '@page-system';
 import { createStaticApp, getPageNames, loadHtmlCache } from './lib/hono-server';
 import { log } from './lib/logger';
 import { createServer, setupSigintHandler } from './lib/signal-handler';
