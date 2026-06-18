@@ -403,7 +403,7 @@ generate-env → sync-system-pages → clean:cache → fetch:rates → generate-
 | `import.meta.env` | `source.define` replaces `import.meta.env` with full env object (browser-safe keys only). `PRIVATE_` prefix in `.env` excludes secrets from browser bundle |
 | Output paths | `dist/assets/{scripts,styles,images,fonts}` — organized by asset type |
 | Static copy | `output.copy` moves `public/` static files (favicon, sw.js, manifest, robots, i18n bundles) to `dist/` |
-| Path aliases | Single source: `tsconfig.json` paths → `utils/alias.ts` auto-derives bundler format for jiti + Rsbuild. `@i18n`, `@template-engine`, `@page-system`, `@config/*`, `@scripts/*`, `@utils/*`, `@generated/*`. Edit `tsconfig.json` only — all consumers auto-sync |
+| Path aliases | Single source: `tsconfig.json` paths → `utils/paths.ts` auto-derives bundler format for jiti + Rsbuild. `@i18n`, `@template-engine`, `@page-system`, `@config/*`, `@scripts/*`, `@utils/*`, `@generated/*`. Edit `tsconfig.json` only — all consumers auto-sync |
 | Nunjucks loader | `simple-nunjucks-loader` with search paths: `pages/`, `layouts/`, `.` (root); `assetsPaths: assets/` |
 | Pre-entries | Bootstrap + main.css auto-injected via `page-inject-loader.cjs` (not `preEntry`) |
 
@@ -449,7 +449,7 @@ Ideal for Lighthouse audits, mobile testing, or sharing WIP via a public URL.
 | `biome.json` | Linting (Tailwind class sorting, organize imports) + formatting (2-space indent, single quotes). Overrides: `main.css` disables `noDescendingSpecificity`/`noImportantStyles`; `common.ts` disables `noExplicitAny` |
 | `.vscode/settings.json` | Editor config: Biome formatter, Tailwind IntelliSense, i18n-ally, Peacock color |
 | `.vscode/extensions.json` | Workspace extension recommendations (12 extensions) |
-| `tsconfig.json` | Strict mode, ESNext, path aliases (single source of truth — `utils/alias.ts` auto-derives for jiti + bundler) |
+| `tsconfig.json` | Strict mode, ESNext, path aliases (single source of truth — `utils/paths.ts` auto-derives for jiti + bundler) |
 
 ### VS Code extensions
 
@@ -518,7 +518,7 @@ Config: `.husky/pre-commit`, `.lintstagedrc`.
 
 - No comments unless explicitly requested
 - No deprecated or backward-compat code — remove entirely
-- Import paths: `tsconfig.json` is single source of truth → `utils/alias.ts` auto-derives for jiti + bundler. Aliases: `@i18n`, `@template-engine`, `@page-system`, `@config/*`, `@scripts/*`, `@utils/*`, `@generated/*`
+- Import paths: `tsconfig.json` is single source of truth → `utils/paths.ts` auto-derives for jiti + bundler. Aliases: `@i18n`, `@template-engine`, `@page-system`, `@config/*`, `@scripts/*`, `@utils/*`, `@generated/*`
 - Biome for lint + format (not Prettier) — config in `biome.json`
 - Pre-commit chain: Husky + lint-staged (Biome) + typecheck + test (`&&`)
 

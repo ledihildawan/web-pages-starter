@@ -43,7 +43,7 @@ Requires [Python 3](https://python.org) with `fonttools` + `brotli` (`pip instal
 - No comments unless requested
 - No deprecated code — remove entirely
 - Nunjucks string concat: `~` (never `+`)
-- Import paths: `@i18n`, `@template-engine`, `@page-system`, `@config/*`, `@scripts/*`, `@utils/*`, `@generated/*` aliases used everywhere (including the rsbuild config chain). `tsconfig.json` is the single source of truth for path aliases — `utils/alias.ts` reads them and exports bundler-format aliases, auto-deriving for jiti + bundler. `rsbuild.config.ts` is a thin jiti wrapper that loads `configs/rsbuild.ts` — real config lives in `configs/rsbuild.ts`. Env imports use `@generated/env` (not `@utils/env`); `@utils/*` still covers `common.ts`, `json5.ts`, `alias.ts`, etc.
+- Import paths: `@i18n`, `@template-engine`, `@page-system`, `@config/*`, `@scripts/*`, `@utils/*`, `@generated/*` aliases used everywhere (including the rsbuild config chain). `tsconfig.json` is the single source of truth for path aliases — `utils/paths.ts` reads them and exports bundler-format aliases, auto-deriving for jiti + bundler. `rsbuild.config.ts` is a thin jiti wrapper that loads `configs/rsbuild.ts` — real config lives in `configs/rsbuild.ts`. Env imports use `@generated/env` (not `@utils/env`); `@utils/*` still covers `common.ts`, `json5.ts`, `alias.ts`, etc.
 - i18n CLI scripts live in `packages/i18n/cli/` (not `scripts/`). Page-system CLI lives in `packages/page-system/cli/`. Env CLI lives in `packages/env/cli/`.
 
 ## Build Modes
@@ -140,8 +140,8 @@ pages/home/
 - `bunfig.toml` — `preload = ["./packages/env/preload.ts"]`
 - `.env` — general env vars shared across all stages. Required. Gitignored. `PRIVATE_` prefix = server-only (not exposed to browser). No prefix = browser-safe (public by default). Edit this file to add/change env vars — `packages/env/cli/generate-env.ts` auto-generates `generated/env.ts` from it
 - `.env.{stage}` — per-stage overrides. Active: `.env.dev`, `.env.prod`. Gitignored. Stage pipeline: `dev → qa → uat → preprod → prod`
-- `configs/rsbuild.ts` — Rsbuild build configuration (loaded via the jiti wrapper in `rsbuild.config.ts`). Includes splitChunks cacheGroups, resource hints plugin, page-inject-loader rule. Path aliases from `tsconfig.json` via `utils/alias.ts`.
-- `utils/alias.ts` — reads `tsconfig.json` paths, converts to bundler format. Single source of truth: edit `tsconfig.json` paths → jiti + bundler auto-sync.
+- `configs/rsbuild.ts` — Rsbuild build configuration (loaded via the jiti wrapper in `rsbuild.config.ts`). Includes splitChunks cacheGroups, resource hints plugin, page-inject-loader rule. Path aliases from `tsconfig.json` via `utils/paths.ts`.
+- `utils/paths.ts` — reads `tsconfig.json` paths, converts to bundler format. Single source of truth: edit `tsconfig.json` paths → jiti + bundler auto-sync.
 
 ## Packages
 
