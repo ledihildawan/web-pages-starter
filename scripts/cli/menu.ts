@@ -1,7 +1,7 @@
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
-import path from 'node:path';
 import { resolveRoot } from '@utils/common';
+import { find } from '@utils/paths';
 import inquirer from 'inquirer';
 import { log } from '../lib/logger';
 import { setupSigintHandler, wrapMainError } from '../lib/signal-handler';
@@ -9,14 +9,14 @@ import { setupSigintHandler, wrapMainError } from '../lib/signal-handler';
 const runTool = (name: string, args: string[] = []): Promise<void> => {
   return new Promise((resolve, reject) => {
     const candidates = [
-      path.join(__dirname, '..', `${name}.ts`),
-      path.join(__dirname, '..', 'generators', `${name}.ts`),
-      path.join(__dirname, '..', 'generators', `generate-${name}.ts`),
+      find('@scripts', `${name}.ts`),
+      find('@scripts', 'generators', `${name}.ts`),
+      find('@scripts', 'generators', `generate-${name}.ts`),
+      find('@i18n', 'cli', `${name}.ts`),
+      find('@page-system', 'cli', `${name}.ts`),
       resolveRoot('packages', 'env', 'cli', `${name}.ts`),
-      resolveRoot('packages', 'page-system', 'cli', `${name}.ts`),
-      resolveRoot('packages', 'i18n', 'cli', `${name}.ts`),
     ];
-    const toolPath = candidates.find((p) => fs.existsSync(p));
+    const toolPath = candidates.find((c): c is string => c !== null);
     if (!toolPath) {
       reject(new Error(`Tool "${name}" not found`));
       return;
