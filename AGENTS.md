@@ -43,7 +43,7 @@ Requires [Python 3](https://python.org) with `fonttools` + `brotli` (`pip instal
 - No comments unless requested
 - No deprecated code — remove entirely
 - Nunjucks string concat: `~` (never `+`)
-- Import paths: `@i18n`, `@template-engine`, `@page-system`, `@config/*`, `@scripts/*`, `@utils/*`, `@generated/*` aliases used everywhere (including the rsbuild config chain). `rsbuild.config.ts` is a thin jiti wrapper that loads `configs/rsbuild.ts` with tsconfig path aliases — real config lives in `configs/rsbuild.ts`.
+- Import paths: `@i18n`, `@template-engine`, `@page-system`, `@config/*`, `@scripts/*`, `@utils/*`, `@generated/*` aliases used everywhere (including the rsbuild config chain). `rsbuild.config.ts` is a thin jiti wrapper that loads `configs/rsbuild.ts` with tsconfig path aliases — real config lives in `configs/rsbuild.ts`. Env imports use `@generated/env` (not `@utils/env`); `@utils/*` still covers `common.ts`, `json5.ts`, etc.
 - i18n CLI scripts live in `packages/i18n/cli/` (not `scripts/`). Page-system CLI lives in `packages/page-system/cli/`.
 
 ## Build Modes
@@ -55,7 +55,7 @@ bun run build -- --debug   # skip JS/CSS minify
 bun run preview            # build (BUILD_PREVIEW=true) + serve via tunnel
 ```
 
-Build pipeline: `sync-system-pages → clean-cache → fetch-exchange-rates → generate-active-locales → generate-fonts-css → sync-locales → generate-types → build.ts → subset-fonts → compress`
+Build pipeline: `generate-env → sync-system-pages → clean-cache → fetch-exchange-rates → generate-active-locales → generate-fonts-css → sync-locales → generate-types → build.ts → subset-fonts → compress`
 
 ## Testing
 
@@ -135,12 +135,11 @@ pages/home/
 
 - `configs/i18n.ts` — default locale + active locales (`defineI18n`)
 - `configs/fonts.ts` — font stack config (`defineFontStack`). Font CSS imported via `bootstrap.ts` (not here directly)
-- `utils/env.ts` — env config: schema keys array + `readEnv()` (sync, no Zod on client). Manual type coercion for PORT (number), MINIFY/BUILD_PREVIEW/PRETTY_HTML (boolean). Defaults: `MINIFY=true`, `BUILD_PREVIEW=false`, `PRETTY_HTML=false`. All values from `.env` (general) + `.env.{stage}` (stage-specific). Stage pipeline: `dev → qa → uat → preprod → prod`
-- `utils/env.ts` — env engine: `readEnv(keys)` reads `process.env` (server) or `import.meta.env` (client via Rsbuild define). Sync — no top-level await. Server env file loading via `loadServerEnvFiles()` (co-located in same file)
+- `generated/env.ts` — fully generated env system: schema + engine + validation + singleton. Auto-generated from `.env` files by `scripts/generate-env.ts`. Reads `process.env` (server) or `import.meta.env` (browser). Runtime type validation with warnings. `PRIVATE_` prefix marks server-only keys (browser-safe by default). Stage pipeline: `dev → qa → uat → preprod → prod`
 - `shared/env-preload.ts` — Bun preload script (`bunfig.toml`), loads `.env` + `.env.{stage}` into `process.env` before any module runs
 - `bunfig.toml` — `preload = ["./shared/env-preload.ts"]`
-- `.env` — general defaults shared across all stages. Required. Real file gitignored, `.env.example` template git-tracked
-- `.env.{stage}` — per-stage overrides (stage-specific keys: `STAGE`, `NODE_ENV`, `SITE_URL`, `BASE_PATH`, optional secrets). Active: `.env.dev`, `.env.prod`. Templates: `.env.{stage}.example` (git-tracked). Real files gitignored. Stage pipeline: `dev → qa → uat → preprod → prod`
+- `.env` — general env vars shared across all stages. Required. Gitignored. `PRIVATE_` prefix = server-only (not exposed to browser). No prefix = browser-safe (public by default). Edit this file to add/change env vars — `scripts/generate-env.ts` auto-generates `generated/env.ts` from it
+- `.env.{stage}` — per-stage overrides. Active: `.env.dev`, `.env.prod`. Gitignored. Stage pipeline: `dev → qa → uat → preprod → prod`
 - `configs/rsbuild.ts` — Rsbuild build configuration (loaded via the jiti wrapper in `rsbuild.config.ts`). Includes splitChunks cacheGroups, resource hints plugin, page-inject-loader rule
 
 ## Packages
@@ -168,7 +167,8 @@ pages/home/
 
 ## Generated Files
 
-All 3 generated files are **tracked in git** (not gitignored):
+All 4 generated files are **tracked in git** (not gitignored):
+- `generated/env.ts` — auto-generated env system (schema + engine + validation). Regenerated from `.env` files by `scripts/generate-env.ts`
 - `generated/active-locales-data.ts` — filtered locale data (always uses `i18nConfig.locales`, no dev stub)
 - `generated/exchange-rates.ts` — currency rates (24h cache)
 - `generated/i18n.d.ts` — TypeScript key types from locale JSON

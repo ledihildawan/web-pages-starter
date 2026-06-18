@@ -17,11 +17,10 @@ Requires [Bun](https://bun.sh) `>= 1.3.14`.
 
 ```
 ├── configs/               # app configuration
-│   ├── env.ts             #   env config: schema keys + readEnv() (sync, no Zod on client) → typed env with defaults
 │   ├── i18n.ts            #   defaultLocale + active locales
 │   ├── fonts.ts           #   font stack config (CSS imported via bootstrap.ts)
 │   └── rsbuild.ts         #   Rsbuild build configuration (real config; rsbuild.config.ts is a jiti wrapper)
-├── utils/                 # shared utilities (flattened from packages/core) — common, env, json5, microtask-queue, types
+├── utils/                 # shared utilities — common (resolveRoot, getValueByPath), json5, microtask-queue, scheduler, types
 ├── types/                 # ambient type declarations (env.d.ts, global.d.ts, globals.d.ts)
 ├── data/                  # global site data
 │   ├── global.json5       #   site_name, seo, social, dns, preconnect
@@ -80,7 +79,7 @@ Requires [Bun](https://bun.sh) `>= 1.3.14`.
 │       └── cli/           #     sync-system-pages.ts, generate-page.ts, delete-page.ts
 ├── public/                # static assets (favicon, generated sw.js/manifest/robots/sitemap)
 │   └── assets/i18n/       #   pre-compiled i18n JSON bundles (generated)
-├── generated/             # auto-generated active-locales-data + exchange rates + i18n types (tracked in git; regenerated at build)
+├── generated/             # auto-generated: env.ts (env system), active-locales-data, exchange rates, i18n types, image-manifest (tracked in git; regenerated at build)
 ├── tests/                 # general DOM sanity check (rstest)
 ├── docs/                  # documentation
 ```
@@ -333,7 +332,7 @@ See [docs/i18n.md](docs/i18n.md#runtime) for detailed bootstrap flow.
 ### Development
 
 ```
-sync-system-pages → clean:cache → fetch:rates → generate-active-locales → generate-fonts-css → sync-locales → generate-types → [watch || rsbuild dev]
+generate-env → sync-system-pages → clean:cache → fetch:rates → generate-active-locales → generate-fonts-css → sync-locales → generate-types → [watch || rsbuild dev]
 ```
 
 - Rsbuild dev server on port 8888 with HMR
@@ -344,7 +343,7 @@ sync-system-pages → clean:cache → fetch:rates → generate-active-locales �
 ### Production
 
 ```
-sync-system-pages → clean:cache → fetch:rates → generate-active-locales → generate-fonts-css → sync-locales → generate-types → build.ts → subset-fonts → compress
+generate-env → sync-system-pages → clean:cache → fetch:rates → generate-active-locales → generate-fonts-css → sync-locales → generate-types → build.ts → subset-fonts → compress
 ```
 
 `build.ts` orchestrates the final steps with `NODE_ENV=production`:
@@ -357,6 +356,7 @@ sync-system-pages → clean:cache → fetch:rates → generate-active-locales �
 - **compress** — generates `.br` (Brotli) + `.gz` (Gzip) files for all text assets
 
 **Pre-build steps:**
+0. **generate-env** — regenerates `generated/env.ts` from `.env` files (schema + engine + runtime validation + singleton). Must run before any tool importing `@generated/env`
 1. **sync-system-pages** — renames ALL system page folders to match locale-dependent slugs from `SYSTEM_PAGE_SLUGS` when the default locale changes
 2. **clean-cache** — purges `node_modules/.cache`, `.cache`, `dist`, `public/assets/i18n`
 3. **fetch-exchange-rates** — pulls live rates from Frankfurter API (24h cache)
@@ -368,7 +368,7 @@ sync-system-pages → clean:cache → fetch:rates → generate-active-locales �
 7. **generate-sitemap** — generates `public/sitemap.xml` from pages and `SITE_URL`
 8. **generate-manifest** — generates `public/manifest.json` from `global.json5` + `i18nConfig`, uses `BASE_PATH` for `start_url` and `scope`
 9. **generate-robots** — generates `public/robots.txt` from `SITE_URL`
-10. **generate-sw** — generates `public/sw.js` dynamically with locale-specific error page URLs from `SYSTEM_PAGE_SLUGS` (cache version v5)
+10. **generate-service-worker** — generates `public/service-worker.js` dynamically with locale-specific error page URLs from `SYSTEM_PAGE_SLUGS`
 11. **rsbuild build** — Rsbuild production bundle with:
     - JS + CSS minification (Rspack)
     - HTML minification (`html-minifier-terser` — collapse, sort, minify inline CSS/JS, minify JSON-LD)
@@ -397,7 +397,7 @@ sync-system-pages → clean:cache → fetch:rates → generate-active-locales �
 | Root page as index | `pluginRootPageAsIndex` renames `home.html` → `index.html` post-build |
 | Clean URLs | Dev server `historyApiFallback` with per-page rewrites: `/pricing` → `pricing.html`, `/about` → `about.html`, etc. |
 | Hot reload | `pluginHotReloadContent` adds `compilation.contextDependencies` for `locales/`, `data/`, `pages/`, `shared/`, `layouts/` — Rspack rebuilds on any file change in these dirs |
-| `BASE_PATH` support | `source.define` injects `import.meta.env.BASE_PATH` for runtime JS; template param `base_path` for Nunjucks |
+| `import.meta.env` | `source.define` replaces `import.meta.env` with full env object (browser-safe keys only). `PRIVATE_` prefix in `.env` excludes secrets from browser bundle |
 | Output paths | `dist/assets/{scripts,styles,images,fonts}` — organized by asset type |
 | Static copy | `output.copy` moves `public/` static files (favicon, sw.js, manifest, robots, i18n bundles) to `dist/` |
 | Path aliases | `@i18n` / `@i18n/*` → `packages/i18n/`, `@template-engine` / `@template-engine/*` → `packages/template-engine/`, `@page-system` / `@page-system/*` → `packages/page-system/`, `@config/*` → `configs/`, `@scripts/*` → `scripts/`, `@utils/*` → `utils/`, `@generated/*` → `generated/`. All aliases work everywhere via the jiti wrapper in `rsbuild.config.ts` |
@@ -432,8 +432,7 @@ Ideal for Lighthouse audits, mobile testing, or sharing WIP via a public URL.
 
 | File | Purpose |
 | --- | --- |
-| `utils/env.ts` | Env config: schema keys array + `readEnv()` (sync, no Zod on client). Manual type coercion. Defaults: `MINIFY=true`, `BUILD_PREVIEW=false`, `PRETTY_HTML=false`. All values from `.env` (general) + `.env.{stage}` (override). Stage pipeline: `dev → qa → uat → preprod → prod` |
-| `utils/env.ts` | Env engine: `readEnv(keys)` reads `process.env` (server) or `import.meta.env` (client via Rsbuild define). Sync — no top-level await. Server env file loading via `loadServerEnvFiles()` (co-located in same file) |
+| `generated/env.ts` | Auto-generated env system: schema + engine + runtime validation + singleton. Generated from `.env` files by `scripts/generate-env.ts`. `PRIVATE_` prefix = server-only (browser-safe by default). Stage pipeline: `dev → qa → uat → preprod → prod` |
 | `shared/env-preload.ts` | Bun preload script (`bunfig.toml`), loads `.env` + `.env.{stage}` into `process.env` before any module runs |
 | `bunfig.toml` | `preload = ["./shared/env-preload.ts"]` |
 | `.env` | General defaults shared across all stages. Required. Real file gitignored, `.env.example` template git-tracked |
@@ -442,10 +441,8 @@ Ideal for Lighthouse audits, mobile testing, or sharing WIP via a public URL.
 | `configs/fonts.ts` | Font stack — CSS import + family config (`sans`/`serif`/`mono` + custom keys) |
 | `configs/rsbuild.ts` | Rsbuild build configuration (real config; `rsbuild.config.ts` is a thin jiti wrapper) |
 | `packages/page-system/system-pages.ts` | `ROOT_PAGE`, `SYSTEM_PAGE_IDS` (7 system pages), `SYSTEM_PAGE_SLUGS` (locale-dependent URL slugs), slug helpers (`getSystemPageSlug`, `getRootPageSlug`, `getErrorPageSlugs`, `isSystemPageId`, `isSystemPageSlug`) |
-| `configs/paths.ts` | `ROOT_PATH` + `resolveRoot()` — centralizes all filesystem path resolution |
 | `data/global.json5` | Site name, SEO metadata, social links, DNS/prefetch |
 | `data/menu.json5` | Navigation structure (header menu with children) |
-| `.env.{stage}` | Per-stage env vars. Stages: `dev`, `qa`, `uat`, `preprod`, `prod`. Templates: `.env.{stage}.example` (git-tracked). Real files gitignored |
 | `biome.json` | Linting (Tailwind class sorting, organize imports) + formatting (2-space indent, single quotes). Overrides: `main.css` disables `noDescendingSpecificity`/`noImportantStyles`; `common.ts` disables `noExplicitAny` |
 | `.vscode/settings.json` | Editor config: Biome formatter, Tailwind IntelliSense, i18n-ally, Peacock color |
 | `.vscode/extensions.json` | Workspace extension recommendations (12 extensions) |
@@ -463,28 +460,28 @@ Recommended extensions are listed in `.vscode/extensions.json`. Key extensions:
 
 ### Environment variables
 
-All variables are read at load time by `utils/env.ts` via `readEnv()` from `@utils/env` (sync, manual type coercion — no Zod on client to keep bundle small). Values come from `.env` (general) + `.env.{stage}` (override), loaded via `bunfig.toml` preload for Bun scripts and `loadServerEnvFiles()` from `utils/env.ts` for the Rsbuild Node process.
+All variables are auto-generated from `.env` files into `generated/env.ts` by `scripts/generate-env.ts`. Runtime type validation warns on mismatches. `PRIVATE_` prefix in `.env` marks server-only keys (browser-safe by default — like TypeScript class members). Types are inferred from values (`true`/`false` → boolean, digits → number, else → string).
 
-| Variable | Type | Purpose |
-| --- | --- | --- |
-| `STAGE` | enum | Current stage: `dev`, `qa`, `uat`, `preprod`, `prod` |
-| `SITE_URL` | string | Base URL for sitemap and meta tags (required) |
-| `BASE_PATH` | string | Subpath for deployment (e.g. `/web-pages-starter/`). Defaults to `/` |
-| `PORT` | number | Server port (default 8888) |
-| `HOST` | string | Server bind address |
-| `MINIFY` | boolean | Enable JS/CSS minification (default `true`) |
-| `BUILD_PREVIEW` | boolean | Set automatically by preview tool (default `false`) |
-| `PRETTY_HTML` | boolean | Pretty-print HTML output (default `false`) |
-| `NGROK_AUTHTOKEN` | string? | Auth token for ngrok tunnel (preview) |
-| `NODE_BINARY` / `RSBUILD_RUNTIME` | string? | Runtime override for build process |
-| `LIGHTHOUSE_OUTPUT_DIR` | string | Custom output directory for Lighthouse reports |
-| `SITEMAP_DEFAULT_PRIORITY` | string | Default priority for sitemap URLs |
-| `SITEMAP_DEFAULT_CHANGEFREQ` | string | Default change frequency for sitemap URLs |
+| Variable | Purpose |
+| --- | --- |
+| `STAGE` | Current stage: `dev`, `qa`, `uat`, `preprod`, `prod` |
+| `SITE_URL` | Base URL for sitemap and meta tags (required) |
+| `BASE_PATH` | Subpath for deployment (e.g. `/web-pages-starter/`). Defaults to `/` |
+| `PORT` | Server port (default 8888) |
+| `HOST` | Server bind address |
+| `MINIFY` | Enable JS/CSS minification (default `true`) |
+| `BUILD_PREVIEW` | Set automatically by preview tool (default `false`) |
+| `PRETTY_HTML` | Pretty-print HTML output (default `false`) |
+| `NGROK_AUTHTOKEN` | Auth token for ngrok tunnel (preview) |
+| `NODE_BINARY` / `RSBUILD_RUNTIME` | Runtime override for build process |
+| `LIGHTHOUSE_OUTPUT_DIR` | Custom output directory for Lighthouse reports |
+| `SITEMAP_DEFAULT_PRIORITY` | Default priority for sitemap URLs |
+| `SITEMAP_DEFAULT_CHANGEFREQ` | Default change frequency for sitemap URLs |
 
 ## PWA
 
 - `public/manifest.json` — web app manifest (generated by `scripts/generate-manifest.ts` from `global.json5` + `i18nConfig`)
-- `public/sw.js` — **generated** by `scripts/generate-sw.ts` (not static). Stale-while-revalidate service worker with navigation cache and asset caching. Derives `BASE_PATH` from `self.location`, precaches `index.html`, 6 error pages, `manifest.json`, `favicon.svg`. Offline fallback to `offline.html`. Cache version: v6
+- `public/service-worker.js` — **generated** by `scripts/generate-service-worker.ts` (not static). Stale-while-revalidate service worker with navigation cache and asset caching. Derives `BASE_PATH` from `self.location`, precaches `index.html`, 6 error pages, `manifest.json`, `favicon.svg`. Offline fallback to `offline.html`. Cache version: dynamic — `starter-<base36 timestamp>`, regenerated each build
 - Registered automatically in production builds via `import.meta.env.BASE_PATH`
 
 ### Error pages
@@ -623,7 +620,7 @@ Direct tool access:
 | `bun ./scripts/generate-sitemap.ts` | Generate `public/sitemap.xml` from page directories |
 | `bun ./scripts/generate-manifest.ts` | Generate `public/manifest.json` from `global.json5` + `i18nConfig` |
 | `bun ./scripts/generate-robots.ts` | Generate `public/robots.txt` from `SITE_URL` |
-| `bun ./scripts/generate-sw.ts` | Generate `public/sw.js` with locale-specific error page URLs |
+| `bun ./scripts/generate-service-worker.ts` | Generate `public/service-worker.js` with locale-specific error page URLs |
 | `bun ./packages/page-system/cli/sync-system-pages.ts` | Rename system page folders to match locale-dependent slugs |
 | `bun ./packages/i18n/cli/sync-locales.ts` | Sync missing locale directories and files from default |
 | `bun ./packages/page-system/cli/delete-page.ts [name]` | Delete a page and its locale files across all locale directories (system pages protected) |
@@ -657,7 +654,7 @@ Most tools live in `scripts/`; i18n-specific CLI tools live in `packages/i18n/cl
 | `scripts/generate-sitemap.ts` | log, logBox, env.SITE_URL, writeFilePath | Generate sitemap.xml |
 | `scripts/generate-manifest.ts` | logBox, writeFilePath | Generate manifest.json from global.json5 + i18nConfig |
 | `scripts/generate-robots.ts` | logBox, env.SITE_URL, writeFilePath | Generate robots.txt from env.SITE_URL |
-| `scripts/generate-sw.ts` | logBox, writeFilePath | Generate `public/sw.js` with locale-specific error page URLs |
+| `scripts/generate-service-worker.ts` | logBox, writeFilePath | Generate `public/service-worker.js` with locale-specific error page URLs |
 | `packages/page-system/cli/sync-system-pages.ts` | log, logBox, wrapMainError | Rename ALL system page folders to locale-dependent slugs when default locale changes |
 | `packages/i18n/cli/sync-locales.ts` | log, logBox | Create missing locale directories; sync missing files in existing directories |
 | `packages/page-system/cli/delete-page.ts` | log | Delete a page (folder + locale files across all locale dirs); scans for broken URL references before deletion; system pages protected |
