@@ -125,3 +125,7 @@ export const env: TypedEnv = {
   ...rawEnv,
   IS_PROD: (rawEnv.STAGE ?? ENV_DEFAULTS.STAGE) === 'prod',
 } as TypedEnv;
+
+const BROWSER_ENV_KEYS = ['BASE_PATH', 'STAGE'] as const;
+
+export const browserEnv = Object.fromEntries(BROWSER_ENV_KEYS.map((k) => [k, env[k as keyof typeof env]]));

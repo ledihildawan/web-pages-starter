@@ -18,4 +18,13 @@ declare global {
       effectiveType: 'slow-2g' | '2g' | '3g' | '4g';
     };
   }
+
+  interface ImportMetaEnv {
+    BASE_PATH: string;
+    STAGE: string;
+    SINGLE_LOCALE: boolean;
+    DEV: boolean;
+    PROD: boolean;
+    MODE: string;
+  }
 }

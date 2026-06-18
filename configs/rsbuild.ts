@@ -7,7 +7,7 @@ import { generateDynamicEntries } from '@page-system/dynamic-routes';
 import { defineConfig, type RsbuildPlugin } from '@rsbuild/core';
 import { createTemplateParams } from '@template-engine';
 import { resolveRoot } from '@utils/common';
-import { env, schemaKeys } from '@utils/env';
+import { browserEnv, env } from '@utils/env';
 import { minify } from 'html-minifier-terser';
 import { html as beautifyHtml } from 'js-beautify';
 
@@ -212,7 +212,7 @@ export default defineConfig({
     entry: getEntries(),
     define: {
       'import.meta.env': JSON.stringify({
-        ...Object.fromEntries(schemaKeys.map((k) => [k, env[k as keyof typeof env]])),
+        ...browserEnv,
         SINGLE_LOCALE: isSingleLocale(),
       }),
     },
