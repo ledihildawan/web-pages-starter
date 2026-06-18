@@ -1,3 +1,5 @@
+import path from 'node:path';
+
 export type AliasKey =
   | '@'
   | '@config'
@@ -9,14 +11,14 @@ export type AliasKey =
   | '@template-engine'
   | '@utils';
 
-export const aliasPaths = {
-  '@': '.',
-  '@config': 'configs',
-  '@constants': 'constants.ts',
-  '@generated': 'generated',
-  '@i18n': 'packages/i18n',
-  '@page-system': 'packages/page-system',
-  '@scripts': 'scripts',
-  '@template-engine': 'packages/template-engine',
-  '@utils': 'utils',
-} as const satisfies Record<AliasKey, string>;
+export const alias: Record<AliasKey, string> = {
+  '@': path.resolve('.'),
+  '@config': path.resolve('configs'),
+  '@constants': path.resolve('constants.ts'),
+  '@generated': path.resolve('generated'),
+  '@i18n': path.resolve('packages/i18n'),
+  '@page-system': path.resolve('packages/page-system'),
+  '@scripts': path.resolve('scripts'),
+  '@template-engine': path.resolve('packages/template-engine'),
+  '@utils': path.resolve('utils'),
+};

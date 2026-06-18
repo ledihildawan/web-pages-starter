@@ -20,9 +20,9 @@ const entries = Object.entries(tsconfig.compilerOptions.paths)
   .sort(([a], [b]) => a.localeCompare(b));
 
 const keys = entries.map(([k]) => k);
-const lines = entries.map(([k, v]) => `  '${k}': '${v}',`).join('\n');
+const lines = entries.map(([k, v]) => `  '${k}': path.resolve('${v}'),`).join('\n');
 
-const output = `export type AliasKey =\n${keys.map((k) => `  | '${k}'`).join('\n')};\n\nexport const aliasPaths = {\n${lines}\n} as const satisfies Record<AliasKey, string>;\n`;
+const output = `import path from 'node:path';\n\nexport type AliasKey =\n${keys.map((k) => `  | '${k}'`).join('\n')};\n\nexport const alias: Record<AliasKey, string> = {\n${lines}\n};\n`;
 
 writeFilePath(lookup('@', 'generated', 'path-aliases.ts'), output);
 log.success(`Generated path aliases — ${keys.length} key(s): ${keys.join(', ')}`);
