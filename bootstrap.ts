@@ -123,12 +123,12 @@ const registerServiceWorker = (): void => {
 async function bootstrap() {
   try {
     const [cspModule, Collapse, Focus, fonts] = await Promise.all([
-      import('@alpinejs/csp'),
+      import('@alpinejs/csp').then((m) => m.default),
       import('@alpinejs/collapse').then((m) => m.default),
       import('@alpinejs/focus').then((m) => m.default),
       import('@i18n/fonts/fonts'),
     ]);
-    const Alpine = (cspModule as { default: typeof globalThis.Alpine }).default;
+    const Alpine = cspModule;
 
     globalThis.Alpine = Alpine;
     Alpine.plugin(Collapse);

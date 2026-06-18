@@ -1,1 +1,3 @@
-declare module '@alpinejs/csp';
+declare module '@alpinejs/csp' {
+  export { default } from 'alpinejs';
+}
