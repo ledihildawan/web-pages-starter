@@ -23,9 +23,6 @@
 {% set x_ua = compat.x_ua_compatible %}
 {% set referrer = compat.referrer %}
 
-{% set dns_prefetch = global.dns_prefetch or [] %}
-{% set preconnect = global.preconnect or [] %}
-
 <!DOCTYPE html>
 <html lang="{{ lang }}" dir="{{ localeConfig.dir or 'ltr' }}" class="scroll-smooth selection:bg-violet-500/30 selection:text-violet-200">
   <head>
@@ -66,19 +63,11 @@
     {% endif %}
     <meta name="referrer" content="{{ referrer or 'strict-origin-when-cross-origin' }}">
 
-    {% for href in dns_prefetch %}
+    {% for href in dns_prefetch or [] %}
       <link rel="dns-prefetch" href="{{ href }}">
     {% endfor %}
 
-    {% for host in preconnect %}
-      <link rel="preconnect" href="{{ host.href }}"{% if host.crossorigin %} crossorigin{% endif %}>
-    {% endfor %}
-
-    {% for href in page.dns_prefetch or [] %}
-      <link rel="dns-prefetch" href="{{ href }}">
-    {% endfor %}
-
-    {% for host in page.preconnect or [] %}
+    {% for host in preconnect or [] %}
       <link rel="preconnect" href="{{ host.href }}"{% if host.crossorigin %} crossorigin{% endif %}>
     {% endfor %}
 

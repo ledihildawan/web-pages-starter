@@ -682,10 +682,17 @@ export const createTemplateParams = (
     return data;
   })();
 
-  const domains = [
-    ...((globalData.preconnect as Array<{ href: string }>) ?? []).map((h) => h.href),
-    ...((pageData?.preconnect as Array<{ href: string }>) ?? []).map((h) => h.href),
+  const dnsPrefetch = [
+    ...((globalData.dns_prefetch as string[]) ?? []),
+    ...((pageData?.dns_prefetch as string[]) ?? []),
   ];
+
+  const preconnect = [
+    ...((globalData.preconnect as Array<{ href: string; crossorigin?: boolean }>) ?? []),
+    ...((pageData?.preconnect as Array<{ href: string; crossorigin?: boolean }>) ?? []),
+  ];
+
+  const domains = preconnect.map((h) => h.href);
 
   const csp = [
     "default-src 'self'",
@@ -712,6 +719,8 @@ export const createTemplateParams = (
     clientI18nScript,
     csp_nonce: cspNonce,
     csp,
+    dns_prefetch: dnsPrefetch,
+    preconnect,
     page_id: pageId,
     route,
     global: globalData,
