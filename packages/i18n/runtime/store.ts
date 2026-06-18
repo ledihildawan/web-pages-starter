@@ -7,7 +7,7 @@ import { setStrategies } from '@i18n/engine/formatters';
 import { getLanguageSubtag } from '@i18n/engine/helpers';
 import { loadStrategies } from '@i18n/strategies/loader';
 import { scheduleTask } from '@utils/microtask-queue';
-import type { AlpineComponent } from 'alpinejs';
+import { defineStore } from '@/utils/alpine';
 
 export interface i18nStoreLanguages {
   code: LocaleCode;
@@ -27,11 +27,7 @@ export interface i18nStore {
   updateDocumentAttributes: (code: string) => void;
 }
 
-export const type = 'store';
-
-export const name = 'i18n';
-
-export const value = (): AlpineComponent<i18nStore> => ({
+export default defineStore('i18n', {
   current: localStorage.getItem(LOCALE_STORAGE_KEY) || i18nConfig.defaultLocale,
   languages: getActiveLocalesDisplay(),
   loadedLocales: new Set<string>(),

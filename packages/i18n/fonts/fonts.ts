@@ -3,6 +3,7 @@ import { ACTIVE_WRITING_SYSTEMS } from '@generated/active-locales-data';
 import type { LocaleConfig } from '@i18n/data/locales';
 import type { WritingSystemCode } from '@i18n/data/writing-systems';
 import { getActiveLocales } from '@i18n/engine/active-locales';
+import { getCspNonce } from '@utils/common';
 
 const loaded = new Set<string>();
 
@@ -25,16 +26,14 @@ async function injectFontFaceRules(wsCode: string): Promise<void> {
 
   try {
     const basePath = (window as { __BASE_PATH__?: string }).__BASE_PATH__ ?? '';
-    const response = await fetch(`${basePath}assets/fonts/fonts.css`);
-    if (!response.ok) return;
+    const href = `${basePath}assets/fonts/fonts.css`;
+    const nonce = getCspNonce();
 
-    const text = await response.text();
-    const nonce = (window as { __CSP_NONCE__?: string }).__CSP_NONCE__;
-
-    const style = document.createElement('style');
-    if (nonce) style.setAttribute('nonce', nonce);
-    style.textContent = text;
-    document.head.appendChild(style);
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = href;
+    if (nonce) link.setAttribute('nonce', nonce);
+    document.head.appendChild(link);
   } catch (err) {
     handleLoadError(`failed to load font for "${wsCode}"`, err);
   }
@@ -51,6 +50,7 @@ function loadFontForLang(lang: string | null): void {
 
 export const preloadActiveFont = (): void => {
   if (typeof document === 'undefined') return;
+
   loadFontForLang(getCurrentLang());
 };
 

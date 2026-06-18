@@ -1,15 +1,13 @@
 import '@/styles/main.css';
 
 import { env } from '@generated/env';
+import { getCspNonce } from '@utils/common';
 
 const SW_DISMISS_KEY = 'sw_update_dismissed';
 const SW_DISMISS_DURATION = 24 * 60 * 60 * 1000;
 
 const showBootstrapError = (_message: string) => {
-  const nonce = document
-    .querySelector('meta[http-equiv="Content-Security-Policy"]')
-    ?.getAttribute('content')
-    ?.match(/nonce-([a-zA-Z0-9+/=]+)/)?.[1];
+  const nonce = getCspNonce();
   const style = document.createElement('style');
   style.id = 'bootstrap-error-style';
   if (nonce) style.setAttribute('nonce', nonce);
@@ -143,31 +141,32 @@ async function bootstrap() {
       import('@i18n/fonts/fonts'),
     ]);
 
-    Alpine = cspModule;
+    globalThis.Alpine = cspModule;
 
     for (const plugin of plugins) {
-      Alpine.plugin(plugin);
+      globalThis.Alpine.plugin(plugin);
     }
 
-    const states = await Promise.all([import('../shared/nav/navbar')]);
+    const states = await Promise.all([
+      import('@i18n/runtime/store').then((m) => m.default),
+      import('../shared/nav/navbar').then((m) => m.default),
+    ]);
 
     for (const state of states) {
-      Alpine[state.type](state.name, state.value);
-    }
-
-    if (!import.meta.env.SINGLE_LOCALE) {
-      const i18nStore = await import('@i18n/runtime/store');
-
-      Alpine.store(i18nStore.name, i18nStore.value);
-
-      const { i18next, initIntl } = await import('@i18n/runtime/runtime');
-
-      if (!i18next.isInitialized) {
-        await initIntl(window.__SAVED_LOCALE__ || window.__SERVER_LOCALE__);
+      if (state.type === 'data') {
+        globalThis.Alpine.data(state.name, state.factory);
+      } else if (state.type === 'store') {
+        globalThis.Alpine.store(state.name, state.value);
       }
     }
 
-    requestAnimationFrame(() => Alpine.start());
+    const { i18next, initIntl } = await import('@i18n/runtime/runtime');
+
+    if (!i18next.isInitialized) {
+      await initIntl(window.__SAVED_LOCALE__ || window.__SERVER_LOCALE__);
+    }
+
+    globalThis.Alpine.start();
 
     fonts.preloadActiveFont();
     fonts.loadLanguageFonts();
