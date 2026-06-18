@@ -213,6 +213,9 @@ export default defineConfig({
   source: {
     entry: getEntries(),
     define: {
+      ...Object.fromEntries(
+        schemaKeys.map((k) => [`import.meta.env.${k}`, JSON.stringify(env[k as keyof typeof env])]),
+      ),
       'import.meta.env.APP_ENV': JSON.stringify(
         Object.fromEntries(schemaKeys.map((k) => [k, env[k as keyof typeof env]])),
       ),
