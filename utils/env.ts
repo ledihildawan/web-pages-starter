@@ -1,52 +1,37 @@
+import { ENV_KEYS, ENV_SCHEMA, type SchemaEnv } from '@generated/env-schema';
+
 export const STAGES = ['dev', 'qa', 'uat', 'preprod', 'prod'] as const;
-
-export type Env = Record<string, unknown> & {
-  STAGE: (typeof STAGES)[number];
-  IS_PROD: boolean;
-};
-
-const ENV_DEFAULTS = {
-  STAGE: 'dev' as (typeof STAGES)[number],
-  PORT: 0,
-  HOST: '',
-  SITE_URL: '',
-  NGROK_AUTHTOKEN: undefined as string | undefined,
-  NODE_BINARY: undefined as string | undefined,
-  RSBUILD_RUNTIME: undefined as string | undefined,
-  LIGHTHOUSE_OUTPUT_DIR: '',
-  SITEMAP_DEFAULT_PRIORITY: '',
-  SITEMAP_DEFAULT_CHANGEFREQ: '',
-  BASE_PATH: '/',
-  BUILD_PREVIEW: false,
-  MINIFY: true,
-  PRETTY_HTML: false,
-};
-
-export const schemaKeys = Object.keys(ENV_DEFAULTS) as readonly string[];
-
-export type TypedEnv = typeof ENV_DEFAULTS & {
-  IS_PROD: boolean;
-};
 
 const IS_BROWSER = typeof window !== 'undefined' && typeof window.document !== 'undefined';
 
-function coerce(raw: unknown): unknown {
+type EnvType = 'string' | 'number' | 'boolean';
+
+function validateValue(key: string, raw: unknown, type: EnvType): unknown {
   if (raw === undefined || raw === null) return undefined;
-  if (typeof raw !== 'string') return raw;
-  if (raw === 'true') return true;
-  if (raw === 'false') return false;
-  if (/^-?\d+$/.test(raw)) return Number(raw);
-  return raw;
+  if (type === 'boolean') {
+    if (typeof raw === 'boolean') return raw;
+    if (raw === 'true') return true;
+    if (raw === 'false') return false;
+    console.warn(`[env] ${key}: expected boolean, got "${String(raw)}"`);
+    return undefined;
+  }
+  if (type === 'number') {
+    if (typeof raw === 'number') return raw;
+    const num = Number(raw);
+    if (!Number.isNaN(num)) return num;
+    console.warn(`[env] ${key}: expected number, got "${String(raw)}"`);
+    return undefined;
+  }
+  if (typeof raw === 'string') return raw;
+  return String(raw);
 }
 
 function getBrowserEnv(): Record<string, unknown> {
   const source = (import.meta.env ?? {}) as Record<string, unknown>;
   const result: Record<string, unknown> = {};
-
-  for (const key of schemaKeys) {
+  for (const key of ENV_KEYS) {
     result[key] = source[key];
   }
-
   return result;
 }
 
@@ -55,24 +40,19 @@ function getMetaEnv(): Record<string, unknown> {
   return process.env ?? {};
 }
 
-export function readEnv(keys: readonly string[]): Env {
-  const env = getMetaEnv();
+export function readEnv(): SchemaEnv & { IS_PROD: boolean } {
+  const source = getMetaEnv();
   const values: Record<string, unknown> = {};
 
-  for (const key of keys) {
-    const raw = IS_BROWSER ? env[key] : coerce(env[key]);
-    if (raw !== undefined && raw !== null) {
-      values[key] = raw;
-    }
+  for (const key of ENV_KEYS) {
+    const field = ENV_SCHEMA[key as keyof typeof ENV_SCHEMA];
+    const raw = IS_BROWSER ? source[key] : source[key];
+    const validated = validateValue(key, raw, field.type);
+    values[key] = validated ?? field.default;
   }
 
   const stage = (values.STAGE as (typeof STAGES)[number]) ?? 'dev';
-
-  return {
-    ...values,
-    STAGE: stage,
-    IS_PROD: stage === 'prod',
-  } as Env;
+  return { ...values, STAGE: stage, IS_PROD: stage === 'prod' } as SchemaEnv & { IS_PROD: boolean };
 }
 
 export async function loadServerEnvFiles(): Promise<void> {
@@ -118,13 +98,11 @@ export async function loadServerEnvFiles(): Promise<void> {
   }
 }
 
-const rawEnv = readEnv(schemaKeys);
+export type TypedEnv = SchemaEnv & { IS_PROD: boolean };
 
-export const env: TypedEnv = {
-  ...ENV_DEFAULTS,
-  ...rawEnv,
-  IS_PROD: (rawEnv.STAGE ?? ENV_DEFAULTS.STAGE) === 'prod',
-} as TypedEnv;
+const rawEnv = readEnv();
+
+export const env: TypedEnv = rawEnv;
 
 const BROWSER_ENV_KEYS = ['BASE_PATH', 'STAGE'] as const;
 
