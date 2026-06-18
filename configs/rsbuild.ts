@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
-import { getActiveLocaleCodes, LOCALE_STORAGE_KEY } from '@i18n';
+import { getActiveLocaleCodes, isSingleLocale, LOCALE_STORAGE_KEY } from '@i18n';
 import { getRootPageSlug, getSystemPageSlug, scanPages } from '@page-system';
 import { generateDynamicEntries } from '@page-system/dynamic-routes';
 import { defineConfig, type RsbuildPlugin } from '@rsbuild/core';
@@ -157,8 +157,6 @@ const resolveTemplate = (entryName: string): string => {
   return path.join('pages', entryName, 'index.njk');
 };
 
-const isSingleLocale = (i18nConfig.locales ?? []).length === 0;
-
 export default defineConfig({
   server: {
     host: env.HOST,
@@ -213,8 +211,10 @@ export default defineConfig({
   source: {
     entry: getEntries(),
     define: {
-      'import.meta.env': JSON.stringify(Object.fromEntries(schemaKeys.map((k) => [k, env[k as keyof typeof env]]))),
-      'import.meta.env.SINGLE_LOCALE': JSON.stringify(isSingleLocale),
+      'import.meta.env': JSON.stringify({
+        ...Object.fromEntries(schemaKeys.map((k) => [k, env[k as keyof typeof env]])),
+        SINGLE_LOCALE: isSingleLocale(),
+      }),
     },
   },
   output: {

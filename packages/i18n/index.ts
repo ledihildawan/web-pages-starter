@@ -89,6 +89,7 @@ export const getLocaleLabelCountry = (localeCode: LocaleCode): string => {
 export {
   getActiveLocaleCodes,
   getActiveLocales,
+  isSingleLocale,
 } from './engine/active-locales';
 
 export const getActiveLocalesDisplay = () =>

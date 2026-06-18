@@ -5,6 +5,8 @@ import type { LocaleCode, LocaleConfig } from '@i18n/data/locales';
 let cachedCodes: LocaleCode[] | undefined;
 let cachedLocales: LocaleConfig[] | undefined;
 
+export const isSingleLocale = (): boolean => getActiveLocaleCodes().length <= 1;
+
 export const getActiveLocaleCodes = (): LocaleCode[] => {
   if (!cachedCodes) {
     cachedCodes = [i18nConfig.defaultLocale, ...(i18nConfig.locales ?? [])];

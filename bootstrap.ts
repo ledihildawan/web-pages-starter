@@ -4,8 +4,6 @@ import { env } from '@utils/env';
 import { registerNavbarComponent } from './shared/nav/navbar';
 import { registerSectionNavComponent } from './shared/nav/section-nav';
 
-const SINGLE_LOCALE = Boolean(import.meta.env.SINGLE_LOCALE);
-
 const SW_DISMISS_KEY = 'sw_update_dismissed';
 const SW_DISMISS_DURATION = 24 * 60 * 60 * 1000;
 
@@ -136,7 +134,7 @@ async function bootstrap() {
     Alpine.plugin(Collapse);
     Alpine.plugin(Focus);
 
-    if (SINGLE_LOCALE) {
+    if (import.meta.env.SINGLE_LOCALE) {
       Alpine.store('i18n', {
         current: window.__SERVER_LOCALE__ ?? 'en-US',
         languages: [],
