@@ -73,7 +73,7 @@
 
     {{ page_meta.render(page, global, LOCALE_CODES, page_id, i18n, csp_nonce) }}
     {{ clientI18nScript }}
-    {% block head %}{% endblock %}
+    {% block extra_head %}{% endblock %}
   </head>
 
   <body class="min-block-screen bg-slate-950 text-slate-200 antialiased" data-page="{{ page_id }}">
@@ -99,6 +99,6 @@
 
     {% include "shared/layout/footer.njk" %}
 
-    {% block scripts %}{% endblock %}
+    {% block body_end %}{% endblock %}
   </body>
 </html>
