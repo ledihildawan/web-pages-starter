@@ -270,7 +270,6 @@ export default defineConfig({
     cleanDistPath: true,
     minify: shouldMinify ? { js: true, css: true } : false,
     inlineStyles: false,
-    inlineScripts: false,
     sourceMap: !shouldMinify ? { js: 'cheap-module-source-map', css: true } : false,
     filename: {
       js: '[name].[contenthash:8].js',

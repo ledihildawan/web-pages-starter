@@ -7,11 +7,11 @@ import { env } from '@generated/env';
 import type { serve } from '@hono/node-server';
 import ngrok from '@ngrok/ngrok';
 import { getErrorPageSlugs, getRootPageSlug } from '@page-system';
+import { createStaticApp, getPageNames, loadHtmlCache } from '@scripts/lib/hono-server';
+import { log } from '@scripts/lib/logger';
+import { createServer, wrapMainError } from '@scripts/lib/signal-handler';
 import { lookup } from '@utils/paths';
 import inquirer from 'inquirer';
-import { createStaticApp, getPageNames, loadHtmlCache } from '../lib/hono-server';
-import { log } from '../lib/logger';
-import { createServer, wrapMainError } from '../lib/signal-handler';
 
 const PORT = env.PORT;
 const HOST = env.HOST;

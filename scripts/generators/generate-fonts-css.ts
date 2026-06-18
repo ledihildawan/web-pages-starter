@@ -2,8 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
 import { buildFontsCss } from '@i18n/fonts/font-css';
+import { log, logBox } from '@scripts/lib/logger';
 import { lookup } from '@utils/paths';
-import { log, logBox } from '../lib/logger';
 
 const OUTPUT_DIR = lookup('@', 'public', 'assets', 'fonts');
 const OUTPUT_FILE = path.join(OUTPUT_DIR, 'fonts.css');

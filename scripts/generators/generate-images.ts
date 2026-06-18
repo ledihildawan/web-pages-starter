@@ -1,10 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { env } from '@generated/env';
+import { log, logBox } from '@scripts/lib/logger';
 import { generatedHeader, writeFilePath } from '@scripts/lib/write-file';
 import { lookup } from '@utils/paths';
 import sharp from 'sharp';
-import { log, logBox } from '../lib/logger';
 
 const SOURCE_DIR = lookup('@', 'assets', 'images');
 const OUTPUT_DIR = lookup('@', 'public', 'assets', 'images');

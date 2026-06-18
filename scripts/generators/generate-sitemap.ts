@@ -3,9 +3,9 @@ import { i18nConfig } from '@config/i18n';
 import { LOCALE_CODES } from '@generated/active-locales-data';
 import { env } from '@generated/env';
 import { getErrorPageSlugs, getRootPageSlug, scanPages } from '@page-system';
+import { log, logBox } from '@scripts/lib/logger';
+import { writeFilePath } from '@scripts/lib/write-file';
 import { lookup } from '@utils/paths';
-import { log, logBox } from '../lib/logger';
-import { writeFilePath } from '../lib/write-file';
 
 const cliArgs = process.argv.slice(2);
 const distOnly = cliArgs.includes('--dist-only');

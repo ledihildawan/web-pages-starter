@@ -1,9 +1,9 @@
 import { i18nConfig } from '@config/i18n';
 import { env } from '@generated/env';
 import { getErrorPageSlugs } from '@page-system';
+import { logBox } from '@scripts/lib/logger';
+import { writeFilePath } from '@scripts/lib/write-file';
 import { lookup } from '@utils/paths';
-import { logBox } from '../lib/logger';
-import { writeFilePath } from '../lib/write-file';
 
 const OUTPUT_PUBLIC = lookup('@', 'public', 'robots.txt');
 const OUTPUT_DIST = lookup('@', 'dist', 'robots.txt');

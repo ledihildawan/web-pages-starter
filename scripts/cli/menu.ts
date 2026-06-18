@@ -1,9 +1,9 @@
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
+import { log } from '@scripts/lib/logger';
+import { setupSigintHandler, wrapMainError } from '@scripts/lib/signal-handler';
 import { find, lookup } from '@utils/paths';
 import inquirer from 'inquirer';
-import { log } from '../lib/logger';
-import { setupSigintHandler, wrapMainError } from '../lib/signal-handler';
 
 const runTool = (name: string, args: string[] = []): Promise<void> => {
   return new Promise((resolve, reject) => {

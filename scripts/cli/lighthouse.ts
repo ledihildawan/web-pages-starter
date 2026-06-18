@@ -3,10 +3,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 import { env } from '@generated/env';
+import { log, logBox } from '@scripts/lib/logger';
+import { setupSigintHandler, wrapMainError } from '@scripts/lib/signal-handler';
 import inquirer from 'inquirer';
 import { DOMParser } from 'linkedom';
-import { log, logBox } from '../lib/logger';
-import { setupSigintHandler, wrapMainError } from '../lib/signal-handler';
 
 const OUTPUT_DIR = env.LIGHTHOUSE_OUTPUT_DIR;
 

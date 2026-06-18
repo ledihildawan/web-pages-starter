@@ -1,8 +1,8 @@
 import { i18nConfig } from '@config/i18n';
 import { getErrorPageSlugs, getRootPageSlug, getSystemPageSlug } from '@page-system';
+import { logBox } from '@scripts/lib/logger';
+import { writeFilePath } from '@scripts/lib/write-file';
 import { lookup } from '@utils/paths';
-import { logBox } from '../lib/logger';
-import { writeFilePath } from '../lib/write-file';
 
 const OUTPUT = lookup('@', 'public', 'service-worker.js');
 

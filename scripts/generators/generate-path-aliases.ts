@@ -1,7 +1,7 @@
 import fs from 'node:fs';
+import { log } from '@scripts/lib/logger';
+import { writeFilePath } from '@scripts/lib/write-file';
 import { lookup } from '@utils/paths';
-import { log } from '../lib/logger';
-import { writeFilePath } from '../lib/write-file';
 
 const tsconfig = JSON.parse(fs.readFileSync(lookup('@', 'tsconfig.json'), 'utf-8')) as {
   compilerOptions: { paths: Record<string, string[]> };

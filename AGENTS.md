@@ -43,7 +43,7 @@ Requires [Python 3](https://python.org) with `fonttools` + `brotli` (`pip instal
 - No comments unless requested
 - No deprecated code — remove entirely
 - Nunjucks string concat: `~` (never `+`)
-- Import paths: `@i18n`, `@template-engine`, `@page-system`, `@config/*`, `@scripts/*`, `@utils/*`, `@generated/*` aliases used everywhere (including the rsbuild config chain). `tsconfig.json` is the single source of truth for path aliases — `utils/paths.ts` reads them and exports bundler-format aliases, auto-deriving for jiti + bundler. `rsbuild.config.ts` is a thin jiti wrapper that loads `configs/rsbuild.ts` — real config lives in `configs/rsbuild.ts`. Env imports use `@generated/env` (not `@utils/env`); `@utils/*` still covers `common.ts`, `json5.ts`, `alias.ts`, etc.
+- Import paths: `@i18n`, `@template-engine`, `@page-system`, `@config/*`, `@scripts/*`, `@utils/*`, `@generated/*` aliases used everywhere (including the rsbuild config chain). `tsconfig.json` is the single source of truth for path aliases — `utils/paths.ts` reads them and exports bundler-format aliases, auto-deriving for jiti + bundler. `rsbuild.config.ts` is a thin jiti wrapper that loads `configs/rsbuild.ts` — real config lives in `configs/rsbuild.ts`. Env imports use `@generated/env` (not `@utils/env`); `@utils/*` still covers `common.ts`, `json5.ts`, `paths.ts`, etc.
 - i18n CLI scripts live in `packages/i18n/cli/` (not `scripts/`). Page-system CLI lives in `packages/page-system/cli/`. Env CLI lives in `packages/env/cli/`.
 
 ## Build Modes
@@ -55,7 +55,7 @@ bun run build -- --debug   # skip JS/CSS minify
 bun run preview            # build (BUILD_PREVIEW=true) + serve via tunnel
 ```
 
-Build pipeline: `generate-env → sync-system-pages → clean-cache → fetch-exchange-rates → generate-active-locales → generate-fonts-css → sync-locales → generate-types → build.ts → subset-fonts → compress`
+Build pipeline: `generate-path-aliases → generate-env → sync-system-pages → clean-cache → fetch-exchange-rates → generate-active-locales → generate-fonts-css → sync-locales → generate-types → build.ts → subset-fonts → compress`
 
 ## Testing
 
@@ -176,6 +176,8 @@ All 4 generated files are **tracked in git** (not gitignored):
 - `generated/active-locales-data.ts` — filtered locale data (always uses `i18nConfig.locales`, no dev stub)
 - `generated/exchange-rates.ts` — currency rates (24h cache)
 - `generated/i18n.d.ts` — TypeScript key types from locale JSON
+- generated/image-manifest.ts — image manifest
+- generated/path-aliases.ts — alias type + map
 
 Biome is configured to skip `generated/**` (formatter + linter disabled).
 
