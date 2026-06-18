@@ -213,9 +213,7 @@ export default defineConfig({
   source: {
     entry: getEntries(),
     define: {
-      ...Object.fromEntries(
-        schemaKeys.map((k) => [`import.meta.env.${k}`, JSON.stringify(env[k as keyof typeof env])]),
-      ),
+      __APP_ENV__: JSON.stringify(Object.fromEntries(schemaKeys.map((k) => [k, env[k as keyof typeof env]]))),
       'import.meta.env.SINGLE_LOCALE': JSON.stringify(isSingleLocale),
     },
   },

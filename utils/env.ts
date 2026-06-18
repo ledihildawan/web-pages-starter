@@ -13,22 +13,7 @@ function getMetaEnv(): Record<string, unknown> {
 }
 
 function getBrowserEnv(): Record<string, unknown> {
-  return {
-    PORT: import.meta.env.PORT,
-    HOST: import.meta.env.HOST,
-    SITE_URL: import.meta.env.SITE_URL,
-    NGROK_AUTHTOKEN: import.meta.env.NGROK_AUTHTOKEN,
-    NODE_BINARY: import.meta.env.NODE_BINARY,
-    RSBUILD_RUNTIME: import.meta.env.RSBUILD_RUNTIME,
-    LIGHTHOUSE_OUTPUT_DIR: import.meta.env.LIGHTHOUSE_OUTPUT_DIR,
-    SITEMAP_DEFAULT_PRIORITY: import.meta.env.SITEMAP_DEFAULT_PRIORITY,
-    SITEMAP_DEFAULT_CHANGEFREQ: import.meta.env.SITEMAP_DEFAULT_CHANGEFREQ,
-    BASE_PATH: import.meta.env.BASE_PATH,
-    STAGE: import.meta.env.STAGE,
-    BUILD_PREVIEW: import.meta.env.BUILD_PREVIEW,
-    MINIFY: import.meta.env.MINIFY,
-    PRETTY_HTML: import.meta.env.PRETTY_HTML,
-  };
+  return typeof __APP_ENV__ !== 'undefined' ? __APP_ENV__ : {};
 }
 
 function coerce(raw: unknown): unknown {
