@@ -10,6 +10,7 @@ import { createTemplateParams } from '@template-engine';
 import { resolveRoot } from '@utils/common';
 import { minify } from 'html-minifier-terser';
 import { html as beautifyHtml } from 'js-beautify';
+import { alias } from './alias';
 
 const isBuild = env.IS_PROD || env.BUILD_PREVIEW;
 const shouldMinify = isBuild && env.MINIFY;
@@ -198,15 +199,7 @@ export default defineConfig({
     },
   },
   resolve: {
-    alias: {
-      '@config': resolveRoot('configs'),
-      '@constants': resolveRoot('constants.ts'),
-      '@generated': resolveRoot('generated'),
-      '@i18n': resolveRoot('packages', 'i18n'),
-      '@template-engine': resolveRoot('packages', 'template-engine'),
-      '@page-system': resolveRoot('packages', 'page-system'),
-      '@utils': resolveRoot('utils'),
-    },
+    alias,
   },
   source: {
     entry: getEntries(),
