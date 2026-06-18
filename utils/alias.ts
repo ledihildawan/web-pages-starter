@@ -1,5 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import type { AliasKey } from '@generated/alias-keys';
+
+export type { AliasKey };
 
 const tsconfig = JSON.parse(fs.readFileSync(path.resolve('tsconfig.json'), 'utf-8')) as {
   compilerOptions: { paths: Record<string, string[]> };
@@ -20,16 +23,5 @@ for (const [key, targets] of Object.entries(rawPaths)) {
     aliasMap.set(aliasKey, path.resolve(aliasPath));
   }
 }
-
-export type AliasKey =
-  | '@'
-  | '@config'
-  | '@constants'
-  | '@generated'
-  | '@i18n'
-  | '@template-engine'
-  | '@page-system'
-  | '@scripts'
-  | '@utils';
 
 export const alias: Record<AliasKey, string> = Object.fromEntries(aliasMap) as Record<AliasKey, string>;
