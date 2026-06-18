@@ -361,7 +361,17 @@ Examples:
   } else {
     try {
       const sitemapXml = await fetchSitemap(baseUrl, getExtraHeaders(baseUrl, cliArgs));
-      urls = parseSitemap(sitemapXml);
+      urls = parseSitemap(sitemapXml).map((u) => {
+        if (baseIdx !== -1) {
+          try {
+            const parsed = new URL(u);
+            return `${base}${parsed.pathname}`;
+          } catch {
+            return u;
+          }
+        }
+        return u;
+      });
     } catch (err) {
       log.warn(`Warning: Could not fetch sitemap — ${(err as Error).message}`);
       urls = [baseUrl];
