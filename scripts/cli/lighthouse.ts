@@ -344,6 +344,10 @@ Examples:
 
   let urls = [];
 
+  const baseIdx = cliArgs.indexOf('--base');
+  const baseUrl = baseIdx !== -1 && cliArgs[baseIdx + 1] ? cliArgs[baseIdx + 1] : env.SITE_URL;
+  const base = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+
   if (cliArgs.includes('--url')) {
     const urlIndex = cliArgs.indexOf('--url');
     const urlPath = cliArgs[urlIndex + 1];
@@ -351,17 +355,16 @@ Examples:
       log.error('Error: --url requires a path argument');
       process.exit(1);
     }
-    const base = env.SITE_URL.endsWith('/') ? env.SITE_URL.slice(0, -1) : env.SITE_URL;
     urls = [`${base}${urlPath.startsWith('/') ? urlPath : `/${urlPath}`}`];
   } else if (cliArgs.includes('--no-sitemap')) {
-    urls = [env.SITE_URL];
+    urls = [baseUrl];
   } else {
     try {
-      const sitemapXml = await fetchSitemap(env.SITE_URL, getExtraHeaders(env.SITE_URL, cliArgs));
+      const sitemapXml = await fetchSitemap(baseUrl, getExtraHeaders(baseUrl, cliArgs));
       urls = parseSitemap(sitemapXml);
     } catch (err) {
       log.warn(`Warning: Could not fetch sitemap — ${(err as Error).message}`);
-      urls = [env.SITE_URL];
+      urls = [baseUrl];
     }
   }
 

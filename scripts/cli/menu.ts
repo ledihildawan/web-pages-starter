@@ -140,8 +140,19 @@ const tools: Tool[] = [
   },
   {
     name: 'Lighthouse',
-    description: 'Audit accessibility, SEO, best practices, performance, and AI agent compatibility',
+    description: 'Audit accessibility, SEO, best practices, performance',
     action: async () => {
+      const { baseUrl } = await inquirer.prompt<{ baseUrl: string }>([
+        {
+          type: 'input',
+          name: 'baseUrl',
+          message: 'Base URL (Enter for env.SITE_URL, or paste tunnel URL):',
+          default: '',
+        },
+      ]);
+
+      const baseArgs = baseUrl.trim() ? ['--base', baseUrl.trim()] : [];
+
       const { auditType } = await inquirer.prompt<{ auditType: string }>([
         {
           type: 'select',
@@ -164,13 +175,13 @@ const tools: Tool[] = [
 
       switch (auditType) {
         case 'quick':
-          await runTool('lighthouse', ['--mobile', '--no-throttle', '--only-cats', 'accessibility']);
+          await runTool('lighthouse', [...baseArgs, '--mobile', '--no-throttle', '--only-cats', 'accessibility']);
           break;
         case 'full':
-          await runTool('lighthouse', ['--both', '--no-throttle']);
+          await runTool('lighthouse', [...baseArgs, '--both', '--no-throttle']);
           break;
         case 'custom':
-          await runTool('lighthouse');
+          await runTool('lighthouse', baseArgs);
           break;
         case 'url': {
           const { urlPath } = await inquirer.prompt<{ urlPath: string }>([
@@ -181,7 +192,7 @@ const tools: Tool[] = [
               validate: (input: string) => (input.trim().length > 0 ? true : 'URL path is required'),
             },
           ]);
-          await runTool('lighthouse', ['--no-sitemap', '--url', urlPath, '--no-throttle']);
+          await runTool('lighthouse', [...baseArgs, '--no-sitemap', '--url', urlPath, '--no-throttle']);
           break;
         }
       }
