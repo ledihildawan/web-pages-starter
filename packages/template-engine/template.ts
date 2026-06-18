@@ -341,13 +341,16 @@ const createI18nObject = (
     },
 
     formatCurrency: (value: number | string, currency: string, options?: TemplateFormatOptions) => {
+      const { raw, className, nativeDigits, numberingSystem, ...intlOpts } = options ?? {};
       const formatted = formatCurrency(value, currency, options);
       if (options?.raw) return formatted;
-      return renderHtml(
-        formatted,
-        buildAttrs({ 'format-currency': value, 'target-currency': currency }, undefined, options?.nativeDigits),
-        options?.className,
+      const attrs = buildAttrs(
+        { 'format-currency': value, 'target-currency': currency },
+        undefined,
+        options?.nativeDigits,
       );
+      if (Object.keys(intlOpts).length > 0) attrs['format-opts'] = JSON.stringify(intlOpts);
+      return renderHtml(formatted, attrs, options?.className);
     },
 
     formatPercent: (value: number | string, options?: TemplateFormatOptions) => {
@@ -428,9 +431,12 @@ const createI18nObject = (
     },
 
     formatAbbreviated: (value: number, options?: TemplateFormatOptions) => {
+      const { raw, className, nativeDigits, numberingSystem, ...intlOpts } = options ?? {};
       const formatted = formatAbbreviated(value, options);
       if (options?.raw) return formatted;
-      return renderHtml(formatted, { 'format-abbreviated': value }, options?.className);
+      const attrs: Record<string, string | number> = { 'format-abbreviated': value };
+      if (Object.keys(intlOpts).length > 0) attrs['format-opts'] = JSON.stringify(intlOpts);
+      return renderHtml(formatted, attrs, options?.className);
     },
 
     formatList: (items: string[], options?: TemplateFormatOptions) => {

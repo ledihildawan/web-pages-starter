@@ -109,7 +109,10 @@ const FORMATTERS = [
   },
   {
     attr: 'data-format-abbreviated',
-    format: (v: string) => formatAbbreviated(parseFloat(v)),
+    format: (v: string, el: HTMLElement) => {
+      const opts = el.getAttribute('data-format-opts');
+      return formatAbbreviated(parseFloat(v), opts ? JSON.parse(opts) : undefined);
+    },
   },
   {
     attr: 'data-format-date',
@@ -141,11 +144,14 @@ const FORMATTERS = [
   },
   {
     attr: 'data-format-currency',
-    format: (v: string, el: HTMLElement, dc: string) =>
-      formatCurrency(parseFloat(v), el.getAttribute('data-target-currency') ?? dc, {
+    format: (v: string, el: HTMLElement, dc: string) => {
+      const opts = el.getAttribute('data-format-opts');
+      return formatCurrency(parseFloat(v), el.getAttribute('data-target-currency') ?? dc, {
         numberingSystem: getNs(el),
         nativeDigits: el.getAttribute('data-use-native') === 'true',
-      }),
+        ...(opts ? JSON.parse(opts) : {}),
+      });
+    },
   },
   {
     attr: 'data-convert-currency',
