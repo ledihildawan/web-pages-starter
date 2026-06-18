@@ -3,16 +3,16 @@ import { i18nConfig } from '@config/i18n';
 import { LOCALE_CODES } from '@generated/active-locales-data';
 import { env } from '@generated/env';
 import { getErrorPageSlugs, getRootPageSlug, scanPages } from '@page-system';
-import { resolveRoot } from '@utils/common';
+import { lookup } from '@utils/paths';
 import { log, logBox } from '../lib/logger';
 import { writeFilePath } from '../lib/write-file';
 
 const cliArgs = process.argv.slice(2);
 const distOnly = cliArgs.includes('--dist-only');
 
-const PAGES_DIR = resolveRoot('pages');
-const OUTPUT_PUBLIC = resolveRoot('public', 'sitemap.xml');
-const OUTPUT_DIST = resolveRoot('dist', 'sitemap.xml');
+const PAGES_DIR = lookup('@', 'pages');
+const OUTPUT_PUBLIC = lookup('@', 'public', 'sitemap.xml');
+const OUTPUT_DIST = lookup('@', 'dist', 'sitemap.xml');
 
 const DEFAULT_PRIORITY = env.SITEMAP_DEFAULT_PRIORITY;
 const DEFAULT_CHANGEFREQ = env.SITEMAP_DEFAULT_CHANGEFREQ;

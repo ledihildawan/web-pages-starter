@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import { resolveRoot } from '@utils/common';
+import { lookup } from '@utils/paths';
 import { log } from './lib/logger';
 
 const dirs = [
@@ -11,7 +11,7 @@ const dirs = [
   'public/assets/fonts',
 ];
 for (const dir of dirs) {
-  const fullPath = resolveRoot(dir);
+  const fullPath = lookup('@', dir);
   try {
     if (fs.existsSync(fullPath)) {
       fs.rmSync(fullPath, { recursive: true, force: true });

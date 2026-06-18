@@ -8,7 +8,7 @@ import { generateDynamicEntries } from '@page-system/dynamic-routes';
 import { defineConfig, type RsbuildPlugin } from '@rsbuild/core';
 import { createTemplateParams } from '@template-engine';
 import { alias } from '@utils/alias';
-import { resolveRoot } from '@utils/common';
+import { lookup } from '@utils/paths';
 import { minify } from 'html-minifier-terser';
 import { html as beautifyHtml } from 'js-beautify';
 
@@ -86,12 +86,12 @@ const pluginHotReloadContent = (): RsbuildPlugin => ({
           };
         }) {
           compiler.hooks.afterCompile.tap('watch-content-files', (compilation) => {
-            compilation.contextDependencies.add(resolveRoot('locales'));
-            compilation.contextDependencies.add(resolveRoot('data'));
-            compilation.contextDependencies.add(resolveRoot('pages'));
-            compilation.contextDependencies.add(resolveRoot('shared'));
-            compilation.contextDependencies.add(resolveRoot('layouts'));
-            compilation.contextDependencies.add(resolveRoot('generated'));
+            compilation.contextDependencies.add(lookup('@', 'locales'));
+            compilation.contextDependencies.add(lookup('@', 'data'));
+            compilation.contextDependencies.add(lookup('@', 'pages'));
+            compilation.contextDependencies.add(lookup('@', 'shared'));
+            compilation.contextDependencies.add(lookup('@', 'layouts'));
+            compilation.contextDependencies.add(lookup('@', 'generated'));
           });
         },
       });
@@ -174,11 +174,11 @@ const pluginRemoveEmptyPageJs = (): RsbuildPlugin => ({
   },
 });
 
-const scannedPages = scanPages(resolveRoot('pages'), '');
+const scannedPages = scanPages(lookup('@', 'pages'), '');
 
 const getPageNames = (): string[] => scannedPages.map((p) => p.name);
 
-const PAGE_ENTRY = resolveRoot('shared', 'page-entry.ts');
+const PAGE_ENTRY = lookup('@', 'shared', 'page-entry.ts');
 
 const getEntries = (): Record<string, string | string[]> => {
   const entries: Record<string, string | string[]> = {};
@@ -281,38 +281,38 @@ export default defineConfig({
     },
     copy: [
       {
-        from: resolveRoot('assets'),
+        from: lookup('@', 'assets'),
         to: 'assets',
         globOptions: { ignore: MANAGED_EXTS.map((ext) => `**/*.${ext}`) },
         noErrorOnMissing: true,
       },
       {
-        from: resolveRoot('public', 'manifest.json'),
+        from: lookup('@', 'public', 'manifest.json'),
         to: 'manifest.json',
         noErrorOnMissing: true,
       },
       {
-        from: resolveRoot('public', 'service-worker.js'),
+        from: lookup('@', 'public', 'service-worker.js'),
         to: 'service-worker.js',
         noErrorOnMissing: true,
       },
       {
-        from: resolveRoot('public', 'robots.txt'),
+        from: lookup('@', 'public', 'robots.txt'),
         to: 'robots.txt',
         noErrorOnMissing: true,
       },
       {
-        from: resolveRoot('public', 'sitemap.xml'),
+        from: lookup('@', 'public', 'sitemap.xml'),
         to: 'sitemap.xml',
         noErrorOnMissing: true,
       },
       {
-        from: resolveRoot('public', 'favicon.svg'),
+        from: lookup('@', 'public', 'favicon.svg'),
         to: 'favicon.svg',
         noErrorOnMissing: true,
       },
       {
-        from: resolveRoot('public/assets/i18n'),
+        from: lookup('@', 'public/assets/i18n'),
         to: 'assets/i18n',
         noErrorOnMissing: true,
       },
@@ -367,8 +367,8 @@ export default defineConfig({
             enforce: 'pre',
             use: [
               {
-                loader: resolveRoot('packages', 'page-system', 'page-inject-loader.cjs'),
-                options: { bootstrap: resolveRoot('bootstrap.ts') },
+                loader: lookup('@', 'packages', 'page-system', 'page-inject-loader.cjs'),
+                options: { bootstrap: lookup('@', 'bootstrap.ts') },
               },
             ],
           },
@@ -383,8 +383,8 @@ export default defineConfig({
                 loader: 'simple-nunjucks-loader',
                 options: {
                   autoescape: false,
-                  searchPaths: ['pages', 'layouts', '.'].map((d) => resolveRoot(d)),
-                  assetsPaths: [resolveRoot('assets')],
+                  searchPaths: ['pages', 'layouts', '.'].map((d) => lookup('@', d)),
+                  assetsPaths: [lookup('@', 'assets')],
                 },
               },
             ],
@@ -403,7 +403,7 @@ export default defineConfig({
         return createTemplateParams(
           {
             ...params,
-            entryName: path.relative(resolveRoot('pages'), dynEntry.templateDir),
+            entryName: path.relative(lookup('@', 'pages'), dynEntry.templateDir),
           },
           LOCALE_STORAGE_KEY,
           getActiveLocaleCodes(),

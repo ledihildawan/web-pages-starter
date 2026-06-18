@@ -25,6 +25,7 @@
     "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
+      "@/*": ["./*"],
       "@config/*": ["./configs/*"],
       "@constants": ["./constants.ts"],
       "@utils/*": ["./utils/*"],

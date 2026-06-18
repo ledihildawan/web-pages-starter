@@ -2,10 +2,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
 import { buildFontsCss } from '@i18n/fonts/font-css';
-import { resolveRoot } from '@utils/common';
+import { lookup } from '@utils/paths';
 import { log, logBox } from '../lib/logger';
 
-const OUTPUT_DIR = resolveRoot('public', 'assets', 'fonts');
+const OUTPUT_DIR = lookup('@', 'public', 'assets', 'fonts');
 const OUTPUT_FILE = path.join(OUTPUT_DIR, 'fonts.css');
 
 const allLocales = [...new Set([i18nConfig.defaultLocale, ...(i18nConfig.locales ?? [])])];
@@ -19,7 +19,7 @@ for (const pkgCss of packageCss) {
   fs.mkdirSync(pkgDir, { recursive: true });
 
   for (const fontFile of pkgCss.fontFiles) {
-    const srcPath = path.join(resolveRoot('node_modules', pkgCss.pkg, 'files', fontFile));
+    const srcPath = path.join(lookup('@', 'node_modules', pkgCss.pkg, 'files', fontFile));
     const destPath = path.join(pkgDir, fontFile);
     if (fs.existsSync(srcPath) && !fs.existsSync(destPath)) {
       fs.copyFileSync(srcPath, destPath);

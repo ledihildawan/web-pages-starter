@@ -3,12 +3,12 @@ import process from 'node:process';
 import { i18nConfig } from '@config/i18n';
 import { env } from '@generated/env';
 import { getErrorPageSlugs, getRootPageSlug } from '@page-system';
-import { resolveRoot } from '@utils/common';
+import { lookup } from '@utils/paths';
 import { createStaticApp, getPageNames, loadHtmlCache } from './lib/hono-server';
 import { log } from './lib/logger';
 import { createServer, setupSigintHandler } from './lib/signal-handler';
 
-const DIST = resolveRoot('dist');
+const DIST = lookup('@', 'dist');
 
 if (!existsSync(DIST)) {
   log.distNotFound();

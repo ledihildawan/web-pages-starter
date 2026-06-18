@@ -5,7 +5,7 @@ import { getActiveLocaleCodes } from '@i18n/engine/active-locales';
 import { isSystemPageSlug, SYSTEM_PAGE_IDS, type SystemPageId } from '@page-system';
 import { log } from '@scripts/lib/logger';
 import { romanize } from '@scripts/lib/romanize';
-import { resolveRoot } from '@utils/common';
+import { lookup } from '@utils/paths';
 
 const args = process.argv.slice(2);
 const inputPath = args[0];
@@ -55,7 +55,7 @@ const pageId = lastSegment;
 const urlPath = formattedSegments.join('/');
 const titleCase = lastSegment.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase());
 
-const pagesRoot = resolveRoot('pages');
+const pagesRoot = lookup('@', 'pages');
 const targetDir = groupFolder
   ? path.join(pagesRoot, groupFolder, ...formattedSegments)
   : path.join(pagesRoot, ...formattedSegments);
@@ -134,7 +134,7 @@ try {
   fs.writeFileSync(path.join(targetDir, 'script.ts'), '');
   fs.writeFileSync(path.join(targetDir, 'style.css'), '');
 
-  const baseLocaleDir = resolveRoot('locales');
+  const baseLocaleDir = lookup('@', 'locales');
   if (fs.existsSync(baseLocaleDir)) {
     for (const lng of getActiveLocaleCodes()) {
       const filePath = path.join(baseLocaleDir, lng, `${pageId}.json`);

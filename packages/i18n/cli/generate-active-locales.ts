@@ -7,9 +7,9 @@ import { NUMBERING_SYSTEMS } from '@i18n/data/numbering-systems';
 import { WRITING_SYSTEM, WRITING_SYSTEMS } from '@i18n/data/writing-systems';
 import { log } from '@scripts/lib/logger';
 import { generatedHeader, writeFilePath } from '@scripts/lib/write-file';
-import { resolveRoot } from '@utils/common';
+import { lookup } from '@utils/paths';
 
-const OUTPUT_FILE = resolveRoot('generated', 'active-locales-data.ts');
+const OUTPUT_FILE = lookup('@', 'generated', 'active-locales-data.ts');
 
 const activeCodes: LocaleCode[] = [...new Set([i18nConfig.defaultLocale, ...(i18nConfig.locales ?? [])])];
 

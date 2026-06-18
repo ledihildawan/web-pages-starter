@@ -1,12 +1,12 @@
 import { i18nConfig } from '@config/i18n';
 import { env } from '@generated/env';
 import { getErrorPageSlugs } from '@page-system';
-import { resolveRoot } from '@utils/common';
+import { lookup } from '@utils/paths';
 import { logBox } from '../lib/logger';
 import { writeFilePath } from '../lib/write-file';
 
-const OUTPUT_PUBLIC = resolveRoot('public', 'robots.txt');
-const OUTPUT_DIST = resolveRoot('dist', 'robots.txt');
+const OUTPUT_PUBLIC = lookup('@', 'public', 'robots.txt');
+const OUTPUT_DIST = lookup('@', 'dist', 'robots.txt');
 
 const basePath = env.BASE_PATH.replace(/\/?$/, '/');
 const baseUrl = env.SITE_URL.endsWith('/') ? env.SITE_URL : `${env.SITE_URL}/`;

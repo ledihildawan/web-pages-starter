@@ -52,8 +52,9 @@ import { cardinal as jaCardinal, ordinal as jaOrdinal } from '@i18n/strategies/j
 import { cardinal as zhCardinal } from '@i18n/strategies/zh';
 import { loadSharedLocales } from '@i18n/utils';
 import { getRootPageSlug } from '@page-system';
-import { getValueByPath, resolveRoot } from '@utils/common';
+import { getValueByPath } from '@utils/common';
 import { loadGlobalData, readJSON5 } from '@utils/json5';
+import { lookup } from '@utils/paths';
 import type { DateValue, JsonData } from '@utils/types';
 
 setStrategies(
@@ -79,9 +80,9 @@ const hashLocales = (name: string, sharedLocales: string[]): string => {
   const parts: string[] = [];
   for (const locale of getActiveLocales()) {
     const files = [
-      resolveRoot('locales', locale.code, 'common.json'),
-      resolveRoot('locales', locale.code, `${name}.json`),
-      ...sharedLocales.map((lName) => resolveRoot('locales', locale.code, `${lName}.json`)),
+      lookup('@', 'locales', locale.code, 'common.json'),
+      lookup('@', 'locales', locale.code, `${name}.json`),
+      ...sharedLocales.map((lName) => lookup('@', 'locales', locale.code, `${lName}.json`)),
     ];
     for (const f of files) {
       try {
@@ -121,7 +122,7 @@ export const scanSharedLocales = (
   const includeRegex = /(?:include|import|extends)\s+['"]([^'"]+\.njk)['"]/g;
   for (const match of content.matchAll(includeRegex)) {
     for (const dir of ['pages', 'layouts', '.']) {
-      const candidate = resolveRoot(dir, match[1]);
+      const candidate = lookup('@', dir, match[1]);
       if (fs.existsSync(candidate)) {
         scanSharedLocales(candidate, pageId, found, scanned);
         break;
@@ -150,14 +151,14 @@ const generateClientI18nScript = (
       supportedLangs.map((l) => [
         l,
         {
-          common: readJSON5(resolveRoot('locales', l, 'common.json')),
-          [name]: readJSON5(resolveRoot('locales', l, `${name}.json`)),
-          ...loadSharedLocales(l, sharedLocales, resolveRoot('locales')),
+          common: readJSON5(lookup('@', 'locales', l, 'common.json')),
+          [name]: readJSON5(lookup('@', 'locales', l, `${name}.json`)),
+          ...loadSharedLocales(l, sharedLocales, lookup('@', 'locales')),
         },
       ]),
     ) as Record<string, JsonData>;
 
-    const dirs = [resolveRoot('public', 'assets', 'i18n', name), resolveRoot('dist', 'assets', 'i18n', name)];
+    const dirs = [lookup('@', 'public', 'assets', 'i18n', name), lookup('@', 'dist', 'assets', 'i18n', name)];
     for (const dir of dirs) {
       if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir, { recursive: true });
@@ -593,14 +594,14 @@ export const createTemplateParams = (
 ) => {
   const lang = i18nConfig.defaultLocale;
   const folderName = String(params.entryName || getRootPageSlug(lang));
-  const pageData = readJSON5(resolveRoot('pages', folderName, 'data.json5'));
+  const pageData = readJSON5(lookup('@', 'pages', folderName, 'data.json5'));
   const pageId = String(pageData.page_id || folderName);
-  const sharedLocales = scanSharedLocales(resolveRoot('pages', folderName, 'index.njk'), pageId);
+  const sharedLocales = scanSharedLocales(lookup('@', 'pages', folderName, 'index.njk'), pageId);
 
   const mergedLocales: JsonData = {
-    common: readJSON5(resolveRoot('locales', lang, 'common.json')),
-    [pageId]: readJSON5(resolveRoot('locales', lang, `${pageId}.json`)),
-    ...loadSharedLocales(lang, sharedLocales, resolveRoot('locales')),
+    common: readJSON5(lookup('@', 'locales', lang, 'common.json')),
+    [pageId]: readJSON5(lookup('@', 'locales', lang, `${pageId}.json`)),
+    ...loadSharedLocales(lang, sharedLocales, lookup('@', 'locales')),
   };
 
   const resolveKeyToPath = (key: string): string => {
@@ -677,7 +678,7 @@ export const createTemplateParams = (
   };
 
   const globalData = (() => {
-    const data = loadGlobalData(resolveRoot('data'));
+    const data = loadGlobalData(lookup('@', 'data'));
     data.site_url = env.SITE_URL;
     return data;
   })();

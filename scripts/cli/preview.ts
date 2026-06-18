@@ -7,7 +7,7 @@ import { env } from '@generated/env';
 import type { serve } from '@hono/node-server';
 import ngrok from '@ngrok/ngrok';
 import { getErrorPageSlugs, getRootPageSlug } from '@page-system';
-import { resolveRoot } from '@utils/common';
+import { lookup } from '@utils/paths';
 import inquirer from 'inquirer';
 import { createStaticApp, getPageNames, loadHtmlCache } from '../lib/hono-server';
 import { log } from '../lib/logger';
@@ -16,7 +16,7 @@ import { createServer, wrapMainError } from '../lib/signal-handler';
 const PORT = env.PORT;
 const HOST = env.HOST;
 const LOCAL_URL = `http://localhost:${PORT}`;
-const DIST = resolveRoot('dist');
+const DIST = lookup('@', 'dist');
 
 const TEXT_EXTS = ['.html', '.css', '.js', '.json', '.xml', '.txt', '.svg', '.webmanifest'];
 

@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 import { env } from '@generated/env';
-import { resolveRoot } from '@utils/common';
+import { lookup } from '@utils/paths';
 import { log, logBox } from './lib/logger';
 
 const args = process.argv.slice(2);
@@ -32,7 +32,7 @@ if (args.includes('--pretty')) {
 
 logBox('Build Process', { Mode: mode });
 
-const distPath = resolveRoot('dist');
+const distPath = lookup('@', 'dist');
 if (fs.existsSync(distPath)) {
   log.info('Cleaning previous build...');
   fs.rmSync(distPath, { recursive: true, force: true });
@@ -47,7 +47,7 @@ const generators = [
 ];
 
 for (const gen of generators) {
-  const genPath = resolveRoot(gen);
+  const genPath = lookup('@', gen);
   const result = spawnSync('bun', [genPath], {
     stdio: 'inherit',
     env: spawnEnv,

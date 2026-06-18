@@ -4,12 +4,12 @@ import path from 'node:path';
 import process from 'node:process';
 import { log, logBox } from '@scripts/lib/logger';
 import { setupSigintHandler } from '@scripts/lib/signal-handler';
-import { resolveRoot } from '@utils/common';
+import { lookup } from '@utils/paths';
 import chokidar from 'chokidar';
 
-const LOCALE_DIR = resolveRoot('locales');
-const I18N_CONFIG = resolveRoot('configs', 'i18n.ts');
-const GENERATED_DIR = resolveRoot('generated');
+const LOCALE_DIR = lookup('@', 'locales');
+const I18N_CONFIG = lookup('@', 'configs', 'i18n.ts');
+const GENERATED_DIR = lookup('@', 'generated');
 
 if (!fs.existsSync(LOCALE_DIR)) {
   log.error(`Error: Locale directory not found at ${LOCALE_DIR}`);

@@ -1,11 +1,11 @@
 import fs from 'node:fs';
 import { CURRENCY_CODE } from '@i18n/data/currencies';
-import { resolveRoot } from '@utils/common';
+import { lookup } from '@utils/paths';
 import { log } from './lib/logger';
 import { generatedHeader, writeFilePath } from './lib/write-file';
 
 const EXCHANGE_RATES_URL = 'https://api.frankfurter.dev/v2/rates';
-const EXCHANGE_RATES_FILE = resolveRoot('generated', 'exchange-rates.ts');
+const EXCHANGE_RATES_FILE = lookup('@', 'generated', 'exchange-rates.ts');
 const BASE_CURRENCY = CURRENCY_CODE.USD;
 
 async function fetchExchangeRates(): Promise<Record<string, number>> {

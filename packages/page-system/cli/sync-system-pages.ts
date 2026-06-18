@@ -4,9 +4,9 @@ import { i18nConfig } from '@config/i18n';
 import { getSystemPageSlug, SYSTEM_PAGE_IDS } from '@page-system/system-pages';
 import { log, logBox } from '@scripts/lib/logger';
 import { wrapMainError } from '@scripts/lib/signal-handler';
-import { resolveRoot } from '@utils/common';
+import { lookup } from '@utils/paths';
 
-const PAGES_DIR = resolveRoot('pages');
+const PAGES_DIR = lookup('@', 'pages');
 
 function getPageIdFromFolder(folderName: string): string | null {
   const indexPath = path.join(PAGES_DIR, folderName, 'data.json5');

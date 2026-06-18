@@ -1,14 +1,14 @@
 import { i18nConfig } from '@config/i18n';
 import { env } from '@generated/env';
-import { resolveRoot } from '@utils/common';
 import { loadGlobalData } from '@utils/json5';
+import { lookup } from '@utils/paths';
 import { logBox } from '../lib/logger';
 import { writeFilePath } from '../lib/write-file';
 
-const OUTPUT_PUBLIC = resolveRoot('public', 'manifest.json');
-const OUTPUT_DIST = resolveRoot('dist', 'manifest.json');
+const OUTPUT_PUBLIC = lookup('@', 'public', 'manifest.json');
+const OUTPUT_DIST = lookup('@', 'dist', 'manifest.json');
 
-const dataDir = resolveRoot('data');
+const dataDir = lookup('@', 'data');
 const global = loadGlobalData(dataDir);
 
 const siteName = (global.site_name as string) || 'Starter';

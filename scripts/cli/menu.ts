@@ -1,7 +1,6 @@
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
-import { resolveRoot } from '@utils/common';
-import { find } from '@utils/paths';
+import { find, lookup } from '@utils/paths';
 import inquirer from 'inquirer';
 import { log } from '../lib/logger';
 import { setupSigintHandler, wrapMainError } from '../lib/signal-handler';
@@ -14,7 +13,7 @@ const runTool = (name: string, args: string[] = []): Promise<void> => {
       find('@scripts', 'generators', `generate-${name}.ts`),
       find('@i18n', 'cli', `${name}.ts`),
       find('@page-system', 'cli', `${name}.ts`),
-      resolveRoot('packages', 'env', 'cli', `${name}.ts`),
+      lookup('@', 'packages', 'env', 'cli', `${name}.ts`),
     ];
     const toolPath = candidates.find((c): c is string => c !== null);
     if (!toolPath) {
@@ -108,7 +107,7 @@ const tools: Tool[] = [
     name: 'Serve',
     description: 'Serve production build locally',
     action: async () => {
-      const distPath = resolveRoot('dist');
+      const distPath = lookup('@', 'dist');
       if (!fs.existsSync(distPath)) {
         log.distNotFound();
         const { choice } = await inquirer.prompt<{ choice: string }>([
@@ -315,7 +314,7 @@ const tools: Tool[] = [
       const dirs = ['node_modules', 'dist', 'bun.lock'];
       for (const dir of dirs) {
         try {
-          fs.rmSync(resolveRoot(dir), {
+          fs.rmSync(lookup('@', dir), {
             recursive: true,
             force: true,
           });

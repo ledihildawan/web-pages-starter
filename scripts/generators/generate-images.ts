@@ -2,13 +2,13 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { env } from '@generated/env';
 import { generatedHeader, writeFilePath } from '@scripts/lib/write-file';
-import { resolveRoot } from '@utils/common';
+import { lookup } from '@utils/paths';
 import sharp from 'sharp';
 import { log, logBox } from '../lib/logger';
 
-const SOURCE_DIR = resolveRoot('assets', 'images');
-const OUTPUT_DIR = resolveRoot('public', 'assets', 'images');
-const MANIFEST_FILE = resolveRoot('generated', 'image-manifest.ts');
+const SOURCE_DIR = lookup('@', 'assets', 'images');
+const OUTPUT_DIR = lookup('@', 'public', 'assets', 'images');
+const MANIFEST_FILE = lookup('@', 'generated', 'image-manifest.ts');
 
 const ASSET_PREFIX = env.BASE_PATH.replace(/\/$/, '');
 const imageUrl = (file: string): string => `${ASSET_PREFIX}/assets/images/${file}`;

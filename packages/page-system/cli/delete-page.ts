@@ -5,8 +5,8 @@ import { i18nConfig } from '@config/i18n';
 import { isSystemPageId, isSystemPageSlug, scanPages } from '@page-system';
 import { log } from '@scripts/lib/logger';
 import { setupSigintHandler, wrapMainError } from '@scripts/lib/signal-handler';
-import { resolveRoot } from '@utils/common';
 import { readJSON5 } from '@utils/json5';
+import { lookup } from '@utils/paths';
 import inquirer from 'inquirer';
 
 const args = process.argv.slice(2);
@@ -20,7 +20,7 @@ interface PageInfo {
 }
 
 function getAllPages(): PageInfo[] {
-  const pagesDir = resolveRoot('pages');
+  const pagesDir = lookup('@', 'pages');
   const scanned = scanPages(pagesDir, '');
   return scanned.map((p) => {
     let pageId = p.name;
@@ -182,7 +182,7 @@ function deletePage(pageInfo: PageInfo): {
   }
 
   let localeFilesDeleted = 0;
-  const localesDir = resolveRoot('locales');
+  const localesDir = lookup('@', 'locales');
   if (fs.existsSync(localesDir)) {
     for (const lng of fs.readdirSync(localesDir)) {
       const localeFile = path.join(localesDir, lng, `${pageInfo.pageId}.json`);

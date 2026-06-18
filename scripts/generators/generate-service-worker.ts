@@ -1,10 +1,10 @@
 import { i18nConfig } from '@config/i18n';
 import { getErrorPageSlugs, getRootPageSlug, getSystemPageSlug } from '@page-system';
-import { resolveRoot } from '@utils/common';
+import { lookup } from '@utils/paths';
 import { logBox } from '../lib/logger';
 import { writeFilePath } from '../lib/write-file';
 
-const OUTPUT = resolveRoot('public', 'service-worker.js');
+const OUTPUT = lookup('@', 'public', 'service-worker.js');
 
 const rootSlug = getRootPageSlug(i18nConfig.defaultLocale);
 const [notFoundSlug, unauthorizedSlug, forbiddenSlug, serverErrorSlug, maintenanceSlug, offlineErrorSlug] =

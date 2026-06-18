@@ -2,10 +2,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { log } from '@scripts/lib/logger';
 import { writeFilePath } from '@scripts/lib/write-file';
-import { resolveRoot } from '@utils/common';
+import { lookup } from '@utils/paths';
 
-const ROOT = resolveRoot();
-const OUTPUT_FILE = resolveRoot('generated', 'env.ts');
+const ROOT = lookup('@');
+const OUTPUT_FILE = lookup('@', 'generated', 'env.ts');
 
 const ENV_FILES = fs.existsSync(ROOT)
   ? fs.readdirSync(ROOT).filter((f) => f.startsWith('.env') && !f.endsWith('.example'))
