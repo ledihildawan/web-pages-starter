@@ -350,6 +350,7 @@ export default defineConfig({
     define: {
       'import.meta.env': JSON.stringify({
         ...browserEnv,
+        BROWSER: true,
         SINGLE_LOCALE: isSingleLocale(),
         DEFAULT_LOCALE: i18nConfig.defaultLocale,
         FLAG_CDN_BASE,

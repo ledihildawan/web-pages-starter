@@ -8,14 +8,10 @@
 export const STAGES = ['dev', 'qa', 'uat', 'preprod', 'prod'] as const;
 
 const BROWSER_SCHEMA = {
-  BASE_PATH: { type: 'string', default: '' },
-  HOST: { type: 'string', default: '' },
-  PORT: { type: 'number', default: 0 },
-  SITE_URL: { type: 'string', default: '' },
-  STAGE: { type: 'string', default: '' }
+{{codegen:browser_schema_entries}}
 } as const;
 
-const BROWSER_ENV_KEYS = ['BASE_PATH', 'HOST', 'PORT', 'SITE_URL', 'STAGE'] as const;
+const BROWSER_ENV_KEYS = [{{codegen:browser_keys}}] as const;
 
 type SchemaToType<S extends Record<string, { type: string }>> = {
   [K in keyof S]: S[K]['type'] extends 'number'
@@ -26,15 +22,7 @@ type SchemaToType<S extends Record<string, { type: string }>> = {
 };
 
 type FullSchema = typeof BROWSER_SCHEMA & {
-  BUILD_PREVIEW: { type: 'boolean' },
-  LIGHTHOUSE_OUTPUT_DIR: { type: 'string' },
-  MINIFY: { type: 'boolean' },
-  NGROK_AUTHTOKEN: { type: 'string' },
-  NODE_BINARY: { type: 'string' },
-  PRETTY_HTML: { type: 'boolean' },
-  RSBUILD_RUNTIME: { type: 'string' },
-  SITEMAP_DEFAULT_CHANGEFREQ: { type: 'string' },
-  SITEMAP_DEFAULT_PRIORITY: { type: 'string' }
+{{codegen:private_type_entries}}
 };
 
 export type TypedEnv = SchemaToType<FullSchema> & { IS_PROD: boolean };
@@ -53,32 +41,11 @@ function readEnv(): TypedEnv {
   }
 
   const ENV_SCHEMA = {
-      BASE_PATH: { type: 'string', default: '' },
-      BUILD_PREVIEW: { type: 'boolean', default: false },
-      HOST: { type: 'string', default: '' },
-      LIGHTHOUSE_OUTPUT_DIR: { type: 'string', default: '' },
-      MINIFY: { type: 'boolean', default: false },
-      NGROK_AUTHTOKEN: { type: 'string', default: '' },
-      NODE_BINARY: { type: 'string', default: '' },
-      PORT: { type: 'number', default: 0 },
-      PRETTY_HTML: { type: 'boolean', default: false },
-      RSBUILD_RUNTIME: { type: 'string', default: '' },
-      SITEMAP_DEFAULT_CHANGEFREQ: { type: 'string', default: '' },
-      SITEMAP_DEFAULT_PRIORITY: { type: 'string', default: '' },
-      SITE_URL: { type: 'string', default: '' },
-      STAGE: { type: 'string', default: '' }
+{{codegen:full_schema_entries}}
   } as const;
 
   const ENV_KEY_MAP: Record<string, string> = {
-      BUILD_PREVIEW: 'PRIVATE_BUILD_PREVIEW',
-      LIGHTHOUSE_OUTPUT_DIR: 'PRIVATE_LIGHTHOUSE_OUTPUT_DIR',
-      MINIFY: 'PRIVATE_MINIFY',
-      NGROK_AUTHTOKEN: 'PRIVATE_NGROK_AUTHTOKEN',
-      NODE_BINARY: 'PRIVATE_NODE_BINARY',
-      PRETTY_HTML: 'PRIVATE_PRETTY_HTML',
-      RSBUILD_RUNTIME: 'PRIVATE_RSBUILD_RUNTIME',
-      SITEMAP_DEFAULT_CHANGEFREQ: 'PRIVATE_SITEMAP_DEFAULT_CHANGEFREQ',
-      SITEMAP_DEFAULT_PRIORITY: 'PRIVATE_SITEMAP_DEFAULT_PRIORITY'
+{{codegen:key_map_entries}}
   };
 
   function validateValue(raw: unknown, type: 'string' | 'number' | 'boolean'): unknown {

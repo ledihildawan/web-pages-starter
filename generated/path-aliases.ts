@@ -2,6 +2,7 @@ import path from 'node:path';
 
 export type AliasKey =
   | '@'
+  | '@codegen'
   | '@config'
   | '@constants'
   | '@generated'
@@ -13,6 +14,7 @@ export type AliasKey =
 
 export const alias: Record<AliasKey, string> = {
   '@': path.resolve('.'),
+  '@codegen': path.resolve('packages/codegen'),
   '@config': path.resolve('configs'),
   '@constants': path.resolve('constants.ts'),
   '@generated': path.resolve('generated'),
