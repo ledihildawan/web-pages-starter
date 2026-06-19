@@ -7,81 +7,15 @@
 
 export const STAGES = ['dev', 'qa', 'uat', 'preprod', 'prod'] as const;
 
-const ENV_SCHEMA = {
+const BROWSER_SCHEMA = {
   BASE_PATH: { type: 'string', default: '' },
-  BUILD_PREVIEW: { type: 'boolean', default: false },
   HOST: { type: 'string', default: '' },
-  LIGHTHOUSE_OUTPUT_DIR: { type: 'string', default: '' },
-  MINIFY: { type: 'boolean', default: false },
-  NGROK_AUTHTOKEN: { type: 'string', default: '' },
-  NODE_BINARY: { type: 'string', default: '' },
   PORT: { type: 'number', default: 0 },
-  PRETTY_HTML: { type: 'boolean', default: false },
-  RSBUILD_RUNTIME: { type: 'string', default: '' },
-  SITEMAP_DEFAULT_CHANGEFREQ: { type: 'string', default: '' },
-  SITEMAP_DEFAULT_PRIORITY: { type: 'string', default: '' },
   SITE_URL: { type: 'string', default: '' },
   STAGE: { type: 'string', default: '' },
 } as const;
 
-const ENV_KEYS = Object.keys(ENV_SCHEMA);
-
-const ENV_KEY_MAP: Record<string, string> = {
-  BASE_PATH: 'BASE_PATH',
-  BUILD_PREVIEW: 'BUILD_PREVIEW',
-  HOST: 'HOST',
-  LIGHTHOUSE_OUTPUT_DIR: 'LIGHTHOUSE_OUTPUT_DIR',
-  MINIFY: 'MINIFY',
-  NGROK_AUTHTOKEN: 'PRIVATE_NGROK_AUTHTOKEN',
-  NODE_BINARY: 'NODE_BINARY',
-  PORT: 'PORT',
-  PRETTY_HTML: 'PRETTY_HTML',
-  RSBUILD_RUNTIME: 'RSBUILD_RUNTIME',
-  SITEMAP_DEFAULT_CHANGEFREQ: 'SITEMAP_DEFAULT_CHANGEFREQ',
-  SITEMAP_DEFAULT_PRIORITY: 'SITEMAP_DEFAULT_PRIORITY',
-  SITE_URL: 'SITE_URL',
-  STAGE: 'STAGE',
-};
-
-const BROWSER_ENV_KEYS = ['BASE_PATH', 'BUILD_PREVIEW', 'HOST', 'LIGHTHOUSE_OUTPUT_DIR', 'MINIFY', 'NODE_BINARY', 'PORT', 'PRETTY_HTML', 'RSBUILD_RUNTIME', 'SITEMAP_DEFAULT_CHANGEFREQ', 'SITEMAP_DEFAULT_PRIORITY', 'SITE_URL', 'STAGE'] as const;
-
-type EnvType = 'string' | 'number' | 'boolean';
-
-const IS_BROWSER = typeof window !== 'undefined' && typeof window.document !== 'undefined';
-
-function validateValue(key: string, raw: unknown, type: EnvType): unknown {
-  if (raw === undefined || raw === null) return undefined;
-  if (type === 'boolean') {
-    if (typeof raw === 'boolean') return raw;
-    if (raw === 'true') return true;
-    if (raw === 'false') return false;
-    console.warn(`[env] ${key}: expected boolean, got "${String(raw)}"`);
-    return undefined;
-  }
-  if (type === 'number') {
-    if (typeof raw === 'number') return raw;
-    const num = Number(raw);
-    if (!Number.isNaN(num)) return num;
-    console.warn(`[env] ${key}: expected number, got "${String(raw)}"`);
-    return undefined;
-  }
-  if (typeof raw === 'string') return raw;
-  return String(raw);
-}
-
-function getBrowserEnv(): Record<string, unknown> {
-  const source = (import.meta.env ?? {}) as Record<string, unknown>;
-  const result: Record<string, unknown> = {};
-  for (const key of ENV_KEYS) {
-    result[key] = source[key];
-  }
-  return result;
-}
-
-function getMetaEnv(): Record<string, unknown> {
-  if (IS_BROWSER) return getBrowserEnv();
-  return process.env ?? {};
-}
+const BROWSER_ENV_KEYS = ['BASE_PATH', 'HOST', 'PORT', 'SITE_URL', 'STAGE'] as const;
 
 type SchemaToType<S extends Record<string, { type: string }>> = {
   [K in keyof S]: S[K]['type'] extends 'number'
@@ -91,17 +25,88 @@ type SchemaToType<S extends Record<string, { type: string }>> = {
       : string;
 };
 
-export type TypedEnv = SchemaToType<typeof ENV_SCHEMA> & { IS_PROD: boolean };
+type FullSchema = typeof BROWSER_SCHEMA & {
+  BUILD_PREVIEW: { type: 'boolean' },
+  LIGHTHOUSE_OUTPUT_DIR: { type: 'string' },
+  MINIFY: { type: 'boolean' },
+  NGROK_AUTHTOKEN: { type: 'string' },
+  NODE_BINARY: { type: 'string' },
+  PRETTY_HTML: { type: 'boolean' },
+  RSBUILD_RUNTIME: { type: 'string' },
+  SITEMAP_DEFAULT_CHANGEFREQ: { type: 'string' },
+  SITEMAP_DEFAULT_PRIORITY: { type: 'string' }
+};
+
+export type TypedEnv = SchemaToType<FullSchema> & { IS_PROD: boolean };
+
+export type BrowserEnvType = Pick<TypedEnv, (typeof BROWSER_ENV_KEYS)[number]>;
 
 function readEnv(): TypedEnv {
-  const source = getMetaEnv();
+  if (import.meta.env.BROWSER) {
+    const source = (import.meta.env ?? {}) as Record<string, unknown>;
+    const result: Record<string, unknown> = {};
+    for (const key of BROWSER_ENV_KEYS) {
+      result[key] = source[key];
+    }
+    const stage = (result.STAGE as (typeof STAGES)[number]) ?? 'dev';
+    return { ...result, STAGE: stage, IS_PROD: stage === 'prod' } as TypedEnv;
+  }
+
+  const ENV_SCHEMA = {
+      BASE_PATH: { type: 'string', default: '' },
+      BUILD_PREVIEW: { type: 'boolean', default: false },
+      HOST: { type: 'string', default: '' },
+      LIGHTHOUSE_OUTPUT_DIR: { type: 'string', default: '' },
+      MINIFY: { type: 'boolean', default: false },
+      NGROK_AUTHTOKEN: { type: 'string', default: '' },
+      NODE_BINARY: { type: 'string', default: '' },
+      PORT: { type: 'number', default: 0 },
+      PRETTY_HTML: { type: 'boolean', default: false },
+      RSBUILD_RUNTIME: { type: 'string', default: '' },
+      SITEMAP_DEFAULT_CHANGEFREQ: { type: 'string', default: '' },
+      SITEMAP_DEFAULT_PRIORITY: { type: 'string', default: '' },
+      SITE_URL: { type: 'string', default: '' },
+      STAGE: { type: 'string', default: '' },
+  } as const;
+
+  const ENV_KEY_MAP: Record<string, string> = {
+      BUILD_PREVIEW: 'PRIVATE_BUILD_PREVIEW',
+      LIGHTHOUSE_OUTPUT_DIR: 'PRIVATE_LIGHTHOUSE_OUTPUT_DIR',
+      MINIFY: 'PRIVATE_MINIFY',
+      NGROK_AUTHTOKEN: 'PRIVATE_NGROK_AUTHTOKEN',
+      NODE_BINARY: 'PRIVATE_NODE_BINARY',
+      PRETTY_HTML: 'PRIVATE_PRETTY_HTML',
+      RSBUILD_RUNTIME: 'PRIVATE_RSBUILD_RUNTIME',
+      SITEMAP_DEFAULT_CHANGEFREQ: 'PRIVATE_SITEMAP_DEFAULT_CHANGEFREQ',
+      SITEMAP_DEFAULT_PRIORITY: 'PRIVATE_SITEMAP_DEFAULT_PRIORITY',
+  };
+
+  function validateValue(raw: unknown, type: 'string' | 'number' | 'boolean'): unknown {
+    if (raw === undefined || raw === null) return undefined;
+    if (type === 'boolean') {
+      if (typeof raw === 'boolean') return raw;
+      if (raw === 'true') return true;
+      if (raw === 'false') return false;
+      return undefined;
+    }
+    if (type === 'number') {
+      if (typeof raw === 'number') return raw;
+      const num = Number(raw);
+      if (!Number.isNaN(num)) return num;
+      return undefined;
+    }
+    if (typeof raw === 'string') return raw;
+    return String(raw);
+  }
+
+  const source = process.env ?? {};
   const values: Record<string, unknown> = {};
 
-  for (const key of ENV_KEYS) {
+  for (const key of Object.keys(ENV_SCHEMA)) {
     const field = ENV_SCHEMA[key as keyof typeof ENV_SCHEMA];
-    const lookupKey = IS_BROWSER ? key : (ENV_KEY_MAP[key] ?? key);
+    const lookupKey = ENV_KEY_MAP[key] ?? key;
     const raw = source[lookupKey];
-    const validated = validateValue(key, raw, field.type);
+    const validated = validateValue(raw, field.type);
     values[key] = validated ?? field.default;
   }
 
@@ -153,8 +158,6 @@ export async function loadServerEnvFiles(): Promise<void> {
 }
 
 export const env: TypedEnv = readEnv();
-
-export type BrowserEnvType = Pick<TypedEnv, (typeof BROWSER_ENV_KEYS)[number]>;
 
 export const browserEnv = Object.fromEntries(
   BROWSER_ENV_KEYS.map((k) => [k, env[k as keyof typeof env]]),

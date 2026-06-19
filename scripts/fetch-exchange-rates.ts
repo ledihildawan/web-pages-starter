@@ -108,11 +108,7 @@ export function convertCurrency(
   const fromRate = rates[from];
   const toRate = rates[to];
 
-  if (!fromRate || !toRate) {
-    const missing = !fromRate ? from : to;
-    console.warn(\`[i18n] Currency not supported: \${missing}. Available: \${Object.keys(rates).join(', ')}\`);
-    return amount;
-  }
+  if (!fromRate || !toRate) return amount;
 
   const inBase = amount / fromRate;
   return inBase * toRate;
