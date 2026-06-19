@@ -48,6 +48,12 @@
       "assist": { "enabled": false }
     },
     {
+      "includes": ["packages/codegen/templates/**"],
+      "formatter": { "enabled": false },
+      "linter": { "enabled": false },
+      "assist": { "enabled": false }
+    },
+    {
       "includes": ["public/assets/fonts/**"],
       "formatter": { "enabled": false },
       "linter": { "enabled": false },

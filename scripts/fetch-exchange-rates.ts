@@ -1,9 +1,10 @@
 import fs from 'node:fs';
+import { inject, loadTemplate } from '@codegen';
 import { CURRENCY_CODE } from '@i18n/data/currencies';
 import { getActiveLocales } from '@i18n/engine/active-locales';
 import { lookup } from '@utils/paths';
 import { log } from './lib/logger';
-import { generatedHeader, writeFilePath } from './lib/write-file';
+import { writeFilePath } from './lib/write-file';
 
 const EXCHANGE_RATES_URL = 'https://api.frankfurter.dev/v2/rates';
 const EXCHANGE_RATES_FILE = lookup('@', 'generated', 'exchange-rates.ts');
@@ -48,11 +49,10 @@ async function fetchExchangeRates(): Promise<Record<string, number>> {
 }
 
 function formatRatesObject(rates: Record<string, number>): string {
-  const entries = Object.entries(rates)
+  return Object.entries(rates)
     .sort(([, a], [, b]) => a - b)
     .map(([key, value]) => `  ${key}: ${value.toFixed(8)}`)
     .join(',\n');
-  return `{\n${entries}\n}`;
 }
 
 async function loadExistingRates(): Promise<{ lastUpdated: Date } | null> {
@@ -92,32 +92,11 @@ async function generateExchangeRates(forceRefresh = false): Promise<void> {
       log.info(`  1 ${BASE_CURRENCY} = ${rate.toFixed(4)} ${currency}`);
     }
 
-    const header = generatedHeader('scripts/fetch-exchange-rates.ts');
-    const content = `${header}
-
-export const EXCHANGE_RATES = ${formatRatesObject(rates)} as const;
-
-export function convertCurrency(
-  amount: number,
-  from: string,
-  to: string,
-  rates: Record<string, number> = EXCHANGE_RATES
-): number {
-  if (from === to) return amount;
-
-  const fromRate = rates[from];
-  const toRate = rates[to];
-
-  if (!fromRate || !toRate) {
-    const missing = !fromRate ? from : to;
-    console.warn(\`[i18n] Currency not supported: \${missing}. Available: \${Object.keys(rates).join(', ')}\`);
-    return amount;
-  }
-
-  const inBase = amount / fromRate;
-  return inBase * toRate;
-}
-`;
+    const template = loadTemplate('exchange-rates.ts');
+    const content = inject(template, {
+      generated_at: new Date().toISOString(),
+      rates_object: formatRatesObject(rates),
+    });
 
     writeFilePath(EXCHANGE_RATES_FILE, content);
 
