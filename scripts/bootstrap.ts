@@ -95,6 +95,7 @@ const showUpdateNotification = (registration: ServiceWorkerRegistration) => {
 
     window.location.reload();
   });
+
   banner.querySelector('#sw-dismiss-btn')?.addEventListener('click', () => {
     dismissUpdate();
 
@@ -114,11 +115,13 @@ const registerServiceWorker = () => {
   navigator.serviceWorker.ready.then((reg) => {
     if (reg.waiting) {
       showUpdateNotification(reg);
+
       return;
     }
 
     reg.addEventListener('updatefound', () => {
       const newWorker = reg.installing;
+
       if (!newWorker) return;
 
       newWorker.addEventListener('statechange', () => {
@@ -130,26 +133,36 @@ const registerServiceWorker = () => {
   });
 };
 
+const SINGLE_LOCALE = import.meta.env.SINGLE_LOCALE;
+
 async function bootstrap() {
   try {
-    const [cspModule, plugins, fonts] = await Promise.all([
+    const [cspModule, fonts] = await Promise.all([
       import('@alpinejs/csp').then((m) => m.default),
-      Promise.all([
-        import('@alpinejs/collapse').then((m) => m.default),
-        import('@alpinejs/focus').then((m) => m.default),
-      ]),
       import('@i18n/fonts/fonts'),
     ]);
 
     globalThis.Alpine = cspModule;
 
-    for (const plugin of plugins) {
-      globalThis.Alpine.plugin(plugin);
+    if (SINGLE_LOCALE) {
+      globalThis.Alpine.store('i18n', {
+        current: window.__SERVER_LOCALE__ ?? 'en-US',
+        languages: [],
+        change: () => {},
+      });
+
+      globalThis.Alpine.start();
+
+      fonts.loadLanguageFonts();
+      fonts.watchScriptAndLoadFont();
+
+      registerServiceWorker();
+      return;
     }
 
     const states = await Promise.all([
       import('@i18n/runtime/store').then((m) => m.default),
-      import('../shared/nav/navbar').then((m) => m.default),
+      import('@/shared/nav/navbar').then((m) => m.default),
     ]);
 
     for (const state of states) {

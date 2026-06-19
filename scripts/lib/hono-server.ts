@@ -20,20 +20,25 @@ const getCacheControl = (urlPath: string): string => {
   if (HTML_RE.test(urlPath)) return 'no-cache, must-revalidate, max-age=0';
   if (FINGERPRINTED_ASSET_RE.test(urlPath)) return `public, max-age=${ONE_YEAR}, immutable`;
   if (/\.(?:json|xml|txt|svg|ico)$/.test(urlPath)) return `public, max-age=${ONE_HOUR}`;
+
   return 'public, max-age=0, must-revalidate';
 };
 
 function scanHtmlFiles(dir: string, basePath: string): Array<{ key: string; content: string }> {
   const results: Array<{ key: string; content: string }> = [];
+
   if (!existsSync(dir)) return results;
 
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     const fullPath = path.join(dir, entry.name);
+
     if (entry.isDirectory()) {
       const childBase = basePath ? `${basePath}/${entry.name}` : entry.name;
+
       results.push(...scanHtmlFiles(fullPath, childBase));
     } else if (entry.name.endsWith('.html')) {
       const key = basePath ? `${basePath}/${entry.name.replace(/\.html$/, '')}` : entry.name.replace(/\.html$/, '');
+
       results.push({ key, content: readFileSync(fullPath, 'utf8') });
     }
   }
@@ -42,9 +47,11 @@ function scanHtmlFiles(dir: string, basePath: string): Array<{ key: string; cont
 
 export function loadHtmlCache(distDir: string): Map<string, string> {
   const cache = new Map<string, string>();
+
   for (const { key, content } of scanHtmlFiles(distDir, '')) {
     cache.set(key, content);
   }
+
   return cache;
 }
 
@@ -56,14 +63,19 @@ export function createStaticApp(distDir: string, htmlCache?: Map<string, string>
   const cache = htmlCache ?? loadHtmlCache(distDir);
 
   const app = new Hono();
+
   app.use('*', compress());
   app.use('*', async (c, next) => {
     const start = Date.now();
+
     await next();
+
     if (!c.res.headers.has('Cache-Control')) {
       c.res.headers.set('Cache-Control', getCacheControl(c.req.path));
     }
+
     const ms = Date.now() - start;
+
     log.info(`\x1b[90m${ms.toString().padStart(4)}ms\x1b[0m ${c.req.method} ${c.req.path}`);
   });
 
@@ -71,6 +83,7 @@ export function createStaticApp(distDir: string, htmlCache?: Map<string, string>
 
   app.use('*', async (c, next) => {
     await next();
+
     c.res.headers.set('X-Content-Type-Options', 'nosniff');
     c.res.headers.set('X-Frame-Options', 'DENY');
     c.res.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
@@ -79,17 +92,26 @@ export function createStaticApp(distDir: string, htmlCache?: Map<string, string>
 
   app.get('*', (c) => {
     const reqPath = c.req.path;
+
     if (STATIC_ASSET_RE.test(reqPath)) return c.notFound();
+
     if (reqPath === '/') {
       const home = cache.get('index');
+
       if (home) return c.html(home);
+
       return c.notFound();
     }
+
     const cleanPath = reqPath.replace(/^\/+|\/+$/g, '');
+
     if (cache.has(cleanPath)) return c.html(cache.get(cleanPath) as string);
+
     const notFoundSlug = getSystemPageSlug('not-found', i18nConfig.defaultLocale);
     const notFound = cache.get(notFoundSlug);
+
     if (notFound) return c.html(notFound, 404);
+
     return c.notFound();
   });
 

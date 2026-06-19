@@ -19,9 +19,21 @@ export default defineData('navbar', () => ({
   focusedElement: null as Element | null,
   _ticking: false,
   _menuFocusTriggered: false,
+  _pluginsLoaded: false,
 
   get i18n(): i18nStore {
     return this.$store.i18n as i18nStore;
+  },
+
+  async _ensurePlugins() {
+    if (this._pluginsLoaded) return;
+    this._pluginsLoaded = true;
+    const [collapse, focus] = await Promise.all([
+      import('@alpinejs/collapse').then((m) => m.default),
+      import('@alpinejs/focus').then((m) => m.default),
+    ]);
+    globalThis.Alpine.plugin(collapse);
+    globalThis.Alpine.plugin(focus);
   },
 
   isActive(path: string): boolean {
@@ -147,7 +159,8 @@ export default defineData('navbar', () => ({
     return true;
   },
 
-  toggleMobile() {
+  async toggleMobile() {
+    await this._ensurePlugins();
     if (!this.mobileMenuOpen) {
       this.scrollY = window.scrollY;
       this.focusedElement = document.activeElement;
