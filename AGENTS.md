@@ -40,12 +40,18 @@ Requires [Python 3](https://python.org) with `fonttools` + `brotli` (`pip instal
 
 ## Code Style
 
-- No comments unless requested
-- No deprecated code — remove entirely
-- Nunjucks string concat: `~` (never `+`)
-- Import paths: `@i18n`, `@template-engine`, `@page-system`, `@config/*`, `@scripts/*`, `@utils/*`, `@generated/*` aliases used everywhere (including the rsbuild config chain). `tsconfig.json` is the single source of truth for path aliases — `utils/paths.ts` reads them and exports bundler-format aliases, auto-deriving for jiti + bundler. `rsbuild.config.ts` is a thin jiti wrapper that loads `configs/rsbuild.ts` — real config lives in `configs/rsbuild.ts`. Env imports use `@generated/env` (not `@utils/env`); `@utils/*` still covers `common.ts`, `json5.ts`, `paths.ts`, etc.
-- i18n CLI scripts live in `packages/i18n/cli/` (not `scripts/`). Page-system CLI lives in `packages/page-system/cli/`. Env CLI lives in `packages/env/cli/`.
-- Always write JavaScript and TypeScript targeting ECMAScript 2022+ and modern runtimes (2025–2026). Prefer modern language features and APIs. Do not generate legacy JavaScript, CommonJS, polyfills, compatibility workarounds, or outdated patterns unless explicitly requested.
+* **General:**
+  * No comments unless explicitly requested.
+  * Remove all deprecated code entirely.
+  * Write modern JS/TS (ECMAScript 2022+). No CommonJS, polyfills, or legacy patterns.
+* **Nunjucks:** Use `~` for string concatenation (never `+`).
+* **Project Structure:**
+  * **CLI Scripts:** Must reside in their respective package folders (e.g., `packages/i18n/cli/`, `packages/env/cli/`), not in a global `scripts/` directory.
+  * **Rsbuild Config:** `rsbuild.config.ts` is strictly a Jiti wrapper. The actual configuration lives in `configs/rsbuild.ts`.
+* **Imports & Path Aliases:**
+  * Use predefined aliases everywhere (`@i18n`, `@template-engine`, `@page-system`, `@config/*`, `@scripts/*`, `@utils/*`, `@generated/*`).
+  * Use `@generated/env` for environment imports (never `@utils/env`).
+  * `tsconfig.json` is the single source of truth for aliases (`utils/paths.ts` reads and auto-derives them for Jiti/bundlers).
 
 
 ## Build Modes

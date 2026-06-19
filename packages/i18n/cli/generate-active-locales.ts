@@ -61,12 +61,17 @@ function serializeWritingSystem(ws: (typeof WRITING_SYSTEMS)[number]): string {
 }
 
 const filteredWritingSystem = Object.fromEntries(
-  Object.entries(WRITING_SYSTEM).map(([key, value]) => {
-    if (key.endsWith('_LANGUAGES') && Array.isArray(value)) {
-      return [key, (value as readonly string[]).filter((lang) => activeLanguageCodes.includes(lang))];
-    }
-    return [key, value];
-  }),
+  Object.entries(WRITING_SYSTEM)
+    .filter(([key]) => {
+      const wsCode = key.replace('_LANGUAGES', '');
+      return activeWsCodes.some((code) => code.toUpperCase() === wsCode);
+    })
+    .map(([key, value]) => {
+      if (key.endsWith('_LANGUAGES') && Array.isArray(value)) {
+        return [key, (value as readonly string[]).filter((lang) => activeLanguageCodes.includes(lang))];
+      }
+      return [key, value];
+    }),
 );
 
 const activeFontEntries = Object.entries(FONT_CSS_PATHS).filter(([ns]) => activeNsCodes.includes(ns));
