@@ -15,6 +15,7 @@
     "aria_label": "Toggle Pricing Plan"
   },
   "plans": {
+    "section_title": "Plans",
     "hobby": {
       "name": "Hobby",
       "desc": "Perfect for side projects and learning.",

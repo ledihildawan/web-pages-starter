@@ -698,7 +698,7 @@ export const createTemplateParams = (
   const csp = [
     "default-src 'self'",
     `script-src 'self' 'nonce-${cspNonce}'`,
-    `style-src 'self' 'nonce-${cspNonce}' 'unsafe-inline'`,
+    `style-src 'self' 'nonce-${cspNonce}'`,
     `img-src 'self' data:${domains.map((d) => ` ${d}`).join('')}`,
     "font-src 'self' data:",
     "connect-src 'self'",

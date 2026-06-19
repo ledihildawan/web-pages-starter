@@ -9,7 +9,7 @@ export const isSingleLocale = (): boolean => getActiveLocaleCodes().length <= 1;
 
 export const getActiveLocaleCodes = (): LocaleCode[] => {
   if (!cachedCodes) {
-    cachedCodes = [i18nConfig.defaultLocale, ...(i18nConfig.locales ?? [])];
+    cachedCodes = [...new Set([i18nConfig.defaultLocale, ...(i18nConfig.locales ?? [])])];
   }
   return cachedCodes;
 };

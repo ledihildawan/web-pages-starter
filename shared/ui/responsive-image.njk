@@ -3,7 +3,7 @@
 {% if picture %}
 <picture>
   <source type="image/avif" srcset="{{ image.srcset }}" sizes="{{ sizes }}">
-  <img width="{{ image.width }}" height="{{ image.height }}" src="{{ image.src }}" sizes="{{ sizes }}" alt="{{ alt }}" loading="{{ loading }}" decoding="async" {% if fetchpriority %}fetchpriority="{{ fetchpriority }}"{% endif %} {% if lcp %}data-lcp="true"{% endif %} {% if class %}class="{{ class }}"{% endif %}>
+  <img width="{{ image.width }}" height="{{ image.height }}" src="{{ image.src }}" srcset="{{ image.srcset }}" sizes="{{ sizes }}" alt="{{ alt }}" loading="{{ loading }}" decoding="async" {% if fetchpriority %}fetchpriority="{{ fetchpriority }}"{% endif %} {% if lcp %}data-lcp="true"{% endif %} {% if class %}class="{{ class }}"{% endif %}>
 </picture>
 {% else %}
 <img width="{{ image.width }}" height="{{ image.height }}" src="{{ image.src }}" srcset="{{ image.srcset }}" sizes="{{ sizes }}" alt="{{ alt }}" loading="{{ loading }}" decoding="async" {% if fetchpriority %}fetchpriority="{{ fetchpriority }}"{% endif %} {% if lcp %}data-lcp="true"{% endif %} {% if class %}class="{{ class }}"{% endif %}>

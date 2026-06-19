@@ -2,21 +2,27 @@
   :root {
     --dir: 1;
 
-    --gradient-primary: linear-gradient(135deg, #7c3aed 0%, #a855f7 35%, #ec4899 65%, #f472b6 100%);
+    --gradient-primary: linear-gradient(
+      135deg,
+      oklch(0.541 0.247 293.009) 0%,
+      oklch(0.627 0.233 303.9) 35%,
+      oklch(0.656 0.212 354.308) 65%,
+      oklch(0.725 0.175 349.761) 100%
+    );
     --gradient-primary-subtle: linear-gradient(
       135deg,
-      rgba(124, 58, 237, 0.08) 0%,
-      rgba(168, 85, 247, 0.08) 35%,
-      rgba(236, 72, 153, 0.08) 65%,
-      rgba(244, 114, 182, 0.08) 100%
+      oklch(0.541 0.247 293.009 / 0.08) 0%,
+      oklch(0.627 0.233 303.9 / 0.08) 35%,
+      oklch(0.656 0.212 354.308 / 0.08) 65%,
+      oklch(0.725 0.175 349.761 / 0.08) 100%
     );
     --gradient-hero: linear-gradient(
       180deg,
-      rgba(124, 58, 237, 0.12) 0%,
-      rgba(168, 85, 247, 0.08) 50%,
+      oklch(0.541 0.247 293.009 / 0.12) 0%,
+      oklch(0.627 0.233 303.9 / 0.08) 50%,
       transparent 100%
     );
-    --gradient-violet: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+    --gradient-violet: linear-gradient(135deg, oklch(0.541 0.247 293.009) 0%, oklch(0.491 0.241 292.581) 100%);
 
     --elevation-1: rgba(0, 0, 0, 0.05);
     --elevation-2: rgba(0, 0, 0, 0.08);

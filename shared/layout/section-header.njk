@@ -1,4 +1,4 @@
-{% macro section_header(badge, title, description, icon = null, show_gradient = true) %}
+{% macro section_header(badge, title, description, icon = null, show_gradient = true, heading_id = null) %}
   <div class="text-center mbe-24 space-y-4">
     {% if badge %}
       <div class="inline-flex items-center gap-2.5 px-4 py-2 bg-violet-500/10 border border-violet-500/30 rounded-full text-violet-300 text-sm mbe-6">
@@ -8,7 +8,7 @@
       </div>
     {% endif %}
 
-    <h2 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white">
+    <h2 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-white"{% if heading_id %} id="{{ heading_id }}"{% endif %}>
       {{ title }}
     </h2>
 

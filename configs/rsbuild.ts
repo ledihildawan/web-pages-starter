@@ -27,6 +27,7 @@ const pluginResourceHints = (): RsbuildPlugin => ({
       const asyncDir = path.join(distDir, 'assets', 'scripts', 'async');
       let alpineChunkUrl = '';
       let i18nChunkUrl = '';
+      let i18nFormattersChunkUrl = '';
 
       if (fs.existsSync(asyncDir)) {
         for (const f of fs.readdirSync(asyncDir)) {
@@ -34,6 +35,7 @@ const pluginResourceHints = (): RsbuildPlugin => ({
           const url = `/assets/scripts/async/${f}`;
           if (f.startsWith('chunk-alpine-core')) alpineChunkUrl = url;
           else if (f.startsWith('chunk-i18next')) i18nChunkUrl = url;
+          else if (f.startsWith('chunk-i18n-formatters')) i18nFormattersChunkUrl = url;
         }
       }
 
@@ -61,9 +63,16 @@ const pluginResourceHints = (): RsbuildPlugin => ({
           hints += `<link rel="modulepreload" href="${i18nChunkUrl}">\n`;
         }
 
-        const imgMatch = content.match(/<img[^>]*data-lcp="true"[^>]*src="([^"]*)"[^>]*>/);
+        if (i18nFormattersChunkUrl && !isSingleLocale()) {
+          hints += `<link rel="modulepreload" href="${i18nFormattersChunkUrl}">\n`;
+        }
+
+        const imgMatch = content.match(/<img[^>]*data-lcp="true"[^>]*>/);
         if (imgMatch) {
-          hints += `<link rel="preload" as="image" href="${imgMatch[1]}" fetchpriority="high">\n`;
+          const srcMatch = imgMatch[0].match(/src="([^"]*)"/);
+          if (srcMatch) {
+            hints += `<link rel="preload" as="image" href="${srcMatch[1]}" fetchpriority="high">\n`;
+          }
         }
 
         if (hints) {
@@ -263,7 +272,7 @@ export default defineConfig({
     minSize: 2000,
     cacheGroups: {
       i18next: {
-        test: /[\\/]node_modules[\\/](i18next|@formatjs|intl-pluralrules)[\\/]/,
+        test: /[\\/]node_modules[\\/](i18next|@formatjs|intl-pluralrules|intl-messageformat)[\\/]/,
         name: 'chunk-i18next',
         chunks: 'async',
         priority: 30,
@@ -281,7 +290,7 @@ export default defineConfig({
         priority: 20,
       },
       i18nFormatters: {
-        test: /[\\/]packages[\\/]i18n[\\/](engine|strategies|fonts)[\\/]/,
+        test: /[\\/]packages[\\/]i18n[\\/](data|engine|runtime|strategies|fonts)[\\/]/,
         name: 'chunk-i18n-formatters',
         chunks: 'async',
         priority: 15,

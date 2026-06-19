@@ -43,7 +43,7 @@ function loadFontForLang(lang: string | null): void {
   if (!lang) return;
   const locale = findLocale(lang);
   const ws = locale?.writingSystem as WritingSystemCode | undefined;
-  if (ws && ws !== 'latin') {
+  if (ws) {
     injectFontFaceRules(ws);
   }
 }

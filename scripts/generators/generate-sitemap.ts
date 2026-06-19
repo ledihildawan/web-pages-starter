@@ -57,8 +57,10 @@ const generateSitemap = () => {
   const addPageUrl = (page: string, priority: string) => {
     const hreflangLinks = generateHreflangLinks(baseUrl, page, rootSlug, locales);
     const pagePath = getPagePath(page, rootSlug);
+    const lastmod = new Date().toISOString().split('T')[0];
     urls.push(`  <url>
     <loc>${baseUrl}${pagePath}</loc>
+    <lastmod>${lastmod}</lastmod>
     <changefreq>${DEFAULT_CHANGEFREQ}</changefreq>
     <priority>${priority}</priority>
 ${hreflangLinks}

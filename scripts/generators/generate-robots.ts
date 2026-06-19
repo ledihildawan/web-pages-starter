@@ -12,7 +12,7 @@ const basePath = env.BASE_PATH.replace(/\/?$/, '/');
 const baseUrl = env.SITE_URL.endsWith('/') ? env.SITE_URL : `${env.SITE_URL}/`;
 
 const errorSlugs = getErrorPageSlugs(i18nConfig.defaultLocale);
-const disallowRules = errorSlugs.map((slug) => `Disallow: ${basePath}${slug}.html`).join('\n');
+const disallowRules = errorSlugs.map((slug) => `Disallow: ${basePath}${slug}`).join('\n');
 
 const robots = `User-agent: *
 Allow: ${basePath}

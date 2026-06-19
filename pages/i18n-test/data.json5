@@ -1,5 +1,8 @@
 {
   page_id: 'i18n-test',
+  meta: {
+    robots: 'noindex, nofollow',
+  },
   hero: {
     t_key: 'hero',
   },

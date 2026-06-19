@@ -50,7 +50,7 @@
       {% for link in error_quick_links.split(',') %}
         {% set parts = link.split('|') %}
         {% if not loop.first %}
-          <span class="text-slate-700">•</span>{% endif %}
+          <span class="text-slate-700" aria-hidden="true">•</span>{% endif %}
         <a href="{{ url(parts[0]) }}" class="color-shift text-slate-400 hover:text-white transition-colors duration-300 font-medium hover:underline decoration-{{ error_icon_color }}-500 underline-offset-4">{{ i18n.t(parts[1]) }}</a>
       {% endfor %}
     </div>

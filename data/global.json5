@@ -1,7 +1,7 @@
 {
   site_name: 'Starter',
   site_description: 'Build lightning-fast, beautiful web applications with Starter.',
-  site_image: '/assets/images/og-image.svg',
+  site_image: '/assets/images/og-image.png',
   root_page: 'home',
   seo: {
     theme_color: '#020617',

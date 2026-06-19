@@ -96,7 +96,7 @@
 
   .card-border-glow {
     position: relative;
-    background: rgba(15, 23, 42, 0.6);
+    background: oklch(0.208 0.04 265.755 / 0.6);
     border-radius: var(--radius-card-lg);
   }
 
@@ -105,13 +105,23 @@
     position: absolute;
     inset: -1px;
     border-radius: var(--radius-card-lg);
-    background: linear-gradient(135deg, rgba(124, 58, 237, 0), rgba(168, 85, 247, 0), rgba(236, 72, 153, 0));
+    background: linear-gradient(
+      135deg,
+      oklch(0.541 0.247 293.009 / 0),
+      oklch(0.627 0.233 303.9 / 0),
+      oklch(0.656 0.212 354.308 / 0)
+    );
     transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: -1;
   }
 
   .card-border-glow:hover::before {
-    background: linear-gradient(135deg, rgba(124, 58, 237, 0.4), rgba(168, 85, 247, 0.4), rgba(236, 72, 153, 0.4));
+    background: linear-gradient(
+      135deg,
+      oklch(0.541 0.247 293.009 / 0.4),
+      oklch(0.627 0.233 303.9 / 0.4),
+      oklch(0.656 0.212 354.308 / 0.4)
+    );
   }
 
   .spotlight-card {
@@ -125,7 +135,7 @@
     inset: 0;
     background: radial-gradient(
       circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
-      rgba(124, 58, 237, 0.15),
+      oklch(0.541 0.247 293.009 / 0.15),
       transparent 50%
     );
     opacity: 0;
@@ -303,13 +313,13 @@
   }
 
   .magnetic-btn:focus {
-    outline: 2px solid rgba(124, 58, 237, 0.9);
+    outline: 2px solid oklch(0.541 0.247 293.009 / 0.9);
     outline-offset: 2px;
     border-radius: 0.5rem;
   }
 
   .toggle-btn.toggle-active {
-    box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+    box-shadow: 0 0 30px oklch(0.606 0.219 292.717 / 0.3);
   }
 
   .toggle-knob {
@@ -317,7 +327,7 @@
   }
 
   .toggle-knob.toggle-knob-active {
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+    box-shadow: 0 0 20px oklch(0.606 0.219 292.717 / 0.5);
   }
 
   .toggle-knob-pos-start {

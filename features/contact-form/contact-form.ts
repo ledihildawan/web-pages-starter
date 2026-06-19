@@ -47,8 +47,8 @@ export function contactFormData() {
     setError(field: ContactFormField, message: string) {
       field.el.setAttribute('aria-invalid', 'true');
       if (field.errorEl) {
-        field.errorEl.textContent = message;
         field.errorEl.classList.remove('hidden');
+        field.errorEl.textContent = message;
       }
     },
 

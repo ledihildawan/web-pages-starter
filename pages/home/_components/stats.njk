@@ -1,4 +1,4 @@
-<section class="pbs-24 pbe-24 px-6 relative bg-white/2 border-bs border-be border-white/5 cv-auto-300">
+<div class="pbs-24 pbe-24 px-6 relative bg-white/2 border-bs border-be border-white/5 cv-auto-300">
   <div class="max-inline-6xl mx-auto">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-16 text-center">
       {% for stat in page.stats %}
@@ -6,7 +6,7 @@
         {% set stat_val_key = stat_key ~ '_val' %}
         {% set stat_label_key = stat_key %}
         <div class="group gpu-boost">
-          <p class="text-6xl font-black text-{{ stat.color }}-400 tracking-tighter mbe-3 transition-transform ease-emphasized group-hover:scale-110 duration-500">
+          <p class="text-6xl font-black tabular-nums text-{{ stat.color }}-400 tracking-tighter mbe-3 transition-transform ease-emphasized group-hover:scale-110 duration-500">
             {{ i18n.t(stat_val_key) }}
           </p>
           <p class="text-slate-300 font-bold uppercase tracking-[0.2em] text-[10px]">
@@ -16,4 +16,4 @@
       {% endfor %}
     </div>
   </div>
-</section>
+</div>

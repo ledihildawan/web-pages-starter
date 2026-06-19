@@ -792,7 +792,7 @@
       <div x-data class="flex flex-wrap justify-center gap-3">
         {% for locale in locales %}
           <button type="button" @click="$store.i18n.change('{{ locale.code }}')" :aria-pressed="$store.i18n.current === '{{ locale.code }}'" :class="$store.i18n.current === '{{ locale.code }}' ? 'bg-violet-500/20 border-violet-500/50 text-white shadow-lg shadow-violet-500/10' : 'bg-slate-900/30 border-white/5 text-slate-300 hover:bg-violet-500/10 hover:border-violet-500/30 hover:text-white'" class="flex items-center gap-3 px-5 py-3 radius-card-md border transition text-sm font-black">
-            <img src="https://flagcdn.com/w40/{{ locale.flag }}.png" alt="{{ locale.label }}" class="inline-6 block-4 rounded shadow-sm object-cover" loading="lazy">
+            <img src="https://flagcdn.com/w40/{{ locale.flag }}.png" width="40" height="30" alt="{{ locale.label }}" class="inline-6 block-4 rounded shadow-sm object-cover" loading="lazy">
             <span>{{ locale.label }}</span>
           </button>
         {% endfor %}

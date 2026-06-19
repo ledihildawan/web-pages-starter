@@ -1,7 +1,7 @@
 {
   page_id: 'contact',
   meta: {
-    title: 'Contact',
+    title: 'Contact | Starter',
     description: "Get in touch with our team. We're here to help with any questions or support needs.",
     t_key: 'contact',
     theme_color: 'violet',

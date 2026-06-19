@@ -16,7 +16,8 @@
     h1=page.meta.h1
   ) }}
 
-  <section class="pbs-40 pbe-40 px-6">
+  <section class="pbs-40 pbe-40 px-6" aria-labelledby="contact-info-heading">
+    <h2 id="contact-info-heading" class="sr-only">{{ i18n.t('contact:contact.info_title') }}</h2>
     <div class="max-inline-6xl mx-auto">
       <div class="grid md:grid-cols-3 gap-8">
         {% for item in page.contact_items %}
@@ -38,7 +39,9 @@
         i18n.t('contact:contact.badge'),
         i18n.t('contact:contact.form_title'),
         i18n.t('contact:contact.form_subtitle'),
-        icon.icon('envelope', 'inline-4 block-4')
+        icon.icon('envelope', 'inline-4 block-4'),
+        true,
+        'contact-form-heading'
       ) }}
 
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
@@ -48,7 +51,7 @@
             <div class="absolute -inset-be-24 -inset-e-24 inline-48 block-48 bg-violet-600/5 blur-3xl rounded-full"></div>
             <div class="absolute inset-0 opacity-30 bg-[radial-gradient(#8b5cf6_1px,transparent_1px)] bg-size-[32px_32px]"></div>
 
-            <form class="space-y-6 relative" method="post" action="{{ url('/contact') }}" novalidate="novalidate" x-data="contactForm()" @submit.prevent="validate()">
+            <form class="space-y-6 relative" method="post" action="{{ url('/contact') }}" novalidate="novalidate" x-data="contactForm()" @submit.prevent="validate()" aria-labelledby="contact-form-heading">
               {{ form.form_input('text', 'contact:contact.form.name', 'contact:contact.form.name_placeholder', 'name', i18n=i18n) }}
               {{ form.form_input('email', 'contact:contact.form.email', 'contact:contact.form.email_placeholder', 'email', i18n=i18n) }}
               {{ form.form_input('text', 'contact:contact.form.subject', 'contact:contact.form.subject_placeholder', 'subject', i18n=i18n) }}

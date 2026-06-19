@@ -1,7 +1,7 @@
 {
   page_id: 'features',
   meta: {
-    title: 'Features',
+    title: 'Features | Starter',
     description: 'Explore powerful features including real-time sync, analytics, dark mode, API-first design, and more.',
     t_key: 'hero',
     theme_color: 'violet',

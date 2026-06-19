@@ -173,19 +173,36 @@ async function bootstrap() {
       }
     }
 
-    const { i18next, initIntl } = await import('@i18n/runtime/runtime');
+    const savedLocale = window.__SAVED_LOCALE__ || window.__SERVER_LOCALE__;
+    const isDefaultLocale = savedLocale === window.__SERVER_LOCALE__;
 
-    if (!i18next.isInitialized) {
-      await initIntl(window.__SAVED_LOCALE__ || window.__SERVER_LOCALE__);
+    if (isDefaultLocale) {
+      globalThis.Alpine.start();
+
+      fonts.preloadActiveFont();
+      fonts.loadLanguageFonts();
+      fonts.watchScriptAndLoadFont();
+
+      import('@i18n/runtime/runtime').then(({ i18next, initIntl }) => {
+        if (!i18next.isInitialized) initIntl(savedLocale);
+      });
+
+      registerServiceWorker();
+    } else {
+      const { i18next, initIntl } = await import('@i18n/runtime/runtime');
+
+      if (!i18next.isInitialized) {
+        await initIntl(savedLocale);
+      }
+
+      globalThis.Alpine.start();
+
+      fonts.preloadActiveFont();
+      fonts.loadLanguageFonts();
+      fonts.watchScriptAndLoadFont();
+
+      registerServiceWorker();
     }
-
-    globalThis.Alpine.start();
-
-    fonts.preloadActiveFont();
-    fonts.loadLanguageFonts();
-    fonts.watchScriptAndLoadFont();
-
-    registerServiceWorker();
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : String(error);
 
