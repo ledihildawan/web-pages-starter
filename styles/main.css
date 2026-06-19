@@ -6,6 +6,11 @@
   --font-sans: "Inter Variable", system-ui, -apple-system, sans-serif;
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+
+  --perspective-*: initial;
+  --drop-*: initial;
+  --inset-shadow-*: initial;
+  --container-*: initial;
 }
 
 @layer accessibility, base, components, utilities, overrides;
