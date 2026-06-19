@@ -1,6 +1,11 @@
 import type { i18nStore } from '@/packages/i18n/runtime/store';
 import { defineData } from '@/utils/alpine';
 
+const TRANSITION_OPEN = 700;
+const TRANSITION_CLOSE = 500;
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const transitionMs = (normal: number) => (prefersReducedMotion ? 0 : normal);
+
 export default defineData('navbar', () => ({
   mobileMenuOpen: false,
   menuChildrenVisible: false,
@@ -19,7 +24,9 @@ export default defineData('navbar', () => ({
   focusedElement: null as Element | null,
   _ticking: false,
   _menuFocusTriggered: false,
+  _locked: false,
   _pluginsLoaded: false,
+  _closeTimer: 0,
 
   get i18n(): i18nStore {
     return this.$store.i18n as i18nStore;
@@ -36,6 +43,51 @@ export default defineData('navbar', () => ({
     globalThis.Alpine.plugin(focus);
   },
 
+  _lock(ms: number) {
+    clearTimeout(this._closeTimer);
+    this._locked = true;
+    this._closeTimer = setTimeout(() => {
+      this._locked = false;
+    }, ms) as unknown as number;
+  },
+
+  _escapeOr(fallback: () => void) {
+    if (this.activeMobileSub !== null) this.activeMobileSub = null;
+    else fallback();
+  },
+
+  _focusFirstLink() {
+    if (this._menuFocusTriggered) return;
+    this._menuFocusTriggered = true;
+    this.$nextTick(() => {
+      (this.$refs.mobileMenu?.querySelector('a[href], button:not([disabled])') as HTMLElement | null)?.focus();
+    });
+  },
+
+  _restoreFocus() {
+    const btn = document.querySelector<HTMLButtonElement>('[aria-controls="mobile-menu"]');
+    btn?.focus();
+  },
+
+  _lockBody() {
+    document.body.style.overflow = 'hidden';
+    document.body.classList.add('menu-open');
+  },
+
+  _unlockBody() {
+    document.body.style.overflow = '';
+    document.body.classList.remove('menu-open');
+  },
+
+  _changeLanguage(event: Event, closeMobile: boolean) {
+    const langCode = (event.target as HTMLElement).closest('[data-lang-option]')?.getAttribute('data-lang-option');
+    if (!langCode) return;
+    this.i18n.change(langCode);
+    if (closeMobile) this.closeMobileMenu();
+    else this.langOpen = false;
+    this.hapticFeedback();
+  },
+
   isActive(path: string): boolean {
     const base = this.basePath.replace(/\/$/, '') || '';
     const normalize = (p: string) => {
@@ -43,14 +95,11 @@ export default defineData('navbar', () => ({
       if (n === '' || n === '/index') n = '/';
       return n;
     };
-    const current = normalize(this.currentPath);
-    const target = normalize(base + path);
-
-    return current === target;
+    return normalize(this.currentPath) === normalize(base + path);
   },
 
   hapticFeedback() {
-    if (navigator.vibrate) navigator.vibrate(10);
+    navigator.vibrate?.(10);
   },
 
   onResize() {
@@ -58,18 +107,31 @@ export default defineData('navbar', () => ({
   },
 
   onNavEscape() {
-    if (this.activeMobileSub !== null) this.activeMobileSub = null;
-    else this.langOpen = false;
+    this._escapeOr(() => {
+      this.langOpen = false;
+    });
   },
-
   onMobileEscape() {
-    if (this.activeMobileSub !== null) this.activeMobileSub = null;
-    else this.toggleMobile();
+    this._escapeOr(() => {
+      this.toggleMobile();
+    });
+  },
+  onMenuEscape() {
+    this._escapeOr(() => {
+      this.closeMobileMenu();
+    });
   },
 
-  onMenuEscape() {
-    if (this.activeMobileSub !== null) this.activeMobileSub = null;
-    else this.closeMobileMenu();
+  onMenuVisible() {
+    if (this.mobileMenuOpen) this._focusFirstLink();
+  },
+
+  onAnimationEnd() {
+    if (this.mobileMenuOpen && this.menuChildrenVisible) this._focusFirstLink();
+  },
+
+  resetMenuFocus() {
+    this._menuFocusTriggered = false;
   },
 
   init() {
@@ -79,9 +141,7 @@ export default defineData('navbar', () => ({
 
   onScroll() {
     if (this.mobileMenuOpen || this._ticking) return;
-
     this._ticking = true;
-
     requestAnimationFrame(() => {
       const currentScroll = window.scrollY;
       this.scrolled = currentScroll > 20;
@@ -96,24 +156,19 @@ export default defineData('navbar', () => ({
   },
 
   handleTouchStart(e: TouchEvent) {
-    this.touchStartY = e.touches[0].clientY;
+    this.touchStartY = e.touches[0]?.clientY ?? 0;
     this.isDragging = true;
   },
 
   handleTouchMove(e: TouchEvent) {
     if (!this.isDragging) return;
-
-    this.touchCurrentY = e.touches[0].clientY;
+    this.touchCurrentY = e.touches[0]?.clientY ?? 0;
   },
 
   handleTouchEnd() {
     if (!this.isDragging) return;
-
     this.isDragging = false;
-
-    const diff = this.touchCurrentY - this.touchStartY;
-
-    if (diff > 100) {
+    if (this.touchCurrentY - this.touchStartY > 100) {
       this.hapticFeedback();
       this.closeMobileMenu();
     }
@@ -121,7 +176,6 @@ export default defineData('navbar', () => ({
 
   toggleSubmenuWithFeedback(index: number) {
     this.activeMobileSub = this.activeMobileSub === index ? null : index;
-
     this.hapticFeedback();
   },
 
@@ -131,19 +185,17 @@ export default defineData('navbar', () => ({
   },
 
   closeMobileMenu(url: string | null = null): boolean {
-    if (this.isNavigating) return false;
+    if (this.isNavigating || this._locked) return false;
 
     this.isNavigating = true;
+    this._lock(transitionMs(TRANSITION_CLOSE));
     this.hapticFeedback();
     this._menuFocusTriggered = false;
     this.mobileMenuOpen = false;
 
-    const menuButton = document.querySelector('[aria-controls="mobile-menu"]') as HTMLElement | null;
-
-    if (menuButton) setTimeout(() => menuButton.focus(), 100);
-
     const targetUrl = typeof url === 'string' ? url : null;
-    const isAnchorLink = targetUrl?.includes('#');
+    const isAnchorLink = targetUrl?.includes('#') ?? false;
+    const closeDelay = transitionMs(TRANSITION_CLOSE);
 
     if (targetUrl && !isAnchorLink) {
       setTimeout(() => {
@@ -154,52 +206,47 @@ export default defineData('navbar', () => ({
     setTimeout(() => {
       this.menuChildrenVisible = false;
       this.activeMobileSub = null;
-
-      document.body.classList.remove('menu-open');
-
+      this._unlockBody();
       this.isNavigating = false;
+      this._restoreFocus();
 
       if (isAnchorLink) {
         this.navHidden = true;
-
         window.location.href = targetUrl!;
-
         setTimeout(() => {
           this.lastScroll = window.scrollY;
         }, 50);
       } else {
         this.navHidden = this.scrollY > 150;
         this.lastScroll = this.scrollY;
-
         window.scrollTo(0, this.scrollY);
       }
-    }, 500);
+    }, closeDelay);
 
     return true;
   },
 
   async toggleMobile() {
+    if (this._locked) return;
     await this._ensurePlugins();
-    if (!this.mobileMenuOpen) {
-      this.scrollY = window.scrollY;
-      this.focusedElement = document.activeElement;
 
-      document.body.classList.add('menu-open');
-
-      this.mobileMenuOpen = true;
-      this.navHidden = false;
-
-      this.hapticFeedback();
-
-      this.menuChildrenVisible = true;
-    } else {
+    if (this.mobileMenuOpen) {
       this.closeMobileMenu();
+      return;
     }
+
+    this._lock(transitionMs(TRANSITION_OPEN));
+    this.scrollY = window.scrollY;
+    this.focusedElement = document.activeElement;
+    this._lockBody();
+    this.mobileMenuOpen = true;
+    this.navHidden = false;
+    this.menuChildrenVisible = true;
+    this.hapticFeedback();
   },
 
   navigateToHome() {
     const homeUrl = this.basePath.endsWith('/') ? this.basePath : `${this.basePath}/`;
-
     if (this.mobileMenuOpen) {
       this.closeMobileMenu(homeUrl);
     } else {
@@ -208,56 +255,27 @@ export default defineData('navbar', () => ({
   },
 
   getCurrentLanguageObj() {
-    return this.i18n.languages.find((lang) => lang.code === this.i18n.current)!;
+    return this.i18n.languages.find((lang) => lang.code === this.i18n.current) ?? null;
   },
 
   getCurrentFlagUrl(): string {
     const lang = this.getCurrentLanguageObj();
-
-    if (!lang?.flag) return '';
-
-    return `https://flagcdn.com/w20/${lang.flag.toLowerCase()}.png`;
+    return lang?.flag ? `https://flagcdn.com/w20/${lang.flag.toLowerCase()}.png` : '';
   },
 
   getCurrentFlagAlt(): string {
     const lang = this.getCurrentLanguageObj();
-
-    return `${lang.label || 'Language'} flag - ${(lang.flag || '').toUpperCase()}`;
+    return lang ? `${lang.label ?? 'Language'} flag - ${lang.flag.toUpperCase()}` : 'Language flag';
   },
 
   getCurrentLanguageLabel(): string {
-    const lang = this.getCurrentLanguageObj();
-
-    return lang!.label;
+    return this.getCurrentLanguageObj()?.label ?? this.i18n.current.toUpperCase();
   },
 
   selectLanguageOption(event: Event) {
-    const opt = (event.target as HTMLElement).closest('[data-lang-option]');
-
-    if (opt) {
-      const langCode = (opt as HTMLElement).dataset.langOption;
-
-      if (langCode) {
-        this.i18n.change(langCode);
-
-        this.closeMobileMenu();
-        this.hapticFeedback();
-      }
-    }
+    this._changeLanguage(event, true);
   },
-
   selectLanguageFromClick(event: Event) {
-    const opt = (event.target as HTMLElement).closest('[data-lang-option]');
-
-    if (opt) {
-      const langCode = (opt as HTMLElement).dataset.langOption;
-
-      if (langCode) {
-        this.i18n.change(langCode);
-
-        this.langOpen = false;
-        this.hapticFeedback();
-      }
-    }
+    this._changeLanguage(event, false);
   },
 }));
