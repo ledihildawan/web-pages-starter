@@ -53,6 +53,25 @@ export default defineData('navbar', () => ({
     if (navigator.vibrate) navigator.vibrate(10);
   },
 
+  onResize() {
+    if (window.innerWidth >= 1024 && this.mobileMenuOpen) this.toggleMobile();
+  },
+
+  onNavEscape() {
+    if (this.activeMobileSub !== null) this.activeMobileSub = null;
+    else this.langOpen = false;
+  },
+
+  onMobileEscape() {
+    if (this.activeMobileSub !== null) this.activeMobileSub = null;
+    else this.toggleMobile();
+  },
+
+  onMenuEscape() {
+    if (this.activeMobileSub !== null) this.activeMobileSub = null;
+    else this.closeMobileMenu();
+  },
+
   init() {
     this.lastScroll = window.scrollY;
     this.scrolled = this.lastScroll > 20;

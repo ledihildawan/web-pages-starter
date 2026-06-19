@@ -1,4 +1,4 @@
-  <nav aria-label="Main navigation" x-cloak x-data="navbar" @keydown.escape.window="activeMobileSub !== null ? activeMobileSub = null : langOpen = false" @resize.window="if(isDesktopWidth() && mobileMenuOpen) toggleMobile()" @scroll.window="onScroll" class="fixed inset-bs-0 inset-s-0 inline-full z-100 transition-[transform,background-color,border-color,box-shadow] duration-500 ease-emphasized border-be bg-transparent border-transparent translate-y-0" :class="{
+  <nav aria-label="Main navigation" x-cloak x-data="navbar" @keydown.escape.window="onNavEscape" @resize.window="onResize" @scroll.window="onScroll" class="fixed inset-bs-0 inset-s-0 inline-full z-100 transition-[transform,background-color,border-color,box-shadow] duration-500 ease-emphasized border-be bg-transparent border-transparent translate-y-0" :class="{
     'bg-slate-950/90 backdrop-blur-2xl shadow-xl border-white/10': scrolled && !mobileMenuOpen,
     'bg-transparent border-transparent': !scrolled && !mobileMenuOpen,
     'bg-slate-950 border-transparent shadow-none': mobileMenuOpen,
@@ -71,7 +71,7 @@
           </span>
         </a>
       </div>
-      <button @click.stop="toggleMobile()" @keydown.escape="activeMobileSub !== null ? activeMobileSub = null : toggleMobile()" :aria-label="mobileMenuOpen ? 'Close menu' : 'Open menu'" :aria-expanded="mobileMenuOpen" aria-controls="mobile-menu" class="lg:hidden relative z-150 inline-11 block-11 flex items-center justify-center text-slate-200 hover:text-white bg-white/5 radius-icon border border-white/10 hover:bg-white/8 hover:border-white/15 btn-squash icon-squash anticipate-press" :class="mobileMenuOpen ? 'bg-transparent border-transparent hover:bg-white/5' : ''">
+      <button @click.stop="toggleMobile()" @keydown.escape="onMobileEscape" :aria-label="mobileMenuOpen ? 'Close menu' : 'Open menu'" :aria-expanded="mobileMenuOpen" aria-controls="mobile-menu" class="lg:hidden relative z-150 inline-11 block-11 flex items-center justify-center text-slate-200 hover:text-white bg-white/5 radius-icon border border-white/10 hover:bg-white/8 hover:border-white/15 btn-squash icon-squash anticipate-press" :class="mobileMenuOpen ? 'bg-transparent border-transparent hover:bg-white/5' : ''">
         <div class="relative inline-5 block-4 flex flex-col justify-between items-center">
           <span class="inline-full block-0.5 bg-current transition-[transform] duration-500 ease-emphasized" :class="mobileMenuOpen ? 'rotate-45 translate-y-1.75' : ''"></span>
           <span class="inline-full block-0.5 bg-current transition-[opacity,transform] duration-300 ease-emphasized" :class="mobileMenuOpen ? 'opacity-0 -translate-x-4' : ''"></span>
@@ -93,7 +93,7 @@
       x-transition:leave="transition ease-in duration-500"
       x-transition:leave-start="translate-y-0"
       x-transition:leave-end="-translate-y-full"
-      @keydown.escape.window="activeMobileSub !== null ? activeMobileSub = null : closeMobileMenu()"
+      @keydown.escape.window="onMenuEscape"
       @click.self="closeMobileMenu()"
       @touchstart.passive="handleTouchStart($event)"
       @touchmove.passive="handleTouchMove($event)"
