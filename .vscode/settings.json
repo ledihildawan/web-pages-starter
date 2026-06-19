@@ -56,6 +56,7 @@
     "**/coverage": true
   },
   "files.associations": {
+    "**/codegen/templates/**": "plaintext",
     "*.njk": "njk",
     "*.css": "tailwindcss"
   },
