@@ -1,6 +1,7 @@
 import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
+import { fontsConfig } from '@config/fonts';
 import { i18nConfig } from '@config/i18n';
 import { env } from '@generated/env';
 import type { I18nTranslationKeys } from '@generated/i18n';
@@ -64,6 +65,33 @@ setStrategies(
 );
 
 const escapeHtmlAttr = (value: string | number | boolean): string => String(value).replace(/"/g, '&quot;');
+
+let cachedFontPreloadUrl: string | null | undefined;
+
+const getFontPreloadUrl = (): string | null => {
+  if (cachedFontPreloadUrl !== undefined) return cachedFontPreloadUrl;
+  const fontName = fontsConfig.sans?.name;
+  if (!fontName) {
+    cachedFontPreloadUrl = null;
+    return null;
+  }
+  try {
+    const fontsCssPath = lookup('@', 'public', 'assets', 'fonts', 'fonts.css');
+    if (!fs.existsSync(fontsCssPath)) {
+      cachedFontPreloadUrl = null;
+      return null;
+    }
+    const escaped = fontName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const fontsCss = fs.readFileSync(fontsCssPath, 'utf-8');
+    const woff2Match = fontsCss.match(
+      new RegExp(`url\\(['"]?(\\.\\/[^'"]*${escaped}-latin-wght-normal\\.woff2)['"]?\\)`),
+    );
+    cachedFontPreloadUrl = woff2Match ? `/assets/fonts/${woff2Match[1].replace('./', '')}` : null;
+  } catch {
+    cachedFontPreloadUrl = null;
+  }
+  return cachedFontPreloadUrl;
+};
 
 const warnedKeys = new Set<string>();
 
@@ -723,6 +751,7 @@ export const createTemplateParams = (
     csp,
     dns_prefetch: dnsPrefetch,
     preconnect,
+    font_preload_url: getFontPreloadUrl(),
     page_id: pageId,
     route,
     global: globalData,

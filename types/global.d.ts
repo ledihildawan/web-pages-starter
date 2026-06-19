@@ -2,7 +2,6 @@ import type { BrowserEnvType } from '@generated/env';
 import type { I18nPages } from '@generated/i18n';
 import type { LocaleCode } from '@i18n/data/locales';
 import type { Alpine as AlpineType } from 'alpinejs';
-import type { i18nStore } from '@/packages/i18n/runtime/store';
 
 declare global {
   var Alpine: AlpineType;

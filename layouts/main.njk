@@ -45,8 +45,6 @@
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
 
     <link rel="manifest" href="{{ manifest_path }}">
-    <link rel="icon" href="{{ favicon_path }}">
-    <link rel="apple-touch-icon" href="{{ apple_icon_path }}">
 
     {% if noTelephone %}
       <meta name="format-detection" content="telephone=no">
@@ -70,6 +68,10 @@
     {% for host in preconnect or [] %}
       <link rel="preconnect" href="{{ host.href }}"{% if host.crossorigin %} crossorigin{% endif %}>
     {% endfor %}
+
+    {% if font_preload_url %}
+      <link rel="preload" as="font" type="font/woff2" href="{{ font_preload_url }}" crossorigin>
+    {% endif %}
 
     <link rel="stylesheet" href="{{ url('/assets/fonts/fonts.css') }}">
 

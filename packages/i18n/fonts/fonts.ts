@@ -21,11 +21,24 @@ function handleLoadError(context: string, err: unknown): void {
   console.warn(`[fonts] ${context}:`, message);
 }
 
+function hasFontFaceRules(): boolean {
+  for (const sheet of document.styleSheets) {
+    try {
+      for (const rule of sheet.cssRules) {
+        if (rule instanceof CSSFontFaceRule) return true;
+      }
+    } catch {
+      // cross-origin stylesheet
+    }
+  }
+  return false;
+}
+
 async function injectFontFaceRules(wsCode: string): Promise<void> {
   if (loaded.has(wsCode)) return;
   loaded.add(wsCode);
 
-  if (document.querySelector(`link[href*="${FONTS_CSS_PATH}"]`)) return;
+  if (document.querySelector(`link[href*="${FONTS_CSS_PATH}"]`) || hasFontFaceRules()) return;
 
   try {
     const basePath = (window as { __BASE_PATH__?: string }).__BASE_PATH__ ?? '';

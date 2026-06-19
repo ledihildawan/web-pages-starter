@@ -138,7 +138,7 @@ const SINGLE_LOCALE = import.meta.env.SINGLE_LOCALE;
 async function bootstrap() {
   try {
     const [cspModule, fonts] = await Promise.all([
-      import('@alpinejs/csp').then((m) => m.default),
+      import(/* webpackPreload: true */ '@alpinejs/csp').then((m) => m.default),
       import('@i18n/fonts/fonts'),
     ]);
 
@@ -161,7 +161,7 @@ async function bootstrap() {
     }
 
     const states = await Promise.all([
-      import('@i18n/runtime/store').then((m) => m.default),
+      import(/* webpackPreload: true */ '@i18n/runtime/store').then((m) => m.default),
       import('@/shared/nav/navbar').then((m) => m.default),
     ]);
 
@@ -183,13 +183,13 @@ async function bootstrap() {
       fonts.loadLanguageFonts();
       fonts.watchScriptAndLoadFont();
 
-      import('@i18n/runtime/runtime').then(({ i18next, initIntl }) => {
+      import(/* webpackPreload: true */ '@i18n/runtime/runtime').then(({ i18next, initIntl }) => {
         if (!i18next.isInitialized) initIntl(savedLocale);
       });
 
       registerServiceWorker();
     } else {
-      const { i18next, initIntl } = await import('@i18n/runtime/runtime');
+      const { i18next, initIntl } = await import(/* webpackPreload: true */ '@i18n/runtime/runtime');
 
       if (!i18next.isInitialized) {
         await initIntl(savedLocale);

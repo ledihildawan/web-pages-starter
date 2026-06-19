@@ -24,7 +24,7 @@ const ERROR_PAGES = [
   \`\${BASE}${maintenanceSlug}.html\`,
   \`\${BASE}${offlineErrorSlug}.html\`,
 ];
-const PRECACHE_URLS = [BASE, ...ERROR_PAGES, \`\${BASE}manifest.json\`, \`\${BASE}favicon.svg\`];
+const PRECACHE_URLS = [BASE, ...ERROR_PAGES, \`\${BASE}manifest.json\`];
 
 const logCacheError = (context, url) => {
   console.warn(\`[SW] Cache error in \${context}: \${url}\`);

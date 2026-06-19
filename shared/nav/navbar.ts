@@ -219,7 +219,7 @@ export default defineData('navbar', () => ({
 
       if (isAnchorLink) {
         this.navHidden = true;
-        window.location.href = targetUrl!;
+        window.location.href = targetUrl as string;
         setTimeout(() => {
           this.lastScroll = window.scrollY;
         }, SCROLL_RECALC_DELAY);

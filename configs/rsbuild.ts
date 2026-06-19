@@ -1,6 +1,5 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { fontsConfig } from '@config/fonts';
 import { i18nConfig } from '@config/i18n';
 import { browserEnv, env } from '@generated/env';
 import { getActiveLocaleCodes, isSingleLocale, LOCALE_STORAGE_KEY } from '@i18n';
@@ -19,89 +18,42 @@ const isPrettyHtml = env.PRETTY_HTML;
 const shouldMinifyHTML = shouldMinify && !isPrettyHtml;
 const MANAGED_EXTS = ['ts', 'css', 'njk', 'png', 'jpg', 'jpeg', 'webp', 'svg', 'gif'];
 
-const pluginResourceHints = (): RsbuildPlugin => ({
-  name: 'plugin-resource-hints',
+const pluginPreloadChunks = (): RsbuildPlugin => ({
+  name: 'plugin-preload-chunks',
   setup(api) {
     api.onAfterBuild(() => {
+      if (!isBuild) return;
+
       const distDir = api.context.distPath;
       if (!fs.existsSync(distDir)) return;
 
-      const asyncDir = path.join(distDir, 'assets', 'scripts', 'async');
-      let alpineChunkUrl = '';
-      let i18nChunkUrl = '';
-      let i18nFormattersChunkUrl = '';
-      let latinFontUrl = '';
-
-      if (fs.existsSync(asyncDir)) {
-        for (const f of fs.readdirSync(asyncDir)) {
-          if (!f.endsWith('.js')) continue;
-          const url = `/assets/scripts/async/${f}`;
-          if (f.startsWith(CHUNK_NAMES.alpineCore)) alpineChunkUrl = url;
-          else if (f.startsWith(CHUNK_NAMES.i18next)) i18nChunkUrl = url;
-          else if (f.startsWith(CHUNK_NAMES.i18nFormatters)) i18nFormattersChunkUrl = url;
-        }
-      }
-
-      const fontsCssPath = path.join(distDir, 'assets', 'fonts', 'fonts.css');
-      if (fs.existsSync(fontsCssPath)) {
-        const primaryFontName = fontsConfig.sans?.name;
-        if (primaryFontName) {
-          const escaped = primaryFontName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-          const fontsCss = fs.readFileSync(fontsCssPath, 'utf-8');
-          const woff2Match = fontsCss.match(
-            new RegExp(`url\\(['"]?(\\.\\/[^'"]*${escaped}-latin-wght-normal\\.woff2)['"]?\\)`),
-          );
-          if (woff2Match) {
-            latinFontUrl = `/assets/fonts/${woff2Match[1].replace('./', '')}`;
+      const chunkUrls: string[] = [];
+      for (const sub of ['', 'async']) {
+        const dir = path.join(distDir, 'assets', 'scripts', sub);
+        if (!fs.existsSync(dir)) continue;
+        const prefix = sub ? '/assets/scripts/async' : '/assets/scripts';
+        for (const f of fs.readdirSync(dir)) {
+          if (f.endsWith('.js') && Object.values(CHUNK_NAMES).some((n) => f.startsWith(n))) {
+            chunkUrls.push(`${prefix}/${f}`);
           }
         }
       }
+
+      if (!chunkUrls.length) return;
 
       for (const file of fs.readdirSync(distDir)) {
         if (!file.endsWith('.html')) continue;
         const filePath = path.join(distDir, file);
-        let content = fs.readFileSync(filePath, 'utf-8');
-
-        const jsScripts = [...content.matchAll(/<script[^>]*defer[^>]*src="([^"]*)"[^>]*><\/script>/g)];
-
-        let hints = '';
-
-        for (const m of jsScripts) {
-          const src = m[1];
-          if (!src.includes('runtime.')) {
-            hints += `<link rel="modulepreload" href="${src}">\n`;
-          }
+        let html = fs.readFileSync(filePath, 'utf-8');
+        const deferSrcs = new Set([...html.matchAll(/<script\s+defer\s+[^>]*src="([^"]*)"/g)].map((m) => m[1]));
+        const preloads = chunkUrls
+          .filter((url) => !deferSrcs.has(url))
+          .map((url) => `<link rel="preload" as="script" href="${url}">`)
+          .join('\n');
+        if (preloads) {
+          html = html.replace('</title>', `</title>\n${preloads}`);
+          fs.writeFileSync(filePath, html);
         }
-
-        if (alpineChunkUrl) {
-          hints += `<link rel="modulepreload" href="${alpineChunkUrl}">\n`;
-        }
-
-        if (i18nChunkUrl && !isSingleLocale()) {
-          hints += `<link rel="modulepreload" href="${i18nChunkUrl}">\n`;
-        }
-
-        if (i18nFormattersChunkUrl && !isSingleLocale()) {
-          hints += `<link rel="modulepreload" href="${i18nFormattersChunkUrl}">\n`;
-        }
-
-        if (latinFontUrl) {
-          hints += `<link rel="preload" as="font" type="font/woff2" href="${latinFontUrl}" crossorigin>\n`;
-        }
-
-        const imgMatch = content.match(/<img[^>]*data-lcp="true"[^>]*>/);
-        if (imgMatch) {
-          const srcMatch = imgMatch[0].match(/src="([^"]*)"/);
-          if (srcMatch) {
-            hints += `<link rel="preload" as="image" href="${srcMatch[1]}" fetchpriority="high">\n`;
-          }
-        }
-
-        if (hints) {
-          content = content.replace('</title>', `</title>\n${hints.trim()}`);
-        }
-
-        fs.writeFileSync(filePath, content);
       }
     });
   },
@@ -225,6 +177,63 @@ const pluginRemoveEmptyPageJs = (): RsbuildPlugin => ({
   },
 });
 
+const pluginInlineCss = (): RsbuildPlugin => ({
+  name: 'plugin-inline-css',
+  setup(api) {
+    api.onAfterBuild(() => {
+      if (!isBuild) return;
+
+      const distDir = api.context.distPath;
+      if (!fs.existsSync(distDir)) return;
+
+      let inlined = 0;
+
+      for (const file of fs.readdirSync(distDir)) {
+        if (!file.endsWith('.html')) continue;
+        const filePath = path.join(distDir, file);
+        let html = fs.readFileSync(filePath, 'utf-8');
+
+        const nonceMatch = html.match(/nonce-([a-zA-Z0-9+/=]+)/);
+        if (!nonceMatch) continue;
+        const nonce = nonceMatch[1];
+
+        const linkMatches = [...html.matchAll(/<link\s+[^>]*rel="stylesheet"[^>]*>/g)];
+        let modified = false;
+
+        for (const m of linkMatches) {
+          const tag = m[0];
+          const hrefMatch = tag.match(/href="([^"]+)"/);
+          if (!hrefMatch) continue;
+
+          const href = hrefMatch[1];
+          if (href.startsWith('http')) continue;
+
+          const cssPath = path.join(distDir, href.replace(/^\//, ''));
+          if (!fs.existsSync(cssPath)) continue;
+
+          let css = fs.readFileSync(cssPath, 'utf-8');
+          const cssDir = href.substring(0, href.lastIndexOf('/'));
+          css = css.replace(/url\(\s*['"]?([^'")\s]+)['"]?\s*\)/g, (match, url: string) => {
+            if (url.startsWith('/') || url.startsWith('http') || url.startsWith('data:')) return match;
+            return `url(${cssDir}/${url.replace(/^\.\//, '')})`;
+          });
+          html = html.replace(tag, `<style nonce="${nonce}">${css}</style>`);
+          modified = true;
+          inlined++;
+        }
+
+        if (modified) {
+          fs.writeFileSync(filePath, html);
+        }
+      }
+
+      if (inlined > 0) {
+        console.log(`  [plugin-inline-css] Inlined ${inlined} stylesheet(s) into HTML`);
+      }
+    });
+  },
+});
+
 const CHUNK_NAMES = {
   alpineCore: 'chunk-alpine-core',
   i18next: 'chunk-i18next',
@@ -305,7 +314,7 @@ export default defineConfig({
       i18next: {
         test: /[\\/]node_modules[\\/](i18next|@formatjs|intl-pluralrules|intl-messageformat)[\\/]/,
         name: CHUNK_NAMES.i18next,
-        chunks: 'async',
+        chunks: 'all',
         priority: 30,
       },
       alpinePlugins: {
@@ -405,11 +414,12 @@ export default defineConfig({
     ],
   },
   plugins: [
-    pluginResourceHints(),
+    pluginPreloadChunks(),
     pluginRootPageAsIndex(),
     pluginHotReloadContent(),
     pluginPrettyHtml(),
     pluginRemoveEmptyPageJs(),
+    pluginInlineCss(),
   ],
   tools: {
     htmlPlugin: (config) => {
