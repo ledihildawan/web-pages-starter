@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import { lookup } from '@utils/paths';
+import { lookup } from '@generated/paths';
 import { log } from './lib/logger';
 
 const dirs = [

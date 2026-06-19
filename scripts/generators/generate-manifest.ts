@@ -1,14 +1,15 @@
+import { inject, loadTemplate } from '@codegen';
 import { i18nConfig } from '@config/i18n';
 import { env } from '@generated/env';
+import { lookup } from '@generated/paths';
 import { logBox } from '@scripts/lib/logger';
 import { writeFilePath } from '@scripts/lib/write-file';
 import { loadGlobalData } from '@utils/json5';
-import { lookup } from '@utils/paths';
 
-const OUTPUT_PUBLIC = lookup('@', 'public', 'manifest.json');
-const OUTPUT_DIST = lookup('@', 'dist', 'manifest.json');
+const OUTPUT_PUBLIC = lookup('@public', 'manifest.json');
+const OUTPUT_DIST = lookup('@dist', 'manifest.json');
 
-const dataDir = lookup('@', 'data');
+const dataDir = lookup('@data');
 const global = loadGlobalData(dataDir);
 
 const siteName = (global.site_name as string) || 'Starter';
@@ -58,8 +59,15 @@ const manifest = {
   prefer_related_applications: false,
 };
 
-writeFilePath(OUTPUT_PUBLIC, `${JSON.stringify(manifest, null, 2)}\n`);
-writeFilePath(OUTPUT_DIST, `${JSON.stringify(manifest, null, 2)}\n`);
+const manifestJson = `${JSON.stringify(manifest, null, 2)}\n`;
+
+const template = loadTemplate('manifest.json');
+const output = inject(template, {
+  manifest: manifestJson,
+});
+
+writeFilePath(OUTPUT_PUBLIC, output);
+writeFilePath(OUTPUT_DIST, output);
 
 logBox('Generate Manifest', {
   Name: siteName,

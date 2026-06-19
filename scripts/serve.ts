@@ -2,13 +2,13 @@ import { existsSync } from 'node:fs';
 import process from 'node:process';
 import { i18nConfig } from '@config/i18n';
 import { env } from '@generated/env';
+import { lookup } from '@generated/paths';
 import { getErrorPageSlugs, getRootPageSlug } from '@page-system';
-import { lookup } from '@utils/paths';
 import { createStaticApp, getPageNames, loadHtmlCache } from './lib/hono-server';
 import { log } from './lib/logger';
 import { createServer, setupSigintHandler } from './lib/signal-handler';
 
-const DIST = lookup('@', 'dist');
+const DIST = lookup('@dist');
 
 if (!existsSync(DIST)) {
   log.distNotFound();

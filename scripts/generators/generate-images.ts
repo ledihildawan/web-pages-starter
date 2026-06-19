@@ -1,14 +1,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { env } from '@generated/env';
+import { lookup } from '@generated/paths';
 import { log, logBox } from '@scripts/lib/logger';
 import { generatedHeader, writeFilePath } from '@scripts/lib/write-file';
-import { lookup } from '@utils/paths';
 import sharp from 'sharp';
 
-const SOURCE_DIR = lookup('@', 'assets', 'images');
-const OUTPUT_DIR = lookup('@', 'public', 'assets', 'images');
-const MANIFEST_FILE = lookup('@', 'generated', 'image-manifest.ts');
+const SOURCE_DIR = lookup('@assets', 'images');
+const OUTPUT_DIR = lookup('@public', 'assets', 'images');
+const MANIFEST_FILE = lookup('@generated', 'image-manifest.ts');
 
 const ASSET_PREFIX = env.BASE_PATH.replace(/\/$/, '');
 const imageUrl = (file: string): string => `${ASSET_PREFIX}/assets/images/${file}`;
@@ -137,7 +137,11 @@ async function main(): Promise<void> {
     }
   }
 
-  const manifestContent = `${generatedHeader('scripts/generators/generate-images.ts')}
+  const manifestContent = `${generatedHeader('scripts/generators/generate-images.ts', {
+    description: [`Images processed: ${processed}`, `Passthrough: ${passthrough}`, `Sizes: ${SIZES.join(', ')}px`].join(
+      '\n',
+    ),
+  })}
 
 export interface ImageEntry {
   width: number;

@@ -1,11 +1,11 @@
 {
-  "editor.fontFamily": "Monolisa",
+  "editor.fontFamily": "Monolisa, JetBrains Mono, Cascadia Code, Fira Code, SF Mono, Consolas, monospace",
   "editor.fontLigatures": true,
-  "editor.fontSize": 11.5,
+  "editor.fontSize": 13,
   "editor.tabSize": 2,
-  "editor.fontWeight": "600",
-  "editor.lineHeight": 22.5,
-  "editor.letterSpacing": 0.118,
+  "editor.fontWeight": "500",
+  "editor.lineHeight": 21,
+  "editor.letterSpacing": 0.5,
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "biomejs.biome",
   "editor.codeActionsOnSave": {
@@ -56,6 +56,7 @@
     "**/coverage": true
   },
   "files.associations": {
+    "**/codegen/templates/**": "plaintext",
     "*.njk": "njk",
     "*.css": "tailwindcss"
   },

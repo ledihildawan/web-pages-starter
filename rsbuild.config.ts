@@ -1,5 +1,5 @@
 import { createJiti } from 'jiti';
-import { alias } from './utils/paths';
+import { alias } from './generated/paths';
 
 const jiti = createJiti(import.meta.url, { alias });
 

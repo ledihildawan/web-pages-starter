@@ -1,12 +1,12 @@
 import { inject, loadTemplate } from '@codegen';
 import { i18nConfig } from '@config/i18n';
+import { lookup } from '@generated/paths';
 import { I18N_ASSET_DIR } from '@i18n';
 import { getErrorPageSlugs, getRootPageSlug, getSystemPageSlug } from '@page-system';
 import { logBox } from '@scripts/lib/logger';
 import { writeFilePath } from '@scripts/lib/write-file';
-import { lookup } from '@utils/paths';
 
-const OUTPUT = lookup('@', 'public', 'service-worker.js');
+const OUTPUT = lookup('@public', 'service-worker.js');
 
 const rootSlug = getRootPageSlug(i18nConfig.defaultLocale);
 const [notFoundSlug, unauthorizedSlug, forbiddenSlug, serverErrorSlug, maintenanceSlug, offlineErrorSlug] =
@@ -17,6 +17,7 @@ const CACHE_VERSION = `starter-${Date.now().toString(36)}`;
 
 const template = loadTemplate('service-worker.js');
 const swContent = inject(template, {
+  generated_at: new Date().toISOString(),
   cache_version: `'${CACHE_VERSION}'`,
   not_found_slug: notFoundSlug,
   unauthorized_slug: unauthorizedSlug,

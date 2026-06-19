@@ -2,16 +2,16 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
 import { LOCALE_CODES as ACTIVE_LOCALE_CODES } from '@generated/active-locales-data';
+import { lookup } from '@generated/paths';
 import { DEFAULT_NAMESPACE } from '@i18n/constants';
 import { LOCALE_CODES } from '@i18n/data/locales';
 import { log, logBox } from '@scripts/lib/logger';
 import { generatedHeader, writeFilePath } from '@scripts/lib/write-file';
 import { collectKeys, readJSON5 } from '@utils/json5';
-import { lookup } from '@utils/paths';
 
-const LOCALES_ROOT = lookup('@', 'locales');
+const LOCALES_ROOT = lookup('@locales');
 const DEFAULT_LOCALE_DIR = path.join(LOCALES_ROOT, i18nConfig.defaultLocale);
-const OUTPUT_FILE = lookup('@', 'generated', 'i18n.d.ts');
+const OUTPUT_FILE = lookup('@generated', 'i18n.d.ts');
 
 const activeLocaleSet = new Set(ACTIVE_LOCALE_CODES);
 
@@ -77,7 +77,7 @@ function readLocaleTree(dirPath: string): Record<string, unknown> {
 }
 
 function getPageIds(): Set<string> {
-  const pagesDir = lookup('@', 'pages');
+  const pagesDir = lookup('@pages');
   if (!fs.existsSync(pagesDir)) return new Set();
   return new Set(fs.readdirSync(pagesDir).filter((f) => fs.statSync(path.join(pagesDir, f)).isDirectory()));
 }

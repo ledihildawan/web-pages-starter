@@ -4,19 +4,19 @@ import path from 'node:path';
 import process from 'node:process';
 import { i18nConfig } from '@config/i18n';
 import { env } from '@generated/env';
+import { lookup } from '@generated/paths';
 import type { serve } from '@hono/node-server';
 import ngrok from '@ngrok/ngrok';
 import { getErrorPageSlugs, getRootPageSlug } from '@page-system';
 import { createStaticApp, getPageNames, loadHtmlCache } from '@scripts/lib/hono-server';
 import { log } from '@scripts/lib/logger';
 import { createServer, wrapMainError } from '@scripts/lib/signal-handler';
-import { lookup } from '@utils/paths';
 import inquirer from 'inquirer';
 
 const PORT = env.PORT;
 const HOST = env.HOST;
 const LOCAL_URL = `http://localhost:${PORT}`;
-const DIST = lookup('@', 'dist');
+const DIST = lookup('@dist');
 
 const TEXT_EXTS = ['.html', '.css', '.js', '.json', '.xml', '.txt', '.svg', '.webmanifest'];
 

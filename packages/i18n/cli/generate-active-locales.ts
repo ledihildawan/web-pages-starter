@@ -1,4 +1,5 @@
 import { i18nConfig } from '@config/i18n';
+import { lookup } from '@generated/paths';
 import { FONT_CSS_PATHS } from '@i18n/data/font-paths';
 import { LANGUAGES } from '@i18n/data/languages';
 import type { LocaleCode, LocaleConfig } from '@i18n/data/locales';
@@ -7,9 +8,8 @@ import { NUMBERING_SYSTEMS } from '@i18n/data/numbering-systems';
 import { WRITING_SYSTEM, WRITING_SYSTEMS } from '@i18n/data/writing-systems';
 import { log } from '@scripts/lib/logger';
 import { generatedHeader, writeFilePath } from '@scripts/lib/write-file';
-import { lookup } from '@utils/paths';
 
-const OUTPUT_FILE = lookup('@', 'generated', 'active-locales-data.ts');
+const OUTPUT_FILE = lookup('@generated', 'active-locales-data.ts');
 
 const activeCodes: LocaleCode[] = [...new Set([i18nConfig.defaultLocale, ...(i18nConfig.locales ?? [])])];
 
