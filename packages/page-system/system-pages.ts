@@ -1,6 +1,7 @@
 import { env } from '@generated/env';
 
 export const ROOT_PAGE = 'home';
+export const FALLBACK_LOCALE = 'en-US';
 
 export const SYSTEM_PAGE_IDS = [
   ROOT_PAGE,
@@ -994,10 +995,10 @@ export function getSystemPageSlug(pageId: string, locale: string): string {
     if (!env.IS_PROD && !warnedMissing.has(key)) {
       warnedMissing.add(key);
       console.warn(
-        `[pages] No system page slug for "${pageId}" in locale "${locale}". Add an entry to SYSTEM_PAGE_SLUGS in packages/page-system/system-pages.ts. Falling back to en-US.`,
+        `[pages] No system page slug for "${pageId}" in locale "${locale}". Add an entry to SYSTEM_PAGE_SLUGS in packages/page-system/system-pages.ts. Falling back to ${FALLBACK_LOCALE}.`,
       );
     }
-    return entry['en-US'] ?? pageId;
+    return entry[FALLBACK_LOCALE] ?? pageId;
   }
   return slug;
 }

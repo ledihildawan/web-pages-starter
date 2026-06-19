@@ -24,6 +24,8 @@ async function injectFontFaceRules(wsCode: string): Promise<void> {
   if (loaded.has(wsCode)) return;
   loaded.add(wsCode);
 
+  if (document.querySelector('link[href*="fonts.css"]')) return;
+
   try {
     const basePath = (window as { __BASE_PATH__?: string }).__BASE_PATH__ ?? '';
     const href = `${basePath}assets/fonts/fonts.css`;

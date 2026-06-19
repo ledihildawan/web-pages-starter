@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { fontsConfig } from '@config/fonts';
 import { i18nConfig } from '@config/i18n';
 import { browserEnv, env } from '@generated/env';
 import { getActiveLocaleCodes, isSingleLocale, LOCALE_STORAGE_KEY } from '@i18n';
@@ -28,14 +29,30 @@ const pluginResourceHints = (): RsbuildPlugin => ({
       let alpineChunkUrl = '';
       let i18nChunkUrl = '';
       let i18nFormattersChunkUrl = '';
+      let latinFontUrl = '';
 
       if (fs.existsSync(asyncDir)) {
         for (const f of fs.readdirSync(asyncDir)) {
           if (!f.endsWith('.js')) continue;
           const url = `/assets/scripts/async/${f}`;
-          if (f.startsWith('chunk-alpine-core')) alpineChunkUrl = url;
-          else if (f.startsWith('chunk-i18next')) i18nChunkUrl = url;
-          else if (f.startsWith('chunk-i18n-formatters')) i18nFormattersChunkUrl = url;
+          if (f.startsWith(CHUNK_NAMES.alpineCore)) alpineChunkUrl = url;
+          else if (f.startsWith(CHUNK_NAMES.i18next)) i18nChunkUrl = url;
+          else if (f.startsWith(CHUNK_NAMES.i18nFormatters)) i18nFormattersChunkUrl = url;
+        }
+      }
+
+      const fontsCssPath = path.join(distDir, 'assets', 'fonts', 'fonts.css');
+      if (fs.existsSync(fontsCssPath)) {
+        const primaryFontName = fontsConfig.sans?.name;
+        if (primaryFontName) {
+          const escaped = primaryFontName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          const fontsCss = fs.readFileSync(fontsCssPath, 'utf-8');
+          const woff2Match = fontsCss.match(
+            new RegExp(`url\\(['"]?(\\.\\/[^'"]*${escaped}-latin-wght-normal\\.woff2)['"]?\\)`),
+          );
+          if (woff2Match) {
+            latinFontUrl = `/assets/fonts/${woff2Match[1].replace('./', '')}`;
+          }
         }
       }
 
@@ -65,6 +82,10 @@ const pluginResourceHints = (): RsbuildPlugin => ({
 
         if (i18nFormattersChunkUrl && !isSingleLocale()) {
           hints += `<link rel="modulepreload" href="${i18nFormattersChunkUrl}">\n`;
+        }
+
+        if (latinFontUrl) {
+          hints += `<link rel="preload" as="font" type="font/woff2" href="${latinFontUrl}" crossorigin>\n`;
         }
 
         const imgMatch = content.match(/<img[^>]*data-lcp="true"[^>]*>/);
@@ -203,6 +224,12 @@ const pluginRemoveEmptyPageJs = (): RsbuildPlugin => ({
   },
 });
 
+const CHUNK_NAMES = {
+  alpineCore: 'chunk-alpine-core',
+  i18next: 'chunk-i18next',
+  i18nFormatters: 'chunk-i18n-formatters',
+} as const;
+
 const scannedPages = scanPages(lookup('@', 'pages'), '');
 
 const getPageNames = (): string[] => scannedPages.map((p) => p.name);
@@ -258,7 +285,7 @@ export default defineConfig({
             };
           }),
         {
-          from: /^\/(?!locales\/|assets\/|fonts\/|images\/|favicon\.svg$|favicon\.ico$|manifest\.json$|sw\.js$|robots\.txt$|sitemap\.xml$|.*\.[a-z0-9]+$)/,
+          from: /^\/(?!locales\/|assets\/|fonts\/|images\/|favicon\.svg$|favicon\.ico$|manifest\.json$|service-worker\.js$|robots\.txt$|sitemap\.xml$|.*\.[a-z0-9]+$)/,
           to: `/${getSystemPageSlug('not-found', i18nConfig.defaultLocale)}.html`,
         },
       ],
@@ -273,7 +300,7 @@ export default defineConfig({
     cacheGroups: {
       i18next: {
         test: /[\\/]node_modules[\\/](i18next|@formatjs|intl-pluralrules|intl-messageformat)[\\/]/,
-        name: 'chunk-i18next',
+        name: CHUNK_NAMES.i18next,
         chunks: 'async',
         priority: 30,
       },
@@ -285,13 +312,13 @@ export default defineConfig({
       },
       alpineCore: {
         test: /[\\/]node_modules[\\/]@alpinejs[\\/]csp[\\/]/,
-        name: 'chunk-alpine-core',
+        name: CHUNK_NAMES.alpineCore,
         chunks: 'all',
         priority: 20,
       },
       i18nFormatters: {
         test: /[\\/]packages[\\/]i18n[\\/](data|engine|runtime|strategies|fonts)[\\/]/,
-        name: 'chunk-i18n-formatters',
+        name: CHUNK_NAMES.i18nFormatters,
         chunks: 'async',
         priority: 15,
       },
@@ -311,6 +338,7 @@ export default defineConfig({
       'import.meta.env': JSON.stringify({
         ...browserEnv,
         SINGLE_LOCALE: isSingleLocale(),
+        DEFAULT_LOCALE: i18nConfig.defaultLocale,
       }),
     },
   },

@@ -23,6 +23,7 @@ declare global {
 
   interface ImportMetaEnv extends BrowserEnvType {
     SINGLE_LOCALE: boolean;
+    DEFAULT_LOCALE: string;
     DEV: boolean;
     PROD: boolean;
     MODE: string;

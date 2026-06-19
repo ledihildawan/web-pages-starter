@@ -146,7 +146,7 @@ async function bootstrap() {
 
     if (SINGLE_LOCALE) {
       globalThis.Alpine.store('i18n', {
-        current: window.__SERVER_LOCALE__ ?? 'en-US',
+        current: window.__SERVER_LOCALE__ ?? import.meta.env.DEFAULT_LOCALE,
         languages: [],
         change: () => {},
       });

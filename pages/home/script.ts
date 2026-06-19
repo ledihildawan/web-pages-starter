@@ -1,14 +1,10 @@
-console.log('Home page loaded');
-
 document.addEventListener('alpine:init', () => {
   Alpine.data('homeHero', () => ({
     title: 'Web Pages Starter',
     subtitle: 'Build lightning-fast web applications',
     isMenuOpen: false,
 
-    init() {
-      console.log('Home hero initialized');
-    },
+    init() {},
 
     toggleMenu() {
       this.isMenuOpen = !this.isMenuOpen;
