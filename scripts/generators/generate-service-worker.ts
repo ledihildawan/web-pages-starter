@@ -1,4 +1,5 @@
 import { i18nConfig } from '@config/i18n';
+import { I18N_ASSET_DIR } from '@i18n';
 import { getErrorPageSlugs, getRootPageSlug, getSystemPageSlug } from '@page-system';
 import { logBox } from '@scripts/lib/logger';
 import { writeFilePath } from '@scripts/lib/write-file';
@@ -58,7 +59,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  const isI18nAsset = request.url.includes('/assets/i18n/');
+  const isI18nAsset = request.url.includes('/${I18N_ASSET_DIR}/');
   if (isI18nAsset) {
     event.respondWith(
       caches.match(request).then((cached) => {

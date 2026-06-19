@@ -24,6 +24,7 @@ declare global {
   interface ImportMetaEnv extends BrowserEnvType {
     SINGLE_LOCALE: boolean;
     DEFAULT_LOCALE: string;
+    FLAG_CDN_BASE: string;
     DEV: boolean;
     PROD: boolean;
     MODE: string;

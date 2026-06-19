@@ -1,6 +1,6 @@
 import { i18nConfig } from '@config/i18n';
 import { env } from '@generated/env';
-import { getActiveLocalesDisplay, LOCALE_STORAGE_KEY } from '@i18n';
+import { DEFAULT_NAMESPACE, getActiveLocalesDisplay, I18N_ASSET_DIR, LOCALE_STORAGE_KEY } from '@i18n';
 import type { LocaleCode } from '@i18n/data/locales';
 import { getActiveLocales } from '@i18n/engine/active-locales';
 import { setStrategies } from '@i18n/engine/formatters';
@@ -53,10 +53,10 @@ export default defineStore('i18n', {
   },
 
   async ensureLocaleData(code: string, pageID: string, m: typeof import('./runtime')) {
-    if (m.i18next.hasResourceBundle(code, 'common')) return;
+    if (m.i18next.hasResourceBundle(code, DEFAULT_NAMESPACE)) return;
 
     try {
-      const response = await fetch(`${env.BASE_PATH}assets/i18n/${pageID}/${code}.json`);
+      const response = await fetch(`${env.BASE_PATH}${I18N_ASSET_DIR}/${pageID}/${code}.json`);
       const data = await response.json();
 
       for (const [ns, bundle] of Object.entries(data)) {
@@ -72,7 +72,7 @@ export default defineStore('i18n', {
 
         this.loadedLocales.delete(oldest);
 
-        m.i18next.removeResourceBundle(oldest, 'common');
+        m.i18next.removeResourceBundle(oldest, DEFAULT_NAMESPACE);
         m.i18next.removeResourceBundle(oldest, pageID);
       }
     } catch {

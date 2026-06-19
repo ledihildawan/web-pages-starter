@@ -8,6 +8,7 @@ import { getRootPageSlug, getSystemPageSlug, scanPages } from '@page-system';
 import { generateDynamicEntries } from '@page-system/dynamic-routes';
 import { defineConfig, type RsbuildPlugin } from '@rsbuild/core';
 import { createTemplateParams } from '@template-engine';
+import { readJSON5 } from '@utils/json5';
 import { alias, lookup } from '@utils/paths';
 import { minify } from 'html-minifier-terser';
 import { html as beautifyHtml } from 'js-beautify';
@@ -230,6 +231,9 @@ const CHUNK_NAMES = {
   i18nFormatters: 'chunk-i18n-formatters',
 } as const;
 
+const globalConfig = readJSON5(lookup('@', 'data', 'global.json5')) as { flag_cdn?: string };
+const FLAG_CDN_BASE = globalConfig.flag_cdn || 'https://flagcdn.com';
+
 const scannedPages = scanPages(lookup('@', 'pages'), '');
 
 const getPageNames = (): string[] => scannedPages.map((p) => p.name);
@@ -339,6 +343,7 @@ export default defineConfig({
         ...browserEnv,
         SINGLE_LOCALE: isSingleLocale(),
         DEFAULT_LOCALE: i18nConfig.defaultLocale,
+        FLAG_CDN_BASE,
       }),
     },
   },

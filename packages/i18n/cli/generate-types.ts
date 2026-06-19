@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
 import { LOCALE_CODES as ACTIVE_LOCALE_CODES } from '@generated/active-locales-data';
+import { DEFAULT_NAMESPACE } from '@i18n/constants';
 import { LOCALE_CODES } from '@i18n/data/locales';
 import { log, logBox } from '@scripts/lib/logger';
 import { generatedHeader, writeFilePath } from '@scripts/lib/write-file';
@@ -90,7 +91,7 @@ function pickPages(namespaces: Record<string, unknown>, pageIds: Set<string>): R
 }
 
 function pickShared(namespaces: Record<string, unknown>, pageIds: Set<string>): Record<string, unknown> {
-  return Object.fromEntries(Object.entries(namespaces).filter(([ns]) => ns !== 'common' && !pageIds.has(ns)));
+  return Object.fromEntries(Object.entries(namespaces).filter(([ns]) => ns !== DEFAULT_NAMESPACE && !pageIds.has(ns)));
 }
 
 function compareLocaleParity(
@@ -131,7 +132,7 @@ try {
   });
 
   const defaultNamespaces = readLocaleTree(DEFAULT_LOCALE_DIR);
-  const commonData = defaultNamespaces.common;
+  const commonData = defaultNamespaces[DEFAULT_NAMESPACE];
   const pageIds = getPageIds();
   const pagesData = pickPages(defaultNamespaces, pageIds);
   const sharedData = pickShared(defaultNamespaces, pageIds);
@@ -159,7 +160,7 @@ try {
     }
   }
 
-  const commonKeys = collectKeys(commonData).map((k) => `'common:${k}'`);
+  const commonKeys = collectKeys(commonData).map((k) => `'${DEFAULT_NAMESPACE}:${k}'`);
   const pageKeys = Object.entries(pagesData).flatMap(([page, data]) => collectKeys(data).map((k) => `'${page}:${k}'`));
   const sharedKeys = Object.entries(sharedData).flatMap(([ns, data]) => collectKeys(data).map((k) => `'${ns}:${k}'`));
 

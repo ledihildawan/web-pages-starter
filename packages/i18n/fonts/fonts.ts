@@ -1,5 +1,6 @@
 import { fontsConfig } from '@config/fonts';
 import { ACTIVE_WRITING_SYSTEMS } from '@generated/active-locales-data';
+import { FONTS_CSS_PATH } from '@i18n';
 import type { LocaleConfig } from '@i18n/data/locales';
 import type { WritingSystemCode } from '@i18n/data/writing-systems';
 import { getActiveLocales } from '@i18n/engine/active-locales';
@@ -24,11 +25,11 @@ async function injectFontFaceRules(wsCode: string): Promise<void> {
   if (loaded.has(wsCode)) return;
   loaded.add(wsCode);
 
-  if (document.querySelector('link[href*="fonts.css"]')) return;
+  if (document.querySelector(`link[href*="${FONTS_CSS_PATH}"]`)) return;
 
   try {
     const basePath = (window as { __BASE_PATH__?: string }).__BASE_PATH__ ?? '';
-    const href = `${basePath}assets/fonts/fonts.css`;
+    const href = `${basePath}${FONTS_CSS_PATH}`;
     const nonce = getCspNonce();
 
     const link = document.createElement('link');

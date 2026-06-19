@@ -53,7 +53,7 @@
             {% for lang in locales %}
               <button data-lang-option="{{ lang.code }}" class="lang-option inline-full px-3 py-2.5 block-10 flex items-center gap-3 text-start radius-icon text-[12px] font-bold transition-[color,background-color,border-color] duration-300 group" :aria-current="$store.i18n.current === '{{ lang.code }}'">
                 <span class="inline-5 block-3.5 shrink-0 overflow-hidden rounded-xs bg-white/5 flex items-center justify-center aspect-4/3">
-                  <img src="https://flagcdn.com/w20/{{ lang.flag }}.png" width="20" height="15" class="inline-full block-full object-cover transition-[opacity,filter] duration-300 lang-flag" loading="lazy" alt="{{ lang.label }} flag - {{ lang.flag | upper }}">
+                  <img src="{{ global.flag_cdn }}/w20/{{ lang.flag }}.png" width="20" height="15" class="inline-full block-full object-cover transition-[opacity,filter] duration-300 lang-flag" loading="lazy" alt="{{ lang.label }} flag - {{ lang.flag | upper }}">
                 </span>
                 <span class="truncate">{{ lang.label }}</span>
               </button>
@@ -149,7 +149,7 @@
             {% for lang in locales %}
               <button data-lang-option="{{ lang.code }}" class="lang-option group relative flex items-center gap-3 px-4 pbs-4 pbe-4 radius-btn transition-[color,background-color,border-color] duration-300 border text-start active:scale-[0.96]" :aria-current="$store.i18n.current === '{{ lang.code }}'" aria-label="{{ lang.label }} ({{ lang.flag | upper }})">
                 <div class="relative shrink-0 inline-5 block-3.5 overflow-hidden rounded-xs bg-white/5 aspect-4/3">
-                  <img src="https://flagcdn.com/w40/{{ lang.flag }}.png" width="40" height="30" class="inline-full block-full object-cover transition-[opacity,filter] duration-200 lang-flag" loading="lazy" alt="{{ lang.label }} flag - {{ lang.flag | upper }}">
+                  <img src="{{ global.flag_cdn }}/w40/{{ lang.flag }}.png" width="40" height="30" class="inline-full block-full object-cover transition-[opacity,filter] duration-200 lang-flag" loading="lazy" alt="{{ lang.label }} flag - {{ lang.flag | upper }}">
                 </div>
                 <div class="flex flex-col min-inline-0">
                   <span class="text-[13px] font-bold truncate leading-none">{{ lang.label }}</span>

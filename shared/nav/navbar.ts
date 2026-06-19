@@ -3,6 +3,13 @@ import { defineData } from '@/utils/alpine';
 
 const TRANSITION_OPEN = 700;
 const TRANSITION_CLOSE = 500;
+const LG_BREAKPOINT = 1024;
+const SCROLLED_THRESHOLD = 20;
+const NAV_HIDE_THRESHOLD = 150;
+const SWIPE_UP_THRESHOLD = 100;
+const CLOSE_NAV_DELAY = 200;
+const SCROLL_RECALC_DELAY = 50;
+const HAPTIC_MS = 10;
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const transitionMs = (normal: number) => (prefersReducedMotion ? 0 : normal);
 
@@ -99,11 +106,11 @@ export default defineData('navbar', () => ({
   },
 
   hapticFeedback() {
-    navigator.vibrate?.(10);
+    navigator.vibrate?.(HAPTIC_MS);
   },
 
   onResize() {
-    if (window.innerWidth >= 1024 && this.mobileMenuOpen) this.toggleMobile();
+    if (window.innerWidth >= LG_BREAKPOINT && this.mobileMenuOpen) this.toggleMobile();
   },
 
   onNavEscape() {
@@ -136,7 +143,7 @@ export default defineData('navbar', () => ({
 
   init() {
     this.lastScroll = window.scrollY;
-    this.scrolled = this.lastScroll > 20;
+    this.scrolled = this.lastScroll > SCROLLED_THRESHOLD;
   },
 
   onScroll() {
@@ -144,8 +151,8 @@ export default defineData('navbar', () => ({
     this._ticking = true;
     requestAnimationFrame(() => {
       const currentScroll = window.scrollY;
-      this.scrolled = currentScroll > 20;
-      if (currentScroll > this.lastScroll && currentScroll > 150) {
+      this.scrolled = currentScroll > SCROLLED_THRESHOLD;
+      if (currentScroll > this.lastScroll && currentScroll > NAV_HIDE_THRESHOLD) {
         this.navHidden = true;
       } else if (currentScroll < this.lastScroll) {
         this.navHidden = false;
@@ -168,7 +175,7 @@ export default defineData('navbar', () => ({
   handleTouchEnd() {
     if (!this.isDragging) return;
     this.isDragging = false;
-    if (this.touchCurrentY - this.touchStartY > 100) {
+    if (this.touchCurrentY - this.touchStartY > SWIPE_UP_THRESHOLD) {
       this.hapticFeedback();
       this.closeMobileMenu();
     }
@@ -200,7 +207,7 @@ export default defineData('navbar', () => ({
     if (targetUrl && !isAnchorLink) {
       setTimeout(() => {
         window.location.href = targetUrl;
-      }, 200);
+      }, CLOSE_NAV_DELAY);
     }
 
     setTimeout(() => {
@@ -215,9 +222,9 @@ export default defineData('navbar', () => ({
         window.location.href = targetUrl!;
         setTimeout(() => {
           this.lastScroll = window.scrollY;
-        }, 50);
+        }, SCROLL_RECALC_DELAY);
       } else {
-        this.navHidden = this.scrollY > 150;
+        this.navHidden = this.scrollY > NAV_HIDE_THRESHOLD;
         this.lastScroll = this.scrollY;
         window.scrollTo(0, this.scrollY);
       }
@@ -260,7 +267,7 @@ export default defineData('navbar', () => ({
 
   getCurrentFlagUrl(): string {
     const lang = this.getCurrentLanguageObj();
-    return lang?.flag ? `https://flagcdn.com/w20/${lang.flag.toLowerCase()}.png` : '';
+    return lang?.flag ? `${import.meta.env.FLAG_CDN_BASE}/w20/${lang.flag.toLowerCase()}.png` : '';
   },
 
   getCurrentFlagAlt(): string {

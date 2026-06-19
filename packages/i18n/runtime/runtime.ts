@@ -2,7 +2,7 @@ import { i18nConfig } from '@config/i18n';
 import { env } from '@generated/env';
 import { convertCurrency, EXCHANGE_RATES } from '@generated/exchange-rates';
 import type { I18nTranslationKeys } from '@generated/i18n';
-import { getActiveLocalesDisplay, LOCALE_STORAGE_KEY } from '@i18n';
+import { DEFAULT_NAMESPACE, getActiveLocalesDisplay, I18N_ASSET_DIR, LOCALE_STORAGE_KEY } from '@i18n';
 import type { LocaleCode } from '@i18n/data/locales';
 import { getActiveLocaleCodes } from '@i18n/engine/active-locales';
 import {
@@ -292,7 +292,7 @@ export async function initIntl(localeOverride?: string): Promise<void> {
   setStrategies(strategies.cardinal, strategies.ordinal);
 
   try {
-    const response = await fetch(`${env.BASE_PATH}assets/i18n/${pageID}/${savedLocale}.json`);
+    const response = await fetch(`${env.BASE_PATH}${I18N_ASSET_DIR}/${pageID}/${savedLocale}.json`);
     const data = await response.json();
 
     const resources: Resource = {
@@ -305,7 +305,7 @@ export async function initIntl(localeOverride?: string): Promise<void> {
       supportedLngs: getActiveLocaleCodes(),
       fallbackLng: i18nConfig.defaultLocale,
       ns: Object.keys(data),
-      defaultNS: 'common',
+      defaultNS: DEFAULT_NAMESPACE,
       detection: localeOverride
         ? undefined
         : {

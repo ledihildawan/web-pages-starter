@@ -2,6 +2,7 @@
   site_name: 'Starter',
   site_description: 'Build lightning-fast, beautiful web applications with Starter.',
   site_image: '/assets/images/og-image.png',
+  flag_cdn: 'https://flagcdn.com',
   root_page: 'home',
   seo: {
     theme_color: '#020617',

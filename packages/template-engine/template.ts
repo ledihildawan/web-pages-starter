@@ -8,6 +8,7 @@ import { IMAGE_MANIFEST } from '@generated/image-manifest';
 import {
   convertCurrency,
   convertLocalPrice,
+  DEFAULT_NAMESPACE,
   formatAbbreviated,
   formatBytes,
   formatCardinal,
@@ -115,7 +116,7 @@ export const scanSharedLocales = (
     const colonIdx = key.indexOf(':');
     if (colonIdx !== -1) {
       const ns = key.slice(0, colonIdx);
-      if (ns !== 'common' && ns !== pageId) found.add(ns);
+      if (ns !== DEFAULT_NAMESPACE && ns !== pageId) found.add(ns);
     }
   }
 
@@ -630,7 +631,7 @@ export const createTemplateParams = (
     if (colonIdx !== -1) {
       return { ns: key.slice(0, colonIdx), clientKey: key.slice(colonIdx + 1) };
     }
-    return { ns: 'common', clientKey: key };
+    return { ns: DEFAULT_NAMESPACE, clientKey: key };
   };
 
   const i18n = createI18nObject(lang, resolve, normalizeI18nKey);

@@ -45,6 +45,8 @@ Requires [Python 3](https://python.org) with `fonttools` + `brotli` (`pip instal
 - Nunjucks string concat: `~` (never `+`)
 - Import paths: `@i18n`, `@template-engine`, `@page-system`, `@config/*`, `@scripts/*`, `@utils/*`, `@generated/*` aliases used everywhere (including the rsbuild config chain). `tsconfig.json` is the single source of truth for path aliases — `utils/paths.ts` reads them and exports bundler-format aliases, auto-deriving for jiti + bundler. `rsbuild.config.ts` is a thin jiti wrapper that loads `configs/rsbuild.ts` — real config lives in `configs/rsbuild.ts`. Env imports use `@generated/env` (not `@utils/env`); `@utils/*` still covers `common.ts`, `json5.ts`, `paths.ts`, etc.
 - i18n CLI scripts live in `packages/i18n/cli/` (not `scripts/`). Page-system CLI lives in `packages/page-system/cli/`. Env CLI lives in `packages/env/cli/`.
+- Always write JavaScript and TypeScript targeting ECMAScript 2022+ and modern runtimes (2025–2026). Prefer modern language features and APIs. Do not generate legacy JavaScript, CommonJS, polyfills, compatibility workarounds, or outdated patterns unless explicitly requested.
+
 
 ## Build Modes
 
