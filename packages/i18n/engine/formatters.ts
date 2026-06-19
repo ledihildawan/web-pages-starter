@@ -195,7 +195,7 @@ const processNumeric = (
   const languageSubtag = getLanguageSubtag(getLocale());
 
   if (options.nativeDigits && !options.numberingSystem) {
-    const cjkLanguages = WRITING_SYSTEM.CJK_LANGUAGES as readonly string[];
+    const cjkLanguages = (WRITING_SYSTEM.CJK_LANGUAGES ?? []) as readonly string[];
     if (config.cjk && cjkLanguages.includes(languageSubtag)) return config.cjk(num, languageSubtag);
 
     const digitRules: {
@@ -204,17 +204,17 @@ const processNumeric = (
       fallback: (num: number) => string;
     }[] = [
       {
-        languages: WRITING_SYSTEM.ARABIC_LANGUAGES as readonly string[],
+        languages: (WRITING_SYSTEM.ARABIC_LANGUAGES ?? []) as readonly string[],
         converter: NATIVE_DIGITS_MAP.ar,
         fallback: config.arabicFallback,
       },
       {
-        languages: WRITING_SYSTEM.DEVANAGARI_LANGUAGES as readonly string[],
+        languages: (WRITING_SYSTEM.DEVANAGARI_LANGUAGES ?? []) as readonly string[],
         converter: NATIVE_DIGITS_MAP.hi,
         fallback: config.devanagariFallback,
       },
       {
-        languages: WRITING_SYSTEM.CYRILLIC_LANGUAGES as readonly string[],
+        languages: (WRITING_SYSTEM.CYRILLIC_LANGUAGES ?? []) as readonly string[],
         converter: NATIVE_DIGITS_MAP.ru,
         fallback: config.cyrillicFallback,
       },

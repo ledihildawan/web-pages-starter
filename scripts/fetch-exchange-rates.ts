@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import { CURRENCY_CODE } from '@i18n/data/currencies';
+import { getActiveLocales } from '@i18n/engine/active-locales';
 import { lookup } from '@utils/paths';
 import { log } from './lib/logger';
 import { generatedHeader, writeFilePath } from './lib/write-file';
@@ -7,6 +8,14 @@ import { generatedHeader, writeFilePath } from './lib/write-file';
 const EXCHANGE_RATES_URL = 'https://api.frankfurter.dev/v2/rates';
 const EXCHANGE_RATES_FILE = lookup('@', 'generated', 'exchange-rates.ts');
 const BASE_CURRENCY = CURRENCY_CODE.USD;
+
+function getActiveCurrencies(): Set<string> {
+  const currencies = new Set<string>([BASE_CURRENCY]);
+  for (const locale of getActiveLocales()) {
+    currencies.add(locale.currency);
+  }
+  return currencies;
+}
 
 async function fetchExchangeRates(): Promise<Record<string, number>> {
   const url = `${EXCHANGE_RATES_URL}?base=${BASE_CURRENCY}`;
@@ -23,12 +32,16 @@ async function fetchExchangeRates(): Promise<Record<string, number>> {
     rate: number;
   }>;
 
+  const activeCurrencies = getActiveCurrencies();
+
   const ratesObj: Record<string, number> = {
     [BASE_CURRENCY]: 1,
   };
 
   for (const item of data) {
-    ratesObj[item.quote] = item.rate;
+    if (activeCurrencies.has(item.quote)) {
+      ratesObj[item.quote] = item.rate;
+    }
   }
 
   return ratesObj;
