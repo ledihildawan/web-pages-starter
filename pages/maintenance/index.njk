@@ -1,0 +1,12 @@
+{% extends "main.njk" %}
+{% import "shared/ui/icons.njk" as icon %}
+
+{% block content %}
+{% set error_icon_name = 'clock' %}
+{% set error_icon_color = 'sky' %}
+{% set error_gradient_from = 'sky' %}
+{% set error_gradient_via = 'blue' %}
+{% set error_i18n_ns = 'maintenance' %}
+{% set error_quick_links = '/|home,/about|about,/contact|contact' %}
+{% include "shared/error/error-page.njk" %}
+{% endblock %}

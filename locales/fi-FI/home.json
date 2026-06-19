@@ -1,0 +1,103 @@
+{
+  "about": {
+    "badge": "Tietoa meistä"
+  },
+  "hero": {
+    "badge": "Welcome",
+    "title_part1": "Luomme ",
+    "title_highlight": "digitaalista tulevaisuutta",
+    "description": "Vuonna 2024 perustettu Starter auttaa kehittäjiä rakentamaan parempia sovelluksia nopeammin. Uskomme puhtaan koodin, kauniin muotoilun ja avoimen lähdekoodin yhteistyön voimaan.",
+    "primary_btn": {
+      "label": "Aloita ilmaiseksi",
+      "url": "#pricing"
+    },
+    "secondary_btn": {
+      "label": "Näytä demo",
+      "url": "#features"
+    },
+    "note": "Ei luottokorttia tarvita",
+    "image_alt": "Web Pages Starter dashboard preview"
+  },
+  "stats": {
+    "community": "Globaali yhteisö",
+    "community_val": "50K+",
+    "projects": "Valmiit projektit",
+    "projects_val": "120+",
+    "uptime": "Käytettävyys",
+    "uptime_val": "99.99%",
+    "rating": "Arvosana",
+    "rating_val": "4.9/5"
+  },
+  "story": {
+    "tag": "Tarinamme",
+    "visual_label": "Luovan studion kuva",
+    "title": "Intohimon ajamia, <br>laadun määrittelemiä.",
+    "para1": "Matkamme alkoi yksinkertaisella idealla: tehdä web-kehityksestä saavutettavaa ja hauskaa kaikille. Olimme kyllästyneitä raskaisiin kehyksiin ja monimutkaisiin asetuksiin.",
+    "para2": "Nykyään olemme monimuotoinen tiimi insinöörejä, suunnittelijoita ja ajattelijoita, jotka työskentelevät yhdessä ratkaistakseen monimutkaisia ongelmia eleganteilla ratkaisuilla.",
+    "val1": "Käyttäjäkeskeinen muotoilufilosofia",
+    "val2": "Suorituskyky edellä -arkkitehtuuri",
+    "val3": "Avoimuus ja avoin viestintä"
+  },
+  "mission": {
+    "title": "Tehtävämme",
+    "description": "Valtuuttaa kehittäjiä ja yrityksiä eleganteilla, nopeilla ja helppokäyttöisillä työkaluilla poikkeuksellisten digitaalisten tuotteiden rakentamiseen."
+  },
+  "vision": {
+    "title": "Visioomme",
+    "description": "Tulla modernien kehittäjien valitsemaksi alustaksi, jotka arvostavat kauneutta, suorituskykyä ja käyttäjäkokemusta jokaisella koodirivillä."
+  },
+  "values": {
+    "title": "Arvomme",
+    "subtitle": "Periaatteet, jotka ohjaavat jokaista päätöstämme."
+  },
+  "passion": {
+    "title": "Intohimo",
+    "description": "Rakastamme sitä, mitä teemme, ja se näkyy tuotteidemme jokaisessa yksityiskohdassa."
+  },
+  "collaboration": {
+    "title": "Yhteistyö",
+    "description": "Yhdessä työskentely tuottaa parhaat tulokset. Uskomme vahvan tiimin voimaan."
+  },
+  "innovation": {
+    "title": "Innovaatio",
+    "description": "Etsimme aina parempia tapoja ratkaista ongelmia ja luoda arvoa."
+  },
+  "integrity": {
+    "title": "Rehellisyys",
+    "description": "Rehellisyys ja avoimuus ovat jokaisen rakentamamme suhteen perusta."
+  },
+  "excellence": {
+    "title": "Erinomaisuus",
+    "description": "Emme tyydy 'riittävän hyvään'. Pyrimme aina parhaaseen."
+  },
+  "quality": {
+    "title": "Laatu",
+    "description": "Puhdas koodi, kaunis muotoilu ja saumaton kokemus ovat standardimme."
+  },
+  "team": {
+    "title": "Tapaa tiimi",
+    "subtitle": "Loistavat mielet jokaisen kirjoittamamme koodirivin takana.",
+    "alex_desc": "Visionäärinen johtaja, jolla on yli 10 vuoden kokemus SaaS-ekosysteemien kehittämisestä.",
+    "sarah_desc": "Fullstack-taikuutta erikoistuen suuren mittakaavan järjestelmäarkkitehtuurien rakentamiseen.",
+    "mike_desc": "Pakkomielteinen pikselien yksityiskohdista, sujuvista UX-virroista ja saavutettavuusstandardeista.",
+    "jessica_desc": "Luova tarinankertoja, joka auttaa brändejä löytämään ainutlaatuisen äänensä digitaalisessa maailmassa."
+  },
+  "features": {
+    "list": {
+      "speed": {
+        "title": "Salamannopea",
+        "description": "Optimoitu suorituskyky alle 100 ms latausajoilla. Rakennettu globaaliin skaalaukseen edge-infran avulla."
+      },
+      "design": {
+        "title": "Moderni muotoilu",
+        "description": "Puhdas, responsiivinen käyttöliittymä, joka näyttää ammattimaiselta kaikilla laitteilla. Täysin mukautettavat komponentit."
+      },
+      "security": {
+        "title": "Korkea tietoturva",
+        "description": "Päästä päähän -salaus, monivaiheinen tunnistautuminen ja SOC2-vaatimustenmukaisuus tietojesi suojaamiseksi."
+      }
+    },
+    "heading": "Avainominaisuudet",
+    "subheading": "Kaikki mitä tarvitset rakentamiseen ja skaalaukseen."
+  }
+}

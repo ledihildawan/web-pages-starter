@@ -1,0 +1,46 @@
+{
+  page_id: 'contact',
+  meta: {
+    title: 'Contact | Starter',
+    description: "Get in touch with our team. We're here to help with any questions or support needs.",
+    t_key: 'contact',
+    theme_color: 'violet',
+  },
+  contact: {
+    t_key: 'contact',
+  },
+  contact_items: [
+    {
+      label: 'email',
+      color: 'emerald',
+      icon: 'envelope',
+    },
+    {
+      label: 'phone',
+      color: 'violet',
+      icon: 'phone',
+    },
+    {
+      label: 'location',
+      color: 'fuchsia',
+      icon: 'map-pin',
+    },
+  ],
+  socials: [
+    {
+      url: 'https://github.com',
+      name: 'GitHub',
+      color: 'emerald',
+    },
+    {
+      url: 'https://twitter.com',
+      name: 'Twitter',
+      color: 'violet',
+    },
+    {
+      url: 'https://linkedin.com',
+      name: 'LinkedIn',
+      color: 'fuchsia',
+    },
+  ],
+}

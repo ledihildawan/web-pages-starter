@@ -8,38 +8,191 @@ bun run dev        # http://localhost:8888
 bun run build      # production build to ./dist
 ```
 
+Requires [Python 3](https://python.org) with `fonttools` + `brotli` (`pip install fonttools brotli`) for font subsetting.
+
+## Simplicity First
+
+- Prefer the simplest solution that correctly solves the problem.
+- Do not over-engineer.
+- Avoid unnecessary abstractions, dependencies, and architectural complexity.
+- Favor readability, maintainability, and clarity.
+- Every added layer of complexity must have a clear and documented benefit.
+
+## Documentation First
+
+- Always use the official documentation as the primary source of truth.
+- Never invent, assume, or hallucinate APIs, functions, configuration options, behaviors, or features.
+- Verify all code examples, API names, parameters, return values, and configuration options against the official documentation before using them.
+- If the official documentation does not mention a feature, assume it does not exist.
+- If the required information cannot be found in the official documentation, explicitly state that it could not be verified.
+- Prefer saying "I don't know" over providing unverified information.
+- Do not rely solely on model memory when official documentation is available.
+- When documentation links are provided, review them before generating code, explanations, or recommendations.
+
+## Constrained Creativity
+
+- You may propose alternative implementations, improvements, refactoring ideas, or architectural suggestions.
+- Any proposed solution must remain compatible with the documented APIs and features.
+- Do not invent new APIs, methods, configuration options, or framework capabilities.
+- Creative solutions are allowed only within the constraints of the official documentation.
+- Before suggesting an approach, verify that it can be implemented using documented functionality.
+- If an idea requires undocumented behavior, clearly label it as an assumption and do not present it as a valid implementation.
+
 ## Code Style
 
 - No comments unless requested
 - No deprecated code — remove entirely
 - Nunjucks string concat: `~` (never `+`)
-- Import paths: relative in source (`../../../../generated/*`), `@generated/*` in tsconfig/alias
+- Import paths: `@i18n`, `@template-engine`, `@page-system`, `@config/*`, `@scripts/*`, `@utils/*`, `@generated/*` aliases used everywhere (including the rsbuild config chain). `tsconfig.json` is the single source of truth for path aliases — `utils/paths.ts` reads them and exports bundler-format aliases, auto-deriving for jiti + bundler. `rsbuild.config.ts` is a thin jiti wrapper that loads `configs/rsbuild.ts` — real config lives in `configs/rsbuild.ts`. Env imports use `@generated/env` (not `@utils/env`); `@utils/*` still covers `common.ts`, `json5.ts`, `paths.ts`, etc.
+- i18n CLI scripts live in `packages/i18n/cli/` (not `scripts/`). Page-system CLI lives in `packages/page-system/cli/`. Env CLI lives in `packages/env/cli/`.
+- Always write JavaScript and TypeScript targeting ECMAScript 2022+ and modern runtimes (2025–2026). Prefer modern language features and APIs. Do not generate legacy JavaScript, CommonJS, polyfills, compatibility workarounds, or outdated patterns unless explicitly requested.
+
+
+## Build Modes
+
+```bash
+bun run build              # minified HTML + CSS/JS + Brotli/Gzip compression (default)
+bun run build -- --pretty  # pretty-printed HTML for CMS template porting
+bun run build -- --debug   # skip JS/CSS minify
+bun run preview            # build (BUILD_PREVIEW=true) + serve via tunnel
+```
+
+Build pipeline: `generate-path-aliases → generate-env → sync-system-pages → clean-cache → fetch-exchange-rates → generate-active-locales → generate-fonts-css → sync-locales → generate-types → build.ts → subset-fonts → compress`
 
 ## Testing
 
+Tests are colocated with source in `__tests__/` directories:
+
 ```bash
-bun run test              # all tests
+bun run test              # all tests (auto-discovers __tests__/**/*.test.ts)
 bun run test -- --watch   # watch mode
 bunx biome ci             # lint check (no write)
 bun run typecheck         # tsc --noEmit
 ```
 
+Tests use native rstest assertions (`expect().not.toBeNull()`, `.toBe()`, etc.) — no jest-dom matchers.
+
 ## i18n Key Patterns
 
 ```
-i18n.t('home:hero.title')          → src/locales/{locale}/home.json
-i18n.t('common:nav.home')          → src/locales/{locale}/common.json
-i18n.t('components.cta:heading')   → src/locales/{locale}/components.cta.json
+i18n.t('home:hero.title')          → locales/{locale}/home.json
+i18n.t('common:nav.home')          → locales/{locale}/common.json
+i18n.t('cta:heading')              → locales/{locale}/cta.json
 i18n.t('site_name')                → common:site_name (bare keys resolve to common)
 ```
 
+Shared locales are auto-detected by scanning templates for `i18n.t('namespace:...')` usage. No declaration needed.
+
 ## Template Conventions
 
-- `url()` for all internal links
-- `isActive()` for navbar active state
+- `url()` for all internal links (no `.html` extension — clean URLs)
+- `isActive()` for navbar active state (normalizes `.html` and `/index`)
 - Macros receive resolved text, not keys (except `form-input.njk`)
-- Error pages: `{% set %}` + `{% include "error-page.njk" %}`
+- Error pages: `{% set %}` + `{% include "shared/error/error-page.njk" %}`
 - Quick links: string-encoded `'/|home,/features|features'`
+- No inline `<style>` in templates manually — all CSS via `styles/main.css`. CSS is auto-inlined post-build by `pluginInlineCss`.
+
+## Page Routing Conventions
+
+```
+pages/
+  _components/     ← underscore prefix = NOT a page (skipped by scanner)
+  (marketing)/     ← parentheses = group folder (stripped from URL)
+    home/          ← /home
+    about/         ← /about
+  services/        ← nested folder = /services
+    web/           ← /services/web
+  blog/
+    [slug]/        ← dynamic page (generates from data.json5)
+      index.njk
+    data.json5     ← { items: [{ slug: "getting-started", title: "..." }] }
+```
+
+### Page file convention (traditional web inspired)
+
+Each page folder contains optional files — only `index.njk` is required:
+
+```
+pages/home/
+  index.njk        ← template (required, like index.html)
+  script.ts        ← page-specific JS (optional, like script.js)
+  style.css        ← page-specific CSS (optional, like style.css)
+  data.json5       ← page metadata: page_id, SEO (optional)
+```
+
+- No `script.ts` → uses `shared/page-entry.ts` as fallback entry
+- No `style.css` → no page-specific CSS chunk
+- 0-byte `style.css` → skipped from build entries
+- Bootstrap + CSS auto-injected by `packages/page-system/page-inject-loader.cjs` (no manual imports needed)
+
+### Entry system
+
+- `page-inject-loader.cjs` auto-injects `import '../../bootstrap'` + `import './style.css'` into every `script.ts` and `page-entry.ts`
+- Bootstrap (`bootstrap.ts`) imports `main.css` + Alpine + plugins + fonts + SW
+- splitChunks extracts shared bootstrap code to a single cached chunk
+- Pages with small JS (< 2 KB) → inlined in HTML; larger → separate file
+- Pages without `script.ts` → only shared chunk referenced, no page JS file
+
+## Config Files
+
+- `configs/i18n.ts` — default locale + active locales (`defineI18n`)
+- `configs/fonts.ts` — font stack config (`defineFontStack`). Font CSS imported via `bootstrap.ts` (not here directly)
+- `generated/env.ts` — fully generated env system: schema + engine + validation + singleton. Auto-generated from `.env` files by `packages/env/cli/generate-env.ts`. Reads `process.env` (server) or `import.meta.env` (browser). Runtime type validation with warnings. `PRIVATE_` prefix marks server-only keys (browser-safe by default). Stage pipeline: `dev → qa → uat → preprod → prod`
+- `packages/env/preload.ts` — Bun preload script (`bunfig.toml`), loads `.env` + `.env.{stage}` into `process.env` before any module runs
+- `bunfig.toml` — `preload = ["./packages/env/preload.ts"]`
+- `.env` — general env vars shared across all stages. Required. Gitignored. `PRIVATE_` prefix = server-only (not exposed to browser). No prefix = browser-safe (public by default). Edit this file to add/change env vars — `packages/env/cli/generate-env.ts` auto-generates `generated/env.ts` from it
+- `.env.{stage}` — per-stage overrides. Active: `.env.dev`, `.env.prod`. Gitignored. Stage pipeline: `dev → qa → uat → preprod → prod`
+- `configs/rsbuild.ts` — Rsbuild build configuration (loaded via the jiti wrapper in `rsbuild.config.ts`). Includes splitChunks cacheGroups (CHUNK_NAMES constant), `pluginPreloadChunks` (JS chunk preload), `pluginInlineCss` (CSS inlining + nonce + URL rewrite), `pluginRootPageAsIndex`, `pluginHotReloadContent`, `pluginPrettyHtml`, `pluginRemoveEmptyPageJs`. Path aliases from `tsconfig.json` via `utils/paths.ts`. `import.meta.env` define includes `SINGLE_LOCALE`, `DEFAULT_LOCALE`, `FLAG_CDN_BASE`.
+- `utils/paths.ts` — reads `tsconfig.json` paths, converts to bundler format. Single source of truth: edit `tsconfig.json` paths → jiti + bundler auto-sync.
+
+## Packages
+
+- `packages/i18n/` — i18n engine (data, formatting, runtime, strategies, fonts). Pure engine — ZERO imports from `configs/` or `page-system` in runtime.
+- `packages/env/` — env system. Auto-generates `generated/env.ts` from `.env` files. `PRIVATE_` prefix = server-only.
+  - `cli/generate-env.ts` — scans `.env` files, infers types, generates schema + engine
+  - `preload.ts` — Bun preload script (`bunfig.toml`), loads `.env` before any module
+- `packages/template-engine/` — SSR template rendering (`createTemplateParams`, `scanSharedLocales`). Depends on `@i18n` + `@page-system`.
+  - `template.ts` — SSR rendering: `createTemplateParams()`, `generateClientI18nScript()`, `scanSharedLocales()`
+- `packages/page-system/` — page system (scanner, system pages, dynamic routes, CLI, page-inject-loader). Standalone.
+  - `system-pages.ts` — root page, system page IDs, locale-dependent slugs (`ROOT_PAGE`, `SYSTEM_PAGE_IDS`, `SYSTEM_PAGE_SLUGS`)
+  - `scanner.ts` — `scanPages()`, `isGroup()`, `isSlugDir()` (jiti-safe)
+  - `dynamic-routes.ts` — `generateDynamicEntries()` — [slug] discovery from `data.json5`
+  - `page-inject-loader.cjs` — auto-injects bootstrap + page CSS into entry files
+  - `cli/` — `sync-system-pages.ts`, `generate-page.ts`, `delete-page.ts`
+
+## Build Optimizations
+
+- **splitChunks**: 5 cacheGroups — `i18next` (`chunks: 'all'`, priority 30), `alpinePlugins` (async, priority 25), `alpineCore` (all, priority 20), `i18nFormatters` (async, priority 15), `default` (`minChunks: 2`, priority -10). Chunk names centralized in `CHUNK_NAMES` constant shared between cacheGroups config + preload plugin.
+- **CSS inlining**: `pluginInlineCss` post-build plugin converts all `<link rel="stylesheet">` to `<style nonce="...">` with relative URL rewriting. Eliminates render-blocking CSS requests. Nonce extracted from CSP meta tag.
+- **JS chunk preload**: `pluginPreloadChunks` post-build plugin scans for named chunks (matching `CHUNK_NAMES`), adds `<link rel="preload" as="script">` for chunks NOT already in `<script defer>`. Uses `preload` (not `modulepreload`) for HTTP cache dedup with rspack's classic script loading.
+- **Font woff2 preload**: Generated by template engine (`template.ts`) from `fontsConfig.sans.name`. Reads `fonts.css` at SSR time, extracts latin woff2 URL, passes as `font_preload_url` template param → `<link rel="preload" as="font">` in `main.njk`.
+- **webpackPreload magic comments**: `bootstrap.ts` dynamic imports use `/* webpackPreload: true */` for critical chunks (alpine, i18next, i18n-formatters).
+- **Brotli + Gzip**: `scripts/compress.ts` generates `.br` + `.gz` files post-build
+- **Font subsetting**: `scripts/subset-fonts.ts` uses `pyftsubset` to strip hinting/tables
+- **JS**: `sideEffects: true` for `bootstrap.ts` + `script.ts` (prevent tree-shaking of entry files)
+- **Single-locale i18n skip**: stub Alpine store, skip i18next init when only 1 locale
+- **Alpine.start() decoupled**: For default locale, Alpine starts immediately without waiting for i18next init (background). For non-default locales, waits for `initIntl()` to prevent flash of wrong language.
+- **Service Worker v6**: stale-while-revalidate for assets, network-first for navigation
+- **Tailwind v4 theme pruning**: `@theme` disables unused utility namespaces (`--perspective-*`, `--drop-*`, `--inset-shadow-*`, `--grayscale-*`, `--invert-*`, `--saturate-*`, `--sepia-*`, `--contrast-*`, `--brightness-*`, `--hue-rotate-*`, `--outline-*`, `--skew-*`)
+- **OKLCH colors**: All CSS colors use `oklch()`. No hex or rgba for colored values. Neutral black/white `rgba()` acceptable. Lightning CSS generates sRGB fallbacks automatically.
+
+## Generated Files
+
+All generated files are **tracked in git** (not gitignored):
+- `generated/env.ts` — auto-generated env system (schema + engine + validation). Regenerated from `.env` files by `packages/env/cli/generate-env.ts`
+- `generated/active-locales-data.ts` — filtered locale data (always uses `i18nConfig.locales`, no dev stub)
+- `generated/exchange-rates.ts` — currency rates (24h cache)
+- `generated/i18n.d.ts` — TypeScript key types from locale JSON
+- `generated/image-manifest.ts` — image manifest
+- `generated/path-aliases.ts` — alias type + map
+
+Biome is configured to skip `generated/**` (formatter + linter disabled).
+
+## Shared Constants
+
+- `packages/i18n/constants.ts` — `DEFAULT_NAMESPACE` (`'common'`), `I18N_ASSET_DIR` (`'assets/i18n'`), `FONTS_CSS_PATH` (`'assets/fonts/fonts.css'`). Imported via `@i18n` barrel.
+- `packages/page-system/system-pages.ts` — `FALLBACK_LOCALE` (`'en-US'`) for slug lookup fallback.
+- `configs/rsbuild.ts` — `CHUNK_NAMES` constant (shared between cacheGroups + pluginPreloadChunks).
 
 ## Restrictions
 
@@ -48,6 +201,9 @@ i18n.t('site_name')                → common:site_name (bare keys resolve to co
 - **DESTRUCTIVE git ops** (`reset --hard`, `rebase`) require `git status` first
 - **File mods**: use `bun` or script in `temp/` — avoid PowerShell
 - **Never add dependency** without user approval
+- **After changing `i18nConfig`**: re-run `bun run dev` or `bun run build` to regenerate active locale data, font CSS, and exchange rates
+- **Adding a locale to `LOCALES`**: also add entries to `SYSTEM_PAGE_SLUGS` in `packages/page-system/system-pages.ts` (getSystemPageSlug warns in dev if missing). Update `FALLBACK_LOCALE` if the default locale changes.
+- **No hardcoded values**: all config must be dynamic. Font names from `fontsConfig`, locale codes from `i18nConfig`, chunk names from `CHUNK_NAMES`, namespaces from `DEFAULT_NAMESPACE`, asset paths from `I18N_ASSET_DIR`/`FONTS_CSS_PATH`. Flag CDN from `global.json5` → `import.meta.env.FLAG_CDN_BASE`.
 - Husky pre-commit: Biome → typecheck → test (all must pass)
 
 ## CI Fixes Flow

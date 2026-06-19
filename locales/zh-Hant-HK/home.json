@@ -1,0 +1,103 @@
+{
+  "about": {
+    "badge": "關於我們"
+  },
+  "hero": {
+    "badge": "Welcome",
+    "title_part1": "我們正在打造 ",
+    "title_highlight": "數碼未來",
+    "description": "Starter 成立於 2024 年，旨在幫助開發者更快地構建更好的應用程式。我們相信簡潔的代碼、美觀的設計以及開源協作的力量。",
+    "primary_btn": {
+      "label": "免費開始使用",
+      "url": "#pricing"
+    },
+    "secondary_btn": {
+      "label": "觀看示範",
+      "url": "#features"
+    },
+    "note": "無需信用卡",
+    "image_alt": "Web Pages Starter dashboard preview"
+  },
+  "stats": {
+    "community": "全球社群",
+    "community_val": "50K+",
+    "projects": "已完成專案",
+    "projects_val": "120+",
+    "uptime": "正常運作時間",
+    "uptime_val": "99.99%",
+    "rating": "評價",
+    "rating_val": "4.9/5"
+  },
+  "story": {
+    "tag": "我們的故事",
+    "visual_label": "創意工作室插圖",
+    "title": "激情驅動，\u003cbr\u003e卓越定義。",
+    "para1": "我們的旅程始於一個簡單的想法：讓每個人都能輕鬆愉快地進行 Web 開發。我們厭倦了臃腫的框架和複雜的配置。",
+    "para2": "今天，我們是一個由工程師、設計師和思想家組成的多元化團隊，共同努力用優雅的方案解決複雜的問題。",
+    "val1": "以用戶為中心的設計理念",
+    "val2": "性能優先的架構",
+    "val3": "透明度和公開溝通"
+  },
+  "mission": {
+    "title": "我們的使命",
+    "description": "通過優雅、快速且易於使用的工具，賦能開發者與企業打造卓越的數碼產品。"
+  },
+  "vision": {
+    "title": "我們的願景",
+    "description": "成為重視美感、性能和用戶體驗的現代開發者的首選平台。"
+  },
+  "values": {
+    "title": "我們的價值觀",
+    "subtitle": "指導我們每一個決策的原則。"
+  },
+  "passion": {
+    "title": "激情",
+    "description": "我們熱愛自己的工作，這份熱愛體現在我們產品的每一個細節中。"
+  },
+  "collaboration": {
+    "title": "協作",
+    "description": "團隊合作能夠創造最佳成果。我們相信團隊的強大力量。"
+  },
+  "innovation": {
+    "title": "創新",
+    "description": "始終尋求更好的方式來解決問題和創造價值。"
+  },
+  "integrity": {
+    "title": "誠信",
+    "description": "誠實和透明是我們建立的所有關係的基石。"
+  },
+  "excellence": {
+    "title": "卓越",
+    "description": "我們從不滿足於\"足夠好\"，始終追求最好的結果。"
+  },
+  "quality": {
+    "title": "品質",
+    "description": "簡潔的代碼、美觀的設計和無縫的體驗是我們的標準。"
+  },
+  "team": {
+    "title": "團隊介紹",
+    "subtitle": "每一行代碼背後的才華橫溢的頭腦。",
+    "alex_desc": "在 SaaS 生態系統開發方面擁有 10 多年經驗的遠見卓識的領導者。",
+    "sarah_desc": "擅長構建大規模系統架構的全棧高手。",
+    "mike_desc": "痴迷於像素細節、流暢的 UX 流程和無障礙標準。",
+    "jessica_desc": "通過創意敘事幫助品牌在數字世界中找到獨特聲音的專家。"
+  },
+  "features": {
+    "list": {
+      "speed": {
+        "title": "極速飛快",
+        "description": "最佳化效能，載入時間低於 100 毫秒。搭配邊緣基礎設施，為全球規模而打造。"
+      },
+      "design": {
+        "title": "現代設計",
+        "description": "簡潔且響應式的 UI，在任何裝置上都呈現專業外觀。元件可完全自訂。"
+      },
+      "security": {
+        "title": "高安全性",
+        "description": "端對端加密、多因素驗證及 SOC2 合規，全面保護您的資料。"
+      }
+    },
+    "heading": "核心功能",
+    "subheading": "您構建與擴展所需的一切。"
+  }
+}

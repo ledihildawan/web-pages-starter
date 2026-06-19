@@ -1,0 +1,429 @@
+import { i18nConfig } from '@config/i18n';
+import { env } from '@generated/env';
+import { convertCurrency, EXCHANGE_RATES } from '@generated/exchange-rates';
+import type { I18nTranslationKeys } from '@generated/i18n';
+import { DEFAULT_NAMESPACE, getActiveLocalesDisplay, I18N_ASSET_DIR, LOCALE_STORAGE_KEY } from '@i18n';
+import type { LocaleCode } from '@i18n/data/locales';
+import { getActiveLocaleCodes } from '@i18n/engine/active-locales';
+import {
+  formatAbbreviated,
+  formatBytes,
+  formatCardinal,
+  formatCurrency,
+  formatDate,
+  formatDateTime,
+  formatDuration,
+  formatList,
+  formatNumber,
+  formatOrdinal,
+  formatPercent,
+  formatRelativeTime,
+  formatScientific,
+  formatTime,
+  formatUnit,
+  plural,
+  setStrategies,
+  singular,
+  toNativeDigits,
+} from '@i18n/engine/formatters';
+import { getCurrency, getLanguageSubtag, getLocale, setLocale } from '@i18n/engine/helpers';
+import { loadStrategies } from '@i18n/strategies/loader';
+import { scheduleTask } from '@utils/microtask-queue';
+import type { DateTimePreset } from '@utils/types';
+import i18next, { type Resource } from 'i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
+
+export { i18next };
+
+export const clearMissingKeys = (): void => {
+  missingKeys.clear();
+};
+
+const isDev = import.meta.env.DEV;
+const missingKeys = new Set<string>();
+
+const getVars = (el: HTMLElement): Record<string, string | number | boolean> => {
+  const vars = el.getAttribute('data-i18n-vars');
+  if (!vars) return {};
+  try {
+    return JSON.parse(vars);
+  } catch {
+    return {};
+  }
+};
+
+const processElements = (selector: string, attr: string, callback: (el: HTMLElement, val: string) => void) => {
+  document.querySelectorAll<HTMLElement>(selector).forEach((el) => {
+    const val = el.getAttribute(attr);
+    if (val !== null) callback(el, val);
+  });
+};
+
+const getNativeDigitSetting = (el: HTMLElement): boolean | undefined => {
+  if (el.hasAttribute('data-force-native')) return true;
+  if (el.hasAttribute('data-force-universal')) return false;
+  return undefined;
+};
+
+const getNs = (el: HTMLElement): string | undefined => {
+  const ns = el.getAttribute('data-numbering-system');
+  return ns && ns.length > 0 ? ns : undefined;
+};
+
+const FORMATTERS = [
+  {
+    attr: 'data-format-number',
+    format: (v: string, el: HTMLElement) =>
+      formatNumber(parseFloat(v), {
+        numberingSystem: getNs(el),
+        nativeDigits: el.getAttribute('data-use-native') === 'true',
+      }),
+  },
+  {
+    attr: 'data-format-percent',
+    format: (v: string, el: HTMLElement) =>
+      formatPercent(parseFloat(v), {
+        numberingSystem: getNs(el),
+        nativeDigits: el.getAttribute('data-use-native') === 'true',
+      }),
+  },
+  {
+    attr: 'data-format-duration',
+    format: (v: string) => formatDuration(parseFloat(v)),
+  },
+  {
+    attr: 'data-format-ordinal',
+    format: (v: string) => formatOrdinal(parseFloat(v)),
+  },
+  {
+    attr: 'data-format-cardinal',
+    format: (v: string) => formatCardinal(parseFloat(v)),
+  },
+  {
+    attr: 'data-format-scientific',
+    format: (v: string, el: HTMLElement) =>
+      formatScientific(parseFloat(v), {
+        numberingSystem: getNs(el),
+        nativeDigits: el.getAttribute('data-use-native') === 'true',
+      }),
+  },
+  {
+    attr: 'data-format-abbreviated',
+    format: (v: string, el: HTMLElement) => {
+      const opts = el.getAttribute('data-format-opts');
+      return formatAbbreviated(parseFloat(v), opts ? JSON.parse(opts) : undefined);
+    },
+  },
+  {
+    attr: 'data-format-date',
+    format: (v: string, el: HTMLElement) => {
+      const opts = el.getAttribute('data-format-opts');
+      return formatDate(v as DateTimePreset, opts ? JSON.parse(opts) : undefined);
+    },
+  },
+  {
+    attr: 'data-format-datetime',
+    format: (v: string, el: HTMLElement) => {
+      const opts = el.getAttribute('data-format-opts');
+      return formatDateTime(v as DateTimePreset, opts ? JSON.parse(opts) : undefined);
+    },
+  },
+  {
+    attr: 'data-format-time',
+    format: (v: string, el: HTMLElement) =>
+      formatTime(v as DateTimePreset, {
+        timeStyle: (el.getAttribute('data-time-preset') ?? 'short') as DateTimePreset,
+      }),
+  },
+  {
+    attr: 'data-format-date-preset',
+    format: (v: string, el: HTMLElement) =>
+      formatDate(v as DateTimePreset, {
+        dateStyle: (el.getAttribute('data-date-preset') ?? 'medium') as DateTimePreset,
+      }),
+  },
+  {
+    attr: 'data-format-currency',
+    format: (v: string, el: HTMLElement, dc: string) => {
+      const opts = el.getAttribute('data-format-opts');
+      return formatCurrency(parseFloat(v), el.getAttribute('data-target-currency') ?? dc, {
+        numberingSystem: getNs(el),
+        nativeDigits: el.getAttribute('data-use-native') === 'true',
+        ...(opts ? JSON.parse(opts) : {}),
+      });
+    },
+  },
+  {
+    attr: 'data-convert-currency',
+    format: (v: string, el: HTMLElement, dc: string) => {
+      const currency = el.getAttribute('data-target-currency') ?? dc;
+      const rate = EXCHANGE_RATES[currency as keyof typeof EXCHANGE_RATES] ?? 1;
+      return formatCurrency(parseFloat(v) * rate, currency, {
+        numberingSystem: getNs(el),
+        nativeDigits: el.getAttribute('data-use-native') === 'true',
+      });
+    },
+  },
+  {
+    attr: 'data-convert-to-locale',
+    format: (v: string, _el: HTMLElement, dc: string) => {
+      const rate = EXCHANGE_RATES[dc as keyof typeof EXCHANGE_RATES] ?? 1;
+      return formatCurrency(parseFloat(v) * rate, dc, { nativeDigits: false });
+    },
+  },
+  {
+    attr: 'data-local-price',
+    format: (_v: string, el: HTMLElement, _dc: string) => {
+      const pricingStr = el.getAttribute('data-local-price') ?? '{}';
+      const discountStr = el.getAttribute('data-discount');
+      const explicitTarget = el.getAttribute('data-target-currency');
+
+      let price = 0;
+      let fromCurrency: string = 'USD';
+      const locale = getLocale();
+
+      try {
+        const pricing = JSON.parse(pricingStr);
+        if (pricing[locale]) {
+          price = pricing[locale];
+          fromCurrency = getCurrency(locale);
+        } else if (pricing.base) {
+          price = pricing.base;
+          fromCurrency = 'USD';
+        }
+      } catch (err) {
+        if (isDev) console.error('[i18n] initIntl failed:', err);
+      }
+
+      if (discountStr) {
+        price = price * parseFloat(discountStr);
+      }
+
+      const targetCurrency = explicitTarget && explicitTarget !== 'undefined' ? explicitTarget : getCurrency(locale);
+
+      if (fromCurrency === targetCurrency) {
+        return formatCurrency(price, targetCurrency);
+      }
+
+      const converted = convertCurrency(price, fromCurrency, targetCurrency, EXCHANGE_RATES);
+      return formatCurrency(converted, targetCurrency);
+    },
+  },
+  {
+    attr: 'data-format-unit',
+    format: (v: string, el: HTMLElement) => {
+      const unit = el.getAttribute('data-unit');
+      return unit
+        ? formatUnit(parseFloat(v), unit, {
+            numberingSystem: getNs(el),
+            nativeDigits: el.getAttribute('data-use-native') === 'true',
+          })
+        : v;
+    },
+  },
+  {
+    attr: 'data-format-bytes',
+    format: (v: string, el: HTMLElement) =>
+      formatBytes(parseFloat(v), parseInt(el.getAttribute('data-bytes-decimals') ?? '1', 10)),
+  },
+  {
+    attr: 'data-relative-time',
+    format: (v: string, el: HTMLElement) => {
+      const unit = (el.getAttribute('data-unit') ?? 'second') as Intl.RelativeTimeFormatUnit;
+      const numeric = el.getAttribute('data-numeric') ?? 'always';
+      const value = parseFloat(v);
+      return formatRelativeTime(value, {
+        unit,
+        numeric: numeric as 'always' | 'auto',
+      });
+    },
+  },
+  {
+    attr: 'data-format-list',
+    format: (_v: string, el: HTMLElement) => {
+      const itemsStr = el.getAttribute('data-items') ?? '[]';
+      try {
+        const items = JSON.parse(itemsStr);
+        return Array.isArray(items) ? formatList(items) : itemsStr;
+      } catch {
+        return itemsStr;
+      }
+    },
+  },
+  {
+    attr: 'data-pluralized',
+    format: (word: string, el: HTMLElement) => {
+      const countStr = el.getAttribute('data-count');
+      const count = countStr ? parseInt(countStr, 10) : undefined;
+      const inclusive = el.getAttribute('data-inclusive') === 'true';
+      return plural(word, count, inclusive);
+    },
+  },
+  {
+    attr: 'data-singularized',
+    format: (word: string) => singular(word),
+  },
+  {
+    attr: 'data-native-digits',
+    format: (text: string, el: HTMLElement) => {
+      const forceAttr = el.getAttribute('data-force');
+      if (forceAttr === null) return toNativeDigits(text);
+      return toNativeDigits(text, forceAttr === 'true');
+    },
+  },
+] as const;
+
+export async function initIntl(localeOverride?: string): Promise<void> {
+  const pageID = window.__PAGE_ID__;
+
+  const rawLocale = (localeOverride ||
+    localStorage.getItem(LOCALE_STORAGE_KEY) ||
+    document.documentElement.getAttribute('lang')) as LocaleCode | null;
+
+  if (!rawLocale) return;
+
+  const activeCodes = getActiveLocaleCodes();
+  const savedLocale = activeCodes.includes(rawLocale) ? rawLocale : i18nConfig.defaultLocale;
+
+  setLocale(getLocale(savedLocale));
+
+  const lang = getLanguageSubtag(getLocale());
+  const strategies = await loadStrategies(lang);
+  setStrategies(strategies.cardinal, strategies.ordinal);
+
+  try {
+    const response = await fetch(`${env.BASE_PATH}${I18N_ASSET_DIR}/${pageID}/${savedLocale}.json`);
+    const data = await response.json();
+
+    const resources: Resource = {
+      [savedLocale]: data,
+    };
+
+    const initOptions = {
+      lng: savedLocale,
+      resources,
+      supportedLngs: getActiveLocaleCodes(),
+      fallbackLng: i18nConfig.defaultLocale,
+      ns: Object.keys(data),
+      defaultNS: DEFAULT_NAMESPACE,
+      detection: localeOverride
+        ? undefined
+        : {
+            order: ['localStorage', 'navigator'],
+            caches: ['localStorage'],
+            lookupLocalStorage: LOCALE_STORAGE_KEY,
+          },
+      interpolation: { escapeValue: false },
+      saveMissing: false,
+      parseMissingKeyHandler: (key: string) => {
+        if (isDev && !missingKeys.has(key)) {
+          missingKeys.add(key);
+          console.warn(`[i18n] Missing key "${key}" in locale "${i18next.language}"`);
+        }
+        return `[${key}]`;
+      },
+    };
+
+    if (localeOverride) {
+      await i18next.init(initOptions);
+    } else {
+      await i18next.use(LanguageDetector).init(initOptions);
+    }
+
+    const isDefaultLocale = savedLocale === i18nConfig.defaultLocale;
+
+    if (isDefaultLocale) {
+      updateI18nStoreLabels();
+      return;
+    }
+
+    translatePage();
+    updateFormattedElements();
+    updateI18nStoreLabels();
+  } catch (err) {
+    if (isDev) console.error('[i18n] initIntl failed:', err);
+  }
+}
+
+export const updateI18nStoreLabels = (): void => {
+  if (typeof window === 'undefined' || !globalThis.Alpine) {
+    return;
+  }
+
+  const store = globalThis.Alpine.store('i18n') as {
+    languages: Array<{ code: string; label: string; flag: string }>;
+    current: string;
+  };
+  if (!store) {
+    return;
+  }
+
+  const updatedLanguages = getActiveLocalesDisplay();
+
+  store.languages.length = 0;
+  updatedLanguages.forEach((lang) => {
+    store.languages.push(lang);
+  });
+
+  store.current = localStorage.getItem(LOCALE_STORAGE_KEY) || i18nConfig.defaultLocale;
+};
+
+export const t = (key: I18nTranslationKeys, vars?: Record<string, string | number | boolean>): string => {
+  const result = i18next.t(key, vars);
+  if (result === key && isDev && !missingKeys.has(key)) {
+    missingKeys.add(key);
+  }
+  return result;
+};
+
+export const translatePage = (): void => {
+  scheduleTask(() => {
+    processElements('[data-i18n-html]', 'data-i18n-html', (el, key) => {
+      const translated = i18next.t(key, getVars(el));
+      el.innerHTML = toNativeDigits(translated, getNativeDigitSetting(el));
+    });
+
+    processElements('[data-i18n]', 'data-i18n', (el, key) => {
+      const translated = t(key as I18nTranslationKeys, getVars(el));
+      el.textContent = toNativeDigits(translated, getNativeDigitSetting(el));
+    });
+
+    processElements('[data-i18n-attr]', 'data-i18n-attr', (el, raw) => {
+      if (!raw.includes(':')) return;
+      const colonIdx = raw.indexOf(':');
+      const attrName = raw.slice(0, colonIdx);
+      const translationKey = raw.slice(colonIdx + 1);
+      const translated = t(translationKey as I18nTranslationKeys, getVars(el));
+      el.setAttribute(attrName, toNativeDigits(translated));
+    });
+
+    processElements('[data-i18n-plural]', 'data-i18n-plural', (el, key) => {
+      const countStr = el.getAttribute('data-i18n-count');
+      if (!countStr) return;
+      const pluralKey = key.includes(':') ? key : `common:${key}`;
+      const translated = i18next.t(pluralKey, {
+        ...getVars(el),
+        count: parseInt(countStr, 10),
+      });
+      el.textContent = toNativeDigits(translated);
+    });
+  });
+
+  scheduleTask(() => {
+    updateFormattedElements();
+  });
+};
+
+export const updateFormattedElements = (): void => {
+  scheduleTask(() => {
+    const locale = getLocale(i18next.language as LocaleCode);
+    setLocale(locale);
+    const defaultCurrency = getCurrency(locale);
+
+    FORMATTERS.forEach(({ attr, format }) => {
+      processElements(`[${attr}]`, attr, (el, v) => {
+        el.textContent = format(v, el, defaultCurrency);
+      });
+    });
+  });
+};

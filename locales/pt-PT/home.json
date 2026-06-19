@@ -1,0 +1,103 @@
+{
+  "about": {
+    "badge": "Sobre Nós"
+  },
+  "hero": {
+    "badge": "Welcome",
+    "title_part1": "Estamos a criar o ",
+    "title_highlight": "Futuro Digital",
+    "description": "Fundado em 2024, o Starter existe para ajudar os developers a construir melhores aplicações mais rapidamente. Acreditamos no poder do código limpo, design bonito e colaboração open source.",
+    "primary_btn": {
+      "label": "Começa Grátis",
+      "url": "#pricing"
+    },
+    "secondary_btn": {
+      "label": "Ver Demo",
+      "url": "#features"
+    },
+    "note": "Não é necessário cartão de crédito",
+    "image_alt": "Web Pages Starter dashboard preview"
+  },
+  "stats": {
+    "community": "Comunidade Global",
+    "community_val": "50K+",
+    "projects": "Projetos Concluídos",
+    "projects_val": "120+",
+    "uptime": "Disponibilidade",
+    "uptime_val": "99.99%",
+    "rating": "Avaliação",
+    "rating_val": "4.9/5"
+  },
+  "story": {
+    "tag": "A Nossa História",
+    "visual_label": "Ilustração de Estúdio Criativo",
+    "title": "Movidos pela paixão, \u003cbr\u003edefinidos pela excelência.",
+    "para1": "A nossa jornada começou com uma ideia simples: tornar o desenvolvimento web acessível e divertido para todos. Estávamos cansados de frameworks inchados e configurações complexas.",
+    "para2": "Hoje, somos uma equipa diversificada de engenheiros, designers e pensadores a trabalhar juntos para resolver problemas complexos com soluções elegantes.",
+    "val1": "Filosofia de design centrada no utilizador",
+    "val2": "Arquitetura performance-first",
+    "val3": "Transparência e comunicação aberta"
+  },
+  "mission": {
+    "title": "A Nossa Missão",
+    "description": "Capacitar developers e empresas com ferramentas elegantes, rápidas e fáceis de usar para construir produtos digitais excecionais."
+  },
+  "vision": {
+    "title": "A Nossa Visão",
+    "description": "Ser a plataforma de escolha para developers modernos que valorizam beleza, performance e experiência do utilizador em cada linha de código."
+  },
+  "values": {
+    "title": "Os Nossos Valores",
+    "subtitle": "Princípios que guiam cada decisão que tomamos."
+  },
+  "passion": {
+    "title": "Paixão",
+    "description": "Amamos o que fazemos, e isso nota-se em cada detalhe dos nossos produtos."
+  },
+  "collaboration": {
+    "title": "Colaboração",
+    "description": "Trabalhar juntos produz os melhores resultados. Acreditamos no poder de equipas sólidas."
+  },
+  "innovation": {
+    "title": "Inovação",
+    "description": "Sempre a procurar melhores formas de resolver problemas e criar valor."
+  },
+  "integrity": {
+    "title": "Integridade",
+    "description": "Honestidade e transparência são a base de cada relação que construímos."
+  },
+  "excellence": {
+    "title": "Excelência",
+    "description": "Não nos contentamos com o suficientemente bom. Sempre nos esforçamos pelo melhor."
+  },
+  "quality": {
+    "title": "Qualidade",
+    "description": "Código limpo, design bonito e experiências fluidas são os nossos padrões."
+  },
+  "team": {
+    "title": "Conhece a Equipa",
+    "subtitle": "As mentes brilhantes por trás de cada linha de código que escrevemos.",
+    "alex_desc": "Líder visionário com 10+ anos de experiência em desenvolvimento de ecossistema SaaS.",
+    "sarah_desc": "Especialista full-stack especializada em construir arquiteturas de sistemas em grande escala.",
+    "mike_desc": "Profundamente obcecado com detalhes de pixel, fluxos UX suaves e padrões de acessibilidade.",
+    "jessica_desc": "Narradora criativa a ajudar marcas a encontrar a sua voz única no mundo digital."
+  },
+  "features": {
+    "list": {
+      "speed": {
+        "title": "Ultra Rápido",
+        "description": "Performance otimizada com tempos de carregamento inferiores a 100ms. Construído para escala global com infraestrutura edge."
+      },
+      "design": {
+        "title": "Design Moderno",
+        "description": "Interface limpa e responsiva com aspeto profissional em qualquer dispositivo. Componentes totalmente personalizáveis."
+      },
+      "security": {
+        "title": "Alta Segurança",
+        "description": "Encriptação de ponta a ponta, autenticação multifator e conformidade SOC2 para proteger os teus dados."
+      }
+    },
+    "heading": "Funcionalidades Principais",
+    "subheading": "Tudo o que precisas para construir e escalar."
+  }
+}

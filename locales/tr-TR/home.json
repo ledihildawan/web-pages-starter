@@ -1,0 +1,103 @@
+{
+  "about": {
+    "badge": "Hakkımızda"
+  },
+  "hero": {
+    "badge": "Welcome",
+    "title_part1": "Biz ",
+    "title_highlight": "dijital geleceği",
+    "description": "2024 yılında kurulan Starter, geliştiricilerin daha hızlı ve daha iyi uygulamalar oluşturmasına yardımcı olmak için var. Temiz kod, güzel tasarım ve açık kaynak işbirliğinin gücüne inanıyoruz.",
+    "primary_btn": {
+      "label": "Ücretsiz Başlayın",
+      "url": "#pricing"
+    },
+    "secondary_btn": {
+      "label": "Demoyu Görüntüle",
+      "url": "#features"
+    },
+    "note": "Kredi kartı gerekmez",
+    "image_alt": "Web Pages Starter dashboard preview"
+  },
+  "stats": {
+    "community": "Küresel Topluluk",
+    "community_val": "50K+",
+    "projects": "Tamamlanan Proje",
+    "projects_val": "120+",
+    "uptime": "Çalışma Süresi",
+    "uptime_val": "99.99%",
+    "rating": "Puan",
+    "rating_val": "4.9/5"
+  },
+  "story": {
+    "tag": "Hikayemiz",
+    "visual_label": "Yaratıcı Stüdyo İllüstrasyonu",
+    "title": "Tutkuyla hareket eden, \u003cbr\u003emükemmellikle tanımlanan.",
+    "para1": "Yolculuğumuz basit bir fikirle başladı: web geliştirmeyi herkes için erişilebilir ve eğlenceli hale getirmek. Ağır framework\u0027lerden ve karmaşık yapılandırmalardan bıkmıştık.",
+    "para2": "Bugün, karmaşık sorunları zarif çözümlerle çözmek için birlikte çalışan mühendisler, tasarımcılar ve düşünürlerden oluşan çeşitli bir ekibiz.",
+    "val1": "Kullanıcı odaklı tasarım felsefesi",
+    "val2": "Performans öncelikli mimari",
+    "val3": "Şeffaflık ve açık iletişim"
+  },
+  "mission": {
+    "title": "Misyonumuz",
+    "description": "Geliştiricileri ve işletmeleri, harika dijital ürünler oluşturmak için zarif, hızlı ve kullanımı kolay araçlarla güçlendirmek."
+  },
+  "vision": {
+    "title": "Vizyonumuz",
+    "description": "Her satır kodda güzelliğe, performansa ve kullanıcı deneyimine değer veren modern geliştiricilerin tercih ettiği platform olmak."
+  },
+  "values": {
+    "title": "Değerlerimiz",
+    "subtitle": "Aldığımız her karara rehberlik eden ilkeler."
+  },
+  "passion": {
+    "title": "Tutku",
+    "description": "Ne yaptığımızı seviyoruz ve bu, ürünümüzün her detayında görülüyor."
+  },
+  "collaboration": {
+    "title": "İşbirliği",
+    "description": "Birlikte çalışmak en iyi sonuçları doğurur. Sağlam bir ekibin gücüne inanıyoruz."
+  },
+  "innovation": {
+    "title": "Yenilik",
+    "description": "Sorunları çözmek ve değer yaratmak için her zaman daha iyi yollar arıyoruz."
+  },
+  "integrity": {
+    "title": "Dürüstlük",
+    "description": "Şeffaflık ve dürüstlük, kurduğumuz her ilişkinin temelidir."
+  },
+  "excellence": {
+    "title": "Mükemmellik",
+    "description": "Yeterince iyiyiyle yetinmiyoruz. Her zaman en iyisini hedefliyoruz."
+  },
+  "quality": {
+    "title": "Kalite",
+    "description": "Temiz kod, güzel tasarım ve kusursuz deneyim bizim standartlarımızdır."
+  },
+  "team": {
+    "title": "Ekibi Tanıyın",
+    "subtitle": "Yazdığımız her satır kodun arkasındaki parlak zihinler.",
+    "alex_desc": "SaaS ekosistemi geliştirmede 10+ yıl deneyime sahip vizyoner lider.",
+    "sarah_desc": "Büyük ölçekli sistem mimarileri oluşturma konusunda uzmanlaşmış full-stack sihirbazı.",
+    "mike_desc": "Piksel detayları, akıcı UX akışları ve erişilebilirlik standartlarına takıntılı.",
+    "jessica_desc": "Markaların dijital dünyada benzersiz seslerini bulmalarına yardımcı olan yaratıcı hikaye anlatıcı."
+  },
+  "features": {
+    "list": {
+      "speed": {
+        "title": "Son Derece Hızlı",
+        "description": "100ms altında yükleme süresiyle optimum performans. Edge altyapısıyla küresel ölçek için tasarlandı."
+      },
+      "design": {
+        "title": "Modern Tasarım",
+        "description": "Tüm cihazlarda profesyonel görünen responsive ve temiz arayüz. Tamamen özelleştirilebilir bileşenler."
+      },
+      "security": {
+        "title": "Yüksek Güvenlik",
+        "description": "Verilerinizi korumak için uçtan uca şifreleme, çok faktörlü kimlik doğrulama ve SOC2 uyumluluğu."
+      }
+    },
+    "heading": "Öne Çıkan Özellikler",
+    "subheading": "Oluşturmak ve büyümek için ihtiyacınız olan her şey."
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "about": {
+    "badge": "Apie mus"
+  },
+  "hero": {
+    "badge": "Welcome",
+    "title_part1": "Mes kuriame ",
+    "title_highlight": "skaitmeninę ateitį",
+    "description": "Įkurta 2024 m., Starter sukurtas padėti kūrėjams greičiau kurti geresnes programas. Tikime švaraus kodo, gražaus dizaino ir atvirojo kodo bendradarbiavimo galia.",
+    "primary_btn": {
+      "label": "Nemokamai pradėti",
+      "url": "#pricing"
+    },
+    "secondary_btn": {
+      "label": "Peržiūrėti demo",
+      "url": "#features"
+    },
+    "note": "Nereikia kredito kortelės",
+    "image_alt": "Web Pages Starter dashboard preview"
+  },
+  "stats": {
+    "community": "Pasaulinė bendruomenė",
+    "community_val": "50K+",
+    "projects": "Užbaigti projektai",
+    "projects_val": "120+",
+    "uptime": "Veikimo laikas",
+    "uptime_val": "99.99%",
+    "rating": "Įvertinimas",
+    "rating_val": "4.9/5"
+  },
+  "story": {
+    "tag": "Mūsų istorija",
+    "visual_label": "Kūrybinės studijos iliustracija",
+    "title": "Skatinti aistra, \u003cbr\u003eapibrėžti tobulumu.",
+    "para1": "Mūsų kelionė prasidėjo nuo paprastos idėjos: padaryti žiniatinklio kūrimą prieinamą ir malonų visiems. Mes pavargome nuo sunkių sistemų ir sudėtingų konfigūracijų.",
+    "para2": "Šiandien mes esame įvairi inžinierių, dizainerių ir mąstytojų komanda, kuri kartu sprendžia sudėtingas problemas elegantiškais sprendimais.",
+    "val1": "Vartotojui orientuota dizaino filosofija",
+    "val2": "Pirmiausia našumo architektūra",
+    "val3": "Skaidrumas ir atviras bendravimas"
+  },
+  "mission": {
+    "title": "Mūsų misija",
+    "description": "Suteikti galimybę kūrėjams ir verslams naudotis elegantiškais, greitais ir lengvais įrankiais kuriant išskirtinius skaitmeninius produktus."
+  },
+  "vision": {
+    "title": "Mūsų vizija",
+    "description": "Tapti pageidaujama platforma šiuolaikiniams kūrėjams, kurie vertina grožį, našumą ir vartotojo patirtį kiekvienoje kodo eilutėje."
+  },
+  "values": {
+    "title": "Mūsų vertybės",
+    "subtitle": "Principai, kurie vadovauja kiekvienam mūsų priimtam sprendimui."
+  },
+  "passion": {
+    "title": "Aistra",
+    "description": "Mes mylime tai, ką darome, ir tai matosi kiekvienoje mūsų produkto detalėje."
+  },
+  "collaboration": {
+    "title": "Bendradarbiavimas",
+    "description": "Kartu dirbant gimsta geriausi rezultatai. Tikime stiprios komandos galia."
+  },
+  "innovation": {
+    "title": "Inovacijos",
+    "description": "Visada ieškome geresnių būdų spręsti problemas ir kurti vertę."
+  },
+  "integrity": {
+    "title": "Sąžiningumas",
+    "description": "Sąžiningumas ir skaidrumas yra kiekvienų mūsų užmegztų ryšių pagrindas."
+  },
+  "excellence": {
+    "title": "Tobulumas",
+    "description": "Nesame patenkinti pakankamai geru. Visada siekiame geriausio."
+  },
+  "quality": {
+    "title": "Kokybė",
+    "description": "Švarus kodas, gražus dizainas ir sklandi patirtis – tai mūsų standartas."
+  },
+  "team": {
+    "title": "Susipažinkite su komanda",
+    "subtitle": "Puikūs protai už kiekvienos kodo eilutės, kurią parašome.",
+    "alex_desc": "Vizionierius lyderis su daugiau nei 10 metų patirtimi kuriant SaaS ekosistemas.",
+    "sarah_desc": "Pilno steko specialistė, besitelkianti į didelio masto sistemų architektūros kūrimą.",
+    "mike_desc": "Fiksuotas ties pikselių detalėmis, sklandžiais UX srautais ir prieinamumo standartais.",
+    "jessica_desc": "Kūrybinė pasakotoja, padedanti prekėms rasti unikalų balsą skaitmeniniame pasaulyje."
+  },
+  "features": {
+    "list": {
+      "speed": {
+        "title": "Labai greita",
+        "description": "Optimalus našumas su įkėlimo laiku žemiau 100 ms. Sukurta pasaulinei sklaidai su krašto infrastruktūra."
+      },
+      "design": {
+        "title": "Modernus dizainas",
+        "description": "Reaguojanti ir švari vartotojo sąsaja, kuri atrodo profesionaliai visuose įrenginiuose. Visiškai pritaikomi komponentai."
+      },
+      "security": {
+        "title": "Aukštas saugumas",
+        "description": "Galinis šifravimas, kelių veiksnių tapatybės nustatymas ir SOC2 atitiktis, apsaugantys Jūsų duomenis."
+      }
+    },
+    "heading": "Išskirtinės funkcijos",
+    "subheading": "Viskas, ko Jums reikia kūrimui ir augimui."
+  }
+}

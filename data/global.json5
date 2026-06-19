@@ -1,0 +1,41 @@
+{
+  site_name: 'Starter',
+  site_description: 'Build lightning-fast, beautiful web applications with Starter.',
+  site_image: '/assets/images/og-image.png',
+  flag_cdn: 'https://flagcdn.com',
+  root_page: 'home',
+  seo: {
+    theme_color: '#020617',
+    theme_color_light: '#f8fafc',
+    og_type: 'website',
+    twitter_card: 'summary_large_image',
+    og_image_width: 1200,
+    og_image_height: 630,
+  },
+  pwa: {
+    mobile_web_app_capable: true,
+    apple_mobile_web_app_capable: true,
+    apple_mobile_web_app_status_bar_style: 'default',
+    msapplication_tile_color: '#020617',
+  },
+  format_detection: {
+    telephone: false,
+    email: false,
+    address: false,
+  },
+  compatibility: {
+    x_ua_compatible: 'IE=edge',
+    referrer: 'strict-origin-when-cross-origin',
+  },
+  preconnect: [
+    {
+      href: 'https://flagcdn.com',
+    },
+  ],
+  dns_prefetch: [
+    'https://flagcdn.com',
+  ],
+  social: {
+    github: 'ledihildawan/web-pages-starter',
+  },
+}

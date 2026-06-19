@@ -1,0 +1,103 @@
+{
+  "about": {
+    "badge": "O nas"
+  },
+  "hero": {
+    "badge": "Welcome",
+    "title_part1": "Ustvarjamo ",
+    "title_highlight": "digitalno prihodnost",
+    "description": "Ustanovljen leta 2024, Starter obstaja, da pomaga razvijalcem graditi boljše aplikacije hitreje. Verjamemo v moč čiste kode, čudovitega oblikovanja in odprte kolaboracije.",
+    "primary_btn": {
+      "label": "Začnite brezplačno",
+      "url": "#pricing"
+    },
+    "secondary_btn": {
+      "label": "Oglejte demo",
+      "url": "#features"
+    },
+    "note": "Brez potrebe po kreditni kartici",
+    "image_alt": "Web Pages Starter dashboard preview"
+  },
+  "stats": {
+    "community": "Globalna skupnost",
+    "community_val": "50K+",
+    "projects": "Zaključenih projektov",
+    "projects_val": "120+",
+    "uptime": "Razpoložljivost",
+    "uptime_val": "99.99%",
+    "rating": "Ocena",
+    "rating_val": "4.9/5"
+  },
+  "story": {
+    "tag": "Naša zgodba",
+    "visual_label": "Ilustracija kreativnega studia",
+    "title": "Vodeni s strastjo, \u003cbr\u003eopredeljeni z odličnostjo.",
+    "para1": "Naše potovanje se je začelo z enostavno idejo: narediti spletni razvoj dostopen in zabaven za vse. Bili smo utrujeni od težkih ogrodij in zapletenih konfiguracij.",
+    "para2": "Danes smo raznolika ekipa inženirjev, oblikovalcev in mislecev, ki skupaj rešujejo kompleksne probleme z elegantnimi rešitvami.",
+    "val1": "Oblikovalna filozofija, osredotočena na uporabnika",
+    "val2": "Arhitektura s performansami na prvem mestu",
+    "val3": "Transparentnost in odprta komunikacija"
+  },
+  "mission": {
+    "title": "Naše poslanstvo",
+    "description": "Omočiti razvijalce in podjetja z elegantnimi, hitrimi in enostavnimi orodji za gradnjo izjemnih digitalnih izdelkov."
+  },
+  "vision": {
+    "title": "Naša vizija",
+    "description": "Postati platforma izbire za moderne razvijalce, ki cenijo lepoto, performanse in uporabniško izkušnjo v vsaki vrstici kode."
+  },
+  "values": {
+    "title": "Naše vrednote",
+    "subtitle": "Načela, ki vodijo vsako odločitev, ki jo sprejmemo."
+  },
+  "passion": {
+    "title": "Strast",
+    "description": "Ljubimo to, kar počnemo, in to je vidno v vsakem detajlu naših izdelkov."
+  },
+  "collaboration": {
+    "title": "Sodelovanje",
+    "description": "Skupno delo prinaša najboljše rezultate. Verjamemo v moč močne ekipe."
+  },
+  "innovation": {
+    "title": "Inovacije",
+    "description": "Vedno iščemo boljše načine za reševanje problemov in ustvarjanje vrednosti."
+  },
+  "integrity": {
+    "title": "Integriteta",
+    "description": "Iskrenost in transparentnost sta temelj vsakega odnosa, ki ga gradimo."
+  },
+  "excellence": {
+    "title": "Odličnost",
+    "description": "Ne zadovoljujemo se z dobrim. Vedno težimo k najboljšemu."
+  },
+  "quality": {
+    "title": "Kakovost",
+    "description": "Čista koda, čudovito oblikovanje in brezhibna izkušnja so naši standardi."
+  },
+  "team": {
+    "title": "Spoznajte ekipo",
+    "subtitle": "Briljantni umi za vsako vrstico kode, ki jo napišemo.",
+    "alex_desc": "Vizionarski vodja z 10+ leti izkušenj pri razvoju SaaS ekosistemov.",
+    "sarah_desc": "Full-stack čarovnik, specializiran za gradnjo skalabilnih sistemskih arhitektur.",
+    "mike_desc": "Obseden s pikselnimi detajli, tekočimi UX poteki in standardi dostopnosti.",
+    "jessica_desc": "Kreativni pripovedovalec, ki blagovnim znamkam pomaga najti svoj edinstven glas v digitalnem svetu."
+  },
+  "features": {
+    "list": {
+      "speed": {
+        "title": "Izjemno hitro",
+        "description": "Optimalne performanse s časom nalaganja pod 100ms. zasnovano za globalno skaliranje z edge infrastrukturo."
+      },
+      "design": {
+        "title": "Moderno oblikovanje",
+        "description": "Odziven in čist UI, ki izgleda profesionalno na vseh napravah. Popolnoma prilagodljive komponente."
+      },
+      "security": {
+        "title": "Visoka raven varnosti",
+        "description": "End-to-end šifriranje, večfaktorska avtentikacija in SOC2 skladnost za zaščito vaših podatkov."
+      }
+    },
+    "heading": "Ključne funkcije",
+    "subheading": "Vse, kar potrebujete za gradnjo in rast."
+  }
+}

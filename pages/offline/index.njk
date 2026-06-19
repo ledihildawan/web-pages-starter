@@ -1,0 +1,12 @@
+{% extends "main.njk" %}
+{% import "shared/ui/icons.njk" as icon %}
+
+{% block content %}
+{% set error_icon_name = 'cloud' %}
+{% set error_icon_color = 'slate' %}
+{% set error_gradient_from = 'slate' %}
+{% set error_gradient_via = 'zinc' %}
+{% set error_i18n_ns = 'offline' %}
+{% set error_quick_links = '/|home,/about|about,/features|features' %}
+{% include "shared/error/offline-page.njk" %}
+{% endblock %}

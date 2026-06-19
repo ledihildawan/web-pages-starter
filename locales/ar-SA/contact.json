@@ -1,0 +1,55 @@
+{
+  "meta": {
+    "title": "تواصل معنا | Starter App",
+    "description": "تواصل معنا للاستفسارات والدعم."
+  },
+  "contact": {
+    "badge": "تواصل معنا",
+    "title_part1": "لنتواصل",
+    "title_highlight": "معاً",
+    "description": "هل لديك استفسار أو ترغب في التعاون؟ يسعدنا سماعك. أرسل لنا رسالة وسنرد في أسرع وقت ممكن.",
+    "info_title": "معلومات الاتصال",
+    "form_title": "أرسل رسالة",
+    "form_subtitle": "املأ النموذج أدناه وسنرد عليك في أقرب فرصة.",
+    "social_title": "تابعنا",
+    "social_subtitle": "تابع آخر أخبارنا على وسائل التواصل الاجتماعي",
+    "social_badge": "Follow Us",
+    "info": {
+      "response_time": {
+        "title": "استجابة سريعة",
+        "description": "نسعى للرد على كل رسالة خلال ٢٤ ساعة في أيام العمل."
+      },
+      "working_hours": {
+        "title": "ساعات العمل",
+        "description": "الأحد - الخميس: ٠٩:٠٠ - ١٨:٠٠. عطلة نهاية الأسبوع: حسب الأولوية."
+      },
+      "support": {
+        "title": "دعم مستمر",
+        "description": "فريق الدعم لدينا جاهز دائماً لمساعدتك في حل المشاكل التقنية."
+      }
+    },
+    "form": {
+      "name": "الاسم",
+      "name_placeholder": "أدخل اسمك",
+      "email": "البريد الإلكتروني",
+      "email_placeholder": "name@example.com",
+      "subject": "الموضوع",
+      "subject_placeholder": "ما الذي تريد مناقشته؟",
+      "message": "الرسالة",
+      "message_placeholder": "أخبرنا المزيد عن استفسارك...",
+      "submit": "إرسال الرسالة",
+      "errors": {
+        "required": "This field is required.",
+        "email_invalid": "Please enter a valid email address.",
+        "submit_errors": "Please fix {{count}} error(s) before submitting."
+      },
+      "submitting": "Submitting form..."
+    }
+  },
+  "email_label": "البريد الإلكتروني",
+  "email_value": "hello@starter.app",
+  "phone_label": "الهاتف",
+  "phone_value": "+٩٦٦ ٥٠ ١٢٣ ٤٥٦٧",
+  "location_label": "الموقع",
+  "location_value": "الرياض، المملكة العربية السعودية"
+}

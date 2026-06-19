@@ -1,0 +1,216 @@
+{% extends "main.njk" %}
+{% import "shared/layout/hero-section.njk" as hero %}
+{% import "shared/layout/section-header.njk" as section %}
+{% import "shared/ui/icons.njk" as icon %}
+
+{% block content %}
+  {% set story_key = 'about:' ~ page.story.t_key %}
+  {% set story_visual_label_key = story_key ~ '.visual_label' %}
+  {% set story_tag_key = story_key ~ '.tag' %}
+  {% set story_title_key = story_key ~ '.title' %}
+  {% set story_para1_key = story_key ~ '.para1' %}
+  {% set story_para2_key = story_key ~ '.para2' %}
+  {% set hero_key = 'about:hero' %}
+  {{ hero.hero_section(
+    i18n.t(hero_key ~ '.badge'),
+    i18n.t(hero_key ~ '.title_part1'),
+    i18n.t(hero_key ~ '.title_highlight'),
+    i18n.t(hero_key ~ '.description'),
+    h1=page.meta.h1
+  ) }}
+
+  <section class="pbs-40 pbe-40 px-6">
+    <div class="max-inline-6xl mx-auto">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8 p-8 lg:p-12 border border-white/10 bg-linear-to-br from-white/3 to-transparent backdrop-blur-xl radius-card-lg shadow-2xl">
+        {% for stat in page.stats %}
+          {% set stat_key = 'about:stats.' ~ stat.label %}
+          {% set stat_val_key = stat_key ~ '_val' %}
+          {% set stat_label_key = stat_key %}
+          <div class="relative group">
+            <div class="absolute inset-0 bg-linear-to-br from-{{ stat.color }}-500/20 to-transparent radius-card-md blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
+            <div class="relative">
+              <div class="text-4xl md:text-5xl lg:text-6xl font-black tabular-nums mbe-2 tracking-tighter text-white group-hover:scale-110 group-hover:text-{{ stat.color }}-300 transition-[scale,color] duration-400 td-{{ loop.index0 }}">
+                {{ i18n.t(stat_val_key) }}
+              </div>
+              <div class="text-[10px] text-slate-400 font-black uppercase tracking-[0.2em] group-hover:text-slate-400 transition-colors duration-200">
+                {{ i18n.t(stat_label_key) }}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="pbs-40 pbe-40 px-6">
+    <div class="max-inline-7xl mx-auto grid md:grid-cols-2 gap-16 lg:gap-24 items-center">
+      <div class="relative group order-2 md:order-1">
+        <div class="absolute -inset-8 bg-linear-to-r from-violet-600/40 via-fuchsia-600/20 to-pink-600/40 radius-card-lg blur-3xl opacity-50 group-hover:opacity-80 transition-opacity duration-400 ease-emphasized"></div>
+
+        <div class="relative block-full bg-linear-to-br from-slate-900 to-slate-950 radius-card-lg border border-white/10 overflow-hidden shadow-2xl">
+          <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#8b5cf6_1px,transparent_1px)] bg-size-[32px_32px]"></div>
+          <div class="absolute inset-0 bg-linear-to-br from-violet-600/10 via-transparent to-fuchsia-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
+
+          <div class="relative p-12 lg:p-16 text-center">
+            <div class="inline-24 block-24 bg-linear-to-br from-violet-500/20 to-fuchsia-500/10 radius-card-md flex items-center justify-center mx-auto mbe-10 border border-violet-500/30 shadow-[0_0_60px_rgba(139,92,246,0.2)] group-hover:rotate-12 group-hover:scale-110 transition-[transform] duration-400 ease-emphasized">
+              {{ icon.icon('book', 'inline-12 block-12 text-violet-400', size='xl') }}
+            </div>
+            <p class="text-slate-400 text-xs font-black uppercase tracking-[0.3em]">
+              {{ i18n.t(story_visual_label_key) }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-8 order-1 md:order-2">
+        <div class="inline-flex items-center gap-3 px-5 py-2.5 bg-linear-to-r from-violet-500/10 to-fuchsia-500/10 border border-violet-500/30 rounded-full text-violet-300 text-sm">
+          {{ icon.icon('book', 'inline-4 block-4') }}
+          <span class="font-bold tracking-wide uppercase text-[10px]">{{ i18n.t(story_tag_key) }}</span>
+        </div>
+
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tight text-white">
+          {{ i18n.html(story_title_key) }}
+        </h2>
+
+        <div class="space-y-6 text-slate-300 text-lg md:text-xl leading-relaxed font-medium">
+          <p>{{ i18n.t(story_para1_key) }}</p>
+          <p>{{ i18n.t(story_para2_key) }}</p>
+        </div>
+
+        <ul class="space-y-5 pbs-4">
+          {% set value_colors = ['violet', 'fuchsia', 'pink'] %}
+          {% for i in range(1, 4) %}
+            {% set story_val_key = story_key ~ '.val' ~ i %}
+            <li class="flex items-center gap-5 text-white group cursor-default">
+              <span class="flex-none flex items-center justify-center inline-9 block-9 radius-icon bg-linear-to-br from-{{ value_colors[i-1] }}-500/20 to-{{ value_colors[i-1] }}-500/5 text-{{ value_colors[i-1] }}-400 text-xs font-black border border-{{ value_colors[i-1] }}-500/30 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-[0_0_30px_rgba(139,92,246,0.3)] transition-[transform,box-shadow] duration-200">
+                {{ icon.icon('check', 'inline-5 block-5', size='md') }}
+              </span>
+              <span class="tracking-tight font-medium">{{ i18n.t(story_val_key) }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="pbs-40 pbe-40 px-6 relative bg-linear-to-b from-white/2 to-transparent border-bs border-be border-white/5">
+    <div class="max-inline-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-10">
+        <div class="spotlight-card card-border-glow card-squash group relative p-12 lg:p-14 radius-card-lg bg-linear-to-br from-slate-900/60 to-slate-900/40 card-border hover:border-violet-500/40 transition-[transform,box-shadow,border-color] duration-250 ease-emphasized overflow-hidden backdrop-blur-xl shadow-xl hover:shadow-[0_25px_60px_rgba(139,92,246,0.2)] hover:-translate-y-2 hover-lift">
+          <div class="absolute inset-be-0 inset-e-0 inline-40 block-40 bg-linear-to-br from-violet-500/15 to-transparent rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
+          <div class="absolute inset-0 opacity-30 bg-[radial-gradient(#8b5cf6_1px,transparent_1px)] bg-size-[32px_32px]"></div>
+
+          <div class="relative">
+            <div class="inline-16 block-16 radius-nested-lg bg-linear-to-br from-violet-500/20 to-violet-500/5 flex items-center justify-center text-violet-400 mbe-8 border border-violet-500/30 group-hover:scale-110 transition-[scale,box-shadow] duration-200 shadow-lg group-hover:shadow-[0_0_40px_rgba(139,92,246,0.3)] icon-squash">
+              {{ icon.icon('chart', 'inline-8 block-8', size='lg') }}
+            </div>
+            <h3 class="text-2xl lg:text-3xl font-black text-white mbe-4">{{ i18n.t('about:mission.title') }}</h3>
+            <p class="text-slate-400 leading-relaxed text-lg">{{ i18n.t('about:mission.description') }}</p>
+          </div>
+        </div>
+
+        <div class="spotlight-card card-border-glow card-squash group relative p-12 lg:p-14 radius-card-lg bg-linear-to-br from-slate-900/60 to-slate-900/40 card-border hover:border-fuchsia-500/40 transition-[transform,box-shadow,border-color] duration-250 ease-emphasized overflow-hidden backdrop-blur-xl shadow-xl hover:shadow-[0_25px_60px_rgba(217,70,239,0.2)] hover:-translate-y-2 hover-lift">
+          <div class="absolute inset-be-0 inset-e-0 inline-40 block-40 bg-linear-to-br from-fuchsia-500/15 to-transparent rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
+          <div class="absolute inset-0 opacity-30 bg-[radial-gradient(#d946ef_1px,transparent_1px)] bg-size-[32px_32px]"></div>
+
+          <div class="relative">
+            <div class="inline-16 block-16 radius-nested-lg bg-linear-to-br from-fuchsia-500/20 to-fuchsia-500/5 flex items-center justify-center text-fuchsia-400 mbe-8 border border-fuchsia-500/30 group-hover:scale-110 transition-[scale,box-shadow] duration-200 shadow-lg group-hover:shadow-[0_0_40px_rgba(217,70,239,0.3)] icon-squash">
+              {{ icon.icon('sparkles', 'inline-8 block-8', size='lg') }}
+            </div>
+            <h3 class="text-2xl lg:text-3xl font-black text-white mbe-4">{{ i18n.t('about:vision.title') }}</h3>
+            <p class="text-slate-400 leading-relaxed text-lg">{{ i18n.t('about:vision.description') }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pbs-40 pbe-40 px-6">
+    {{ section.section_header(
+      i18n.t('about:values.title'),
+      i18n.t('about:values.title'),
+      i18n.t('about:values.subtitle'),
+      icon.icon('star', 'inline-4 block-4')
+    ) }}
+
+    <div class="max-inline-7xl mx-auto">
+      <div class="grid md:grid-cols-3 gap-8 values-grid">
+        {% for value in page.values %}
+          {% set val_key = 'about:' ~ value.t_key %}
+          {% set val_title_key = val_key ~ '.title' %}
+          {% set val_desc_key = val_key ~ '.description' %}
+          <div class="spotlight-card card-border-glow card-squash group relative p-10 lg:p-12 radius-card-lg bg-linear-to-br from-slate-900/60 to-slate-900/40 card-border hover:border-{{ value.color }}-500/40 hover:shadow-[0_20px_50px_rgba(139,92,246,0.2)] hover:-translate-y-2 transition-[transform,box-shadow,border-color] duration-250 ease-emphasized overflow-hidden backdrop-blur-xl hover-lift">
+            <div class="absolute inset-be-0 inset-e-0 inline-40 block-40 bg-linear-to-br from-{{ value.color }}-500/15 to-transparent rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
+            <div class="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity duration-400 bg-[radial-gradient(currentColor_1px,transparent_1px)] bg-size-[32px_32px] radial-current"></div>
+
+            <div class="relative">
+              <div class="inline-16 lg:inline-20 block-16 lg:block-20 radius-nested-lg bg-linear-to-br from-{{ value.color }}-500/20 to-{{ value.color }}-500/5 flex items-center justify-center text-{{ value.color }}-400 mbe-8 border border-{{ value.color }}-500/30 group-hover:rotate-6 group-hover:scale-110 transition-[transform,box-shadow] duration-200 shadow-lg group-hover:shadow-[0_0_40px_rgba(139,92,246,0.3)] icon-squash">
+                {% if value.icon == 'heart' %}
+                  {{ icon.icon('heart', 'inline-8 block-8 lg:inline-10 lg:block-10', size='xl') }}
+                {% elif value.icon == 'users' %}
+                  {{ icon.icon('users', 'inline-8 block-8 lg:inline-10 lg:block-10', size='xl') }}
+                {% elif value.icon == 'light' %}
+                  {{ icon.icon('light', 'inline-8 block-8 lg:inline-10 lg:block-10', size='xl') }}
+                {% elif value.icon == 'shield' %}
+                  {{ icon.icon('shield', 'inline-8 block-8 lg:inline-10 lg:block-10', size='xl') }}
+                {% elif value.icon == 'rocket' %}
+                  {{ icon.icon('rocket', 'inline-8 block-8 lg:inline-10 lg:block-10', size='xl') }}
+                {% elif value.icon == 'star' %}
+                  {{ icon.icon('star', 'inline-8 block-8 lg:inline-10 lg:block-10', size='xl') }}
+                {% endif %}
+              </div>
+              <h3 class="text-xl lg:text-2xl font-black text-white mbe-3 group-hover:text-{{ value.color }}-200 transition-colors duration-200">{{ i18n.t(val_title_key) }}</h3>
+              <p class="text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors duration-200">{{ i18n.t(val_desc_key) }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="pbs-40 pbe-40 px-6 relative bg-linear-to-b from-white/2 to-transparent border-bs border-be border-white/5">
+    {% set team_key = 'about:team' %}
+    {% set team_title_key = team_key ~ '.title' %}
+    {% set team_subtitle_key = team_key ~ '.subtitle' %}
+    {{ section.section_header(
+      i18n.t('our_team'),
+      i18n.t(team_title_key),
+      i18n.t(team_subtitle_key),
+      icon.icon('users', 'inline-4 block-4')
+    ) }}
+
+    <div class="max-inline-7xl mx-auto">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {% for member in page.team.members %}
+          {% set desc_key = 'about:' ~ member.desc_key %}
+          <div class="spotlight-card card-border-glow card-squash group relative p-8 lg:p-10 radius-card-lg bg-linear-to-br from-slate-900/60 to-slate-900/40 card-border hover:border-{{ member.color }}-500/40 hover:shadow-[0_20px_50px_rgba(139,92,246,0.2)] hover:-translate-y-2 transition-[transform,box-shadow,border-color] duration-250 ease-emphasized text-center overflow-hidden backdrop-blur-xl hover-lift">
+            <div class="absolute inset-be-0 inset-e-0 inline-40 block-40 bg-linear-to-br from-{{ member.color }}-500/15 to-transparent rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
+
+            <div class="relative">
+              <div class="relative inline-24 lg:inline-28 block-24 lg:block-28 mx-auto mbe-6">
+                <div class="absolute inset-0 bg-linear-to-br from-{{ member.color }}-500 to-transparent rounded-full blur-md opacity-20 group-hover:opacity-60 transition-opacity duration-200"></div>
+                <div class="relative inline-full block-full rounded-full bg-linear-to-br from-slate-800 to-slate-900 border-2 border-white/10 group-hover:border-{{ member.color }}-500/50 transition-[border-color,box-shadow] duration-200 flex items-center justify-center overflow-hidden shadow-inner group-hover:shadow-[0_0_40px_rgba(139,92,246,0.3)]">
+                  {{ icon.icon('users', 'inline-12 block-12 text-slate-600 group-hover:text-' ~ member.color ~ '-400 transition-colors duration-200', size='xl') }}
+                </div>
+                <div class="absolute inset-be-1 inset-e-1 inline-5 block-5 bg-emerald-500 rounded-full border-4 border-slate-950"></div>
+              </div>
+
+              <h3 class="text-xl font-black text-white mbe-2 tracking-tight group-hover:text-{{ member.color }}-200 transition-colors duration-200">{{ member.name }}</h3>
+              <p class="text-[10px] font-black text-{{ member.color }}-400 mbe-4 uppercase tracking-[0.2em]">{{ i18n.t('about:' ~ member.role_key) }}</p>
+              <p class="text-sm text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors duration-200">
+                {{ i18n.t(desc_key) }}
+              </p>
+
+              <div class="mbs-6 flex justify-center gap-3 opacity-0 group-hover:opacity-100 transition-[opacity,transform] duration-200 transform translate-y-2 group-hover:translate-y-0">
+                {{ icon.icon('check', 'inline-5 block-5') }}
+                {{ icon.icon('heart', 'inline-5 block-5') }}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  {% include "shared/layout/cta.njk" %}
+{% endblock %}

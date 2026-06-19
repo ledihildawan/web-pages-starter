@@ -1,0 +1,36 @@
+{
+  header: [
+    {
+      label: 'features',
+      url: '/features',
+      children: [
+        {
+          label: 'core_features',
+          url: '/features#core',
+        },
+        {
+          label: 'integrations',
+          url: '/features#integrations',
+        },
+      ],
+    },
+    {
+      label: 'pricing',
+      url: '/pricing',
+    },
+    {
+      label: 'about',
+      url: '/about',
+      children: [
+        {
+          label: 'our_team',
+          url: '/about#team',
+        },
+        {
+          label: 'contact_us',
+          url: '/contact',
+        },
+      ],
+    },
+  ],
+}

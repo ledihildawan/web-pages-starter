@@ -1,6 +1,6 @@
 # Web Pages Starter
 
-A multi-page starter for content sites built with **Rsbuild + Nunjucks + Alpine.js + Tailwind CSS v4 + i18next**. Ships 87 locales out of the box with SSG rendering, runtime language switching, locale-aware formatting, RTL support, and regional pricing.
+A multi-page starter for content sites built with **Rsbuild + Nunjucks + Alpine.js + Tailwind CSS v4 + i18next**. Ships 136 locales out of the box with SSG rendering, runtime language switching, locale-aware formatting, RTL support, and regional pricing.
 
 ## Quick Start
 
@@ -16,52 +16,82 @@ Requires [Bun](https://bun.sh) `>= 1.3.14`.
 ## Project Structure
 
 ```
-src/
 ├── configs/               # app configuration
-│   ├── env.ts             #   environment variable loading
-│   ├── i18n.ts            #   defaultLocale + fonts
-│   ├── paths.ts           #   filesystem path constants
-│   └── pages.ts            #   ROOT_PAGE, SYSTEM_PAGE_IDS, SYSTEM_PAGE_SLUGS, slug helpers
+│   ├── i18n.ts            #   defaultLocale + active locales
+│   ├── fonts.ts           #   font stack config (CSS imported via bootstrap.ts)
+│   └── rsbuild.ts         #   Rsbuild build configuration (real config; rsbuild.config.ts is a jiti wrapper)
+├── utils/                 # shared utilities — common (getValueByPath, getCspNonce), json5, paths (lookup/find), alpine (defineData/defineStore), microtask-queue, scheduler, types
+├── types/                 # ambient type declarations (global.d.ts, modules.d.ts, alpinejs-csp.d.ts)
 ├── data/                  # global site data
 │   ├── global.json5       #   site_name, seo, social, dns, preconnect
 │   └── menu.json5         #   navigation structure (header links + dropdowns)
 ├── pages/                 # routes — one folder per page
 │   └── {page}/
 │       ├── index.njk      #   Nunjucks template (required)
-│       ├── index.json5    #   page data — colors, icons, layout (optional)
-│       ├── index.ts       #   page entry (auto-imported by Rsbuild)
-│       ├── index.css      #   page styles (optional)
-│       └── components/    #   page-local partials (optional)
-├── components/            # 11 shared Nunjucks partials (includes error-page.njk, offline-page.njk)
-├── layouts/               # base template (main.njk) + macros/ (page-meta.njk)
-├── locales/               # translation source of truth (87 locales)
+│       ├── data.json5     #   page data — page_id, SEO, layout (optional)
+│       ├── script.ts      #   page-specific JS (optional, auto-injects bootstrap)
+│       ├── style.css      #   page styles (optional, auto-loaded if exists)
+│       └── _components/    #   page-local components (underscore = not a page)
+├── shared/                # reusable Nunjucks UI + layouts (cross-page)
+│   ├── page-entry.ts      #   fallback entry for pages without script.ts
+│   ├── seo/               #   page-meta.njk macro
+│   ├── ui/                #   icons, form-input, info-card, social-link, responsive-image
+│   ├── layout/            #   cta, footer, hero-section, section-header
+│   ├── nav/               #   navbar
+│   └── error/             #   error-page, offline-page
+├── features/              # domain logic by capability
+│   ├── contact-form/      #   contact form validation
+│   └── carousel/          #   carousel init
+├── layouts/
+│   └── main.njk           # base template (SEO, navbar, footer, scripts)
+├── locales/               # translation source of truth (136 locales)
 │   └── {locale}/
 │       ├── common.json    #   shared copy (nav, footer, labels, plurals)
 │       ├── {page}.json    #   page-specific copy
-│       └── components.{name}.json  #   component copy (flat, dot-notation namespace)
-├── scripts/
-│   ├── lib/i18n/          #   i18n engine (19 files)
-│   ├── lib/utils/         #   shared utilities (microtask queue)
-│   ├── utils/             #   build-time utilities (json5, common, types)
-│   └── main.ts            #   app bootstrap
+│       └── {shared}.json  #   shared locale copy (e.g. cta.json)
 ├── styles/
-│   └── main.css           #   Tailwind v4 entry + design tokens + component classes
-├── assets/                #   images, fonts, raw assets
-└── *.d.ts                 #   TS type declarations (env, global, globals, linkedom)
-
-tools/                     #   build-time CLI scripts
-  └── shared/              #   shared modules (logger, signal-handler, hono-server, site-url, write-file, romanize)
-public/                    #   static assets (favicon, generated sw.js/manifest/robots/sitemap)
-  └── assets/i18n/         #   pre-compiled i18n JSON bundles (generated)
-generated/                 #   auto-generated types + exchange rates (gitignored at file level; stubs committed for fresh-clone typecheck; overwritten at build time)
-docs/                      #   documentation
+│   ├── tokens.css         #   design tokens (CSS custom properties)
+│   ├── components.css      #   component classes
+│   └── main.css           #   Tailwind v4 entry (imports tokens + components)
+├── assets/                # images, fonts, raw assets
+├── bootstrap.ts           # app entry — global CSS (main.css), Alpine + collapse/focus plugins, i18n store/initIntl, fonts, SW. Auto-injected via page-inject-loader
+├── bunfig.toml            # Bun config — preload packages/env/preload.ts for .env.{stage} loading
+├── scripts/               # build-time scripts (build, serve, compress, subset-fonts, fetch-exchange-rates, clean-cache)
+│   └── lib/               #   logger, signal-handler, hono-server, write-file, romanize
+├── packages/
+│   ├── i18n/              #   self-contained i18n package (data, formatting, runtime, strategies, fonts)
+│   │   ├── index.ts       #     public API barrel
+│   │   ├── data/          #     master data — 136 locales, 93 languages (build-time only)
+│   │   ├── engine/        #     formatters, helpers, active-locales (client)
+│   │   ├── strategies/    #     per-language cardinal/ordinal (code-split async)
+│   │   ├── fonts/         #     font loading system
+│   │   ├── runtime/       #     i18next init, Alpine store
+│   │   └── config/        #     types, defineI18n/defineFont/defineFontStack
+│   ├── env/                #   env system (auto-generates generated/env.ts from .env files)
+│   │   ├── cli/            #     generate-env.ts (scans .env → schema + engine + validation)
+│   │   └── preload.ts      #     Bun preload (loads .env before any module via bunfig.toml)
+│   ├── template-engine/   #   Nunjucks SSR rendering. Depends on @i18n (one-way) + @page-system (getRootPageSlug)
+│   │   ├── index.ts       #     public API barrel: exports createTemplateParams, scanSharedLocales
+│   │   └── template.ts    #     Nunjucks i18n.* API: createTemplateParams(), generateClientI18nScript(), scanSharedLocales()
+│   └── page-system/       #   page system (routing, discovery, CLI). Standalone (only @config/*, @utils/*)
+│       ├── index.ts       #     public API barrel
+│       ├── system-pages.ts #     ROOT_PAGE, SYSTEM_PAGE_IDS, SYSTEM_PAGE_SLUGS, slug helpers
+│       ├── scanner.ts     #     scanPages(), isGroup(), isSlugDir(), isPrivateDir()
+│       ├── dynamic-routes.ts #  generateDynamicEntries() — [slug] discovery from data.json5
+│       ├── page-inject-loader.cjs # auto-injects bootstrap + page CSS into every script.ts/page-entry.ts
+│       └── cli/           #     sync-system-pages.ts, generate-page.ts, delete-page.ts
+├── public/                # static assets (favicon, generated sw.js/manifest/robots/sitemap)
+│   └── assets/i18n/       #   pre-compiled i18n JSON bundles (generated)
+├── generated/             # auto-generated: env.ts (env system), active-locales-data, exchange rates, i18n types, image-manifest (6 files tracked in git (env, path-aliases, active-locales-data, exchange-rates, i18n types, image-manifest); regenerated at build)
+├── tests/                 # general DOM sanity check (rstest)
+├── docs/                  # documentation
 ```
 
 ## Pages & Routing
 
-File-system based, zero-config routing. Drop a folder under `src/pages/` and it becomes a route. The root page (`home` by default) is output as `index.html` via the `pluginRootPageAsIndex` Rsbuild plugin.
+File-system based, zero-config routing. Drop a folder under `pages/` and it becomes a route. The root page (`home` by default) is output as `index.html` via the `pluginRootPageAsIndex` Rsbuild plugin.
 
-`ROOT_PAGE` lives in `src/configs/pages.ts`. System pages (root + 6 error pages) have locale-dependent folder names driven by `SYSTEM_PAGE_SLUGS` — `page_id` (from `index.json5`) is the stable identifier, decoupled from the folder name. When the default locale changes, `sync-system-pages` renames ALL system page folders to the new locale's slugs. Locale files stay keyed by `page_id` (`home.json`, `not-found.json`, etc.) and are never renamed.
+`ROOT_PAGE` lives in `packages/page-system/system-pages.ts`. System pages (root + 6 error pages) have locale-dependent folder names driven by `SYSTEM_PAGE_SLUGS` — `page_id` (from `data.json5`) is the stable identifier, decoupled from the folder name. When the default locale changes, `sync-system-pages` renames ALL system page folders to the new locale's slugs. Locale files stay keyed by `page_id` (`home.json`, `not-found.json`, etc.) and are never renamed.
 
 ### Pages
 
@@ -84,29 +114,29 @@ File-system based, zero-config routing. Drop a folder under `src/pages/` and it 
 ### Scaffold a new page
 
 ```bash
-bun ./tools/generate-page.ts pricing
+bun ./packages/page-system/cli/generate-page.ts pricing
 ```
 
-Creates the page folder, Nunjucks template, entry files, and 87 locale files. Available at `/pricing` immediately.
+Creates the page folder, Nunjucks template, entry files, and locale files for active locales. Available at `/pricing` immediately.
 
 ### Page data
 
-Each page has an optional `index.json5` for structural/layout data (colors, icons, ordering). Text content comes from locale files. This separates content from presentation.
+Each page has an optional `data.json5` for structural/layout data (page_id, SEO, colors, icons, ordering). Text content comes from locale files. This separates content from presentation.
 
 | Variable | Source | Access |
 | --- | --- | --- |
-| `global.*` | `src/data/global.json5` + `menu.json5` | site name, SEO, social, navigation |
-| `page.*` | `src/pages/{page}/index.json5` | page-specific layout data |
-| `i18n.*` | `src/locales/{locale}/*.json` | translated text (see [i18n](#i18n)) |
+| `global.*` | `data/global.json5` + `menu.json5` | site name, SEO, social, navigation |
+| `page.*` | `pages/{page}/data.json5` | page-specific layout data |
+| `i18n.*` | `locales/{locale}/*.json` | translated text (see [i18n](#i18n)) |
 | `lang` | `i18nConfig.defaultLocale` | current locale code |
-| `base_path` | `process.env.BASE_PATH` | subpath prefix for asset URLs (default `/`) |
+| `base_path` | `env.BASE_PATH` | subpath prefix for asset URLs (default `/`) |
 | `localeConfig` | `LOCALES` lookup | current locale's `dir`, `writingSystem`, etc. |
-| `clientI18nScript` | `template.ts` | inline `<script>` for i18n bootstrap |
+| `clientI18nScript` | `packages/template-engine/template.ts` | inline `<script>` for i18n bootstrap |
 | `page_id` | `params.entryName` | stable page identifier (decoupled from folder name; folder uses locale-dependent slug) |
 
 ### Template inheritance
 
-All pages extend `src/layouts/main.njk` which provides the `<head>`, navbar, footer, and the inline i18n bootstrap script. Pages override `{% block content %}` for their body.
+All pages extend `layouts/main.njk` which provides the `<head>`, navbar, footer, and the inline i18n bootstrap script. Pages override `{% block content %}` for their body.
 
 ### URL helper
 
@@ -129,32 +159,30 @@ Use `url()` for all internal links instead of hardcoded paths.
 
 ## Components
 
-Shared Nunjucks partials live in `src/components/`. Two usage patterns:
+Shared Nunjucks partials live in `shared/`. Two usage patterns:
 
 **Include partials** (self-contained blocks):
 ```njk
-{% include "navbar.njk" %}
-{% include "footer.njk" %}
-{% include "cta.njk" %}
+{% include "shared/nav/navbar.njk" %}
+{% include "shared/layout/footer.njk" %}
+{% include "shared/layout/cta.njk" %}
 ```
 
 **Import macros** (parameterized, reusable):
 ```njk
-{% import "hero-section.njk" as hero %}
-{% import "section-header.njk" as section %}
-{% import "icons.njk" as icon %}
-{% import "form-input.njk" as form %}
-{% import "info-card.njk" as card %}
-{% import "social-link.njk" as social_link %}
+{% import "shared/layout/hero-section.njk" as hero %}
+{% import "shared/layout/section-header.njk" as section %}
+{% import "shared/ui/icons.njk" as icon %}
+{% import "shared/ui/form-input.njk" as form %}
+{% import "shared/ui/info-card.njk" as card %}
+{% import "shared/ui/social-link.njk" as social_link %}
 
 {{ hero.hero_section(badge=i18n.t('home:hero.badge'), title_part1=i18n.t('home:hero.title_part1'), title_highlight=i18n.t('home:hero.title_highlight'), description=i18n.t('home:hero.description')) }}
 {{ icon.icon('lightning', 'w-8 h-8', size='xl') }}
 {{ form.form_input('text', 'contact:contact.form.name', 'contact:contact.form.name_placeholder', 'name', i18n=i18n) }}
 ```
 
-Pages can also have **local components** in `src/pages/{page}/components/`.
-
-The build auto-detects which components a page uses (via `getUsedComponents()`) and loads only the relevant i18n namespaces at runtime.
+Shared locale namespaces (e.g. `cta`) are auto-detected by `scanSharedLocales()` which scans templates for `i18n.t('namespace:...')` usage and recursively follows `{% include %}` / `{% import %}` chains. No manual declaration needed — just use `i18n.t('cta:heading')` in a shared template and include it in a page.
 
 ## Styling
 
@@ -162,7 +190,7 @@ The build auto-detects which components a page uses (via `getUsedComponents()`) 
 
 ### Design tokens
 
-CSS custom properties on `:root` in `src/styles/main.css`:
+CSS custom properties on `:root` in `styles/main.css`:
 
 | Token | Purpose |
 | --- | --- |
@@ -170,7 +198,7 @@ CSS custom properties on `:root` in `src/styles/main.css`:
 | `--elevation-1` / `--elevation-2` / `--elevation-3` | Shadow depth |
 | `--shadow-border` / `--shadow-border-hover` | Shadow-as-border for cards (replaces `border` for depth) |
 | `--radius-card-*` / `--radius-btn` / `--radius-icon` | Border radii |
-| `--font-primary` | Dynamic font (set by i18n writing system) |
+| `--font-sans` | Dynamic font (set by i18n writing system; Tailwind v4 `@theme` variable) |
 | `--dir` | `1` (LTR) / `-1` (RTL) for JS transforms |
 
 ### Component classes
@@ -217,18 +245,18 @@ Ten principles enforced across all pages:
 
 The i18n system is the most complex subsystem. Full reference: **[`docs/i18n.md`](docs/i18n.md)**.
 
-87 BCP 47 locales spanning 54 languages. Default locale: `en-US`.
+136 BCP 47 locales spanning 93 languages. Default locale: `en-US`.
 
 ### Data flow
 
 ```
-src/locales/{locale}/*.json
+locales/{locale}/*.json
         │
-        ├─► Build time (template.ts)
+        ├─► Build time (packages/template-engine/template.ts)
         │     Resolves keys with the default locale,
         │     emits HTML with data-* attributes
         │
-        └─► Runtime (runtime.ts)
+        └─► Runtime (packages/i18n/runtime/runtime.ts)
               i18next.init() → translatePage() + updateFormattedElements()
               User switches language → Alpine store → in-place DOM update
 ```
@@ -272,7 +300,7 @@ The same key (`i18n.t('home:hero.title')`) renders at build time **and** updates
 
 ### Alpine store: `$store.i18n`
 
-The i18n store provides reactive locale switching. Registered in `src/scripts/lib/i18n/store.ts`.
+The i18n store provides reactive locale switching. Registered in `packages/i18n/runtime/store.ts`.
 
 | Property | Type | Purpose |
 | --- | --- | --- |
@@ -284,78 +312,110 @@ The i18n store provides reactive locale switching. Registered in `src/scripts/li
 
 | Component | Location | Purpose |
 | --- | --- | --- |
-| `navbar` | `src/components/navbar.njk` (inline script) | Mobile menu, scroll-aware hide/show, language picker dropdown, touch gestures |
-| `contactForm` | `src/pages/contact/index.ts` | Form validation with field-level error messages |
-| `pricing` | `src/pages/pricing/index.njk` (inline `x-data`) | Monthly/yearly toggle |
+| `navbar` | `shared/nav/navbar.njk` (inline script) | Mobile menu, scroll-aware hide/show, language picker dropdown, touch gestures |
+| `contactForm` | `pages/contact/index.ts` | Form validation with field-level error messages |
+| `pricing` | `pages/pricing/index.njk` (inline `x-data`) | Monthly/yearly toggle |
 
-### Bootstrap sequence (`src/scripts/main.ts`)
+### Bootstrap sequence (`bootstrap.ts`)
 
-1. Load Alpine + i18n store in parallel
-2. Register store, start Alpine
-3. Initialize i18next (load locale resources, translate page)
-4. Preload active font
-5. Defer font loading via `requestIdleCallback`
-6. Register service worker (production only)
+1. Import `styles/main.css` (global CSS)
+2. Load Alpine CSP + fonts module in parallel (`/* webpackPreload: true */` magic comments for critical chunks)
+3. **Single-locale**: register stub i18n store → `Alpine.start()` immediately → skip i18next entirely
+4. **Multi-locale (default locale)**: register i18n store + navbar → `Alpine.start()` immediately → i18next initializes in background
+5. **Multi-locale (non-default locale)**: register store + navbar → `initIntl(locale)` → `Alpine.start()` (prevents flash of wrong language)
+6. Font CSS loaded via `<link>` in template head (inlined post-build by `pluginInlineCss`). `fonts.ts` watches for locale changes via `MutationObserver` — only injects for locale switching.
+7. Register service worker (production only)
+
+Bootstrap is auto-injected into every page entry via `packages/page-system/page-inject-loader.cjs` — no manual `import` needed in page `script.ts` files.
+
+See [docs/i18n.md](docs/i18n.md#runtime) for detailed bootstrap flow.
 
 ## Build Pipeline
 
 ### Development
 
 ```
-sync-system-pages → clean:cache → fetch:rates → sync-locales → generate-i18n → [watch:i18n || rsbuild dev]
+generate-env → sync-system-pages → clean:cache → fetch:rates → generate-active-locales → generate-fonts-css → sync-locales → generate-types → [watch || rsbuild dev]
 ```
 
 - Rsbuild dev server on port 8888 with HMR
-- File watching for `.njk`, `.json`, `.json5` (page reload on change)
-- Dev cache: `generateClientI18nScript` hashes all 87 locale files by mtime — skips ~3,400 file I/O ops on repeat page loads; cache invalidates when any locale file changes
-- i18n type regeneration on locale changes via `watch-i18n`
+- Hot reload for `.njk`, `.json`, `.json5` files via `pluginHotReloadContent` (Rspack watches `locales/`, `data/`, `pages/`, `shared/`, `layouts/` — triggers full rebuild + page reload)
+- Dev cache: `generateClientI18nScript` hashes active locale files by mtime — cache invalidates when any locale file changes
+- Locale file watcher (`watch.ts`) — watches locale JSON files + `configs/i18n.ts` + `generated/`; auto-regenerates active-locales → sync-locales → generate-types on config change
 
 ### Production
 
 ```
-sync-system-pages → clean:cache → fetch:rates → sync-locales → generate-i18n → generate-sitemap → generate-manifest → generate-robots → generate-sw → build
+generate-env → sync-system-pages → clean:cache → fetch:rates → generate-active-locales → generate-fonts-css → sync-locales → generate-types → build.ts → subset-fonts → compress
 ```
 
+`build.ts` orchestrates the final steps with `NODE_ENV=production`:
+1. Cleans `dist/`
+2. Runs generators (sitemap, manifest, robots, sw) with production env vars
+3. Spawns Rsbuild for production bundle
+
+**Post-build:**
+- **subset-fonts** — uses `pyftsubset` to strip hinting/tables from woff2 files
+- **compress** — generates `.br` (Brotli) + `.gz` (Gzip) files for all text assets
+
+**Pre-build steps:**
+0. **generate-env** — regenerates `generated/env.ts` from `.env` files (schema + engine + runtime validation + singleton). Must run before any tool importing `@generated/env`
 1. **sync-system-pages** — renames ALL system page folders to match locale-dependent slugs from `SYSTEM_PAGE_SLUGS` when the default locale changes
-2. **clean-cache** — purges `node_modules/.cache`, `.cache`, `dist`
+2. **clean-cache** — purges `node_modules/.cache`, `.cache`, `dist`, `public/assets/i18n`
 3. **fetch-exchange-rates** — pulls live rates from Frankfurter API (24h cache)
-4. **sync-locales** — creates missing locale directories and syncs missing `.json` files within existing directories from the default locale (Phase 1: missing dirs; Phase 2: missing files in existing dirs)
-5. **generate-i18n** — generates `generated/i18n.d.ts` type definitions (overwrites stub), checks locale parity (errors fail the build), syncs `i18n-ally.sourceLanguage`/`displayLanguage` from `i18nConfig.defaultLocale`
-6. **generate-sitemap** — generates `public/sitemap.xml` from pages and `SITE_URL`
-7. **generate-manifest** — generates `public/manifest.json` from `global.json5` + `i18nConfig`, uses `BASE_PATH` for `start_url` and `scope`
-8. **generate-robots** — generates `public/robots.txt` from `SITE_URL`
-9. **generate-sw** — generates `public/sw.js` dynamically with locale-specific error page URLs from `SYSTEM_PAGE_SLUGS` (cache version v5)
-10. **build** — Rsbuild production bundle with:
-   - JS + CSS minification
-   - HTML minification (`html-minifier-terser`)
-   - `home.html` → `index.html` rename (`pluginRootPageAsIndex`)
-   - Image compression (AVIF, quality 75)
-   - CSS inlined into HTML; small JS inlined (<2048 bytes)
-   - Per-page code splitting with shared runtime chunk
-   - Content-hashed filenames for JS/CSS/images
+4. **generate-active-locales** — generates `generated/active-locales-data.ts` with filtered locale/language/numbering/writing-system/font data. Production mode (`--prod`) outputs only active locale entries; dev mode outputs all entries.
+5. **sync-locales** — creates missing locale directories and syncs missing `.json` files from the default locale
+6. **generate-types** — generates `generated/i18n.d.ts` type definitions (overwrites stub), checks locale parity (errors fail the build), syncs `i18n-ally.sourceLanguage`/`displayLanguage` from `i18nConfig.defaultLocale`
+
+**Inside `build.ts` (production env):**
+7. **generate-sitemap** — generates `public/sitemap.xml` from pages and `SITE_URL`
+8. **generate-manifest** — generates `public/manifest.json` from `global.json5` + `i18nConfig`, uses `BASE_PATH` for `start_url` and `scope`
+9. **generate-robots** — generates `public/robots.txt` from `SITE_URL`
+10. **generate-service-worker** — generates `public/service-worker.js` dynamically with locale-specific error page URLs from `SYSTEM_PAGE_SLUGS`
+11. **rsbuild build** — Rsbuild production bundle with:
+    - JS + CSS minification (Rspack)
+    - HTML minification (`html-minifier-terser` — collapse, sort, minify inline CSS/JS, minify JSON-LD)
+    - `home.html` → `index.html` rename (`pluginRootPageAsIndex`)
+    - Image compression (AVIF, 3 sizes: 400/800/1600w, quality 50)
+    - CSS inlined into `<style nonce="...">` via `pluginInlineCss` (eliminates render-blocking CSS, nonce from CSP meta, relative URL rewriting for font paths)
+    - Small JS external with nonce (CSP-safe), larger → separate file
+    - Per-page code splitting with shared bootstrap chunk (splitChunks)
+    - JS chunk preload via `pluginPreloadChunks` (`<link rel="preload" as="script">`, excludes chunks already in `<script defer>`)
+    - Font woff2 preload generated by template engine from `fontsConfig`
+    - Content-hashed filenames for JS/CSS/images
+    - Brotli + Gzip compression post-build
+    - Font subsetting via pyftsubset post-build
+
+   **Build flags:**
+   - `--pretty` — pretty-print HTML instead of minifying (for CMS template porting)
+   - `--debug` — disable JS/CSS minification
 
 ### Rsbuild configuration highlights
 
 | Feature | Detail |
 | --- | --- |
-| Entry discovery | Auto-scans `src/pages/*/index.ts` |
-| Root page as index | `pluginRootPageAsIndex` renames `home.html` → `index.html` post-build; dev server uses `historyApiFallback` rewrite to `/home.html` instead |
-| `BASE_PATH` support | `source.define` injects `import.meta.env.BASE_PATH` for runtime JS; template param `base_path` for Nunjucks |
+| Entry discovery | Recursive scan: `pages/**/script.ts` (optional) or `shared/page-entry.ts` (fallback). `_` prefix (skip), `()` groups (strip from URL), `[slug]` (dynamic from data.json5) |
+| Page entry injection | `page-inject-loader.cjs` auto-injects `import '../../bootstrap'` + `import './style.css'` into every `script.ts`/`page-entry.ts` — zero manual imports |
+| Bootstrap shared chunk | `splitChunks` with `minSize: 2000` + `default` cacheGroup extracts bootstrap to single cached chunk. No duplication across pages |
+| Resource hints | `pluginPreloadChunks` injects `<link rel="preload" as="script">` for named async chunks (excludes `<script defer>` chunks). Font woff2 preload from template engine. CSS inlined via `pluginInlineCss` with nonce + URL rewriting |
+| Root page as index | `pluginRootPageAsIndex` renames `home.html` → `index.html` post-build |
+| Clean URLs | Dev server `historyApiFallback` with per-page rewrites: `/pricing` → `pricing.html`, `/about` → `about.html`, etc. |
+| Hot reload | `pluginHotReloadContent` adds `compilation.contextDependencies` for `locales/`, `data/`, `pages/`, `shared/`, `layouts/` — Rspack rebuilds on any file change in these dirs |
+| `import.meta.env` | `source.define` replaces `import.meta.env` with full env object (browser-safe keys only). `PRIVATE_` prefix in `.env` excludes secrets from browser bundle |
 | Output paths | `dist/assets/{scripts,styles,images,fonts}` — organized by asset type |
 | Static copy | `output.copy` moves `public/` static files (favicon, sw.js, manifest, robots, i18n bundles) to `dist/` |
-| Path aliases | `@/` → `src/`, `@components/`, `@assets/`, `@generated/`, `@configs/`, `@data/` — `@generated/` resolves at bundle time; source files use relative paths (`../../../../generated/*`) for jiti compatibility |
-| Nunjucks loader | `simple-nunjucks-loader` with search paths: `pages/`, `layouts/`, `components/`, `src/` root; `assetsPaths: src/assets/` |
-| Pre-entries | `src/scripts/main.ts` + `src/styles/main.css` loaded before every page |
-| Excluded pages | Hardcoded `EXCLUDED_PAGES` set in config (currently empty — all pages built) |
+| Path aliases | Single source: `tsconfig.json` paths → `utils/paths.ts` auto-derives bundler format for jiti + Rsbuild. `@i18n`, `@template-engine`, `@page-system`, `@config/*`, `@scripts/*`, `@utils/*`, `@generated/*`. Edit `tsconfig.json` only — all consumers auto-sync |
+| Nunjucks loader | `simple-nunjucks-loader` with search paths: `pages/`, `layouts/`, `.` (root); `assetsPaths: assets/` |
+| Pre-entries | Bootstrap + main.css auto-injected via `page-inject-loader.cjs` (not `preEntry`) |
 
 ### Preview (`bun run preview`)
 
-Full preview flow — auto-starts tunnel, builds, and serves. Interactive mode prompts for tunnel provider. Use `--tunnel` flag for scripted use:
+Full preview flow — runs `bun run build` with `BUILD_PREVIEW=true`, then starts a local server and tunnel for external testing. Interactive mode prompts for tunnel provider. Use `--tunnel` flag for scripted use:
 
 ```bash
 bun run preview                                    # Interactive: select ngrok or cloudflared
-bun ./tools/preview.ts --tunnel ngrok              # Use ngrok (requires NGROK_AUTHTOKEN)
-bun ./tools/preview.ts --tunnel cloudflared        # Use cloudflared
+bun ./scripts/cli/preview.ts --tunnel ngrok              # Use ngrok (requires NGROK_AUTHTOKEN)
+bun ./scripts/cli/preview.ts --tunnel cloudflared        # Use cloudflared
 ```
 
 **Tunnel providers:**
@@ -376,16 +436,21 @@ Ideal for Lighthouse audits, mobile testing, or sharing WIP via a public URL.
 
 | File | Purpose |
 | --- | --- |
-| `src/configs/i18n.ts` | Default locale + font stack |
-| `src/configs/pages.ts` | `ROOT_PAGE`, `SYSTEM_PAGE_IDS` (7 system pages), `SYSTEM_PAGE_SLUGS` (locale-dependent URL slugs), slug helpers (`getSystemPageSlug`, `getRootPageSlug`, `getErrorPageSlugs`, `isSystemPageId`, `isSystemPageSlug`) |
-| `src/configs/paths.ts` | Filesystem path constants |
-| `src/data/global.json5` | Site name, SEO metadata, social links, DNS/prefetch |
-| `src/data/menu.json5` | Navigation structure (header menu with children) |
-| `.env.development` | `NODE_ENV`, `SITE_URL`, `PORT`, `HOST` |
-| `.env.production` | `NODE_ENV`, `SITE_URL` (production domain) |
+| `generated/env.ts` | Auto-generated env system: schema + engine + runtime validation + singleton. Generated from `.env` files by `packages/env/cli/generate-env.ts`. `PRIVATE_` prefix = server-only (browser-safe by default). Stage pipeline: `dev → qa → uat → preprod → prod` |
+| `packages/env/preload.ts` | Bun preload script (`bunfig.toml`), loads `.env` + `.env.{stage}` into `process.env` before any module runs |
+| `bunfig.toml` | `preload = ["./packages/env/preload.ts"]` |
+| `.env` | General defaults shared across all stages. Required. Real file gitignored, `.env.example` template git-tracked |
+| `.env.{stage}` | Per-stage overrides. Active: `.env.dev`, `.env.prod`. Templates: `.env.{stage}.example` (git-tracked). Real files gitignored. Stage pipeline: `dev → qa → uat → preprod → prod` |
+| `configs/i18n.ts` | Default locale + active locales |
+| `configs/fonts.ts` | Font stack — family config (`sans`/`serif`/`mono` + custom keys). Drives `generate-fonts-css.ts` (font CSS generation) and template engine font preload |
+| `configs/rsbuild.ts` | Rsbuild build configuration (real config; `rsbuild.config.ts` is a thin jiti wrapper) |
+| `packages/page-system/system-pages.ts` | `ROOT_PAGE`, `SYSTEM_PAGE_IDS` (7 system pages), `SYSTEM_PAGE_SLUGS` (locale-dependent URL slugs), slug helpers (`getSystemPageSlug`, `getRootPageSlug`, `getErrorPageSlugs`, `isSystemPageId`, `isSystemPageSlug`) |
+| `data/global.json5` | Site name, SEO metadata, social links, DNS/prefetch |
+| `data/menu.json5` | Navigation structure (header menu with children) |
 | `biome.json` | Linting (Tailwind class sorting, organize imports) + formatting (2-space indent, single quotes). Overrides: `main.css` disables `noDescendingSpecificity`/`noImportantStyles`; `common.ts` disables `noExplicitAny` |
 | `.vscode/settings.json` | Editor config: Biome formatter, Tailwind IntelliSense, i18n-ally, Peacock color |
 | `.vscode/extensions.json` | Workspace extension recommendations (12 extensions) |
+| `tsconfig.json` | Strict mode, ESNext, path aliases (single source of truth — `utils/paths.ts` auto-derives for jiti + bundler) |
 
 ### VS Code extensions
 
@@ -396,39 +461,45 @@ Recommended extensions are listed in `.vscode/extensions.json`. Key extensions:
 - **i18n-ally** (`lokalise.i18n-ally`) — inline translation annotations
 
 > **Note:** i18n-ally's status bar UI (language picker) does not work with this project's custom i18n runtime. After installing, right-click the status bar and hide "i18n Ally" to reduce clutter. The inline annotations (`data-i18n` key display) and review features still work correctly.
-| `tsconfig.json` | Strict mode, ESNext, path aliases |
 
 ### Environment variables
 
+All variables are auto-generated from `.env` files into `generated/env.ts` by `packages/env/cli/generate-env.ts`. Runtime type validation warns on mismatches. `PRIVATE_` prefix in `.env` marks server-only keys (browser-safe by default — like TypeScript class members). Types are inferred from values (`true`/`false` → boolean, digits → number, else → string).
+
 | Variable | Purpose |
 | --- | --- |
-| `SITE_URL` | Base URL for sitemap and meta tags |
-| `BASE_PATH` | Subpath for GitHub Pages deployment (e.g. `/web-pages-starter/`). Defaults to `/` |
+| `STAGE` | Current stage: `dev`, `qa`, `uat`, `preprod`, `prod` |
+| `SITE_URL` | Base URL for sitemap and meta tags (required) |
+| `BASE_PATH` | Subpath for deployment (e.g. `/web-pages-starter/`). Defaults to `/` |
 | `PORT` | Server port (default 8888) |
-| `HOST` | Server bind address (serve: `0.0.0.0`, preview: `127.0.0.1`) |
-| `BUILD_PREVIEW` | Set automatically by preview tool |
-| `MINIFY` / `MINIFY_HTML` | Disable minification (`"false"`) |
+| `HOST` | Server bind address |
+| `MINIFY` | Enable JS/CSS minification (default `true`) |
+| `BUILD_PREVIEW` | Set automatically by preview tool (default `false`) |
+| `PRETTY_HTML` | Pretty-print HTML output (default `false`) |
+| `NGROK_AUTHTOKEN` | Auth token for ngrok tunnel (preview) |
 | `NODE_BINARY` / `RSBUILD_RUNTIME` | Runtime override for build process |
-| `NGROK_AUTHTOKEN` | Auth token for ngrok tunnel (preview tool) |
+| `LIGHTHOUSE_OUTPUT_DIR` | Custom output directory for Lighthouse reports |
+| `SITEMAP_DEFAULT_PRIORITY` | Default priority for sitemap URLs |
+| `SITEMAP_DEFAULT_CHANGEFREQ` | Default change frequency for sitemap URLs |
 
 ## PWA
 
-- `public/manifest.json` — web app manifest (generated by `tools/generate-manifest.ts` from `global.json5` + `i18nConfig`)
-- `public/sw.js` — **generated** by `tools/generate-sw.ts` (not static). Cache-first service worker with network fallback (derives `BASE_PATH` from `self.location`, precaches `index.html`, 6 error pages with locale-dependent URLs from `SYSTEM_PAGE_SLUGS`, and `manifest.json`; offline fallback to `offline.html`). Cache version: v5
+- `public/manifest.json` — web app manifest (generated by `scripts/generators/generate-manifest.ts` from `global.json5` + `i18nConfig`)
+- `public/service-worker.js` — **generated** by `scripts/generators/generate-service-worker.ts` (not static). Stale-while-revalidate service worker with navigation cache and asset caching. Derives `BASE_PATH` from `self.location`, precaches `index.html`, 6 error pages, `manifest.json`. Offline fallback to `offline.html`. Cache version: dynamic — `starter-<base36 timestamp>`, regenerated each build
 - Registered automatically in production builds via `import.meta.env.BASE_PATH`
 
 ### Error pages
 
-Six error pages using shared Nunjucks partials (`error-page.njk` and `offline-page.njk`). Each has its own i18n namespace and locale files across all 87 locales. Error page URLs are locale-dependent — the URL slug for each error page is defined per-locale in `SYSTEM_PAGE_SLUGS` (`src/configs/pages.ts`).
+Six error pages using shared Nunjucks partials (`shared/error/error-page.njk` and `shared/error/offline-page.njk`). Each has its own i18n namespace and locale files across all 136 locales. Error page URLs are locale-dependent — the URL slug for each error page is defined per-locale in `SYSTEM_PAGE_SLUGS` (`packages/page-system/system-pages.ts`).
 
 | Page | URL | Status | Icon | Gradient | Pattern |
 | --- | --- | --- | --- | --- | --- |
-| `not-found` | `/not-found` | 404 | search | violet/fuchsia | `{% set %}` + `{% include "error-page.njk" %}` |
+| `not-found` | `/not-found` | 404 | search | violet/fuchsia | `{% set %}` + `{% include "shared/error/error-page.njk" %}` |
 | `unauthorized` | `/unauthorized` | 401 | key | yellow/amber | Same |
 | `forbidden` | `/forbidden` | 403 | shield | amber/orange | Same |
 | `server-error` | `/server-error` | 500 | lightning | rose/red | Same |
 | `maintenance` | `/maintenance` | 503 | clock | sky/blue | Same |
-| `offline` | `/offline` | — | cloud | slate/zinc | `{% include "offline-page.njk" %}` (reload button) |
+| `offline` | `/offline` | — | cloud | slate/zinc | `{% include "shared/error/offline-page.njk" %}` (reload button) |
 
 Error pages are excluded from sitemap (`generate-sitemap`), disallowed in `robots.txt`, and have `noindex, nofollow` via `page-meta.njk`. The service worker precaches all six and serves `offline.html` when the network is unavailable. Dev server `historyApiFallback` redirects unknown routes to `/not-found.html`.
 
@@ -448,7 +519,7 @@ Config: `.husky/pre-commit`, `.lintstagedrc`.
 
 - No comments unless explicitly requested
 - No deprecated or backward-compat code — remove entirely
-- Import paths: relative `../../../../generated/*` in source (jiti compatibility); `@generated/*` in `tsconfig.json` paths and `rsbuild.resolve.alias` for bundling
+- Import paths: `tsconfig.json` is single source of truth → `utils/paths.ts` auto-derives for jiti + bundler. Aliases: `@i18n`, `@template-engine`, `@page-system`, `@config/*`, `@scripts/*`, `@utils/*`, `@generated/*`
 - Biome for lint + format (not Prettier) — config in `biome.json`
 - Pre-commit chain: Husky + lint-staged (Biome) + typecheck + test (`&&`)
 
@@ -480,7 +551,7 @@ Runs after CI succeeds on `main`:
 
 ## Testing
 
-[Rstest](https://rstest.dev) + `happy-dom` + Testing Library.
+[Rstest](https://rstest.dev) + `happy-dom` + `@testing-library/dom`.
 
 ### Commands
 
@@ -488,20 +559,27 @@ Runs after CI succeeds on `main`:
 bun run test                                          # run all tests
 bun run test -- --watch                               # watch mode
 bun run test -- --coverage                            # with coverage report (terminal + html + lcov)
-bun run test -- --coverage --coverage.include "src/scripts/lib/i18n/**"  # coverage for specific paths
+bun run test -- --coverage --coverage.include "packages/i18n/**"  # coverage for specific paths
 ```
 
 ### Structure
 
+Tests are colocated with source in `__tests__/` directories:
+
 ```
 tests/
-├── rstest.setup.ts          # extends expect with jest-dom matchers
-├── tsconfig.json            # test-specific TS config
-├── dom.test.ts              # DOM rendering sanity check
-└── i18n/
-    ├── helpers.test.ts      # locale lookup, fallback, direction, currency
-    ├── formatters.test.ts   # formatNumber, formatCurrency, formatDate, formatBytes, cardinal, ordinal
-    └── home-data.test.ts    # home page structure + locale key parity (en-US ↔ id-ID)
+└── dom.test.ts              # DOM rendering sanity check
+
+packages/i18n/__tests__/
+├── helpers.test.ts          # locale lookup, fallback, direction, currency
+├── formatters.test.ts       # formatNumber, formatCurrency, formatDate, formatBytes, cardinal, ordinal
+└── home-data.test.ts        # home page structure + locale key parity (en-US ↔ id-ID)
+
+packages/page-system/__tests__/
+└── system-pages.test.ts     # ROOT_PAGE, SYSTEM_PAGE_SLUGS, slug helpers
+
+scripts/lib/__tests__/
+└── romanize.test.ts         # limax romanization
 ```
 
 ### Coverage
@@ -528,10 +606,12 @@ Run tests interactively via `bun run cli` → **Test** menu:
 | Command | What it does |
 | --- | --- |
 | `bun run dev` | Sync system pages, clean cache, fetch rates, generate i18n types, watch locales, start Rsbuild dev server |
-| `bun run build` | Sync system pages, clean cache, fetch rates, generate i18n types, generate sitemap, manifest, robots, service worker, production build |
-| `bun run preview` | Tunnel orchestrator — build and serve via ngrok or cloudflared |
+| `bun run build` | Production build: minified HTML + CSS/JS, `--prod` active locales, sitemap, manifest, robots, SW |
+| `bun run build -- --pretty` | Same as build but HTML is pretty-printed (for CMS template porting) |
+| `bun run build -- --debug` | Same as build but JS/CSS not minified (for debugging) |
+| `bun run preview` | Run production build (`BUILD_PREVIEW=true`) + serve via ngrok or cloudflared tunnel |
 | `bun run serve` | Serve the production build locally |
-| `bun run clean:cache` | Remove `node_modules/.cache`, `.cache`, `dist` |
+| `bun run clean:cache` | Remove `node_modules/.cache`, `.cache`, `dist`, `public/assets/i18n` |
 | `bun run typecheck` | Run `tsc --noEmit` type checking |
 | `bun run test` | Run tests via `rstest`; supports `--coverage`, `--watch` flags |
 | `bun run cli` | Interactive menu for all tools (includes Test with coverage option) |
@@ -540,32 +620,31 @@ Direct tool access:
 
 | Command | What it does |
 | --- | --- |
-| `bun ./tools/generate-page.ts <name>` | Scaffold a new page with 87 locale files |
-| `bun ./tools/generate-sitemap.ts` | Generate `public/sitemap.xml` from page directories |
-| `bun ./tools/generate-manifest.ts` | Generate `public/manifest.json` from `global.json5` + `i18nConfig` |
-| `bun ./tools/generate-robots.ts` | Generate `public/robots.txt` from `SITE_URL` |
-| `bun ./tools/generate-sw.ts` | Generate `public/sw.js` with locale-specific error page URLs |
-| `bun ./tools/sync-system-pages.ts` | Rename system page folders to match locale-dependent slugs |
-| `bun ./tools/sync-locales.ts` | Sync missing locale directories and files from default |
-| `bun ./tools/delete-page.ts [name]` | Delete a page and its 87 locale files (system pages protected) |
-| `bun ./tools/check-locale-parity.ts` | Diff translation keys across all locales |
-| `bun ./tools/fetch-exchange-rates.ts` | Fetch exchange rates with 24h cache |
-| `bun ./tools/fetch-exchange-rates.ts -- --force` | Force-refresh exchange rates |
-| `bun ./tools/generate-i18n.ts` | Generate i18n types, check parity (build error on mismatch), sync i18n-ally config |
-| `bun ./tools/lighthouse.ts` | Run Lighthouse audits with interactive configuration |
+| `bun ./packages/page-system/cli/generate-page.ts <name>` | Scaffold a new page with locale files for active locales |
+| `bun ./scripts/generators/generate-sitemap.ts` | Generate `public/sitemap.xml` from page directories |
+| `bun ./scripts/generators/generate-manifest.ts` | Generate `public/manifest.json` from `global.json5` + `i18nConfig` |
+| `bun ./scripts/generators/generate-robots.ts` | Generate `public/robots.txt` from `SITE_URL` |
+| `bun ./scripts/generators/generate-service-worker.ts` | Generate `public/service-worker.js` with locale-specific error page URLs |
+| `bun ./packages/page-system/cli/sync-system-pages.ts` | Rename system page folders to match locale-dependent slugs |
+| `bun ./packages/i18n/cli/sync-locales.ts` | Sync missing locale directories and files from default |
+| `bun ./packages/page-system/cli/delete-page.ts [name]` | Delete a page and its locale files across all locale directories (system pages protected) |
+| `bun ./packages/i18n/cli/check-parity.ts` | Diff translation keys across all locales |
+| `bun ./scripts/fetch-exchange-rates.ts` | Fetch exchange rates with 24h cache |
+| `bun ./scripts/fetch-exchange-rates.ts -- --force` | Force-refresh exchange rates |
+| `bun ./packages/i18n/cli/generate-types.ts` | Generate i18n types, check parity (build error on mismatch), sync i18n-ally config |
+| `bun ./scripts/cli/lighthouse.ts` | Run Lighthouse audits with interactive configuration |
 
 ## Tools
 
-All tools live in `tools/`. They share five modules from `tools/shared/`:
+Most tools live in `scripts/`; i18n-specific CLI tools live in `packages/i18n/cli/`, page-system CLI in `packages/page-system/cli/`. They share modules from `scripts/lib/`:
 
 | Module | Purpose |
 | --- | --- |
-| `shared/logger.ts` | Centralized `log.*()` and `logBox()` for formatted box output |
-| `shared/signal-handler.ts` | SIGINT handling, `wrapMainError()`, `handleExitPromptError()`, `createServer()` with EADDRINUSE protection |
-| `shared/hono-server.ts` | `createStaticApp()`, `loadHtmlCache()`, `getPageNames()` — shared Hono static server with cache headers |
-| `shared/site-url.ts` | `SITE_URL` constant from `process.env` |
-| `shared/write-file.ts` | `writeFilePath()` (mkdir + write) and `generatedHeader()` for auto-generated file headers |
-| `shared/romanize.ts` | `romanize()` — limax-based romanization for URL-safe slug generation from non-Latin page names |
+| `lib/logger.ts` | Centralized `log.*()` and `logBox()` for formatted box output |
+| `lib/signal-handler.ts` | SIGINT handling, `wrapMainError()`, `handleExitPromptError()`, `createServer()` with EADDRINUSE protection |
+| `lib/hono-server.ts` | `createStaticApp()`, `loadHtmlCache()`, `getPageNames()` — shared Hono static server with cache headers |
+| `lib/write-file.ts` | `writeFilePath()` (mkdir + write) and `generatedHeader()` for auto-generated file headers |
+| `lib/romanize.ts` | `romanize()` — limax-based romanization for URL-safe slug generation from non-Latin page names |
 
 | Tool | Shared imports | Purpose |
 | --- | --- | --- |
@@ -573,27 +652,28 @@ All tools live in `tools/`. They share five modules from `tools/shared/`:
 | `build.ts` | log, logBox | Production build wrapper (Rsbuild + minification) |
 | `preview.ts` | log, createServer, setupSigintHandler, wrapMainError, createStaticApp | Build + serve through public tunnel |
 | `serve.ts` | log, createServer, setupSigintHandler, createStaticApp, loadHtmlCache, getPageNames | Serve production build locally |
-| `lighthouse.ts` | log, logBox, setupSigintHandler, wrapMainError, SITE_URL | Lighthouse audit runner |
-| `generate-page.ts` | log | Scaffold new page with locale files |
-| `generate-i18n.ts` | log, logBox, writeFilePath, generatedHeader | Generate i18n types, parity check (build error), sync i18n-ally config |
-| `generate-sitemap.ts` | log, logBox, SITE_URL, writeFilePath | Generate sitemap.xml |
-| `generate-manifest.ts` | logBox, writeFilePath | Generate manifest.json from global.json5 + i18nConfig |
-| `generate-robots.ts` | logBox, SITE_URL, writeFilePath | Generate robots.txt from SITE_URL |
-| `generate-sw.ts` | logBox, writeFilePath | Generate `public/sw.js` with locale-specific error page URLs |
-| `sync-system-pages.ts` | log, logBox, wrapMainError | Rename ALL system page folders to locale-dependent slugs when default locale changes |
-| `sync-locales.ts` | log, logBox | Create missing locale directories; sync missing files in existing directories |
-| `delete-page.ts` | log | Delete a page (folder + 87 locale files); scans for broken URL references before deletion; system pages protected |
-| `check-locale-parity.ts` | log | Diff translation keys across locales |
-| `fetch-exchange-rates.ts` | log, writeFilePath, generatedHeader | Fetch and cache exchange rates |
-| `watch-i18n.ts` | log, logBox, setupSigintHandler | Watch locale file changes |
-| `clean-cache.ts` | log | Remove cache directories |
+| `lighthouse.ts` | log, logBox, setupSigintHandler, wrapMainError, env.SITE_URL | Lighthouse audit runner |
+| `packages/page-system/cli/generate-page.ts` | log | Scaffold new page with locale files |
+| `packages/i18n/cli/generate-types.ts` | log, logBox, writeFilePath, generatedHeader | Generate i18n types, parity check (build error), sync i18n-ally config |
+| `scripts/generators/generate-sitemap.ts` | log, logBox, env.SITE_URL, writeFilePath | Generate sitemap.xml |
+| `scripts/generators/generate-manifest.ts` | logBox, writeFilePath | Generate manifest.json from global.json5 + i18nConfig |
+| `scripts/generators/generate-robots.ts` | logBox, env.SITE_URL, writeFilePath | Generate robots.txt from env.SITE_URL |
+| `scripts/generators/generate-service-worker.ts` | logBox, writeFilePath | Generate `public/service-worker.js` with locale-specific error page URLs |
+| `packages/env/cli/generate-env.ts` | log | Regenerate env schema from `.env` files |
+| `packages/page-system/cli/sync-system-pages.ts` | log, logBox, wrapMainError | Rename ALL system page folders to locale-dependent slugs when default locale changes |
+| `packages/i18n/cli/sync-locales.ts` | log, logBox | Create missing locale directories; sync missing files in existing directories |
+| `packages/page-system/cli/delete-page.ts` | log | Delete a page (folder + locale files across all locale dirs); scans for broken URL references before deletion; system pages protected |
+| `packages/i18n/cli/check-parity.ts` | log | Diff translation keys across locales |
+| `scripts/fetch-exchange-rates.ts` | log, writeFilePath, generatedHeader | Fetch and cache exchange rates |
+| `packages/i18n/cli/watch.ts` | log, logBox, setupSigintHandler | Watch locale file changes |
+| `scripts/clean-cache.ts` | log | Remove cache directories |
 
 ## Tech Stack
 
 | Layer | Technology | Version |
 | --- | --- | --- |
-| Runtime | Bun | `^1.3.14` |
-| Bundler | Rsbuild | `^2.0.13` |
+| Runtime | Bun | `>= 1.3.14` |
+| Bundler | Rsbuild | `^2.0.14` |
 | Language | TypeScript | `^6.0.3` |
 | Templates | Nunjucks | `^3.2.4` |
 | Reactive UI | Alpine.js | `^3.15.12` |
@@ -603,6 +683,7 @@ All tools live in `tools/`. They share five modules from `tools/shared/`:
 | Lint/Format | Biome | `^2.5.0` |
 | Testing | Rstest | `^0.10.4` |
 | HTML minifier | html-minifier-terser | `^7.2.0` |
+| HTML beautifier | js-beautify | `^1.15.4` |
 | Romanization | limax | `^4.2.3` |
 
 ## Browser Support

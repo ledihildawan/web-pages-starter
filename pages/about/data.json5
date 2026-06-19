@@ -1,0 +1,97 @@
+{
+  page_id: 'about',
+  meta: {
+    title: 'About | Starter',
+    description: 'Learn about our mission, values, and the team building the future of web development.',
+  },
+  hero: {
+    t_key: 'hero',
+  },
+  stats: [
+    {
+      val: '3+',
+      label: 'years',
+      color: 'violet',
+    },
+    {
+      val: '120+',
+      label: 'clients',
+      color: 'fuchsia',
+    },
+    {
+      val: '15',
+      label: 'countries',
+      color: 'pink',
+    },
+    {
+      val: '24/7',
+      label: 'support',
+      color: 'amber',
+    },
+  ],
+  story: {
+    t_key: 'story',
+    visual_type: 'illustration',
+  },
+  values: [
+    {
+      t_key: 'passion',
+      icon: 'heart',
+      color: 'violet',
+    },
+    {
+      t_key: 'collaboration',
+      icon: 'users',
+      color: 'fuchsia',
+    },
+    {
+      t_key: 'innovation',
+      icon: 'light',
+      color: 'pink',
+    },
+    {
+      t_key: 'integrity',
+      icon: 'shield',
+      color: 'amber',
+    },
+    {
+      t_key: 'excellence',
+      icon: 'rocket',
+      color: 'emerald',
+    },
+    {
+      t_key: 'quality',
+      icon: 'star',
+      color: 'blue',
+    },
+  ],
+  team: {
+    t_key: 'team',
+    members: [
+      {
+        name: 'Alex Morgan',
+        role_key: 'team.alex_role',
+        color: 'violet',
+        desc_key: 'team.alex_desc',
+      },
+      {
+        name: 'Sarah Chen',
+        role_key: 'team.sarah_role',
+        color: 'fuchsia',
+        desc_key: 'team.sarah_desc',
+      },
+      {
+        name: 'Mike Ross',
+        role_key: 'team.mike_role',
+        color: 'pink',
+        desc_key: 'team.mike_desc',
+      },
+      {
+        name: 'Jessica Lee',
+        role_key: 'team.jessica_role',
+        color: 'amber',
+        desc_key: 'team.jessica_desc',
+      },
+    ],
+  },
+}

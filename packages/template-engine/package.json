@@ -1,0 +1,7 @@
+{
+  "name": "@web-pages-starter/template-engine",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false
+}
