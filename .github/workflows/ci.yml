@@ -22,6 +22,11 @@ jobs:
 
       - run: bun install --frozen-lockfile
 
+      - run: cp .env.example .env
+
+      - name: Install fonttools for font subsetting
+        run: pip install fonttools brotli
+
       - run: bunx biome ci .
 
       - run: bun run typecheck

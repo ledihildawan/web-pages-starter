@@ -57,7 +57,7 @@ bun run build -- --debug   # skip JS/CSS minify
 bun run preview            # build (BUILD_PREVIEW=true) + serve via tunnel
 ```
 
-Build pipeline: `generate-path-aliases → generate-env → sync-system-pages → clean-cache → fetch-exchange-rates → generate-active-locales → generate-fonts-css → sync-locales → generate-types → build.ts → subset-fonts → compress`
+Build pipeline: `generate-path-aliases → generate-env → generate-active-locales → sync-system-pages → clean-cache → fetch-exchange-rates → generate-fonts-css → sync-locales → generate-types → build.ts → subset-fonts → compress`
 
 ## Testing
 
