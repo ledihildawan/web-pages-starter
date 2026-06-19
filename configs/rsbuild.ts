@@ -2,13 +2,13 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
 import { browserEnv, env } from '@generated/env';
+import { alias, lookup } from '@generated/paths';
 import { getActiveLocaleCodes, isSingleLocale, LOCALE_STORAGE_KEY } from '@i18n';
 import { getRootPageSlug, getSystemPageSlug, scanPages } from '@page-system';
 import { generateDynamicEntries } from '@page-system/dynamic-routes';
 import { defineConfig, type RsbuildPlugin } from '@rsbuild/core';
 import { createTemplateParams } from '@template-engine';
 import { readJSON5 } from '@utils/json5';
-import { alias, lookup } from '@utils/paths';
 import { minify } from 'html-minifier-terser';
 import { html as beautifyHtml } from 'js-beautify';
 
@@ -89,12 +89,12 @@ const pluginHotReloadContent = (): RsbuildPlugin => ({
           };
         }) {
           compiler.hooks.afterCompile.tap('watch-content-files', (compilation) => {
-            compilation.contextDependencies.add(lookup('@', 'locales'));
-            compilation.contextDependencies.add(lookup('@', 'data'));
-            compilation.contextDependencies.add(lookup('@', 'pages'));
-            compilation.contextDependencies.add(lookup('@', 'shared'));
-            compilation.contextDependencies.add(lookup('@', 'layouts'));
-            compilation.contextDependencies.add(lookup('@', 'generated'));
+            compilation.contextDependencies.add(lookup('@locales'));
+            compilation.contextDependencies.add(lookup('@data'));
+            compilation.contextDependencies.add(lookup('@pages'));
+            compilation.contextDependencies.add(lookup('@shared'));
+            compilation.contextDependencies.add(lookup('@layouts'));
+            compilation.contextDependencies.add(lookup('@generated'));
           });
         },
       });
@@ -240,14 +240,14 @@ const CHUNK_NAMES = {
   i18nFormatters: 'chunk-i18n-formatters',
 } as const;
 
-const globalConfig = readJSON5(lookup('@', 'data', 'global.json5')) as { flag_cdn?: string };
+const globalConfig = readJSON5(lookup('@data', 'global.json5')) as { flag_cdn?: string };
 const FLAG_CDN_BASE = globalConfig.flag_cdn || 'https://flagcdn.com';
 
-const scannedPages = scanPages(lookup('@', 'pages'), '');
+const scannedPages = scanPages(lookup('@pages'), '');
 
 const getPageNames = (): string[] => scannedPages.map((p) => p.name);
 
-const PAGE_ENTRY = lookup('@', 'shared', 'page-entry.ts');
+const PAGE_ENTRY = lookup('@shared', 'page-entry.ts');
 
 const getEntries = (): Record<string, string | string[]> => {
   const entries: Record<string, string | string[]> = {};
@@ -377,38 +377,38 @@ export default defineConfig({
     },
     copy: [
       {
-        from: lookup('@', 'assets'),
+        from: lookup('@assets'),
         to: 'assets',
         globOptions: { ignore: MANAGED_EXTS.map((ext) => `**/*.${ext}`) },
         noErrorOnMissing: true,
       },
       {
-        from: lookup('@', 'public', 'manifest.json'),
+        from: lookup('@public', 'manifest.json'),
         to: 'manifest.json',
         noErrorOnMissing: true,
       },
       {
-        from: lookup('@', 'public', 'service-worker.js'),
+        from: lookup('@public', 'service-worker.js'),
         to: 'service-worker.js',
         noErrorOnMissing: true,
       },
       {
-        from: lookup('@', 'public', 'robots.txt'),
+        from: lookup('@public', 'robots.txt'),
         to: 'robots.txt',
         noErrorOnMissing: true,
       },
       {
-        from: lookup('@', 'public', 'sitemap.xml'),
+        from: lookup('@public', 'sitemap.xml'),
         to: 'sitemap.xml',
         noErrorOnMissing: true,
       },
       {
-        from: lookup('@', 'public', 'favicon.svg'),
+        from: lookup('@public', 'favicon.svg'),
         to: 'favicon.svg',
         noErrorOnMissing: true,
       },
       {
-        from: lookup('@', 'public/assets/i18n'),
+        from: lookup('@public', 'assets/i18n'),
         to: 'assets/i18n',
         noErrorOnMissing: true,
       },
@@ -464,7 +464,7 @@ export default defineConfig({
             enforce: 'pre',
             use: [
               {
-                loader: lookup('@', 'packages', 'page-system', 'page-inject-loader.cjs'),
+                loader: lookup('@page-system', 'page-inject-loader.cjs'),
                 options: { bootstrap: lookup('@scripts', 'bootstrap.ts') },
               },
             ],
@@ -480,8 +480,8 @@ export default defineConfig({
                 loader: 'simple-nunjucks-loader',
                 options: {
                   autoescape: false,
-                  searchPaths: ['pages', 'layouts', '.'].map((d) => lookup('@', d)),
-                  assetsPaths: [lookup('@', 'assets')],
+                  searchPaths: [lookup('@pages'), lookup('@layouts'), lookup('@')],
+                  assetsPaths: [lookup('@assets')],
                 },
               },
             ],
@@ -500,7 +500,7 @@ export default defineConfig({
         return createTemplateParams(
           {
             ...params,
-            entryName: path.relative(lookup('@', 'pages'), dynEntry.templateDir),
+            entryName: path.relative(lookup('@pages'), dynEntry.templateDir),
           },
           LOCALE_STORAGE_KEY,
           getActiveLocaleCodes(),

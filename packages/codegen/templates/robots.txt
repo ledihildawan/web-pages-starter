@@ -1,0 +1,6 @@
+User-agent: *
+Allow: {{codegen:base_path}}
+{{codegen:disallow_rules}}
+Disallow: {{codegen:base_path}}service-worker.js
+
+Sitemap: {{codegen:sitemap_url}}

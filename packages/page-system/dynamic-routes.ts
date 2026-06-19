@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { lookup } from '@generated/paths';
 import { isSlugDir } from '@page-system/scanner';
 import { readJSON5 } from '@utils/json5';
-import { lookup } from '@utils/paths';
 
 interface DynamicEntry {
   entryKey: string;
@@ -11,7 +11,7 @@ interface DynamicEntry {
   data: Record<string, unknown>;
 }
 
-const PAGES_DIR = lookup('@', 'pages');
+const PAGES_DIR = lookup('@pages');
 
 function scanSlugDirs(dir: string, basePath: string): Array<{ dir: string; basePath: string; param: string }> {
   const results: Array<{ dir: string; basePath: string; param: string }> = [];

@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
-import { lookup } from '@utils/paths';
+import { lookup } from '@generated/paths';
 
 const TEMPLATES_DIR = lookup('@codegen', 'templates');
 

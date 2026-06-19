@@ -1,12 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { inject, loadTemplate } from '@codegen';
+import { lookup } from '@generated/paths';
 import { log } from '@scripts/lib/logger';
 import { writeFilePath } from '@scripts/lib/write-file';
-import { lookup } from '@utils/paths';
 
 const ROOT = lookup('@');
-const OUTPUT_FILE = lookup('@', 'generated', 'env.ts');
+const OUTPUT_FILE = lookup('@generated', 'env.ts');
 
 const ENV_FILES = fs.existsSync(ROOT)
   ? fs.readdirSync(ROOT).filter((f) => f.startsWith('.env') && !f.endsWith('.example'))
@@ -111,6 +111,7 @@ const privateTypeEntries = privateKeyList.map((key) => `  ${key}: { type: '${sch
 
 const template = loadTemplate('env.ts');
 const output = inject(template, {
+  generated_at: new Date().toISOString(),
   browser_schema_entries: browserSchemaEntries,
   browser_keys: browserKeysArray,
   full_schema_entries: fullSchemaEntries,

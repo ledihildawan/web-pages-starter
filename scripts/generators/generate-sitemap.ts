@@ -1,18 +1,19 @@
 import process from 'node:process';
+import { inject, loadTemplate } from '@codegen';
 import { i18nConfig } from '@config/i18n';
 import { LOCALE_CODES } from '@generated/active-locales-data';
 import { env } from '@generated/env';
+import { lookup } from '@generated/paths';
 import { getErrorPageSlugs, getRootPageSlug, scanPages } from '@page-system';
 import { log, logBox } from '@scripts/lib/logger';
 import { writeFilePath } from '@scripts/lib/write-file';
-import { lookup } from '@utils/paths';
 
 const cliArgs = process.argv.slice(2);
 const distOnly = cliArgs.includes('--dist-only');
 
-const PAGES_DIR = lookup('@', 'pages');
-const OUTPUT_PUBLIC = lookup('@', 'public', 'sitemap.xml');
-const OUTPUT_DIST = lookup('@', 'dist', 'sitemap.xml');
+const PAGES_DIR = lookup('@pages');
+const OUTPUT_PUBLIC = lookup('@public', 'sitemap.xml');
+const OUTPUT_DIST = lookup('@dist', 'sitemap.xml');
 
 const DEFAULT_PRIORITY = env.SITEMAP_DEFAULT_PRIORITY;
 const DEFAULT_CHANGEFREQ = env.SITEMAP_DEFAULT_CHANGEFREQ;
@@ -76,11 +77,10 @@ ${hreflangLinks}
     addPageUrl(page, priority);
   });
 
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
-${urls.join('\n')}
-</urlset>`;
+  const template = loadTemplate('sitemap.xml');
+  const xml = inject(template, {
+    urls: urls.join('\n'),
+  });
 
   if (!distOnly) {
     writeFilePath(OUTPUT_PUBLIC, xml);

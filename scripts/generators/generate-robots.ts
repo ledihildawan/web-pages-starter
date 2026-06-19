@@ -1,12 +1,13 @@
+import { inject, loadTemplate } from '@codegen';
 import { i18nConfig } from '@config/i18n';
 import { env } from '@generated/env';
+import { lookup } from '@generated/paths';
 import { getErrorPageSlugs } from '@page-system';
 import { logBox } from '@scripts/lib/logger';
 import { writeFilePath } from '@scripts/lib/write-file';
-import { lookup } from '@utils/paths';
 
-const OUTPUT_PUBLIC = lookup('@', 'public', 'robots.txt');
-const OUTPUT_DIST = lookup('@', 'dist', 'robots.txt');
+const OUTPUT_PUBLIC = lookup('@public', 'robots.txt');
+const OUTPUT_DIST = lookup('@dist', 'robots.txt');
 
 const basePath = env.BASE_PATH.replace(/\/?$/, '/');
 const baseUrl = env.SITE_URL.endsWith('/') ? env.SITE_URL : `${env.SITE_URL}/`;
@@ -14,13 +15,12 @@ const baseUrl = env.SITE_URL.endsWith('/') ? env.SITE_URL : `${env.SITE_URL}/`;
 const errorSlugs = getErrorPageSlugs(i18nConfig.defaultLocale);
 const disallowRules = errorSlugs.map((slug) => `Disallow: ${basePath}${slug}`).join('\n');
 
-const robots = `User-agent: *
-Allow: ${basePath}
-${disallowRules}
-Disallow: ${basePath}service-worker.js
-
-Sitemap: ${baseUrl}sitemap.xml
-`;
+const template = loadTemplate('robots.txt');
+const robots = inject(template, {
+  base_path: basePath,
+  disallow_rules: disallowRules,
+  sitemap_url: `${baseUrl}sitemap.xml`,
+});
 
 writeFilePath(OUTPUT_PUBLIC, robots);
 writeFilePath(OUTPUT_DIST, robots);

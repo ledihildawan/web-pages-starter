@@ -1,13 +1,13 @@
 import fs from 'node:fs';
 import { inject, loadTemplate } from '@codegen';
+import { lookup } from '@generated/paths';
 import { CURRENCY_CODE } from '@i18n/data/currencies';
 import { getActiveLocales } from '@i18n/engine/active-locales';
-import { lookup } from '@utils/paths';
 import { log } from './lib/logger';
 import { writeFilePath } from './lib/write-file';
 
 const EXCHANGE_RATES_URL = 'https://api.frankfurter.dev/v2/rates';
-const EXCHANGE_RATES_FILE = lookup('@', 'generated', 'exchange-rates.ts');
+const EXCHANGE_RATES_FILE = lookup('@generated', 'exchange-rates.ts');
 const BASE_CURRENCY = CURRENCY_CODE.USD;
 
 function getActiveCurrencies(): Set<string> {
@@ -96,6 +96,7 @@ async function generateExchangeRates(forceRefresh = false): Promise<void> {
     const content = inject(template, {
       generated_at: new Date().toISOString(),
       rates_object: formatRatesObject(rates),
+      description: ` * Currencies: ${Object.keys(rates).sort().join(', ')}\n *\n`,
     });
 
     writeFilePath(EXCHANGE_RATES_FILE, content);

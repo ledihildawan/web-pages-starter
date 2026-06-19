@@ -1,9 +1,14 @@
 import fs from 'node:fs';
+import path from 'node:path';
+import { inject, loadTemplate } from '@codegen';
+import { lookup } from '@generated/paths';
 import { log } from '@scripts/lib/logger';
 import { writeFilePath } from '@scripts/lib/write-file';
-import { lookup } from '@utils/paths';
 
-const tsconfig = JSON.parse(fs.readFileSync(lookup('@', 'tsconfig.json'), 'utf-8')) as {
+const TSCONFIG_PATH = path.resolve('.', 'tsconfig.json');
+const OUTPUT_PATH = lookup('@generated', 'paths.ts');
+
+const tsconfig = JSON.parse(fs.readFileSync(TSCONFIG_PATH, 'utf-8')) as {
   compilerOptions: { paths: Record<string, string[]> };
 };
 
@@ -20,9 +25,15 @@ const entries = Object.entries(tsconfig.compilerOptions.paths)
   .sort(([a], [b]) => a.localeCompare(b));
 
 const keys = entries.map(([k]) => k);
-const lines = entries.map(([k, v]) => `  '${k}': path.resolve('${v}'),`).join('\n');
+const aliasKeys = keys.map((k) => `  | '${k}'`).join('\n');
+const aliasEntries = entries.map(([k, v]) => `  '${k}': path.resolve('${v}'),`).join('\n');
 
-const output = `import path from 'node:path';\n\nexport type AliasKey =\n${keys.map((k) => `  | '${k}'`).join('\n')};\n\nexport const alias: Record<AliasKey, string> = {\n${lines}\n};\n`;
+const template = loadTemplate('paths.ts');
+const output = inject(template, {
+  generated_at: new Date().toISOString(),
+  alias_keys: aliasKeys,
+  alias_entries: aliasEntries,
+});
 
-writeFilePath(lookup('@', 'generated', 'path-aliases.ts'), output);
+writeFilePath(OUTPUT_PATH, output);
 log.success(`Generated path aliases — ${keys.length} key(s): ${keys.join(', ')}`);

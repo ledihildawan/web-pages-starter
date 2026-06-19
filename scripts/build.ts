@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 import { env } from '@generated/env';
-import { lookup } from '@utils/paths';
+import { lookup } from '@generated/paths';
 import { log, logBox } from './lib/logger';
 
 const args = process.argv.slice(2);
@@ -32,7 +32,7 @@ if (args.includes('--pretty')) {
 
 logBox('Build Process', { Mode: mode });
 
-const distPath = lookup('@', 'dist');
+const distPath = lookup('@dist');
 if (fs.existsSync(distPath)) {
   log.info('Cleaning previous build...');
   fs.rmSync(distPath, { recursive: true, force: true });

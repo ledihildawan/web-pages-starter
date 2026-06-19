@@ -1,10 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import zlib from 'node:zlib';
-import { lookup } from '@utils/paths';
+import { lookup } from '@generated/paths';
 import { log } from './lib/logger';
 
-const DIST = lookup('@', 'dist');
+const DIST = lookup('@dist');
 const COMPRESS_EXTS = ['.html', '.js', '.css', '.json', '.svg', '.xml', '.txt', '.webmanifest'];
 const BROTLI_QUALITY = 11;
 

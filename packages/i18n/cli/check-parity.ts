@@ -1,12 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
+import { lookup } from '@generated/paths';
 import { LOCALE_CODES } from '@i18n/data/locales';
 import { log } from '@scripts/lib/logger';
 import { collectKeys, readJSON5 } from '@utils/json5';
-import { lookup } from '@utils/paths';
 
-const LOCALES_DIR = lookup('@', 'locales');
+const LOCALES_DIR = lookup('@locales');
 const BASE_LOCALE = i18nConfig.defaultLocale;
 
 interface LocaleDiff {

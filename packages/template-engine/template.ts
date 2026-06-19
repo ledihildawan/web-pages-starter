@@ -6,6 +6,7 @@ import { i18nConfig } from '@config/i18n';
 import { env } from '@generated/env';
 import type { I18nTranslationKeys } from '@generated/i18n';
 import { IMAGE_MANIFEST } from '@generated/image-manifest';
+import { lookup } from '@generated/paths';
 import {
   convertCurrency,
   convertLocalPrice,
@@ -56,7 +57,6 @@ import { loadSharedLocales } from '@i18n/utils';
 import { getRootPageSlug } from '@page-system';
 import { getValueByPath } from '@utils/common';
 import { loadGlobalData, readJSON5 } from '@utils/json5';
-import { lookup } from '@utils/paths';
 import type { DateValue, JsonData } from '@utils/types';
 
 setStrategies(
@@ -76,7 +76,7 @@ const getFontPreloadUrl = (): string | null => {
     return null;
   }
   try {
-    const fontsCssPath = lookup('@', 'public', 'assets', 'fonts', 'fonts.css');
+    const fontsCssPath = lookup('@public', 'assets', 'fonts', 'fonts.css');
     if (!fs.existsSync(fontsCssPath)) {
       cachedFontPreloadUrl = null;
       return null;
@@ -109,9 +109,9 @@ const hashLocales = (name: string, sharedLocales: string[]): string => {
   const parts: string[] = [];
   for (const locale of getActiveLocales()) {
     const files = [
-      lookup('@', 'locales', locale.code, 'common.json'),
-      lookup('@', 'locales', locale.code, `${name}.json`),
-      ...sharedLocales.map((lName) => lookup('@', 'locales', locale.code, `${lName}.json`)),
+      lookup('@locales', locale.code, 'common.json'),
+      lookup('@locales', locale.code, `${name}.json`),
+      ...sharedLocales.map((lName) => lookup('@locales', locale.code, `${lName}.json`)),
     ];
     for (const f of files) {
       try {
@@ -180,14 +180,14 @@ const generateClientI18nScript = (
       supportedLangs.map((l) => [
         l,
         {
-          common: readJSON5(lookup('@', 'locales', l, 'common.json')),
-          [name]: readJSON5(lookup('@', 'locales', l, `${name}.json`)),
-          ...loadSharedLocales(l, sharedLocales, lookup('@', 'locales')),
+          common: readJSON5(lookup('@locales', l, 'common.json')),
+          [name]: readJSON5(lookup('@locales', l, `${name}.json`)),
+          ...loadSharedLocales(l, sharedLocales, lookup('@locales')),
         },
       ]),
     ) as Record<string, JsonData>;
 
-    const dirs = [lookup('@', 'public', 'assets', 'i18n', name), lookup('@', 'dist', 'assets', 'i18n', name)];
+    const dirs = [lookup('@public', 'assets', 'i18n', name), lookup('@dist', 'assets', 'i18n', name)];
     for (const dir of dirs) {
       if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir, { recursive: true });
@@ -623,14 +623,14 @@ export const createTemplateParams = (
 ) => {
   const lang = i18nConfig.defaultLocale;
   const folderName = String(params.entryName || getRootPageSlug(lang));
-  const pageData = readJSON5(lookup('@', 'pages', folderName, 'data.json5'));
+  const pageData = readJSON5(lookup('@pages', folderName, 'data.json5'));
   const pageId = String(pageData.page_id || folderName);
-  const sharedLocales = scanSharedLocales(lookup('@', 'pages', folderName, 'index.njk'), pageId);
+  const sharedLocales = scanSharedLocales(lookup('@pages', folderName, 'index.njk'), pageId);
 
   const mergedLocales: JsonData = {
-    common: readJSON5(lookup('@', 'locales', lang, 'common.json')),
-    [pageId]: readJSON5(lookup('@', 'locales', lang, `${pageId}.json`)),
-    ...loadSharedLocales(lang, sharedLocales, lookup('@', 'locales')),
+    common: readJSON5(lookup('@locales', lang, 'common.json')),
+    [pageId]: readJSON5(lookup('@locales', lang, `${pageId}.json`)),
+    ...loadSharedLocales(lang, sharedLocales, lookup('@locales')),
   };
 
   const resolveKeyToPath = (key: string): string => {
@@ -707,7 +707,7 @@ export const createTemplateParams = (
   };
 
   const globalData = (() => {
-    const data = loadGlobalData(lookup('@', 'data'));
+    const data = loadGlobalData(lookup('@data'));
     data.site_url = env.SITE_URL;
     return data;
   })();

@@ -1,8 +1,8 @@
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
+import { find, lookup } from '@generated/paths';
 import { log } from '@scripts/lib/logger';
 import { setupSigintHandler, wrapMainError } from '@scripts/lib/signal-handler';
-import { find, lookup } from '@utils/paths';
 import inquirer from 'inquirer';
 
 const runTool = (name: string, args: string[] = []): Promise<void> => {
@@ -114,7 +114,7 @@ const tools: Tool[] = [
     name: 'Serve',
     description: 'Serve production build locally',
     action: async () => {
-      const distPath = lookup('@', 'dist');
+      const distPath = lookup('@dist');
       if (!fs.existsSync(distPath)) {
         log.distNotFound();
         const { choice } = await inquirer.prompt<{ choice: string }>([

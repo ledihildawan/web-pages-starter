@@ -1,10 +1,10 @@
 import { execSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
-import { lookup } from '@utils/paths';
+import { lookup } from '@generated/paths';
 import { log, logBox } from './lib/logger';
 
-const FONTS_DIRS = [lookup('@', 'dist', 'assets', 'fonts')];
+const FONTS_DIRS = [lookup('@dist', 'assets', 'fonts')];
 
 const SUBSET_FLAGS = [
   '--flavor=woff2',

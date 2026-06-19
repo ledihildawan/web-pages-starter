@@ -82,7 +82,7 @@ Requires [Bun](https://bun.sh) `>= 1.3.14`.
 │       └── cli/           #     sync-system-pages.ts, generate-page.ts, delete-page.ts
 ├── public/                # static assets (favicon, generated sw.js/manifest/robots/sitemap)
 │   └── assets/i18n/       #   pre-compiled i18n JSON bundles (generated)
-├── generated/             # auto-generated: env.ts (env system), active-locales-data, exchange rates, i18n types, image-manifest (6 files tracked in git (env, path-aliases, active-locales-data, exchange-rates, i18n types, image-manifest); regenerated at build)
+├── generated/             # auto-generated: env.ts (env system), active-locales-data, exchange rates, i18n types, image-manifest (6 files tracked in git (env, paths, active-locales-data, exchange-rates, i18n types, image-manifest); regenerated at build)
 ├── tests/                 # general DOM sanity check (rstest)
 ├── docs/                  # documentation
 ```
@@ -404,7 +404,7 @@ generate-env → sync-system-pages → clean:cache → fetch:rates → generate-
 | `import.meta.env` | `source.define` replaces `import.meta.env` with full env object (browser-safe keys only). `PRIVATE_` prefix in `.env` excludes secrets from browser bundle |
 | Output paths | `dist/assets/{scripts,styles,images,fonts}` — organized by asset type |
 | Static copy | `output.copy` moves `public/` static files (favicon, sw.js, manifest, robots, i18n bundles) to `dist/` |
-| Path aliases | Single source: `tsconfig.json` paths → `utils/paths.ts` auto-derives bundler format for jiti + Rsbuild. `@i18n`, `@template-engine`, `@page-system`, `@config/*`, `@scripts/*`, `@utils/*`, `@generated/*`. Edit `tsconfig.json` only — all consumers auto-sync |
+| Path aliases | Single source: `tsconfig.json` paths → `generated/paths.ts` auto-derives bundler format for jiti + Rsbuild. `@i18n`, `@template-engine`, `@page-system`, `@config/*`, `@scripts/*`, `@utils/*`, `@generated/*`, `@assets/*`, `@data/*`, `@dist/*`, `@layouts/*`, `@locales/*`, `@pages/*`, `@public/*`, `@shared/*`. Edit `tsconfig.json` only — all consumers auto-sync |
 | Nunjucks loader | `simple-nunjucks-loader` with search paths: `pages/`, `layouts/`, `.` (root); `assetsPaths: assets/` |
 | Pre-entries | Bootstrap + main.css auto-injected via `page-inject-loader.cjs` (not `preEntry`) |
 
@@ -450,7 +450,7 @@ Ideal for Lighthouse audits, mobile testing, or sharing WIP via a public URL.
 | `biome.json` | Linting (Tailwind class sorting, organize imports) + formatting (2-space indent, single quotes). Overrides: `main.css` disables `noDescendingSpecificity`/`noImportantStyles`; `common.ts` disables `noExplicitAny` |
 | `.vscode/settings.json` | Editor config: Biome formatter, Tailwind IntelliSense, i18n-ally, Peacock color |
 | `.vscode/extensions.json` | Workspace extension recommendations (12 extensions) |
-| `tsconfig.json` | Strict mode, ESNext, path aliases (single source of truth — `utils/paths.ts` auto-derives for jiti + bundler) |
+| `tsconfig.json` | Strict mode, ESNext, path aliases (single source of truth — `generated/paths.ts` auto-derives for jiti + bundler) |
 
 ### VS Code extensions
 
@@ -519,7 +519,7 @@ Config: `.husky/pre-commit`, `.lintstagedrc`.
 
 - No comments unless explicitly requested
 - No deprecated or backward-compat code — remove entirely
-- Import paths: `tsconfig.json` is single source of truth → `utils/paths.ts` auto-derives for jiti + bundler. Aliases: `@i18n`, `@template-engine`, `@page-system`, `@config/*`, `@scripts/*`, `@utils/*`, `@generated/*`
+- Import paths: `tsconfig.json` is single source of truth → `generated/paths.ts` auto-derives for jiti + bundler. Aliases: `@i18n`, `@template-engine`, `@page-system`, `@config/*`, `@scripts/*`, `@utils/*`, `@generated/*`, `@assets/*`, `@data/*`, `@dist/*`, `@layouts/*`, `@locales/*`, `@pages/*`, `@public/*`, `@shared/*`
 - Biome for lint + format (not Prettier) — config in `biome.json`
 - Pre-commit chain: Husky + lint-staged (Biome) + typecheck + test (`&&`)
 
@@ -643,7 +643,7 @@ Most tools live in `scripts/`; i18n-specific CLI tools live in `packages/i18n/cl
 | `lib/logger.ts` | Centralized `log.*()` and `logBox()` for formatted box output |
 | `lib/signal-handler.ts` | SIGINT handling, `wrapMainError()`, `handleExitPromptError()`, `createServer()` with EADDRINUSE protection |
 | `lib/hono-server.ts` | `createStaticApp()`, `loadHtmlCache()`, `getPageNames()` — shared Hono static server with cache headers |
-| `lib/write-file.ts` | `writeFilePath()` (mkdir + write) and `generatedHeader()` for auto-generated file headers |
+| `lib/write-file.ts` | `writeFilePath()` (mkdir + write), `generatedHeader()`, `COMMENT_EXCLUDED_FILES`, `shouldAddComment()`, `withGeneratedHeader()` for auto-generated file headers |
 | `lib/romanize.ts` | `romanize()` — limax-based romanization for URL-safe slug generation from non-Latin page names |
 
 | Tool | Shared imports | Purpose |
@@ -655,16 +655,16 @@ Most tools live in `scripts/`; i18n-specific CLI tools live in `packages/i18n/cl
 | `lighthouse.ts` | log, logBox, setupSigintHandler, wrapMainError, env.SITE_URL | Lighthouse audit runner |
 | `packages/page-system/cli/generate-page.ts` | log | Scaffold new page with locale files |
 | `packages/i18n/cli/generate-types.ts` | log, logBox, writeFilePath, generatedHeader | Generate i18n types, parity check (build error), sync i18n-ally config |
-| `scripts/generators/generate-sitemap.ts` | log, logBox, env.SITE_URL, writeFilePath | Generate sitemap.xml |
-| `scripts/generators/generate-manifest.ts` | logBox, writeFilePath | Generate manifest.json from global.json5 + i18nConfig |
-| `scripts/generators/generate-robots.ts` | logBox, env.SITE_URL, writeFilePath | Generate robots.txt from env.SITE_URL |
-| `scripts/generators/generate-service-worker.ts` | logBox, writeFilePath | Generate `public/service-worker.js` with locale-specific error page URLs |
-| `packages/env/cli/generate-env.ts` | log | Regenerate env schema from `.env` files |
+| `scripts/generators/generate-sitemap.ts` | log, logBox, env.SITE_URL, writeFilePath, loadTemplate, inject | Generate sitemap.xml |
+| `scripts/generators/generate-manifest.ts` | logBox, writeFilePath, loadTemplate, inject | Generate manifest.json from global.json5 + i18nConfig |
+| `scripts/generators/generate-robots.ts` | logBox, env.SITE_URL, writeFilePath, loadTemplate, inject | Generate robots.txt from env.SITE_URL |
+| `scripts/generators/generate-service-worker.ts` | logBox, writeFilePath, loadTemplate, inject | Generate `public/service-worker.js` with locale-specific error page URLs |
+| `packages/env/cli/generate-env.ts` | log, loadTemplate, inject | Regenerate env schema from `.env` files |
 | `packages/page-system/cli/sync-system-pages.ts` | log, logBox, wrapMainError | Rename ALL system page folders to locale-dependent slugs when default locale changes |
 | `packages/i18n/cli/sync-locales.ts` | log, logBox | Create missing locale directories; sync missing files in existing directories |
 | `packages/page-system/cli/delete-page.ts` | log | Delete a page (folder + locale files across all locale dirs); scans for broken URL references before deletion; system pages protected |
 | `packages/i18n/cli/check-parity.ts` | log | Diff translation keys across locales |
-| `scripts/fetch-exchange-rates.ts` | log, writeFilePath, generatedHeader | Fetch and cache exchange rates |
+| `scripts/fetch-exchange-rates.ts` | log, writeFilePath, generatedHeader, loadTemplate, inject | Fetch and cache exchange rates |
 | `packages/i18n/cli/watch.ts` | log, logBox, setupSigintHandler | Watch locale file changes |
 | `scripts/clean-cache.ts` | log | Remove cache directories |
 
