@@ -3,7 +3,7 @@ import path from 'node:path';
 import { env } from '@generated/env';
 import { lookup } from '@generated/paths';
 import { log, logBox } from '@scripts/lib/logger';
-import { computeStringHash, isCacheValid, storeCache } from '@scripts/lib/pipeline-cache';
+import { computeStringHash, isCacheValid, restoreCache, storeCache } from '@scripts/lib/pipeline-cache';
 import { generatedHeader, writeFilePath } from '@scripts/lib/write-file';
 import sharp from 'sharp';
 
@@ -126,6 +126,9 @@ async function main(): Promise<void> {
   const sourceHash = computeSourceHash();
 
   if (isCacheValid(CACHE_KEY, sourceHash)) {
+    if (!fs.existsSync(OUTPUT_DIR)) {
+      restoreCache(CACHE_KEY, OUTPUT_DIR);
+    }
     logBox('Generate Images', {
       Processed: '(cached)',
       Passthrough: '(cached)',
