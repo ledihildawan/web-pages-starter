@@ -18,7 +18,6 @@
   {% set og_type = page.meta.og_type or seo_config.og_type or "website" %}
   {% set twitter_card = seo_config.twitter_card or "summary_large_image" %}
   {% set author = page.meta.author or seo_config.default_author %}
-  {% set theme_color = seo_config.theme_color or global.seo.theme_color %}
 
   {% set default_locale = lang or "en-US" %}
   {% set hreflang_locales = locale_codes or [] %}
@@ -28,9 +27,6 @@
   <meta name="description" content="{{ description }}">
   {% if author %}
   <meta name="author" content="{{ author }}">
-  {% endif %}
-  {% if theme_color %}
-  <meta name="theme-color" content="{{ theme_color }}">
   {% endif %}
 
   {# --- Robots --- #}

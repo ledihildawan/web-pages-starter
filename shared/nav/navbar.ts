@@ -106,7 +106,9 @@ export default defineData('navbar', () => ({
   },
 
   hapticFeedback() {
-    navigator.vibrate?.(HAPTIC_MS);
+    if ('vibrate' in navigator) {
+      navigator.vibrate(HAPTIC_MS);
+    }
   },
 
   onResize() {
