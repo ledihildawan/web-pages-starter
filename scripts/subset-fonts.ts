@@ -40,8 +40,9 @@ function subsetFont(filePath: string): { before: number; after: number } {
       }
       return { before, after: Math.min(after, before) };
     }
-  } catch {
+  } catch (_err) {
     if (fs.existsSync(tmpOut)) fs.unlinkSync(tmpOut);
+    console.warn(`⚠ Font subset timeout/failure: ${path.basename(filePath)}`);
   }
 
   return { before, after: before };

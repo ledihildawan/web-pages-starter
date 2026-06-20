@@ -12,11 +12,15 @@ export const getFallbackChain = (locale: string): LocaleCode[] => {
   const languageSubtag = locale.split('-')[0];
   const matched = LOCALE_CODES.find((c) => c.startsWith(`${languageSubtag}-`));
 
+  const fallbackChain: LocaleCode[] = [];
   if (matched) {
-    return [matched, i18nConfig.defaultLocale];
+    fallbackChain.push(matched);
+  }
+  if (i18nConfig.defaultLocale !== locale && i18nConfig.defaultLocale !== matched) {
+    fallbackChain.push(i18nConfig.defaultLocale);
   }
 
-  return [i18nConfig.defaultLocale];
+  return fallbackChain;
 };
 
 let currentLocale: LocaleCode | undefined;

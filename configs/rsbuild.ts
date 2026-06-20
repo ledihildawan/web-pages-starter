@@ -214,7 +214,7 @@ const pluginInlineCss = (): RsbuildPlugin => ({
 
           let css = fs.readFileSync(cssPath, 'utf-8');
           const cssDir = href.substring(0, href.lastIndexOf('/'));
-          css = css.replace(/url\(\s*['"]?([^'")\s]+)['"]?\s*\)/g, (match, url: string) => {
+          css = css.replace(/(?:src:\s*)?url\(\s*['"]?([^'")\s]+)['"]?\s*\)/g, (match, url: string) => {
             if (url.startsWith('/') || url.startsWith('http') || url.startsWith('data:')) return match;
             return `url(${cssDir}/${url.replace(/^\.\//, '')})`;
           });
@@ -418,6 +418,11 @@ export default defineConfig({
       {
         from: lookup('@public', 'assets/images'),
         to: 'assets/images',
+        noErrorOnMissing: true,
+      },
+      {
+        from: lookup('@public', 'assets/i18n'),
+        to: 'assets/i18n',
         noErrorOnMissing: true,
       },
     ],

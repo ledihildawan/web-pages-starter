@@ -21,7 +21,10 @@ export function convertCurrency(
   const fromRate = rates[from];
   const toRate = rates[to];
 
-  if (!fromRate || !toRate) return amount;
+  if (!fromRate || !toRate) {
+    console.warn(`[exchange-rates] Missing rate for ${!fromRate ? from : to} — returning unconverted amount`);
+    return amount;
+  }
 
   const inBase = amount / fromRate;
   return inBase * toRate;

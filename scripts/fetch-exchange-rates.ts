@@ -112,7 +112,8 @@ async function generateExchangeRates(forceRefresh = false): Promise<void> {
     if (!existing) {
       throw error;
     }
-    log.info('Using existing cached rates as fallback');
+    const hoursSinceUpdate = (Date.now() - existing.lastUpdated.getTime()) / (1_000 * 60 * 60);
+    log.warn(`Using stale cached exchange rates (${hoursSinceUpdate.toFixed(1)} hours old) — update recommended`);
   }
 }
 

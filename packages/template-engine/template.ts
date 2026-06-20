@@ -195,20 +195,16 @@ const generateClientI18nScript = (
       ]),
     ) as Record<string, JsonData>;
 
-    const dirs = [lookup('@public', 'assets', 'i18n', name), lookup('@dist', 'assets', 'i18n', name)];
-    for (const dir of dirs) {
-      if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir, { recursive: true });
-      }
+    const dir = lookup('@public', 'assets', 'i18n', name);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
     }
     for (const [localeCode, data] of Object.entries(allI18nData)) {
       const json = JSON.stringify(data);
-      for (const dir of dirs) {
-        const filePath = path.join(dir, `${localeCode}.json`);
-        const tmpPath = `${filePath}.tmp`;
-        fs.writeFileSync(tmpPath, json, 'utf-8');
-        fs.renameSync(tmpPath, filePath);
-      }
+      const filePath = path.join(dir, `${localeCode}.json`);
+      const tmpPath = `${filePath}.tmp`;
+      fs.writeFileSync(tmpPath, json, 'utf-8');
+      fs.renameSync(tmpPath, filePath);
     }
 
     script = `<script>

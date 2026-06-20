@@ -43,10 +43,15 @@ function findDataSource(slugDir: string): {
   data: Record<string, unknown>;
 } {
   const parentDir = path.dirname(slugDir);
-  const dataPath = path.join(parentDir, 'data.json5');
-  const dataPathTs = path.join(parentDir, 'data.json');
+  const baseName = 'data';
 
-  const dataFile = fs.existsSync(dataPath) ? dataPath : fs.existsSync(dataPathTs) ? dataPathTs : null;
+  let dataFile: string | null = null;
+  if (fs.existsSync(parentDir)) {
+    const files = fs.readdirSync(parentDir);
+    const json5File = files.find((f) => f.toLowerCase() === `${baseName}.json5`);
+    const jsonFile = files.find((f) => f.toLowerCase() === `${baseName}.json`);
+    dataFile = json5File ? path.join(parentDir, json5File) : jsonFile ? path.join(parentDir, jsonFile) : null;
+  }
 
   if (!dataFile) {
     console.warn(`[dynamic-routes] No data.json5 found at ${parentDir}. Skipping [slug] directory.`);

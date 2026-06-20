@@ -24,6 +24,7 @@ const contentToHash = [
   offlineSlug,
   offlineErrorSlug,
   I18N_ASSET_DIR,
+  Date.now().toString(36),
 ].join('|');
 
 const CACHE_VERSION = `starter-${createHash('sha256').update(contentToHash).digest('hex').slice(0, 8)}`;
