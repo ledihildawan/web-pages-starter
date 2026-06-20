@@ -26,7 +26,7 @@ const runBuild = (): Promise<void> => {
     const proc = spawn('bun', ['run', 'build'], {
       stdio: 'inherit',
       cwd: process.cwd(),
-      env: { ...process.env, BUILD_PREVIEW: 'true' },
+      env: { ...process.env, BUILD_PREVIEW: 'true', STAGE: 'prod' },
       shell: false,
     });
     proc.on('close', (code) => {
@@ -170,7 +170,7 @@ const main = async () => {
   if (provider === 'ngrok') {
     const listener = await ngrok.forward({
       addr: PORT,
-      authtoken_from_env: true,
+      authtoken: env.NGROK_AUTHTOKEN,
     });
     tunnelUrl = listener.url() || '';
     if (!tunnelUrl) {

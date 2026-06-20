@@ -17,22 +17,26 @@ export const collectKeys = (obj: unknown, prefix = ''): string[] => {
     });
 };
 
+const MAX_CACHE_SIZE = 1000;
 const json5Cache = new Map<string, { mtime: number; data: JsonData }>();
 
 export const readJSON5 = (filePath: string): JsonData => {
+  if (!fs.existsSync(filePath)) return {};
+
+  const stat = fs.statSync(filePath);
+  const cached = json5Cache.get(filePath);
+  if (cached && cached.mtime === stat.mtimeMs) return cached.data;
+
   try {
-    if (!fs.existsSync(filePath)) return {};
-    const stat = fs.statSync(filePath);
-
-    const cached = json5Cache.get(filePath);
-    if (cached && cached.mtime === stat.mtimeMs) return cached.data;
-
     const data = JSON5.parse(fs.readFileSync(filePath, 'utf-8')) as JsonData;
+    if (json5Cache.size >= MAX_CACHE_SIZE) {
+      const firstKey = json5Cache.keys().next().value;
+      if (firstKey) json5Cache.delete(firstKey);
+    }
     json5Cache.set(filePath, { mtime: stat.mtimeMs, data });
     return data;
   } catch (err) {
-    console.warn(`[JSON5 Read Error]: ${filePath}`, err);
-    return {};
+    throw new Error(`[JSON5 Parse Error]: ${filePath} — ${err}`);
   }
 };
 

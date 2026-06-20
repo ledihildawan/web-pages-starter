@@ -52,6 +52,9 @@ async function main() {
 
     log.info(`Renaming folder: ${currentFolder} -> ${expectedSlug}`);
     fs.renameSync(path.join(PAGES_DIR, currentFolder), expectedPath);
+    if (!fs.existsSync(expectedPath)) {
+      throw new Error(`Rename failed: ${expectedPath} does not exist after rename`);
+    }
     renames.push({ pageId, from: currentFolder, to: expectedSlug });
   }
 

@@ -48,16 +48,21 @@ function stripLocaleExt(fileName: string): string {
 
 function readLocaleTree(dirPath: string): Record<string, unknown> {
   const namespaces: Record<string, unknown> = {};
+  const stack: { dir: string; prefix: string }[] = [{ dir: dirPath, prefix: '' }];
 
-  const walk = (currentDir: string, prefix = '') => {
-    if (!fs.existsSync(currentDir)) return;
+  while (stack.length > 0) {
+    const current = stack.pop();
+    if (!current) continue;
+    const { dir: currentDir, prefix } = current;
+    if (!fs.existsSync(currentDir)) continue;
 
-    for (const entry of fs.readdirSync(currentDir).sort()) {
+    const entries = fs.readdirSync(currentDir).sort().reverse();
+    for (const entry of entries) {
       const entryPath = path.join(currentDir, entry);
       const stat = fs.statSync(entryPath);
 
       if (stat.isDirectory()) {
-        walk(entryPath, `${prefix}${entry}/`);
+        stack.push({ dir: entryPath, prefix: `${prefix}${entry}/` });
         continue;
       }
 
@@ -70,9 +75,8 @@ function readLocaleTree(dirPath: string): Record<string, unknown> {
 
       namespaces[namespace] = readJSON5(entryPath) as Record<string, unknown>;
     }
-  };
+  }
 
-  walk(dirPath);
   return namespaces;
 }
 

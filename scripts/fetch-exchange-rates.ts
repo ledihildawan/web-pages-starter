@@ -28,10 +28,11 @@ async function fetchExchangeRates(): Promise<Record<string, number>> {
     throw new Error(`[i18n] Failed to fetch exchange rates: ${response.statusText}`);
   }
 
-  const data = (await response.json()) as Array<{
-    quote: string;
-    rate: number;
-  }>;
+  const raw = await response.json();
+
+  if (!Array.isArray(raw)) {
+    throw new Error('[i18n] Exchange rates API returned unexpected format');
+  }
 
   const activeCurrencies = getActiveCurrencies();
 
@@ -39,7 +40,9 @@ async function fetchExchangeRates(): Promise<Record<string, number>> {
     [BASE_CURRENCY]: 1,
   };
 
-  for (const item of data) {
+  for (const item of raw) {
+    if (typeof item !== 'object' || item === null) continue;
+    if (typeof item.quote !== 'string' || typeof item.rate !== 'number') continue;
     if (activeCurrencies.has(item.quote)) {
       ratesObj[item.quote] = item.rate;
     }

@@ -1,0 +1,24 @@
+export const PIPELINE_STEPS = {
+  PRE_BUILD: [
+    'scripts/generators/generate-paths.ts',
+    'packages/env/cli/generate-env.ts',
+    'packages/i18n/cli/generate-active-locales.ts',
+    'packages/page-system/cli/sync-system-pages.ts',
+    'scripts/clean-cache.ts',
+    'scripts/fetch-exchange-rates.ts',
+    'scripts/generators/generate-fonts-css.ts',
+    'packages/i18n/cli/sync-locales.ts',
+    'packages/i18n/cli/generate-types.ts',
+    'scripts/generators/generate-images.ts',
+  ],
+  SERVE: [
+    'scripts/generators/generate-sitemap.ts',
+    'scripts/generators/generate-manifest.ts',
+    'scripts/generators/generate-robots.ts',
+    'scripts/generators/generate-service-worker.ts',
+  ],
+  RSBUILD: 'rsbuild',
+  POST_BUILD: ['scripts/subset-fonts.ts', 'scripts/compress.ts'],
+} as const;
+
+export type PipelineStep = (typeof PIPELINE_STEPS)[keyof typeof PIPELINE_STEPS];

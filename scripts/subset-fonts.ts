@@ -6,7 +6,7 @@ import { log, logBox } from './lib/logger';
 
 const FONTS_DIRS = [lookup('@dist', 'assets', 'fonts')];
 
-const SUBSET_FLAGS = [
+const SUBSET_FLAGS_ARRAY = [
   '--flavor=woff2',
   '--no-hinting',
   '--desubroutinize',
@@ -15,16 +15,18 @@ const SUBSET_FLAGS = [
   '--drop-tables+=cvar',
   '--drop-tables+=kern',
   '--layout-features=*',
-  '--output-file=__SUBSET_OUT__',
-  '--unicodes=*',
-].join(' ');
+];
 
 function subsetFont(filePath: string): { before: number; after: number } {
   const before = fs.statSync(filePath).size;
-  const tmpOut = `${filePath}.tmp`;
+  const tmpOut = `${filePath}.subset.tmp`;
 
   try {
-    execSync(`pyftsubset "${filePath}" ${SUBSET_FLAGS.replace('__SUBSET_OUT__', `"${tmpOut}"`)}`, {
+    const escapedPath = filePath.replace(/"/g, '\\"');
+    const escapedTmpOut = tmpOut.replace(/"/g, '\\"');
+    const flags = SUBSET_FLAGS_ARRAY.join(' ');
+    const cmd = `pyftsubset "${escapedPath}" ${flags} --output-file="${escapedTmpOut}" --unicodes=*`;
+    execSync(cmd, {
       stdio: 'ignore',
       timeout: 30000,
     });
@@ -32,9 +34,10 @@ function subsetFont(filePath: string): { before: number; after: number } {
     if (fs.existsSync(tmpOut)) {
       const after = fs.statSync(tmpOut).size;
       if (after < before) {
-        fs.copyFileSync(tmpOut, filePath);
+        fs.renameSync(tmpOut, filePath);
+      } else {
+        fs.unlinkSync(tmpOut);
       }
-      fs.unlinkSync(tmpOut);
       return { before, after: Math.min(after, before) };
     }
   } catch {

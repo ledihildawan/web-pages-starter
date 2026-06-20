@@ -98,6 +98,7 @@ const convertLatinDigits = (text: string, targetDigits: readonly string[]) =>
   text.replace(/\d/g, (d) => targetDigits[Number(d)]);
 
 const toRoman = (num: number): string => {
+  if (num <= 0 || num > 3999) return String(num);
   const vals = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
   const syms = ['M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I'];
   let result = '';
@@ -369,6 +370,7 @@ export const formatScientific = (value: number | string, options: FormatOptions 
 
 export const formatBytes = (bytes: number, decimals: number = 1) => {
   if (bytes < 0) bytes = Math.abs(bytes);
+  if (!Number.isFinite(bytes)) return String(bytes);
   if (bytes === 0) {
     try {
       return new Intl.NumberFormat(getLocale(), {

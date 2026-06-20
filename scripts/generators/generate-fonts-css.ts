@@ -24,8 +24,10 @@ for (const pkgCss of packageCss) {
   for (const fontFile of pkgCss.fontFiles) {
     const srcPath = path.join(lookup('@', 'node_modules', pkgCss.pkg, 'files', fontFile));
     const destPath = path.join(pkgDir, fontFile);
-    if (fs.existsSync(srcPath) && !fs.existsSync(destPath)) {
+    try {
       fs.copyFileSync(srcPath, destPath);
+    } catch {
+      // Skip if copy fails (e.g., source doesn't exist or dest already exists)
     }
   }
 }

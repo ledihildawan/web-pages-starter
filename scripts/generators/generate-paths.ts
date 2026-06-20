@@ -1,18 +1,18 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { inject, loadTemplate } from '@codegen';
-import { lookup } from '@generated/paths';
 import { log } from '@scripts/lib/logger';
 import { writeFilePath } from '@scripts/lib/write-file';
 
 const TSCONFIG_PATH = path.resolve('.', 'tsconfig.json');
-const OUTPUT_PATH = lookup('@generated', 'paths.ts');
+const OUTPUT_PATH = path.resolve('.', 'generated', 'paths.ts');
 
 const tsconfig = JSON.parse(fs.readFileSync(TSCONFIG_PATH, 'utf-8')) as {
   compilerOptions: { paths: Record<string, string[]> };
 };
 
-const entries = Object.entries(tsconfig.compilerOptions.paths)
+const seen = new Set<string>();
+const rawEntries = Object.entries(tsconfig.compilerOptions.paths)
   .map(([key, targets]) => {
     const aliasKey = key.endsWith('/*') ? key.slice(0, -2) : key;
     let aliasPath = targets[0];
@@ -21,12 +21,16 @@ const entries = Object.entries(tsconfig.compilerOptions.paths)
     if (aliasPath.startsWith('./')) aliasPath = aliasPath.slice(2);
     return [aliasKey, aliasPath] as const;
   })
-  .filter(([k], i, arr) => arr.findIndex(([k2]) => k2 === k) === i)
+  .filter(([k]) => {
+    if (seen.has(k)) return false;
+    seen.add(k);
+    return true;
+  })
   .sort(([a], [b]) => a.localeCompare(b));
 
-const keys = entries.map(([k]) => k);
+const keys = rawEntries.map(([k]) => k);
 const aliasKeys = keys.map((k) => `  | '${k}'`).join('\n');
-const aliasEntries = entries.map(([k, v]) => `  '${k}': path.resolve('${v}'),`).join('\n');
+const aliasEntries = rawEntries.map(([k, v]) => `  '${k}': path.resolve('${v}'),`).join('\n');
 
 const template = loadTemplate('paths.ts');
 const output = inject(template, {

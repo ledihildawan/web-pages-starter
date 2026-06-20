@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { inject, loadTemplate } from '@codegen';
 import { i18nConfig } from '@config/i18n';
 import { lookup } from '@generated/paths';
@@ -13,7 +14,19 @@ const [notFoundSlug, unauthorizedSlug, forbiddenSlug, serverErrorSlug, maintenan
   getErrorPageSlugs(i18nConfig.defaultLocale);
 const offlineSlug = getSystemPageSlug('offline', i18nConfig.defaultLocale);
 
-const CACHE_VERSION = `starter-${Date.now().toString(36)}`;
+const contentToHash = [
+  rootSlug,
+  notFoundSlug,
+  unauthorizedSlug,
+  forbiddenSlug,
+  serverErrorSlug,
+  maintenanceSlug,
+  offlineSlug,
+  offlineErrorSlug,
+  I18N_ASSET_DIR,
+].join('|');
+
+const CACHE_VERSION = `starter-${createHash('sha256').update(contentToHash).digest('hex').slice(0, 8)}`;
 
 const template = loadTemplate('service-worker.js');
 const swContent = inject(template, {

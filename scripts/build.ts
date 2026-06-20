@@ -5,6 +5,7 @@ import process from 'node:process';
 import { env } from '@generated/env';
 import { lookup } from '@generated/paths';
 import { log, logBox } from './lib/logger';
+import { PIPELINE_STEPS } from './lib/pipeline';
 
 const args = process.argv.slice(2);
 const isPreview = env.BUILD_PREVIEW;
@@ -30,6 +31,20 @@ if (args.includes('--pretty')) {
   spawnEnv.PRETTY_HTML = 'true';
 }
 
+const runStep = (step: string): boolean => {
+  const stepPath = lookup('@', step);
+  const result = spawnSync('bun', [stepPath], {
+    stdio: 'inherit',
+    env: spawnEnv,
+    cwd: process.cwd(),
+  });
+  if (result.status !== 0) {
+    log.error(`Error: ${path.basename(step)} failed — exit code ${result.status}`);
+    return false;
+  }
+  return true;
+};
+
 logBox('Build Process', { Mode: mode });
 
 const distPath = lookup('@dist');
@@ -38,25 +53,14 @@ if (fs.existsSync(distPath)) {
   fs.rmSync(distPath, { recursive: true, force: true });
 }
 
-const generators = [
-  'scripts/generators/generate-images.ts',
-  'scripts/generators/generate-sitemap.ts',
-  'scripts/generators/generate-manifest.ts',
-  'scripts/generators/generate-robots.ts',
-  'scripts/generators/generate-service-worker.ts',
-];
+log.info('\n--- Pre-build generators ---\n');
+for (const step of PIPELINE_STEPS.PRE_BUILD) {
+  if (!runStep(step)) process.exit(1);
+}
 
-for (const gen of generators) {
-  const genPath = lookup('@', gen);
-  const result = spawnSync('bun', [genPath], {
-    stdio: 'inherit',
-    env: spawnEnv,
-    cwd: process.cwd(),
-  });
-  if (result.status !== 0) {
-    log.error(`Error: ${path.basename(gen)} failed — exit code ${result.status}`);
-    process.exit(result.status || 1);
-  }
+log.info('\n--- Serve generators ---\n');
+for (const step of PIPELINE_STEPS.SERVE) {
+  if (!runStep(step)) process.exit(1);
 }
 
 log.info('\nBundling with Rsbuild...\n');
@@ -93,6 +97,11 @@ if (result.error) {
 if (result.status !== 0) {
   log.error(`Error: Build failed — exit code ${result.status}`);
   process.exit(result.status || 1);
+}
+
+log.info('\n--- Post-build ---\n');
+for (const step of PIPELINE_STEPS.POST_BUILD) {
+  if (!runStep(step)) process.exit(1);
 }
 
 log.info('\n┌──────────────────────────────────────────┐');

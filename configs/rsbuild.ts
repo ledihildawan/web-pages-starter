@@ -11,6 +11,7 @@ import { createTemplateParams } from '@template-engine';
 import { readJSON5 } from '@utils/json5';
 import { minify } from 'html-minifier-terser';
 import { html as beautifyHtml } from 'js-beautify';
+import lightningcss from 'lightningcss';
 
 const isBuild = env.IS_PROD || env.BUILD_PREVIEW;
 const shouldMinify = isBuild && env.MINIFY;
@@ -193,7 +194,7 @@ const pluginInlineCss = (): RsbuildPlugin => ({
         const filePath = path.join(distDir, file);
         let html = fs.readFileSync(filePath, 'utf-8');
 
-        const nonceMatch = html.match(/nonce-([a-zA-Z0-9+/=]+)/);
+        const nonceMatch = html.match(/nonce-([a-zA-Z0-9_-]+)/);
         if (!nonceMatch) continue;
         const nonce = nonceMatch[1];
 
@@ -217,6 +218,12 @@ const pluginInlineCss = (): RsbuildPlugin => ({
             if (url.startsWith('/') || url.startsWith('http') || url.startsWith('data:')) return match;
             return `url(${cssDir}/${url.replace(/^\.\//, '')})`;
           });
+          const minified = lightningcss.transform({
+            code: Buffer.from(css),
+            filename: path.basename(cssPath),
+            minify: true,
+          });
+          css = minified.code.toString();
           html = html.replace(tag, `<style nonce="${nonce}">${css}</style>`);
           modified = true;
           inlined++;
@@ -236,6 +243,7 @@ const pluginInlineCss = (): RsbuildPlugin => ({
 
 const CHUNK_NAMES = {
   alpineCore: 'chunk-alpine-core',
+  alpinePlugins: 'chunk-alpine-plugins',
   i18next: 'chunk-i18next',
   i18nFormatters: 'chunk-i18n-formatters',
 } as const;
@@ -408,8 +416,8 @@ export default defineConfig({
         noErrorOnMissing: true,
       },
       {
-        from: lookup('@public', 'assets/i18n'),
-        to: 'assets/i18n',
+        from: lookup('@public', 'assets/images'),
+        to: 'assets/images',
         noErrorOnMissing: true,
       },
     ],

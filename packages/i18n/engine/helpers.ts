@@ -50,7 +50,7 @@ export const getLanguageConfig = (locale: LocaleCode): LocaleConfig | undefined 
 };
 
 export const getCurrency = (locale: LocaleCode): CurrencyCode =>
-  getLanguageConfig(locale)?.currency || LOCALES[0].currency;
+  getLanguageConfig(locale)?.currency || getLanguageConfig(i18nConfig.defaultLocale)?.currency || 'USD';
 
 export const getTimezone = (locale: LocaleCode): string => getLanguageConfig(locale)?.timezone || 'UTC';
 

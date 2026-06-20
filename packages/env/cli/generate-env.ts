@@ -13,7 +13,11 @@ const ENV_FILES = fs.existsSync(ROOT)
   : [];
 const SKIP_KEYS = new Set(['NODE_ENV']);
 const PRIVATE_PREFIX = 'PRIVATE_';
-const SECRET_PATTERN = /(?:TOKEN|SECRET|PASSWORD|PASSPHRASE|CREDENTIAL|API_KEY|PRIVATE_KEY)/i;
+const SECRET_WORDS = ['TOKEN', 'SECRET', 'PASSWORD', 'PASSPHRASE', 'CREDENTIAL', 'API_KEY', 'PRIVATE_KEY'];
+const isSecretKey = (key: string): boolean => {
+  const upper = key.toUpperCase();
+  return SECRET_WORDS.some((word) => upper.includes(word));
+};
 
 type EnvType = 'string' | 'number' | 'boolean';
 
@@ -86,7 +90,7 @@ if (schema.size === 0) {
 }
 
 for (const key of schema.keys()) {
-  if (!privateKeys.has(key) && SECRET_PATTERN.test(key) && key !== 'STAGE') {
+  if (!privateKeys.has(key) && isSecretKey(key) && key !== 'STAGE') {
     log.warn(`[env] "${key}" looks like a secret but has no PRIVATE_ prefix — will be exposed to browser`);
   }
 }

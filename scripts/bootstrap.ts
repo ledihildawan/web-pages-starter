@@ -9,8 +9,11 @@ const SW_DISMISS_DURATION = 24 * 60 * 60 * 1000;
 const showBootstrapError = (_message: string) => {
   const nonce = getCspNonce();
   const style = document.createElement('style');
+
   style.id = 'bootstrap-error-style';
+
   if (nonce) style.setAttribute('nonce', nonce);
+
   style.textContent = `
     #bootstrap-error { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #020617; color: #e2e8f0; font-family: system-ui, sans-serif; padding: 2rem; }
     #bootstrap-error .inner { text-align: center; max-width: 400px; }
@@ -18,9 +21,11 @@ const showBootstrapError = (_message: string) => {
     #bootstrap-error p { color: #94a3b8; margin-bottom: 1.5rem; }
     #bootstrap-error button { background: #7c3aed; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; border: none; }
   `;
+
   document.head.appendChild(style);
 
   const errorDiv = document.createElement('div');
+
   errorDiv.id = 'bootstrap-error';
   errorDiv.innerHTML = `
     <div class="inner">

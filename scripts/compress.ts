@@ -30,7 +30,9 @@ function walk(dir: string): string[] {
   return files;
 }
 
-const files = walk(DIST).filter((f) => COMPRESS_EXTS.includes(path.extname(f)));
+const files = walk(DIST).filter(
+  (f) => COMPRESS_EXTS.includes(path.extname(f)) && !f.endsWith('.br') && !f.endsWith('.gz'),
+);
 
 let totalRaw = 0;
 let totalBr = 0;

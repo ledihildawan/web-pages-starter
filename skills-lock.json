@@ -61,6 +61,12 @@
       "skillPath": "skills/misc/setup-pre-commit/SKILL.md",
       "computedHash": "f9aeedf0a1f560ec465c3939c54434c2d949ac8b958a0493db52216f688a0366"
     },
+    "transitions-dev": {
+      "source": "Jakubantalik/transitions.dev",
+      "sourceType": "github",
+      "skillPath": "skills/transitions-dev/SKILL.md",
+      "computedHash": "a52ddeb8b36c87ee5b19d84017ddcf0dca3b5da9bedaf723a25c7952125fa582"
+    },
     "userinterface-wiki": {
       "source": "raphaelsalaja/userinterface-wiki",
       "sourceType": "github",

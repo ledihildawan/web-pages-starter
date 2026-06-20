@@ -98,7 +98,7 @@ const warnedKeys = new Set<string>();
 const i18nScriptCache = new Map<string, { hash: string; script: string }>();
 
 const hashCache = new Map<string, { hash: string; ts: number }>();
-const HASH_TTL = 1000;
+const HASH_TTL = 5000;
 
 const hashLocales = (name: string, sharedLocales: string[]): string => {
   const cacheKey = `${name}:${sharedLocales.join(',')}`;
@@ -115,7 +115,12 @@ const hashLocales = (name: string, sharedLocales: string[]): string => {
     ];
     for (const f of files) {
       try {
-        parts.push(String(fs.statSync(f).mtimeMs));
+        const content = fs.readFileSync(f, 'utf-8');
+        let h = 0;
+        for (let i = 0; i < content.length; i++) {
+          h = (Math.imul(31, h) + content.charCodeAt(i)) | 0;
+        }
+        parts.push(String(h));
       } catch {
         parts.push('0');
       }
@@ -134,7 +139,10 @@ export const scanSharedLocales = (
 ): string[] => {
   if (scanned.has(templatePath)) return [...found];
   scanned.add(templatePath);
-  if (!fs.existsSync(templatePath)) return [...found];
+  if (!fs.existsSync(templatePath)) {
+    console.warn(`[template] Template not found: ${templatePath}`);
+    return [...found];
+  }
 
   const content = fs.readFileSync(templatePath, 'utf-8');
 
@@ -196,7 +204,10 @@ const generateClientI18nScript = (
     for (const [localeCode, data] of Object.entries(allI18nData)) {
       const json = JSON.stringify(data);
       for (const dir of dirs) {
-        fs.writeFileSync(path.join(dir, `${localeCode}.json`), json, 'utf-8');
+        const filePath = path.join(dir, `${localeCode}.json`);
+        const tmpPath = `${filePath}.tmp`;
+        fs.writeFileSync(tmpPath, json, 'utf-8');
+        fs.renameSync(tmpPath, filePath);
       }
     }
 
@@ -248,7 +259,7 @@ const createI18nObject = (
   const createItem = (key: string | undefined, vars: Record<string, unknown> = {}): I18nItem => {
     if (!key) {
       return {
-        value: `[missing_key]`,
+        value: `[missing_key: undefined]`,
         key: 'common:site_name' as I18nTranslationKeys,
         vars: null,
       };
