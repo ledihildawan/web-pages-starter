@@ -4,6 +4,7 @@ import path from 'node:path';
 import process from 'node:process';
 import { env } from '@generated/env';
 import { log, logBox } from '@scripts/lib/logger';
+import { getAndVerifyPreviewUrl } from '@scripts/lib/preview-url';
 import { setupSigintHandler, wrapMainError } from '@scripts/lib/signal-handler';
 import inquirer from 'inquirer';
 import { DOMParser } from 'linkedom';
@@ -345,7 +346,27 @@ Examples:
   let urls = [];
 
   const baseIdx = cliArgs.indexOf('--base');
-  const baseUrl = baseIdx !== -1 && cliArgs[baseIdx + 1] ? cliArgs[baseIdx + 1] : env.SITE_URL;
+  let baseUrl: string;
+
+  if (baseIdx !== -1 && cliArgs[baseIdx + 1]) {
+    baseUrl = cliArgs[baseIdx + 1];
+  } else {
+    const preview = await getAndVerifyPreviewUrl();
+    if (!preview) {
+      log.error('Preview server not running. Start with bun run preview first.');
+      process.exit(1);
+    }
+    if (preview.reason === 'expired') {
+      log.error('Preview URL expired. Start preview again to continue.');
+      process.exit(1);
+    }
+    if (preview.reason === 'unaccessible') {
+      log.error('Preview server no longer accessible. Start preview again.');
+      process.exit(1);
+    }
+    baseUrl = preview.url;
+  }
+
   const base = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
 
   if (cliArgs.includes('--url')) {

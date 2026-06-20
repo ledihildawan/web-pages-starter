@@ -10,6 +10,7 @@ import ngrok from '@ngrok/ngrok';
 import { getErrorPageSlugs, getRootPageSlug } from '@page-system';
 import { createStaticApp, getPageNames, loadHtmlCache } from '@scripts/lib/hono-server';
 import { log } from '@scripts/lib/logger';
+import { deletePreviewUrl, savePreviewUrl, verifyUrlAccessible } from '@scripts/lib/preview-url';
 import { createServer, wrapMainError } from '@scripts/lib/signal-handler';
 import inquirer from 'inquirer';
 
@@ -217,8 +218,33 @@ const main = async () => {
     hostname: HOST,
   });
 
+  log.info('Verifying tunnel URL...');
+  const maxRetries = 5;
+  const retryDelay = 3000;
+  let verified = false;
+
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+
+  for (let i = 0; i < maxRetries; i++) {
+    const accessible = await verifyUrlAccessible(tunnelUrl);
+    if (accessible) {
+      verified = true;
+      break;
+    }
+    log.info(`  Attempt ${i + 1}/${maxRetries} failed, retrying in ${retryDelay / 1000}s...`);
+    await new Promise((resolve) => setTimeout(resolve, retryDelay));
+  }
+
+  if (!verified) {
+    log.error('Error: Tunnel URL not accessible after multiple attempts.');
+    process.exit(1);
+  }
+
+  await savePreviewUrl(tunnelUrl);
+
   const shutdown = async () => {
     log.info('\nShutting down...');
+    deletePreviewUrl();
     await closeServer(serverInstance);
     if (tunnelClose) {
       try {

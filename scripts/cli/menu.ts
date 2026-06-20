@@ -2,6 +2,7 @@ import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import { find, lookup } from '@generated/paths';
 import { log } from '@scripts/lib/logger';
+import { getAndVerifyPreviewUrl } from '@scripts/lib/preview-url';
 import { setupSigintHandler, wrapMainError } from '@scripts/lib/signal-handler';
 import inquirer from 'inquirer';
 
@@ -142,16 +143,26 @@ const tools: Tool[] = [
     name: 'Lighthouse',
     description: 'Audit accessibility, SEO, best practices, performance',
     action: async () => {
-      const { baseUrl } = await inquirer.prompt<{ baseUrl: string }>([
-        {
-          type: 'input',
-          name: 'baseUrl',
-          message: 'Base URL (Enter for env.SITE_URL, or paste tunnel URL):',
-          default: '',
-        },
-      ]);
+      const preview = await getAndVerifyPreviewUrl();
 
-      const baseArgs = baseUrl.trim() ? ['--base', baseUrl.trim()] : [];
+      if (!preview) {
+        log.error('Preview server not running. Start with bun run preview first.');
+        return;
+      }
+
+      if (preview.reason === 'expired') {
+        log.error('Preview URL expired. Start preview again to continue.');
+        return;
+      }
+
+      if (preview.reason === 'unaccessible') {
+        log.error('Preview server no longer accessible. Start preview again.');
+        return;
+      }
+
+      const baseArgs = ['--base', preview.url];
+
+      log.info(`Using preview URL: ${preview.url}`);
 
       const { auditType } = await inquirer.prompt<{ auditType: string }>([
         {
