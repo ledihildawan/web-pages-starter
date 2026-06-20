@@ -492,7 +492,7 @@ export default defineConfig({
               {
                 loader: 'simple-nunjucks-loader',
                 options: {
-                  autoescape: false,
+                  autoescape: true,
                   searchPaths: [lookup('@pages'), lookup('@layouts'), lookup('@')],
                   assetsPaths: [lookup('@assets')],
                 },

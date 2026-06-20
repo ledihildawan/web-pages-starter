@@ -384,7 +384,7 @@ export const formatBytes = (bytes: number, decimals: number = 1) => {
 
   const units = ['byte', 'kilobyte', 'megabyte', 'gigabyte', 'terabyte', 'petabyte'];
   const k = 1_024;
-  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  const i = Math.max(0, Math.floor(Math.log(bytes) / Math.log(k)));
   const scaled = bytes / k ** i;
 
   try {
