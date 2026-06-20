@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import { lookup } from '@generated/paths';
 import { log } from './lib/logger';
 
-const dirs = ['node_modules/.cache', '.cache', 'public/assets/i18n', 'public/assets/images', 'public/assets/fonts'];
+const dirs = ['node_modules/.cache', '.cache', 'public/assets/images'];
 for (const dir of dirs) {
   const fullPath = lookup('@', dir);
   try {

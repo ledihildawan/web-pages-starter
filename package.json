@@ -16,6 +16,7 @@
     "preview": "bun ./scripts/cli/preview.ts",
     "serve": "bun ./scripts/serve.ts",
     "clean:cache": "bun ./scripts/clean-cache.ts",
+    "clean:pipeline": "bun -e \"import { clearPipelineCache } from './scripts/lib/pipeline-cache.ts'; clearPipelineCache(); console.log('Pipeline cache cleared');\"",
     "cli": "bun ./scripts/cli/menu.ts",
     "typecheck": "bunx tsc --noEmit",
     "test": "rstest",

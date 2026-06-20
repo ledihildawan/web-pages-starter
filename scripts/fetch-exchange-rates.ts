@@ -4,11 +4,13 @@ import { lookup } from '@generated/paths';
 import { CURRENCY_CODE } from '@i18n/data/currencies';
 import { getActiveLocales } from '@i18n/engine/active-locales';
 import { log } from './lib/logger';
+import { getCacheWithTTL, setCacheWithTTL } from './lib/pipeline-cache';
 import { writeFilePath } from './lib/write-file';
 
 const EXCHANGE_RATES_URL = 'https://api.frankfurter.dev/v2/rates';
 const EXCHANGE_RATES_FILE = lookup('@generated', 'exchange-rates.ts');
 const BASE_CURRENCY = CURRENCY_CODE.USD;
+const TTL_MINUTES = 24 * 60;
 
 function getActiveCurrencies(): Set<string> {
   const currencies = new Set<string>([BASE_CURRENCY]);
@@ -58,31 +60,13 @@ function formatRatesObject(rates: Record<string, number>): string {
     .join(',\n');
 }
 
-async function loadExistingRates(): Promise<{ lastUpdated: Date } | null> {
-  if (fs.existsSync(EXCHANGE_RATES_FILE)) {
-    try {
-      const stats = await fs.promises.stat(EXCHANGE_RATES_FILE);
-      return { lastUpdated: stats.mtime };
-    } catch {
-      log.warn('Warning: Could not read cached exchange rates');
-      return null;
-    }
-  }
-  return null;
-}
-
-function isRatesFresh(data: { lastUpdated: Date }): boolean {
-  const now = new Date();
-  const hoursSinceUpdate = (now.getTime() - data.lastUpdated.getTime()) / (1_000 * 60 * 60);
-  return hoursSinceUpdate < 24;
-}
-
 async function generateExchangeRates(forceRefresh = false): Promise<void> {
-  const existing = await loadExistingRates();
-
-  if (!forceRefresh && existing && isRatesFresh(existing)) {
-    log.info(`Using cached exchange rates (last updated: ${existing.lastUpdated})`);
-    return;
+  if (!forceRefresh) {
+    const cached = getCacheWithTTL('exchange-rates');
+    if (cached && fs.existsSync(EXCHANGE_RATES_FILE)) {
+      log.info(`Using cached exchange rates (last updated: ${cached.cachedAt})`);
+      return;
+    }
   }
 
   log.info(`Fetching all exchange rates (base: ${BASE_CURRENCY})`);
@@ -103,17 +87,13 @@ async function generateExchangeRates(forceRefresh = false): Promise<void> {
     });
 
     writeFilePath(EXCHANGE_RATES_FILE, content);
+    setCacheWithTTL('exchange-rates', TTL_MINUTES);
 
     log.info(`Exchange rates saved to ${EXCHANGE_RATES_FILE.replace(process.cwd(), '.')}`);
     log.info(`Last updated: ${new Date().toISOString()}`);
   } catch (error) {
     log.error(`Error: Failed to generate exchange rates — ${error}`);
-
-    if (!existing) {
-      throw error;
-    }
-    const hoursSinceUpdate = (Date.now() - existing.lastUpdated.getTime()) / (1_000 * 60 * 60);
-    log.warn(`Using stale cached exchange rates (${hoursSinceUpdate.toFixed(1)} hours old) — update recommended`);
+    throw error;
   }
 }
 

@@ -5,12 +5,28 @@ import { i18nConfig } from '@config/i18n';
 import { lookup } from '@generated/paths';
 import { buildFontsCss } from '@i18n/fonts/font-css';
 import { log, logBox } from '@scripts/lib/logger';
+import { computeStringHash, isCacheValid, restoreCache, storeCache } from '@scripts/lib/pipeline-cache';
 import { generatedHeader } from '@scripts/lib/write-file';
 
 const OUTPUT_DIR = lookup('@public', 'assets', 'fonts');
 const OUTPUT_FILE = path.join(OUTPUT_DIR, 'fonts.css');
+const CACHE_KEY = 'fonts-css';
 
 const allLocales = [...new Set([i18nConfig.defaultLocale, ...(i18nConfig.locales ?? [])])];
+const configHash = computeStringHash(JSON.stringify({ fontsConfig, locales: allLocales }));
+
+if (isCacheValid(CACHE_KEY, configHash)) {
+  if (restoreCache(CACHE_KEY, OUTPUT_DIR)) {
+    logBox('Generate Fonts CSS', {
+      Locales: allLocales.join(', '),
+      Packages: '(cached)',
+      Output: 'public/assets/fonts/fonts.css',
+    });
+    log.success('Done: Using cached fonts CSS');
+    process.exit(0);
+  }
+}
+
 const packageCss = buildFontsCss(allLocales, './');
 
 fs.mkdirSync(OUTPUT_DIR, { recursive: true });
@@ -45,6 +61,7 @@ if (packageCss.length > 0) {
     .join('\n')}\n}\n`;
 
   fs.writeFileSync(OUTPUT_FILE, `${header + combined}\n\n${cssCustomProps}`, 'utf-8');
+  storeCache(CACHE_KEY, OUTPUT_DIR, configHash);
 } else {
   if (fs.existsSync(OUTPUT_FILE)) {
     fs.unlinkSync(OUTPUT_FILE);
