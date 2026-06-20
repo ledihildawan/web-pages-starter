@@ -10,7 +10,7 @@ import { generatedHeader } from '@scripts/lib/write-file';
 
 const OUTPUT_DIR = lookup('@public', 'assets', 'fonts');
 const OUTPUT_FILE = path.join(OUTPUT_DIR, 'fonts.css');
-const CACHE_KEY = 'fonts-css';
+const CACHE_KEY = 'fonts';
 
 const allLocales = [...new Set([i18nConfig.defaultLocale, ...(i18nConfig.locales ?? [])])];
 const configHash = computeStringHash(JSON.stringify({ fontsConfig, locales: allLocales }));

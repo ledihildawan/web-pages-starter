@@ -46,6 +46,8 @@
       "@page-system/*": ["./packages/page-system/*"],
       "@codegen": ["./packages/codegen/index.ts"],
       "@codegen/*": ["./packages/codegen/*"],
+      "@env": ["./packages/env/index.ts"],
+      "@env/*": ["./packages/env/*"],
       "@scripts/*": ["./scripts/*"]
     },
     "types": ["bun-types", "node"]

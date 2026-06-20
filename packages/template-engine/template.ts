@@ -110,7 +110,7 @@ const hashLocales = (name: string, sharedLocales: string[]): string => {
     const files = [
       lookup('@locales', locale.code, 'common.json'),
       lookup('@locales', locale.code, `${name}.json`),
-      ...sharedLocales.map((lName) => lookup('@locales', locale.code, `${lName}.json`)),
+      ...sharedLocales.map((sharedLocaleName) => lookup('@locales', locale.code, `${sharedLocaleName}.json`)),
     ];
     for (const f of files) {
       try {
@@ -184,12 +184,12 @@ const generateClientI18nScript = (
   let script = cached && cached.hash === hash ? cached.script : null;
   if (!script) {
     const allI18nData = Object.fromEntries(
-      supportedLangs.map((l) => [
-        l,
+      supportedLangs.map((localeCode) => [
+        localeCode,
         {
-          common: readJSON5(lookup('@locales', l, 'common.json')),
-          [name]: readJSON5(lookup('@locales', l, `${name}.json`)),
-          ...loadSharedLocales(l, sharedLocales, lookup('@locales')),
+          common: readJSON5(lookup('@locales', localeCode, 'common.json')),
+          [name]: readJSON5(lookup('@locales', localeCode, `${name}.json`)),
+          ...loadSharedLocales(localeCode, sharedLocales, lookup('@locales')),
         },
       ]),
     ) as Record<string, JsonData>;
@@ -517,7 +517,7 @@ const createI18nObject = (
       if (options?.raw) return formatted;
       return renderHtml(
         formatted,
-        buildAttrs({ 'local-price': escapeHtmlAttr(JSON.stringify(plan.pricing)) }, undefined, options?.nativeDigits),
+        buildAttrs({ 'local-price': escapeHtmlAttr(JSON.stringify(plan.prices)) }, undefined, options?.nativeDigits),
         options?.className,
       );
     },
@@ -527,7 +527,7 @@ const createI18nObject = (
       if (options?.raw) return formatted;
       return renderHtml(
         formatted,
-        buildAttrs({ 'local-price': escapeHtmlAttr(JSON.stringify(plan.pricing)) }, undefined, options?.nativeDigits),
+        buildAttrs({ 'local-price': escapeHtmlAttr(JSON.stringify(plan.prices)) }, undefined, options?.nativeDigits),
         options?.className,
       );
     },
@@ -539,7 +539,7 @@ const createI18nObject = (
         formatted,
         buildAttrs(
           {
-            'local-price': escapeHtmlAttr(JSON.stringify(plan.pricing)),
+            'local-price': escapeHtmlAttr(JSON.stringify(plan.prices)),
             'target-currency': targetCurrency,
           },
           undefined,
@@ -554,7 +554,7 @@ const createI18nObject = (
       if (options?.raw) return formatted;
       return renderHtml(
         formatted,
-        buildAttrs({ 'local-price': escapeHtmlAttr(JSON.stringify(plan.pricing)) }, undefined, options?.nativeDigits),
+        buildAttrs({ 'local-price': escapeHtmlAttr(JSON.stringify(plan.prices)) }, undefined, options?.nativeDigits),
         options?.className,
       );
     },
@@ -571,7 +571,7 @@ const createI18nObject = (
         formatted,
         buildAttrs(
           {
-            'local-price': escapeHtmlAttr(JSON.stringify(plan.pricing)),
+            'local-price': escapeHtmlAttr(JSON.stringify(plan.prices)),
             discount: discountMultiplier,
             'target-currency': targetCurrency,
           },

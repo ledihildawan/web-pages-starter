@@ -6,6 +6,7 @@ import { env } from '@generated/env';
 import { lookup } from '@generated/paths';
 import { getErrorPageSlugs, getRootPageSlug, scanPages } from '@page-system';
 import { log, logBox } from '@scripts/lib/logger';
+import { computeStringHash, isCacheValid, restoreCache, storeCache } from '@scripts/lib/pipeline-cache';
 import { writeFilePath } from '@scripts/lib/write-file';
 
 const cliArgs = process.argv.slice(2);
@@ -14,6 +15,7 @@ const distOnly = cliArgs.includes('--dist-only');
 const PAGES_DIR = lookup('@pages');
 const OUTPUT_PUBLIC = lookup('@public', 'sitemap.xml');
 const OUTPUT_DIST = lookup('@dist', 'sitemap.xml');
+const CACHE_KEY = 'sitemap';
 
 const DEFAULT_PRIORITY = env.SITEMAP_DEFAULT_PRIORITY;
 const DEFAULT_CHANGEFREQ = env.SITEMAP_DEFAULT_CHANGEFREQ;
@@ -25,6 +27,24 @@ const getPages = () => {
     .filter((name) => !EXCLUDED.includes(name))
     .sort();
 };
+
+const sourceHash = computeStringHash(
+  JSON.stringify({ pages: getPages(), locales: LOCALE_CODES, env: { SITE_URL: env.SITE_URL } }),
+);
+
+if (isCacheValid(CACHE_KEY, sourceHash)) {
+  if (!distOnly) {
+    restoreCache(CACHE_KEY, OUTPUT_PUBLIC);
+  }
+  restoreCache(CACHE_KEY, OUTPUT_DIST);
+  logBox('Generate Sitemap', {
+    Pages: getPages().length,
+    Locales: LOCALE_CODES.length,
+    'Base URL': env.SITE_URL.slice(0, 24),
+    Output: OUTPUT_PUBLIC.replace(process.cwd(), '.').slice(0, 24),
+  });
+  process.exit(0);
+}
 
 const getPagePath = (page: string, rootSlug: string): string => {
   return page === rootSlug ? '/' : `/${page}`;
@@ -86,6 +106,8 @@ ${hreflangLinks}
     writeFilePath(OUTPUT_PUBLIC, xml);
   }
   writeFilePath(OUTPUT_DIST, xml);
+
+  storeCache(CACHE_KEY, OUTPUT_PUBLIC, sourceHash);
 
   logBox('Generate Sitemap', {
     Pages: urls.length,

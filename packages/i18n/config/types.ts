@@ -68,12 +68,7 @@ export interface RelativeTimeOptions {
   numeric?: 'always' | 'auto';
 }
 
-export interface RegionalPrice {
-  pricing: {
-    base: number;
-    [locale: string]: number;
-  };
-}
+export type { RegionalPrice } from '@generated/pricing';
 
 export interface TemplateFormatOptions extends FormatOptions {
   raw?: boolean;

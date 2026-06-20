@@ -1,11 +1,10 @@
-import { DIRECTION_CODE } from './directions';
+﻿import { DIRECTION_CODE } from './directions';
 import { LANGUAGE_CODE, type LanguageCode } from './languages';
 
 export const WRITING_SYSTEMS = [
   {
     code: 'latin',
     name: 'Latin Script',
-    nameId: 'Skrip Latin',
     description: 'Latin alphabet and variants used in Western and many other languages',
     languages: [
       LANGUAGE_CODE.ID,
@@ -58,7 +57,6 @@ export const WRITING_SYSTEMS = [
   {
     code: 'cjk',
     name: 'CJK Unified Ideographs',
-    nameId: 'Ideografi CJK Terpadu',
     description: 'Chinese, Japanese, Korean unified characters and their variants',
     languages: [LANGUAGE_CODE.ZH, LANGUAGE_CODE.JA, LANGUAGE_CODE.KO],
     numberingSystems: ['jpan', 'hans', 'hant', 'kore', 'hanidec', 'fullwide'],
@@ -68,7 +66,6 @@ export const WRITING_SYSTEMS = [
   {
     code: 'arabic',
     name: 'Arabic Script',
-    nameId: 'Skrip Arab',
     description: 'Arabic alphabet and variants used in Arabic and other languages',
     languages: [
       LANGUAGE_CODE.AR,
@@ -85,7 +82,6 @@ export const WRITING_SYSTEMS = [
   {
     code: 'devanagari',
     name: 'Devanagari Script',
-    nameId: 'Skrip Devanagari',
     description: 'Devanagari script used in Hindi and other Indian languages',
     languages: [LANGUAGE_CODE.HI, LANGUAGE_CODE.MR, LANGUAGE_CODE.NE],
     numberingSystems: ['deva'],
@@ -95,7 +91,6 @@ export const WRITING_SYSTEMS = [
   {
     code: 'cyrillic',
     name: 'Cyrillic Script',
-    nameId: 'Skrip Cyrillic',
     description: 'Cyrillic alphabet used in Russian and other Slavic languages',
     languages: [
       LANGUAGE_CODE.RU,
@@ -116,7 +111,6 @@ export const WRITING_SYSTEMS = [
   {
     code: 'thai',
     name: 'Thai Script',
-    nameId: 'Skrip Thai',
     description: 'Thai script used in Thai language',
     languages: [LANGUAGE_CODE.TH],
     numberingSystems: ['thai'],
@@ -126,7 +120,6 @@ export const WRITING_SYSTEMS = [
   {
     code: 'bengali',
     name: 'Bengali Script',
-    nameId: 'Skrip Bengali',
     description: 'Bengali script used in Bengali and Assamese languages',
     languages: [LANGUAGE_CODE.BN, LANGUAGE_CODE.AS],
     numberingSystems: ['beng'],
@@ -136,7 +129,6 @@ export const WRITING_SYSTEMS = [
   {
     code: 'tamil',
     name: 'Tamil Script',
-    nameId: 'Skrip Tamil',
     description: 'Tamil script used in Tamil language',
     languages: [LANGUAGE_CODE.TA],
     numberingSystems: ['tamldec', 'taml'],
@@ -146,7 +138,6 @@ export const WRITING_SYSTEMS = [
   {
     code: 'telugu',
     name: 'Telugu Script',
-    nameId: 'Skrip Telugu',
     description: 'Telugu script used in Telugu language',
     languages: [LANGUAGE_CODE.TE],
     numberingSystems: ['telu'],
@@ -156,7 +147,6 @@ export const WRITING_SYSTEMS = [
   {
     code: 'kannada',
     name: 'Kannada Script',
-    nameId: 'Skrip Kannada',
     description: 'Kannada script used in Kannada language',
     languages: [LANGUAGE_CODE.KN],
     numberingSystems: ['knda'],
@@ -166,7 +156,6 @@ export const WRITING_SYSTEMS = [
   {
     code: 'malayalam',
     name: 'Malayalam Script',
-    nameId: 'Skrip Malayalam',
     description: 'Malayalam script used in Malayalam language',
     languages: [LANGUAGE_CODE.ML],
     numberingSystems: ['mlym'],
@@ -176,7 +165,6 @@ export const WRITING_SYSTEMS = [
   {
     code: 'gujarati',
     name: 'Gujarati Script',
-    nameId: 'Skrip Gujarati',
     description: 'Gujarati script used in Gujarati language',
     languages: [LANGUAGE_CODE.GU],
     numberingSystems: ['gujr'],
@@ -186,7 +174,6 @@ export const WRITING_SYSTEMS = [
   {
     code: 'gurmukhi',
     name: 'Gurmukhi Script',
-    nameId: 'Skrip Gurmukhi',
     description: 'Gurmukhi script used in Punjabi language',
     languages: [LANGUAGE_CODE.PA],
     numberingSystems: ['guru'],
@@ -196,7 +183,6 @@ export const WRITING_SYSTEMS = [
   {
     code: 'sinhala',
     name: 'Sinhala Script',
-    nameId: 'Skrip Sinhala',
     description: 'Sinhala script used in Sinhala language',
     languages: [LANGUAGE_CODE.SI] as LanguageCode[],
     numberingSystems: ['sinh'],
@@ -206,7 +192,6 @@ export const WRITING_SYSTEMS = [
   {
     code: 'georgian',
     name: 'Georgian Script',
-    nameId: 'Skrip Georgian',
     description: 'Georgian script used in Georgian language',
     languages: [LANGUAGE_CODE.KA],
     numberingSystems: ['geor'],
@@ -216,7 +201,6 @@ export const WRITING_SYSTEMS = [
   {
     code: 'armenian',
     name: 'Armenian Script',
-    nameId: 'Skrip Armenian',
     description: 'Armenian script used in Armenian language',
     languages: [LANGUAGE_CODE.HY],
     numberingSystems: ['armn'],
@@ -226,7 +210,6 @@ export const WRITING_SYSTEMS = [
   {
     code: 'ethiopic',
     name: 'Ethiopic Script',
-    nameId: 'Skrip Ethiopic',
     description: 'Ethiopic script used in Amharic and other Ethiopian languages',
     languages: [LANGUAGE_CODE.AM] as LanguageCode[],
     numberingSystems: ['ethi'],
@@ -236,7 +219,6 @@ export const WRITING_SYSTEMS = [
   {
     code: 'khmer',
     name: 'Khmer Script',
-    nameId: 'Skrip Khmer',
     description: 'Khmer script used in Khmer language',
     languages: [LANGUAGE_CODE.KM] as LanguageCode[],
     numberingSystems: ['khmr'],
@@ -246,7 +228,6 @@ export const WRITING_SYSTEMS = [
   {
     code: 'lao',
     name: 'Lao Script',
-    nameId: 'Skrip Lao',
     description: 'Lao script used in Lao language',
     languages: [LANGUAGE_CODE.LO] as LanguageCode[],
     numberingSystems: ['laoo'],
@@ -256,7 +237,6 @@ export const WRITING_SYSTEMS = [
   {
     code: 'myanmar',
     name: 'Myanmar Script',
-    nameId: 'Skrip Myanmar',
     description: 'Myanmar script used in Burmese language',
     languages: [LANGUAGE_CODE.MY] as LanguageCode[],
     numberingSystems: ['mymr'],
@@ -266,7 +246,6 @@ export const WRITING_SYSTEMS = [
   {
     code: 'greek',
     name: 'Greek Script',
-    nameId: 'Skrip Yunani',
     description: 'Greek script used in Greek language (included in Inter font)',
     languages: [LANGUAGE_CODE.EL],
     numberingSystems: ['grek'],
@@ -276,7 +255,6 @@ export const WRITING_SYSTEMS = [
   {
     code: 'hebrew',
     name: 'Hebrew Script',
-    nameId: 'Skrip Ibrani',
     description: 'Hebrew script used in Hebrew language (included in Inter font)',
     languages: [LANGUAGE_CODE.HE],
     numberingSystems: ['hebr'],
@@ -286,7 +264,6 @@ export const WRITING_SYSTEMS = [
   {
     code: 'odia',
     name: 'Odia Script',
-    nameId: 'Skrip Odia',
     description: 'Odia script used for the Odia language in India',
     languages: [LANGUAGE_CODE.OR] as LanguageCode[],
     numberingSystems: ['orya'],
@@ -296,7 +273,6 @@ export const WRITING_SYSTEMS = [
   {
     code: 'tibetan',
     name: 'Tibetan Script',
-    nameId: 'Skrip Tibet',
     description: 'Tibetan script used in Tibet and Bhutan',
     languages: [] as LanguageCode[],
     numberingSystems: ['tibt'],
@@ -306,7 +282,6 @@ export const WRITING_SYSTEMS = [
   {
     code: 'nko',
     name: 'N\u2019Ko Script',
-    nameId: 'Skrip N\u2019Ko',
     description: 'N\u2019Ko script used in West Africa (Mali, Guinea, Ivory Coast)',
     languages: [] as LanguageCode[],
     numberingSystems: ['nkoo'],
@@ -316,7 +291,6 @@ export const WRITING_SYSTEMS = [
   {
     code: 'adlam',
     name: 'Adlam Script',
-    nameId: 'Skrip Adlam',
     description: 'Adlam script used in Guinea and surrounding West Africa',
     languages: [] as LanguageCode[],
     numberingSystems: ['adlm'],

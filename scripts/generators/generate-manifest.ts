@@ -3,14 +3,34 @@ import { i18nConfig } from '@config/i18n';
 import { env } from '@generated/env';
 import { lookup } from '@generated/paths';
 import { logBox } from '@scripts/lib/logger';
+import { computeStringHash, isCacheValid, restoreCache, storeCache } from '@scripts/lib/pipeline-cache';
 import { writeFilePath } from '@scripts/lib/write-file';
 import { loadGlobalData } from '@utils/json5';
 
 const OUTPUT_PUBLIC = lookup('@public', 'manifest.json');
 const OUTPUT_DIST = lookup('@dist', 'manifest.json');
+const CACHE_KEY = 'manifest';
 
 const dataDir = lookup('@data');
 const global = loadGlobalData(dataDir);
+
+const sourceHash = computeStringHash(
+  JSON.stringify({ global, i18nConfig, env: { BASE_PATH: env.BASE_PATH, SITE_URL: env.SITE_URL } }),
+);
+
+if (isCacheValid(CACHE_KEY, sourceHash)) {
+  restoreCache(CACHE_KEY, OUTPUT_PUBLIC);
+  if (OUTPUT_PUBLIC !== OUTPUT_DIST) {
+    restoreCache(CACHE_KEY, OUTPUT_DIST);
+  }
+  logBox('Generate Manifest', {
+    Name: (global.site_name as string) || 'Starter',
+    Lang: i18nConfig.defaultLocale,
+    Theme: ((global.seo as Record<string, unknown>)?.theme_color as string) || '#020617',
+    Output: 'public/manifest.json (cached)',
+  });
+  process.exit(0);
+}
 
 const siteName = (global.site_name as string) || 'Starter';
 const siteDescription = (global.site_description as string) || 'A modern web application with i18n support';
@@ -68,6 +88,8 @@ const output = inject(template, {
 
 writeFilePath(OUTPUT_PUBLIC, output);
 writeFilePath(OUTPUT_DIST, output);
+
+storeCache(CACHE_KEY, OUTPUT_PUBLIC, sourceHash);
 
 logBox('Generate Manifest', {
   Name: siteName,

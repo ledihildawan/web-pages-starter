@@ -3,12 +3,14 @@ import path from 'node:path';
 import { env } from '@generated/env';
 import { lookup } from '@generated/paths';
 import { log, logBox } from '@scripts/lib/logger';
+import { computeStringHash, isCacheValid, storeCache } from '@scripts/lib/pipeline-cache';
 import { generatedHeader, writeFilePath } from '@scripts/lib/write-file';
 import sharp from 'sharp';
 
 const SOURCE_DIR = lookup('@assets', 'images');
 const OUTPUT_DIR = lookup('@public', 'assets', 'images');
 const MANIFEST_FILE = lookup('@generated', 'image-manifest.ts');
+const CACHE_KEY = 'images';
 
 const ASSET_PREFIX = env.BASE_PATH.replace(/\/$/, '');
 const imageUrl = (file: string): string => `${ASSET_PREFIX}/assets/images/${file}`;
@@ -99,10 +101,38 @@ function copyPassthrough(inputFile: string, outputName: string): void {
   fs.copyFileSync(inputFile, outFile);
 }
 
+function computeSourceHash(): string {
+  if (!fs.existsSync(SOURCE_DIR)) {
+    return '';
+  }
+  const entries = fs.readdirSync(SOURCE_DIR);
+  const fileInfos: Array<{ name: string; mtime: number }> = [];
+  for (const entry of entries) {
+    const inputPath = path.join(SOURCE_DIR, entry);
+    if (fs.statSync(inputPath).isFile()) {
+      const stat = fs.statSync(inputPath);
+      fileInfos.push({ name: entry, mtime: stat.mtimeMs });
+    }
+  }
+  return computeStringHash(JSON.stringify(fileInfos));
+}
+
 async function main(): Promise<void> {
   if (!fs.existsSync(SOURCE_DIR)) {
     log.warn('No assets/images/ directory found');
     return;
+  }
+
+  const sourceHash = computeSourceHash();
+
+  if (isCacheValid(CACHE_KEY, sourceHash)) {
+    logBox('Generate Images', {
+      Processed: '(cached)',
+      Passthrough: '(cached)',
+      Sizes: SIZES.join(', '),
+      Output: 'public/assets/images/',
+    });
+    process.exit(0);
   }
 
   fs.mkdirSync(OUTPUT_DIR, { recursive: true });
@@ -155,6 +185,8 @@ export const IMAGE_MANIFEST: Record<string, ImageEntry> = ${JSON.stringify(manif
 `;
 
   writeFilePath(MANIFEST_FILE, manifestContent);
+
+  storeCache(CACHE_KEY, OUTPUT_DIR, sourceHash);
 
   logBox('Generate Images', {
     Processed: String(processed),

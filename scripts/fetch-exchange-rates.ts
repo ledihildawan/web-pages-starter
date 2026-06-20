@@ -7,21 +7,111 @@ import { log } from './lib/logger';
 import { getCacheWithTTL, setCacheWithTTL } from './lib/pipeline-cache';
 import { writeFilePath } from './lib/write-file';
 
-const EXCHANGE_RATES_URL = 'https://api.frankfurter.dev/v2/rates';
+const EXCHANGE_RATES_URL = 'https://api.frankfurter.dev/v1';
+const FRANKFURTER_CURRENCIES_URL = `${EXCHANGE_RATES_URL}/currencies`;
+const FRANKFURTER_RATES_URL = `${EXCHANGE_RATES_URL}/latest`;
 const EXCHANGE_RATES_FILE = lookup('@generated', 'exchange-rates.ts');
 const BASE_CURRENCY = CURRENCY_CODE.USD;
 const TTL_MINUTES = 24 * 60;
+const PRICE_KEY_PATTERN = /^price_([a-z]{3})$/;
 
-function getActiveCurrencies(): Set<string> {
-  const currencies = new Set<string>([BASE_CURRENCY]);
-  for (const locale of getActiveLocales()) {
-    currencies.add(locale.currency);
+async function getFrankfurterCurrencies(): Promise<Set<string>> {
+  try {
+    const response = await fetch(FRANKFURTER_CURRENCIES_URL);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch currencies: ${response.statusText}`);
+    }
+    const data = await response.json();
+    return new Set(Object.keys(data));
+  } catch (error) {
+    log.warn(`Could not fetch Frankfurter currencies: ${error}. Using fallback list.`);
+    return new Set([
+      'AUD',
+      'BRL',
+      'CAD',
+      'CHF',
+      'CNY',
+      'EUR',
+      'GBP',
+      'HKD',
+      'HUF',
+      'IDR',
+      'INR',
+      'JPY',
+      'KRW',
+      'MXN',
+      'MYR',
+      'NOK',
+      'NZD',
+      'PHP',
+      'PLN',
+      'RON',
+      'SEK',
+      'SGD',
+      'THB',
+      'TRY',
+      'USD',
+      'ZAR',
+    ]);
   }
+}
+
+function getPricingCurrencies(whitelist: Set<string>): Set<string> {
+  const currencies = new Set<string>();
+  const pricingPath = lookup('@pages', 'pricing', 'data.json5');
+
+  if (!fs.existsSync(pricingPath)) {
+    log.warn(`Pricing data not found at ${pricingPath}`);
+    return currencies;
+  }
+
+  try {
+    const content = fs.readFileSync(pricingPath, 'utf-8');
+    const data = JSON.parse(content);
+    extractPriceKeys(data, currencies, whitelist);
+  } catch (error) {
+    log.warn(`Could not read pricing data: ${error}`);
+  }
+
+  return currencies;
+}
+
+function extractPriceKeys(obj: unknown, currencies: Set<string>, whitelist: Set<string>): void {
+  if (typeof obj !== 'object' || obj === null) return;
+
+  for (const [key, value] of Object.entries(obj)) {
+    const match = key.match(PRICE_KEY_PATTERN);
+    if (match && whitelist.has(match[1].toUpperCase())) {
+      currencies.add(match[1].toUpperCase());
+    }
+    if (typeof value === 'object' && value !== null) {
+      extractPriceKeys(value, currencies, whitelist);
+    }
+  }
+}
+
+function getActiveCurrencies(whitelist: Set<string>): Set<string> {
+  const currencies = new Set<string>([BASE_CURRENCY]);
+
+  for (const locale of getActiveLocales()) {
+    if (whitelist.has(locale.currency)) {
+      currencies.add(locale.currency);
+    }
+  }
+
+  const pricingCurrencies = getPricingCurrencies(whitelist);
+  for (const currency of pricingCurrencies) {
+    currencies.add(currency);
+  }
+
   return currencies;
 }
 
 async function fetchExchangeRates(): Promise<Record<string, number>> {
-  const url = `${EXCHANGE_RATES_URL}?base=${BASE_CURRENCY}`;
+  const whitelist = await getFrankfurterCurrencies();
+  const activeCurrencies = getActiveCurrencies(whitelist);
+
+  const url = `${FRANKFURTER_RATES_URL}?base=${BASE_CURRENCY}`;
 
   log.info(`Fetching from: ${url}`);
 
@@ -32,21 +122,18 @@ async function fetchExchangeRates(): Promise<Record<string, number>> {
 
   const raw = await response.json();
 
-  if (!Array.isArray(raw)) {
+  if (!raw.rates || typeof raw.rates !== 'object') {
     throw new Error('[i18n] Exchange rates API returned unexpected format');
   }
-
-  const activeCurrencies = getActiveCurrencies();
 
   const ratesObj: Record<string, number> = {
     [BASE_CURRENCY]: 1,
   };
 
-  for (const item of raw) {
-    if (typeof item !== 'object' || item === null) continue;
-    if (typeof item.quote !== 'string' || typeof item.rate !== 'number') continue;
-    if (activeCurrencies.has(item.quote)) {
-      ratesObj[item.quote] = item.rate;
+  for (const [currency, rate] of Object.entries(raw.rates)) {
+    if (typeof currency !== 'string' || typeof rate !== 'number') continue;
+    if (activeCurrencies.has(currency)) {
+      ratesObj[currency] = rate;
     }
   }
 

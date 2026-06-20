@@ -2,7 +2,6 @@ export const CALENDARS = [
   {
     code: 'gregory',
     name: 'Gregorian Calendar',
-    nameId: 'Kalender Gregorian',
     description: 'The internationally accepted civil calendar',
     eras: ['BC', 'AD'],
     months: 12,

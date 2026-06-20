@@ -184,8 +184,8 @@ function deletePage(pageInfo: PageInfo): {
   let localeFilesDeleted = 0;
   const localesDir = lookup('@locales');
   if (fs.existsSync(localesDir)) {
-    for (const lng of fs.readdirSync(localesDir)) {
-      const localeFile = path.join(localesDir, lng, `${pageInfo.pageId}.json`);
+    for (const localeCode of fs.readdirSync(localesDir)) {
+      const localeFile = path.join(localesDir, localeCode, `${pageInfo.pageId}.json`);
       if (fs.existsSync(localeFile)) {
         fs.rmSync(localeFile, { force: true });
         localeFilesDeleted++;

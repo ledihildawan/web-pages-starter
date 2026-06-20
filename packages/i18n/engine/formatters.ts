@@ -495,16 +495,18 @@ export const formatList = (items: string[], options?: ListFormatOptions) => {
 
 export const localPrice = (plan: RegionalPrice): number => {
   const locale = getLocale();
+  const currency = getCurrency(locale);
+  const priceKey = `price_${currency.toLowerCase()}`;
 
-  if (!plan?.pricing) {
+  if (!plan?.prices) {
     return 0;
   }
 
-  if (plan.pricing[locale]) {
-    return plan.pricing[locale];
+  if (priceKey in plan.prices) {
+    return plan.prices[priceKey] as number;
   }
 
-  return plan.pricing.base;
+  return plan.prices.price_usd;
 };
 
 export const localPriceCurrency = (_plan: RegionalPrice) => {

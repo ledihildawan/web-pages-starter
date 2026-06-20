@@ -49,7 +49,7 @@ Requires [Python 3](https://python.org) with `fonttools` + `brotli` (`pip instal
   * **CLI Scripts:** Must reside in their respective package folders (e.g., `packages/i18n/cli/`, `packages/env/cli/`), not in a global `scripts/` directory.
   * **Rsbuild Config:** `rsbuild.config.ts` is strictly a Jiti wrapper. The actual configuration lives in `configs/rsbuild.ts`.
 * **Imports & Path Aliases:**
-  * Use predefined aliases everywhere (`@i18n`, `@template-engine`, `@page-system`, `@config/*`, `@scripts/*`, `@utils/*`, `@generated/*`, `@assets/*`, `@data/*`, `@dist/*`, `@layouts/*`, `@locales/*`, `@pages/*`, `@public/*`, `@shared/*`).
+  * Use predefined aliases everywhere (`@i18n`, `@env`, `@template-engine`, `@page-system`, `@config/*`, `@scripts/*`, `@utils/*`, `@generated/*`, `@assets/*`, `@data/*`, `@dist/*`, `@layouts/*`, `@locales/*`, `@pages/*`, `@public/*`, `@shared/*`).
   * Use `@generated/env` for environment imports (never `@utils/env`).
   * Use `@generated/paths` for path helpers (`lookup()`, `find()`, `alias`).
   * `tsconfig.json` is the single source of truth for aliases (`scripts/generators/generate-paths.ts` reads and auto-derives them into `generated/paths.ts` for Jiti/bundlers).
@@ -64,7 +64,7 @@ bun run build -- --debug   # skip JS/CSS minify
 bun run preview            # build (BUILD_PREVIEW=true) + serve via tunnel
 ```
 
-Build pipeline: `generate-paths → generate-env → generate-active-locales → sync-system-pages → clean-cache → fetch-exchange-rates → generate-fonts-css → sync-locales → generate-types → build.ts → subset-fonts → compress`
+Build pipeline: `generate-paths → generate-env → generate-active-locales → sync-system-pages → clean:cache → fetch:rates → generate:fonts → sync-locales → generate-types → build.ts → subset-fonts → compress`
 
 ## Testing
 
@@ -222,7 +222,7 @@ Templates: `paths.ts`, `env.ts`, `exchange-rates.ts`, `service-worker.js`, `site
 ## Shared Constants
 
 - `packages/i18n/constants.ts` — `DEFAULT_NAMESPACE` (`'common'`), `I18N_ASSET_DIR` (`'assets/i18n'`), `FONTS_CSS_PATH` (`'assets/fonts/fonts.css'`). Imported via `@i18n` barrel.
-- `packages/page-system/system-pages.ts` — `FALLBACK_LOCALE` (`'en-US'`) for slug lookup fallback.
+- `packages/page-system/system-pages.ts` — `FALLBACK_LOCALE` (derived from `i18nConfig.defaultLocale`) for slug lookup fallback.
 - `configs/rsbuild.ts` — `CHUNK_NAMES` constant (shared between cacheGroups + pluginPreloadChunks).
 - `scripts/lib/write-file.ts` — `COMMENT_EXCLUDED_FILES` (files excluded from comment headers: `sitemap.xml`, `robots.txt`, `manifest.json`, `favicon.svg`, `og-image.svg`).
 
@@ -234,7 +234,7 @@ Templates: `paths.ts`, `env.ts`, `exchange-rates.ts`, `service-worker.js`, `site
 - **File mods**: use `bun` or script in `temp/` — avoid PowerShell
 - **Never add dependency** without user approval
 - **After changing `i18nConfig`**: re-run `bun run dev` or `bun run build` to regenerate active locale data, font CSS, and exchange rates
-- **Adding a locale to `LOCALES`**: also add entries to `SYSTEM_PAGE_SLUGS` in `packages/page-system/system-pages.ts` (getSystemPageSlug warns in dev if missing). Update `FALLBACK_LOCALE` if the default locale changes.
+- **Adding a locale to `LOCALES`**: also add entries to `SYSTEM_PAGE_SLUGS` in `packages/page-system/system-pages.ts` (getSystemPageSlug warns in dev if missing). `FALLBACK_LOCALE` auto-derives from `i18nConfig.defaultLocale`.
 - **No hardcoded values**: all config must be dynamic. Font names from `fontsConfig`, locale codes from `i18nConfig`, chunk names from `CHUNK_NAMES`, namespaces from `DEFAULT_NAMESPACE`, asset paths from `I18N_ASSET_DIR`/`FONTS_CSS_PATH`. Flag CDN from `global.json5` → `import.meta.env.FLAG_CDN_BASE`.
 - Husky pre-commit: Biome → typecheck → test (all must pass)
 

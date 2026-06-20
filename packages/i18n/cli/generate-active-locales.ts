@@ -57,7 +57,7 @@ function serializeWritingSystem(ws: (typeof WRITING_SYSTEMS)[number]): string {
   const nsList = ws.numberingSystems.map((ns: string) => `'${ns}'`).join(', ');
   const desc = ws.description.replace(/'/g, "\\'");
   const font = ws.defaultFont.replace(/'/g, "\\'");
-  return `  { code: '${ws.code}', name: '${ws.name}', nameId: '${ws.nameId}', description: '${desc}', languages: [${langs}], numberingSystems: [${nsList}], direction: '${ws.direction}', defaultFont: '${font}' }`;
+  return `  { code: '${ws.code}', name: '${ws.name}', description: '${desc}', languages: [${langs}], numberingSystems: [${nsList}], direction: '${ws.direction}', defaultFont: '${font}' }`;
 }
 
 const filteredWritingSystem = Object.fromEntries(

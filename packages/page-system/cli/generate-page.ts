@@ -136,11 +136,11 @@ try {
 
   const baseLocaleDir = lookup('@locales');
   if (fs.existsSync(baseLocaleDir)) {
-    for (const lng of getActiveLocaleCodes()) {
-      const filePath = path.join(baseLocaleDir, lng, `${pageId}.json`);
+    for (const localeCode of getActiveLocaleCodes()) {
+      const filePath = path.join(baseLocaleDir, localeCode, `${pageId}.json`);
       if (!fs.existsSync(filePath)) {
         fs.writeFileSync(filePath, localeContent, 'utf-8');
-        log.info(`Created locale [${lng}]: locales/${lng}/${pageId}.json`);
+        log.info(`Created locale [${localeCode}]: locales/${localeCode}/${pageId}.json`);
       }
     }
   }

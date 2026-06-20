@@ -1,7 +1,8 @@
+import { i18nConfig } from '@config/i18n';
 import { env } from '@generated/env';
 
 export const ROOT_PAGE = 'home';
-export const FALLBACK_LOCALE = 'en-US';
+export const FALLBACK_LOCALE = i18nConfig.defaultLocale;
 
 export const SYSTEM_PAGE_IDS = [
   ROOT_PAGE,
