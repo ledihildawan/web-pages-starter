@@ -179,35 +179,20 @@ async function bootstrap() {
     }
 
     const savedLocale = window.__SAVED_LOCALE__ || window.__SERVER_LOCALE__;
-    const isDefaultLocale = savedLocale === window.__SERVER_LOCALE__;
 
-    if (isDefaultLocale) {
-      globalThis.Alpine.start();
+    const { i18next, initIntl } = await import(/* webpackPreload: true */ '@i18n/runtime/runtime');
 
-      fonts.preloadActiveFont();
-      fonts.loadLanguageFonts();
-      fonts.watchScriptAndLoadFont();
-
-      import(/* webpackPreload: true */ '@i18n/runtime/runtime').then(({ i18next, initIntl }) => {
-        if (!i18next.isInitialized) initIntl(savedLocale);
-      });
-
-      registerServiceWorker();
-    } else {
-      const { i18next, initIntl } = await import(/* webpackPreload: true */ '@i18n/runtime/runtime');
-
-      if (!i18next.isInitialized) {
-        await initIntl(savedLocale);
-      }
-
-      globalThis.Alpine.start();
-
-      fonts.preloadActiveFont();
-      fonts.loadLanguageFonts();
-      fonts.watchScriptAndLoadFont();
-
-      registerServiceWorker();
+    if (!i18next.isInitialized) {
+      await initIntl(savedLocale);
     }
+
+    globalThis.Alpine.start();
+
+    fonts.preloadActiveFont();
+    fonts.loadLanguageFonts();
+    fonts.watchScriptAndLoadFont();
+
+    registerServiceWorker();
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : String(error);
 
