@@ -18,7 +18,7 @@
       <ul class="hidden lg:flex items-center gap-2 me-4">
         {% for item in global.menu.header %}
           <li class="relative group/dd">
-            <a href="{{ url(item.url) }}" class="text-[13px] font-bold px-4 pbs-2.5 pbe-2.5 radius-icon transition-[color,background-color] duration-300 flex items-center gap-1.5 relative" :class="isActive('{{ item.url }}') ? 'text-white bg-white/5' : 'text-slate-400 hover:text-white hover:bg-white/5'" :aria-current="isActive('{{ item.url }}') ? 'page' : undefined">
+            <a href="{{ url(item.url) }}" class="text-[13px] font-bold px-4 pbs-2.5 pbe-2.5 radius-icon transition-[color,background-color] duration-300 flex items-center gap-1.5 relative" :class="isActive('{{ item.url }}') ? 'text-white bg-white/5' : 'text-slate-400 hover:text-white hover:bg-white/5'" :aria-current="isActive('{{ item.url }}') ? 'page' : false">
               {{ i18n.t(item.label) }}
               {% if item.children %}
                 {{ icon.icon('chevron-down', 'inline-3 block-3 transition-transform duration-200 opacity-20 group-hover/dd:rotate-180 group-hover/dd:opacity-100 group-focus-within/dd:rotate-180 group-focus-within/dd:opacity-100', size='md') }}
@@ -85,6 +85,7 @@
       id="mobile-menu"
       x-ref="mobileMenu"
       x-show="mobileMenuOpen"
+      x-trap="mobileMenuOpen"
       x-cloak
       x-transition:enter="transition ease-emphasized duration-700"
       x-transition:enter-start="-translate-y-full"

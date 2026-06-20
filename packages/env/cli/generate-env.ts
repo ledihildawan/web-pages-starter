@@ -73,13 +73,31 @@ function emptyDefault(type: EnvType): string {
 const schema = new Map<string, EnvType>();
 const privateKeys = new Set<string>();
 
-for (const file of ENV_FILES) {
+const STAGE_ORDER = ['dev', 'qa', 'uat', 'preprod', 'prod'];
+const getStagePriority = (file: string): number => {
+  const match = file.match(/^\.env\.(\w+)$/);
+  if (!match) return -1;
+  const stage = match[1];
+  const idx = STAGE_ORDER.indexOf(stage);
+  return idx === -1 ? -1 : idx;
+};
+
+const sortedEnvFiles = ENV_FILES.sort((a, b) => {
+  const priorityA = getStagePriority(a);
+  const priorityB = getStagePriority(b);
+  if (priorityA === -1 && priorityB === -1) return a.localeCompare(b);
+  if (priorityA === -1) return -1;
+  if (priorityB === -1) return 1;
+  return priorityB - priorityA;
+});
+
+for (const file of sortedEnvFiles) {
   for (const entry of parseEnvFile(path.join(ROOT, file))) {
-    if (!schema.has(entry.key)) {
-      schema.set(entry.key, entry.type);
-    }
+    schema.set(entry.key, entry.type);
     if (entry.isPrivate) {
       privateKeys.add(entry.key);
+    } else {
+      privateKeys.delete(entry.key);
     }
   }
 }

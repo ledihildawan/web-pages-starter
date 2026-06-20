@@ -735,7 +735,7 @@ export const createTemplateParams = (
     "default-src 'self'",
     `script-src 'self' 'nonce-${cspNonce}'`,
     `style-src 'self' 'nonce-${cspNonce}'`,
-    `img-src 'self' data:${domains.map((d) => ` ${d}`).join('')}`,
+    `img-src 'self' data: ${domains.join(' ')}`,
     "font-src 'self' data:",
     "connect-src 'self'",
     "base-uri 'self'",
