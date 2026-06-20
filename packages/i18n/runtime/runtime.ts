@@ -292,8 +292,19 @@ export async function initIntl(localeOverride?: string): Promise<void> {
   setStrategies(strategies.cardinal, strategies.ordinal);
 
   try {
-    const response = await fetch(`${env.BASE_PATH}${I18N_ASSET_DIR}/${pageID}/${savedLocale}.json`);
-    const data = await response.json();
+    interface WindowWithI18n extends Window {
+      __INITIAL_I18N_DATA__?: Record<string, Record<string, unknown>>;
+    }
+    const win = window as WindowWithI18n;
+
+    let data: Record<string, Record<string, unknown>>;
+
+    if (savedLocale === i18nConfig.defaultLocale && win.__INITIAL_I18N_DATA__) {
+      data = win.__INITIAL_I18N_DATA__;
+    } else {
+      const response = await fetch(`${env.BASE_PATH}${I18N_ASSET_DIR}/${pageID}/${savedLocale}.json`);
+      data = await response.json();
+    }
 
     const resources: Resource = {
       [savedLocale]: data,

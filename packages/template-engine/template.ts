@@ -1,4 +1,3 @@
-import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fontsConfig } from '@config/fonts';
@@ -207,6 +206,8 @@ const generateClientI18nScript = (
       fs.renameSync(tmpPath, filePath);
     }
 
+    const initialI18nData = JSON.stringify(allI18nData[lang]);
+
     script = `<script>
 (() => {
   const defaultLocale = ${JSON.stringify(lang)};
@@ -223,6 +224,7 @@ const generateClientI18nScript = (
   window.__PAGE_ID__ = ${JSON.stringify(name)};
   window.__SAVED_LOCALE__ = savedLocale;
   window.__SERVER_LOCALE__ = defaultLocale;
+  window.__INITIAL_I18N_DATA__ = ${initialI18nData};
 
   const htmlEl = document.documentElement;
   if (savedLocale !== htmlEl.getAttribute('lang')) {
@@ -675,7 +677,7 @@ export const createTemplateParams = (
 
   const isSingleLocale = LOCALE_CODES.length <= 1;
 
-  const cspNonce = crypto.randomBytes(16).toString('base64');
+  const cspNonce = '__CSP_NONCE__';
 
   const basePath = env.BASE_PATH;
 

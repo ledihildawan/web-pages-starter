@@ -216,14 +216,19 @@ const pluginInlineCss = (): RsbuildPlugin => ({
           const cssDir = href.substring(0, href.lastIndexOf('/'));
           css = css.replace(/(?:src:\s*)?url\(\s*['"]?([^'")\s]+)['"]?\s*\)/g, (match, url: string) => {
             if (url.startsWith('/') || url.startsWith('http') || url.startsWith('data:')) return match;
-            return `url(${cssDir}/${url.replace(/^\.\//, '')})`;
+            const newUrl = `url(${cssDir}/${url.replace(/^\.\//, '')})`;
+            return match.startsWith('src:') ? `src: ${newUrl}` : newUrl;
           });
-          const minified = lightningcss.transform({
-            code: Buffer.from(css),
-            filename: path.basename(cssPath),
-            minify: true,
-          });
-          css = minified.code.toString();
+
+          if (!cssPath.includes('fonts.css')) {
+            const minified = lightningcss.transform({
+              code: Buffer.from(css),
+              filename: path.basename(cssPath),
+              minify: true,
+            });
+            css = minified.code.toString();
+          }
+
           html = html.replace(tag, `<style nonce="${nonce}">${css}</style>`);
           modified = true;
           inlined++;
@@ -492,7 +497,7 @@ export default defineConfig({
               {
                 loader: 'simple-nunjucks-loader',
                 options: {
-                  autoescape: true,
+                  autoescape: false,
                   searchPaths: [lookup('@pages'), lookup('@layouts'), lookup('@')],
                   assetsPaths: [lookup('@assets')],
                 },
@@ -522,5 +527,18 @@ export default defineConfig({
       }
       return createTemplateParams(params, LOCALE_STORAGE_KEY, getActiveLocaleCodes());
     },
+    tags: [
+      {
+        tag: 'link',
+        attrs: {
+          rel: 'stylesheet',
+          href: '/assets/fonts/fonts.css',
+          nonce: '__CSP_NONCE__',
+        },
+      },
+    ],
+  },
+  security: {
+    nonce: '__CSP_NONCE__',
   },
 });

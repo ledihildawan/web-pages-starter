@@ -104,6 +104,20 @@ for (const step of PIPELINE_STEPS.POST_BUILD) {
   if (!runStep(step)) process.exit(1);
 }
 
+log.info('\n--- Copying i18n assets ---');
+const i18nSrc = lookup('@public', 'assets/i18n');
+const i18nDest = lookup('@dist', 'assets/i18n');
+if (fs.existsSync(i18nSrc)) {
+  if (fs.existsSync(i18nDest)) {
+    fs.rmSync(i18nDest, { recursive: true, force: true });
+  }
+  fs.cpSync(i18nSrc, i18nDest, { recursive: true });
+  const count = fs
+    .readdirSync(i18nDest, { recursive: true })
+    .filter((f): f is string => typeof f === 'string' && !fs.statSync(path.join(i18nDest, f)).isDirectory()).length;
+  log.info(`  Copied ${count} i18n file(s) to dist`);
+}
+
 log.info('\n┌──────────────────────────────────────────┐');
 log.info('│           Build completed                │');
 log.info('├──────────────────────────────────────────┤');

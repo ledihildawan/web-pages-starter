@@ -14,6 +14,7 @@ const HTML_RE = /\.html?$/;
 const SW_RE = /\/sw\.js$/;
 const ONE_YEAR = 31_536_000;
 const ONE_HOUR = 3_600;
+const NONCE_PLACEHOLDER = '__CSP_NONCE__';
 
 const getCacheControl = (urlPath: string): string => {
   if (SW_RE.test(urlPath)) return 'no-store, no-cache, must-revalidate, max-age=0';
@@ -59,6 +60,42 @@ export function getPageNames(distDir: string): string[] {
   return scanHtmlFiles(distDir, '').map((f) => f.key);
 }
 
+function generateNonce(): string {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+
+  const bytes = new Uint8Array(16);
+
+  crypto.getRandomValues(bytes);
+
+  let nonce = '';
+
+  for (const byte of bytes) {
+    nonce += chars[byte % chars.length];
+  }
+
+  return nonce;
+}
+
+function injectNonce(html: string, nonce: string): string {
+  const nonceAttrPattern = new RegExp(`nonce=["']${NONCE_PLACEHOLDER}["']`, 'g');
+
+  let result = html.replace(nonceAttrPattern, `nonce="${nonce}"`);
+
+  const cspMetaMatch = result.match(
+    /<meta[^>]+http-equiv=["']Content-Security-Policy["'][^>]+content=["']([^"']+)["']/i,
+  );
+
+  if (cspMetaMatch) {
+    const oldCsp = cspMetaMatch[1];
+
+    const newCsp = oldCsp.replace(/nonce-[^;']+/g, `nonce-${nonce}`);
+
+    result = result.replace(cspMetaMatch[0], cspMetaMatch[0].replace(oldCsp, newCsp));
+  }
+
+  return result;
+}
+
 export function createStaticApp(distDir: string, htmlCache?: Map<string, string>): Hono {
   const cache = htmlCache ?? loadHtmlCache(distDir);
 
@@ -95,24 +132,34 @@ export function createStaticApp(distDir: string, htmlCache?: Map<string, string>
 
     if (STATIC_ASSET_RE.test(reqPath)) return c.notFound();
 
-    if (reqPath === '/') {
-      const home = cache.get('index');
+    let html: string | undefined;
 
-      if (home) return c.html(home);
+    if (reqPath === '/') {
+      html = cache.get('index');
+    } else {
+      const cleanPath = reqPath.replace(/^\/+|\/+$/g, '');
+
+      html = cache.get(cleanPath);
+    }
+
+    if (!html) {
+      const notFoundSlug = getSystemPageSlug('not-found', i18nConfig.defaultLocale);
+      const notFound = cache.get(notFoundSlug);
+
+      if (notFound) {
+        const nonce = generateNonce();
+        const processedHtml = injectNonce(notFound, nonce);
+
+        return c.html(processedHtml, 404);
+      }
 
       return c.notFound();
     }
 
-    const cleanPath = reqPath.replace(/^\/+|\/+$/g, '');
+    const nonce = generateNonce();
+    const processedHtml = injectNonce(html, nonce);
 
-    if (cache.has(cleanPath)) return c.html(cache.get(cleanPath) as string);
-
-    const notFoundSlug = getSystemPageSlug('not-found', i18nConfig.defaultLocale);
-    const notFound = cache.get(notFoundSlug);
-
-    if (notFound) return c.html(notFound, 404);
-
-    return c.notFound();
+    return c.html(processedHtml);
   });
 
   return app;
