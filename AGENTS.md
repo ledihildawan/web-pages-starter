@@ -103,15 +103,16 @@ Shared locales are auto-detected by scanning templates for `i18n.t('namespace:..
 
 ```
 pages/
-  _components/     ← underscore prefix = NOT a page (skipped by scanner)
-  _features/       ← underscore prefix = NOT a page (page-local capability modules)
-  (marketing)/     ← parentheses = group folder (stripped from URL)
-    home/          ← /home
-    about/         ← /about
-  services/        ← nested folder = /services
-    web/           ← /services/web
+  _ui/            ← underscore prefix = NOT a page (page-local UI)
+  _features/      ← underscore prefix = NOT a page (page-local capability modules)
+  _components/    ← underscore prefix = NOT a page (DEPRECATED: use _ui/)
+  (marketing)/   ← parentheses = group folder (stripped from URL)
+    home/         ← /home
+    about/        ← /about
+  services/       ← nested folder = /services
+    web/          ← /services/web
   blog/
-    [slug]/        ← dynamic page (generates from data.json5)
+    [slug]/       ← dynamic page (generates from data.json5)
       index.njk
     data.json5     ← { items: [{ slug: "getting-started", title: "..." }] }
 ```
@@ -126,8 +127,8 @@ pages/home/
   script.ts        ← page-specific JS (optional, like script.js)
   style.css        ← page-specific CSS (optional, like style.css)
   data.json5       ← page metadata: page_id, SEO (optional)
-  _components/    ← page-local dumb UI components (underscore = not a page)
-  _features/       ← page-local capability modules (underscore = not a page)
+  _ui/            ← page-local UI components (underscore = not a page)
+  _features/      ← page-local capability modules (underscore = not a page)
 ```
 
 - No `script.ts` → uses `shared/page-entry.ts` as fallback entry

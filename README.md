@@ -39,7 +39,7 @@ Requires [Bun](https://bun.sh) `>= 1.3.14`.
 │       ├── data.json5     #   page data — page_id, SEO, layout (optional)
 │       ├── script.ts      #   page-specific JS (optional, auto-injects bootstrap)
 │       ├── style.css      #   page styles (optional, auto-loaded if exists)
-│       ├── _components/   #   page-local dumb UI components (underscore = not a page)
+│       ├── _ui/           #   page-local UI components (underscore = not a page)
 │       └── _features/     #   page-local capability modules (carousel, contact-form, etc.)
 ├── locales/               # translation source of truth (136 locales)
 │   └── {locale}/
