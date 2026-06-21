@@ -8,8 +8,8 @@ import { env } from '@generated/env';
 import { lookup } from '@generated/paths';
 import sharp from 'sharp';
 
-const SOURCE_DIR = lookup('@assets', ASSET_PATHS.images);
-const OUTPUT_DIR = lookup('@public', ASSET_PATHS.images);
+const SOURCE_DIR = lookup('@assets', 'images');
+const OUTPUT_DIR = lookup('@public', 'assets', 'images');
 const MANIFEST_FILE = lookup('@generated', 'image-manifest.ts');
 const CACHE_KEY = 'images';
 

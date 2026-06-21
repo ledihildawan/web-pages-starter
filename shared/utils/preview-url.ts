@@ -6,8 +6,11 @@ const PREVIEW_URL_FILE = path.join(TEMP_DIR, 'preview-url.json');
 
 const DEFAULT_EXPIRES_IN_MINUTES = 60;
 
-interface SavedPreviewUrl {
+export type TunnelProvider = 'ngrok' | 'cloudflared';
+
+export interface SavedPreviewUrl {
   url: string;
+  provider: TunnelProvider;
   savedAt: string;
   expiresAt: string;
 }
@@ -26,6 +29,7 @@ export async function verifyUrlAccessible(url: string): Promise<boolean> {
 
 export async function savePreviewUrl(
   url: string,
+  provider: TunnelProvider,
   expiresInMinutes: number = DEFAULT_EXPIRES_IN_MINUTES,
 ): Promise<void> {
   if (!existsSync(TEMP_DIR)) {
@@ -37,6 +41,7 @@ export async function savePreviewUrl(
 
   const data: SavedPreviewUrl = {
     url,
+    provider,
     savedAt: now.toISOString(),
     expiresAt: expiresAt.toISOString(),
   };

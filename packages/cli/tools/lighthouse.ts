@@ -5,30 +5,11 @@ import process from 'node:process';
 import { log, logBox } from '@core/utils/logger';
 import { setupSigintHandler, wrapMainError } from '@core/utils/signal-handler';
 import { env } from '@generated/env';
-import { lookup } from '@generated/paths';
+import { isExpired, loadPreviewUrl } from '@shared/utils/preview-url';
 import inquirer from 'inquirer';
 import { DOMParser } from 'linkedom';
 
-const PREVIEW_URL_FILE = lookup('@public', '.preview-url.json');
 const OUTPUT_DIR = env.LIGHTHOUSE_OUTPUT_DIR;
-
-interface PreviewData {
-  url: string;
-  timestamp: number;
-}
-
-async function getPreviewUrl(): Promise<string | null> {
-  if (!fs.existsSync(PREVIEW_URL_FILE)) return null;
-  try {
-    const content = fs.readFileSync(PREVIEW_URL_FILE, 'utf-8');
-    const data = JSON.parse(content) as PreviewData;
-    const maxAge = 2 * 60 * 60 * 1000;
-    if (Date.now() - data.timestamp > maxAge) return null;
-    return data.url;
-  } catch {
-    return null;
-  }
-}
 
 const hasNgrokFlag = (args: string[]) => args.includes('--ngrok');
 const isNgrokUrl = (url: string) => url.includes('ngrok');
@@ -194,12 +175,12 @@ Options:
   if (baseIdx !== -1 && cliArgs[baseIdx + 1]) {
     baseUrl = cliArgs[baseIdx + 1];
   } else {
-    const previewUrl = await getPreviewUrl();
-    if (!previewUrl) {
-      log.error('Preview server not running. Start with bun run preview first.');
+    const saved = await loadPreviewUrl();
+    if (!saved || isExpired(saved)) {
+      log.error('Preview server not running or URL expired. Start with bun run preview first.');
       process.exit(1);
     }
-    baseUrl = previewUrl;
+    baseUrl = saved.url;
   }
 
   const base = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;

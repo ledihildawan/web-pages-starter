@@ -11,36 +11,13 @@ import type { serve } from '@hono/node-server';
 import ngrok from '@ngrok/ngrok';
 import { getErrorPageSlugs, getRootPageSlug } from '@page-system';
 import { createStaticApp, getPageNames, loadHtmlCache } from '@shared/utils/hono-server';
+import { loadPreviewUrl, savePreviewUrl, type TunnelProvider, verifyUrlAccessible } from '@shared/utils/preview-url';
 import inquirer from 'inquirer';
 
 const PORT = env.PORT;
 const HOST = env.HOST;
 const LOCAL_URL = `http://localhost:${PORT}`;
 const DIST = lookup('@dist');
-
-const PREVIEW_URL_FILE = lookup('@public', '.preview-url.json');
-
-type TunnelProvider = 'ngrok' | 'cloudflared';
-
-interface PreviewData {
-  url: string;
-  provider: TunnelProvider;
-  timestamp: number;
-}
-
-function savePreviewUrl(url: string, provider: TunnelProvider): void {
-  const data: PreviewData = { url, provider, timestamp: Date.now() };
-  fs.writeFileSync(PREVIEW_URL_FILE, JSON.stringify(data, null, 2), 'utf-8');
-}
-
-async function verifyUrlAccessible(url: string): Promise<boolean> {
-  try {
-    const response = await fetch(url, { method: 'HEAD' });
-    return response.ok;
-  } catch {
-    return false;
-  }
-}
 
 const TEXT_EXTS = ['.html', '.css', '.js', '.json', '.xml', '.txt', '.svg', '.webmanifest'];
 
@@ -164,19 +141,6 @@ const startCloudflaredTunnel = (): Promise<{ url: string; kill: () => void }> =>
 
 const DIST_EXISTS = (): boolean => fs.existsSync(DIST);
 
-const loadSavedPreviewUrl = (): { url: string; provider: TunnelProvider } | null => {
-  if (!fs.existsSync(PREVIEW_URL_FILE)) return null;
-  try {
-    const data = JSON.parse(fs.readFileSync(PREVIEW_URL_FILE, 'utf-8')) as PreviewData;
-    if (data.url && data.provider) {
-      return { url: data.url, provider: data.provider };
-    }
-    return null;
-  } catch {
-    return null;
-  }
-};
-
 interface AutoDetectResult {
   action: 'skip' | 'replace' | 'rebuild';
   reason: string;
@@ -184,7 +148,7 @@ interface AutoDetectResult {
 }
 
 const autoDetectAction = async (provider: TunnelProvider): Promise<AutoDetectResult> => {
-  const saved = loadSavedPreviewUrl();
+  const saved = loadPreviewUrl();
 
   if (!DIST_EXISTS()) {
     return { action: 'rebuild', reason: 'dist/ not found' };

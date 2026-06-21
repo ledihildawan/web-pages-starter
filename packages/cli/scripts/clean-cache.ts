@@ -10,6 +10,8 @@ const dirs = [
   lookup('@public', 'assets'),
 ];
 
+const files = [lookup('@public', '.preview-url.json')];
+
 for (const dir of dirs) {
   try {
     if (fs.existsSync(dir)) {
@@ -18,6 +20,17 @@ for (const dir of dirs) {
     }
   } catch {
     log.warn(`Warning: Could not remove ${dir}`);
+  }
+}
+
+for (const file of files) {
+  try {
+    if (fs.existsSync(file)) {
+      fs.unlinkSync(file);
+      log.info(`  Removed: ${path.relative(process.cwd(), file)}`);
+    }
+  } catch {
+    log.warn(`Warning: Could not remove ${file}`);
   }
 }
 
