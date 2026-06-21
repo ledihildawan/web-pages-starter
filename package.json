@@ -11,13 +11,13 @@
     "bun": ">=1.3.14"
   },
   "scripts": {
-    "dev": "bun ./scripts/dev.ts",
-    "build": "bun ./scripts/build.ts",
-    "preview": "bun ./scripts/cli/preview.ts",
-    "serve": "bun ./scripts/serve.ts",
-    "clean:cache": "bun ./scripts/clean-cache.ts",
-    "clean:pipeline": "bun -e \"import { clearPipelineCache } from './scripts/lib/pipeline-cache.ts'; clearPipelineCache(); console.log('Pipeline cache cleared');\"",
-    "cli": "bun ./scripts/cli/menu.ts",
+    "dev": "bun ./packages/cli/scripts/dev.ts",
+    "build": "bun ./packages/cli/scripts/build.ts",
+    "preview": "bun ./packages/cli/tools/preview.ts",
+    "serve": "bun ./packages/cli/scripts/serve.ts",
+    "clean:cache": "bun ./packages/cli/scripts/clean-cache.ts",
+    "clean:pipeline": "bun -e \"import { clearPipelineCache } from '@core/utils/pipeline-cache'; clearPipelineCache(); console.log('Pipeline cache cleared');\"",
+    "cli": "bun ./packages/cli/tools/menu.ts",
     "typecheck": "bunx tsc --noEmit",
     "test": "rstest",
     "prepare": "husky && git config merge.generated.name 'auto-resolve generated files' 2>/dev/null; git config merge.generated.driver true 2>/dev/null; true"

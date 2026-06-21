@@ -28,8 +28,8 @@
       "@/*": ["./*"],
       "@assets/*": ["./assets/*"],
       "@config/*": ["./configs/*"],
-      "@constants": ["./shared/constants/index.ts"],
-      "@constants/*": ["./shared/constants/*"],
+      "@constants": ["./packages/core/constants/index.ts"],
+      "@constants/*": ["./packages/core/constants/*"],
       "@data/*": ["./data/*"],
       "@dist/*": ["./dist/*"],
       "@features/*": ["./features/*"],
@@ -48,14 +48,20 @@
       "@template-engine/*": ["./packages/template-engine/*"],
       "@page-system": ["./packages/page-system/index.ts"],
       "@page-system/*": ["./packages/page-system/*"],
-      "@codegen": ["./packages/codegen/index.ts"],
-      "@codegen/*": ["./packages/codegen/*"],
-      "@env": ["./packages/env/index.ts"],
-      "@env/*": ["./packages/env/*"],
-      "@scripts/*": ["./scripts/*"]
+      "@cli/*": ["./packages/cli/*"],
+      "@core/*": ["./packages/core/*"]
     },
     "types": ["bun-types", "node"]
   },
   "include": ["**/*.ts"],
-  "exclude": ["dist", "node_modules", "temp", "coverage", "packages/codegen/templates"]
+  "exclude": [
+    "dist",
+    "node_modules",
+    "temp",
+    "coverage",
+    "packages/cli/templates/**",
+    "packages/cli/generators/paths.ts",
+    "packages/cli/generators/env.ts",
+    "packages/codegen/templates/**"
+  ]
 }

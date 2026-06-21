@@ -1,6 +1,0 @@
-{
-  "name": "@web-pages-starter/codegen",
-  "private": true,
-  "type": "module",
-  "sideEffects": false
-}

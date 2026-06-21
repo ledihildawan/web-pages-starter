@@ -48,7 +48,7 @@
       "assist": { "enabled": false }
     },
     {
-      "includes": ["packages/codegen/templates/**"],
+      "includes": ["packages/cli/templates/**"],
       "formatter": { "enabled": false },
       "linter": { "enabled": false },
       "assist": { "enabled": false }

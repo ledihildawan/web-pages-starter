@@ -1,1 +1,1 @@
-preload = ["./packages/env/preload.ts"]
+preload = ["./packages/core/preload.ts"]
