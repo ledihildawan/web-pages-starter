@@ -110,7 +110,7 @@ const tools: Tool[] = [
   },
   {
     name: 'Preview',
-    description: 'Build and serve via tunnel',
+    description: 'Build and serve via tunnel (ngrok/cloudflared)',
     action: () => runBunScript('preview'),
   },
   {

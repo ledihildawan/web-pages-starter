@@ -20,20 +20,17 @@ const DIST = lookup('@dist');
 
 const PREVIEW_URL_FILE = lookup('@public', '.preview-url.json');
 
+type TunnelProvider = 'ngrok' | 'cloudflared';
+
 interface PreviewData {
   url: string;
+  provider: TunnelProvider;
   timestamp: number;
 }
 
-function savePreviewUrl(url: string): void {
-  const data: PreviewData = { url, timestamp: Date.now() };
+function savePreviewUrl(url: string, provider: TunnelProvider): void {
+  const data: PreviewData = { url, provider, timestamp: Date.now() };
   fs.writeFileSync(PREVIEW_URL_FILE, JSON.stringify(data, null, 2), 'utf-8');
-}
-
-function deletePreviewUrl(): void {
-  if (fs.existsSync(PREVIEW_URL_FILE)) {
-    fs.unlinkSync(PREVIEW_URL_FILE);
-  }
 }
 
 async function verifyUrlAccessible(url: string): Promise<boolean> {
@@ -165,18 +162,75 @@ const startCloudflaredTunnel = (): Promise<{ url: string; kill: () => void }> =>
   });
 };
 
-const main = async () => {
-  const cliProvider = process.argv.includes('--tunnel') ? process.argv[process.argv.indexOf('--tunnel') + 1] : null;
+const DIST_EXISTS = (): boolean => fs.existsSync(DIST);
 
-  let provider: string;
+const loadSavedPreviewUrl = (): { url: string; provider: TunnelProvider } | null => {
+  if (!fs.existsSync(PREVIEW_URL_FILE)) return null;
+  try {
+    const data = JSON.parse(fs.readFileSync(PREVIEW_URL_FILE, 'utf-8')) as PreviewData;
+    if (data.url && data.provider) {
+      return { url: data.url, provider: data.provider };
+    }
+    return null;
+  } catch {
+    return null;
+  }
+};
+
+interface AutoDetectResult {
+  action: 'skip' | 'replace' | 'rebuild';
+  reason: string;
+  savedUrl?: string;
+}
+
+const autoDetectAction = async (provider: TunnelProvider): Promise<AutoDetectResult> => {
+  const saved = loadSavedPreviewUrl();
+
+  if (!DIST_EXISTS()) {
+    return { action: 'rebuild', reason: 'dist/ not found' };
+  }
+
+  if (!saved) {
+    return { action: 'rebuild', reason: 'no saved preview URL' };
+  }
+
+  if (saved.provider !== provider) {
+    return {
+      action: 'replace',
+      reason: `provider changed (${saved.provider} → ${provider})`,
+      savedUrl: saved.url,
+    };
+  }
+
+  if (provider === 'ngrok') {
+    const accessible = await verifyUrlAccessible(saved.url);
+    if (accessible) {
+      return { action: 'skip', reason: 'ngrok URL still accessible' };
+    }
+    return { action: 'skip', reason: 'ngrok URL not accessible, starting new tunnel' };
+  }
+
+  return {
+    action: 'replace',
+    reason: 'cloudflared new tunnel URL',
+    savedUrl: saved.url,
+  };
+};
+
+const main = async () => {
+  const cliArgs = process.argv.slice(2);
+  const tunnelIndex = cliArgs.indexOf('--tunnel');
+  const cliProvider = tunnelIndex !== -1 ? cliArgs[tunnelIndex + 1] : null;
+
+  let provider: TunnelProvider;
 
   if (cliProvider && (cliProvider === 'ngrok' || cliProvider === 'cloudflared')) {
-    provider = cliProvider;
+    provider = cliProvider as TunnelProvider;
   } else if (cliProvider) {
     log.error('Error: Invalid tunnel provider. Use --tunnel ngrok or --tunnel cloudflared');
     process.exit(1);
   } else {
-    const { selected } = await inquirer.prompt<{ selected: string }>([
+    const { selected } = await inquirer.prompt<{ selected: TunnelProvider }>([
       {
         type: 'select',
         name: 'selected',
@@ -190,11 +244,20 @@ const main = async () => {
     provider = selected;
   }
 
+  log.info('\nChecking dist/ status...');
+  const autoDetect = await autoDetectAction(provider);
+  log.info(`  - Action: ${autoDetect.action}`);
+  log.info(`  - Reason: ${autoDetect.reason}`);
+
   let tunnelUrl = '';
   let tunnelClose: (() => void) | null = null;
   let serverInstance: ReturnType<typeof serve> | null = null;
 
   if (provider === 'ngrok') {
+    if (autoDetect.action === 'rebuild') {
+      await runBuild();
+    }
+
     const listener = await ngrok.forward({
       addr: PORT,
       authtoken: env.NGROK_AUTHTOKEN,
@@ -209,8 +272,6 @@ const main = async () => {
     tunnelClose = async () => {
       await listener.close();
     };
-
-    await runBuild();
   } else {
     if (!checkCloudflared()) {
       log.error('Error: cloudflared not found.');
@@ -218,7 +279,9 @@ const main = async () => {
       process.exit(1);
     }
 
-    await runBuild();
+    if (autoDetect.action === 'rebuild') {
+      await runBuild();
+    }
 
     log.info('Starting cloudflared tunnel...');
     try {
@@ -230,8 +293,14 @@ const main = async () => {
       process.exit(1);
     }
 
-    const replaced = replaceUrls(LOCAL_URL, tunnelUrl);
-    log.info(`  Done: Replaced URLs in ${replaced} file(s)`);
+    if (autoDetect.action === 'skip' || autoDetect.action === 'replace') {
+      const fromUrl = autoDetect.savedUrl || LOCAL_URL;
+      const replaced = replaceUrls(fromUrl, tunnelUrl);
+      log.info(`  Done: Replaced URLs in ${replaced} file(s)`);
+    } else {
+      const replaced = replaceUrls(LOCAL_URL, tunnelUrl);
+      log.info(`  Done: Replaced URLs in ${replaced} file(s)`);
+    }
   }
 
   const htmlCache = loadHtmlCache(DIST);
@@ -266,11 +335,10 @@ const main = async () => {
     process.exit(1);
   }
 
-  await savePreviewUrl(tunnelUrl);
+  await savePreviewUrl(tunnelUrl, provider);
 
   const shutdown = async () => {
     log.info('\nShutting down...');
-    deletePreviewUrl();
     await closeServer(serverInstance);
     if (tunnelClose) {
       try {
