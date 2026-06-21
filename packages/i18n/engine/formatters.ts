@@ -1,8 +1,8 @@
 import { ACTIVE_NUMBERING_SYSTEMS, WRITING_SYSTEM } from '@generated/active-locales-data';
+import { convertCurrency as convertCurrencyRaw, EXCHANGE_RATES } from '@generated/exchange-rates';
 import type { CurrencyCode } from '@i18n/data/currencies';
+import type { DateValue } from '@utils/types';
 import pluralize from 'pluralize';
-import { convertCurrency as convertCurrencyRaw, EXCHANGE_RATES } from '../../../generated/exchange-rates';
-import type { DateValue } from '../../../utils/types';
 import type {
   CardinalOptions,
   DurationOptions,

@@ -7,8 +7,8 @@ import { getActiveLocales } from '@i18n/engine/active-locales';
 import { setStrategies } from '@i18n/engine/formatters';
 import { getLanguageSubtag } from '@i18n/engine/helpers';
 import { loadStrategies } from '@i18n/strategies/loader';
+import { defineStore } from '@utils/alpine';
 import { scheduleTask } from '@utils/microtask-queue';
-import { defineStore } from '@/utils/alpine';
 
 export interface i18nStoreLanguages {
   code: LocaleCode;

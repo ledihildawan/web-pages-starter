@@ -20,12 +20,16 @@ Requires [Bun](https://bun.sh) `>= 1.3.14`.
 │   ├── i18n.ts            #   defaultLocale + active locales
 │   ├── fonts.ts           #   font stack config (CSS imported via bootstrap.ts)
 │   └── rsbuild.ts         #   Rsbuild build configuration (real config; rsbuild.config.ts is a jiti wrapper)
-├── constants/             # centralized constants (single source of truth)
-│   ├── index.ts           #   barrel exports
-│   ├── asset-paths.ts     #   ASSET_PATHS (locales, fonts, images, scripts, styles)
-│   └── public-filenames.ts # PUBLIC_FILENAMES (serviceWorker, robots, sitemap, manifest, faviconSvg/Ico), PUBLIC_DIRS
-├── utils/                 # shared utilities — logger, signal-handler, write-file, hono-server, json5, paths (lookup/find), alpine (defineData/defineStore), microtask-queue, scheduler, types
-├── types/                 # ambient type declarations (global.d.ts, modules.d.ts, alpinejs-csp.d.ts)
+├── features/              # GLOBAL features (truly reusable across pages)
+├── shared/                # ALL cross-page code (centralized infrastructure)
+│   ├── ui/               #   ALL cross-page UI (icons, form-input, info-card, navbar, hero, cta, footer, etc.)
+│   ├── constants/         #   centralized constants (single source of truth)
+│   ├── utils/            #   shared utilities (logger, signal-handler, write-file, hono-server, json5, etc.)
+│   ├── types/            #   ambient type declarations (global.d.ts, modules.d.ts, alpinejs-csp.d.ts)
+│   ├── layouts/          #   page templates (main.njk)
+│   ├── errors/           #   error page templates (error-page, offline-page)
+│   ├── seo/              #   SEO components (page-meta)
+│   └── page-entry.ts     #   fallback entry for pages without script.ts
 ├── data/                  # global site data
 │   ├── global.json5       #   site_name, seo, social, dns, preconnect
 │   └── menu.json5         #   navigation structure (header links + dropdowns)
@@ -35,33 +39,21 @@ Requires [Bun](https://bun.sh) `>= 1.3.14`.
 │       ├── data.json5     #   page data — page_id, SEO, layout (optional)
 │       ├── script.ts      #   page-specific JS (optional, auto-injects bootstrap)
 │       ├── style.css      #   page styles (optional, auto-loaded if exists)
-│       └── _components/    #   page-local components (underscore = not a page)
-├── shared/                # reusable Nunjucks UI + layouts (cross-page)
-│   ├── page-entry.ts      #   fallback entry for pages without script.ts
-│   ├── seo/               #   page-meta.njk macro
-│   ├── ui/                #   icons, form-input, info-card, social-link, responsive-image
-│   ├── layout/            #   cta, footer, hero-section, section-header
-│   ├── nav/               #   navbar
-│   └── error/             #   error-page, offline-page
-├── features/              # domain logic by capability
-│   ├── contact-form/      #   contact form validation
-│   └── carousel/          #   carousel init
-├── layouts/
-│   └── main.njk           # base template (SEO, navbar, footer, scripts)
+│       ├── _components/   #   page-local dumb UI components (underscore = not a page)
+│       └── _features/     #   page-local capability modules (carousel, contact-form, etc.)
 ├── locales/               # translation source of truth (136 locales)
 │   └── {locale}/
 │       ├── common.json    #   shared copy (nav, footer, labels, plurals)
 │       ├── {page}.json    #   page-specific copy
-│       └── {shared}.json  #   shared locale copy (e.g. cta.json)
+│       └── {shared}.json #   shared locale copy (e.g. cta.json)
 ├── styles/
 │   ├── tokens.css         #   design tokens (CSS custom properties)
-│   ├── components.css      #   component classes
-│   └── main.css           #   Tailwind v4 entry (imports tokens + components)
+│   ├── components.css     #   component classes
+│   └── main.css          #   Tailwind v4 entry (imports tokens + components)
 ├── assets/                # images, fonts, raw assets
-├── bootstrap.ts           # app entry — global CSS (main.css), Alpine + collapse/focus plugins, i18n store/initIntl, fonts, SW. Auto-injected via page-inject-loader
-├── bunfig.toml            # Bun config — preload packages/env/preload.ts for .env.{stage} loading
-├── scripts/               # build-time scripts (build, serve, compress, subset-fonts, fetch-exchange-rates, clean-cache)
-│   └── lib/               #   logger, signal-handler, hono-server, write-file, romanize
+├── bootstrap.ts          # app entry — global CSS (main.css), Alpine + collapse/focus plugins, i18n store/initIntl, fonts, SW. Auto-injected via page-inject-loader
+├── bunfig.toml          # Bun config — preload packages/env/preload.ts for .env.{stage} loading
+├── scripts/              # build-time scripts (build, serve, compress, subset-fonts, fetch-exchange-rates, clean-cache)
 ├── packages/
 │   ├── i18n/              #   self-contained i18n package (data, formatting, runtime, strategies, fonts)
 │   │   ├── index.ts       #     public API barrel

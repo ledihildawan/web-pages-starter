@@ -49,7 +49,7 @@ Requires [Python 3](https://python.org) with `fonttools` + `brotli` (`pip instal
   * **CLI Scripts:** Must reside in their respective package folders (e.g., `packages/i18n/cli/`, `packages/env/cli/`), not in a global `scripts/` directory.
   * **Rsbuild Config:** `rsbuild.config.ts` is strictly a Jiti wrapper. The actual configuration lives in `configs/rsbuild.ts`.
 * **Imports & Path Aliases:**
-  * Use predefined aliases everywhere (`@i18n`, `@env`, `@template-engine`, `@page-system`, `@config/*`, `@constants`, `@constants/*`, `@scripts/*`, `@utils/*`, `@generated/*`, `@assets/*`, `@data/*`, `@dist/*`, `@layouts/*`, `@locales/*`, `@pages/*`, `@public/*`, `@shared/*`).
+  * Use predefined aliases everywhere (`@i18n`, `@env`, `@template-engine`, `@page-system`, `@config/*`, `@features/*`, `@shared/*`, `@shared/ui/*`, `@shared/constants`, `@shared/constants/*`, `@shared/utils/*`, `@shared/types/*`, `@shared/layouts/*`, `@scripts/*`, `@generated/*`, `@assets/*`, `@data/*`, `@dist/*`, `@locales/*`, `@pages/*`, `@public/*`).
   * Use `@generated/env` for environment imports (never `@utils/env`).
   * Use `@generated/paths` for path helpers (`lookup()`, `find()`, `alias`).
   * `tsconfig.json` is the single source of truth for aliases (`scripts/generators/generate-paths.ts` reads and auto-derives them into `generated/paths.ts` for Jiti/bundlers).
@@ -104,6 +104,7 @@ Shared locales are auto-detected by scanning templates for `i18n.t('namespace:..
 ```
 pages/
   _components/     ← underscore prefix = NOT a page (skipped by scanner)
+  _features/       ← underscore prefix = NOT a page (page-local capability modules)
   (marketing)/     ← parentheses = group folder (stripped from URL)
     home/          ← /home
     about/         ← /about
@@ -125,6 +126,8 @@ pages/home/
   script.ts        ← page-specific JS (optional, like script.js)
   style.css        ← page-specific CSS (optional, like style.css)
   data.json5       ← page metadata: page_id, SEO (optional)
+  _components/    ← page-local dumb UI components (underscore = not a page)
+  _features/       ← page-local capability modules (underscore = not a page)
 ```
 
 - No `script.ts` → uses `shared/page-entry.ts` as fallback entry
@@ -221,12 +224,12 @@ Templates: `paths.ts`, `env.ts`, `exchange-rates.ts`, `service-worker.js`, `site
 
 ## Shared Constants
 
-- `constants/asset-paths.ts` — `ASSET_PATHS` (locales, fonts, fontsCss, images, scripts, styles). Import via `@constants` barrel.
-- `constants/public-filenames.ts` — `PUBLIC_FILENAMES` (serviceWorker, robots, sitemap, manifest, faviconSvg, faviconIco), `PUBLIC_DIRS` (locales, assets, fonts, images). Import via `@constants` barrel.
+- `shared/constants/asset-paths.ts` — `ASSET_PATHS` (locales, fonts, fontsCss, images, scripts, styles). Import via `@shared/constants` or `@constants` barrel.
+- `shared/constants/public-filenames.ts` — `PUBLIC_FILENAMES` (serviceWorker, robots, sitemap, manifest, faviconSvg, faviconIco), `PUBLIC_DIRS` (locales, assets, fonts, images). Import via `@shared/constants` or `@constants` barrel.
 - `packages/i18n/constants.ts` — `DEFAULT_NAMESPACE` (`'common'`), `CSP_NONCE_PLACEHOLDER`. Imported via `@i18n` barrel.
 - `packages/page-system/system-pages.ts` — `FALLBACK_LOCALE` (derived from `i18nConfig.defaultLocale`) for slug lookup fallback.
 - `configs/rsbuild.ts` — `CHUNK_NAMES` constant (shared between cacheGroups + pluginPreloadChunks).
-- `utils/write-file.ts` — `COMMENT_EXCLUDED_FILES` (files excluded from comment headers). Values sourced from `PUBLIC_FILENAMES`.
+- `shared/utils/write-file.ts` — `COMMENT_EXCLUDED_FILES` (files excluded from comment headers). Values sourced from `PUBLIC_FILENAMES`.
 
 ## Restrictions
 

@@ -1,5 +1,5 @@
+import { defineData } from '@utils/alpine';
 import type { i18nStore } from '@/packages/i18n/runtime/store';
-import { defineData } from '@/utils/alpine';
 
 const TRANSITION_OPEN = 700;
 const TRANSITION_CLOSE = 500;
