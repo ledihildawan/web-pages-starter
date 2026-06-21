@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { log } from '@core/utils/logger';
 import { writeFilePath } from '@core/utils/write-file';
 import { lookup } from '@generated/paths';
@@ -138,7 +139,7 @@ const browserKeysArray = browserKeys.map((k) => `'${k}'`).join(', ');
 
 const privateTypeEntries = privateKeyList.map((key) => `  ${key}: { type: '${schema.get(key)}' }`).join(',\n');
 
-const TEMPLATE_DIR = path.dirname(new URL(import.meta.url).pathname);
+const TEMPLATE_DIR = path.dirname(fileURLToPath(import.meta.url));
 const template = fs.readFileSync(path.join(TEMPLATE_DIR, '../templates/env.ts'), 'utf-8');
 const output = inject(template, {
   generated_at: new Date().toISOString(),

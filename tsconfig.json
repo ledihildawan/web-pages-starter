@@ -34,7 +34,7 @@
       "@dist/*": ["./dist/*"],
       "@features/*": ["./features/*"],
       "@generated/*": ["./generated/*"],
-      "@layouts/*": ["./shared/layouts/*"],
+      "@layouts/*": ["./shared/ui/layouts/*"],
       "@locales/*": ["./locales/*"],
       "@pages/*": ["./pages/*"],
       "@public/*": ["./public/*"],

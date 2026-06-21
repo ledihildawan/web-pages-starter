@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { log } from '@core/utils/logger';
 import { writeFilePath } from '@core/utils/write-file';
 import { lookup } from '@generated/paths';
@@ -12,7 +13,7 @@ function inject(template: string, values: Record<string, string>): string {
   return result;
 }
 
-const TEMPLATE_DIR = path.dirname(new URL(import.meta.url).pathname);
+const TEMPLATE_DIR = path.dirname(fileURLToPath(import.meta.url));
 const template = fs.readFileSync(path.join(TEMPLATE_DIR, '../templates/manifest.json'), 'utf-8');
 
 const manifestJson = JSON.stringify({ name: 'App' }, null, 2);
