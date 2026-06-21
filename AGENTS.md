@@ -105,7 +105,6 @@ Shared locales are auto-detected by scanning templates for `i18n.t('namespace:..
 pages/
   _ui/            ← underscore prefix = NOT a page (page-local UI)
   _features/      ← underscore prefix = NOT a page (page-local capability modules)
-  _components/    ← underscore prefix = NOT a page (DEPRECATED: use _ui/)
   (marketing)/   ← parentheses = group folder (stripped from URL)
     home/         ← /home
     about/        ← /about
