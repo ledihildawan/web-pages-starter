@@ -25,8 +25,9 @@ Requires [Bun](https://bun.sh) `>= 1.3.14`.
 │   ├── ui/               #   ALL cross-page UI (primitives, composites, patterns, layouts)
 │   │   ├── primitives/  #     icons, form-input (basic building blocks)
 │   │   ├── composites/  #     navbar, hero, cta, footer, info-card, etc. (composed from primitives)
-│   │   ├── patterns/    #     error-page, offline-page, page-meta (reusable UI patterns)
+│   │   ├── patterns/    #     error-page, offline-page (reusable UI patterns)
 │   │   └── layouts/     #     main.njk (page templates)
+│   ├── macros/           #   Nunjucks macros (page-meta for SEO)
 │   ├── constants/        #   centralized constants (single source of truth)
 │   ├── utils/           #   shared utilities (logger, signal-handler, write-file, hono-server, json5, etc.)
 │   ├── types/           #   ambient type declarations (global.d.ts, modules.d.ts, alpinejs-csp.d.ts)
@@ -487,16 +488,16 @@ All variables are auto-generated from `.env` files into `generated/env.ts` by `p
 
 ### Error pages
 
-Six error pages using shared Nunjucks partials (`shared/ui/patterns/error/error-page.njk` and `shared/ui/patterns/error/offline-page.njk`). Each has its own i18n namespace and locale files across all 136 locales. Error page URLs are locale-dependent — the URL slug for each error page is defined per-locale in `SYSTEM_PAGE_SLUGS` (`packages/page-system/system-pages.ts`).
+Six error pages using shared Nunjucks partials (`shared/ui/patterns/error-page.njk` and `shared/ui/patterns/offline-page.njk`). Each has its own i18n namespace and locale files across all 136 locales. Error page URLs are locale-dependent — the URL slug for each error page is defined per-locale in `SYSTEM_PAGE_SLUGS` (`packages/page-system/system-pages.ts`).
 
 | Page | URL | Status | Icon | Gradient | Pattern |
 | --- | --- | --- | --- | --- | --- |
-| `not-found` | `/not-found` | 404 | search | violet/fuchsia | `{% set %}` + `{% include "shared/ui/patterns/error/error-page.njk" %}` |
+| `not-found` | `/not-found` | 404 | search | violet/fuchsia | `{% set %}` + `{% include "shared/ui/patterns/error-page.njk" %}` |
 | `unauthorized` | `/unauthorized` | 401 | key | yellow/amber | Same |
 | `forbidden` | `/forbidden` | 403 | shield | amber/orange | Same |
 | `server-error` | `/server-error` | 500 | lightning | rose/red | Same |
 | `maintenance` | `/maintenance` | 503 | clock | sky/blue | Same |
-| `offline` | `/offline` | — | cloud | slate/zinc | `{% include "shared/ui/patterns/error/offline-page.njk" %}` (reload button) |
+| `offline` | `/offline` | — | cloud | slate/zinc | `{% include "shared/ui/patterns/offline-page.njk" %}` (reload button) |
 
 Error pages are excluded from sitemap (`generate-sitemap`), disallowed in `robots.txt`, and have `noindex, nofollow` via `page-meta.njk`. The service worker precaches all six and serves `offline.html` when the network is unavailable. Dev server `historyApiFallback` redirects unknown routes to `/not-found.html`.
 
