@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { log } from '@core/utils/logger';
 import { writeFilePath } from '@core/utils/write-file';
 
@@ -39,7 +40,7 @@ const keys = rawEntries.map(([k]) => k);
 const aliasKeys = keys.map((k) => `  | '${k}'`).join('\n');
 const aliasEntries = rawEntries.map(([k, v]) => `  '${k}': path.resolve('${v}'),`).join('\n');
 
-const TEMPLATE_DIR = path.dirname(new URL(import.meta.url).pathname);
+const TEMPLATE_DIR = path.dirname(fileURLToPath(import.meta.url));
 const template = fs.readFileSync(path.join(TEMPLATE_DIR, '../templates/paths.ts'), 'utf-8');
 const output = inject(template, {
   generated_at: new Date().toISOString(),
