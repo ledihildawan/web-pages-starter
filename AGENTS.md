@@ -200,7 +200,7 @@ Biome is configured to skip `generated/**` (formatter + linter disabled).
 
 ### Comment headers
 
-All generated files include a standard header comment via `generatedHeader()` from `scripts/lib/write-file.ts`:
+All generated files include a standard header comment via `generatedHeader()` from `@core/utils/write-file`:
 
 ```
 /**
@@ -212,15 +212,15 @@ All generated files include a standard header comment via `generatedHeader()` fr
  */
 ```
 
-Files in `COMMENT_EXCLUDED_FILES` (in `scripts/lib/write-file.ts`) are excluded from comment headers — these are SEO/browser-critical files served directly to clients/crawlers: `sitemap.xml`, `robots.txt`, `manifest.json`, `favicon.svg`, `og-image.svg`. Use `shouldAddComment(filePath)` to check before adding a header.
+Files in `COMMENT_EXCLUDED_FILES` (in `@core/utils/write-file`) are excluded from comment headers — these are SEO/browser-critical files served directly to clients/crawlers: `sitemap.xml`, `robots.txt`, `manifest.json`, `favicon.svg`, `og-image.svg`. Use `shouldAddComment(filePath)` to check before adding a header.
 
 ### Generator templates
 
-Generators use the `@codegen` template system (`packages/codegen/`):
-- `loadTemplate(name)` — reads a template from `packages/codegen/templates/`
+Generators use templates from `packages/cli/templates/`:
+- Templates are loaded directly via `fs.readFileSync` with relative paths
 - `inject(template, values)` — replaces `{{codegen:key}}` placeholders with values
 
-Templates: `paths.ts`, `env.ts`, `exchange-rates.ts`, `service-worker.js`, `sitemap.xml`, `manifest.json`, `robots.txt`. Templates that support comments embed the header with `{{codegen:generated_at}}` as the timestamp placeholder.
+Templates: `paths.ts`, `env.ts`, `service-worker.js`, `sitemap.xml`, `manifest.json`, `robots.txt`. Templates that support comments embed the header with `{{codegen:generated_at}}` as the timestamp placeholder.
 
 ## Shared Constants
 

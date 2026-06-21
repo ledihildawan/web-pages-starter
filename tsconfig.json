@@ -61,7 +61,6 @@
     "coverage",
     "packages/cli/templates/**",
     "packages/cli/generators/paths.ts",
-    "packages/cli/generators/env.ts",
-    "packages/codegen/templates/**"
+    "packages/cli/generators/env.ts"
   ]
 }
