@@ -13,10 +13,13 @@ const OUTPUT_DIR = lookup('@public', ...ASSET_PATHS.fonts.split('/'));
 const OUTPUT_FILE = path.join(OUTPUT_DIR, 'fonts.css');
 const CACHE_KEY = 'fonts';
 
+const args = process.argv.slice(2);
+const forceRefresh = args.includes('--force') || args.includes('-f');
+
 const allLocales = [...new Set([i18nConfig.defaultLocale, ...(i18nConfig.locales ?? [])])];
 const configHash = computeStringHash(JSON.stringify({ fontsConfig, locales: allLocales }));
 
-if (isCacheValid(CACHE_KEY, configHash)) {
+if (!forceRefresh && isCacheValid(CACHE_KEY, configHash)) {
   if (restoreCache(CACHE_KEY, OUTPUT_DIR)) {
     logBox('Generate Fonts CSS', {
       Locales: allLocales.join(', '),
@@ -26,6 +29,7 @@ if (isCacheValid(CACHE_KEY, configHash)) {
     log.success('Done: Using cached fonts CSS');
     process.exit(0);
   }
+  log.warn('Cache restore failed, regenerating');
 }
 
 const packageCss = buildFontsCss(allLocales, './');
@@ -44,7 +48,7 @@ for (const pkgCss of packageCss) {
     try {
       fs.copyFileSync(srcPath, destPath);
     } catch {
-      // Skip if copy fails (e.g., source doesn't exist or dest already exists)
+      log.warn(`Warning: Could not copy font file ${fontFile}`);
     }
   }
 }
@@ -62,7 +66,9 @@ if (packageCss.length > 0) {
     .join('\n')}\n}\n`;
 
   fs.writeFileSync(OUTPUT_FILE, `${header + combined}\n\n${cssCustomProps}`, 'utf-8');
-  storeCache(CACHE_KEY, OUTPUT_DIR, configHash);
+  if (!storeCache(CACHE_KEY, OUTPUT_DIR, configHash)) {
+    log.warn('Failed to store cache for fonts CSS');
+  }
 } else {
   if (fs.existsSync(OUTPUT_FILE)) {
     fs.unlinkSync(OUTPUT_FILE);

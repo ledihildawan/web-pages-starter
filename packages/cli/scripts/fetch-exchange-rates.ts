@@ -5,7 +5,7 @@ import { getCacheWithTTL, setCacheWithTTL } from '@core/utils/pipeline-cache';
 import { writeFilePath } from '@core/utils/write-file';
 import { env } from '@generated/env';
 import { lookup } from '@generated/paths';
-import { CURRENCY_CODE } from '@i18n/data/currencies';
+import { CURRENCY_CODE, CURRENCY_CODES } from '@i18n/data/currencies';
 import { getActiveLocales } from '@i18n/engine/active-locales';
 import { readJSON5 } from '@shared/utils/json5';
 
@@ -79,7 +79,7 @@ function getActiveCurrencies(): Set<string> {
     currencies.add(locale.currency);
   }
 
-  const pageCurrencies = getCurrenciesFromPages(currencies);
+  const pageCurrencies = getCurrenciesFromPages(new Set(CURRENCY_CODES));
   for (const currency of pageCurrencies) {
     currencies.add(currency);
   }

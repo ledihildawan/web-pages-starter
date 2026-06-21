@@ -164,7 +164,62 @@ const tools: Tool[] = [
   {
     name: 'Fetch Rates',
     description: 'Fetch and cache latest exchange rates',
-    action: () => runTool('fetch-exchange-rates'),
+    action: async () => {
+      const { force } = await inquirer.prompt<{ force: boolean }>([
+        {
+          type: 'confirm',
+          name: 'force',
+          message: 'Force refresh (ignore cache)?',
+          default: false,
+        },
+      ]);
+      await runTool('fetch-exchange-rates', force ? ['--force'] : []);
+    },
+  },
+  {
+    name: 'Subset Fonts',
+    description: 'Generate subsetted font files for active locales',
+    action: async () => {
+      const { force } = await inquirer.prompt<{ force: boolean }>([
+        {
+          type: 'confirm',
+          name: 'force',
+          message: 'Force regenerate (ignore cache)?',
+          default: false,
+        },
+      ]);
+      await runTool('subset-fonts', force ? ['--force'] : []);
+    },
+  },
+  {
+    name: 'Fonts CSS',
+    description: 'Generate fonts CSS with preloaded subsets',
+    action: async () => {
+      const { force } = await inquirer.prompt<{ force: boolean }>([
+        {
+          type: 'confirm',
+          name: 'force',
+          message: 'Force regenerate (ignore cache)?',
+          default: false,
+        },
+      ]);
+      await runTool('fonts-css', force ? ['--force'] : []);
+    },
+  },
+  {
+    name: 'Compress Assets',
+    description: 'Compress HTML/CSS/JS with Brotli and Gzip',
+    action: async () => {
+      const { force } = await inquirer.prompt<{ force: boolean }>([
+        {
+          type: 'confirm',
+          name: 'force',
+          message: 'Force recompress (ignore cache)?',
+          default: false,
+        },
+      ]);
+      await runTool('compress', force ? ['--force'] : []);
+    },
   },
   {
     name: 'Generate Page',
@@ -213,7 +268,7 @@ const tools: Tool[] = [
   },
   {
     name: 'Clean Cache',
-    description: 'Clear build cache and distribution files',
+    description: 'Clear all caches: pipeline, rsbuild, dist, assets',
     action: () => runTool('clean-cache'),
   },
   {

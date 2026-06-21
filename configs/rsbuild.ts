@@ -510,6 +510,11 @@ export default defineConfig({
       },
     },
   },
+  performance: {
+    buildCache: {
+      cacheDirectory: lookup('@', 'node_modules/.cache/rsbuild'),
+    },
+  },
   html: {
     inject: 'head',
     scriptLoading: 'defer',

@@ -13,6 +13,9 @@ const OUTPUT_DIR = lookup('@public', ASSET_PATHS.images);
 const MANIFEST_FILE = lookup('@generated', 'image-manifest.ts');
 const CACHE_KEY = 'images';
 
+const args = process.argv.slice(2);
+const forceRefresh = args.includes('--force') || args.includes('-f');
+
 const ASSET_PREFIX = env.BASE_PATH.replace(/\/$/, '');
 const imageUrl = (file: string): string => `${ASSET_PREFIX}/${ASSET_PATHS.images}/${file}`;
 
@@ -126,17 +129,20 @@ async function main(): Promise<void> {
 
   const sourceHash = computeSourceHash();
 
-  if (isCacheValid(CACHE_KEY, sourceHash)) {
-    if (!fs.existsSync(OUTPUT_DIR)) {
-      restoreCache(CACHE_KEY, OUTPUT_DIR);
+  if (!forceRefresh && isCacheValid(CACHE_KEY, sourceHash)) {
+    if (fs.existsSync(OUTPUT_DIR)) {
+      if (restoreCache(CACHE_KEY, OUTPUT_DIR)) {
+        logBox('Generate Images', {
+          Processed: '(cached)',
+          Passthrough: '(cached)',
+          Sizes: SIZES.join(', '),
+          Output: `public/${ASSET_PATHS.images}/`,
+        });
+        log.success('Done: Using cached images');
+        process.exit(0);
+      }
+      log.warn('Cache restore failed, regenerating');
     }
-    logBox('Generate Images', {
-      Processed: '(cached)',
-      Passthrough: '(cached)',
-      Sizes: SIZES.join(', '),
-      Output: `public/${ASSET_PATHS.images}/`,
-    });
-    process.exit(0);
   }
 
   fs.mkdirSync(OUTPUT_DIR, { recursive: true });
@@ -190,7 +196,9 @@ export const IMAGE_MANIFEST: Record<string, ImageEntry> = ${JSON.stringify(manif
 
   writeFilePath(MANIFEST_FILE, manifestContent);
 
-  storeCache(CACHE_KEY, OUTPUT_DIR, sourceHash);
+  if (!storeCache(CACHE_KEY, OUTPUT_DIR, sourceHash)) {
+    log.warn('Failed to store cache for images');
+  }
 
   logBox('Generate Images', {
     Processed: String(processed),

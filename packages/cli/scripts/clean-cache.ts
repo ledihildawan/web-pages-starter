@@ -1,18 +1,24 @@
 import fs from 'node:fs';
-import { ASSET_PATHS } from '@constants';
+import path from 'node:path';
 import { log } from '@core/utils/logger';
 import { lookup } from '@generated/paths';
 
-const dirs = ['node_modules/.cache', '.cache', `public/${ASSET_PATHS.images}`];
+const dirs = [
+  lookup('@', 'temp/pipeline'),
+  lookup('@', 'node_modules/.cache/rsbuild'),
+  lookup('@dist'),
+  lookup('@public', 'assets'),
+];
+
 for (const dir of dirs) {
-  const fullPath = lookup('@', dir);
   try {
-    if (fs.existsSync(fullPath)) {
-      fs.rmSync(fullPath, { recursive: true, force: true });
+    if (fs.existsSync(dir)) {
+      fs.rmSync(dir, { recursive: true, force: true });
+      log.info(`  Removed: ${path.relative(process.cwd(), dir)}`);
     }
   } catch {
-    log.warn(`Warning: Could not remove ${fullPath}`);
+    log.warn(`Warning: Could not remove ${dir}`);
   }
 }
 
-log.success('Done: Cache cleaned');
+log.success('Done: All caches cleaned');

@@ -81,6 +81,13 @@ export function getCacheWithTTL(key: string): { cachedAt: string; ttlMinutes: nu
   if (!entry || !('ttlMinutes' in entry)) {
     return null;
   }
+
+  if (!checkTTL(entry.cachedAt, entry.ttlMinutes)) {
+    delete manifest[key];
+    saveManifest(manifest);
+    return null;
+  }
+
   return { cachedAt: entry.cachedAt, ttlMinutes: entry.ttlMinutes };
 }
 
