@@ -32,6 +32,7 @@
       "@constants/*": ["./packages/core/constants/*"],
       "@data/*": ["./data/*"],
       "@dist/*": ["./dist/*"],
+      "@rsbuild-out/*": ["./rsbuild-out/*"],
       "@features/*": ["./features/*"],
       "@generated/*": ["./generated/*"],
       "@layouts/*": ["./shared/ui/layouts/*"],
@@ -54,5 +55,5 @@
     "types": ["bun-types", "node"]
   },
   "include": ["**/*.ts"],
-  "exclude": ["dist", "node_modules", "temp", "coverage", "packages/cli/templates/**"]
+  "exclude": ["dist", "rsbuild-out", "node_modules", "temp", "coverage", "packages/cli/templates/**"]
 }

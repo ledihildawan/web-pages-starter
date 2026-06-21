@@ -12,70 +12,12 @@ import { defineConfig, type RsbuildPlugin } from '@rsbuild/core';
 import { createTemplateParams } from '@template-engine';
 import { readJSON5 } from '@utils/json5';
 import { minify } from 'html-minifier-terser';
-import { html as beautifyHtml } from 'js-beautify';
-import lightningcss from 'lightningcss';
 
 const isBuild = env.IS_PROD || env.BUILD_PREVIEW;
 const shouldMinify = isBuild && env.MINIFY;
 const isPrettyHtml = env.PRETTY_HTML;
 const shouldMinifyHTML = shouldMinify && !isPrettyHtml;
 const MANAGED_EXTS = ['ts', 'css', 'njk', 'png', 'jpg', 'jpeg', 'webp', 'svg', 'gif'];
-
-const pluginPreloadChunks = (): RsbuildPlugin => ({
-  name: 'plugin-preload-chunks',
-  setup(api) {
-    api.onAfterBuild(() => {
-      if (!isBuild) return;
-
-      const distDir = api.context.distPath;
-      if (!fs.existsSync(distDir)) return;
-
-      const chunkUrls: string[] = [];
-      for (const sub of ['', 'async']) {
-        const dir = path.join(distDir, 'assets', 'scripts', sub);
-        if (!fs.existsSync(dir)) continue;
-        const prefix = sub ? `/${ASSET_PATHS.scripts}/async` : `/${ASSET_PATHS.scripts}`;
-        for (const f of fs.readdirSync(dir)) {
-          if (f.endsWith('.js') && Object.values(CHUNK_NAMES).some((n) => f.startsWith(n))) {
-            chunkUrls.push(`${prefix}/${f}`);
-          }
-        }
-      }
-
-      if (!chunkUrls.length) return;
-
-      for (const file of fs.readdirSync(distDir)) {
-        if (!file.endsWith('.html')) continue;
-        const filePath = path.join(distDir, file);
-        let html = fs.readFileSync(filePath, 'utf-8');
-        const deferSrcs = new Set([...html.matchAll(/<script\s+defer\s+[^>]*src="([^"]*)"/g)].map((m) => m[1]));
-        const preloads = chunkUrls
-          .filter((url) => !deferSrcs.has(url))
-          .map((url) => `<link rel="preload" as="script" href="${url}">`)
-          .join('\n');
-        if (preloads) {
-          html = html.replace('</title>', `</title>\n${preloads}`);
-          fs.writeFileSync(filePath, html);
-        }
-      }
-    });
-  },
-});
-
-const pluginRootPageAsIndex = (): RsbuildPlugin => ({
-  name: 'plugin-root-page-as-index',
-  setup(api) {
-    api.onAfterBuild(() => {
-      const distDir = api.context.distPath;
-      const rootSlug = getRootPageSlug(i18nConfig.defaultLocale);
-      const src = path.join(distDir, `${rootSlug}.html`);
-      const dest = path.join(distDir, 'index.html');
-      if (fs.existsSync(src)) {
-        fs.renameSync(src, dest);
-      }
-    });
-  },
-});
 
 const pluginHotReloadContent = (): RsbuildPlugin => ({
   name: 'plugin-hot-reload-content',
@@ -98,152 +40,10 @@ const pluginHotReloadContent = (): RsbuildPlugin => ({
             compilation.contextDependencies.add(lookup('@shared'));
             compilation.contextDependencies.add(lookup('@layouts'));
             compilation.contextDependencies.add(lookup('@generated'));
+            compilation.contextDependencies.add(lookup('@features'));
           });
         },
       });
-    });
-  },
-});
-
-const pluginPrettyHtml = (): RsbuildPlugin => ({
-  name: 'plugin-pretty-html',
-  setup(api) {
-    if (!isPrettyHtml) return;
-    api.onAfterBuild(() => {
-      const distDir = api.context.distPath;
-      if (!fs.existsSync(distDir)) return;
-
-      for (const file of fs.readdirSync(distDir)) {
-        if (!file.endsWith('.html')) continue;
-        const filePath = path.join(distDir, file);
-        const content = fs.readFileSync(filePath, 'utf8');
-        const beautified = beautifyHtml(content, {
-          indent_size: 2,
-          indent_inner_html: true,
-          preserve_newlines: false,
-          end_with_newline: true,
-          unformatted: ['script', 'style', 'pre', 'code', 'textarea', 'span'],
-        });
-        fs.writeFileSync(filePath, beautified);
-      }
-    });
-  },
-});
-
-const pluginRemoveEmptyPageJs = (): RsbuildPlugin => ({
-  name: 'plugin-remove-empty-page-js',
-  setup(api) {
-    api.onAfterBuild(() => {
-      const distDir = api.context.distPath;
-      if (!fs.existsSync(distDir)) return;
-
-      const EMPTY_PATTERN = /rspackChunk.*?push\(\[\[\d+\],\{\d+:function\([a-z],[a-z],[a-z]\)\{[a-z]\(\d+\)\}\}/;
-      let removed = 0;
-
-      for (const file of fs.readdirSync(distDir)) {
-        if (!file.endsWith('.html')) continue;
-        const htmlPath = path.join(distDir, file);
-        let html = fs.readFileSync(htmlPath, 'utf-8');
-        let modified = false;
-
-        const scripts = [...html.matchAll(/<script\s+defer\s+src="([^"]+\.js)"><\/script>/g)];
-
-        for (const m of scripts) {
-          const src = m[1];
-          const jsFile = src.replace(/^\//, '');
-          const jsPath = path.join(distDir, jsFile);
-
-          if (!fs.existsSync(jsPath)) continue;
-          const content = fs.readFileSync(jsPath, 'utf-8');
-
-          if (!EMPTY_PATTERN.test(content)) continue;
-
-          html = html.split(m[0]).join('');
-          html = html.replace(
-            new RegExp(`<link[^>]*modulepreload[^>]*href="${src.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"[^>]*>`, 'g'),
-            '',
-          );
-          fs.unlinkSync(jsPath);
-          removed++;
-          modified = true;
-        }
-
-        if (modified) {
-          fs.writeFileSync(htmlPath, html);
-        }
-      }
-
-      if (removed > 0) {
-        console.log(`  [plugin-remove-empty-page-js] Removed ${removed} empty JS file(s) + script tags`);
-      }
-    });
-  },
-});
-
-const pluginInlineCss = (): RsbuildPlugin => ({
-  name: 'plugin-inline-css',
-  setup(api) {
-    api.onAfterBuild(() => {
-      if (!isBuild) return;
-
-      const distDir = api.context.distPath;
-      if (!fs.existsSync(distDir)) return;
-
-      let inlined = 0;
-
-      for (const file of fs.readdirSync(distDir)) {
-        if (!file.endsWith('.html')) continue;
-        const filePath = path.join(distDir, file);
-        let html = fs.readFileSync(filePath, 'utf-8');
-
-        const nonceMatch = html.match(/nonce-([a-zA-Z0-9_-]+)/);
-        if (!nonceMatch) continue;
-        const nonce = nonceMatch[1];
-
-        const linkMatches = [...html.matchAll(/<link\s+[^>]*rel="stylesheet"[^>]*>/g)];
-        let modified = false;
-
-        for (const m of linkMatches) {
-          const tag = m[0];
-          const hrefMatch = tag.match(/href="([^"]+)"/);
-          if (!hrefMatch) continue;
-
-          const href = hrefMatch[1];
-          if (href.startsWith('http')) continue;
-
-          const cssPath = path.join(distDir, href.replace(/^\//, ''));
-          if (!fs.existsSync(cssPath)) continue;
-
-          let css = fs.readFileSync(cssPath, 'utf-8');
-          const cssDir = href.substring(0, href.lastIndexOf('/'));
-          css = css.replace(/(?:src:\s*)?url\(\s*['"]?([^'")\s]+)['"]?\s*\)/g, (match, url: string) => {
-            if (url.startsWith('/') || url.startsWith('http') || url.startsWith('data:')) return match;
-            const newUrl = `url(${cssDir}/${url.replace(/^\.\//, '')})`;
-            return match.startsWith('src:') ? `src: ${newUrl}` : newUrl;
-          });
-
-          if (!cssPath.includes('fonts.css')) {
-            const minified = lightningcss.transform({
-              code: Buffer.from(css),
-              filename: path.basename(cssPath),
-              minify: true,
-            });
-            css = minified.code.toString();
-          }
-
-          html = html.replace(tag, `<style nonce="${nonce}">${css}</style>`);
-          modified = true;
-          inlined++;
-        }
-
-        if (modified) {
-          fs.writeFileSync(filePath, html);
-        }
-      }
-
-      if (inlined > 0) {
-        console.log(`  [plugin-inline-css] Inlined ${inlined} stylesheet(s) into HTML`);
-      }
     });
   },
 });
@@ -374,6 +174,7 @@ export default defineConfig({
   },
   output: {
     distPath: {
+      root: 'rsbuild-out',
       js: ASSET_PATHS.scripts,
       css: ASSET_PATHS.styles,
       image: ASSET_PATHS.images,
@@ -434,14 +235,7 @@ export default defineConfig({
       },
     ],
   },
-  plugins: [
-    pluginPreloadChunks(),
-    pluginRootPageAsIndex(),
-    pluginHotReloadContent(),
-    pluginPrettyHtml(),
-    pluginRemoveEmptyPageJs(),
-    pluginInlineCss(),
-  ],
+  plugins: [pluginHotReloadContent()],
   tools: {
     htmlPlugin: (config) => {
       config.minify = (html: string) =>

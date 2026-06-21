@@ -18,8 +18,8 @@ export const PIPELINE_STEPS = {
     'packages/cli/generators/robots.ts',
     'packages/cli/generators/service-worker.ts',
   ],
-  RSBUILD: 'rsbuild',
-  POST_BUILD: ['packages/cli/generators/compress.ts'],
+  RSBUILD: 'packages/cli/scripts/rsbuild-wrapper.ts',
+  POST_BUILD: [],
 } as const;
 
 export type PipelineStep = (typeof PIPELINE_STEPS)[keyof typeof PIPELINE_STEPS];

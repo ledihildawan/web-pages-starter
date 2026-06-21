@@ -9,6 +9,7 @@ temp/
 # Dependencies & build output
 node_modules
 dist/
+rsbuild-out/
 .rsbuild
 coverage/
 reports/
