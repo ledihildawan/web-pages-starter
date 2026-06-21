@@ -60,6 +60,12 @@
       "assist": { "enabled": false }
     },
     {
+      "includes": ["public/assets/locales/**"],
+      "formatter": { "enabled": false },
+      "linter": { "enabled": false },
+      "assist": { "enabled": false }
+    },
+    {
       "includes": ["styles/main.css"],
       "linter": {
         "rules": {

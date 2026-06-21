@@ -4,9 +4,9 @@ import { i18nConfig } from '@config/i18n';
 import { env } from '@generated/env';
 import { lookup } from '@generated/paths';
 import { getErrorPageSlugs, getRootPageSlug } from '@page-system';
-import { createStaticApp, getPageNames, loadHtmlCache } from './lib/hono-server';
-import { log } from './lib/logger';
-import { createServer, setupSigintHandler } from './lib/signal-handler';
+import { createStaticApp, getPageNames, loadHtmlCache } from '@utils/hono-server';
+import { log } from '@utils/logger';
+import { createServer, setupSigintHandler } from '@utils/signal-handler';
 
 const DIST = lookup('@dist');
 

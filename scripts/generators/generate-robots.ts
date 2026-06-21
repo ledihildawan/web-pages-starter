@@ -1,14 +1,15 @@
 import { inject, loadTemplate } from '@codegen';
 import { i18nConfig } from '@config/i18n';
+import { PUBLIC_FILENAMES } from '@constants';
 import { env } from '@generated/env';
 import { lookup } from '@generated/paths';
 import { getErrorPageSlugs } from '@page-system';
-import { logBox } from '@scripts/lib/logger';
-import { computeStringHash, isCacheValid, restoreCache, storeCache } from '@scripts/lib/pipeline-cache';
-import { writeFilePath } from '@scripts/lib/write-file';
+import { logBox } from '@utils/logger';
+import { computeStringHash, isCacheValid, restoreCache, storeCache } from '@utils/pipeline-cache';
+import { writeFilePath } from '@utils/write-file';
 
-const OUTPUT_PUBLIC = lookup('@public', 'robots.txt');
-const OUTPUT_DIST = lookup('@dist', 'robots.txt');
+const OUTPUT_PUBLIC = lookup('@public', PUBLIC_FILENAMES.robots);
+const OUTPUT_DIST = lookup('@dist', PUBLIC_FILENAMES.robots);
 const CACHE_KEY = 'robots';
 
 const sourceHash = computeStringHash(
@@ -23,7 +24,7 @@ if (isCacheValid(CACHE_KEY, sourceHash)) {
   const baseUrl = env.SITE_URL.endsWith('/') ? env.SITE_URL : `${env.SITE_URL}/`;
   logBox('Generate Robots', {
     Sitemap: baseUrl.slice(0, 28),
-    Output: 'public/robots.txt (cached)',
+    Output: `public/${PUBLIC_FILENAMES.robots} (cached)`,
   });
   process.exit(0);
 }
@@ -38,7 +39,7 @@ const template = loadTemplate('robots.txt');
 const robots = inject(template, {
   base_path: basePath,
   disallow_rules: disallowRules,
-  sitemap_url: `${baseUrl}sitemap.xml`,
+  sitemap_url: `${baseUrl}${PUBLIC_FILENAMES.sitemap}`,
 });
 
 writeFilePath(OUTPUT_PUBLIC, robots);
@@ -48,5 +49,5 @@ storeCache(CACHE_KEY, OUTPUT_PUBLIC, sourceHash);
 
 logBox('Generate Robots', {
   Sitemap: baseUrl.slice(0, 28),
-  Output: 'public/robots.txt',
+  Output: `public/${PUBLIC_FILENAMES.robots}`,
 });

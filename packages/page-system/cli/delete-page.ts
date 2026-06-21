@@ -4,9 +4,9 @@ import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
 import { lookup } from '@generated/paths';
 import { isSystemPageId, isSystemPageSlug, scanPages } from '@page-system';
-import { log } from '@scripts/lib/logger';
-import { setupSigintHandler, wrapMainError } from '@scripts/lib/signal-handler';
 import { readJSON5 } from '@utils/json5';
+import { log } from '@utils/logger';
+import { setupSigintHandler, wrapMainError } from '@utils/signal-handler';
 import inquirer from 'inquirer';
 
 const args = process.argv.slice(2);

@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fontsConfig } from '@config/fonts';
 import { i18nConfig } from '@config/i18n';
+import { ASSET_PATHS } from '@constants';
 import { env } from '@generated/env';
 import type { I18nTranslationKeys } from '@generated/i18n';
 import { IMAGE_MANIFEST } from '@generated/image-manifest';
@@ -46,6 +47,7 @@ import type {
   TemplateFormatOptions,
   TemplateParams,
 } from '@i18n/config/types';
+import { CSP_NONCE_PLACEHOLDER } from '@i18n/constants';
 import type { CurrencyCode } from '@i18n/data/currencies';
 import type { LocaleCode, LocaleConfig } from '@i18n/data/locales';
 import { cardinal as arCardinal, ordinal as arOrdinal } from '@i18n/strategies/ar';
@@ -75,7 +77,7 @@ const getFontPreloadUrl = (): string | null => {
     return null;
   }
   try {
-    const fontsCssPath = lookup('@public', 'assets', 'fonts', 'fonts.css');
+    const fontsCssPath = lookup('@public', ...ASSET_PATHS.fontsCss.split('/'));
     if (!fs.existsSync(fontsCssPath)) {
       cachedFontPreloadUrl = null;
       return null;
@@ -85,7 +87,7 @@ const getFontPreloadUrl = (): string | null => {
     const woff2Match = fontsCss.match(
       new RegExp(`url\\(['"]?(\\.\\/[^'"]*${escaped}-latin-wght-normal\\.woff2)['"]?\\)`),
     );
-    cachedFontPreloadUrl = woff2Match ? `/assets/fonts/${woff2Match[1].replace('./', '')}` : null;
+    cachedFontPreloadUrl = woff2Match ? `/${ASSET_PATHS.fonts}/${woff2Match[1].replace('./', '')}` : null;
   } catch {
     cachedFontPreloadUrl = null;
   }
@@ -194,7 +196,7 @@ const generateClientI18nScript = (
       ]),
     ) as Record<string, JsonData>;
 
-    const dir = lookup('@public', 'assets', 'i18n', name);
+    const dir = lookup('@public', ASSET_PATHS.locales, name);
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });
     }
@@ -224,6 +226,7 @@ const generateClientI18nScript = (
   window.__PAGE_ID__ = ${JSON.stringify(name)};
   window.__SAVED_LOCALE__ = savedLocale;
   window.__SERVER_LOCALE__ = defaultLocale;
+  window.__CSP_NONCE__ = undefined;
   window.__INITIAL_I18N_DATA__ = ${initialI18nData};
 
   const htmlEl = document.documentElement;
@@ -677,12 +680,12 @@ export const createTemplateParams = (
 
   const isSingleLocale = LOCALE_CODES.length <= 1;
 
-  const cspNonce = '__CSP_NONCE__';
+  const cspNonce = CSP_NONCE_PLACEHOLDER;
 
   const basePath = env.BASE_PATH;
 
   const clientI18nScript = isSingleLocale
-    ? `<script nonce="${cspNonce}">window.__SERVER_LOCALE__=${JSON.stringify(lang)};window.__SAVED_LOCALE__=${JSON.stringify(lang)};window.__BASE_PATH__=${JSON.stringify(basePath)};window.__CSP_NONCE__=${JSON.stringify(cspNonce)};</script>`
+    ? `<script nonce="${cspNonce}">window.__SERVER_LOCALE__=${JSON.stringify(lang)};window.__SAVED_LOCALE__=${JSON.stringify(lang)};window.__BASE_PATH__=${JSON.stringify(basePath)};window.__CSP_NONCE__=undefined;</script>`
     : generateClientI18nScript(
         lang,
         pageId,

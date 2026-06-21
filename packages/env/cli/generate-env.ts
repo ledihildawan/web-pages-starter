@@ -2,8 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { inject, loadTemplate } from '@codegen';
 import { lookup } from '@generated/paths';
-import { log } from '@scripts/lib/logger';
-import { writeFilePath } from '@scripts/lib/write-file';
+import { log } from '@utils/logger';
+import { writeFilePath } from '@utils/write-file';
 
 const ROOT = lookup('@');
 const OUTPUT_FILE = lookup('@generated', 'env.ts');

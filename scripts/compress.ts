@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import zlib from 'node:zlib';
 import { lookup } from '@generated/paths';
-import { log } from './lib/logger';
+import { log } from '@utils/logger';
 
 const DIST = lookup('@dist');
 const COMPRESS_EXTS = ['.html', '.js', '.css', '.json', '.svg', '.xml', '.txt', '.webmanifest'];

@@ -3,8 +3,8 @@ import path from 'node:path';
 import process from 'node:process';
 import { env } from '@generated/env';
 import { lookup } from '@generated/paths';
-import { log, logBox } from './lib/logger';
-import { PIPELINE_STEPS } from './lib/pipeline';
+import { log, logBox } from '@utils/logger';
+import { PIPELINE_STEPS } from '@utils/pipeline';
 
 const spawnEnv: NodeJS.ProcessEnv = { ...process.env };
 

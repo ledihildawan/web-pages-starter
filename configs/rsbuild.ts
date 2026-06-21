@@ -1,9 +1,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
+import { ASSET_PATHS, PUBLIC_FILENAMES } from '@constants';
 import { browserEnv, env } from '@generated/env';
 import { alias, lookup } from '@generated/paths';
 import { getActiveLocaleCodes, isSingleLocale, LOCALE_STORAGE_KEY } from '@i18n';
+import { CSP_NONCE_PLACEHOLDER } from '@i18n/constants';
 import { getRootPageSlug, getSystemPageSlug, scanPages } from '@page-system';
 import { generateDynamicEntries } from '@page-system/dynamic-routes';
 import { defineConfig, type RsbuildPlugin } from '@rsbuild/core';
@@ -32,7 +34,7 @@ const pluginPreloadChunks = (): RsbuildPlugin => ({
       for (const sub of ['', 'async']) {
         const dir = path.join(distDir, 'assets', 'scripts', sub);
         if (!fs.existsSync(dir)) continue;
-        const prefix = sub ? '/assets/scripts/async' : '/assets/scripts';
+        const prefix = sub ? `/${ASSET_PATHS.scripts}/async` : `/${ASSET_PATHS.scripts}`;
         for (const f of fs.readdirSync(dir)) {
           if (f.endsWith('.js') && Object.values(CHUNK_NAMES).some((n) => f.startsWith(n))) {
             chunkUrls.push(`${prefix}/${f}`);
@@ -332,7 +334,7 @@ export default defineConfig({
       },
       alpinePlugins: {
         test: /[\\/]node_modules[\\/]@alpinejs[\\/](collapse|focus)[\\/]/,
-        name: 'chunk-alpine-plugins',
+        name: CHUNK_NAMES.alpinePlugins,
         chunks: 'async',
         priority: 25,
       },
@@ -372,10 +374,10 @@ export default defineConfig({
   },
   output: {
     distPath: {
-      js: 'assets/scripts',
-      css: 'assets/styles',
-      image: 'assets/images',
-      font: 'assets/fonts',
+      js: ASSET_PATHS.scripts,
+      css: ASSET_PATHS.styles,
+      image: ASSET_PATHS.images,
+      font: ASSET_PATHS.fonts,
     },
     assetPrefix: env.BASE_PATH,
     cleanDistPath: true,
@@ -396,38 +398,38 @@ export default defineConfig({
         noErrorOnMissing: true,
       },
       {
-        from: lookup('@public', 'manifest.json'),
-        to: 'manifest.json',
+        from: lookup('@public', PUBLIC_FILENAMES.manifest),
+        to: PUBLIC_FILENAMES.manifest,
         noErrorOnMissing: true,
       },
       {
-        from: lookup('@public', 'service-worker.js'),
-        to: 'service-worker.js',
+        from: lookup('@public', PUBLIC_FILENAMES.serviceWorker),
+        to: PUBLIC_FILENAMES.serviceWorker,
         noErrorOnMissing: true,
       },
       {
-        from: lookup('@public', 'robots.txt'),
-        to: 'robots.txt',
+        from: lookup('@public', PUBLIC_FILENAMES.robots),
+        to: PUBLIC_FILENAMES.robots,
         noErrorOnMissing: true,
       },
       {
-        from: lookup('@public', 'sitemap.xml'),
-        to: 'sitemap.xml',
+        from: lookup('@public', PUBLIC_FILENAMES.sitemap),
+        to: PUBLIC_FILENAMES.sitemap,
         noErrorOnMissing: true,
       },
       {
-        from: lookup('@public', 'favicon.svg'),
-        to: 'favicon.svg',
+        from: lookup('@public', PUBLIC_FILENAMES.faviconSvg),
+        to: PUBLIC_FILENAMES.faviconSvg,
         noErrorOnMissing: true,
       },
       {
-        from: lookup('@public', 'assets/images'),
-        to: 'assets/images',
+        from: lookup('@public', ASSET_PATHS.images),
+        to: ASSET_PATHS.images,
         noErrorOnMissing: true,
       },
       {
-        from: lookup('@public', 'assets/i18n'),
-        to: 'assets/i18n',
+        from: lookup('@public', ASSET_PATHS.locales),
+        to: ASSET_PATHS.locales,
         noErrorOnMissing: true,
       },
     ],
@@ -527,18 +529,8 @@ export default defineConfig({
       }
       return createTemplateParams(params, LOCALE_STORAGE_KEY, getActiveLocaleCodes());
     },
-    tags: [
-      {
-        tag: 'link',
-        attrs: {
-          rel: 'stylesheet',
-          href: '/assets/fonts/fonts.css',
-          nonce: '__CSP_NONCE__',
-        },
-      },
-    ],
   },
   security: {
-    nonce: '__CSP_NONCE__',
+    nonce: CSP_NONCE_PLACEHOLDER,
   },
 });

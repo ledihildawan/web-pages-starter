@@ -20,7 +20,11 @@ Requires [Bun](https://bun.sh) `>= 1.3.14`.
 │   ├── i18n.ts            #   defaultLocale + active locales
 │   ├── fonts.ts           #   font stack config (CSS imported via bootstrap.ts)
 │   └── rsbuild.ts         #   Rsbuild build configuration (real config; rsbuild.config.ts is a jiti wrapper)
-├── utils/                 # shared utilities — common (getValueByPath, getCspNonce), json5, paths (lookup/find), alpine (defineData/defineStore), microtask-queue, scheduler, types
+├── constants/             # centralized constants (single source of truth)
+│   ├── index.ts           #   barrel exports
+│   ├── asset-paths.ts     #   ASSET_PATHS (locales, fonts, images, scripts, styles)
+│   └── public-filenames.ts # PUBLIC_FILENAMES (serviceWorker, robots, sitemap, manifest, faviconSvg/Ico), PUBLIC_DIRS
+├── utils/                 # shared utilities — logger, signal-handler, write-file, hono-server, json5, paths (lookup/find), alpine (defineData/defineStore), microtask-queue, scheduler, types
 ├── types/                 # ambient type declarations (global.d.ts, modules.d.ts, alpinejs-csp.d.ts)
 ├── data/                  # global site data
 │   ├── global.json5       #   site_name, seo, social, dns, preconnect

@@ -1,20 +1,23 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
+import { PUBLIC_FILENAMES } from '@constants';
 import { serveStatic } from '@hono/node-server/serve-static';
+import { CSP_NONCE_PLACEHOLDER } from '@i18n/constants';
 import { getSystemPageSlug } from '@page-system';
 import { Hono } from 'hono';
 import { compress } from 'hono/compress';
 import { log } from './logger';
 
-const STATIC_ASSET_RE =
-  /^\/(?:locales\/|assets\/|fonts\/|images\/|favicon\.svg$|favicon\.ico$|manifest\.json$|sw\.js$|robots\.txt$|sitemap\.xml$|.*\.[a-z0-9]+$)/;
+const { faviconSvg, faviconIco, manifest, serviceWorker, robots, sitemap } = PUBLIC_FILENAMES;
+const STATIC_ASSET_RE = new RegExp(
+  `^\\/(?:locales\\/|assets\\/|fonts\\/|images\\/|${faviconSvg.replace('.', '\\.')}|${faviconIco.replace('.', '\\.')}|${manifest}|${serviceWorker}|${robots}|${sitemap}|.*\\.[a-z0-9]+$)`,
+);
 const FINGERPRINTED_ASSET_RE = /^\/(?:locales|assets|fonts|images)\//;
 const HTML_RE = /\.html?$/;
-const SW_RE = /\/sw\.js$/;
+const SW_RE = new RegExp(`\\/${serviceWorker}$`);
 const ONE_YEAR = 31_536_000;
 const ONE_HOUR = 3_600;
-const NONCE_PLACEHOLDER = '__CSP_NONCE__';
 
 const getCacheControl = (urlPath: string): string => {
   if (SW_RE.test(urlPath)) return 'no-store, no-cache, must-revalidate, max-age=0';
@@ -61,37 +64,13 @@ export function getPageNames(distDir: string): string[] {
 }
 
 function generateNonce(): string {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
-
-  const bytes = new Uint8Array(16);
-
-  crypto.getRandomValues(bytes);
-
-  let nonce = '';
-
-  for (const byte of bytes) {
-    nonce += chars[byte % chars.length];
-  }
-
-  return nonce;
+  return crypto.randomUUID().replace(/-/g, '');
 }
 
 function injectNonce(html: string, nonce: string): string {
-  const nonceAttrPattern = new RegExp(`nonce=["']${NONCE_PLACEHOLDER}["']`, 'g');
+  let result = html.replace(new RegExp(CSP_NONCE_PLACEHOLDER, 'g'), nonce);
 
-  let result = html.replace(nonceAttrPattern, `nonce="${nonce}"`);
-
-  const cspMetaMatch = result.match(
-    /<meta[^>]+http-equiv=["']Content-Security-Policy["'][^>]+content=["']([^"']+)["']/i,
-  );
-
-  if (cspMetaMatch) {
-    const oldCsp = cspMetaMatch[1];
-
-    const newCsp = oldCsp.replace(/nonce-[^;']+/g, `nonce-${nonce}`);
-
-    result = result.replace(cspMetaMatch[0], cspMetaMatch[0].replace(oldCsp, newCsp));
-  }
+  result = result.replace(/window\.__CSP_NONCE__\s*=\s*(?:undefined|void 0)/, `window.__CSP_NONCE__ = '${nonce}'`);
 
   return result;
 }
@@ -117,6 +96,15 @@ export function createStaticApp(distDir: string, htmlCache?: Map<string, string>
   });
 
   app.use('/*', serveStatic({ root: './dist', rewriteRequestPath: (p) => p, precompressed: true }));
+
+  app.use('/*', async (c, next) => {
+    await next();
+
+    const contentType = c.res.headers.get('Content-Type');
+    if (contentType?.includes('application/json') && !contentType.includes('charset')) {
+      c.res.headers.set('Content-Type', 'application/json; charset=utf-8');
+    }
+  });
 
   app.use('*', async (c, next) => {
     await next();

@@ -3,8 +3,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 import { lookup } from '@generated/paths';
-import { log, logBox } from '@scripts/lib/logger';
-import { setupSigintHandler } from '@scripts/lib/signal-handler';
+import { log, logBox } from '@utils/logger';
+import { setupSigintHandler } from '@utils/signal-handler';
 import chokidar from 'chokidar';
 
 const LOCALE_DIR = lookup('@locales');

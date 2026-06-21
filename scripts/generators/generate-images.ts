@@ -1,19 +1,20 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { ASSET_PATHS } from '@constants';
 import { env } from '@generated/env';
 import { lookup } from '@generated/paths';
-import { log, logBox } from '@scripts/lib/logger';
-import { computeStringHash, isCacheValid, restoreCache, storeCache } from '@scripts/lib/pipeline-cache';
-import { generatedHeader, writeFilePath } from '@scripts/lib/write-file';
+import { log, logBox } from '@utils/logger';
+import { computeStringHash, isCacheValid, restoreCache, storeCache } from '@utils/pipeline-cache';
+import { generatedHeader, writeFilePath } from '@utils/write-file';
 import sharp from 'sharp';
 
-const SOURCE_DIR = lookup('@assets', 'images');
-const OUTPUT_DIR = lookup('@public', 'assets', 'images');
+const SOURCE_DIR = lookup('@assets', ASSET_PATHS.images);
+const OUTPUT_DIR = lookup('@public', ASSET_PATHS.images);
 const MANIFEST_FILE = lookup('@generated', 'image-manifest.ts');
 const CACHE_KEY = 'images';
 
 const ASSET_PREFIX = env.BASE_PATH.replace(/\/$/, '');
-const imageUrl = (file: string): string => `${ASSET_PREFIX}/assets/images/${file}`;
+const imageUrl = (file: string): string => `${ASSET_PREFIX}/${ASSET_PATHS.images}/${file}`;
 
 const SIZES = [400, 800, 1600];
 const AVIF_QUALITY = 50;
@@ -119,7 +120,7 @@ function computeSourceHash(): string {
 
 async function main(): Promise<void> {
   if (!fs.existsSync(SOURCE_DIR)) {
-    log.warn('No assets/images/ directory found');
+    log.warn(`No ${ASSET_PATHS.images}/ directory found`);
     return;
   }
 
@@ -133,7 +134,7 @@ async function main(): Promise<void> {
       Processed: '(cached)',
       Passthrough: '(cached)',
       Sizes: SIZES.join(', '),
-      Output: 'public/assets/images/',
+      Output: `public/${ASSET_PATHS.images}/`,
     });
     process.exit(0);
   }
@@ -195,7 +196,7 @@ export const IMAGE_MANIFEST: Record<string, ImageEntry> = ${JSON.stringify(manif
     Processed: String(processed),
     Passthrough: String(passthrough),
     Sizes: SIZES.join(', '),
-    Output: 'public/assets/images/',
+    Output: `public/${ASSET_PATHS.images}/`,
   });
 }
 

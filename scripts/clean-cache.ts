@@ -1,8 +1,9 @@
 import fs from 'node:fs';
+import { ASSET_PATHS } from '@constants';
 import { lookup } from '@generated/paths';
-import { log } from './lib/logger';
+import { log } from '@utils/logger';
 
-const dirs = ['node_modules/.cache', '.cache', 'public/assets/images'];
+const dirs = ['node_modules/.cache', '.cache', `public/${ASSET_PATHS.images}`];
 for (const dir of dirs) {
   const fullPath = lookup('@', dir);
   try {

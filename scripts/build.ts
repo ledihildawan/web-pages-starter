@@ -2,10 +2,12 @@ import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
+import { ASSET_PATHS } from '@constants';
+import { LOCALE_CODES } from '@generated/active-locales-data';
 import { env } from '@generated/env';
 import { lookup } from '@generated/paths';
-import { log, logBox } from './lib/logger';
-import { PIPELINE_STEPS } from './lib/pipeline';
+import { log, logBox } from '@utils/logger';
+import { PIPELINE_STEPS } from '@utils/pipeline';
 
 const args = process.argv.slice(2);
 const isPreview = env.BUILD_PREVIEW;
@@ -104,18 +106,40 @@ for (const step of PIPELINE_STEPS.POST_BUILD) {
   if (!runStep(step)) process.exit(1);
 }
 
-log.info('\n--- Copying i18n assets ---');
-const i18nSrc = lookup('@public', 'assets/i18n');
-const i18nDest = lookup('@dist', 'assets/i18n');
-if (fs.existsSync(i18nSrc)) {
-  if (fs.existsSync(i18nDest)) {
-    fs.rmSync(i18nDest, { recursive: true, force: true });
+log.info('\n--- Copying locale assets ---');
+const localesSrc = lookup('@locales');
+const localesPublicDest = lookup('@public', ASSET_PATHS.locales);
+const localesDistDest = lookup('@dist', ASSET_PATHS.locales);
+const activeLocales = LOCALE_CODES;
+
+if (fs.existsSync(localesSrc)) {
+  if (fs.existsSync(localesPublicDest)) {
+    fs.rmSync(localesPublicDest, { recursive: true, force: true });
   }
-  fs.cpSync(i18nSrc, i18nDest, { recursive: true });
+  for (const locale of activeLocales) {
+    const srcDir = path.join(localesSrc, locale);
+    const destDir = path.join(localesPublicDest, locale);
+    if (fs.existsSync(srcDir)) {
+      fs.mkdirSync(destDir, { recursive: true });
+      const files = fs.readdirSync(srcDir).filter((f) => f.endsWith('.json'));
+      for (const file of files) {
+        fs.copyFileSync(path.join(srcDir, file), path.join(destDir, file));
+      }
+    }
+  }
+  log.info(`  Copied ${activeLocales.length} locale(s) to public`);
+}
+if (fs.existsSync(localesPublicDest)) {
+  if (fs.existsSync(localesDistDest)) {
+    fs.rmSync(localesDistDest, { recursive: true, force: true });
+  }
+  fs.cpSync(localesPublicDest, localesDistDest, { recursive: true });
   const count = fs
-    .readdirSync(i18nDest, { recursive: true })
-    .filter((f): f is string => typeof f === 'string' && !fs.statSync(path.join(i18nDest, f)).isDirectory()).length;
-  log.info(`  Copied ${count} i18n file(s) to dist`);
+    .readdirSync(localesDistDest, { recursive: true })
+    .filter(
+      (f): f is string => typeof f === 'string' && !fs.statSync(path.join(localesDistDest, f)).isDirectory(),
+    ).length;
+  log.info(`  Copied ${count} locale file(s) to dist`);
 }
 
 log.info('\n┌──────────────────────────────────────────┐');

@@ -2,13 +2,14 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fontsConfig } from '@config/fonts';
 import { i18nConfig } from '@config/i18n';
+import { ASSET_PATHS } from '@constants';
 import { lookup } from '@generated/paths';
 import { buildFontsCss } from '@i18n/fonts/font-css';
-import { log, logBox } from '@scripts/lib/logger';
-import { computeStringHash, isCacheValid, restoreCache, storeCache } from '@scripts/lib/pipeline-cache';
-import { generatedHeader } from '@scripts/lib/write-file';
+import { log, logBox } from '@utils/logger';
+import { computeStringHash, isCacheValid, restoreCache, storeCache } from '@utils/pipeline-cache';
+import { generatedHeader } from '@utils/write-file';
 
-const OUTPUT_DIR = lookup('@public', 'assets', 'fonts');
+const OUTPUT_DIR = lookup('@public', ...ASSET_PATHS.fonts.split('/'));
 const OUTPUT_FILE = path.join(OUTPUT_DIR, 'fonts.css');
 const CACHE_KEY = 'fonts';
 
@@ -20,7 +21,7 @@ if (isCacheValid(CACHE_KEY, configHash)) {
     logBox('Generate Fonts CSS', {
       Locales: allLocales.join(', '),
       Packages: '(cached)',
-      Output: 'public/assets/fonts/fonts.css',
+      Output: `public/${ASSET_PATHS.fontsCss}`,
     });
     log.success('Done: Using cached fonts CSS');
     process.exit(0);
@@ -71,7 +72,7 @@ if (packageCss.length > 0) {
 logBox('Generate Fonts CSS', {
   Locales: allLocales.join(', '),
   Packages: packageCss.map((p) => `${path.basename(p.pkg)} (${p.subsetCount})`).join(', ') || '(none)',
-  Output: 'public/assets/fonts/fonts.css',
+  Output: `public/${ASSET_PATHS.fontsCss}`,
 });
 log.success(
   `Done: ${packageCss.length} font package(s), ${packageCss.reduce((s, p) => s + p.subsetCount, 0)} subset(s) total`,

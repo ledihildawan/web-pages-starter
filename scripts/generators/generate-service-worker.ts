@@ -1,13 +1,13 @@
 import { createHash } from 'node:crypto';
 import { inject, loadTemplate } from '@codegen';
 import { i18nConfig } from '@config/i18n';
+import { ASSET_PATHS, PUBLIC_FILENAMES } from '@constants';
 import { lookup } from '@generated/paths';
-import { I18N_ASSET_DIR } from '@i18n';
 import { getErrorPageSlugs, getRootPageSlug, getSystemPageSlug } from '@page-system';
-import { logBox } from '@scripts/lib/logger';
-import { writeFilePath } from '@scripts/lib/write-file';
+import { logBox } from '@utils/logger';
+import { writeFilePath } from '@utils/write-file';
 
-const OUTPUT = lookup('@public', 'service-worker.js');
+const OUTPUT = lookup('@public', PUBLIC_FILENAMES.serviceWorker);
 
 const rootSlug = getRootPageSlug(i18nConfig.defaultLocale);
 const [notFoundSlug, unauthorizedSlug, forbiddenSlug, serverErrorSlug, maintenanceSlug, offlineErrorSlug] =
@@ -23,7 +23,7 @@ const contentToHash = [
   maintenanceSlug,
   offlineSlug,
   offlineErrorSlug,
-  I18N_ASSET_DIR,
+  ASSET_PATHS.locales,
   Date.now().toString(36),
 ].join('|');
 
@@ -40,7 +40,7 @@ const swContent = inject(template, {
   maintenance_slug: maintenanceSlug,
   offline_error_slug: offlineErrorSlug,
   offline_slug: offlineSlug,
-  i18n_asset_dir: I18N_ASSET_DIR,
+  i18n_asset_dir: ASSET_PATHS.locales,
 });
 
 writeFilePath(OUTPUT, swContent);
@@ -48,5 +48,5 @@ writeFilePath(OUTPUT, swContent);
 logBox('Generate Service Worker', {
   Version: CACHE_VERSION,
   Pages: String([rootSlug, ...getErrorPageSlugs(i18nConfig.defaultLocale)].length),
-  Output: 'public/service-worker.js',
+  Output: `public/${PUBLIC_FILENAMES.serviceWorker}`,
 });

@@ -1,6 +1,6 @@
 import { fontsConfig } from '@config/fonts';
+import { ASSET_PATHS } from '@constants';
 import { ACTIVE_WRITING_SYSTEMS } from '@generated/active-locales-data';
-import { FONTS_CSS_PATH } from '@i18n';
 import type { LocaleConfig } from '@i18n/data/locales';
 import type { WritingSystemCode } from '@i18n/data/writing-systems';
 import { getActiveLocales } from '@i18n/engine/active-locales';
@@ -38,11 +38,11 @@ async function injectFontFaceRules(wsCode: string): Promise<void> {
   if (loaded.has(wsCode)) return;
   loaded.add(wsCode);
 
-  if (document.querySelector(`link[href*="${FONTS_CSS_PATH}"]`) || hasFontFaceRules()) return;
+  if (document.querySelector(`link[href*="${ASSET_PATHS.fontsCss}"]`) || hasFontFaceRules()) return;
 
   try {
     const basePath = (window as { __BASE_PATH__?: string }).__BASE_PATH__ ?? '';
-    const href = `${basePath}${FONTS_CSS_PATH}`;
+    const href = `${basePath}${ASSET_PATHS.fontsCss}`;
     const nonce = getCspNonce();
 
     const link = document.createElement('link');
@@ -115,7 +115,7 @@ export const setupFontStackCSS = (): void => {
 
   cssLines.push('}');
 
-  const nonce = (window as { __CSP_NONCE__?: string }).__CSP_NONCE__;
+  const nonce = getCspNonce();
   const style = document.createElement('style');
   if (nonce) {
     style.setAttribute('nonce', nonce);

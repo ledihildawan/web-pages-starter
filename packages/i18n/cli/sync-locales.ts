@@ -3,7 +3,7 @@ import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
 import { lookup } from '@generated/paths';
 import { LOCALE_CODES } from '@i18n/data/locales';
-import { log, logBox } from '@scripts/lib/logger';
+import { log, logBox } from '@utils/logger';
 
 const LOCALES_ROOT = lookup('@locales');
 const DEFAULT_LOCALE = i18nConfig.defaultLocale;

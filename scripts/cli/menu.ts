@@ -1,9 +1,9 @@
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import { find, lookup } from '@generated/paths';
-import { log } from '@scripts/lib/logger';
-import { getAndVerifyPreviewUrl } from '@scripts/lib/preview-url';
-import { setupSigintHandler, wrapMainError } from '@scripts/lib/signal-handler';
+import { log } from '@utils/logger';
+import { getAndVerifyPreviewUrl } from '@utils/preview-url';
+import { setupSigintHandler, wrapMainError } from '@utils/signal-handler';
 import inquirer from 'inquirer';
 
 const runTool = (name: string, args: string[] = []): Promise<void> => {

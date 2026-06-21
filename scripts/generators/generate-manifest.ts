@@ -1,14 +1,15 @@
 import { inject, loadTemplate } from '@codegen';
 import { i18nConfig } from '@config/i18n';
+import { PUBLIC_FILENAMES } from '@constants';
 import { env } from '@generated/env';
 import { lookup } from '@generated/paths';
-import { logBox } from '@scripts/lib/logger';
-import { computeStringHash, isCacheValid, restoreCache, storeCache } from '@scripts/lib/pipeline-cache';
-import { writeFilePath } from '@scripts/lib/write-file';
 import { loadGlobalData } from '@utils/json5';
+import { logBox } from '@utils/logger';
+import { computeStringHash, isCacheValid, restoreCache, storeCache } from '@utils/pipeline-cache';
+import { writeFilePath } from '@utils/write-file';
 
-const OUTPUT_PUBLIC = lookup('@public', 'manifest.json');
-const OUTPUT_DIST = lookup('@dist', 'manifest.json');
+const OUTPUT_PUBLIC = lookup('@public', PUBLIC_FILENAMES.manifest);
+const OUTPUT_DIST = lookup('@dist', PUBLIC_FILENAMES.manifest);
 const CACHE_KEY = 'manifest';
 
 const dataDir = lookup('@data');
@@ -27,7 +28,7 @@ if (isCacheValid(CACHE_KEY, sourceHash)) {
     Name: (global.site_name as string) || 'Starter',
     Lang: i18nConfig.defaultLocale,
     Theme: ((global.seo as Record<string, unknown>)?.theme_color as string) || '#020617',
-    Output: 'public/manifest.json (cached)',
+    Output: `public/${PUBLIC_FILENAMES.manifest} (cached)`,
   });
   process.exit(0);
 }
@@ -95,5 +96,5 @@ logBox('Generate Manifest', {
   Name: siteName,
   Lang: i18nConfig.defaultLocale,
   Theme: themeColor,
-  Output: 'public/manifest.json',
+  Output: `public/${PUBLIC_FILENAMES.manifest}`,
 });

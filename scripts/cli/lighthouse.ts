@@ -3,9 +3,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 import { env } from '@generated/env';
-import { log, logBox } from '@scripts/lib/logger';
-import { getAndVerifyPreviewUrl } from '@scripts/lib/preview-url';
-import { setupSigintHandler, wrapMainError } from '@scripts/lib/signal-handler';
+import { log, logBox } from '@utils/logger';
+import { getAndVerifyPreviewUrl } from '@utils/preview-url';
+import { setupSigintHandler, wrapMainError } from '@utils/signal-handler';
 import inquirer from 'inquirer';
 import { DOMParser } from 'linkedom';
 

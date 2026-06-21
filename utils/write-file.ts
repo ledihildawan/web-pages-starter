@@ -1,11 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { PUBLIC_FILENAMES } from '@constants';
 
 export const COMMENT_EXCLUDED_FILES = [
-  'sitemap.xml',
-  'robots.txt',
-  'manifest.json',
-  'favicon.svg',
+  PUBLIC_FILENAMES.sitemap,
+  PUBLIC_FILENAMES.robots,
+  PUBLIC_FILENAMES.manifest,
+  PUBLIC_FILENAMES.faviconSvg,
   'og-image.svg',
 ] as const;
 

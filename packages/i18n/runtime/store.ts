@@ -1,6 +1,7 @@
 import { i18nConfig } from '@config/i18n';
+import { ASSET_PATHS } from '@constants';
 import { env } from '@generated/env';
-import { DEFAULT_NAMESPACE, getActiveLocalesDisplay, I18N_ASSET_DIR, LOCALE_STORAGE_KEY } from '@i18n';
+import { DEFAULT_NAMESPACE, getActiveLocalesDisplay, LOCALE_STORAGE_KEY } from '@i18n';
 import type { LocaleCode } from '@i18n/data/locales';
 import { getActiveLocales } from '@i18n/engine/active-locales';
 import { setStrategies } from '@i18n/engine/formatters';
@@ -56,7 +57,7 @@ export default defineStore('i18n', {
     if (m.i18next.hasResourceBundle(code, DEFAULT_NAMESPACE)) return;
 
     try {
-      const response = await fetch(`${env.BASE_PATH}${I18N_ASSET_DIR}/${pageID}/${code}.json`);
+      const response = await fetch(`${env.BASE_PATH}${ASSET_PATHS.locales}/${pageID}/${code}.json`);
       const data = await response.json();
 
       for (const [ns, bundle] of Object.entries(data)) {

@@ -1,8 +1,9 @@
 import { i18nConfig } from '@config/i18n';
+import { ASSET_PATHS } from '@constants';
 import { env } from '@generated/env';
 import { convertCurrency, EXCHANGE_RATES } from '@generated/exchange-rates';
 import type { I18nTranslationKeys } from '@generated/i18n';
-import { DEFAULT_NAMESPACE, getActiveLocalesDisplay, I18N_ASSET_DIR, LOCALE_STORAGE_KEY } from '@i18n';
+import { DEFAULT_NAMESPACE, getActiveLocalesDisplay, LOCALE_STORAGE_KEY } from '@i18n';
 import type { LocaleCode } from '@i18n/data/locales';
 import { getActiveLocaleCodes } from '@i18n/engine/active-locales';
 import {
@@ -302,7 +303,7 @@ export async function initIntl(localeOverride?: string): Promise<void> {
     if (savedLocale === i18nConfig.defaultLocale && win.__INITIAL_I18N_DATA__) {
       data = win.__INITIAL_I18N_DATA__;
     } else {
-      const response = await fetch(`${env.BASE_PATH}${I18N_ASSET_DIR}/${pageID}/${savedLocale}.json`);
+      const response = await fetch(`${env.BASE_PATH}${ASSET_PATHS.locales}/${pageID}/${savedLocale}.json`);
       data = await response.json();
     }
 

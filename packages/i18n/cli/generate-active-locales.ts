@@ -6,8 +6,8 @@ import type { LocaleCode, LocaleConfig } from '@i18n/data/locales';
 import { LOCALES } from '@i18n/data/locales';
 import { NUMBERING_SYSTEMS } from '@i18n/data/numbering-systems';
 import { WRITING_SYSTEM, WRITING_SYSTEMS } from '@i18n/data/writing-systems';
-import { log } from '@scripts/lib/logger';
-import { generatedHeader, writeFilePath } from '@scripts/lib/write-file';
+import { log } from '@utils/logger';
+import { generatedHeader, writeFilePath } from '@utils/write-file';
 
 const OUTPUT_FILE = lookup('@generated', 'active-locales-data.ts');
 

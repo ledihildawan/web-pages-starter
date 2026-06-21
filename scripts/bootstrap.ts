@@ -1,7 +1,9 @@
 import '@/styles/main.css';
 
+import { PUBLIC_FILENAMES } from '@constants';
 import { env } from '@generated/env';
 import { getCspNonce } from '@utils/common';
+import DisableDevtool from 'disable-devtool';
 
 const SW_DISMISS_KEY = 'sw_update_dismissed';
 const SW_DISMISS_DURATION = 24 * 60 * 60 * 1000;
@@ -108,10 +110,24 @@ const showUpdateNotification = (registration: ServiceWorkerRegistration) => {
   });
 };
 
+const initDisableDevtool = () => {
+  if (!env.DISABLE_DEVTOOL_ENABLED) return;
+
+  DisableDevtool({
+    md5: env.DISABLE_DEVTOOL_MD5,
+    disableMenu: env.DISABLE_DEVTOOL_DISABLE_MENU,
+    interval: 150,
+    detectors: 'all',
+    onDevtoolOpen: () => {
+      window.location.reload();
+    },
+  });
+};
+
 const registerServiceWorker = () => {
   if (!env.IS_PROD || !('serviceWorker' in navigator)) return;
 
-  navigator.serviceWorker.register(`${env.BASE_PATH}service-worker.js`).catch((error: unknown) => {
+  navigator.serviceWorker.register(`${env.BASE_PATH}${PUBLIC_FILENAMES.serviceWorker}`).catch((error: unknown) => {
     const message = error instanceof Error ? error.message : String(error);
 
     console.warn('Warning: Service worker registration failed —', message);
@@ -161,6 +177,7 @@ async function bootstrap() {
       fonts.loadLanguageFonts();
       fonts.watchScriptAndLoadFont();
 
+      initDisableDevtool();
       registerServiceWorker();
       return;
     }
@@ -192,6 +209,7 @@ async function bootstrap() {
     fonts.loadLanguageFonts();
     fonts.watchScriptAndLoadFont();
 
+    initDisableDevtool();
     registerServiceWorker();
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : String(error);

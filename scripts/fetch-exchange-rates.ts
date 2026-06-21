@@ -1,106 +1,87 @@
 import fs from 'node:fs';
+import path from 'node:path';
 import { inject, loadTemplate } from '@codegen';
+import { env } from '@generated/env';
 import { lookup } from '@generated/paths';
 import { CURRENCY_CODE } from '@i18n/data/currencies';
 import { getActiveLocales } from '@i18n/engine/active-locales';
-import { log } from './lib/logger';
-import { getCacheWithTTL, setCacheWithTTL } from './lib/pipeline-cache';
-import { writeFilePath } from './lib/write-file';
+import { readJSON5 } from '@utils/json5';
+import { log } from '@utils/logger';
+import { getCacheWithTTL, setCacheWithTTL } from '@utils/pipeline-cache';
+import { writeFilePath } from '@utils/write-file';
 
-const EXCHANGE_RATES_URL = 'https://api.frankfurter.dev/v1';
-const FRANKFURTER_CURRENCIES_URL = `${EXCHANGE_RATES_URL}/currencies`;
-const FRANKFURTER_RATES_URL = `${EXCHANGE_RATES_URL}/latest`;
+const CURRENCY_FREAKS_URL = 'https://api.currencyfreaks.com/v2.0/rates/latest';
 const EXCHANGE_RATES_FILE = lookup('@generated', 'exchange-rates.ts');
 const BASE_CURRENCY = CURRENCY_CODE.USD;
 const TTL_MINUTES = 24 * 60;
 const PRICE_KEY_PATTERN = /^price_([a-z]{3})$/;
+const CURRENCY_ARR_PATTERNS = ['currency_comparison_currencies', 'supported_currencies', 'available_currencies'];
 
-async function getFrankfurterCurrencies(): Promise<Set<string>> {
-  try {
-    const response = await fetch(FRANKFURTER_CURRENCIES_URL);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch currencies: ${response.statusText}`);
+function extractCurrenciesFromData(
+  data: Record<string, unknown>,
+  currencies: Set<string>,
+  whitelist: Set<string>,
+): void {
+  if (typeof data !== 'object' || data === null) return;
+
+  for (const [key, value] of Object.entries(data)) {
+    const priceMatch = key.match(PRICE_KEY_PATTERN);
+    if (priceMatch && whitelist.has(priceMatch[1].toUpperCase())) {
+      currencies.add(priceMatch[1].toUpperCase());
     }
-    const data = await response.json();
-    return new Set(Object.keys(data));
-  } catch (error) {
-    log.warn(`Could not fetch Frankfurter currencies: ${error}. Using fallback list.`);
-    return new Set([
-      'AUD',
-      'BRL',
-      'CAD',
-      'CHF',
-      'CNY',
-      'EUR',
-      'GBP',
-      'HKD',
-      'HUF',
-      'IDR',
-      'INR',
-      'JPY',
-      'KRW',
-      'MXN',
-      'MYR',
-      'NOK',
-      'NZD',
-      'PHP',
-      'PLN',
-      'RON',
-      'SEK',
-      'SGD',
-      'THB',
-      'TRY',
-      'USD',
-      'ZAR',
-    ]);
+
+    if (CURRENCY_ARR_PATTERNS.includes(key) && Array.isArray(value)) {
+      for (const item of value) {
+        if (typeof item === 'string' && whitelist.has(item.toUpperCase())) {
+          currencies.add(item.toUpperCase());
+        }
+      }
+    }
+
+    if (typeof value === 'object' && value !== null) {
+      extractCurrenciesFromData(value as Record<string, unknown>, currencies, whitelist);
+    }
   }
 }
 
-function getPricingCurrencies(whitelist: Set<string>): Set<string> {
+function getCurrenciesFromPages(whitelist: Set<string>): Set<string> {
   const currencies = new Set<string>();
-  const pricingPath = lookup('@pages', 'pricing', 'data.json5');
+  const pagesDir = lookup('@pages');
 
-  if (!fs.existsSync(pricingPath)) {
-    log.warn(`Pricing data not found at ${pricingPath}`);
+  if (!fs.existsSync(pagesDir)) {
     return currencies;
   }
 
-  try {
-    const content = fs.readFileSync(pricingPath, 'utf-8');
-    const data = JSON.parse(content);
-    extractPriceKeys(data, currencies, whitelist);
-  } catch (error) {
-    log.warn(`Could not read pricing data: ${error}`);
-  }
+  const scanDir = (dir: string): void => {
+    const entries = fs.readdirSync(dir, { withFileTypes: true });
+    for (const entry of entries) {
+      const fullPath = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        scanDir(fullPath);
+      } else if (entry.name === 'data.json5') {
+        try {
+          const data = readJSON5(fullPath);
+          extractCurrenciesFromData(data, currencies, whitelist);
+        } catch (error) {
+          log.warn(`Could not read ${fullPath}: ${error}`);
+        }
+      }
+    }
+  };
 
+  scanDir(pagesDir);
   return currencies;
 }
 
-function extractPriceKeys(obj: unknown, currencies: Set<string>, whitelist: Set<string>): void {
-  if (typeof obj !== 'object' || obj === null) return;
-
-  for (const [key, value] of Object.entries(obj)) {
-    const match = key.match(PRICE_KEY_PATTERN);
-    if (match && whitelist.has(match[1].toUpperCase())) {
-      currencies.add(match[1].toUpperCase());
-    }
-    if (typeof value === 'object' && value !== null) {
-      extractPriceKeys(value, currencies, whitelist);
-    }
-  }
-}
-
-function getActiveCurrencies(whitelist: Set<string>): Set<string> {
+function getActiveCurrencies(): Set<string> {
   const currencies = new Set<string>([BASE_CURRENCY]);
 
   for (const locale of getActiveLocales()) {
-    if (whitelist.has(locale.currency)) {
-      currencies.add(locale.currency);
-    }
+    currencies.add(locale.currency);
   }
 
-  const pricingCurrencies = getPricingCurrencies(whitelist);
-  for (const currency of pricingCurrencies) {
+  const pageCurrencies = getCurrenciesFromPages(currencies);
+  for (const currency of pageCurrencies) {
     currencies.add(currency);
   }
 
@@ -108,12 +89,16 @@ function getActiveCurrencies(whitelist: Set<string>): Set<string> {
 }
 
 async function fetchExchangeRates(): Promise<Record<string, number>> {
-  const whitelist = await getFrankfurterCurrencies();
-  const activeCurrencies = getActiveCurrencies(whitelist);
+  const activeCurrencies = getActiveCurrencies();
+  const symbols = [...activeCurrencies].join(',');
+  const apiKey = env.CURRENCY_FREAKS_API_KEY;
+  const url = `${CURRENCY_FREAKS_URL}?apikey=${apiKey}&symbols=${symbols}&base=${BASE_CURRENCY}`;
 
-  const url = `${FRANKFURTER_RATES_URL}?base=${BASE_CURRENCY}`;
+  log.info(`Fetching from: ${url.replace(apiKey || '', '***')}`);
 
-  log.info(`Fetching from: ${url}`);
+  if (!apiKey) {
+    throw new Error('CURRENCY_FREAKS_API_KEY not set in environment');
+  }
 
   const response = await fetch(url);
   if (!response.ok) {
@@ -131,9 +116,10 @@ async function fetchExchangeRates(): Promise<Record<string, number>> {
   };
 
   for (const [currency, rate] of Object.entries(raw.rates)) {
-    if (typeof currency !== 'string' || typeof rate !== 'number') continue;
-    if (activeCurrencies.has(currency)) {
-      ratesObj[currency] = rate;
+    if (typeof currency !== 'string') continue;
+    const numRate = typeof rate === 'string' ? parseFloat(rate) : typeof rate === 'number' ? rate : NaN;
+    if (!Number.isNaN(numRate)) {
+      ratesObj[currency] = numRate;
     }
   }
 

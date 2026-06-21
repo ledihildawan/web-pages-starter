@@ -86,7 +86,7 @@ export const getLocaleLabelCountry = (localeCode: LocaleCode): string => {
   return `${nativeName}${regionSuffix}`;
 };
 
-export { DEFAULT_NAMESPACE, FONTS_CSS_PATH, I18N_ASSET_DIR } from './constants';
+export { DEFAULT_NAMESPACE } from './constants';
 export {
   getActiveLocaleCodes,
   getActiveLocales,

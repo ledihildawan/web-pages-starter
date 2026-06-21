@@ -4,8 +4,8 @@ import { i18nConfig } from '@config/i18n';
 import { lookup } from '@generated/paths';
 import { getActiveLocaleCodes } from '@i18n/engine/active-locales';
 import { isSystemPageSlug, SYSTEM_PAGE_IDS, type SystemPageId } from '@page-system';
-import { log } from '@scripts/lib/logger';
-import { romanize } from '@scripts/lib/romanize';
+import { log } from '@utils/logger';
+import { romanize } from '@utils/romanize';
 
 const args = process.argv.slice(2);
 const inputPath = args[0];

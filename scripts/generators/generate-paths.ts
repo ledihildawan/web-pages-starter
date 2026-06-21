@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { inject, loadTemplate } from '@codegen';
-import { log } from '@scripts/lib/logger';
-import { writeFilePath } from '@scripts/lib/write-file';
+import { log } from '@utils/logger';
+import { writeFilePath } from '@utils/write-file';
 
 const TSCONFIG_PATH = path.resolve('.', 'tsconfig.json');
 const OUTPUT_PATH = path.resolve('.', 'generated', 'paths.ts');

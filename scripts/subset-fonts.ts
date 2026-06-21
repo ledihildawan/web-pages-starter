@@ -2,7 +2,7 @@ import { execSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { lookup } from '@generated/paths';
-import { log, logBox } from './lib/logger';
+import { log, logBox } from '@utils/logger';
 
 const FONTS_DIRS = [lookup('@dist', 'assets', 'fonts')];
 

@@ -8,10 +8,10 @@ import { lookup } from '@generated/paths';
 import type { serve } from '@hono/node-server';
 import ngrok from '@ngrok/ngrok';
 import { getErrorPageSlugs, getRootPageSlug } from '@page-system';
-import { createStaticApp, getPageNames, loadHtmlCache } from '@scripts/lib/hono-server';
-import { log } from '@scripts/lib/logger';
-import { deletePreviewUrl, savePreviewUrl, verifyUrlAccessible } from '@scripts/lib/preview-url';
-import { createServer, wrapMainError } from '@scripts/lib/signal-handler';
+import { createStaticApp, getPageNames, loadHtmlCache } from '@utils/hono-server';
+import { log } from '@utils/logger';
+import { deletePreviewUrl, savePreviewUrl, verifyUrlAccessible } from '@utils/preview-url';
+import { createServer, wrapMainError } from '@utils/signal-handler';
 import inquirer from 'inquirer';
 
 const PORT = env.PORT;
