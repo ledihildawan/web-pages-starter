@@ -184,7 +184,7 @@ async function bootstrap() {
 
     const states = await Promise.all([
       import(/* webpackPreload: true */ '@i18n/runtime/store').then((m) => m.default),
-      import('@/shared/ui/navbar').then((m) => m.default),
+      import('@/shared/ui/composites/navbar').then((m) => m.default),
     ]);
 
     for (const state of states) {

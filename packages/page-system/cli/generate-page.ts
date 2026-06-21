@@ -99,7 +99,7 @@ const njkContent = `{% extends "main.njk" %}
     </div>
   </section>
 
-  {% include "shared/layout/cta.njk" %}
+  {% include "shared/ui/composites/cta.njk" %}
 {% endblock %}
 `;
 

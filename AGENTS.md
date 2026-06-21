@@ -95,7 +95,7 @@ Shared locales are auto-detected by scanning templates for `i18n.t('namespace:..
 - `url()` for all internal links (no `.html` extension — clean URLs)
 - `isActive()` for navbar active state (normalizes `.html` and `/index`)
 - Macros receive resolved text, not keys (except `form-input.njk`)
-- Error pages: `{% set %}` + `{% include "shared/error/error-page.njk" %}`
+- Error pages: `{% set %}` + `{% include "shared/ui/patterns/error/error-page.njk" %}`
 - Quick links: string-encoded `'/|home,/features|features'`
 - No inline `<style>` in templates manually — all CSS via `styles/main.css`. CSS is auto-inlined post-build by `pluginInlineCss`.
 

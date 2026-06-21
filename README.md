@@ -22,14 +22,15 @@ Requires [Bun](https://bun.sh) `>= 1.3.14`.
 │   └── rsbuild.ts         #   Rsbuild build configuration (real config; rsbuild.config.ts is a jiti wrapper)
 ├── features/              # GLOBAL features (truly reusable across pages)
 ├── shared/                # ALL cross-page code (centralized infrastructure)
-│   ├── ui/               #   ALL cross-page UI (icons, form-input, info-card, navbar, hero, cta, footer, etc.)
-│   ├── constants/         #   centralized constants (single source of truth)
-│   ├── utils/            #   shared utilities (logger, signal-handler, write-file, hono-server, json5, etc.)
-│   ├── types/            #   ambient type declarations (global.d.ts, modules.d.ts, alpinejs-csp.d.ts)
-│   ├── layouts/          #   page templates (main.njk)
-│   ├── errors/           #   error page templates (error-page, offline-page)
-│   ├── seo/              #   SEO components (page-meta)
-│   └── page-entry.ts     #   fallback entry for pages without script.ts
+│   ├── ui/               #   ALL cross-page UI (primitives, composites, patterns, layouts)
+│   │   ├── primitives/  #     icons, form-input (basic building blocks)
+│   │   ├── composites/  #     navbar, hero, cta, footer, info-card, etc. (composed from primitives)
+│   │   ├── patterns/    #     error-page, offline-page, page-meta (reusable UI patterns)
+│   │   └── layouts/     #     main.njk (page templates)
+│   ├── constants/        #   centralized constants (single source of truth)
+│   ├── utils/           #   shared utilities (logger, signal-handler, write-file, hono-server, json5, etc.)
+│   ├── types/           #   ambient type declarations (global.d.ts, modules.d.ts, alpinejs-csp.d.ts)
+│   └── page-entry.ts    #   fallback entry for pages without script.ts
 ├── data/                  # global site data
 │   ├── global.json5       #   site_name, seo, social, dns, preconnect
 │   └── menu.json5         #   navigation structure (header links + dropdowns)
@@ -159,18 +160,18 @@ Shared Nunjucks partials live in `shared/`. Two usage patterns:
 
 **Include partials** (self-contained blocks):
 ```njk
-{% include "shared/nav/navbar.njk" %}
-{% include "shared/layout/footer.njk" %}
-{% include "shared/layout/cta.njk" %}
+{% include "shared/ui/composites/navbar.njk" %}
+{% include "shared/ui/composites/footer.njk" %}
+{% include "shared/ui/composites/cta.njk" %}
 ```
 
 **Import macros** (parameterized, reusable):
 ```njk
-{% import "shared/layout/hero-section.njk" as hero %}
-{% import "shared/layout/section-header.njk" as section %}
-{% import "shared/ui/icons.njk" as icon %}
-{% import "shared/ui/form-input.njk" as form %}
-{% import "shared/ui/info-card.njk" as card %}
+{% import "shared/ui/composites/hero-section.njk" as hero %}
+{% import "shared/ui/composites/section-header.njk" as section %}
+{% import "shared/ui/primitives/icons.njk" as icon %}
+{% import "shared/ui/primitives/form-input.njk" as form %}
+{% import "shared/ui/composites/info-card.njk" as card %}
 {% import "shared/ui/social-link.njk" as social_link %}
 
 {{ hero.hero_section(badge=i18n.t('home:hero.badge'), title_part1=i18n.t('home:hero.title_part1'), title_highlight=i18n.t('home:hero.title_highlight'), description=i18n.t('home:hero.description')) }}
@@ -486,16 +487,16 @@ All variables are auto-generated from `.env` files into `generated/env.ts` by `p
 
 ### Error pages
 
-Six error pages using shared Nunjucks partials (`shared/error/error-page.njk` and `shared/error/offline-page.njk`). Each has its own i18n namespace and locale files across all 136 locales. Error page URLs are locale-dependent — the URL slug for each error page is defined per-locale in `SYSTEM_PAGE_SLUGS` (`packages/page-system/system-pages.ts`).
+Six error pages using shared Nunjucks partials (`shared/ui/patterns/error/error-page.njk` and `shared/ui/patterns/error/offline-page.njk`). Each has its own i18n namespace and locale files across all 136 locales. Error page URLs are locale-dependent — the URL slug for each error page is defined per-locale in `SYSTEM_PAGE_SLUGS` (`packages/page-system/system-pages.ts`).
 
 | Page | URL | Status | Icon | Gradient | Pattern |
 | --- | --- | --- | --- | --- | --- |
-| `not-found` | `/not-found` | 404 | search | violet/fuchsia | `{% set %}` + `{% include "shared/error/error-page.njk" %}` |
+| `not-found` | `/not-found` | 404 | search | violet/fuchsia | `{% set %}` + `{% include "shared/ui/patterns/error/error-page.njk" %}` |
 | `unauthorized` | `/unauthorized` | 401 | key | yellow/amber | Same |
 | `forbidden` | `/forbidden` | 403 | shield | amber/orange | Same |
 | `server-error` | `/server-error` | 500 | lightning | rose/red | Same |
 | `maintenance` | `/maintenance` | 503 | clock | sky/blue | Same |
-| `offline` | `/offline` | — | cloud | slate/zinc | `{% include "shared/error/offline-page.njk" %}` (reload button) |
+| `offline` | `/offline` | — | cloud | slate/zinc | `{% include "shared/ui/patterns/error/offline-page.njk" %}` (reload button) |
 
 Error pages are excluded from sitemap (`generate-sitemap`), disallowed in `robots.txt`, and have `noindex, nofollow` via `page-meta.njk`. The service worker precaches all six and serves `offline.html` when the network is unavailable. Dev server `historyApiFallback` redirects unknown routes to `/not-found.html`.
 
