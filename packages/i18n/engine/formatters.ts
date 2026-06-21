@@ -1,5 +1,5 @@
 import { ACTIVE_NUMBERING_SYSTEMS, WRITING_SYSTEM } from '@generated/active-locales-data';
-import { convertCurrency as convertCurrencyRaw, EXCHANGE_RATES } from '@generated/exchange-rates';
+import { EXCHANGE_RATES } from '@generated/exchange-rates';
 import type { CurrencyCode } from '@i18n/data/currencies';
 import type { DateValue } from '@utils/types';
 import pluralize from 'pluralize';
@@ -14,6 +14,7 @@ import type {
   TimeFormatOptions,
 } from '../config/types';
 import { getActiveLocales } from './active-locales';
+import { convertCurrencyRaw } from './convert-currency';
 import { getCurrency, getLanguageConfig, getLanguageSubtag, getLocale } from './helpers';
 
 const toDateObj = (date: DateValue): Date =>

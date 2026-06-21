@@ -54,13 +54,5 @@
     "types": ["bun-types", "node"]
   },
   "include": ["**/*.ts"],
-  "exclude": [
-    "dist",
-    "node_modules",
-    "temp",
-    "coverage",
-    "packages/cli/templates/**",
-    "packages/cli/generators/paths.ts",
-    "packages/cli/generators/env.ts"
-  ]
+  "exclude": ["dist", "node_modules", "temp", "coverage", "packages/cli/templates/**"]
 }

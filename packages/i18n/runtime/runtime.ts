@@ -1,11 +1,11 @@
 import { i18nConfig } from '@config/i18n';
 import { ASSET_PATHS } from '@constants';
 import { env } from '@generated/env';
-import { convertCurrency, EXCHANGE_RATES } from '@generated/exchange-rates';
 import type { I18nTranslationKeys } from '@generated/i18n';
 import { DEFAULT_NAMESPACE, getActiveLocalesDisplay, LOCALE_STORAGE_KEY } from '@i18n';
 import type { LocaleCode } from '@i18n/data/locales';
 import { getActiveLocaleCodes } from '@i18n/engine/active-locales';
+import { convertCurrencyRaw } from '@i18n/engine/convert-currency';
 import {
   formatAbbreviated,
   formatBytes,
@@ -33,6 +33,7 @@ import { scheduleTask } from '@utils/microtask-queue';
 import type { DateTimePreset } from '@utils/types';
 import i18next, { type Resource } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
+import { EXCHANGE_RATES } from '@/generated/exchange-rates';
 
 export { i18next };
 
@@ -206,7 +207,7 @@ const FORMATTERS = [
         return formatCurrency(price, targetCurrency);
       }
 
-      const converted = convertCurrency(price, fromCurrency, targetCurrency, EXCHANGE_RATES);
+      const converted = convertCurrencyRaw(price, fromCurrency, targetCurrency, EXCHANGE_RATES);
       return formatCurrency(converted, targetCurrency);
     },
   },
