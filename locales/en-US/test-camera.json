@@ -1,0 +1,19 @@
+{
+  "hero": {
+    "badge": "Camera Test",
+    "title": "Test Camera",
+    "description": "Test your camera functionality"
+  },
+  "content": {
+    "intro": "Click 'Start Camera' to begin. Allow camera access when prompted."
+  },
+  "camera": {
+    "start": "Start Camera",
+    "stop": "Stop Camera",
+    "capture": "Capture Photo",
+    "retake": "Retake",
+    "error_permission": "Camera access denied. Please allow camera permissions.",
+    "error_not_found": "No camera found on this device.",
+    "error_generic": "An error occurred while accessing the camera."
+  }
+}

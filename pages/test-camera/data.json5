@@ -1,0 +1,10 @@
+{
+  page_id: 'test-camera',
+  url_path: 'test-camera',
+  meta: {
+    title: 'Test Camera | Starter',
+    description: 'Test your camera functionality with our camera test tool.',
+    t_title: 'meta.title',
+    t_description: 'meta.description',
+  },
+}
