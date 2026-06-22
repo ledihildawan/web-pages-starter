@@ -4,6 +4,7 @@ import path from 'node:path';
 import { log } from '@core/utils/logger';
 import { setupSigintHandler, wrapMainError } from '@core/utils/signal-handler';
 import { lookup } from '@generated/paths';
+import { Separator } from '@inquirer/prompts';
 import inquirer from 'inquirer';
 
 const CLI_DIR = path.resolve('packages/cli');
@@ -11,6 +12,7 @@ const I18N_CLI_DIR = path.resolve('packages/i18n/cli');
 const PAGE_SYSTEM_CLI_DIR = path.resolve('packages/page-system/cli');
 
 // ─── Help ─────────────────────────────────────────────────────────────────────
+
 function printHelp(): void {
   log.info(`
 Interactive CLI menu for Web Pages Starter.
@@ -22,14 +24,15 @@ Options:
   --help, -h    Show this help message
 
 Menu sections:
-  Workflow       Dev, Build, Preview, Serve, Test, Generate Page, Delete Page
-  Manual         Check Parity, Sync Locales, Subset Fonts
+  Develop        Dev server, test
+  Build          Production/Pretty/Debug, Preview, Serve
+  Pages          Generate Page, Delete Page
+  i18n           Check Parity, Sync Locales
+  Performance    Lighthouse audit
+  Utilities      Subset Fonts
 
-For direct tool access, see: bun ./packages/<pkg>/cli/<tool>.ts --help
-
-Examples:
-  bun run cli                  # interactive menu
-  bun ./packages/i18n/cli/check-parity.ts --help
+For direct tool access:
+  bun ./packages/<pkg>/cli/<tool>.ts --help
 `);
 }
 
@@ -37,6 +40,8 @@ if (process.argv.includes('--help') || process.argv.includes('-h')) {
   printHelp();
   process.exit(0);
 }
+
+// ─── Tool runners ──────────────────────────────────────────────────────────────
 
 const runTool = (name: string, args: string[] = []): Promise<void> => {
   return new Promise((resolve, reject) => {
@@ -102,7 +107,9 @@ const runBunScript = (name: string, ...extraArgs: string[]): Promise<void> => {
   });
 };
 
-type ToolAction = () => undefined | Promise<unknown>;
+// ─── Types ─────────────────────────────────────────────────────────────────────
+
+type ToolAction = () => unknown;
 
 interface Tool {
   name: string;
@@ -110,164 +117,280 @@ interface Tool {
   action: ToolAction;
 }
 
-// ─── Relevant (workflow) ─────────────────────────────────────────────────────
-const workflowTools: Tool[] = [
+interface Section {
+  key: string;
+  title: string;
+  items: Tool[];
+}
+
+// ─── Banner ────────────────────────────────────────────────────────────────────
+
+const BANNER = `
+╔══════════════════════════════════════════════════╗
+║           Web Pages Starter CLI                   ║
+╚══════════════════════════════════════════════════╝`;
+
+// ─── Section definitions ───────────────────────────────────────────────────────
+
+const SECTIONS: Section[] = [
   {
-    name: 'Dev',
-    description: 'Start development server with hot reload',
-    action: () => runBunScript('dev'),
-  },
-  {
-    name: 'Build',
-    description: 'Build production bundle (minified / pretty / debug)',
-    action: async () => {
-      const { buildType } = await inquirer.prompt<{ buildType: string }>([
-        {
-          type: 'select',
-          name: 'buildType',
-          message: 'Select build type:',
-          choices: [
-            { name: 'Production (minified)', value: 'build' },
-            { name: 'Pretty HTML (CMS porting)', value: 'build -- --pretty' },
-            { name: 'Debug (no minify)', value: 'build -- --debug' },
-          ],
+    key: 'develop',
+    title: 'Develop',
+    items: [
+      {
+        name: 'Dev Server',
+        description: 'Start dev server with hot reload',
+        action: () => runBunScript('dev'),
+      },
+      {
+        name: 'Test',
+        description: 'Run unit tests',
+        action: async () => {
+          const { mode } = await inquirer.prompt<{ mode: string }>([
+            {
+              type: 'select',
+              name: 'mode',
+              message: 'Select test mode:',
+              choices: [
+                { name: 'Run tests', value: 'run' },
+                { name: 'Run with coverage', value: 'coverage' },
+                { name: 'Watch mode', value: 'watch' },
+              ],
+            },
+          ]);
+          await runBunScript('test', ...(mode === 'coverage' ? ['--coverage'] : mode === 'watch' ? ['--watch'] : []));
         },
-      ]);
-      const [script, ...args] = buildType.split(' ');
-      await runBunScript(script, ...args);
-    },
+      },
+    ],
   },
   {
-    name: 'Preview',
-    description: 'Build and serve via tunnel (ngrok/cloudflared)',
-    action: () => runBunScript('preview'),
-  },
-  {
-    name: 'Serve',
-    description: 'Serve production build locally',
-    action: async () => {
-      const distPath = lookup('@dist');
-      if (!fs.existsSync(distPath)) {
-        log.distNotFound();
-        const { choice } = await inquirer.prompt<{ choice: string }>([
-          {
-            type: 'select',
-            name: 'choice',
-            message: 'Select action:',
-            choices: [
-              { name: 'Build first, then serve', value: 'build' },
-              { name: 'Cancel', value: 'cancel' },
-            ],
-          },
-        ]);
-        if (choice === 'build') {
-          await runBunScript('build');
-        } else {
-          log.cancelled();
-          return;
-        }
-      }
-      await runBunScript('serve');
-    },
-  },
-  {
-    name: 'Test',
-    description: 'Run unit tests',
-    action: async () => {
-      const { testType } = await inquirer.prompt<{ testType: string }>([
-        {
-          type: 'select',
-          name: 'testType',
-          message: 'Select test mode:',
-          choices: [
-            { name: 'Run tests', value: 'run' },
-            { name: 'Run with coverage', value: 'coverage' },
-            { name: 'Watch mode', value: 'watch' },
-          ],
+    key: 'build',
+    title: 'Build',
+    items: [
+      {
+        name: 'Production',
+        description: 'Minified production build',
+        action: async () => {
+          const { variant } = await inquirer.prompt<{ variant: string }>([
+            {
+              type: 'select',
+              name: 'variant',
+              message: 'Select build variant:',
+              choices: [
+                { name: 'Production  Minified', value: 'build' },
+                { name: 'Pretty  Clean HTML (CMS porting)', value: 'pretty' },
+                { name: 'Debug  No minification', value: 'debug' },
+              ],
+            },
+          ]);
+          await runBunScript(
+            'build',
+            ...(variant === 'pretty' ? ['--', '--pretty'] : variant === 'debug' ? ['--', '--debug'] : []),
+          );
         },
-      ]);
-      const args = testType === 'coverage' ? ['--coverage'] : testType === 'watch' ? ['--watch'] : [];
-      await runBunScript('test', ...args);
-    },
-  },
-  {
-    name: 'Generate Page',
-    description: 'Scaffold new page with translation files',
-    action: async () => {
-      const { pageName } = await inquirer.prompt<{ pageName: string }>([
-        {
-          type: 'input',
-          name: 'pageName',
-          message: 'Enter page name:',
-          validate: (input: string) => (input.trim().length > 0 ? true : 'Page name is required'),
+      },
+      {
+        name: 'Preview Tunnel',
+        description: 'Build + tunnel preview (ngrok / cloudflared)',
+        action: () => runBunScript('preview'),
+      },
+      {
+        name: 'Serve Dist',
+        description: 'Serve production dist locally',
+        action: async () => {
+          const distPath = lookup('@dist');
+          if (!fs.existsSync(distPath)) {
+            log.warn('dist/ not found. Building first...');
+            await runBunScript('build');
+          }
+          await runBunScript('serve');
         },
-      ]);
-      await runTool('generate-page', [pageName.trim()]);
-    },
+      },
+    ],
   },
   {
-    name: 'Delete Page',
-    description: 'Remove a page and its locale files',
-    action: () => runTool('delete-page'),
+    key: 'pages',
+    title: 'Pages',
+    items: [
+      {
+        name: 'Generate Page',
+        description: 'Scaffold a new page with locale files',
+        action: async () => {
+          const { pageName } = await inquirer.prompt<{ pageName: string }>([
+            {
+              type: 'input',
+              name: 'pageName',
+              message: 'Enter page path:',
+              hint: 'e.g. pricing  or  services/web',
+              validate: (input: string) => (input.trim().length > 0 ? true : 'Page path is required'),
+            },
+          ]);
+          await runTool('generate-page', [pageName.trim()]);
+        },
+      },
+      {
+        name: 'Delete Page',
+        description: 'Remove a page and its locale files',
+        action: () => runTool('delete-page'),
+      },
+    ],
+  },
+  {
+    key: 'i18n',
+    title: 'i18n',
+    items: [
+      {
+        name: 'Check Parity',
+        description: 'Verify translation key parity across locales',
+        action: () => runTool('check-parity'),
+      },
+      {
+        name: 'Sync Locales',
+        description: 'Sync missing locale files from default locale',
+        action: () => runTool('sync-locales'),
+      },
+    ],
+  },
+  {
+    key: 'perf',
+    title: 'Performance',
+    items: [
+      {
+        name: 'Lighthouse',
+        description: 'Run Lighthouse audit (desktop + mobile, all categories)',
+        action: () => runTool('lighthouse'),
+      },
+    ],
+  },
+  {
+    key: 'utils',
+    title: 'Utilities',
+    items: [
+      {
+        name: 'Subset Fonts',
+        description: 'Regenerate subsetted font files',
+        action: async () => {
+          const { force } = await inquirer.prompt<{ force: boolean }>([
+            {
+              type: 'confirm',
+              name: 'force',
+              message: 'Force regenerate (ignore cache)?',
+              default: false,
+            },
+          ]);
+          await runTool('subset-fonts', force ? ['--force'] : []);
+        },
+      },
+    ],
   },
 ];
 
-// ─── Manual-only (run on demand) ─────────────────────────────────────────────
-const manualTools: Tool[] = [
-  {
-    name: 'Check Parity',
-    description: 'Verify translation key parity across locales',
-    action: () => runTool('check-parity'),
-  },
-  {
-    name: 'Sync Locales',
-    description: 'Synchronize locale files from default locale',
-    action: () => runTool('sync-locales'),
-  },
-  {
-    name: 'Subset Fonts',
-    description: 'Regenerate subsetted font files (with --force to skip cache)',
-    action: async () => {
-      const { force } = await inquirer.prompt<{ force: boolean }>([
-        {
-          type: 'confirm',
-          name: 'force',
-          message: 'Force regenerate (ignore cache)?',
-          default: false,
-        },
-      ]);
-      await runTool('subset-fonts', force ? ['--force'] : []);
-    },
-  },
-];
+// ─── Menu renderer ─────────────────────────────────────────────────────────────
+
+function printSection(section: Section): void {
+  const title = `▸ ${section.title}`;
+  const items = section.items.map((item, i) => `  ${i + 1}. ${item.name.padEnd(20)} ${item.description}`);
+  console.log(`\n${title}\n${items.join('\n')}\n  B. Back to main menu\n`);
+}
+
+// ─── Main ─────────────────────────────────────────────────────────────────────
 
 const main = async (): Promise<void> => {
-  console.clear();
-  log.header('Web Pages Starter CLI');
-  log.info('Ctrl+C to cancel at any time.\n');
+  let exit = false;
 
-  const allTools = [...workflowTools, { name: '---', description: '---', action: () => {} }, ...manualTools];
+  while (!exit) {
+    process.stdout.write('\x1b[2J\x1b[H');
+    console.log(BANNER);
+    log.info('\n  What do you want to do?\n');
 
-  const { action } = await inquirer.prompt<{ action: string }>([
-    {
-      type: 'rawlist',
-      name: 'action',
-      message: 'What do you want to do?',
-      choices: allTools.map((t) => (t.name === '---' ? '────────────' : `${t.name} - ${t.description}`)),
-      filter: (val: string) => val,
-    },
-  ]);
+    const sectionChoices = SECTIONS.map((s) => ({ name: `  ${s.title.padEnd(14)} →`, value: s.key }));
 
-  if (action === '────────────') {
-    log.cancelled();
-    return;
+    const { section } = await inquirer.prompt<{ section: string }>([
+      {
+        type: 'rawlist',
+        name: 'section',
+        message: 'Select:',
+        choices: [
+          ...(sectionChoices as { name: string; value: string }[]),
+          new Separator(),
+          { name: '  Quit', value: '__quit__' },
+        ],
+        loop: false,
+      },
+    ]);
+
+    if (section === '__quit__') {
+      exit = true;
+      continue;
+    }
+
+    const currentSection = SECTIONS.find((s) => s.key === section);
+    if (!currentSection) {
+      log.error('Error: Unknown section.');
+      log.info('\n  Press Enter to continue...');
+      await inquirer.prompt<Record<string, unknown>>([{ type: 'input', name: '_', message: '' }]);
+      continue;
+    }
+
+    // Sub-menu loop
+    let back = false;
+    while (!back) {
+      process.stdout.write('\x1b[2J\x1b[H');
+      console.log(BANNER);
+      printSection(currentSection);
+
+      const toolChoices = currentSection.items.map((item) => ({
+        name: `  ${item.name.padEnd(22)} ${item.description}`,
+        value: item.name,
+      }));
+
+      const { toolName } = await inquirer.prompt<{ toolName: string }>([
+        {
+          type: 'rawlist',
+          name: 'toolName',
+          message: `Select ${currentSection.title} tool:`,
+          choices: [
+            ...(toolChoices as { name: string; value: string }[]),
+            new Separator(),
+            { name: '  Back', value: '__back__' },
+          ],
+          loop: false,
+        },
+      ]);
+
+      if (toolName === '__back__') {
+        back = true;
+        break;
+      }
+
+      const tool = currentSection.items.find((t) => t.name === toolName);
+      if (!tool) {
+        log.error(`Error: Unknown tool "${toolName}".`);
+        log.info('\n  Press Enter to continue...');
+        await inquirer.prompt<Record<string, unknown>>([{ type: 'input', name: '_', message: '' }]);
+        back = true;
+        break;
+      }
+
+      process.stdout.write('\x1b[2J\x1b[H');
+      console.log(BANNER);
+      log.toolStarted(`${currentSection.title} / ${tool.name}`);
+
+      try {
+        await tool.action();
+      } catch {
+        // failure already logged via log.toolFailed inside runners
+      }
+
+      log.info('\n  Press Enter to continue...');
+      await inquirer.prompt<Record<string, unknown>>([{ type: 'input', name: '_', message: '' }]);
+      back = true;
+    }
   }
 
-  const tool = allTools.find((t) => `${t.name} - ${t.description}` === action);
-  if (!tool) return;
-
-  log.toolStarted(tool.name);
-  await tool.action();
+  process.stdout.write('\x1b[2J\x1b[H');
+  console.log(BANNER);
+  log.success('\n  Goodbye!\n');
 };
 
 setupSigintHandler();
