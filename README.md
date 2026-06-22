@@ -611,12 +611,19 @@ Run tests interactively via `bun run cli` → **Test** menu:
 ### Interactive menu
 
 ```bash
-bun run cli   # interactive menu with all tools
+bun run cli   # interactive menu with categorized sections
 ```
 
 Menu sections:
-- **Workflow** — Dev, Build (Prod/Pretty/Debug), Preview, Serve, Test, Generate Page, Delete Page
-- **Manual** — Check Parity, Sync Locales, Subset Fonts
+
+| Section | Tools |
+|---|---|
+| **Develop** | Dev Server, Test |
+| **Build** | Production, Preview Tunnel, Serve Dist |
+| **Pages** | Generate Page, Delete Page |
+| **i18n** | Check Parity, Sync Locales |
+| **Performance** | Lighthouse |
+| **Utilities** | Subset Fonts |
 
 ### Package scripts
 
