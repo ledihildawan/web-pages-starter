@@ -96,7 +96,7 @@ function extractSubset(comment: string): string {
   return '';
 }
 
-function parseFontFaceBlocks(css: string): FontFaceBlock[] {
+export function parseFontFaceBlocks(css: string): FontFaceBlock[] {
   const blocks: FontFaceBlock[] = [];
   const regex = /\/\*\s*([\w[\]-]+)\s*\*\/\s*(@font-face\s*\{[^}]+\})/g;
   let match = regex.exec(css);

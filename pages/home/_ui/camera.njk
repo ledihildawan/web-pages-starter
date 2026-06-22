@@ -1,0 +1,36 @@
+<section class="relative pbs-20 pbe-20 px-6 text-center overflow-hidden bg-slate-900/50">
+  <div class="max-inline-2xl mx-auto">
+
+    <h2 class="text-3xl font-bold mbe-8 text-white">Kamera Test</h2>
+
+    <div class="flex flex-col items-center gap-6">
+      <button
+        id="startCameraBtn"
+        class="inline-flex items-center gap-3 min-block-14 px-10 py-4 bg-emerald-600 hover:bg-emerald-500 text-white radius-btn font-black text-lg transition-colors duration-200"
+      >
+        <svg class="block w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
+        Nyalakan Kamera
+      </button>
+
+      <video
+        id="videoElement"
+        autoplay
+        playsinline
+        muted
+        class="w-full max-w-md rounded-xl bg-black"
+      ></video>
+
+      <div class="w-full max-w-md text-left">
+        <p class="text-sm font-bold text-slate-400 mbe-2 uppercase tracking-wide">Log Kamera:</p>
+        <div
+          id="logOutput"
+          class="bg-black/50 rounded-lg p-4 font-mono text-sm text-emerald-400 min-h-[120px] overflow-auto"
+        >Klik tombol untuk mulai.</div>
+      </div>
+    </div>
+
+  </div>
+</section>

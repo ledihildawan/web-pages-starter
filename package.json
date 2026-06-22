@@ -100,12 +100,20 @@
     "tailwindcss": "^4.3.1",
     "typescript": "^6.0.3"
   },
-  "browserslist": [
-    ">= 0.5%",
-    "last 2 versions",
-    "not dead",
-    "not ie 11"
-  ],
+  "browserslist": {
+    "production": [
+      ">= 0.5%",
+      "last 2 versions",
+      "not dead",
+      "not ie 11"
+    ],
+    "pretty": [
+      "Chrome >= 111",
+      "Safari >= 15.4",
+      "Firefox >= 113",
+      "Edge >= 111"
+    ]
+  },
   "trustedDependencies": [
     "core-js"
   ]

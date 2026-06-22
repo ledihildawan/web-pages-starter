@@ -57,7 +57,7 @@ export default defineStore('i18n', {
     if (m.i18next.hasResourceBundle(code, DEFAULT_NAMESPACE)) return;
 
     try {
-      const response = await fetch(`${env.BASE_PATH}${ASSET_PATHS.locales}/${pageID}/${code}.json`);
+      const response = await fetch(`${env.BASE_PATH}${ASSET_PATHS.locales}/${code}/${pageID}.json`);
       const data = await response.json();
 
       for (const [ns, bundle] of Object.entries(data)) {

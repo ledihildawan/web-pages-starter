@@ -49,22 +49,35 @@ Requires [Python 3](https://python.org) with `fonttools` + `brotli` (`pip instal
   * **CLI Scripts:** Must reside in their respective package folders (e.g., `packages/i18n/cli/`, `packages/env/cli/`), not in a global `scripts/` directory.
   * **Rsbuild Config:** `rsbuild.config.ts` is strictly a Jiti wrapper. The actual configuration lives in `configs/rsbuild.ts`.
 * **Imports & Path Aliases:**
-  * Use predefined aliases everywhere (`@i18n`, `@env`, `@template-engine`, `@page-system`, `@config/*`, `@features/*`, `@shared/*`, `@shared/ui/*`, `@shared/constants`, `@shared/constants/*`, `@shared/utils/*`, `@shared/types/*`, `@shared/layouts/*`, `@scripts/*`, `@generated/*`, `@assets/*`, `@data/*`, `@dist/*`, `@locales/*`, `@pages/*`, `@public/*`).
+  * Use predefined aliases everywhere (`@i18n`, `@template-engine`, `@page-system`, `@config/*`, `@cli/*`, `@core/*`, `@constants/*`, `@utils/*`, `@shared/*`, `@shared/ui/*`, `@generated/*`, `@assets/*`, `@data/*`, `@dist/*`, `@locales/*`, `@pages/*`, `@public/*`, `@layouts/*`).
   * Use `@generated/env` for environment imports (never `@utils/env`).
   * Use `@generated/paths` for path helpers (`lookup()`, `find()`, `alias`).
-  * `tsconfig.json` is the single source of truth for aliases (`scripts/generators/generate-paths.ts` reads and auto-derives them into `generated/paths.ts` for Jiti/bundlers).
+  * `tsconfig.json` is the single source of truth for aliases (`packages/cli/generators/paths.ts` reads and auto-derives them into `generated/paths.ts` for Jiti/bundlers).
 
 
 ## Build Modes
 
 ```bash
 bun run build              # minified HTML + CSS/JS + Brotli/Gzip compression (default)
-bun run build -- --pretty  # pretty-printed HTML for CMS template porting
+bun run build -- --pretty  # pretty-printed HTML + CSS external in /assets/styles/ + JS not minified
 bun run build -- --debug   # skip JS/CSS minify
-bun run preview            # build (BUILD_PREVIEW=true) + serve via tunnel
+bun run preview            # build (BUILD_PREVIEW=true, SITE_URL=tunnel) + serve via tunnel
 ```
 
-Build pipeline: `generate-paths → generate-env → generate-active-locales → sync-system-pages → clean:cache → fetch:rates → generate:fonts → sync-locales → generate-types → build.ts → subset-fonts → compress`
+Pretty mode (`--pretty`):
+- HTML beautified with 2-space indent via `js-beautify`
+- CSS stays external in `/assets/styles/` (not inlined into `<style>`)
+- LightningCSS targets: `Chrome >= 111, Safari >= 15.4, Firefox >= 113, Edge >= 111`
+- Color features excluded: `labColors`, `oklabColors`, `p3Colors`, `colorFunction` (eliminates hex+lab duplicates)
+- CSS minified (LightningCSS default), JS not minified
+- Source maps enabled for debugging
+- `preload-chunks` still runs normally
+
+Build pipeline: `generate-paths → generate-pricing-types → generate-env → generate-active-locales → sync-system-pages → fetch-exchange-rates → generate-fonts-css → subset-fonts → sync-locales → generate-types → generate-images → [rsbuild-wrapper] → [copy-locale-assets]`
+
+**SERVE generators** (run inside rsbuild-wrapper before rsbuild): `generate-sitemap → generate-manifest → generate-robots → generate-service-worker`
+
+**rsbuild-wrapper** runs rsbuild then applies post-build steps in order: `copy-to-dist → root-page-as-index → pretty-html → remove-empty-js → inline-css → preload-chunks → compress`
 
 ## Testing
 
@@ -97,7 +110,7 @@ Shared locales are auto-detected by scanning templates for `i18n.t('namespace:..
 - Macros receive resolved text, not keys (except `form-input.njk`)
 - Error pages: `{% set %}` + `{% include "shared/ui/patterns/error-page.njk" %}`
 - Quick links: string-encoded `'/|home,/features|features'`
-- No inline `<style>` in templates manually — all CSS via `styles/main.css`. CSS is auto-inlined post-build by `pluginInlineCss`.
+- No inline `<style>` in templates manually — all CSS via `styles/main.css`. CSS is auto-inlined post-build by `inlineCssOnDist()` in rsbuild-wrapper (production only; pretty mode keeps CSS external in `/assets/styles/`).
 
 ## Page Routing Conventions
 
@@ -152,7 +165,7 @@ pages/home/
 - `bunfig.toml` — `preload = ["./packages/env/preload.ts"]`
 - `.env` — general env vars shared across all stages. Required. Gitignored. `PRIVATE_` prefix = server-only (not exposed to browser). No prefix = browser-safe (public by default). Edit this file to add/change env vars — `packages/env/cli/generate-env.ts` auto-generates `generated/env.ts` from it
 - `.env.{stage}` — per-stage overrides. Active: `.env.dev`, `.env.prod`. Gitignored. Stage pipeline: `dev → qa → uat → preprod → prod`
-- `configs/rsbuild.ts` — Rsbuild build configuration (loaded via the jiti wrapper in `rsbuild.config.ts`). Includes splitChunks cacheGroups (CHUNK_NAMES constant), `pluginPreloadChunks` (JS chunk preload), `pluginInlineCss` (CSS inlining + nonce + URL rewrite), `pluginRootPageAsIndex`, `pluginHotReloadContent`, `pluginPrettyHtml`, `pluginRemoveEmptyPageJs`. Path aliases from `tsconfig.json` via `generated/paths.ts`. `import.meta.env` define includes `SINGLE_LOCALE`, `DEFAULT_LOCALE`, `FLAG_CDN_BASE`.
+- `configs/rsbuild.ts` — Rsbuild build configuration (loaded via the jiti wrapper in `rsbuild.config.ts`). Includes `pluginHotReloadContent` (actual RsbuildPlugin that adds contextDependencies for HMR), splitChunks cacheGroups (CHUNK_NAMES constant), htmlPlugin minification config, lightningcssLoader config, and page-inject-loader for bootstrap/CSS injection. Path aliases from `tsconfig.json` via `generated/paths.ts`. `import.meta.env` define includes `SINGLE_LOCALE`, `DEFAULT_LOCALE`, `FLAG_CDN_BASE`.
 - `generated/paths.ts` — auto-generated alias type + map + `lookup()`/`find()` helpers. Reads `tsconfig.json` paths. Single source of truth: edit `tsconfig.json` paths → jiti + bundler auto-sync.
 
 ## Packages
@@ -173,12 +186,12 @@ pages/home/
 ## Build Optimizations
 
 - **splitChunks**: 5 cacheGroups — `i18next` (`chunks: 'all'`, priority 30), `alpinePlugins` (async, priority 25), `alpineCore` (all, priority 20), `i18nFormatters` (async, priority 15), `default` (`minChunks: 2`, priority -10). Chunk names centralized in `CHUNK_NAMES` constant shared between cacheGroups config + preload plugin.
-- **CSS inlining**: `pluginInlineCss` post-build plugin converts all `<link rel="stylesheet">` to `<style nonce="...">` with relative URL rewriting. Eliminates render-blocking CSS requests. Nonce extracted from CSP meta tag.
-- **JS chunk preload**: `pluginPreloadChunks` post-build plugin scans for named chunks (matching `CHUNK_NAMES`), adds `<link rel="preload" as="script">` for chunks NOT already in `<script defer>`. Uses `preload` (not `modulepreload`) for HTTP cache dedup with rspack's classic script loading.
+- **CSS inlining**: `inlineCssOnDist()` function in rsbuild-wrapper post-builds converts all `<link rel="stylesheet">` to `<style nonce="...">` with relative URL rewriting. Eliminates render-blocking CSS requests. Skipped in pretty mode (CSS stays external). Nonce extracted from CSP meta tag.
+- **JS chunk preload**: `preloadChunksOnDist()` function in rsbuild-wrapper scans for named chunks (matching `CHUNK_NAMES`), adds `<link rel="preload" as="script">` for chunks NOT already in `<script defer>`. Uses `preload` (not `modulepreload`) for HTTP cache dedup with rspack's classic script loading.
 - **Font woff2 preload**: Generated by template engine (`template.ts`) from `fontsConfig.sans.name`. Reads `fonts.css` at SSR time, extracts latin woff2 URL, passes as `font_preload_url` template param → `<link rel="preload" as="font">` in `main.njk`.
 - **webpackPreload magic comments**: `bootstrap.ts` dynamic imports use `/* webpackPreload: true */` for critical chunks (alpine, i18next, i18n-formatters).
-- **Brotli + Gzip**: `scripts/compress.ts` generates `.br` + `.gz` files post-build
-- **Font subsetting**: `scripts/subset-fonts.ts` uses `pyftsubset` to strip hinting/tables
+- **Brotli + Gzip**: `packages/cli/generators/compress.ts` generates `.br` + `.gz` files post-build
+- **Font subsetting**: `packages/cli/generators/subset-fonts.ts` uses `pyftsubset` (fonttools CLI) to strip hinting and unused OpenType tables from woff2 files
 - **JS**: `sideEffects: true` for `bootstrap.ts` + `script.ts` (prevent tree-shaking of entry files)
 - **Single-locale i18n skip**: stub Alpine store, skip i18next init when only 1 locale
 - **Alpine.start() decoupled**: For default locale, Alpine starts immediately without waiting for i18next init (background). For non-default locales, waits for `initIntl()` to prevent flash of wrong language.
@@ -228,7 +241,7 @@ Templates: `paths.ts`, `env.ts`, `service-worker.js`, `sitemap.xml`, `manifest.j
 - `shared/constants/public-filenames.ts` — `PUBLIC_FILENAMES` (serviceWorker, robots, sitemap, manifest, faviconSvg, faviconIco), `PUBLIC_DIRS` (locales, assets, fonts, images). Import via `@shared/constants` or `@constants` barrel.
 - `packages/i18n/constants.ts` — `DEFAULT_NAMESPACE` (`'common'`), `CSP_NONCE_PLACEHOLDER`. Imported via `@i18n` barrel.
 - `packages/page-system/system-pages.ts` — `FALLBACK_LOCALE` (derived from `i18nConfig.defaultLocale`) for slug lookup fallback.
-- `configs/rsbuild.ts` — `CHUNK_NAMES` constant (shared between cacheGroups + pluginPreloadChunks).
+- `configs/rsbuild.ts` — `CHUNK_NAMES` constant (shared between splitChunks cacheGroups + `preloadChunksOnDist()` in rsbuild-wrapper).
 - `shared/utils/write-file.ts` — `COMMENT_EXCLUDED_FILES` (files excluded from comment headers). Values sourced from `PUBLIC_FILENAMES`.
 
 ## Restrictions

@@ -182,9 +182,9 @@ export default defineConfig({
     },
     assetPrefix: env.BASE_PATH,
     cleanDistPath: true,
-    minify: shouldMinify ? { js: true, css: true } : false,
-    inlineStyles: false,
+    minify: isPrettyHtml ? { css: true, js: false } : shouldMinify ? { js: true, css: true } : false,
     sourceMap: !shouldMinify ? { js: 'cheap-module-source-map', css: true } : false,
+    inlineStyles: false,
     filename: {
       js: '[name].[contenthash:8].js',
       css: '[name].[contenthash:8].css',
@@ -237,6 +237,17 @@ export default defineConfig({
   },
   plugins: [pluginHotReloadContent()],
   tools: {
+    lightningcssLoader: isPrettyHtml
+      ? {
+          targets: 'Chrome >= 111, Safari >= 15.4, Firefox >= 113, Edge >= 111',
+          exclude: {
+            colorFunction: true,
+            oklabColors: true,
+            labColors: true,
+            p3Colors: true,
+          },
+        }
+      : undefined,
     htmlPlugin: (config) => {
       config.minify = (html: string) =>
         !shouldMinifyHTML

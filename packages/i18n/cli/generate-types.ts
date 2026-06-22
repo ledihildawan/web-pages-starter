@@ -129,10 +129,14 @@ function compareLocaleParity(
   return errors;
 }
 
+const args = process.argv.slice(2);
+const skipParityCheck = args.includes('--no-check');
+
 try {
   logBox('Generate i18n Type Definitions', {
     'Default locale': i18nConfig.defaultLocale,
     Output: 'i18n.d.ts',
+    'Parity check': skipParityCheck ? 'skipping (--no-check)' : 'enabled',
   });
 
   const defaultNamespaces = readLocaleTree(DEFAULT_LOCALE_DIR);
@@ -145,7 +149,9 @@ try {
     throw new Error(`[i18n] Missing default common locale: ${path.join(DEFAULT_LOCALE_DIR, 'common.json')}`);
   }
 
-  if (ACTIVE_LOCALE_CODES.length <= 1) {
+  if (skipParityCheck) {
+    log.info('  Skipping parity check (--no-check flag)\n');
+  } else if (ACTIVE_LOCALE_CODES.length <= 1) {
     log.info('  Skipping parity check (single active locale)\n');
   } else {
     const parityErrors = LOCALE_CODES.filter((lang) => activeLocaleSet.has(lang)).flatMap((lang) => {

@@ -8,6 +8,7 @@ export const PIPELINE_STEPS = {
     'scripts/clean-cache.ts',
     'scripts/fetch-exchange-rates.ts',
     'scripts/generators/generate-fonts-css.ts',
+    'packages/cli/generators/subset-fonts.ts',
     'packages/i18n/cli/sync-locales.ts',
     'packages/i18n/cli/generate-types.ts',
     'scripts/generators/generate-images.ts',
@@ -19,7 +20,7 @@ export const PIPELINE_STEPS = {
     'scripts/generators/generate-service-worker.ts',
   ],
   RSBUILD: 'rsbuild',
-  POST_BUILD: ['scripts/subset-fonts.ts', 'scripts/compress.ts'],
+  POST_BUILD: ['scripts/compress.ts'],
 } as const;
 
 export type PipelineStep = (typeof PIPELINE_STEPS)[keyof typeof PIPELINE_STEPS];

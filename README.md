@@ -55,8 +55,11 @@ Requires [Bun](https://bun.sh) `>= 1.3.14`.
 ├── assets/                # images, fonts, raw assets
 ├── bootstrap.ts          # app entry — global CSS (main.css), Alpine + collapse/focus plugins, i18n store/initIntl, fonts, SW. Auto-injected via page-inject-loader
 ├── bunfig.toml          # Bun config — preload packages/env/preload.ts for .env.{stage} loading
-├── scripts/              # build-time scripts (build, serve, compress, subset-fonts, fetch-exchange-rates, clean-cache)
 ├── packages/
+│   ├── cli/
+│   │   ├── generators/     # build generators: env, paths, sitemap, manifest, robots, service-worker, compress, images, fonts-css, subset-fonts, pricing-types, sync-locales, active-locales, exchange-rates, types
+│   │   ├── scripts/        # build scripts: build.ts, dev.ts, serve.ts, rsbuild-wrapper.ts, clean-cache.ts, fetch-exchange-rates.ts
+│   │   └── tools/          # tools: preview.ts, lighthouse.ts, menu.ts
 │   ├── i18n/              #   self-contained i18n package (data, formatting, runtime, strategies, fonts)
 │   │   ├── index.ts       #     public API barrel
 │   │   ├── data/          #     master data — 136 locales, 93 languages (build-time only)
@@ -321,7 +324,7 @@ The i18n store provides reactive locale switching. Registered in `packages/i18n/
 3. **Single-locale**: register stub i18n store → `Alpine.start()` immediately → skip i18next entirely
 4. **Multi-locale (default locale)**: register i18n store + navbar → `Alpine.start()` immediately → i18next initializes in background
 5. **Multi-locale (non-default locale)**: register store + navbar → `initIntl(locale)` → `Alpine.start()` (prevents flash of wrong language)
-6. Font CSS loaded via `<link>` in template head (inlined post-build by `pluginInlineCss`). `fonts.ts` watches for locale changes via `MutationObserver` — only injects for locale switching.
+6. Font CSS loaded via `<link>` in template head. `injectFontFaceRules()` in `fonts.ts` checks for existing `CSSFontFaceRule` in `document.styleSheets` — skips if rules already present from inlined CSS. `watchScriptAndLoadFont()` sets up `MutationObserver` for locale changes.
 7. Register service worker (production only)
 
 Bootstrap is auto-injected into every page entry via `packages/page-system/page-inject-loader.cjs` — no manual `import` needed in page `script.ts` files.
@@ -333,60 +336,64 @@ See [docs/i18n.md](docs/i18n.md#runtime) for detailed bootstrap flow.
 ### Development
 
 ```
-generate-env → sync-system-pages → clean:cache → fetch:rates → generate-active-locales → generate-fonts-css → sync-locales → generate-types → [watch || rsbuild dev]
+generate-paths → generate-pricing-types → generate-env → sync-system-pages → fetch-exchange-rates → generate-active-locales → generate-fonts-css → subset-fonts → sync-locales → generate-types → generate-images → [watch || rsbuild dev]
 ```
 
+- `generate-paths` + `generate-env` must run first (all generators depend on their outputs)
 - Rsbuild dev server on port 8888 with HMR
-- Hot reload for `.njk`, `.json`, `.json5` files via `pluginHotReloadContent` (Rspack watches `locales/`, `data/`, `pages/`, `shared/`, `layouts/` — triggers full rebuild + page reload)
+- Hot reload for `.njk`, `.json`, `.json5` files via `pluginHotReloadContent` (Rspack watches `locales/`, `data/`, `pages/`, `shared/`, `layouts/`, `generated/` — triggers full rebuild + page reload)
 - Dev cache: `generateClientI18nScript` hashes active locale files by mtime — cache invalidates when any locale file changes
-- Locale file watcher (`watch.ts`) — watches locale JSON files + `configs/i18n.ts` + `generated/`; auto-regenerates active-locales → sync-locales → generate-types on config change
+- Locale file watcher (`packages/i18n/cli/watch.ts`) — runs separately in dev mode, watches locale JSON files + `configs/i18n.ts` + `generated/`; auto-regenerates active-locales → sync-locales → generate-types --no-check on locale or config change
 
 ### Production
 
 ```
-generate-env → sync-system-pages → clean:cache → fetch:rates → generate-active-locales → generate-fonts-css → sync-locales → generate-types → build.ts → subset-fonts → compress
+generate-paths → generate-pricing-types → generate-env → sync-system-pages → fetch-exchange-rates → generate-active-locales → generate-fonts-css → subset-fonts → sync-locales → generate-types → generate-images → rsbuild-wrapper → copy-locale-assets
 ```
+
+**SERVE generators** (inside rsbuild-wrapper, before rsbuild): `generate-sitemap → generate-manifest → generate-robots → generate-service-worker`
+
+**rsbuild-wrapper** executes: rsbuild → copy-to-dist → root-page-as-index → pretty-html → remove-empty-js → inline-css → preload-chunks → compress
 
 `build.ts` orchestrates the final steps with `NODE_ENV=production`:
 1. Cleans `dist/`
-2. Runs generators (sitemap, manifest, robots, sw) with production env vars
-3. Spawns Rsbuild for production bundle
+2. Runs SERVE generators (sitemap, manifest, robots, sw) with production env vars
+3. Spawns rsbuild-wrapper which runs Rsbuild for production bundle
 
 **Post-build:**
-- **subset-fonts** — uses `pyftsubset` to strip hinting/tables from woff2 files
-- **compress** — generates `.br` (Brotli) + `.gz` (Gzip) files for all text assets
+- **copy-locale-assets** — copies locale JSON files from `locales/` to `public/assets/locales/` and `dist/assets/locales/`
 
-**Pre-build steps:**
-0. **generate-env** — regenerates `generated/env.ts` from `.env` files (schema + engine + runtime validation + singleton). Must run before any tool importing `@generated/env`
-1. **sync-system-pages** — renames ALL system page folders to match locale-dependent slugs from `SYSTEM_PAGE_SLUGS` when the default locale changes
-2. **clean-cache** — purges `node_modules/.cache`, `.cache`, `dist`, `public/assets/i18n`
-3. **fetch-exchange-rates** — pulls live rates from Frankfurter API (24h cache)
-4. **generate-active-locales** — generates `generated/active-locales-data.ts` with filtered locale/language/numbering/writing-system/font data. Production mode (`--prod`) outputs only active locale entries; dev mode outputs all entries.
-5. **sync-locales** — creates missing locale directories and syncs missing `.json` files from the default locale
-6. **generate-types** — generates `generated/i18n.d.ts` type definitions (overwrites stub), checks locale parity (errors fail the build), syncs `i18n-ally.sourceLanguage`/`displayLanguage` from `i18nConfig.defaultLocale`
+**Pre-build steps** (run before rsbuild):
+0. **generate-paths** — generates `generated/paths.ts` from `tsconfig.json` paths (alias map + `lookup()`/`find()` helpers). Must run first.
+1. **generate-pricing-types** — extracts currency codes from `data/pricing.json5` → generates `generated/pricing.d.ts`
+2. **generate-env** — regenerates `generated/env.ts` from `.env` files (schema + engine + runtime validation + singleton). Must run before any tool importing `@generated/env`
+3. **generate-active-locales** — generates `generated/active-locales-data.ts` with filtered locale/language/numbering/writing-system/font data. Production mode (`--prod`) outputs only active locale entries; dev mode outputs all entries.
+4. **sync-system-pages** — renames ALL system page folders to match locale-dependent slugs from `SYSTEM_PAGE_SLUGS` when the default locale changes
+5. **fetch-exchange-rates** — pulls live rates from Frankfurter API (24h cache)
+6. **generate-fonts-css** — generates `public/assets/fonts/fonts.css` with font-face rules for active locales (subset-filtered by writing system)
+7. **subset-fonts** — uses `pyftsubset` (fonttools CLI) to strip hinting and unused OpenType tables from woff2 font files
+8. **sync-locales** — creates missing locale directories and syncs missing `.json` files from the default locale
+9. **generate-types** — generates `generated/i18n.d.ts` type definitions (overwrites stub), checks locale parity (errors fail the build; dev mode uses `--no-check` to skip parity), syncs `i18n-ally.sourceLanguage`/`displayLanguage` from `i18nConfig.defaultLocale`
+10. **generate-images** — compresses images (AVIF, 3 sizes: 400/800/1600w, quality 50), generates `generated/image-manifest.ts`
 
-**Inside `build.ts` (production env):**
-7. **generate-sitemap** — generates `public/sitemap.xml` from pages and `SITE_URL`
-8. **generate-manifest** — generates `public/manifest.json` from `global.json5` + `i18nConfig`, uses `BASE_PATH` for `start_url` and `scope`
-9. **generate-robots** — generates `public/robots.txt` from `SITE_URL`
-10. **generate-service-worker** — generates `public/service-worker.js` dynamically with locale-specific error page URLs from `SYSTEM_PAGE_SLUGS`
-11. **rsbuild build** — Rsbuild production bundle with:
-    - JS + CSS minification (Rspack)
-    - HTML minification (`html-minifier-terser` — collapse, sort, minify inline CSS/JS, minify JSON-LD)
-    - `home.html` → `index.html` rename (`pluginRootPageAsIndex`)
-    - Image compression (AVIF, 3 sizes: 400/800/1600w, quality 50)
-    - CSS inlined into `<style nonce="...">` via `pluginInlineCss` (eliminates render-blocking CSS, nonce from CSP meta, relative URL rewriting for font paths)
-    - Small JS external with nonce (CSP-safe), larger → separate file
-    - Per-page code splitting with shared bootstrap chunk (splitChunks)
-    - JS chunk preload via `pluginPreloadChunks` (`<link rel="preload" as="script">`, excludes chunks already in `<script defer>`)
-    - Font woff2 preload generated by template engine from `fontsConfig`
-    - Content-hashed filenames for JS/CSS/images
-    - Brotli + Gzip compression post-build
-    - Font subsetting via pyftsubset post-build
+**SERVE generators** (run inside rsbuild-wrapper before rsbuild):
+11. **generate-sitemap** — generates `public/sitemap.xml` from pages and `SITE_URL`
+12. **generate-manifest** — generates `public/manifest.json` from `global.json5` + `i18nConfig`, uses `BASE_PATH` for `start_url` and `scope`
+13. **generate-robots** — generates `public/robots.txt` from `SITE_URL`
+14. **generate-service-worker** — generates `public/service-worker.js` dynamically with locale-specific error page URLs from `SYSTEM_PAGE_SLUGS`
 
-   **Build flags:**
-   - `--pretty` — pretty-print HTML instead of minifying (for CMS template porting)
-   - `--debug` — disable JS/CSS minification
+**rsbuild-wrapper** executes:
+- Runs rsbuild for production bundle with JS + CSS minification, HTML minification
+- `home.html` → `index.html` rename
+- Image compression (AVIF)
+- `inlineCssOnDist()` — CSS inlined into `<style nonce="...">` (production only; skipped in pretty mode)
+- `preloadChunksOnDist()` — adds `<link rel="preload">` for named JS chunks
+- Font woff2 preload from `fontsConfig`
+- Content-hashed filenames for JS/CSS/images
+- Brotli + Gzip compression (`compress.ts`)
+
+**Post-build:**
+- **copy-locale-assets** — copies locale JSON files from `locales/` to `public/assets/locales/` and `dist/assets/locales/`
 
 ### Rsbuild configuration highlights
 
@@ -395,14 +402,14 @@ generate-env → sync-system-pages → clean:cache → fetch:rates → generate-
 | Entry discovery | Recursive scan: `pages/**/script.ts` (optional) or `shared/page-entry.ts` (fallback). `_` prefix (skip), `()` groups (strip from URL), `[slug]` (dynamic from data.json5) |
 | Page entry injection | `page-inject-loader.cjs` auto-injects `import '../../bootstrap'` + `import './style.css'` into every `script.ts`/`page-entry.ts` — zero manual imports |
 | Bootstrap shared chunk | `splitChunks` with `minSize: 2000` + `default` cacheGroup extracts bootstrap to single cached chunk. No duplication across pages |
-| Resource hints | `pluginPreloadChunks` injects `<link rel="preload" as="script">` for named async chunks (excludes `<script defer>` chunks). Font woff2 preload from template engine. CSS inlined via `pluginInlineCss` with nonce + URL rewriting |
-| Root page as index | `pluginRootPageAsIndex` renames `home.html` → `index.html` post-build |
+| Resource hints | `preloadChunksOnDist()` (in rsbuild-wrapper) injects `<link rel="preload" as="script">` for named async chunks (excludes `<script defer>` chunks). Font woff2 preload from template engine. CSS inlined via `inlineCssOnDist()` with nonce + URL rewriting (production only; skipped in pretty mode) |
+| Root page as index | `rootPageAsIndex()` function in rsbuild-wrapper renames `home.html` → `index.html` post-build |
 | Clean URLs | Dev server `historyApiFallback` with per-page rewrites: `/pricing` → `pricing.html`, `/about` → `about.html`, etc. |
 | Hot reload | `pluginHotReloadContent` adds `compilation.contextDependencies` for `locales/`, `data/`, `pages/`, `shared/`, `layouts/` — Rspack rebuilds on any file change in these dirs |
 | `import.meta.env` | `source.define` replaces `import.meta.env` with full env object (browser-safe keys only). `PRIVATE_` prefix in `.env` excludes secrets from browser bundle |
 | Output paths | `dist/assets/{scripts,styles,images,fonts}` — organized by asset type |
 | Static copy | `output.copy` moves `public/` static files (favicon, sw.js, manifest, robots, i18n bundles) to `dist/` |
-| Path aliases | Single source: `tsconfig.json` paths → `generated/paths.ts` auto-derives bundler format for jiti + Rsbuild. `@i18n`, `@template-engine`, `@page-system`, `@config/*`, `@scripts/*`, `@utils/*`, `@generated/*`, `@assets/*`, `@data/*`, `@dist/*`, `@layouts/*`, `@locales/*`, `@pages/*`, `@public/*`, `@shared/*`. Edit `tsconfig.json` only — all consumers auto-sync |
+| Path aliases | Single source: `tsconfig.json` paths → `generated/paths.ts` auto-derives bundler format for jiti + Rsbuild. `@i18n`, `@template-engine`, `@page-system`, `@config/*`, `@cli/*`, `@core/*`, `@utils/*`, `@generated/*`, `@assets/*`, `@data/*`, `@dist/*`, `@layouts/*`, `@locales/*`, `@pages/*`, `@public/*`, `@shared/*`. Edit `tsconfig.json` only — all consumers auto-sync |
 | Nunjucks loader | `simple-nunjucks-loader` with search paths: `pages/`, `layouts/`, `.` (root); `assetsPaths: assets/` |
 | Pre-entries | Bootstrap + main.css auto-injected via `page-inject-loader.cjs` (not `preEntry`) |
 
@@ -412,8 +419,8 @@ Full preview flow — runs `bun run build` with `BUILD_PREVIEW=true`, then start
 
 ```bash
 bun run preview                                    # Interactive: select ngrok or cloudflared
-bun ./scripts/cli/preview.ts --tunnel ngrok              # Use ngrok (requires NGROK_AUTHTOKEN)
-bun ./scripts/cli/preview.ts --tunnel cloudflared        # Use cloudflared
+bun ./packages/cli/tools/preview.ts --tunnel ngrok              # Use ngrok (requires NGROK_AUTHTOKEN)
+bun ./packages/cli/tools/preview.ts --tunnel cloudflared        # Use cloudflared
 ```
 
 **Tunnel providers:**
@@ -482,8 +489,8 @@ All variables are auto-generated from `.env` files into `generated/env.ts` by `p
 
 ## PWA
 
-- `public/manifest.json` — web app manifest (generated by `scripts/generators/generate-manifest.ts` from `global.json5` + `i18nConfig`)
-- `public/service-worker.js` — **generated** by `scripts/generators/generate-service-worker.ts` (not static). Stale-while-revalidate service worker with navigation cache and asset caching. Derives `BASE_PATH` from `self.location`, precaches `index.html`, 6 error pages, `manifest.json`. Offline fallback to `offline.html`. Cache version: dynamic — `starter-<base36 timestamp>`, regenerated each build
+- `public/manifest.json` — web app manifest (generated by `packages/cli/generators/manifest.ts` from `global.json5` + `i18nConfig`)
+- `public/service-worker.js` — **generated** by `packages/cli/generators/service-worker.ts` (not static). Stale-while-revalidate service worker with navigation cache and asset caching. Derives `BASE_PATH` from `self.location`, precaches `index.html`, 6 error pages, `manifest.json`. Offline fallback to `offline.html`. Cache version: dynamic — `starter-<base36 timestamp>`, regenerated each build
 - Registered automatically in production builds via `import.meta.env.BASE_PATH`
 
 ### Error pages
@@ -517,7 +524,7 @@ Config: `.husky/pre-commit`, `.lintstagedrc`.
 
 - No comments unless explicitly requested
 - No deprecated or backward-compat code — remove entirely
-- Import paths: `tsconfig.json` is single source of truth → `generated/paths.ts` auto-derives for jiti + bundler. Aliases: `@i18n`, `@template-engine`, `@page-system`, `@config/*`, `@scripts/*`, `@utils/*`, `@generated/*`, `@assets/*`, `@data/*`, `@dist/*`, `@layouts/*`, `@locales/*`, `@pages/*`, `@public/*`, `@shared/*`
+- Import paths: `tsconfig.json` is single source of truth → `generated/paths.ts` auto-derives for jiti + bundler. Aliases: `@i18n`, `@template-engine`, `@page-system`, `@config/*`, `@cli/*`, `@core/*`, `@utils/*`, `@generated/*`, `@assets/*`, `@data/*`, `@dist/*`, `@layouts/*`, `@locales/*`, `@pages/*`, `@public/*`, `@shared/*`
 - Biome for lint + format (not Prettier) — config in `biome.json`
 - Pre-commit chain: Husky + lint-staged (Biome) + typecheck + test (`&&`)
 
@@ -576,7 +583,7 @@ packages/i18n/__tests__/
 packages/page-system/__tests__/
 └── system-pages.test.ts     # ROOT_PAGE, SYSTEM_PAGE_SLUGS, slug helpers
 
-scripts/lib/__tests__/
+shared/utils/__tests__/
 └── romanize.test.ts         # limax romanization
 ```
 
@@ -619,22 +626,20 @@ Direct tool access:
 | Command | What it does |
 | --- | --- |
 | `bun ./packages/page-system/cli/generate-page.ts <name>` | Scaffold a new page with locale files for active locales |
-| `bun ./scripts/generators/generate-sitemap.ts` | Generate `public/sitemap.xml` from page directories |
-| `bun ./scripts/generators/generate-manifest.ts` | Generate `public/manifest.json` from `global.json5` + `i18nConfig` |
-| `bun ./scripts/generators/generate-robots.ts` | Generate `public/robots.txt` from `SITE_URL` |
-| `bun ./scripts/generators/generate-service-worker.ts` | Generate `public/service-worker.js` with locale-specific error page URLs |
-| `bun ./packages/page-system/cli/sync-system-pages.ts` | Rename system page folders to match locale-dependent slugs |
-| `bun ./packages/i18n/cli/sync-locales.ts` | Sync missing locale directories and files from default |
-| `bun ./packages/page-system/cli/delete-page.ts [name]` | Delete a page and its locale files across all locale directories (system pages protected) |
+| `bun ./packages/cli/generators/sitemap.ts` | Generate `public/sitemap.xml` from page directories |
+| `bun ./packages/cli/generators/manifest.ts` | Generate `public/manifest.json` from `global.json5` + `i18nConfig` |
+| `bun ./packages/cli/generators/robots.ts` | Generate `public/robots.txt` from `SITE_URL` |
+| `bun ./packages/cli/generators/service-worker.ts` | Generate `public/service-worker.js` with locale-specific error page URLs |
+| `bun ./packages/cli/scripts/fetch-exchange-rates.ts` | Fetch exchange rates with 24h cache |
+| `bun ./packages/cli/scripts/fetch-exchange-rates.ts -- --force` | Force-refresh exchange rates |
+| `bun ./packages/cli/tools/lighthouse.ts` | Run Lighthouse audits with interactive configuration |
+| `bun ./packages/cli/scripts/clean-cache.ts` | Purge build cache directories |
 | `bun ./packages/i18n/cli/check-parity.ts` | Diff translation keys across all locales |
-| `bun ./scripts/fetch-exchange-rates.ts` | Fetch exchange rates with 24h cache |
-| `bun ./scripts/fetch-exchange-rates.ts -- --force` | Force-refresh exchange rates |
 | `bun ./packages/i18n/cli/generate-types.ts` | Generate i18n types, check parity (build error on mismatch), sync i18n-ally config |
-| `bun ./scripts/cli/lighthouse.ts` | Run Lighthouse audits with interactive configuration |
 
 ## Tools
 
-Most tools live in `scripts/`; i18n-specific CLI tools live in `packages/i18n/cli/`, page-system CLI in `packages/page-system/cli/`. They share modules from `scripts/lib/`:
+Most tools live in `packages/cli/`; i18n-specific CLI tools live in `packages/i18n/cli/`, page-system CLI in `packages/page-system/cli/`, env CLI in `packages/env/cli/`. They share modules from `packages/cli/generators/lib/`:
 
 | Module | Purpose |
 | --- | --- |
@@ -646,25 +651,24 @@ Most tools live in `scripts/`; i18n-specific CLI tools live in `packages/i18n/cl
 
 | Tool | Shared imports | Purpose |
 | --- | --- | --- |
-| `cli.ts` | log, setupSigintHandler, wrapMainError | Interactive menu for all tools |
-| `build.ts` | log, logBox | Production build wrapper (Rsbuild + minification) |
-| `preview.ts` | log, createServer, setupSigintHandler, wrapMainError, createStaticApp | Build + serve through public tunnel |
-| `serve.ts` | log, createServer, setupSigintHandler, createStaticApp, loadHtmlCache, getPageNames | Serve production build locally |
-| `lighthouse.ts` | log, logBox, setupSigintHandler, wrapMainError, env.SITE_URL | Lighthouse audit runner |
+| `packages/cli/scripts/build.ts` | log, logBox | Production build wrapper (Rsbuild + minification) |
+| `packages/cli/tools/preview.ts` | log, createServer, setupSigintHandler, wrapMainError, createStaticApp | Build + serve through public tunnel |
+| `packages/cli/scripts/serve.ts` | log, createServer, setupSigintHandler, createStaticApp, loadHtmlCache, getPageNames | Serve production build locally |
+| `packages/cli/tools/lighthouse.ts` | log, logBox, setupSigintHandler, wrapMainError, env.SITE_URL | Lighthouse audit runner |
 | `packages/page-system/cli/generate-page.ts` | log | Scaffold new page with locale files |
 | `packages/i18n/cli/generate-types.ts` | log, logBox, writeFilePath, generatedHeader | Generate i18n types, parity check (build error), sync i18n-ally config |
-| `scripts/generators/generate-sitemap.ts` | log, logBox, env.SITE_URL, writeFilePath, loadTemplate, inject | Generate sitemap.xml |
-| `scripts/generators/generate-manifest.ts` | logBox, writeFilePath, loadTemplate, inject | Generate manifest.json from global.json5 + i18nConfig |
-| `scripts/generators/generate-robots.ts` | logBox, env.SITE_URL, writeFilePath, loadTemplate, inject | Generate robots.txt from env.SITE_URL |
-| `scripts/generators/generate-service-worker.ts` | logBox, writeFilePath, loadTemplate, inject | Generate `public/service-worker.js` with locale-specific error page URLs |
+| `packages/cli/generators/sitemap.ts` | log, logBox, env.SITE_URL, writeFilePath, loadTemplate, inject | Generate sitemap.xml |
+| `packages/cli/generators/manifest.ts` | logBox, writeFilePath, loadTemplate, inject | Generate manifest.json from global.json5 + i18nConfig |
+| `packages/cli/generators/robots.ts` | logBox, env.SITE_URL, writeFilePath, loadTemplate, inject | Generate robots.txt from env.SITE_URL |
+| `packages/cli/generators/service-worker.ts` | logBox, writeFilePath, loadTemplate, inject | Generate `public/service-worker.js` with locale-specific error page URLs |
 | `packages/env/cli/generate-env.ts` | log, loadTemplate, inject | Regenerate env schema from `.env` files |
 | `packages/page-system/cli/sync-system-pages.ts` | log, logBox, wrapMainError | Rename ALL system page folders to locale-dependent slugs when default locale changes |
 | `packages/i18n/cli/sync-locales.ts` | log, logBox | Create missing locale directories; sync missing files in existing directories |
 | `packages/page-system/cli/delete-page.ts` | log | Delete a page (folder + locale files across all locale dirs); scans for broken URL references before deletion; system pages protected |
 | `packages/i18n/cli/check-parity.ts` | log | Diff translation keys across locales |
-| `scripts/fetch-exchange-rates.ts` | log, writeFilePath, generatedHeader, loadTemplate, inject | Fetch and cache exchange rates |
+| `packages/cli/scripts/fetch-exchange-rates.ts` | log, writeFilePath, generatedHeader, loadTemplate, inject | Fetch and cache exchange rates |
 | `packages/i18n/cli/watch.ts` | log, logBox, setupSigintHandler | Watch locale file changes |
-| `scripts/clean-cache.ts` | log | Remove cache directories |
+| `packages/cli/scripts/clean-cache.ts` | log | Remove cache directories |
 
 ## Tech Stack
 

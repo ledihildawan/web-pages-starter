@@ -304,7 +304,7 @@ export async function initIntl(localeOverride?: string): Promise<void> {
     if (savedLocale === i18nConfig.defaultLocale && win.__INITIAL_I18N_DATA__) {
       data = win.__INITIAL_I18N_DATA__;
     } else {
-      const response = await fetch(`${env.BASE_PATH}${ASSET_PATHS.locales}/${pageID}/${savedLocale}.json`);
+      const response = await fetch(`${env.BASE_PATH}${ASSET_PATHS.locales}/${savedLocale}/${pageID}.json`);
       data = await response.json();
     }
 

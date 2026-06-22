@@ -49,8 +49,8 @@ const runDevServer = (): Promise<void> => {
 const main = async (): Promise<void> => {
   logBox('Dev Setup', { Stage: env.STAGE || 'development' });
 
-  log.info('\n--- Pre-build generators ---\n');
-  for (const step of PIPELINE_STEPS.PRE_BUILD) {
+  log.info('\n--- Pre-build generators (dev mode) ---\n');
+  for (const step of PIPELINE_STEPS.PRE_BUILD_DEV) {
     const stepPath = lookup('@', step);
     const result = spawnSync('bun', [stepPath], {
       stdio: 'inherit',

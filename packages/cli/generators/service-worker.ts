@@ -17,7 +17,6 @@ const TEMPLATE_DIR = path.dirname(fileURLToPath(import.meta.url));
 const template = fs.readFileSync(path.join(TEMPLATE_DIR, '../templates/service-worker.js'), 'utf-8');
 
 const output = inject(template, {
-  generated_at: new Date().toISOString(),
   cache_version: "'starter-v1'",
   not_found_slug: '404',
   unauthorized_slug: '401',

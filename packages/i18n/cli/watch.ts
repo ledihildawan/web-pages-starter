@@ -40,7 +40,7 @@ function regenerate() {
       log.info('Regenerating i18n types...');
       execSync('bun ./packages/i18n/cli/generate-active-locales.ts', { stdio: 'inherit' });
       execSync('bun ./packages/i18n/cli/sync-locales.ts', { stdio: 'inherit' });
-      execSync('bun ./packages/i18n/cli/generate-types.ts', { stdio: 'inherit' });
+      execSync('bun ./packages/i18n/cli/generate-types.ts --no-check', { stdio: 'inherit' });
       log.success('i18n regeneration complete');
     } catch (err) {
       log.error(`Regeneration failed: ${err}`);
@@ -55,9 +55,10 @@ watcher.on('all', (event, filePath) => {
 
   if (filePath.endsWith('.json')) {
     log.info(`${event}: ${relativePath}`);
-    log.info('Run `bun ./packages/i18n/cli/generate-types.ts` to regenerate types if needed.\n');
+    // Trigger type regeneration on any JSON locale file change
+    regenerate();
   } else if (relativePath === 'configs/i18n.ts') {
-    log.info(`${event}: ${relativePath} — triggering regeneration`);
+    log.info(`${event}: ${relativePath} — triggering full regeneration`);
     regenerate();
   } else if (filePath.startsWith(GENERATED_DIR)) {
     log.info(`${event}: ${relativePath}`);

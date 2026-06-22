@@ -163,6 +163,11 @@ function removeEmptyPageJs(): void {
 }
 
 function inlineCssOnDist(): void {
+  if (isPrettyHtml) {
+    console.log('  [inline-css] SKIPPED — pretty mode keeps CSS external');
+    return;
+  }
+
   let inlined = 0;
 
   for (const file of fs.readdirSync(DIST)) {

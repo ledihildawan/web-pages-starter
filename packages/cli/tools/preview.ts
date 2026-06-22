@@ -11,7 +11,7 @@ import type { serve } from '@hono/node-server';
 import ngrok from '@ngrok/ngrok';
 import { getErrorPageSlugs, getRootPageSlug } from '@page-system';
 import { createStaticApp, getPageNames, loadHtmlCache } from '@shared/utils/hono-server';
-import { loadPreviewUrl, savePreviewUrl, type TunnelProvider, verifyUrlAccessible } from '@shared/utils/preview-url';
+import { savePreviewUrl, type TunnelProvider, verifyUrlAccessible } from '@shared/utils/preview-url';
 import inquirer from 'inquirer';
 
 const PORT = env.PORT;
@@ -21,13 +21,13 @@ const DIST = lookup('@dist');
 
 const TEXT_EXTS = ['.html', '.css', '.js', '.json', '.xml', '.txt', '.svg', '.webmanifest'];
 
-const runBuild = (): Promise<void> => {
+const runBuild = (siteUrl: string): Promise<void> => {
   return new Promise((resolve, reject) => {
     log.info('\n[Build] Running production build...');
     const proc = spawn('bun', ['run', 'build'], {
       stdio: 'inherit',
       cwd: process.cwd(),
-      env: { ...process.env, BUILD_PREVIEW: 'true', STAGE: 'prod' },
+      env: { ...process.env, BUILD_PREVIEW: 'true', STAGE: 'prod', SITE_URL: siteUrl },
       shell: false,
     });
     proc.on('close', (code) => {
@@ -139,48 +139,6 @@ const startCloudflaredTunnel = (): Promise<{ url: string; kill: () => void }> =>
   });
 };
 
-const DIST_EXISTS = (): boolean => fs.existsSync(DIST);
-
-interface AutoDetectResult {
-  action: 'skip' | 'replace' | 'rebuild';
-  reason: string;
-  savedUrl?: string;
-}
-
-const autoDetectAction = async (provider: TunnelProvider): Promise<AutoDetectResult> => {
-  const saved = loadPreviewUrl();
-
-  if (!DIST_EXISTS()) {
-    return { action: 'rebuild', reason: 'dist/ not found' };
-  }
-
-  if (!saved) {
-    return { action: 'rebuild', reason: 'no saved preview URL' };
-  }
-
-  if (saved.provider !== provider) {
-    return {
-      action: 'replace',
-      reason: `provider changed (${saved.provider} → ${provider})`,
-      savedUrl: saved.url,
-    };
-  }
-
-  if (provider === 'ngrok') {
-    const accessible = await verifyUrlAccessible(saved.url);
-    if (accessible) {
-      return { action: 'skip', reason: 'ngrok URL still accessible' };
-    }
-    return { action: 'skip', reason: 'ngrok URL not accessible, starting new tunnel' };
-  }
-
-  return {
-    action: 'replace',
-    reason: 'cloudflared new tunnel URL',
-    savedUrl: saved.url,
-  };
-};
-
 const main = async () => {
   const cliArgs = process.argv.slice(2);
   const tunnelIndex = cliArgs.indexOf('--tunnel');
@@ -208,19 +166,12 @@ const main = async () => {
     provider = selected;
   }
 
-  log.info('\nChecking dist/ status...');
-  const autoDetect = await autoDetectAction(provider);
-  log.info(`  - Action: ${autoDetect.action}`);
-  log.info(`  - Reason: ${autoDetect.reason}`);
-
   let tunnelUrl = '';
   let tunnelClose: (() => void) | null = null;
   let serverInstance: ReturnType<typeof serve> | null = null;
 
   if (provider === 'ngrok') {
-    if (autoDetect.action === 'rebuild') {
-      await runBuild();
-    }
+    await runBuild(tunnelUrl);
 
     const listener = await ngrok.forward({
       addr: PORT,
@@ -232,7 +183,6 @@ const main = async () => {
       await listener.close();
       process.exit(1);
     }
-    process.env.SITE_URL = tunnelUrl;
     tunnelClose = async () => {
       await listener.close();
     };
@@ -243,9 +193,7 @@ const main = async () => {
       process.exit(1);
     }
 
-    if (autoDetect.action === 'rebuild') {
-      await runBuild();
-    }
+    await runBuild(tunnelUrl);
 
     log.info('Starting cloudflared tunnel...');
     try {
@@ -257,14 +205,8 @@ const main = async () => {
       process.exit(1);
     }
 
-    if (autoDetect.action === 'skip' || autoDetect.action === 'replace') {
-      const fromUrl = autoDetect.savedUrl || LOCAL_URL;
-      const replaced = replaceUrls(fromUrl, tunnelUrl);
-      log.info(`  Done: Replaced URLs in ${replaced} file(s)`);
-    } else {
-      const replaced = replaceUrls(LOCAL_URL, tunnelUrl);
-      log.info(`  Done: Replaced URLs in ${replaced} file(s)`);
-    }
+    const replaced = replaceUrls(LOCAL_URL, tunnelUrl);
+    log.info(`  Done: Replaced URLs in ${replaced} file(s)`);
   }
 
   const htmlCache = loadHtmlCache(DIST);

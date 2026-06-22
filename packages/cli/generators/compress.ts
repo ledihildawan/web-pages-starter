@@ -78,10 +78,8 @@ for (const file of files) {
       totalBr += fs.statSync(brPath).size;
       totalGz += fs.statSync(gzPath).size;
       cached++;
-      log.info(`Restored from cache: ${relPath}`);
       continue;
     }
-    log.warn(`Cache restore failed for ${relPath}, recompressing`);
   }
 
   const content = fs.readFileSync(file);
@@ -99,7 +97,6 @@ for (const file of files) {
   totalBr += br.length;
   totalGz += gz.length;
   fresh++;
-  log.info(`Compressed: ${relPath}`);
 }
 
 const cacheStatus = forceRefresh ? '(forced)' : '';
