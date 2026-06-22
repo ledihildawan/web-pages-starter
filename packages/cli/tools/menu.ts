@@ -10,6 +10,34 @@ const CLI_DIR = path.resolve('packages/cli');
 const I18N_CLI_DIR = path.resolve('packages/i18n/cli');
 const PAGE_SYSTEM_CLI_DIR = path.resolve('packages/page-system/cli');
 
+// ─── Help ─────────────────────────────────────────────────────────────────────
+function printHelp(): void {
+  log.info(`
+Interactive CLI menu for Web Pages Starter.
+
+Usage:
+  bun run cli [options]
+
+Options:
+  --help, -h    Show this help message
+
+Menu sections:
+  Workflow       Dev, Build, Preview, Serve, Test, Generate Page, Delete Page
+  Manual         Check Parity, Sync Locales, Subset Fonts
+
+For direct tool access, see: bun ./packages/<pkg>/cli/<tool>.ts --help
+
+Examples:
+  bun run cli                  # interactive menu
+  bun ./packages/i18n/cli/check-parity.ts --help
+`);
+}
+
+if (process.argv.includes('--help') || process.argv.includes('-h')) {
+  printHelp();
+  process.exit(0);
+}
+
 const runTool = (name: string, args: string[] = []): Promise<void> => {
   return new Promise((resolve, reject) => {
     const candidates = [
@@ -216,6 +244,7 @@ const manualTools: Tool[] = [
 const main = async (): Promise<void> => {
   console.clear();
   log.header('Web Pages Starter CLI');
+  log.info('Ctrl+C to cancel at any time.\n');
 
   const allTools = [...workflowTools, { name: '---', description: '---', action: () => {} }, ...manualTools];
 

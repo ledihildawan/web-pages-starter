@@ -10,7 +10,34 @@ import { setupSigintHandler, wrapMainError } from '@utils/signal-handler';
 import inquirer from 'inquirer';
 
 const args = process.argv.slice(2);
-const providedPageName = args[0]?.trim();
+
+// ─── Help ─────────────────────────────────────────────────────────────────────
+function printHelp(): void {
+  log.info(`
+Delete a page and all its locale files.
+
+Usage:
+  bun ./packages/page-system/cli/delete-page.ts [options]
+  bun ./packages/page-system/cli/delete-page.ts <page-name> [options]
+
+Arguments:
+  <page-name>    Optional. Name, url_path, or page_id of the page to delete.
+                 If omitted, shows an interactive page selector.
+
+Options:
+  --name <name>  Delete the specified page by name, url_path, or page_id.
+  --help         Show this help message
+`);
+}
+
+if (args.includes('--help') || args.includes('-h')) {
+  printHelp();
+  process.exit(0);
+}
+
+const nameIndex = args.indexOf('--name');
+const providedPageName = nameIndex !== -1 ? args[nameIndex + 1] : args.find((a) => !a.startsWith('--'));
+const providedPageNameTrimmed = providedPageName?.trim();
 
 interface PageInfo {
   name: string;
@@ -42,8 +69,10 @@ async function selectPage(): Promise<PageInfo | null> {
   const pages = getAllPages();
   if (pages.length === 0) {
     log.error('Error: No pages found in pages/.');
+    log.info('Tip: Run `bun run cli` → Generate Page to create one.\n');
     return null;
   }
+  log.info('Ctrl+C to cancel at any time.\n');
 
   const choices = pages.map((p) => {
     const isSystem = isSystemPage(p.pageId) || isSystemPage(p.urlPath);
@@ -219,14 +248,18 @@ async function runSyncLocales(): Promise<void> {
 async function main(): Promise<void> {
   let pageInfo: PageInfo | null | undefined = null;
 
-  if (providedPageName) {
+  if (providedPageNameTrimmed) {
     const pages = getAllPages();
     pageInfo =
       pages.find(
-        (p) => p.name === providedPageName || p.urlPath === providedPageName || p.pageId === providedPageName,
+        (p) =>
+          p.name === providedPageNameTrimmed ||
+          p.urlPath === providedPageNameTrimmed ||
+          p.pageId === providedPageNameTrimmed,
       ) || null;
     if (!pageInfo) {
-      log.error(`Error: Page "${providedPageName}" not found.`);
+      log.error(`Error: Page "${providedPageNameTrimmed}" not found.`);
+      log.info('Tip: Run `bun run cli` → Delete Page for an interactive selector.\n');
       process.exit(1);
     }
   } else {
@@ -251,6 +284,7 @@ async function main(): Promise<void> {
   log.success(`\nDone: Page "${pageInfo.name}" deleted`);
   log.info(`  - Folder: ${folderDeleted ? 'deleted' : 'not found'}`);
   log.info(`  - Locale files: ${localeFilesDeleted} files removed (page_id: ${pageInfo.pageId})`);
+  log.info('\nNext: Run `bun run dev` to verify the page is gone.\n');
 
   try {
     await runSyncLocales();

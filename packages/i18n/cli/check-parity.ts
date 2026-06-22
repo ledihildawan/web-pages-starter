@@ -9,6 +9,31 @@ import { log } from '@utils/logger';
 const LOCALES_DIR = lookup('@locales');
 const BASE_LOCALE = i18nConfig.defaultLocale;
 
+// ─── Help ─────────────────────────────────────────────────────────────────────
+function printHelp(): void {
+  log.info(`
+Verify that all locale files have the same translation keys as the default locale.
+
+Usage:
+  bun ./packages/i18n/cli/check-parity.ts [options]
+
+Options:
+  --help         Show this help message
+
+Exit codes:
+  0    All locales are in sync
+  1    One or more locales have missing, extra, or duplicate keys
+
+Examples:
+  bun ./packages/i18n/cli/check-parity.ts
+`);
+}
+
+if (process.argv.includes('--help') || process.argv.includes('-h')) {
+  printHelp();
+  process.exit(0);
+}
+
 interface LocaleDiff {
   locale: string;
   missing: string[];
@@ -254,7 +279,7 @@ function printReport(report: ReturnType<typeof checkParity>): void {
 
   const localeCount = report.summary.filter((s) => s.missing > 0 || s.extra > 0 || s.dupeCount > 0).length;
 
-  log.info(`\n${'═'.repeat(60)}`);
+  log.info(`${'═'.repeat(60)}`);
   if (localeCount === 0) {
     log.success('Done: All locales have perfect parity');
   } else {
@@ -262,6 +287,9 @@ function printReport(report: ReturnType<typeof checkParity>): void {
     log.error(`Error: ${localeCount} ${lbl} attention`);
   }
   log.info(`${'═'.repeat(60)}\n`);
+  if (localeCount > 0) {
+    log.info('Next: Run `bun run cli` → Sync Locales to add missing keys, then translate.\n');
+  }
 }
 
 const report = checkParity();

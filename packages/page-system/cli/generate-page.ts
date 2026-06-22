@@ -8,17 +8,40 @@ import { log } from '@utils/logger';
 import { romanize } from '@utils/romanize';
 
 const args = process.argv.slice(2);
-const inputPath = args[0];
+
+// ─── Help ─────────────────────────────────────────────────────────────────────
+function printHelp(): void {
+  log.info(`
+Generate a new page with locale files for all active locales.
+
+Usage:
+  bun ./packages/page-system/cli/generate-page.ts <page-path> [options]
+
+Arguments:
+  <page-path>    Required. URL path for the new page.
+                 Use "/" for nested pages (e.g. "services/web")
+
+Options:
+  --help         Show this help message
+
+Examples:
+  bun ./packages/page-system/cli/generate-page.ts pricing
+  bun ./packages/page-system/cli/generate-page.ts services/web
+  bun ./packages/page-system/cli/generate-page.ts "(marketing)/landing"
+  bun ./packages/page-system/cli/generate-page.ts blog/getting-started
+`);
+}
+
+if (args.includes('--help') || args.includes('-h')) {
+  printHelp();
+  process.exit(0);
+}
+
+const inputPath = args.find((a) => !a.startsWith('--'));
 
 if (!inputPath) {
   log.error('Error: Please provide a page path.');
-  log.info('Usage: bun ./packages/page-system/cli/generate-page.ts <page-path>');
-  log.info('');
-  log.info('Examples:');
-  log.info('  bun generate-page.ts pricing                    → pages/pricing/');
-  log.info('  bun generate-page.ts services/web               → pages/services/web/');
-  log.info('  bun generate-page.ts "(marketing)/landing"      → pages/(marketing)/landing/');
-  log.info('  bun generate-page.ts blog/getting-started       → pages/blog/getting-started/');
+  log.info('Tip: Run with --help to see usage examples.\n');
   process.exit(1);
 }
 
@@ -158,7 +181,8 @@ try {
         .join(' → ')} → ${titleCase}`,
     );
   }
-  log.info('\nTip: Restart dev server if the new entry is not detected.');
+  log.info('\nNext: Restart dev server — `bun run dev` — to see the new entry detected.');
+  log.info('Tip: Run `bun run cli` → Generate Page to create pages interactively.\n');
 } catch (error) {
   log.error(`Error: Generation failed — ${error}`);
   process.exit(1);

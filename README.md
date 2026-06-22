@@ -635,14 +635,18 @@ Menu sections:
 
 ### Direct tool access
 
+Every tool supports `--help`:
+
 || Command | What it does ||
 || --- | --- ||
-|| `bun ./packages/page-system/cli/generate-page.ts <name>` | Scaffold a new page with locale files for active locales ||
-|| `bun ./packages/i18n/cli/check-parity.ts` | Diff translation keys across all locales (manual verification) ||
-|| `bun ./packages/i18n/cli/sync-locales.ts` | Sync missing locale files from default locale ||
-|| `bun ./packages/i18n/cli/generate-types.ts` | Generate i18n types (parity check in prod; `--no-check` skips parity in dev) ||
-|| `bun ./packages/cli/tools/lighthouse.ts` | Run Lighthouse audits with interactive configuration ||
-|| `bun ./packages/cli/scripts/clean-cache.ts` | Purge build cache directories ||
+|| `bun ./packages/page-system/cli/generate-page.ts --help` | Usage, options, examples for generate-page ||
+|| `bun ./packages/page-system/cli/delete-page.ts --help` | Usage, options, examples for delete-page ||
+|| `bun ./packages/i18n/cli/check-parity.ts --help` | Usage, options, exit codes for check-parity ||
+|| `bun ./packages/i18n/cli/sync-locales.ts --help` | Usage, options for sync-locales ||
+|| `bun ./packages/i18n/cli/generate-types.ts --help` | Usage, options, exit codes for generate-types ||
+|| `bun run cli --help` | CLI menu help ||
+|| `bun ./packages/cli/tools/lighthouse.ts --help` | Lighthouse audit options ||
+|| `bun ./packages/cli/scripts/clean-cache.ts --help` | Cache cleaning options ||
 
 ## Tools
 

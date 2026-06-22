@@ -129,7 +129,35 @@ function compareLocaleParity(
   return errors;
 }
 
+// ─── Help ─────────────────────────────────────────────────────────────────────
+function printHelp(): void {
+  log.info(`
+Generate TypeScript type definitions from locale JSON files and verify
+that all locales have the same translation keys (parity check).
+
+Usage:
+  bun ./packages/i18n/cli/generate-types.ts [options]
+
+Options:
+  --no-check    Skip parity check (dev mode — allows missing keys)
+  --help        Show this help message
+
+Exit codes:
+  0    Types generated successfully
+  1    Parity check failed (missing keys in non-default locales)
+
+Examples:
+  bun ./packages/i18n/cli/generate-types.ts           # prod: generate + parity check
+  bun ./packages/i18n/cli/generate-types.ts --no-check  # dev: skip parity check
+`);
+}
+
 const args = process.argv.slice(2);
+if (args.includes('--help') || args.includes('-h')) {
+  printHelp();
+  process.exit(0);
+}
+
 const skipParityCheck = args.includes('--no-check');
 
 try {
@@ -213,6 +241,7 @@ export interface I18nShared ${toTsInterface(sharedData)}
   log.info(`\n  ${allKeyCount} translation keys typed`);
   log.info(`  ${OUTPUT_FILE.replace(process.cwd(), '.')}`);
   log.success('\nDone: i18n types generated');
+  log.info('\nNext: Restart dev server if adding new translation keys.\n');
 } catch (error) {
   log.error(`Error: Generation failed — ${error}`);
   process.exit(1);

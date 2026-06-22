@@ -5,6 +5,28 @@ import { lookup } from '@generated/paths';
 import { LOCALE_CODES } from '@i18n/data/locales';
 import { log, logBox } from '@utils/logger';
 
+// ─── Help ─────────────────────────────────────────────────────────────────────
+function printHelp(): void {
+  log.info(`
+Sync locale files: create missing locale directories and copy missing .json files
+from the default locale to all configured locales.
+
+Usage:
+  bun ./packages/i18n/cli/sync-locales.ts [options]
+
+Options:
+  --help    Show this help message
+
+Examples:
+  bun ./packages/i18n/cli/sync-locales.ts
+`);
+}
+
+if (process.argv.includes('--help') || process.argv.includes('-h')) {
+  printHelp();
+  process.exit(0);
+}
+
 const LOCALES_ROOT = lookup('@locales');
 const DEFAULT_LOCALE = i18nConfig.defaultLocale;
 const sourceDir = path.join(LOCALES_ROOT, DEFAULT_LOCALE);
