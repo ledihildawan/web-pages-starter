@@ -62,7 +62,12 @@ bun run build              # minified HTML + CSS/JS + Brotli/Gzip compression (d
 bun run build -- --pretty  # pretty-printed HTML + CSS external in /assets/styles/ + JS not minified
 bun run build -- --debug   # skip JS/CSS minify
 bun run preview            # build (BUILD_PREVIEW=true, SITE_URL=tunnel) + serve via tunnel
+bun run cli               # interactive CLI menu (workflow + manual tools)
 ```
+
+**CLI menu** (`bun run cli`):
+- **Workflow** — Dev, Build (Prod/Pretty/Debug), Preview, Serve, Test, Generate Page, Delete Page
+- **Manual** — Check Parity, Sync Locales, Subset Fonts
 
 Pretty mode (`--pretty`):
 - HTML beautified with 2-space indent via `js-beautify`

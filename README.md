@@ -608,58 +608,63 @@ Run tests interactively via `bun run cli` → **Test** menu:
 
 ## Commands
 
-| Command | What it does |
-| --- | --- |
-| `bun run dev` | Sync system pages, clean cache, fetch rates, generate i18n types, watch locales, start Rsbuild dev server |
-| `bun run build` | Production build: minified HTML + CSS/JS, `--prod` active locales, sitemap, manifest, robots, SW |
-| `bun run build -- --pretty` | Same as build but HTML is pretty-printed (for CMS template porting) |
-| `bun run build -- --debug` | Same as build but JS/CSS not minified (for debugging) |
-| `bun run preview` | Run production build (`BUILD_PREVIEW=true`) + serve via ngrok or cloudflared tunnel |
-| `bun run serve` | Serve the production build locally |
-| `bun run clean:cache` | Remove `node_modules/.cache`, `.cache`, `dist`, `public/assets/i18n` |
-| `bun run typecheck` | Run `tsc --noEmit` type checking |
-| `bun run test` | Run tests via `rstest`; supports `--coverage`, `--watch` flags |
-| `bun run cli` | Interactive menu for all tools (includes Test with coverage option) |
+### Interactive menu
 
-Direct tool access:
+```bash
+bun run cli   # interactive menu with all tools
+```
 
-| Command | What it does |
-| --- | --- |
-| `bun ./packages/page-system/cli/generate-page.ts <name>` | Scaffold a new page with locale files for active locales |
-| `bun ./packages/cli/generators/sitemap.ts` | Generate `public/sitemap.xml` from page directories |
-| `bun ./packages/cli/generators/manifest.ts` | Generate `public/manifest.json` from `global.json5` + `i18nConfig` |
-| `bun ./packages/cli/generators/robots.ts` | Generate `public/robots.txt` from `SITE_URL` |
-| `bun ./packages/cli/generators/service-worker.ts` | Generate `public/service-worker.js` with locale-specific error page URLs |
-| `bun ./packages/cli/scripts/fetch-exchange-rates.ts` | Fetch exchange rates with 24h cache |
-| `bun ./packages/cli/scripts/fetch-exchange-rates.ts -- --force` | Force-refresh exchange rates |
-| `bun ./packages/cli/tools/lighthouse.ts` | Run Lighthouse audits with interactive configuration |
-| `bun ./packages/cli/scripts/clean-cache.ts` | Purge build cache directories |
-| `bun ./packages/i18n/cli/check-parity.ts` | Diff translation keys across all locales |
-| `bun ./packages/i18n/cli/generate-types.ts` | Generate i18n types, check parity (build error on mismatch), sync i18n-ally config |
+Menu sections:
+- **Workflow** — Dev, Build (Prod/Pretty/Debug), Preview, Serve, Test, Generate Page, Delete Page
+- **Manual** — Check Parity, Sync Locales, Subset Fonts
+
+### Package scripts
+
+|| Command | What it does ||
+|| --- | --- ||
+|| `bun run dev` | Dev server (PRE_BUILD_DEV pipeline: types without parity check) ||
+|| `bun run build` | Production build: minified HTML + CSS/JS, sitemap, manifest, robots, SW ||
+|| `bun run build -- --pretty` | Pretty HTML for CMS template porting (CSS external, readable output) ||
+|| `bun run build -- --debug` | Debug build: JS/CSS not minified, source maps enabled ||
+|| `bun run preview` | Build (SITE_URL=tunnel) + serve via ngrok or cloudflared tunnel ||
+|| `bun run serve` | Serve the production build locally ||
+|| `bun run clean:cache` | Remove `node_modules/.cache`, `.cache`, `dist`, `public/assets/i18n` ||
+|| `bun run typecheck` | Run `tsc --noEmit` type checking ||
+|| `bun run test` | Run tests via `rstest`; supports `--coverage`, `--watch` flags ||
+|| `bun run cli` | Interactive menu (workflow + manual tools) ||
+
+### Direct tool access
+
+|| Command | What it does ||
+|| --- | --- ||
+|| `bun ./packages/page-system/cli/generate-page.ts <name>` | Scaffold a new page with locale files for active locales ||
+|| `bun ./packages/i18n/cli/check-parity.ts` | Diff translation keys across all locales (manual verification) ||
+|| `bun ./packages/i18n/cli/sync-locales.ts` | Sync missing locale files from default locale ||
+|| `bun ./packages/i18n/cli/generate-types.ts` | Generate i18n types (parity check in prod; `--no-check` skips parity in dev) ||
+|| `bun ./packages/cli/tools/lighthouse.ts` | Run Lighthouse audits with interactive configuration ||
+|| `bun ./packages/cli/scripts/clean-cache.ts` | Purge build cache directories ||
 
 ## Tools
 
-Most tools live in `packages/cli/`; i18n-specific CLI tools live in `packages/i18n/cli/`, page-system CLI in `packages/page-system/cli/`, env CLI in `packages/env/cli/`. They share modules from `packages/cli/generators/lib/`:
+Tools live in their respective packages. Shared utilities are in `packages/core/utils/`:
 
-| Module | Purpose |
-| --- | --- |
-| `lib/logger.ts` | Centralized `log.*()` and `logBox()` for formatted box output |
-| `lib/signal-handler.ts` | SIGINT handling, `wrapMainError()`, `handleExitPromptError()`, `createServer()` with EADDRINUSE protection |
-| `lib/hono-server.ts` | `createStaticApp()`, `loadHtmlCache()`, `getPageNames()` — shared Hono static server with cache headers |
-| `lib/write-file.ts` | `writeFilePath()` (mkdir + write), `generatedHeader()`, `COMMENT_EXCLUDED_FILES`, `shouldAddComment()`, `withGeneratedHeader()` for auto-generated file headers |
-| `lib/romanize.ts` | `romanize()` — limax-based romanization for URL-safe slug generation from non-Latin page names |
+|| Module | Purpose |
+|| --- | --- |
+|| `packages/core/utils/logger.ts` | Centralized `log.*()` and `logBox()` for formatted box output |
+|| `packages/core/utils/signal-handler.ts` | SIGINT handling, `wrapMainError()`, `handleExitPromptError()`, `createServer()` with EADDRINUSE protection |
+|| `packages/core/utils/hono-server.ts` | `createStaticApp()`, `loadHtmlCache()`, `getPageNames()` — shared Hono static server with cache headers |
+|| `packages/core/utils/write-file.ts` | `writeFilePath()` (mkdir + write), `generatedHeader()`, `shouldAddComment()`, `withGeneratedHeader()` for auto-generated file headers |
+|| `shared/utils/romanize.ts` | `romanize()` — limax-based romanization for URL-safe slug generation from non-Latin page names |
 
-| Tool | Shared imports | Purpose |
-| --- | --- | --- |
-| `packages/cli/scripts/build.ts` | log, logBox | Production build wrapper (Rsbuild + minification) |
-| `packages/cli/tools/preview.ts` | log, createServer, setupSigintHandler, wrapMainError, createStaticApp | Build + serve through public tunnel |
-| `packages/cli/scripts/serve.ts` | log, createServer, setupSigintHandler, createStaticApp, loadHtmlCache, getPageNames | Serve production build locally |
-| `packages/cli/tools/lighthouse.ts` | log, logBox, setupSigintHandler, wrapMainError, env.SITE_URL | Lighthouse audit runner |
-| `packages/page-system/cli/generate-page.ts` | log | Scaffold new page with locale files |
-| `packages/i18n/cli/generate-types.ts` | log, logBox, writeFilePath, generatedHeader | Generate i18n types, parity check (build error), sync i18n-ally config |
-| `packages/cli/generators/sitemap.ts` | log, logBox, env.SITE_URL, writeFilePath, loadTemplate, inject | Generate sitemap.xml |
-| `packages/cli/generators/manifest.ts` | logBox, writeFilePath, loadTemplate, inject | Generate manifest.json from global.json5 + i18nConfig |
-| `packages/cli/generators/robots.ts` | logBox, env.SITE_URL, writeFilePath, loadTemplate, inject | Generate robots.txt from env.SITE_URL |
+|| Tool | Shared imports | Purpose |
+|| --- | --- | --- |
+|| `packages/cli/scripts/build.ts` | log, logBox, lookup, runStep, PIPELINE_STEPS | Production build wrapper (runs full pipeline: PRE_BUILD → rsbuild-wrapper → POST_BUILD) |
+|| `packages/cli/tools/preview.ts` | log, createServer, setupSigintHandler, wrapMainError, createStaticApp | Build + serve through public tunnel (ngrok/cloudflared); passes SITE_URL to build |
+|| `packages/cli/scripts/serve.ts` | log, createServer, setupSigintHandler, createStaticApp, loadHtmlCache, getPageNames | Serve production build locally |
+|| `packages/cli/tools/lighthouse.ts` | log, logBox, setupSigintHandler, wrapMainError, env.SITE_URL | Lighthouse audit runner |
+|| `packages/cli/tools/menu.ts` | log, setupSigintHandler, wrapMainError, lookup, inquirer | Interactive CLI menu: workflow tools + manual tools |
+|| `packages/page-system/cli/generate-page.ts` | log, lookup, find, scanner | Scaffold new page with locale files for active locales |
+|| `packages/i18n/cli/generate-types.ts` | log, logBox, writeFilePath, generatedHeader | Generate i18n types, parity check (fails build), `--no-check` skips parity in dev mode, syncs i18n-ally config |
 | `packages/cli/generators/service-worker.ts` | logBox, writeFilePath, loadTemplate, inject | Generate `public/service-worker.js` with locale-specific error page URLs |
 | `packages/env/cli/generate-env.ts` | log, loadTemplate, inject | Regenerate env schema from `.env` files |
 | `packages/page-system/cli/sync-system-pages.ts` | log, logBox, wrapMainError | Rename ALL system page folders to locale-dependent slugs when default locale changes |

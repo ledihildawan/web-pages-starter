@@ -82,7 +82,8 @@ interface Tool {
   action: ToolAction;
 }
 
-const tools: Tool[] = [
+// ─── Relevant (workflow) ─────────────────────────────────────────────────────
+const workflowTools: Tool[] = [
   {
     name: 'Dev',
     description: 'Start development server with hot reload',
@@ -90,7 +91,7 @@ const tools: Tool[] = [
   },
   {
     name: 'Build',
-    description: 'Build production bundle with optimizations',
+    description: 'Build production bundle (minified / pretty / debug)',
     action: async () => {
       const { buildType } = await inquirer.prompt<{ buildType: string }>([
         {
@@ -142,83 +143,23 @@ const tools: Tool[] = [
     },
   },
   {
-    name: 'Check Parity',
-    description: 'Verify translation key parity across locales',
-    action: () => runTool('check-parity'),
-  },
-  {
-    name: 'Generate Env',
-    description: 'Regenerate env schema from .env files',
-    action: () => runTool('generate-env'),
-  },
-  {
-    name: 'Generate Types',
-    description: 'Regenerate i18n TypeScript types from locale JSON',
-    action: () => runTool('generate-types'),
-  },
-  {
-    name: 'Sync System Pages',
-    description: 'Rename system page folders to locale-dependent slugs',
-    action: () => runTool('sync-system-pages'),
-  },
-  {
-    name: 'Fetch Rates',
-    description: 'Fetch and cache latest exchange rates',
+    name: 'Test',
+    description: 'Run unit tests',
     action: async () => {
-      const { force } = await inquirer.prompt<{ force: boolean }>([
+      const { testType } = await inquirer.prompt<{ testType: string }>([
         {
-          type: 'confirm',
-          name: 'force',
-          message: 'Force refresh (ignore cache)?',
-          default: false,
+          type: 'select',
+          name: 'testType',
+          message: 'Select test mode:',
+          choices: [
+            { name: 'Run tests', value: 'run' },
+            { name: 'Run with coverage', value: 'coverage' },
+            { name: 'Watch mode', value: 'watch' },
+          ],
         },
       ]);
-      await runTool('fetch-exchange-rates', force ? ['--force'] : []);
-    },
-  },
-  {
-    name: 'Subset Fonts',
-    description: 'Generate subsetted font files for active locales',
-    action: async () => {
-      const { force } = await inquirer.prompt<{ force: boolean }>([
-        {
-          type: 'confirm',
-          name: 'force',
-          message: 'Force regenerate (ignore cache)?',
-          default: false,
-        },
-      ]);
-      await runTool('subset-fonts', force ? ['--force'] : []);
-    },
-  },
-  {
-    name: 'Fonts CSS',
-    description: 'Generate fonts CSS with preloaded subsets',
-    action: async () => {
-      const { force } = await inquirer.prompt<{ force: boolean }>([
-        {
-          type: 'confirm',
-          name: 'force',
-          message: 'Force regenerate (ignore cache)?',
-          default: false,
-        },
-      ]);
-      await runTool('fonts-css', force ? ['--force'] : []);
-    },
-  },
-  {
-    name: 'Compress Assets',
-    description: 'Compress HTML/CSS/JS with Brotli and Gzip',
-    action: async () => {
-      const { force } = await inquirer.prompt<{ force: boolean }>([
-        {
-          type: 'confirm',
-          name: 'force',
-          message: 'Force recompress (ignore cache)?',
-          default: false,
-        },
-      ]);
-      await runTool('compress', force ? ['--force'] : []);
+      const args = testType === 'coverage' ? ['--coverage'] : testType === 'watch' ? ['--watch'] : [];
+      await runBunScript('test', ...args);
     },
   },
   {
@@ -241,87 +182,33 @@ const tools: Tool[] = [
     description: 'Remove a page and its locale files',
     action: () => runTool('delete-page'),
   },
+];
+
+// ─── Manual-only (run on demand) ─────────────────────────────────────────────
+const manualTools: Tool[] = [
+  {
+    name: 'Check Parity',
+    description: 'Verify translation key parity across locales',
+    action: () => runTool('check-parity'),
+  },
   {
     name: 'Sync Locales',
-    description: 'Synchronize locale files from default',
+    description: 'Synchronize locale files from default locale',
     action: () => runTool('sync-locales'),
   },
   {
-    name: 'Test',
-    description: 'Run unit tests with optional coverage',
+    name: 'Subset Fonts',
+    description: 'Regenerate subsetted font files (with --force to skip cache)',
     action: async () => {
-      const { testType } = await inquirer.prompt<{ testType: string }>([
-        {
-          type: 'select',
-          name: 'testType',
-          message: 'Select test mode:',
-          choices: [
-            { name: 'Run tests', value: 'run' },
-            { name: 'Run with coverage', value: 'coverage' },
-            { name: 'Watch mode', value: 'watch' },
-          ],
-        },
-      ]);
-      const args = testType === 'coverage' ? ['--coverage'] : testType === 'watch' ? ['--watch'] : [];
-      await runBunScript('test', ...args);
-    },
-  },
-  {
-    name: 'Clean Cache',
-    description: 'Clear all caches: pipeline, rsbuild, dist, assets',
-    action: () => runTool('clean-cache'),
-  },
-  {
-    name: 'Full Reset',
-    description: 'Remove dependencies and reinstall',
-    action: async () => {
-      log.info('This will DELETE:');
-      log.info('   - node_modules/');
-      log.info('   - dist/');
-      log.info('   - bun.lock\n');
-
-      const { confirm } = await inquirer.prompt<{ confirm: boolean }>([
+      const { force } = await inquirer.prompt<{ force: boolean }>([
         {
           type: 'confirm',
-          name: 'confirm',
-          message: 'Type "yes" to confirm deletion:',
+          name: 'force',
+          message: 'Force regenerate (ignore cache)?',
           default: false,
         },
       ]);
-
-      if (!confirm) {
-        log.info('Cancelled.');
-        return;
-      }
-
-      const { doubleConfirm } = await inquirer.prompt<{ doubleConfirm: string }>([
-        {
-          type: 'input',
-          name: 'doubleConfirm',
-          message: 'Re-type "yes" to confirm:',
-          default: '',
-        },
-      ]);
-
-      if (doubleConfirm.toLowerCase() !== 'yes') {
-        log.info('Cancelled.');
-        return;
-      }
-
-      const dirs = ['node_modules', 'dist', 'bun.lock'];
-      for (const dir of dirs) {
-        try {
-          fs.rmSync(lookup('@', dir), { recursive: true, force: true });
-          log.info(`Removed ${dir}`);
-        } catch {}
-      }
-      log.info('Running bun install...');
-      const proc = spawn('bun', ['install'], {
-        stdio: 'inherit',
-        shell: false,
-        cwd: process.cwd(),
-      });
-      return new Promise<void>((resolve) => proc.on('close', () => resolve()));
+      await runTool('subset-fonts', force ? ['--force'] : []);
     },
   },
 ];
@@ -330,16 +217,24 @@ const main = async (): Promise<void> => {
   console.clear();
   log.header('Web Pages Starter CLI');
 
+  const allTools = [...workflowTools, { name: '---', description: '---', action: () => {} }, ...manualTools];
+
   const { action } = await inquirer.prompt<{ action: string }>([
     {
       type: 'rawlist',
       name: 'action',
       message: 'What do you want to do?',
-      choices: tools.map((t) => `${t.name} - ${t.description}`),
+      choices: allTools.map((t) => (t.name === '---' ? '────────────' : `${t.name} - ${t.description}`)),
+      filter: (val: string) => val,
     },
   ]);
 
-  const tool = tools.find((t) => `${t.name} - ${t.description}` === action);
+  if (action === '────────────') {
+    log.cancelled();
+    return;
+  }
+
+  const tool = allTools.find((t) => `${t.name} - ${t.description}` === action);
   if (!tool) return;
 
   log.toolStarted(tool.name);
