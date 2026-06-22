@@ -1,13 +1,13 @@
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
-import path from 'node:path';
+import { basename, dirname, join, relative, resolve } from 'pathe';
 import { ASSET_PATHS } from '@constants';
 import { computeStringHash } from '@core/utils/pipeline-cache';
 import { lookup } from '@generated/paths';
 import { html as beautifyHtml } from 'js-beautify';
 import * as lightningcss from 'lightningcss';
 
-const RSBUILD_OUT = path.resolve(process.cwd(), 'rsbuild-out');
+const RSBUILD_OUT = resolve(process.cwd(), 'rsbuild-out');
 const DIST = lookup('@dist');
 const MARKER_FILE = lookup('@', 'temp/pipeline/rsbuild-marker.json');
 const COMPRESS_STEP = lookup('@cli', 'generators/compress.ts');
@@ -31,7 +31,7 @@ const CHUNK_NAMES = {
 function walk(dir: string): string[] {
   const files: string[] = [];
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    const full = path.join(dir, entry.name);
+    const full = join(dir, entry.name);
     if (entry.isDirectory()) {
       files.push(...walk(full));
     } else {
@@ -46,7 +46,7 @@ function computeSourceHash(): string {
   const root = process.cwd();
 
   for (const dir of SOURCE_DIRS) {
-    const dirPath = path.join(root, dir);
+    const dirPath = join(root, dir);
     if (fs.existsSync(dirPath)) {
       allFiles.push(...walk(dirPath));
     }
@@ -54,7 +54,7 @@ function computeSourceHash(): string {
 
   const hashes: string[] = [];
   for (const file of allFiles.sort()) {
-    const relPath = path.relative(root, file).replace(/\\/g, '/');
+    const relPath = relative(root, file).replace(/\\/g, '/');
     const content = fs.readFileSync(file);
     const hash = computeStringHash(content.toString('utf-8'));
     hashes.push(`${relPath}:${hash}`);
@@ -73,12 +73,12 @@ function loadMarker(): Marker | null {
 
 function saveMarker(sourceHash: string): void {
   const marker: Marker = { sourceHash, timestamp: Date.now() };
-  fs.mkdirSync(path.dirname(MARKER_FILE), { recursive: true });
+  fs.mkdirSync(dirname(MARKER_FILE), { recursive: true });
   fs.writeFileSync(MARKER_FILE, JSON.stringify(marker, null, 2));
 }
 
 function runRsbuild(): boolean {
-  const rsbuildBin = path.resolve(process.cwd(), 'node_modules', '@rsbuild', 'core', 'bin', 'rsbuild.js');
+  const rsbuildBin = resolve(process.cwd(), 'node_modules', '@rsbuild', 'core', 'bin', 'rsbuild.js');
   const result = spawnSync('bun', [rsbuildBin, 'build'], {
     stdio: 'inherit',
     env: { ...process.env, NODE_ENV: 'production' },
@@ -95,8 +95,8 @@ function copyToDist(): void {
 }
 
 function rootPageAsIndex(): void {
-  const src = path.join(DIST, 'home.html');
-  const dest = path.join(DIST, 'index.html');
+  const src = join(DIST, 'home.html');
+  const dest = join(DIST, 'index.html');
   if (fs.existsSync(src)) {
     fs.renameSync(src, dest);
   }
@@ -107,7 +107,7 @@ function prettyHtml(): void {
 
   for (const file of fs.readdirSync(DIST)) {
     if (!file.endsWith('.html')) continue;
-    const filePath = path.join(DIST, file);
+    const filePath = join(DIST, file);
     const content = fs.readFileSync(filePath, 'utf8');
     const beautified = beautifyHtml(content, {
       indent_size: 2,
@@ -128,7 +128,7 @@ function removeEmptyPageJs(): void {
 
   for (const file of fs.readdirSync(DIST)) {
     if (!file.endsWith('.html')) continue;
-    const htmlPath = path.join(DIST, file);
+    const htmlPath = join(DIST, file);
     let html = fs.readFileSync(htmlPath, 'utf-8');
     let modified = false;
 
@@ -139,7 +139,7 @@ function removeEmptyPageJs(): void {
       if (!src.includes('.js')) continue;
 
       const jsFile = src.replace(/^\//, '');
-      const jsPath = path.join(DIST, jsFile);
+      const jsPath = join(DIST, jsFile);
 
       if (!fs.existsSync(jsPath)) continue;
       const content = fs.readFileSync(jsPath, 'utf-8');
@@ -185,7 +185,7 @@ function inlineCssOnDist(): void {
 
   for (const file of fs.readdirSync(DIST)) {
     if (!file.endsWith('.html')) continue;
-    const filePath = path.join(DIST, file);
+    const filePath = join(DIST, file);
     let html = fs.readFileSync(filePath, 'utf-8');
 
     const nonceMatch = html.match(/nonce-([a-zA-Z0-9_-]+)/);
@@ -203,7 +203,7 @@ function inlineCssOnDist(): void {
       const href = hrefMatch[1];
       if (href.startsWith('http')) continue;
 
-      const cssPath = path.join(DIST, href.replace(/^\//, ''));
+      const cssPath = join(DIST, href.replace(/^\//, ''));
       if (!fs.existsSync(cssPath)) continue;
 
       let css = fs.readFileSync(cssPath, 'utf-8');
@@ -217,7 +217,7 @@ function inlineCssOnDist(): void {
       if (!cssPath.includes('fonts.css')) {
         const minified = lightningcss.transform({
           code: Buffer.from(css),
-          filename: path.basename(cssPath),
+          filename: basename(cssPath),
           minify: true,
         });
         css = minified.code.toString();
@@ -241,7 +241,7 @@ function inlineCssOnDist(): void {
 function preloadChunksOnDist(): void {
   const chunkUrls: string[] = [];
   for (const sub of ['', 'async']) {
-    const dir = path.join(DIST, 'assets', 'scripts', sub);
+    const dir = join(DIST, 'assets', 'scripts', sub);
     if (!fs.existsSync(dir)) continue;
     const prefix = sub ? `/${ASSET_PATHS.scripts}/async` : `/${ASSET_PATHS.scripts}`;
     for (const f of fs.readdirSync(dir)) {
@@ -255,7 +255,7 @@ function preloadChunksOnDist(): void {
 
   for (const file of fs.readdirSync(DIST)) {
     if (!file.endsWith('.html')) continue;
-    const filePath = path.join(DIST, file);
+    const filePath = join(DIST, file);
     let html = fs.readFileSync(filePath, 'utf-8');
     const deferSrcs = new Set([...html.matchAll(/<script\s+defer\s+[^>]*src="([^"]*)"/g)].map((m) => m[1]));
     const preloads = chunkUrls

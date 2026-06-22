@@ -1,5 +1,5 @@
 import { spawnSync } from 'node:child_process';
-import path from 'node:path';
+import { basename } from 'pathe';
 import process from 'node:process';
 import { log, logBox } from '@core/utils/logger';
 import { PIPELINE_STEPS } from '@core/utils/pipeline';
@@ -38,7 +38,7 @@ const runStep = (step: string): boolean => {
     cwd: process.cwd(),
   });
   if (result.status !== 0) {
-    log.error(`Error: ${path.basename(step)} failed — exit code ${result.status}`);
+    log.error(`Error: ${basename(step)} failed — exit code ${result.status}`);
     return false;
   }
   return true;

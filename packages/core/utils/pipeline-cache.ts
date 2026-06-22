@@ -1,9 +1,9 @@
 import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
-import path from 'node:path';
+import { dirname, join } from 'pathe';
 
 const PIPELINE_DIR = 'temp/pipeline';
-const MANIFEST_FILE = path.join(PIPELINE_DIR, 'cache-manifest.json');
+const MANIFEST_FILE = join(PIPELINE_DIR, 'cache-manifest.json');
 
 interface CacheEntry {
   cachedAt: string;
@@ -28,7 +28,7 @@ export function computeHash(files: string[]): string {
     try {
       const stat = statSync(file);
       if (stat.isDirectory()) {
-        const dirHash = computeHash(readdirSync(file).map((f) => path.join(file, f)));
+        const dirHash = computeHash(readdirSync(file).map((f) => join(file, f)));
         hash.update(dirHash);
       } else {
         hash.update(file);
@@ -68,7 +68,7 @@ export function getCache(key: string): CacheEntry | null {
   if (!entry || 'ttlMinutes' in entry) {
     return null;
   }
-  const cachePath = path.join(PIPELINE_DIR, entry.cachePath);
+  const cachePath = join(PIPELINE_DIR, entry.cachePath);
   if (!existsSync(cachePath)) {
     return null;
   }
@@ -115,7 +115,7 @@ export function isCacheValid(key: string, hash: string): boolean {
   if (!entry || entry.hash !== hash) {
     return false;
   }
-  return existsSync(path.join(PIPELINE_DIR, entry.cachePath));
+  return existsSync(join(PIPELINE_DIR, entry.cachePath));
 }
 
 export function checkTTL(cachedAt: string, ttlMinutes: number): boolean {
@@ -129,7 +129,7 @@ export function invalidateCache(key?: string): void {
   if (key) {
     const entry = manifest[key];
     if (entry && !('ttlMinutes' in entry)) {
-      const cachePath = path.join(PIPELINE_DIR, entry.cachePath);
+      const cachePath = join(PIPELINE_DIR, entry.cachePath);
       if (existsSync(cachePath)) {
         rmSync(cachePath, { recursive: true, force: true });
       }
@@ -138,7 +138,7 @@ export function invalidateCache(key?: string): void {
   } else {
     for (const entry of Object.values(manifest)) {
       if (!('ttlMinutes' in entry)) {
-        const cachePath = path.join(PIPELINE_DIR, entry.cachePath);
+        const cachePath = join(PIPELINE_DIR, entry.cachePath);
         if (existsSync(cachePath)) {
           rmSync(cachePath, { recursive: true, force: true });
         }
@@ -150,7 +150,7 @@ export function invalidateCache(key?: string): void {
 }
 
 export function storeCache(key: string, sourcePath: string, hash: string): boolean {
-  const cacheDir = path.join(PIPELINE_DIR, key);
+  const cacheDir = join(PIPELINE_DIR, key);
 
   try {
     if (existsSync(cacheDir)) {
@@ -161,7 +161,7 @@ export function storeCache(key: string, sourcePath: string, hash: string): boole
     if (statSync(sourcePath).isDirectory()) {
       copyDir(sourcePath, cacheDir);
     } else {
-      mkdirSync(path.dirname(cacheDir), { recursive: true });
+      mkdirSync(dirname(cacheDir), { recursive: true });
       const content = readFileSync(sourcePath);
       writeFileSync(cacheDir, content);
     }
@@ -179,7 +179,7 @@ export function restoreCache(key: string, destPath: string): boolean {
     return false;
   }
 
-  const cacheSrc = path.join(PIPELINE_DIR, entry.cachePath);
+  const cacheSrc = join(PIPELINE_DIR, entry.cachePath);
   if (!existsSync(cacheSrc)) {
     return false;
   }
@@ -192,7 +192,7 @@ export function restoreCache(key: string, destPath: string): boolean {
     if (statSync(cacheSrc).isDirectory()) {
       copyDir(cacheSrc, destPath);
     } else {
-      mkdirSync(path.dirname(destPath), { recursive: true });
+      mkdirSync(dirname(destPath), { recursive: true });
       const content = readFileSync(cacheSrc);
       writeFileSync(destPath, content);
     }
@@ -206,8 +206,8 @@ function copyDir(src: string, dest: string): void {
   mkdirSync(dest, { recursive: true });
   const entries = readdirSync(src);
   for (const entry of entries) {
-    const srcPath = path.join(src, entry);
-    const destPath = path.join(dest, entry);
+    const srcPath = join(src, entry);
+    const destPath = join(dest, entry);
     if (statSync(srcPath).isDirectory()) {
       copyDir(srcPath, destPath);
     } else {
@@ -225,7 +225,7 @@ export function getCacheStats(): { total: number; entries: Array<{ key: string; 
   for (const [key, entry] of Object.entries(manifest)) {
     if ('ttlMinutes' in entry) continue;
 
-    const cachePath = path.join(PIPELINE_DIR, entry.cachePath);
+    const cachePath = join(PIPELINE_DIR, entry.cachePath);
     if (!existsSync(cachePath)) continue;
 
     const size = getDirSize(cachePath);
@@ -240,7 +240,7 @@ function getDirSize(dir: string): number {
   let size = 0;
   const entries = readdirSync(dir);
   for (const entry of entries) {
-    const fullPath = path.join(dir, entry);
+    const fullPath = join(dir, entry);
     if (statSync(fullPath).isDirectory()) {
       size += getDirSize(fullPath);
     } else {

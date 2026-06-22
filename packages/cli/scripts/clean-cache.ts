@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import path from 'node:path';
+import { relative } from 'pathe';
 import { log } from '@core/utils/logger';
 import { lookup } from '@generated/paths';
 
@@ -16,7 +16,7 @@ for (const dir of dirs) {
   try {
     if (fs.existsSync(dir)) {
       fs.rmSync(dir, { recursive: true, force: true });
-      log.info(`  Removed: ${path.relative(process.cwd(), dir)}`);
+      log.info(`  Removed: ${relative(process.cwd(), dir)}`);
     }
   } catch {
     log.warn(`Warning: Could not remove ${dir}`);
@@ -27,7 +27,7 @@ for (const file of files) {
   try {
     if (fs.existsSync(file)) {
       fs.unlinkSync(file);
-      log.info(`  Removed: ${path.relative(process.cwd(), file)}`);
+      log.info(`  Removed: ${relative(process.cwd(), file)}`);
     }
   } catch {
     log.warn(`Warning: Could not remove ${file}`);

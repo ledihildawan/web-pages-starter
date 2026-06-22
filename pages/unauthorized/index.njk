@@ -1,5 +1,5 @@
-{% extends "main.njk" %}
-{% import "shared/ui/primitives/icons.njk" as icon %}
+{% extends "@layouts/main.njk" %}
+{% import "@shared/ui/primitives/icons.njk" as icon %}
 
 {% block content %}
 {% set error_icon_name = 'key' %}
@@ -8,5 +8,5 @@
 {% set error_gradient_via = 'amber' %}
 {% set error_i18n_ns = 'unauthorized' %}
 {% set error_quick_links = '/|home,/contact|contact' %}
-{% include "shared/ui/patterns/error-page.njk" %}
+{% include "@shared/ui/patterns/error-page.njk" %}
 {% endblock %}

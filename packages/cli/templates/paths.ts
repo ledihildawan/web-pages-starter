@@ -7,7 +7,7 @@
  */
 
 import fs from 'node:fs';
-import path from 'node:path';
+import { join } from 'pathe';
 
 export type AliasKey =
 {{codegen:alias_keys}};
@@ -17,7 +17,7 @@ export const alias: Record<AliasKey, string> = {
 };
 
 export function lookup(key: AliasKey, ...parts: string[]): string {
-  return path.join(alias[key], ...parts);
+  return join(alias[key], ...parts);
 }
 
 export function find(key: AliasKey, ...parts: string[]): string | null {

@@ -1,5 +1,5 @@
-{% extends "main.njk" %}
-{% import "shared/ui/primitives/icons.njk" as icon %}
+{% extends "@layouts/main.njk" %}
+{% import "@shared/ui/primitives/icons.njk" as icon %}
 
 {% block content %}
 {% set error_icon_name = 'clock' %}
@@ -8,5 +8,5 @@
 {% set error_gradient_via = 'blue' %}
 {% set error_i18n_ns = 'maintenance' %}
 {% set error_quick_links = '/|home,/about|about,/contact|contact' %}
-{% include "shared/ui/patterns/error-page.njk" %}
+{% include "@shared/ui/patterns/error-page.njk" %}
 {% endblock %}

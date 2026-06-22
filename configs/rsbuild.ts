@@ -1,10 +1,9 @@
 import fs from 'node:fs';
-import path from 'node:path';
+import { join, relative } from 'pathe';
 import { i18nConfig } from '@config/i18n';
 import { ASSET_PATHS, PUBLIC_FILENAMES } from '@constants';
 import { browserEnv, env } from '@generated/env';
 import { alias, lookup } from '@generated/paths';
-import { getNunjucksPaths } from '@config/nunjucks';
 import { getActiveLocaleCodes, isSingleLocale, LOCALE_STORAGE_KEY } from '@i18n';
 import { CSP_NONCE_PLACEHOLDER } from '@i18n/constants';
 import { getRootPageSlug, getSystemPageSlug, scanPages } from '@page-system';
@@ -19,7 +18,6 @@ const shouldMinify = isBuild && env.MINIFY;
 const isPrettyHtml = env.PRETTY_HTML;
 const shouldMinifyHTML = shouldMinify && !isPrettyHtml;
 const MANAGED_EXTS = ['ts', 'css', 'njk', 'png', 'jpg', 'jpeg', 'webp', 'svg', 'gif'];
-const njkPaths = getNunjucksPaths();
 
 const pluginHotReloadContent = (): RsbuildPlugin => ({
   name: 'plugin-hot-reload-content',
@@ -70,12 +68,12 @@ const getEntries = (): Record<string, string | string[]> => {
   const entries: Record<string, string | string[]> = {};
 
   for (const page of scannedPages) {
-    const scriptFile = path.join(page.dir, 'script.ts');
+    const scriptFile = join(page.dir, 'script.ts');
     entries[page.name] = fs.existsSync(scriptFile) ? scriptFile : PAGE_ENTRY;
   }
 
   for (const dyn of dynamicEntries) {
-    const scriptFile = path.join(dyn.templateDir, 'script.ts');
+    const scriptFile = join(dyn.templateDir, 'script.ts');
     entries[dyn.entryKey] = fs.existsSync(scriptFile) ? scriptFile : PAGE_ENTRY;
   }
 
@@ -89,9 +87,9 @@ const dynamicTemplateMap = new Map(dynamicEntries.map((e) => [e.entryKey, e.temp
 const resolveTemplate = (entryName: string): string => {
   const dynDir = dynamicTemplateMap.get(entryName);
   if (dynDir) {
-    return path.relative(process.cwd(), path.join(dynDir, 'index.njk'));
+    return relative(process.cwd(), join(dynDir, 'index.njk'));
   }
-  return path.join('pages', entryName, 'index.njk');
+  return join('pages', entryName, 'index.njk');
 };
 
 export default defineConfig({
@@ -307,7 +305,6 @@ export default defineConfig({
                 loader: 'simple-nunjucks-loader',
                 options: {
                   autoescape: false,
-                  ...njkPaths,
                 },
               },
             ],
@@ -331,7 +328,7 @@ export default defineConfig({
         return createTemplateParams(
           {
             ...params,
-            entryName: path.relative(lookup('@pages'), dynEntry.templateDir),
+            entryName: relative(lookup('@pages'), dynEntry.templateDir),
           },
           LOCALE_STORAGE_KEY,
           getActiveLocaleCodes(),

@@ -1,5 +1,5 @@
 {% macro info_card(label_text, value_text, color, icon_name) %}
-  {% import "shared/ui/primitives/icons.njk" as icon %}
+  {% import "@shared/ui/primitives/icons.njk" as icon %}
   <div class="spotlight-card card-border-glow card-squash group relative p-10 lg:p-12 radius-card-lg bg-linear-to-br from-slate-900/60 to-slate-900/40 card-border hover:border-{{ color }}-500/40 hover:shadow-[0_20px_50px_rgba(139,92,246,0.25)] hover:-translate-y-2 transition-[transform,box-shadow,border-color] duration-250 ease-emphasized text-center overflow-hidden backdrop-blur-xl card-hover-lift">
     <div class="absolute inset-be-0 inset-e-0 inline-40 block-40 bg-linear-to-br from-{{ color }}-500/15 to-transparent rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
     <div class="relative inline-16 lg:inline-20 block-16 lg:block-20 mx-auto mbe-8">

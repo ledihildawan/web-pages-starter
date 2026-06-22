@@ -1,6 +1,6 @@
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
-import path from 'node:path';
+import { join, relative } from 'pathe';
 import { i18nConfig } from '@config/i18n';
 import { lookup } from '@generated/paths';
 import { isSystemPageId, isSystemPageSlug, scanPages } from '@page-system';
@@ -53,7 +53,7 @@ function getAllPages(): PageInfo[] {
     let pageId = p.name;
     let urlPath = p.name;
     try {
-      const data = readJSON5(path.join(p.dir, 'data.json5'));
+      const data = readJSON5(join(p.dir, 'data.json5'));
       pageId = String(data.page_id || p.name.split('/').pop() || p.name);
       urlPath = String(data.url_path || p.name);
     } catch {}
@@ -104,7 +104,7 @@ interface Reference {
 function collectFiles(dir: string, ext: string, out: string[]): void {
   if (!fs.existsSync(dir)) return;
   for (const entry of fs.readdirSync(dir)) {
-    const full = path.join(dir, entry);
+    const full = join(dir, entry);
     const stat = fs.statSync(full);
     if (stat.isDirectory()) {
       collectFiles(full, ext, out);
@@ -123,11 +123,11 @@ function findReferences(pageInfo: PageInfo): Reference[] {
   );
 
   const scanFiles: string[] = [];
-  collectFiles(path.join('pages'), '.njk', scanFiles);
-  collectFiles(path.join('shared'), '.njk', scanFiles);
-  collectFiles(path.join('layouts'), '.njk', scanFiles);
+  collectFiles(join('pages'), '.njk', scanFiles);
+  collectFiles(join('shared'), '.njk', scanFiles);
+  collectFiles(join('layouts'), '.njk', scanFiles);
 
-  const menuFile = path.join('data', 'menu.json5');
+  const menuFile = join('data', 'menu.json5');
   if (fs.existsSync(menuFile)) scanFiles.push(menuFile);
 
   for (const file of scanFiles) {
@@ -140,7 +140,7 @@ function findReferences(pageInfo: PageInfo): Reference[] {
       pattern.lastIndex = 0;
       if (pattern.test(lines[i])) {
         refs.push({
-          file: path.relative(process.cwd(), file).replace(/\\/g, '/'),
+          file: relative(process.cwd(), file).replace(/\\/g, '/'),
           line: i + 1,
           content: lines[i].trim(),
         });
@@ -214,7 +214,7 @@ function deletePage(pageInfo: PageInfo): {
   const localesDir = lookup('@locales');
   if (fs.existsSync(localesDir)) {
     for (const localeCode of fs.readdirSync(localesDir)) {
-      const localeFile = path.join(localesDir, localeCode, `${pageInfo.pageId}.json`);
+      const localeFile = join(localesDir, localeCode, `${pageInfo.pageId}.json`);
       if (fs.existsSync(localeFile)) {
         fs.rmSync(localeFile, { force: true });
         localeFilesDeleted++;

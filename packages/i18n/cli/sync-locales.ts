@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import path from 'node:path';
+import { join } from 'pathe';
 import { i18nConfig } from '@config/i18n';
 import { lookup } from '@generated/paths';
 import { LOCALE_CODES } from '@i18n/data/locales';
@@ -29,7 +29,7 @@ if (process.argv.includes('--help') || process.argv.includes('-h')) {
 
 const LOCALES_ROOT = lookup('@locales');
 const DEFAULT_LOCALE = i18nConfig.defaultLocale;
-const sourceDir = path.join(LOCALES_ROOT, DEFAULT_LOCALE);
+const sourceDir = join(LOCALES_ROOT, DEFAULT_LOCALE);
 
 try {
   if (!fs.existsSync(sourceDir)) {
@@ -50,7 +50,7 @@ try {
   for (const lang of LOCALE_CODES) {
     if (lang === DEFAULT_LOCALE) continue;
 
-    const targetDir = path.join(LOCALES_ROOT, lang);
+    const targetDir = join(LOCALES_ROOT, lang);
     const isNewDir = !fs.existsSync(targetDir);
 
     if (isNewDir) {
@@ -59,9 +59,9 @@ try {
     }
 
     for (const file of sourceFiles) {
-      const targetPath = path.join(targetDir, file);
+      const targetPath = join(targetDir, file);
       if (!fs.existsSync(targetPath)) {
-        fs.copyFileSync(path.join(sourceDir, file), targetPath);
+        fs.copyFileSync(join(sourceDir, file), targetPath);
         missingFiles++;
       }
     }

@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import path from 'node:path';
+import { basename, extname, join } from 'pathe';
 import { ASSET_PATHS } from '@constants';
 import { log, logBox } from '@core/utils/logger';
 import { computeStringHash, isCacheValid, restoreCache, storeCache } from '@core/utils/pipeline-cache';
@@ -52,7 +52,7 @@ async function processImage(inputFile: string, outputName: string): Promise<Imag
 
     for (const size of SIZES) {
       if (size <= metadata.width) {
-        const outFile = path.join(OUTPUT_DIR, `${outputName}-${size}w.avif`);
+        const outFile = join(OUTPUT_DIR, `${outputName}-${size}w.avif`);
         await sharp(inputFile)
           .resize({ width: size, withoutEnlargement: true })
           .avif({ quality: AVIF_QUALITY })
@@ -73,7 +73,7 @@ async function processImage(inputFile: string, outputName: string): Promise<Imag
 
     if (srcsetParts.length === 0) {
       const outName = `${outputName}-${metadata.width}w.avif`;
-      await sharp(inputFile).avif({ quality: AVIF_QUALITY }).toFile(path.join(OUTPUT_DIR, outName));
+      await sharp(inputFile).avif({ quality: AVIF_QUALITY }).toFile(join(OUTPUT_DIR, outName));
       const url = imageUrl(outName);
       srcsetParts.push(`${url} ${metadata.width}w`);
       defaultSrc = url;
@@ -101,7 +101,7 @@ async function processImage(inputFile: string, outputName: string): Promise<Imag
 }
 
 function copyPassthrough(inputFile: string, outputName: string): void {
-  const outFile = path.join(OUTPUT_DIR, outputName);
+  const outFile = join(OUTPUT_DIR, outputName);
   fs.copyFileSync(inputFile, outFile);
 }
 
@@ -112,7 +112,7 @@ function computeSourceHash(): string {
   const entries = fs.readdirSync(SOURCE_DIR);
   const fileInfos: Array<{ name: string; mtime: number }> = [];
   for (const entry of entries) {
-    const inputPath = path.join(SOURCE_DIR, entry);
+    const inputPath = join(SOURCE_DIR, entry);
     if (fs.statSync(inputPath).isFile()) {
       const stat = fs.statSync(inputPath);
       fileInfos.push({ name: entry, mtime: stat.mtimeMs });
@@ -153,11 +153,11 @@ async function main(): Promise<void> {
   let passthrough = 0;
 
   for (const entry of entries) {
-    const inputPath = path.join(SOURCE_DIR, entry);
+    const inputPath = join(SOURCE_DIR, entry);
     if (!fs.statSync(inputPath).isFile()) continue;
 
-    const ext = path.extname(entry).toLowerCase();
-    const name = path.basename(entry, ext);
+    const ext = extname(entry).toLowerCase();
+    const name = basename(entry, ext);
 
     if (PASSTHROUGH_EXTS.includes(ext)) {
       copyPassthrough(inputPath, entry);

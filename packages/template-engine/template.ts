@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import path from 'node:path';
+import { join } from 'pathe';
 import { fontsConfig } from '@config/fonts';
 import { i18nConfig } from '@config/i18n';
 import { ASSET_PATHS } from '@constants';
@@ -202,7 +202,7 @@ const generateClientI18nScript = (
     }
     for (const [localeCode, data] of Object.entries(allI18nData)) {
       const json = JSON.stringify(data);
-      const filePath = path.join(dir, `${localeCode}.json`);
+      const filePath = join(dir, `${localeCode}.json`);
       const tmpPath = `${filePath}.tmp`;
       fs.writeFileSync(tmpPath, json, 'utf-8');
       fs.renameSync(tmpPath, filePath);

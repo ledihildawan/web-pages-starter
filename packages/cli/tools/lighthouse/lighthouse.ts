@@ -1,5 +1,5 @@
 import { writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { join } from 'pathe';
 import process from 'node:process';
 import { log, logBox } from '@core/utils/logger';
 import { setupSigintHandler, wrapMainError } from '@core/utils/signal-handler';

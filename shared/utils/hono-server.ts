@@ -1,5 +1,5 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
-import path from 'node:path';
+import { join } from 'pathe';
 import { i18nConfig } from '@config/i18n';
 import { PUBLIC_FILENAMES } from '@constants';
 import { serveStatic } from '@hono/node-server/serve-static';
@@ -34,7 +34,7 @@ function scanHtmlFiles(dir: string, basePath: string): Array<{ key: string; cont
   if (!existsSync(dir)) return results;
 
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
-    const fullPath = path.join(dir, entry.name);
+    const fullPath = join(dir, entry.name);
 
     if (entry.isDirectory()) {
       const childBase = basePath ? `${basePath}/${entry.name}` : entry.name;

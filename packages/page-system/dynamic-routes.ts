@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import path from 'node:path';
+import { dirname, join } from 'pathe';
 import { lookup } from '@generated/paths';
 import { isSlugDir } from '@page-system/scanner';
 import { readJSON5 } from '@utils/json5';
@@ -21,7 +21,7 @@ function scanSlugDirs(dir: string, basePath: string): Array<{ dir: string; baseP
     if (!entry.isDirectory()) continue;
     if (entry.name.startsWith('_')) continue;
 
-    const fullPath = path.join(dir, entry.name);
+    const fullPath = join(dir, entry.name);
     const childBase = basePath ? `${basePath}/${entry.name}` : entry.name;
 
     if (isSlugDir(entry.name)) {
@@ -42,7 +42,7 @@ function findDataSource(slugDir: string): {
   slugs: string[];
   data: Record<string, unknown>;
 } {
-  const parentDir = path.dirname(slugDir);
+  const parentDir = dirname(slugDir);
   const baseName = 'data';
 
   let dataFile: string | null = null;
@@ -50,7 +50,7 @@ function findDataSource(slugDir: string): {
     const files = fs.readdirSync(parentDir);
     const json5File = files.find((f) => f.toLowerCase() === `${baseName}.json5`);
     const jsonFile = files.find((f) => f.toLowerCase() === `${baseName}.json`);
-    dataFile = json5File ? path.join(parentDir, json5File) : jsonFile ? path.join(parentDir, jsonFile) : null;
+    dataFile = json5File ? join(parentDir, json5File) : jsonFile ? join(parentDir, jsonFile) : null;
   }
 
   if (!dataFile) {

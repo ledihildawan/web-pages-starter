@@ -1,7 +1,7 @@
-{% extends "main.njk" %}
-{% import "shared/ui/composites/hero-section.njk" as hero %}
-{% import "shared/ui/composites/section-header.njk" as section %}
-{% import "shared/ui/primitives/icons.njk" as icon %}
+{% extends "@layouts/main.njk" %}
+{% import "@shared/ui/composites/hero-section.njk" as hero %}
+{% import "@shared/ui/composites/section-header.njk" as section %}
+{% import "@shared/ui/primitives/icons.njk" as icon %}
 
 {% block content %}
   {% set story_key = 'about:' ~ page.story.t_key %}
@@ -212,5 +212,5 @@
     </div>
   </section>
 
-  {% include "shared/ui/composites/cta.njk" %}
+  {% include "@shared/ui/composites/cta.njk" %}
 {% endblock %}

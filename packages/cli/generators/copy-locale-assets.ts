@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import path from 'node:path';
+import { join } from 'pathe';
 import { ASSET_PATHS } from '@constants';
 import { log } from '@core/utils/logger';
 import { LOCALE_CODES } from '@generated/active-locales-data';
@@ -21,13 +21,13 @@ function main(): void {
     fs.rmSync(localesPublicDest, { recursive: true, force: true });
   }
   for (const locale of activeLocales) {
-    const srcDir = path.join(localesSrc, locale);
-    const destDir = path.join(localesPublicDest, locale);
+    const srcDir = join(localesSrc, locale);
+    const destDir = join(localesPublicDest, locale);
     if (fs.existsSync(srcDir)) {
       fs.mkdirSync(destDir, { recursive: true });
       const files = fs.readdirSync(srcDir).filter((f) => f.endsWith('.json'));
       for (const file of files) {
-        fs.copyFileSync(path.join(srcDir, file), path.join(destDir, file));
+        fs.copyFileSync(join(srcDir, file), join(destDir, file));
       }
     }
   }
@@ -41,9 +41,7 @@ function main(): void {
     fs.cpSync(localesPublicDest, localesDistDest, { recursive: true });
     const count = fs
       .readdirSync(localesDistDest, { recursive: true })
-      .filter(
-        (f): f is string => typeof f === 'string' && !fs.statSync(path.join(localesDistDest, f)).isDirectory(),
-      ).length;
+      .filter((f): f is string => typeof f === 'string' && !fs.statSync(join(localesDistDest, f)).isDirectory()).length;
     log.info(`  Copied ${count} locale file(s) to dist`);
   }
 }

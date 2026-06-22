@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import path from 'node:path';
+import { join } from 'pathe';
 import { i18nConfig } from '@config/i18n';
 import { LOCALE_CODES as ACTIVE_LOCALE_CODES } from '@generated/active-locales-data';
 import { lookup } from '@generated/paths';
@@ -10,7 +10,7 @@ import { log, logBox } from '@utils/logger';
 import { generatedHeader, writeFilePath } from '@utils/write-file';
 
 const LOCALES_ROOT = lookup('@locales');
-const DEFAULT_LOCALE_DIR = path.join(LOCALES_ROOT, i18nConfig.defaultLocale);
+const DEFAULT_LOCALE_DIR = join(LOCALES_ROOT, i18nConfig.defaultLocale);
 const OUTPUT_FILE = lookup('@generated', 'i18n.d.ts');
 
 const activeLocaleSet = new Set(ACTIVE_LOCALE_CODES);
@@ -58,7 +58,7 @@ function readLocaleTree(dirPath: string): Record<string, unknown> {
 
     const entries = fs.readdirSync(currentDir).sort().reverse();
     for (const entry of entries) {
-      const entryPath = path.join(currentDir, entry);
+      const entryPath = join(currentDir, entry);
       const stat = fs.statSync(entryPath);
 
       if (stat.isDirectory()) {
@@ -83,7 +83,7 @@ function readLocaleTree(dirPath: string): Record<string, unknown> {
 function getPageIds(): Set<string> {
   const pagesDir = lookup('@pages');
   if (!fs.existsSync(pagesDir)) return new Set();
-  return new Set(fs.readdirSync(pagesDir).filter((f) => fs.statSync(path.join(pagesDir, f)).isDirectory()));
+  return new Set(fs.readdirSync(pagesDir).filter((f) => fs.statSync(join(pagesDir, f)).isDirectory()));
 }
 
 function pickByNamespaces(namespaces: Record<string, unknown>, match: Set<string>): Record<string, unknown> {
@@ -174,7 +174,7 @@ try {
   const sharedData = pickShared(defaultNamespaces, pageIds);
 
   if (!commonData) {
-    throw new Error(`[i18n] Missing default common locale: ${path.join(DEFAULT_LOCALE_DIR, 'common.json')}`);
+    throw new Error(`[i18n] Missing default common locale: ${join(DEFAULT_LOCALE_DIR, 'common.json')}`);
   }
 
   if (skipParityCheck) {
@@ -183,7 +183,7 @@ try {
     log.info('  Skipping parity check (single active locale)\n');
   } else {
     const parityErrors = LOCALE_CODES.filter((lang) => activeLocaleSet.has(lang)).flatMap((lang) => {
-      const langDir = path.join(LOCALES_ROOT, lang);
+      const langDir = join(LOCALES_ROOT, lang);
       if (!fs.existsSync(langDir)) return [`${lang}: missing locale directory`];
       return compareLocaleParity(defaultNamespaces, readLocaleTree(langDir), lang);
     });

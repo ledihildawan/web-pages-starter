@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import path from 'node:path';
+import { basename, dirname } from 'pathe';
 import { PUBLIC_FILENAMES } from '@constants';
 
 export const COMMENT_EXCLUDED_FILES = [
@@ -15,7 +15,7 @@ export interface GeneratedHeaderOptions {
 }
 
 export function writeFilePath(filePath: string, content: string): void {
-  fs.mkdirSync(path.dirname(filePath), { recursive: true });
+  fs.mkdirSync(dirname(filePath), { recursive: true });
   fs.writeFileSync(filePath, content, 'utf-8');
 }
 
@@ -35,7 +35,7 @@ export function generatedHeader(toolName: string, options?: GeneratedHeaderOptio
 }
 
 export function shouldAddComment(filePath: string): boolean {
-  const fileName = path.basename(filePath);
+  const fileName = basename(filePath);
   return !(COMMENT_EXCLUDED_FILES as readonly string[]).includes(fileName);
 }
 

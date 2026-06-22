@@ -1,6 +1,6 @@
 import { exec } from 'node:child_process';
 import fs from 'node:fs';
-import path from 'node:path';
+import { basename, dirname, join } from 'pathe';
 import { i18nConfig } from '@config/i18n';
 import type { LocaleCode } from '@i18n/data/locales';
 import { log, logBox } from '@core/utils/logger';
@@ -26,8 +26,8 @@ const MAX_CONCURRENCY = 4;
 
 function getNeededFontFiles(pkg: string, wantedSubsets: Set<string>): Set<string> {
   const pkgDir = lookup('@', 'node_modules', pkg);
-  const wghtPath = path.join(pkgDir, 'wght.css');
-  const cssPath = fs.existsSync(wghtPath) ? wghtPath : path.join(pkgDir, 'index.css');
+  const wghtPath = join(pkgDir, 'wght.css');
+  const cssPath = fs.existsSync(wghtPath) ? wghtPath : join(pkgDir, 'index.css');
 
   if (!fs.existsSync(cssPath)) return new Set();
 
@@ -56,7 +56,7 @@ function collectSourceFileInfos(
 
     const pkgDir = lookup('@', 'node_modules', pkg, 'files');
     for (const fileName of files) {
-      const filePath = path.join(pkgDir, fileName);
+      const filePath = join(pkgDir, fileName);
       if (fs.existsSync(filePath)) {
         const stat = fs.statSync(filePath);
         fileInfos.push({ path: filePath, mtime: stat.mtimeMs, size: stat.size });
@@ -94,7 +94,7 @@ async function subsetFontAsync(srcPath: string, destPath: string): Promise<{ bef
     }
   } catch (_err) {
     if (fs.existsSync(tmpOut)) fs.unlinkSync(tmpOut);
-    console.warn(`⚠ Font subset timeout/failure: ${path.basename(srcPath)}`);
+    console.warn(`⚠ Font subset timeout/failure: ${basename(srcPath)}`);
   }
 
   return { before, after: before };
@@ -168,10 +168,10 @@ async function mainAsync(): Promise<void> {
     const pkgName = pkg.replace('@', '').replace('/', '-');
 
     for (const fileName of files) {
-      const srcFile = path.join(pkgDir, 'files', fileName);
-      const destFile = path.join(publicFontsDir, pkgName, 'files', fileName);
+      const srcFile = join(pkgDir, 'files', fileName);
+      const destFile = join(publicFontsDir, pkgName, 'files', fileName);
 
-      const destFileDir = path.dirname(destFile);
+      const destFileDir = dirname(destFile);
       if (!fs.existsSync(destFileDir)) {
         fs.mkdirSync(destFileDir, { recursive: true });
       }

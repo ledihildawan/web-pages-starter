@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import path from 'node:path';
+import { join } from 'pathe';
 import { i18nConfig } from '@config/i18n';
 import { lookup } from '@generated/paths';
 import { getActiveLocaleCodes } from '@i18n/engine/active-locales';
@@ -80,8 +80,8 @@ const titleCase = lastSegment.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpp
 
 const pagesRoot = lookup('@pages');
 const targetDir = groupFolder
-  ? path.join(pagesRoot, groupFolder, ...formattedSegments)
-  : path.join(pagesRoot, ...formattedSegments);
+  ? join(pagesRoot, groupFolder, ...formattedSegments)
+  : join(pagesRoot, ...formattedSegments);
 
 if (fs.existsSync(targetDir)) {
   log.error(`Error: Page "${urlPath}" already exists.`);
@@ -152,15 +152,15 @@ const localeContent = `{
 `;
 
 try {
-  fs.writeFileSync(path.join(targetDir, 'index.njk'), njkContent);
-  fs.writeFileSync(path.join(targetDir, 'data.json5'), jsonContent);
-  fs.writeFileSync(path.join(targetDir, 'script.ts'), '');
-  fs.writeFileSync(path.join(targetDir, 'style.css'), '');
+  fs.writeFileSync(join(targetDir, 'index.njk'), njkContent);
+  fs.writeFileSync(join(targetDir, 'data.json5'), jsonContent);
+  fs.writeFileSync(join(targetDir, 'script.ts'), '');
+  fs.writeFileSync(join(targetDir, 'style.css'), '');
 
   const baseLocaleDir = lookup('@locales');
   if (fs.existsSync(baseLocaleDir)) {
     for (const localeCode of getActiveLocaleCodes()) {
-      const filePath = path.join(baseLocaleDir, localeCode, `${pageId}.json`);
+      const filePath = join(baseLocaleDir, localeCode, `${pageId}.json`);
       if (!fs.existsSync(filePath)) {
         fs.writeFileSync(filePath, localeContent, 'utf-8');
         log.info(`Created locale [${localeCode}]: locales/${localeCode}/${pageId}.json`);

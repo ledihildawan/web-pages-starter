@@ -1,11 +1,11 @@
 import fs from 'node:fs';
-import path from 'node:path';
+import { dirname, resolve, join } from 'pathe';
 import { fileURLToPath } from 'node:url';
 import { log } from '@core/utils/logger';
 import { writeFilePath } from '@core/utils/write-file';
 
-const TSCONFIG_PATH = path.resolve('.', 'tsconfig.json');
-const OUTPUT_PATH = path.resolve('.', 'generated', 'paths.ts');
+const TSCONFIG_PATH = resolve('.', 'tsconfig.json');
+const OUTPUT_PATH = resolve('.', 'generated', 'paths.ts');
 
 function inject(template: string, values: Record<string, string>): string {
   let result = template;
@@ -38,10 +38,10 @@ const rawEntries = Object.entries(tsconfig.compilerOptions.paths)
 
 const keys = rawEntries.map(([k]) => k);
 const aliasKeys = keys.map((k) => `  | '${k}'`).join('\n');
-const aliasEntries = rawEntries.map(([k, v]) => `  '${k}': path.resolve('${v}'),`).join('\n');
+const aliasEntries = rawEntries.map(([k, v]) => `  '${k}': resolve('${v}'),`).join('\n');
 
-const TEMPLATE_DIR = path.dirname(fileURLToPath(import.meta.url));
-const template = fs.readFileSync(path.join(TEMPLATE_DIR, '../templates/paths.ts'), 'utf-8');
+const TEMPLATE_DIR = dirname(fileURLToPath(import.meta.url));
+const template = fs.readFileSync(join(TEMPLATE_DIR, '../templates/paths.ts'), 'utf-8');
 const output = inject(template, {
   generated_at: new Date().toISOString(),
   alias_keys: aliasKeys,

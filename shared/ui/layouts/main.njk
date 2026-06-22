@@ -1,5 +1,5 @@
-{% import "shared/macros/page-meta.njk" as page_meta %}
-{% import "shared/ui/primitives/icons.njk" as icon %}
+{% import "@shared/macros/page-meta.njk" as page_meta %}
+{% import "@shared/ui/primitives/icons.njk" as icon %}
 
 {% set seo_config = global.seo or {} %}
 {% set theme_color = seo_config.theme_color or "#020617" %}
@@ -93,13 +93,13 @@
       <div class="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.03)_1px,transparent_0)] bg-size-[64px_64px] mask-[radial-gradient(ellipse_at_center,black,transparent_75%)]"></div>
     </div>
 
-    {% include "shared/ui/composites/navbar.njk" %}
+    {% include "@shared/ui/composites/navbar.njk" %}
 
     <main id="main-content" class="relative z-10 flex flex-col min-block-screen">
       {% block content %}{% endblock %}
     </main>
 
-    {% include "shared/ui/composites/footer.njk" %}
+    {% include "@shared/ui/composites/footer.njk" %}
 
     {% block scripts %}{% endblock %}
   </body>

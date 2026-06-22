@@ -9,7 +9,7 @@
   <div class="max-inline-6xl mx-auto relative z-10">
     <div class="relative mbe-8">
       <div class="inline-flex items-center justify-center inline-28 block-28 md:inline-36 md:block-36 rounded-full bg-{{ error_icon_color }}-500/10 border border-{{ error_icon_color }}-500/20 mbe-8">
-        {% import "shared/ui/primitives/icons.njk" as icon %}
+        {% import "@shared/ui/primitives/icons.njk" as icon %}
         {{ icon.icon(error_icon_name, 'inline-14 block-14 md:inline-18 md:block-18 text-' ~ error_icon_color ~ '-400', size='xl') }}
       </div>
       <h1 class="text-[10rem] md:text-[16rem] lg:text-[20rem] font-black leading-none tracking-tighter text-gradient-white-subtle select-none">

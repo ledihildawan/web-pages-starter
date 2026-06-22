@@ -1,8 +1,8 @@
 import { existsSync, mkdirSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs';
-import path from 'node:path';
+import { join } from 'pathe';
 
 const TEMP_DIR = 'temp';
-const PREVIEW_URL_FILE = path.join(TEMP_DIR, 'preview-url.json');
+const PREVIEW_URL_FILE = join(TEMP_DIR, 'preview-url.json');
 
 const DEFAULT_EXPIRES_IN_MINUTES = 60;
 

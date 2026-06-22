@@ -57,5 +57,13 @@
     "types": ["bun-types", "node"]
   },
   "include": ["**/*.ts"],
-  "exclude": ["dist", "rsbuild-out", "node_modules", "temp", "coverage", "packages/cli/templates/**"]
+  "exclude": [
+    "dist",
+    "rsbuild-out",
+    "node_modules",
+    "temp",
+    "coverage",
+    "packages/cli/templates/**",
+    "packages/simple-nunjucks-loader/**"
+  ]
 }

@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import path from 'node:path';
+import { dirname, join } from 'pathe';
 import { fileURLToPath } from 'node:url';
 import { log } from '@core/utils/logger';
 import { writeFilePath } from '@core/utils/write-file';
@@ -100,7 +100,7 @@ const sortedEnvFiles = ENV_FILES.sort((a, b) => {
 });
 
 for (const file of sortedEnvFiles) {
-  for (const entry of parseEnvFile(path.join(ROOT, file))) {
+  for (const entry of parseEnvFile(join(ROOT, file))) {
     schema.set(entry.key, entry.type);
     if (entry.isPrivate) {
       privateKeys.add(entry.key);
@@ -139,8 +139,8 @@ const browserKeysArray = browserKeys.map((k) => `'${k}'`).join(', ');
 
 const privateTypeEntries = privateKeyList.map((key) => `  ${key}: { type: '${schema.get(key)}' }`).join(',\n');
 
-const TEMPLATE_DIR = path.dirname(fileURLToPath(import.meta.url));
-const template = fs.readFileSync(path.join(TEMPLATE_DIR, '../templates/env.ts'), 'utf-8');
+const TEMPLATE_DIR = dirname(fileURLToPath(import.meta.url));
+const template = fs.readFileSync(join(TEMPLATE_DIR, '../templates/env.ts'), 'utf-8');
 const output = inject(template, {
   generated_at: new Date().toISOString(),
   browser_schema_entries: browserSchemaEntries,

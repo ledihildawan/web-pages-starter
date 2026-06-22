@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import path from 'node:path';
+import { dirname, extname, join, relative } from 'pathe';
 import zlib from 'node:zlib';
 import { log, logBox } from '@core/utils/logger';
 import { computeStringHash } from '@core/utils/pipeline-cache';
@@ -16,7 +16,7 @@ const forceRefresh = args.includes('--force') || args.includes('-f');
 function walk(dir: string): string[] {
   const files: string[] = [];
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    const full = path.join(dir, entry.name);
+    const full = join(dir, entry.name);
     if (entry.isDirectory()) {
       files.push(...walk(full));
     } else {
@@ -39,14 +39,12 @@ function restoreFromCache(cacheBrPath: string, cacheGzPath: string, brPath: stri
 }
 
 const allFiles = walk(DIST);
-const files = allFiles.filter(
-  (f) => COMPRESS_EXTS.includes(path.extname(f)) && !f.endsWith('.br') && !f.endsWith('.gz'),
-);
+const files = allFiles.filter((f) => COMPRESS_EXTS.includes(extname(f)) && !f.endsWith('.br') && !f.endsWith('.gz'));
 
 const relPathToHash = new Map<string, string>();
 
 for (const file of files) {
-  const relPath = path.relative(DIST, file).replace(/\\/g, '/');
+  const relPath = relative(DIST, file).replace(/\\/g, '/');
   const content = fs.readFileSync(file);
   const hash = computeStringHash(content.toString('utf-8'));
   relPathToHash.set(relPath, hash);
@@ -59,9 +57,9 @@ let totalBr = 0;
 let totalGz = 0;
 
 for (const file of files) {
-  const relPath = path.relative(DIST, file).replace(/\\/g, '/');
+  const relPath = relative(DIST, file).replace(/\\/g, '/');
   const hash = relPathToHash.get(relPath) || '';
-  const cacheSubDir = path.join(CACHE_DIR, hash);
+  const cacheSubDir = join(CACHE_DIR, hash);
   const cacheBrPath = `${cacheSubDir}/${relPath}.br`;
   const cacheGzPath = `${cacheSubDir}/${relPath}.gz`;
 
@@ -89,7 +87,7 @@ for (const file of files) {
   fs.writeFileSync(brPath, br);
   fs.writeFileSync(gzPath, gz);
 
-  fs.mkdirSync(path.dirname(cacheBrPath), { recursive: true });
+  fs.mkdirSync(dirname(cacheBrPath), { recursive: true });
   fs.writeFileSync(cacheBrPath, br);
   fs.writeFileSync(cacheGzPath, gz);
 

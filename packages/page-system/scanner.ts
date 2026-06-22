@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import path from 'node:path';
+import { join } from 'pathe';
 
 export interface ScannedPage {
   name: string;
@@ -21,8 +21,8 @@ export const scanPages = (dir: string, basePath: string): ScannedPage[] => {
     if (isPrivateDir(entry.name)) continue;
     if (isSlugDir(entry.name)) continue;
 
-    const fullPath = path.join(dir, entry.name);
-    const hasIndex = fs.existsSync(path.join(fullPath, 'index.njk'));
+    const fullPath = join(dir, entry.name);
+    const hasIndex = fs.existsSync(join(fullPath, 'index.njk'));
 
     if (isGroup(entry.name)) {
       results.push(...scanPages(fullPath, basePath));

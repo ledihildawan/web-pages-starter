@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import path from 'node:path';
+import { join } from 'pathe';
 import { log } from '@core/utils/logger';
 import { getCacheWithTTL, setCacheWithTTL } from '@core/utils/pipeline-cache';
 import { writeFilePath } from '@core/utils/write-file';
@@ -54,7 +54,7 @@ function getCurrenciesFromPages(whitelist: Set<string>): Set<string> {
   const scanDir = (dir: string): void => {
     const entries = fs.readdirSync(dir, { withFileTypes: true });
     for (const entry of entries) {
-      const fullPath = path.join(dir, entry.name);
+      const fullPath = join(dir, entry.name);
       if (entry.isDirectory()) {
         scanDir(fullPath);
       } else if (entry.name === 'data.json5') {

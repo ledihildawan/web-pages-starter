@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import path from 'node:path';
+import { dirname, join } from 'pathe';
 import { fileURLToPath } from 'node:url';
 import { log } from '@core/utils/logger';
 import { writeFilePath } from '@core/utils/write-file';
@@ -50,8 +50,8 @@ function generateSitemap(): string {
   return entries.join('\n');
 }
 
-const TEMPLATE_DIR = path.dirname(fileURLToPath(import.meta.url));
-const template = fs.readFileSync(path.join(TEMPLATE_DIR, '../templates/sitemap.xml'), 'utf-8');
+const TEMPLATE_DIR = dirname(fileURLToPath(import.meta.url));
+const template = fs.readFileSync(join(TEMPLATE_DIR, '../templates/sitemap.xml'), 'utf-8');
 
 const urls = generateSitemap();
 const sitemapOutput = inject(template, { urls });

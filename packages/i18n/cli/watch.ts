@@ -1,6 +1,6 @@
 import { execSync } from 'node:child_process';
 import fs from 'node:fs';
-import path from 'node:path';
+import { relative } from 'pathe';
 import process from 'node:process';
 import { lookup } from '@generated/paths';
 import { log, logBox } from '@utils/logger';
@@ -52,7 +52,7 @@ function regenerate() {
 watcher.on('all', (event, filePath) => {
   if (!filePath) return;
 
-  const relativePath = path.relative(process.cwd(), filePath);
+  const relativePath = relative(process.cwd(), filePath);
 
   if (filePath.endsWith('.json')) {
     log.info(`${event}: ${relativePath}`);

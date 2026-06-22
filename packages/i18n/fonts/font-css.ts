@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import path from 'node:path';
+import { join, resolve } from 'pathe';
 import type { LocaleCode } from '../data/locales';
 import { LOCALES } from '../data/locales';
 import type { FontPackageEntry } from './font-registry';
@@ -111,15 +111,15 @@ export function parseFontFaceBlocks(css: string): FontFaceBlock[] {
 }
 
 function resolvePackagePath(pkg: string): string {
-  const nodeModules = path.resolve(process.cwd(), 'node_modules', pkg);
+  const nodeModules = resolve(process.cwd(), 'node_modules', pkg);
   return nodeModules;
 }
 
 function readPackageWghtCss(pkg: string): string | null {
   const pkgDir = resolvePackagePath(pkg);
-  const wghtPath = path.join(pkgDir, 'wght.css');
+  const wghtPath = join(pkgDir, 'wght.css');
   if (fs.existsSync(wghtPath)) return fs.readFileSync(wghtPath, 'utf-8');
-  const indexPath = path.join(pkgDir, 'index.css');
+  const indexPath = join(pkgDir, 'index.css');
   if (fs.existsSync(indexPath)) return fs.readFileSync(indexPath, 'utf-8');
   return null;
 }
@@ -168,7 +168,7 @@ export function buildFontsCss(locales: LocaleCode[], fontsBasePath?: string): Fo
           const relativePath = `./${pkgName}/files/${fileName}`;
           return b.css.replace(/url\(\.\/files\/([^)]+)\)/, `url('${relativePath}')`);
         }
-        const resolved = path.join(pkgDir, 'files', fileName);
+        const resolved = join(pkgDir, 'files', fileName);
         return b.css.replace(/url\(\.\/files\/([^)]+)\)/, `url('${resolved.replace(/\\/g, '/')}')`);
       })
       .join('\n\n');

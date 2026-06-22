@@ -1,10 +1,10 @@
-{% extends "main.njk" %}
-{% import "shared/ui/composites/hero-section.njk" as hero %}
-{% import "shared/ui/composites/section-header.njk" as section %}
-{% import "shared/ui/composites/info-card.njk" as card %}
-{% import "shared/ui/primitives/form-input.njk" as form %}
-{% import "shared/ui/composites/social-link.njk" as social_link %}
-{% import "shared/ui/primitives/icons.njk" as icon %}
+{% extends "@layouts/main.njk" %}
+{% import "@shared/ui/composites/hero-section.njk" as hero %}
+{% import "@shared/ui/composites/section-header.njk" as section %}
+{% import "@shared/ui/composites/info-card.njk" as card %}
+{% import "@shared/ui/primitives/form-input.njk" as form %}
+{% import "@shared/ui/composites/social-link.njk" as social_link %}
+{% import "@shared/ui/primitives/icons.njk" as icon %}
 
 {% block content %}
   {% set hero_key = 'contact:contact' %}
@@ -126,5 +126,5 @@
     </div>
   </section>
 
-  {% include "shared/ui/composites/cta.njk" %}
+  {% include "@shared/ui/composites/cta.njk" %}
 {% endblock %}

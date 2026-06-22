@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import path from 'node:path';
+import { join } from 'pathe';
 import { i18nConfig } from '@config/i18n';
 import { lookup } from '@generated/paths';
 import { LOCALE_CODES } from '@i18n/data/locales';
@@ -99,7 +99,7 @@ function findDuplicateKeys(content: string): Record<string, number> {
 }
 
 function tryDetectDuplicates(locale: string, filePath: string): Record<string, number> | null {
-  const full = path.join(LOCALES_DIR, locale, filePath);
+  const full = join(LOCALES_DIR, locale, filePath);
   if (!fs.existsSync(full)) return null;
   try {
     const content = fs.readFileSync(full, 'utf8');
@@ -116,7 +116,7 @@ function getSetDifference(setA: Set<string>, setB: Set<string>): string[] {
 }
 
 function tryReadKeys(locale: string, filePath: string): Set<string> | null {
-  const full = path.join(LOCALES_DIR, locale, filePath);
+  const full = join(LOCALES_DIR, locale, filePath);
   if (!fs.existsSync(full)) return null;
   try {
     return new Set(collectKeys(readJSON5(full)));
@@ -169,7 +169,7 @@ function checkParity() {
   log.info('\nChecking common.json...');
   checkAndTrack('common.json');
 
-  const baseDir = path.join(LOCALES_DIR, BASE_LOCALE);
+  const baseDir = join(LOCALES_DIR, BASE_LOCALE);
   if (fs.existsSync(baseDir)) {
     const pageFiles = fs.readdirSync(baseDir).filter((f) => f.endsWith('.json') && f !== 'common.json');
 

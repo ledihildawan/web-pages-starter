@@ -1,6 +1,6 @@
 import { spawn, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
-import path from 'node:path';
+import { extname, join } from 'pathe';
 import process from 'node:process';
 import { i18nConfig } from '@config/i18n';
 import { log } from '@core/utils/logger';
@@ -46,10 +46,10 @@ const replaceUrls = (fromUrl: string, toUrl: string): number => {
     if (!fs.existsSync(dir)) return files;
     const entries = fs.readdirSync(dir, { withFileTypes: true });
     for (const entry of entries) {
-      const fullPath = path.join(dir, entry.name);
+      const fullPath = join(dir, entry.name);
       if (entry.isDirectory()) {
         files.push(...getAllTextFiles(fullPath));
-      } else if (TEXT_EXTS.includes(path.extname(entry.name).toLowerCase())) {
+      } else if (TEXT_EXTS.includes(extname(entry.name).toLowerCase())) {
         files.push(fullPath);
       }
     }

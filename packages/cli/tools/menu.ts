@@ -1,15 +1,15 @@
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
-import path from 'node:path';
+import { join, resolve as patheResolve } from 'pathe';
 import { log } from '@core/utils/logger';
 import { setupSigintHandler, wrapMainError } from '@core/utils/signal-handler';
 import { lookup } from '@generated/paths';
 import { Separator } from '@inquirer/prompts';
 import inquirer from 'inquirer';
 
-const CLI_DIR = path.resolve('packages/cli');
-const I18N_CLI_DIR = path.resolve('packages/i18n/cli');
-const PAGE_SYSTEM_CLI_DIR = path.resolve('packages/page-system/cli');
+const CLI_DIR = patheResolve('packages/cli');
+const I18N_CLI_DIR = patheResolve('packages/i18n/cli');
+const PAGE_SYSTEM_CLI_DIR = patheResolve('packages/page-system/cli');
 
 // ─── Help ─────────────────────────────────────────────────────────────────────
 
@@ -46,12 +46,12 @@ if (process.argv.includes('--help') || process.argv.includes('-h')) {
 const runTool = (name: string, args: string[] = []): Promise<void> => {
   return new Promise((resolve, reject) => {
     const candidates = [
-      path.join(CLI_DIR, `generators/${name}.ts`),
-      path.join(CLI_DIR, `scripts/${name}.ts`),
-      path.join(CLI_DIR, `tools/${name}.ts`),
-      path.join(CLI_DIR, `tools/${name}/${name}.ts`),
-      path.join(I18N_CLI_DIR, `${name}.ts`),
-      path.join(PAGE_SYSTEM_CLI_DIR, `${name}.ts`),
+      join(CLI_DIR, `generators/${name}.ts`),
+      join(CLI_DIR, `scripts/${name}.ts`),
+      join(CLI_DIR, `tools/${name}.ts`),
+      join(CLI_DIR, `tools/${name}/${name}.ts`),
+      join(I18N_CLI_DIR, `${name}.ts`),
+      join(PAGE_SYSTEM_CLI_DIR, `${name}.ts`),
     ];
     const toolPath = candidates.find((c) => fs.existsSync(c));
 

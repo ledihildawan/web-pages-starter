@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import path from 'node:path';
+import { join } from 'pathe';
 import { i18nConfig } from '@config/i18n';
 import { lookup } from '@generated/paths';
 import { getSystemPageSlug, SYSTEM_PAGE_IDS } from '@page-system/system-pages';
@@ -9,7 +9,7 @@ import { wrapMainError } from '@utils/signal-handler';
 const PAGES_DIR = lookup('@pages');
 
 function getPageIdFromFolder(folderName: string): string | null {
-  const indexPath = path.join(PAGES_DIR, folderName, 'data.json5');
+  const indexPath = join(PAGES_DIR, folderName, 'data.json5');
   if (!fs.existsSync(indexPath)) return null;
   const content = fs.readFileSync(indexPath, 'utf-8');
   const match = content.match(/"page_id":\s*"([^"]+)"/);
@@ -20,7 +20,7 @@ function getAllNjkFiles(dir: string): string[] {
   const files: string[] = [];
   const entries = fs.readdirSync(dir, { withFileTypes: true });
   for (const entry of entries) {
-    const fullPath = path.join(dir, entry.name);
+    const fullPath = join(dir, entry.name);
     if (entry.isDirectory()) {
       files.push(...getAllNjkFiles(fullPath));
     } else if (entry.name.endsWith('.njk')) {
@@ -36,7 +36,7 @@ async function main() {
 
   for (const pageId of SYSTEM_PAGE_IDS) {
     const expectedSlug = getSystemPageSlug(pageId, defaultLocale);
-    const expectedPath = path.join(PAGES_DIR, expectedSlug);
+    const expectedPath = join(PAGES_DIR, expectedSlug);
 
     if (fs.existsSync(expectedPath)) {
       continue;
@@ -51,7 +51,7 @@ async function main() {
     }
 
     log.info(`Renaming folder: ${currentFolder} -> ${expectedSlug}`);
-    fs.renameSync(path.join(PAGES_DIR, currentFolder), expectedPath);
+    fs.renameSync(join(PAGES_DIR, currentFolder), expectedPath);
     if (!fs.existsSync(expectedPath)) {
       throw new Error(`Rename failed: ${expectedPath} does not exist after rename`);
     }

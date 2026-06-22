@@ -1,6 +1,6 @@
 import { spawn, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
-import path from 'node:path';
+import { basename, resolve as patheResolve } from 'pathe';
 import process from 'node:process';
 import { log, logBox } from '@core/utils/logger';
 import { PIPELINE_STEPS } from '@core/utils/pipeline';
@@ -39,7 +39,7 @@ const runDevServer = (): Promise<void> => {
       shell: false,
     });
 
-    const rsbuildBin = path.resolve(process.cwd(), 'node_modules', '@rsbuild', 'core', 'bin', 'rsbuild.js');
+    const rsbuildBin = patheResolve(process.cwd(), 'node_modules', '@rsbuild', 'core', 'bin', 'rsbuild.js');
     const devProcess = spawn('bun', [rsbuildBin, 'dev'], {
       stdio: 'inherit',
       env: spawnEnv,
@@ -82,7 +82,7 @@ const main = async (): Promise<void> => {
       cwd: process.cwd(),
     });
     if (result.status !== 0) {
-      log.error(`Error: ${path.basename(step)} failed — exit code ${result.status}`);
+      log.error(`Error: ${basename(step)} failed — exit code ${result.status}`);
       process.exit(1);
     }
   }

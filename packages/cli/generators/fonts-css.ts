@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import path from 'node:path';
+import { basename, join } from 'pathe';
 import { fontsConfig } from '@config/fonts';
 import { i18nConfig } from '@config/i18n';
 import { ASSET_PATHS } from '@constants';
@@ -10,7 +10,7 @@ import { lookup } from '@generated/paths';
 import { buildFontsCss } from '@i18n/fonts/font-css';
 
 const OUTPUT_DIR = lookup('@public', ...ASSET_PATHS.fonts.split('/'));
-const OUTPUT_FILE = path.join(OUTPUT_DIR, 'fonts.css');
+const OUTPUT_FILE = join(OUTPUT_DIR, 'fonts.css');
 const CACHE_KEY = 'fonts';
 
 const args = process.argv.slice(2);
@@ -38,13 +38,13 @@ fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 
 for (const pkgCss of packageCss) {
   const pkgName = pkgCss.pkg.replace('@', '').replace('/', '-');
-  const pkgDir = path.join(OUTPUT_DIR, pkgName, 'files');
+  const pkgDir = join(OUTPUT_DIR, pkgName, 'files');
 
   fs.mkdirSync(pkgDir, { recursive: true });
 
   for (const fontFile of pkgCss.fontFiles) {
-    const srcPath = path.join(lookup('@', 'node_modules', pkgCss.pkg, 'files', fontFile));
-    const destPath = path.join(pkgDir, fontFile);
+    const srcPath = join(lookup('@', 'node_modules', pkgCss.pkg, 'files', fontFile));
+    const destPath = join(pkgDir, fontFile);
     try {
       fs.copyFileSync(srcPath, destPath);
     } catch {
@@ -57,7 +57,7 @@ if (packageCss.length > 0) {
   const header = `${generatedHeader('packages/cli/generators/fonts-css.ts', {
     description: [
       `Active locales: ${allLocales.join(', ')}`,
-      `Font packages: ${packageCss.map((p) => `${path.basename(p.pkg)} (${p.subsetCount})`).join(', ')}`,
+      `Font packages: ${packageCss.map((p) => `${basename(p.pkg)} (${p.subsetCount})`).join(', ')}`,
     ].join('\n'),
   })}\n\n`;
   const combined = packageCss.map((p) => p.css).join('\n\n');
@@ -77,7 +77,7 @@ if (packageCss.length > 0) {
 
 logBox('Generate Fonts CSS', {
   Locales: allLocales.join(', '),
-  Packages: packageCss.map((p) => `${path.basename(p.pkg)} (${p.subsetCount})`).join(', ') || '(none)',
+  Packages: packageCss.map((p) => `${basename(p.pkg)} (${p.subsetCount})`).join(', ') || '(none)',
   Output: `public/${ASSET_PATHS.fontsCss}`,
 });
 log.success(
