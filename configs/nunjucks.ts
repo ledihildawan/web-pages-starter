@@ -12,20 +12,30 @@ function isDirectory(p: string): boolean {
   }
 }
 
+function isSubdirectoryOf(parent: string, child: string): boolean {
+  const rel = path.relative(parent, child);
+  return !rel.startsWith('..') && !path.isAbsolute(rel);
+}
+
 export function getNunjucksPaths() {
   const searchPaths: string[] = [];
   const assetsPaths: string[] = [];
+  const projectRoot = alias['@'];
 
-  for (const [, resolvedPath] of Object.entries(alias)) {
+  for (const [aliasKey, resolvedPath] of Object.entries(alias)) {
     if (!isDirectory(resolvedPath)) continue;
 
     const normalized = path.normalize(resolvedPath);
     const shouldExclude = EXCLUDE_PATTERNS.some((pattern) => normalized.includes(pattern));
     if (shouldExclude) continue;
 
+    if (aliasKey !== '@' && isSubdirectoryOf(projectRoot, resolvedPath)) {
+      continue;
+    }
+
     searchPaths.push(resolvedPath);
 
-    if (normalized.includes(path.sep + 'assets' + path.sep) || normalized.endsWith('assets')) {
+    if (normalized.includes(`${path.sep}assets${path.sep}`) || normalized.endsWith('assets')) {
       assetsPaths.push(resolvedPath);
     }
   }
