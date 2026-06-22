@@ -1,11 +1,13 @@
-import { execSync } from 'node:child_process';
+import { exec } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { i18nConfig } from '@config/i18n';
+import type { LocaleCode } from '@i18n/data/locales';
 import { log, logBox } from '@core/utils/logger';
 import { computeStringHash, isCacheValid, restoreCache, storeCache } from '@core/utils/pipeline-cache';
 import { lookup } from '@generated/paths';
 import { getNeededFontPackages, parseFontFaceBlocks } from '@i18n/fonts/font-css';
+import type { FontPackageEntry } from '@i18n/fonts/font-registry';
 
 const CACHE_KEY = 'subset-fonts';
 
@@ -19,6 +21,8 @@ const SUBSET_FLAGS_ARRAY = [
   '--drop-tables+=kern',
   '--layout-features=*',
 ];
+
+const MAX_CONCURRENCY = 4;
 
 function getNeededFontFiles(pkg: string, wantedSubsets: Set<string>): Set<string> {
   const pkgDir = lookup('@', 'node_modules', pkg);
@@ -41,7 +45,7 @@ function getNeededFontFiles(pkg: string, wantedSubsets: Set<string>): Set<string
 }
 
 function collectSourceFileInfos(
-  packages: Map<string, any>,
+  packages: Map<string, FontPackageEntry[]>,
   neededFiles: Map<string, Set<string>>,
 ): Array<{ path: string; mtime: number; size: number }> {
   const fileInfos: Array<{ path: string; mtime: number; size: number }> = [];
@@ -62,7 +66,7 @@ function collectSourceFileInfos(
   return fileInfos;
 }
 
-function subsetFont(srcPath: string, destPath: string): { before: number; after: number } {
+async function subsetFontAsync(srcPath: string, destPath: string): Promise<{ before: number; after: number }> {
   const before = fs.statSync(srcPath).size;
   const tmpOut = `${destPath}.subset.tmp`;
 
@@ -71,9 +75,12 @@ function subsetFont(srcPath: string, destPath: string): { before: number; after:
     const escapedTmpOut = tmpOut.replace(/"/g, '\\"');
     const flags = SUBSET_FLAGS_ARRAY.join(' ');
     const cmd = `pyftsubset "${escapedSrc}" ${flags} --output-file="${escapedTmpOut}" --unicodes=*`;
-    execSync(cmd, {
-      stdio: 'ignore',
-      timeout: 30000,
+
+    await new Promise<void>((resolve, reject) => {
+      exec(cmd, { timeout: 30000 }, (err: Error | null) => {
+        if (err) reject(err);
+        else resolve();
+      });
     });
 
     if (fs.existsSync(tmpOut)) {
@@ -93,16 +100,40 @@ function subsetFont(srcPath: string, destPath: string): { before: number; after:
   return { before, after: before };
 }
 
-function main(): void {
+interface FontTask {
+  srcFile: string;
+  destFile: string;
+  name: string;
+}
+
+async function runWithConcurrency<T>(
+  tasks: T[],
+  concurrency: number,
+  runner: (task: T) => Promise<void>,
+): Promise<void> {
+  const executing: Promise<void>[] = [];
+  for (const task of tasks) {
+    const p = runner(task).then(() => {
+      executing.splice(executing.indexOf(p), 1);
+    });
+    executing.push(p);
+    if (executing.length >= concurrency) {
+      await Promise.race(executing);
+    }
+  }
+  await Promise.all(executing);
+}
+
+async function mainAsync(): Promise<void> {
   const args = process.argv.slice(2);
   const forceRefresh = args.includes('--force') || args.includes('-f');
 
-  const allLocales = [i18nConfig.defaultLocale, ...(i18nConfig.locales ?? [])];
-  const fontPackages = getNeededFontPackages(allLocales as any);
+  const allLocales: LocaleCode[] = [i18nConfig.defaultLocale, ...(i18nConfig.locales ?? [])];
+  const fontPackages = getNeededFontPackages(allLocales);
 
   const neededFiles = new Map<string, Set<string>>();
   for (const [pkg, entries] of fontPackages) {
-    const wantAll = entries.some((e: any) => e.subsets === 'all');
+    const wantAll = entries.some((e) => e.subsets === 'all');
     const wantedSubsets = new Set<string>();
     if (!wantAll) {
       for (const entry of entries) {
@@ -127,9 +158,7 @@ function main(): void {
     return;
   }
 
-  let totalBefore = 0;
-  let totalAfter = 0;
-  let processed = 0;
+  const fontTasks: FontTask[] = [];
 
   for (const [pkg] of fontPackages) {
     const files = neededFiles.get(pkg);
@@ -148,21 +177,29 @@ function main(): void {
       }
 
       const name = `${pkgName}/files/${fileName}`;
-      log.info(`  Subsetting ${name}...`);
-      const { before, after } = subsetFont(srcFile, destFile);
-      totalBefore += before;
-      totalAfter += after;
-      processed++;
-      const saved = before - after;
-      const pct = before > 0 ? Math.round((saved / before) * 100) : 0;
-      log.success(`  ${name}: ${Math.round(before / 1024)} KB → ${Math.round(after / 1024)} KB (-${pct}%)`);
+      fontTasks.push({ srcFile, destFile, name });
     }
   }
 
-  if (processed === 0) {
+  if (fontTasks.length === 0) {
     log.warn('No woff2 files found');
     return;
   }
+
+  let totalBefore = 0;
+  let totalAfter = 0;
+
+  await runWithConcurrency(fontTasks, MAX_CONCURRENCY, async (task) => {
+    log.info(`  Subsetting ${task.name}...`);
+    const result = await subsetFontAsync(task.srcFile, task.destFile);
+    totalBefore += result.before;
+    totalAfter += result.after;
+    const saved = result.before - result.after;
+    const pct = result.before > 0 ? Math.round((saved / result.before) * 100) : 0;
+    log.success(
+      `  ${task.name}: ${Math.round(result.before / 1024)} KB → ${Math.round(result.after / 1024)} KB (-${pct}%)`,
+    );
+  });
 
   if (!storeCache(CACHE_KEY, publicFontsDir, sourceHash)) {
     log.warn('Failed to store cache for subset fonts');
@@ -174,11 +211,11 @@ function main(): void {
 
   logBox('Subset Fonts', {
     Packages: pkgNames,
-    Files: String(processed),
+    Files: String(fontTasks.length),
     Before: `${Math.round(totalBefore / 1024)} KB`,
     After: `${Math.round(totalAfter / 1024)} KB`,
     Saved: `${Math.round(totalSaved / 1024)} KB (-${totalPct}%)`,
   });
 }
 
-main();
+mainAsync().catch(console.error);

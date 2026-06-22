@@ -1,4 +1,5 @@
 import { spawn, spawnSync } from 'node:child_process';
+import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 import { log, logBox } from '@core/utils/logger';
@@ -7,6 +8,25 @@ import { env } from '@generated/env';
 import { lookup } from '@generated/paths';
 
 const spawnEnv: NodeJS.ProcessEnv = { ...process.env };
+
+const cleanDevArtifacts = (): void => {
+  const distDir = lookup('@dist');
+  const rsbuildCache = lookup('@', 'node_modules/.cache/rsbuild');
+
+  const cleanDir = (dir: string, name: string) => {
+    if (fs.existsSync(dir)) {
+      try {
+        fs.rmSync(dir, { recursive: true, force: true });
+        log.info(`  Cleaned: ${name}`);
+      } catch {
+        log.warn(`Warning: Could not clean ${name}`);
+      }
+    }
+  };
+
+  cleanDir(distDir, 'dist/');
+  cleanDir(rsbuildCache, 'node_modules/.cache/rsbuild');
+};
 
 const runDevServer = (): Promise<void> => {
   return new Promise((resolve, reject) => {
@@ -48,6 +68,10 @@ const runDevServer = (): Promise<void> => {
 
 const main = async (): Promise<void> => {
   logBox('Dev Setup', { Stage: env.STAGE || 'development' });
+
+  log.info('\n--- Cleaning dev artifacts ---');
+  cleanDevArtifacts();
+  log.info('');
 
   log.info('\n--- Pre-build generators (dev mode) ---\n');
   for (const step of PIPELINE_STEPS.PRE_BUILD_DEV) {

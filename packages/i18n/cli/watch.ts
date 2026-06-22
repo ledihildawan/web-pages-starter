@@ -10,13 +10,14 @@ import chokidar from 'chokidar';
 const LOCALE_DIR = lookup('@locales');
 const I18N_CONFIG = lookup('@config', 'i18n.ts');
 const GENERATED_DIR = lookup('@generated');
+const PAGES_DIR = lookup('@pages');
 
 if (!fs.existsSync(LOCALE_DIR)) {
   log.error(`Error: Locale directory not found at ${LOCALE_DIR}`);
   process.exit(1);
 }
 
-const WATCH_PATHS = [LOCALE_DIR, I18N_CONFIG, GENERATED_DIR];
+const WATCH_PATHS = [LOCALE_DIR, I18N_CONFIG, GENERATED_DIR, PAGES_DIR];
 
 logBox('Watch i18n Changes', {
   Watching: `${WATCH_PATHS.map((p) => p.replace(process.cwd(), '.'))
@@ -55,13 +56,21 @@ watcher.on('all', (event, filePath) => {
 
   if (filePath.endsWith('.json')) {
     log.info(`${event}: ${relativePath}`);
-    // Trigger type regeneration on any JSON locale file change
     regenerate();
   } else if (relativePath === 'configs/i18n.ts') {
     log.info(`${event}: ${relativePath} — triggering full regeneration`);
     regenerate();
   } else if (filePath.startsWith(GENERATED_DIR)) {
     log.info(`${event}: ${relativePath}`);
+  } else if (filePath.endsWith('data.json5')) {
+    log.info(`${event}: ${relativePath} — regenerating data types`);
+    try {
+      execSync('bun ./packages/cli/generators/pricing-types.ts', { stdio: 'inherit' });
+      execSync('bun ./packages/cli/generators/images.ts', { stdio: 'inherit' });
+      log.success('Data types regeneration complete');
+    } catch (err) {
+      log.error(`Data regeneration failed: ${err}`);
+    }
   }
 });
 

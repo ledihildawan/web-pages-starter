@@ -79,7 +79,7 @@
       }
     },
     {
-      "includes": ["utils/common.ts"],
+      "includes": ["**/utils/common.ts"],
       "linter": {
         "rules": {
           "suspicious": {
@@ -92,7 +92,7 @@
   "assist": {
     "actions": {
       "source": {
-        "organizeImports": "on"
+        "organizeImports": "off"
       }
     }
   }

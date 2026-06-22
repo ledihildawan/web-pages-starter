@@ -49,6 +49,7 @@ const runTool = (name: string, args: string[] = []): Promise<void> => {
       path.join(CLI_DIR, `generators/${name}.ts`),
       path.join(CLI_DIR, `scripts/${name}.ts`),
       path.join(CLI_DIR, `tools/${name}.ts`),
+      path.join(CLI_DIR, `tools/${name}/${name}.ts`),
       path.join(I18N_CLI_DIR, `${name}.ts`),
       path.join(PAGE_SYSTEM_CLI_DIR, `${name}.ts`),
     ];
@@ -127,7 +128,7 @@ interface Section {
 
 const BANNER = `
 ╔══════════════════════════════════════════════════╗
-║           Web Pages Starter CLI                   ║
+║           Web Pages Starter CLI                  ║
 ╚══════════════════════════════════════════════════╝`;
 
 // ─── Section definitions ───────────────────────────────────────────────────────

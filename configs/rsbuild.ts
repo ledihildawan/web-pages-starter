@@ -4,6 +4,7 @@ import { i18nConfig } from '@config/i18n';
 import { ASSET_PATHS, PUBLIC_FILENAMES } from '@constants';
 import { browserEnv, env } from '@generated/env';
 import { alias, lookup } from '@generated/paths';
+import { getNunjucksPaths } from '@config/nunjucks';
 import { getActiveLocaleCodes, isSingleLocale, LOCALE_STORAGE_KEY } from '@i18n';
 import { CSP_NONCE_PLACEHOLDER } from '@i18n/constants';
 import { getRootPageSlug, getSystemPageSlug, scanPages } from '@page-system';
@@ -18,6 +19,7 @@ const shouldMinify = isBuild && env.MINIFY;
 const isPrettyHtml = env.PRETTY_HTML;
 const shouldMinifyHTML = shouldMinify && !isPrettyHtml;
 const MANAGED_EXTS = ['ts', 'css', 'njk', 'png', 'jpg', 'jpeg', 'webp', 'svg', 'gif'];
+const njkPaths = getNunjucksPaths();
 
 const pluginHotReloadContent = (): RsbuildPlugin => ({
   name: 'plugin-hot-reload-content',
@@ -305,8 +307,7 @@ export default defineConfig({
                 loader: 'simple-nunjucks-loader',
                 options: {
                   autoescape: false,
-                  searchPaths: [lookup('@pages'), lookup('@layouts'), lookup('@')],
-                  assetsPaths: [lookup('@assets')],
+                  ...njkPaths,
                 },
               },
             ],

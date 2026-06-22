@@ -1,1 +1,26 @@
-bunx lint-staged && bun run typecheck && bun run test
+set -e
+
+echo "Running pre-commit checks..."
+
+bunx lint-staged
+
+bun run typecheck &
+PID1=$!
+
+bun run test &
+PID2=$!
+
+FAILED=0
+
+wait $PID1 || FAILED=1
+wait $PID2 || FAILED=1
+
+if [ $FAILED -eq 1 ]; then
+  echo "Pre-commit checks failed"
+
+  exit 1
+fi
+
+echo "All pre-commit checks passed"
+
+exit 0

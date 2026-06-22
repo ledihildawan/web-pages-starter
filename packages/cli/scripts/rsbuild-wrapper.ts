@@ -121,8 +121,10 @@ function prettyHtml(): void {
 }
 
 function removeEmptyPageJs(): void {
-  const EMPTY_PATTERN = /rspackChunk.*?push\(\[\[\d+\],\{\d+:function\([a-z],[a-z],[a-z]\)\{[a-z]\(\d+\)\}\}/;
+  const EMPTY_PATTERN = /rspackChunk.*?push\(\[\[\d+\],\{\d+:function\([^)]+\)\{[^}]+\}\}/;
+  const EMPTY_PATTERN_STRICT = /rspackChunk.*?push\(\[\[\d+\],\{\d+:function\(\w+,\w+,\w+\)\{\w+\(\d+\)\}\}/;
   let removed = 0;
+  let skipped = 0;
 
   for (const file of fs.readdirSync(DIST)) {
     if (!file.endsWith('.html')) continue;
@@ -130,23 +132,31 @@ function removeEmptyPageJs(): void {
     let html = fs.readFileSync(htmlPath, 'utf-8');
     let modified = false;
 
-    const scripts = [...html.matchAll(/<script\s+defer\s+src="([^"]+\.js)"><\/script>/g)];
+    const scripts = [...html.matchAll(/<script\s+[^>]*src="([^"]+\.js)"[^>]*>/g)];
 
     for (const m of scripts) {
       const src = m[1];
+      if (!src.includes('.js')) continue;
+
       const jsFile = src.replace(/^\//, '');
       const jsPath = path.join(DIST, jsFile);
 
       if (!fs.existsSync(jsPath)) continue;
       const content = fs.readFileSync(jsPath, 'utf-8');
 
-      if (!EMPTY_PATTERN.test(content)) continue;
+      if (!EMPTY_PATTERN.test(content)) {
+        skipped++;
+        continue;
+      }
 
-      html = html.split(m[0]).join('');
-      html = html.replace(
-        new RegExp(`<link[^>]*modulepreload[^>]*href="${src.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"[^>]*>`, 'g'),
-        '',
-      );
+      if (!EMPTY_PATTERN_STRICT.test(content)) {
+        skipped++;
+        continue;
+      }
+
+      const escapedSrc = src.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      html = html.replace(new RegExp(`<script\\s+[^>]*src="${escapedSrc}"[^>]*>\\s*</script>`, 'g'), '');
+      html = html.replace(new RegExp(`<link[^>]*modulepreload[^>]*href="${escapedSrc}"[^>]*>`, 'g'), '');
       fs.unlinkSync(jsPath);
       removed++;
       modified = true;
@@ -158,7 +168,10 @@ function removeEmptyPageJs(): void {
   }
 
   if (removed > 0) {
-    console.log(`  [remove-empty-js] Removed ${removed} empty JS file(s) + script tags`);
+    console.log(`  [remove-empty-js] Removed ${removed} empty JS file(s)`);
+  }
+  if (skipped > 0) {
+    console.log(`  [remove-empty-js] Skipped ${skipped} non-empty JS file(s)`);
   }
 }
 

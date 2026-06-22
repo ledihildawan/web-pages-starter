@@ -1,4 +1,8 @@
 @layer components {
+  .mirror {
+    transform: scaleX(-1);
+  }
+
   .gpu-boost,
   .magnetic-btn {
     backface-visibility: hidden;
