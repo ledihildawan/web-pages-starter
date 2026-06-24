@@ -7,10 +7,6 @@ import { isSystemPageSlug, SYSTEM_PAGE_IDS, type SystemPageId } from '@web-pages
 import { log } from '@web-pages-starter/core/logger';
 import slug from 'limax';
 
-function romanize(name: string): string {
-  return slug(name, { tone: true, maintainCase: false, custom: {} });
-}
-
 const args = process.argv.slice(2);
 
 // ─── Help ─────────────────────────────────────────────────────────────────────
@@ -59,7 +55,8 @@ if (segments.length === 0) {
   process.exit(1);
 }
 
-const formattedSegments = segments.map((s) => romanize(s)).filter(Boolean);
+const formattedSegments = segments.map((s) => slug(s, { tone: true, maintainCase: false, custom: {} })).filter(Boolean);
+
 if (formattedSegments.length !== segments.length) {
   log.error('Error: Page path contains invalid characters.');
   process.exit(1);

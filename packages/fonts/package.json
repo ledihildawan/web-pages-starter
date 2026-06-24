@@ -5,6 +5,6 @@
   "type": "module",
   "sideEffects": false,
   "dependencies": {
-    "@web-pages-starter/i18n": "link:@web-pages-starter/i18n"
+    "@web-pages-starter/i18n": "*"
   }
 }
