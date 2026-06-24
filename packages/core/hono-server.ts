@@ -1,6 +1,6 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'pathe';
-import { PUBLIC_FILENAMES } from '@core/public-filenames';
+import { PUBLIC_FILENAMES } from '@web-pages-starter/core/public-filenames';
 import { serveStatic } from '@hono/node-server/serve-static';
 import { CSP_NONCE_PLACEHOLDER } from '@web-pages-starter/i18n/constants';
 import { Hono } from 'hono';

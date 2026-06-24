@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import { relative } from 'pathe';
-import { log } from '@core/logger';
+import { log } from '@web-pages-starter/core/logger';
 import { lookup } from '@generated/paths';
 
 const dirs = [

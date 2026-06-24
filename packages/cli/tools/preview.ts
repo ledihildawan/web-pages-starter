@@ -3,14 +3,14 @@ import fs from 'node:fs';
 import { extname, join } from 'pathe';
 import process from 'node:process';
 import { i18nConfig } from '@config/i18n';
-import { log } from '@core/logger';
-import { createServer, wrapMainError } from '@core/signal-handler';
+import { log } from '@web-pages-starter/core/logger';
+import { createServer, wrapMainError } from '@web-pages-starter/core/signal-handler';
 import { env } from '@generated/env';
 import { lookup } from '@generated/paths';
 import type { serve } from '@hono/node-server';
 import ngrok from '@ngrok/ngrok';
 import { getErrorPageSlugs, getRootPageSlug } from '@web-pages-starter/page-system';
-import { createStaticApp, getPageNames, loadHtmlCache } from '@core/hono-server';
+import { createStaticApp, getPageNames, loadHtmlCache } from '@web-pages-starter/core/hono-server';
 import { savePreviewUrl, type TunnelProvider, verifyUrlAccessible } from '@shared/utils/preview-url';
 import inquirer from 'inquirer';
 

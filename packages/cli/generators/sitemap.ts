@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import { dirname, join } from 'pathe';
 import { fileURLToPath } from 'node:url';
-import { log } from '@core/logger';
-import { writeFilePath } from '@core/write-file';
+import { log } from '@web-pages-starter/core/logger';
+import { writeFilePath } from '@web-pages-starter/core/write-file';
 import { lookup } from '@generated/paths';
 import { scanPages } from '@page-system/scanner';
 import { ROOT_PAGE, SYSTEM_PAGE_IDS } from '@page-system/system-pages';

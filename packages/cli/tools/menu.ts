@@ -1,8 +1,8 @@
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import { join, resolve as patheResolve } from 'pathe';
-import { log } from '@core/logger';
-import { setupSigintHandler, wrapMainError } from '@core/signal-handler';
+import { log } from '@web-pages-starter/core/logger';
+import { setupSigintHandler, wrapMainError } from '@web-pages-starter/core/signal-handler';
 import inquirer from 'inquirer';
 
 const CLI_DIR = patheResolve('packages/cli');

@@ -1,4 +1,4 @@
-import { readJSON5 } from '@core/json5';
+import { readJSON5 } from '@web-pages-starter/core/json5';
 import type { JsonData } from '@utils/types';
 
 export const loadSharedLocales = (lang: string, names: string[], localesDir: string): JsonData => {

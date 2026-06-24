@@ -5,9 +5,9 @@ import { LOCALE_CODES as ACTIVE_LOCALE_CODES } from '@generated/active-locales-d
 import { lookup } from '@generated/paths';
 import { DEFAULT_NAMESPACE } from '@i18n/constants';
 import { LOCALE_CODES } from '@i18n/data/locales';
-import { collectKeys, readJSON5 } from '@core/json5';
-import { log, logBox } from '@core/logger';
-import { generatedHeader, writeFilePath } from '@core/write-file';
+import { collectKeys, readJSON5 } from '@web-pages-starter/core/json5';
+import { log, logBox } from '@web-pages-starter/core/logger';
+import { generatedHeader, writeFilePath } from '@web-pages-starter/core/write-file';
 
 const LOCALES_ROOT = lookup('@locales');
 const DEFAULT_LOCALE_DIR = join(LOCALES_ROOT, i18nConfig.defaultLocale);

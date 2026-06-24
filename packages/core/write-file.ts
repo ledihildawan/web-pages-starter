@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import { basename, dirname } from 'pathe';
-import { PUBLIC_FILENAMES } from '@core/public-filenames';
+import { PUBLIC_FILENAMES } from '@web-pages-starter/core/public-filenames';
 
 export const COMMENT_EXCLUDED_FILES = [
   PUBLIC_FILENAMES.sitemap,

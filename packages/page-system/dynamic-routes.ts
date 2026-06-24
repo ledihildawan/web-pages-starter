@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import { dirname, join } from 'pathe';
 import { lookup } from '@generated/paths';
 import { isSlugDir } from '@page-system/scanner';
-import { readJSON5 } from '@core/json5';
+import { readJSON5 } from '@web-pages-starter/core/json5';
 
 interface DynamicEntry {
   entryKey: string;

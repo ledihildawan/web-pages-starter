@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import { join } from 'pathe';
-import { ASSET_PATHS } from '@core/asset-paths';
-import { log } from '@core/logger';
+import { ASSET_PATHS } from '@web-pages-starter/core/asset-paths';
+import { log } from '@web-pages-starter/core/logger';
 import { LOCALE_CODES } from '@generated/active-locales-data';
 import { lookup } from '@generated/paths';
 

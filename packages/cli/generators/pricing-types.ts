@@ -1,8 +1,8 @@
 import fs from 'node:fs';
-import { log } from '@core/logger';
-import { generatedHeader, writeFilePath } from '@core/write-file';
+import { log } from '@web-pages-starter/core/logger';
+import { generatedHeader, writeFilePath } from '@web-pages-starter/core/write-file';
 import { lookup } from '@generated/paths';
-import { readJSON5 } from '@core/json5';
+import { readJSON5 } from '@web-pages-starter/core/json5';
 
 const PRICE_KEY_PATTERN = /^price_([a-z]{3})$/;
 const OUTPUT_FILE = lookup('@generated', 'pricing.d.ts');

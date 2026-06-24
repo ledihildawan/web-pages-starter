@@ -1,5 +1,5 @@
 import { fontsConfig } from '@config/fonts';
-import { ASSET_PATHS } from '@core/asset-paths';
+import { ASSET_PATHS } from '@web-pages-starter/core/asset-paths';
 import { ACTIVE_WRITING_SYSTEMS } from '@generated/active-locales-data';
 import type { LocaleConfig } from '@i18n/data/locales';
 import type { WritingSystemCode } from '@i18n/data/writing-systems';

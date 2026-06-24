@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import { join, relative } from 'pathe';
 import { i18nConfig } from '@config/i18n';
-import { ASSET_PATHS } from '@core/asset-paths';
-import { PUBLIC_FILENAMES } from '@core/public-filenames';
+import { ASSET_PATHS } from '@web-pages-starter/core/asset-paths';
+import { PUBLIC_FILENAMES } from '@web-pages-starter/core/public-filenames';
 import { browserEnv, env } from '@generated/env';
 import { alias, lookup } from '@generated/paths';
 import { getActiveLocaleCodes, isSingleLocale, LOCALE_STORAGE_KEY } from '@web-pages-starter/i18n';
@@ -11,7 +11,7 @@ import { getRootPageSlug, getSystemPageSlug, scanPages } from '@web-pages-starte
 import { generateDynamicEntries } from '@web-pages-starter/page-system/dynamic-routes';
 import { defineConfig, type RsbuildPlugin } from '@rsbuild/core';
 import { createTemplateParams } from '@web-pages-starter/template-engine';
-import { readJSON5 } from '@core/json5';
+import { readJSON5 } from '@web-pages-starter/core/json5';
 import { minify } from 'html-minifier-terser';
 
 const isBuild = env.IS_PROD || env.BUILD_PREVIEW;

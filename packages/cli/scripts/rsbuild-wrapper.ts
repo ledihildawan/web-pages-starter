@@ -1,8 +1,8 @@
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import { basename, dirname, join, relative, resolve } from 'pathe';
-import { ASSET_PATHS } from '@core/asset-paths';
-import { computeStringHash } from '@core/pipeline-cache';
+import { ASSET_PATHS } from '@web-pages-starter/core/asset-paths';
+import { computeStringHash } from '@web-pages-starter/core/pipeline-cache';
 import { lookup } from '@generated/paths';
 import { html as beautifyHtml } from 'js-beautify';
 import * as lightningcss from 'lightningcss';

@@ -1,6 +1,6 @@
 import { existsSync } from 'node:fs';
 import { lookup } from '@generated/paths';
-import { getPageNames } from '@core/hono-server';
+import { getPageNames } from '@web-pages-starter/core/hono-server';
 
 export interface DiscoveredPage {
   path: string;

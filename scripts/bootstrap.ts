@@ -1,4 +1,4 @@
-import { PUBLIC_FILENAMES } from '@core/public-filenames';
+import { PUBLIC_FILENAMES } from '@web-pages-starter/core/public-filenames';
 import { env } from '@generated/env';
 import { getCspNonce } from '@utils/common';
 import DisableDevtool from 'disable-devtool';

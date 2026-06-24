@@ -22,6 +22,7 @@
     "prepare": "husky && git config merge.generated.name 'auto-resolve generated files' 2>/dev/null; git config merge.generated.driver true 2>/dev/null; true"
   },
   "dependencies": {
+    "@web-pages-starter/core": "link:@web-pages-starter/core",
     "@web-pages-starter/i18n": "link:@web-pages-starter/i18n",
     "@web-pages-starter/page-system": "link:@web-pages-starter/page-system",
     "@web-pages-starter/template-engine": "link:@web-pages-starter/template-engine",
@@ -100,6 +101,7 @@
     "postcss": "^8.5.15",
     "postcss-loader": "^8.2.1",
     "postcss-prune-var": "^1.1.2",
+    "read-cache": "^1.0.0",
     "sharp": "^0.35.2",
     "simple-nunjucks-loader": "file:packages/simple-nunjucks-loader",
     "tailwindcss": "^4.3.1",

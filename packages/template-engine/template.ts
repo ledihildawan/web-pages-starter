@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import { join } from 'pathe';
 import { fontsConfig } from '@config/fonts';
 import { i18nConfig } from '@config/i18n';
-import { ASSET_PATHS } from '@core/asset-paths';
+import { ASSET_PATHS } from '@web-pages-starter/core/asset-paths';
 import { env } from '@generated/env';
 import type { I18nTranslationKeys } from '@generated/i18n';
 import { IMAGE_MANIFEST } from '@generated/image-manifest';
@@ -57,7 +57,7 @@ import { cardinal as zhCardinal } from '@web-pages-starter/i18n/strategies/zh';
 import { loadSharedLocales } from '@web-pages-starter/i18n/utils';
 import { getRootPageSlug } from '@web-pages-starter/page-system';
 import { getValueByPath } from '@utils/common';
-import { loadGlobalData, readJSON5 } from '@core/json5';
+import { loadGlobalData, readJSON5 } from '@web-pages-starter/core/json5';
 import type { DateValue, JsonData } from '@utils/types';
 
 setStrategies(

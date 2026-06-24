@@ -1,9 +1,9 @@
 import fs from 'node:fs';
 import { basename, extname, join } from 'pathe';
-import { ASSET_PATHS } from '@core/asset-paths';
-import { log, logBox } from '@core/logger';
-import { computeStringHash, isCacheValid, restoreCache, storeCache } from '@core/pipeline-cache';
-import { generatedHeader, writeFilePath } from '@core/write-file';
+import { ASSET_PATHS } from '@web-pages-starter/core/asset-paths';
+import { log, logBox } from '@web-pages-starter/core/logger';
+import { computeStringHash, isCacheValid, restoreCache, storeCache } from '@web-pages-starter/core/pipeline-cache';
+import { generatedHeader, writeFilePath } from '@web-pages-starter/core/write-file';
 import { env } from '@generated/env';
 import { lookup } from '@generated/paths';
 import sharp from 'sharp';

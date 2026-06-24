@@ -2,10 +2,10 @@ import fs from 'node:fs';
 import { basename, join } from 'pathe';
 import { fontsConfig } from '@config/fonts';
 import { i18nConfig } from '@config/i18n';
-import { ASSET_PATHS } from '@core/asset-paths';
-import { log, logBox } from '@core/logger';
-import { computeStringHash, isCacheValid, restoreCache, storeCache } from '@core/pipeline-cache';
-import { generatedHeader } from '@core/write-file';
+import { ASSET_PATHS } from '@web-pages-starter/core/asset-paths';
+import { log, logBox } from '@web-pages-starter/core/logger';
+import { computeStringHash, isCacheValid, restoreCache, storeCache } from '@web-pages-starter/core/pipeline-cache';
+import { generatedHeader } from '@web-pages-starter/core/write-file';
 import { lookup } from '@generated/paths';
 import { buildFontsCss } from '@i18n/fonts/font-css';
 

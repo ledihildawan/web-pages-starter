@@ -3,8 +3,8 @@ import { join } from 'pathe';
 import { i18nConfig } from '@config/i18n';
 import { lookup } from '@generated/paths';
 import { LOCALE_CODES } from '@i18n/data/locales';
-import { collectKeys, readJSON5 } from '@core/json5';
-import { log } from '@core/logger';
+import { collectKeys, readJSON5 } from '@web-pages-starter/core/json5';
+import { log } from '@web-pages-starter/core/logger';
 
 const LOCALES_DIR = lookup('@locales');
 const BASE_LOCALE = i18nConfig.defaultLocale;

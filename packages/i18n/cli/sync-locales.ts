@@ -3,7 +3,7 @@ import { join } from 'pathe';
 import { i18nConfig } from '@config/i18n';
 import { lookup } from '@generated/paths';
 import { LOCALE_CODES } from '@i18n/data/locales';
-import { log, logBox } from '@core/logger';
+import { log, logBox } from '@web-pages-starter/core/logger';
 
 // ─── Help ─────────────────────────────────────────────────────────────────────
 function printHelp(): void {

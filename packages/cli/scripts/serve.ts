@@ -1,12 +1,12 @@
 import { existsSync } from 'node:fs';
 import process from 'node:process';
 import { i18nConfig } from '@config/i18n';
-import { log } from '@core/logger';
-import { createServer, setupSigintHandler } from '@core/signal-handler';
+import { log } from '@web-pages-starter/core/logger';
+import { createServer, setupSigintHandler } from '@web-pages-starter/core/signal-handler';
 import { env } from '@generated/env';
 import { lookup } from '@generated/paths';
 import { getErrorPageSlugs, getRootPageSlug } from '@web-pages-starter/page-system';
-import { createStaticApp, getPageNames, loadHtmlCache } from '@core/hono-server';
+import { createStaticApp, getPageNames, loadHtmlCache } from '@web-pages-starter/core/hono-server';
 
 const DIST = lookup('@dist');
 

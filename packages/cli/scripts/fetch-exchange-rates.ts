@@ -1,13 +1,13 @@
 import fs from 'node:fs';
 import { join } from 'pathe';
-import { log } from '@core/logger';
-import { getCacheWithTTL, setCacheWithTTL } from '@core/pipeline-cache';
-import { writeFilePath } from '@core/write-file';
+import { log } from '@web-pages-starter/core/logger';
+import { getCacheWithTTL, setCacheWithTTL } from '@web-pages-starter/core/pipeline-cache';
+import { writeFilePath } from '@web-pages-starter/core/write-file';
 import { env } from '@generated/env';
 import { lookup } from '@generated/paths';
 import { CURRENCY_CODE, CURRENCY_CODES } from '@i18n/data/currencies';
 import { getActiveLocales } from '@i18n/engine/active-locales';
-import { readJSON5 } from '@core/json5';
+import { readJSON5 } from '@web-pages-starter/core/json5';
 
 const CURRENCY_FREAKS_URL = 'https://api.currencyfreaks.com/v2.0/rates/latest';
 const EXCHANGE_RATES_FILE = lookup('@generated', 'exchange-rates.ts');

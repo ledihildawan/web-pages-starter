@@ -1,8 +1,8 @@
 import { writeFileSync } from 'node:fs';
 import { join } from 'pathe';
 import process from 'node:process';
-import { log, logBox } from '@core/logger';
-import { setupSigintHandler, wrapMainError } from '@core/signal-handler';
+import { log, logBox } from '@web-pages-starter/core/logger';
+import { setupSigintHandler, wrapMainError } from '@web-pages-starter/core/signal-handler';
 import { env } from '@generated/env';
 import { isExpired, loadPreviewUrl } from '@shared/utils/preview-url';
 import inquirer from 'inquirer';

@@ -1,8 +1,8 @@
 import { spawnSync } from 'node:child_process';
 import { basename } from 'pathe';
 import process from 'node:process';
-import { log, logBox } from '@core/logger';
-import { PIPELINE_STEPS } from '@core/pipeline';
+import { log, logBox } from '@web-pages-starter/core/logger';
+import { PIPELINE_STEPS } from '@web-pages-starter/core/pipeline';
 import { env } from '@generated/env';
 import { lookup } from '@generated/paths';
 
