@@ -38,7 +38,7 @@ import {
   setStrategies,
   singular,
   toNativeDigits,
-} from '@i18n';
+} from '@web-pages-starter/i18n';
 import type {
   CardinalOptions,
   I18nItem,
@@ -46,16 +46,16 @@ import type {
   RelativeTimeOptions,
   TemplateFormatOptions,
   TemplateParams,
-} from '@i18n/config/types';
-import { CSP_NONCE_PLACEHOLDER } from '@i18n/constants';
-import type { CurrencyCode } from '@i18n/data/currencies';
-import type { LocaleCode, LocaleConfig } from '@i18n/data/locales';
-import { cardinal as arCardinal, ordinal as arOrdinal } from '@i18n/strategies/ar';
-import { cardinal as idCardinal, ordinal as idOrdinal } from '@i18n/strategies/id';
-import { cardinal as jaCardinal, ordinal as jaOrdinal } from '@i18n/strategies/ja';
-import { cardinal as zhCardinal } from '@i18n/strategies/zh';
-import { loadSharedLocales } from '@i18n/utils';
-import { getRootPageSlug } from '@page-system';
+} from '@web-pages-starter/i18n/config/types';
+import { CSP_NONCE_PLACEHOLDER } from '@web-pages-starter/i18n/constants';
+import type { CurrencyCode } from '@web-pages-starter/i18n/data/currencies';
+import type { LocaleCode, LocaleConfig } from '@web-pages-starter/i18n/data/locales';
+import { cardinal as arCardinal, ordinal as arOrdinal } from '@web-pages-starter/i18n/strategies/ar';
+import { cardinal as idCardinal, ordinal as idOrdinal } from '@web-pages-starter/i18n/strategies/id';
+import { cardinal as jaCardinal, ordinal as jaOrdinal } from '@web-pages-starter/i18n/strategies/ja';
+import { cardinal as zhCardinal } from '@web-pages-starter/i18n/strategies/zh';
+import { loadSharedLocales } from '@web-pages-starter/i18n/utils';
+import { getRootPageSlug } from '@web-pages-starter/page-system';
 import { getValueByPath } from '@utils/common';
 import { loadGlobalData, readJSON5 } from '@core/json5';
 import type { DateValue, JsonData } from '@utils/types';

@@ -5,7 +5,7 @@ import { log } from '@core/logger';
 import { createServer, setupSigintHandler } from '@core/signal-handler';
 import { env } from '@generated/env';
 import { lookup } from '@generated/paths';
-import { getErrorPageSlugs, getRootPageSlug } from '@page-system';
+import { getErrorPageSlugs, getRootPageSlug } from '@web-pages-starter/page-system';
 import { createStaticApp, getPageNames, loadHtmlCache } from '@core/hono-server';
 
 const DIST = lookup('@dist');

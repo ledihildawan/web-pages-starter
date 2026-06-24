@@ -5,12 +5,12 @@ import { ASSET_PATHS } from '@core/asset-paths';
 import { PUBLIC_FILENAMES } from '@core/public-filenames';
 import { browserEnv, env } from '@generated/env';
 import { alias, lookup } from '@generated/paths';
-import { getActiveLocaleCodes, isSingleLocale, LOCALE_STORAGE_KEY } from '@i18n';
-import { CSP_NONCE_PLACEHOLDER } from '@i18n/constants';
-import { getRootPageSlug, getSystemPageSlug, scanPages } from '@page-system';
-import { generateDynamicEntries } from '@page-system/dynamic-routes';
+import { getActiveLocaleCodes, isSingleLocale, LOCALE_STORAGE_KEY } from '@web-pages-starter/i18n';
+import { CSP_NONCE_PLACEHOLDER } from '@web-pages-starter/i18n/constants';
+import { getRootPageSlug, getSystemPageSlug, scanPages } from '@web-pages-starter/page-system';
+import { generateDynamicEntries } from '@web-pages-starter/page-system/dynamic-routes';
 import { defineConfig, type RsbuildPlugin } from '@rsbuild/core';
-import { createTemplateParams } from '@template-engine';
+import { createTemplateParams } from '@web-pages-starter/template-engine';
 import { readJSON5 } from '@core/json5';
 import { minify } from 'html-minifier-terser';
 

@@ -2,7 +2,7 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'pathe';
 import { PUBLIC_FILENAMES } from '@core/public-filenames';
 import { serveStatic } from '@hono/node-server/serve-static';
-import { CSP_NONCE_PLACEHOLDER } from '@i18n/constants';
+import { CSP_NONCE_PLACEHOLDER } from '@web-pages-starter/i18n/constants';
 import { Hono } from 'hono';
 import { compress } from 'hono/compress';
 import { log } from './logger';

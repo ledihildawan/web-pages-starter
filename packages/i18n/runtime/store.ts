@@ -1,12 +1,12 @@
 import { i18nConfig } from '@config/i18n';
 import { ASSET_PATHS } from '@core/asset-paths';
 import { env } from '@generated/env';
-import { DEFAULT_NAMESPACE, getActiveLocalesDisplay, LOCALE_STORAGE_KEY } from '@i18n';
-import type { LocaleCode } from '@i18n/data/locales';
-import { getActiveLocales } from '@i18n/engine/active-locales';
-import { setStrategies } from '@i18n/engine/formatters';
-import { getLanguageSubtag } from '@i18n/engine/helpers';
-import { loadStrategies } from '@i18n/strategies/loader';
+import { DEFAULT_NAMESPACE, getActiveLocalesDisplay, LOCALE_STORAGE_KEY } from '@web-pages-starter/i18n';
+import type { LocaleCode } from '@web-pages-starter/i18n/data/locales';
+import { getActiveLocales } from '@web-pages-starter/i18n/engine/active-locales';
+import { setStrategies } from '@web-pages-starter/i18n/engine/formatters';
+import { getLanguageSubtag } from '@web-pages-starter/i18n/engine/helpers';
+import { loadStrategies } from '@web-pages-starter/i18n/strategies/loader';
 import { defineStore } from '@utils/alpine';
 import { scheduleTask } from '@core/microtask-queue';
 

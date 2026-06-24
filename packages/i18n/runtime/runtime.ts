@@ -2,10 +2,10 @@ import { i18nConfig } from '@config/i18n';
 import { ASSET_PATHS } from '@core/asset-paths';
 import { env } from '@generated/env';
 import type { I18nTranslationKeys } from '@generated/i18n';
-import { DEFAULT_NAMESPACE, getActiveLocalesDisplay, LOCALE_STORAGE_KEY } from '@i18n';
-import type { LocaleCode } from '@i18n/data/locales';
-import { getActiveLocaleCodes } from '@i18n/engine/active-locales';
-import { convertCurrencyRaw } from '@i18n/engine/convert-currency';
+import { DEFAULT_NAMESPACE, getActiveLocalesDisplay, LOCALE_STORAGE_KEY } from '@web-pages-starter/i18n';
+import type { LocaleCode } from '@web-pages-starter/i18n/data/locales';
+import { getActiveLocaleCodes } from '@web-pages-starter/i18n/engine/active-locales';
+import { convertCurrencyRaw } from '@web-pages-starter/i18n/engine/convert-currency';
 import {
   formatAbbreviated,
   formatBytes,
@@ -26,9 +26,9 @@ import {
   setStrategies,
   singular,
   toNativeDigits,
-} from '@i18n/engine/formatters';
-import { getCurrency, getLanguageSubtag, getLocale, setLocale } from '@i18n/engine/helpers';
-import { loadStrategies } from '@i18n/strategies/loader';
+} from '@web-pages-starter/i18n/engine/formatters';
+import { getCurrency, getLanguageSubtag, getLocale, setLocale } from '@web-pages-starter/i18n/engine/helpers';
+import { loadStrategies } from '@web-pages-starter/i18n/strategies/loader';
 import { scheduleTask } from '@core/microtask-queue';
 import type { DateTimePreset } from '@utils/types';
 import i18next, { type Resource } from 'i18next';

@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import { join, relative } from 'pathe';
 import { i18nConfig } from '@config/i18n';
 import { lookup } from '@generated/paths';
-import { isSystemPageId, isSystemPageSlug, scanPages } from '@page-system';
+import { isSystemPageId, isSystemPageSlug, scanPages } from '@web-pages-starter/page-system';
 import { readJSON5 } from '@core/json5';
 import { log } from '@core/logger';
 import { setupSigintHandler, wrapMainError } from '@core/signal-handler';

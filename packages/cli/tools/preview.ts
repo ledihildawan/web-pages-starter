@@ -9,7 +9,7 @@ import { env } from '@generated/env';
 import { lookup } from '@generated/paths';
 import type { serve } from '@hono/node-server';
 import ngrok from '@ngrok/ngrok';
-import { getErrorPageSlugs, getRootPageSlug } from '@page-system';
+import { getErrorPageSlugs, getRootPageSlug } from '@web-pages-starter/page-system';
 import { createStaticApp, getPageNames, loadHtmlCache } from '@core/hono-server';
 import { savePreviewUrl, type TunnelProvider, verifyUrlAccessible } from '@shared/utils/preview-url';
 import inquirer from 'inquirer';
