@@ -2,11 +2,12 @@
 {% import "@shared/ui/primitives/icons.njk" as icon %}
 
 {% block content %}
-{% set error_icon_name = 'search' %}
-{% set error_icon_color = 'violet' %}
-{% set error_gradient_from = 'violet' %}
-{% set error_gradient_via = 'fuchsia' %}
-{% set error_i18n_ns = 'not-found' %}
-{% set error_quick_links = '/|home,/features|features,/pricing|pricing' %}
-{% include "@shared/ui/patterns/error-page.njk" %}
+  {% set error_icon_name = 'search' %}
+  {% set error_icon_color = 'violet' %}
+  {% set error_gradient_from = 'violet' %}
+  {% set error_gradient_via = 'fuchsia' %}
+  {% set error_i18n_ns = 'not-found' %}
+  {% set error_quick_links = '/|home,/features|features,/pricing|pricing' %}
+
+  {% include "@shared/ui/patterns/error-page.njk" %}
 {% endblock %}

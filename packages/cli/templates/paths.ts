@@ -7,7 +7,7 @@
  */
 
 import fs from 'node:fs';
-import { join } from 'pathe';
+import { join, resolve } from 'pathe';
 
 export type AliasKey =
 {{codegen:alias_keys}};

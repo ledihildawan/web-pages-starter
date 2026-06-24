@@ -3,8 +3,8 @@ import { join } from 'pathe';
 import { i18nConfig } from '@config/i18n';
 import { lookup } from '@generated/paths';
 import { getSystemPageSlug, SYSTEM_PAGE_IDS } from '@page-system/system-pages';
-import { log, logBox } from '@utils/logger';
-import { wrapMainError } from '@utils/signal-handler';
+import { log, logBox } from '@core/logger';
+import { wrapMainError } from '@core/signal-handler';
 
 const PAGES_DIR = lookup('@pages');
 

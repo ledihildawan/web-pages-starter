@@ -77,12 +77,12 @@ export default defineData('navbar', () => ({
   },
 
   _lockBody() {
-    document.body.style.overflow = 'hidden';
+    document.body.dataset.menuLocked = '';
     document.body.classList.add('menu-open');
   },
 
   _unlockBody() {
-    document.body.style.overflow = '';
+    delete document.body.dataset.menuLocked;
     document.body.classList.remove('menu-open');
   },
 
@@ -144,6 +144,7 @@ export default defineData('navbar', () => ({
   },
 
   init() {
+    this._ensurePlugins();
     this.lastScroll = window.scrollY;
     this.scrolled = this.lastScroll > SCROLLED_THRESHOLD;
   },

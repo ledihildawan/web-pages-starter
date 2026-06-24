@@ -4,9 +4,9 @@ import { join, relative } from 'pathe';
 import { i18nConfig } from '@config/i18n';
 import { lookup } from '@generated/paths';
 import { isSystemPageId, isSystemPageSlug, scanPages } from '@page-system';
-import { readJSON5 } from '@utils/json5';
-import { log } from '@utils/logger';
-import { setupSigintHandler, wrapMainError } from '@utils/signal-handler';
+import { readJSON5 } from '@core/json5';
+import { log } from '@core/logger';
+import { setupSigintHandler, wrapMainError } from '@core/signal-handler';
 import inquirer from 'inquirer';
 
 const args = process.argv.slice(2);

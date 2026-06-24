@@ -1,5 +1,5 @@
 import { i18nConfig } from '@config/i18n';
-import { ASSET_PATHS } from '@constants';
+import { ASSET_PATHS } from '@core/asset-paths';
 import { env } from '@generated/env';
 import type { I18nTranslationKeys } from '@generated/i18n';
 import { DEFAULT_NAMESPACE, getActiveLocalesDisplay, LOCALE_STORAGE_KEY } from '@i18n';
@@ -29,7 +29,7 @@ import {
 } from '@i18n/engine/formatters';
 import { getCurrency, getLanguageSubtag, getLocale, setLocale } from '@i18n/engine/helpers';
 import { loadStrategies } from '@i18n/strategies/loader';
-import { scheduleTask } from '@utils/microtask-queue';
+import { scheduleTask } from '@core/microtask-queue';
 import type { DateTimePreset } from '@utils/types';
 import i18next, { type Resource } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';

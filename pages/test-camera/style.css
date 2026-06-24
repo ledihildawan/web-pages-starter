@@ -1,0 +1,80 @@
+@keyframes capture-flash {
+  0% {
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes capture-success-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+.flash-overlay {
+  animation: capture-flash 400ms ease-out forwards;
+}
+
+.capture-success {
+  animation: capture-success-in 600ms ease-out forwards;
+}
+
+.camera-off-bg {
+  background:
+    radial-gradient(ellipse at center top, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at center bottom, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
+    linear-gradient(to bottom, #0f172a, #020617);
+}
+
+.video-container {
+  transition:
+    box-shadow 500ms ease-out,
+    ring-color 500ms ease-out;
+}
+
+.video-container.active {
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.video-container.inactive {
+  box-shadow:
+    0 10px 40px -10px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    transition-duration: 0.01ms;
+  }
+}

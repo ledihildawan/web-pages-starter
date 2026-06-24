@@ -1,3 +1,5 @@
+import { defineData } from '@/shared/utils/alpine';
+
 type CameraPriority =
   | 'camera0'
   | 'wide'
@@ -188,7 +190,7 @@ function getTypeTag(cam: CameraDevice): string {
 }
 
 document.addEventListener('alpine:init', () => {
-  Alpine.data('cameraTest', () => ({
+  const cameraTest = defineData('cameraTest', () => ({
     stream: null as MediaStream | null,
     devices: [] as CameraDevice[],
     selectedIndex: -1,
@@ -198,7 +200,9 @@ document.addEventListener('alpine:init', () => {
     lastError: null as string | null,
     isInitializing: false,
     captured: false,
-    logMessages: [] as { msg: string; type: 'info' | 'warn' | 'error'; time: string }[],
+    isCapturing: false,
+    showDebugInfo: false,
+    showCameraSelector: false,
 
     cameraConfig: {
       back: 'camera0' as CameraPriority,
@@ -217,14 +221,6 @@ document.addEventListener('alpine:init', () => {
       return this.selectedIndex >= 0 ? this.devices[this.selectedIndex] : null;
     },
 
-    get btnLabelText() {
-      return this.isActive ? 'Matikan Kamera' : 'Nyalakan Kamera';
-    },
-
-    get btnColorClass() {
-      return this.isActive ? 'bg-red-600 hover:bg-red-500' : 'bg-emerald-600 hover:bg-emerald-500';
-    },
-
     init() {
       this.$nextTick(() => {
         this.setupEventListeners();
@@ -235,12 +231,12 @@ document.addEventListener('alpine:init', () => {
       const video = this.$refs.video as HTMLVideoElement;
       if (video) {
         video.addEventListener('loadedmetadata', () => {
-          this.log('Video metadata loaded');
+          console.log(`[${timestamp()}] Video metadata loaded`);
         });
       }
 
       navigator.mediaDevices?.addEventListener('devicechange', async () => {
-        this.log('Device change detected', 'warn');
+        console.log(`[${timestamp()}] Device change detected`);
         const hadStream = this.stream !== null;
         const prevSelected = this.selectedIndex;
 
@@ -249,27 +245,11 @@ document.addEventListener('alpine:init', () => {
         const stillExists = prevSelected >= 0 && this.devices.some((d) => d.index === prevSelected);
 
         if (!stillExists && hadStream) {
-          this.log('Kamera sebelumnya tidak ada - auto-switch ke default', 'warn');
+          console.log(`[${timestamp()}] Previous camera unavailable - auto-switching to default`);
           this.autoSelectDefault();
           await this.startCamera();
         } else if (stillExists) {
           this.selectedIndex = prevSelected;
-        }
-
-        this.renderSelector();
-      });
-    },
-
-    log(msg: string, type: 'info' | 'warn' | 'error' = 'info') {
-      const prefix = type === 'error' ? '[ERROR]' : type === 'warn' ? '[WARN]' : '';
-      const line = `${prefix ? `${prefix} ` : ''}[${timestamp()}] ${msg}`;
-      console.log(line);
-      this.logMessages.push({ msg, type, time: timestamp() });
-      this.$nextTick(() => {
-        const logOutput = this.$refs.logOutput as HTMLElement;
-        if (logOutput) {
-          const color = type === 'error' ? '#ef4444' : type === 'warn' ? '#f59e0b' : '#10b981';
-          logOutput.innerHTML += `<br><span style="color:${color}">[${timestamp()}] ${msg}</span>`;
         }
       });
     },
@@ -297,59 +277,18 @@ document.addEventListener('alpine:init', () => {
     autoSelectDefault(): void {
       if (this.backIndex >= 0) {
         this.selectedIndex = this.backIndex;
-        this.log('[AUTO] Default: kamera belakang');
+        console.log(`[${timestamp()}] [AUTO] Default: back camera`);
       } else if (this.frontIndex >= 0) {
         this.selectedIndex = this.frontIndex;
-        this.log('[AUTO] Default: kamera depan');
+        console.log(`[${timestamp()}] [AUTO] Default: front camera`);
       } else if (this.devices.length > 0) {
         this.selectedIndex = 0;
-        this.log('[AUTO] Default: kamera pertama (tidak ada back/front terdeteksi)');
+        console.log(`[${timestamp()}] [AUTO] Default: first camera (no back/front detected)`);
       }
     },
 
-    logDeviceSummary(): void {
-      this.log('');
-      this.log(`Ditemukan ${this.devices.length} kamera:`);
-      this.devices.forEach((cam) => {
-        const isBack = this.backIndex >= 0 && cam.index === this.backIndex;
-        const isFront = this.frontIndex >= 0 && cam.index === this.frontIndex;
-        const isSelected = cam.index === this.selectedIndex;
-        const flags = [isBack ? '←BACK' : '', isFront ? 'FRONT→' : '', isSelected ? '✓' : ''].filter(Boolean).join(' ');
-        this.log(`  [${cam.index}] "${cam.label}"${getTypeTag(cam)} ${flags}`);
-      });
-      this.log('');
-    },
-
-    renderSelector(): void {
-      const selector = this.$refs.selector as HTMLElement;
-      if (!selector) return;
-
-      if (this.devices.length <= 1) {
-        selector.classList.add('hidden');
-        return;
-      }
-
-      selector.innerHTML = '';
-      selector.classList.remove('hidden');
-
-      this.devices.forEach((cam, i) => {
-        const btn = document.createElement('button');
-        const isBackMain = this.backIndex >= 0 && i === this.backIndex;
-        const isFrontMain = this.frontIndex >= 0 && i === this.frontIndex;
-        const isSelected = i === this.selectedIndex;
-
-        let tag = '';
-        if (isBackMain) tag = ` [${this.cameraConfig.back}]`;
-        else if (isFrontMain) tag = ` [${this.cameraConfig.front}]`;
-        if (isSelected && tag) tag += ' ✓';
-
-        btn.className = `px-4 py-2 rounded-lg font-medium transition-all duration-150 active:scale-[0.96] ${
-          isSelected ? 'bg-emerald-600 text-white shadow-lg' : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
-        }`;
-        btn.textContent = cam.label + tag + getTypeTag(cam);
-        btn.addEventListener('click', () => this.selectCamera(i));
-        selector.appendChild(btn);
-      });
+    toggleCameraSelector() {
+      this.showCameraSelector = !this.showCameraSelector;
     },
 
     async selectCamera(index: number) {
@@ -359,25 +298,27 @@ document.addEventListener('alpine:init', () => {
       this.selectedIndex = index;
       this.isFront = cam.facing === 'front';
 
-      this.log(`Kamera dipilih: "${cam.label}"${getTypeTag(cam)} [facing: ${cam.facing}, num: ${cam.cameraNum}]`);
+      console.log(
+        `[${timestamp()}] Camera selected: "${cam.label}"${getTypeTag(cam)} [facing: ${cam.facing}, num: ${cam.cameraNum}]`,
+      );
 
       if (this.stream) {
         await this.startCamera();
       }
-      this.renderSelector();
     },
 
     async startCamera() {
       if (this.selectedIndex < 0 || this.selectedIndex >= this.devices.length) {
-        this.log('Tidak ada kamera dipilih', 'error');
+        this.lastError = 'No camera selected';
         return;
       }
 
       const cam = this.devices[this.selectedIndex];
       this.isFront = cam.facing === 'front';
       this.lastError = null;
+      this.captured = false;
 
-      this.log(`Membuka: "${cam.label}"...`);
+      console.log(`[${timestamp()}] Opening: "${cam.label}"...`);
 
       try {
         if (this.stream) {
@@ -399,23 +340,23 @@ document.addEventListener('alpine:init', () => {
 
         this.stream.getTracks().forEach((track) => {
           track.addEventListener('ended', () => {
-            this.log('Track ended - kamera terputus', 'warn');
+            console.log(`[${timestamp()}] Track ended - camera disconnected`);
             this.stopCamera();
           });
-          track.addEventListener('mute', () => this.log('Track muted', 'warn'));
-          track.addEventListener('unmute', () => this.log('Track unmuted'));
+          track.addEventListener('mute', () => console.log(`[${timestamp()}] Track muted`));
+          track.addEventListener('unmute', () => console.log(`[${timestamp()}] Track unmuted`));
         });
 
         const video = this.$refs.video as HTMLVideoElement;
         video.srcObject = this.stream;
-        video.classList.remove('hidden');
         video.classList.toggle('mirror', this.isFront);
 
         try {
           await video.play();
         } catch (playErr) {
           if (video.error) {
-            this.log(`Video error: ${video.error.message}`, 'error');
+            this.lastError = video.error.message;
+            console.error(`[${timestamp()}] Video error: ${video.error.message}`);
           }
           throw playErr;
         }
@@ -429,16 +370,24 @@ document.addEventListener('alpine:init', () => {
           });
         }
 
-        this.log(`Kamera aktif ✓ [facing: ${cam.facing}, num: ${cam.cameraNum}, type: ${getTypeTag(cam).trim()}]`);
+        console.log(
+          `[${timestamp()}] Camera active [facing: ${cam.facing}, num: ${cam.cameraNum}, type: ${getTypeTag(cam).trim()}]`,
+        );
       } catch (err) {
         this.lastError = (err as Error).message;
-        this.log(`Error: ${this.lastError}`, 'error');
+        console.error(`[${timestamp()}] Error: ${this.lastError}`);
         if (this.stream) {
           this.stopStream(this.stream);
           this.stream = null;
         }
         const video = this.$refs.video as HTMLVideoElement;
-        video.srcObject = null;
+        if (video) video.srcObject = null;
+
+        setTimeout(() => {
+          if (this.lastError === (err as Error).message) {
+            this.lastError = null;
+          }
+        }, 4000);
       }
     },
 
@@ -456,10 +405,13 @@ document.addEventListener('alpine:init', () => {
       if (preview) preview.classList.add('hidden');
 
       this.isFront = false;
-      this.log('Kamera dimatikan.');
+      this.captured = false;
+      console.log(`[${timestamp()}] Camera stopped`);
     },
 
-    captureImage() {
+    async captureImage() {
+      if (this.isCapturing) return;
+
       const video = this.$refs.video as HTMLVideoElement;
       const canvas = this.$refs.canvas as HTMLCanvasElement;
 
@@ -467,6 +419,8 @@ document.addEventListener('alpine:init', () => {
 
       const ctx = canvas.getContext('2d');
       if (!ctx) return;
+
+      this.isCapturing = true;
 
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
@@ -478,12 +432,30 @@ document.addEventListener('alpine:init', () => {
 
       ctx.drawImage(video, 0, 0);
 
+      const flashOverlay = this.$refs.flashOverlay as HTMLElement;
+      const captureSuccess = this.$refs.captureSuccess as HTMLElement;
+
+      flashOverlay.classList.remove('flash-overlay');
+      captureSuccess.classList.remove('capture-success');
+
+      await new Promise((r) => setTimeout(r, 10));
+      flashOverlay.classList.add('flash-overlay');
+
       const preview = this.$refs.preview as HTMLImageElement;
       if (preview) {
         preview.src = canvas.toDataURL('image/png');
         preview.classList.remove('hidden');
-        this.log('Gambar berhasil di-capture!');
       }
+
+      await new Promise((r) => setTimeout(r, 100));
+      captureSuccess.classList.add('capture-success');
+
+      console.log(`[${timestamp()}] Image captured!`);
+
+      setTimeout(() => {
+        this.isCapturing = false;
+        captureSuccess.classList.remove('capture-success');
+      }, 600);
     },
 
     async initCamera() {
@@ -495,42 +467,42 @@ document.addEventListener('alpine:init', () => {
       }
 
       this.isInitializing = true;
-      const logOutput = this.$refs.logOutput as HTMLElement;
-      if (logOutput) logOutput.innerHTML = '';
+      this.lastError = null;
 
-      this.log('═══════════════════════════════════════');
-      this.log('       INISIALISASI KAMERA             ');
-      this.log('═══════════════════════════════════════');
-
-      this.log('Meminta izin kamera...');
+      console.log('═══════════════════════════════════════');
+      console.log('       CAMERA INITIALIZATION           ');
+      console.log('═══════════════════════════════════════');
 
       try {
         const temp = await navigator.mediaDevices.getUserMedia({ video: true });
         this.stopStream(temp);
       } catch {
-        this.log('Izin kamera ditolak atau tidak tersedia', 'error');
+        this.lastError = 'Camera access denied or not available';
         this.isInitializing = false;
+        setTimeout(() => {
+          if (this.lastError === 'Camera access denied or not available') {
+            this.lastError = null;
+          }
+        }, 4000);
         return;
       }
 
       try {
         await this.enumerateCameras();
       } catch (err) {
-        this.log(`Gagal enumerateDevices: ${(err as Error).message}`, 'error');
+        this.lastError = `Failed to enumerate devices: ${(err as Error).message}`;
         this.isInitializing = false;
         return;
       }
 
       if (this.devices.length === 0) {
-        this.log('Kamera tidak ditemukan', 'error');
+        this.lastError = 'No cameras found on this device';
         this.isInitializing = false;
         return;
       }
 
       await this.detectCameras();
       this.autoSelectDefault();
-      this.logDeviceSummary();
-      this.renderSelector();
       await this.startCamera();
 
       this.isInitializing = false;
@@ -564,7 +536,9 @@ document.addEventListener('alpine:init', () => {
       const oldPriority = this.cameraConfig[config];
       this.cameraConfig[config] = newPriority;
 
-      this.log(`[Config] ${config === 'back' ? 'Back' : 'Front'} priority: ${oldPriority} → ${newPriority}`);
+      console.log(
+        `[${timestamp()}] [Config] ${config === 'back' ? 'Back' : 'Front'} priority: ${oldPriority} → ${newPriority}`,
+      );
 
       if (this.devices.length > 0) {
         const prevBack = this.backIndex;
@@ -578,15 +552,13 @@ document.addEventListener('alpine:init', () => {
             : this.frontIndex !== prevFront && this.frontIndex >= 0;
 
         if (shouldSwitch) {
-          this.log(`[Auto] Switch ke ${config} berdasarkan priority baru`);
+          console.log(`[${timestamp()}] [Auto] Switching to ${config} based on new priority`);
           if (config === 'back') {
             await this.switchToBack();
           } else {
             await this.switchToFront();
           }
         }
-
-        this.renderSelector();
       }
     },
 
@@ -594,13 +566,13 @@ document.addEventListener('alpine:init', () => {
       const { devices, backIndex, frontIndex, selectedIndex, isFront, lastError } = this;
       const lines = [
         '═══════════════════════════════════════',
-        '           CAMERA DEBUG INFO            ',
+        '           CAMERA DEBUG INFO           ',
         '═══════════════════════════════════════',
         `Timestamp: ${new Date().toISOString()}`,
-        `Total kamera: ${devices.length}`,
+        `Total cameras: ${devices.length}`,
         `Last error: ${lastError || 'none'}`,
         '',
-        '─── Kamera List ───',
+        '─── Camera List ───',
         ...devices.map((cam) =>
           [
             `  [${cam.index}] "${cam.label}"`,
@@ -626,11 +598,12 @@ document.addEventListener('alpine:init', () => {
       const info = this.getDebugInfo();
       navigator.clipboard
         .writeText(info)
-        .then(() => this.log('Debug info copied to clipboard!'))
+        .then(() => console.log(`[${timestamp()}] Debug info copied to clipboard!`))
         .catch(() => {
-          this.log('Failed to copy - see console');
           console.log(info);
         });
     },
   }));
+
+  Alpine.data(cameraTest.name, cameraTest.factory);
 });

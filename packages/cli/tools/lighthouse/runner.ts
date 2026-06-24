@@ -1,7 +1,7 @@
 import { spawn } from 'node:child_process';
 import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync } from 'node:fs';
 import { join } from 'pathe';
-import { log } from '@core/utils/logger';
+import { log } from '@core/logger';
 import { DEFAULT_OUTPUT_DIR, MAX_REPORTS } from './constants';
 import type { CategoryScore, PageScore } from './formatter';
 

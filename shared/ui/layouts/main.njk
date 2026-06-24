@@ -1,4 +1,4 @@
-{% import "@shared/macros/page-meta.njk" as page_meta %}
+{% import "@core/macros/page-meta.njk" as page_meta %}
 {% import "@shared/ui/primitives/icons.njk" as icon %}
 
 {% set seo_config = global.seo or {} %}
@@ -7,100 +7,107 @@
 {% set manifest_path = seo_config.manifest_path or (base_path ~ "manifest.json") %}
 {% set favicon_path = seo_config.favicon_path or (base_path ~ "favicon.svg") %}
 {% set apple_icon_path = seo_config.apple_touch_icon_path or (base_path ~ "favicon.svg") %}
-
 {% set pwa = global.pwa or {} %}
 {% set mobile_capable = pwa.mobile_web_app_capable !== false %}
 {% set apple_capable = pwa.apple_mobile_web_app_capable !== false %}
 {% set apple_status_style = pwa.apple_mobile_web_app_status_bar_style or "default" %}
 {% set ms_tile_color = pwa.msapplication_tile_color or theme_color %}
-
 {% set fmt = global.format_detection or {} %}
 {% set noTelephone = fmt.telephone === false %}
 {% set noEmail = fmt.email === false %}
 {% set noAddress = fmt.address === false %}
-
 {% set compat = global.compatibility or {} %}
 {% set x_ua = compat.x_ua_compatible %}
 {% set referrer = compat.referrer %}
 
 <!DOCTYPE html>
-<html lang="{{ lang }}" dir="{{ localeConfig.dir or 'ltr' }}" class="scroll-smooth selection:bg-violet-500/30 selection:text-violet-200">
+<html
+  lang="{{ lang }}"
+  dir="{{ localeConfig.dir or 'ltr' }}"
+  class="scroll-smooth selection:bg-violet-500/30 selection:text-violet-200">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     {% if mobile_capable %}
-      <meta name="mobile-web-app-capable" content="yes">
+      <meta name="mobile-web-app-capable" content="yes" />
     {% endif %}
     {% if apple_capable %}
-      <meta name="apple-mobile-web-app-capable" content="yes">
-      <meta name="apple-mobile-web-app-status-bar-style" content="{{ apple_status_style }}">
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="{{ apple_status_style }}" />
     {% endif %}
-
-    <meta name="theme-color" content="{{ theme_color_light }}" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="{{ theme_color }}" media="(prefers-color-scheme: dark)">
-    <meta name="msapplication-TileColor" content="{{ ms_tile_color }}">
-
-    <meta http-equiv="Content-Security-Policy" content="{{ csp }}">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-
-    <link rel="manifest" href="{{ manifest_path }}">
-
+    <meta
+      name="theme-color" content="{{ theme_color_light }}" media="(prefers-color-scheme: light)"
+    />
+    <meta name="theme-color" content="{{ theme_color }}" media="(prefers-color-scheme: dark)" />
+    <meta name="msapplication-TileColor" content="{{ ms_tile_color }}" />
+    <meta http-equiv="Content-Security-Policy" content="{{ csp }}" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <link rel="manifest" href="{{ manifest_path }}" />
     {% if noTelephone %}
-      <meta name="format-detection" content="telephone=no">
+      <meta name="format-detection" content="telephone=no" />
     {% endif %}
     {% if noEmail %}
-      <meta name="format-detection" content="email=no">
+      <meta name="format-detection" content="email=no" />
     {% endif %}
     {% if noAddress %}
-      <meta name="format-detection" content="address=no">
+      <meta name="format-detection" content="address=no" />
     {% endif %}
-
     {% if x_ua %}
-      <meta http-equiv="X-UA-Compatible" content="{{ x_ua }}">
+      <meta http-equiv="X-UA-Compatible" content="{{ x_ua }}" />
     {% endif %}
-    <meta name="referrer" content="{{ referrer or 'strict-origin-when-cross-origin' }}">
-
+    <meta name="referrer" content="{{ referrer or 'strict-origin-when-cross-origin' }}" />
     {% for href in dns_prefetch or [] %}
-      <link rel="dns-prefetch" href="{{ href }}">
+      <link rel="dns-prefetch" href="{{ href }}" />
     {% endfor %}
-
     {% for host in preconnect or [] %}
-      <link rel="preconnect" href="{{ host.href }}"{% if host.crossorigin %} crossorigin{% endif %}>
+      <link
+        rel="preconnect" href="{{ host.href }}" {% if host.crossorigin %}crossorigin{% endif %}
+      />
     {% endfor %}
-
     {% if font_preload_url %}
-      <link rel="preload" as="font" type="font/woff2" href="{{ font_preload_url }}" crossorigin>
+      <link
+        rel="preload" as="font" type="font/woff2"
+        href="{{ font_preload_url }}" crossorigin
+      />
     {% endif %}
-
     {{ page_meta.render(page, global, LOCALE_CODES, page_id, i18n, csp_nonce) }}
     {{ clientI18nScript }}
-    {% block extra_head %}{% endblock %}
+    {% block extra_head %}
+    {% endblock %}
   </head>
 
   <body class="min-block-screen bg-slate-950 text-slate-200 antialiased" data-page="{{ page_id }}">
     <a href="#main-content" class="skip-to-content">
-      <svg class="inline-5 block-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0l-10.5 10.5M21 3v10.5"/>
+      <svg
+        class="inline-5 block-5" fill="none" viewBox="0 0 24 24"
+        stroke="currentColor" stroke-width="2.5">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0l-10.5 10.5M21 3v10.5"
+        />
       </svg>
       {{ i18n.t('skip_to_content') }}
     </a>
-
     <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-      <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(139,92,246,0.08),transparent_50%),radial-gradient(circle_at_0%_100%,rgba(217,70,239,0.05),transparent_40%)]"></div>
-      <div class="absolute inset-bs-[-10%] inset-s-[-10%] inline-[60%] block-[60%] bg-violet-600/8 rounded-full blur-[120px]"></div>
-      <div class="absolute inset-be-[-10%] inset-e-[-10%] inline-[50%] block-[50%] bg-fuchsia-600/6 rounded-full blur-[120px]"></div>
-      <div class="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.03)_1px,transparent_0)] bg-size-[64px_64px] mask-[radial-gradient(ellipse_at_center,black,transparent_75%)]"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(139,92,246,0.08),transparent_50%),radial-gradient(circle_at_0%_100%,rgba(217,70,239,0.05),transparent_40%)]">
+      </div>
+      <div class="absolute inset-bs-[-10%] inset-s-[-10%] inline-[60%] block-[60%] bg-violet-600/8 rounded-full blur-[120px]">
+      </div>
+      <div class="absolute inset-be-[-10%] inset-e-[-10%] inline-[50%] block-[50%] bg-fuchsia-600/6 rounded-full blur-[120px]">
+      </div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.03)_1px,transparent_0)] bg-size-[64px_64px] mask-[radial-gradient(ellipse_at_center,black,transparent_75%)]">
+      </div>
     </div>
 
     {% include "@shared/ui/composites/navbar.njk" %}
 
     <main id="main-content" class="relative z-10 flex flex-col min-block-screen">
-      {% block content %}{% endblock %}
+      {% block content %} {% endblock %}
     </main>
 
     {% include "@shared/ui/composites/footer.njk" %}
-
-    {% block scripts %}{% endblock %}
+    {% block scripts %}
+    {% endblock %}
   </body>
 </html>

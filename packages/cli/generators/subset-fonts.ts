@@ -3,8 +3,8 @@ import fs from 'node:fs';
 import { basename, dirname, join } from 'pathe';
 import { i18nConfig } from '@config/i18n';
 import type { LocaleCode } from '@i18n/data/locales';
-import { log, logBox } from '@core/utils/logger';
-import { computeStringHash, isCacheValid, restoreCache, storeCache } from '@core/utils/pipeline-cache';
+import { log, logBox } from '@core/logger';
+import { computeStringHash, isCacheValid, restoreCache, storeCache } from '@core/pipeline-cache';
 import { lookup } from '@generated/paths';
 import { getNeededFontPackages, parseFontFaceBlocks } from '@i18n/fonts/font-css';
 import type { FontPackageEntry } from '@i18n/fonts/font-registry';
@@ -94,7 +94,7 @@ async function subsetFontAsync(srcPath: string, destPath: string): Promise<{ bef
     }
   } catch (_err) {
     if (fs.existsSync(tmpOut)) fs.unlinkSync(tmpOut);
-    console.warn(`⚠ Font subset timeout/failure: ${basename(srcPath)}`);
+    console.warn(`[font-subset] Warning: ${basename(srcPath)}`);
   }
 
   return { before, after: before };

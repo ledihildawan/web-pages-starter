@@ -2,8 +2,8 @@ import { spawn, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import { basename, resolve as patheResolve } from 'pathe';
 import process from 'node:process';
-import { log, logBox } from '@core/utils/logger';
-import { PIPELINE_STEPS } from '@core/utils/pipeline';
+import { log, logBox } from '@core/logger';
+import { PIPELINE_STEPS } from '@core/pipeline';
 import { env } from '@generated/env';
 import { lookup } from '@generated/paths';
 
@@ -75,14 +75,15 @@ const main = async (): Promise<void> => {
 
   log.info('\n--- Pre-build generators (dev mode) ---\n');
   for (const step of PIPELINE_STEPS.PRE_BUILD_DEV) {
-    const stepPath = lookup('@', step);
-    const result = spawnSync('bun', [stepPath], {
+    const [stepPath, ...args] = Array.isArray(step) ? step : [step];
+    const resolvedPath = lookup('@', stepPath);
+    const result = spawnSync('bun', [resolvedPath, ...args], {
       stdio: 'inherit',
       env: spawnEnv,
       cwd: process.cwd(),
     });
     if (result.status !== 0) {
-      log.error(`Error: ${basename(step)} failed — exit code ${result.status}`);
+      log.error(`Error: ${basename(stepPath)} failed — exit code ${result.status}`);
       process.exit(1);
     }
   }

@@ -1,16 +1,22 @@
 <footer class="pbs-16 pbe-16 px-6 border-bs border-white/10 bg-slate-950 relative overflow-hidden">
   <div class="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-    <div class="absolute inset-be-0 inset-e-0 inline-96 block-96 bg-linear-to-br from-violet-600/10 via-transparent to-fuchsia-600/5 rounded-full blur-[120px]"></div>
-    <div class="absolute inset-bs-0 inset-s-0 inline-64 block-64 bg-fuchsia-600/5 rounded-full blur-[80px]"></div>
+    <div class="absolute inset-be-0 inset-e-0 inline-96 block-96 bg-linear-to-br from-violet-600/10 via-transparent to-fuchsia-600/5 rounded-full blur-[120px]">
+    </div>
+    <div class="absolute inset-bs-0 inset-s-0 inline-64 block-64 bg-fuchsia-600/5 rounded-full blur-[80px]">
+    </div>
   </div>
   <div class="max-inline-7xl mx-auto">
     <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-8 mbe-12">
       <div class="flex flex-col items-center md:items-start gap-2">
-        <a href="{{ url('/') }}" class="group flex flex-col transition-transform active:scale-[0.96]">
-          <span class="text-2xl font-black text-gradient tracking-tight leading-none group-hover:brightness-125 transition-[filter] duration-200">
+        <a
+          href="{{ url('/') }}"
+          class="group flex flex-col transition-transform active:scale-[0.96]">
+          <span
+            class="text-2xl font-black text-gradient tracking-tight leading-none group-hover:brightness-125 transition-[filter] duration-200">
             Starter
           </span>
-          <span class="text-[10px] text-slate-400 font-black tracking-[0.25em] uppercase mbs-1.5 transition-colors duration-200 group-hover:text-slate-300">
+          <span
+            class="text-[10px] text-slate-400 font-black tracking-[0.25em] uppercase mbs-1.5 transition-colors duration-200 group-hover:text-slate-300">
             {{ i18n.t('engine_name') }}
           </span>
         </a>
@@ -18,11 +24,18 @@
           {{ i18n.t('site_tagline') }}
         </p>
       </div>
-      <nav class="flex flex-wrap justify-center items-center gap-inline-6 gap-block-2" aria-label="Footer navigation">
+
+      <nav
+        class="flex flex-wrap justify-center items-center gap-inline-6 gap-block-2"
+        aria-label="Footer navigation">
         {% for item in global.menu.header %}
-          <a href="{{ url(item.url) }}" class="group relative text-sm text-slate-400 hover:text-white transition-colors duration-300 px-4 py-2.5 flex items-center font-bold">
+          <a
+            href="{{ url(item.url) }}"
+            class="group relative text-sm text-slate-400 hover:text-white transition-colors duration-300 px-4 py-2.5 flex items-center font-bold">
             {{ i18n.t(item.label) }}
-            <span class="absolute inset-bs-0 inset-s-0 inline-0 group-hover:inline-full block-0.5 bg-linear-to-r from-violet-500 to-fuchsia-500 transition-[inline-size] duration-200"></span>
+            <span
+              class="absolute inset-bs-0 inset-s-0 inline-0 group-hover:inline-full block-0.5 bg-linear-to-r from-violet-500 to-fuchsia-500 transition-[inline-size] duration-200">
+            </span>
           </a>
         {% endfor %}
       </nav>
@@ -39,13 +52,25 @@
       {% set social = global.social or {} %}
       <div class="flex items-center gap-2">
         {% if social.github %}
-          <a href="https://github.com/{{ social.github }}" target="_blank" rel="me noopener noreferrer" aria-label="GitHub (opens in new tab)" class="btn-squash anticipate-press hover-lift ripple-click group inline-11 block-11 flex items-center justify-center radius-icon bg-white/5 card-border card-border-hover hover:bg-white/10 transition-[background-color,box-shadow] duration-300 overflow-hidden">
-            {{ icon.icon('github', 'inline-5 block-5 text-slate-400 group-hover:text-white transition-colors duration-300', size='lg') }}
+          <a
+            rel="me noopener noreferrer"
+            href="https://github.com/{{ social.github }}"
+            class="btn-squash anticipate-press hover-lift ripple-click group inline-11 block-11 flex items-center justify-center radius-icon bg-white/5 card-border card-border-hover hover:bg-white/10 transition-[background-color,box-shadow] duration-300 overflow-hidden"
+            target="_blank" aria-label="GitHub (opens in new tab)">
+            {{
+              icon.icon('github', 'inline-5 block-5 text-slate-400 group-hover:text-white transition-colors duration-300', size='lg')
+            }}
           </a>
         {% endif %}
         {% if social.twitter %}
-          <a href="https://twitter.com/{{ social.twitter }}" target="_blank" rel="me noopener noreferrer" aria-label="Twitter (opens in new tab)" class="btn-squash anticipate-press hover-lift ripple-click group inline-11 block-11 flex items-center justify-center radius-icon bg-white/5 card-border card-border-hover hover:bg-white/10 transition-[background-color,box-shadow] duration-300 overflow-hidden">
-            {{ icon.icon('twitter', 'inline-5 block-5 text-slate-400 group-hover:text-white transition-colors duration-300', size='lg') }}
+          <a
+            rel="me noopener noreferrer"
+            href="https://twitter.com/{{ social.twitter }}"
+            class="btn-squash anticipate-press hover-lift ripple-click group inline-11 block-11 flex items-center justify-center radius-icon bg-white/5 card-border card-border-hover hover:bg-white/10 transition-[background-color,box-shadow] duration-300 overflow-hidden"
+            target="_blank" aria-label="Twitter (opens in new tab)">
+            {{
+              icon.icon('twitter', 'inline-5 block-5 text-slate-400 group-hover:text-white transition-colors duration-300', size='lg')
+            }}
           </a>
         {% endif %}
       </div>

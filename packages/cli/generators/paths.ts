@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import { dirname, resolve, join } from 'pathe';
 import { fileURLToPath } from 'node:url';
-import { log } from '@core/utils/logger';
-import { writeFilePath } from '@core/utils/write-file';
+import { log } from '@core/logger';
+import { writeFilePath } from '@core/write-file';
 
 const TSCONFIG_PATH = resolve('.', 'tsconfig.json');
 const OUTPUT_PATH = resolve('.', 'generated', 'paths.ts');

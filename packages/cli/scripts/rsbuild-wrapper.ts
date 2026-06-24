@@ -1,8 +1,8 @@
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import { basename, dirname, join, relative, resolve } from 'pathe';
-import { ASSET_PATHS } from '@constants';
-import { computeStringHash } from '@core/utils/pipeline-cache';
+import { ASSET_PATHS } from '@core/asset-paths';
+import { computeStringHash } from '@core/pipeline-cache';
 import { lookup } from '@generated/paths';
 import { html as beautifyHtml } from 'js-beautify';
 import * as lightningcss from 'lightningcss';
@@ -119,62 +119,6 @@ function prettyHtml(): void {
     fs.writeFileSync(filePath, beautified);
   }
 }
-
-function removeEmptyPageJs(): void {
-  const EMPTY_PATTERN = /rspackChunk.*?push\(\[\[\d+\],\{\d+:function\([^)]+\)\{[^}]+\}\}/;
-  const EMPTY_PATTERN_STRICT = /rspackChunk.*?push\(\[\[\d+\],\{\d+:function\(\w+,\w+,\w+\)\{\w+\(\d+\)\}\}/;
-  let removed = 0;
-  let skipped = 0;
-
-  for (const file of fs.readdirSync(DIST)) {
-    if (!file.endsWith('.html')) continue;
-    const htmlPath = join(DIST, file);
-    let html = fs.readFileSync(htmlPath, 'utf-8');
-    let modified = false;
-
-    const scripts = [...html.matchAll(/<script\s+[^>]*src="([^"]+\.js)"[^>]*>/g)];
-
-    for (const m of scripts) {
-      const src = m[1];
-      if (!src.includes('.js')) continue;
-
-      const jsFile = src.replace(/^\//, '');
-      const jsPath = join(DIST, jsFile);
-
-      if (!fs.existsSync(jsPath)) continue;
-      const content = fs.readFileSync(jsPath, 'utf-8');
-
-      if (!EMPTY_PATTERN.test(content)) {
-        skipped++;
-        continue;
-      }
-
-      if (!EMPTY_PATTERN_STRICT.test(content)) {
-        skipped++;
-        continue;
-      }
-
-      const escapedSrc = src.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      html = html.replace(new RegExp(`<script\\s+[^>]*src="${escapedSrc}"[^>]*>\\s*</script>`, 'g'), '');
-      html = html.replace(new RegExp(`<link[^>]*modulepreload[^>]*href="${escapedSrc}"[^>]*>`, 'g'), '');
-      fs.unlinkSync(jsPath);
-      removed++;
-      modified = true;
-    }
-
-    if (modified) {
-      fs.writeFileSync(htmlPath, html);
-    }
-  }
-
-  if (removed > 0) {
-    console.log(`  [remove-empty-js] Removed ${removed} empty JS file(s)`);
-  }
-  if (skipped > 0) {
-    console.log(`  [remove-empty-js] Skipped ${skipped} non-empty JS file(s)`);
-  }
-}
-
 function inlineCssOnDist(): void {
   if (isPrettyHtml) {
     console.log('  [inline-css] SKIPPED — pretty mode keeps CSS external');
@@ -279,13 +223,18 @@ function runCompress(): boolean {
 }
 
 function main(): void {
+  const isForce = process.env.FORCE_REBUILD === 'true';
+
   console.log('[rsbuild-wrapper] Computing source hash...');
   const currentHash = computeSourceHash();
   const marker = loadMarker();
 
-  if (marker && marker.sourceHash === currentHash) {
-    console.log('[rsbuild-wrapper] SKIP - source unchanged, using cached build');
+  if (!isForce && marker && marker.sourceHash === currentHash && fs.existsSync(DIST)) {
     process.exit(0);
+  }
+
+  if (isForce) {
+    console.log('[rsbuild-wrapper] FORCE - rebuilding regardless of cache');
   }
 
   console.log('[rsbuild-wrapper] Running Rsbuild...');
@@ -295,25 +244,12 @@ function main(): void {
     process.exit(1);
   }
 
-  console.log('[rsbuild-wrapper] Copying rsbuild-out to dist...');
   copyToDist();
-
-  console.log('[rsbuild-wrapper] Applying root-page-as-index...');
   rootPageAsIndex();
-
-  console.log('[rsbuild-wrapper] Applying pretty-html...');
   prettyHtml();
-
-  console.log('[rsbuild-wrapper] Applying remove-empty-page-js...');
-  removeEmptyPageJs();
-
-  console.log('[rsbuild-wrapper] Applying inline-css...');
   inlineCssOnDist();
-
-  console.log('[rsbuild-wrapper] Applying preload-chunks...');
   preloadChunksOnDist();
 
-  console.log('[rsbuild-wrapper] Running compress...');
   if (!runCompress()) {
     console.error('[rsbuild-wrapper] Compress failed');
     process.exit(1);

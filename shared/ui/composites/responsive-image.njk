@@ -1,12 +1,34 @@
-{% macro render(image, alt, sizes, loading="lazy", class="", fetchpriority="", picture=false, lcp=false) %}
-{% if image %}
-{% if picture %}
-<picture>
-  <source type="image/avif" srcset="{{ image.srcset }}" sizes="{{ sizes }}">
-  <img width="{{ image.width }}" height="{{ image.height }}" src="{{ image.src }}" srcset="{{ image.srcset }}" sizes="{{ sizes }}" alt="{{ alt }}" loading="{{ loading }}" decoding="async" {% if fetchpriority %}fetchpriority="{{ fetchpriority }}"{% endif %} {% if lcp %}data-lcp="true"{% endif %} {% if class %}class="{{ class }}"{% endif %}>
-</picture>
-{% else %}
-<img width="{{ image.width }}" height="{{ image.height }}" src="{{ image.src }}" srcset="{{ image.srcset }}" sizes="{{ sizes }}" alt="{{ alt }}" loading="{{ loading }}" decoding="async" {% if fetchpriority %}fetchpriority="{{ fetchpriority }}"{% endif %} {% if lcp %}data-lcp="true"{% endif %} {% if class %}class="{{ class }}"{% endif %}>
-{% endif %}
-{% endif %}
+{%
+  macro render(image, alt, sizes, loading="lazy", class="", fetchpriority="", picture=false, lcp=false)
+%}
+  {% if image %}
+    {% if picture %}
+      <picture>
+        <source type="image/avif" sizes="{{ sizes }}" srcset="{{ image.srcset }}" />
+        <img
+          alt="{{ alt }}" src="{{ image.src }}" sizes="{{ sizes }}"
+          width="{{ image.width }}" height="{{ image.height }}" srcset="{{ image.srcset }}"
+          loading="{{ loading }}" decoding="async" {% if lcp %}data-lcp="true"{% endif %}
+          {% if class %}
+            class="{{ class }}"
+          {% endif %}
+          {% if fetchpriority %}
+            fetchpriority="{{ fetchpriority }}"
+          {% endif %}
+        />O
+      </picture>
+    {% else %}
+      <img
+        alt="{{ alt }}" src="{{ image.src }}" sizes="{{ sizes }}"
+        width="{{ image.width }}" height="{{ image.height }}" srcset="{{ image.srcset }}"
+        loading="{{ loading }}" decoding="async" {% if lcp %}data-lcp="true"{% endif %}
+        {% if class %}
+          class="{{ class }}"
+        {% endif %}
+        {% if fetchpriority %}
+          fetchpriority="{{ fetchpriority }}"
+        {% endif %}
+      />
+    {% endif %}
+  {% endif %}
 {% endmacro %}

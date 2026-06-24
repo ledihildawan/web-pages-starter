@@ -1,16 +1,22 @@
 import { spawnSync } from 'node:child_process';
 import { basename } from 'pathe';
 import process from 'node:process';
-import { log, logBox } from '@core/utils/logger';
-import { PIPELINE_STEPS } from '@core/utils/pipeline';
+import { log, logBox } from '@core/logger';
+import { PIPELINE_STEPS } from '@core/pipeline';
 import { env } from '@generated/env';
 import { lookup } from '@generated/paths';
 
 const args = process.argv.slice(2);
+const isForce = args.includes('--force');
 const isPreview = env.BUILD_PREVIEW;
 const callerSiteUrl = env.SITE_URL;
 
-const spawnEnv: NodeJS.ProcessEnv = { ...process.env, NODE_ENV: 'production', STAGE: 'prod' };
+const spawnEnv: NodeJS.ProcessEnv = {
+  ...process.env,
+  NODE_ENV: 'production',
+  STAGE: 'prod',
+  FORCE_REBUILD: isForce ? 'true' : undefined,
+};
 
 if (isPreview) {
   spawnEnv.BUILD_PREVIEW = 'true';

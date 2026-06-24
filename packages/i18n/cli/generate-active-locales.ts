@@ -6,8 +6,8 @@ import type { LocaleCode, LocaleConfig } from '@i18n/data/locales';
 import { LOCALES } from '@i18n/data/locales';
 import { NUMBERING_SYSTEMS } from '@i18n/data/numbering-systems';
 import { WRITING_SYSTEM, WRITING_SYSTEMS } from '@i18n/data/writing-systems';
-import { log } from '@utils/logger';
-import { generatedHeader, writeFilePath } from '@utils/write-file';
+import { log } from '@core/logger';
+import { generatedHeader, writeFilePath } from '@core/write-file';
 
 const OUTPUT_FILE = lookup('@generated', 'active-locales-data.ts');
 
@@ -35,7 +35,7 @@ const wsEntries = WRITING_SYSTEMS.filter((ws) => activeWsCodes.includes(ws.code)
 
 function serializeLocale(locale: LocaleConfig): string {
   const entries = Object.entries(locale).map(([key, value]) => {
-    if (typeof value === 'string') return `${key}: '${value.replace(/'/g, "\\'")}'`;
+    if (typeof value === 'string') return `${key}: ${JSON.stringify(value)}`;
     if (typeof value === 'boolean') return `${key}: ${value}`;
     return `${key}: ${value}`;
   });
@@ -43,21 +43,19 @@ function serializeLocale(locale: LocaleConfig): string {
 }
 
 function serializeLanguage(lang: { code: string; name: string; nativeName: string }): string {
-  const escaped = lang.nativeName.replace(/'/g, "\\'");
-  return `  { code: '${lang.code}', name: '${lang.name}', nativeName: '${escaped}' }`;
+  const nativeNameJson = JSON.stringify(lang.nativeName);
+  return `  { code: '${lang.code}', name: '${lang.name}', nativeName: ${nativeNameJson} }`;
 }
 
 function serializeNumberingSystem(ns: (typeof NUMBERING_SYSTEMS)[number]): string {
-  const digits = ns.digits ? `[${ns.digits.map((d: string) => `'${d}'`).join(', ')}]` : 'null';
-  return `  { code: '${ns.code}', type: '${ns.type}', digits: ${digits} }`;
+  const digits = ns.digits ? `[${ns.digits.map((d: string) => JSON.stringify(d)).join(', ')}]` : 'null';
+  return `  { code: ${JSON.stringify(ns.code)}, type: ${JSON.stringify(ns.type)}, digits: ${digits} }`;
 }
 
 function serializeWritingSystem(ws: (typeof WRITING_SYSTEMS)[number]): string {
-  const langs = ws.languages.map((l: string) => `'${l}'`).join(', ');
-  const nsList = ws.numberingSystems.map((ns: string) => `'${ns}'`).join(', ');
-  const desc = ws.description.replace(/'/g, "\\'");
-  const font = ws.defaultFont.replace(/'/g, "\\'");
-  return `  { code: '${ws.code}', name: '${ws.name}', description: '${desc}', languages: [${langs}], numberingSystems: [${nsList}], direction: '${ws.direction}', defaultFont: '${font}' }`;
+  const langs = ws.languages.map((l: string) => JSON.stringify(l)).join(', ');
+  const nsList = ws.numberingSystems.map((ns: string) => JSON.stringify(ns)).join(', ');
+  return `  { code: ${JSON.stringify(ws.code)}, name: ${JSON.stringify(ws.name)}, description: ${JSON.stringify(ws.description)}, languages: [${langs}], numberingSystems: [${nsList}], direction: ${JSON.stringify(ws.direction)}, defaultFont: ${JSON.stringify(ws.defaultFont)} }`;
 }
 
 const filteredWritingSystem = Object.fromEntries(

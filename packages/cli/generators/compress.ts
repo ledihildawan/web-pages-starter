@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import { dirname, extname, join, relative } from 'pathe';
 import zlib from 'node:zlib';
-import { log, logBox } from '@core/utils/logger';
-import { computeStringHash } from '@core/utils/pipeline-cache';
+import { log, logBox } from '@core/logger';
+import { computeStringHash } from '@core/pipeline-cache';
 import { lookup } from '@generated/paths';
 
 const DIST = lookup('@dist');

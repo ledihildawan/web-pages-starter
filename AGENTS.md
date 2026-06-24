@@ -62,12 +62,44 @@ bun run build              # minified HTML + CSS/JS + Brotli/Gzip compression (d
 bun run build -- --pretty  # pretty-printed HTML + CSS external in /assets/styles/ + JS not minified
 bun run build -- --debug   # skip JS/CSS minify
 bun run preview            # build (BUILD_PREVIEW=true, SITE_URL=tunnel) + serve via tunnel
-bun run cli               # interactive CLI menu (workflow + manual tools)
+bun run cli                # interactive CLI menu (all available commands)
+bun run clean:cache        # remove temp/pipeline cache
 ```
 
-**CLI menu** (`bun run cli`):
-- **Workflow** — Dev, Build (Prod/Pretty/Debug), Preview, Serve, Test, Generate Page, Delete Page
-- **Manual** — Check Parity, Sync Locales, Subset Fonts
+**CLI menu** (`bun run cli`) — flat list, single-step navigation:
+
+```
+  Web Pages Starter CLI
+  ---------------------
+
+  [ Develop ]
+    1. Dev Server         Start dev server with hot reload
+    2. Test               Run unit tests
+
+  [ Build ]
+    3. Production Build   Minified production build
+    4. Pretty Build      Beautified HTML + external CSS for inspection
+    5. Debug Build       No minification, source maps enabled
+    6. Preview Tunnel    Build + tunnel preview (ngrok/cloudflared)
+    7. Serve Dist        Build + serve production dist locally
+
+  [ Pages ]
+    8. Generate Page     Scaffold a new page with locale files
+    9. Delete Page       Remove a page and its locale files
+
+  [ i18n ]
+   10. Check Parity      Verify translation key parity across locales
+   11. Sync Locales      Sync missing keys from default locale
+
+  [ Performance ]
+   12. Lighthouse        Run Lighthouse audit (desktop + mobile)
+
+  [ Utilities ]
+   13. Subset Fonts     Regenerate subsetted font files
+   14. Clean Cache      Remove temp/pipeline cache
+   15. Lint             Run biome linter
+   16. Typecheck        Run TypeScript checker
+```
 
 Pretty mode (`--pretty`):
 - HTML beautified with 2-space indent via `js-beautify`
@@ -82,7 +114,11 @@ Build pipeline: `generate-paths → generate-pricing-types → generate-env → 
 
 **SERVE generators** (run inside rsbuild-wrapper before rsbuild): `generate-sitemap → generate-manifest → generate-robots → generate-service-worker`
 
-**rsbuild-wrapper** runs rsbuild then applies post-build steps in order: `copy-to-dist → root-page-as-index → pretty-html → remove-empty-js → inline-css → preload-chunks → compress`
+**rsbuild-wrapper** runs rsbuild then applies post-build steps in order: `copy-to-dist → root-page-as-index → pretty-html → inline-css → preload-chunks → compress`
+
+Cache behavior:
+- Cache hit (marker exists + hash matches + dist exists): silent exit, no output
+- Rebuild triggers: dist missing, source changed, or FORCE_REBUILD=true
 
 ## Testing
 
@@ -148,18 +184,18 @@ pages/home/
   _features/      ← page-local capability modules (underscore = not a page)
 ```
 
-- No `script.ts` → uses `shared/page-entry.ts` as fallback entry
+- No `script.ts` → no page JS loaded
 - No `style.css` → no page-specific CSS chunk
 - 0-byte `style.css` → skipped from build entries
 - Bootstrap + CSS auto-injected by `packages/page-system/page-inject-loader.cjs` (no manual imports needed)
 
 ### Entry system
 
-- `page-inject-loader.cjs` auto-injects `import '../../bootstrap'` + `import './style.css'` into every `script.ts` and `page-entry.ts`
-- Bootstrap (`bootstrap.ts`) imports `main.css` + Alpine + plugins + fonts + SW
-- splitChunks extracts shared bootstrap code to a single cached chunk
+- `page-inject-loader.cjs` auto-injects bootstrap + CSS into every page entry via loader options
+- Bootstrap (`scripts/bootstrap.ts`) imports `main.css` + Alpine + plugins + fonts + SW
+- `splitChunks.bootstrap` extracts bootstrap to a separate cached chunk to prevent duplication across pages
 - Pages with small JS (< 2 KB) → inlined in HTML; larger → separate file
-- Pages without `script.ts` → only shared chunk referenced, no page JS file
+- Pages without `script.ts` → only shared bootstrap chunk referenced, no page JS file
 
 ## Config Files
 
@@ -185,12 +221,12 @@ pages/home/
   - `system-pages.ts` — root page, system page IDs, locale-dependent slugs (`ROOT_PAGE`, `SYSTEM_PAGE_IDS`, `SYSTEM_PAGE_SLUGS`)
   - `scanner.ts` — `scanPages()`, `isGroup()`, `isSlugDir()` (jiti-safe)
   - `dynamic-routes.ts` — `generateDynamicEntries()` — [slug] discovery from `data.json5`
-  - `page-inject-loader.cjs` — auto-injects bootstrap + page CSS into entry files
+  - `page-inject-loader.cjs` — auto-injects bootstrap + page CSS via loader options
   - `cli/` — `sync-system-pages.ts`, `generate-page.ts`, `delete-page.ts`
 
 ## Build Optimizations
 
-- **splitChunks**: 5 cacheGroups — `i18next` (`chunks: 'all'`, priority 30), `alpinePlugins` (async, priority 25), `alpineCore` (all, priority 20), `i18nFormatters` (async, priority 15), `default` (`minChunks: 2`, priority -10). Chunk names centralized in `CHUNK_NAMES` constant shared between cacheGroups config + preload plugin.
+- **splitChunks**: 6 cacheGroups — `bootstrap` (enforce, priority 40), `i18next` (enforce, priority 30), `alpinePlugins` (async, priority 25), `alpineCore` (enforce, priority 20), `i18nFormatters` (async, priority 15), `vendors` (priority 5), `default` (`minChunks: 2`, priority -10). `minSize: 20000` (webpack default). `enforce: true` ensures critical chunks always split regardless of size.
 - **CSS inlining**: `inlineCssOnDist()` function in rsbuild-wrapper post-builds converts all `<link rel="stylesheet">` to `<style nonce="...">` with relative URL rewriting. Eliminates render-blocking CSS requests. Skipped in pretty mode (CSS stays external). Nonce extracted from CSP meta tag.
 - **JS chunk preload**: `preloadChunksOnDist()` function in rsbuild-wrapper scans for named chunks (matching `CHUNK_NAMES`), adds `<link rel="preload" as="script">` for chunks NOT already in `<script defer>`. Uses `preload` (not `modulepreload`) for HTTP cache dedup with rspack's classic script loading.
 - **Font woff2 preload**: Generated by template engine (`template.ts`) from `fontsConfig.sans.name`. Reads `fonts.css` at SSR time, extracts latin woff2 URL, passes as `font_preload_url` template param → `<link rel="preload" as="font">` in `main.njk`.

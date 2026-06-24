@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import { dirname, join } from 'pathe';
 import { fileURLToPath } from 'node:url';
-import { log } from '@core/utils/logger';
-import { writeFilePath } from '@core/utils/write-file';
+import { log } from '@core/logger';
+import { writeFilePath } from '@core/write-file';
 import { lookup } from '@generated/paths';
 
 function inject(template: string, values: Record<string, string>): string {

@@ -1,5 +1,5 @@
 import { i18nConfig } from '@config/i18n';
-import { ASSET_PATHS } from '@constants';
+import { ASSET_PATHS } from '@core/asset-paths';
 import { env } from '@generated/env';
 import { DEFAULT_NAMESPACE, getActiveLocalesDisplay, LOCALE_STORAGE_KEY } from '@i18n';
 import type { LocaleCode } from '@i18n/data/locales';
@@ -8,7 +8,7 @@ import { setStrategies } from '@i18n/engine/formatters';
 import { getLanguageSubtag } from '@i18n/engine/helpers';
 import { loadStrategies } from '@i18n/strategies/loader';
 import { defineStore } from '@utils/alpine';
-import { scheduleTask } from '@utils/microtask-queue';
+import { scheduleTask } from '@core/microtask-queue';
 
 export interface i18nStoreLanguages {
   code: LocaleCode;

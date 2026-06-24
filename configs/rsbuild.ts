@@ -1,7 +1,8 @@
 import fs from 'node:fs';
 import { join, relative } from 'pathe';
 import { i18nConfig } from '@config/i18n';
-import { ASSET_PATHS, PUBLIC_FILENAMES } from '@constants';
+import { ASSET_PATHS } from '@core/asset-paths';
+import { PUBLIC_FILENAMES } from '@core/public-filenames';
 import { browserEnv, env } from '@generated/env';
 import { alias, lookup } from '@generated/paths';
 import { getActiveLocaleCodes, isSingleLocale, LOCALE_STORAGE_KEY } from '@i18n';
@@ -10,7 +11,7 @@ import { getRootPageSlug, getSystemPageSlug, scanPages } from '@page-system';
 import { generateDynamicEntries } from '@page-system/dynamic-routes';
 import { defineConfig, type RsbuildPlugin } from '@rsbuild/core';
 import { createTemplateParams } from '@template-engine';
-import { readJSON5 } from '@utils/json5';
+import { readJSON5 } from '@core/json5';
 import { minify } from 'html-minifier-terser';
 
 const isBuild = env.IS_PROD || env.BUILD_PREVIEW;
@@ -62,19 +63,21 @@ const scannedPages = scanPages(lookup('@pages'), '');
 
 const getPageNames = (): string[] => scannedPages.map((p) => p.name);
 
-const PAGE_ENTRY = lookup('@shared', 'page-entry.ts');
-
 const getEntries = (): Record<string, string | string[]> => {
   const entries: Record<string, string | string[]> = {};
 
   for (const page of scannedPages) {
     const scriptFile = join(page.dir, 'script.ts');
-    entries[page.name] = fs.existsSync(scriptFile) ? scriptFile : PAGE_ENTRY;
+    if (fs.existsSync(scriptFile)) {
+      entries[page.name] = scriptFile;
+    }
   }
 
   for (const dyn of dynamicEntries) {
     const scriptFile = join(dyn.templateDir, 'script.ts');
-    entries[dyn.entryKey] = fs.existsSync(scriptFile) ? scriptFile : PAGE_ENTRY;
+    if (fs.existsSync(scriptFile)) {
+      entries[dyn.entryKey] = scriptFile;
+    }
   }
 
   return entries;
@@ -124,13 +127,21 @@ export default defineConfig({
     writeToDisk: false,
   },
   splitChunks: {
-    minSize: 2000,
+    minSize: 20000,
     cacheGroups: {
+      bootstrap: {
+        test: /[\\/]scripts[\\/]bootstrap\.ts$/,
+        name: 'bootstrap',
+        chunks: 'all',
+        priority: 40,
+        enforce: true,
+      },
       i18next: {
         test: /[\\/]node_modules[\\/](i18next|@formatjs|intl-pluralrules|intl-messageformat)[\\/]/,
         name: CHUNK_NAMES.i18next,
         chunks: 'all',
         priority: 30,
+        enforce: true,
       },
       alpinePlugins: {
         test: /[\\/]node_modules[\\/]@alpinejs[\\/](collapse|focus)[\\/]/,
@@ -143,12 +154,20 @@ export default defineConfig({
         name: CHUNK_NAMES.alpineCore,
         chunks: 'all',
         priority: 20,
+        enforce: true,
       },
       i18nFormatters: {
         test: /[\\/]packages[\\/]i18n[\\/](data|engine|runtime|strategies|fonts)[\\/]/,
         name: CHUNK_NAMES.i18nFormatters,
         chunks: 'async',
         priority: 15,
+      },
+      vendors: {
+        test: /[\\/]node_modules[\\/]/,
+        name: 'vendors',
+        chunks: 'all',
+        priority: 5,
+        reuseExistingChunk: true,
       },
       default: {
         minChunks: 2,
@@ -285,30 +304,20 @@ export default defineConfig({
       module: {
         rules: [
           {
-            test: /(?:^|[\\/])(?:script|page-entry)\.ts$/,
+            test: /(?:^|[\\/])script\.ts$/,
             enforce: 'pre',
             use: [
               {
                 loader: lookup('@page-system', 'page-inject-loader.cjs'),
-                options: { bootstrap: lookup('@shared', 'bootstrap.ts') },
-              },
-            ],
-          },
-          {
-            test: /(?:bootstrap|script)\.ts$/,
-            sideEffects: true,
-          },
-          {
-            test: /\.njk$/,
-            use: [
-              {
-                loader: 'simple-nunjucks-loader',
                 options: {
-                  autoescape: false,
+                  mainCss: lookup('@', 'styles/main.css'),
+                  bootstrap: lookup('@', 'scripts/bootstrap.ts'),
                 },
               },
             ],
           },
+          { test: /(?:bootstrap|script)\.ts$/, sideEffects: true },
+          { test: /\.njk$/, use: [{ loader: 'simple-nunjucks-loader', options: { autoescape: false } }] },
         ],
       },
     },

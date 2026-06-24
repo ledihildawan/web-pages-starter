@@ -29,9 +29,8 @@ Requires [Bun](https://bun.sh) `>= 1.3.14`.
 │   │   └── layouts/     #     main.njk (page templates)
 │   ├── macros/           #   Nunjucks macros (page-meta for SEO)
 │   ├── constants/        #   centralized constants (single source of truth)
-│   ├── utils/           #   shared utilities (logger, signal-handler, write-file, hono-server, json5, etc.)
-│   ├── types/           #   ambient type declarations (global.d.ts, modules.d.ts, alpinejs-csp.d.ts)
-│   └── page-entry.ts    #   fallback entry for pages without script.ts
+│   ├── utils/           # shared utilities (logger, signal-handler, write-file, json5, etc.)
+│   └── types/           # ambient type declarations (global.d.ts, modules.d.ts, alpinejs-csp.d.ts)
 ├── data/                  # global site data
 │   ├── global.json5       #   site_name, seo, social, dns, preconnect
 │   └── menu.json5         #   navigation structure (header links + dropdowns)
@@ -53,7 +52,7 @@ Requires [Bun](https://bun.sh) `>= 1.3.14`.
 │   ├── components.css     #   component classes
 │   └── main.css          #   Tailwind v4 entry (imports tokens + components)
 ├── assets/                # images, fonts, raw assets
-├── bootstrap.ts          # app entry — global CSS (main.css), Alpine + collapse/focus plugins, i18n store/initIntl, fonts, SW. Auto-injected via page-inject-loader
+├── bootstrap.ts          # app entry — global CSS (main.css), Alpine + collapse/focus plugins, i18n store/initIntl, fonts, SW. Auto-injected via page-inject-loader (scripts/bootstrap.ts)
 ├── bunfig.toml          # Bun config — preload packages/env/preload.ts for .env.{stage} loading
 ├── packages/
 │   ├── cli/
@@ -79,7 +78,7 @@ Requires [Bun](https://bun.sh) `>= 1.3.14`.
 │       ├── system-pages.ts #     ROOT_PAGE, SYSTEM_PAGE_IDS, SYSTEM_PAGE_SLUGS, slug helpers
 │       ├── scanner.ts     #     scanPages(), isGroup(), isSlugDir(), isPrivateDir()
 │       ├── dynamic-routes.ts #  generateDynamicEntries() — [slug] discovery from data.json5
-│       ├── page-inject-loader.cjs # auto-injects bootstrap + page CSS into every script.ts/page-entry.ts
+│       ├── page-inject-loader.cjs # auto-injects bootstrap + CSS via loader options
 │       └── cli/           #     sync-system-pages.ts, generate-page.ts, delete-page.ts
 ├── public/                # static assets (favicon, generated sw.js/manifest/robots/sitemap)
 │   └── assets/i18n/       #   pre-compiled i18n JSON bundles (generated)
@@ -353,7 +352,7 @@ generate-paths → generate-pricing-types → generate-env → sync-system-pages
 
 **SERVE generators** (inside rsbuild-wrapper, before rsbuild): `generate-sitemap → generate-manifest → generate-robots → generate-service-worker`
 
-**rsbuild-wrapper** executes: rsbuild → copy-to-dist → root-page-as-index → pretty-html → remove-empty-js → inline-css → preload-chunks → compress
+**rsbuild-wrapper** executes: rsbuild → copy-to-dist → root-page-as-index → pretty-html → inline-css → preload-chunks → compress
 
 `build.ts` orchestrates the final steps with `NODE_ENV=production`:
 1. Cleans `dist/`
@@ -399,9 +398,9 @@ generate-paths → generate-pricing-types → generate-env → sync-system-pages
 
 | Feature | Detail |
 | --- | --- |
-| Entry discovery | Recursive scan: `pages/**/script.ts` (optional) or `shared/page-entry.ts` (fallback). `_` prefix (skip), `()` groups (strip from URL), `[slug]` (dynamic from data.json5) |
-| Page entry injection | `page-inject-loader.cjs` auto-injects `import '../../bootstrap'` + `import './style.css'` into every `script.ts`/`page-entry.ts` — zero manual imports |
-| Bootstrap shared chunk | `splitChunks` with `minSize: 2000` + `default` cacheGroup extracts bootstrap to single cached chunk. No duplication across pages |
+| Entry discovery | Recursive scan: `pages/**/script.ts` (optional). `_` prefix (skip), `()` groups (strip from URL), `[slug]` (dynamic from data.json5) |
+| Page entry injection | `page-inject-loader.cjs` auto-injects bootstrap + CSS via loader options — zero manual imports |
+| Bootstrap shared chunk | `splitChunks.bootstrap` (priority 40, enforce: true) extracts bootstrap to single cached chunk. No duplication across pages |
 | Resource hints | `preloadChunksOnDist()` (in rsbuild-wrapper) injects `<link rel="preload" as="script">` for named async chunks (excludes `<script defer>` chunks). Font woff2 preload from template engine. CSS inlined via `inlineCssOnDist()` with nonce + URL rewriting (production only; skipped in pretty mode) |
 | Root page as index | `rootPageAsIndex()` function in rsbuild-wrapper renames `home.html` → `index.html` post-build |
 | Clean URLs | Dev server `historyApiFallback` with per-page rewrites: `/pricing` → `pricing.html`, `/about` → `about.html`, etc. |
@@ -411,7 +410,7 @@ generate-paths → generate-pricing-types → generate-env → sync-system-pages
 | Static copy | `output.copy` moves `public/` static files (favicon, sw.js, manifest, robots, i18n bundles) to `dist/` |
 | Path aliases | Single source: `tsconfig.json` paths → `generated/paths.ts` auto-derives bundler format for jiti + Rsbuild. `@i18n`, `@template-engine`, `@page-system`, `@config/*`, `@cli/*`, `@core/*`, `@utils/*`, `@generated/*`, `@assets/*`, `@data/*`, `@dist/*`, `@layouts/*`, `@locales/*`, `@pages/*`, `@public/*`, `@shared/*`. Edit `tsconfig.json` only — all consumers auto-sync |
 | Nunjucks loader | `simple-nunjucks-loader` with search paths: `pages/`, `layouts/`, `.` (root); `assetsPaths: assets/` |
-| Pre-entries | Bootstrap + main.css auto-injected via `page-inject-loader.cjs` (not `preEntry`) |
+| Pre-entries | Bootstrap + main.css auto-injected via `page-inject-loader.cjs` |
 
 ### Preview (`bun run preview`)
 
@@ -619,11 +618,11 @@ Menu sections:
 | Section | Tools |
 |---|---|
 | **Develop** | Dev Server, Test |
-| **Build** | Production, Preview Tunnel, Serve Dist |
+| **Build** | Production Build, Pretty Build, Debug Build, Preview Tunnel, Serve Dist |
 | **Pages** | Generate Page, Delete Page |
 | **i18n** | Check Parity, Sync Locales |
 | **Performance** | Lighthouse |
-| **Utilities** | Subset Fonts |
+| **Utilities** | Subset Fonts, Clean Cache, Lint, Typecheck |
 
 ### Package scripts
 
@@ -638,7 +637,8 @@ Menu sections:
 || `bun run clean:cache` | Remove `node_modules/.cache`, `.cache`, `dist`, `public/assets/i18n` ||
 || `bun run typecheck` | Run `tsc --noEmit` type checking ||
 || `bun run test` | Run tests via `rstest`; supports `--coverage`, `--watch` flags ||
-|| `bun run cli` | Interactive menu (workflow + manual tools) ||
+|| `bun run cli` | Interactive menu (all 16 commands) |
+| `bunx biome ci` | Lint check (no write) ||
 
 ### Direct tool access
 
@@ -663,7 +663,7 @@ Tools live in their respective packages. Shared utilities are in `packages/core/
 || --- | --- |
 || `packages/core/utils/logger.ts` | Centralized `log.*()` and `logBox()` for formatted box output |
 || `packages/core/utils/signal-handler.ts` | SIGINT handling, `wrapMainError()`, `handleExitPromptError()`, `createServer()` with EADDRINUSE protection |
-|| `packages/core/utils/hono-server.ts` | `createStaticApp()`, `loadHtmlCache()`, `getPageNames()` — shared Hono static server with cache headers |
+|| `packages/core/utils/hono-server.ts` | `createStaticApp()`, `loadHtmlCache()`, `getPageNames()` — Hono static server with cache headers |
 || `packages/core/utils/write-file.ts` | `writeFilePath()` (mkdir + write), `generatedHeader()`, `shouldAddComment()`, `withGeneratedHeader()` for auto-generated file headers |
 || `shared/utils/romanize.ts` | `romanize()` — limax-based romanization for URL-safe slug generation from non-Latin page names |
 

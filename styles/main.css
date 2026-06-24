@@ -433,9 +433,12 @@
     inset-inline: 0;
     inset-block-start: 0;
     inline-size: 100%;
-    overflow-y: scroll;
     padding-inline-end: var(--sw-scrollbar-w);
     transform: translateY(var(--body-offset));
+  }
+
+  [data-menu-locked] {
+    overflow: hidden;
   }
 
   [x-show] {
@@ -695,4 +698,8 @@
     opacity: 1;
     filter: grayscale(0);
   }
+}
+
+.vignette-overlay {
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.4) 100%);
 }

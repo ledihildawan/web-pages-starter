@@ -2,11 +2,11 @@
 {% import "@shared/ui/primitives/icons.njk" as icon %}
 
 {% block content %}
-{% set error_icon_name = 'lightning' %}
-{% set error_icon_color = 'rose' %}
-{% set error_gradient_from = 'rose' %}
-{% set error_gradient_via = 'red' %}
-{% set error_i18n_ns = 'server-error' %}
-{% set error_quick_links = '/|home,/about|about,/contact|contact' %}
-{% include "@shared/ui/patterns/error-page.njk" %}
+  {% set error_icon_name = 'lightning' %}
+  {% set error_icon_color = 'rose' %}
+  {% set error_gradient_from = 'rose' %}
+  {% set error_gradient_via = 'red' %}
+  {% set error_i18n_ns = 'server-error' %}
+  {% set error_quick_links = '/|home,/about|about,/contact|contact' %}
+  {% include "@shared/ui/patterns/error-page.njk" %}
 {% endblock %}
