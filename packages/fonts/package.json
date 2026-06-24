@@ -5,6 +5,7 @@
   "type": "module",
   "sideEffects": false,
   "dependencies": {
+    "@web-pages-starter/core": "*",
     "@web-pages-starter/i18n": "*",
     "@fontsource-variable/inter": "^5.2.8",
     "@fontsource-variable/noto-sans-adlam": "^5.2.9",

@@ -5,6 +5,8 @@
   "type": "module",
   "sideEffects": false,
   "dependencies": {
+    "@web-pages-starter/core": "*",
+    "@web-pages-starter/i18n": "*",
     "limax": "^4.2.3"
   }
 }
