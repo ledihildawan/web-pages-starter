@@ -14,6 +14,8 @@ export interface RunOptions {
   extraHeaders?: string | null;
   throttlingMethod?: string;
   view?: boolean;
+  quiet?: boolean;
+  retry?: number;
 }
 
 export interface RunResult {
@@ -83,9 +85,11 @@ function parseLighthouseJson(jsonPath: string, categories: string[]): PageScore 
   };
 }
 
-export async function runLighthouse(url: string, args: string[], label: string): Promise<void> {
+export async function runLighthouse(url: string, args: string[], label?: string): Promise<void> {
   return new Promise((resolve, reject) => {
-    log.info(`\n${label} Running Lighthouse for ${url}...`);
+    if (label) {
+      log.info(`\n${label} Running Lighthouse for ${url}...`);
+    }
     const proc = spawn('bunx', ['lighthouse', url, ...args], {
       stdio: ['inherit', 'inherit', 'pipe'],
       shell: false,
@@ -118,7 +122,18 @@ export async function runLighthouse(url: string, args: string[], label: string):
 }
 
 export async function runAudit(options: RunOptions): Promise<RunResult> {
-  const { urls, formFactor, categories, outputs, outputDir, extraHeaders, throttlingMethod, view } = options;
+  const {
+    urls,
+    formFactor,
+    categories,
+    outputs,
+    outputDir,
+    extraHeaders,
+    throttlingMethod,
+    view,
+    quiet = false,
+    retry = 1,
+  } = options;
 
   const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
   const reportDir = join(outputDir, timestamp);
@@ -171,27 +186,52 @@ export async function runAudit(options: RunOptions): Promise<RunResult> {
   }
 
   const results: PageScore[] = [];
+  const failedTasks: typeof tasks = [];
 
   for (let i = 0; i < tasks.length; i++) {
     const task = tasks[i];
     const taskIndex = `${i + 1}/${tasks.length}`;
-    const label = `[${taskIndex}] ${task.ff}`;
+    const label = quiet ? undefined : `[${taskIndex}] ${task.ff}`;
 
-    try {
-      await runLighthouse(task.url, task.args, label);
+    for (let attempt = 1; attempt <= retry; attempt++) {
+      try {
+        if (!quiet && label) {
+          if (attempt > 1) {
+            log.info(`${label} Retry ${attempt}/${retry}...`);
+          }
+          log.info(`\n${label} Running Lighthouse for ${task.url}...`);
+        }
+        await runLighthouse(task.url, task.args, label ?? '');
 
-      if (outputs.includes('json')) {
-        const jsonPath = `${task.outputPath}.report.json`;
-        if (existsSync(jsonPath)) {
-          const pageScore = parseLighthouseJson(jsonPath, categories);
-          if (!results.find((r) => r.url === pageScore.url && r.path === pageScore.path)) {
-            results.push(pageScore);
+        if (outputs.includes('json')) {
+          const jsonPath = `${task.outputPath}.report.json`;
+          if (existsSync(jsonPath)) {
+            const pageScore = parseLighthouseJson(jsonPath, categories);
+            if (!results.find((r) => r.url === pageScore.url && r.path === pageScore.path)) {
+              results.push(pageScore);
+            }
           }
         }
+        break;
+      } catch (err) {
+        if (attempt === retry) {
+          if (!quiet) {
+            log.error(`Failed: ${task.url} (${task.ff}) - ${(err as Error).message}`);
+          }
+          failedTasks.push(task);
+        } else if (!quiet) {
+          log.warn(`Retry ${attempt}/${retry} for ${task.url}...`);
+        }
       }
-    } catch (err) {
-      log.error(`Failed: ${task.url} (${task.ff}) - ${(err as Error).message}`);
     }
+  }
+
+  if (failedTasks.length > 0 && !quiet) {
+    log.warn(`\n${failedTasks.length} URL(s) failed after ${retry} attempt(s):`);
+    for (const ft of failedTasks) {
+      log.warn(`  - ${ft.url} (${ft.ff})`);
+    }
+    log.warn('Tip: Check if the preview server is running or try --retry=3\n');
   }
 
   return {

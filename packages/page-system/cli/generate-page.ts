@@ -158,32 +158,51 @@ try {
   fs.writeFileSync(join(targetDir, 'script.ts'), '');
   fs.writeFileSync(join(targetDir, 'style.css'), '');
 
+  const pageRelPath = groupFolder ? `${groupFolder}/${urlPath}` : urlPath;
+  log.success(`\nDone: Page "${urlPath}" generated`);
+  log.info(`\n  Created files:`);
+  log.info(`    pages/`);
+  log.info(`    └── ${pageRelPath}/`);
+  log.info(`        ├── index.njk`);
+  log.info(`        ├── data.json5`);
+  log.info(`        ├── script.ts`);
+  log.info(`        └── style.css`);
+
+  const localesCreated: string[] = [];
   const baseLocaleDir = lookup('@locales');
   if (fs.existsSync(baseLocaleDir)) {
     for (const localeCode of getActiveLocaleCodes()) {
       const filePath = join(baseLocaleDir, localeCode, `${pageId}.json`);
       if (!fs.existsSync(filePath)) {
         fs.writeFileSync(filePath, localeContent, 'utf-8');
-        log.info(`Created locale [${localeCode}]: locales/${localeCode}/${pageId}.json`);
+        localesCreated.push(localeCode);
       }
     }
   }
 
-  log.success(`\nDone: Page "${urlPath}" generated`);
-  log.info(`Path: pages/${groupFolder ? `${groupFolder}/` : ''}${urlPath}/`);
-  log.info(`page_id: ${pageId}`);
-  log.info(`url_path: ${urlPath}`);
+  if (localesCreated.length > 0) {
+    log.info(`    locales/`);
+    for (const lc of localesCreated) {
+      log.info(`    └── ${lc}/`);
+      log.info(`        └── ${pageId}.json`);
+    }
+  }
+
+  log.info(`\n  Metadata:`);
+  log.info(`    page_id: ${pageId}`);
+  log.info(`    url_path: ${urlPath}`);
+
   if (formattedSegments.length > 1) {
-    log.info(`\nBreadcrumb (auto-generated):`);
+    log.info(`\n  Breadcrumb (auto-generated):`);
     log.info(
-      `  Home → ${formattedSegments
+      `    Home → ${formattedSegments
         .slice(0, -1)
         .map((s) => s.replace(/-/g, ' '))
         .join(' → ')} → ${titleCase}`,
     );
   }
-  log.info('\nNext: Restart dev server — `bun run dev` — to see the new entry detected.');
-  log.info('Tip: Run `bun run cli` → Generate Page to create pages interactively.\n');
+
+  log.info('\n  Next: Restart dev server — `bun run dev` — to see the new entry detected.\n');
 } catch (error) {
   log.error(`Error: Generation failed — ${error}`);
   process.exit(1);

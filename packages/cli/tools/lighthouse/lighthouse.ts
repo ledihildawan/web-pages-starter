@@ -22,10 +22,13 @@ const CLI_OPTIONS = {
   '--form-factor': 'desktop | mobile | both (default: interactive)',
   '--categories': 'Comma-separated categories (default: all stable)',
   '--output': 'html | json | csv (default: html,json)',
+  '--json': 'Shortcut for --output=json (for CI/CD)',
   '--view': 'Open report in browser (default: true)',
   '--no-view': "Don't open report",
   '--dist': 'Path to dist folder',
   '--throttling-method': 'devtools | provided | simulate (default: devtools)',
+  '--quiet': 'Suppress stdout output (for CI)',
+  '--retry': 'Retry failed URLs up to 3 times (default: 1)',
   '--list': 'List URLs only, do not audit',
   '--clean': 'Clean old reports',
 } as const;
@@ -64,6 +67,8 @@ interface CliArgs {
   view: boolean;
   dist: string | null;
   throttlingMethod: string | null;
+  quiet: boolean;
+  retry: number;
   list: boolean;
   clean: boolean;
   baseUrl: string | null;
@@ -81,6 +86,8 @@ function parseArgs(): CliArgs {
     view: true,
     dist: null,
     throttlingMethod: null,
+    quiet: false,
+    retry: 1,
     list: false,
     clean: false,
     baseUrl: null,
@@ -136,6 +143,23 @@ function parseArgs(): CliArgs {
 
     if (arg === '--throttling-method') {
       result.throttlingMethod = args[++i] || null;
+      continue;
+    }
+
+    if (arg === '--json') {
+      result.outputs = ['json'];
+      continue;
+    }
+
+    if (arg === '--quiet' || arg === '-q') {
+      result.quiet = true;
+      continue;
+    }
+
+    if (arg === '--retry') {
+      const val = args[++i];
+      const retryCount = parseInt(val || '3', 10);
+      result.retry = isNaN(retryCount) ? 1 : Math.min(Math.max(retryCount, 1), 5);
       continue;
     }
 
@@ -292,12 +316,15 @@ async function main(): Promise<void> {
 
   cleanupOldReports(outputDir);
 
-  logBox('Lighthouse Audit', {
-    'Form factor': formFactor === 'both' ? 'All' : formFactor,
-    Categories: categories.join(', '),
-    Output: args.outputs.join(','),
-    URLs: auditUrls.length,
-  });
+  if (!args.quiet) {
+    logBox('Lighthouse Audit', {
+      'Form factor': formFactor === 'both' ? 'All' : formFactor,
+      Categories: categories.join(', '),
+      Output: args.outputs.join(','),
+      URLs: auditUrls.length,
+      Retry: args.retry > 1 ? `${args.retry}x` : '1x',
+    });
+  }
 
   const result = await runAudit({
     urls: auditUrls,
@@ -307,9 +334,11 @@ async function main(): Promise<void> {
     outputDir,
     throttlingMethod: args.throttlingMethod || DEFAULT_THROTTLING_METHOD,
     view: args.view,
+    quiet: args.quiet,
+    retry: args.retry,
   });
 
-  if (result.results.length > 0) {
+  if (result.results.length > 0 && !args.quiet) {
     console.log(`\n${formatSummaryTable(result.results, categories)}`);
 
     if (args.outputs.includes('csv')) {
@@ -321,8 +350,10 @@ async function main(): Promise<void> {
   }
 
   if (result.success) {
-    log.success('\nDone: Lighthouse audit complete');
-    log.info(`Reports: ${result.reportDir}/`);
+    if (!args.quiet) {
+      log.success('\nDone: Lighthouse audit complete');
+      log.info(`Reports: ${result.reportDir}/`);
+    }
   } else {
     log.error('\nAudit completed with errors.');
     process.exit(1);

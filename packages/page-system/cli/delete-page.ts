@@ -26,6 +26,7 @@ Arguments:
 
 Options:
   --name <name>  Delete the specified page by name, url_path, or page_id.
+  --dry-run      Preview what would be deleted without actually deleting.
   --help         Show this help message
 `);
 }
@@ -36,6 +37,7 @@ if (args.includes('--help') || args.includes('-h')) {
 }
 
 const nameIndex = args.indexOf('--name');
+const dryRun = args.includes('--dry-run');
 const providedPageName = nameIndex !== -1 ? args[nameIndex + 1] : args.find((a) => !a.startsWith('--'));
 const providedPageNameTrimmed = providedPageName?.trim();
 
@@ -275,6 +277,30 @@ async function main(): Promise<void> {
 
   const refs = findReferences(pageInfo);
   showReferenceWarnings(refs);
+
+  if (dryRun) {
+    log.info(`\n[DRY RUN] Would delete page: "${pageInfo.name}"`);
+    log.info(`\n  Would delete:`);
+    log.info(`    pages/${pageInfo.name}/ (entire folder)`);
+
+    const localesDir = lookup('@locales');
+    const localeFiles: string[] = [];
+    if (fs.existsSync(localesDir)) {
+      for (const localeCode of fs.readdirSync(localesDir)) {
+        const localeFile = join(localesDir, localeCode, `${pageInfo.pageId}.json`);
+        if (fs.existsSync(localeFile)) {
+          localeFiles.push(`locales/${localeCode}/${pageInfo.pageId}.json`);
+        }
+      }
+    }
+    if (localeFiles.length > 0) {
+      for (const f of localeFiles) log.info(`    ${f}`);
+    } else {
+      log.info(`    (no locale files found)`);
+    }
+    log.info('\n  Run without --dry-run to actually delete.\n');
+    return;
+  }
 
   const confirmed = await confirmDeletion(pageInfo.name);
   if (!confirmed) return;

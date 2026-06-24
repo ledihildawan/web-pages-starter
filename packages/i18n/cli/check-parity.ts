@@ -18,6 +18,7 @@ Usage:
   bun ./packages/i18n/cli/check-parity.ts [options]
 
 Options:
+  --json         Output results as JSON (for CI/CV integration)
   --help         Show this help message
 
 Exit codes:
@@ -26,6 +27,7 @@ Exit codes:
 
 Examples:
   bun ./packages/i18n/cli/check-parity.ts
+  bun ./packages/i18n/cli/check-parity.ts --json > parity-report.json
 `);
 }
 
@@ -33,6 +35,8 @@ if (process.argv.includes('--help') || process.argv.includes('-h')) {
   printHelp();
   process.exit(0);
 }
+
+const outputJson = process.argv.includes('--json');
 
 interface LocaleDiff {
   locale: string;
@@ -293,7 +297,23 @@ function printReport(report: ReturnType<typeof checkParity>): void {
 }
 
 const report = checkParity();
-printReport(report);
+
+if (outputJson) {
+  const jsonOutput = {
+    timestamp: new Date().toISOString(),
+    baseLocale: BASE_LOCALE,
+    summary: report.summary,
+    reports: report.reports.map((r) => ({
+      file: r.file,
+      totalKeys: r.totalKeys,
+      diffs: r.diffs,
+    })),
+    hasIssues: report.reports.length > 0,
+  };
+  console.log(JSON.stringify(jsonOutput, null, 2));
+} else {
+  printReport(report);
+}
 
 const hasIssues = report.summary.some((s) => s.missing > 0 || s.extra > 0);
 if (hasIssues) {
