@@ -23,7 +23,7 @@ const TEXT_EXTS = ['.html', '.css', '.js', '.json', '.xml', '.txt', '.svg', '.we
 
 const runBuild = (siteUrl: string): Promise<void> => {
   return new Promise((resolve, reject) => {
-    log.info('\n[Build] Running production build...');
+    log.info('\n▼ Running production build...');
     const proc = spawn('bun', ['run', 'build'], {
       stdio: 'inherit',
       cwd: process.cwd(),
@@ -31,10 +31,26 @@ const runBuild = (siteUrl: string): Promise<void> => {
       shell: false,
     });
     proc.on('close', (code) => {
-      if (code !== 0) return reject(new Error('Build failed'));
+      if (code !== 0) {
+        return reject(
+          new Error(
+            `Build failed with exit code ${code}.\n` +
+              '  Check the output above for details.\n' +
+              '  Common causes:\n' +
+              '    - Config file errors (run `bun run typecheck` to check)\n' +
+              '    - Missing locale files (check locales/)\n' +
+              '    - Invalid data files (check data/*.json5)',
+          ),
+        );
+      }
+      log.success('▼ Build complete');
       resolve();
     });
-    proc.on('error', reject);
+    proc.on('error', (err) => {
+      reject(
+        new Error(`Failed to start build: ${err.message}.\n` + '  Make sure dependencies are installed: `bun install`'),
+      );
+    });
   });
 };
 
@@ -100,6 +116,7 @@ const checkCloudflared = (): boolean => {
 const startCloudflaredTunnel = (): Promise<{ url: string; kill: () => void }> => {
   return new Promise((resolve, reject) => {
     const tunnelTarget = `http://${HOST}:${PORT}`;
+    log.info('▼ Starting cloudflared tunnel...');
     const proc = spawn('cloudflared', ['tunnel', '--url', tunnelTarget], {
       stdio: ['ignore', 'pipe', 'pipe'],
     });
@@ -125,16 +142,39 @@ const startCloudflaredTunnel = (): Promise<{ url: string; kill: () => void }> =>
           finish(() => resolve({ url: match[0], kill: () => proc.kill() }));
           return;
         }
+        if (line.includes('ERR_')) {
+          log.warn(`  cloudflared: ${line.trim()}`);
+        }
       }
     };
 
     proc.stdout.on('data', processChunk);
     proc.stderr.on('data', processChunk);
-    proc.on('error', (err) => finish(() => reject(new Error(`cloudflared failed — ${err.message}`))));
-    proc.on('close', (code) => finish(() => reject(new Error(`cloudflared exited (code ${code})`))));
+    proc.on('error', (err) =>
+      finish(() =>
+        reject(
+          new Error(
+            `cloudflared failed: ${err.message}.\n` +
+              '  Make sure cloudflared is installed:\n' +
+              '  https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads',
+          ),
+        ),
+      ),
+    );
+    proc.on('close', (code) =>
+      finish(() =>
+        reject(new Error(`cloudflared exited unexpectedly (code ${code}).\n` + '  Try again or use ngrok instead.')),
+      ),
+    );
 
     setTimeout(() => {
-      finish(() => reject(new Error('cloudflared tunnel timeout (30s) — no URL received')));
+      finish(() =>
+        reject(
+          new Error(
+            'cloudflared timeout (30s) — no tunnel URL received.\n' + '  Check your internet connection and try again.',
+          ),
+        ),
+      );
     }, 30000);
   });
 };
