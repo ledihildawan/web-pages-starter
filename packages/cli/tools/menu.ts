@@ -197,7 +197,7 @@ const TOOLS: Tool[] = [
   {
     name: 'Lighthouse',
     section: 'Performance',
-    description: 'Run Lighthouse audit with --json, --quiet, --retry',
+    description: 'Run Lighthouse audit (desktop + mobile)',
     action: () => runTool('lighthouse'),
   },
   {
