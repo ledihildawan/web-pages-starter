@@ -58,7 +58,8 @@ export const wrapMainError = (mainFn: () => Promise<void>, label = 'Error:') => 
   mainFn().catch((err) => {
     if (handleExitPromptError(err)) return;
 
-    log.error(`\n${label} ${err}`);
+    const message = err instanceof Error ? err.message : String(err);
+    log.error(`\n${label} ${message}`);
 
     process.exit(1);
   });

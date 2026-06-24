@@ -264,9 +264,7 @@ async function getBaseUrl(cliBase?: string | null): Promise<string> {
 
   const saved = await loadPreviewUrl();
   if (!saved || isExpired(saved)) {
-    log.error('Error: Preview server not running or URL expired.');
-    log.info('  Tip: Start with `bun run preview` first.\n');
-    process.exit(1);
+    throw new Error('Preview server not running or URL expired.\n  Tip: Run `bun run preview` first.');
   }
 
   return saved.url;
@@ -288,6 +286,30 @@ async function main(): Promise<void> {
 
   const outputDir = env.LIGHTHOUSE_OUTPUT_DIR || DEFAULT_OUTPUT_DIR;
 
+  if (args.list) {
+    const baseUrl = await getBaseUrl(args.baseUrl);
+    const pages = scanPagesFromDist(args.dist || undefined);
+    const auditUrls =
+      args.urls.length > 0
+        ? args.urls.map((u) => `${baseUrl}${u.startsWith('/') ? u : `/${u}`}`)
+        : pages.map((p) => `${baseUrl}${p.url}`);
+
+    log.info('\n  Discovered URLs:\n');
+    for (const url of auditUrls) {
+      log.info(`    ${url}`);
+    }
+    log.info('');
+    process.exit(0);
+  }
+
+  if (args.urls.length === 0) {
+    const pages = scanPagesFromDist(args.dist || undefined);
+    if (pages.length === 0) {
+      log.error('Error: No pages found in dist.\n');
+      process.exit(1);
+    }
+  }
+
   const formFactor = args.formFactor ?? (await interactiveFormFactor());
 
   let categories = args.categories;
@@ -306,15 +328,6 @@ async function main(): Promise<void> {
     args.urls.length > 0
       ? args.urls.map((u) => `${baseUrl}${u.startsWith('/') ? u : `/${u}`}`)
       : await interactiveUrlSelection(pages, baseUrl);
-
-  if (args.list) {
-    log.info('\n  Discovered URLs:\n');
-    for (const url of auditUrls) {
-      log.info(`    ${url}`);
-    }
-    log.info('');
-    process.exit(0);
-  }
 
   if (auditUrls.length === 0) {
     log.error('Error: No URLs to audit.\n');
