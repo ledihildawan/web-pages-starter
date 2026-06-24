@@ -36,6 +36,9 @@
         "@fontsource/noto-sans-oriya": "^5.2.9",
         "@hono/node-server": "^2.0.5",
         "@splidejs/splide": "^4.1.4",
+        "@web-pages-starter/i18n": "link:@web-pages-starter/i18n",
+        "@web-pages-starter/page-system": "link:@web-pages-starter/page-system",
+        "@web-pages-starter/template-engine": "link:@web-pages-starter/template-engine",
         "alpinejs": "^3.15.12",
         "disable-devtool": "^0.3.9",
         "hono": "^4.12.26",
@@ -85,18 +88,6 @@
         "tailwindcss": "^4.3.1",
         "typescript": "^6.0.3",
       },
-    },
-    "packages/i18n": {
-      "name": "@web-pages-starter/i18n",
-      "version": "1.0.0",
-    },
-    "packages/page-system": {
-      "name": "@web-pages-starter/page-system",
-      "version": "1.0.0",
-    },
-    "packages/template-engine": {
-      "name": "@web-pages-starter/template-engine",
-      "version": "1.0.0",
     },
   },
   "trustedDependencies": [
@@ -813,11 +804,11 @@
 
     "@vue/shared": ["@vue/shared@3.1.5", "", {}, "sha512-oJ4F3TnvpXaQwZJNF3ZK+kLPHKarDmJjJ6jyzVNDKH9md1dptjC7lWR//jrGuLdek/U6iltWxqAnYOu8gCiOvA=="],
 
-    "@web-pages-starter/i18n": ["@web-pages-starter/i18n@workspace:packages/i18n"],
+    "@web-pages-starter/i18n": ["@web-pages-starter/i18n@link:@web-pages-starter/i18n", {}],
 
-    "@web-pages-starter/page-system": ["@web-pages-starter/page-system@workspace:packages/page-system"],
+    "@web-pages-starter/page-system": ["@web-pages-starter/page-system@link:@web-pages-starter/page-system", {}],
 
-    "@web-pages-starter/template-engine": ["@web-pages-starter/template-engine@workspace:packages/template-engine"],
+    "@web-pages-starter/template-engine": ["@web-pages-starter/template-engine@link:@web-pages-starter/template-engine", {}],
 
     "@webassemblyjs/ast": ["@webassemblyjs/ast@1.14.1", "", { "dependencies": { "@webassemblyjs/helper-numbers": "1.13.2", "@webassemblyjs/helper-wasm-bytecode": "1.13.2" } }, "sha512-nuBEDgQfm1ccRp/8bCQrx1frohyufl4JlbMMZ4P1wpeOfDhF6FQkxZJ1b/e+PLwr6X1Nhw6OLme5usuBWYBvuQ=="],
 
