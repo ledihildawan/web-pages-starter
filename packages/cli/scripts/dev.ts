@@ -36,7 +36,6 @@ const runDevServer = (): Promise<void> => {
       stdio: 'inherit',
       env: spawnEnv,
       cwd: process.cwd(),
-      shell: false,
     });
 
     const rsbuildBin = patheResolve(process.cwd(), 'node_modules', '@rsbuild', 'core', 'bin', 'rsbuild.js');
@@ -44,7 +43,6 @@ const runDevServer = (): Promise<void> => {
       stdio: 'inherit',
       env: spawnEnv,
       cwd: process.cwd(),
-      shell: false,
     });
 
     const cleanup = () => {
