@@ -12,6 +12,8 @@ const args = process.argv.slice(2);
 // ─── Help ─────────────────────────────────────────────────────────────────────
 function printHelp(): void {
   log.info(`
+Generate Page
+
 Generate a new page with locale files for all active locales.
 
 Usage:
@@ -22,7 +24,7 @@ Arguments:
                  Use "/" for nested pages (e.g. "services/web")
 
 Options:
-  --help         Show this help message
+  --help         Show this help message.
 
 Examples:
   bun ./packages/page-system/cli/generate-page.ts pricing

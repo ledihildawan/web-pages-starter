@@ -132,19 +132,21 @@ function compareLocaleParity(
 // ─── Help ─────────────────────────────────────────────────────────────────────
 function printHelp(): void {
   log.info(`
-Generate TypeScript type definitions from locale JSON files and verify
-that all locales have the same translation keys (parity check).
+Generate i18n Types
+
+Generate TypeScript type definitions from locale JSON files and verify that all
+locales have the same translation keys (parity check).
 
 Usage:
   bun ./packages/i18n/cli/generate-types.ts [options]
 
 Options:
-  --no-check    Skip parity check (dev mode — allows missing keys)
-  --help        Show this help message
+  --no-check    Skip parity check (dev mode — allows missing keys).
+  --help        Show this help message.
 
 Exit codes:
-  0    Types generated successfully
-  1    Parity check failed (missing keys in non-default locales)
+  0    Types generated successfully.
+  1    Parity check failed (missing keys in non-default locales).
 
 Examples:
   bun ./packages/i18n/cli/generate-types.ts           # prod: generate + parity check

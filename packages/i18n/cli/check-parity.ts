@@ -12,18 +12,20 @@ const BASE_LOCALE = i18nConfig.defaultLocale;
 // ─── Help ─────────────────────────────────────────────────────────────────────
 function printHelp(): void {
   log.info(`
+Check Parity
+
 Verify that all locale files have the same translation keys as the default locale.
 
 Usage:
   bun ./packages/i18n/cli/check-parity.ts [options]
 
 Options:
-  --json         Output results as JSON (for CI/CV integration)
-  --help         Show this help message
+  --json         Output results as JSON (for CI/CV integration).
+  --help         Show this help message.
 
 Exit codes:
-  0    All locales are in sync
-  1    One or more locales have missing, extra, or duplicate keys
+  0    All locales are in sync.
+  1    One or more locales have missing, extra, or duplicate keys.
 
 Examples:
   bun ./packages/i18n/cli/check-parity.ts

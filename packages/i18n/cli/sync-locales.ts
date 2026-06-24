@@ -8,14 +8,16 @@ import { log, logBox } from '@web-pages-starter/core/logger';
 // ─── Help ─────────────────────────────────────────────────────────────────────
 function printHelp(): void {
   log.info(`
-Sync locale files: create missing locale directories and copy missing .json files
-from the default locale to all configured locales.
+Sync Locale Files
+
+Create missing locale directories and copy missing .json files from the default
+locale to all configured locales.
 
 Usage:
   bun ./packages/i18n/cli/sync-locales.ts [options]
 
 Options:
-  --help    Show this help message
+  --help    Show this help message.
 
 Examples:
   bun ./packages/i18n/cli/sync-locales.ts

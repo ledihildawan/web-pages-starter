@@ -7,7 +7,7 @@
 # Nunjucks templates loader for Webpack
 
 This Webpack loader compiles [Nunjucks][nunjucks-github] templates.
-[`html-webpack-plugin`][html-webpack-plugin-github] compatible. 
+[`html-webpack-plugin`][html-webpack-plugin-github] is compatible. 
 
 > For Webpack 4 support use loader 2.x version
 
@@ -26,7 +26,7 @@ npm install --no-optional --save-dev simple-nunjucks-loader
 ## Usage
 
 This loader will [precompile][nunjucks-docs-precompiling]
-Nunjucks templates. It also includes Nunjunks (slim) runtime for browser.
+Nunjucks templates. It also includes Nunjucks (slim) runtime for browser.
 
 Add loader to your `webpack` config as follows:
 
@@ -70,7 +70,7 @@ the page.
 site.
 
 ## How it works
-By default Nunjunks bundle all precompiled templates to
+By default Nunjucks bundle all precompiled templates to
 `window.nunjucksPrecompiled`, then loads them via custom loader from this
 global object. If precompiled template reference some other template file,
 it is loaded from disk (in NodeJS environment), or fetched via `XMLHttpRequest`
@@ -78,14 +78,14 @@ from internet and precompile downloaded template in runtime.
 
 Both are not webpack-way for projects bundling.
 
-This loader got template source, parse it with Nunjucks parser, to get AST of
+This loader receives template source, parse it with Nunjucks parser, to get AST of
 template. This AST is iterated to get info on imported templates, used filters
 and extensions.
 
 Next step is precompile template, to make it faster. Loader injects own wrapper
 to avoid default behaviour with creating global `window.nunjucksPrecompiled`.
 
-One final step is gather all parts together. Loader is inserts imports of
+One final step is to gather all parts together. The loader inserts imports of
 templates, filters and extensions that somehow noted in template, this will make
 Webpack to rebuild template only when one of essential part is changed.
 
@@ -95,7 +95,7 @@ template rendered.
 
 ### Assets support
 
-Loader add own `{% static %}` tag, for loading assets, and track their change.
+The loader adds its own `{% static %}` tag, for loading assets, and track their change.
 
 Signature is same to `static` tag from Django.
 
@@ -147,8 +147,8 @@ Because of asynchronous nature of Webpack assets loading, all assets, that
 loaded via `{% static %}` tag, make template to return `Promise` too.
 
 ## Options
-Loader supports limited number of [Nunjuncks options][nunjucks-docs-configure].
-It's doesn't support `watch` (we use `webpack` own dependencies watch),
+Loader supports limited number of [Nunjucks options][nunjucks-docs-configure].
+It doesn't support `watch` (we use `webpack` own dependencies watch),
 `noCache`, `web` settings and `express`.
 
 All other options get passed to Nunjunks `Environment` during files loading.
@@ -161,7 +161,7 @@ All other options get passed to Nunjunks `Environment` during files loading.
 |**[`globals`](#globals)**|`Object.<string, string>`|`{}`|Map global function to corresponding module|
 |**[`extensions`](#extensions)**|`Object.<string, string>`|`{}`|Map extension to corresponding module|
 |**[`filters`](#filters)**|`Object.<string, string>`|`{}`|Map filters to corresponding module|
-|<!-- Add custom options above -->**`autoescape`**|`{Boolean}`|`true`|See [Nunjuncks options][nunjucks-docs-configure] for description of options below|
+|<!-- Add custom options above -->**`autoescape`**|`{Boolean}`|`true`|See [Nunjucks options][nunjucks-docs-configure] for description of options below|
 |**`throwOnUndefined`**|`{Boolean}`|`false`||
 |**`trimBlocks`**|`{Boolean}`|`false`||
 |**`lstripBlocks`**|`{Boolean}`|`false`||
@@ -189,7 +189,7 @@ Installs Jinja syntax. This option install it for whole bundle.
 Loader is searching for full template relative to given string(s) from
 `searchPath` option (or project root, if no paths given).
 
-Path to file couldn't be outside of folders above.
+Path to file cannot be outside of folders above.
 
 **webpack.config.js**
 ```js
@@ -241,7 +241,7 @@ module.exports = {
 ### globals
 
 Set global function and import path, that should return function to use.
-It the same function that [`env.addGlobal`][nunjucks-docs-addglobal] using.
+It's the same function that [`env.addGlobal`][nunjucks-docs-addglobal] using.
 
 **webpack.config.js**
 ```js
@@ -299,7 +299,7 @@ module.exports = {
 };
 ```
 
-> :boom: Using ES modules syntax for extensions
+> Note: Using ES modules syntax for extensions
 > [is not yet possible](https://github.com/ogonkov/nunjucks-loader/issues/81)
 
 **extension.js**
@@ -314,7 +314,7 @@ class CustomExtension {}
 module.exports = new CustomExtension();
 ```
 
-Loader trying to guess which extensions are really used, and keep only required
+The loader tries to guess which extensions are really used, and keep only required
 imports.
 
 ### filters
@@ -345,7 +345,7 @@ module.exports = {
 };
 ```
 
-> :boom: Using ES modules syntax for filters
+> Note: Using ES modules syntax for filters
 > [is not yet possible](https://github.com/ogonkov/nunjucks-loader/issues/81)
 
 **filter.js**
@@ -362,7 +362,7 @@ module.exports = function filter(val, param) {
 {{ foo_var | filter(3) }}
 ```
 
-Nunjucks is not aware that filter is asynchronous when parse template to AST. 
+Nunjucks is not aware that a filter is asynchronous when it parses the template to AST. 
 Because of that, you should mark filter as async. To do that, filter module
 should export `async` flag:
 

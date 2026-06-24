@@ -14,6 +14,8 @@ const args = process.argv.slice(2);
 // ─── Help ─────────────────────────────────────────────────────────────────────
 function printHelp(): void {
   log.info(`
+Delete Page
+
 Delete a page and all its locale files.
 
 Usage:
@@ -27,7 +29,7 @@ Arguments:
 Options:
   --name <name>  Delete the specified page by name, url_path, or page_id.
   --dry-run      Preview what would be deleted without actually deleting.
-  --help         Show this help message
+  --help         Show this help message.
 `);
 }
 
