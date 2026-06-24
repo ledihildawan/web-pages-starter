@@ -25,6 +25,7 @@ public/manifest.json
 public/robots.txt
 public/sitemap.xml
 public/service-worker.js
+public/reload.json
 
 # Profile
 .rspack-profile-*/

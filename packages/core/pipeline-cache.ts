@@ -255,3 +255,96 @@ export function clearPipelineCache(): void {
     rmSync(PIPELINE_DIR, { recursive: true, force: true });
   }
 }
+
+export interface StepCache {
+  lastRun: number;
+  sources: Record<string, number>;
+}
+
+export interface PipelineCache {
+  version: number;
+  steps: Record<string, StepCache>;
+}
+
+const DEV_CACHE_VERSION = 1;
+const DEV_CACHE_FILE = 'node_modules/.cache/dev-pipeline-cache.json';
+
+export function getDevCachePath(): string {
+  return join(process.cwd(), DEV_CACHE_FILE);
+}
+
+export function readDevCache(): PipelineCache | null {
+  try {
+    const path = getDevCachePath();
+    if (!existsSync(path)) return null;
+    const data = readFileSync(path, 'utf-8');
+    const cache = JSON.parse(data) as PipelineCache;
+    if (cache.version !== DEV_CACHE_VERSION) return null;
+    return cache;
+  } catch {
+    return null;
+  }
+}
+
+export function writeDevCache(cache: PipelineCache): void {
+  try {
+    const dir = join(process.cwd(), 'node_modules/.cache');
+    if (!existsSync(dir)) {
+      mkdirSync(dir, { recursive: true });
+    }
+    writeFileSync(getDevCachePath(), JSON.stringify(cache, null, 2));
+  } catch {}
+}
+
+export function getSourceMtime(source: string): number {
+  try {
+    const path = join(process.cwd(), source);
+    if (!existsSync(path)) return 0;
+    return statSync(path).mtimeMs;
+  } catch {
+    return 0;
+  }
+}
+
+export function getSourcesMtime(sources: string[]): Record<string, number> {
+  const result: Record<string, number> = {};
+  for (const src of sources) {
+    result[src] = getSourceMtime(src);
+  }
+  return result;
+}
+
+export function hasSourcesChanged(cached: StepCache | undefined, sources: Record<string, number>): boolean {
+  if (!cached) return true;
+
+  for (const [src, mtime] of Object.entries(sources)) {
+    if (cached.sources[src] !== mtime) return true;
+  }
+  return false;
+}
+
+export function createStepCache(sources: string[]): StepCache {
+  return {
+    lastRun: Date.now(),
+    sources: getSourcesMtime(sources),
+  };
+}
+
+const DEFAULT_SOURCES: Record<string, string[]> = {
+  'packages/cli/generators/paths.ts': ['tsconfig.json'],
+  'packages/cli/generators/pricing-types.ts': ['data/pricing.json5'],
+  'packages/cli/generators/env.ts': ['.env', '.env.*'],
+  'packages/cli/generators/generate-active-locales.ts': ['configs/i18n.ts'],
+  'packages/page-system/cli/sync-system-pages.ts': ['configs/i18n.ts', 'packages/page-system/system-pages.ts'],
+  'packages/cli/scripts/fetch-exchange-rates.ts': ['configs/i18n.ts'],
+  'packages/cli/generators/fonts-css.ts': ['configs/fonts.ts', 'package.json'],
+  'packages/cli/generators/subset-fonts.ts': ['configs/fonts.ts', 'package.json'],
+  'packages/i18n/cli/sync-locales.ts': ['locales/**'],
+  'packages/i18n/cli/generate-types.ts': ['locales/**'],
+  'packages/cli/generators/images.ts': ['data/images.json5'],
+};
+
+export function getSourcesForStep(step: string, extraSources?: string[]): string[] {
+  const sources = DEFAULT_SOURCES[step] || [];
+  return extraSources ? [...sources, ...extraSources] : sources;
+}

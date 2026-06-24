@@ -124,16 +124,11 @@ export default defineConfig({
     },
   },
   dev: {
-    hmr: true,
+    hmr: false,
     liveReload: true,
-    client: {
-      path: '/rsbuild-hmr',
-      port: String(env.PORT),
-      host: env.HOST,
-    },
-    writeToDisk: false,
     watchFiles: {
       paths: [lookup('@pages'), lookup('@layouts'), lookup('@shared')],
+      type: 'reload-page',
     },
   },
   splitChunks: {

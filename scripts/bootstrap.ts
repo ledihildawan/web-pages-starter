@@ -154,6 +154,30 @@ const registerServiceWorker = () => {
   });
 };
 
+const initDevReload = () => {
+  if (env.IS_PROD) return;
+
+  let lastT = 0;
+  let initialized = false;
+
+  const pollInterval = setInterval(() => {
+    fetch('/reload.json')
+      .then((r) => r.json())
+      .then((data) => {
+        if (!initialized) {
+          lastT = data.t || 0;
+          initialized = true;
+          return;
+        }
+        if (data.t && data.t !== lastT) {
+          lastT = data.t;
+          location.reload();
+        }
+      })
+      .catch(() => clearInterval(pollInterval));
+  }, 2000);
+};
+
 const SINGLE_LOCALE = import.meta.env.SINGLE_LOCALE;
 
 async function bootstrap() {
@@ -175,6 +199,7 @@ async function bootstrap() {
 
       initDisableDevtool();
       registerServiceWorker();
+      initDevReload();
       return;
     }
 
@@ -209,6 +234,7 @@ async function bootstrap() {
 
     initDisableDevtool();
     registerServiceWorker();
+    initDevReload();
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : String(error);
 

@@ -6,6 +6,16 @@ import { log, logBox } from '@web-pages-starter/core/logger';
 import { PIPELINE_STEPS } from '@web-pages-starter/core/pipeline';
 import { env } from '@generated/env';
 import { lookup } from '@generated/paths';
+import {
+  readDevCache,
+  writeDevCache,
+  getSourcesForStep,
+  getSourcesMtime,
+  hasSourcesChanged,
+  createStepCache,
+} from '@web-pages-starter/core/pipeline-cache';
+import chokidar from 'chokidar';
+import type { FSWatcher } from 'chokidar';
 
 const spawnEnv: NodeJS.ProcessEnv = { ...process.env };
 
@@ -28,33 +38,84 @@ const cleanDevArtifacts = (): void => {
   cleanDir(rsbuildCache, 'node_modules/.cache/rsbuild');
 };
 
+const CONFIG_WATCH_PATHS = ['configs/*.ts', 'configs/**/*.ts', '.env', '.env.*', 'package.json', 'tsconfig.json'];
+
+let watchProcess: ReturnType<typeof spawn> | null = null;
+let devProcess: ReturnType<typeof spawn> | null = null;
+let configWatcher: FSWatcher | null = null;
+let restartTimeout: ReturnType<typeof setTimeout> | null = null;
+let isRestarting = false;
+
+const cleanup = () => {
+  if (watchProcess) {
+    watchProcess.kill();
+    watchProcess = null;
+  }
+  if (devProcess) {
+    devProcess.kill();
+    devProcess = null;
+  }
+  if (configWatcher) {
+    configWatcher.close();
+    configWatcher = null;
+  }
+};
+
+const restartDevServer = () => {
+  if (isRestarting) return;
+  isRestarting = true;
+
+  log.warn('\n\n⚠ Config changed — restarting dev server...\n');
+
+  cleanup();
+
+  setTimeout(() => {
+    isRestarting = false;
+    runDevServer();
+  }, 1000);
+};
+
+const debouncedRestart = () => {
+  if (restartTimeout) clearTimeout(restartTimeout);
+  restartTimeout = setTimeout(restartDevServer, 500);
+};
+
 const runDevServer = (): Promise<void> => {
   return new Promise((resolve, reject) => {
     logBox('Dev Server', { Port: String(env.PORT), Host: env.HOST });
 
-    const watchProcess = spawn('bun', ['./packages/i18n/cli/watch.ts'], {
+    watchProcess = spawn('bun', ['./packages/i18n/cli/watch.ts'], {
       stdio: 'inherit',
       env: spawnEnv,
       cwd: process.cwd(),
     });
 
     const rsbuildBin = patheResolve(process.cwd(), 'node_modules', '@rsbuild', 'core', 'bin', 'rsbuild.js');
-    const devProcess = spawn('bun', [rsbuildBin, 'dev'], {
+    devProcess = spawn('bun', [rsbuildBin, 'dev'], {
       stdio: 'inherit',
       env: spawnEnv,
       cwd: process.cwd(),
     });
 
-    const cleanup = () => {
-      watchProcess.kill();
-      devProcess.kill();
-    };
+    configWatcher = chokidar.watch(CONFIG_WATCH_PATHS, {
+      persistent: true,
+      ignoreInitial: true,
+    });
+
+    configWatcher.on('change', (path: string) => {
+      log.info(`\n  ● Config changed: ${basename(path)}`);
+      debouncedRestart();
+    });
+
+    configWatcher.on('error', (err) => {
+      log.error(`Config watcher error: ${err}`);
+    });
 
     process.on('SIGINT', cleanup);
     process.on('SIGTERM', cleanup);
 
     devProcess.on('close', (code) => {
-      if (code !== 0) {
+      if (code !== 0 && !isRestarting) {
         reject(new Error(`Rsbuild dev exited with code ${code}`));
       } else {
         resolve();
@@ -64,6 +125,43 @@ const runDevServer = (): Promise<void> => {
   });
 };
 
+const runPipelineWithCache = (): void => {
+  let cache = readDevCache();
+  if (!cache) {
+    cache = { version: 1, steps: {} };
+  }
+
+  for (const step of PIPELINE_STEPS.PRE_BUILD_DEV) {
+    const [stepPath, ...args] = Array.isArray(step) ? step : [step];
+    const sourceFiles = getSourcesForStep(stepPath);
+    const sources = getSourcesMtime(sourceFiles);
+    const cached = cache.steps[stepPath];
+
+    if (!hasSourcesChanged(cached, sources)) {
+      log.info(`  ○ ${basename(stepPath)} (unchanged)`);
+      continue;
+    }
+
+    log.info(`  ▶ ${basename(stepPath)}`);
+    const resolvedPath = lookup('@', stepPath);
+    const result = spawnSync('bun', [resolvedPath, ...args], {
+      stdio: 'inherit',
+      env: spawnEnv,
+      cwd: process.cwd(),
+    });
+
+    if (result.status !== 0) {
+      log.error(`Error: ${basename(stepPath)} failed — exit code ${result.status}`);
+      process.exit(1);
+    }
+
+    cache.steps[stepPath] = createStepCache(sourceFiles);
+  }
+
+  writeDevCache(cache);
+  log.success('Pipeline complete');
+};
+
 const main = async (): Promise<void> => {
   logBox('Dev Setup', { Stage: env.STAGE || 'development' });
 
@@ -71,20 +169,9 @@ const main = async (): Promise<void> => {
   cleanDevArtifacts();
   log.info('');
 
-  log.info('\n--- Pre-build generators (dev mode) ---\n');
-  for (const step of PIPELINE_STEPS.PRE_BUILD_DEV) {
-    const [stepPath, ...args] = Array.isArray(step) ? step : [step];
-    const resolvedPath = lookup('@', stepPath);
-    const result = spawnSync('bun', [resolvedPath, ...args], {
-      stdio: 'inherit',
-      env: spawnEnv,
-      cwd: process.cwd(),
-    });
-    if (result.status !== 0) {
-      log.error(`Error: ${basename(stepPath)} failed — exit code ${result.status}`);
-      process.exit(1);
-    }
-  }
+  log.info('\n--- Pre-build generators (dev mode) ---');
+  runPipelineWithCache();
+  log.info('');
 
   log.info('\n--- Starting dev server ---\n');
   try {
