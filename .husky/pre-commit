@@ -2,8 +2,10 @@ set -e
 
 echo "Running pre-commit checks..."
 
+# Run lint-staged (biome on staged files)
 bunx lint-staged
 
+# Run typecheck and test in parallel
 bun run typecheck &
 PID1=$!
 
@@ -16,7 +18,7 @@ wait $PID1 || FAILED=1
 wait $PID2 || FAILED=1
 
 if [ $FAILED -eq 1 ]; then
-  echo "Pre-commit checks failed"
+  echo "Pre-commit checks failed (typecheck or test)"
 
   exit 1
 fi
