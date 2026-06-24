@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import { join } from 'pathe';
 import { i18nConfig } from '@config/i18n';
 import { lookup } from '@generated/paths';
-import { LOCALE_CODES } from '@i18n/data/locales';
+import { LOCALE_CODES } from '../data/locales';
 import { collectKeys, readJSON5 } from '@web-pages-starter/core/json5';
 import { log } from '@web-pages-starter/core/logger';
 

@@ -11,12 +11,12 @@ import {
   formatUnit,
   setStrategies,
   toNativeDigits,
-} from '@i18n/engine/formatters';
-import { setLocale } from '@i18n/engine/helpers';
-import { cardinal as arCardinal, ordinal as arOrdinal } from '@i18n/strategies/ar';
-import { cardinal as idCardinal, ordinal as idOrdinal } from '@i18n/strategies/id';
-import { cardinal as jaCardinal, ordinal as jaOrdinal } from '@i18n/strategies/ja';
-import { cardinal as zhCardinal } from '@i18n/strategies/zh';
+} from '../engine/formatters';
+import { setLocale } from '../engine/helpers';
+import { cardinal as arCardinal, ordinal as arOrdinal } from '../strategies/ar';
+import { cardinal as idCardinal, ordinal as idOrdinal } from '../strategies/id';
+import { cardinal as jaCardinal, ordinal as jaOrdinal } from '../strategies/ja';
+import { cardinal as zhCardinal } from '../strategies/zh';
 import { describe, expect, test } from '@rstest/core';
 
 setStrategies(

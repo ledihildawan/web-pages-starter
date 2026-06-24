@@ -1,6 +1,6 @@
 import { i18nConfig } from '@config/i18n';
 import { LOCALES } from '@generated/active-locales-data';
-import type { LocaleCode, LocaleConfig } from '@i18n/data/locales';
+import type { LocaleCode, LocaleConfig } from '../data/locales';
 
 let cachedCodes: LocaleCode[] | undefined;
 let cachedLocales: LocaleConfig[] | undefined;
