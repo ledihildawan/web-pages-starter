@@ -22,7 +22,6 @@ export interface i18nStore {
   loadedLocales: Set<string>;
   maxLoadedLocales: number;
   change: (locale: string) => Promise<void>;
-  refreshFonts: () => void;
   changeLanguage: (code: string) => void;
   ensureLocaleData: (code: string, pageID: string, m: typeof import('./runtime')) => Promise<void>;
   updateDocumentAttributes: (code: string) => void;
@@ -45,12 +44,6 @@ export default defineStore('i18n', {
     htmlEl.setAttribute('data-script', locale.writingSystem);
 
     htmlEl.classList.toggle('is-rtl', locale.dir === 'rtl');
-  },
-
-  async refreshFonts() {
-    const { loadLanguageFonts } = await import('@web-pages-starter/fonts');
-
-    loadLanguageFonts();
   },
 
   async ensureLocaleData(code: string, pageID: string, m: typeof import('./runtime')) {
@@ -105,8 +98,6 @@ export default defineStore('i18n', {
     }
 
     this.updateDocumentAttributes(code);
-
-    await this.refreshFonts();
   },
 
   async change(code: string) {

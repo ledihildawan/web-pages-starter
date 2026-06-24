@@ -7,7 +7,6 @@
   "dependencies": {
     "@web-pages-starter/core": "*",
     "@web-pages-starter/i18n": "*",
-    "@web-pages-starter/page-system": "*",
-    "nunjucks": "^3.2.4"
+    "@web-pages-starter/page-system": "*"
   }
 }

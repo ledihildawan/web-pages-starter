@@ -1,11 +1,11 @@
 import { i18nConfig } from '@config/i18n';
 import { lookup } from '@generated/paths';
 import { FONT_CSS_PATHS } from '@web-pages-starter/fonts/data/font-paths';
-import { LANGUAGES } from '@i18n/data/languages';
-import type { LocaleCode, LocaleConfig } from '@i18n/data/locales';
-import { LOCALES } from '@i18n/data/locales';
-import { NUMBERING_SYSTEMS } from '@i18n/data/numbering-systems';
-import { WRITING_SYSTEM, WRITING_SYSTEMS } from '@i18n/data/writing-systems';
+import { LANGUAGES } from '@web-pages-starter/i18n/data/languages';
+import type { LocaleCode, LocaleConfig } from '@web-pages-starter/i18n/data/locales';
+import { LOCALES } from '@web-pages-starter/i18n/data/locales';
+import { NUMBERING_SYSTEMS } from '@web-pages-starter/i18n/data/numbering-systems';
+import { WRITING_SYSTEM, WRITING_SYSTEMS } from '@web-pages-starter/i18n/data/writing-systems';
 import { log } from '@web-pages-starter/core/logger';
 import { generatedHeader, writeFilePath } from '@web-pages-starter/core/write-file';
 
@@ -78,7 +78,7 @@ function serializeFontEntry(ns: string, cssPath: string): string {
   return `  '${ns}': { css: '${cssPath}', loader: () => import('${cssPath}') }`;
 }
 
-const content = `${generatedHeader('packages/i18n/cli/generate-active-locales.ts')}
+const content = `${generatedHeader('packages/cli/generators/generate-active-locales.ts')}
 
 import type { LocaleCode, LocaleConfig } from '../packages/i18n/data/locales';
 

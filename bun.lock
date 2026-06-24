@@ -110,7 +110,6 @@
       "version": "1.0.0",
       "dependencies": {
         "@web-pages-starter/core": "*",
-        "@web-pages-starter/fonts": "*",
         "chokidar": "^5.0.0",
         "i18next": "^26.3.1",
         "i18next-browser-languagedetector": "^8.2.1",
@@ -161,7 +160,6 @@
         "@web-pages-starter/core": "*",
         "@web-pages-starter/i18n": "*",
         "@web-pages-starter/page-system": "*",
-        "nunjucks": "^3.2.4",
       },
     },
   },
