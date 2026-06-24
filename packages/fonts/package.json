@@ -5,6 +5,32 @@
   "type": "module",
   "sideEffects": false,
   "dependencies": {
-    "@web-pages-starter/i18n": "*"
+    "@web-pages-starter/i18n": "*",
+    "@fontsource-variable/noto-sans-adlam": "^5.2.9",
+    "@fontsource-variable/noto-sans-arabic": "^5.2.10",
+    "@fontsource-variable/noto-sans-armenian": "^5.2.8",
+    "@fontsource-variable/noto-sans-bengali": "^5.2.11",
+    "@fontsource-variable/noto-sans-devanagari": "^5.2.8",
+    "@fontsource-variable/noto-sans-ethiopic": "^5.2.7",
+    "@fontsource-variable/noto-sans-georgian": "^5.2.8",
+    "@fontsource-variable/noto-sans-gujarati": "^5.2.7",
+    "@fontsource-variable/noto-sans-gurmukhi": "^5.2.9",
+    "@fontsource-variable/noto-sans-hebrew": "^5.2.8",
+    "@fontsource-variable/noto-sans-jp": "^5.2.10",
+    "@fontsource-variable/noto-sans-kannada": "^5.2.9",
+    "@fontsource-variable/noto-sans-khmer": "^5.2.8",
+    "@fontsource-variable/noto-sans-kr": "^5.2.10",
+    "@fontsource-variable/noto-sans-lao": "^5.2.8",
+    "@fontsource-variable/noto-sans-malayalam": "^5.2.8",
+    "@fontsource-variable/noto-sans-myanmar": "^5.2.1",
+    "@fontsource-variable/noto-sans-sc": "^5.2.10",
+    "@fontsource-variable/noto-sans-sinhala": "^5.2.10",
+    "@fontsource-variable/noto-sans-tamil": "^5.2.7",
+    "@fontsource-variable/noto-sans-tc": "^5.2.10",
+    "@fontsource-variable/noto-sans-telugu": "^5.2.8",
+    "@fontsource-variable/noto-sans-thai": "^5.2.8",
+    "@fontsource-variable/noto-serif-tibetan": "^5.2.8",
+    "@fontsource/noto-sans-nko": "^5.2.6",
+    "@fontsource/noto-sans-oriya": "^5.2.9"
   }
 }
