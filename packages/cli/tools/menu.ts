@@ -143,31 +143,31 @@ const TOOLS: Tool[] = [
   {
     name: 'Production Build',
     section: 'Build',
-    description: 'Minified production build',
+    description: 'Build for production with minification',
     action: () => runBunScript('build'),
   },
   {
     name: 'Pretty Build',
     section: 'Build',
-    description: 'Beautified HTML + external CSS for inspection',
+    description: 'Build with beautified HTML and external CSS',
     action: () => runBunScript('build', '--', '--pretty'),
   },
   {
     name: 'Debug Build',
     section: 'Build',
-    description: 'No minification, source maps enabled',
+    description: 'Build without minification, with source maps',
     action: () => runBunScript('build', '--', '--debug'),
   },
   {
     name: 'Preview Tunnel',
     section: 'Build',
-    description: 'Build + tunnel preview (ngrok/cloudflared)',
+    description: 'Build and preview via tunnel (ngrok/cloudflared)',
     action: () => runBunScript('preview'),
   },
   {
     name: 'Serve Dist',
     section: 'Build',
-    description: 'Build + serve production dist locally',
+    description: 'Build and serve production dist locally',
     action: async () => {
       log.info('Building production dist...');
       await runBunScript('build');
