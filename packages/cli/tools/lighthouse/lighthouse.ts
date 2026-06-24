@@ -17,6 +17,10 @@ import { formatCsvHeader, formatCsvLine, formatSummaryTable } from './formatter'
 import { cleanupOldReports, runAudit } from './runner';
 import { scanPagesFromDist } from './scanner';
 
+const BANNER = `
+  Lighthouse Audit
+  ${'─'.repeat(50)}`;
+
 const CLI_OPTIONS = {
   '--help': 'Show this help message',
   '--form-factor': 'desktop | mobile | both (default: interactive)',
@@ -34,10 +38,8 @@ const CLI_OPTIONS = {
 } as const;
 
 function printHelp(): void {
+  console.log(BANNER);
   log.info(`
-  Lighthouse Audit Tool
-  ${'─'.repeat(50)}
-
   Usage:
     bun run cli          Interactive menu (select Lighthouse)
     bun ./packages/cli/tools/lighthouse/index.ts [options]
@@ -197,7 +199,7 @@ async function interactiveFormFactor(): Promise<'desktop' | 'mobile' | 'both'> {
     {
       type: 'select',
       name: 'selected',
-      message: 'Select form factor:',
+      message: '  Select form factor:',
       choices: [
         { name: 'Desktop', value: 'desktop' },
         { name: 'Mobile', value: 'mobile' },
@@ -223,9 +225,9 @@ async function interactiveCategories(): Promise<string[]> {
     {
       type: 'checkbox',
       name: 'selected',
-      message: 'Select categories to audit:',
+      message: '  Select categories to audit:',
       choices,
-      validate: (answer: string[]) => (answer.length > 0 ? true : 'Select at least one category'),
+      validate: (answer: string[]) => (answer.length > 0 ? true : '  Select at least one category'),
     },
   ]);
 
@@ -247,7 +249,7 @@ async function interactiveUrlSelection(pages: { path: string; url: string }[], b
     {
       type: 'checkbox',
       name: 'selected',
-      message: 'Select URLs to audit:',
+      message: '  Select URLs to audit:',
       choices,
     },
   ]);
@@ -262,7 +264,8 @@ async function getBaseUrl(cliBase?: string | null): Promise<string> {
 
   const saved = await loadPreviewUrl();
   if (!saved || isExpired(saved)) {
-    log.error('Preview server not running or URL expired. Start with bun run preview first.');
+    log.error('Error: Preview server not running or URL expired.');
+    log.info('  Tip: Start with `bun run preview` first.\n');
     process.exit(1);
   }
 
@@ -279,6 +282,7 @@ async function main(): Promise<void> {
 
   if (args.clean) {
     cleanupOldReports(env.LIGHTHOUSE_OUTPUT_DIR || DEFAULT_OUTPUT_DIR);
+    log.success('Done: Old reports cleaned.\n');
     process.exit(0);
   }
 
@@ -292,7 +296,7 @@ async function main(): Promise<void> {
   }
 
   if (categories.includes('agentic')) {
-    log.warn('\n⚠️  Agentic Browsing is experimental and requires Chrome 150+.\n');
+    log.warn('  Warning: Agentic Browsing is experimental and requires Chrome 150+.\n');
   }
 
   const baseUrl = await getBaseUrl(args.baseUrl);
@@ -304,22 +308,23 @@ async function main(): Promise<void> {
       : await interactiveUrlSelection(pages, baseUrl);
 
   if (args.list) {
-    log.info('\nDiscovered URLs:\n');
+    log.info('\n  Discovered URLs:\n');
     for (const url of auditUrls) {
-      log.info(`  ${url}`);
+      log.info(`    ${url}`);
     }
     log.info('');
     process.exit(0);
   }
 
   if (auditUrls.length === 0) {
-    log.error('No URLs to audit.');
+    log.error('Error: No URLs to audit.\n');
     process.exit(1);
   }
 
   cleanupOldReports(outputDir);
 
   if (!args.quiet) {
+    console.log(BANNER);
     logBox('Lighthouse Audit', {
       'Form factor': formFactor === 'both' ? 'All' : formFactor,
       Categories: categories.join(', '),
@@ -348,17 +353,17 @@ async function main(): Promise<void> {
       const csvPath = join(result.reportDir, 'summary.csv');
       const csvLines = [formatCsvHeader(categories), ...result.results.map((r) => formatCsvLine(r))].join('\n');
       writeFileSync(csvPath, csvLines);
-      log.info(`\nCSV: ${csvPath}`);
+      log.info(`\n  CSV: ${csvPath}`);
     }
   }
 
   if (result.success) {
     if (!args.quiet) {
       log.success('\nDone: Lighthouse audit complete');
-      log.info(`Reports: ${result.reportDir}/`);
+      log.info(`  Reports: ${result.reportDir}/\n`);
     }
   } else {
-    log.error('\nAudit completed with errors.');
+    log.error('\nError: Audit completed with errors.\n');
     process.exit(1);
   }
 }
