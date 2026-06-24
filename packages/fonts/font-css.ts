@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import { join, resolve } from 'pathe';
-import type { LocaleCode } from '../data/locales';
-import { LOCALES } from '../data/locales';
+import type { LocaleCode } from '@web-pages-starter/i18n/data/locales';
+import { LOCALES } from '@web-pages-starter/i18n/data/locales';
 import type { FontPackageEntry } from './font-registry';
 import { EXTRA_INTER_SUBSETS_FOR_LANGUAGE, FONT_FOR_WRITING_SYSTEM, INTER_PACKAGE } from './font-registry';
 

@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@web-pages-starter/core": "link:@web-pages-starter/core",
+    "@web-pages-starter/fonts": "link:@web-pages-starter/fonts",
     "@web-pages-starter/i18n": "link:@web-pages-starter/i18n",
     "@web-pages-starter/page-system": "link:@web-pages-starter/page-system",
     "@web-pages-starter/template-engine": "link:@web-pages-starter/template-engine",

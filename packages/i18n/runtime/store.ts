@@ -48,9 +48,9 @@ export default defineStore('i18n', {
   },
 
   async refreshFonts() {
-    const fonts = await import('../fonts/fonts');
+    const { loadLanguageFonts } = await import('@web-pages-starter/fonts');
 
-    fonts.loadLanguageFonts();
+    loadLanguageFonts();
   },
 
   async ensureLocaleData(code: string, pageID: string, m: typeof import('./runtime')) {

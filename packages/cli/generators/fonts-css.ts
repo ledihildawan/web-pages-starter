@@ -7,7 +7,7 @@ import { log, logBox } from '@web-pages-starter/core/logger';
 import { computeStringHash, isCacheValid, restoreCache, storeCache } from '@web-pages-starter/core/pipeline-cache';
 import { generatedHeader } from '@web-pages-starter/core/write-file';
 import { lookup } from '@generated/paths';
-import { buildFontsCss } from '@i18n/fonts/font-css';
+import { buildFontsCss } from '@web-pages-starter/fonts/font-css';
 
 const OUTPUT_DIR = lookup('@public', ...ASSET_PATHS.fonts.split('/'));
 const OUTPUT_FILE = join(OUTPUT_DIR, 'fonts.css');

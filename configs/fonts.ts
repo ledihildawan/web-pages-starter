@@ -1,4 +1,4 @@
-import { defineFontStack } from '@i18n/config/define';
+import { defineFontStack } from '@web-pages-starter/fonts/config/define';
 
 export const fontsConfig = defineFontStack({
   sans: {

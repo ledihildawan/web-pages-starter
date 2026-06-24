@@ -1,6 +1,6 @@
 import { i18nConfig } from '@config/i18n';
 import { lookup } from '@generated/paths';
-import { FONT_CSS_PATHS } from '@i18n/data/font-paths';
+import { FONT_CSS_PATHS } from '@web-pages-starter/fonts/data/font-paths';
 import { LANGUAGES } from '@i18n/data/languages';
 import type { LocaleCode, LocaleConfig } from '@i18n/data/locales';
 import { LOCALES } from '@i18n/data/locales';

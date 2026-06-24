@@ -37,6 +37,7 @@
         "@hono/node-server": "^2.0.5",
         "@splidejs/splide": "^4.1.4",
         "@web-pages-starter/core": "link:@web-pages-starter/core",
+        "@web-pages-starter/fonts": "link:@web-pages-starter/fonts",
         "@web-pages-starter/i18n": "link:@web-pages-starter/i18n",
         "@web-pages-starter/page-system": "link:@web-pages-starter/page-system",
         "@web-pages-starter/template-engine": "link:@web-pages-starter/template-engine",
@@ -807,6 +808,8 @@
     "@vue/shared": ["@vue/shared@3.1.5", "", {}, "sha512-oJ4F3TnvpXaQwZJNF3ZK+kLPHKarDmJjJ6jyzVNDKH9md1dptjC7lWR//jrGuLdek/U6iltWxqAnYOu8gCiOvA=="],
 
     "@web-pages-starter/core": ["@web-pages-starter/core@link:@web-pages-starter/core", {}],
+
+    "@web-pages-starter/fonts": ["@web-pages-starter/fonts@link:@web-pages-starter/fonts", {}],
 
     "@web-pages-starter/i18n": ["@web-pages-starter/i18n@link:@web-pages-starter/i18n", {}],
 

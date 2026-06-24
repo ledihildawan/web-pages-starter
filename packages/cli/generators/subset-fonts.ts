@@ -6,8 +6,8 @@ import type { LocaleCode } from '@i18n/data/locales';
 import { log, logBox } from '@web-pages-starter/core/logger';
 import { computeStringHash, isCacheValid, restoreCache, storeCache } from '@web-pages-starter/core/pipeline-cache';
 import { lookup } from '@generated/paths';
-import { getNeededFontPackages, parseFontFaceBlocks } from '@i18n/fonts/font-css';
-import type { FontPackageEntry } from '@i18n/fonts/font-registry';
+import { getNeededFontPackages, parseFontFaceBlocks } from '@web-pages-starter/fonts/font-css';
+import type { FontPackageEntry } from '@web-pages-starter/fonts/font-registry';
 
 const CACHE_KEY = 'subset-fonts';
 

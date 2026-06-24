@@ -3,7 +3,7 @@ import { env } from '@generated/env';
 import { getCspNonce } from '@utils/common';
 import DisableDevtool from 'disable-devtool';
 import alpineCsp from '@alpinejs/csp';
-import { preloadActiveFont, loadLanguageFonts, watchScriptAndLoadFont } from '@i18n/fonts/fonts';
+import { preloadActiveFont, loadLanguageFonts, watchScriptAndLoadFont } from '@web-pages-starter/fonts';
 
 const SW_DISMISS_KEY = 'sw_update_dismissed';
 const SW_DISMISS_DURATION = 24 * 60 * 60 * 1000;
