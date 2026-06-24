@@ -1,0 +1,17 @@
+{
+  "name": "@web-pages-starter/cli",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "dependencies": {
+    "@web-pages-starter/core": "*",
+    "@web-pages-starter/fonts": "*",
+    "@web-pages-starter/i18n": "*",
+    "@web-pages-starter/page-system": "*",
+    "@ngrok/ngrok": "^1.7.0",
+    "inquirer": "^14.0.2",
+    "js-beautify": "^1.15.4",
+    "sharp": "^0.35.2"
+  }
+}
