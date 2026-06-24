@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <name>inline-xml</name>
+  <version>1.0</version>
+  <features>
+    <item>txt</item>
+    <item>md</item>
+    <item>ini</item>
+  </features>
+</config>

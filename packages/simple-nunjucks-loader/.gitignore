@@ -1,0 +1,10 @@
+/.idea/
+node_modules
+
+# /lib/
+/public/
+/index.js
+/test/.coverage/
+/test/bundles/
+
+.DS_Store

@@ -1,0 +1,26 @@
+Object.defineProperty(exports, '__esModule', {
+  value: true,
+});
+exports.getPathRemover = getPathRemover;
+var _path = _interopRequireDefault(require('path'));
+function _interopRequireDefault(e) {
+  return e && e.__esModule ? e : { default: e };
+}
+/**
+ * Returns a function that removes path from given one
+ *
+ * @param {string} targetPath
+ * @returns {function(string): string}
+ */
+function getPathRemover(targetPath) {
+  const normalizedTargetPath = _path.default.resolve(targetPath);
+
+  /**
+   * @param {string} pathToRemove
+   * @returns {string}
+   */
+  function removePath(pathToRemove) {
+    return normalizedTargetPath.replace(_path.default.resolve(pathToRemove), '').replace(/^[\\/]/, '');
+  }
+  return removePath;
+}

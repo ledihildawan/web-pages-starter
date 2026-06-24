@@ -1,0 +1,9 @@
+{% extends 'test/fixtures/base.njk' %}
+
+{% block content%}
+    <p>
+        {% include 'test/fixtures/button.njk' %}
+    </p>
+
+    {% include 'test/fixtures/button.njk' %}
+{% endblock %}

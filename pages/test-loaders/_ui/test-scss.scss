@@ -1,0 +1,12 @@
+@use "sass:color";
+
+$primary-color: #ff6b6b;
+$gradient: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+
+.test-scss {
+  color: $primary-color;
+  background: $gradient;
+  &:hover {
+    color: color.adjust($primary-color, $lightness: -10%);
+  }
+}

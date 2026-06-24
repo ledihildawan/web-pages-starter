@@ -1,0 +1,10 @@
+@primary: #10b981;
+@gradient: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
+
+.test-less {
+  color: @primary;
+  background: @gradient;
+  &:hover {
+    color: spin(@primary, -10deg);
+  }
+}

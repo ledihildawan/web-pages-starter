@@ -1,0 +1,4 @@
+!glob! test patterns:
+- *.css in current folder
+- **/*.json in subfolders
+- specific file references

@@ -1,0 +1,7 @@
+Object.defineProperty(exports, '__esModule', {
+  value: true,
+});
+exports.getModuleOutput = getModuleOutput;
+function getModuleOutput(importedSymbol) {
+  return `${importedSymbol} && ${importedSymbol}.default || ${importedSymbol}`;
+}

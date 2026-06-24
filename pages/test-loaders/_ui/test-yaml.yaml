@@ -1,0 +1,8 @@
+name: inline-yaml
+version: 1.0
+enabled: true
+features:
+  - glsl
+  - shaders
+  - vert
+  - frag

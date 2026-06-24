@@ -1,0 +1,7 @@
+{
+  // JSON5 supports comments!
+  name: "inline-json5",
+  version: 2.0,
+  enabled: true,
+  features: ["yaml", "toml", "xml", "csv"]
+}

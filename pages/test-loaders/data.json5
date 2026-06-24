@@ -1,0 +1,10 @@
+{
+  page_id: "test-loaders",
+  url_path: "test-loaders",
+  title: "Test Loaders",
+  description: "Testing all 25 inline loaders",
+  meta: {
+    title: "Test Loaders - Inline Loaders Demo",
+    description: "Testing all 25 inline loaders for the simple-nunjucks-loader",
+  },
+}

@@ -1,0 +1,6 @@
+name = "inline-toml"
+version = "3.0"
+enabled = true
+
+[features]
+items = ["env", "glob", "url", "base64"]

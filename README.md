@@ -55,31 +55,32 @@ Requires [Bun](https://bun.sh) `>= 1.3.14`.
 ├── bootstrap.ts          # app entry — global CSS (main.css), Alpine + collapse/focus plugins, i18n store/initIntl, fonts, SW. Auto-injected via page-inject-loader (scripts/bootstrap.ts)
 ├── bunfig.toml          # Bun config — preload packages/env/preload.ts for .env.{stage} loading
 ├── packages/
-│   ├── cli/
-│   │   ├── generators/     # build generators: env, paths, sitemap, manifest, robots, service-worker, compress, images, fonts-css, subset-fonts, pricing-types, sync-locales, active-locales, exchange-rates, types
-│   │   ├── scripts/        # build scripts: build.ts, dev.ts, serve.ts, rsbuild-wrapper.ts, clean-cache.ts, fetch-exchange-rates.ts
-│   │   └── tools/          # tools: preview.ts, lighthouse.ts, menu.ts
-│   ├── i18n/              #   self-contained i18n package (data, formatting, runtime, strategies, fonts)
+│   ├── cli/               #   @web-pages-starter/cli — inquirer, js-beautify, sharp, @ngrok/ngrok
+│   │   ├── generators/     #     build generators: env, paths, sitemap, manifest, robots, service-worker, compress, images, fonts-css, subset-fonts, pricing-types, sync-locales, active-locales, exchange-rates, types
+│   │   ├── scripts/        #     build scripts: build.ts, dev.ts, serve.ts, rsbuild-wrapper.ts, clean-cache.ts, fetch-exchange-rates.ts
+│   │   └── tools/          #     tools: preview.ts, lighthouse.ts, menu.ts
+│   ├── core/              #   @web-pages-starter/core — json5, pathe, logger, signal-handler, pipeline-cache (no external deps)
+│   ├── fonts/             #   @web-pages-starter/fonts — @fontsource/* packages (24 fonts). Depends on core + i18n
+│   ├── i18n/              #   @web-pages-starter/i18n — i18next, pluralize, chokidar (for i18n watch CLI)
 │   │   ├── index.ts       #     public API barrel
 │   │   ├── data/          #     master data — 136 locales, 93 languages (build-time only)
 │   │   ├── engine/        #     formatters, helpers, active-locales (client)
 │   │   ├── strategies/    #     per-language cardinal/ordinal (code-split async)
-│   │   ├── fonts/         #     font loading system
 │   │   ├── runtime/       #     i18next init, Alpine store
-│   │   └── config/        #     types, defineI18n/defineFont/defineFontStack
-│   ├── env/                #   env system (auto-generates generated/env.ts from .env files)
-│   │   ├── cli/            #     generate-env.ts (scans .env → schema + engine + validation)
-│   │   └── preload.ts      #     Bun preload (loads .env before any module via bunfig.toml)
-│   ├── template-engine/   #   Nunjucks SSR rendering. Depends on @i18n (one-way) + @page-system (getRootPageSlug)
+│   │   └── config/        #     types, defineI18n
+│   ├── page-system/       #   @web-pages-starter/page-system — limax, page system (scanner, dynamic routes, CLI, page-inject-loader). Depends on core + i18n
+│   │   ├── index.ts       #     public API barrel
+│   │   ├── system-pages.ts #     ROOT_PAGE, SYSTEM_PAGE_IDS, SYSTEM_PAGE_SLUGS, slug helpers
+│   │   ├── scanner.ts     #     scanPages(), isGroup(), isSlugDir(), isPrivateDir()
+│   │   ├── dynamic-routes.ts #  generateDynamicEntries() — [slug] discovery from data.json5
+│   │   ├── page-inject-loader.cjs # auto-injects bootstrap + CSS via loader options
+│   │   └── cli/           #     sync-system-pages.ts, generate-page.ts, delete-page.ts
+│   ├── template-engine/   #   @web-pages-starter/template-engine — Nunjucks SSR rendering. Depends on core + i18n + page-system
 │   │   ├── index.ts       #     public API barrel: exports createTemplateParams, scanSharedLocales
 │   │   └── template.ts    #     Nunjucks i18n.* API: createTemplateParams(), generateClientI18nScript(), scanSharedLocales()
-│   └── page-system/       #   page system (routing, discovery, CLI). Standalone (only @config/*, @utils/*)
-│       ├── index.ts       #     public API barrel
-│       ├── system-pages.ts #     ROOT_PAGE, SYSTEM_PAGE_IDS, SYSTEM_PAGE_SLUGS, slug helpers
-│       ├── scanner.ts     #     scanPages(), isGroup(), isSlugDir(), isPrivateDir()
-│       ├── dynamic-routes.ts #  generateDynamicEntries() — [slug] discovery from data.json5
-│       ├── page-inject-loader.cjs # auto-injects bootstrap + CSS via loader options
-│       └── cli/           #     sync-system-pages.ts, generate-page.ts, delete-page.ts
+│   └── env/               #   env system (auto-generates generated/env.ts from .env files)
+│       ├── cli/            #     generate-env.ts (scans .env → schema + engine + validation)
+│       └── preload.ts      #     Bun preload (loads .env before any module via bunfig.toml)
 ├── public/                # static assets (favicon, generated sw.js/manifest/robots/sitemap)
 │   └── assets/i18n/       #   pre-compiled i18n JSON bundles (generated)
 ├── generated/             # auto-generated: env.ts (env system), active-locales-data, exchange rates, i18n types, image-manifest (6 files tracked in git (env, paths, active-locales-data, exchange-rates, i18n types, image-manifest); regenerated at build)

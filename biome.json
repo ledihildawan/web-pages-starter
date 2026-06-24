@@ -87,6 +87,30 @@
           }
         }
       }
+    },
+    {
+      "includes": ["packages/simple-nunjucks-loader/lib/**"],
+      "formatter": { "enabled": false },
+      "linter": { "enabled": false },
+      "assist": { "enabled": false }
+    },
+    {
+      "includes": ["packages/simple-nunjucks-loader/test/**"],
+      "formatter": { "enabled": false },
+      "linter": { "enabled": false },
+      "assist": { "enabled": false }
+    },
+    {
+      "includes": ["packages/simple-nunjucks-loader/src/public/**"],
+      "formatter": { "enabled": false },
+      "linter": { "enabled": false },
+      "assist": { "enabled": false }
+    },
+    {
+      "includes": ["packages/simple-nunjucks-loader/src/lib/**"],
+      "formatter": { "enabled": false },
+      "linter": { "enabled": false },
+      "assist": { "enabled": false }
     }
   ],
   "assist": {

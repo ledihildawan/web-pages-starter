@@ -7,7 +7,7 @@ temp/
 !.env.example
 
 # Local packages
-packages/simple-nunjucks-loader/
+# packages/simple-nunjucks-loader/
 
 # Dependencies & build output
 node_modules

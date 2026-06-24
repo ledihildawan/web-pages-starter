@@ -1,0 +1,26 @@
+Object.defineProperty(exports, '__esModule', {
+  value: true,
+});
+exports.getDependenciesTemplates = getDependenciesTemplates;
+var _nunjucks = _interopRequireDefault(require('nunjucks'));
+var _ImportWrapper = require('../import-wrapper/ImportWrapper');
+var _getAddNodeValue = require('./get-add-node-value');
+function _interopRequireDefault(e) {
+  return e && e.__esModule ? e : { default: e };
+}
+/**
+ * @param {nunjucks.nodes.Root} nodes
+ * @returns {ImportWrapper[]}
+ */
+function getDependenciesTemplates(nodes) {
+  const extendsNodes = nodes.findAll(_nunjucks.default.nodes.Extends);
+  const includeNodes = nodes.findAll(_nunjucks.default.nodes.Include);
+  const importNodes = nodes.findAll(_nunjucks.default.nodes.Import);
+  const fromImportNodes = nodes.findAll(_nunjucks.default.nodes.FromImport);
+  return [...extendsNodes, ...includeNodes, ...importNodes, ...fromImportNodes].map((node) => {
+    if (typeof node.template.value !== 'string') {
+      return (0, _getAddNodeValue.getAddNodeValue)(node.template);
+    }
+    return new _ImportWrapper.ImportWrapper().addLiteral(node.template.value);
+  });
+}

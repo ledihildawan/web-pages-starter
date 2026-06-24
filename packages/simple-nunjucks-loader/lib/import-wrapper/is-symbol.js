@@ -1,0 +1,8 @@
+Object.defineProperty(exports, '__esModule', {
+  value: true,
+});
+exports.isSymbol = isSymbol;
+var _ImportSymbol = require('./ImportSymbol');
+function isSymbol(value) {
+  return value instanceof _ImportSymbol.ImportSymbol;
+}

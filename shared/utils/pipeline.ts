@@ -3,7 +3,7 @@ export const PIPELINE_STEPS = {
     'scripts/generators/generate-paths.ts',
     'scripts/generators/generate-pricing-types.ts',
     'packages/env/cli/generate-env.ts',
-    'packages/i18n/cli/generate-active-locales.ts',
+    'packages/cli/generators/generate-active-locales.ts',
     'packages/page-system/cli/sync-system-pages.ts',
     'scripts/clean-cache.ts',
     'scripts/fetch-exchange-rates.ts',

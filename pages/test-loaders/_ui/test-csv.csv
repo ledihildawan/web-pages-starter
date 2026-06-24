@@ -1,0 +1,4 @@
+name,version,type
+inline-json,1.0,data
+inline-yaml,2.0,config
+inline-toml,3.0,config

@@ -211,18 +211,15 @@ pages/home/
 
 ## Packages
 
-- `packages/i18n/` — i18n engine (data, formatting, runtime, strategies, fonts). Pure engine — ZERO imports from `configs/` or `page-system` in runtime.
+- `@web-pages-starter/core` — base utilities (json5, pathe, logger, signal-handler, pipeline-cache). No external dependencies.
+- `@web-pages-starter/fonts` — @fontsource/* packages (24 font packages). Depends on `@web-pages-starter/core` + `@web-pages-starter/i18n` (for locale/writing-system data).
+- `@web-pages-starter/i18n` — i18n engine (data, formatting, runtime, strategies). Pure engine — ZERO imports from `configs/` or `page-system` in runtime. Depends on `@web-pages-starter/core`.
+- `@web-pages-starter/page-system` — page system (scanner, system pages, dynamic routes, CLI, page-inject-loader). Standalone. Depends on `@web-pages-starter/core` + `@web-pages-starter/i18n`.
+- `@web-pages-starter/template-engine` — SSR template rendering (`createTemplateParams`, `scanSharedLocales`). Depends on `@web-pages-starter/core` + `@web-pages-starter/i18n` + `@web-pages-starter/page-system`.
+- `@web-pages-starter/cli` — CLI tools (inquirer, js-beautify, sharp, @ngrok/ngrok). Depends on all packages.
 - `packages/env/` — env system. Auto-generates `generated/env.ts` from `.env` files. `PRIVATE_` prefix = server-only.
   - `cli/generate-env.ts` — scans `.env` files, infers types, generates schema + engine
   - `preload.ts` — Bun preload script (`bunfig.toml`), loads `.env` before any module
-- `packages/template-engine/` — SSR template rendering (`createTemplateParams`, `scanSharedLocales`). Depends on `@i18n` + `@page-system`.
-  - `template.ts` — SSR rendering: `createTemplateParams()`, `generateClientI18nScript()`, `scanSharedLocales()`
-- `packages/page-system/` — page system (scanner, system pages, dynamic routes, CLI, page-inject-loader). Standalone.
-  - `system-pages.ts` — root page, system page IDs, locale-dependent slugs (`ROOT_PAGE`, `SYSTEM_PAGE_IDS`, `SYSTEM_PAGE_SLUGS`)
-  - `scanner.ts` — `scanPages()`, `isGroup()`, `isSlugDir()` (jiti-safe)
-  - `dynamic-routes.ts` — `generateDynamicEntries()` — [slug] discovery from `data.json5`
-  - `page-inject-loader.cjs` — auto-injects bootstrap + page CSS via loader options
-  - `cli/` — `sync-system-pages.ts`, `generate-page.ts`, `delete-page.ts`
 
 ## Build Optimizations
 

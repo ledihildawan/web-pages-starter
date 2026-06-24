@@ -1,0 +1,23 @@
+Object.defineProperty(exports, '__esModule', {
+  value: true,
+});
+exports.hasAsyncTags = hasAsyncTags;
+var _nunjucks = _interopRequireDefault(require('nunjucks'));
+function _interopRequireDefault(e) {
+  return e && e.__esModule ? e : { default: e };
+}
+/**
+ * @param {nunjucks.nodes.Root} nodes
+ * @returns {boolean}
+ */
+function hasAsyncTags(nodes) {
+  return [
+    _nunjucks.default.nodes.IfAsync,
+    _nunjucks.default.nodes.AsyncEach,
+    _nunjucks.default.nodes.AsyncAll,
+    _nunjucks.default.nodes.FilterAsync,
+    _nunjucks.default.nodes.CallExtensionAsync,
+  ].some(function examineNodes(nodeType) {
+    return nodes.findAll(nodeType).length > 0;
+  });
+}

@@ -1,0 +1,5 @@
+{
+  "name": "inline-json",
+  "version": "1.0",
+  "features": ["css", "js", "ts", "html", "svg"]
+}

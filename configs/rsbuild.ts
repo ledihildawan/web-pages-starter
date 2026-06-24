@@ -317,7 +317,17 @@ export default defineConfig({
             ],
           },
           { test: /(?:bootstrap|script)\.ts$/, sideEffects: true },
-          { test: /\.njk$/, use: [{ loader: 'simple-nunjucks-loader', options: { autoescape: false } }] },
+          {
+            test: /\.njk$/,
+            use: [
+              {
+                loader: join(__dirname, '../packages/simple-nunjucks-loader'),
+                options: {
+                  autoescape: false,
+                },
+              },
+            ],
+          },
         ],
       },
     },

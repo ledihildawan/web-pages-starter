@@ -1,9 +1,9 @@
 {% extends "@layouts/main.njk" %}
 
 {% block content %}
-  {% include "./_ui/hero.njk" %}
-  {% include "./_ui/camera.njk" %}
-  {% include "./_ui/features.njk" %}
-  {% include "./_ui/stats.njk" %}
-  {% include "@shared/ui/composites/cta.njk" %}
+  {% load "./_ui/hero.njk" %}
+  {% load "./_ui/camera.njk" %}
+  {% load "./_ui/features.njk" %}
+  {% load "./_ui/stats.njk" %}
+  {% load "@shared/ui/composites/cta.njk" %}
 {% endblock %}

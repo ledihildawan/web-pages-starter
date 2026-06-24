@@ -1,0 +1,9 @@
+{% set name = 'base.njk' %}
+{% extends 'test/fixtures/dynamic-templates/' + name %}
+
+{% block body %}
+    {% set macroName = 'form' %}
+    {% import 'test/fixtures/dynamic-templates/' + macroName + '-macro.njk' as form %}
+
+    {{ form.field('user') }}
+{% endblock %}
