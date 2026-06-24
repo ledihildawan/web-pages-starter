@@ -11,6 +11,60 @@ import type { FontPackageEntry } from '@web-pages-starter/fonts/font-registry';
 
 const CACHE_KEY = 'subset-fonts';
 
+const UNICODE_RANGES: Record<string, string[]> = {
+  latin: [
+    'U+0000-007F',
+    'U+0080-00FF',
+    'U+0100-017F',
+    'U+0180-024F',
+    'U+0250-02AF',
+    'U+02B0-02FF',
+    'U+0300-036F',
+    'U+0370-03FF',
+  ],
+  arabic: ['U+0600-06FF', 'U+0750-077F', 'U+08A0-08FF', 'U+FB50-FDFF', 'U+FE70-FEFF'],
+  common: [
+    'U+2000-206F',
+    'U+2070-209F',
+    'U+20A0-20CF',
+    'U+2100-214F',
+    'U+2150-218F',
+    'U+2190-21FF',
+    'U+2200-22FF',
+    'U+2300-23FF',
+    'U+2500-257F',
+    'U+25A0-25FF',
+    'U+2600-26FF',
+    'U+2700-27BF',
+  ],
+};
+
+const LOCALE_UNICODE_MAP: Record<string, string[]> = {
+  en: ['latin', 'common'],
+  ar: ['arabic', 'latin', 'common'],
+};
+
+function getUnicodeRangesForLocales(locales: LocaleCode[]): string[] {
+  const ranges = new Set<string>();
+
+  for (const locale of locales) {
+    const lang = locale.split('-')[0].toLowerCase();
+    const script = lang;
+
+    const localeRanges = LOCALE_UNICODE_MAP[script] || LOCALE_UNICODE_MAP[lang] || ['latin', 'common'];
+    for (const rangeGroup of localeRanges) {
+      const groupRanges = UNICODE_RANGES[rangeGroup];
+      if (groupRanges) {
+        for (const r of groupRanges) {
+          ranges.add(r);
+        }
+      }
+    }
+  }
+
+  return [...ranges];
+}
+
 const SUBSET_FLAGS_ARRAY = [
   '--flavor=woff2',
   '--no-hinting',
@@ -66,7 +120,11 @@ function collectSourceFileInfos(
   return fileInfos;
 }
 
-async function subsetFontAsync(srcPath: string, destPath: string): Promise<{ before: number; after: number }> {
+async function subsetFontAsync(
+  srcPath: string,
+  destPath: string,
+  unicodeRanges: string[],
+): Promise<{ before: number; after: number }> {
   const before = fs.statSync(srcPath).size;
   const tmpOut = `${destPath}.subset.tmp`;
 
@@ -74,11 +132,12 @@ async function subsetFontAsync(srcPath: string, destPath: string): Promise<{ bef
     const escapedSrc = srcPath.replace(/"/g, '\\"');
     const escapedTmpOut = tmpOut.replace(/"/g, '\\"');
     const flags = SUBSET_FLAGS_ARRAY.join(' ');
-    const cmd = `pyftsubset "${escapedSrc}" ${flags} --output-file="${escapedTmpOut}" --unicodes=*`;
+    const unicodes = `--unicodes=${unicodeRanges.join(',')}`;
+    const cmd = `pyftsubset "${escapedSrc}" ${flags} ${unicodes} --output-file="${escapedTmpOut}"`;
 
     await new Promise<void>((resolve, reject) => {
       exec(cmd, { timeout: 30000 }, (err: Error | null) => {
-        if (err) reject(err);
+        if (err) reject(new Error(`pyftsubset failed for ${basename(srcPath)}: ${err.message}\nCmd: ${cmd}`));
         else resolve();
       });
     });
@@ -94,7 +153,7 @@ async function subsetFontAsync(srcPath: string, destPath: string): Promise<{ bef
     }
   } catch (_err) {
     if (fs.existsSync(tmpOut)) fs.unlinkSync(tmpOut);
-    console.warn(`[font-subset] Warning: ${basename(srcPath)}`);
+    console.warn(`[font-subset] Warning: ${basename(srcPath)} - ${(_err as Error).message}`);
   }
 
   return { before, after: before };
@@ -104,6 +163,7 @@ interface FontTask {
   srcFile: string;
   destFile: string;
   name: string;
+  unicodeRanges: string[];
 }
 
 async function runWithConcurrency<T>(
@@ -153,12 +213,13 @@ async function mainAsync(): Promise<void> {
     const pkgNames = [...fontPackages.keys()].map((p) => p.replace('@', '').replace('/', '-')).join(', ');
     logBox('Subset Fonts', { Status: 'Using cached subsetted fonts', Packages: pkgNames });
     if (!restoreCache(CACHE_KEY, publicFontsDir)) {
-      log.warn('Cache restore failed, will regenerate');
+      log.warn('Cache restore failed (hash mismatch or corrupted), regenerating fonts...');
     }
     return;
   }
 
   const fontTasks: FontTask[] = [];
+  const unicodeRanges = getUnicodeRangesForLocales(allLocales);
 
   for (const [pkg] of fontPackages) {
     const files = neededFiles.get(pkg);
@@ -177,7 +238,7 @@ async function mainAsync(): Promise<void> {
       }
 
       const name = `${pkgName}/files/${fileName}`;
-      fontTasks.push({ srcFile, destFile, name });
+      fontTasks.push({ srcFile, destFile, name, unicodeRanges });
     }
   }
 
@@ -191,7 +252,7 @@ async function mainAsync(): Promise<void> {
 
   await runWithConcurrency(fontTasks, MAX_CONCURRENCY, async (task) => {
     log.info(`  Subsetting ${task.name}...`);
-    const result = await subsetFontAsync(task.srcFile, task.destFile);
+    const result = await subsetFontAsync(task.srcFile, task.destFile, task.unicodeRanges);
     totalBefore += result.before;
     totalAfter += result.after;
     const saved = result.before - result.after;

@@ -55,9 +55,8 @@ function computeSourceHash(): string {
   const hashes: string[] = [];
   for (const file of allFiles.sort()) {
     const relPath = relative(root, file).replace(/\\/g, '/');
-    const content = fs.readFileSync(file);
-    const hash = computeStringHash(content.toString('utf-8'));
-    hashes.push(`${relPath}:${hash}`);
+    const stat = fs.statSync(file);
+    hashes.push(`${relPath}:${stat.mtimeMs}:${stat.size}`);
   }
   return computeStringHash(hashes.join('|'));
 }

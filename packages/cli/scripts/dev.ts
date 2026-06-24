@@ -116,12 +116,30 @@ const runDevServer = (): Promise<void> => {
 
     devProcess.on('close', (code) => {
       if (code !== 0 && !isRestarting) {
-        reject(new Error(`Rsbuild dev exited with code ${code}`));
+        reject(
+          new Error(
+            `Rsbuild dev exited with code ${code}.\n` +
+              '  Check the output above for details.\n' +
+              '  Common causes:\n' +
+              '    - Config file error (run `bun run typecheck` to check)\n' +
+              '    - Missing dependencies (run `bun install`)\n' +
+              '    - Port already in use (kill the process on port ' +
+              String(env.PORT) +
+              ')',
+          ),
+        );
       } else {
         resolve();
       }
     });
-    devProcess.on('error', reject);
+    devProcess.on('error', (err) => {
+      reject(
+        new Error(
+          `Failed to start Rsbuild dev server: ${err.message}.\n` +
+            '  Check that all dependencies are installed (run `bun install`)',
+        ),
+      );
+    });
   });
 };
 

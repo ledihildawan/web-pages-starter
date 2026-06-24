@@ -13,6 +13,26 @@ const OUTPUT_DIR = lookup('@public', 'assets', 'images');
 const MANIFEST_FILE = lookup('@generated', 'image-manifest.ts');
 const CACHE_KEY = 'images';
 
+const MAX_CONCURRENCY = 4;
+
+async function runWithConcurrency<T>(
+  tasks: T[],
+  concurrency: number,
+  runner: (task: T) => Promise<void>,
+): Promise<void> {
+  const executing: Promise<void>[] = [];
+  for (const task of tasks) {
+    const p = runner(task).then(() => {
+      executing.splice(executing.indexOf(p), 1);
+    });
+    executing.push(p);
+    if (executing.length >= concurrency) {
+      await Promise.race(executing);
+    }
+  }
+  await Promise.all(executing);
+}
+
 const args = process.argv.slice(2);
 const forceRefresh = args.includes('--force') || args.includes('-f');
 
@@ -141,7 +161,7 @@ async function main(): Promise<void> {
         log.success('Done: Using cached images');
         process.exit(0);
       }
-      log.warn('Cache restore failed, regenerating');
+      log.warn('Cache restore failed (hash mismatch or corrupted), regenerating images...');
     }
   }
 
@@ -152,6 +172,14 @@ async function main(): Promise<void> {
   let processed = 0;
   let passthrough = 0;
 
+  interface ImageTask {
+    inputPath: string;
+    name: string;
+    ext: string;
+    entry: string;
+  }
+
+  const tasks: ImageTask[] = [];
   for (const entry of entries) {
     const inputPath = join(SOURCE_DIR, entry);
     if (!fs.statSync(inputPath).isFile()) continue;
@@ -169,13 +197,17 @@ async function main(): Promise<void> {
       continue;
     }
 
-    log.info(`  Processing ${entry}...`);
-    const result = await processImage(inputPath, name);
+    tasks.push({ inputPath, name, ext, entry });
+  }
+
+  await runWithConcurrency(tasks, MAX_CONCURRENCY, async (task) => {
+    log.info(`  Processing ${task.entry}...`);
+    const result = await processImage(task.inputPath, task.name);
     if (result) {
-      manifest[name] = result;
+      manifest[task.name] = result;
       processed++;
     }
-  }
+  });
 
   const manifestContent = `${generatedHeader('packages/cli/generators/images.ts', {
     description: [`Images processed: ${processed}`, `Passthrough: ${passthrough}`, `Sizes: ${SIZES.join(', ')}px`].join(
