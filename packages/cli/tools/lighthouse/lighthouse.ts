@@ -1,9 +1,10 @@
-import { writeFileSync } from 'node:fs';
+import fs, { writeFileSync } from 'node:fs';
 import { join } from 'pathe';
 import process from 'node:process';
 import { log, logBox } from '@web-pages-starter/core/logger';
 import { setupSigintHandler, wrapMainError } from '@web-pages-starter/core/signal-handler';
 import { env } from '@generated/env';
+import { lookup } from '@generated/paths';
 import { isExpired, loadPreviewUrl } from '@shared/utils/preview-url';
 import inquirer from 'inquirer';
 import {
@@ -284,11 +285,18 @@ async function main(): Promise<void> {
     process.exit(0);
   }
 
+  const distPath = args.dist || lookup('@dist');
+  if (!fs.existsSync(distPath)) {
+    throw new Error(
+      `Dist folder not found at "${distPath}".\n  Tip: Run \`bun run build\` first to create the dist folder.`,
+    );
+  }
+
   const outputDir = env.LIGHTHOUSE_OUTPUT_DIR || DEFAULT_OUTPUT_DIR;
 
   if (args.list) {
     const baseUrl = await getBaseUrl(args.baseUrl);
-    const pages = scanPagesFromDist(args.dist || undefined);
+    const pages = scanPagesFromDist(distPath);
     const auditUrls =
       args.urls.length > 0
         ? args.urls.map((u) => `${baseUrl}${u.startsWith('/') ? u : `/${u}`}`)
@@ -303,10 +311,9 @@ async function main(): Promise<void> {
   }
 
   if (args.urls.length === 0) {
-    const pages = scanPagesFromDist(args.dist || undefined);
+    const pages = scanPagesFromDist(distPath);
     if (pages.length === 0) {
-      log.error('Error: No pages found in dist.\n');
-      process.exit(1);
+      throw new Error(`No pages found in dist folder.\n  Tip: Run \`bun run build\` to populate the dist folder.`);
     }
   }
 
@@ -330,8 +337,7 @@ async function main(): Promise<void> {
       : await interactiveUrlSelection(pages, baseUrl);
 
   if (auditUrls.length === 0) {
-    log.error('Error: No URLs to audit.\n');
-    process.exit(1);
+    throw new Error('No URLs to audit.');
   }
 
   cleanupOldReports(outputDir);
@@ -376,8 +382,7 @@ async function main(): Promise<void> {
       log.info(`  Reports: ${result.reportDir}/\n`);
     }
   } else {
-    log.error('\nError: Audit completed with errors.\n');
-    process.exit(1);
+    throw new Error('Audit completed with errors.');
   }
 }
 

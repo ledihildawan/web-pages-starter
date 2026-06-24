@@ -189,8 +189,7 @@ const main = async () => {
   if (cliProvider && (cliProvider === 'ngrok' || cliProvider === 'cloudflared')) {
     provider = cliProvider as TunnelProvider;
   } else if (cliProvider) {
-    log.error('Error: Invalid tunnel provider. Use --tunnel ngrok or --tunnel cloudflared');
-    process.exit(1);
+    throw new Error('Invalid tunnel provider. Use --tunnel ngrok or --tunnel cloudflared');
   } else {
     const { selected } = await inquirer.prompt<{ selected: TunnelProvider }>([
       {
@@ -219,18 +218,17 @@ const main = async () => {
     });
     tunnelUrl = listener.url() || '';
     if (!tunnelUrl) {
-      log.error('Error: ngrok returned no tunnel URL. Check NGROK_AUTHTOKEN.');
       await listener.close();
-      process.exit(1);
+      throw new Error('ngrok returned no tunnel URL. Check NGROK_AUTHTOKEN.');
     }
     tunnelClose = async () => {
       await listener.close();
     };
   } else {
     if (!checkCloudflared()) {
-      log.error('Error: cloudflared not found.');
-      log.error('Install: https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads');
-      process.exit(1);
+      throw new Error(
+        'cloudflared not found.\n  Install: https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads',
+      );
     }
 
     await runBuild(tunnelUrl);
@@ -241,8 +239,7 @@ const main = async () => {
       tunnelUrl = tunnel.url;
       tunnelClose = tunnel.kill;
     } catch (err) {
-      log.error(`Error: ${(err as Error).message}`);
-      process.exit(1);
+      throw new Error(`cloudflared tunnel failed: ${(err as Error).message}`);
     }
 
     const replaced = replaceUrls(LOCAL_URL, tunnelUrl);
@@ -277,8 +274,7 @@ const main = async () => {
   }
 
   if (!verified) {
-    log.error('Error: Tunnel URL not accessible after multiple attempts.');
-    process.exit(1);
+    throw new Error('Tunnel URL not accessible after multiple attempts.');
   }
 
   await savePreviewUrl(tunnelUrl, provider);

@@ -61,16 +61,14 @@ const runTool = (name: string, args: string[] = []): Promise<void> => {
 
     proc.on('close', (code) => {
       if (code !== 0) {
-        log.toolFailed(name, code ?? 1);
-        reject(new Error(`${name} failed`));
+        reject(new Error(`${name} failed with exit code ${code}`));
       } else {
         resolve();
       }
     });
 
     proc.on('error', (err) => {
-      log.toolSpawnFailed(name, err);
-      reject(err);
+      reject(new Error(`Failed to run "${name}" — ${err.message}`));
     });
   });
 };
@@ -86,16 +84,14 @@ const runBunScript = (name: string, ...extraArgs: string[]): Promise<void> => {
 
     proc.on('close', (code) => {
       if (code !== 0) {
-        log.toolFailed(name, code ?? 1);
-        reject(new Error(`${name} failed`));
+        reject(new Error(`${name} failed with exit code ${code}`));
       } else {
         resolve();
       }
     });
 
     proc.on('error', (err) => {
-      log.toolSpawnFailed(name, err);
-      reject(err);
+      reject(new Error(`Failed to run "${name}" — ${err.message}`));
     });
   });
 };
@@ -291,7 +287,15 @@ async function runToolInteractive(): Promise<void> {
     await tool.action();
     log.success('\n  Done!\n');
   } catch {
-    // error already logged
+    // error already logged by the tool
+    log.info('\n  Press Enter to continue...');
+    await inquirer.prompt<{ continue: boolean }>([
+      {
+        type: 'input',
+        name: 'continue',
+        message: '',
+      },
+    ]);
   }
 
   await runToolInteractive();

@@ -260,9 +260,9 @@ async function main(): Promise<void> {
           p.pageId === providedPageNameTrimmed,
       ) || null;
     if (!pageInfo) {
-      log.error(`Error: Page "${providedPageNameTrimmed}" not found.`);
-      log.info('Tip: Run `bun run cli` → Delete Page for an interactive selector.\n');
-      process.exit(1);
+      throw new Error(
+        `Page "${providedPageNameTrimmed}" not found.\n  Tip: Run \`bun run cli\` → Delete Page for an interactive selector.`,
+      );
     }
   } else {
     pageInfo = await selectPage();
@@ -271,8 +271,7 @@ async function main(): Promise<void> {
   if (!pageInfo) return;
 
   if (isSystemPage(pageInfo.pageId) || isSystemPage(pageInfo.urlPath)) {
-    log.error(`Error: "${pageInfo.name}" is a system page and cannot be deleted.`);
-    process.exit(1);
+    throw new Error(`"${pageInfo.name}" is a system page and cannot be deleted.`);
   }
 
   const refs = findReferences(pageInfo);
