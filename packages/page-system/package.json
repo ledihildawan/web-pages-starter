@@ -3,5 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "sideEffects": false
+  "sideEffects": false,
+  "dependencies": {
+    "limax": "^4.2.3"
+  }
 }

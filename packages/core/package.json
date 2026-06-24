@@ -3,5 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "sideEffects": false
+  "sideEffects": false,
+  "dependencies": {
+    "json5": "^2.2.3",
+    "pathe": "^2.0.3"
+  }
 }
