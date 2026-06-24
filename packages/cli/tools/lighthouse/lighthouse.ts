@@ -50,7 +50,8 @@ ${Object.entries(CLI_OPTIONS)
   Categories:
 ${CATEGORIES_ALL.map((c) => {
   const cat = c as { value: string; experimental?: boolean; name: string };
-  return `    ${cat.value.padEnd(22)} ${cat.experimental ? '(experimental) ' : ''}${cat.name}`;
+  const experimental = cat.experimental ? ' (experimental)' : '';
+  return `    ${cat.value.padEnd(20)} ${cat.name}${experimental}`;
 }).join('\n')}
 
   Examples:
