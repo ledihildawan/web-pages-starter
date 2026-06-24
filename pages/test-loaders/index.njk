@@ -5,188 +5,187 @@ description: Testing all 25 inline loaders for the simple-nunjucks-loader
 {% extends "@layouts/main.njk" %}
 
 {% block content %}
-<section class="px-6 py-20 max-inline-6xl mx-auto">
-  <h1 class="text-4xl font-black text-white mb-4">Inline Loaders Test Page</h1>
-  <p class="text-slate-400 mb-12">Testing all 25 inline loaders for Rsbuild integration</p>
+  <section class="px-6 py-20 max-inline-6xl mx-auto">
+    <h1 class="text-4xl font-black text-white mb-4">Inline Loaders Test asdsaPage</h1>
+    <p class="text-slate-400 mb-12">Testing all 25 inline loaders for Rsbuild integration s</p>
 
-  {# =========================================== #}
-  {# STYLES: raw, scss, sass, less #}
-  {# =========================================== #}
-  <section class="mb-16">
-    <h2 class="text-2xl font-bold text-violet-400 mb-4">Styles</h2>
-    <div class="grid gap-6 md:grid-cols-2">
-      <div class="p-6 bg-slate-900 rounded-xl">
-        <h3 class="text-lg font-bold text-white mb-2">!raw!</h3>
-        {% load '!raw!./_ui/test-raw.css' %}
-        <p class="text-slate-400 text-sm">Raw CSS - violet gradient</p>
+    {# =========================================== #}
+    {# STYLES: raw, scss, sass, less #}
+    {# =========================================== #}
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-violet-400 mb-4">Styles</h2>
+      <div class="grid gap-6 md:grid-cols-2">
+        <div class="p-6 bg-slate-900 rounded-xl">
+          <h3 class="text-lg font-bold text-white mb-2">!raw!</h3>
+          {% load '!raw!./_ui/test-raw.css' %}
+          <p class="text-slate-400 text-sm">Raw CSS - violet gradient</p>
+        </div>
+        <div class="p-6 bg-slate-900 rounded-xl">
+          <h3 class="text-lg font-bold text-white mb-2">!scss!</h3>
+          {% load '!scss!./_ui/test-scss.scss' %}
+          <p class="text-slate-400 text-sm">SCSS - red/yellow gradient</p>
+        </div>
+        <div class="p-6 bg-slate-900 rounded-xl">
+          <h3 class="text-lg font-bold text-white mb-2">!sass!</h3>
+          {% load '!sass!./_ui/test-sass.sass' %}
+          <p class="text-slate-400 text-sm">Sass (indented) - blue/purple gradient</p>
+        </div>
+        <div class="p-6 bg-slate-900 rounded-xl">
+          <h3 class="text-lg font-bold text-white mb-2">!less!</h3>
+          {% load '!less!./_ui/test-less.less' %}
+          <p class="text-slate-400 text-sm">Less - green/blue gradient</p>
+        </div>
       </div>
-      <div class="p-6 bg-slate-900 rounded-xl">
-        <h3 class="text-lg font-bold text-white mb-2">!scss!</h3>
-        {% load '!scss!./_ui/test-scss.scss' %}
-        <p class="text-slate-400 text-sm">SCSS - red/yellow gradient</p>
+    </section>
+
+    {# =========================================== #}
+    {# SCRIPTS: js, ts, mjs #}
+    {# =========================================== #}
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-fuchsia-400 mb-4">Scripts</h2>
+      <div class="grid gap-6 md:grid-cols-3">
+        <div class="p-6 bg-slate-900 rounded-xl">
+          <h3 class="text-lg font-bold text-white mb-2">!js!</h3>
+          {% load '!js!./_ui/test-js.js' %}
+          <p class="text-slate-400 text-sm">JavaScript (IIFE bundle)</p>
+        </div>
+        <div class="p-6 bg-slate-900 rounded-xl">
+          <h3 class="text-lg font-bold text-white mb-2">!ts!</h3>
+          {% load '!ts!./_ui/test-ts.ts' %}
+          <p class="text-slate-400 text-sm">TypeScript (compiled + bundle)</p>
+        </div>
+        <div class="p-6 bg-slate-900 rounded-xl">
+          <h3 class="text-lg font-bold text-white mb-2">!mjs!</h3>
+          {% load '!mjs!./_ui/test-mjs.mjs' %}
+          <p class="text-slate-400 text-sm">ES Module (type="module")</p>
+        </div>
       </div>
-      <div class="p-6 bg-slate-900 rounded-xl">
-        <h3 class="text-lg font-bold text-white mb-2">!sass!</h3>
-        {% load '!sass!./_ui/test-sass.sass' %}
-        <p class="text-slate-400 text-sm">Sass (indented) - blue/purple gradient</p>
+    </section>
+
+    {# =========================================== #}
+    {# MARKUP: html, svg, md #}
+    {# =========================================== #}
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-pink-400 mb-4">Markup</h2>
+      <div class="grid gap-6 md:grid-cols-3">
+        <div class="p-6 bg-slate-900 rounded-xl">
+          <h3 class="text-lg font-bold text-white mb-2">!html!</h3>
+          {% load '!html!./_ui/test-html.html' %}
+          <p class="text-slate-400 text-sm">HTML fragment</p>
+        </div>
+        <div class="p-6 bg-slate-900 rounded-xl">
+          <h3 class="text-lg font-bold text-white mb-2">!svg!</h3>
+          {% load '!svg!./_ui/test-svg.svg' %}
+          <p class="text-slate-400 text-sm">Inline SVG</p>
+        </div>
+        <div class="p-6 bg-slate-900 rounded-xl">
+          <h3 class="text-lg font-bold text-white mb-2">!md!</h3>
+          {% load '!md!./_ui/test-md.md' %}
+          <p class="text-slate-400 text-sm">Markdown (rendered)</p>
+        </div>
       </div>
-      <div class="p-6 bg-slate-900 rounded-xl">
-        <h3 class="text-lg font-bold text-white mb-2">!less!</h3>
-        {% load '!less!./_ui/test-less.less' %}
-        <p class="text-slate-400 text-sm">Less - green/blue gradient</p>
+    </section>
+
+    {# =========================================== #}
+    {# DATA: json, json5, yaml, toml, xml, csv, ini #}
+    {# =========================================== #}
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-amber-400 mb-4">Data Formats</h2>
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div class="p-6 bg-slate-900 rounded-xl">
+          <h3 class="text-lg font-bold text-white mb-2">!json!</h3>
+          {% load '!json!./_ui/test-json.json' %}
+          <p class="text-slate-400 text-sm">JSON</p>
+        </div>
+        <div class="p-6 bg-slate-900 rounded-xl">
+          <h3 class="text-lg font-bold text-white mb-2">!json5!</h3>
+          {% load '!json5!./_ui/test-json5.json5' %}
+          <p class="text-slate-400 text-sm">JSON5 (with comments)</p>
+        </div>
+        <div class="p-6 bg-slate-900 rounded-xl">
+          <h3 class="text-lg font-bold text-white mb-2">!yaml!</h3>
+          {% load '!yaml!./_ui/test-yaml.yaml' %}
+          <p class="text-slate-400 text-sm">YAML</p>
+        </div>
+        <div class="p-6 bg-slate-900 rounded-xl">
+          <h3 class="text-lg font-bold text-white mb-2">!toml!</h3>
+          {% load '!toml!./_ui/test-toml.toml' %}
+          <p class="text-slate-400 text-sm">TOML</p>
+        </div>
+        <div class="p-6 bg-slate-900 rounded-xl">
+          <h3 class="text-lg font-bold text-white mb-2">!xml!</h3>
+          {% load '!xml!./_ui/test-xml.xml' %}
+          <p class="text-slate-400 text-sm">XML</p>
+        </div>
+        <div class="p-6 bg-slate-900 rounded-xl">
+          <h3 class="text-lg font-bold text-white mb-2">!csv!</h3>
+          {% load '!csv!./_ui/test-csv.csv' %}
+          <p class="text-slate-400 text-sm">CSV</p>
+        </div>
+        <div class="p-6 bg-slate-900 rounded-xl">
+          <h3 class="text-lg font-bold text-white mb-2">!ini!</h3>
+          {% load '!ini!./_ui/test-ini.ini' %}
+          <p class="text-slate-400 text-sm">INI</p>
+        </div>
       </div>
-    </div>
+    </section>
+
+    {# =========================================== #}
+    {# SHADERS: glsl, vert, frag #}
+    {# =========================================== #}
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-emerald-400 mb-4">Shaders (GLSL)</h2>
+      <div class="grid gap-6 md:grid-cols-3">
+        <div class="p-6 bg-slate-900 rounded-xl">
+          <h3 class="text-lg font-bold text-white mb-2">!glsl!</h3>
+          {% load '!glsl!./_ui/test-glsl.frag' %}
+          <p class="text-slate-400 text-sm">Fragment shader (.frag)</p>
+        </div>
+        <div class="p-6 bg-slate-900 rounded-xl">
+          <h3 class="text-lg font-bold text-white mb-2">!vert!</h3>
+          {% load '!vert!./_ui/test-vert.vert' %}
+          <p class="text-slate-400 text-sm">Vertex shader (.vert)</p>
+        </div>
+        <div class="p-6 bg-slate-900 rounded-xl">
+          <h3 class="text-lg font-bold text-white mb-2">!frag!</h3>
+          {% load '!frag!./_ui/test-frag.frag' %}
+          <p class="text-slate-400 text-sm">Fragment shader (.frag alt)</p>
+        </div>
+      </div>
+    </section>
+
+    {# =========================================== #}
+    {# TEXT & CONFIG: txt, env, glob, url, base64 #}
+    {# =========================================== #}
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-cyan-400 mb-4">Text & Config</h2>
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div class="p-6 bg-slate-900 rounded-xl">
+          <h3 class="text-lg font-bold text-white mb-2">!txt!</h3>
+          {% load '!txt!./_ui/test-txt.txt' %}
+          <p class="text-slate-400 text-sm">Plain text</p>
+        </div>
+        <div class="p-6 bg-slate-900 rounded-xl">
+          <h3 class="text-lg font-bold text-white mb-2">!env!</h3>
+          {% load '!env!./_ui/test-env.env' %}
+          <p class="text-slate-400 text-sm">Environment file</p>
+        </div>
+        <div class="p-6 bg-slate-900 rounded-xl">
+          <h3 class="text-lg font-bold text-white mb-2">!glob!</h3>
+          {% load '!glob!./_ui/test-glob.glob' %}
+          <p class="text-slate-400 text-sm">Glob pattern reference</p>
+        </div>
+        <div class="p-6 bg-slate-900 rounded-xl">
+          <h3 class="text-lg font-bold text-white mb-2">!url!</h3>
+          {% load '!url!./_ui/test-url.url' %}
+          <p class="text-slate-400 text-sm">URL reference</p>
+        </div>
+        <div class="p-6 bg-slate-900 rounded-xl">
+          <h3 class="text-lg font-bold text-white mb-2">!base64!</h3>
+          {% load '!base64!./_ui/test-base64.base64' %}
+          <p class="text-slate-400 text-sm">Base64 encoded data</p>
+        </div>
+      </div>
+    </section>
   </section>
-
-  {# =========================================== #}
-  {# SCRIPTS: js, ts, mjs #}
-  {# =========================================== #}
-  <section class="mb-16">
-    <h2 class="text-2xl font-bold text-fuchsia-400 mb-4">Scripts</h2>
-    <div class="grid gap-6 md:grid-cols-3">
-      <div class="p-6 bg-slate-900 rounded-xl">
-        <h3 class="text-lg font-bold text-white mb-2">!js!</h3>
-        {% load '!js!./_ui/test-js.js' %}
-        <p class="text-slate-400 text-sm">JavaScript (IIFE bundle)</p>
-      </div>
-      <div class="p-6 bg-slate-900 rounded-xl">
-        <h3 class="text-lg font-bold text-white mb-2">!ts!</h3>
-        {% load '!ts!./_ui/test-ts.ts' %}
-        <p class="text-slate-400 text-sm">TypeScript (compiled + bundle)</p>
-      </div>
-      <div class="p-6 bg-slate-900 rounded-xl">
-        <h3 class="text-lg font-bold text-white mb-2">!mjs!</h3>
-        {% load '!mjs!./_ui/test-mjs.mjs' %}
-        <p class="text-slate-400 text-sm">ES Module (type="module")</p>
-      </div>
-    </div>
-  </section>
-
-  {# =========================================== #}
-  {# MARKUP: html, svg, md #}
-  {# =========================================== #}
-  <section class="mb-16">
-    <h2 class="text-2xl font-bold text-pink-400 mb-4">Markup</h2>
-    <div class="grid gap-6 md:grid-cols-3">
-      <div class="p-6 bg-slate-900 rounded-xl">
-        <h3 class="text-lg font-bold text-white mb-2">!html!</h3>
-        {% load '!html!./_ui/test-html.html' %}
-        <p class="text-slate-400 text-sm">HTML fragment</p>
-      </div>
-      <div class="p-6 bg-slate-900 rounded-xl">
-        <h3 class="text-lg font-bold text-white mb-2">!svg!</h3>
-        {% load '!svg!./_ui/test-svg.svg' %}
-        <p class="text-slate-400 text-sm">Inline SVG</p>
-      </div>
-      <div class="p-6 bg-slate-900 rounded-xl">
-        <h3 class="text-lg font-bold text-white mb-2">!md!</h3>
-        {% load '!md!./_ui/test-md.md' %}
-        <p class="text-slate-400 text-sm">Markdown (rendered)</p>
-      </div>
-    </div>
-  </section>
-
-  {# =========================================== #}
-  {# DATA: json, json5, yaml, toml, xml, csv, ini #}
-  {# =========================================== #}
-  <section class="mb-16">
-    <h2 class="text-2xl font-bold text-amber-400 mb-4">Data Formats</h2>
-    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      <div class="p-6 bg-slate-900 rounded-xl">
-        <h3 class="text-lg font-bold text-white mb-2">!json!</h3>
-        {% load '!json!./_ui/test-json.json' %}
-        <p class="text-slate-400 text-sm">JSON</p>
-      </div>
-      <div class="p-6 bg-slate-900 rounded-xl">
-        <h3 class="text-lg font-bold text-white mb-2">!json5!</h3>
-        {% load '!json5!./_ui/test-json5.json5' %}
-        <p class="text-slate-400 text-sm">JSON5 (with comments)</p>
-      </div>
-      <div class="p-6 bg-slate-900 rounded-xl">
-        <h3 class="text-lg font-bold text-white mb-2">!yaml!</h3>
-        {% load '!yaml!./_ui/test-yaml.yaml' %}
-        <p class="text-slate-400 text-sm">YAML</p>
-      </div>
-      <div class="p-6 bg-slate-900 rounded-xl">
-        <h3 class="text-lg font-bold text-white mb-2">!toml!</h3>
-        {% load '!toml!./_ui/test-toml.toml' %}
-        <p class="text-slate-400 text-sm">TOML</p>
-      </div>
-      <div class="p-6 bg-slate-900 rounded-xl">
-        <h3 class="text-lg font-bold text-white mb-2">!xml!</h3>
-        {% load '!xml!./_ui/test-xml.xml' %}
-        <p class="text-slate-400 text-sm">XML</p>
-      </div>
-      <div class="p-6 bg-slate-900 rounded-xl">
-        <h3 class="text-lg font-bold text-white mb-2">!csv!</h3>
-        {% load '!csv!./_ui/test-csv.csv' %}
-        <p class="text-slate-400 text-sm">CSV</p>
-      </div>
-      <div class="p-6 bg-slate-900 rounded-xl">
-        <h3 class="text-lg font-bold text-white mb-2">!ini!</h3>
-        {% load '!ini!./_ui/test-ini.ini' %}
-        <p class="text-slate-400 text-sm">INI</p>
-      </div>
-    </div>
-  </section>
-
-  {# =========================================== #}
-  {# SHADERS: glsl, vert, frag #}
-  {# =========================================== #}
-  <section class="mb-16">
-    <h2 class="text-2xl font-bold text-emerald-400 mb-4">Shaders (GLSL)</h2>
-    <div class="grid gap-6 md:grid-cols-3">
-      <div class="p-6 bg-slate-900 rounded-xl">
-        <h3 class="text-lg font-bold text-white mb-2">!glsl!</h3>
-        {% load '!glsl!./_ui/test-glsl.frag' %}
-        <p class="text-slate-400 text-sm">Fragment shader (.frag)</p>
-      </div>
-      <div class="p-6 bg-slate-900 rounded-xl">
-        <h3 class="text-lg font-bold text-white mb-2">!vert!</h3>
-        {% load '!vert!./_ui/test-vert.vert' %}
-        <p class="text-slate-400 text-sm">Vertex shader (.vert)</p>
-      </div>
-      <div class="p-6 bg-slate-900 rounded-xl">
-        <h3 class="text-lg font-bold text-white mb-2">!frag!</h3>
-        {% load '!frag!./_ui/test-frag.frag' %}
-        <p class="text-slate-400 text-sm">Fragment shader (.frag alt)</p>
-      </div>
-    </div>
-  </section>
-
-  {# =========================================== #}
-  {# TEXT & CONFIG: txt, env, glob, url, base64 #}
-  {# =========================================== #}
-  <section class="mb-16">
-    <h2 class="text-2xl font-bold text-cyan-400 mb-4">Text & Config</h2>
-    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      <div class="p-6 bg-slate-900 rounded-xl">
-        <h3 class="text-lg font-bold text-white mb-2">!txt!</h3>
-        {% load '!txt!./_ui/test-txt.txt' %}
-        <p class="text-slate-400 text-sm">Plain text</p>
-      </div>
-      <div class="p-6 bg-slate-900 rounded-xl">
-        <h3 class="text-lg font-bold text-white mb-2">!env!</h3>
-        {% load '!env!./_ui/test-env.env' %}
-        <p class="text-slate-400 text-sm">Environment file</p>
-      </div>
-      <div class="p-6 bg-slate-900 rounded-xl">
-        <h3 class="text-lg font-bold text-white mb-2">!glob!</h3>
-        {% load '!glob!./_ui/test-glob.glob' %}
-        <p class="text-slate-400 text-sm">Glob pattern reference</p>
-      </div>
-      <div class="p-6 bg-slate-900 rounded-xl">
-        <h3 class="text-lg font-bold text-white mb-2">!url!</h3>
-        {% load '!url!./_ui/test-url.url' %}
-        <p class="text-slate-400 text-sm">URL reference</p>
-      </div>
-      <div class="p-6 bg-slate-900 rounded-xl">
-        <h3 class="text-lg font-bold text-white mb-2">!base64!</h3>
-        {% load '!base64!./_ui/test-base64.base64' %}
-        <p class="text-slate-400 text-sm">Base64 encoded data</p>
-      </div>
-    </div>
-  </section>
-
-</section>
 {% endblock %}
