@@ -35,28 +35,30 @@ const CLI_OPTIONS = {
 
 function printHelp(): void {
   log.info(`
-Lighthouse Audit Tool
+  Lighthouse Audit Tool
+  ${'─'.repeat(50)}
 
-Usage:
-  bun run cli → Lighthouse (interactive)
-  bun ./packages/cli/tools/lighthouse/index.ts [options]
+  Usage:
+    bun run cli          Interactive menu (select Lighthouse)
+    bun ./packages/cli/tools/lighthouse/index.ts [options]
 
-Options:
+  Options:
 ${Object.entries(CLI_OPTIONS)
-  .map(([opt, desc]) => `  ${opt.padEnd(25)} ${desc}`)
+  .map(([opt, desc]) => `    ${opt.padEnd(22)} ${desc}`)
   .join('\n')}
 
-Categories:
+  Categories:
 ${CATEGORIES_ALL.map((c) => {
   const cat = c as { value: string; experimental?: boolean; name: string };
-  return `  ${cat.value.padEnd(25)} ${cat.experimental ? '(experimental) ' : ''}${cat.name}`;
+  return `    ${cat.value.padEnd(22)} ${cat.experimental ? '(experimental) ' : ''}${cat.name}`;
 }).join('\n')}
 
-Examples:
-  bun ./packages/cli/tools/lighthouse/index.ts --form-factor=desktop --categories=performance,accessibility
-  bun ./packages/cli/tools/lighthouse/index.ts --list --dist=./dist
-  bun ./packages/cli/tools/lighthouse/index.ts --clean
-`);
+  Examples:
+    bun ./packages/cli/tools/lighthouse/index.ts --form-factor=desktop --categories=performance,accessibility
+    bun ./packages/cli/tools/lighthouse/index.ts --list --dist=./dist
+    bun ./packages/cli/tools/lighthouse/index.ts --clean
+    bun ./packages/cli/tools/lighthouse/index.ts --json --quiet --retry=3
+  `);
 }
 
 interface CliArgs {
