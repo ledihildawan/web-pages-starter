@@ -124,7 +124,12 @@ export default defineConfig({
     },
   },
   dev: {
+    hmr: true,
+    liveReload: true,
     writeToDisk: false,
+    watchFiles: {
+      paths: [lookup('@pages'), lookup('@layouts'), lookup('@shared')],
+    },
   },
   splitChunks: {
     minSize: 20000,
