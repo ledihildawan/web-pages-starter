@@ -275,7 +275,7 @@ async function runToolInteractive(): Promise<void> {
   }
 
   const idx = parseInt(choice, 10) - 1;
-  if (isNaN(idx) || idx < 0 || idx >= TOOLS.length) {
+  if (Number.isNaN(idx) || idx < 0 || idx >= TOOLS.length) {
     log.error(`Invalid choice. Enter 1-${TOOLS.length} or Q.`);
     await runToolInteractive();
     return;

@@ -1,6 +1,5 @@
 import type { AlpineComponent } from 'alpinejs';
 
-
 export function defineData<T extends { [key in keyof T]: T[key] }>(name: string, factory: () => AlpineComponent<T>) {
   return { type: 'data' as const, name, factory };
 }
